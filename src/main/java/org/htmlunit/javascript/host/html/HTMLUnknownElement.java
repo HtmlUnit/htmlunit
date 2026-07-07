@@ -31,6 +31,8 @@ import org.htmlunit.xml.XmlPage;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLUnknownElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlUnknownElement.class)
 public class HTMLUnknownElement extends HTMLElement {

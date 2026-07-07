@@ -25,6 +25,8 @@ import org.htmlunit.javascript.host.Element;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver">MDN Documentation</a>
  */
 @JsxClass
 public class IntersectionObserver extends HtmlUnitScriptable {

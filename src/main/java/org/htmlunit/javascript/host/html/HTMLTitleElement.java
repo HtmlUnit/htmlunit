@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTitleElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlTitle.class)
 public class HTMLTitleElement extends HTMLElement {

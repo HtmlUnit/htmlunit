@@ -29,7 +29,6 @@ import org.htmlunit.javascript.host.dom.NodeList;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
- *
  */
 class LabelsNodeList extends NodeList {
 

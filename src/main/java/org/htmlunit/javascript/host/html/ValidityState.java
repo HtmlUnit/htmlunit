@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ValidityState">MDN Documentation</a>
  */
 @JsxClass
 public class ValidityState extends HtmlUnitScriptable {
@@ -51,6 +53,8 @@ public class ValidityState extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a boolean value that is true if the user has provided
+     * input that the browser is unable to convert.
      * @return a boolean value that is true if the user has provided
      *         input that the browser is unable to convert.
      */
@@ -60,7 +64,8 @@ public class ValidityState extends HtmlUnitScriptable {
     }
 
     /**
-     * @return whether the customer validity message is set or not
+     * Returns whether the custom validity message is set.
+     * @return whether the custom validity message is set
      */
     @JsxGetter
     public boolean isCustomError() {

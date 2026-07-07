@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlVideo.class)
 public class HTMLVideoElement extends HTMLMediaElement {

@@ -36,6 +36,8 @@ import org.htmlunit.javascript.host.event.MouseEvent;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Lai Quang Duong
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlTableCell.class)
 public class HTMLTableCellElement extends HTMLElement {
@@ -99,7 +101,7 @@ public class HTMLTableCellElement extends HTMLElement {
     /**
      * Returns the index of this cell within the parent row.
      * @return the index of this cell within the parent row
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533549.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement/cellIndex">MDN Documentation</a>
      */
     @JsxGetter
     public int getCellIndex() {
@@ -150,7 +152,7 @@ public class HTMLTableCellElement extends HTMLElement {
     /**
      * Returns the value of the {@code bgColor} attribute.
      * @return the value of the {@code bgColor} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement#bgcolor">MDN Documentation</a>
      */
     @JsxGetter
     public String getBgColor() {
@@ -160,7 +162,7 @@ public class HTMLTableCellElement extends HTMLElement {
     /**
      * Sets the value of the {@code bgColor} attribute.
      * @param bgColor the value of the {@code bgColor} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement#bgcolor">MDN Documentation</a>
      */
     @JsxSetter
     public void setBgColor(final String bgColor) {
@@ -228,7 +230,7 @@ public class HTMLTableCellElement extends HTMLElement {
     /**
      * Returns the value of the {@code noWrap} attribute.
      * @return the value of the {@code noWrap} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement#nowrap">MDN Documentation</a>
      */
     @JsxGetter
     public boolean isNoWrap() {
@@ -238,7 +240,7 @@ public class HTMLTableCellElement extends HTMLElement {
     /**
      * Sets the value of the {@code noWrap} attribute.
      * @param noWrap the value of the {@code noWrap} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement#nowrap">MDN Documentation</a>
      */
     @JsxSetter
     public void setNoWrap(final boolean noWrap) {
@@ -281,8 +283,8 @@ public class HTMLTableCellElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the {@code width} property.
-     * @return the value of the {@code width} property
+     * Returns the value of the {@code height} property.
+     * @return the value of the {@code height} property
      */
     @JsxGetter(propertyName = "height")
     public String getHeight_js() {
@@ -319,7 +321,7 @@ public class HTMLTableCellElement extends HTMLElement {
 
     /**
      * Sets the {@code headers} attribute.
-     * @param headers the new attribute
+     * @param headers the new {@code headers} attribute value
      */
     @JsxSetter
     public void setHeaders(final String headers) {
@@ -337,7 +339,7 @@ public class HTMLTableCellElement extends HTMLElement {
 
     /**
      * Sets the {@code scope} attribute.
-     * @param scope the new attribute
+     * @param scope the new {@code scope} attribute value
      */
     @JsxSetter
     public void setScope(final String scope) {

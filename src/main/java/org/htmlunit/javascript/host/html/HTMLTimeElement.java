@@ -25,6 +25,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTimeElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlTime.class)
 public class HTMLTimeElement extends HTMLElement {
@@ -39,8 +41,8 @@ public class HTMLTimeElement extends HTMLElement {
     }
 
     /**
-     * Returns the dateTime.
-     * @return the dateTime
+     * Returns the value of the {@code dateTime} property.
+     * @return the value of the {@code dateTime} property
      */
     @JsxGetter
     public String getDateTime() {
@@ -48,8 +50,8 @@ public class HTMLTimeElement extends HTMLElement {
     }
 
     /**
-     * Sets the dateTime.
-     * @param dateTime the dateTime
+     * Sets the value of the {@code dateTime} property.
+     * @param dateTime the {@code dateTime} property value
      */
     @JsxSetter
     public void setDateTime(final String dateTime) {

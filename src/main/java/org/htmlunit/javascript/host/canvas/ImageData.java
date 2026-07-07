@@ -33,6 +33,8 @@ import org.htmlunit.platform.canvas.rendering.RenderingBackend;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ImageData">MDN Documentation</a>
  */
 @JsxClass
 public class ImageData extends HtmlUnitScriptable {
@@ -53,10 +55,10 @@ public class ImageData extends HtmlUnitScriptable {
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the arguments to the ImageData constructor
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr {@code true} if invoked with the {@code new} operator
+     * @return the Java object that JavaScript can access
      */
     @JsxConstructor
     public static ImageData jsConstructor(final Context cx, final VarScope scope,

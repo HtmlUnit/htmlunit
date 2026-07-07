@@ -50,6 +50,8 @@ import org.htmlunit.javascript.host.dom.Node;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlTable.class)
 public class HTMLTableElement extends HTMLElement {
@@ -171,7 +173,7 @@ public class HTMLTableElement extends HTMLElement {
      * If this table does not have a caption, this method creates an empty table caption,
      * adds it to the table and then returns it. If one or more captions already exist,
      * this method returns the first existing caption.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536381.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/createCaption">MDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
@@ -183,8 +185,8 @@ public class HTMLTableElement extends HTMLElement {
      * If this table does not have a tfoot element, this method creates an empty tfoot
      * element, adds it to the table and then returns it. If this table already has a
      * tfoot element, this method returns the existing tfoot element.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536402.aspx">MSDN Documentation</a>
-     * @return a newly added caption if no caption exists, or the first existing caption
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/createTFoot">MDN Documentation</a>
+     * @return a newly added tfoot element if none exists, or the first existing tfoot element
      */
     @JsxFunction
     public HtmlUnitScriptable createTFoot() {
@@ -195,8 +197,8 @@ public class HTMLTableElement extends HTMLElement {
      * If this table does not have a tbody element, this method creates an empty tbody
      * element, adds it to the table and then returns it. If this table already has a
      * tbody element, this method returns the existing tbody element.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536402.aspx">MSDN Documentation</a>
-     * @return a newly added caption if no caption exists, or the first existing caption
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/createTBody">MDN Documentation</a>
+     * @return a newly added tbody element if none exists, or the first existing tbody element
      */
     @JsxFunction
     public HtmlUnitScriptable createTBody() {
@@ -207,8 +209,8 @@ public class HTMLTableElement extends HTMLElement {
      * If this table does not have a thead element, this method creates an empty
      * thead element, adds it to the table and then returns it. If this table
      * already has a thead element, this method returns the existing thead element.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536403.aspx">MSDN Documentation</a>
-     * @return a newly added caption if no caption exists, or the first existing caption
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/createTHead">MDN Documentation</a>
+     * @return a newly added thead element if none exists, or the first existing thead element
      */
     @JsxFunction
     public HtmlUnitScriptable createTHead() {
@@ -219,7 +221,7 @@ public class HTMLTableElement extends HTMLElement {
      * Deletes this table's caption. If the table has multiple captions, this method
      * deletes only the first caption. If this table does not have any captions, this
      * method does nothing.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536405.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/deleteCaption">MDN Documentation</a>
      */
     @JsxFunction
     public void deleteCaption() {
@@ -230,7 +232,7 @@ public class HTMLTableElement extends HTMLElement {
      * Deletes this table's tfoot element. If the table has multiple tfoot elements, this
      * method deletes only the first tfoot element. If this table does not have any tfoot
      * elements, this method does nothing.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536409.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/deleteTFoot">MDN Documentation</a>
      */
     @JsxFunction
     public void deleteTFoot() {
@@ -241,7 +243,7 @@ public class HTMLTableElement extends HTMLElement {
      * Deletes this table's thead element. If the table has multiple thead elements, this
      * method deletes only the first thead element. If this table does not have any thead
      * elements, this method does nothing.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536410.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/deleteTHead">MDN Documentation</a>
      */
     @JsxFunction
     public void deleteTHead() {
@@ -252,7 +254,7 @@ public class HTMLTableElement extends HTMLElement {
      * Inserts a new row at the specified index in the element's row collection. If the index
      * is -1 or there is no index specified, then the row is appended at the end of the
      * element's row collection.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536457.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/insertRow">MDN Documentation</a>
      * @param index specifies where to insert the row in the row's collection.
      *        The default value is -1, which appends the new row to the end of the rows collection
      * @return the newly-created row
@@ -337,7 +339,7 @@ public class HTMLTableElement extends HTMLElement {
 
     /**
      * Sets the {@code width} property.
-     * @param width the {@code width} property
+     * @param width the {@code width} property value
      */
     @JsxSetter(propertyName = "width")
     public void setWidth_js(final String width) {
@@ -355,7 +357,7 @@ public class HTMLTableElement extends HTMLElement {
 
     /**
      * Sets the {@code cellSpacing} property.
-     * @param cellSpacing the {@code cellSpacing} property
+     * @param cellSpacing the {@code cellSpacing} property value
      */
     @JsxSetter
     public void setCellSpacing(final String cellSpacing) {
@@ -373,7 +375,7 @@ public class HTMLTableElement extends HTMLElement {
 
     /**
      * Sets the {@code cellPadding} property.
-     * @param cellPadding the {@code cellPadding} property
+     * @param cellPadding the {@code cellPadding} property value
      */
     @JsxSetter
     public void setCellPadding(final String cellPadding) {
@@ -391,7 +393,7 @@ public class HTMLTableElement extends HTMLElement {
 
     /**
      * Sets the {@code border} property.
-     * @param border the {@code border} property
+     * @param border the {@code border} property value
      */
     @JsxSetter
     public void setBorder(final String border) {
@@ -401,7 +403,7 @@ public class HTMLTableElement extends HTMLElement {
     /**
      * Returns the value of the {@code bgColor} property.
      * @return the value of the {@code bgColor} property
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement#bgcolor">MDN Documentation</a>
      */
     @JsxGetter
     public String getBgColor() {
@@ -411,7 +413,7 @@ public class HTMLTableElement extends HTMLElement {
     /**
      * Sets the value of the {@code bgColor} property.
      * @param bgColor the value of the {@code bgColor} property
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement#bgcolor">MDN Documentation</a>
      */
     @JsxSetter
     public void setBgColor(final String bgColor) {
@@ -440,7 +442,7 @@ public class HTMLTableElement extends HTMLElement {
 
     /**
      * Gets the {@code summary} property.
-     * @return the property
+     * @return the {@code summary} property
      */
     @JsxGetter
     public String getSummary() {
@@ -449,7 +451,7 @@ public class HTMLTableElement extends HTMLElement {
 
     /**
      * Sets the {@code summary} property.
-     * @param summary the new property
+     * @param summary the {@code summary} property value
      */
     @JsxSetter
     public void setSummary(final String summary) {
@@ -458,7 +460,7 @@ public class HTMLTableElement extends HTMLElement {
 
     /**
      * Gets the {@code rules} property.
-     * @return the property
+     * @return the {@code rules} property
      */
     @JsxGetter
     public String getRules() {
@@ -467,7 +469,7 @@ public class HTMLTableElement extends HTMLElement {
 
     /**
      * Sets the {@code rules} property.
-     * @param rules the new property
+     * @param rules the {@code rules} property value
      */
     @JsxSetter
     public void setRules(final String rules) {
@@ -494,7 +496,7 @@ public class HTMLTableElement extends HTMLElement {
 
     /**
      * Deletes the row at the specified index.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536408.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/deleteRow">MDN Documentation</a>
      * @param rowIndex the zero-based index of the row to delete
      */
     @JsxFunction

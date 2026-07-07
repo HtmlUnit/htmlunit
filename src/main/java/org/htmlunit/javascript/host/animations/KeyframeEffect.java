@@ -22,6 +22,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code KeyframeEffect}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect">MDN Documentation</a>
  */
 @JsxClass
 public class KeyframeEffect extends HtmlUnitScriptable {

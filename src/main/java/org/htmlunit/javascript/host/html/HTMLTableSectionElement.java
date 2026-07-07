@@ -40,6 +40,8 @@ import org.htmlunit.javascript.host.dom.DOMException;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlTableBody.class)
 @JsxClass(domClass = HtmlTableHeader.class)
@@ -148,7 +150,7 @@ public class HTMLTableSectionElement extends HTMLElement {
 
     /**
      * Deletes the row at the specified index.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536408.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/deleteRow">MDN Documentation</a>
      * @param rowIndex the zero-based index of the row to delete
      */
     @JsxFunction
@@ -169,7 +171,7 @@ public class HTMLTableSectionElement extends HTMLElement {
      * Inserts a new row at the specified index in the element's row collection. If the index
      * is -1 or there is no index specified, then the row is appended at the end of the
      * element's row collection.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536457.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/insertRow">MDN Documentation</a>
      * @param index specifies where to insert the row in the row's collection.
      *        The default value is -1, which appends the new row to the end of the rows collection
      * @return the newly-created row

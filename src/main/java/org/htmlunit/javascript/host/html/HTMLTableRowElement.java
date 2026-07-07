@@ -42,6 +42,8 @@ import org.htmlunit.javascript.host.dom.DOMException;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlTableRow.class)
 public class HTMLTableRowElement extends HTMLElement {
@@ -61,7 +63,7 @@ public class HTMLTableRowElement extends HTMLElement {
     /**
      * Returns the index of the row within the parent table.
      * @return the index of the row within the parent table
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534377.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/rowIndex">MDN Documentation</a>
      */
     @JsxGetter
     public int getRowIndex() {
@@ -76,7 +78,7 @@ public class HTMLTableRowElement extends HTMLElement {
     /**
      * Returns the index of the row within the enclosing thead, tbody or tfoot.
      * @return the index of the row within the enclosing thead, tbody or tfoot
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534621.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/sectionRowIndex">MDN Documentation</a>
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-79105901">
      *     DOM Level 1</a>
      */
@@ -113,7 +115,7 @@ public class HTMLTableRowElement extends HTMLElement {
     /**
      * Returns the value of the {@code bgColor} attribute.
      * @return the value of the {@code bgColor} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement#bgcolor">MDN Documentation</a>
      */
     @JsxGetter
     public String getBgColor() {
@@ -123,7 +125,7 @@ public class HTMLTableRowElement extends HTMLElement {
     /**
      * Sets the value of the {@code bgColor} attribute.
      * @param bgColor the value of the {@code bgColor} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement#bgcolor">MDN Documentation</a>
      */
     @JsxSetter
     public void setBgColor(final String bgColor) {
@@ -134,7 +136,7 @@ public class HTMLTableRowElement extends HTMLElement {
      * Inserts a new cell at the specified index in the element's cells collection. If the index
      * is -1 or there is no index specified, then the cell is appended at the end of the
      * element's cells collection.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536455.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/insertCell">MDN Documentation</a>
      * @param index specifies where to insert the cell in the 'tr'.
      *        The default value is -1, which appends the new cell to the end of the cells collection
      * @return the newly-created cell
@@ -167,7 +169,7 @@ public class HTMLTableRowElement extends HTMLElement {
     /**
      * Deletes the cell at the specified index in the element's cells collection. If the index
      * is -1, then the last cell is deleted.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536406.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/deleteCell">MDN Documentation</a>
      * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-11738598">W3C DOM Level2</a>
      * @param index specifies the cell to delete.
      */

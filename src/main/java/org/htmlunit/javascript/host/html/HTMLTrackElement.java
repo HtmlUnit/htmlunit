@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTrackElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlTrack.class)
 public class HTMLTrackElement extends HTMLElement {
