@@ -24,6 +24,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLFramebuffer">MDN Documentation</a>
  */
 @JsxClass
 public class WebGLFramebuffer extends HtmlUnitScriptable {
