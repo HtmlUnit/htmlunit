@@ -70,7 +70,7 @@ import org.htmlunit.util.StringUtils;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Dennis Duysak
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration">MDN doc</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration">MDN Documentation</a>
  */
 @JsxClass
 public class CSSStyleDeclaration extends HtmlUnitScriptable {
@@ -201,7 +201,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Sets the specified style attribute.
      * @param name the attribute name (camel-cased)
      * @param newValue the attribute value
-     * @param important important value
+     * @param important the priority (e.g. empty string, or "important")
      */
     protected void setStyleAttribute(final String name, String newValue, final String important) {
         if (null == newValue || "null".equals(newValue)) {
@@ -926,8 +926,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a CSS property name from a CSSStyleDeclaration by index.
      * @param index the index
-     * @return a CSS property name from a CSSStyleDeclaration by index.
+     * @return a CSS property name from a CSSStyleDeclaration by index
      */
     @JsxFunction
     public String item(final int index) {
@@ -1944,7 +1945,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Sets the style attribute which should be treated as an integer in pixels.
      * @param name the attribute name
      * @param value the attribute value
-     * @param important important value
+     * @param important the priority (e.g. empty string, or "important")
      * @param auto true if auto is supported
      * @param percent true if percent is supported
      * @param validValues valid values

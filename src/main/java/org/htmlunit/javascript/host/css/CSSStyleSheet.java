@@ -38,7 +38,7 @@ import org.w3c.dom.DOMException;
 /**
  * A JavaScript object for {@code CSSStyleSheet}.
  *
- * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535871.aspx">MSDN doc</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet">MDN Documentation</a>
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
@@ -250,10 +250,10 @@ public class CSSStyleSheet extends StyleSheet {
 
     /**
      * Adds a new rule.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/aa358796.aspx">MSDN</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/addRule">MDN Documentation</a>
      * @param selector the selector name
      * @param rule the rule
-     * @return always return -1 as of MSDN documentation
+     * @return always -1
      */
     @JsxFunction
     public int addRule(final String selector, final String rule) {
@@ -282,7 +282,7 @@ public class CSSStyleSheet extends StyleSheet {
     /**
      * Deletes an existing rule.
      * @param position the position of the rule to be deleted
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/removeRule">MDN Documentation</a>
      */
     @JsxFunction
     public void removeRule(final int position) {

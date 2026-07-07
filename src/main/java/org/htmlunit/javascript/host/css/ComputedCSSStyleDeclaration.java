@@ -39,6 +39,8 @@ import org.htmlunit.util.StringUtils;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Alex Gorbatovsky
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration">MDN Documentation</a>
  */
 @JsxClass(value = FF, className = "CSSStyleProperties")
 @JsxClass(value = FF_ESR, className = "CSS2Properties")
@@ -129,7 +131,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /**
      * Gets the {@code backgroundPosition} style attribute.
-     * @return the style attribute
+     * @return the {@code backgroundPosition} style attribute
      */
     @Override
     public String getBackgroundPosition() {

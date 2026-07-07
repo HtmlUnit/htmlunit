@@ -41,7 +41,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule">MDN doc</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule">MDN Documentation</a>
  */
 @JsxClass
 public class CSSRule extends HtmlUnitScriptable {
@@ -102,7 +102,7 @@ public class CSSRule extends HtmlUnitScriptable {
     public static final int KEYFRAME_RULE             = 8;
 
     /**
-     * The rule is a {@code CSSMerginRule}.
+     * The rule is a {@code CSSMarginRule}.
      */
     @JsxConstant({CHROME, EDGE})
     public static final int MARGIN_RULE               = 9;
@@ -126,7 +126,7 @@ public class CSSRule extends HtmlUnitScriptable {
     public static final int SUPPORTS_RULE             = 12;
 
     /**
-     * The rule is a {@code CSSCounterStyleRule}.
+     * The rule is a {@code CSSFontFeatureValuesRule}.
      */
     @JsxConstant
     public static final int FONT_FEATURE_VALUES_RULE  = 14;
