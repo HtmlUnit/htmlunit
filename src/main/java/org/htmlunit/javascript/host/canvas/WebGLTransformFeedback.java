@@ -23,6 +23,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code WebGLTransformFeedback}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLTransformFeedback">MDN Documentation</a>
  */
 @JsxClass
 public class WebGLTransformFeedback extends HtmlUnitScriptable {

@@ -23,6 +23,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code WebGLSync}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLSync">MDN Documentation</a>
  */
 @JsxClass
 public class WebGLSync extends HtmlUnitScriptable {
