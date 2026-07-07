@@ -42,6 +42,7 @@ import org.htmlunit.xml.XmlPage;
  * @author Ronald Brill
  * @author Adam Afeltowicz
  *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMImplementation">MDN Documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-102161490">
  *     W3C Dom Level 1</a>
  */
@@ -57,7 +58,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
     }
 
     /**
-     * Test if the DOM implementation implements a specific feature.
+     * Tests if the DOM implementation implements a specific feature.
      * @param feature the name of the feature to test (case-insensitive)
      * @param version the version number of the feature to test
      * @return true if the feature is implemented in the specified version, false otherwise

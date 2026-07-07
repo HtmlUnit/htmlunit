@@ -23,6 +23,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CDATASection">MDN Documentation</a>
  */
 @JsxClass(domClass = DomCDataSection.class)
 public class CDATASection extends Text {

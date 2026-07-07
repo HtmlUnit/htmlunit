@@ -30,6 +30,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 /**
  * Exception for DOM manipulations.
  *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMException">MDN Documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-17189187">
  *     DOM-Level-2-Core</a>
  * @author Marc Guillemot
@@ -183,7 +184,7 @@ public class DOMException extends HtmlUnitScriptable {
     /**
      * Constructor.
      * @param message the exception message
-     * @param error the error code (on of the constants from the class)
+     * @param error the error code (one of the constants from the class)
      */
     public DOMException(final String message, final int error) {
         message_ = message;
@@ -272,7 +273,7 @@ public class DOMException extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the name of the in which the exception occurred.
+     * Gets the name of the file in which the exception occurred.
      * @return the name of the source file
      */
     @JsxGetter({FF, FF_ESR})

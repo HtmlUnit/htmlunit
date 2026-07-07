@@ -35,6 +35,8 @@ import org.htmlunit.javascript.host.Element;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CharacterData">MDN Documentation</a>
  */
 @JsxClass
 public class CharacterData extends Node {
@@ -76,7 +78,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Append a string to character data.
+     * Appends a string to character data.
      * @param arg the string to be appended to the character data
      */
     @JsxFunction
@@ -85,7 +87,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Delete characters from character data.
+     * Deletes characters from character data.
      * @param offset the position of the first character to be deleted
      * @param count the number of characters to be deleted
      */
@@ -110,7 +112,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Insert a string into character data.
+     * Inserts a string into character data.
      * @param offset the position within the first character at which
      *        the string is to be inserted.
      * @param arg the string to insert
@@ -121,7 +123,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Replace characters of character data with a string.
+     * Replaces characters of character data with a string.
      * @param offset the position within the first character at which
      *        the string is to be replaced.
      * @param count the number of characters to be replaced
@@ -134,7 +136,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Extract a substring from character data.
+     * Extracts a substring from character data.
      * @param offset the position of the first character to be extracted
      * @param count the number of characters to be extracted
      * @return a string that consists of the count characters of the character
@@ -215,7 +217,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Replaces the node wit a set of Node or DOMString objects.
+     * Replaces the node with a set of Node or DOMString objects.
      * @param context the context
      * @param scope the scope
      * @param thisObj this object

@@ -25,6 +25,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Comment">MDN Documentation</a>
  */
 @JsxClass(domClass = DomComment.class)
 public class Comment extends CharacterData {

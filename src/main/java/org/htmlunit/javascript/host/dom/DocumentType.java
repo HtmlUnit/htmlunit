@@ -31,8 +31,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
- * @see <a href="http://msdn.microsoft.com/en-us/library/ms762752.aspx">MSDN documentation</a>
- * @see <a href="http://www.xulplanet.com/references/objref/DocumentType.html">XUL Planet</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentType">MDN Documentation</a>
  */
 @JsxClass(domClass = DomDocumentType.class)
 public class DocumentType extends Node {
@@ -47,8 +46,8 @@ public class DocumentType extends Node {
     }
 
     /**
-     * Returns the name.
-     * @return the name
+     * Returns the {@code name} property.
+     * @return the {@code name} property
      */
     @JsxGetter
     public String getName() {
@@ -64,8 +63,8 @@ public class DocumentType extends Node {
     }
 
     /**
-     * Returns the publicId.
-     * @return the publicId
+     * Returns the {@code publicId} property.
+     * @return the {@code publicId} property
      */
     @JsxGetter
     public String getPublicId() {
@@ -73,8 +72,8 @@ public class DocumentType extends Node {
     }
 
     /**
-     * Returns the systemId.
-     * @return the systemId
+     * Returns the {@code systemId} property.
+     * @return the {@code systemId} property
      */
     @JsxGetter
     public String getSystemId() {
@@ -121,7 +120,7 @@ public class DocumentType extends Node {
     }
 
     /**
-     * Replaces the node wit a set of Node or DOMString objects.
+     * Replaces the node with a set of Node or DOMString objects.
      * @param context the context
      * @param scope the scope
      * @param thisObj this object

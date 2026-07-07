@@ -153,7 +153,7 @@ import org.w3c.dom.ProcessingInstruction;
  * @author Lai Quang Duong
  * @author Sven Strickroth
  *
- * @see <a href="http://msdn.microsoft.com/en-us/library/ms531073.aspx">MSDN documentation</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">MDN Documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">W3C Dom Level 1</a>
  */
 @JsxClass
@@ -344,7 +344,7 @@ public class Document extends Node {
      * Sets the value of the {@code location} property. The location's default property is "href",
      * so setting "document.location='http://www.sf.net'" is equivalent to setting
      * "document.location.href='http://www.sf.net'".
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/location">MDN Documentation</a>
      * @param location the location to navigate to
      * @throws IOException when location loading fails
      */
@@ -803,7 +803,7 @@ public class Document extends Node {
 
     /**
      * Returns the value of the {@code activeElement} property.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533065.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement">MDN Documentation</a>
      * @return the value of the {@code activeElement} property
      */
     @JsxGetter
@@ -839,7 +839,7 @@ public class Document extends Node {
 
     /**
      * Returns the value of the JavaScript property {@code anchors}.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537435.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/anchors">MDN Documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
      *     Gecko DOM reference</a>
      * @return the value of this property
@@ -872,10 +872,8 @@ public class Document extends Node {
 
     /**
      * Returns the value of the JavaScript property {@code applets}.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537436.aspx">
-     *     MSDN documentation</a>
-     * @see <a href="https://developer.mozilla.org/En/DOM:document.applets">
-     *     Gecko DOM reference</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/applets">
+     *     MDN Documentation</a>
      * @return the value of this property
      */
     @JsxGetter
@@ -1062,7 +1060,7 @@ public class Document extends Node {
 
     /**
      * Indicates if the command is supported.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536681.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandSupported">MDN Documentation</a>
      * @param cmd the command identifier
      * @return {@code true} if the command is supported
      */
@@ -1096,7 +1094,7 @@ public class Document extends Node {
 
     /**
      * Executes a command.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536419.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand">MDN Documentation</a>
      * @param cmd the command identifier
      * @param userInterface display a user interface if the command supports one
      * @param value the string, number, or other value to assign (possible values depend on the command)
@@ -1174,7 +1172,7 @@ public class Document extends Node {
 
     /**
      * Adds a cookie, as long as cookies are enabled.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533693.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie">MDN Documentation</a>
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]"
      */
     @JsxSetter
@@ -1813,7 +1811,7 @@ public class Document extends Node {
 
     /**
      * Returns the value of the JavaScript property {@code links}. Refer also to the
-     * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
+     * <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/links">MDN Documentation</a>.
      * @return the value of this property
      */
     @JsxGetter
@@ -2045,7 +2043,7 @@ public class Document extends Node {
     /**
      * Returns the value of the {@code bgColor} property.
      * @return the value of the {@code bgColor} property
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/bgColor">MDN Documentation</a>
      */
     @JsxGetter
     public String getBgColor() {
@@ -2059,7 +2057,7 @@ public class Document extends Node {
     /**
      * Sets the value of the {@code bgColor} property.
      * @param color the value of the {@code bgColor} property
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/bgColor">MDN Documentation</a>
      */
     @JsxSetter
     public void setBgColor(final String color) {
@@ -3486,6 +3484,7 @@ public class Document extends Node {
     }
 
     /**
+     * Returns the {@code currentScript} property.
      * @return the {@code currentScript}
      */
     @JsxGetter
@@ -3494,6 +3493,7 @@ public class Document extends Node {
     }
 
     /**
+     * Sets the {@code currentScript} property.
      * @param script the {@code currentScript}
      */
     public void setCurrentScript(final ScriptableObject script) {
@@ -3501,6 +3501,7 @@ public class Document extends Node {
     }
 
     /**
+     * Returns the {@code FontFaceSet} property.
      * @return the {@code FontFaceSet}
      */
     @JsxGetter
@@ -3602,8 +3603,9 @@ public class Document extends Node {
     }
 
     /**
+     * Resolves a blob URL to its associated {@link Blob}.
      * @param url the url to resolve
-     * @return the Blob for the given URL or {@code null} if not found.
+     * @return the Blob for the given URL or {@code null} if not found
      */
     public Blob resolveBlobUrl(final String url) {
         return blobUrl2Blobs_.get(url);
