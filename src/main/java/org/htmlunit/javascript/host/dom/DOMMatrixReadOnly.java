@@ -34,6 +34,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly">MDN Documentation</a>
  */
 @JsxClass
 public class DOMMatrixReadOnly extends HtmlUnitScriptable {
@@ -93,10 +95,10 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the arguments to the DOMMatrixReadOnly constructor
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr {@code true} if invoked with the {@code new} operator
+     * @return the Java object that JavaScript can access
      */
     @JsxConstructor
     public static DOMMatrixReadOnly jsConstructor(final Context cx, final VarScope scope,
@@ -166,7 +168,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m11
+     * Returns the {@code m11} property.
+     * @return the {@code m11} property
      */
     @JsxGetter
     public double getM11() {
@@ -174,6 +177,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m11} property.
      * @param m11 the new value
      */
     public void setM11(final double m11) {
@@ -181,7 +185,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a
+     * Returns the {@code a} property.
+     * @return the {@code a} property
      */
     @JsxGetter
     public double getA() {
@@ -189,7 +194,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m12
+     * Returns the {@code m12} property.
+     * @return the {@code m12} property
      */
     @JsxGetter
     public double getM12() {
@@ -197,6 +203,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m12} property.
      * @param m12 the new value
      */
     public void setM12(final double m12) {
@@ -204,7 +211,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return b
+     * Returns the {@code b} property.
+     * @return the {@code b} property
      */
     @JsxGetter
     public double getB() {
@@ -212,7 +220,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m13
+     * Returns the {@code m13} property.
+     * @return the {@code m13} property
      */
     @JsxGetter
     public double getM13() {
@@ -220,6 +229,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m13} property.
      * @param m13 the new value
      */
     public void setM13(final double m13) {
@@ -227,7 +237,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m14
+     * Returns the {@code m14} property.
+     * @return the {@code m14} property
      */
     @JsxGetter
     public double getM14() {
@@ -235,6 +246,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m14} property.
      * @param m14 the new value
      */
     public void setM14(final double m14) {
@@ -242,7 +254,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m21
+     * Returns the {@code m21} property.
+     * @return the {@code m21} property
      */
     @JsxGetter
     public double getM21() {
@@ -250,6 +263,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m21} property.
      * @param m21 the new value
      */
     public void setM21(final double m21) {
@@ -257,7 +271,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return c
+     * Returns the {@code c} property.
+     * @return the {@code c} property
      */
     @JsxGetter
     public double getC() {
@@ -265,7 +280,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m22
+     * Returns the {@code m22} property.
+     * @return the {@code m22} property
      */
     @JsxGetter
     public double getM22() {
@@ -273,6 +289,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m22} property.
      * @param m22 the new value
      */
     public void setM22(final double m22) {
@@ -280,7 +297,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return d
+     * Returns the {@code d} property.
+     * @return the {@code d} property
      */
     @JsxGetter
     public double getD() {
@@ -288,7 +306,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m23
+     * Returns the {@code m23} property.
+     * @return the {@code m23} property
      */
     @JsxGetter
     public double getM23() {
@@ -296,6 +315,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m23} property.
      * @param m23 the new value
      */
     public void setM23(final double m23) {
@@ -303,7 +323,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m24
+     * Returns the {@code m24} property.
+     * @return the {@code m24} property
      */
     @JsxGetter
     public double getM24() {
@@ -311,6 +332,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m24} property.
      * @param m24 the new value
      */
     public void setM24(final double m24) {
@@ -318,7 +340,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m31
+     * Returns the {@code m31} property.
+     * @return the {@code m31} property
      */
     @JsxGetter
     public double getM31() {
@@ -326,6 +349,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m31} property.
      * @param m31 the new value
      */
     public void setM31(final double m31) {
@@ -333,7 +357,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m32
+     * Returns the {@code m32} property.
+     * @return the {@code m32} property
      */
     @JsxGetter
     public double getM32() {
@@ -341,6 +366,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m32} property.
      * @param m32 the new value
      */
     public void setM32(final double m32) {
@@ -348,7 +374,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m33
+     * Returns the {@code m33} property.
+     * @return the {@code m33} property
      */
     @JsxGetter
     public double getM33() {
@@ -356,6 +383,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m33} property.
      * @param m33 the new value
      */
     public void setM33(final double m33) {
@@ -363,7 +391,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m34
+     * Returns the {@code m34} property.
+     * @return the {@code m34} property
      */
     @JsxGetter
     public double getM34() {
@@ -371,6 +400,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m34} property.
      * @param m34 the new value
      */
     public void setM34(final double m34) {
@@ -378,7 +408,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m41
+     * Returns the {@code m41} property.
+     * @return the {@code m41} property
      */
     @JsxGetter
     public double getM41() {
@@ -386,6 +417,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m41} property.
      * @param m41 the new value
      */
     public void setM41(final double m41) {
@@ -393,7 +425,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return e
+     * Returns the {@code e} property.
+     * @return the {@code e} property
      */
     @JsxGetter
     public double getE() {
@@ -401,7 +434,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m42
+     * Returns the {@code m42} property.
+     * @return the {@code m42} property
      */
     @JsxGetter
     public double getM42() {
@@ -409,6 +443,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m42} property.
      * @param m42 the new value
      */
     public void setM42(final double m42) {
@@ -416,7 +451,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return f
+     * Returns the {@code f} property.
+     * @return the {@code f} property
      */
     @JsxGetter
     public double getF() {
@@ -424,7 +460,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m43
+     * Returns the {@code m43} property.
+     * @return the {@code m43} property
      */
     @JsxGetter
     public double getM43() {
@@ -432,6 +469,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m43} property.
      * @param m43 the new value
      */
     public void setM43(final double m43) {
@@ -439,7 +477,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return m44
+     * Returns the {@code m44} property.
+     * @return the {@code m44} property
      */
     @JsxGetter
     public double getM44() {
@@ -447,6 +486,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code m44} property.
      * @param m44 the new value
      */
     public void setM44(final double m44) {
@@ -454,7 +494,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return is2d
+     * Returns the {@code is2D} property.
+     * @return the {@code is2D} property
      */
     @JsxGetter
     public boolean isIs2D() {
@@ -462,6 +503,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code is2D} property.
      * @param is2D the new value
      */
     public void setIs2D(final boolean is2D) {
@@ -469,6 +511,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns whether this matrix is the identity matrix.
      * @return true if m12 element, m13 element, m14 element, m21 element, m23 element, m24 element,
      *     m31 element, m32 element, m34 element, m41 element, m42 element, m43 element are 0 or -0
      *     and m11 element, m22 element, m33 element, m44 element are 1. Otherwise it returns false.
@@ -483,6 +526,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a new matrix being the result of the original matrix flipped about the x-axis.
      * @return a new matrix being the result of the original matrix flipped about the x-axis.
      *     This is equivalent to multiplying the matrix by DOMMatrix(-1, 0, 0, 1, 0, 0).
      *     The original matrix is not modified.
@@ -518,7 +562,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a new matrix being the result of the original matrix flipped about the x-axis.
+     * Returns a new matrix being the result of the original matrix flipped about the y-axis.
+     * @return a new matrix being the result of the original matrix flipped about the y-axis.
      *     This is equivalent to multiplying the matrix by DOMMatrix(1, 0, 0, -1, 0, 0).
      *     The original matrix is not modified.
      */
@@ -553,6 +598,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a new matrix which is the inverse of the original matrix.
      * @return new matrix which is the inverse of the original matrix.
      *     If the matrix cannot be inverted, the new matrix's components are all set to NaN
      *     and its is2D property is set to false. The original matrix is not changed.
@@ -588,6 +634,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a new matrix which is the dot product of the matrix and the given matrix.
      * @param other the matrix to multiply with this matrix
      * @return a new matrix which is the dot product of the matrix and the otherMatrix parameter.
      *     If otherMatrix is omitted, the matrix is multiplied by a matrix in which every element
@@ -695,6 +742,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a new matrix rotated about the z-axis by the specified angle.
      * @param rotZ the rotation angle in degrees. If omitted, defaults to 0.
      * @return a new matrix which is the result of the original matrix rotated by the specified angle.
      *     The rotation is applied around the origin (0, 0) in the 2D plane.
@@ -851,6 +899,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a new matrix skewed along the x-axis by the specified angle.
      * @param alphaObj the angle, in degrees, by which to skew the matrix along the x-axis
      * @return returns a new DOMMatrix created by applying the specified skew transformation
      *     to the source matrix along its x-axis. The original matrix is not modified.
@@ -877,6 +926,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a new matrix skewed along the y-axis by the specified angle.
      * @param alphaObj the angle, in degrees, by which to skew the matrix along the y-axis
      * @return returns a new DOMMatrix created by applying the specified skew transformation
      *     to the source matrix along its x-axis. The original matrix is not modified.
@@ -944,6 +994,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a new Float32Array containing all 16 elements of the matrix.
      * @return a new Float32Array containing all 16 elements
      *     (m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44)
      *     which comprise the matrix. The elements are stored into the array
@@ -979,6 +1030,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a new Float64Array containing all 16 elements of the matrix.
      * @return a new Float64Array containing all 16 elements
      *     (m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44)
      *     which comprise the matrix. The elements are stored into the array
@@ -1014,6 +1066,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the values of the matrix as a CSS transform function string.
      * @return the values of the list separated by commas,
      *     within matrix() or matrix3d() function syntax.
      */
@@ -1067,8 +1120,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the values of the list separated by commas,
-     *     within matrix() or matrix3d() function syntax.
+     * Returns a JSON representation of the DOMMatrixReadOnly object.
+     * @return a JSON representation of the DOMMatrixReadOnly object
      */
     @JsxFunction
     public Scriptable toJSON() {

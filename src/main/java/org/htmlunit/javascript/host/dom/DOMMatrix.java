@@ -29,6 +29,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix">MDN Documentation</a>
  */
 @JsxClass
 public class DOMMatrix extends DOMMatrixReadOnly {
@@ -350,6 +352,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     /**
+     * Sets the {@code a} property.
      * @param a the new value
      */
     @JsxSetter
@@ -367,6 +370,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     /**
+     * Sets the {@code b} property.
      * @param b the new value
      */
     @JsxSetter
@@ -384,6 +388,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     /**
+     * Sets the {@code c} property.
      * @param c the new value
      */
     @JsxSetter
@@ -401,6 +406,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     /**
+     * Sets the {@code d} property.
      * @param d the new value
      */
     @JsxSetter
@@ -418,6 +424,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     /**
+     * Sets the {@code e} property.
      * @param e the new value
      */
     @JsxSetter
@@ -435,6 +442,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     /**
+     * Sets the {@code f} property.
      * @param f the new value
      */
     @JsxSetter
@@ -443,8 +451,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     /**
-     * @return inverts the original matrix. If the matrix cannot be inverted,
-     *     the new matrix's components are all set to NaN and its is2D property is set to false.
+     * Inverts the original matrix. If the matrix cannot be inverted,
+     * the new matrix's components are all set to NaN and its is2D property is set to false.
+     * @return this matrix, inverted
      */
     @JsxFunction
     public DOMMatrix invertSelf() {

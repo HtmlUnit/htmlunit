@@ -23,6 +23,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList">MDN Documentation</a>
  */
 @JsxClass
 public class DOMStringList extends HtmlUnitScriptable {

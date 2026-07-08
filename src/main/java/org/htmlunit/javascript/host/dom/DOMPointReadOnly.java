@@ -31,6 +31,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly">MDN Documentation</a>
  */
 @JsxClass
 public class DOMPointReadOnly extends HtmlUnitScriptable {
@@ -68,8 +70,8 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
      * @param scope the scope
      * @param args the arguments to the constructor
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr {@code true} if invoked with the {@code new} operator
+     * @return the Java object that JavaScript can access
      */
     @JsxConstructor
     public static DOMPointReadOnly jsConstructor(final Context cx, final VarScope scope,
@@ -106,7 +108,8 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return x coordinate
+     * Returns the {@code x} coordinate.
+     * @return the {@code x} coordinate
      */
     @JsxGetter
     public double getX() {
@@ -114,6 +117,7 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code x} coordinate.
      * @param x the new value
      */
     public void setX(final double x) {
@@ -121,7 +125,8 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return y coordinate
+     * Returns the {@code y} coordinate.
+     * @return the {@code y} coordinate
      */
     @JsxGetter
     public double getY() {
@@ -129,6 +134,7 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code y} coordinate.
      * @param y the new value
      */
     public void setY(final double y) {
@@ -136,7 +142,8 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return z coordinate
+     * Returns the {@code z} coordinate.
+     * @return the {@code z} coordinate
      */
     @JsxGetter
     public double getZ() {
@@ -144,6 +151,7 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code z} coordinate.
      * @param z the new value
      */
     public void setZ(final double z) {
@@ -151,7 +159,8 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return w perspective value
+     * Returns the {@code w} perspective value.
+     * @return the {@code w} perspective value
      */
     @JsxGetter
     public double getW() {
@@ -159,6 +168,7 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code w} perspective value.
      * @param w the new value
      */
     public void setW(final double w) {
@@ -166,7 +176,8 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a JSON representation of the DOMPointReadOnly object.
+     * Returns a JSON representation of the DOMPointReadOnly object.
+     * @return a JSON representation of the DOMPointReadOnly object
      */
     @JsxFunction
     public Scriptable toJSON() {

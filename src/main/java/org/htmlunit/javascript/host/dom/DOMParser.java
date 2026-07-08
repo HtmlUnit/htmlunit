@@ -41,9 +41,7 @@ import org.htmlunit.util.MimeType;
  *
  * @see <a href="http://www.w3.org/TR/DOM-Parsing/">W3C Spec</a>
  * @see <a href="http://domparsing.spec.whatwg.org/">WhatWG Spec</a>
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMParser">Mozilla Developer Network</a>
- * @see <a href="http://msdn.microsoft.com/en-us/library/ff975060.aspx">MSDN</a>
- * @see <a href="http://www.xulplanet.com/references/objref/DOMParser.html">XUL Planet</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMParser">MDN Documentation</a>
  */
 @JsxClass
 public class DOMParser extends HtmlUnitScriptable {

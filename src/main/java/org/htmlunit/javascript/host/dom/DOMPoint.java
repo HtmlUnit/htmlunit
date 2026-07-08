@@ -27,6 +27,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint">MDN Documentation</a>
  */
 @JsxClass
 public class DOMPoint extends DOMPointReadOnly {
@@ -35,10 +37,10 @@ public class DOMPoint extends DOMPointReadOnly {
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the arguments to the DOMPoint constructor
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr {@code true} if invoked with the {@code new} operator
+     * @return the Java object that JavaScript can access
      */
     @JsxConstructor
     public static DOMPoint jsConstructor(final Context cx, final VarScope scope,

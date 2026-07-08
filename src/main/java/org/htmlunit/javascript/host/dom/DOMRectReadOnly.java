@@ -31,6 +31,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly">MDN Documentation</a>
  */
 @JsxClass
 public class DOMRectReadOnly extends HtmlUnitScriptable {
@@ -68,10 +70,10 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the arguments to the DOMRectReadOnly constructor
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr {@code true} if invoked with the {@code new} operator
+     * @return the Java object that JavaScript can access
      */
     @JsxConstructor
     public static DOMRectReadOnly jsConstructor(final Context cx, final VarScope scope,
@@ -108,7 +110,8 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return x
+     * Returns the {@code x} coordinate.
+     * @return the {@code x} coordinate
      */
     @JsxGetter
     public double getX() {
@@ -116,6 +119,7 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code x} coordinate.
      * @param x the new value
      */
     public void setX(final double x) {
@@ -123,7 +127,8 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return y
+     * Returns the {@code y} coordinate.
+     * @return the {@code y} coordinate
      */
     @JsxGetter
     public double getY() {
@@ -131,6 +136,7 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code y} coordinate.
      * @param y the new value
      */
     public void setY(final double y) {
@@ -138,7 +144,8 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return width
+     * Returns the {@code width}.
+     * @return the {@code width}
      */
     @JsxGetter
     public double getWidth() {
@@ -146,6 +153,7 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code width}.
      * @param width the new value
      */
     public void setWidth(final double width) {
@@ -153,7 +161,8 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return height
+     * Returns the {@code height}.
+     * @return the {@code height}
      */
     @JsxGetter
     public double getHeight() {
@@ -161,6 +170,7 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code height}.
      * @param height the new value
      */
     public void setHeight(final double height) {
@@ -168,7 +178,8 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return top
+     * Returns the {@code top} coordinate.
+     * @return the {@code top} coordinate
      */
     @JsxGetter
     public double getTop() {
@@ -176,7 +187,8 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return right
+     * Returns the {@code right} coordinate.
+     * @return the {@code right} coordinate
      */
     @JsxGetter
     public double getRight() {
@@ -184,7 +196,8 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return right
+     * Returns the {@code bottom} coordinate.
+     * @return the {@code bottom} coordinate
      */
     @JsxGetter
     public double getBottom() {
@@ -192,7 +205,8 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return left
+     * Returns the {@code left} coordinate.
+     * @return the {@code left} coordinate
      */
     @JsxGetter
     public double getLeft() {
@@ -200,7 +214,8 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a JSON representation of the DOMRectReadOnly object.
+     * Returns a JSON representation of the DOMRectReadOnly object.
+     * @return a JSON representation of the DOMRectReadOnly object
      */
     @JsxFunction
     public Scriptable toJSON() {
