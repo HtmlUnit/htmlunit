@@ -58,7 +58,7 @@ import org.w3c.dom.NodeList;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
- * @author MatrixNeoKozak
+ * @author MatrixNeoKozak (matrixneo2026@tutamail.com)
  */
 @JsxClass
 public class XSLTProcessor extends HtmlUnitScriptable {
