@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Chrome/Edge 150, Bugfixes">
+            <action type="add" dev="rbri">
+                The document 'Details about HtmlUnit Security' added to the documentation pages.
+            </action>
             <action type="update" dev="rbri" due-to="MatrixNeoKozak">
                 Update TransformerFactory and DocumentBuilderFactory configuration with FEATURE_SECURE_PROCESSING
                 and restrict external DTD and stylesheet references to mitigate remote resource loading during XSLT transformation.
