@@ -16,29 +16,40 @@
         <section name="Overview" id="sec_overview">
             <p>
                 HtmlUnit is a headless browser written in Java for testing, automation, and web scraping.
-                It provides implementations of browser technologies such as HTML parsing, the DOM, JavaScript execution, 
-                cookies, networking, and browser APIs.
+                It provides implementations of browser technologies such as HTML parsing, the DOM,
+                JavaScript execution, cookies, networking, and browser APIs.
             </p>
-
             <p>
-                Unlike modern web browsers such as Chrome, Firefox, or Edge, <strong>HtmlUnit is not designed to
-                provide a secure execution environment for untrusted web content</strong>.
-                While it aims to emulate browser behavior, it intentionally does <strong>not</strong> implement
-                the operating system and process-level security architecture found in modern browsers.
+                Unlike modern web browsers such as Chrome, Firefox, or Edge,
+                <strong>HtmlUnit is not designed to provide a secure execution environment
+                for untrusted web content</strong>.
+                While it aims to emulate browser behavior, it intentionally does
+                <strong>not</strong> implement the operating system and process-level
+                security architecture found in modern browsers.
             </p>
-
             <p>
-                If your application loads arbitrary or untrusted web pages, you are responsible for providing appropriate isolation 
-                and restricting the privileges of the HtmlUnit process.
+                <strong>Important:</strong>
+                HtmlUnit is intended for browser automation and testing—not as a security sandbox.
+                Applications that process arbitrary or hostile web content should provide
+                appropriate isolation using operating system, virtual machine, container,
+                or service-level controls.
+            </p>
+            <p>
+                If your application loads arbitrary or untrusted web pages, you are responsible
+                for providing appropriate isolation and restricting the privileges of the
+                HtmlUnit process.
             </p>
         </section>
 
-        <section name="Security Considerations"  id="sec_security_considerations">
+        <section name="Security Considerations" id="sec_security_considerations">
             <p>
-                HtmlUnit executes entirely within the hosting JVM. JavaScript, DOM processing, 
-                networking, and browser emulation all run as part of your application's process.<br></br>
-                This architecture provides excellent integration and performance for testing and automation, 
-                but it also means that HtmlUnit should <strong>not</strong> be considered a security boundary.
+                HtmlUnit executes entirely within the hosting JVM. HTML parsing, DOM processing,
+                JavaScript execution, networking, and browser emulation all run as part
+                of your application's process.
+                <br></br>
+                This architecture provides excellent integration and performance for
+                testing and automation, but it also means that HtmlUnit should
+                <strong>not</strong> be considered a security boundary.
             </p>
             <p>
                 Unlike modern browsers, HtmlUnit does not provide:
@@ -51,14 +62,17 @@
                 <li>Browser exploit mitigation technologies</li>
             </ul>
             <p>
-                Applications that require these protections should execute HtmlUnit inside an appropriately isolated environment.
+                Applications requiring these protections should execute HtmlUnit inside
+                an appropriately isolated environment.
             </p>
-        </section>
 
-        <section name="Processing Untrusted Content"  id="sec_processing_untrusted_content">
+        </section>
+        
+        <section name="Processing Untrusted Content" id="sec_processing_untrusted_content">
             <p>
-                Processing arbitrary Internet pages or user-supplied content means executing complex parsing and
-                JavaScript code within your application's JVM. As with any software that processes untrusted input,
+                Processing arbitrary Internet pages or user-supplied content means parsing
+                complex HTML, CSS, JavaScript, and related web content inside your
+                application's JVM. As with any software that processes untrusted input,
                 vulnerabilities may exist despite ongoing maintenance and security fixes.
             </p>
             <p>
@@ -68,19 +82,22 @@
                 <li>User-provided URLs</li>
                 <li>Customer-supplied HTML</li>
                 <li>Unknown third-party websites</li>
-                <li>Malware analysis</li>
+                <li>Malware or security research</li>
                 <li>Phishing sites</li>
-                <li>Advertisement networks</li>
+                <li>Third-party advertising networks</li>
             </ul>
             <p>
-                While HtmlUnit makes every effort to correctly implement web standards and fix security defects, 
-                it should <strong>not</strong> be relied upon as the primary security mechanism for hostile content.
+                While HtmlUnit strives to correctly implement web standards and promptly
+                address reported security issues, it should
+                <strong>not</strong> be relied upon as the primary security mechanism
+                for hostile content.
             </p>
         </section>
-
-        <section name="Deployment Recommendations"  id="sec_deployment_recommendations">
+        
+        <section name="Deployment Recommendations" id="sec_deployment_recommendations">
             <p>
-                When processing untrusted or arbitrary web content, consider running HtmlUnit inside an isolated environment such as:
+                When processing untrusted or arbitrary web content, consider running
+                HtmlUnit inside an isolated environment such as:
             </p>
             <ul>
                 <li>A dedicated virtual machine</li>
@@ -90,12 +107,24 @@
                 <li>A separate service with limited permissions</li>
             </ul>
             <p>
-                If HtmlUnit processes untrusted content, the execution environment should be considered disposable and recoverable.
+                When processing untrusted content, the execution environment should be
+                considered disposable and recoverable.
             </p>
+        
+            <subsection name="Security Responsibility Model">
+                <p>
+                    HtmlUnit focuses on browser emulation and automation functionality.
+                    Security controls such as process isolation, network restrictions,
+                    resource limits, credential management, monitoring, and workload
+                    isolation remain the responsibility of the hosting application and
+                    deployment environment.
+                </p>
+            </subsection>
 
             <subsection name="Network Security">
                 <p>
-                    HtmlUnit performs network requests on behalf of the loaded page.<br></br>
+                    HtmlUnit performs network requests on behalf of loaded pages.
+                    <br></br>
                     Depending on your application, consider:
                 </p>
                 <ul>
@@ -105,45 +134,80 @@
                     <li>Preventing access to internal services</li>
                     <li>Protecting against Server-Side Request Forgery (SSRF)</li>
                 </ul>
+                <p>
+                    Without appropriate controls, untrusted pages may be able to initiate
+                    requests to resources accessible from the hosting environment,
+                    including internal services, administrative interfaces, or cloud
+                    metadata endpoints.
+                </p>
             </subsection>
 
             <subsection name="File System and System Resources">
                 <p>
-                    HtmlUnit does not provide any sandbox or security boundary between the processed web page and the hosting JVM/System.
+                    HtmlUnit executes within the hosting JVM and should not be treated as
+                    a security boundary.
                     <br></br>
-                    Any vulnerability in HtmlUnit or one of its dependencies executes with the full privileges of the hosting process.
-                    This includes access to the file system, network, environment variables, credentials available to the process, 
-                    and any other resources accessible to the JVM.
+                    If an attacker successfully exploits a vulnerability in HtmlUnit,
+                    one of its dependencies, the Java runtime, or related components,
+                    the resulting impact would generally be limited only by the
+                    privileges of the hosting process.
                 </p>
                 <p>
-                    Run HtmlUnit with the minimum operating system permissions required for your application.
+                    Depending on the application's permissions, this could include access to:
+                </p>
+                <ul>
+                    <li>Files accessible to the process</li>
+                    <li>Network connectivity</li>
+                    <li>Environment variables</li>
+                    <li>Configuration files</li>
+                    <li>Credentials or authentication tokens available to the process</li>
+                    <li>Other operating system resources available to the JVM</li>
+                </ul>
+                <p>
+                    Run HtmlUnit with the minimum operating system permissions required
+                    for your application.
                 </p>
             </subsection>
 
             <subsection name="Java Security Manager">
                 <p>
-                    Older Java versions supported the Java Security Manager as an application sandbox.
+                    Older Java versions supported the Java Security Manager as an
+                    application sandbox.
                     <br></br>
-                    Since the Security Manager has been deprecated and removed from recent Java releases,
-                    applications should use operating system or container-based isolation when processing untrusted content.
+                    Since the Security Manager has been deprecated and removed from
+                    recent Java releases, applications should instead rely on operating
+                    system, container, or virtual machine isolation when processing
+                    untrusted content.
                 </p>
             </subsection>
-
+        
             <subsection name="Dependency Updates">
                 <p>
-                    Like any software that processes untrusted input, HtmlUnit and its dependencies should be kept up to date.
+                    Like any software that processes untrusted input, HtmlUnit and its
+                    dependencies should be kept up to date.
                     <br></br>
-                    Likewise, keep the Java runtime and operating system up to date, since vulnerabilities in either may affect 
-                    the security of applications using HtmlUnit.
+                    Likewise, keep the Java runtime and operating system updated, since
+                    vulnerabilities in either may affect the security of applications
+                    using HtmlUnit.
                 </p>
             </subsection>
-
+        
             <subsection name="Resource Consumption">
                 <p>
-                    Malicious or poorly written web pages may consume excessive CPU time, memory, or network resources.
-                    When processing untrusted content, applications should consider enforcing appropriate resource limits,
-                    execution timeouts, and memory limits through the hosting environment.
+                    Malicious or poorly written web pages may consume excessive CPU time,
+                    memory, network bandwidth, or other system resources.
                 </p>
+                <p>
+                    When processing untrusted content, consider enforcing:
+                </p>
+                <ul>
+                    <li>Execution time limits</li>
+                    <li>Memory limits</li>
+                    <li>CPU quotas</li>
+                    <li>Maximum page or response sizes</li>
+                    <li>Network request limits</li>
+                    <li>Automatic termination and recovery of stalled or misbehaving workloads</li>
+                </ul>
             </subsection>
 
         </section>
