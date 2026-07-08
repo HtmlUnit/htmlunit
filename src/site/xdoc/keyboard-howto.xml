@@ -67,7 +67,7 @@
                 To use special keys, you can use htmlElement.type(int) with KeyboardEvent.DOM_VK_PAGE_DOWN.
             </p>
             <p>
-                To simulate typing while holding modifier keys (Shift/Ctrl/Alt) use the Keybord class.<br></br>
+                To simulate typing while holding modifier keys (Shift/Ctrl/Alt) use the Keybord class.<br/>
                 Example: Simulate Ctrl+c to copy to the clipboard (details in the next section).
             <source><![CDATA[
   final HtmlInput input = (HtmlInput) page.getElementById("i1");

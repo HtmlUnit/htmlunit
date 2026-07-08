@@ -43,7 +43,7 @@
                 If the response type is supported the content will be available as HtmlPage (or XHtmlPage) including access to all the embedded stuff
                 like javascript, css and images.
                 Like real browsers, there is also support for text only content (TextPage) and plain XML content (XmlPage).
-                <br></br>
+                <br/>
                 But HtmlUnit can't offer a file dialog because the main use cases are automatic testing and scraping. Based on this the current implementation
                 offers two ways to handle downloads:
             </p>

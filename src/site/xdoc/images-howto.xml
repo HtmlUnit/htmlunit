@@ -28,7 +28,7 @@
             </p>
             <subsection name="Example">
                 <p>
-                    Add svg support to be able to include SVG images into your canvas drawings<br></br>
+                    Add svg support to be able to include SVG images into your canvas drawings<br/>
                     This is simply done by adding some dependencies to your project:
                 </p>
 <source>

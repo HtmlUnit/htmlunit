@@ -46,7 +46,7 @@
                 HtmlUnit executes entirely within the hosting JVM. HTML parsing, DOM processing,
                 JavaScript execution, networking, and browser emulation all run as part
                 of your application's process.
-                <br></br>
+                <br/>
                 This architecture provides excellent integration and performance for
                 testing and automation, but it also means that HtmlUnit should
                 <strong>not</strong> be considered a security boundary.
@@ -124,7 +124,7 @@
             <subsection name="Network Security">
                 <p>
                     HtmlUnit performs network requests on behalf of loaded pages.
-                    <br></br>
+                    <br/>
                     Depending on your application, consider:
                 </p>
                 <ul>
@@ -146,7 +146,7 @@
                 <p>
                     HtmlUnit executes within the hosting JVM and should not be treated as
                     a security boundary.
-                    <br></br>
+                    <br/>
                     If an attacker successfully exploits a vulnerability in HtmlUnit,
                     one of its dependencies, the Java runtime, or related components,
                     the resulting impact would generally be limited only by the
@@ -173,7 +173,7 @@
                 <p>
                     Older Java versions supported the Java Security Manager as an
                     application sandbox.
-                    <br></br>
+                    <br/>
                     Since the Security Manager has been deprecated and removed from
                     recent Java releases, applications should instead rely on operating
                     system, container, or virtual machine isolation when processing
@@ -185,7 +185,7 @@
                 <p>
                     Like any software that processes untrusted input, HtmlUnit and its
                     dependencies should be kept up to date.
-                    <br></br>
+                    <br/>
                     Likewise, keep the Java runtime and operating system updated, since
                     vulnerabilities in either may affect the security of applications
                     using HtmlUnit.

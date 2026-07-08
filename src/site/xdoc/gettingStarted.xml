@@ -13,7 +13,118 @@
             </macro>
         </section>
 
-        <section name="Introduction">
+        <section name="Quick Start">
+            <p>
+                This example demonstrates the basic workflow when using HtmlUnit:
+                <br/>
+                &nbsp;-&nbsp;Create a WebClient.
+                <br/>
+                &nbsp;-&nbsp;Load a web page.
+                <br/>
+                &nbsp;-&nbsp;Access the page contents.
+            </p>
+            <source><![CDATA[
+try (final WebClient webClient = new WebClient()) {
+    final HtmlPage page = webClient.getPage("https://example.com");
+
+    System.out.println(page.getTitleText());
+}
+}]]></source>
+            <p>
+                The WebClient is the central entry point of the HtmlUnit API. It represents a web browser, 
+                manages network communication, executes JavaScript, maintains cookies, and provides access to the pages you load.
+                <br/>
+                The getPage() method retrieves the requested resource and returns an object representing the loaded page.
+                In this example, the returned object is an HtmlPage, which provides access to the document structure and browser APIs.
+                <br/>
+                Once a page has been loaded, you can inspect its contents, locate elements, interact with forms, click links, 
+                execute JavaScript, or extract data.
+            </p>
+            <p>
+                The following sections introduce these capabilities in more detail.        
+            </p>
+
+            <subsection name="When to Use HtmlUnit">
+            
+                <p>
+                    HtmlUnit is one of several libraries for working with web content.
+                    The right choice depends on your application's requirements.
+                </p>
+            
+                <table>
+                    <tr>
+                        <th>Library</th>
+                        <th>Best suited for</th>
+                    </tr>
+                    <tr>
+                        <td>HtmlUnit</td>
+                        <td>Browser automation, testing, and web scraping with JavaScript support, without requiring a graphical browser.</td>
+                    </tr>
+                    <tr>
+                        <td>Jsoup</td>
+                        <td>Parsing and extracting data from HTML documents when browser behavior and JavaScript execution are not required.</td>
+                    </tr>
+                    <tr>
+                        <td>Selenium</td>
+                        <td>Automating real browsers for end-to-end testing and browser-specific behavior.</td>
+                    </tr>
+                </table>
+            
+                <p>
+                    HtmlUnit provides a browser-like programming model entirely within Java.
+                    It is often a good choice when JavaScript support is required, but running
+                    a full browser would be unnecessary or impractical.
+                </p>
+                <p>
+                    The <a href="https://github.com/HtmlUnit/htmlunit-jsoup">htmlunit-jsoup</a>
+                    bridge combines HtmlUnit's browser emulation and JavaScript support with
+                    Jsoup's DOM and selector API. It also makes it possible to use many
+                    Jsoup-based libraries with pages loaded and rendered by HtmlUnit.
+                </p>                
+            </subsection>
+        </section>
+
+        <section name="HtmlUnit's Programming Model" id="sec_programming_model">
+        
+            <p>
+                HtmlUnit models the interaction between a web browser and web pages.
+                The central class is <code>WebClient</code>, which represents a browser
+                instance. A <code>WebClient</code> is responsible for making HTTP requests,
+                executing JavaScript, managing cookies, following redirects, and maintaining
+                browser state across multiple requests.
+            </p>
+        
+            <p>
+                Loading a page with <code>WebClient.getPage()</code> returns an object
+                representing the retrieved resource. For HTML documents, this is typically
+                an <code>HtmlPage</code>, which provides access to the page's DOM and
+                browser-specific functionality.
+            </p>
+        
+            <p>
+                Once a page has been loaded, you can:
+            </p>
+        
+            <ul>
+                <li>Inspect the document structure</li>
+                <li>Locate elements by ID, CSS selector, or XPath</li>
+                <li>Interact with forms and links</li>
+                <li>Execute JavaScript</li>
+                <li>Extract text, attributes, and other page content</li>
+                <li>Navigate to additional pages while preserving browser state</li>
+            </ul>
+        
+            <p>
+                In most applications, a single <code>WebClient</code> is reused to
+                navigate through multiple pages, just as a user would with a web browser.
+                Each call to <code>getPage()</code> returns a new page object while the
+                browser state, such as cookies and session information, remains associated
+                with the <code>WebClient</code>.
+            </p>
+        
+        </section>
+
+        <section name="Writing a first test">
             <p>
                 The <a href="dependencies.html">dependencies page</a> lists all the jars that you will need
                 to have in your classpath.
@@ -200,7 +311,7 @@ currency.setSelectedAttribute(euro, true);]]></source>
         <section name="Finding a specific element">
             <p>
                 Once you have a reference to an HtmlPage, you can search for a specific HtmlElement by one of
-                'get' methods, or by using XPath or CSS selectors.
+                'get' methods, or by using CSS or XPath selectors.
             </p>
             <subsection name="Traversing the DOM tree">
                 <p>
@@ -254,26 +365,6 @@ public void getElements() throws Exception {
                 </ul>
             </subsection>
 
-            <subsection name="XPath queries">
-                <p>
-                    XPath is the suggested way for more complex searches, a brief tutorial can be found in
-                    <a href="https://www.w3schools.com/xml/xpath_intro.asp">W3Schools</a>
-                </p>
-                <source><![CDATA[
-@Test
-public void xpath() throws Exception {
-    try (WebClient webClient = new WebClient()) {
-        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-
-        //get list of all divs
-        final List<?> divs = page.getByXPath("//div");
-
-        //get div which has a 'id' attribute of 'banner'
-        final HtmlDivision div = (HtmlDivision) page.getByXPath("//div[@id='banner']").get(0);
-    }
-}]]></source>
-            </subsection>
-
             <subsection name="CSS Selectors">
                 <p>
                     You can also use CSS selectors
@@ -292,6 +383,26 @@ public void cssSelector() throws Exception {
 
         //get div which has the id 'breadcrumbs'
         final DomNode div = page.querySelector("div#breadcrumbs");
+    }
+}]]></source>
+            </subsection>
+
+            <subsection name="XPath queries">
+                <p>
+                    XPath is the suggested way for more complex searches, a brief tutorial can be found in
+                    <a href="https://www.w3schools.com/xml/xpath_intro.asp">W3Schools</a>
+                </p>
+                <source><![CDATA[
+@Test
+public void xpath() throws Exception {
+    try (WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
+
+        //get list of all divs
+        final List<?> divs = page.getByXPath("//div");
+
+        //get div which has a 'id' attribute of 'banner'
+        final HtmlDivision div = (HtmlDivision) page.getByXPath("//div[@id='banner']").get(0);
     }
 }]]></source>
             </subsection>

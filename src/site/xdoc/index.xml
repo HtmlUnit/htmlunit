@@ -173,7 +173,7 @@
                     </li>
 
                     <li>
-                        <a href="https://www.scrapingbee.com/java-webscraping-book/">The Java Web Scraping Handbook</a><br></br>
+                        <a href="https://www.scrapingbee.com/java-webscraping-book/">The Java Web Scraping Handbook</a><br/>
                         A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
                     </li>
                     
@@ -285,7 +285,7 @@ implementation group: 'org.htmlunit', name: 'htmlunit', version: '5.2.0']]></sou
             <p>
                 JavaScript code is executed just like in normal browsers when the page loads or when a handler is triggered.
                 Additionally, HtmlUnit provides the ability to inject code into an existing page via
-                HtmlPage.executeJavascript(String yourJsCode).<br></br>
+                HtmlPage.executeJavascript(String yourJsCode).<br/>
                 Refer to the <a href="javascript-howto.html">Use JavaScript</a> for more details.
             </p>
             
