@@ -12,15 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.libraries;
+package org.htmlunit.libraries.html2canvas;
 
 import java.net.URL;
 import java.time.Duration;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -53,14 +50,9 @@ public class Html2CanvasTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("data:image/png;base64")
-    @HtmlUnitNYI(CHROME = "nyi",
-            EDGE = "nyi",
-            FF = "nyi",
-            FF_ESR = "nyi")
     public void helloWorld() throws Exception {
-        // this does not produce an image in html unit so far
-        // have added this test to not forget it
+        readExpectedAlertFromPng("helloworld");
+
         doTest("html2canvas.html");
     }
 
@@ -70,27 +62,21 @@ public class Html2CanvasTest extends WebDriverTestCase {
         driver.get(getBaseUrl() + filename);
         driver.findElement(By.id("printButtonId")).click();
 
-        // verifyTextArea2(driver, getExpectedAlerts());
-
         final WebElement textArea = driver.findElement(By.id("myLog"));
-        verify(DEFAULT_WAIT_TIME, textArea);
+        wait(DEFAULT_WAIT_TIME, textArea);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
-    private void verify(final Duration maxWaitTime, final WebElement textArea) throws Exception {
+    private static void wait(final Duration maxWaitTime, final WebElement textArea) throws Exception {
         final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
-        String result = "nyi";
         while (System.currentTimeMillis() < maxWait) {
             final String value = textArea.getDomProperty("value");
             if (value != null && value.startsWith("data:image/png;base64,")) {
-                result = value;
                 break;
             }
 
             Thread.sleep(100);
         }
-
-        Assertions.assertTrue(result.startsWith(getExpectedAlerts()[0]),
-                "'" + result + "' does not start with '" + getExpectedAlerts()[0] + "'");
     }
 }

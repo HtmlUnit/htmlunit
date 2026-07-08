@@ -699,4 +699,28 @@ public abstract class WebTestCase {
         }
         return result;
     }
+
+    protected void readExpectedAlertFromPng(final String testName) throws IOException {
+        String resourceName = testName + "/nyi_" + getBrowserVersion().getNickname() + ".png";
+        try (InputStream is = getClass().getResourceAsStream(resourceName)) {
+            if (is != null) {
+                final byte[] bytes = IOUtils.toByteArray(is);
+                final String alert = "data:image/png;base64," + Base64.getEncoder().encodeToString(bytes);
+                setExpectedAlerts(alert);
+
+                return;
+            }
+        }
+
+        resourceName = testName + "/expected_" + getBrowserVersion().getNickname() + ".png";
+        try (InputStream is = getClass().getResourceAsStream(resourceName)) {
+            if (is == null) {
+                throw new IllegalArgumentException("Resource named '" + resourceName + "' not found");
+            }
+
+            final byte[] bytes = IOUtils.toByteArray(is);
+            final String alert = "data:image/png;base64," + Base64.getEncoder().encodeToString(bytes);
+            setExpectedAlerts(alert);
+        }
+    }
 }

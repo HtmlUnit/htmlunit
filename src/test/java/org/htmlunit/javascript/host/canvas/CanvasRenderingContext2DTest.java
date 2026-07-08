@@ -14,9 +14,7 @@
  */
 package org.htmlunit.javascript.host.canvas;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Base64;
 import java.util.Collections;
 
 import org.apache.commons.io.IOUtils;
@@ -2870,18 +2868,5 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTextArea2(html);
-    }
-
-    private void readExpectedAlertFromPng(final String testName) throws IOException {
-        String resourceName = testName + "/expected_" + getBrowserVersion().getNickname() + ".png";
-        try (InputStream is = getClass().getResourceAsStream(resourceName)) {
-            if (is == null) {
-                throw new IllegalArgumentException("Resource named '" + resourceName + "' not found");
-            }
-
-            final byte[] bytes = IOUtils.toByteArray(is);
-            final String alert = "data:image/png;base64," + Base64.getEncoder().encodeToString(bytes);
-            setExpectedAlerts(alert);
-        }
     }
 }
