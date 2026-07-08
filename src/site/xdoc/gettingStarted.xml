@@ -28,7 +28,6 @@ try (final WebClient webClient = new WebClient()) {
     final HtmlPage page = webClient.getPage("https://example.com");
 
     System.out.println(page.getTitleText());
-}
 }]]></source>
             <p>
                 The WebClient is the central entry point of the HtmlUnit API. It represents a web browser, 
@@ -453,5 +452,56 @@ public void extractTextFromBody() throws Exception {
 }]]></source>
             </subsection>
         </section>
+
+    <section name="Where to Go Next">
+        <p>
+            This guide introduced the basic concepts of HtmlUnit. The following
+            pages provide more detailed information about specific topics.
+        </p>
+        <ul>
+            <li>
+                <a href="webclient.html">WebClient - the browser</a><br></br>
+                Learn how to configure browser behavior, networking, cookies,
+                proxies, JavaScript, and other browser options.
+            </li>
+            <li>
+                <a href="javascript.html">Use JavaScript</a><br></br>
+                Execute JavaScript, interact with dynamic pages, and wait for
+                asynchronous background tasks.
+            </li>
+            <li>
+                <a href="windows.html">Windows and Frames</a><br></br>
+                Work with multiple windows, tabs, and HTML frames.
+            </li>
+            <li>
+                <a href="tables.html">Use Tables</a><br></br>
+                Convenient APIs for accessing and processing HTML tables.
+            </li>
+            <li>
+                <a href="keyboard.html">Use the Keyboard</a><br></br>
+                Simulate keyboard input and browser events.
+            </li>
+            <li>
+                <a href="fileupload.html">File Upload</a> and
+                <a href="filedownload.html">File Download</a><br></br>
+                Upload files through forms and download resources.
+            </li>
+            <li>
+                <a href="security.html">Security</a><br></br>
+                Understand HtmlUnit's security model and recommendations for
+                processing untrusted content.
+            </li>
+            <li>
+                <a href="logging.html">Logging</a><br></br>
+                Enable and configure logging to help troubleshoot applications.
+            </li>
+            <li>
+                <a href="all.html">All the Details</a><br></br>
+                A comprehensive reference covering the HtmlUnit API and advanced
+                features.
+            </li>
+        </ul>
+    
+    </section>
     </body>
 </document>
