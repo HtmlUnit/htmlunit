@@ -1417,6 +1417,10 @@
         <contributor>
             <name>Sebastian Peters</name>
         </contributor>
+        <contributor>
+            <name>MatrixNeoKozak</name>
+            <email>matrixneo2026@tutamail.com</email>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as dependency -->
