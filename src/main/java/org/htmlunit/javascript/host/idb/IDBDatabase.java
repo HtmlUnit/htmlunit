@@ -23,6 +23,8 @@ import org.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase">MDN Documentation</a>
  */
 @JsxClass
 public class IDBDatabase extends EventTarget {
