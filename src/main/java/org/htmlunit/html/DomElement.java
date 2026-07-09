@@ -761,6 +761,8 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
+     * Returns the identifier of this element.
+     *
      * @return the identifier of this element
      */
     public final String getId() {
@@ -814,7 +816,9 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * @return an Iterable over the DomElement children of this object, i.e. excluding the non-element nodes
+     * Returns an {@link Iterable} over the {@link DomElement} children of this object, i.e. excluding the non-element nodes.
+     *
+     * @return an {@link Iterable} over the {@link DomElement} children of this object, i.e. excluding the non-element nodes
      */
     public final Iterable<DomElement> getChildElements() {
         return new ChildElementsIterable(this);
@@ -865,7 +869,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         /**
-         * @return is there a next one ?
+         * {@inheritDoc}
          */
         @Override
         public boolean hasNext() {
@@ -873,7 +877,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         /**
-         * @return the next one
+         * {@inheritDoc}
          */
         @Override
         public DomElement next() {
@@ -986,6 +990,8 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
+     * Returns true if this is an {@link DisabledElement} and disabled.
+     *
      * @return true if this is an {@link DisabledElement} and disabled
      */
     protected boolean isDisabledElementAndDisabled() {

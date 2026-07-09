@@ -28,7 +28,6 @@ import org.htmlunit.FrameContentHandler;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
-import org.htmlunit.WebClientOptions;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
@@ -162,10 +161,6 @@ public abstract class BaseFrameElement extends HtmlElement {
         contentLoaded_ = true;
     }
 
-    /**
-     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *      {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
-     */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
         setContentLoaded();
 

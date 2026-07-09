@@ -51,7 +51,7 @@ public class DomComment extends DomCharacterData implements Comment {
     }
 
     /**
-     * @return the node name, in this case {@link #NODE_NAME}
+     * {@inheritDoc}
      */
     @Override
     public String getNodeName() {

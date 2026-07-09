@@ -112,7 +112,7 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * @return the node type constant, in this case {@link org.w3c.dom.Node#TEXT_NODE}
+     * {@inheritDoc}
      */
     @Override
     public short getNodeType() {
@@ -120,7 +120,7 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * @return the node name, in this case {@link #NODE_NAME}
+     * {@inheritDoc}
      */
     @Override
     public String getNodeName() {
