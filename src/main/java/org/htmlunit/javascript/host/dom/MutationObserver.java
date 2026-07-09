@@ -43,6 +43,8 @@ import org.htmlunit.javascript.host.Window;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Atsushi Nakagawa
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">MDN Documentation</a>
  */
 @JsxClass
 public class MutationObserver extends HtmlUnitScriptable implements HtmlAttributeChangeListener,
@@ -50,7 +52,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
 
     private Function function_;
     private Node node_;
-    private boolean attaributes_;
+    private boolean attributes_;
     private boolean attributeOldValue_;
     private NativeArray attributeFilter_;
     private boolean characterData_;
@@ -82,7 +84,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
         }
 
         node_ = node;
-        attaributes_ = Boolean.TRUE.equals(options.get("attributes"));
+        attributes_ = Boolean.TRUE.equals(options.get("attributes"));
         attributeOldValue_ = Boolean.TRUE.equals(options.get("attributeOldValue"));
         characterData_ = Boolean.TRUE.equals(options.get("characterData"));
         characterDataOldValue_ = Boolean.TRUE.equals(options.get("characterDataOldValue"));
@@ -91,11 +93,11 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
 
         final boolean childList = Boolean.TRUE.equals(options.get("childList"));
 
-        if (!attaributes_ && !childList && !characterData_) {
-            throw JavaScriptEngine.typeError("One of childList, attributes, od characterData must be set");
+        if (!attributes_ && !childList && !characterData_) {
+            throw JavaScriptEngine.typeError("One of childList, attributes, or characterData must be set");
         }
 
-        if (attaributes_ && node_.getDomNodeOrDie() instanceof HtmlElement) {
+        if (attributes_ && node_.getDomNodeOrDie() instanceof HtmlElement) {
             ((HtmlElement) node_.getDomNodeOrDie()).addHtmlAttributeChangeListener(this);
         }
         if (characterData_) {
@@ -108,7 +110,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      */
     @JsxFunction
     public void disconnect() {
-        if (attaributes_ && node_.getDomNodeOrDie() instanceof HtmlElement) {
+        if (attributes_ && node_.getDomNodeOrDie() instanceof HtmlElement) {
             ((HtmlElement) node_.getDomNodeOrDie()).removeHtmlAttributeChangeListener(this);
         }
         if (characterData_) {
@@ -118,7 +120,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
 
     /**
      * Empties the MutationObserver instance's record queue and returns what was in there.
-     * @return an {@link NativeArray} of {@link MutationRecord}s
+     * @return a {@link NativeArray} of {@link MutationRecord}s
      */
     @JsxFunction
     public Scriptable takeRecords() {

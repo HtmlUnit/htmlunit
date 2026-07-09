@@ -43,7 +43,7 @@ public class NativeXPathNSResolver extends HtmlUnitScriptable implements PrefixR
     }
 
     /**
-     * Look up the namespace URI associated to the given namespace prefix.
+     * Looks up the namespace URI associated to the given namespace prefix.
      * @param prefix the prefix to look for
      * @return the associated namespace URI or null if none is found
      */

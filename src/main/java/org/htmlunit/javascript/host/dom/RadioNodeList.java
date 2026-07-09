@@ -34,6 +34,8 @@ import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Lai Quang Duong
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/RadioNodeList">MDN Documentation</a>
  */
 @JsxClass
 public class RadioNodeList extends NodeList {
@@ -59,7 +61,7 @@ public class RadioNodeList extends NodeList {
      *
      * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
-     *        of a descendant node of parentScope changes (attribute added, modified or removed)
+     *        of a descendant node of domNode changes (attribute added, modified or removed)
      */
     public RadioNodeList(final DomNode domNode, final boolean attributeChangeSensitive) {
         super(domNode, attributeChangeSensitive);
@@ -123,6 +125,7 @@ public class RadioNodeList extends NodeList {
     }
 
     /**
+     * Returns the {@code Symbol.iterator} function that allows iterating over this collection.
      * @return the Iterator symbol
      */
     @JsxSymbol
