@@ -147,6 +147,8 @@ public final class StringUtils {
     }
 
     /**
+     * Returns true if the provided string has only one char and this matches the expectation.
+     *
      * @param expected the char that we expect
      * @param s the string to check
      * @return true if the provided string has only one char and this matches the expectation
@@ -297,8 +299,10 @@ public final class StringUtils {
      * A {@code null} string input will return {@code null}.
      * An empty ("") string input will return the empty string.
      * A {@code null} separator will return the empty string if the input string is not {@code null}.
+     * </p>
      * <p>
      * If nothing is found, the empty string is returned.
+     * </p>
      *
      * @param str the String to get a substring from, may be null.
      * @param find the String to find, may be null.
@@ -917,6 +921,8 @@ public final class StringUtils {
     }
 
     /**
+     * Returns true if it only contains valid chars and is non-null.
+     *
      * @param cs the String to check, may be null.
      * @param valid an array of valid chars, may be null.
      * @return true if it only contains valid chars and is non-null.

@@ -699,9 +699,10 @@ public final class UrlUtils {
 
     /**
      * Parses a given specification using the algorithm depicted in
-     * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>:
+     * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>.
      * <p>
      * Section 2.4: Parsing a URL
+     * </p>
      * <p>
      *   An accepted method for parsing URLs is useful to clarify the
      *   generic-RL syntax of Section 2.2 and to describe the algorithm for
@@ -711,7 +712,7 @@ public final class UrlUtils {
      *   rules assume that the URL has already been separated from any
      *   surrounding text and copied to a "parse string". The rules are
      *   listed in the order in which they would be applied by the parser.
-     *
+     * </p>
      * @param spec The specification to parse.
      * @return the parsed specification.
      */
@@ -911,12 +912,14 @@ public final class UrlUtils {
      * Returns true if specified string is a valid scheme name.
      * <p>
      * https://tools.ietf.org/html/rfc1738
+     * </p>
      * <p>
      * Scheme names consist of a sequence of characters. The lower case
      * letters "a"--"z", digits, and the characters plus ("+"), period
      * ("."), and hyphen ("-") are allowed. For resiliency, programs
      * interpreting URLs should treat upper case letters as equivalent to
      * lower case in scheme names (e.g., allow "HTTP" as well as "http").
+     * </p>
      *
      * @param scheme the scheme string to check
      * @return true if valid
@@ -974,9 +977,10 @@ public final class UrlUtils {
 
     /**
      * Resolves a given relative URL against a base URL using the algorithm
-     * depicted in <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>:
+     * depicted in <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>.
      * <p>
      * Section 4: Resolving Relative URLs
+     * </p>
      * <p>
      *   This section describes an example algorithm for resolving URLs within
      *   a context in which the URLs may be relative, such that the result is
@@ -985,6 +989,7 @@ public final class UrlUtils {
      *   original author, it does guarantee that any valid URL (relative or
      *   absolute) can be consistently transformed to an absolute form given a
      *   valid base URL.
+     * </p>
      *
      * @param baseUrl     The base URL in which to resolve the specification.
      * @param relativeUrl The relative URL to resolve against the base URL.
@@ -1121,7 +1126,7 @@ public final class UrlUtils {
     }
 
     /**
-     * "../" after the leading "/" should be removed as browsers do (not in RFC)
+     * "../" after the leading "/" should be removed as browsers do (not in RFC).
      */
     private static String removeLeadingSlashPoints(final String path) {
         int i = 1;
@@ -1345,8 +1350,10 @@ public final class UrlUtils {
     }
 
     /**
+     * Returns the encoded string.
+     *
      * @param part the part to encode
-     * @return the ecoded string
+     * @return the encoded string
      */
     public static String encodeQueryPart(final String part) {
         if (part == null || part.isEmpty()) {
@@ -1496,6 +1503,7 @@ public final class UrlUtils {
      *
      * <p>The method handles default ports correctly by using the URL's default port when
      * the explicit port is -1 (indicating no port was specified).
+     * </p>
      *
      * @param originUrl the first URL to compare (must not be null)
      * @param newUrl the second URL to compare (must not be null)

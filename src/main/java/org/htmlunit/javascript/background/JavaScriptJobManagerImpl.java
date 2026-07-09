@@ -462,7 +462,8 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /**
-     * Our own serialization (to handle the weak reference)
+     * Our own serialization (to handle the weak reference).
+     *
      * @param in the stream to read from
      * @throws IOException in case of error
      * @throws ClassNotFoundException in case of error
