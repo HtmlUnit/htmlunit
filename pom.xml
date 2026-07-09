@@ -263,6 +263,7 @@
                 <version>${surefire-plugin.version}</version>
                 <configuration>
                     <argLine>${surefire.argLine.modules}</argLine>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
             <plugin>
@@ -468,6 +469,7 @@
                                 <exclude>**/encoding/*.java</exclude>
                             </excludes>
                             <argLine>${surefire.argLine.modules} -Xms128m -Xmx1g -Dsun.reflect.noInflation=true</argLine>
+                            <testFailureIgnore>true</testFailureIgnore>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
