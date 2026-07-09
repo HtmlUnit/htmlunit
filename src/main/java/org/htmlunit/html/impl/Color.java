@@ -69,6 +69,8 @@ public class Color {
     }
 
     /**
+     * Returns the red part.
+     *
      * @return the red part
      */
     public int getRed() {
@@ -76,6 +78,8 @@ public class Color {
     }
 
     /**
+     * Returns the green part.
+     *
      * @return the green part
      */
     public int getGreen() {
@@ -83,6 +87,8 @@ public class Color {
     }
 
     /**
+     * Returns the blue part.
+     *
      * @return the blue part
      */
     public int getBlue() {
@@ -90,6 +96,8 @@ public class Color {
     }
 
     /**
+     * Returns the alpha part.
+     *
      * @return the alpha part
      */
     public int getAlpha() {

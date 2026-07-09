@@ -44,6 +44,8 @@ public interface SelectableTextInput {
     void select();
 
     /**
+     * Returns all the text in this element.
+     *
      * @return all the text in this element
      */
     String getText();

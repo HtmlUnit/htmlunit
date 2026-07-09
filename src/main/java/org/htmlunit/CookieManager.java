@@ -29,11 +29,13 @@ import org.htmlunit.http.Cookie;
  *
  * <p>This class is thread-safe: all mutator and accessor methods are
  * synchronized on the {@code CookieManager} instance.
+ * </p>
  *
  * <p>Cookie support can be turned off via {@link #setCookiesEnabled(boolean)}.
  * While disabled, this manager ignores all cookie operations: additions and
  * removals become no-ops, and accessors behave as if the cookie store were
  * empty. Subclasses that override these methods must preserve this contract.
+ * </p>
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour

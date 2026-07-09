@@ -328,6 +328,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * Return the string, or {@code toReturnIfEmptyOrDefault}.
+     *
      * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defaultValue}
      * @param defaultValue the default value of the string
      * @return the string, or {@code toReturnIfEmptyOrDefault}
@@ -392,6 +394,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * Returns the width.
+     *
      * @return the width
      */
     @Override
@@ -506,6 +510,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * Returns the {@link DomElement} the backing {@link ElementCssStyleDeclaration}
+     * is associated with.
+     *
      * @return the {@link DomElement} the backing {@link ElementCssStyleDeclaration}
      *         is associated with
      */
@@ -691,7 +698,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * @return the bottom setting
+     * {@inheritDoc}
      */
     @Override
     public String getBottom() {
@@ -699,7 +706,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * @return the color setting
+     * {@inheritDoc}
      */
     @Override
     public String getColor() {
@@ -716,7 +723,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * @return the display setting
+     * {@inheritDoc}
      */
     @Override
     public String getDisplay() {
@@ -744,7 +751,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * @return the font setting
+     * {@inheritDoc}
      */
     @Override
     public String getFont() {
@@ -756,7 +763,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * @return the font family setting
+     * {@inheritDoc}
      */
     @Override
     public String getFontFamily() {
@@ -764,7 +771,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * @return the font size setting
+     * {@inheritDoc}
      */
     @Override
     public String getFontSize() {
@@ -1743,8 +1750,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * @return the element's calculated height taking relevant CSS into account, but <b>not</b> the element's child
-     *         elements
+     * Returns the element's calculated height taking relevant CSS into account, but <b>not</b> the element's child
+     *         elements.
+     * @return the element's calculated height
      */
     private int getEmptyHeight(final DomElement element) {
         final Integer cachedEmptyHeight = getCachedEmptyHeight();
@@ -2115,7 +2123,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * Returns true if this element shows a scrollbar.
+     *
      * @param ignoreSize whether to consider the content/calculated width/height
+     * @return true if this element shows a scrollbar
      */
     private boolean isScrollable(final DomElement element, final boolean horizontal, final boolean ignoreSize) {
         final boolean scrollable;
@@ -2492,6 +2503,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * Returns the string, or {@code toReturnIfEmptyOrDefault}.
+     *
      * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defaultValue}
      * @param defaultValue the default value of the string
      * @return the string, or {@code toReturnIfEmptyOrDefault}

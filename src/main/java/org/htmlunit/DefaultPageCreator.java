@@ -68,6 +68,7 @@ import org.htmlunit.xml.XmlPage;
  *      <td>{@link UnexpectedPage}</td>
  *    </tr>
  *  </table>
+ * </p>
  *
  * @author Mike Bowler
  * @author Christian Sell
@@ -86,7 +87,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
 
     /**
      * See <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05">
-     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05</a>
+     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05</a>.
      */
     private static final String[] HTML_PATTERNS = {"!DOCTYPE HTML", "HTML", "HEAD", "SCRIPT",
         "IFRAME", "H1", "DIV", "FONT", "TABLE", "A", "STYLE", "TITLE", "B", "BODY", "BR", "P", "!--" };
@@ -246,7 +247,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
 
     /**
      * See <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4">
-     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4</a>
+     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4</a>.
      * @param bytes the bytes to check
      */
     private static boolean isBinary(final byte[] bytes) {
