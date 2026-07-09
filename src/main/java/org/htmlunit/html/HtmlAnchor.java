@@ -394,6 +394,7 @@ public class HtmlAnchor extends HtmlElement {
      * It should be noted that even web browsers will sometimes not give the expected result when using this
      * method of following links. Links that have no real href and rely on JavaScript to do their work will
      * fail.
+     * </p>
      *
      * @return the page opened by this link, nested in a new {@link org.htmlunit.TopLevelWindow}
      * @throws MalformedURLException if the href could not be converted to a valid URL

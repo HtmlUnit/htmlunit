@@ -106,7 +106,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     private Locator locator_;
     private final Deque<DomNode> stack_ = new ArrayDeque<>();
 
-    /** Did the snippet tried to overwrite the start node? */
+    /** Did the snippet tried to overwrite the start node. */
     private boolean snippetStartNodeOverwritten_;
     private final int initialSize_;
     private DomNode currentNode_;
@@ -186,7 +186,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     }
 
     /**
-     * Create the configuration depending on the simulated browser
+     * Create the configuration depending on the simulated browser.
      * @return the configuration
      */
     private static XMLParserConfiguration createConfiguration(final BrowserVersion browserVersion) {

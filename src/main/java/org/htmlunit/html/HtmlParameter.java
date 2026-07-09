@@ -33,7 +33,7 @@ public class HtmlParameter extends HtmlElement {
     public static final String TAG_NAME = "param";
 
     /**
-     * Creates an instance of HtmlParameter
+     * Creates an instance of HtmlParameter.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

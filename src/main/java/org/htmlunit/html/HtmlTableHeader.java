@@ -33,7 +33,7 @@ public class HtmlTableHeader extends TableRowGroup {
     public static final String TAG_NAME = "thead";
 
     /**
-     * Creates an instance of HtmlTableHeader
+     * Creates an instance of HtmlTableHeader.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

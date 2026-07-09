@@ -1099,7 +1099,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Recursively sets the new page on the node and its children
+     * Recursively sets the new page on the node and its children.
      * @param newPage the new owning page
      */
     private void setPage(final SgmlPage newPage) {

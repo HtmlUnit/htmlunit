@@ -63,7 +63,7 @@ public class HtmlLink extends HtmlElement {
     private CssStyleSheet sheet_;
 
     /**
-     * Creates an instance of HtmlLink
+     * Creates an instance of HtmlLink.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

@@ -200,6 +200,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
      * <p>
      * We may follow WebDriver solution, once made,
      * see https://code.google.com/p/selenium/issues/detail?id=2239
+     * </p>
      * @param files the list of files to upload
      */
     public void setFiles(final File... files) {
@@ -248,7 +249,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
     }
 
     /**
-     * To tolerate {@code file://}
+     * To tolerate {@code file://}.
      */
     private static File normalizeFile(final File file) {
         File f = null;

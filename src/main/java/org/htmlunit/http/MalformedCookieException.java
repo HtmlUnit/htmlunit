@@ -26,6 +26,7 @@ package org.htmlunit.http;
  *   <li>The max-age attribute is not a valid integer</li>
  *   <li>Any other violation of the HTTP cookie specification (RFC 2109, RFC 2965, Netscape spec)</li>
  * </ul>
+ * </p>
  *
  * @author Ronald Brill
  */

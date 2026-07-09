@@ -46,7 +46,7 @@ public class HtmlStyle extends HtmlElement {
     private CssStyleSheet sheet_;
 
     /**
-     * Creates an instance of HtmlStyle
+     * Creates an instance of HtmlStyle.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

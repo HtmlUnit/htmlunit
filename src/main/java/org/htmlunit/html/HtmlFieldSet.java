@@ -38,7 +38,7 @@ public class HtmlFieldSet extends HtmlElement implements DisabledElement, Valida
     private String customValidity_;
 
     /**
-     * Creates an instance of HtmlFieldSet
+     * Creates an instance of HtmlFieldSet.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

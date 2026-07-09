@@ -23,6 +23,7 @@ import org.htmlunit.html.DomNode;
  *
  * <blockquote>Mostly for historical reasons, in addition to the browsing context's selection, each
  * textarea and input element has an independent selection. These are the text field selections.</blockquote>
+ * </p>
  *
  * @author Daniel Gredler
  * @author Ronald Brill

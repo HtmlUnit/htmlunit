@@ -34,7 +34,7 @@ public class HtmlOrderedList extends HtmlElement {
     public static final String TAG_NAME = "ol";
 
     /**
-     * Creates an instance of HtmlOrderedList
+     * Creates an instance of HtmlOrderedList.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

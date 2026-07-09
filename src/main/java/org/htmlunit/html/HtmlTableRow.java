@@ -211,7 +211,7 @@ public class HtmlTableRow extends HtmlElement {
         }
 
         /**
-         * Sets the internal position to the next cell, starting at the given node
+         * Sets the internal position to the next cell, starting at the given node.
          * @param node the node to mark as the next cell; if this is not a cell, the
          *        next reachable cell will be marked.
          */

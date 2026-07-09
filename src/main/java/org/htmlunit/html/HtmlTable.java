@@ -60,7 +60,8 @@ public class HtmlTable extends HtmlElement {
      * This means, a cell with colspan='2' consumes two columns; a cell with rowspan='3' consumes three rows. The
      * index is based on the 'background' model of the table; if you have a row like<br>
      * &lt;td&gt;cell1&lt;/td&gt; &lt;td colspan='2'&gt;cell2&lt;/td&gt; then this row is treated as a row with
-     * three cells.<br>
+     * three cells.
+     * </p>
      * <p>
      * <code>
      * getCellAt(rowIndex, 0).asText() returns "cell1";<br>

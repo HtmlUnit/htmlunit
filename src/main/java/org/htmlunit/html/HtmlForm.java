@@ -204,7 +204,7 @@ public class HtmlForm extends HtmlElement {
     /**
      * Check if element which cause submit contains new html5 attributes
      * (formaction, formmethod, formtarget, formenctype)
-     * and override existing values
+     * and override existing values.
      * @param submitElement the element to update
      */
     private void updateHtml5Attributes(final SubmittableElement submitElement) {

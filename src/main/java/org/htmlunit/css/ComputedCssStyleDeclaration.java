@@ -234,7 +234,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     private final SortedMap<String, StyleElement> localModifications_ = new TreeMap<>();
 
-    /** The wrapped CSSStyleDeclaration */
+    /** The wrapped CSSStyleDeclaration. */
     private final ElementCssStyleDeclaration elementStyleDeclaration_;
 
     /**

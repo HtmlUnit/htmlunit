@@ -34,7 +34,7 @@ public class HtmlTableColumn extends HtmlElement {
     public static final String TAG_NAME = "col";
 
     /**
-     * Creates an instance of HtmlTableColumn
+     * Creates an instance of HtmlTableColumn.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

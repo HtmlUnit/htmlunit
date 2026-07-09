@@ -37,7 +37,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
     public static final String TAG_NAME = "optgroup";
 
     /**
-     * Creates an instance of HtmlOptionGroup
+     * Creates an instance of HtmlOptionGroup.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

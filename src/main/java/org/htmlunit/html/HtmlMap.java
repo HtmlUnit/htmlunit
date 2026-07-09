@@ -35,7 +35,7 @@ public class HtmlMap extends HtmlElement {
     public static final String TAG_NAME = "map";
 
     /**
-     * Creates an instance of HtmlMap
+     * Creates an instance of HtmlMap.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element
