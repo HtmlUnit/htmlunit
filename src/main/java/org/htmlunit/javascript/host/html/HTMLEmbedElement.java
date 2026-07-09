@@ -14,8 +14,14 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlEmbed;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -93,6 +99,54 @@ public class HTMLEmbedElement extends HTMLElement {
     @JsxSetter(propertyName = "width")
     public void setWidth_js(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
+    }
+
+    /**
+     * Returns the value of the {@code src} property.
+     * @return the value of the {@code src} property
+     */
+    @JsxGetter
+    public String getSrc() {
+        final HtmlEmbed embed = (HtmlEmbed) getDomNodeOrDie();
+        String src = embed.getAttributeDirect("src");
+        if (ATTRIBUTE_NOT_DEFINED == src) {
+            return src;
+        }
+        try {
+            final URL expandedSrc = ((HtmlPage) embed.getPage()).getFullyQualifiedUrl(src);
+            src = expandedSrc.toString();
+        }
+        catch (final MalformedURLException ignored) {
+            // ignore
+        }
+        return src;
+    }
+
+    /**
+     * Sets the value of the {@code src} property.
+     * @param src the value of the {@code src} property
+     */
+    @JsxSetter
+    public void setSrc(final String src) {
+        getDomNodeOrDie().setAttribute("src", src);
+    }
+
+    /**
+     * Returns the value of the {@code type} property.
+     * @return the value of the {@code type} property
+     */
+    @JsxGetter
+    public String getType() {
+        return getDomNodeOrDie().getAttributeDirect("type");
+    }
+
+    /**
+     * Sets the value of the {@code type} property.
+     * @param type the value of the {@code type} property
+     */
+    @JsxSetter
+    public void setType(final String type) {
+        getDomNodeOrDie().setAttribute("type", type);
     }
 
     /**
