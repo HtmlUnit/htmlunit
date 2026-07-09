@@ -5266,10 +5266,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "width[GSCE]",
             FF_ESR = "align[GSCE],constructor(),getSVGDocument(),height[GSCE],name[GSCE],src[GSCE],type[GSCE],"
                 + "width[GSCE]")
-    @HtmlUnitNYI(CHROME = "align[GSCE],constructor(),height[GSCE],name[GSCE],width[GSCE]",
-            EDGE = "align[GSCE],constructor(),height[GSCE],name[GSCE],width[GSCE]",
-            FF_ESR = "align[GSCE],constructor(),height[GSCE],name[GSCE],width[GSCE]",
-            FF = "align[GSCE],constructor(),height[GSCE],name[GSCE],width[GSCE]")
+    @HtmlUnitNYI(CHROME = "align[GSCE],constructor(),height[GSCE],name[GSCE],src[GSCE],type[GSCE],width[GSCE]",
+            EDGE = "align[GSCE],constructor(),height[GSCE],name[GSCE],src[GSCE],type[GSCE],width[GSCE]",
+            FF_ESR = "align[GSCE],constructor(),height[GSCE],name[GSCE],src[GSCE],type[GSCE],width[GSCE]",
+            FF = "align[GSCE],constructor(),height[GSCE],name[GSCE],src[GSCE],type[GSCE],width[GSCE]")
     public void embed() throws Exception {
         test("embed");
     }
