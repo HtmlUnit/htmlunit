@@ -21,6 +21,7 @@ import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_PRIORITY;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -232,6 +233,8 @@ public class WebClient implements Serializable, AutoCloseable {
     private transient List<WeakReference<JavaScriptJobManager>> jobManagers_ =
             Collections.synchronizedList(new ArrayList<>());
     private WebWindow currentWindow_;
+
+    private transient BlobUrlStore blobUrlStore_ = new BlobUrlStore();
 
     private HTMLParserListener htmlParserListener_;
     private CSSErrorHandler cssErrorHandler_ = new DefaultCssErrorHandler();
@@ -1020,6 +1023,14 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
+     * Returns the blob URL store for this client.
+     * @return the {@link BlobUrlStore} for this client
+     */
+    public BlobUrlStore getBlobUrlStore() {
+        return blobUrlStore_;
+    }
+
+    /**
      * Adds a listener for {@link WebWindowEvent}s. All events from all windows associated with this
      * client will be sent to the specified listener.
      * @param listener a listener
@@ -1045,6 +1056,8 @@ public class WebClient implements Serializable, AutoCloseable {
         for (final WebWindowListener listener : new ArrayList<>(webWindowListeners_)) {
             listener.webWindowContentChanged(event);
         }
+
+        blobUrlStore_.removeForPage(event.getOldPage());
     }
 
     private void fireWindowOpened(final WebWindowEvent event) {
@@ -1064,6 +1077,8 @@ public class WebClient implements Serializable, AutoCloseable {
         for (final WebWindowListener listener : new ArrayList<>(webWindowListeners_)) {
             listener.webWindowClosed(event);
         }
+
+        blobUrlStore_.removeForPage(event.getOldPage());
 
         // to open a new top level window if all others are gone
         if (currentWindowTracker_ != null) {
@@ -1450,11 +1465,10 @@ public class WebClient implements Serializable, AutoCloseable {
         return webResponse;
     }
 
-    private WebResponse makeWebResponseForBlobUrl(final WebRequest webRequest) {
-        final Window window = getCurrentWindow().getScriptableObject();
-        final Blob fileOrBlob = window.getDocument().resolveBlobUrl(webRequest.getUrl().toString());
+    private WebResponse makeWebResponseForBlobUrl(final WebRequest webRequest) throws IOException {
+        final Blob fileOrBlob = blobUrlStore_.resolve(webRequest.getUrl().toString());
         if (fileOrBlob == null) {
-            throw JavaScriptEngine.typeError("Cannot load data from " + webRequest.getUrl());
+            throw new FileNotFoundException("No entry for '" + webRequest.getUrl() + "' in the BlobUrlStore.");
         }
 
         final List<NameValuePair> headers = new ArrayList<>();
@@ -2671,6 +2685,7 @@ public class WebClient implements Serializable, AutoCloseable {
         loadQueue_ = new ArrayList<>();
         css3ParserPool_ = new CSS3ParserPool();
         broadcastChannel_ = new HashSet<>();
+        blobUrlStore_ = new BlobUrlStore();
     }
 
     private static class LoadJob {
