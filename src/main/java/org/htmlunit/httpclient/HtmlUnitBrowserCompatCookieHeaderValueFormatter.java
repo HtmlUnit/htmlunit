@@ -23,6 +23,7 @@ import org.apache.http.message.BasicHeaderValueFormatter;
  * if the value contains special chars.
  * I guess this is something special for HttpClient because HttpClient also removes
  * the quotes from cookies (@see {@link HtmlUnitBrowserCompatCookieSpec})
+ * </p>
  *
  * @author Ronald Brill
  */

@@ -124,6 +124,8 @@ final class RsaHashedKeyAlgorithm {
     }
 
     /**
+     * Returns the public exponent as a BigInteger.
+     *
      * @return the public exponent as a BigInteger
      */
     BigInteger getPublicExponentAsBigInteger() {
@@ -135,6 +137,8 @@ final class RsaHashedKeyAlgorithm {
     }
 
     /**
+     * Returns the Java hash algorithm name (e.g. "SHA256" from "SHA-256").
+     *
      * @return the Java hash algorithm name (e.g. "SHA256" from "SHA-256")
      */
     String getJavaHash() {

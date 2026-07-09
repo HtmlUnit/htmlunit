@@ -87,6 +87,8 @@ final class EcKeyAlgorithm {
     }
 
     /**
+     * Returns the JCA curve name (e.g. "secp256r1" for "P-256").
+     *
      * @return the JCA curve name (e.g. "secp256r1" for "P-256")
      */
     String getJavaCurveName() {

@@ -103,6 +103,8 @@ final class HmacKeyAlgorithm {
     }
 
     /**
+     * Returns the Java algorithm name for {@link javax.crypto.Mac} (e.g. "HmacSHA256").
+     *
      * @return the Java algorithm name for {@link javax.crypto.Mac} (e.g. "HmacSHA256")
      */
     String getJavaName() {
