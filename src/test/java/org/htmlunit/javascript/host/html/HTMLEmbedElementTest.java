@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public class HTMLEmbedElementTest extends WebDriverTestCase {
 

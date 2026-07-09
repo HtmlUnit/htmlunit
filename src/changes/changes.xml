@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Chrome/Edge 150, Bugfixes">
+            <action type="update" dev="Lai Quang Duong">
+                Missing getter/setter for src and type property of HTMLEmbedElement added.
+            </action>
+            <action type="add" dev="rbri">
+                Various additions to the web site content.
+            </action>
             <action type="add" dev="rbri">
                 The document &apos;Details about HtmlUnit Security&apos; added to the documentation pages.
             </action>

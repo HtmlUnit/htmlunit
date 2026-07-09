@@ -32,6 +32,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement">MDN Documentation</a>
  */
