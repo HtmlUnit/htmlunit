@@ -143,7 +143,7 @@ final class RsaHashedKeyAlgorithm {
 
     /**
      * Converts to a JS object matching the {@code RsaHashedKeyAlgorithm} dictionary:
-     * {@code {name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: Uint8Array, hash: {name: "SHA-256"}}}
+     * {@code {name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: Uint8Array, hash: {name: "SHA-256"}}}.
      *
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object

@@ -111,7 +111,7 @@ final class HmacKeyAlgorithm {
 
     /**
      * Converts to a JS object matching the {@code HmacKeyAlgorithm} dictionary:
-     * {@code {name: "HMAC", hash: {name: "SHA-256"}, length: N}}
+     * {@code {name: "HMAC", hash: {name: "SHA-256"}, length: N}}.
      *
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object

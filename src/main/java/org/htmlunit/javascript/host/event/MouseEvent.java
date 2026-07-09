@@ -112,7 +112,7 @@ public class MouseEvent extends UIEvent {
     /** The buttons being depressed (if any) when the mouse event was fired. */
     private int buttons_;
 
-    /** Switch to disable label handling if we already processing the event triggered from label processing */
+    /** Switch to disable label handling if we already processing the event triggered from label processing. */
     private boolean processLabelAfterBubbling_ = true;
 
     /** Whether or not the "meta" key was pressed during the firing of the event. */

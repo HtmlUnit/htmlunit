@@ -249,6 +249,7 @@ public class HTMLDocument extends Document {
      * <p>
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
      * a good description of the semantics of open(), write(), writeln() and close().
+     * </p>
      *
      * @param content the content to write
      */
@@ -444,6 +445,7 @@ public class HTMLDocument extends Document {
      * <p>
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
      * a good description of the semantics of open(), write(), writeln() and close().
+     * </p>
      *
      * @param url when a new document is opened, <i>url</i> is a String that specifies a MIME type for the document.
      *        When a new window is opened, <i>url</i> is a String that specifies the URL to render in the new window
@@ -616,7 +618,7 @@ public class HTMLDocument extends Document {
     /**
      * Calls to <code>document.XYZ</code> should first look at elements named <code>XYZ</code> before
      * using standard functions.
-     * <p>
+     *
      * {@inheritDoc}
      */
     @Override

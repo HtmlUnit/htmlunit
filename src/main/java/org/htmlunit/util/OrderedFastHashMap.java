@@ -36,6 +36,7 @@ import java.util.Set;
  * map interface but only for compatibility reason in the sense of replacing a
  * regular map. Iterator and streaming methods are either not implemented or
  * less efficient.
+ * </p>
  * <p>
  * It goes the extra mile to avoid the overhead of wrapper objects.
  * <p>
@@ -167,7 +168,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
-     * Adds a key and value to the internal position structure
+     * Adds a key and value to the internal position structure.
      *
      * @param key the key
      * @param value the value to store
@@ -414,7 +415,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
-     * Get us the start index from where we search or insert into the map
+     * Get us the start index from where we search or insert into the map.
      *
      * @param key the key to calculate the position for
      * @return the start position
@@ -429,6 +430,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
      *
      * <p>
      * Note that this function will return 1 when the argument is 0.
+     * </p>
      *
      * @param x a long integer smaller than or equal to 2<sup>62</sup>.
      * @return the least power of two greater than or equal to the specified value.
@@ -672,7 +674,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
-     * We have to overwrite the export due to the use of static object as marker
+     * We have to overwrite the export due to the use of static object as marker.
      *
      * @param aInputStream the inputstream to read from
      * @throws IOException when the reading from the source fails
@@ -703,7 +705,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
-     * We have to overwrite the export due to the use of static object as marker
+     * We have to overwrite the export due to the use of static object as marker.
      *
      * @param aOutputStream the stream to write to
      * @throws IOException in case we have issue writing our data to the stream

@@ -94,7 +94,7 @@ public final class EncodingSniffer {
     private static final byte[] CSS_CHARSET_DECLARATION_PREFIX = "@charset \"".getBytes(US_ASCII);
 
     /**
-     * The number of HTML bytes to sniff for encoding info embedded in <code>meta</code> tags;
+     * The number of HTML bytes to sniff for encoding info embedded in <code>meta</code> tags.
      */
     private static final int SIZE_OF_HTML_CONTENT_SNIFFED = 1024;
 
@@ -499,7 +499,7 @@ public final class EncodingSniffer {
 
     /**
      * Parses and returns the charset declaration at the start of a css file if any, otherwise returns {@code null}.
-     * <p>e.g. <pre>@charset "UTF-8"</pre>
+     * <p>e.g. <pre>@charset "UTF-8"</pre></p>
      *
      * @param is the input stream to parse
      * @return the charset declaration at the start of a css file if any, otherwise returns {@code null}.

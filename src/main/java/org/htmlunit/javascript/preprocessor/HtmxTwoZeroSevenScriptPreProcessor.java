@@ -26,8 +26,10 @@ import org.htmlunit.html.HtmlPage;
  * (such as spread operator usage in array push and for-of loops over array copies)
  * to equivalent ES5-compatible code. This is necessary because these features are
  * not yet supported by the JavaScript engine htmlunit-corejs (Rhino).
+ * </p>
  * <p>
  * The class can be chained with other {@link ScriptPreProcessor} instances via its constructor.
+ * </p>
  * <p>
  * Supported patches include:
  * <ul>
@@ -36,6 +38,7 @@ import org.htmlunit.html.HtmlPage;
  *   <li>Replacing <code>for (const preservedElt of [...pantry.children])</code> with <code>for (const preservedElt of Array.from(pantry.children))</code></li>
  *   <li>Similar replacements for minified htmx scripts (e.g., <code>htmx.min.js</code>)</li>
  * </ul>
+ * </p>
  * <p>
  * <b>Usage Example:</b>
  * <pre>
@@ -44,6 +47,7 @@ import org.htmlunit.html.HtmlPage;
  *     // use webClient as needed
  * }
  * </pre>
+ * </p>
  *
  * @author Ronald Brill
  * @see ScriptPreProcessor
