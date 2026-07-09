@@ -107,6 +107,7 @@ public class WebClientOptions implements Serializable {
      * Sets the SSLContext; if this is set it is used and some other settings are ignored
      * (protocol, keyStore, keyStorePassword, trustStore, sslClientCertificateStore, sslClientCertificatePassword).
      * <p>This property is transient (because SSLContext is not serializable)
+     * </p>
      * @param sslContext the SSLContext, {@code null} to use for default value
      */
     public void setSSLContext(final SSLContext sslContext) {
@@ -117,6 +118,7 @@ public class WebClientOptions implements Serializable {
      * Gets the SSLContext; if this is set this is used and some other settings are ignored
      * (protocol, keyStore, keyStorePassword, trustStore, sslClientCertificateStore, sslClientCertificatePassword).
      * <p>This property is transient (because SSLContext is not serializable)
+     * </p>
      * @return the SSLContext
      */
     public SSLContext getSSLContext() {
@@ -223,11 +225,14 @@ public class WebClientOptions implements Serializable {
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
+     * </p>
      * <p>
      * In some cases the impl seems to pick old certificates from the {@link KeyStore}. To avoid
      * that, wrap your {@link KeyStore} inside your own {@link KeyStore} impl and filter out outdated
      * certificates.
+     * </p>
      * <p>This property is transient (because KeyStore is not serializable)
+     * </p>
      *
      * @param keyStore {@link KeyStore} to use
      * @param keyStorePassword the keystore password
@@ -245,7 +250,9 @@ public class WebClientOptions implements Serializable {
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
+     * </p>
      * <p>This property is transient (because KeyStore is not serializable)
+     * </p>
      *
      * @param keyStoreUrl the URL which locates the certificate {@link KeyStore}
      * @param keyStorePassword the certificate {@link KeyStore} password
@@ -271,10 +278,12 @@ public class WebClientOptions implements Serializable {
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
+     * </p>
      * <p>
      * In some cases the impl seems to pick old certificates from the {@link KeyStore}. To avoid
      * that, wrap your {@link KeyStore} inside your own {@link KeyStore} impl and filter out outdated
      * certificates. Provide the {@link KeyStore} to the options instead of the input stream.
+     * </p>
      *
      * @param keyStoreInputStream the input stream which represents the {@link KeyStore} holding the certificates
      * @param keyStorePassword the {@link KeyStore} password
@@ -295,6 +304,7 @@ public class WebClientOptions implements Serializable {
     /**
      * Gets the SSLClientCertificateStore.
      * <p>This property is transient (because KeyStore is not serializable)
+     * </p>
      *
      * @return the KeyStore for use on SSL connections
      */
@@ -588,7 +598,9 @@ public class WebClientOptions implements Serializable {
      * Sets the SSL server certificate trust store. All server certificates will be validated against
      * this trust store.
      * <p>This property is transient (because KeyStore is not serializable)
+     * </p>
      * <p>The needed parameters are used to construct a {@link java.security.KeyStore}.
+     * </p>
      *
      * @param sslTrustStoreUrl the URL which locates the trust store
      * @param sslTrustStorePassword the trust store password
@@ -611,6 +623,7 @@ public class WebClientOptions implements Serializable {
     /**
      * Gets the SSL TrustStore.
      * <p>This property is transient (because KeyStore is not serializable)
+     * </p>
      * @return the SSL TrustStore for insecure SSL connections
      */
     public KeyStore getSSLTrustStore() {
@@ -698,8 +711,10 @@ public class WebClientOptions implements Serializable {
      * <p>
      * On machines with multiple network interfaces, this parameter can be used to select the network interface
      * from which the connection originates.
+     * </p>
      * <p>
      * Default: {@code null}
+     * </p>
      *
      * @return the local address
      */
