@@ -47,7 +47,7 @@ public final class ClassConfiguration {
     private final String hostClassSimpleName_;
 
     /**
-     * The constructor method in the {@link #hostClass_}
+     * The constructor method in the {@link #hostClass_}.
      */
     private Map.Entry<String, Member> jsConstructor_;
     private String jsConstructorAlias_;

@@ -52,10 +52,10 @@ import org.htmlunit.util.StringUtils;
  *                     .setApplicationVersion(applicationVersion)
  *                     .setUserAgent(userAgent)
  *                     .build();
- * </pre>
+ * </pre></p>
  * <p>But keep in mind this new one still behaves like an FF, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
- * plugins like UserAgentSwitcher.
+ * plugins like UserAgentSwitcher.</p>
  *
  * @author Mike Bowler
  * @author Daniel Gredler
@@ -902,7 +902,7 @@ public final class BrowserVersion implements Serializable {
      * parameter (see {@link MediaResourceType#parse(String)} for the exact parsing rules).
      * The parsed value is then looked up first against this browser's "probably" playable
      * resources (MIME type plus a known-good codec list) and, failing that, against its
-     * "maybe" playable resources (MIME type alone, with no codec guarantee).
+     * "maybe" playable resources (MIME type alone, with no codec guarantee).</p>
      *
      * @param type the media type string to test, e.g. {@code "video/mp4"} or
      *             {@code "video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\""}
@@ -1206,7 +1206,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Represents a media type that a browser can play, combining a MIME type
      * with an optional set of codecs.
-     * <p>Instances are immutable.
+     * <p>Instances are immutable.</p>
      *
      * <p>Instances are used as keys in the two lookup sets held by each
      * {@link BrowserVersion} ({@code maybeMediaResource_} and
@@ -1220,11 +1220,12 @@ public final class BrowserVersion implements Serializable {
      *       codec list is in the {@code probablyMediaResources_} set.</li>
      *   <li>{@code ""}         — neither set contains a matching entry.</li>
      * </ul>
+     * </p>
      *
      * <p>Equality and hashing are based on both the MIME type string and the
      * normalised codec string, so {@code new MediaResourceType("video/mp4", null)}
      * and {@code new MediaResourceType("video/mp4", "avc1.42E01E")} are
-     * considered distinct entries.
+     * considered distinct entries.</p>
      *
      * @see BrowserVersion#canPlayType(String)
      * @see <a href="https://html.spec.whatwg.org/multipage/media.html#dom-navigator-canplaytype">
@@ -1280,6 +1281,7 @@ public final class BrowserVersion implements Serializable {
          *   <li>Input without a semicolon is used verbatim as the MIME type
          *       with a {@code null} codec.</li>
          * </ol>
+         * </p>
          *
          * @param mediaResourceType the raw string passed to
          *                          {@code HTMLMediaElement.canPlayType()},

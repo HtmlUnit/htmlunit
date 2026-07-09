@@ -34,7 +34,7 @@ public class AboutURLConnection extends URLConnection {
     }
 
     /**
-     * @see java.net.URLConnection#connect()
+     * {@inheritDoc}
      */
     @Override
     public void connect() {

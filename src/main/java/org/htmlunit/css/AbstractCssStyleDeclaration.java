@@ -534,7 +534,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
     }
 
     /**
-     * Gets the border width for the specified side
+     * Gets the border width for the specified side.
      * @param borderSideWidth the border side width Definition
      * @param borderSide the border side Definition
      * @return the width, "" if not defined

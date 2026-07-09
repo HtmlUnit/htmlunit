@@ -82,7 +82,7 @@ final class AesKeyAlgorithm {
 
     /**
      * Converts to a JS object matching the {@code AesKeyAlgorithm} dictionary:
-     * {@code {name: "AES-GCM", length: 256}}
+     * {@code {name: "AES-GCM", length: 256}}.
      *
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object
