@@ -397,4 +397,25 @@ public class NoOpRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] setLineJoin(" + lineJoin + ")");
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LineCap getLineCap() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] getLineCap()");
+        }
+        return LineCap.BUTT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setLineCap(final LineCap lineCap) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setLineCap(" + lineCap + ")");
+        }
+    }
 }

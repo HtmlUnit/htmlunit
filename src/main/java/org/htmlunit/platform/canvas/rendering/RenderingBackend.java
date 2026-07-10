@@ -49,6 +49,18 @@ public interface RenderingBackend {
     }
 
     /**
+     * LineCap to be used while rendering.
+     */
+    enum LineCap {
+        /** LineCap.BUTT. */
+        BUTT,
+        /** LineCap.ROUND. */
+        ROUND,
+        /** LineCap.SQUARE. */
+        SQUARE
+    }
+
+    /**
      * Starts a new path by emptying the list of sub-paths.
      */
     void beginPath();
@@ -363,4 +375,17 @@ public interface RenderingBackend {
      * @param lineJoin the {@code lineJoin} property value
      */
     void setLineJoin(LineJoin lineJoin);
+
+    /**
+     * Returns the shape used to draw the end points of lines.
+     *
+     * @return the shape used to draw the end points of lines.
+     */
+    LineCap getLineCap();
+
+    /**
+     * Sets the {@code lineCap} property.
+     * @param lineCap the {@code lineCap} property value
+     */
+    void setLineCap(LineCap lineCap);
 }

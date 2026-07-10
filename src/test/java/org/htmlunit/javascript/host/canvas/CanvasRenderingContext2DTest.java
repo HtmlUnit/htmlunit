@@ -2923,6 +2923,89 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "    context.stroke();\n");
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("butt")
+    public void lineCapDefault() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+               "log(context.lineCap);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"miter", "round", "round", "butt", "butt", "butt"})
+    public void lineJoinCapGet() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "log(context.lineCap);\n"
+                + "context.lineCap = 'round'\n"
+                + "log(context.lineCap);\n"
+                + "context.lineCap = 'SquARE'\n"
+                + "log(context.lineCap);\n"
+                + "context.lineCap = 'butt'\n"
+                + "log(context.lineCap);\n"
+                + "context.lineCap = '  square '\n"
+                + "log(context.lineCap);\n"
+                + "context.lineCap = '  unknow '\n"
+                + "log(context.lineCap);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAALklEQVR4AdTRsQ0AAAgCQXT/nZUBKGjfSEdzYVUesXi2pYiI"
+            + "sSU/ETOmpCCWeQAAAP//NWxm8gAAAAZJREFUAwALrgYppm2j7wAAAABJRU5ErkJggg==")
+    public void drawCapButt() throws Exception {
+        draw("<canvas id='myCanvas' width='10', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.lineCap = 'butt';\n"
+                + "    context.lineWidth = 6;\n"
+                + "    context.beginPath();\n"
+                + "    context.moveTo(6, 5);\n"
+                + "    context.lineTo(6, 15);\n"
+                + "    context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAAdklEQVR4AeySwQmAMBRDP951QxfQeXQBN9QFTELpIf8fRK+K"
+            + "KWn+I4XSIR5+n8ANh5xN9LAR3sjBgsnYRM8sgTMA/5V5I5scVOagQ33/g/0qKvP6eq6iTZk3HgWozMEV4A6xhaJnll4PmOBg"
+            + "gqHoYfN7VFgtNwAAAP//ybmhIAAAAAZJREFUAwD8YQ4p7/bWhAAAAABJRU5ErkJggg==")
+    public void drawCapRound() throws Exception {
+        draw("<canvas id='myCanvas' width='10', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.lineCap = 'round';\n"
+                + "    context.lineWidth = 6;\n"
+                + "    context.beginPath();\n"
+                + "    context.moveTo(6, 5);\n"
+                + "    context.lineTo(6, 15);\n"
+                + "    context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAANUlEQVR4AeySMQoAAAgCq///uQwaHcLZyIYIg8OKZ8mHjQdM"
+            + "ITvCkLcdOZfbGs+CSAymfx4HAAD//5I7/cIAAAAGSURBVAMA6AgGKb9SbOsAAAAASUVORK5CYII=")
+    public void drawCapSquare() throws Exception {
+        draw("<canvas id='myCanvas' width='10', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.lineCap = 'square';\n"
+                + "    context.lineWidth = 6;\n"
+                + "    context.beginPath();\n"
+                + "    context.moveTo(6, 5);\n"
+                + "    context.lineTo(6, 15);\n"
+                + "    context.stroke();\n");
+    }
+
     private void draw(final String canvasSetup, final String drawJS) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
