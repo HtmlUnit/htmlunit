@@ -78,6 +78,8 @@ public class BeforeUnloadEvent extends Event {
     }
 
     /**
+     * Returns {@code true} if returnValue holds the beforeunload message.
+     *
      * @return {@code true} if returnValue holds the beforeunload message
      */
     public boolean isBeforeUnloadMessageSet() {
@@ -85,6 +87,8 @@ public class BeforeUnloadEvent extends Event {
     }
 
     /**
+     * Returns the return value associated with the event.
+     *
      * @return the return value associated with the event
      */
     @JsxGetter

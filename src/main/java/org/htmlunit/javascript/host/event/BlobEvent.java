@@ -65,6 +65,8 @@ public class BlobEvent extends Event {
     }
 
     /**
+     * Returns the Blob associated with the event.
+     *
      * @return the Blob associated with the event
      */
     @JsxGetter

@@ -62,34 +62,47 @@ public class Blob extends HtmlUnitScriptable {
      * The backend used for saving the blob.
      */
     protected abstract static class Backend implements Serializable {
+
         /**
+         * Returns the name.
+         *
          * @return the name
          */
         abstract String getName();
 
         /**
+         * Returns the last modified timestamp as long.
+         *
          * @return the last modified timestamp as long
          */
         abstract long getLastModified();
 
         /**
+         * Returns the size.
+         *
          * @return the size
          */
         abstract long getSize();
 
         /**
+         * Returns the type.
+         *
          * @param browserVersion the {@link BrowserVersion}
          * @return the type
          */
         abstract String getType(BrowserVersion browserVersion);
 
         /**
+         * Returns the text.
+         *
          * @return the text
          * @throws IOException in case of error
          */
         abstract String getText() throws IOException;
 
         /**
+         * Returns the bytes.
+         *
          * @param start the start position
          * @param end the end position
          * @return the bytes
@@ -317,6 +330,7 @@ public class Blob extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code size} property.
+     *
      * @return the {@code size} property
      */
     @JsxGetter
@@ -326,6 +340,7 @@ public class Blob extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code type} property.
+     *
      * @return the {@code type} property
      */
     @JsxGetter
@@ -334,6 +349,9 @@ public class Blob extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a Promise that resolves with an ArrayBuffer containing the
+     *         data in binary form.
+     *
      * @return a Promise that resolves with an ArrayBuffer containing the
      *         data in binary form.
      */
@@ -350,6 +368,8 @@ public class Blob extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a new Blob object which contains data from a subset of the blob on which it's called.
+     *
      * @param start An index into the Blob indicating the first byte to include in the new Blob. If you specify
      *        a negative value, it's treated as an offset from the end of the Blob toward the beginning.
      *        For example, -10 would be the 10th from last byte in the Blob. The default value is 0.
@@ -402,6 +422,8 @@ public class Blob extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a ReadableStream which, upon reading, returns the contents of the Blob.
+     *
      * @return a ReadableStream which, upon reading, returns the contents of the Blob.
      */
     @JsxFunction
@@ -410,6 +432,9 @@ public class Blob extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns a Promise that resolves with a string containing the
+     *         contents of the blob, interpreted as UTF-8.
+     *
      * @return a Promise that resolves with a string containing the
      *         contents of the blob, interpreted as UTF-8.
      */
@@ -419,6 +444,8 @@ public class Blob extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the bytes of this blob.
+     *
      * @return the bytes of this blob
      */
     public byte[] getBytes() {

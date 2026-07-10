@@ -75,6 +75,8 @@ public class CloseEvent extends Event {
     }
 
     /**
+     * Returns the code.
+     *
      * @return the code
      */
     @JsxGetter
