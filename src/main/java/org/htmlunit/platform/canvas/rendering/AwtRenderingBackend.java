@@ -949,6 +949,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         graphics2D_.setStroke(new BasicStroke(getLineWidth(),
                 toAwtLineCap(lineCap_), toAwtLineJoin(lineJoin_), miterLimit_));
         graphics2D_.setColor(strokeColor_);
+
         for (final Path2D path2d : subPaths_) {
             if (hasSegments(path2d)) {
                 graphics2D_.draw(path2d);

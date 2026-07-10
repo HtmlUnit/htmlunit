@@ -32,6 +32,8 @@ import org.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext">MDN Documentation</a>
  */
 @JsxClass
 public class BaseAudioContext extends EventTarget {
@@ -46,6 +48,7 @@ public class BaseAudioContext extends EventTarget {
     }
 
     /**
+     * Creates a new AudioBufferSourceNode, which can be used to play audio data contained within an AudioBuffer object.
      * @return a new AudioBufferSourceNode, which can be used to
      *         play audio data contained within an AudioBuffer object.
      */
@@ -58,6 +61,8 @@ public class BaseAudioContext extends EventTarget {
     }
 
     /**
+     * Creates a new, empty AudioBuffer object, which can then be
+     * populated by data, and played via an AudioBufferSourceNode.
      * @return new, empty AudioBuffer object, which can then be
      *         populated by data, and played via an AudioBufferSourceNode.
      */
@@ -70,6 +75,7 @@ public class BaseAudioContext extends EventTarget {
     }
 
     /**
+     * Creates a GainNode, which can be used to control the overall gain (or volume) of the audio graph.
      * @return a GainNode, which can be used to control the overall gain (or volume) of the audio graph.
      */
     @JsxFunction
