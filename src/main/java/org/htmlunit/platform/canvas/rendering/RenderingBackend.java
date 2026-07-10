@@ -37,6 +37,18 @@ public interface RenderingBackend {
     }
 
     /**
+     * LineJoin to be used while rendering.
+     */
+    enum LineJoin {
+        /** LineJoin.MITER. */
+        MITER,
+        /** LineJoin.ROUND. */
+        ROUND,
+        /** LineJoin.BEVEL. */
+        BEVEL
+    }
+
+    /**
      * Starts a new path by emptying the list of sub-paths.
      */
     void beginPath();
@@ -322,6 +334,9 @@ public interface RenderingBackend {
     void closePath();
 
     /**
+     * Returns the alpha (transparency) value that is applied to shapes and images
+     *         before they are drawn onto the canvas.
+     *
      * @return the alpha (transparency) value that is applied to shapes and images
      *         before they are drawn onto the canvas.
      */
@@ -333,4 +348,19 @@ public interface RenderingBackend {
      * @param globalAlpha the new alpha
      */
     void setGlobalAlpha(double globalAlpha);
+
+    /**
+     * Returns the the shape used to join two line segments where they meet.
+     * There are three possible values for this property: "round", "bevel",
+     * and "miter". The default is "miter".
+     *
+     * @return the the shape used to join two line segments
+     */
+    LineJoin getLineJoin();
+
+    /**
+     * Sets the {@code lineJoin} property.
+     * @param lineJoin the {@code lineJoin} property value
+     */
+    void setLineJoin(LineJoin lineJoin);
 }

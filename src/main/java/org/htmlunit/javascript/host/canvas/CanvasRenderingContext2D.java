@@ -35,6 +35,7 @@ import org.htmlunit.javascript.host.html.HTMLCanvasElement;
 import org.htmlunit.javascript.host.html.HTMLImageElement;
 import org.htmlunit.platform.Platform;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend;
+import org.htmlunit.platform.canvas.rendering.RenderingBackend.LineJoin;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend.WindingRule;
 import org.htmlunit.protocol.data.DataURLConnection;
 import org.htmlunit.util.MimeType;
@@ -813,5 +814,45 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxGetter
     public HTMLCanvasElement getCanvas() {
         return canvas_;
+    }
+
+    /**
+     * Returns the the shape used to join two line segments where they meet.
+     * There are three possible values for this property: "round", "bevel",
+     * and "miter". The default is "miter".
+     *
+     * @return the the shape used to join two line segments
+     */
+    @JsxGetter
+    public String getLineJoin() {
+        switch (getRenderingBackend().getLineJoin()) {
+            case ROUND:
+                return "round";
+            case BEVEL:
+                return "bevel";
+            default:
+                return "miter";
+        }
+    }
+
+    /**
+     * Sets the {@code lineJoin} property.
+     * @param lineJoin the {@code lineJoin} property value
+     */
+    @JsxSetter
+    public void setLineJoin(final String lineJoin) {
+        switch (lineJoin) {
+            case "round":
+                getRenderingBackend().setLineJoin(LineJoin.ROUND);
+                break;
+            case "bevel":
+                getRenderingBackend().setLineJoin(LineJoin.BEVEL);
+                break;
+            case "miter":
+                getRenderingBackend().setLineJoin(LineJoin.MITER);
+                break;
+            default:
+                // ignore invalid values per spec
+        }
     }
 }
