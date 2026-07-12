@@ -22,12 +22,15 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChannelMergerNode">MDN Documentation</a>
  */
 @JsxClass
 public class ChannelMergerNode extends AudioNode {
 
     /**
      * Creates an instance.
+     * @param baCtx the required audio context
      */
     @Override
     @JsxConstructor

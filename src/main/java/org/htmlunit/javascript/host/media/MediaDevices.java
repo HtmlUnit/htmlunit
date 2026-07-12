@@ -26,6 +26,8 @@ import org.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices">MDN Documentation</a>
  */
 @JsxClass
 public class MediaDevices extends EventTarget {
@@ -40,6 +42,7 @@ public class MediaDevices extends EventTarget {
     }
 
     /**
+     * Requests access to a media input device.
      * @return a {@link NativePromise} that resolves to a {@link DOMException} because HtmlUnit
      *         does not support media streaming
      */

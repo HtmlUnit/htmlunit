@@ -23,12 +23,18 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/GainNode">MDN Documentation</a>
  */
 @JsxClass
 public class GainNode extends AudioNode {
 
     private AudioParam gain_;
 
+    /**
+     * Creates an instance.
+     * @param baCtx the required audio context
+     */
     @Override
     @JsxConstructor
     public void jsConstructor(final Object baCtx) {
@@ -42,6 +48,7 @@ public class GainNode extends AudioNode {
     }
 
     /**
+     * Returns an a-rate AudioParam representing the amount of gain to apply.
      * @return an a-rate AudioParam representing the amount of gain to apply.
      */
     @JsxGetter
