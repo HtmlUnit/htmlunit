@@ -38,7 +38,7 @@ import org.htmlunit.cyberneko.xerces.util.StandardEncodingTranslator;
 
 /**
  * Sniffs encoding settings from HTML, XML or other content. The HTML encoding sniffing algorithm is based on the
- * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#determining-the-character-encoding">HTML5
+ * <a href="https://html.spec.whatwg.org/multipage/parsing.html#determining-the-character-encoding">HTML5
  * encoding sniffing algorithm</a>.
  *
  * @author Daniel Gredler
@@ -59,7 +59,7 @@ public final class EncodingSniffer {
         new byte[] {'-'}
     };
 
-    /** Sequence(s) of bytes indicating the beginning of a <code>meta</code> HTML tag. */
+    /** Sequence(s) of bytes indicating the beginning of a {@code meta} HTML tag. */
     private static final byte[][] META_START = {
         new byte[] {'<'},
         new byte[] {'m', 'M'},
@@ -94,13 +94,13 @@ public final class EncodingSniffer {
     private static final byte[] CSS_CHARSET_DECLARATION_PREFIX = "@charset \"".getBytes(US_ASCII);
 
     /**
-     * The number of HTML bytes to sniff for encoding info embedded in <code>meta</code> tags.
+     * The number of HTML bytes to sniff for encoding info embedded in {@code meta} tags.
      */
     private static final int SIZE_OF_HTML_CONTENT_SNIFFED = 1024;
 
     /**
      * The number of XML bytes to sniff for encoding info embedded in the XML declaration;
-     * relatively small because it's always at the very beginning of the file.
+     * relatively small because it is always at the very beginning of the file.
      */
     private static final int SIZE_OF_XML_CONTENT_SNIFFED = 512;
 
@@ -114,13 +114,12 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Returns {@code true} if the specified HTTP response headers contain a <code>Content-Type</code> that
+     * Returns {@code true} if the specified HTTP response headers contain a {@code Content-Type} that
      * ends with one of the specified strings.
      *
      * @param headers the HTTP response headers
      * @param contentTypeEndings the content type endings to search for
-     * @return {@code true} if the specified HTTP response headers contain a <code>Content-Type</code> that
-     *         ends with one of the specified strings
+     * @return {@code true} if the {@code Content-Type} header ends with one of the specified strings
      */
     static boolean contentTypeEndsWith(final List<NameValuePair> headers, final String... contentTypeEndings) {
         for (final NameValuePair pair : headers) {
@@ -144,12 +143,12 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Attempts to sniff an encoding from a <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Byte Order Mark</a>
+     * Attempts to sniff an encoding from a
+     * <a href="https://en.wikipedia.org/wiki/Byte_order_mark">Byte Order Mark</a>
      * in the specified byte array.
      *
      * @param bytes the bytes to check for a Byte Order Mark
-     * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
-     *         could not be determined
+     * @return the encoding sniffed from the specified bytes, or {@code null} if it could not be determined
      */
     static Charset sniffEncodingFromUnicodeBom(final byte[] bytes) {
         if (bytes == null) {
@@ -174,10 +173,11 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Returns whether the specified byte array starts with the given {@link ByteOrderMark}, or not.
+     * Returns whether the specified byte array starts with the given {@link ByteOrderMark}.
+     *
      * @param bytes the byte array to check
-     * @param bom the {@link ByteOrderMark}
-     * @return whether the specified byte array starts with the given {@link ByteOrderMark}, or not
+     * @param bom the {@link ByteOrderMark} to look for
+     * @return {@code true} if the byte array starts with the given {@link ByteOrderMark}
      */
     private static boolean startsWith(final byte[] bytes, final ByteOrderMark bom) {
         final byte[] bomBytes = bom.getBytes();
@@ -186,12 +186,11 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Attempts to sniff an encoding from an HTML <code>meta</code> tag in the specified byte array.
+     * Attempts to sniff an encoding from an HTML {@code meta} tag in the specified input stream.
      *
-     * @param is the content stream to check for an HTML <code>meta</code> tag
-     * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
-     *         could not be determined
-     * @throws IOException if an IO error occurs
+     * @param is the content stream to check for an HTML {@code meta} tag
+     * @return the encoding sniffed from the stream, or {@code null} if it could not be determined
+     * @throws IOException if an I/O error occurs
      */
     public static Charset sniffEncodingFromMetaTag(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_HTML_CONTENT_SNIFFED);
@@ -273,13 +272,13 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Extracts an attribute from the specified byte array, starting at the specified index, using the
-     * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#concept-get-attributes-when-sniffing">HTML5
+     * Extracts an attribute from the specified byte array starting at the specified index, using the
+     * <a href="https://html.spec.whatwg.org/multipage/parsing.html#concept-get-attributes-when-sniffing">HTML5
      * attribute algorithm</a>.
      *
      * @param bytes the byte array to extract an attribute from
      * @param startFrom the index to start searching from
-     * @return the next attribute in the specified byte array, or {@code null} if one is not available
+     * @return the next attribute in the specified byte array, or {@code null} if none is available
      */
     static Attribute getAttribute(final byte[] bytes, final int startFrom) {
         if (startFrom >= bytes.length) {
@@ -378,13 +377,12 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Extracts an encoding from the specified <code>Content-Type</code> value using
-     * <a href="http://ietfreport.isoc.org/idref/draft-abarth-mime-sniff/">the IETF algorithm</a>; if
-     * no encoding is found, this method returns {@code null}.
+     * Extracts an encoding from the specified {@code Content-Type} value using
+     * <a href="https://www.ietf.org/rfc/rfc2616.txt">the IETF algorithm</a>; if
+     * no encoding is found, returns {@code null}.
      *
-     * @param s the <code>Content-Type</code> value to search for an encoding
-     * @return the encoding found in the specified <code>Content-Type</code> value, or {@code null} if no
-     *         encoding was found
+     * @param s the {@code Content-Type} value to search for an encoding
+     * @return the encoding found in the specified value, or {@code null} if none was found
      */
     public static Charset extractEncodingFromContentType(final String s) {
         if (s == null) {
@@ -452,9 +450,9 @@ public final class EncodingSniffer {
      * Searches the specified XML content for an XML declaration and returns the encoding if found,
      * otherwise returns {@code null}.
      *
-     * @param is the content stream to check for the charset declaration
+     * @param is the content stream to check for a charset declaration
      * @return the encoding of the specified XML content, or {@code null} if it could not be determined
-     * @throws IOException if an IO error occurs
+     * @throws IOException if an I/O error occurs
      */
     public static Charset sniffEncodingFromXmlDeclaration(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_XML_CONTENT_SNIFFED);
@@ -498,12 +496,13 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Parses and returns the charset declaration at the start of a css file if any, otherwise returns {@code null}.
-     * e.g. <pre>@charset "UTF-8"</pre>
+     * Parses and returns the charset declaration at the start of a CSS file if present,
+     * otherwise returns {@code null}.
+     * e.g. {@code @charset "UTF-8"}
      *
      * @param is the input stream to parse
-     * @return the charset declaration at the start of a css file if any, otherwise returns {@code null}.
-     * @throws IOException if an IO error occurs
+     * @return the charset found at the start of the CSS file, or {@code null} if none
+     * @throws IOException if an I/O error occurs
      */
     public static Charset sniffEncodingFromCssDeclaration(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_CSS_CONTENT_SNIFFED);
@@ -529,10 +528,11 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Returns {@code Charset} if the specified charset name is supported on this platform.
+     * Returns the {@link Charset} for the specified charset name if it is supported on this platform,
+     * or {@code null} if it is not.
      *
-     * @param charsetName the charset name to check
-     * @return {@code Charset} if the specified charset name is supported on this platform
+     * @param charsetName the charset name to look up
+     * @return the {@link Charset} for the given name, or {@code null} if unsupported
      */
     public static Charset toCharset(final String charsetName) {
         final String nameFromLabel = translateEncodingLabel(charsetName);
@@ -548,14 +548,13 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Returns {@code true} if the byte in the specified byte array at the specified index matches one of the
-     * specified byte array patterns.
+     * Returns {@code true} if the byte in the specified byte array at the specified index matches
+     * one of the specified byte array patterns.
      *
      * @param bytes the byte array to search in
      * @param i the index at which to search
      * @param sought the byte array patterns to search for
-     * @return {@code true} if the byte in the specified byte array at the specified index matches one of the
-     *         specified byte array patterns
+     * @return {@code true} if the byte at index {@code i} matches one of the patterns
      */
     static boolean matches(final byte[] bytes, final int i, final byte[][] sought) {
         if (i + sought.length > bytes.length) {
@@ -578,13 +577,13 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Skips ahead to the first occurrence of the specified targets within the specified array,
-     * starting at the specified index. This method returns <code>-1</code> if none of the targets are found.
+     * Skips ahead to the first occurrence of any of the specified target bytes within the specified array,
+     * starting at the specified index. Returns {@code -1} if none of the targets are found.
      *
      * @param bytes the array to search through
-     * @param startFrom the index to start looking at
-     * @param targets the targets to search for
-     * @return the index of the first occurrence of the specified targets within the specified array
+     * @param startFrom the index to start looking from
+     * @param targets the target bytes to search for
+     * @return the index of the first occurrence of any target byte, or {@code -1} if not found
      */
     static int skipToAnyOf(final byte[] bytes, final int startFrom, final byte[] targets) {
         int i = startFrom;
@@ -601,12 +600,12 @@ public final class EncodingSniffer {
 
     /**
      * Finds the first index of the specified sub-array inside the specified array, starting at the
-     * specified index. This method returns <code>-1</code> if the specified sub-array cannot be found.
+     * specified index. Returns {@code -1} if the sub-array cannot be found.
      *
-     * @param array the array to traverse for looking for the sub-array
+     * @param array the array to traverse
      * @param subarray the sub-array to find
-     * @param startIndex the start index to traverse forwards from
-     * @return the index of the sub-array within the array
+     * @param startIndex the index to start traversing from
+     * @return the index of the sub-array within the array, or {@code -1} if not found
      */
     static int indexOfSubArray(final byte[] array, final byte[] subarray, final int startIndex) {
         for (int i = startIndex; i < array.length; i++) {
@@ -630,14 +629,14 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Attempts to read <code>size</code> bytes from the specified input stream. Note that this method is not guaranteed
-     * to be able to read <code>size</code> bytes; however, the returned byte array will always be the exact length of the
-     * number of bytes read.
+     * Attempts to read {@code size} bytes from the specified input stream. Note that this method is not guaranteed
+     * to read exactly {@code size} bytes; however, the returned byte array will always be the exact length of the
+     * number of bytes actually read.
      *
      * @param content the input stream to read from
      * @param size the number of bytes to try to read
      * @return the bytes read from the specified input stream
-     * @throws IOException if an IO error occurs
+     * @throws IOException if an I/O error occurs
      */
     static byte[] read(final InputStream content, final int size) throws IOException {
         byte[] bytes = new byte[size];
@@ -653,16 +652,15 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Attempts to read <code>size</code> bytes from the specified input stream and then prepends the specified prefix to
-     * the bytes read, returning the resultant byte array. Note that this method is not guaranteed to be able to read
-     * <code>size</code> bytes; however, the returned byte array will always be the exact length of the number of bytes
-     * read plus the length of the prefix array.
+     * Attempts to read {@code size} bytes from the specified input stream and then prepends the specified prefix,
+     * returning the resulting byte array. Note that this method is not guaranteed to read exactly {@code size} bytes;
+     * however, the returned byte array will always be the exact length of the number of bytes read plus the prefix length.
      *
      * @param content the input stream to read from
      * @param size the number of bytes to try to read
-     * @param prefix the byte array to prepend to the bytes read from the specified input stream
-     * @return the bytes read from the specified input stream, prefixed by the specified prefix
-     * @throws IOException if an IO error occurs
+     * @param prefix the byte array to prepend to the bytes read
+     * @return the bytes read from the input stream, prepended by the specified prefix
+     * @throws IOException if an I/O error occurs
      */
     static byte[] readAndPrepend(final InputStream content, final int size, final byte[] prefix) throws IOException {
         final int prefixLength = prefix.length;
@@ -704,9 +702,10 @@ public final class EncodingSniffer {
 
     /**
      * Translates the given encoding label into a normalized form
-     * according to <a href="http://encoding.spec.whatwg.org/#encodings">Reference</a>.
+     * according to the <a href="https://encoding.spec.whatwg.org/#encodings">WHATWG Encoding specification</a>.
+     *
      * @param encodingLabel the label to translate
-     * @return the normalized encoding name or null if not found
+     * @return the normalized encoding name, or {@code null} if not found
      */
     public static String translateEncodingLabel(final String encodingLabel) {
         if (StringUtils.isEmptyOrNull(encodingLabel)) {
