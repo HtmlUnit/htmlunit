@@ -55,7 +55,7 @@
 
         <!-- selenium -->
         <htmlunitdriver.version>4.45.0</htmlunitdriver.version>
-        <selenium.version>4.45.0</selenium.version>
+        <selenium.version>4.46.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v149</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
