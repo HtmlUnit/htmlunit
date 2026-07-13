@@ -19,20 +19,4 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgSymbol;
 
 /**
- * A JavaScript object for {@code SVGSymbolElement}.
- *
- * @author Ahmed Ashour
- * @author Ronald Brill
- */
-@JsxClass(domClass = SvgSymbol.class)
-public class SVGSymbolElement extends SVGGraphicsElement {
-
-    /**
-     * Creates an instance.
-     */
-    @Override
-    @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
-    }
-}
+ * JavaScript host object for {@code SVGSymbolElement

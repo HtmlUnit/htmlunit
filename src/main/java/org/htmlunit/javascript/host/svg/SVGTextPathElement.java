@@ -22,10 +22,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgTextPath;
 
 /**
- * A JavaScript object for {@code SVGTextPathElement}.
+ * JavaScript host object for {@code SVGTextPathElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGTextPathElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgTextPath.class)
 public class SVGTextPathElement extends SVGTextContentElement {
@@ -67,7 +69,7 @@ public class SVGTextPathElement extends SVGTextContentElement {
     public static final int TEXTPATH_SIDETYPE_RIGHT = 2;
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

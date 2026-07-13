@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgView;
 
 /**
- * A JavaScript object for {@code SVGViewElement}.
+ * JavaScript host object for {@code SVGViewElement}.
  *
  * @author Frank Danek
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGViewElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgView.class)
 public class SVGViewElement extends SVGElement {
@@ -39,7 +41,7 @@ public class SVGViewElement extends SVGElement {
     public static final int SVG_ZOOMANDPAN_MAGNIFY = 2;
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
