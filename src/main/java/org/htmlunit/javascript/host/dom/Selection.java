@@ -53,8 +53,9 @@ public class Selection extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a string currently being represented by the selection object,
-     *         i.e. the currently selected text.
+     * Returns the text represented by this selection.
+     *
+     * @return the currently selected text
      */
     @JsxFunction(functionName = "toString")
     public String jsToString() {
