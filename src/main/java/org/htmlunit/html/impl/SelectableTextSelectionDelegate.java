@@ -20,10 +20,9 @@ import org.htmlunit.html.DomNode;
  * Contains standard selection-related functionality used by various input elements.
  *
  * <p>From <a href="http://www.whatwg.org/specs/web-apps/current-work/#selection">the HTML5 spec</a>:
- *
+ * </p>
  * <blockquote>Mostly for historical reasons, in addition to the browsing context's selection, each
  * textarea and input element has an independent selection. These are the text field selections.</blockquote>
- * </p>
  *
  * @author Daniel Gredler
  * @author Ronald Brill

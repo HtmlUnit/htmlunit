@@ -32,22 +32,22 @@ import org.htmlunit.html.HtmlPage;
  * </p>
  * <p>
  * Supported patches include:
+ * </p>
  * <ul>
  *   <li>Replacing <code>result.push(...toArray(...))</code> with <code>result.push.apply(result, toArray(...))</code></li>
  *   <li>Replacing <code>result.push(...findAttributeTargets(...))</code> with <code>result.push.apply(result, findAttributeTargets(...))</code></li>
  *   <li>Replacing <code>for (const preservedElt of [...pantry.children])</code> with <code>for (const preservedElt of Array.from(pantry.children))</code></li>
  *   <li>Similar replacements for minified htmx scripts (e.g., <code>htmx.min.js</code>)</li>
  * </ul>
- * </p>
  * <p>
  * <b>Usage Example:</b>
+ * </p>
  * <pre>
  * try (WebClient webClient = new WebClient()) {
  *     webClient.setScriptPreProcessor(new HtmxTwoZeroSevenScriptPreProcessor());
  *     // use webClient as needed
  * }
  * </pre>
- * </p>
  *
  * @author Ronald Brill
  * @see ScriptPreProcessor

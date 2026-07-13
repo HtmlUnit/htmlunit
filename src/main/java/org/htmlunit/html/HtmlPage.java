@@ -777,6 +777,7 @@ public class HtmlPage extends SgmlPage {
      * be used for tabbing.
      * <p>
      * The rules for determining tab order are as follows:
+     * </p>
      * <ol>
      *   <li>Those elements that support the tabindex attribute and assign a
      *   positive value to it are navigated first. Navigation proceeds from the
@@ -791,7 +792,6 @@ public class HtmlPage extends SgmlPage {
      *   <li>Elements that are disabled do not participate in the tabbing
      *   order.</li>
      * </ol>
-     * </p>
      * <p>
      * Additionally, the value of tabindex must be within 0 and 32767. Any
      * values outside this range will be ignored.

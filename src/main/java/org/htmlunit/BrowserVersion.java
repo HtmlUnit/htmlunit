@@ -40,7 +40,8 @@ import org.htmlunit.util.StringUtils;
  * constants are provided for common browser versions.
  *
  * <p>You can create a different browser setup by using the BrowserVersionFactory.
- * <pre id='htmlUnitCode'>
+ * </p>
+ * <pre>
  *         final String applicationName = "APPNAME";
  *         final String applicationVersion = "APPVERSION";
  *         final String userAgent = "USERAGENT";
@@ -52,7 +53,7 @@ import org.htmlunit.util.StringUtils;
  *                     .setApplicationVersion(applicationVersion)
  *                     .setUserAgent(userAgent)
  *                     .build();
- * </pre></p>
+ * </pre>
  * <p>But keep in mind this new one still behaves like an FF, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.</p>
@@ -1213,6 +1214,7 @@ public final class BrowserVersion implements Serializable {
      * {@code probablyMediaResources_}) and are queried by
      * {@link BrowserVersion#canPlayType(String)} to determine the value
      * returned by the {@code HTMLMediaElement.canPlayType()} DOM method:
+     * </p>
      * <ul>
      *   <li>{@code "maybe"}    — the MIME type alone is in the
      *       {@code maybeMediaResource_} set (no codec information given).</li>
@@ -1220,7 +1222,6 @@ public final class BrowserVersion implements Serializable {
      *       codec list is in the {@code probablyMediaResources_} set.</li>
      *   <li>{@code ""}         — neither set contains a matching entry.</li>
      * </ul>
-     * </p>
      *
      * <p>Equality and hashing are based on both the MIME type string and the
      * normalised codec string, so {@code new MediaResourceType("video/mp4", null)}
@@ -1263,6 +1264,7 @@ public final class BrowserVersion implements Serializable {
          * <p>The parsing rules follow the
          * <a href="https://html.spec.whatwg.org/multipage/media.html#dom-navigator-canplaytype">
          * HTML Living Standard</a>:
+         * </p>
          * <ol>
          *   <li>Blank or whitespace-only input returns {@code null} (the caller
          *       will map this to {@code ""}).</li>
@@ -1281,7 +1283,6 @@ public final class BrowserVersion implements Serializable {
          *   <li>Input without a semicolon is used verbatim as the MIME type
          *       with a {@code null} codec.</li>
          * </ol>
-         * </p>
          *
          * @param mediaResourceType the raw string passed to
          *                          {@code HTMLMediaElement.canPlayType()},

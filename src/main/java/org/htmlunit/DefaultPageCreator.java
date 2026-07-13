@@ -40,35 +40,34 @@ import org.htmlunit.xml.XmlPage;
  *
  * <p>
  * The following table shows the type of {@link Page} created depending on the content type:<br>
- * <br>
- *  <table border="1" style="width:50%;">
- *    <tr>
- *      <th>Content type</th>
- *      <th>Type of page</th>
- *    </tr>
- *    <tr>
- *      <td>text/html<br>
- *          text/javascript</td>
- *      <td>{@link HtmlPage}</td>
- *    </tr>
- *    <tr>
- *      <td>text/xml<br>
- *      application/xml<br>
- *      text/vnd.wap.wml<br>
- *      *+xml
- *      </td>
- *      <td>{@link XmlPage}, or an {@link XHtmlPage} if an XHTML namespace is used</td>
- *    </tr>
- *    <tr>
- *      <td>text/*</td>
- *      <td>{@link TextPage}</td>
- *    </tr>
- *    <tr>
- *      <td>Anything else</td>
- *      <td>{@link UnexpectedPage}</td>
- *    </tr>
- *  </table>
  * </p>
+ * <table border="1" style="width:50%;">
+ *   <tr>
+ *     <th>Content type</th>
+ *     <th>Type of page</th>
+ *   </tr>
+ *   <tr>
+ *     <td>text/html<br>
+ *         text/javascript</td>
+ *     <td>{@link HtmlPage}</td>
+ *   </tr>
+ *   <tr>
+ *     <td>text/xml<br>
+ *     application/xml<br>
+ *     text/vnd.wap.wml<br>
+ *     *+xml
+ *     </td>
+ *     <td>{@link XmlPage}, or an {@link XHtmlPage} if an XHTML namespace is used</td>
+ *   </tr>
+ *   <tr>
+ *     <td>text/*</td>
+ *     <td>{@link TextPage}</td>
+ *   </tr>
+ *   <tr>
+ *     <td>Anything else</td>
+ *     <td>{@link UnexpectedPage}</td>
+ *   </tr>
+ * </table>
  *
  * @author Mike Bowler
  * @author Christian Sell

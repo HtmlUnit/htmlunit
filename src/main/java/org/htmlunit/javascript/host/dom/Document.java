@@ -1368,6 +1368,7 @@ public class Document extends Node {
      * with the except of setting the domain to itself.</p>
      * <p>
      * The domain will be set according to the following rules:
+     * </p>
      * <ol>
      * <li>If the newDomain.equalsIgnoreCase(currentDomain) the method returns with no error.</li>
      * <li>If the browser version is netscape, the newDomain is downshifted.</li>
@@ -1383,7 +1384,6 @@ public class Document extends Node {
      *        will fail
      * </li>
      * </ol>
-     * </p>
      * <p>
      * TODO This code could be modified to understand country domain suffixes.
      * The domain www.bbc.co.uk should be trimmable only down to bbc.co.uk
