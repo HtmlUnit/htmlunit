@@ -28,7 +28,7 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code Screen}.
+ * JavaScript host object for {@code Screen}.
  *
  * @author Mike Bowler
  * @author Daniel Gredler
@@ -37,9 +37,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  * @author cd alexndr
  *
- * @see <a href="http://msdn.microsoft.com/en-us/library/ms535868.aspx">
- *     MSDN documentation</a>
- * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Screen">MDN Documentation</a>
  */
 @JsxClass
 public class Screen extends EventTarget {
@@ -54,7 +52,7 @@ public class Screen extends EventTarget {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
@@ -63,8 +61,9 @@ public class Screen extends EventTarget {
     }
 
     /**
-     * Creates an instance.
-     * @param screen the backend
+     * Creates an instance backed by the given screen.
+     *
+     * @param screen the backend screen
      */
     public Screen(final org.htmlunit.Screen screen) {
         screen_ = screen;
@@ -72,6 +71,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code availHeight} property.
+     *
      * @return the {@code availHeight} property
      */
     @JsxGetter
@@ -81,6 +81,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code availLeft} property.
+     *
      * @return the {@code availLeft} property
      */
     @JsxGetter
@@ -90,6 +91,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code availTop} property.
+     *
      * @return the {@code availTop} property
      */
     @JsxGetter
@@ -99,6 +101,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code availWidth} property.
+     *
      * @return the {@code availWidth} property
      */
     @JsxGetter
@@ -108,6 +111,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code colorDepth} property.
+     *
      * @return the {@code colorDepth} property
      */
     @JsxGetter
@@ -117,6 +121,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code height} property.
+     *
      * @return the {@code height} property
      */
     @JsxGetter
@@ -126,6 +131,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code left} property.
+     *
      * @return the {@code left} property
      */
     @JsxGetter({FF, FF_ESR})
@@ -135,6 +141,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code pixelDepth} property.
+     *
      * @return the {@code pixelDepth} property
      */
     @JsxGetter
@@ -144,6 +151,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code top} property.
+     *
      * @return the {@code top} property
      */
     @JsxGetter({FF, FF_ESR})
@@ -153,6 +161,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code width} property.
+     *
      * @return the {@code width} property
      */
     @JsxGetter
@@ -162,6 +171,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code orientation} property.
+     *
      * @return the {@code orientation} property
      */
     @JsxGetter
@@ -174,8 +184,9 @@ public class Screen extends EventTarget {
     }
 
     /**
-     * Returns the {@code orientation} property.
-     * @return the {@code orientation} property
+     * Returns the {@code mozOrientation} property.
+     *
+     * @return the {@code mozOrientation} property
      */
     @JsxGetter({FF, FF_ESR})
     public String getMozOrientation() {
@@ -183,8 +194,9 @@ public class Screen extends EventTarget {
     }
 
     /**
-     * Returns the {@code orientation} property.
-     * @return the {@code orientation} property
+     * Returns the {@code isExtended} property.
+     *
+     * @return the {@code isExtended} property
      */
     @JsxGetter({CHROME, EDGE})
     public boolean isIsExtended() {
@@ -193,6 +205,7 @@ public class Screen extends EventTarget {
 
     /**
      * Returns the {@code onchange} event handler for this element.
+     *
      * @return the {@code onchange} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
@@ -201,8 +214,9 @@ public class Screen extends EventTarget {
     }
 
     /**
-     * Setter for the {@code onchange} event handler.
-     * @param change the handler
+     * Sets the {@code onchange} event handler.
+     *
+     * @param change the {@code onchange} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnchange(final Object change) {

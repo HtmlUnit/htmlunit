@@ -19,7 +19,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
- * A JavaScript object for {@code Netscape}.
+ * JavaScript host object for {@code Netscape}.
  *
  * @author Marc Guillemot
  * @author Ronald Brill

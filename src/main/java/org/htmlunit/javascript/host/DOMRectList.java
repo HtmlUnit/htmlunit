@@ -25,10 +25,12 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code DOMRectList}.
+ * JavaScript host object for {@code DOMRectList}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRectList">MDN Documentation</a>
  */
 @JsxClass
 public class DOMRectList extends HtmlUnitScriptable {
@@ -44,7 +46,7 @@ public class DOMRectList extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -52,7 +54,8 @@ public class DOMRectList extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the length property.
+     * Returns the number of {@link DOMRect} objects in the list.
+     *
      * @return the length
      */
     @JsxGetter
@@ -73,9 +76,10 @@ public class DOMRectList extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the item at the specified index.
+     * Returns the {@link DOMRect} at the specified index.
+     *
      * @param index the index
-     * @return the found item
+     * @return the {@link DOMRect} at the given index, or {@code null} if the index is out of range
      */
     @JsxFunction
     public DOMRect item(final int index) {
@@ -86,7 +90,8 @@ public class DOMRectList extends HtmlUnitScriptable {
     }
 
     /**
-     * Add a rect.
+     * Adds a {@link DOMRect} to this list.
+     *
      * @param clientRect the rect to add
      */
     public void add(final DOMRect clientRect) {

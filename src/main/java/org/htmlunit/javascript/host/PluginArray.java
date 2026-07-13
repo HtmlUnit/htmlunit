@@ -27,13 +27,13 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 
 /**
- * A JavaScript object for {@code PluginArray}.
+ * JavaScript host object for {@code PluginArray}.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
  *
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PluginArray">PluginArray</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PluginArray">MDN Documentation</a>
  */
 @JsxClass
 public class PluginArray extends HtmlUnitScriptable {
@@ -41,7 +41,7 @@ public class PluginArray extends HtmlUnitScriptable {
     private final List<Plugin> elements_ = new ArrayList<>();
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -49,9 +49,10 @@ public class PluginArray extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the item at the given index.
+     * Returns the {@link Plugin} at the given index.
+     *
      * @param index the index
-     * @return the item at the given position
+     * @return the {@link Plugin} at the given position, or {@code null} if out of range
      */
     @JsxFunction
     public Plugin item(final int index) {
@@ -74,7 +75,7 @@ public class PluginArray extends HtmlUnitScriptable {
     }
 
     /**
-     * {@inheritDoc}.
+     * {@inheritDoc}
      */
     @Override
     public boolean has(final String name, final Scriptable start) {
@@ -101,9 +102,10 @@ public class PluginArray extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the item at the given index.
-     * @param name the item name
-     * @return the item with the given name
+     * Returns the {@link Plugin} with the given name.
+     *
+     * @param name the plugin name to look up
+     * @return the matching {@link Plugin}, or {@code null} if not found
      */
     @JsxFunction
     public Plugin namedItem(final String name) {
@@ -116,8 +118,9 @@ public class PluginArray extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the array size.
-     * @return the number elements
+     * Returns the number of plugins in this array.
+     *
+     * @return the number of elements
      */
     @JsxGetter
     public int getLength() {
@@ -125,9 +128,10 @@ public class PluginArray extends HtmlUnitScriptable {
     }
 
     /**
-     * Current implementation does nothing.
-     * @param reloadDocuments reload yes / no
-     * @see <a href="http://www.xulplanet.com/references/objref/PluginArray.html#method_refresh">XUL Planet</a>
+     * Refreshes the plugin list. Currently does nothing.
+     *
+     * @param reloadDocuments whether to reload all documents if the plugin list has changed
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PluginArray/refresh">MDN Documentation</a>
      */
     @JsxFunction
     public void refresh(final boolean reloadDocuments) {
@@ -135,16 +139,18 @@ public class PluginArray extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the name of the plugin.
+     * Returns the name of the given plugin.
+     *
      * @param element a {@link Plugin}
-     * @return the name
+     * @return the plugin name
      */
     protected String getItemName(final Object element) {
         return ((Plugin) element).getName();
     }
 
     /**
-     * Adds an element.
+     * Adds a {@link Plugin} to this array.
+     *
      * @param element the element to add
      */
     void add(final Plugin element) {
@@ -152,7 +158,9 @@ public class PluginArray extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the Iterator symbol
+     * Returns an iterator over the values in this array.
+     *
+     * @return the iterator
      */
     @JsxSymbol
     public Scriptable iterator() {

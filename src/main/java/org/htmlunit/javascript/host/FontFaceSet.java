@@ -26,17 +26,19 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code FontFaceSet}.
+ * JavaScript host object for {@code FontFaceSet}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet">MDN Documentation</a>
  */
 @JsxClass(isJSObject = false, value = {CHROME, EDGE})
 @JsxClass({FF, FF_ESR})
 public class FontFaceSet extends EventTarget {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
@@ -45,11 +47,13 @@ public class FontFaceSet extends EventTarget {
     }
 
     /**
-     * @param font a font specification using the CSS value syntax, e.g. "italic bold 16px Roboto"
-     * @param text limit the font faces to those whose Unicode range contains at least one
-     *          of the characters in text. This does not check for individual glyph coverage.
-     * @return a Promise of an Array of FontFace loaded. The promise is fulfilled
-     *          when all the fonts are loaded; it is rejected if one of the fonts failed to load.
+     * Initiates loading of all fonts in the given list and returns a {@code Promise} that resolves
+     * when all fonts are loaded, or rejects if any font fails to load.
+     *
+     * @param font a font specification using CSS value syntax, e.g. {@code "italic bold 16px Roboto"}
+     * @param text limits the font faces to those whose Unicode range contains at least one
+     *             of the characters in this text
+     * @return a {@code Promise} of an array of loaded {@code FontFace} objects
      */
     @JsxFunction
     public NativePromise load(final String font, final String text) {

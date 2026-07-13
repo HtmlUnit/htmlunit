@@ -33,9 +33,10 @@ public final class ConsoleCustom {
 
     /**
      * Adds a single marker to the browser's Performance or Waterfall tool.
-     * This lets you correlate a point in your code with the other events
-     * recorded in the timeline, such as layout and paint events.
-     * <p>Currently a noop because timeline is not supported so far</p>
+     * This lets you correlate a point in your code with the other events recorded in the timeline,
+     * such as layout and paint events.
+     * <p>Currently a no-op because timeline is not supported.</p>
+     *
      * @param context the JavaScript context
      * @param scope the scope
      * @param thisObj the scriptable

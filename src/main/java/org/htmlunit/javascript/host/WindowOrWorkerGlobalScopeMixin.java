@@ -33,7 +33,7 @@ import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.util.StringUtils;
 
 /**
- * The implementation of {@code WindowOrWorkerGlobalScope}
+ * The implementation of {@link WindowOrWorkerGlobalScope}
  * to be used by the implementers of the mixin.
  *
  * @author Ronald Brill
@@ -43,10 +43,11 @@ import org.htmlunit.util.StringUtils;
 public final class WindowOrWorkerGlobalScopeMixin {
 
     /**
-     * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
-     * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
-     * <a href="http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability">
-     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability</a>
+     * The minimum delay that can be used with {@code setInterval()} or {@code setTimeout()}.
+     * Browser minimums are usually in the 10–15 ms range, but there is no reason to waste that much time.
+     *
+     * @see <a href="http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability">
+     *     Minimum Timer Delay and Reliability</a>
      */
     private static final int MIN_TIMER_DELAY = 1;
 
@@ -55,9 +56,10 @@ public final class WindowOrWorkerGlobalScopeMixin {
     }
 
     /**
-     * Decodes a string of data which has been encoded using base-64 encoding.
-     * @param encodedData the encoded string
-     * @param scriptable the HtmlUnitScriptable
+     * Decodes a string of data that has been encoded using Base64 encoding.
+     *
+     * @param encodedData the Base64-encoded string to decode
+     * @param scriptable the calling {@link HtmlUnitScriptable}
      * @return the decoded value
      */
     public static String atob(final String encodedData, final HtmlUnitScriptable scriptable) {
@@ -75,10 +77,11 @@ public final class WindowOrWorkerGlobalScopeMixin {
     }
 
     /**
-     * Creates a base-64 encoded ASCII string from a string of binary data.
-     * @param stringToEncode string to encode
-     * @param scriptable the HtmlUnitScriptable
-     * @return the encoded string
+     * Creates a Base64-encoded ASCII string from a string of binary data.
+     *
+     * @param stringToEncode the Latin-1 string to encode
+     * @param scriptable the calling {@link HtmlUnitScriptable}
+     * @return the Base64-encoded string
      */
     public static String btoa(final String stringToEncode, final HtmlUnitScriptable scriptable) {
         final int l = stringToEncode.length();
@@ -104,12 +107,11 @@ public final class WindowOrWorkerGlobalScopeMixin {
     }
 
     /**
-     * Sets a chunk of JavaScript to be invoked at some specified time later.
-     * The invocation occurs only if the window is opened after the delay
-     * and does not contain an other page than the one that originated the setTimeout.
+     * Sets a chunk of JavaScript to be invoked after the specified delay.
+     * The invocation occurs only if the window is still open after the delay
+     * and has not been replaced by another page.
      *
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">
-     *     MDN web docs</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/setTimeout">MDN Documentation</a>
      *
      * @param context the JavaScript context
      * @param thisObj the scriptable
@@ -131,10 +133,10 @@ public final class WindowOrWorkerGlobalScopeMixin {
     }
 
     /**
-     * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
+     * Sets a chunk of JavaScript to be invoked repeatedly at the specified interval.
      *
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">
-     *     MDN web docs</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/setInterval">MDN Documentation</a>
+     *
      * @param context the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
@@ -157,11 +159,11 @@ public final class WindowOrWorkerGlobalScopeMixin {
     /**
      * Queues a microtask to be executed.
      *
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/queueMicrotask">
-     *     MDN web docs</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/queueMicrotask">MDN Documentation</a>
+     *
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
-     * @return undefined
+     * @return {@code undefined}
      */
     public static Object queueMicrotask(final Scriptable thisObj, final Object[] args) {
         if (args.length < 1) {

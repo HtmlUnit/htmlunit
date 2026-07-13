@@ -27,13 +27,13 @@ import org.htmlunit.javascript.configuration.JsxStaticGetter;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A Notification.
+ * JavaScript host object for {@code Notification}.
  *
- * @see <a href="https://developer.mozilla.org/en/docs/Web/API/notification">
- *     MDN - Notification</a>
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Ahmed Ashour
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Notification">MDN Documentation</a>
  */
 @JsxClass
 public class Notification extends EventTarget {
@@ -45,8 +45,9 @@ public class Notification extends EventTarget {
     public static final int maxActions = 2;
 
     /**
-     * JavaScript constructor.
-     * @param title the title
+     * Creates an instance of this object.
+     *
+     * @param title the notification title
      */
     @JsxConstructor
     public void jsConstructor(final String title) {
@@ -55,8 +56,9 @@ public class Notification extends EventTarget {
 
     /**
      * Returns the {@code permission} static property.
+     *
      * @param thisObj the scriptable
-     * @return the {@code permission} static property
+     * @return the current permission level
      */
     @JsxStaticGetter
     public static String getPermission(final Scriptable thisObj) {
@@ -64,7 +66,7 @@ public class Notification extends EventTarget {
     }
 
     /**
-     * Asks the user for permission.
+     * Requests the user's permission to display notifications.
      */
     @JsxStaticFunction
     public static void requestPermission() {
