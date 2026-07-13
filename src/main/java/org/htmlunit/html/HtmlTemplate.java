@@ -56,6 +56,8 @@ public class HtmlTemplate extends HtmlElement {
     }
 
     /**
+     * Return the associated document fragment.
+     *
      * @return the associated document fragment
      */
     public DomDocumentFragment getContent() {

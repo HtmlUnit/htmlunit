@@ -125,6 +125,8 @@ public class HtmlStyle extends HtmlElement {
     }
 
     /**
+     * Return the referenced style sheet.
+     *
      * @return the referenced style sheet
      */
     public CssStyleSheet getSheet() {

@@ -51,15 +51,19 @@ public class HtmlTableRow extends HtmlElement {
     }
 
     /**
-     * @return an Iterator over the all HtmlTableCell objects in this row
+     * Returns an iterator over all cells in this row.
+     *
+     * @return an iterator over all {@link HtmlTableCell} objects in this row
      */
     public CellIterator getCellIterator() {
         return new CellIterator();
     }
 
     /**
-     * @return an immutable list containing all the HtmlTableCells held by this object
-     * @see #getCellIterator
+     * Returns an immutable list of all cells in this row.
+     *
+     * @return an immutable list containing all {@link HtmlTableCell} objects in this row
+     * @see #getCellIterator()
      */
     public List<HtmlTableCell> getCells() {
         final List<HtmlTableCell> result = new ArrayList<>();
@@ -70,6 +74,8 @@ public class HtmlTableRow extends HtmlElement {
     }
 
     /**
+     * Returns the cell at the specified index.
+     *
      * @param index the 0-based index
      * @return the cell at the given index
      * @throws IndexOutOfBoundsException if there is no cell at the given index
@@ -134,8 +140,9 @@ public class HtmlTableRow extends HtmlElement {
     }
 
     /**
-     * Gets the table containing this row.
-     * @return the table
+     * Returns the table containing this row.
+     *
+     * @return the enclosing table
      */
     public HtmlTable getEnclosingTable() {
         return (HtmlTable) getEnclosingElement("table");
@@ -167,7 +174,7 @@ public class HtmlTableRow extends HtmlElement {
         }
 
         /**
-         * @return whether there is another cell available
+         * {@inheritDoc}
          */
         @Override
         public boolean hasNext() {
@@ -175,8 +182,7 @@ public class HtmlTableRow extends HtmlElement {
         }
 
         /**
-         * @return the next cell
-         * @throws NoSuchElementException if no cell is available
+         * {@inheritDoc}
          */
         @Override
         public HtmlTableCell next() throws NoSuchElementException {
@@ -184,7 +190,7 @@ public class HtmlTableRow extends HtmlElement {
         }
 
         /**
-         * Removes the cell under the cursor from the current row.
+         * {@inheritDoc}
          */
         @Override
         public void remove() {
@@ -198,6 +204,8 @@ public class HtmlTableRow extends HtmlElement {
         }
 
         /**
+         * Returns the next cell.
+         *
          * @return the next cell
          * @throws NoSuchElementException if no cell is available
          */
@@ -237,9 +245,7 @@ public class HtmlTableRow extends HtmlElement {
         }
 
         /**
-         * Returns an HtmlTableCell iterator.
-         *
-         * @return an HtmlTableCell Iterator.
+         * {@inheritDoc}
          */
         @Override
         public Iterator<HtmlTableCell> iterator() {
