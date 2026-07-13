@@ -17,7 +17,7 @@ package org.htmlunit.util.geometry;
 import java.util.ArrayList;
 
 /**
- * Simple 2D shape polygon.
+ * Simple 2D polygon shape.
  *
  * @author Ronald Brill
  */
@@ -26,10 +26,11 @@ public class Polygon2D implements Shape2D {
     private final Rectangle2D boundingBox_;
 
     /**
-     * Ctor.
-     * @see #lineTo(double, double)
-     * @param startX the x value of the first point.
-     * @param startY the Y value of the first point.
+     * Creates a new polygon starting at the given point.
+     * Use {@link #lineTo(double, double)} to add further corner points.
+     *
+     * @param startX the x coordinate of the first point
+     * @param startY the y coordinate of the first point
      */
     public Polygon2D(final double startX, final double startY) {
         points_ = new ArrayList<>();
@@ -38,10 +39,11 @@ public class Polygon2D implements Shape2D {
     }
 
     /**
-     * Add another corner Point to the polygon.
-     * @param x the x value of the corner to be added
-     * @param y the y value of the corner to be added
-     * @return this to support fluent style construction
+     * Adds another corner point to the polygon.
+     *
+     * @param x the x coordinate of the corner to add
+     * @param y the y coordinate of the corner to add
+     * @return this instance to support fluent-style construction
      */
     public Polygon2D lineTo(final double x, final double y) {
         points_.add(new Point2D(x, y));

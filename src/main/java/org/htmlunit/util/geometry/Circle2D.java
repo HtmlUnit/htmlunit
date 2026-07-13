@@ -15,7 +15,7 @@
 package org.htmlunit.util.geometry;
 
 /**
- * Simple 2D shape circle.
+ * Simple 2D circle shape.
  *
  * @author Ronald Brill
  */
@@ -25,9 +25,10 @@ public class Circle2D implements Shape2D {
     private final double radius_;
 
     /**
-     * Ctor.
-     * @param centerX x value of the second center
-     * @param centerY y value of the second center
+     * Creates a new circle with the given center and radius.
+     *
+     * @param centerX the x coordinate of the center
+     * @param centerY the y coordinate of the center
      * @param radius the radius
      */
     public Circle2D(final double centerX, final double centerY, final double radius) {

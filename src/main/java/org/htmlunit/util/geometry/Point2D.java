@@ -17,7 +17,7 @@ package org.htmlunit.util.geometry;
 import java.util.Objects;
 
 /**
- * Simple 2D point.
+ * Simple immutable 2D point.
  *
  * @author Ronald Brill
  */
@@ -26,9 +26,10 @@ public class Point2D {
     private final double myY_;
 
     /**
-     * Ctor.
-     * @param x x value
-     * @param y y value
+     * Creates a new point with the given coordinates.
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
      */
     public Point2D(final double x, final double y) {
         myX_ = x;
@@ -36,14 +37,18 @@ public class Point2D {
     }
 
     /**
-     * @return the x value
+     * Returns the x coordinate.
+     *
+     * @return the x coordinate
      */
     public double getX() {
         return myX_;
     }
 
     /**
-     * @return the y value
+     * Returns the y coordinate.
+     *
+     * @return the y coordinate
      */
     public double getY() {
         return myY_;
