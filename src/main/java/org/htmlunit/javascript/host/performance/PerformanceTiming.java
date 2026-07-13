@@ -20,11 +20,13 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code PerformanceTiming}.
+ * JavaScript host object for {@code PerformanceTiming}.
  * This implementation is a simple mock for the moment.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming">MDN Documentation</a>
  */
 @JsxClass
 public class PerformanceTiming extends HtmlUnitScriptable {
@@ -77,7 +79,7 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -85,7 +87,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a domainLookupStart
+     * Returns the value of the {@code domainLookupStart} property.
+     *
+     * @return the timestamp immediately before the browser starts the domain name lookup
      */
     @JsxGetter
     public long getDomainLookupStart() {
@@ -93,7 +97,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a domainLookupEnd
+     * Returns the value of the {@code domainLookupEnd} property.
+     *
+     * @return the timestamp immediately after the browser finishes the domain name lookup
      */
     @JsxGetter
     public long getDomainLookupEnd() {
@@ -101,7 +107,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a connectStart
+     * Returns the value of the {@code connectStart} property.
+     *
+     * @return the timestamp immediately before the browser starts to establish the connection to the server
      */
     @JsxGetter
     public long getConnectStart() {
@@ -109,7 +117,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a connectEnd
+     * Returns the value of the {@code connectEnd} property.
+     *
+     * @return the timestamp immediately after the browser finishes establishing the connection to the server
      */
     @JsxGetter
     public long getConnectEnd() {
@@ -117,7 +127,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a responseStart
+     * Returns the value of the {@code responseStart} property.
+     *
+     * @return the timestamp immediately after the browser receives the first byte of the response
      */
     @JsxGetter
     public long getResponseStart() {
@@ -125,7 +137,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a responseEnd
+     * Returns the value of the {@code responseEnd} property.
+     *
+     * @return the timestamp immediately after the browser receives the last byte of the response
      */
     @JsxGetter
     public long getResponseEnd() {
@@ -133,7 +147,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a secureConnectionStart
+     * Returns the value of the {@code secureConnectionStart} property.
+     *
+     * @return the timestamp immediately before the browser starts the handshake process to secure the current connection
      */
     @JsxGetter
     public long getSecureConnectionStart() {
@@ -141,7 +157,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return an unloadEventStart
+     * Returns the value of the {@code unloadEventStart} property.
+     *
+     * @return the timestamp immediately before the unload event is fired
      */
     @JsxGetter
     public long getUnloadEventStart() {
@@ -149,7 +167,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return an unloadEventEnd
+     * Returns the value of the {@code unloadEventEnd} property.
+     *
+     * @return the timestamp immediately after the unload event completes
      */
     @JsxGetter
     public long getUnloadEventEnd() {
@@ -157,7 +177,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a redirectStart
+     * Returns the value of the {@code redirectStart} property.
+     *
+     * @return the timestamp of the start of the first HTTP redirect
      */
     @JsxGetter
     public long getRedirectStart() {
@@ -165,7 +187,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a redirectEnd
+     * Returns the value of the {@code redirectEnd} property.
+     *
+     * @return the timestamp immediately after the last redirect response is received
      */
     @JsxGetter
     public long getRedirectEnd() {
@@ -173,7 +197,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a domContentLoadedEventStart
+     * Returns the value of the {@code domContentLoadedEventStart} property.
+     *
+     * @return the timestamp immediately before the {@code DOMContentLoaded} event is fired
      */
     @JsxGetter
     public long getDomContentLoadedEventStart() {
@@ -181,7 +207,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a domLoading
+     * Returns the value of the {@code domLoading} property.
+     *
+     * @return the timestamp immediately before the browser sets the document readyState to {@code loading}
      */
     @JsxGetter
     public long getDomLoading() {
@@ -189,7 +217,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a domInteractive
+     * Returns the value of the {@code domInteractive} property.
+     *
+     * @return the timestamp immediately before the browser sets the document readyState to {@code interactive}
      */
     @JsxGetter
     public long getDomInteractive() {
@@ -197,7 +227,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a domContentLoadedEventEnd
+     * Returns the value of the {@code domContentLoadedEventEnd} property.
+     *
+     * @return the timestamp immediately after the {@code DOMContentLoaded} event completes
      */
     @JsxGetter
     public long getDomContentLoadedEventEnd() {
@@ -205,7 +237,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a domComplete
+     * Returns the value of the {@code domComplete} property.
+     *
+     * @return the timestamp immediately before the browser sets the document readyState to {@code complete}
      */
     @JsxGetter
     public long getDomComplete() {
@@ -213,7 +247,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a loadEventStart
+     * Returns the value of the {@code loadEventStart} property.
+     *
+     * @return the timestamp immediately before the load event is fired
      */
     @JsxGetter
     public long getLoadEventStart() {
@@ -221,7 +257,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a loadEventEnd
+     * Returns the value of the {@code loadEventEnd} property.
+     *
+     * @return the timestamp immediately after the load event completes
      */
     @JsxGetter
     public long getLoadEventEnd() {
@@ -229,7 +267,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a navigationStart
+     * Returns the value of the {@code navigationStart} property.
+     *
+     * @return the timestamp immediately after the previous document's unload event completes
      */
     @JsxGetter
     public long getNavigationStart() {
@@ -237,7 +277,9 @@ public class PerformanceTiming extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a navigationStart
+     * Returns the value of the {@code fetchStart} property.
+     *
+     * @return the timestamp immediately before the browser starts to fetch the resource
      */
     @JsxGetter
     public long getFetchStart() {
