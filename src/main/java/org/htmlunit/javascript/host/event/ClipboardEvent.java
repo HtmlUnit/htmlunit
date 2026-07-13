@@ -19,10 +19,12 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code ClipboardEvent}.
+ * JavaScript host object for {@code ClipboardEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ClipboardEvent">MDN Documentation</a>
  */
 @JsxClass
 public class ClipboardEvent extends Event {

@@ -23,14 +23,14 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 
 /**
- * JavaScript object representing the BeforeUnloadEvent.
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.onbeforeunload">Mozilla Developer Network</a>
- * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ff974336.aspx">MSDN</a>
+ * JavaScript host object for {@code BeforeUnloadEvent}.
  *
  * @author Frank Danek
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Atsushi Nakagawa
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/BeforeUnloadEvent">MDN Documentation</a>
  */
 @JsxClass
 public class BeforeUnloadEvent extends Event {
@@ -45,7 +45,7 @@ public class BeforeUnloadEvent extends Event {
     }
 
     /**
-     * The JavaScript constructor. It seems it is not possible to do it from JavaScript code.
+     * JavaScript constructor. This event cannot be constructed from JavaScript.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -78,9 +78,9 @@ public class BeforeUnloadEvent extends Event {
     }
 
     /**
-     * Returns {@code true} if returnValue holds the beforeunload message.
+     * Returns {@code true} if {@code returnValue} holds the beforeunload message.
      *
-     * @return {@code true} if returnValue holds the beforeunload message
+     * @return {@code true} if {@code returnValue} holds the beforeunload message
      */
     public boolean isBeforeUnloadMessageSet() {
         return !getReturnValueDefault(getBrowserVersion()).equals(getReturnValue());
@@ -99,6 +99,7 @@ public class BeforeUnloadEvent extends Event {
 
     /**
      * Sets the return value associated with the event.
+     *
      * @param returnValue the return value associated with the event
      */
     @JsxSetter

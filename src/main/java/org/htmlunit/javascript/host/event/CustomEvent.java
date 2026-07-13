@@ -22,10 +22,12 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code CustomEvent}.
+ * JavaScript host object for {@code CustomEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent">MDN Documentation</a>
  */
 @JsxClass
 public class CustomEvent extends Event {
@@ -34,7 +36,7 @@ public class CustomEvent extends Event {
     private Object detail_;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this event.
      *
      * @param type the event type
      * @param details the event details (optional)
@@ -53,12 +55,12 @@ public class CustomEvent extends Event {
     }
 
     /**
-     * Implementation of the DOM Level 2 Event method for initializing the mouse event.
+     * Initializes the custom event.
      *
      * @param type the event type
-     * @param bubbles can the event bubble
-     * @param cancelable can the event be canceled
-     * @param detail the detail to set for the event
+     * @param bubbles whether the event bubbles
+     * @param cancelable whether the event can be canceled
+     * @param detail the custom detail data for the event
      */
     @JsxFunction
     public void initCustomEvent(
@@ -71,8 +73,9 @@ public class CustomEvent extends Event {
     }
 
     /**
-     * Returns any data passed when initializing the event.
-     * @return any data passed when initializing the event
+     * Returns any data passed when the event was initialized.
+     *
+     * @return any data passed when the event was initialized
      */
     @JsxGetter
     public Object getDetail() {

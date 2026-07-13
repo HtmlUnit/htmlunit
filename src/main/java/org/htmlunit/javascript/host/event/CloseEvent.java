@@ -21,10 +21,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code CloseEvent}.
+ * JavaScript host object for {@code CloseEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent">MDN Documentation</a>
  */
 @JsxClass
 public class CloseEvent extends Event {
@@ -52,7 +54,7 @@ public class CloseEvent extends Event {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this event.
      *
      * @param type the event type
      * @param details the event details (optional)
@@ -70,14 +72,13 @@ public class CloseEvent extends Event {
             if (!isNullMissingOrUndefined(reason)) {
                 reason_ = JavaScriptEngine.toString(reason);
             }
-
         }
     }
 
     /**
-     * Returns the code.
+     * Returns the close code.
      *
-     * @return the code
+     * @return the close code
      */
     @JsxGetter
     public int getCode() {
@@ -85,13 +86,17 @@ public class CloseEvent extends Event {
     }
 
     /**
-     * @param code the code
+     * Sets the close code.
+     *
+     * @param code the close code
      */
     public void setCode(final int code) {
         code_ = code;
     }
 
     /**
+     * Returns the reason the connection was closed.
+     *
      * @return the reason
      */
     @JsxGetter
@@ -100,6 +105,8 @@ public class CloseEvent extends Event {
     }
 
     /**
+     * Sets the reason the connection was closed.
+     *
      * @param reason the reason
      */
     public void setReason(final String reason) {
@@ -107,7 +114,9 @@ public class CloseEvent extends Event {
     }
 
     /**
-     * @return the wasClean
+     * Returns whether the connection was closed cleanly.
+     *
+     * @return {@code true} if the connection was closed cleanly
      */
     @JsxGetter
     public boolean isWasClean() {
@@ -115,7 +124,9 @@ public class CloseEvent extends Event {
     }
 
     /**
-     * @param wasClean the wasClean
+     * Sets whether the connection was closed cleanly.
+     *
+     * @param wasClean {@code true} if the connection was closed cleanly
      */
     public void setWasClean(final boolean wasClean) {
         wasClean_ = wasClean;

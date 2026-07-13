@@ -27,10 +27,12 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.file.Blob;
 
 /**
- * A JavaScript object for {@code BlobEvent}.
+ * JavaScript host object for {@code BlobEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/BlobEvent">MDN Documentation</a>
  */
 @JsxClass({CHROME, EDGE, FF, FF, FF_ESR})
 public class BlobEvent extends Event {
@@ -39,7 +41,7 @@ public class BlobEvent extends Event {
     private Blob data_;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this event.
      *
      * @param type the event type
      * @param details the event details (optional)
@@ -65,9 +67,9 @@ public class BlobEvent extends Event {
     }
 
     /**
-     * Returns the Blob associated with the event.
+     * Returns the {@link Blob} associated with the event.
      *
-     * @return the Blob associated with the event
+     * @return the {@link Blob} associated with the event
      */
     @JsxGetter
     public Blob getData() {
@@ -75,12 +77,11 @@ public class BlobEvent extends Event {
     }
 
     /**
-     * Sets the associated with the event.
+     * Sets the {@link Blob} associated with the event.
      *
-     * @param data associated with the event
+     * @param data the {@link Blob} to associate with the event
      */
     protected void setDetail(final Blob data) {
         data_ = data;
     }
-
 }

@@ -23,7 +23,7 @@ import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 
 /**
- * Allows to wrap event handler code as Function object.
+ * Wraps event handler code as a {@link Function} object.
  *
  * @author Marc Guillemot
  * @author Ronald Brill
@@ -35,10 +35,11 @@ public class EventHandler extends BaseFunction {
     private Function realFunction_;
 
     /**
-     * Builds a function that will execute the JavaScript code provided.
-     * @param node the element for which the event is build
-     * @param eventName the event for which this handler is created
-     * @param jsSnippet the JavaScript code
+     * Builds a function that will execute the given JavaScript code.
+     *
+     * @param node the element for which the event is built
+     * @param eventName the event name for which this handler is created
+     * @param jsSnippet the JavaScript code snippet to execute
      */
     public EventHandler(final DomNode node, final String eventName, final String jsSnippet) {
         super();
@@ -73,9 +74,11 @@ public class EventHandler extends BaseFunction {
     }
 
     /**
-     * @see org.htmlunit.corejs.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+     * Returns the JavaScript source representation of this function declaration.
+     *
      * @param typeHint the type hint
-     * @return the js code of the function declaration
+     * @return the JavaScript source of the function declaration
+     * @see org.htmlunit.corejs.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
      */
     @Override
     public Object getDefaultValue(final Class<?> typeHint) {

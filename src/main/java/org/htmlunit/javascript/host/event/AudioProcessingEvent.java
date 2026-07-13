@@ -22,16 +22,18 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code AudioProcessingEvent}.
+ * JavaScript host object for {@code AudioProcessingEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioProcessingEvent">MDN Documentation</a>
  */
 @JsxClass
 public class AudioProcessingEvent extends Event {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this event.
      *
      * @param type the event type
      * @param details the event details (optional)

@@ -31,15 +31,14 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * JavaScript object representing a Keyboard Event.
- * For general information on which properties and functions should be supported, see
- * <a href="http://www.w3c.org/TR/DOM-Level-3-Events/#Events-KeyboardEvents-Interfaces">
- * DOM Level 3 Events</a>.
+ * JavaScript host object for {@code KeyboardEvent}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
  * @author Joerg Werner
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent">MDN Documentation</a>
  */
 @JsxClass
 public class KeyboardEvent extends UIEvent {
@@ -805,9 +804,10 @@ public class KeyboardEvent extends UIEvent {
     public static final int DOM_VK_WIN_OEM_CLEAR = 254;
 
     /**
-     * For {@link #TYPE_KEY_DOWN} and {@link #TYPE_KEY_UP}, this map stores {@link #setKeyCode(int)} associated with
-     * the character (if they are not the same).
-     * You can verify this <a href="http://www.asquare.net/javascript/tests/KeyCode.html">here</a>
+     * Maps characters to key codes for {@link #TYPE_KEY_DOWN} and {@link #TYPE_KEY_UP} events
+     * where the key code differs from the character code.
+     *
+     * @see <a href="https://www.asquare.net/javascript/tests/KeyCode.html">Key Code Reference</a>
      */
     private static final Map<Character, Integer> KEX_CODE_MAP = new HashMap<>();
     static {
@@ -886,14 +886,14 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Creates a new keyboard event instance.
+     * Creates a new keyboard event instance for a character key.
      *
      * @param domNode the DOM node that triggered the event
      * @param type the event type
      * @param character the character associated with the event
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
+     * @param shiftKey {@code true} if SHIFT is pressed
+     * @param ctrlKey {@code true} if CTRL is pressed
+     * @param altKey {@code true} if ALT is pressed
      */
     public KeyboardEvent(final DomNode domNode, final String type, final char character,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
@@ -928,14 +928,14 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Creates a new keyboard event instance.
+     * Creates a new keyboard event instance for a key code.
      *
      * @param domNode the DOM node that triggered the event
      * @param type the event type
      * @param keyCode the key code associated with the event
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
+     * @param shiftKey {@code true} if SHIFT is pressed
+     * @param ctrlKey {@code true} if CTRL is pressed
+     * @param altKey {@code true} if ALT is pressed
      */
     public KeyboardEvent(final DomNode domNode, final String type, final int keyCode,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
@@ -960,26 +960,32 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Returns whether the specified character can be written only when {@code SHIFT} key is pressed.
-     * @param ch the character
-     * @param shiftKey is shift key pressed
-     * @return whether the specified character can be written only when {@code SHIFT} key is pressed
+     * Returns whether the specified character requires the {@code SHIFT} key to be pressed.
+     *
+     * @param ch the character to check
+     * @param shiftKey whether the shift key is currently pressed
+     * @return {@code true} if the character requires the {@code SHIFT} key
      */
     public static boolean isShiftNeeded(final char ch, final boolean shiftKey) {
         return "~!@#$%^&*()_+{}:\"<>?|".indexOf(ch) != -1
                 || (!shiftKey && ch >= 'A' && ch <= 'Z');
     }
 
-    /** We can not accept DOM_VK_A, because is it 'A' or 'a', so the character constructor should be used. */
+    /**
+     * Returns whether the given key code is ambiguous (i.e. could represent either upper or lower case).
+     * Key codes in the ranges {@code DOM_VK_0}–{@code DOM_VK_9} and {@code DOM_VK_A}–{@code DOM_VK_Z}
+     * are considered ambiguous; the character constructor should be used instead.
+     */
     private static boolean isAmbiguousKeyCode(final int keyCode) {
         return (keyCode >= DOM_VK_0 && keyCode <= DOM_VK_9) || (keyCode >= DOM_VK_A && keyCode <= DOM_VK_Z);
     }
 
     /**
-     * Converts a Java character to a keyCode.
-     * @see <a href="http://www.w3.org/TR/DOM-Level-3-Events/#keyset-keyidentifiers">DOM 3 Events</a>
-     * @param c the character
-     * @return the corresponding keycode
+     * Converts a Java character to its corresponding key code.
+     *
+     * @param c the character to convert
+     * @return the corresponding key code
+     * @see <a href="https://www.w3.org/TR/DOM-Level-3-Events/#dom-keyboard-event-key-algorithm">DOM 3 Events</a>
      */
     private static int charToKeyCode(final char c) {
         if (c >= 'a' && c <= 'z') {
@@ -994,7 +1000,8 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Determines the value of the 'key' property from the current value of 'keyCode', 'charCode', or 'which'.
+     * Determines the value of the {@code key} property from the current key code, char code, or {@code which}.
+     *
      * @return the key value
      */
     private String determineKey() {
@@ -1011,7 +1018,8 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Determines the value of the 'code' property from the current value of 'keyCode', 'charCode', or 'which'.
+     * Determines the value of the {@code code} property from the current key code, char code, or {@code which}.
+     *
      * @return the code value
      */
     private String determineCode() {
@@ -1028,7 +1036,7 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this event.
      *
      * @param type the event type
      * @param details the event details (optional)
@@ -1105,18 +1113,18 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Implementation of the DOM Level 3 Event method for initializing the key event.
+     * Initializes the keyboard event using the DOM Level 3 Event specification.
      *
      * @param type the event type
-     * @param bubbles can the event bubble
-     * @param cancelable can the event be canceled
+     * @param bubbles whether the event can bubble
+     * @param cancelable whether the event can be canceled
      * @param view the view to use for this event
-     * @param key the value of the key attribute. Defaults to ""
-     * @param location the value of the location attribute. Defaults to 0
-     * @param ctrlKey is the control key pressed
-     * @param altKey is the alt key pressed
-     * @param shiftKey is the shift key pressed
-     * @param metaKey is the meta key pressed
+     * @param key the value of the {@code key} attribute; defaults to {@code ""}
+     * @param location the value of the {@code location} attribute; defaults to {@code 0}
+     * @param ctrlKey whether the Control key is pressed
+     * @param altKey whether the Alt key is pressed
+     * @param shiftKey whether the Shift key is pressed
+     * @param metaKey whether the Meta key is pressed
      */
     @JsxFunction
     public void initKeyboardEvent(
@@ -1144,6 +1152,7 @@ public class KeyboardEvent extends UIEvent {
 
     /**
      * Returns the char code associated with the event.
+     *
      * @return the char code associated with the event
      */
     @JsxGetter
@@ -1153,6 +1162,7 @@ public class KeyboardEvent extends UIEvent {
 
     /**
      * Sets the char code associated with the event.
+     *
      * @param charCode the char code associated with the event
      */
     protected void setCharCode(final int charCode) {
@@ -1160,8 +1170,9 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Returns the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed.
-     * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
+     * Returns the numeric key code of the key pressed, or the char code for an alphanumeric key pressed.
+     *
+     * @return the numeric key code or char code
      */
     @Override
     public int getWhich() {
@@ -1169,8 +1180,9 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Sets the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed.
-     * @param which the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
+     * Sets the numeric key code of the key pressed, or the char code for an alphanumeric key pressed.
+     *
+     * @param which the key code or char code
      */
     protected void setWhich(final int which) {
         which_ = which;
@@ -1213,8 +1225,9 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Returns the value of a key or keys pressed by the user.
-     * @return the value of a key or keys pressed by the user
+     * Returns the value of the key pressed by the user.
+     *
+     * @return the value of the key pressed
      */
     @JsxGetter
     public String getKey() {
@@ -1222,16 +1235,18 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Sets the value of a key or keys pressed by the user.
-     * @param key the value of a key or keys pressed by the user
+     * Sets the value of the key pressed by the user.
+     *
+     * @param key the key value
      */
     protected void setKey(final String key) {
         key_ = key;
     }
 
     /**
-     * Returns a physical key on the keyboard.
-     * @return a physical key on the keyboard
+     * Returns the physical key identifier on the keyboard.
+     *
+     * @return the physical key identifier
      */
     @JsxGetter
     public String getCode() {
@@ -1239,16 +1254,18 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Sets a physical key on the keyboard.
-     * @param code a physical key on the keyboard
+     * Sets the physical key identifier on the keyboard.
+     *
+     * @param code the physical key identifier
      */
     protected void setCode(final String code) {
         code_ = code;
     }
 
     /**
-     * Returns whether or not the "meta" key was pressed during the event firing.
-     * @return whether or not the "meta" key was pressed during the event firing
+     * Returns whether the {@code meta} key was pressed during the event.
+     *
+     * @return {@code true} if the {@code meta} key was pressed
      */
     @JsxGetter
     public boolean isMetaKey() {
@@ -1256,8 +1273,9 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Sets whether or not the "meta" key was pressed during the event firing.
-     * @param metaKey whether or not the "meta" was pressed during the event firing
+     * Sets whether the {@code meta} key was pressed during the event.
+     *
+     * @param metaKey {@code true} if the {@code meta} key was pressed
      */
     protected void setMetaKey(final boolean metaKey) {
         metaKey_ = metaKey;
@@ -1265,7 +1283,8 @@ public class KeyboardEvent extends UIEvent {
 
     /**
      * Returns the location of the key on the keyboard.
-     * @return the location of the key on the keyboard
+     *
+     * @return the key location
      */
     @JsxGetter
     public int getLocation() {
@@ -1274,15 +1293,17 @@ public class KeyboardEvent extends UIEvent {
 
     /**
      * Sets the location of the key on the keyboard.
-     * @param location the location of the key on the keyboard
+     *
+     * @param location the key location
      */
     protected void setLocation(final int location) {
         location_ = location;
     }
 
     /**
-     * Returns whether or not the key is being held down such that it is automatically repeating.
-     * @return whether or not the key is being held down
+     * Returns whether the key is being held down causing auto-repeat.
+     *
+     * @return {@code true} if the key is being held down
      */
     @JsxGetter
     public boolean isRepeat() {
@@ -1290,16 +1311,18 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Sets whether or not the key is being held down such that it is automatically repeating.
-     * @param repeat whether or not the key is being held down
+     * Sets whether the key is being held down causing auto-repeat.
+     *
+     * @param repeat {@code true} if the key is being held down
      */
     protected void setRepeat(final boolean repeat) {
         repeat_ = repeat;
     }
 
     /**
-     * Returns whether or not the event is fired after the compositionstart and before the compositionend events.
-     * @return whether or not the event is fired while composing
+     * Returns whether this event is fired after the {@code compositionstart} and before the {@code compositionend} events.
+     *
+     * @return {@code true} if the event is fired while composing
      */
     @JsxGetter
     public boolean getIsComposing() {
@@ -1307,8 +1330,9 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Sets whether or not this event is fired after the compositionstart and before the compositionend events.
-     * @param isComposing whether or not this event is fired while composing
+     * Sets whether this event is fired after the {@code compositionstart} and before the {@code compositionend} events.
+     *
+     * @param isComposing {@code true} if the event is fired while composing
      */
     protected void setIsComposing(final boolean isComposing) {
         isComposing_ = isComposing;
