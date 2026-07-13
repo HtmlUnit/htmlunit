@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgDefs;
 
 /**
- * A JavaScript object for {@code SVGDefsElement}.
+ * JavaScript host object for {@code SVGDefsElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGDefsElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgDefs.class)
 public class SVGDefsElement extends SVGGraphicsElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

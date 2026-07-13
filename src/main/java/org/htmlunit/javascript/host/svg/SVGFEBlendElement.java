@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeBlend;
 
 /**
- * A JavaScript object for {@code SVGFEBlendElement}.
+ * JavaScript host object for {@code SVGFEBlendElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFEBlendElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeBlend.class)
 public class SVGFEBlendElement extends SVGElement {
@@ -81,7 +83,7 @@ public class SVGFEBlendElement extends SVGElement {
     public static final int SVG_FEBLEND_MODE_LUMINOSITY = 16;
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

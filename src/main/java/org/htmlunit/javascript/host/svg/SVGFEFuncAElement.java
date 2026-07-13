@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeFuncA;
 
 /**
- * A JavaScript object for {@code SVGFEFuncAElement}.
+ * JavaScript host object for {@code SVGFEFuncAElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFEFuncAElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeFuncA.class)
 public class SVGFEFuncAElement extends SVGComponentTransferFunctionElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

@@ -19,17 +19,19 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgAnimate;
 
 /**
- * A JavaScript object for {@code SVGAnimateElement}.
+ * JavaScript host object for {@code SVGAnimateElement}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimateElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgAnimate.class)
 public class SVGAnimateElement extends SVGAnimationElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

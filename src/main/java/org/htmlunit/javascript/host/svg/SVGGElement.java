@@ -20,16 +20,18 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.svg.SvgGroup;
 
 /**
- * A JavaScript object for {@code SVGGElement}.
+ * JavaScript host object for {@code SVGGElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgGroup.class)
 public class SVGGElement extends SVGGraphicsElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

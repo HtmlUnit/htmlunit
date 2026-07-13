@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeSpotLight;
 
 /**
- * A JavaScript object for {@code SVGFESpotLightElement}.
+ * JavaScript host object for {@code SVGFESpotLightElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFESpotLightElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeSpotLight.class)
 public class SVGFESpotLightElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

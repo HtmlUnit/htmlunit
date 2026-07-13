@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgEllipse;
 
 /**
- * A JavaScript object for {@code SVGEllipseElement}.
+ * JavaScript host object for {@code SVGEllipseElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGEllipseElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgEllipse.class)
 public class SVGEllipseElement extends SVGGeometryElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
