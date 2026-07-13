@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.htmlunit.corejs.javascript.ClassDescriptor;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Symbol;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -54,6 +55,7 @@ public final class ClassConfiguration {
     private final Class<?>[] domClasses_;
     private final boolean jsObject_;
     private final String className_;
+    private final ClassDescriptor descriptor_;
 
     /**
      * Constructor.
@@ -66,6 +68,22 @@ public final class ClassConfiguration {
      */
     public ClassConfiguration(final Class<? extends HtmlUnitScriptable> hostClass, final Class<?>[] domClasses,
             final boolean jsObject, final String className, final String extendedClassName) {
+        this(hostClass, domClasses, jsObject, className, extendedClassName, null);
+    }
+
+    /**
+     * Constructor for descriptor-based host classes.
+     *
+     * @param hostClass - the class implementing this functionality
+     * @param domClasses the DOM classes that this object supports
+     * @param jsObject boolean flag for if this object is a JavaScript object
+     * @param className the class name, can be null
+     * @param extendedClassName the extended class name
+     * @param descriptor the {@link ClassDescriptor} to use for wiring, or {@code null} for annotation-based setup
+     */
+    public ClassConfiguration(final Class<? extends HtmlUnitScriptable> hostClass, final Class<?>[] domClasses,
+            final boolean jsObject, final String className, final String extendedClassName,
+            final ClassDescriptor descriptor) {
         hostClass_ = hostClass;
         hostClassSimpleName_ = hostClass_.getSimpleName();
         jsObject_ = jsObject;
@@ -77,6 +95,7 @@ public final class ClassConfiguration {
             className_ = className;
         }
         extendedClassName_ = extendedClassName;
+        descriptor_ = descriptor;
     }
 
     void setJSConstructor(final String name, final Member jsConstructor) {
@@ -306,6 +325,16 @@ public final class ClassConfiguration {
      */
     public String getClassName() {
         return className_;
+    }
+
+    /**
+     * Returns the {@link ClassDescriptor} for this class, or {@code null} if this class
+     * uses the annotation-based setup.
+     *
+     * @return the descriptor, or {@code null}
+     */
+    public ClassDescriptor getDescriptor() {
+        return descriptor_;
     }
 
     /**

@@ -72,6 +72,22 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
             }
         }
+
+        final SupportedBrowser expectedBrowser = toSupportedBrowser(browser);
+        for (final HtmlUnitClassDescriptor descriptor : getDescriptors()) {
+            final org.htmlunit.corejs.javascript.ClassDescriptor classDescriptor =
+                    descriptor.forBrowser(expectedBrowser);
+            if (classDescriptor != null) {
+                final ClassConfiguration config = new ClassConfiguration(
+                        descriptor.getHostClass(),
+                        descriptor.getDomClasses(),
+                        descriptor.isJsObject(),
+                        null,
+                        descriptor.getExtendedClassName(),
+                        classDescriptor);
+                configuration_.add(config);
+            }
+        }
     }
 
     /**
@@ -80,6 +96,40 @@ public abstract class AbstractJavaScriptConfiguration {
      * @return the classes configured by this configuration
      */
     protected abstract Class<? extends HtmlUnitScriptable>[] getClasses();
+
+    /**
+     * Returns the descriptor-based host classes registered by this configuration.
+     * Subclasses override this to return their migrated descriptors.
+     *
+     * @return the descriptors, never {@code null}
+     */
+    protected HtmlUnitClassDescriptor[] getDescriptors() {
+        return new HtmlUnitClassDescriptor[0];
+    }
+
+    /**
+     * Maps a {@link BrowserVersion} to the corresponding {@link SupportedBrowser} constant.
+     *
+     * @param browserVersion the browser version
+     * @return the matching {@link SupportedBrowser}
+     */
+    private static SupportedBrowser toSupportedBrowser(final BrowserVersion browserVersion) {
+        if (browserVersion != null) {
+            if (browserVersion.isChrome()) {
+                return CHROME;
+            }
+            if (browserVersion.isEdge()) {
+                return EDGE;
+            }
+            if (browserVersion.isFirefoxESR()) {
+                return FF_ESR;
+            }
+            if (browserVersion.isFirefox()) {
+                return FF;
+            }
+        }
+        return CHROME;
+    }
 
     /**
      * Gets all the configurations.
