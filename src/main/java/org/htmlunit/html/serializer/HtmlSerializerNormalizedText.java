@@ -801,6 +801,8 @@ public class HtmlSerializerNormalizedText {
         }
 
         /**
+         * Returns the constructed text.
+         *
          * @return the constructed text.
          */
         public String getText() {

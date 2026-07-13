@@ -71,6 +71,7 @@ public class SimpleRange implements Serializable {
 
     /**
      * Constructs a range for the specified element.
+     *
      * @param node the node for the range
      */
     public SimpleRange(final DomNode node) {
@@ -82,6 +83,7 @@ public class SimpleRange implements Serializable {
 
     /**
      * Constructs a range for the provided element and start and end offset.
+     *
      * @param node the node for the range
      * @param offset the start and end offset
      */
@@ -94,6 +96,7 @@ public class SimpleRange implements Serializable {
 
     /**
      * Constructs a range for the provided elements and offsets.
+     *
      * @param startNode the start node
      * @param startOffset the start offset
      * @param endNode the end node
@@ -111,6 +114,7 @@ public class SimpleRange implements Serializable {
 
     /**
      * Duplicates the contents of this.
+     *
      * @return DocumentFragment that contains content equivalent to this
      */
     public DomDocumentFragment cloneContents() {
@@ -190,6 +194,7 @@ public class SimpleRange implements Serializable {
     /**
      * Produces a new SimpleRange whose boundary-points are equal to the
      * boundary-points of this.
+     *
      * @return duplicated simple
      */
     public SimpleRange cloneRange() {
@@ -293,6 +298,8 @@ public class SimpleRange implements Serializable {
     }
 
     /**
+     * Determines whether this range is collapsed.
+     *
      * @return true if startContainer equals endContainer and
      *         startOffset equals endOffset
      * @throws DOMException in case of error
@@ -302,6 +309,8 @@ public class SimpleRange implements Serializable {
     }
 
     /**
+     * Returns the deepest common ancestor of this range's boundary points.
+     *
      * @return the deepest common ancestor container of this range's two
      *         boundary-points.
      * @throws DOMException in case of error
@@ -326,6 +335,8 @@ public class SimpleRange implements Serializable {
     }
 
     /**
+     * Returns the node within which this range ends.
+     *
      * @return the Node within which this range ends
      */
     public DomNode getEndContainer() {
@@ -333,6 +344,8 @@ public class SimpleRange implements Serializable {
     }
 
     /**
+     * Returns the offset within the end container.
+     *
      * @return offset within the ending node of this
      */
     public int getEndOffset() {
@@ -340,6 +353,8 @@ public class SimpleRange implements Serializable {
     }
 
     /**
+     * Returns the node within which this range begins.
+     *
      * @return the Node within which this range begins
      */
     public DomNode getStartContainer() {
@@ -347,6 +362,8 @@ public class SimpleRange implements Serializable {
     }
 
     /**
+     * Returns the offset within the start container.
+     *
      * @return offset within the starting node of this
      */
     public int getStartOffset() {
@@ -556,6 +573,8 @@ public class SimpleRange implements Serializable {
     }
 
     /**
+     * Returns the nodes fully contained within this range in document order.
+     *
      * @return a list with all nodes contained in this range
      */
     public List<DomNode> containedNodes() {
