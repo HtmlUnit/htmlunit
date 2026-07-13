@@ -23,16 +23,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 
 /**
- * A JavaScript object for {@code SpeechGrammar}.
+ * JavaScript host object for {@code SpeechGrammar}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechGrammar">MDN Documentation</a>
  */
 @JsxClass({CHROME, EDGE})
 public class SpeechGrammar extends HtmlUnitScriptable {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     @JsxConstructorAlias(alias = "webkitSpeechGrammar")

@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code SpeechSynthesisUtterance}.
+ * JavaScript host object for {@code SpeechSynthesisUtterance}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance">MDN Documentation</a>
  */
 @JsxClass
 public class SpeechSynthesisUtterance extends EventTarget {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

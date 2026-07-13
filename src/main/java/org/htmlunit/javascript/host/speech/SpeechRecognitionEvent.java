@@ -24,16 +24,21 @@ import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 import org.htmlunit.javascript.host.event.Event;
 
 /**
- * A JavaScript object for {@code SpeechRecognitionEvent}.
+ * JavaScript host object for {@code SpeechRecognitionEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognitionEvent">MDN Documentation</a>
  */
 @JsxClass({CHROME, EDGE})
 public class SpeechRecognitionEvent extends Event {
 
     /**
-     * {@inheritDoc}
+     * Creates an instance of this object.
+     *
+     * @param type the event type
+     * @param details the event details
      */
     @Override
     @JsxConstructor
