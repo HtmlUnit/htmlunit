@@ -19,4 +19,22 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgSymbol;
 
 /**
- * JavaScript host object for {@code SVGSymbolElement
+ * JavaScript host object for {@code SVGSymbolElement}.
+ *
+ * @author Ahmed Ashour
+ * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGSymbolElement">MDN Documentation</a>
+ */
+@JsxClass(domClass = SvgSymbol.class)
+public class SVGSymbolElement extends SVGGraphicsElement {
+
+    /**
+     * Creates an instance of this object.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
+    }
+}
