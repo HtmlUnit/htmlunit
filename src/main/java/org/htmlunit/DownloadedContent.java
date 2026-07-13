@@ -76,6 +76,8 @@ public interface DownloadedContent extends Serializable {
         private final boolean temporary_;
 
         /**
+         * Ctor.
+         *
          * @param file the file
          * @param temporary if true, the file will be deleted when cleanUp() is called.
          */

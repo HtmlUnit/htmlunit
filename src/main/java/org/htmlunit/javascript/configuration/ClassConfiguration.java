@@ -247,6 +247,8 @@ public final class ClassConfiguration {
     }
 
     /**
+     * Returns the extendedClass.
+     *
      * @return the extendedClass
      */
     public String getExtendedClassName() {
@@ -262,6 +264,7 @@ public final class ClassConfiguration {
     }
 
     /**
+     * Returns the hostClassSimpleName.
      * @return the hostClassSimpleName
      */
     public String getHostClassSimpleName() {
@@ -277,6 +280,8 @@ public final class ClassConfiguration {
     }
 
     /**
+     * Returns the JavaScript constructor method alias.
+     *
      * @return the JavaScript constructor method alias
      *         or null if there is nothing.
      */
@@ -294,6 +299,8 @@ public final class ClassConfiguration {
     }
 
     /**
+     * Return the jsObject.
+     *
      * @return the jsObject
      */
     public boolean isJsObject() {
@@ -328,6 +335,8 @@ public final class ClassConfiguration {
         }
 
         /**
+         * Returns the readMethod.
+         *
          * @return the readMethod
          */
         public Method getReadMethod() {
@@ -335,6 +344,8 @@ public final class ClassConfiguration {
         }
 
         /**
+         * Returns the writeMethod.
+         *
          * @return the writeMethod
          */
         public Method getWriteMethod() {
@@ -364,6 +375,8 @@ public final class ClassConfiguration {
         }
 
         /**
+         * Returns the name.
+         *
          * @return the name
          */
         public String getName() {
@@ -371,6 +384,8 @@ public final class ClassConfiguration {
         }
 
         /**
+         * Returns the value.
+         *
          * @return the value
          */
         public Object getValue() {
@@ -378,6 +393,8 @@ public final class ClassConfiguration {
         }
 
         /**
+         * Returns the flag.
+         *
          * @return the flag
          */
         public int getFlag() {

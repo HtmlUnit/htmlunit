@@ -24,6 +24,8 @@ import java.io.Serializable;
 public interface ClipboardHandler extends Serializable {
 
     /**
+     * Returns the current content of the clipboard.
+     *
      * @return the current content of the clipboard
      */
     String getClipboardContent();

@@ -46,7 +46,8 @@ class WebResponseFromCache extends WebResponseWrapper {
     }
 
     /**
-     * Wraps the provided response for the given request
+     * Wraps the provided response for the given request.
+     *
      * @param cachedResponse the response from cache
      * @param currentRequest the new request
      */

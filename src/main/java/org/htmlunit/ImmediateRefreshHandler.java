@@ -24,6 +24,7 @@ import java.net.URL;
  * <p>
  * If you want a refresh handler that does not ignore the wait time,
  * see {@link ThreadedRefreshHandler}.
+ * </p>
  *
  * @author Mike Bowler
  * @author Daniel Gredler

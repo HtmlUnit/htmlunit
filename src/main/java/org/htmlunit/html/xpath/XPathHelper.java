@@ -93,11 +93,16 @@ public final class XPathHelper {
     }
 
     /**
+     * Evaluates the specified XPath expression against the given node and returns the result
+     * as a list. Depending on the XPath result type, the list contains matching nodes,
+     * a single {@link Double}, {@link Boolean}, or {@link String} value.
+     *
      * @param <T> the type of nodes expected
      * @param node the start node
      * @param xpath the {@link XPathAdapter} to search for
      * @param prefixResolver the {@link PrefixResolver} to be used
-     * @return a list of nodes matching the given xpath
+     * @return a list of nodes matching the given xpath, or a singleton list containing
+     *         the evaluated number, boolean, or string value
      * @throws TransformerException in case of error
      */
     public static <T> List<T> getByXPath(final Node node, final XPathAdapter xpath,

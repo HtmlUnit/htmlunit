@@ -34,6 +34,7 @@ import org.htmlunit.corejs.javascript.VarScope;
  * format specifiers and the numbers of parameters don't match, no exception is thrown.
  * <p>
  * The default logger uses Apache Commons Logging.
+ * </p>
  *
  * @author Andrea Martino
  * @author Ronald Brill
@@ -50,11 +51,12 @@ public class WebConsole implements ConsolePrinter, Serializable {
     public interface Logger {
 
         /**
-         * Is trace logging currently enabled?
+         * Is trace logging currently enabled?.
          * <p>
          * Call this method to prevent having to perform expensive operations
          * (for example, <code>String</code> concatenation)
          * when the log level is more than trace.
+         * </p>
          *
          * @return true if trace is enabled in the underlying logger.
          */
@@ -68,11 +70,12 @@ public class WebConsole implements ConsolePrinter, Serializable {
         void trace(Object message);
 
         /**
-         * Is debug logging currently enabled?
+         * Is debug logging currently enabled?.
          * <p>
          * Call this method to prevent having to perform expensive operations
          * (for example, <code>String</code> concatenation)
          * when the log level is more than debug.
+         * </p>
          *
          * @return true if debug is enabled in the underlying logger.
          */
@@ -86,11 +89,12 @@ public class WebConsole implements ConsolePrinter, Serializable {
         void debug(Object message);
 
         /**
-         * Is info logging currently enabled?
+         * Is info logging currently enabled?.
          * <p>
          * Call this method to prevent having to perform expensive operations
          * (for example, <code>String</code> concatenation)
          * when the log level is more than info.
+         * </p>
          *
          * @return true if info is enabled in the underlying logger.
          */
@@ -104,11 +108,12 @@ public class WebConsole implements ConsolePrinter, Serializable {
         void info(Object message);
 
         /**
-         * Is warn logging currently enabled?
+         * Is warn logging currently enabled?.
          * <p>
          * Call this method to prevent having to perform expensive operations
          * (for example, <code>String</code> concatenation)
          * when the log level is more than warn.
+         * </p>
          *
          * @return true if warn is enabled in the underlying logger.
          */
@@ -122,11 +127,12 @@ public class WebConsole implements ConsolePrinter, Serializable {
         void warn(Object message);
 
         /**
-         * Is error logging currently enabled?
+         * Is error logging currently enabled?.
          * <p>
          * Call this method to prevent having to perform expensive operations
          * (for example, <code>String</code> concatenation)
          * when the log level is more than error.
+         * </p>
          *
          * @return true if error is enabled in the underlying logger.
          */

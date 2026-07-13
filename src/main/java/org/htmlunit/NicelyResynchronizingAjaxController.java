@@ -55,8 +55,6 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
 
     /**
      * Resynchronizes calls performed from the thread where this instance has been created.
-     * <p>
-     * {@inheritDoc}
      */
     @Override
     public boolean processSynchron(final HtmlPage page, final WebRequest settings, final boolean async) {
