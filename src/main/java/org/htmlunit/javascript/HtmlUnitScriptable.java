@@ -109,7 +109,6 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      * Normally HtmlUnit objects don't need to overwrite this method as properties are defined
      * on the prototypes. In some cases where "content" of object
      * has priority compared to the properties consider using utility {@link #getWithPreemption(String)}.
-     * <p>
      * {@inheritDoc}
      */
     @Override
