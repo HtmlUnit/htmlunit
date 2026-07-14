@@ -113,7 +113,7 @@ public class DomProcessingInstruction extends DomNode implements ProcessingInstr
      * {@inheritDoc}
      */
     @Override
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         printWriter.print("<?");
         printWriter.print(getTarget());
         printWriter.print(" ");

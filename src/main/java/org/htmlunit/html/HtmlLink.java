@@ -359,6 +359,7 @@ public class HtmlLink extends HtmlElement {
         }
         return sheet_;
     }
+
     /**
      * Returns whether this link references a style sheet.
      *

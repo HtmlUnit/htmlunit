@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 public class HtmlOrderedListTest extends SimpleWebTestCase {
 
@@ -68,10 +69,15 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlElement element = page.getHtmlElementById("myNode");
 
-        // assertEquals("<ol id=\"myNode\"></ol>", element.asXml());
+        assertEquals("<ol id=\"myNode\"></ol>", element.asXml());
+
         assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
-                + "<html><head/><body>\r\n    <ol id=\"myNode\"></ol>\n"
+                + "<html>\r\n"
+                + "  <head/>\r\n"
+                + "  <body>\r\n"
+                + "    <ol id=\"myNode\"></ol>\n"
                 + "foo\n"
-                + "</body></html>", page.asXml());
+                + "</body>\r\n"
+                + "</html>", page.asXml());
     }
 }

@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import java.io.PrintWriter;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -69,5 +70,14 @@ public class HtmlHead extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.NONE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
+        // enforce always a line break before
+        return super.printXml(indent, true, printWriter);
     }
 }

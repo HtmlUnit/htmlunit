@@ -75,6 +75,7 @@ import org.xml.sax.SAXException;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Sven Strickroth
+ * @author Ronny Shapiro
  */
 public class DomElement extends DomNamespaceNode implements Element {
 
@@ -349,10 +350,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      * {@inheritDoc}
      */
     @Override
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         final boolean hasChildren = getFirstChild() != null;
 
-        if (tagBefore) {
+        if (indentBefore) {
             printWriter.print("\r\n");
             printWriter.print(indent);
         }
@@ -362,8 +363,8 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         if (hasChildren) {
             printWriter.print(">");
-            final boolean tag = printChildrenAsXml(indent, false, printWriter);
-            if (tag) {
+            final boolean indBefore = printChildrenAsXml(indent, false, printWriter);
+            if (indBefore) {
                 printWriter.print("\r\n");
                 printWriter.print(indent);
             }

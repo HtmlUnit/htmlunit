@@ -33,6 +33,7 @@ import org.w3c.dom.Text;
  * @author Sudhan Moghe
  * @author Philip Graf
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 public class DomText extends DomCharacterData implements Text {
 
@@ -131,20 +132,20 @@ public class DomText extends DomCharacterData implements Text {
      * {@inheritDoc}
      */
     @Override
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         String data = getData();
-        boolean tag = tagBefore;
+        boolean indBefore = indentBefore;
         if (StringUtils.isNotBlank(data)) {
             if (!(getParentNode() instanceof HtmlStyle) || !data.startsWith("<!--") || !data.endsWith("-->")) {
                 data = StringUtils.escapeXmlChars(data);
             }
             printWriter.print(data);
-            tag = false;
+            indBefore = false;
         }
         else if (data != null && !data.isEmpty()) {
-            tag = true;
+            indBefore = true;
         }
-        return printChildrenAsXml(indent, tag, printWriter);
+        return printChildrenAsXml(indent, indBefore, printWriter);
     }
 
     /**

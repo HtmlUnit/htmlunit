@@ -36,6 +36,7 @@ import org.junit.jupiter.api.Test;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 public class HtmlScriptTest extends SimpleWebTestCase {
 
@@ -110,13 +111,17 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         // asXml() should be reusable
         final String xml = page.asXml();
         assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
-                + "<html><head><title>foo</title></head><body>\r\n    <script id=\"script1\">\r\n"
+                + "<html>\r\n"
+                + "  <head><title>foo</title></head>\r\n"
+                + "  <body>\r\n"
+                + "    <script id=\"script1\">\r\n"
                 + "//<![CDATA[\r\n"
                 + "\n"
                 + "  alert('hello');\n"
                 + "\r\n"
                 + "//]]>\r\n"
-                + "    </script></body></html>",
+                + "    </script></body>\r\n"
+                + "</html>",
                 xml);
 
         loadPageWithAlerts(xml);

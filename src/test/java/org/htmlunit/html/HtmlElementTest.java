@@ -897,6 +897,26 @@ public class HtmlElementTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml_span() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<p><span>a</span><span>b</span></p>"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
+                + "<html>\r\n"
+                + "  <head/>\r\n"
+                + "  <body>\r\n"
+                + "    <p><span>a</span><span>b</span></p></body>\r\n"
+                + "</html>", page.asXml());
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

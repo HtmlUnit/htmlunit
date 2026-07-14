@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 public class HtmlNoScript2Test extends SimpleWebTestCase {
 

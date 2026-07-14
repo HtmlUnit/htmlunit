@@ -801,7 +801,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 tag = true;
             }
             printXml("", tag, printWriter);
-            return stringWriter.toString();
+            return stringWriter.toString().trim();
         }
     }
 
@@ -809,12 +809,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Recursively writes the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
-     * @param tagBefore true if the last thing printed was a tag
+     * @param indentBefore if true start a new line before outputting
      * @param printWriter writer where child nodes are written
      * @return true if the last thing printed was a tag
      */
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
-        if (tagBefore) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
+        if (indentBefore) {
             printWriter.print("\r\n");
             printWriter.print(indent);
         }

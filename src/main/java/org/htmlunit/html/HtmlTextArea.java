@@ -423,7 +423,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
 

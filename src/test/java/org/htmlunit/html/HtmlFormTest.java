@@ -45,6 +45,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Philip Graf
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 public class HtmlFormTest extends SimpleWebTestCase {
 
@@ -1199,8 +1200,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final String xml =
                 "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
-                        + "<html><head/><body>\r\n    <form></form>\r\n    <div>test</div>\r\n"
-                        + "  </body></html>";
+                        + "<html>\r\n"
+                        + "  <head/>\r\n"
+                        + "  <body>\r\n"
+                        + "    <form></form>\r\n"
+                        + "    <div>test</div>\r\n"
+                        + "  </body>\r\n"
+                        + "</html>";
 
         final HtmlPage page = loadPage(html);
         assertEquals(xml, page.asXml());

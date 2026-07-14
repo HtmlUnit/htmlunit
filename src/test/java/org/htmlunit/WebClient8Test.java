@@ -60,8 +60,10 @@ public class WebClient8Test extends SimpleWebTestCase {
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
             final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
             assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
-                    + "<html><head><title>foo</title></head>"
-                    + "<body><div>Hello <b>HtmlUnit</b></div></body></html>",
+                    + "<html>\r\n"
+                    + "  <head><title>foo</title></head>\r\n"
+                    + "  <body><div>Hello <b>HtmlUnit</b></div></body>\r\n"
+                    + "</html>",
                     page.asXml());
         }
     }
@@ -78,8 +80,10 @@ public class WebClient8Test extends SimpleWebTestCase {
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
             final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
             assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
-                    + "<html><head><title>foo</title></head>"
-                    + "<body><div><span>a</span><span>b</span></div></body></html>",
+                    + "<html>\r\n"
+                    + "  <head><title>foo</title></head>\r\n"
+                    + "  <body><div><span>a</span><span>b</span></div></body>\r\n"
+                    + "</html>",
                     page.asXml());
         }
     }
@@ -96,8 +100,10 @@ public class WebClient8Test extends SimpleWebTestCase {
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
             final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
             assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
-                    + "<html><head><title>foo</title></head>"
-                    + "<body><div><span>a</span>\r\n      <span>b</span></div></body></html>",
+                    + "<html>\r\n"
+                    + "  <head><title>foo</title></head>\r\n"
+                    + "  <body><div><span>a</span>\r\n      <span>b</span></div></body>\r\n"
+                    + "</html>",
                     page.asXml());
         }
     }

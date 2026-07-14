@@ -75,10 +75,10 @@ public class HtmlTemplate extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         final boolean hasChildren = domDocumentFragment_.getFirstChild() != null;
 
-        if (tagBefore) {
+        if (indentBefore) {
             printWriter.print("\r\n");
             printWriter.print(indent);
         }
@@ -88,7 +88,7 @@ public class HtmlTemplate extends HtmlElement {
 
         if (hasChildren) {
             printWriter.print(">");
-            final boolean tag = domDocumentFragment_.printChildrenAsXml(indent, tagBefore, printWriter);
+            final boolean tag = domDocumentFragment_.printChildrenAsXml(indent, indentBefore, printWriter);
             if (tag) {
                 printWriter.print("\r\n");
                 printWriter.print(indent);
