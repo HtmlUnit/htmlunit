@@ -9,13 +9,13 @@
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Chrome/Edge 150, Bugfixes">
             <action type="update" dev="Lai Quang Duong">
-                Make XMLHttpRequest check blob url's origin properly instead of 
+                Make XMLHttpRequest check blob url's origin properly instead of
                 throwing No permitted "Access-Control-Allow-Origin" header everytime
             </action>
             <action type="update" dev="Lai Quang Duong">
-                Reworked URL.createObjectURL() / URL.revokeObjectURL() to back blob URLs with 
+                Reworked URL.createObjectURL() / URL.revokeObjectURL() to back blob URLs with
                 a user-agent-wide blob URL store on WebClient, replacing the previous per-Document store.
-                This matches W3C specification where a blob: URL minted in one document is 
+                This matches W3C specification where a blob: URL minted in one document is
                 resolvable from any same-client browsing context.
             </action>
             <action type="fix" dev="Ronny Shapiro">
