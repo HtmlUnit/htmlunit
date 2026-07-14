@@ -67,6 +67,8 @@ import org.w3c.dom.TypeInfo;
 import org.xml.sax.SAXException;
 
 /**
+ * A DOM element in an HTML or XML document.
+ *
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Tom Anderson

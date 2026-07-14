@@ -19,9 +19,9 @@ import java.util.regex.Pattern;
 
 /**
  * Performs subnet calculations given a network address and a subnet mask.
- * Inspired by org.apache.commons.net.util.SubnetUtils.
+ * Inspired by {@code org.apache.commons.net.util.SubnetUtils}.
  *
- * @see "http://www.faqs.org/rfcs/rfc1519.html"
+ * @see "https://www.faqs.org/rfcs/rfc1519.html"
  *
  * @author Ronald Brill
  */
@@ -38,11 +38,11 @@ public class SubnetUtils {
     private final int broadcast_;
 
     /**
-     * Constructs an instance from a dotted decimal address and a dotted decimal mask.
+     * Constructs an instance from a dotted-decimal address and a dotted-decimal mask.
      *
-     * @param address An IP address, e.g. "192.168.0.1"
-     * @param mask    A dotted decimal netmask e.g. "255.255.0.0"
-     * @throws IllegalArgumentException if the address or mask is invalid, i.e. does not match n.n.n.n where n=1-3 decimal digits and the mask is not all zeros
+     * @param address an IP address, e.g. {@code "192.168.0.1"}
+     * @param mask a dotted-decimal netmask, e.g. {@code "255.255.0.0"}
+     * @throws IllegalArgumentException if the address or mask is invalid
      */
     public SubnetUtils(final String address, final String mask) {
         address_ = toInteger(address);
@@ -57,7 +57,7 @@ public class SubnetUtils {
     }
 
     /*
-     * Extracts the components of a dotted decimal address and pack into an integer using a regex match
+     * Extracts the components of a dotted decimal address and packs them into an integer using a regex match.
      */
     private static int matchAddress(final Matcher matcher) {
         int addr = 0;
@@ -69,7 +69,7 @@ public class SubnetUtils {
     }
 
     /*
-     * Checks integer boundaries. Checks if a value x is in the range [begin,end]. Returns x if it is in range, throws an exception otherwise.
+     * Checks that a value is within [begin, end], returning it if valid or throwing otherwise.
      */
     private static int rangeCheck(final int value, final int begin, final int end) {
         // (begin,end]
@@ -80,7 +80,7 @@ public class SubnetUtils {
     }
 
     /*
-     * Converts a dotted decimal format address to a packed integer format
+     * Converts a dotted-decimal address string to a packed integer.
      */
     private static int toInteger(final String address) {
         final Matcher matcher = ADDRESS_PATTERN.matcher(address);
@@ -108,11 +108,11 @@ public class SubnetUtils {
     }
 
     /**
-     * Tests if the parameter <code>address</code> is in the range of usable endpoint addresses for this subnet.
-     * This excludes the network and broadcast addresses by default.
+     * Returns whether the given address integer is in the usable endpoint range for this subnet.
+     * The network and broadcast addresses are excluded.
      *
-     * @param address the address to check
-     * @return true if it is in range
+     * @param address the address to check as an integer
+     * @return {@code true} if the address is in the usable range
      */
     private boolean isInRange(final int address) {
         if (address == 0) {
@@ -125,11 +125,11 @@ public class SubnetUtils {
     }
 
     /**
-     * Tests if the parameter <code>address</code> is in the range of usable endpoint addresses for this subnet.
-     * This excludes the network and broadcast addresses.
+     * Returns whether the given dotted-decimal IPv4 address is in the usable endpoint range for this subnet.
+     * The network and broadcast addresses are excluded.
      *
-     * @param address A dot-delimited IPv4 address, e.g. "192.168.0.1"
-     * @return true if in range, false otherwise
+     * @param address a dot-delimited IPv4 address, e.g. {@code "192.168.0.1"}
+     * @return {@code true} if the address is in the usable range, {@code false} otherwise
      */
     public boolean isInRange(final String address) {
         return isInRange(toInteger(address));

@@ -37,8 +37,8 @@ import org.htmlunit.javascript.host.dom.Node;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
- * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
- * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap">MDN Documentation</a>
  */
 @JsxClass
 public class NamedNodeMap extends HtmlUnitScriptable {
@@ -46,7 +46,7 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     private final org.w3c.dom.NamedNodeMap attributes_;
 
     /**
-     * We need default constructors to build the prototype instance.
+     * Default constructor for prototype instantiation.
      */
     public NamedNodeMap() {
         super();
@@ -54,7 +54,7 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -109,11 +109,11 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Gets the specified attribute but does not handle the synthetic class attribute for IE.
-     * @see #getNamedItem(String)
+     * Gets the specified attribute without handling the synthetic class attribute.
      *
-     * @param name attribute name
-     * @return the attribute node, {@code null} if the attribute is not defined
+     * @param name the attribute name
+     * @return the attribute node, or {@code null} if not found
+     * @see #getNamedItem(String)
      */
     public HtmlUnitScriptable getNamedItemWithoutSytheticClassAttr(final String name) {
         if (attributes_ != null) {
@@ -127,9 +127,10 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the specified attribute.
-     * @param name attribute name
-     * @return the attribute node, {@code null} if the attribute is not defined
+     * Returns the attribute node with the specified name.
+     *
+     * @param name the attribute name
+     * @return the attribute node, or {@code null} if not defined
      */
     @JsxFunction
     public HtmlUnitScriptable getNamedItem(final String name) {
@@ -137,10 +138,11 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the specified attribute.
-     * @param namespaceURI the namespace URI of the node to retrieve.
-     * @param localName the local name of the node to retrieve.
-     * @return the attribute node, {@code null} if the attribute is not defined
+     * Returns the attribute node with the given namespace URI and local name.
+     *
+     * @param namespaceURI the namespace URI of the node to retrieve
+     * @param localName the local name of the node to retrieve
+     * @return the attribute node, or {@code null} if not found
      */
     @JsxFunction
     public Node getNamedItemNS(final String namespaceURI, final String localName) {
@@ -155,8 +157,9 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the specified attribute.
-     * @param node the attribute
+     * Sets the specified attribute node.
+     *
+     * @param node the attribute node to set
      */
     @JsxFunction
     public void setNamedItem(final Node node) {
@@ -164,8 +167,9 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the specified attribute.
-     * @param node the attribute
+     * Sets the specified attribute node using its namespace URI and local name.
+     *
+     * @param node the attribute node to set
      */
     @JsxFunction
     public void setNamedItemNS(final Node node) {
@@ -173,8 +177,9 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * Removes the specified attribute.
-     * @param name the name of the item to remove
+     * Removes the attribute with the specified name.
+     *
+     * @param name the name of the attribute to remove
      */
     @JsxFunction
     public void removeNamedItem(final String name) {
@@ -182,10 +187,11 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * Removes the specified attribute.
-     * @param namespaceURI the namespace URI of the node to retrieve.
-     * @param localName the local name of the node to retrieve.
-     * @return the attribute node, {@code null} if the attribute is not defined
+     * Removes the attribute with the given namespace URI and local name.
+     *
+     * @param namespaceURI the namespace URI of the attribute to remove
+     * @param localName the local name of the attribute to remove
+     * @return the removed attribute node, or {@code null} if not found
      */
     @JsxFunction
     public Attr removeNamedItemNS(final String namespaceURI, final String localName) {
@@ -193,9 +199,10 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the item at the specified index.
+     * Returns the attribute node at the specified index.
+     *
      * @param index the index
-     * @return the item at the specified index
+     * @return the attribute node at the given index, or {@code null} if out of range
      */
     @JsxFunction
     public HtmlUnitScriptable item(final int index) {
@@ -207,8 +214,9 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the number of attributes in this named node map.
-     * @return the number of attributes in this named node map
+     * Returns the number of attributes in this map.
+     *
+     * @return the number of attributes
      */
     @JsxGetter
     public int getLength() {
@@ -224,7 +232,9 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the Iterator symbol
+     * Returns an iterator over the values in this map.
+     *
+     * @return the iterator
      */
     @JsxSymbol
     public Scriptable iterator() {

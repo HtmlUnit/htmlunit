@@ -171,6 +171,8 @@ public final class WebWindowEvent extends EventObject {
     }
 
     /**
+     * Returns the event type.
+     *
      * @return the event type
      */
     public int getEventType() {

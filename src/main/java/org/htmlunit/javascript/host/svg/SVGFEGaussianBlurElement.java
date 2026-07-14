@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeGaussianBlur;
 
 /**
- * A JavaScript object for {@code SVGFEGaussianBlurElement}.
+ * JavaScript host object for {@code SVGFEGaussianBlurElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFEGaussianBlurElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeGaussianBlur.class)
 public class SVGFEGaussianBlurElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

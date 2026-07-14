@@ -61,7 +61,10 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
     }
 
     /**
-     * @return the min as double
+     * Returns the numeric value of the {@code min} attribute.
+     *
+     * @return the value of the {@code min} attribute as a {@code double}, or
+     *         {@code 0} if the attribute is not defined or cannot be parsed
      */
     public double getMinNumeric() {
         final String min = getAttributeDirect("min");
@@ -77,7 +80,10 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
     }
 
     /**
-     * @return the max as double
+     * Returns the numeric value of the {@code max} attribute.
+     *
+     * @return the value of the {@code max} attribute as a {@code double}, or
+     *         {@code 100} if the attribute is not defined or cannot be parsed
      */
     public double getMaxNumeric() {
         final String max = getAttributeDirect("max");
@@ -93,7 +99,10 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
     }
 
     /**
-     * @return the max as double
+     * Returns the numeric value of the {@code step} attribute.
+     *
+     * @return the value of the {@code step} attribute as a {@code double}, or
+     *         {@code 1} if the attribute is not defined or cannot be parsed
      */
     public double getStepNumeric() {
         final String step = getAttributeDirect("step");

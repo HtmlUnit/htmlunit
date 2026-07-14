@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code SVGUnitTypes}.
+ * JavaScript host object for {@code SVGUnitTypes}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGUnitTypes">MDN Documentation</a>
  */
 @JsxClass
 public class SVGUnitTypes extends HtmlUnitScriptable {
@@ -39,7 +41,7 @@ public class SVGUnitTypes extends HtmlUnitScriptable {
     public static final int SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {

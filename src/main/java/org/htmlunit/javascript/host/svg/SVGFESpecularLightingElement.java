@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeSpecularLighting;
 
 /**
- * A JavaScript object for {@code SVGFESpecularLightingElement}.
+ * JavaScript host object for {@code SVGFESpecularLightingElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFESpecularLightingElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeSpecularLighting.class)
 public class SVGFESpecularLightingElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

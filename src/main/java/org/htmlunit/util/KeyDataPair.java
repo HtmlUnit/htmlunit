@@ -47,7 +47,7 @@ public class KeyDataPair extends NameValuePair {
      * @param file the file
      * @param fileName the name of the file
      * @param mimeType the MIME type
-     * @param charset the charset encoding
+     * @param charset the charset encoding name
      */
     public KeyDataPair(final String key, final File file, final String fileName,
             final String mimeType, final String charset) {
@@ -75,14 +75,15 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * Private constructor setting plain properties.
+     * Private constructor setting all fields directly.
      *
-     * @param name will be passed as name to the super constructor
-     * @param value will be passed as value to the super constructor
-     * @param file the file, may be null
-     * @param fileName the filename, may be null
-     * @param mimeType the mimetype, may be null
-     * @param charset the charset, may be null
+     * @param name passed as the name to the super constructor
+     * @param value passed as the value to the super constructor
+     * @param file the file, may be {@code null}
+     * @param fileName the filename, may be {@code null}
+     * @param mimeType the MIME type, may be {@code null}
+     * @param charset the charset, may be {@code null}
+     * @param data the in-memory file data, may be {@code null}
      */
     private KeyDataPair(final String name, final String value, final File file,
               final String fileName, final String mimeType, final Charset charset,
@@ -123,21 +124,26 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * @return the {@link File} object if the file exists, else {@code null}
+     * Returns the {@link File} object if the file exists, otherwise {@code null}.
+     *
+     * @return the file, or {@code null} if it does not exist
      */
     public File getFile() {
         return fileObject_;
     }
 
     /**
-     * @return the fileName
+     * Returns the file name.
+     *
+     * @return the file name
      */
     public String getFileName() {
         return fileName_;
     }
 
     /**
-     * Gets the charset encoding for this file upload.
+     * Returns the charset encoding for this file upload.
+     *
      * @return the charset
      */
     public Charset getCharset() {
@@ -145,7 +151,8 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * Gets the MIME type for this file upload.
+     * Returns the MIME type for this file upload.
+     *
      * @return the MIME type
      */
     public String getMimeType() {
@@ -153,16 +160,20 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * Gets in-memory data assigned to file value.
-     * @return {@code null} if the file content should be used.
+     * Returns the in-memory data assigned to this file value,
+     * or {@code null} if the actual file content should be used.
+     *
+     * @return the in-memory data, or {@code null}
      */
     public byte[] getData() {
         return data_;
     }
 
     /**
-     * Sets file value data. If nothing is set, the file content will be used.
-     * @param data byte array with file data.
+     * Sets the in-memory data for this file value.
+     * If not set, the file content will be used.
+     *
+     * @param data the byte array with file data
      */
     public void setData(final byte[] data) {
         data_ = data;
@@ -184,9 +195,8 @@ public class KeyDataPair extends NameValuePair {
     /**
      * {@inheritDoc}
      *
-     * Specialization of inherited method which will copy all fields
-     * and make sure that the value in the base class is not null, by calling
-     * the constructor with the current value
+     * Specialization of the inherited method that copies all fields
+     * and ensures the value in the base class is not {@code null}.
      */
     @Override
     public KeyDataPair normalized() {

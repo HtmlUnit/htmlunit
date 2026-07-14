@@ -30,7 +30,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.util.StringUtils;
 
 /**
- * A JavaScript object for the client's browsing history.
+ * JavaScript host object for the client's browsing history.
  *
  * @author Mike Bowler
  * @author Chris Erskine
@@ -39,6 +39,8 @@ import org.htmlunit.util.StringUtils;
  * @author Ronald Brill
  * @author Adam Afeltowicz
  * @author Lai Quang Duong
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/History">MDN Documentation</a>
  */
 @JsxClass
 public class History extends HtmlUnitScriptable {
@@ -48,7 +50,7 @@ public class History extends HtmlUnitScriptable {
     private String scrollRestoration_ = SCROLL_RESTAURATION_AUTO;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -57,7 +59,8 @@ public class History extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code length} property.
-     * @return the {@code length} property
+     *
+     * @return the number of entries in the session history
      */
     @JsxGetter
     public int getLength() {
@@ -67,7 +70,8 @@ public class History extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code state} property.
-     * @return the {@code state} property
+     *
+     * @return the current history state object
      */
     @JsxGetter
     public Object getState() {
@@ -76,7 +80,7 @@ public class History extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript function "back".
+     * Navigates one step back in the session history.
      */
     @JsxFunction
     public void back() {
@@ -89,7 +93,7 @@ public class History extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript function "forward".
+     * Navigates one step forward in the session history.
      */
     @JsxFunction
     public void forward() {
@@ -102,8 +106,9 @@ public class History extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript function "go".
-     * @param relativeIndex the relative index
+     * Navigates by the given number of steps relative to the current position in the session history.
+     *
+     * @param relativeIndex the relative number of steps to navigate (positive or negative)
      */
     @JsxFunction
     public void go(final int relativeIndex) {
@@ -116,10 +121,11 @@ public class History extends HtmlUnitScriptable {
     }
 
     /**
-     * Replaces a state.
-     * @param object the state object
-     * @param title the title
-     * @param url an optional URL
+     * Replaces the current history entry with the given state.
+     *
+     * @param object the new state object
+     * @param title the title (currently ignored by most browsers)
+     * @param url an optional new URL for the history entry
      */
     @JsxFunction
     public void replaceState(final Object object, final String title, final Object url) {
@@ -133,10 +139,11 @@ public class History extends HtmlUnitScriptable {
     }
 
     /**
-     * Pushes a state.
-     * @param object the state object
-     * @param title the title
-     * @param url an optional URL
+     * Pushes a new state onto the session history stack.
+     *
+     * @param object the new state object
+     * @param title the title (currently ignored by most browsers)
+     * @param url an optional new URL for the new history entry
      */
     @JsxFunction
     public void pushState(final Object object, final String title, final Object url) {
@@ -163,6 +170,7 @@ public class History extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code scrollRestoration} property.
+     *
      * @return the {@code scrollRestoration} property
      */
     @JsxGetter
@@ -171,7 +179,9 @@ public class History extends HtmlUnitScriptable {
     }
 
     /**
-     * @param scrollRestoration the new value
+     * Sets the {@code scrollRestoration} property.
+     *
+     * @param scrollRestoration the new value; either {@code "auto"} or {@code "manual"}
      */
     @JsxSetter
     public void setScrollRestoration(final String scrollRestoration) {

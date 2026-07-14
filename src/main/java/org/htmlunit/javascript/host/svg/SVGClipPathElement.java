@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgClipPath;
 
 /**
- * A JavaScript object for {@code SVGClipPathElement}.
+ * JavaScript host object for {@code SVGClipPathElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGClipPathElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgClipPath.class)
 public class SVGClipPathElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

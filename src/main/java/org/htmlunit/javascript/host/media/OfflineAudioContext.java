@@ -25,6 +25,8 @@ import org.htmlunit.javascript.configuration.JsxFunction;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/OfflineAudioContext">MDN Documentation</a>
  */
 @JsxClass
 public class OfflineAudioContext extends BaseAudioContext {
@@ -41,8 +43,10 @@ public class OfflineAudioContext extends BaseAudioContext {
     }
 
     /**
+     * Starts rendering the audio graph, taking into account the current connections and the current values of
+     * the various nodes' parameters.
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/OfflineAudioContext/startRendering">
-     *     MDN OfflineAudioContext#startRendering</a>
+     *     MDN Documentation</a>
      */
     @JsxFunction
     public void startRendering() {

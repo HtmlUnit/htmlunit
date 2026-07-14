@@ -66,108 +66,144 @@ import org.htmlunit.javascript.host.html.HTMLHtmlElement;
 public class Node extends EventTarget {
 
     /**
+     * The node is an element.
+     *
      * @see org.w3c.dom.Node#ELEMENT_NODE
      */
     @JsxConstant
     public static final int ELEMENT_NODE = org.w3c.dom.Node.ELEMENT_NODE;
 
     /**
+     * The node is an attribute.
+     *
      * @see org.w3c.dom.Node#ATTRIBUTE_NODE
      */
     @JsxConstant
     public static final int ATTRIBUTE_NODE = org.w3c.dom.Node.ATTRIBUTE_NODE;
 
     /**
+     * The node is a text node.
+     *
      * @see org.w3c.dom.Node#TEXT_NODE
      */
     @JsxConstant
     public static final int TEXT_NODE = org.w3c.dom.Node.TEXT_NODE;
 
     /**
+     * The node is a CDATA section.
+     *
      * @see org.w3c.dom.Node#CDATA_SECTION_NODE
      */
     @JsxConstant
     public static final int CDATA_SECTION_NODE = org.w3c.dom.Node.CDATA_SECTION_NODE;
 
     /**
+     * The node is an entity reference.
+     *
      * @see org.w3c.dom.Node#ENTITY_REFERENCE_NODE
      */
     @JsxConstant
     public static final int ENTITY_REFERENCE_NODE = org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
 
     /**
+     * The node is an entity.
+     *
      * @see org.w3c.dom.Node#ENTITY_NODE
      */
     @JsxConstant
     public static final int ENTITY_NODE = org.w3c.dom.Node.ENTITY_NODE;
 
     /**
+     * The node is a processing instruction.
+     *
      * @see org.w3c.dom.Node#PROCESSING_INSTRUCTION_NODE
      */
     @JsxConstant
     public static final int PROCESSING_INSTRUCTION_NODE = org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
 
     /**
+     * The node is a comment.
+     *
      * @see org.w3c.dom.Node#COMMENT_NODE
      */
     @JsxConstant
     public static final int COMMENT_NODE = org.w3c.dom.Node.COMMENT_NODE;
 
     /**
+     * The node is a document.
+     *
      * @see org.w3c.dom.Node#DOCUMENT_NODE
      */
     @JsxConstant
     public static final int DOCUMENT_NODE = org.w3c.dom.Node.DOCUMENT_NODE;
 
     /**
+     * The node is a document type.
+     *
      * @see org.w3c.dom.Node#DOCUMENT_TYPE_NODE
      */
     @JsxConstant
     public static final int DOCUMENT_TYPE_NODE = org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
 
     /**
+     * The node is a document fragment.
+     *
      * @see org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE
      */
     @JsxConstant
     public static final int DOCUMENT_FRAGMENT_NODE = org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
 
     /**
+     * The node is a notation.
+     *
      * @see org.w3c.dom.Node#NOTATION_NODE
      */
     @JsxConstant
     public static final int NOTATION_NODE = org.w3c.dom.Node.NOTATION_NODE;
 
     /**
+     * The nodes are disconnected.
+     *
      * @see org.w3c.dom.Node#DOCUMENT_POSITION_DISCONNECTED
      */
     @JsxConstant
     public static final int DOCUMENT_POSITION_DISCONNECTED = org.w3c.dom.Node.DOCUMENT_POSITION_DISCONNECTED;
 
     /**
+     * The reference node precedes the other node.
+     *
      * @see org.w3c.dom.Node#DOCUMENT_POSITION_PRECEDING
      */
     @JsxConstant
     public static final int DOCUMENT_POSITION_PRECEDING = org.w3c.dom.Node.DOCUMENT_POSITION_PRECEDING;
 
     /**
+     * The reference node follows the other node.
+     *
      * @see org.w3c.dom.Node#DOCUMENT_POSITION_FOLLOWING
      */
     @JsxConstant
     public static final int DOCUMENT_POSITION_FOLLOWING = org.w3c.dom.Node.DOCUMENT_POSITION_FOLLOWING;
 
     /**
+     * The reference node contains the other node.
+     *
      * @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINS
      */
     @JsxConstant
     public static final int DOCUMENT_POSITION_CONTAINS = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINS;
 
     /**
+     * The reference node is contained by the other node.
+     *
      * @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINED_BY
      */
     @JsxConstant
     public static final int DOCUMENT_POSITION_CONTAINED_BY = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINED_BY;
 
     /**
+     * The document position is implementation-specific.
+     *
      * @see org.w3c.dom.Node#DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
      */
     @JsxConstant
@@ -523,11 +559,11 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Check if 2 nodes are equals.
-     * For detail specifications
-     * @see <a href="https://dom.spec.whatwg.org/#concept-node-equals">concept-node-equals</a>
+     * Determines whether this node is structurally equal to the specified node.
+     *
      * @param other the node to compare with
-     * @return true or false
+     * @return {@code true} if the two nodes are structurally equal
+     * @see <a href="https://dom.spec.whatwg.org/#concept-node-equals">WHATWG DOM: concept-node-equals</a>
      */
     @JsxFunction
     public boolean isEqualNode(final Node other) {
@@ -642,15 +678,10 @@ public class Node extends EventTarget {
     }
 
     /**
-     * This method provides a way to determine whether two Node references returned by
-     * the implementation reference the same object.
-     * When two Node references are references to the same object, even if through a proxy,
-     * the references may be used completely interchangeably, such that all attributes
-     * have the same values and calling the same DOM method on either reference always has exactly the same effect.
+     * Determines whether this node and the specified node are the same object.
      *
      * @param other the node to test against
-     *
-     * @return whether this node is the same node as the given one
+     * @return {@code true} if this node is the same node as the given one
      */
     @JsxFunction
     public boolean isSameNode(final Object other) {
@@ -658,8 +689,9 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Returns whether this node has any children.
-     * @return boolean true if this node has any children, false otherwise
+     * Returns whether this node has any child nodes.
+     *
+     * @return {@code true} if this node has any child nodes
      */
     @JsxFunction
     public boolean hasChildNodes() {
@@ -667,10 +699,11 @@ public class Node extends EventTarget {
     }
 
     /**
-     * @param namespace string containing the namespace to look the prefix up
-     * @return a string containing the prefix for a given namespace URI,
-     *         if present, and null if not. When multiple prefixes are possible,
-     *         the first prefix is returned.
+     * Returns the namespace prefix for the specified namespace URI.
+     *
+     * @param namespace the namespace URI
+     * @return the corresponding namespace prefix, or {@code null} if none exists;
+     *         if multiple prefixes are possible, the first one is returned
      */
     @JsxFunction
     public String lookupPrefix(final String namespace) {
@@ -788,8 +821,9 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Returns the owner document.
-     * @return the document
+     * Returns the root node of this node's tree.
+     *
+     * @return the root node
      */
     @JsxFunction
     public Node getRootNode() {
@@ -868,9 +902,10 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Checks whether the given element is contained within this object.
-     * @param element element object that specifies the element to check
-     * @return true if the element is contained within this object
+     * Returns whether the specified node is contained within this node.
+     *
+     * @param element the node to check
+     * @return {@code true} if the specified node is contained within this node
      */
     @JsxFunction
     public boolean contains(final Object element) {
@@ -900,8 +935,9 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Returns true when the current element has any attributes or not.
-     * @return true if an attribute is specified on this element
+     * Returns whether this node has any attributes.
+     *
+     * @return {@code true} if this node has one or more attributes
      */
     public boolean hasAttributes() {
         return getDomNodeOrDie().hasAttributes();
@@ -1003,9 +1039,10 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the children of the current node.
+     * Returns the child elements of this node.
+     *
+     * @return a live collection of this node's child elements
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
-     * @return the child at the given position
      */
     protected HTMLCollection getChildren() {
         final DomNode node = getDomNodeOrDie();

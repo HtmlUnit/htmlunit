@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeOffset;
 
 /**
- * A JavaScript object for {@code SVGFEOffsetElement}.
+ * JavaScript host object for {@code SVGFEOffsetElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFEOffsetElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeOffset.class)
 public class SVGFEOffsetElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

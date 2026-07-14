@@ -121,6 +121,8 @@ public class History implements Serializable {
         }
 
         /**
+         * Returns the state object.
+         *
          * @return the state object
          */
         Object getState() {

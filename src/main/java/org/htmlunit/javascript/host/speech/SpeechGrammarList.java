@@ -23,16 +23,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 
 /**
- * A JavaScript object for {@code SpeechGrammarList}.
+ * JavaScript host object for {@code SpeechGrammarList}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechGrammarList">MDN Documentation</a>
  */
 @JsxClass({CHROME, EDGE})
 public class SpeechGrammarList extends HtmlUnitScriptable {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     @JsxConstructorAlias(alias = "webkitSpeechGrammarList")

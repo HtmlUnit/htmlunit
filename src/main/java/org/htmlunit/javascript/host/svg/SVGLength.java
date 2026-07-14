@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code SVGLength}.
+ * JavaScript host object for {@code SVGLength}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGLength">MDN Documentation</a>
  */
 @JsxClass
 public class SVGLength extends HtmlUnitScriptable {
@@ -63,7 +65,7 @@ public class SVGLength extends HtmlUnitScriptable {
     public static final int SVG_LENGTHTYPE_PC = 10;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {

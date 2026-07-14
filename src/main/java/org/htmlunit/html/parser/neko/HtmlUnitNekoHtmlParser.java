@@ -296,6 +296,7 @@ class HtmlUnitNekoHTMLErrorHandler implements XMLErrorHandler {
     }
 
     /**
+     * {@inheritDoc}
      * @see DefaultErrorHandler#error(String,String,XMLParseException)
      */
     @Override
@@ -310,6 +311,7 @@ class HtmlUnitNekoHTMLErrorHandler implements XMLErrorHandler {
     }
 
     /**
+     * {@inheritDoc}
      * @see DefaultErrorHandler#warning(String,String,XMLParseException)
      */
     @Override

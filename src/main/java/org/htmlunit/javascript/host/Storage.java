@@ -30,12 +30,14 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.w3c.dom.DOMException;
 
 /**
- * The JavaScript object that represents a Storage.
+ * JavaScript host object for {@code Storage}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Kanoko Yamamoto
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage">MDN Documentation</a>
  */
 @JsxClass
 public class Storage extends HtmlUnitScriptable {
@@ -51,7 +53,7 @@ public class Storage extends HtmlUnitScriptable {
     private long storeSize_;
 
     /**
-     * Public default constructor only for the prototype.
+     * Default constructor for prototype instantiation only.
      */
     public Storage() {
         super();
@@ -59,7 +61,7 @@ public class Storage extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -67,9 +69,10 @@ public class Storage extends HtmlUnitScriptable {
     }
 
     /**
-     * Constructor.
+     * Creates a new {@code Storage} instance backed by the given store.
+     *
      * @param window the parent scope
-     * @param store the storage itself
+     * @param store the backing map for this storage
      */
     public Storage(final Window window, final Map<String, String> store) {
         super();
@@ -109,8 +112,9 @@ public class Storage extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the length property.
-     * @return the length property
+     * Returns the number of items in the storage.
+     *
+     * @return the number of items
      */
     @JsxGetter
     public int getLength() {
@@ -118,8 +122,9 @@ public class Storage extends HtmlUnitScriptable {
     }
 
     /**
-     * Removes the specified key.
-     * @param key the item key
+     * Removes the item with the specified key.
+     *
+     * @param key the key of the item to remove
      */
     @JsxFunction
     public void removeItem(final String key) {
@@ -130,9 +135,10 @@ public class Storage extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the key of the specified index.
-     * @param index the index
-     * @return the key
+     * Returns the key at the specified index.
+     *
+     * @param index the index of the key to retrieve
+     * @return the key at the given index, or {@code null} if out of range
      */
     @JsxFunction
     public String key(final int index) {
@@ -149,9 +155,10 @@ public class Storage extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the value of the specified key.
-     * @param key the item key
-     * @return the value
+     * Returns the value associated with the given key.
+     *
+     * @param key the key of the item to retrieve
+     * @return the value for the given key, or {@code null} if not found
      */
     @JsxFunction
     public Object getItem(final String key) {
@@ -159,9 +166,10 @@ public class Storage extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the item value.
-     * @param key the item key
-     * @param data the value
+     * Sets the value for the given key.
+     *
+     * @param key the key of the item to set
+     * @param data the new value
      */
     @JsxFunction
     public void setItem(final String key, final String data) {
@@ -177,7 +185,7 @@ public class Storage extends HtmlUnitScriptable {
     }
 
     /**
-     * Clears all items.
+     * Removes all items from this storage.
      */
     @JsxFunction
     public void clear() {

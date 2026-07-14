@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code SVGPreserveAspectRatio}.
+ * JavaScript host object for {@code SVGPreserveAspectRatio}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGPreserveAspectRatio">MDN Documentation</a>
  */
 @JsxClass
 public class SVGPreserveAspectRatio extends HtmlUnitScriptable {
@@ -72,7 +74,7 @@ public class SVGPreserveAspectRatio extends HtmlUnitScriptable {
     public static final int SVG_PRESERVEASPECTRATIO_XMAXYMAX = 10;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {

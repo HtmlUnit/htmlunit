@@ -20,16 +20,18 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.svg.SvgPath;
 
 /**
- * A JavaScript object for {@code SVGPathElement}.
+ * JavaScript host object for {@code SVGPathElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGPathElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgPath.class)
 public class SVGPathElement extends SVGGeometryElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
@@ -38,7 +40,9 @@ public class SVGPathElement extends SVGGeometryElement {
     }
 
     /**
-     * @return the length of the path
+     * Returns the total length of the path.
+     *
+     * @return the total length of the path
      */
     @JsxFunction
     public double getTotalLength() {

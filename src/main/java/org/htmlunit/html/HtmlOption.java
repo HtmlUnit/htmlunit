@@ -168,7 +168,11 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * @return {@code true} if the disabled attribute is set for this element
+     * Returns whether this element is disabled.
+     *
+     * @return {@code true} if this element is disabled, either because it has
+     *         the {@code disabled} attribute or because it is contained in a
+     *         disabled ancestor element
      */
     @Override
     public final boolean isDisabled() {

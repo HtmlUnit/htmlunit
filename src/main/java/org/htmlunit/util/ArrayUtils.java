@@ -15,7 +15,7 @@
 package org.htmlunit.util;
 
 /**
- * Utility functions not covered by third party libraries.
+ * Utility functions not covered by third-party libraries.
  *
  * @author Ronald Brill
  */
@@ -44,9 +44,11 @@ public final class ArrayUtils {
     }
 
     /**
-     * @param strings the string[] to check
-     * @param expected the string that we expect
-     * @return true if at least one element of the array equals to the expected string
+     * Returns whether at least one element of the given array equals the expected string.
+     *
+     * @param strings the string array to check
+     * @param expected the string to search for
+     * @return {@code true} if at least one element equals the expected string
      */
     public static boolean contains(final String[] strings, final String expected) {
         if (expected == null) {
@@ -67,9 +69,11 @@ public final class ArrayUtils {
     }
 
     /**
-     * @param chars the char[] to check
-     * @param expected the char that we expect
-     * @return true if at least one element of the array equals to the expected char
+     * Returns whether at least one element of the given array equals the expected char.
+     *
+     * @param chars the char array to check
+     * @param expected the char to search for
+     * @return {@code true} if at least one element equals the expected char
      */
     public static boolean contains(final char[] chars, final char expected) {
         if (chars == null) {
@@ -86,9 +90,11 @@ public final class ArrayUtils {
     }
 
     /**
-     * @param bytes the byte[] to check
-     * @param expected the byte that we expect
-     * @return true if at least one element of the array equals to the expected byte
+     * Returns whether at least one element of the given array equals the expected byte.
+     *
+     * @param bytes the byte array to check
+     * @param expected the byte to search for
+     * @return {@code true} if at least one element equals the expected byte
      */
     public static boolean contains(final byte[] bytes, final byte expected) {
         if (bytes == null) {
@@ -105,9 +111,12 @@ public final class ArrayUtils {
     }
 
     /**
-     * @param strings the string[] to check
-     * @param expected the string that we expect
-     * @return true if at least one element of the array equalsIgnoreCase to the expected string
+     * Returns whether at least one element of the given array equals the expected string,
+     * ignoring case.
+     *
+     * @param strings the string array to check
+     * @param expected the string to search for
+     * @return {@code true} if at least one element equals the expected string, ignoring case
      */
     public static boolean containsIgnoreCase(final String[] strings, final String expected) {
         if (expected == null) {

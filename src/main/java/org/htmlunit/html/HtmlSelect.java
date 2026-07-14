@@ -548,6 +548,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
+     * Returns the size or 1 if not defined or not convertable to int.
+     *
      * @return the size or 1 if not defined or not convertable to int
      */
     public final int getSize() {

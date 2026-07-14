@@ -162,8 +162,10 @@ public class UIEvent extends Event {
     }
 
     /**
-     * @return a number that indicates which button was pressed on the mouse,
-     *         or the numeric keyCode or the character code (charCode) of the key pressed on the keyboard
+     * Returns the button or key associated with this event.
+     *
+     * @return the mouse button that was pressed, or the numeric {@code keyCode}
+     *         or character {@code charCode} of the key that was pressed
      */
     @JsxGetter
     public int getWhich() {

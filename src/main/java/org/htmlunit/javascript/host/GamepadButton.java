@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code GamepadButton}.
+ * JavaScript host object for {@code GamepadButton}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/GamepadButton">MDN Documentation</a>
  */
 @JsxClass
 public class GamepadButton extends HtmlUnitScriptable {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {

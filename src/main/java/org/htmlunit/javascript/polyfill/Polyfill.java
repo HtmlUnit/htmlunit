@@ -40,6 +40,8 @@ public class Polyfill {
     private Script script_;
 
     /**
+     * Returns the build in fetch polyfill.
+     *
      * @return the build in fetch polyfill
      * @throws IOException in case of error
      */

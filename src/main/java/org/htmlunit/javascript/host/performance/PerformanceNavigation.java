@@ -24,10 +24,12 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code PerformanceNavigation}.
+ * JavaScript host object for {@code PerformanceNavigation}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigation">MDN Documentation</a>
  */
 @JsxClass
 public class PerformanceNavigation extends HtmlUnitScriptable {
@@ -51,7 +53,7 @@ public class PerformanceNavigation extends HtmlUnitScriptable {
     public static final int TYPE_RESERVED = 255;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -60,6 +62,7 @@ public class PerformanceNavigation extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code type} property.
+     *
      * @return the {@code type} property
      */
     @JsxGetter
@@ -69,6 +72,7 @@ public class PerformanceNavigation extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code redirectCount} property.
+     *
      * @return the {@code redirectCount} property
      */
     @JsxGetter
@@ -77,8 +81,9 @@ public class PerformanceNavigation extends HtmlUnitScriptable {
     }
 
     /**
-     * The {@code toJSON} function.
-     * @return the {@code toJSON} object
+     * Serializes the object to a JSON representation.
+     *
+     * @return a JSON object containing the {@code type} and {@code redirectCount} properties
      */
     @JsxFunction
     public Scriptable toJSON() {
@@ -88,5 +93,4 @@ public class PerformanceNavigation extends HtmlUnitScriptable {
 
         return json;
     }
-
 }

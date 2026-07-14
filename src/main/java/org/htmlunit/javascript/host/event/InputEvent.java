@@ -23,10 +23,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code InputEvent}.
+ * JavaScript host object for {@code InputEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/InputEvent">MDN Documentation</a>
  */
 @JsxClass
 public class InputEvent extends UIEvent {
@@ -36,7 +38,7 @@ public class InputEvent extends UIEvent {
     private boolean isComposing_;
 
     /**
-     * Default constructor.
+     * Creates a new event instance.
      */
     public InputEvent() {
         super();
@@ -45,7 +47,7 @@ public class InputEvent extends UIEvent {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this event.
      *
      * @param type the event type
      * @param details the event details (optional)
@@ -76,8 +78,9 @@ public class InputEvent extends UIEvent {
     }
 
     /**
-     * Returns whether or not the event is fired after the compositionstart and before the compositionend events.
-     * @return whether or not the event is fired while composing
+     * Returns whether this event is fired after the {@code compositionstart} and before the {@code compositionend} events.
+     *
+     * @return {@code true} if the event is fired while composing
      */
     @JsxGetter
     public boolean isIsComposing() {
@@ -85,16 +88,18 @@ public class InputEvent extends UIEvent {
     }
 
     /**
-     * Sets whether or not this event is fired after the compositionstart and before the compositionend events.
-     * @param isComposing whether or not this event is fired while composing
+     * Sets whether this event is fired after the {@code compositionstart} and before the {@code compositionend} events.
+     *
+     * @param isComposing {@code true} if the event is fired while composing
      */
     protected void setIsComposing(final boolean isComposing) {
         isComposing_ = isComposing;
     }
 
     /**
-     * Retrieves the data contained.
-     * @return the data contained
+     * Returns the data contained in the event.
+     *
+     * @return the data
      */
     @JsxGetter
     public Object getData() {
@@ -102,8 +107,9 @@ public class InputEvent extends UIEvent {
     }
 
     /**
-     * Retrieves the inputType.
-     * @return the inputType
+     * Returns the input type of the event.
+     *
+     * @return the input type
      */
     @JsxGetter
     public Object getInputType() {

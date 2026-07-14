@@ -51,10 +51,10 @@ public class V8BreakIterator extends HtmlUnitScriptable {
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the arguments to the V8BreakIterator constructor
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr {@code true} if invoked with the {@code new} operator
+     * @return the Java object that JavaScript can access
      */
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope,

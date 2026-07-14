@@ -19,10 +19,12 @@ import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code SVGComponentTransferFunctionElement}.
+ * JavaScript host object for {@code SVGComponentTransferFunctionElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGComponentTransferFunctionElement">MDN Documentation</a>
  */
 @JsxClass
 public class SVGComponentTransferFunctionElement extends SVGElement {
@@ -47,7 +49,7 @@ public class SVGComponentTransferFunctionElement extends SVGElement {
     public static final int SVG_FECOMPONENTTRANSFER_TYPE_GAMMA = 5;
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

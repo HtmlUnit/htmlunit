@@ -18,16 +18,18 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code SVGFEDropShadowElement}.
+ * JavaScript host object for {@code SVGFEDropShadowElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFEDropShadowElement">MDN Documentation</a>
  */
 @JsxClass
 public class SVGFEDropShadowElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

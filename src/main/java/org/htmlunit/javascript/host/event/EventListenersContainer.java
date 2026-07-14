@@ -40,7 +40,7 @@ import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.html.HTMLElement;
 
 /**
- * Container for event listener.
+ * Container for event listeners.
  *
  * @author Marc Guillemot
  * @author Daniel Gredler
@@ -171,9 +171,9 @@ public class EventListenersContainer implements Serializable {
     }
 
     /**
-     * The constructor.
+     * Creates a new container for the given event target node.
      *
-     * @param jsNode the node.
+     * @param jsNode the node
      */
     public EventListenersContainer(final EventTarget jsNode) {
         jsNode_ = jsNode;
@@ -182,10 +182,10 @@ public class EventListenersContainer implements Serializable {
     /**
      * Adds an event listener.
      *
-     * @param type the event type to listen for (like "load")
+     * @param type the event type to listen for (e.g. {@code "load"})
      * @param listener the event listener
-     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
-     * @return {@code true} if the listener has been added
+     * @param useCapture if {@code true}, the listener is added for the capture phase
+     * @return {@code true} if the listener was added; {@code false} if it was already registered
      */
     public boolean addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         if (null == listener) {
@@ -217,22 +217,22 @@ public class EventListenersContainer implements Serializable {
     }
 
     /**
-     * Returns the relevant listeners.
+     * Returns the listeners for the given event type and capture mode.
      *
      * @param eventType the event type
-     * @param useCapture whether to use capture of not
-     * @return the listeners list (empty list when empty)
+     * @param useCapture whether to return capture-phase listeners
+     * @return the list of listeners (empty list if none)
      */
     public List<Scriptable> getListeners(final String eventType, final boolean useCapture) {
         return getTypeContainer(eventType).getListeners(useCapture ? Event.CAPTURING_PHASE : Event.BUBBLING_PHASE);
     }
 
     /**
-     * Removes event listener.
+     * Removes an event listener.
      *
-     * @param eventType the type
-     * @param listener the listener
-     * @param useCapture to use capture or not
+     * @param eventType the event type
+     * @param listener the listener to remove
+     * @param useCapture whether to remove from the capture phase
      */
     void removeEventListener(final String eventType, final Scriptable listener, final boolean useCapture) {
         if (listener == null) {
@@ -244,9 +244,10 @@ public class EventListenersContainer implements Serializable {
     }
 
     /**
-     * Sets the handler property (with a handler or something else).
-     * @param eventType the event type (like "click")
-     * @param value the new property
+     * Sets the property handler for the given event type.
+     *
+     * @param eventType the event type (e.g. {@code "click"})
+     * @param value the new handler, or {@code null} to remove it
      */
     public void setEventHandler(final String eventType, final Object value) {
         final Function handler;
@@ -344,16 +345,18 @@ public class EventListenersContainer implements Serializable {
     }
 
     /**
-     * Executes bubbling listeners.
+     * Executes bubbling listeners for the given event.
+     *
      * @param event the event
-     * @param args arguments
+     * @param args the arguments
      */
     public void executeBubblingListeners(final Event event, final Object[] args) {
         executeEventListeners(Event.BUBBLING_PHASE, event, args);
     }
 
     /**
-     * Executes capturing listeners.
+     * Executes capturing listeners for the given event.
+     *
      * @param event the event
      * @param args the arguments
      */
@@ -362,7 +365,8 @@ public class EventListenersContainer implements Serializable {
     }
 
     /**
-     * Executes listeners for events targeting the node. (non-propagation phase)
+     * Executes listeners for events targeting this node (non-propagation phase).
+     *
      * @param event the event
      * @param args the arguments
      */
@@ -371,18 +375,20 @@ public class EventListenersContainer implements Serializable {
     }
 
     /**
-     * Returns an event handler.
-     * @param eventType the event name (e.g. "click")
-     * @return the handler function, {@code null} if the property is null or not a function
+     * Returns the event handler function for the given event type.
+     *
+     * @param eventType the event type (e.g. {@code "click"})
+     * @return the handler function, or {@code null} if not set
      */
     public Function getEventHandler(final String eventType) {
         return getTypeContainer(eventType).handler_;
     }
 
     /**
-     * Returns {@code true} if there are any event listeners for the specified event.
-     * @param eventType the event type (e.g. "click")
-     * @return {@code true} if there are any event listeners for the specified event, {@code false} otherwise
+     * Returns whether there are any event listeners registered for the given event type.
+     *
+     * @param eventType the event type (e.g. {@code "click"})
+     * @return {@code true} if there are any listeners, {@code false} otherwise
      */
     boolean hasEventListeners(final String eventType) {
         return !getTypeContainer(eventType).atTargetListeners_.isEmpty();

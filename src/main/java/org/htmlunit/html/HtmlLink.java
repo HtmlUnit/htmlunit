@@ -359,9 +359,11 @@ public class HtmlLink extends HtmlElement {
         }
         return sheet_;
     }
-
     /**
-     * @return true if the rel attribute is 'stylesheet'
+     * Returns whether this link references a style sheet.
+     *
+     * @return {@code true} if the {@code rel} attribute contains
+     *         {@code stylesheet}
      */
     public boolean isStyleSheetLink() {
         final String rel = getRelAttribute();
@@ -372,7 +374,10 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * @return true if the rel attribute is 'modulepreload'
+     * Returns whether this link references a module preload.
+     *
+     * @return {@code true} if the {@code rel} attribute contains
+     *         {@code modulepreload}
      */
     public boolean isModulePreloadLink() {
         final String rel = getRelAttribute();

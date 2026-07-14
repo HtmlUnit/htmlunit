@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgUse;
 
 /**
- * A JavaScript object for {@code SVGUseElement}.
+ * JavaScript host object for {@code SVGUseElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGUseElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgUse.class)
 public class SVGUseElement extends SVGGraphicsElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

@@ -24,23 +24,25 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
 
 /**
- * Specifies a rectangle that contains a line of text in either an element or a TextRange object.
+ * JavaScript host object for {@code DOMRect}, representing a rectangle with position and dimensions.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRect">DOMRect</a>
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRect">MDN Documentation</a>
  */
 @JsxClass
 public class DOMRect extends DOMRectReadOnly {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
+     *
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the constructor arguments
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr whether invoked via {@code new}
+     * @return the new {@code DOMRect} instance
      */
     @JsxConstructor
     public static DOMRect jsConstructor(final Context cx, final VarScope scope,
@@ -59,12 +61,12 @@ public class DOMRect extends DOMRectReadOnly {
     }
 
     /**
-     * Creates an instance, with the given coordinates.
+     * Creates an instance with the given coordinates.
      *
-     * @param x the x coordinate of the rectangle surrounding the object content
-     * @param y the y coordinate of the rectangle surrounding the object content
-     * @param width the width coordinate of the rectangle surrounding the object content
-     * @param height the height of the rectangle surrounding the object content
+     * @param x the x coordinate of the rectangle
+     * @param y the y coordinate of the rectangle
+     * @param width the width of the rectangle
+     * @param height the height of the rectangle
      */
     public DOMRect(final int x, final int y, final int width, final int height) {
         super(x, y, width, height);

@@ -94,6 +94,8 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     );
 
     /**
+     * The recognized cryptographic key usages.
+     *
      * @see <a href="https://w3c.github.io/webcrypto/#dfn-RecognizedKeyUsage">RecognizedKeyUsage</a>
      */
     private static final Set<String> RECOGNIZED_KEY_USAGES = Collections.unmodifiableSet(
@@ -101,6 +103,8 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     "deriveKey", "deriveBits", "wrapKey", "unwrapKey")));
 
     /**
+     * The valid authentication tag lengths for AES-GCM, in bits.
+     *
      * @see <a href="https://w3c.github.io/webcrypto/#aes-gcm-operations">AES-GCM encrypt, step 6</a>
      */
     private static final Set<Integer> VALID_AES_GCM_TAG_LENGTHS = Set.of(32, 64, 96, 104, 112, 120, 128);

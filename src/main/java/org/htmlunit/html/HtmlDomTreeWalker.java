@@ -68,6 +68,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the root node of this tree walker.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#getRoot()
      * @return the root node
      */
@@ -76,6 +78,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the node types visible to this tree walker.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#getWhatToShow()
      * @return NodeFilter constant
      */
@@ -84,6 +88,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the node filter used by this tree walker.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#getFilter()
      * @return the filter
      */
@@ -92,6 +98,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns whether entity reference nodes are expanded.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#getExpandEntityReferences()
      * @return the ExpandEntityReferences setting
      */
@@ -101,6 +109,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the current node.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#getCurrentNode()
      * @return the current node
      */
@@ -109,9 +119,11 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Sets the current node.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#setCurrentNode(Node)
      * @param currentNode the current node
-     * @throws DOMException if the current node provides is null
+     * @throws DOMException if the current node provided is {@code null}
      */
     public void setCurrentNode(final Node currentNode) throws DOMException {
         if (currentNode == null) {
@@ -122,6 +134,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the next node in document order.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#nextNode()
      * @return the next node
      */
@@ -147,8 +161,7 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
-     * Helper method to get the first uncle node in document order (preorder
-     * traversal) from the given node.
+     * Returns the first ancestor's next sibling in document order.
      */
     private DomNode getFirstUncleNode(final DomNode n) {
         if (n == root_ || n == null) {
@@ -169,9 +182,12 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the logical node occupying the same position as the specified actual node.
+     * <p>
      * Recursively find the logical node occupying the same position as this
      * _actual_ node. It could be the same node, a different node, or null
      * depending on filtering.
+     * </p>
      *
      * @param n The actual node we are trying to find the "equivalent" of
      * @param lookLeft If true, traverse the tree in the left direction. If
@@ -208,7 +224,7 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
-     * Returns whether the node is visible by the TreeWalker.
+     * Returns whether the specified node is visible to this tree walker.
      */
     private boolean isNodeVisible(final Node n) {
         if (acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
@@ -311,6 +327,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the next sibling of the current node.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#nextSibling()
      * @return the next sibling node
      */
@@ -329,6 +347,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the parent of the current node.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#parentNode()
      * @return the parent node
      */
@@ -352,6 +372,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the previous sibling of the current node.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#previousSibling()
      * @return the previous sibling node
      */
@@ -370,6 +392,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the last child of the current node.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#lastChild()
      * @return the last child node
      */
@@ -384,6 +408,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the previous node in document order.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#previousNode()
      * @return the previous node
      */
@@ -398,8 +424,7 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
-     * Helper method to get the previous node in document order (preorder
-     * traversal) from the given node.
+     * Returns the previous node in document order from the specified node.
      */
     private DomNode getPreviousNode(final DomNode n) {
         if (n == root_) {
@@ -430,6 +455,8 @@ public class HtmlDomTreeWalker implements Serializable {
     }
 
     /**
+     * Returns the first child of the current node.
+     *
      * @see org.w3c.dom.traversal.TreeWalker#firstChild()
      * @return the first child node
      */

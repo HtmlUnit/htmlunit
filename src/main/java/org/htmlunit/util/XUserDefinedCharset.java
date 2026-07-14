@@ -23,13 +23,13 @@ import java.nio.charset.CoderResult;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Simple implementation of the 'x-user-defined' {@link Charset}.
- * @author Ronald Brill
+ * Simple implementation of the {@code x-user-defined} {@link Charset}.
  *
+ * @author Ronald Brill
  */
 public final class XUserDefinedCharset extends Charset {
 
-    /** The single instance. */
+    /** The charset name. */
     public static final String NAME = "x-user-defined";
 
     /** The single instance. */

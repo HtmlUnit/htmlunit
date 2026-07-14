@@ -18,6 +18,7 @@ package org.htmlunit.http;
  * Exception thrown when a cookie string cannot be parsed or does not conform to the cookie specification.
  * <p>
  * This exception is thrown in the following scenarios:
+ * </p>
  * <ul>
  *   <li>The cookie string is null</li>
  *   <li>The cookie name is empty or invalid</li>
@@ -26,7 +27,6 @@ package org.htmlunit.http;
  *   <li>The max-age attribute is not a valid integer</li>
  *   <li>Any other violation of the HTTP cookie specification (RFC 2109, RFC 2965, Netscape spec)</li>
  * </ul>
- * </p>
  *
  * @author Ronald Brill
  */

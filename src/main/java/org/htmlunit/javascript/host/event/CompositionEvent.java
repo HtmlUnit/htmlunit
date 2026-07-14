@@ -21,10 +21,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code CompositionEvent}.
+ * JavaScript host object for {@code CompositionEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent">MDN Documentation</a>
  */
 @JsxClass
 public class CompositionEvent extends UIEvent {
@@ -32,7 +34,7 @@ public class CompositionEvent extends UIEvent {
     private String data_;
 
     /**
-     * Default constructor.
+     * Creates a new event instance.
      */
     public CompositionEvent() {
         super();
@@ -40,7 +42,7 @@ public class CompositionEvent extends UIEvent {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this event.
      *
      * @param type the event type
      * @param details the event details (optional)
@@ -59,6 +61,8 @@ public class CompositionEvent extends UIEvent {
     }
 
     /**
+     * Returns the composition data.
+     *
      * @return the data
      */
     @JsxGetter
@@ -67,6 +71,8 @@ public class CompositionEvent extends UIEvent {
     }
 
     /**
+     * Sets the composition data.
+     *
      * @param data the data
      */
     public void setData(final String data) {

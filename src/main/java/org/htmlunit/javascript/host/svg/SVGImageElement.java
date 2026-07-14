@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgImage;
 
 /**
- * A JavaScript object for {@code SVGImageElement}.
+ * JavaScript host object for {@code SVGImageElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGImageElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgImage.class)
 public class SVGImageElement extends SVGGraphicsElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

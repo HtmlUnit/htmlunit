@@ -12,6 +12,12 @@
                 asXml(): emit formatting line breaks only where the document contains whitespace;
                 adjacent elements no longer gain a fabricated line break that renders as a space.
             </action>
+            <action type="add" dev="rbri">
+                CanvasRenderingContext2D lineCap property support added.
+            </action>
+            <action type="add" dev="rbri">
+                CanvasRenderingContext2D lineJoin property support added.
+            </action>
             <action type="add" dev="rbri" issue="#1149">
                 Checkstyle rule set updated: JavadocStyle -> SummaryJavadoc.
             </action>

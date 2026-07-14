@@ -19,15 +19,20 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code SpeechSynthesisErrorEvent}.
+ * JavaScript host object for {@code SpeechSynthesisErrorEvent}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisErrorEvent">MDN Documentation</a>
  */
 @JsxClass
 public class SpeechSynthesisErrorEvent extends SpeechSynthesisEvent {
 
     /**
-     * {@inheritDoc}
+     * Creates an instance of this object.
+     *
+     * @param type the event type
+     * @param details the event details
      */
     @Override
     @JsxConstructor

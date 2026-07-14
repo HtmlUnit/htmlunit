@@ -27,13 +27,13 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 
 /**
- * A JavaScript object for {@code MimeTypeArray}.
+ * JavaScript host object for {@code MimeTypeArray}.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
  *
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MimeTypeArray">MimeTypeArray</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MimeTypeArray">MDN Documentation</a>
  */
 @JsxClass
 public class MimeTypeArray extends HtmlUnitScriptable {
@@ -41,7 +41,7 @@ public class MimeTypeArray extends HtmlUnitScriptable {
     private final List<MimeType> elements_ = new ArrayList<>();
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -49,18 +49,20 @@ public class MimeTypeArray extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the name of the mime type.
+     * Returns the MIME type string for the given element.
+     *
      * @param element a {@link MimeType}
-     * @return the name
+     * @return the MIME type string
      */
     protected String getItemName(final Object element) {
         return ((MimeType) element).getType();
     }
 
     /**
-     * Returns the item at the given index.
+     * Returns the {@link MimeType} at the given index.
+     *
      * @param index the index
-     * @return the item at the given position
+     * @return the {@link MimeType} at the given position
      */
     @JsxFunction
     public MimeType item(final int index) {
@@ -80,7 +82,7 @@ public class MimeTypeArray extends HtmlUnitScriptable {
     }
 
     /**
-     * {@inheritDoc}.
+     * {@inheritDoc}
      */
     @Override
     public boolean has(final String name, final Scriptable start) {
@@ -107,9 +109,10 @@ public class MimeTypeArray extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the item at the given index.
-     * @param name the item name
-     * @return the item with the given name
+     * Returns the {@link MimeType} with the given name.
+     *
+     * @param name the MIME type string to look up
+     * @return the matching {@link MimeType}, or {@code null} if not found
      */
     @JsxFunction
     public MimeType namedItem(final String name) {
@@ -122,8 +125,9 @@ public class MimeTypeArray extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the array size.
-     * @return the number elements
+     * Returns the number of MIME types in this array.
+     *
+     * @return the number of elements
      */
     @JsxGetter
     public int getLength() {
@@ -131,7 +135,8 @@ public class MimeTypeArray extends HtmlUnitScriptable {
     }
 
     /**
-     * Adds an element.
+     * Adds a {@link MimeType} to this array.
+     *
      * @param element the element to add
      */
     void add(final MimeType element) {
@@ -139,7 +144,9 @@ public class MimeTypeArray extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the Iterator symbol
+     * Returns an iterator over the values in this array.
+     *
+     * @return the iterator
      */
     @JsxSymbol
     public Scriptable iterator() {

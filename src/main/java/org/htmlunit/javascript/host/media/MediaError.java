@@ -24,6 +24,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaError">MDN Documentation</a>
  */
 @JsxClass
 public class MediaError extends HtmlUnitScriptable {

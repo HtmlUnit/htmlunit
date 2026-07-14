@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgRadialGradient;
 
 /**
- * A JavaScript object for {@code SVGRadialGradientElement}.
+ * JavaScript host object for {@code SVGRadialGradientElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGRadialGradientElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgRadialGradient.class)
 public class SVGRadialGradientElement extends SVGGradientElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

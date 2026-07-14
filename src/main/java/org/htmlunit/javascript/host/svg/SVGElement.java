@@ -32,16 +32,18 @@ import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.svg.SvgElement;
 
 /**
- * A JavaScript object for {@code SVGElement}.
+ * JavaScript host object for {@code SVGElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgElement.class)
 public class SVGElement extends Element {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
@@ -51,6 +53,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the bounding box, in current user space, of the geometry of all contained graphics elements.
+     *
      * @return the bounding box
      */
     protected SVGRect getBBox() {
@@ -80,6 +83,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onfocus} event handler.
+     *
      * @return the {@code onfocus} event handler
      */
     @JsxGetter
@@ -89,6 +93,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onfocus} event handler.
+     *
      * @param focus the {@code onfocus} event handler
      */
     @JsxSetter
@@ -98,6 +103,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ondragend} event handler.
+     *
      * @return the {@code ondragend} event handler
      */
     @JsxGetter
@@ -107,6 +113,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ondragend} event handler.
+     *
      * @param dragend the {@code ondragend} event handler
      */
     @JsxSetter
@@ -116,6 +123,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code oninvalid} event handler.
+     *
      * @return the {@code oninvalid} event handler
      */
     @JsxGetter
@@ -125,6 +133,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code oninvalid} event handler.
+     *
      * @param invalid the {@code oninvalid} event handler
      */
     @JsxSetter
@@ -133,8 +142,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code pointercancel} event handler for this element.
-     * @return the {@code pointercancel} event handler for this element
+     * Returns the {@code onpointercancel} event handler for this element.
+     *
+     * @return the {@code onpointercancel} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointercancel() {
@@ -142,8 +152,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code pointercancel} event handler.
-     * @param pointercancel the {@code pointercancel} event handler
+     * Sets the {@code onpointercancel} event handler.
+     *
+     * @param pointercancel the {@code onpointercancel} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointercancel(final Object pointercancel) {
@@ -151,8 +162,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code pointerout} event handler for this element.
-     * @return the {@code pointerout} event handler for this element
+     * Returns the {@code onpointerout} event handler for this element.
+     *
+     * @return the {@code onpointerout} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerout() {
@@ -160,8 +172,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code pointerout} event handler.
-     * @param pointerout the {@code pointerout} event handler
+     * Sets the {@code onpointerout} event handler.
+     *
+     * @param pointerout the {@code onpointerout} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerout(final Object pointerout) {
@@ -170,6 +183,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onratechange} event handler.
+     *
      * @return the {@code onratechange} event handler
      */
     @JsxGetter
@@ -179,6 +193,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onratechange} event handler.
+     *
      * @param ratechange the {@code onratechange} event handler
      */
     @JsxSetter
@@ -188,6 +203,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onresize} event handler.
+     *
      * @return the {@code onresize} event handler
      */
     @JsxGetter
@@ -197,6 +213,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onresize} event handler.
+     *
      * @param resize the {@code onresize} event handler
      */
     @JsxSetter
@@ -206,6 +223,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code oncanplaythrough} event handler.
+     *
      * @return the {@code oncanplaythrough} event handler
      */
     @JsxGetter
@@ -215,6 +233,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code oncanplaythrough} event handler.
+     *
      * @param canplaythrough the {@code oncanplaythrough} event handler
      */
     @JsxSetter
@@ -224,6 +243,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code oncancel} event handler.
+     *
      * @return the {@code oncancel} event handler
      */
     @JsxGetter({CHROME, EDGE})
@@ -233,6 +253,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code oncancel} event handler.
+     *
      * @param cancel the {@code oncancel} event handler
      */
     @JsxSetter({CHROME, EDGE})
@@ -241,8 +262,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code pointerenter} event handler.
-     * @return the {@code pointerenter} event handler
+     * Returns the {@code onpointerenter} event handler.
+     *
+     * @return the {@code onpointerenter} event handler
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerenter() {
@@ -250,8 +272,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code pointerenter} event handler.
-     * @param pointerenter the {@code pointerenter} event handler
+     * Sets the {@code onpointerenter} event handler.
+     *
+     * @param pointerenter the {@code onpointerenter} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerenter(final Object pointerenter) {
@@ -260,6 +283,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onselect} event handler.
+     *
      * @return the {@code onselect} event handler
      */
     @JsxGetter
@@ -269,6 +293,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onselect} event handler.
+     *
      * @param select the {@code onselect} event handler
      */
     @JsxSetter
@@ -278,6 +303,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onselectstart} event handler for this element.
+     *
      * @return the {@code onselectstart} event handler for this element
      */
     @JsxGetter
@@ -287,6 +313,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onselectstart} event handler for this element.
+     *
      * @param onselectstart the {@code onselectstart} event handler for this element
      */
     @JsxSetter
@@ -296,6 +323,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onselectionchange} event handler for this element.
+     *
      * @return the {@code onselectionchange} event handler for this element
      */
     @JsxGetter
@@ -305,6 +333,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onselectionchange} event handler for this element.
+     *
      * @param onselectionchange the {@code onselectionchange} event handler for this element
      */
     @JsxSetter
@@ -314,6 +343,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onauxclick} event handler.
+     *
      * @return the {@code onauxclick} event handler
      */
     @JsxGetter({CHROME, EDGE})
@@ -323,6 +353,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onauxclick} event handler.
+     *
      * @param auxclick the {@code onauxclick} event handler
      */
     @JsxSetter({CHROME, EDGE})
@@ -332,6 +363,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onpause} event handler.
+     *
      * @return the {@code onpause} event handler
      */
     @JsxGetter
@@ -341,6 +373,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onpause} event handler.
+     *
      * @param pause the {@code onpause} event handler
      */
     @JsxSetter
@@ -350,6 +383,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onloadstart} event handler.
+     *
      * @return the {@code onloadstart} event handler
      */
     @JsxGetter
@@ -359,6 +393,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onloadstart} event handler.
+     *
      * @param loadstart the {@code onloadstart} event handler
      */
     @JsxSetter
@@ -368,6 +403,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onprogress} event handler.
+     *
      * @return the {@code onprogress} event handler
      */
     @JsxGetter
@@ -377,6 +413,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onprogress} event handler.
+     *
      * @param progress the {@code onprogress} event handler
      */
     @JsxSetter
@@ -385,8 +422,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code pointerup} event handler for this element.
-     * @return the {@code pointerup} event handler for this element
+     * Returns the {@code onpointerup} event handler for this element.
+     *
+     * @return the {@code onpointerup} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerup() {
@@ -394,8 +432,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code pointerup} event handler.
-     * @param pointerup the {@code pointerup} event handler
+     * Sets the {@code onpointerup} event handler.
+     *
+     * @param pointerup the {@code onpointerup} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerup(final Object pointerup) {
@@ -404,6 +443,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onscroll} event handler.
+     *
      * @return the {@code onscroll} event handler
      */
     @JsxGetter
@@ -413,6 +453,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onscroll} event handler.
+     *
      * @param scroll the {@code onscroll} event handler
      */
     @JsxSetter
@@ -422,6 +463,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onscrollend} event handler.
+     *
      * @return the {@code onscrollend} event handler
      */
     @JsxGetter
@@ -431,6 +473,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onscrollend} event handler.
+     *
      * @param scrollend the {@code onscrollend} event handler
      */
     @JsxSetter
@@ -440,6 +483,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onkeydown} event handler.
+     *
      * @return the {@code onkeydown} event handler
      */
     @JsxGetter
@@ -449,6 +493,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onkeydown} event handler.
+     *
      * @param keydown the {@code onkeydown} event handler
      */
     @JsxSetter
@@ -457,8 +502,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code pointerleave} event handler.
-     * @return the {@code pointerleave} event handler
+     * Returns the {@code onpointerleave} event handler.
+     *
+     * @return the {@code onpointerleave} event handler
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerleave() {
@@ -466,8 +512,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code pointerleave} event handler.
-     * @param pointerleave the {@code pointerleave} event handler
+     * Sets the {@code onpointerleave} event handler.
+     *
+     * @param pointerleave the {@code onpointerleave} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerleave(final Object pointerleave) {
@@ -476,6 +523,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onclick} event handler.
+     *
      * @return the {@code onclick} event handler
      */
     @JsxGetter
@@ -485,6 +533,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onclick} event handler.
+     *
      * @param click the {@code onclick} event handler
      */
     @JsxSetter
@@ -494,6 +543,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onkeyup} event handler.
+     *
      * @return the {@code onkeyup} event handler
      */
     @JsxGetter
@@ -503,6 +553,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onkeyup} event handler.
+     *
      * @param keyup the {@code onkeyup} event handler
      */
     @JsxSetter
@@ -512,6 +563,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onchange} event handler.
+     *
      * @return the {@code onchange} event handler
      */
     @JsxGetter
@@ -521,6 +573,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onchange} event handler.
+     *
      * @param change the {@code onchange} event handler
      */
     @JsxSetter
@@ -530,6 +583,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onreset} event handler.
+     *
      * @return the {@code onreset} event handler
      */
     @JsxGetter
@@ -539,6 +593,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onreset} event handler.
+     *
      * @param reset the {@code onreset} event handler
      */
     @JsxSetter
@@ -548,6 +603,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onkeypress} event handler.
+     *
      * @return the {@code onkeypress} event handler
      */
     @JsxGetter
@@ -557,6 +613,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onkeypress} event handler.
+     *
      * @param keypress the {@code onkeypress} event handler
      */
     @JsxSetter
@@ -566,6 +623,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ontimeupdate} event handler.
+     *
      * @return the {@code ontimeupdate} event handler
      */
     @JsxGetter
@@ -575,6 +633,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ontimeupdate} event handler.
+     *
      * @param timeupdate the {@code ontimeupdate} event handler
      */
     @JsxSetter
@@ -584,6 +643,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ondblclick} event handler.
+     *
      * @return the {@code ondblclick} event handler
      */
     @JsxGetter
@@ -593,6 +653,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ondblclick} event handler.
+     *
      * @param dblclick the {@code ondblclick} event handler
      */
     @JsxSetter
@@ -602,6 +663,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ondrag} event handler.
+     *
      * @return the {@code ondrag} event handler
      */
     @JsxGetter
@@ -611,6 +673,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ondrag} event handler.
+     *
      * @param drag the {@code ondrag} event handler
      */
     @JsxSetter
@@ -620,6 +683,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onseeked} event handler.
+     *
      * @return the {@code onseeked} event handler
      */
     @JsxGetter
@@ -629,6 +693,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onseeked} event handler.
+     *
      * @param seeked the {@code onseeked} event handler
      */
     @JsxSetter
@@ -638,6 +703,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onabort} event handler.
+     *
      * @return the {@code onabort} event handler
      */
     @JsxGetter
@@ -647,6 +713,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onabort} event handler.
+     *
      * @param abort the {@code onabort} event handler
      */
     @JsxSetter
@@ -656,6 +723,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onloadedmetadata} event handler.
+     *
      * @return the {@code onloadedmetadata} event handler
      */
     @JsxGetter
@@ -665,6 +733,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onloadedmetadata} event handler.
+     *
      * @param loadedmetadata the {@code onloadedmetadata} event handler
      */
     @JsxSetter
@@ -674,6 +743,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ontoggle} event handler.
+     *
      * @return the {@code ontoggle} event handler
      */
     @JsxGetter({CHROME, EDGE})
@@ -683,6 +753,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ontoggle} event handler.
+     *
      * @param toggle the {@code ontoggle} event handler
      */
     @JsxSetter({CHROME, EDGE})
@@ -692,6 +763,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onplay} event handler.
+     *
      * @return the {@code onplay} event handler
      */
     @JsxGetter
@@ -701,6 +773,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onplay} event handler.
+     *
      * @param play the {@code onplay} event handler
      */
     @JsxSetter
@@ -710,6 +783,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code oncontextmenu} event handler.
+     *
      * @return the {@code oncontextmenu} event handler
      */
     @JsxGetter
@@ -719,6 +793,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code oncontextmenu} event handler.
+     *
      * @param contextmenu the {@code oncontextmenu} event handler
      */
     @JsxSetter
@@ -728,6 +803,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmousemove} event handler.
+     *
      * @return the {@code onmousemove} event handler
      */
     @JsxGetter
@@ -737,6 +813,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmousemove} event handler.
+     *
      * @param mousemove the {@code onmousemove} event handler
      */
     @JsxSetter
@@ -746,6 +823,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onerror} event handler.
+     *
      * @return the {@code onerror} event handler
      */
     @JsxGetter
@@ -755,6 +833,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onerror} event handler.
+     *
      * @param error the {@code onerror} event handler
      */
     @JsxSetter
@@ -764,6 +843,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmouseup} event handler.
+     *
      * @return the {@code onmouseup} event handler
      */
     @JsxGetter
@@ -773,6 +853,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmouseup} event handler.
+     *
      * @param mouseup the {@code onmouseup} event handler
      */
     @JsxSetter
@@ -782,6 +863,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ondragover} event handler.
+     *
      * @return the {@code ondragover} event handler
      */
     @JsxGetter
@@ -791,6 +873,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ondragover} event handler.
+     *
      * @param dragover the {@code ondragover} event handler
      */
     @JsxSetter
@@ -799,8 +882,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code pointermove} event handler for this element.
-     * @return the {@code pointermove} event handler for this element
+     * Returns the {@code onpointermove} event handler for this element.
+     *
+     * @return the {@code onpointermove} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointermove() {
@@ -808,8 +892,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code pointermove} event handler.
-     * @param pointermove the {@code pointermove} event handler
+     * Sets the {@code onpointermove} event handler.
+     *
+     * @param pointermove the {@code onpointermove} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointermove(final Object pointermove) {
@@ -818,6 +903,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code oncut} event handler.
+     *
      * @return the {@code oncut} event handler
      */
     @JsxGetter
@@ -827,6 +913,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code oncut} event handler.
+     *
      * @param cut the {@code oncut} event handler
      */
     @JsxSetter
@@ -836,6 +923,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmouseover} event handler.
+     *
      * @return the {@code onmouseover} event handler
      */
     @JsxGetter
@@ -845,6 +933,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmouseover} event handler.
+     *
      * @param mouseover the {@code onmouseover} event handler
      */
     @JsxSetter
@@ -854,6 +943,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code oninput} event handler.
+     *
      * @return the {@code oninput} event handler
      */
     @JsxGetter
@@ -863,6 +953,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code oninput} event handler.
+     *
      * @param input the {@code oninput} event handler
      */
     @JsxSetter
@@ -871,8 +962,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code lostpointercapture} event handler for this element.
-     * @return the {@code lostpointercapture} event handler for this element
+     * Returns the {@code onlostpointercapture} event handler for this element.
+     *
+     * @return the {@code onlostpointercapture} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
@@ -880,8 +972,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code lostpointercapture} event handler.
-     * @param lostpointercapture the {@code lostpointercapture} event handler
+     * Sets the {@code onlostpointercapture} event handler.
+     *
+     * @param lostpointercapture the {@code onlostpointercapture} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object lostpointercapture) {
@@ -890,6 +983,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onstalled} event handler.
+     *
      * @return the {@code onstalled} event handler
      */
     @JsxGetter
@@ -899,6 +993,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onstalled} event handler.
+     *
      * @param stalled the {@code onstalled} event handler
      */
     @JsxSetter
@@ -907,8 +1002,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code pointerover} event handler for this element.
-     * @return the {@code pointerover} event handler for this element
+     * Returns the {@code onpointerover} event handler for this element.
+     *
+     * @return the {@code onpointerover} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerover() {
@@ -916,8 +1012,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code pointerover} event handler.
-     * @param pointerover the {@code pointerover} event handler
+     * Sets the {@code onpointerover} event handler.
+     *
+     * @param pointerover the {@code onpointerover} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerover(final Object pointerover) {
@@ -926,6 +1023,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onclose} event handler.
+     *
      * @return the {@code onclose} event handler
      */
     @JsxGetter
@@ -935,6 +1033,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onclose} event handler.
+     *
      * @param close the {@code onclose} event handler
      */
     @JsxSetter
@@ -944,6 +1043,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ondragenter} event handler.
+     *
      * @return the {@code ondragenter} event handler
      */
     @JsxGetter
@@ -953,6 +1053,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ondragenter} event handler.
+     *
      * @param dragenter the {@code ondragenter} event handler
      */
     @JsxSetter
@@ -962,6 +1063,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmozfullscreenerror} event handler.
+     *
      * @return the {@code onmozfullscreenerror} event handler
      */
     @JsxGetter({FF, FF_ESR})
@@ -971,6 +1073,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmozfullscreenerror} event handler.
+     *
      * @param mozfullscreenerror the {@code onmozfullscreenerror} event handler
      */
     @JsxSetter({FF, FF_ESR})
@@ -980,6 +1083,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onsubmit} event handler.
+     *
      * @return the {@code onsubmit} event handler
      */
     @JsxGetter
@@ -989,6 +1093,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onsubmit} event handler.
+     *
      * @param submit the {@code onsubmit} event handler
      */
     @JsxSetter
@@ -998,6 +1103,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmouseleave} event handler.
+     *
      * @return the {@code onmouseleave} event handler
      */
     @JsxGetter
@@ -1007,6 +1113,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmouseleave} event handler.
+     *
      * @param mouseleave the {@code onmouseleave} event handler
      */
     @JsxSetter
@@ -1016,6 +1123,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmouseenter} event handler.
+     *
      * @return the {@code onmouseenter} event handler
      */
     @JsxGetter
@@ -1025,6 +1133,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmouseenter} event handler.
+     *
      * @param mouseenter the {@code onmouseenter} event handler
      */
     @JsxSetter
@@ -1034,6 +1143,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ondragleave} event handler.
+     *
      * @return the {@code ondragleave} event handler
      */
     @JsxGetter
@@ -1043,6 +1153,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ondragleave} event handler.
+     *
      * @param dragleave the {@code ondragleave} event handler
      */
     @JsxSetter
@@ -1052,6 +1163,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmousewheel} event handler.
+     *
      * @return the {@code onmousewheel} event handler
      */
     @JsxGetter({CHROME, EDGE})
@@ -1061,6 +1173,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmousewheel} event handler.
+     *
      * @param mousewheel the {@code onmousewheel} event handler
      */
     @JsxSetter({CHROME, EDGE})
@@ -1069,8 +1182,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code pointerdown} event handler for this element.
-     * @return the {@code pointerdown} event handler for this element
+     * Returns the {@code onpointerdown} event handler for this element.
+     *
+     * @return the {@code onpointerdown} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerdown() {
@@ -1078,8 +1192,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code pointerdown} event handler.
-     * @param pointerdown the {@code pointerdown} event handler
+     * Sets the {@code onpointerdown} event handler.
+     *
+     * @param pointerdown the {@code onpointerdown} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerdown(final Object pointerdown) {
@@ -1088,6 +1203,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onseeking} event handler.
+     *
      * @return the {@code onseeking} event handler
      */
     @JsxGetter
@@ -1097,6 +1213,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onseeking} event handler.
+     *
      * @param seeking the {@code onseeking} event handler
      */
     @JsxSetter
@@ -1106,6 +1223,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onblur} event handler.
+     *
      * @return the {@code onblur} event handler
      */
     @JsxGetter
@@ -1115,6 +1233,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onblur} event handler.
+     *
      * @param blur the {@code onblur} event handler
      */
     @JsxSetter
@@ -1124,6 +1243,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code oncuechange} event handler.
+     *
      * @return the {@code oncuechange} event handler
      */
     @JsxGetter({CHROME, EDGE})
@@ -1133,6 +1253,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code oncuechange} event handler.
+     *
      * @param cuechange the {@code oncuechange} event handler
      */
     @JsxSetter({CHROME, EDGE})
@@ -1142,6 +1263,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ondrop} event handler.
+     *
      * @return the {@code ondrop} event handler
      */
     @JsxGetter
@@ -1151,6 +1273,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ondrop} event handler.
+     *
      * @param drop the {@code ondrop} event handler
      */
     @JsxSetter
@@ -1160,6 +1283,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ondragstart} event handler.
+     *
      * @return the {@code ondragstart} event handler
      */
     @JsxGetter
@@ -1169,6 +1293,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ondragstart} event handler.
+     *
      * @param dragstart the {@code ondragstart} event handler
      */
     @JsxSetter
@@ -1178,6 +1303,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmozfullscreenchange} event handler.
+     *
      * @return the {@code onmozfullscreenchange} event handler
      */
     @JsxGetter({FF, FF_ESR})
@@ -1187,6 +1313,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmozfullscreenchange} event handler.
+     *
      * @param mozfullscreenchange the {@code onmozfullscreenchange} event handler
      */
     @JsxSetter({FF, FF_ESR})
@@ -1196,6 +1323,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code ondurationchange} event handler.
+     *
      * @return the {@code ondurationchange} event handler
      */
     @JsxGetter
@@ -1205,6 +1333,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code ondurationchange} event handler.
+     *
      * @param durationchange the {@code ondurationchange} event handler
      */
     @JsxSetter
@@ -1214,6 +1343,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onplaying} event handler.
+     *
      * @return the {@code onplaying} event handler
      */
     @JsxGetter
@@ -1223,6 +1353,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onplaying} event handler.
+     *
      * @param playing the {@code onplaying} event handler
      */
     @JsxSetter
@@ -1232,6 +1363,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onload} event handler.
+     *
      * @return the {@code onload} event handler
      */
     @JsxGetter
@@ -1241,6 +1373,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onload} event handler.
+     *
      * @param load the {@code onload} event handler
      */
     @JsxSetter
@@ -1250,6 +1383,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onended} event handler.
+     *
      * @return the {@code onended} event handler
      */
     @JsxGetter
@@ -1259,6 +1393,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onended} event handler.
+     *
      * @param ended the {@code onended} event handler
      */
     @JsxSetter
@@ -1268,6 +1403,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onloadeddata} event handler.
+     *
      * @return the {@code onloadeddata} event handler
      */
     @JsxGetter
@@ -1277,6 +1413,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onloadeddata} event handler.
+     *
      * @param loadeddata the {@code onloadeddata} event handler
      */
     @JsxSetter
@@ -1286,6 +1423,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code oncopy} event handler.
+     *
      * @return the {@code oncopy} event handler
      */
     @JsxGetter
@@ -1295,6 +1433,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code oncopy} event handler.
+     *
      * @param copy the {@code oncopy} event handler
      */
     @JsxSetter
@@ -1304,6 +1443,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onpaste} event handler.
+     *
      * @return the {@code onpaste} event handler
      */
     @JsxGetter
@@ -1313,6 +1453,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onpaste} event handler.
+     *
      * @param paste the {@code onpaste} event handler
      */
     @JsxSetter
@@ -1322,6 +1463,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmouseout} event handler.
+     *
      * @return the {@code onmouseout} event handler
      */
     @JsxGetter
@@ -1331,6 +1473,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmouseout} event handler.
+     *
      * @param mouseout the {@code onmouseout} event handler
      */
     @JsxSetter
@@ -1340,6 +1483,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onsuspend} event handler.
+     *
      * @return the {@code onsuspend} event handler
      */
     @JsxGetter
@@ -1349,6 +1493,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onsuspend} event handler.
+     *
      * @param suspend the {@code onsuspend} event handler
      */
     @JsxSetter
@@ -1358,6 +1503,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onvolumechange} event handler.
+     *
      * @return the {@code onvolumechange} event handler
      */
     @JsxGetter
@@ -1367,6 +1513,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onvolumechange} event handler.
+     *
      * @param volumechange the {@code onvolumechange} event handler
      */
     @JsxSetter
@@ -1376,6 +1523,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onwaiting} event handler.
+     *
      * @return the {@code onwaiting} event handler
      */
     @JsxGetter
@@ -1385,6 +1533,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onwaiting} event handler.
+     *
      * @param waiting the {@code onwaiting} event handler
      */
     @JsxSetter
@@ -1394,6 +1543,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code oncanplay} event handler.
+     *
      * @return the {@code oncanplay} event handler
      */
     @JsxGetter
@@ -1403,6 +1553,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code oncanplay} event handler.
+     *
      * @param canplay the {@code oncanplay} event handler
      */
     @JsxSetter
@@ -1412,6 +1563,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onmousedown} event handler.
+     *
      * @return the {@code onmousedown} event handler
      */
     @JsxGetter
@@ -1421,6 +1573,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onmousedown} event handler.
+     *
      * @param mousedown the {@code onmousedown} event handler
      */
     @JsxSetter
@@ -1430,6 +1583,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onemptied} event handler.
+     *
      * @return the {@code onemptied} event handler
      */
     @JsxGetter
@@ -1439,6 +1593,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onemptied} event handler.
+     *
      * @param emptied the {@code onemptied} event handler
      */
     @JsxSetter
@@ -1447,8 +1602,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code gotpointercapture} event handler for this element.
-     * @return the {@code gotpointercapture} event handler for this element
+     * Returns the {@code ongotpointercapture} event handler for this element.
+     *
+     * @return the {@code ongotpointercapture} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOngotpointercapture() {
@@ -1456,8 +1612,9 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Sets the {@code gotpointercapture} event handler.
-     * @param gotpointercapture the {@code gotpointercapture} event handler
+     * Sets the {@code ongotpointercapture} event handler.
+     *
+     * @param gotpointercapture the {@code ongotpointercapture} event handler
      */
     @JsxSetter({CHROME, EDGE})
     public void setOngotpointercapture(final Object gotpointercapture) {
@@ -1466,6 +1623,7 @@ public class SVGElement extends Element {
 
     /**
      * Returns the {@code onwheel} event handler for this element.
+     *
      * @return the {@code onwheel} event handler for this element
      */
     @JsxGetter({CHROME, EDGE})
@@ -1476,6 +1634,7 @@ public class SVGElement extends Element {
 
     /**
      * Sets the {@code onwheel} event handler for this element.
+     *
      * @param onwheel the {@code onwheel} event handler for this element
      */
     @JsxSetter({CHROME, EDGE})

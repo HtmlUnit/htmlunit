@@ -26,6 +26,8 @@ import org.htmlunit.javascript.host.event.Event;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Encrypted_Media_Extensions_API">MDN Documentation</a>
  */
 @JsxClass({FF, FF_ESR})
 public class MediaKeyError extends Event {

@@ -30,18 +30,21 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.util.XUserDefinedCharset;
 
 /**
- * A JavaScript object for {@code TextDecoder}.
+ * JavaScript host object for {@code TextDecoder}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder">MDN Documentation</a>
  */
 @JsxClass
 public class TextDecoder extends HtmlUnitScriptable {
     private String whatwgEncoding_ = "utf-8";
 
     /**
-     * Creates an instance.
-     * @param encodingLabel the encoding
+     * Creates an instance of this object.
+     *
+     * @param encodingLabel the encoding label to use; defaults to {@code "utf-8"} if not specified
      */
     @JsxConstructor
     public void jsConstructor(final Object encodingLabel) {
@@ -63,7 +66,9 @@ public class TextDecoder extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the encoding - default is "utf-8"
+     * Returns the encoding label used by this decoder.
+     *
+     * @return the encoding label; defaults to {@code "utf-8"}
      */
     @JsxGetter
     public String getEncoding() {
@@ -71,8 +76,10 @@ public class TextDecoder extends HtmlUnitScriptable {
     }
 
     /**
-     * @param buffer to be decoded
-     * @return returns the decoded string
+     * Decodes the given buffer and returns the decoded string.
+     *
+     * @param buffer the buffer to decode
+     * @return the decoded string
      */
     @JsxFunction
     public String decode(final Object buffer) {

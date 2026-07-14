@@ -15,7 +15,7 @@
 package org.htmlunit.util.geometry;
 
 /**
- * Simple 2D shape line.
+ * Simple 2D line segment shape.
  *
  * @author Ronald Brill
  */
@@ -31,7 +31,8 @@ public class Line2D implements Shape2D {
     private final double yIntercept_;
 
     /**
-     * Ctor.
+     * Creates a new line segment between the two given points.
+     *
      * @param start the start point
      * @param end the end point
      */
@@ -40,11 +41,12 @@ public class Line2D implements Shape2D {
     }
 
     /**
-     * Ctor.
-     * @param x1 the x value of the start point
-     * @param y1 the y value of the start point
-     * @param x2 the x value of the end point
-     * @param y2 the y value of the end point
+     * Creates a new line segment between the two given coordinates.
+     *
+     * @param x1 the x coordinate of the start point
+     * @param y1 the y coordinate of the start point
+     * @param x2 the x coordinate of the end point
+     * @param y2 the y coordinate of the end point
      */
     public Line2D(final double x1, final double y1, final double x2, final double y2) {
         startX_ = x1;
@@ -65,8 +67,11 @@ public class Line2D implements Shape2D {
     }
 
     /**
-     * @param line the line to intersect this with
-     * @return the intersection point of the two lines or null if they are parallel
+     * Returns the intersection point of this line with the given line,
+     * or {@code null} if the lines are parallel.
+     *
+     * @param line the line to intersect with
+     * @return the intersection point, or {@code null} if the lines are parallel
      */
     public Point2D intersect(final Line2D line) {
         if (isVertical_ && line.isVertical_) {

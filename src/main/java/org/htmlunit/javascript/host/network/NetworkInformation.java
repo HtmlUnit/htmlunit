@@ -23,7 +23,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code NetworkInformation}.
+ * JavaScript host object for {@code NetworkInformation}.
  *
  * @author Ronald Brill
  */
@@ -31,7 +31,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class NetworkInformation extends EventTarget {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
@@ -40,7 +40,9 @@ public class NetworkInformation extends EventTarget {
     }
 
     /**
-     * @return the {@code downlink} property
+     * Returns the value of the {@code downlink} property.
+     *
+     * @return the downlink speed
      */
     @JsxGetter
     public double getDownlink() {
@@ -48,7 +50,9 @@ public class NetworkInformation extends EventTarget {
     }
 
     /**
-     * @return the {@code effectiveType} property
+     * Returns the value of the {@code effectiveType} property.
+     *
+     * @return the effective connection type
      */
     @JsxGetter
     public String getEffectiveType() {
@@ -56,7 +60,9 @@ public class NetworkInformation extends EventTarget {
     }
 
     /**
-     * @return the {@code rtt} property
+     * Returns the value of the {@code rtt} property.
+     *
+     * @return the estimated round-trip time in milliseconds
      */
     @JsxGetter
     public int getRtt() {

@@ -24,6 +24,8 @@ import org.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaSource">MDN Documentation</a>
  */
 @JsxClass
 public class MediaSource extends EventTarget {
@@ -38,12 +40,14 @@ public class MediaSource extends EventTarget {
     }
 
     /**
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaSource/isTypeSupported">
-     *     MDN MediaSource#isTypeSupported </a>
+     * Returns whether the specified MIME type is supported.
      *
-     * @param mimeType the mimeType to check
-     * @return indicating if the given MIME type is supported by the
-     *         current user agent — this is, if it can successfully create SourceBuffer objects for that MIME type
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaSource/isTypeSupported">
+     *     MDN Documentation</a>
+     *
+     * @param mimeType the MIME type to check
+     * @return {@code true} if the current user agent supports creating
+     *         {@code SourceBuffer} objects for the specified MIME type
      */
     @JsxStaticFunction
     public static boolean isTypeSupported(final String mimeType) {

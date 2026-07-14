@@ -25,15 +25,18 @@ public interface Shape2D {
     double EPSILON = 0.000_000_1;
 
     /**
-     * @param x point x value
-     * @param y point y value
-     * @return <code>true</code> if the specified point is inside;
-     *         <code>false</code> otherwise.
+     * Returns whether the specified point lies inside this shape.
+     *
+     * @param x the x coordinate of the point to test
+     * @param y the y coordinate of the point to test
+     * @return {@code true} if the point is inside this shape; {@code false} otherwise
      */
     boolean contains(double x, double y);
 
     /**
-     * @return <code>true</code> if the Shape is empty.
+     * Returns whether this shape is empty.
+     *
+     * @return {@code true} if this shape is empty; {@code false} otherwise
      */
     boolean isEmpty();
 }

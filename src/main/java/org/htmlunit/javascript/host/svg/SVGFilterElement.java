@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFilter;
 
 /**
- * A JavaScript object for {@code SVGFilterElement}.
+ * JavaScript host object for {@code SVGFilterElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFilterElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFilter.class)
 public class SVGFilterElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

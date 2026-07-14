@@ -21,13 +21,13 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * JavaScript object representing the HashChangeEvent.
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.onhashchange">Mozilla Developer Network</a>
- * @see <a href="http://msdn.microsoft.com/en-us/library/cc288209.aspx">MSDN</a>
+ * JavaScript host object for {@code HashChangeEvent}.
  *
  * @author Ronald Brill
  * @author Marc Guillemot
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HashChangeEvent">MDN Documentation</a>
  */
 @JsxClass
 public class HashChangeEvent extends Event {
@@ -80,7 +80,8 @@ public class HashChangeEvent extends Event {
     }
 
     /**
-     * Returns the old URL.
+     * Returns the old URL before the hash change.
+     *
      * @return the old URL
      */
     @JsxGetter
@@ -89,7 +90,8 @@ public class HashChangeEvent extends Event {
     }
 
     /**
-     * Returns the new URL.
+     * Returns the new URL after the hash change.
+     *
      * @return the new URL
      */
     @JsxGetter

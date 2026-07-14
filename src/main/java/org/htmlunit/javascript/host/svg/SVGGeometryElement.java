@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 
 /**
- * A JavaScript object for {@code SVGGeometryElement}.
+ * JavaScript host object for {@code SVGGeometryElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement">MDN Documentation</a>
  */
 @JsxClass
 public class SVGGeometryElement extends SVGGraphicsElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

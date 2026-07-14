@@ -126,13 +126,14 @@ import org.htmlunit.util.StringUtils;
 import org.w3c.dom.NamedNodeMap;
 
 /**
- * A JavaScript object for {@code XMLSerializer}.
- * see https://w3c.github.io/DOM-Parsing/#the-xmlserializer-interface
+ * JavaScript host object for {@code XMLSerializer}.
  *
  * @author Ahmed Ashour
  * @author Darrell DeBoer
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLSerializer">MDN Documentation</a>
  */
 @JsxClass
 public class XMLSerializer extends HtmlUnitScriptable {
@@ -181,7 +182,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
     ));
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -189,9 +190,10 @@ public class XMLSerializer extends HtmlUnitScriptable {
     }
 
     /**
-     * The subtree rooted by the specified element is serialized to a string.
-     * @param root the root of the subtree to be serialized (this may be any node, even a document)
-     * @return the serialized string
+     * Serializes the subtree rooted at the specified node to a string.
+     *
+     * @param root the root of the subtree to serialize (may be any node, including a document)
+     * @return the serialized XML string
      */
     @JsxFunction
     public String serializeToString(Node root) {
@@ -309,5 +311,4 @@ public class XMLSerializer extends HtmlUnitScriptable {
             }
         }
     }
-
 }

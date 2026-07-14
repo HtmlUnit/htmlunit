@@ -24,18 +24,20 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code XMLHttpRequestEventTarget}.
+ * JavaScript host object for {@code XMLHttpRequestEventTarget}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Thorsten Wendelmuth
  * @author Atsushi Nakagawa
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget">MDN Documentation</a>
  */
 @JsxClass
 public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
@@ -45,6 +47,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Returns the event handler that fires on load.
+     *
      * @return the event handler that fires on load
      */
     @JsxGetter
@@ -54,6 +57,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on load.
+     *
      * @param loadHandler the event handler that fires on load
      */
     @JsxSetter
@@ -63,6 +67,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Returns the event handler that fires on error.
+     *
      * @return the event handler that fires on error
      */
     @JsxGetter
@@ -72,6 +77,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on error.
+     *
      * @param errorHandler the event handler that fires on error
      */
     @JsxSetter
@@ -81,6 +87,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Returns the event handler that fires on load start.
+     *
      * @return the event handler that fires on load start
      */
     @JsxGetter
@@ -90,6 +97,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on load start.
+     *
      * @param loadstartHandler the event handler that fires on load start
      */
     @JsxSetter
@@ -99,6 +107,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Returns the event handler that fires on load end.
+     *
      * @return the event handler that fires on load end
      */
     @JsxGetter
@@ -108,6 +117,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on load end.
+     *
      * @param loadendHandler the event handler that fires on load end
      */
     @JsxSetter
@@ -117,6 +127,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Returns the event handler that fires on progress.
+     *
      * @return the event handler that fires on progress
      */
     @JsxGetter
@@ -126,6 +137,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on progress.
+     *
      * @param progressHandler the event handler that fires on progress
      */
     @JsxSetter
@@ -135,6 +147,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Returns the event handler that fires on timeout.
+     *
      * @return the event handler that fires on timeout
      */
     @JsxGetter
@@ -144,6 +157,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on timeout.
+     *
      * @param timeoutHandler the event handler that fires on timeout
      */
     @JsxSetter
@@ -153,6 +167,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Returns the event handler that fires on ready state change.
+     *
      * @return the event handler that fires on ready state change
      */
     public Function getOnreadystatechange() {
@@ -161,6 +176,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on ready state change.
+     *
      * @param readyStateChangeHandler the event handler that fires on ready state change
      */
     public void setOnreadystatechange(final Function readyStateChangeHandler) {
@@ -169,6 +185,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Returns the event handler that fires on abort.
+     *
      * @return the event handler that fires on abort
      */
     @JsxGetter
@@ -178,6 +195,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on abort.
+     *
      * @param abortHandler the event handler that fires on abort
      */
     @JsxSetter

@@ -37,6 +37,8 @@ import org.htmlunit.javascript.configuration.JsxSymbolConstant;
  *
  * @author Lai Quang Duong
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale">MDN Documentation</a>
  */
 @JsxClass
 public class Locale extends HtmlUnitScriptable {
@@ -198,6 +200,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the language subtag.
      * @return the language
      */
     @JsxGetter
@@ -206,6 +209,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the script subtag.
      * @return the script
      */
     @JsxGetter
@@ -214,6 +218,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the region subtag.
      * @return the region
      */
     @JsxGetter
@@ -222,6 +227,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the calendar type.
      * @return the calendar type
      */
     @JsxGetter
@@ -230,6 +236,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the collation type.
      * @return the collation type
      */
     @JsxGetter
@@ -238,6 +245,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the numbering system.
      * @return the numbering system
      */
     @JsxGetter
@@ -246,6 +254,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the case first setting.
      * @return the case first setting
      */
     @JsxGetter
@@ -254,6 +263,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the hour cycle.
      * @return the hour cycle
      */
     @JsxGetter
@@ -262,6 +272,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns whether numeric sorting is used.
      * @return whether numeric sorting is used
      */
     @JsxGetter
@@ -270,6 +281,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the base name (without Unicode extensions).
      * @return the base name (without Unicode extensions)
      */
     @JsxGetter
@@ -333,6 +345,7 @@ public class Locale extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the locale's Unicode locale identifier string.
      * @return the locale's Unicode locale identifier string
      */
     @JsxFunction(functionName = "toString")

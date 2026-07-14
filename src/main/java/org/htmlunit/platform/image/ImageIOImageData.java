@@ -73,6 +73,8 @@ public class ImageIOImageData implements ImageData {
     }
 
     /**
+     * Returns the {@link ImageReader}.
+     *
      * @return the {@link ImageReader}
      */
     public ImageReader getImageReader() {

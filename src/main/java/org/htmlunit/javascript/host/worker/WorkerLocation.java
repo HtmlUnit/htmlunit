@@ -24,9 +24,11 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.util.UrlUtils;
 
 /**
- * A JavaScript object for WorkerLocation.
+ * JavaScript host object for {@code WorkerLocation}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WorkerLocation">MDN Documentation</a>
  */
 @JsxClass
 public class WorkerLocation extends HtmlUnitScriptable {
@@ -50,7 +52,7 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -69,7 +71,9 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a string containing the serialized URL for the worker's location.
+     * Returns the serialized URL for the worker's location.
+     *
+     * @return a string containing the serialized URL
      */
     @JsxGetter
     public String getHref() {
@@ -83,7 +87,9 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the protocol portion of the location URL, including the trailing ':'
+     * Returns the protocol portion of the location URL, including the trailing {@code :}.
+     *
+     * @return the protocol
      */
     @JsxGetter
     public String getProtocol() {
@@ -91,7 +97,9 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the host portion of the location URL
+     * Returns the host portion of the location URL.
+     *
+     * @return the host, including the port if non-default
      */
     @JsxGetter
     public String getHost() {
@@ -105,7 +113,9 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the hostname portion of the location URL
+     * Returns the hostname portion of the location URL.
+     *
+     * @return the hostname
      */
     @JsxGetter
     public String getHostname() {
@@ -113,7 +123,9 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the {@code origin} property
+     * Returns the {@code origin} property.
+     *
+     * @return the origin
      */
     @JsxGetter
     public String getOrigin() {
@@ -121,7 +133,9 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the port portion of the location URL
+     * Returns the port portion of the location URL.
+     *
+     * @return the port as a string, or an empty string if no port is specified
      */
     @JsxGetter
     public String getPort() {
@@ -133,7 +147,9 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the pathname portion of the location URL
+     * Returns the pathname portion of the location URL.
+     *
+     * @return the pathname
      */
     @JsxGetter
     public String getPathname() {
@@ -144,7 +160,9 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the search portion of the location URL
+     * Returns the search portion of the location URL.
+     *
+     * @return the query string, prefixed with {@code ?}, or an empty string if none
      */
     @JsxGetter
     public String getSearch() {
@@ -156,7 +174,9 @@ public class WorkerLocation extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the hash portion of the location URL
+     * Returns the hash portion of the location URL.
+     *
+     * @return the fragment identifier, prefixed with {@code #}, or an empty string if none
      */
     @JsxGetter
     public String getHash() {

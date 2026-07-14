@@ -49,6 +49,8 @@ import org.htmlunit.util.StringUtils;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Lai Quang Duong
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">MDN Documentation</a>
  */
 @JsxClass
 public class DateTimeFormat extends HtmlUnitScriptable {
@@ -252,10 +254,10 @@ public class DateTimeFormat extends HtmlUnitScriptable {
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the arguments to the DateTimeFormat constructor
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr {@code true} if invoked with the {@code new} operator
+     * @return the Java object that JavaScript can access
      */
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope,
@@ -286,7 +288,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     /**
      * Formats a date according to the locale and formatting options of this {@code DateTimeFormat} object.
      * @param object the JavaScript object to convert
-     * @return the dated formated
+     * @return the formatted date
      */
     @JsxFunction
     public String format(final Object object) {
@@ -295,7 +297,8 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     }
 
     /**
-     * @return A new object with properties reflecting the locale and date and time formatting options
+     * Returns the resolved options for this Intl.DateTimeFormat object.
+     * @return a new object with properties reflecting the locale and date and time formatting options
      *         computed during the initialization of the given {@code DateTimeFormat} object.
      */
     @JsxFunction
@@ -363,7 +366,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
          * Formats a date according to the locale and formatting options of this {@code DateTimeFormat} object.
          * @param date the JavaScript object to convert
          * @param zoneId the current time zone id
-         * @return the dated formated
+         * @return the formatted date
          */
         String format(final Date date, final ZoneId zoneId) {
             TemporalAccessor zonedDateTime = date.toInstant().atZone(zoneId);

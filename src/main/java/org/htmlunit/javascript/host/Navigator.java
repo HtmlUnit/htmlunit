@@ -36,7 +36,7 @@ import org.htmlunit.javascript.host.network.NetworkInformation;
 import org.htmlunit.util.StringUtils;
 
 /**
- * A JavaScript object for {@code Navigator}.
+ * JavaScript host object for {@code Navigator}.
  *
  * @author Mike Bowler
  * @author Daniel Gredler
@@ -46,7 +46,7 @@ import org.htmlunit.util.StringUtils;
  * @author Frank Danek
  * @author Ronald Brill
  *
- * @see <a href="http://msdn.microsoft.com/en-us/library/ms535867.aspx">MSDN documentation</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator">MDN Documentation</a>
  */
 @JsxClass
 public class Navigator extends HtmlUnitScriptable {
@@ -56,7 +56,7 @@ public class Navigator extends HtmlUnitScriptable {
     private MediaDevices mediaDevices_;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -65,6 +65,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code appCodeName} property.
+     *
      * @return the {@code appCodeName} property
      */
     @JsxGetter
@@ -74,6 +75,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code appName} property.
+     *
      * @return the {@code appName} property
      */
     @JsxGetter
@@ -83,6 +85,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code appVersion} property.
+     *
      * @return the {@code appVersion} property
      */
     @JsxGetter
@@ -92,7 +95,8 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the language of the browser.
-     * @return the language
+     *
+     * @return the browser language
      */
     @JsxGetter
     public String getLanguage() {
@@ -100,8 +104,9 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the language of the browser.
-     * @return the language
+     * Returns the preferred languages of the browser as an array.
+     *
+     * @return the languages array
      */
     @JsxGetter
     public Scriptable getLanguages() {
@@ -126,6 +131,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code cookieEnabled} property.
+     *
      * @return the {@code cookieEnabled} property
      */
     @JsxGetter
@@ -135,6 +141,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code onLine} property.
+     *
      * @return the {@code onLine} property
      */
     @JsxGetter
@@ -144,6 +151,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code platform} property.
+     *
      * @return the {@code platform} property
      */
     @JsxGetter
@@ -153,6 +161,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code product} property.
+     *
      * @return the {@code product} property
      */
     @JsxGetter
@@ -162,8 +171,9 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the build number of the current browser.
-     * @see <a href="https://developer.mozilla.org/en/navigator.productSub">Mozilla Doc</a>
-     * @return false
+     *
+     * @return the {@code productSub} property
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/productSub">MDN Documentation</a>
      */
     @JsxGetter
     public String getProductSub() {
@@ -171,8 +181,9 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the property {@code userAgent}.
-     * @return the property {@code userAgent}
+     * Returns the {@code userAgent} property.
+     *
+     * @return the {@code userAgent} property
      */
     @JsxGetter
     public String getUserAgent() {
@@ -180,8 +191,9 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns an empty array because HtmlUnit does not support embedded objects.
-     * @return an empty array
+     * Returns the list of browser plugins.
+     *
+     * @return the {@code plugins} array
      */
     @JsxGetter
     public PluginArray getPlugins() {
@@ -259,6 +271,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code mimeTypes} property.
+     *
      * @return the {@code mimeTypes} property
      */
     @JsxGetter
@@ -268,8 +281,9 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * Indicates if Java is enabled.
-     * @return false
+     * Returns whether Java is enabled. Always returns {@code false}.
+     *
+     * @return {@code false}
      */
     @JsxFunction
     public boolean javaEnabled() {
@@ -277,8 +291,9 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns {@code false} always as data tainting support is not enabled in HtmlUnit.
-     * @return false
+     * Returns {@code false} as data tainting support is not enabled in HtmlUnit.
+     *
+     * @return {@code false}
      */
     @JsxFunction({FF, FF_ESR})
     public boolean taintEnabled() {
@@ -287,6 +302,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code geolocation} property.
+     *
      * @return the {@code geolocation} property
      */
     @JsxGetter
@@ -298,8 +314,9 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * @return true whether the browser supports inline display
-     *         of PDF files when navigating to them
+     * Returns whether the browser supports inline display of PDF files when navigating to them.
+     *
+     * @return {@code true} if inline PDF viewing is supported
      */
     @JsxGetter
     public boolean isPdfViewerEnabled() {
@@ -308,6 +325,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code buildID} property.
+     *
      * @return the {@code buildID} property
      */
     @JsxGetter({FF, FF_ESR})
@@ -317,6 +335,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code vendor} property.
+     *
      * @return the {@code vendor} property
      */
     @JsxGetter
@@ -326,6 +345,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code vendorSub} property.
+     *
      * @return the {@code vendorSub} property
      */
     @JsxGetter
@@ -335,6 +355,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code doNotTrack} property.
+     *
      * @return the {@code doNotTrack} property
      */
     @JsxGetter
@@ -351,6 +372,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code oscpu} property.
+     *
      * @return the {@code oscpu} property
      */
     @JsxGetter({FF, FF_ESR})
@@ -360,6 +382,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code connection} property.
+     *
      * @return the {@code connection} property
      */
     @JsxGetter({CHROME, EDGE})
@@ -371,8 +394,9 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the {@code mimeTypes} property.
-     * @return the {@code mimeTypes} property
+     * Returns the {@code mediaDevices} property.
+     *
+     * @return the {@code mediaDevices} property
      */
     @JsxGetter
     public MediaDevices getMediaDevices() {

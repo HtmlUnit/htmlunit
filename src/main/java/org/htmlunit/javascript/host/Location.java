@@ -45,7 +45,7 @@ import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
- * A JavaScript object for {@code Location}.
+ * JavaScript host object for {@code Location}.
  *
  * @author Mike Bowler
  * @author Michael Ottati
@@ -144,19 +144,20 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * The current hash; we cache it locally because we don't want to modify the page's URL and
-     * force a page reload each time this changes.
+     * The current hash; cached locally to avoid modifying the page's URL and
+     * forcing a page reload each time this changes.
      */
     private String hash_;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
+     *
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the Location constructor
+     * @param args the constructor arguments
      * @param ctorObj the function object
-     * @param inNewExpr {@code true} if invoked with the {@code new} operator
-     * @return the Java object that JavaScript can access
+     * @param inNewExpr whether invoked via {@code new}
+     * @return the new {@code Location} instance
      */
     @JsxConstructor
     public static Location jsConstructor(final Context cx, final VarScope scope,
@@ -172,7 +173,7 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Initializes this Location.
+     * Initializes this {@code Location}.
      *
      * @param scope the scope
      * @param window the window that this location belongs to
@@ -224,7 +225,8 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Loads the new HTML document corresponding to the specified URL.
-     * @param url the location of the new HTML document to load
+     *
+     * @param url the URL of the new HTML document to load
      * @throws IOException if loading the specified location fails
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/assign">MDN Documentation</a>
      */
@@ -233,9 +235,10 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Reloads the current page, possibly forcing retrieval from the server even if
+     * Reloads the current page, optionally forcing retrieval from the server even if
      * the browser cache contains the latest version of the document.
-     * @param force if {@code true}, force reload from server; otherwise, may reload from cache
+     *
+     * @param force if {@code true}, force reload from the server; otherwise, the browser may reload from cache
      * @throws IOException if there is a problem reloading the page
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/reload">MDN Documentation</a>
      */
@@ -254,8 +257,9 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Loads the document at the specified URL, replacing the current entry in the session
-     * history so that the previous page cannot be reached via the back button.
+     * Loads the document at the specified URL, replacing the current entry in the session history
+     * so that the previous page cannot be reached via the back button.
+     *
      * @param url the new URL to load
      * @throws IOException if loading the specified location fails
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/replace">MDN Documentation</a>
@@ -266,7 +270,8 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the location URL.
+     * Returns the location URL as a string.
+     *
      * @return the location URL
      */
     public String jsToString() {
@@ -277,7 +282,8 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the location URL.
+     * Returns the full URL of the current page.
+     *
      * @return the location URL
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/href">MDN Documentation</a>
      */
@@ -310,7 +316,8 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the location URL to an entirely new value.
+     * Sets the location URL to an entirely new value, navigating to the new page.
+     *
      * @param newLocation the new location URL
      * @throws IOException if loading the specified location fails
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/href">MDN Documentation</a>
@@ -352,7 +359,8 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the search portion of the location URL (the portion following the '?').
+     * Returns the search portion of the location URL (the portion following the {@code ?}).
+     *
      * @return the search portion of the location URL
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/search">MDN Documentation</a>
      */
@@ -372,7 +380,8 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the search portion of the location URL (the portion following the '?').
+     * Sets the search portion of the location URL (the portion following the {@code ?}).
+     *
      * @param search the new search portion of the location URL
      * @throws Exception if an error occurs
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/search">MDN Documentation</a>
@@ -382,7 +391,8 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the hash portion of the location URL (the portion following the '#').
+     * Returns the hash portion of the location URL (the portion following the {@code #}).
+     *
      * @return the hash portion of the location URL
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/hash">MDN Documentation</a>
      */
@@ -408,7 +418,8 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the hash portion of the location URL (the portion following the '#').
+     * Sets the hash portion of the location URL (the portion following the {@code #}).
+     * This method does not cause a server hit.
      *
      * @param hash the new hash portion of the location URL
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/hash">MDN Documentation</a>
@@ -420,7 +431,7 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the hash portion of the location URL (the portion following the '#').
+     * Sets the hash portion of the location URL (the portion following the {@code #}).
      *
      * @param oldURL the old URL
      * @param hash the new hash portion of the location URL
@@ -432,7 +443,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Sets the hash portion of the location URL (the portion following the '#').
+     * Sets the hash portion of the location URL (the portion following the {@code #}).
      *
      * @param oldURL the old URL
      * @param hash the new hash portion of the location URL
@@ -464,6 +475,7 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Returns the hostname portion of the location URL.
+     *
      * @return the hostname portion of the location URL
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/hostname">MDN Documentation</a>
      */
@@ -473,6 +485,7 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Sets the hostname portion of the location URL.
+     *
      * @param hostname the new hostname portion of the location URL
      * @throws Exception if an error occurs
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/hostname">MDN Documentation</a>
@@ -482,7 +495,8 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the host portion of the location URL (the '[hostname]:[port]' portion).
+     * Returns the host portion of the location URL (the {@code [hostname]:[port]} portion).
+     *
      * @return the host portion of the location URL
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/host">MDN Documentation</a>
      */
@@ -498,7 +512,8 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the host portion of the location URL (the '[hostname]:[port]' portion).
+     * Sets the host portion of the location URL (the {@code [hostname]:[port]} portion).
+     *
      * @param host the new host portion of the location URL
      * @throws Exception if an error occurs
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/host">MDN Documentation</a>
@@ -521,6 +536,7 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Returns the pathname portion of the location URL.
+     *
      * @return the pathname portion of the location URL
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname">MDN Documentation</a>
      */
@@ -533,6 +549,7 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Sets the pathname portion of the location URL.
+     *
      * @param pathname the new pathname portion of the location URL
      * @throws Exception if an error occurs
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname">MDN Documentation</a>
@@ -543,7 +560,8 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Returns the port portion of the location URL.
-     * @return the port portion of the location URL
+     *
+     * @return the port portion of the location URL, or an empty string if no port is specified
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/port">MDN Documentation</a>
      */
     public String getPort() {
@@ -556,6 +574,7 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Sets the port portion of the location URL.
+     *
      * @param port the new port portion of the location URL
      * @throws Exception if an error occurs
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/port">MDN Documentation</a>
@@ -565,8 +584,9 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the protocol portion of the location URL, including the trailing ':'.
-     * @return the protocol portion of the location URL, including the trailing ':'
+     * Returns the protocol portion of the location URL, including the trailing {@code :}.
+     *
+     * @return the protocol portion of the location URL
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol">MDN Documentation</a>
      */
     public String getProtocol() {
@@ -575,6 +595,7 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Sets the protocol portion of the location URL.
+     *
      * @param protocol the new protocol portion of the location URL
      * @throws Exception if an error occurs
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol">MDN Documentation</a>
@@ -585,6 +606,7 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Returns this location's current URL.
+     *
      * @return this location's current URL
      */
     private URL getUrl() {
@@ -592,8 +614,9 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets this location's URL, triggering a server hit and loading the resultant document
+     * Sets this location's URL, triggering a server request and loading the resulting document
      * into this location's window.
+     *
      * @param url this location's new URL
      * @throws IOException if there is a problem loading the new location
      */
@@ -610,6 +633,7 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code origin} property.
+     *
      * @return the {@code origin} property
      */
     public String getOrigin() {

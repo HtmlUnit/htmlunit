@@ -608,8 +608,10 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * @return the {@link ImageData} of this image
-     * @throws IOException in case of error
+     * Returns the image data for this image.
+     *
+     * @return the {@link ImageData} for this image
+     * @throws IOException if an I/O error occurs while reading the image
      */
     public ImageData getImageData() throws IOException {
         readImageIfNeeded();
@@ -804,7 +806,10 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * @return true if the image was successfully downloaded
+     * Returns whether this image has finished loading.
+     *
+     * @return {@code true} if the image has finished loading or has no
+     *         {@code src} attribute
      */
     public boolean isComplete() {
         return isComplete_ || ATTRIBUTE_NOT_DEFINED == getSrcAttribute();

@@ -21,6 +21,8 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebResponse;
 
 /**
+ * Utility class for HTTP header analysis.
+ *
  * @author Anton Demydenko
  * @author Lai Quang Duong
  * @author Ronald Brill
@@ -41,72 +43,91 @@ public final class HeaderUtils {
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return if 'Cache-Control' header is present and contains 'private' value
+     * Returns whether the {@code Cache-Control} header is present and contains the {@code private} directive.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return {@code true} if the {@code Cache-Control} header contains {@code private}
      */
     public static boolean containsPrivate(final WebResponse response) {
         return containsCacheControlValue(response, CACHE_CONTROL_PRIVATE);
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return if 'Cache-Control' header is present and contains 'public' value
+     * Returns whether the {@code Cache-Control} header is present and contains the {@code public} directive.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return {@code true} if the {@code Cache-Control} header contains {@code public}
      */
     public static boolean containsPublic(final WebResponse response) {
         return containsCacheControlValue(response, CACHE_CONTROL_PUBLIC);
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return if 'Cache-Control' header is present and contains 'no-store' value
+     * Returns whether the {@code Cache-Control} header is present and contains the {@code no-store} directive.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return {@code true} if the {@code Cache-Control} header contains {@code no-store}
      */
     public static boolean containsNoStore(final WebResponse response) {
         return containsCacheControlValue(response, CACHE_CONTROL_NO_STORE);
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return if 'Cache-Control' header is present and contains 'no-cache' value@return
+     * Returns whether the {@code Cache-Control} header is present and contains the {@code no-cache} directive.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return {@code true} if the {@code Cache-Control} header contains {@code no-cache}
      */
     public static boolean containsNoCache(final WebResponse response) {
         return containsCacheControlValue(response, CACHE_CONTROL_NO_CACHE);
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return if 'Etag' header is present
+     * Returns whether the {@code ETag} header is present.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return {@code true} if the {@code ETag} header is present
      */
     public static boolean containsETag(final WebResponse response) {
         return response.getResponseHeaderValue(HttpHeader.ETAG) != null;
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return if 'Last-Modified' header is present
+     * Returns whether the {@code Last-Modified} header is present.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return {@code true} if the {@code Last-Modified} header is present
      */
     public static boolean containsLastModified(final WebResponse response) {
         return response.getResponseHeaderValue(HttpHeader.LAST_MODIFIED) != null;
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return if 'Cache-Control' header is present and contains 's-maxage' value
+     * Returns whether the {@code Cache-Control} header is present and contains the {@code s-maxage} directive.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return {@code true} if the {@code Cache-Control} header contains {@code s-maxage}
      */
     public static boolean containsSMaxage(final WebResponse response) {
         return containsCacheControlValue(response, CACHE_CONTROL_S_MAXAGE);
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return if 'Cache-Control' header is present and contains 'max-age' value
+     * Returns whether the {@code Cache-Control} header is present and contains the {@code max-age} directive.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return {@code true} if the {@code Cache-Control} header contains {@code max-age}
      */
     public static boolean containsMaxAge(final WebResponse response) {
         return containsCacheControlValue(response, CACHE_CONTROL_MAX_AGE);
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return if 'Cache-Control' header is present and contains 'max-age' value
+     * Returns whether the {@code Cache-Control} header is present and contains
+     * either the {@code max-age} or the {@code s-maxage} directive.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return {@code true} if the {@code Cache-Control} header contains {@code max-age} or {@code s-maxage}
      */
     public static boolean containsMaxAgeOrSMaxage(final WebResponse response) {
         final String cacheControl = response.getResponseHeaderValue(HttpHeader.CACHE_CONTROL);
@@ -117,8 +138,10 @@ public final class HeaderUtils {
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return value of 's-maxage' directive and 0 if it is absent
+     * Returns the value of the {@code s-maxage} directive, or {@code 0} if it is absent.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return the value of the {@code s-maxage} directive, or {@code 0}
      */
     public static long sMaxage(final WebResponse response) {
         if (containsCacheControlValue(response, CACHE_CONTROL_S_MAXAGE)) {
@@ -128,8 +151,10 @@ public final class HeaderUtils {
     }
 
     /**
-     * @param response {@code WebResponse}
-     * @return value of 'max-age' directive and 0 if it is absent
+     * Returns the value of the {@code max-age} directive, or {@code 0} if it is absent.
+     *
+     * @param response the {@link WebResponse} to check
+     * @return the value of the {@code max-age} directive, or {@code 0}
      */
     public static long maxAge(final WebResponse response) {
         if (containsCacheControlValue(response, CACHE_CONTROL_MAX_AGE)) {

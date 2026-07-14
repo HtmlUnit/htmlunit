@@ -25,6 +25,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam">MDN Documentation</a>
  */
 @JsxClass
 public class AudioParam extends HtmlUnitScriptable {
@@ -40,6 +42,7 @@ public class AudioParam extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code value} property.
      * @return the value
      */
     @JsxGetter
@@ -48,6 +51,7 @@ public class AudioParam extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code value} property.
      * @param value the value
      */
     @JsxSetter
@@ -56,6 +60,7 @@ public class AudioParam extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code defaultValue} property.
      * @return the defaultValue
      */
     @JsxGetter
@@ -64,6 +69,7 @@ public class AudioParam extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code maxValue} property.
      * @return the maxValue
      */
     @JsxGetter
@@ -73,6 +79,7 @@ public class AudioParam extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code minValue} property.
      * @return the minValue
      */
     @JsxGetter

@@ -55,7 +55,8 @@ public class XmlSerializer {
     private File outputDir_;
 
     /**
-     * Saves the given {@link SgmlPage} to the file.
+     * Saves the specified page to the given file.
+     *
      * @param page the page to save
      * @param file the destination
      * @throws IOException in case of error
@@ -99,6 +100,8 @@ public class XmlSerializer {
     }
 
     /**
+     * Returns the XML representation of the specified element.
+     *
      * @param node a node
      * @return the xml representation according to the setting of this serializer
      * @throws IOException in case of problem saving resources
@@ -146,6 +149,8 @@ public class XmlSerializer {
     }
 
     /**
+     * Returns the text content of the specified node.
+     *
      * @param node a node
      * @return the text representation according to the setting of this serializer
      */
@@ -226,6 +231,8 @@ public class XmlSerializer {
     }
 
     /**
+     * Returns the attributes to serialize for the specified frame.
+     *
      * @param frame the frame to get the attributes from
      * @return the attribute map
      */
@@ -273,6 +280,8 @@ public class XmlSerializer {
     }
 
     /**
+     * Returns the attributes to serialize for the specified link.
+     *
      * @param link the link to get the attributes from
      * @return the attribute map
      * @throws IOException in case of error
@@ -305,6 +314,8 @@ public class XmlSerializer {
     }
 
     /**
+     * Returns the attributes to serialize for the specified image.
+     *
      * @param image the image to get the attributes from
      * @return the attribute map
      */
@@ -336,6 +347,12 @@ public class XmlSerializer {
         return map;
     }
 
+    /**
+     * Returns the file extension for the specified page.
+     *
+     * @param enclosedPage the page
+     * @return the file extension
+     */
     private static String getSuffix(final WebResponse response) {
         // first try to take the one from the requested file
         final String url = response.getWebRequest().getUrl().toString();
@@ -351,6 +368,13 @@ public class XmlSerializer {
         return MimeType.getFileExtension(response.getContentType());
     }
 
+    /**
+     * Creates a copy of the element's attributes with the specified attribute cloned.
+     *
+     * @param elt the element
+     * @param attrName the attribute to clone
+     * @return the copied attribute map
+     */
     private static Map<String, DomAttr> createAttributesCopyWithClonedAttribute(final HtmlElement elt,
             final String attrName) {
         final Map<String, DomAttr> newMap = new HashMap<>(elt.getAttributesMap());
@@ -370,6 +394,8 @@ public class XmlSerializer {
     }
 
     /**
+     * Determines whether the specified element should be excluded from serialization.
+     *
      * @param element the element to check
      * @return true if the element is a HtmlScript
      */

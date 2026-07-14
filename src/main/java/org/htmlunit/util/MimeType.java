@@ -19,44 +19,45 @@ import java.util.Locale;
 import org.htmlunit.cyberneko.util.FastHashMap;
 
 /**
- * Utility holding information about association between MIME type and file extensions.
+ * Utility class holding information about the association between MIME types and file extensions.
+ *
  * @author Marc Guillemot
  * @author Ronald Brill
  */
 public final class MimeType {
 
-    /** "text/javascript". */
+    /** {@code "text/javascript"}. */
     public static final String TEXT_JAVASCRIPT = "text/javascript";
-    /** "application/octet-stream". */
+    /** {@code "application/octet-stream"}. */
     public static final String APPLICATION_OCTET_STREAM = "application/octet-stream";
-    /** "application/json". */
+    /** {@code "application/json"}. */
     public static final String APPLICATION_JSON = "application/json";
-    /** application/xhtml+xml. */
+    /** {@code "application/xhtml+xml"}. */
     public static final String APPLICATION_XHTML = "application/xhtml+xml";
-    /** application/xml. */
+    /** {@code "application/xml"}. */
     public static final String APPLICATION_XML = "application/xml";
 
-    /** "text/css". */
+    /** {@code "text/css"}. */
     public static final String TEXT_CSS = "text/css";
-    /** "text/html". */
+    /** {@code "text/html"}. */
     public static final String TEXT_HTML = "text/html";
-    /** "text/xml". */
+    /** {@code "text/xml"}. */
     public static final String TEXT_XML = "text/xml";
-    /** "text/plain". */
+    /** {@code "text/plain"}. */
     public static final String TEXT_PLAIN = "text/plain";
 
-    /** "image/gif". */
+    /** {@code "image/gif"}. */
     public static final String IMAGE_GIF = "image/gif";
-    /** "image/jpeg". */
+    /** {@code "image/jpeg"}. */
     public static final String IMAGE_JPEG = "image/jpeg";
-    /** "image/png". */
+    /** {@code "image/png"}. */
     public static final String IMAGE_PNG = "image/png";
 
     private static final FastHashMap<String, String> TYPE2EXTENSION = buildMap();
 
     /**
      * A map to avoid lowercase conversion and a check if this is one of
-     * our mimetype we know. The value is not used.
+     * our known MIME types. The value is not used.
      */
     private static final FastHashMap<String, Boolean> LOOKUP_MAP = new FastHashMap<>(2 * 16 + 1, 0.7f);
 
@@ -85,11 +86,11 @@ public final class MimeType {
     }
 
     /**
-     * See <a href="https://www.rfc-editor.org/rfc/rfc9239.html#name-iana-considerations">
-     * https://www.rfc-editor.org/rfc/rfc9239.html#name-iana-considerations</a>.
+     * Returns whether the given MIME type is a valid JavaScript MIME type according to
+     * <a href="https://www.rfc-editor.org/rfc/rfc9239.html#name-iana-considerations">RFC 9239</a>.
      *
      * @param mimeType the type to check
-     * @return true if the mime type is obsolete
+     * @return {@code true} if the MIME type is a JavaScript MIME type
      */
     public static boolean isJavascriptMimeType(final String mimeType) {
         if (mimeType == null) {
@@ -116,11 +117,11 @@ public final class MimeType {
     }
 
     /**
-     * See <a href="https://mimesniff.spec.whatwg.org/#javascript-mime-type">
-     * https://mimesniff.spec.whatwg.org/#javascript-mime-type</a>.
+     * Returns whether the given MIME type is an obsolete JavaScript MIME type according to
+     * <a href="https://mimesniff.spec.whatwg.org/#javascript-mime-type">MIME Sniffing</a>.
      *
      * @param mimeType the type to check
-     * @return true if the mime type is for js
+     * @return {@code true} if the MIME type is an obsolete JavaScript MIME type
      */
     public static boolean isObsoleteJavascriptMimeType(final String mimeType) {
         if (mimeType == null) {
@@ -184,9 +185,11 @@ public final class MimeType {
     }
 
     /**
-     * Gets the preferred file extension for a content type.
-     * @param contentType the mime type
-     * @return {@code null} if none is known
+     * Returns the preferred file extension for the given content type,
+     * or {@code "unknown"} if none is known.
+     *
+     * @param contentType the MIME type
+     * @return the file extension, or {@code "unknown"} if not recognized
      */
     public static String getFileExtension(final String contentType) {
         if (contentType == null) {
