@@ -18,8 +18,11 @@ import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLAN
 
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.Page;
+import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -84,9 +87,11 @@ public class URL extends HtmlUnitScriptable {
     }
 
     /**
-     * Creates a {@code DOMString} containing a URL representing the given object.
-     * The URL's lifetime is tied to the document in the window on which it was created.
-     * The new object URL represents the specified {@link File} or {@link Blob} object.
+     * The URL.createObjectURL() static method creates a {@code DOMString} containing a URL
+     * representing the object given as parameter.
+     * The new object URL represents the specified {@link File} object or {@link Blob} object
+     * and is registered in the {@link org.htmlunit.BlobUrlStore user-agent-wide blob URL store},
+     * so it can be resolved from any document of the same client.
      *
      * @param fileOrBlob the {@link File} or {@link Blob} to create an object URL for
      * @return the object URL, or {@code null} if the argument is not a supported type
@@ -94,26 +99,45 @@ public class URL extends HtmlUnitScriptable {
      */
     @JsxStaticFunction
     public static String createObjectURL(final Object fileOrBlob) {
-        if (fileOrBlob instanceof File file) {
-            return getWindow(file).getDocument().generateBlobUrl(file);
+        if (!(fileOrBlob instanceof Blob blob)) {
+            throw JavaScriptEngine.typeError("URL.createObjectURL: argument 1 is not a Blob.");
         }
 
-        if (fileOrBlob instanceof Blob blob) {
-            return getWindow(blob).getDocument().generateBlobUrl(blob);
+        final WebWindow webWindow = getWindow(blob).getWebWindow();
+        final Page page = webWindow.getEnclosedPage();
+        final java.net.URL pageUrl = page.getUrl();
+
+        String origin = "null";
+        if (pageUrl != UrlUtils.URL_ABOUT_BLANK) {
+            final int port = pageUrl.getPort();
+            if (port < 0 || port == pageUrl.getDefaultPort()) {
+                origin = pageUrl.getProtocol() + "://" + pageUrl.getHost();
+            }
+            else {
+                origin = pageUrl.getProtocol() + "://" + pageUrl.getHost() + ':' + port;
+            }
         }
 
-        return null;
+        final String blobUrl = "blob:" + origin + "/" + UUID.randomUUID();
+        webWindow.getWebClient().getBlobUrlStore().put(blobUrl, blob, page);
+        return blobUrl;
     }
 
     /**
-     * Releases an existing object URL that was previously created by {@link #createObjectURL}.
+     * Revokes a {@code blob:} URL, removing its entry from the blob URL store.
+     *
+     * @param objectURL the object URL previously returned by {@link #createObjectURL(Object)}
      *
      * @param objectURL the object URL to revoke
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL_static">MDN Documentation</a>
      */
     @JsxStaticFunction
     public static void revokeObjectURL(final Scriptable objectURL) {
-        getWindow(objectURL).getDocument().revokeBlobUrl(Context.toString(objectURL));
+        final String url = Context.toString(objectURL);
+        if (!url.startsWith("blob:")) {
+            return;
+        }
+        getWindow(objectURL).getWebWindow().getWebClient().getBlobUrlStore().remove(url);
     }
 
     /**

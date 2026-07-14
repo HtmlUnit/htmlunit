@@ -30,13 +30,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
@@ -118,7 +116,6 @@ import org.htmlunit.javascript.host.event.ProgressEvent;
 import org.htmlunit.javascript.host.event.TextEvent;
 import org.htmlunit.javascript.host.event.UIEvent;
 import org.htmlunit.javascript.host.event.WheelEvent;
-import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.html.HTMLAllCollection;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLCollection;
@@ -230,8 +227,6 @@ public class Document extends Node {
     private ScriptableObject currentScript_;
     private transient FontFaceSet fonts_;
     private transient StyleSheetList styleSheetList_;
-
-    private final Map<String, Blob> blobUrl2Blobs_ = new HashMap<>();
 
     static {
         // commands
@@ -3585,40 +3580,5 @@ public class Document extends Node {
     @Override
     public boolean contains(final Object element) {
         return getDocumentElement().contains(element);
-    }
-
-    /**
-     * Generate and return the URL for the given blob.
-     * @param blob the Blob containing the data
-     * @return the URL {@link org.htmlunit.javascript.host.URL#createObjectURL(Object)}
-     */
-    public String generateBlobUrl(final Blob blob) {
-        final URL url = getPage().getUrl();
-
-        String origin = "null";
-        if (!UrlUtils.URL_ABOUT_BLANK.equals(url)) {
-            origin = url.getProtocol() + "://" + url.getAuthority();
-        }
-
-        final String blobUrl = "blob:" + origin + "/" + UUID.randomUUID();
-        blobUrl2Blobs_.put(blobUrl, blob);
-        return blobUrl;
-    }
-
-    /**
-     * Resolves a blob URL to its associated {@link Blob}.
-     * @param url the url to resolve
-     * @return the Blob for the given URL or {@code null} if not found
-     */
-    public Blob resolveBlobUrl(final String url) {
-        return blobUrl2Blobs_.get(url);
-    }
-
-    /**
-     * Revokes the URL for the given blob.
-     * @param url the url to revoke {@link org.htmlunit.javascript.host.URL#revokeObjectURL(Scriptable)}
-     */
-    public void revokeBlobUrl(final String url) {
-        blobUrl2Blobs_.remove(url);
     }
 }

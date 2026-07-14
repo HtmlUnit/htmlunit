@@ -730,9 +730,19 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 return;
             }
 
-            final boolean isDataUrl = "data".equals(fullUrl.getProtocol());
-            if (isDataUrl) {
+            if ("data".equals(fullUrl.getProtocol())) {
                 isSameOrigin_ = true;
+            }
+            else if ("blob".equals(fullUrl.getProtocol())) {
+                boolean sameOrigin = false;
+                try {
+                    final URL blobOrigin = UrlUtils.toUrlUnsafe(fullUrl.toExternalForm().substring("blob:".length()));
+                    sameOrigin = UrlUtils.isSameOrigin(pageUrl, blobOrigin);
+                }
+                catch (final MalformedURLException ignored) {
+                    // keep sameOrigin = false
+                }
+                isSameOrigin_ = sameOrigin;
             }
             else {
                 isSameOrigin_ = UrlUtils.isSameOrigin(pageUrl, fullUrl);
