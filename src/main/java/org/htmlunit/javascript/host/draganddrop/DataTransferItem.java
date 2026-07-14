@@ -62,6 +62,8 @@ public class DataTransferItem extends HtmlUnitScriptable {
     }
 
     /**
+     * Creates a string data transfer item.
+     *
      * @param data the data
      * @param type the type
      * @return a new {@link DataTransferItem}
@@ -71,6 +73,8 @@ public class DataTransferItem extends HtmlUnitScriptable {
     }
 
     /**
+     * Creates a file data transfer item.
+     *
      * @param file the file
      * @return a new {@link DataTransferItem}
      */
@@ -87,6 +91,8 @@ public class DataTransferItem extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code type} property.
+     *
      * @return the {@code type} property
      */
     @JsxGetter
@@ -95,6 +101,8 @@ public class DataTransferItem extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code type} property.
+     *
      * @return the {@code type} property
      */
     @JsxGetter
@@ -103,8 +111,8 @@ public class DataTransferItem extends HtmlUnitScriptable {
     }
 
     /**
-     * Invokes the given callback with the drag data item's string data as the argument
-     * if the item's kind is a Plain unicode string (i.e. kind is string).
+     * Invokes the given callback with the drag data item's string data if the item contains a plain Unicode string.
+     *
      * @param callback Function to execute
      */
     @JsxFunction
@@ -133,7 +141,9 @@ public class DataTransferItem extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the drag data item's File object. If the item is not a file, this method returns null.
+     * Returns the file represented by this drag data item.
+     *
+     * @return the drag data item's {@link File}, or {@code null} if this item is not a file
      */
     @JsxFunction
     public File getAsFile() {
@@ -145,7 +155,9 @@ public class DataTransferItem extends HtmlUnitScriptable {
     }
 
     /**
-     * @return true if this is a file
+     * Returns whether this item represents a file.
+     *
+     * @return {@code true} if this item represents a file
      */
     public boolean isFile() {
         return kind_ == KIND_FILE;

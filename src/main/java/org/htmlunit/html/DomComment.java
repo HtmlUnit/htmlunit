@@ -51,7 +51,7 @@ public class DomComment extends DomCharacterData implements Comment {
     }
 
     /**
-     * @return the node name, in this case {@link #NODE_NAME}
+     * {@inheritDoc}
      */
     @Override
     public String getNodeName() {
@@ -62,7 +62,7 @@ public class DomComment extends DomCharacterData implements Comment {
      * {@inheritDoc}
      */
     @Override
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         printWriter.print(indent);
         printWriter.print("<!--");
         printWriter.print(getData());

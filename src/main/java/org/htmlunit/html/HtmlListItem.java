@@ -34,7 +34,7 @@ public class HtmlListItem extends HtmlElement {
     public static final String TAG_NAME = "li";
 
     /**
-     * Creates an instance of HtmlListItem
+     * Creates an instance of HtmlListItem.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

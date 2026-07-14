@@ -368,6 +368,7 @@ public abstract class HtmlElement extends DomElement {
      * <p>
      * Note that this method recursively calls this element's parent's
      * {@link #fireHtmlAttributeAdded(HtmlAttributeChangeEvent)} method.
+     * </p>
      *
      * @param event the event
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
@@ -386,6 +387,7 @@ public abstract class HtmlElement extends DomElement {
      * <p>
      * Note that this method recursively calls this element's parent's
      * {@link #fireHtmlAttributeReplaced(HtmlAttributeChangeEvent)} method.
+     * </p>
      *
      * @param event the event
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
@@ -404,6 +406,7 @@ public abstract class HtmlElement extends DomElement {
      * <p>
      * Note that this method recursively calls this element's parent's
      * {@link #fireHtmlAttributeRemoved(HtmlAttributeChangeEvent)} method.
+     * </p>
      *
      * @param event the event
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
@@ -642,6 +645,7 @@ public abstract class HtmlElement extends DomElement {
      * submits the enclosed form.
      * <p>
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
+     * </p>
      *
      * @param keyCode the key code to simulate typing
      * @return the page that occupies this window after typing
@@ -817,6 +821,7 @@ public abstract class HtmlElement extends DomElement {
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      * <p>
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
+     * </p>
      *
      * @param keyCode the key code wish to simulate typing
      * @param lastType is this the last to type

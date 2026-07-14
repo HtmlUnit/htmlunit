@@ -36,7 +36,7 @@ public class HtmlSpan extends HtmlElement {
     public static final String TAG_NAME = "span";
 
     /**
-     * Creates an instance of HtmlSpan
+     * Creates an instance of HtmlSpan.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

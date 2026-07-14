@@ -20,13 +20,13 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code MimeType}.
+ * JavaScript host object for {@code MimeType}.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
  *
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MimeType">MimeType</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MimeType">MDN Documentation</a>
  */
 @JsxClass
 public class MimeType extends HtmlUnitScriptable {
@@ -44,7 +44,7 @@ public class MimeType extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -52,11 +52,12 @@ public class MimeType extends HtmlUnitScriptable {
     }
 
     /**
-     * Constructor initializing fields.
-     * @param type the mime type
-     * @param description the type description
-     * @param suffixes the file suffixes
-     * @param plugin the associated plugin
+     * Creates an instance with the given properties.
+     *
+     * @param type the MIME type string
+     * @param description the human-readable description
+     * @param suffixes the file suffixes associated with this MIME type
+     * @param plugin the plugin that handles this MIME type
      */
     public MimeType(final String type, final String description, final String suffixes, final Plugin plugin) {
         super();
@@ -67,7 +68,8 @@ public class MimeType extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the mime type's description.
+     * Returns the MIME type's description.
+     *
      * @return the description
      */
     @JsxGetter
@@ -76,7 +78,8 @@ public class MimeType extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the mime type's suffixes.
+     * Returns the file suffixes associated with this MIME type.
+     *
      * @return the suffixes
      */
     @JsxGetter
@@ -85,8 +88,9 @@ public class MimeType extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the mime type's suffixes.
-     * @return the suffixes
+     * Returns the MIME type string.
+     *
+     * @return the MIME type
      */
     @JsxGetter
     public String getType() {
@@ -94,8 +98,9 @@ public class MimeType extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the mime type's associated plugin.
-     * @return the plugin
+     * Returns the plugin that handles this MIME type.
+     *
+     * @return the enabled plugin
      */
     @JsxGetter
     public Plugin getEnabledPlugin() {

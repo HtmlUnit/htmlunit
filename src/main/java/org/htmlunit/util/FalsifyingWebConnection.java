@@ -29,7 +29,7 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
 
 /**
- * Extension of {@link WebConnectionWrapper} providing facility methods to deliver something other than
+ * Extension of {@link WebConnectionWrapper} providing utility methods to deliver content other than
  * what the wrapped connection would deliver.
  *
  * @author Marc Guillemot
@@ -38,8 +38,9 @@ import org.htmlunit.WebResponseData;
 public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
 
     /**
-     * Constructs a WebConnection object wrapping provided WebConnection.
-     * @param webConnection the webConnection that does the real work
+     * Constructs a web connection wrapping the provided {@link WebConnection}.
+     *
+     * @param webConnection the web connection that does the real work
      * @throws IllegalArgumentException if the connection is {@code null}
      */
     public FalsifyingWebConnection(final WebConnection webConnection) throws IllegalArgumentException {
@@ -47,20 +48,22 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
     }
 
     /**
-     * Constructs an instance and places itself as connection of the WebClient.
-     * @param webClient the WebClient which WebConnection should be wrapped
-     * @throws IllegalArgumentException if the WebClient is {@code null}
+     * Constructs an instance and installs itself as the connection of the given {@link WebClient}.
+     *
+     * @param webClient the {@link WebClient} whose connection should be wrapped
+     * @throws IllegalArgumentException if the {@link WebClient} is {@code null}
      */
     public FalsifyingWebConnection(final WebClient webClient) throws IllegalArgumentException {
         super(webClient);
     }
 
     /**
-     * Delivers the content for an alternate URL as if it comes from the requested URL.
+     * Delivers the content for an alternate URL as if it comes from the originally requested URL.
+     *
      * @param webRequest the original web request
-     * @param url the URL from which the content should be retrieved
+     * @param url the URL from which the content should actually be retrieved
      * @return the response
-     * @throws IOException if a problem occurred
+     * @throws IOException if a problem occurs
      */
     protected WebResponse deliverFromAlternateUrl(final WebRequest webRequest, final URL url)
         throws IOException {
@@ -72,11 +75,12 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
     }
 
     /**
-     * Builds a WebResponse with new content, preserving all other information.
+     * Builds a new {@link WebResponse} with the given content, preserving all other response attributes.
+     *
      * @param wr the web response to adapt
      * @param newContent the new content to place in the response
      * @return a web response with the new content
-     * @throws IOException if an encoding problem occurred
+     * @throws IOException if an encoding problem occurs
      */
     protected WebResponse replaceContent(final WebResponse wr, final String newContent) throws IOException {
         final byte[] body = newContent.getBytes(wr.getContentCharset());
@@ -87,12 +91,14 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
     }
 
     /**
-     * Creates a faked WebResponse for the request with the provided content.
+     * Creates a faked {@link WebResponse} for the given request with the provided content,
+     * using HTTP status 200 OK.
+     *
      * @param wr the web request for which a response should be created
      * @param content the content to place in the response
      * @param contentType the content type of the response
      * @return a web response with the provided content
-     * @throws IOException if an encoding problem occurred
+     * @throws IOException if an encoding problem occurs
      */
     protected WebResponse createWebResponse(final WebRequest wr, final String content,
             final String contentType) throws IOException {
@@ -100,14 +106,15 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
     }
 
     /**
-     * Creates a faked WebResponse for the request with the provided content.
+     * Creates a faked {@link WebResponse} for the given request with the provided content and status.
+     *
      * @param wr the web request for which a response should be created
      * @param content the content to place in the response
      * @param contentType the content type of the response
-     * @param responseCode the HTTP code for the response
-     * @param responseMessage the HTTP message for the response
+     * @param responseCode the HTTP status code for the response
+     * @param responseMessage the HTTP status message for the response
      * @return a web response with the provided content
-     * @throws IOException if an encoding problem occurred
+     * @throws IOException if an encoding problem occurs
      */
     protected WebResponse createWebResponse(final WebRequest wr, final String content,
             final String contentType, final int responseCode, final String responseMessage) throws IOException {

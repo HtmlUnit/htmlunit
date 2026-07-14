@@ -204,7 +204,7 @@ public class HtmlForm extends HtmlElement {
     /**
      * Check if element which cause submit contains new html5 attributes
      * (formaction, formmethod, formtarget, formenctype)
-     * and override existing values
+     * and override existing values.
      * @param submitElement the element to update
      */
     private void updateHtml5Attributes(final SubmittableElement submitElement) {
@@ -551,12 +551,13 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * @return A List containing all form controls in the form.
-     *         The form controls in the returned collection are in the same order
-     *         in which they appear in the form by following a preorder,
-     *         depth-first traversal of the tree. This is called tree order.
-     *         Only the following elements are returned:
-     *         button, fieldset, input, object, output, select, textarea.
+     * Returns the form controls contained in this form.
+     *
+     * @return a list containing all form controls in tree order (preorder,
+     *         depth-first traversal). Only the following elements are
+     *         included: {@code button}, {@code fieldset}, {@code input},
+     *         {@code object}, {@code output}, {@code select}, and
+     *         {@code textarea}
      */
     public List<HtmlElement> getFormElements() {
         return getElements(htmlElement -> {
@@ -601,8 +602,10 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * @param filter a predicate to filter the element
-     * @return all elements attached to this form and matching the filter predicate
+     * Returns the form elements that match the specified filter.
+     *
+     * @param filter the predicate used to select elements
+     * @return a list of form elements matching the specified filter
      */
     public List<HtmlElement> getElements(final Predicate<HtmlElement> filter) {
         final List<HtmlElement> elements = new ArrayList<>();
@@ -994,7 +997,9 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * @return the value of the attribute {@code novalidate} or an empty string if that attribute isn't defined
+     * Returns whether form validation is disabled.
+     *
+     * @return {@code true} if the {@code novalidate} attribute is present
      */
     public final boolean isNoValidate() {
         return hasAttribute(ATTRIBUTE_NOVALIDATE);

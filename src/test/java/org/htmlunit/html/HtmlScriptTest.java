@@ -36,6 +36,7 @@ import org.junit.jupiter.api.Test;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 public class HtmlScriptTest extends SimpleWebTestCase {
 
@@ -111,9 +112,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final String xml = page.asXml();
         assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
                 + "<html>\r\n"
-                + "  <head>\r\n"
-                + "    <title>foo</title>\r\n"
-                + "  </head>\r\n"
+                + "  <head><title>foo</title></head>\r\n"
                 + "  <body>\r\n"
                 + "    <script id=\"script1\">\r\n"
                 + "//<![CDATA[\r\n"
@@ -121,8 +120,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
                 + "  alert('hello');\n"
                 + "\r\n"
                 + "//]]>\r\n"
-                + "    </script>\r\n"
-                + "  </body>\r\n"
+                + "    </script></body>\r\n"
                 + "</html>",
                 xml);
 

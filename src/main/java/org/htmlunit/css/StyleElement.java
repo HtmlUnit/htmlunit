@@ -102,6 +102,8 @@ public class StyleElement implements Serializable {
     }
 
     /**
+     * Return true if priority is 'important'.
+     *
      * @return true if priority is 'important'
      */
     public boolean isImportant() {

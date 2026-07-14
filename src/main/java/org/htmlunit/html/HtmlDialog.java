@@ -61,14 +61,18 @@ public class HtmlDialog extends HtmlElement {
     }
 
     /**
-     * @return the {@code open} property
+     * Returns whether this dialog is open.
+     *
+     * @return {@code true} if the dialog is open
      */
     public boolean isOpen() {
         return hasAttribute("open");
     }
 
     /**
-     * @return true if the dialog is open and modal.
+     * Returns whether this dialog is displayed modally.
+     *
+     * @return {@code true} if the dialog is open and modal
      */
     public boolean isModal() {
         return modal_;
@@ -90,7 +94,7 @@ public class HtmlDialog extends HtmlElement {
     }
 
     /**
-     *  Displays the dialog modelessly.
+     * Displays this dialog modelessly.
      */
     public void show() {
         if (!isOpen()) {
@@ -99,7 +103,7 @@ public class HtmlDialog extends HtmlElement {
     }
 
     /**
-     *  Displays the dialog modal.
+     * Displays this dialog modally.
      */
     public void showModal() {
         if (!isOpen()) {
@@ -109,8 +113,9 @@ public class HtmlDialog extends HtmlElement {
     }
 
     /**
-     *  Displays the dialog modal.
-     *  @param returnValue the return value
+     * Closes this dialog and sets its return value.
+     *
+     * @param returnValue the return value
      */
     public void close(final String returnValue) {
         if (isOpen()) {
@@ -138,6 +143,8 @@ public class HtmlDialog extends HtmlElement {
     }
 
     /**
+     * Returns the dialog's return value.
+     *
      * @return the {@code returnValue} property
      */
     public String getReturnValue() {
@@ -145,7 +152,7 @@ public class HtmlDialog extends HtmlElement {
     }
 
     /**
-     * Sets the open state.
+     * Sets the dialog's return value.
      *
      * @param newValue the new value
      */

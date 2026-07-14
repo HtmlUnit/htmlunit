@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code SVGAngle}.
+ * JavaScript host object for {@code SVGAngle}.
  *
  * @author Marc Guillemot
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGAngle">MDN Documentation</a>
  */
 @JsxClass
 public class SVGAngle extends HtmlUnitScriptable {
@@ -49,7 +51,7 @@ public class SVGAngle extends HtmlUnitScriptable {
     public static final int SVG_ANGLETYPE_GRAD = 4;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {

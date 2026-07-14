@@ -134,7 +134,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private transient boolean holdPostponedActions_;
     private transient boolean shutdownPending_;
 
-    /** The JavaScriptExecutor corresponding to all windows of this Web client */
+    /** The JavaScriptExecutor corresponding to all windows of this Web client. */
     private transient JavaScriptExecutor javaScriptExecutor_;
 
     /**
@@ -886,6 +886,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     /**
      * Indicates if JavaScript is running in current thread.
      * <p>This allows code to know if their own evaluation has been triggered by some JS code.
+     * </p>
      * @return {@code true} if JavaScript is running
      */
     @Override
@@ -1333,6 +1334,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * Create a new JavaScript object.
      *
      * <p>Equivalent to evaluating "new Object()".
+     * </p>
      *
      * @param scope the scope to search for the constructor and to evaluate against
      * @return the new object

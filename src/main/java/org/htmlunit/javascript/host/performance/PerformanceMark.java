@@ -18,16 +18,18 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code PerformanceMark}.
+ * JavaScript host object for {@code PerformanceMark}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceMark">MDN Documentation</a>
  */
 @JsxClass
 public class PerformanceMark extends PerformanceEntry {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

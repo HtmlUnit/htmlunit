@@ -122,7 +122,7 @@ import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xml.XmlPage;
 
 /**
- * A JavaScript object for {@code Window}.
+ * JavaScript host object for {@code Window}.
  *
  * @author Mike Bowler
  * @author Chen Jun
@@ -143,7 +143,7 @@ import org.htmlunit.xml.XmlPage;
  * @author Sven Strickroth
  * @author Lai Quang Duong
  *
- * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window">MDN Documentation</a>
  */
 @JsxClass
 @SuppressWarnings("PMD.TooManyFields")
@@ -619,6 +619,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
+     * Sets the {@code clientInformation} property.
+     *
      * @param clientInformation the new value
      */
     @JsxSetter
@@ -695,7 +697,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * To log to the developer tools console, use console.log().
      * <p>
      * HtmlUnit always uses the WebConsole.
-     *
+     * </p>
      * @param message the message to log
      */
     @JsxFunction({FF, FF_ESR})
@@ -1919,6 +1921,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
+     * Returns the {@code netscape} property.
+     *
      * @return the value of {@code netscape} property
      */
     @JsxGetter({FF, FF_ESR})
@@ -2126,6 +2130,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * as that.
      * <p>
      * Sets the {@code performance} property.
+     * </p>
      * @param performance the value to overwrite the defined property value
      */
     @JsxSetter
@@ -3852,6 +3857,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
+     * Returns a boolean indicating whether the current context is secure (true) or not (false).
      * @return a boolean indicating whether the current context is secure (true) or not (false).
      */
     @JsxGetter

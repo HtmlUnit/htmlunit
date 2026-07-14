@@ -37,6 +37,8 @@ public class IntDimension2D {
     }
 
     /**
+     * Returns the width of this as integer.
+     *
      * @return the width of this as integer.
      */
     public int getWidth() {
@@ -44,6 +46,8 @@ public class IntDimension2D {
     }
 
     /**
+     * Returns the height of this as integer.
+     *
      * @return the height of this as integer.
      */
     public int getHeight() {

@@ -53,7 +53,7 @@ import org.htmlunit.util.StringUtils;
  * <p>
  * Workaround for <a href="https://issues.apache.org/jira/browse/HTTPCLIENT-1006">HttpClient bug 1006</a>:
  * quotes are wrongly removed in cookie's values.
-
+ * </p>
  * Implementation is based on the HttpClient code.
  *
  * @author Mike Bowler

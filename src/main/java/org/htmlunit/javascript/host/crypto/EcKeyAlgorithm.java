@@ -87,6 +87,8 @@ final class EcKeyAlgorithm {
     }
 
     /**
+     * Returns the JCA curve name (e.g. "secp256r1" for "P-256").
+     *
      * @return the JCA curve name (e.g. "secp256r1" for "P-256")
      */
     String getJavaCurveName() {
@@ -95,7 +97,7 @@ final class EcKeyAlgorithm {
 
     /**
      * Converts to a JS object matching the {@code EcKeyAlgorithm} dictionary:
-     * {@code {name: "ECDSA", namedCurve: "P-256"}}
+     * {@code {name: "ECDSA", namedCurve: "P-256"}}.
      *
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object

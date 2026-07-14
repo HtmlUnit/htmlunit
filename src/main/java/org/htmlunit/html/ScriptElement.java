@@ -41,11 +41,15 @@ public interface ScriptElement {
     void setExecuted(boolean executed);
 
     /**
+     * Returns the script source url.
+     *
      * @return the script source url
      */
     String getScriptSource();
 
     /**
+     * Returns the charset used for the script encoding.
+     *
      * @return the charset used for the script encoding
      */
     String getScriptCharset();

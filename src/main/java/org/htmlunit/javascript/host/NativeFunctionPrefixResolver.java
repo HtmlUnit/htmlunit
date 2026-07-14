@@ -31,9 +31,9 @@ public class NativeFunctionPrefixResolver implements PrefixResolver {
     private final VarScope scope_;
 
     /**
-     * Constructor.
+     * Creates an instance backed by the given resolver function.
      *
-     * @param resolverFn the {@link NativeFunction} this resolver is for
+     * @param resolverFn the {@link NativeFunction} this resolver delegates to
      * @param scope the scope
      */
     public NativeFunctionPrefixResolver(final NativeFunction resolverFn, final VarScope scope) {

@@ -19,15 +19,17 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code PerformanceObserver}.
+ * JavaScript host object for {@code PerformanceObserver}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver">MDN Documentation</a>
  */
 @JsxClass
 public class PerformanceObserver extends HtmlUnitScriptable {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {

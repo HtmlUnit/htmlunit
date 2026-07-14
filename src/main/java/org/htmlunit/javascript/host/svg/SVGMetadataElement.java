@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgMetadata;
 
 /**
- * A JavaScript object for {@code SVGMetadataElement}.
+ * JavaScript host object for {@code SVGMetadataElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGMetadataElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgMetadata.class)
 public class SVGMetadataElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

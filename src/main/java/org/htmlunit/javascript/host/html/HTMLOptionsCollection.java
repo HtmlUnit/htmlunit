@@ -230,9 +230,11 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      * <p>Per the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection/add">MDN
      * documentation</a> for the JavaScript add() method of the options collection,
      * the index parameter is specified as follows:
+     * </p>
      * <p>
      * <i>Optional. Integer that specifies the index position in the collection where the element is
      * placed. If no value is given, the method places the element at the end of the collection.</i>
+     * </p>
      *
      * @param newOptionObject the DomNode to insert in the collection
      * @param beforeOptionObject An optional parameter which specifies the index position in the

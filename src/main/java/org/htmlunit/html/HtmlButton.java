@@ -249,7 +249,9 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * @return the normalized type value (submit|reset|button).
+     * Returns the normalized button type.
+     *
+     * @return the normalized type value ({@code submit}, {@code reset}, or {@code button})
      */
     public String getType() {
         final String type = getTypeAttribute();
@@ -328,6 +330,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * {@inheritDoc}
+     *
      * @return {@code true} to make generated XML readable as HTML.
      */
     @Override
@@ -381,7 +384,9 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * @return the value of the attribute {@code formnovalidate} or an empty string if that attribute isn't defined
+     * Returns whether the {@code formnovalidate} attribute is present.
+     *
+     * @return {@code true} if the {@code formnovalidate} attribute is present
      */
     public final boolean isFormNoValidate() {
         return hasAttribute(ATTRIBUTE_FORMNOVALIDATE);

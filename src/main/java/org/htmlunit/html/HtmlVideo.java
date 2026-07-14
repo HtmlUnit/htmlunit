@@ -31,7 +31,7 @@ public class HtmlVideo extends HtmlMedia {
     public static final String TAG_NAME = "video";
 
     /**
-     * Creates an instance of HtmlVideo
+     * Creates an instance of HtmlVideo.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

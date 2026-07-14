@@ -60,7 +60,8 @@ public class HtmlTable extends HtmlElement {
      * This means, a cell with colspan='2' consumes two columns; a cell with rowspan='3' consumes three rows. The
      * index is based on the 'background' model of the table; if you have a row like<br>
      * &lt;td&gt;cell1&lt;/td&gt; &lt;td colspan='2'&gt;cell2&lt;/td&gt; then this row is treated as a row with
-     * three cells.<br>
+     * three cells.
+     * </p>
      * <p>
      * <code>
      * getCellAt(rowIndex, 0).asText() returns "cell1";<br>
@@ -109,15 +110,19 @@ public class HtmlTable extends HtmlElement {
     }
 
     /**
-     * @return an iterator over all the HtmlTableRow objects
+     * Returns an iterator over all rows in this table.
+     *
+     * @return an iterator over all {@link HtmlTableRow} objects
      */
     private RowIterator getRowIterator() {
         return new RowIterator();
     }
 
     /**
-     * @return an immutable list containing all the HtmlTableRow objects
-     * @see #getRowIterator
+     * Returns an immutable list of all rows in this table.
+     *
+     * @return an immutable list containing all {@link HtmlTableRow} objects
+     * @see #getRowIterator()
      */
     public List<HtmlTableRow> getRows() {
         final List<HtmlTableRow> result = new ArrayList<>();
@@ -128,10 +133,12 @@ public class HtmlTable extends HtmlElement {
     }
 
     /**
+     * Returns the row at the specified index.
+     *
      * @param index the 0-based index of the row
-     * @return the HtmlTableRow at the given index
+     * @return the {@link HtmlTableRow} at the given index
      * @throws IndexOutOfBoundsException if there is no row at the given index
-     * @see #getRowIterator
+     * @see #getRowIterator()
      */
     public HtmlTableRow getRow(final int index) throws IndexOutOfBoundsException {
         int count = 0;
@@ -159,11 +166,11 @@ public class HtmlTable extends HtmlElement {
     }
 
     /**
-     * Finds and return the row with the specified id.
+     * Returns the row with the specified identifier.
      *
-     * @param id the id of the row
-     * @return the row with the specified id
-     * @exception ElementNotFoundException If the row cannot be found.
+     * @param id the row identifier
+     * @return the row with the specified identifier
+     * @throws ElementNotFoundException if the row cannot be found
      */
     public final HtmlTableRow getRowById(final String id) throws ElementNotFoundException {
         for (final HtmlTableRow row : getRowIterator()) {
@@ -354,7 +361,7 @@ public class HtmlTable extends HtmlElement {
         }
 
         /**
-         * @return {@code true} if there are more rows available
+         * {@inheritDoc}
          */
         @Override
         public boolean hasNext() {
@@ -362,8 +369,7 @@ public class HtmlTable extends HtmlElement {
         }
 
         /**
-         * @return the next row from this iterator
-         * @throws NoSuchElementException if no more rows are available
+         * {@inheritDoc}
          */
         @Override
         public HtmlTableRow next() throws NoSuchElementException {
@@ -371,7 +377,7 @@ public class HtmlTable extends HtmlElement {
         }
 
         /**
-         * Removes the current row from the underlying table.
+         * {@inheritDoc}
          */
         @Override
         public void remove() {
@@ -385,6 +391,8 @@ public class HtmlTable extends HtmlElement {
         }
 
         /**
+         * Returns the next row.
+         *
          * @return the next row from this iterator
          * @throws NoSuchElementException if no more rows are available
          */
@@ -422,6 +430,9 @@ public class HtmlTable extends HtmlElement {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public Iterator<HtmlTableRow> iterator() {
             return this;
@@ -430,7 +441,9 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * {@inheritDoc}
-     * @return {@code true} as browsers ignore self closing <code>table</code> tags.
+     *
+     * @return {@code true} so that generated XML uses explicit opening and closing
+     *         {@code <table>} tags
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {

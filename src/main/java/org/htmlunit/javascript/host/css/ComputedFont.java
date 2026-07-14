@@ -55,7 +55,11 @@ final class ComputedFont {
     }
 
     /**
-     * @return an array of {@code fontSize} and {@code lineHeight}, or {@code null} if invalid
+     * Parses the specified font-size value into its font size and line height components.
+     *
+     * @param fontSize the font-size value to parse
+     * @return an array containing the font size and line height, or {@code null}
+     *         if the value is invalid
      */
     private static String[] getFontSizeDetails(final String fontSize) {
         final int slash = fontSize.indexOf('/');

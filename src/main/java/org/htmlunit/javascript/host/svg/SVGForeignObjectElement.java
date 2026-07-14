@@ -19,17 +19,19 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgForeignObject;
 
 /**
- * A JavaScript object for {@code SVGForeignObjectElement}.
+ * JavaScript host object for {@code SVGForeignObjectElement}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGForeignObjectElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgForeignObject.class)
 public class SVGForeignObjectElement extends SVGGraphicsElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

@@ -124,6 +124,8 @@ final class RsaHashedKeyAlgorithm {
     }
 
     /**
+     * Returns the public exponent as a BigInteger.
+     *
      * @return the public exponent as a BigInteger
      */
     BigInteger getPublicExponentAsBigInteger() {
@@ -135,6 +137,8 @@ final class RsaHashedKeyAlgorithm {
     }
 
     /**
+     * Returns the Java hash algorithm name (e.g. "SHA256" from "SHA-256").
+     *
      * @return the Java hash algorithm name (e.g. "SHA256" from "SHA-256")
      */
     String getJavaHash() {
@@ -143,7 +147,7 @@ final class RsaHashedKeyAlgorithm {
 
     /**
      * Converts to a JS object matching the {@code RsaHashedKeyAlgorithm} dictionary:
-     * {@code {name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: Uint8Array, hash: {name: "SHA-256"}}}
+     * {@code {name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: Uint8Array, hash: {name: "SHA-256"}}}.
      *
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object

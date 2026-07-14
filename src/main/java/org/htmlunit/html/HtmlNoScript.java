@@ -36,7 +36,7 @@ public class HtmlNoScript extends HtmlElement {
     public static final String TAG_NAME = "noscript";
 
     /**
-     * Creates an instance of HtmlNoScript
+     * Creates an instance of HtmlNoScript.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

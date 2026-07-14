@@ -194,6 +194,8 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * Returns the {@link DomElement} associated with this.
+     *
      * @return the {@link DomElement} associated with this
      */
     public DomElement getDomElement() {

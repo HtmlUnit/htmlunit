@@ -29,8 +29,9 @@ public class WindowProxy extends HtmlUnitScriptableProxy<Window> {
     private final WebWindow webWindow_;
 
     /**
-     * Construct a proxy for the {@link Window} of the {@link WebWindow}.
-     * @param webWindow the window
+     * Constructs a proxy for the {@link Window} of the given {@link WebWindow}.
+     *
+     * @param webWindow the web window to proxy
      */
     public WindowProxy(final WebWindow webWindow) {
         super();
@@ -46,8 +47,9 @@ public class WindowProxy extends HtmlUnitScriptableProxy<Window> {
     }
 
     /**
-     * Does nothing.
-     * @param parent the new parent scope
+     * Does nothing, as the window is the top-level scope and its parent scope must remain {@code null}.
+     *
+     * @param parent the new parent scope (ignored)
      */
     @Override
     public void setParentScope(final VarScope parent) {

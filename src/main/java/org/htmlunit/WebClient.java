@@ -78,6 +78,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
+import org.htmlunit.http.Cookie;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HttpClientConverter;
@@ -95,7 +96,6 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.html.HTMLIFrameElement;
 import org.htmlunit.protocol.data.DataURLConnection;
-import org.htmlunit.http.Cookie;
 import org.htmlunit.util.HeaderUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -396,10 +396,12 @@ public class WebClient implements Serializable, AutoCloseable {
      * <p>
      * The returned {@link Page} will be created by the {@link PageCreator}
      * configured by {@link #setPageCreator(PageCreator)}, if any.
+     * </p>
      * <p>
      * The {@link DefaultPageCreator} will create a {@link Page} depending on the content type of the HTTP response,
      * basically {@link HtmlPage} for HTML content, {@link org.htmlunit.xml.XmlPage} for XML content,
      * {@link TextPage} for other text content and {@link UnexpectedPage} for anything else.
+     * </p>
      *
      * @param webWindow the WebWindow to load the result of the request into
      * @param webRequest the web request
@@ -424,10 +426,12 @@ public class WebClient implements Serializable, AutoCloseable {
      * <p>
      * The returned {@link Page} will be created by the {@link PageCreator}
      * configured by {@link #setPageCreator(PageCreator)}, if any.
+     * </p>
      * <p>
      * The {@link DefaultPageCreator} will create a {@link Page} depending on the content type of the HTTP response,
      * basically {@link HtmlPage} for HTML content, {@link org.htmlunit.xml.XmlPage} for XML content,
      * {@link TextPage} for other text content and {@link UnexpectedPage} for anything else.
+     * </p>
      *
      * @param webWindow the WebWindow to load the result of the request into
      * @param webRequest the web request
@@ -739,6 +743,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * <p>Logs the response's content if its status code indicates a request failure and
      * {@link WebClientOptions#isPrintContentOnFailingStatusCode()} returns {@code true}.
+     * </p>
      *
      * @param webResponse the response whose content may be logged
      */
@@ -756,6 +761,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * <p>Throws a {@link FailingHttpStatusCodeException} if the request's status code indicates a request
      * failure and {@link WebClientOptions#isThrowExceptionOnFailingStatusCode()} returns {@code true}.
+     * </p>
      *
      * @param webResponse the response which may trigger a {@link FailingHttpStatusCodeException}
      */
@@ -1867,6 +1873,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * This is a snapshot; future changes are not reflected by this list.
      * <p>
      * The list is ordered by age, the oldest one first.
+     * </p>
      *
      * @return an immutable list of open web windows (whether they are top level windows or not)
      * @see #getWebWindowByName(String)
@@ -1895,6 +1902,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * This is a snapshot; future changes are not reflected by this list.
      * <p>
      * The list is ordered by age, the oldest one first.
+     * </p>
      *
      * @return an immutable list of open top level windows
      * @see #getWebWindowByName(String)
@@ -2275,8 +2283,6 @@ public class WebClient implements Serializable, AutoCloseable {
      * Closes all opened windows, stopping all background JavaScript processing.
      * The WebClient is not really usable after this - you have to create a new one or
      * use WebClient.reset() instead.
-     * <p>
-     * {@inheritDoc}
      */
     @Override
     public void close() {
@@ -2397,6 +2403,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * <p>This shuts down the whole client and restarts with a new empty window.
      * Cookies and other states are preserved.
+     * </p>
      */
     public void reset() {
         close();
@@ -3079,12 +3086,15 @@ public class WebClient implements Serializable, AutoCloseable {
      * hence it is possible to miss a returned parser from another thread under heavy pressure,
      * but because that is unlikely, we keep it simple and efficient. Caches are not supposed
      * to give cutting-edge guarantees.
+     * </p>
      * <p>
      * This concept avoids a resource leak when someone does not close the fetched
      * parser because the pool does not know anything about the parser unless
      * it returns. We are not running a checkout-checkin concept.
+     * </p>
      * <p>
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * </p>
      */
     static class CSS3ParserPool {
         /*
@@ -3124,7 +3134,6 @@ public class WebClient implements Serializable, AutoCloseable {
      * This is a poolable CSS3Parser which can be reused automatically when closed.
      * A regular CSS3Parser is not thread-safe, hence also our pooled parser
      * is not thread-safe.
-     * <p>
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      */
     public static class PooledCSS3Parser extends CSS3Parser implements AutoCloseable {

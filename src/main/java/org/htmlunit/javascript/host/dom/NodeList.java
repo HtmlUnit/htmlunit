@@ -46,6 +46,8 @@ import org.htmlunit.javascript.configuration.JsxSymbol;
  * @author Frank Danek
  * @author Ronald Brill
  * @author Lai Quang Duong
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList">MDN Documentation</a>
  */
 @JsxClass
 public class NodeList extends AbstractList implements Callable {
@@ -70,7 +72,7 @@ public class NodeList extends AbstractList implements Callable {
      *
      * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
-     *        of a descendant node of parentScope changes (attribute added, modified or removed)
+     *        of a descendant node of domNode changes (attribute added, modified or removed)
      */
     public NodeList(final DomNode domNode, final boolean attributeChangeSensitive) {
         super(domNode, attributeChangeSensitive, null);
@@ -191,7 +193,7 @@ public class NodeList extends AbstractList implements Callable {
      * Returns the item or items corresponding to the specified index or key.
      * @param index the index or key corresponding to the element or elements to return
      * @return the element or elements corresponding to the specified index or key
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList/item">MDN Documentation</a>
      */
     @JsxFunction
     public Object item(final Object index) {

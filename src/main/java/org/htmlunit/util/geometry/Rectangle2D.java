@@ -15,7 +15,7 @@
 package org.htmlunit.util.geometry;
 
 /**
- * Simple 2D shape rectangle.
+ * Simple 2D rectangle shape.
  *
  * @author Ronald Brill
  */
@@ -26,11 +26,12 @@ public class Rectangle2D implements Shape2D {
     private double bottom_;
 
     /**
-     * Ctor.
-     * @param x1 x value of the first corner
-     * @param y1 y value of the first corner
-     * @param x2 x value of the second corner
-     * @param y2 y value of the second corner
+     * Creates a new rectangle defined by two corner points.
+     *
+     * @param x1 the x coordinate of the first corner
+     * @param y1 the y coordinate of the first corner
+     * @param x2 the x coordinate of the second corner
+     * @param y2 the y coordinate of the second corner
      */
     public Rectangle2D(final double x1, final double y1, final double x2, final double y2) {
         if (x1 < x2) {
@@ -53,14 +54,18 @@ public class Rectangle2D implements Shape2D {
     }
 
     /**
-     * @return the x coord of the leftmost corner.
+     * Returns the x coordinate of the left edge.
+     *
+     * @return the x coordinate of the left edge
      */
     public double getLeft() {
         return left_;
     }
 
     /**
-     * @return the y coord of the bottom line.
+     * Returns the y coordinate of the bottom edge.
+     *
+     * @return the y coordinate of the bottom edge
      */
     public double getBottom() {
         return bottom_;
@@ -78,11 +83,11 @@ public class Rectangle2D implements Shape2D {
     }
 
     /**
-     * Makes sure the provided point is part of the extended {@link Rectangle2D} by
-     * moving the right or left border to include y and moving the top or bottom border
-     * to include y.
-     * @param x the x position to include
-     * @param y the y position to include
+     * Expands this rectangle to ensure that the given point is included,
+     * moving the left, right, top, or bottom edge as necessary.
+     *
+     * @param x the x coordinate to include
+     * @param y the y coordinate to include
      */
     public void extend(final double x, final double y) {
         if (x > right_) {

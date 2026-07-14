@@ -117,7 +117,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
     // private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
 
-    /** The wrapped CSSStyleDeclaration */
+    /** The wrapped CSSStyleDeclaration. */
     private AbstractCssStyleDeclaration styleDeclaration_;
     private CSSStyleSheet parentStyleSheet_;
 

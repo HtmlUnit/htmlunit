@@ -96,7 +96,7 @@ import org.htmlunit.xml.XmlPage;
 import org.w3c.dom.DocumentType;
 
 /**
- * A JavaScript object for an {@code XMLHttpRequest}.
+ * JavaScript host object for {@code XMLHttpRequest}.
  *
  * @author Daniel Gredler
  * @author Marc Guillemot
@@ -110,23 +110,22 @@ import org.w3c.dom.DocumentType;
  * @author Lai Quang Duong
  * @author Sven Strickroth
  *
- * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
- * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">MDN Documentation</a>
  */
 @JsxClass
 public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
 
-    /** The object has been created, but not initialized (the open() method has not been called). */
+    /** The object has been created, but not initialized (the {@code open()} method has not been called). */
     @JsxConstant
     public static final int UNSENT = 0;
 
-    /** The object has been created, but the send() method has not been called. */
+    /** The object has been created, but the {@code send()} method has not been called. */
     @JsxConstant
     public static final int OPENED = 1;
 
-    /** The send() method has been called, but the status and headers are not yet available. */
+    /** The {@code send()} method has been called, but the status and headers are not yet available. */
     @JsxConstant
     public static final int HEADERS_RECEIVED = 2;
 
@@ -178,7 +177,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
@@ -188,6 +187,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * Sets the state as specified and invokes the state change handler if one has been set.
+     *
      * @param state the new state
      */
     private void setState(final int state) {
@@ -250,6 +250,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      *   <li>3 = loading</li>
      *   <li>4 = done</li>
      * </ul>
+     *
      * @return the current state of the HTTP request
      */
     @JsxGetter
@@ -258,6 +259,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
+     * Returns the {@code responseType} property.
+     *
      * @return the {@code responseType} property
      */
     @JsxGetter
@@ -267,7 +270,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * Sets the {@code responseType} property.
-     * @param responseType the {@code responseType} property.
+     *
+     * @param responseType the {@code responseType} property
      */
     @JsxSetter
     public void setResponseType(final String responseType) {
@@ -294,8 +298,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * @return returns the response's body content as an ArrayBuffer, Blob, Document, JavaScript Object,
-     *         or DOMString, depending on the value of the request's responseType property.
+     * Returns the response body as an {@code ArrayBuffer}, {@code Blob}, {@code Document},
+     * JavaScript object, or {@code DOMString}, depending on the value of the {@code responseType} property.
+     *
+     * @return the response body
      */
     @JsxGetter
     public Object getResponse() {
@@ -449,7 +455,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Returns a string version of the data retrieved from the server.
+     * Returns the response body as a string.
+     *
      * @return a string version of the data retrieved from the server
      */
     @JsxGetter
@@ -497,7 +504,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * Returns a DOM-compatible document object version of the data retrieved from the server.
-     * @return a DOM-compatible document object version of the data retrieved from the server
+     *
+     * @return a DOM-compatible document object, or {@code null}
      */
     @JsxGetter
     public Object getResponseXML() {
@@ -545,9 +553,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Returns the numeric status returned by the server, such as 404 for "Not Found"
-     * or 200 for "OK".
-     * @return the numeric status returned by the server
+     * Returns the numeric HTTP status code returned by the server (e.g. 404 for "Not Found"
+     * or 200 for "OK").
+     *
+     * @return the numeric HTTP status code
      */
     @JsxGetter
     public int getStatus() {
@@ -566,8 +575,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Returns the string message accompanying the status code, such as "Not Found" or "OK".
-     * @return the string message accompanying the status code
+     * Returns the HTTP status message accompanying the status code (e.g. "Not Found" or "OK").
+     *
+     * @return the HTTP status message
      */
     @JsxGetter
     public String getStatusText() {
@@ -602,17 +612,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             fireJavascriptEvent(Event.TYPE_LOAD_END);
         }
 
-        // JavaScriptEngine.constructError("NetworkError",
-        //         "Failed to execute 'send' on 'XMLHttpRequest': Failed to load '" + webRequest_.getUrl() + "'");
-
         setState(UNSENT);
         webResponse_ = new NetworkErrorWebResponse(webRequest_, null);
         aborted_ = true;
     }
 
     /**
-     * Returns the labels and values of all the HTTP headers.
-     * @return the labels and values of all the HTTP headers
+     * Returns all the HTTP response headers as a string.
+     *
+     * @return all response header names and values as a string
      */
     @JsxFunction
     public String getAllResponseHeaders() {
@@ -639,9 +647,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Retrieves the value of an HTTP header from the response body.
-     * @param headerName the (case-insensitive) name of the header to retrieve
-     * @return the value of the specified HTTP header
+     * Returns the value of the specified HTTP response header.
+     *
+     * @param headerName the case-insensitive name of the header to retrieve
+     * @return the value of the specified HTTP header, or {@code null} if not found
      */
     @JsxFunction
     public String getResponseHeader(final String headerName) {
@@ -660,12 +669,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Assigns the destination URL, method and other optional attributes of a pending request.
-     * @param method the method to use to send the request to the server (GET, POST, etc)
+     * Initializes the request by specifying the destination URL, method, and other optional attributes.
+     *
+     * @param method the HTTP method to use (e.g. GET, POST)
      * @param urlParam the URL to send the request to
-     * @param asyncParam Whether or not to send the request to the server asynchronously, defaults to {@code true}
-     * @param user If authentication is needed for the specified URL, the username to use to authenticate
-     * @param password If authentication is needed for the specified URL, the password to use to authenticate
+     * @param asyncParam whether to send the request asynchronously; defaults to {@code true}
+     * @param user the username to use for authentication, if required
+     * @param password the password to use for authentication, if required
      */
     @JsxFunction
     public void open(final String method, final Object urlParam, final Object asyncParam,
@@ -778,7 +788,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Sends the specified content to the server in an HTTP request and receives the response.
+     * Sends the request to the server with the specified content as the request body.
+     *
      * @param content the body of the message being sent with the request
      */
     @JsxFunction
@@ -832,7 +843,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Prepares the WebRequest that will be sent.
+     * Prepares the {@link WebRequest} that will be sent.
+     *
      * @param content the content to send
      */
     private void prepareRequestContent(final Object content) {
@@ -847,7 +859,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final boolean setEncodingType = webRequest_.getAdditionalHeader(HttpHeader.CONTENT_TYPE) == null;
 
             if (content instanceof HTMLDocument document) {
-                // final String body = ((HTMLDocument) content).getDomNodeOrDie().asXml();
                 String body = new XMLSerializer().serializeToString(document);
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Setting request body to: " + body);
@@ -923,7 +934,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * The real send job.
+     * Performs the actual send operation.
      */
     void doSend() {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
@@ -1183,8 +1194,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * @param name header name (MUST be lower-case for performance reasons)
-     * @param value header value
+     * Checks whether the given header name requires a preflight request.
+     *
+     * @param name the header name (MUST be lower-case for performance reasons)
+     * @param value the header value
+     * @return {@code true} if this header requires a preflight
      */
     private static boolean isPreflightHeader(final String name, final String value) {
         if (HttpHeader.CONTENT_TYPE_LC.equals(name)) {
@@ -1205,10 +1219,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Sets the specified header to the specified value. The <code>open</code> method must be
+     * Sets the specified header to the specified value. The {@code open()} method must be
      * called before this method, or an error will occur.
-     * @param name the name of the header being set
-     * @param value the value of the header being set
+     *
+     * @param name the name of the header to set
+     * @param value the value of the header to set
      */
     @JsxFunction
     public void setRequestHeader(final String name, final String value) {
@@ -1232,8 +1247,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Not all request headers can be set from JavaScript.
-     * @see <a href="http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method">W3C doc</a>
+     * Checks whether the specified request header may be set from JavaScript.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader">MDN Documentation</a>
      * @param name the header name
      * @return {@code true} if the header can be set from JavaScript
      */
@@ -1249,11 +1265,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Override the mime type returned by the server (if any). This may be used, for example, to force a stream
-     * to be treated and parsed as text/xml, even if the server does not report it as such.
-     * This must be done before the send method is invoked.
-     * @param mimeType the type used to override that returned by the server (if any)
-     * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
+     * Overrides the MIME type returned by the server. This must be called before {@code send()}.
+     * This may be used, for example, to force a stream to be treated and parsed as {@code text/xml},
+     * even if the server does not report it as such.
+     *
+     * @param mimeType the MIME type to use instead of the one returned by the server
      */
     @JsxFunction
     public void overrideMimeType(final String mimeType) {
@@ -1268,6 +1284,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * Returns the {@code withCredentials} property.
+     *
      * @return the {@code withCredentials} property
      */
     @JsxGetter
@@ -1277,7 +1294,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * Sets the {@code withCredentials} property.
-     * @param withCredentials the {@code withCredentials} property.
+     *
+     * @param withCredentials the {@code withCredentials} property
      */
     @JsxSetter
     public void setWithCredentials(final boolean withCredentials) {
@@ -1286,6 +1304,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * Returns the {@code upload} property.
+     *
      * @return the {@code upload} property
      */
     @JsxGetter
@@ -1321,8 +1340,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * @return the number of milliseconds a request can take before automatically being terminated.
-     *         The default value is 0, which means there is no timeout.
+     * Returns the number of milliseconds a request can take before automatically being terminated.
+     * A value of {@code 0} means there is no timeout.
+     *
+     * @return the timeout in milliseconds
      */
     @JsxGetter
     public int getTimeout() {
@@ -1331,6 +1352,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * Sets the number of milliseconds a request can take before automatically being terminated.
+     *
      * @param timeout the timeout in milliseconds
      */
     @JsxSetter
@@ -1399,6 +1421,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         /**
+         * Returns the I/O error that caused this network error response.
+         *
          * @return the error
          */
         public IOException getError() {

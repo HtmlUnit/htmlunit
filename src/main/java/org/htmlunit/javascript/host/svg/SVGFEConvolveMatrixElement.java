@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeConvolveMatrix;
 
 /**
- * A JavaScript object for {@code SVGFEConvolveMatrixElement}.
+ * JavaScript host object for {@code SVGFEConvolveMatrixElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFEConvolveMatrixElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeConvolveMatrix.class)
 public class SVGFEConvolveMatrixElement extends SVGElement {
@@ -42,7 +44,7 @@ public class SVGFEConvolveMatrixElement extends SVGElement {
     public static final int SVG_EDGEMODE_NONE = 3;
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

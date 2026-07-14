@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeTile;
 
 /**
- * A JavaScript object for {@code SVGFETileElement}.
+ * JavaScript host object for {@code SVGFETileElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFETileElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeTile.class)
 public class SVGFETileElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

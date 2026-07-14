@@ -27,6 +27,8 @@ import org.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection">MDN Documentation</a>
  */
 @JsxClass
 public class RTCPeerConnection extends EventTarget {

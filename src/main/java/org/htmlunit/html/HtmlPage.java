@@ -184,7 +184,7 @@ public class HtmlPage extends SgmlPage {
                     HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlLabel.TAG_NAME,
                     HtmlLegend.TAG_NAME, HtmlTextArea.TAG_NAME));
 
-    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
+    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl. */
     private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<>(Arrays.asList(
             "style",
             "class",
@@ -389,7 +389,10 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * @return the <code>body</code> element, or {@code null} if it does not yet exist
+     * Returns the document's {@code body} element.
+     *
+     * @return the document's {@code body} element, or {@code null} if it does
+     *         not exist
      */
     public HtmlBody getBody() {
         final DomElement doc = getDocumentElement();
@@ -774,28 +777,32 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * Returns a list of all elements that are tabbable in the order that will
-     * be used for tabbing.<p>
-     *
+     * be used for tabbing.
+     * <p>
      * The rules for determining tab order are as follows:
+     * </p>
      * <ol>
      *   <li>Those elements that support the tabindex attribute and assign a
      *   positive value to it are navigated first. Navigation proceeds from the
      *   element with the lowest tabindex value to the element with the highest
      *   value. Values need not be sequential nor must they begin with any
      *   particular value. Elements that have identical tabindex values should
-     *   be navigated in the order they appear in the character stream.
+     *   be navigated in the order they appear in the character stream.</li>
      *   <li>Those elements that do not support the tabindex attribute or
      *   support it and assign it a value of "0" are navigated next. These
      *   elements are navigated in the order they appear in the character
-     *   stream.
+     *   stream.</li>
      *   <li>Elements that are disabled do not participate in the tabbing
-     *   order.
+     *   order.</li>
      * </ol>
+     * <p>
      * Additionally, the value of tabindex must be within 0 and 32767. Any
-     * values outside this range will be ignored.<p>
-     *
+     * values outside this range will be ignored.
+     * </p>
+     * <p>
      * The following elements support the <code>tabindex</code> attribute:
      * A, AREA, BUTTON, INPUT, OBJECT, SELECT, and TEXTAREA.
+     * </p>
      *
      * @return all the tabbable elements in proper tab order
      */
@@ -859,10 +866,11 @@ public class HtmlPage extends SgmlPage {
     /**
      * Returns the HTML element that is assigned to the specified access key. An
      * access key (aka mnemonic key) is used for keyboard navigation of the
-     * page.<p>
-     *
+     * page.
+     * <p>
      * Only the following HTML elements may have <code>accesskey</code>s defined: A, AREA,
      * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
+     * </p>
      *
      * @param accessKey the key to look for
      * @return the HTML element that is assigned to the specified key or null
@@ -879,16 +887,19 @@ public class HtmlPage extends SgmlPage {
     /**
      * Returns all the HTML elements that are assigned to the specified access key. An
      * access key (aka mnemonic key) is used for keyboard navigation of the
-     * page.<p>
-     *
+     * page.
+     * <p>
      * The HTML specification seems to indicate that one accesskey cannot be used
      * for multiple elements however Internet Explorer does seem to support this.
      * It's worth noting that Firefox does not support multiple elements with one
      * access key so you are making your HTML browser specific if you rely on this
-     * feature.<p>
+     * feature.
+     * </p>
      *
+     * <p>
      * Only the following HTML elements may have <code>accesskey</code>s defined: A, AREA,
      * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
+     * </p>
      *
      * @param accessKey the key to look for
      * @return the elements that are assigned to the specified accesskey
@@ -2584,8 +2595,11 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     * Returns the currently active element.
      *
-     * @return the element with focus or the body
+     * @return the element that currently has focus, or the document's
+     *         {@code body} element if no element has focus, or {@code null}
+     *         if the document has no {@code body} element
      */
     public HtmlElement getActiveElement() {
         final DomElement activeElement = getFocusedElement();
@@ -2766,7 +2780,9 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * @return the CSSPropertiesCache for this page
+     * Returns the computed styles cache for this page.
+     *
+     * @return the computed styles cache for this page
      */
     private ComputedStylesCache getCssPropertiesCache() {
         if (computedStylesCache_ == null) {

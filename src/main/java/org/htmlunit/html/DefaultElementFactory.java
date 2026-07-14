@@ -118,10 +118,7 @@ public class DefaultElementFactory implements ElementFactory {
     }
 
     /**
-     * @param page the owning page
-     * @param tagName the HTML tag name
-     * @param attributes initial attributes, possibly {@code null}
-     * @return the newly created element
+     * {@inheritDoc}
      */
     @Override
     public HtmlElement createElement(final SgmlPage page, final String tagName, final Attributes attributes) {
@@ -129,11 +126,7 @@ public class DefaultElementFactory implements ElementFactory {
     }
 
     /**
-     * @param page the owning page
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name of the element type to instantiate
-     * @param attributes initial attributes, possibly {@code null}
-     * @return the newly created element
+     * {@inheritDoc}
      */
     @Override
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,

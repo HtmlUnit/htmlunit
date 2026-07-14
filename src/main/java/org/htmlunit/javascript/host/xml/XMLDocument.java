@@ -41,7 +41,7 @@ import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
 /**
- * A JavaScript object for {@code XMLDocument}.
+ * JavaScript host object for {@code XMLDocument}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
@@ -50,6 +50,8 @@ import org.htmlunit.xml.XmlPage;
  * @author Chuck Dumont
  * @author Frank Danek
  * @author Sven Strickroth
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLDocument">MDN Documentation</a>
  */
 @JsxClass
 public class XMLDocument extends Document {
@@ -64,7 +66,7 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
@@ -73,8 +75,9 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Creates a new instance, with associated XmlPage.
-     * @param enclosingWindow the window
+     * Creates a new instance with an associated {@link XmlPage}.
+     *
+     * @param enclosingWindow the enclosing window
      */
     public XMLDocument(final WebWindow enclosingWindow) {
         super();
@@ -91,11 +94,11 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Loads an XML document using the supplied string.
+     * Loads an XML document from the supplied string.
      *
-     * @param strXML A string containing the XML string to load into this XML document object
-     *        This string can contain an entire XML document or a well-formed fragment.
-     * @return true if the load succeeded; false if the load failed
+     * @param strXML a string containing the XML to load into this document;
+     *        this string can contain an entire XML document or a well-formed fragment
+     * @return {@code true} if the load succeeded; {@code false} if the load failed
      */
     public boolean loadXML(final String strXML) {
         final WebWindow webWindow = getWindow().getWebWindow();

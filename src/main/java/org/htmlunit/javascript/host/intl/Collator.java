@@ -31,6 +31,8 @@ import org.htmlunit.javascript.configuration.JsxSymbolConstant;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator">MDN Documentation</a>
  */
 @JsxClass
 public class Collator extends HtmlUnitScriptable {
@@ -43,10 +45,10 @@ public class Collator extends HtmlUnitScriptable {
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the arguments to the Collator constructor
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr {@code true} if invoked with the {@code new} operator
+     * @return the Java object that JavaScript can access
      */
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope,

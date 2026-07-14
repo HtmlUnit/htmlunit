@@ -131,6 +131,8 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     /**
+     * Sets whether this collection should avoid object detection.
+     *
      * @param newValue the new value
      */
     public void setAvoidObjectDetection(final boolean newValue) {
@@ -138,6 +140,8 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     /**
+     * Sets the function that determines the effect of attribute changes on the cache.
+     *
      * @param effectOnCacheFunction the new function
      */
     public void setEffectOnCacheFunction(
@@ -149,7 +153,9 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     /**
-     * @return elementSupplier
+     * Returns the supplier used to retrieve the collection elements.
+     *
+     * @return the element supplier
      */
     protected Supplier<List<DomNode>> getElementSupplier() {
         return elementsSupplier_;
@@ -167,7 +173,9 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     /**
-     * @return isMatchingPredicate
+     * Returns the predicate used to determine whether a node belongs to this collection.
+     *
+     * @return the matching predicate
      */
     protected Predicate<DomNode> getIsMatchingPredicate() {
         return isMatchingPredicate_;
@@ -234,6 +242,9 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
         return cachedElements;
     }
 
+    /**
+     * Registers the DOM and attribute change listeners for this collection.
+     */
     private void registerListener() {
         if (!listenerRegistered_) {
             final DomNode domNode = getDomNodeOrNull();
@@ -297,8 +308,9 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     /**
-     * Constructs a new instance with an initial cache value.
-     * @param parentScope the parent scope, on which we listen for changes
+     * Creates a new collection backed by the specified initial elements.
+     *
+     * @param parentScope the parent scope on which to listen for changes
      * @param initialElements the initial content for the cache
      * @return the newly created instance
      */
@@ -338,8 +350,9 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     /**
-     * Returns the length.
-     * @return the length
+     * Returns the number of elements in this collection.
+     *
+     * @return the number of elements
      */
     public int getLength() {
         return getElements().size();
@@ -433,6 +446,11 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
             }
         }
 
+        /**
+         * Clears the cached collection elements if required by the specified attribute change.
+         *
+         * @param event the attribute change event
+         */
         private void handleChangeOnCache(final HtmlAttributeChangeEvent event) {
             final AbstractList nodes = nodeList_.get();
             if (null == nodes) {
@@ -457,9 +475,10 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     /**
-     * Gets the scriptable for the provided element that may already be the right scriptable.
+     * Returns the scriptable object for the specified element.
+     *
      * @param object the object for which to get the scriptable
-     * @return the scriptable
+     * @return the scriptable object
      */
     protected Scriptable getScriptableForElement(final Object object) {
         if (object instanceof Scriptable scriptable) {

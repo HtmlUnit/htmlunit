@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code DragEvent}.
+ * JavaScript host object for {@code DragEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent">MDN Documentation</a>
  */
 @JsxClass
 public class DragEvent extends MouseEvent {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this event.
      *
      * @param type the event type
      * @param details the event details (optional)

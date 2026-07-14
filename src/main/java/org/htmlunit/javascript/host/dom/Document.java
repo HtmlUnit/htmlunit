@@ -160,7 +160,7 @@ public class Document extends Node {
 
     /**
      * See <a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands">
-     *     Executing Commands</a>
+     *     Executing Commands</a>.
      */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
@@ -1363,6 +1363,7 @@ public class Document extends Node {
      * with the except of setting the domain to itself.</p>
      * <p>
      * The domain will be set according to the following rules:
+     * </p>
      * <ol>
      * <li>If the newDomain.equalsIgnoreCase(currentDomain) the method returns with no error.</li>
      * <li>If the browser version is netscape, the newDomain is downshifted.</li>
@@ -1373,7 +1374,7 @@ public class Document extends Node {
      *          d2.d3.gargoylesoftware.com
      *             d3.gargoylesoftware.com
      *                gargoylesoftware.com
-     * <p>
+     * <br>
      *        transformation to:        com
      *        will fail
      * </li>
@@ -1382,6 +1383,7 @@ public class Document extends Node {
      * TODO This code could be modified to understand country domain suffixes.
      * The domain www.bbc.co.uk should be trimmable only down to bbc.co.uk
      * trimming to co.uk should not be possible.
+     * </p>
      * @param newDomain the new domain to set
      */
     @JsxSetter
@@ -1848,6 +1850,7 @@ public class Document extends Node {
      * <p>
      * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
      * The DOM spec</a> for details.
+     * </p>
      *
      * @param elementName - value of the {@code name} attribute to look for
      * @return all HTML elements that have a {@code name} attribute with the specified value

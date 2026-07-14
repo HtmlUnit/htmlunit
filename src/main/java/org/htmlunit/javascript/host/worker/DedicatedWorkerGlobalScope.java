@@ -66,6 +66,8 @@ import org.htmlunit.util.MimeType;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Rural Hunter
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope">MDN Documentation</a>
  */
 @JsxClass
 public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
@@ -107,7 +109,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor
@@ -117,7 +119,11 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
     /**
      * Constructor.
-     * @param webClient the WebClient
+     *
+     * @param owningWindow the owning window
+     * @param context the current context
+     * @param webClient the {@link WebClient}
+     * @param name the worker name
      * @param worker the started worker
      * @throws Exception in case of problem
      */
@@ -181,8 +187,9 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
-     * Get the scope itself.
-     * @return this
+     * Returns the scope itself.
+     *
+     * @return this scope
      */
     @JsxGetter
     public Object getSelf() {
@@ -191,6 +198,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
     /**
      * Returns the {@code onmessage} event handler.
+     *
      * @return the {@code onmessage} event handler
      */
     @JsxGetter
@@ -200,6 +208,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
     /**
      * Sets the {@code onmessage} event handler.
+     *
      * @param onmessage the {@code onmessage} event handler
      */
     @JsxSetter
@@ -208,7 +217,9 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
-     * @return returns the WorkerLocation associated with the worker
+     * Returns the {@link WorkerLocation} associated with the worker.
+     *
+     * @return the worker location
      */
     @JsxGetter
     public WorkerLocation getLocation() {
@@ -216,7 +227,9 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
-     * @return returns the WorkerNavigator associated with the worker
+     * Returns the {@link WorkerNavigator} associated with the worker.
+     *
+     * @return the worker navigator
      */
     @JsxGetter
     public WorkerNavigator getNavigator() {
@@ -224,14 +237,17 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
-     * @return the {@code name}
+     * Returns the {@code name} of the worker.
+     *
+     * @return the worker name
      */
     public String jsGetName() {
         return name_;
     }
 
     /**
-     * Sets the {@code name}.
+     * Sets the {@code name} of the worker.
+     *
      * @param name the new name
      */
     public void jsSetName(final Scriptable name) {
@@ -240,7 +256,8 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
     /**
      * Posts a message to the {@link Worker} in the page's context.
-     * @param message the message
+     *
+     * @param message the message to post
      */
     @JsxFunction
     public void postMessage(final Object message) {
@@ -311,13 +328,14 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
-     * Import external script(s).
+     * Imports one or more external scripts into the worker's scope.
+     *
      * @param cx the current context
      * @param scope the scope
      * @param thisObj this object
-     * @param args the script(s) to import
+     * @param args the script URL(s) to import
      * @param funObj the JS function called
-     * @throws IOException in case of problem loading/executing the scripts
+     * @throws IOException in case of problem loading or executing the scripts
      */
     @JsxFunction
     public static void importScripts(final Context cx, final VarScope scope,
@@ -369,12 +387,11 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
-     * Sets a chunk of JavaScript to be invoked at some specified time later.
-     * The invocation occurs only if the window is opened after the delay
-     * and does not contain another page than the one that originated the setTimeout.
+     * Sets a chunk of JavaScript to be invoked after the specified delay.
+     * The invocation occurs only if the window is still open after the delay
+     * and has not been replaced by another page.
      *
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">
-     *     MDN web docs</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/setTimeout">MDN Documentation</a>
      *
      * @param context the JavaScript context
      * @param scope the scope
@@ -391,10 +408,10 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
-     * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
+     * Sets a chunk of JavaScript to be invoked repeatedly at the specified interval.
      *
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">
-     *     MDN web docs</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/setInterval">MDN Documentation</a>
+     *
      * @param context the JavaScript context
      * @param scope the scope
      * @param thisObj the scriptable
@@ -410,9 +427,10 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
-     * Returns the prototype object corresponding to the specified HtmlUnit class inside the window scope.
+     * Returns the prototype object corresponding to the specified HtmlUnit class inside the worker scope.
+     *
      * @param jsClass the class whose prototype is to be returned
-     * @return the prototype object corresponding to the specified class inside the specified scope
+     * @return the prototype object corresponding to the specified class
      */
     @Override
     public Scriptable getPrototype(final Class<? extends HtmlUnitScriptable> jsClass) {
@@ -421,7 +439,8 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
     /**
      * Sets the prototypes for HtmlUnit host classes.
-     * @param map a Map of ({@link Class}, {@link Scriptable})
+     *
+     * @param map a map of ({@link Class}, {@link Scriptable}) prototype entries
      */
     public void setPrototypes(final Map<Class<? extends Scriptable>, Scriptable> map) {
         prototypes_ = map;

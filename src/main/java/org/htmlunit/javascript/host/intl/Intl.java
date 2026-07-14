@@ -48,6 +48,8 @@ import org.htmlunit.javascript.configuration.JsxStaticFunction;
  * @author Ahmed Ashour
  * @author Lai Quang Duong
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl">MDN Documentation</a>
  */
 @JsxClass
 public class Intl extends HtmlUnitScriptable {

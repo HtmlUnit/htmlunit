@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeTurbulence;
 
 /**
- * A JavaScript object for {@code SVGFETurbulenceElement}.
+ * JavaScript host object for {@code SVGFETurbulenceElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFETurbulenceElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeTurbulence.class)
 public class SVGFETurbulenceElement extends SVGElement {
@@ -48,7 +50,7 @@ public class SVGFETurbulenceElement extends SVGElement {
     public static final int SVG_TURBULENCE_TYPE_TURBULENCE = 2;
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

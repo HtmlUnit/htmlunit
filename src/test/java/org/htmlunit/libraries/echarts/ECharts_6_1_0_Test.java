@@ -14,12 +14,8 @@
  */
 package org.htmlunit.libraries.echarts;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.Duration;
-import java.util.Base64;
 
-import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -63,33 +59,6 @@ public class ECharts_6_1_0_Test extends WebDriverTestCase {
             }
 
             Thread.sleep(100);
-        }
-    }
-
-
-    private void readExpectedAlertFromPng(final String testName) throws IOException {
-        String resourceName = testName + "/nyi_" + getBrowserVersion().getNickname() + ".png";
-        if (!useRealBrowser()) {
-            try (InputStream is = getClass().getResourceAsStream(resourceName)) {
-                if (is != null) {
-                    final byte[] bytes = IOUtils.toByteArray(is);
-                    final String alert = "data:image/png;base64," + Base64.getEncoder().encodeToString(bytes);
-                    setExpectedAlerts(alert);
-
-                    return;
-                }
-            }
-        }
-
-        resourceName = testName + "/expected_" + getBrowserVersion().getNickname() + ".png";
-        try (InputStream is = getClass().getResourceAsStream(resourceName)) {
-            if (is == null) {
-                throw new IllegalArgumentException("Resource named '" + resourceName + "' not found");
-            }
-
-            final byte[] bytes = IOUtils.toByteArray(is);
-            final String alert = "data:image/png;base64," + Base64.getEncoder().encodeToString(bytes);
-            setExpectedAlerts(alert);
         }
     }
 }

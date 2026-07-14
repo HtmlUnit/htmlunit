@@ -40,34 +40,34 @@ import org.htmlunit.xml.XmlPage;
  *
  * <p>
  * The following table shows the type of {@link Page} created depending on the content type:<br>
- * <br>
- *  <table border="1" style="width:50%;">
- *    <tr>
- *      <th>Content type</th>
- *      <th>Type of page</th>
- *    </tr>
- *    <tr>
- *      <td>text/html<br>
- *          text/javascript</td>
- *      <td>{@link HtmlPage}</td>
- *    </tr>
- *    <tr>
- *      <td>text/xml<br>
- *      application/xml<br>
- *      text/vnd.wap.wml<br>
- *      *+xml
- *      </td>
- *      <td>{@link XmlPage}, or an {@link XHtmlPage} if an XHTML namespace is used</td>
- *    </tr>
- *    <tr>
- *      <td>text/*</td>
- *      <td>{@link TextPage}</td>
- *    </tr>
- *    <tr>
- *      <td>Anything else</td>
- *      <td>{@link UnexpectedPage}</td>
- *    </tr>
- *  </table>
+ * </p>
+ * <table border="1" style="width:50%;">
+ *   <tr>
+ *     <th>Content type</th>
+ *     <th>Type of page</th>
+ *   </tr>
+ *   <tr>
+ *     <td>text/html<br>
+ *         text/javascript</td>
+ *     <td>{@link HtmlPage}</td>
+ *   </tr>
+ *   <tr>
+ *     <td>text/xml<br>
+ *     application/xml<br>
+ *     text/vnd.wap.wml<br>
+ *     *+xml
+ *     </td>
+ *     <td>{@link XmlPage}, or an {@link XHtmlPage} if an XHTML namespace is used</td>
+ *   </tr>
+ *   <tr>
+ *     <td>text/*</td>
+ *     <td>{@link TextPage}</td>
+ *   </tr>
+ *   <tr>
+ *     <td>Anything else</td>
+ *     <td>{@link UnexpectedPage}</td>
+ *   </tr>
+ * </table>
  *
  * @author Mike Bowler
  * @author Christian Sell
@@ -86,7 +86,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
 
     /**
      * See <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05">
-     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05</a>
+     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05</a>.
      */
     private static final String[] HTML_PATTERNS = {"!DOCTYPE HTML", "HTML", "HEAD", "SCRIPT",
         "IFRAME", "H1", "DIV", "FONT", "TABLE", "A", "STYLE", "TITLE", "B", "BODY", "BR", "P", "!--" };
@@ -246,7 +246,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
 
     /**
      * See <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4">
-     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4</a>
+     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4</a>.
      * @param bytes the bytes to check
      */
     private static boolean isBinary(final byte[] bytes) {

@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public class HTMLEmbedElementTest extends WebDriverTestCase {
 
@@ -216,6 +217,96 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  setWidth(elem, '8');\n"
             + "  setWidth(elem, 'foo');\n"
 
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"§§URL§§foo.pdf", ""})
+    public void getSrc() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <embed id='e1' src='foo.pdf' ></embed>\n"
+            + "  <embed id='e2' ></embed>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  for (var i = 1; i <= 2; i++) {\n"
+            + "    log(document.getElementById('e' + i).src);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"§§URL§§foo.pdf", "§§URL§§bar.pdf"})
+    public void setSrc() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <embed id='e1' src='foo.pdf' ></embed>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var elem = document.getElementById('e1');\n"
+            + "  log(elem.src);\n"
+            + "  elem.src = 'bar.pdf';\n"
+            + "  log(elem.src);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"application/pdf", ""})
+    public void getType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <embed id='e1' type='application/pdf' ></embed>\n"
+            + "  <embed id='e2' ></embed>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  for (var i = 1; i <= 2; i++) {\n"
+            + "    log(document.getElementById('e' + i).type);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"application/pdf", "text/plain"})
+    public void setType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <embed id='e1' type='application/pdf' ></embed>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var elem = document.getElementById('e1');\n"
+            + "  log(elem.type);\n"
+            + "  elem.type = 'text/plain';\n"
+            + "  log(elem.type);\n"
             + "</script>\n"
             + "</body></html>";
 

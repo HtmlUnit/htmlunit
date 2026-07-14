@@ -63,7 +63,7 @@ public class HtmlLink extends HtmlElement {
     private CssStyleSheet sheet_;
 
     /**
-     * Creates an instance of HtmlLink
+     * Creates an instance of HtmlLink.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element
@@ -361,7 +361,10 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * @return true if the rel attribute is 'stylesheet'
+     * Returns whether this link references a style sheet.
+     *
+     * @return {@code true} if the {@code rel} attribute contains
+     *         {@code stylesheet}
      */
     public boolean isStyleSheetLink() {
         final String rel = getRelAttribute();
@@ -372,7 +375,10 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * @return true if the rel attribute is 'modulepreload'
+     * Returns whether this link references a module preload.
+     *
+     * @return {@code true} if the {@code rel} attribute contains
+     *         {@code modulepreload}
      */
     public boolean isModulePreloadLink() {
         final String rel = getRelAttribute();

@@ -40,7 +40,8 @@ import org.htmlunit.util.StringUtils;
  * constants are provided for common browser versions.
  *
  * <p>You can create a different browser setup by using the BrowserVersionFactory.
- * <pre id='htmlUnitCode'>
+ * </p>
+ * <pre>
  *         final String applicationName = "APPNAME";
  *         final String applicationVersion = "APPVERSION";
  *         final String userAgent = "USERAGENT";
@@ -55,7 +56,7 @@ import org.htmlunit.util.StringUtils;
  * </pre>
  * <p>But keep in mind this new one still behaves like an FF, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
- * plugins like UserAgentSwitcher.
+ * plugins like UserAgentSwitcher.</p>
  *
  * @author Mike Bowler
  * @author Daniel Gredler
@@ -334,6 +335,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns whether the same browser.
+     *
      * @param other the {@link BrowserVersion} to compare with
      * @return true if the nickname and the numeric version are the same
      */
@@ -534,6 +537,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns whether the chrome.
+     *
      * Returns {@code true} if this <code>BrowserVersion</code> instance represents some
      * version of Google Chrome. Note that Google Chrome does not return 'Chrome'
      * in the application name, we have to look in the nickname.
@@ -544,6 +549,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns whether the edge.
+     *
      * Returns {@code true} if this <code>BrowserVersion</code> instance represents some
      * version of Microsoft Edge.
      * @return whether this version is a version of the Edge browser
@@ -553,6 +560,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns whether the firefox.
+     *
      * Returns {@code true} if this <code>BrowserVersion</code> instance represents some
      * version of Firefox.
      * @return whether this version is a version of a Firefox browser
@@ -562,6 +571,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns whether the firefox esr.
+     *
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * @return whether this represents the Firefox Extended Support Release (ESR) version
      */
@@ -579,6 +590,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the browser version numeric.
+     *
      * @return the browserVersionNumeric
      */
     public int getBrowserVersionNumeric() {
@@ -625,6 +638,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the vendor.
+     *
      * @return the vendor
      */
     public String getVendor() {
@@ -712,6 +727,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the script accept header.
+     *
      * Returns the value used by the browser for the {@code Accept} header
      * if requesting a script.
      * @return the accept header string
@@ -721,6 +738,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the xml http request accept header.
+     *
      * Returns the value used by the browser for the {@code Accept} header
      * if performing an XMLHttpRequest.
      * @return the accept header string
@@ -730,6 +749,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the img accept header.
+     *
      * Returns the value used by the browser for the {@code Accept} header
      * if requesting an image.
      * @return the accept header string
@@ -739,6 +760,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the css accept header.
+     *
      * Returns the value used by the browser for the {@code Accept} header
      * if requesting a CSS declaration.
      * @return the accept header string
@@ -877,6 +900,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Performs this operation.
+     *
      * @return the pixesPerChar
      *
      * @deprecated as of version 5.3.0; use {@link #getPixelsPerChar()} instead.
@@ -887,6 +912,8 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the pixels per char.
+     *
      * @return the pixelsPerChar (currently hard coded 10)
      */
     public int getPixelsPerChar() {
@@ -895,6 +922,8 @@ public final class BrowserVersion implements Serializable {
 
 
     /**
+     * Performs this operation.
+     *
      * Determines whether this browser thinks it can play the given media resource type,
      * mirroring the result of the DOM method {@code HTMLMediaElement.canPlayType()}.
      *
@@ -902,7 +931,7 @@ public final class BrowserVersion implements Serializable {
      * parameter (see {@link MediaResourceType#parse(String)} for the exact parsing rules).
      * The parsed value is then looked up first against this browser's "probably" playable
      * resources (MIME type plus a known-good codec list) and, failing that, against its
-     * "maybe" playable resources (MIME type alone, with no codec guarantee).
+     * "maybe" playable resources (MIME type alone, with no codec guarantee).</p>
      *
      * @param type the media type string to test, e.g. {@code "video/mp4"} or
      *             {@code "video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\""}
@@ -946,6 +975,8 @@ public final class BrowserVersion implements Serializable {
         private final BrowserVersion workPiece_;
 
         /**
+         * Performs this operation.
+         *
          * Creates a new BrowserVersionBuilder using the given browser version
          * as template for the browser to be constructed.
          * @param version the blueprint
@@ -984,6 +1015,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Performs this operation.
+         *
          * @return the new immutable browser version
          */
         public BrowserVersion build() {
@@ -991,6 +1024,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the application minor version.
+         *
          * @param applicationMinorVersion the applicationMinorVersion to set
          * @return this for fluent use
          */
@@ -1000,6 +1035,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the application name.
+         *
          * @param applicationName the applicationName to set
          * @return this for fluent use
          */
@@ -1009,6 +1046,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the application version.
+         *
          * @param applicationVersion the applicationVersion to set
          * @return this for fluent use
          */
@@ -1018,6 +1057,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the vendor.
+         *
          * @param vendor the vendor to set
          * @return this for fluent use
          */
@@ -1027,6 +1068,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the application code name.
+         *
          * @param applicationCodeName the applicationCodeName to set
          * @return this for fluent use
          */
@@ -1049,6 +1092,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the on line.
+         *
          * @param onLine the onLine to set
          * @return this for fluent use
          */
@@ -1058,6 +1103,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the platform.
+         *
          * @param platform the platform to set
          * @return this for fluent use
          */
@@ -1067,6 +1114,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the system timezone.
+         *
          * @param systemTimezone the systemTimezone to set
          * @return this for fluent use
          */
@@ -1076,6 +1125,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the user agent.
+         *
          * @param userAgent the userAgent to set
          * @return this for fluent use
          */
@@ -1085,6 +1136,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the accept encoding header.
+         *
          * @param acceptEncodingHeader the {@code Accept-Encoding} header
          * @return this for fluent use
          */
@@ -1094,6 +1147,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the accept language header.
+         *
          * @param acceptLanguageHeader the {@code Accept-Language} header
          * @return this for fluent use
          */
@@ -1103,6 +1158,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the html accept header.
+         *
          * @param htmlAcceptHeader the {@code Accept} header to be used when retrieving pages
          * @return this for fluent use
          */
@@ -1112,6 +1169,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the img accept header.
+         *
          * @param imgAcceptHeader the {@code Accept} header to be used when retrieving images
          * @return this for fluent use
          */
@@ -1121,6 +1180,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the css accept header.
+         *
          * @param cssAcceptHeader the {@code Accept} header to be used when retrieving pages
          * @return this for fluent use
          */
@@ -1130,6 +1191,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the script accept header.
+         *
          * @param scriptAcceptHeader the {@code Accept} header to be used when retrieving scripts
          * @return this for fluent use
          */
@@ -1139,6 +1202,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the xml http request accept header.
+         *
          * @param xmlHttpRequestAcceptHeader the {@code Accept} header to be used when
          *        performing XMLHttpRequests
          * @return this for fluent use
@@ -1149,6 +1214,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the sec client hint user agent header.
+         *
          * @param secClientHintUserAgentHeader the {@code sec-ch-ua} header value
          * @return this for fluent use
          */
@@ -1158,6 +1225,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the sec client hint user agent platform header.
+         *
          * @param secClientHintUserAgentPlatformHeader the {@code sec-ch-ua-platform} header value
          * @return this for fluent use
          */
@@ -1167,6 +1236,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the product sub.
+         *
          * @param productSub the productSub
          * @return this for fluent use
          */
@@ -1176,6 +1247,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the header names ordered.
+         *
          * @param headerNamesOrdered the headerNamesOrdered
          * @return this for fluent use
          */
@@ -1185,6 +1258,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the font heights.
+         *
          * @param fontHeights the fontHeights
          * @return this for fluent use
          */
@@ -1194,6 +1269,8 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Sets the build id.
+         *
          * @param buildId the buildId
          * @return this for fluent use
          */
@@ -1204,15 +1281,18 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Performs this operation.
+     *
      * Represents a media type that a browser can play, combining a MIME type
      * with an optional set of codecs.
-     * <p>Instances are immutable.
+     * <p>Instances are immutable.</p>
      *
      * <p>Instances are used as keys in the two lookup sets held by each
      * {@link BrowserVersion} ({@code maybeMediaResource_} and
      * {@code probablyMediaResources_}) and are queried by
      * {@link BrowserVersion#canPlayType(String)} to determine the value
      * returned by the {@code HTMLMediaElement.canPlayType()} DOM method:
+     * </p>
      * <ul>
      *   <li>{@code "maybe"}    — the MIME type alone is in the
      *       {@code maybeMediaResource_} set (no codec information given).</li>
@@ -1224,7 +1304,7 @@ public final class BrowserVersion implements Serializable {
      * <p>Equality and hashing are based on both the MIME type string and the
      * normalised codec string, so {@code new MediaResourceType("video/mp4", null)}
      * and {@code new MediaResourceType("video/mp4", "avc1.42E01E")} are
-     * considered distinct entries.
+     * considered distinct entries.</p>
      *
      * @see BrowserVersion#canPlayType(String)
      * @see <a href="https://html.spec.whatwg.org/multipage/media.html#dom-navigator-canplaytype">
@@ -1241,6 +1321,8 @@ public final class BrowserVersion implements Serializable {
         private final String codecs_;
 
          /**
+          * Performs this operation.
+          *
           * Creates a new {@code MediaResourceType} with the given MIME type and
           * optional codec string.
           *
@@ -1256,12 +1338,15 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Performs this operation.
+         *
          * Parses a raw {@code canPlayType()} argument string into a
          * {@code MediaResourceType} suitable for a set lookup.
          *
          * <p>The parsing rules follow the
          * <a href="https://html.spec.whatwg.org/multipage/media.html#dom-navigator-canplaytype">
          * HTML Living Standard</a>:
+         * </p>
          * <ol>
          *   <li>Blank or whitespace-only input returns {@code null} (the caller
          *       will map this to {@code ""}).</li>

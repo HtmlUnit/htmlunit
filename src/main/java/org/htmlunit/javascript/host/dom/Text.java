@@ -30,6 +30,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Chuck Dumont
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Text">MDN Documentation</a>
  */
 @JsxClass(domClass = DomText.class)
 public class Text extends CharacterData {
@@ -44,7 +46,7 @@ public class Text extends CharacterData {
     }
 
     /**
-     * Split a Text node in two.
+     * Splits a Text node in two.
      * @param offset the character position at which to split the Text node
      * @return the Text node that was split from this node
      */
@@ -55,8 +57,8 @@ public class Text extends CharacterData {
     }
 
     /**
-     * Returns wholeText value.
-     * @return wholeText value
+     * Returns the {@code wholeText} property.
+     * @return the {@code wholeText} property
      */
     @JsxGetter
     public String getWholeText() {

@@ -61,7 +61,7 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  *
- * Provides facility method to work with XML responses.
+ * Provides utility methods for working with XML responses.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -76,7 +76,7 @@ public final class XmlUtils {
 
     private static final ErrorHandler DISCARD_MESSAGES_HANDLER = new ErrorHandler() {
         /**
-         * Does nothing as we're not interested in this.
+         * Does nothing as we are not interested in this.
          */
         @Override
         public void error(final SAXParseException exception) {
@@ -84,7 +84,7 @@ public final class XmlUtils {
         }
 
         /**
-         * Does nothing as we're not interested in this.
+         * Does nothing as we are not interested in this.
          */
         @Override
         public void fatalError(final SAXParseException exception) {
@@ -92,7 +92,7 @@ public final class XmlUtils {
         }
 
         /**
-         * Does nothing as we're not interested in this.
+         * Does nothing as we are not interested in this.
          */
         @Override
         public void warning(final SAXParseException exception) {
@@ -110,13 +110,13 @@ public final class XmlUtils {
     /**
      * Builds a document from the content of the web response.
      * A warning is logged if an exception is thrown while parsing the XML content
-     * (for instance when the content is not a valid XML and can't be parsed).
+     * (for instance when the content is not valid XML and cannot be parsed).
      *
      * @param webResponse the response from the server
-     * @throws IOException if the page could not be created
      * @return the parse result
-     * @throws SAXException if the parsing fails
-     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * @throws IOException if the page could not be created
+     * @throws SAXException if parsing fails
+     * @throws ParserConfigurationException if a {@link DocumentBuilder} cannot be created
      */
     public static Document buildDocument(final WebResponse webResponse)
         throws IOException, SAXException, ParserConfigurationException {
@@ -205,13 +205,13 @@ public final class XmlUtils {
     }
 
     /**
-     * Recursively appends a {@link Node} child to {@link DomNode} parent.
+     * Recursively appends a {@link Node} child to a {@link DomNode} parent.
      *
      * @param page the owner page of {@link DomElement}s to be created
-     * @param parent the parent DomNode
-     * @param child the child Node
-     * @param handleXHTMLAsHTML if true elements from the XHTML namespace are handled as HTML elements instead of
-     *     DOM elements
+     * @param parent the parent {@link DomNode}
+     * @param child the child {@link Node} to append
+     * @param handleXHTMLAsHTML if {@code true}, elements from the XHTML namespace are handled as HTML elements
+     *     instead of DOM elements
      */
     public static void appendChild(final SgmlPage page, final DomNode parent, final Node child,
         final boolean handleXHTMLAsHTML) {
@@ -300,12 +300,12 @@ public final class XmlUtils {
     }
 
     /**
-     * Copy all children from 'source' to 'dest', within the context of the specified page.
-     * @param page the page which the nodes belong to
+     * Copies all children from {@code source} to {@code dest} within the context of the specified page.
+     *
+     * @param page the page to which the nodes belong
      * @param source the node to copy from
      * @param dest the node to copy to
-     * @param handleXHTMLAsHTML if true elements from the XHTML namespace are handled as HTML elements instead of
-     *     DOM elements
+     * @param handleXHTMLAsHTML if {@code true}, elements from the XHTML namespace are handled as HTML elements
      */
     private static void copy(final SgmlPage page, final Node source, final DomNode dest,
         final boolean handleXHTMLAsHTML) {
@@ -345,11 +345,12 @@ public final class XmlUtils {
     }
 
     /**
-     * Search for the namespace URI of the given prefix, starting from the specified element.
-     * The default namespace can be searched for by specifying "" as the prefix.
+     * Searches for the namespace URI bound to the given prefix, starting from the specified element.
+     * The default namespace can be searched for by passing an empty string as the prefix.
+     *
      * @param element the element to start searching from
-     * @param prefix the namespace prefix
-     * @return the namespace URI bound to the prefix; or null if there is no such namespace
+     * @param prefix the namespace prefix to look up; use {@code ""} for the default namespace
+     * @return the namespace URI bound to the prefix, or {@code null} if none is found
      */
     public static String lookupNamespaceURI(final DomElement element, final String prefix) {
         String uri;
@@ -369,10 +370,11 @@ public final class XmlUtils {
     }
 
     /**
-     * Search for the prefix associated with specified namespace URI.
+     * Searches for the prefix associated with the specified namespace URI, starting from the given element.
+     *
      * @param element the element to start searching from
-     * @param namespace the namespace prefix
-     * @return the prefix bound to the namespace URI; or null if there is no such namespace
+     * @param namespace the namespace URI to look up
+     * @return the prefix bound to the namespace URI, or {@code null} if none is found
      */
     public static String lookupPrefix(final DomElement element, final String namespace) {
         final Map<String, DomAttr> attributes = element.getAttributesMap();

@@ -23,10 +23,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeComposite;
 
 /**
- * A JavaScript object for {@code SVGFECompositeElement}.
+ * JavaScript host object for {@code SVGFECompositeElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFECompositeElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeComposite.class)
 public class SVGFECompositeElement extends SVGElement {
@@ -64,7 +66,7 @@ public class SVGFECompositeElement extends SVGElement {
     public static final int SVG_FECOMPOSITE_OPERATOR_LIGHTER = 7;
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

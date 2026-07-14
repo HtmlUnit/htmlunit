@@ -641,6 +641,7 @@ public class WebRequest implements Serializable {
      * Sets the default character set to use for the response when it does not specify one.
      * <p>
      * Unless set, the default is {@link java.nio.charset.StandardCharsets#UTF_8}.
+     * </p>
      * @param defaultResponseContentCharset the default character set of the response
      */
     public void setDefaultResponseContentCharset(final Charset defaultResponseContentCharset) {

@@ -2827,6 +2827,185 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "log(s);\n");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("miter")
+    public void lineJoinDefault() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+               "log(context.lineJoin);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"miter", "round", "round", "bevel", "bevel", "bevel"})
+    public void lineJoinGetSet() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "log(context.lineJoin);\n"
+                + "context.lineJoin = 'round'\n"
+                + "log(context.lineJoin);\n"
+                + "context.lineJoin = 'BeVEl'\n"
+                + "log(context.lineJoin);\n"
+                + "context.lineJoin = 'bevel'\n"
+                + "log(context.lineJoin);\n"
+                + "context.lineJoin = '  round '\n"
+                + "log(context.lineJoin);\n"
+                + "context.lineJoin = '  unknow '\n"
+                + "log(context.lineJoin);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABK0lEQVR4AcSTvy4EURjFN2gVGl6CWq2lFZ0HEI0gQoVezwNo"
+            + "xWPoVRoP4B0Ufr+b+Saz98/MFJLdnDP3u+c75+xusru2+OfXygrP+CKSYxxzPuE6FQ8dnRnbmFN4R3y7ozNjG1OFO0TvYcBZ"
+            + "Le7FOVV4S2IDBpzV4l6cY4W7uC9gDjV3uZ7uY4U3yVF/NHetwgN6TmEL7vQU+1bhdeEshaqnVnhC9hBOQY/eJV+t8HLJMX4p"
+            + "vHnhOfl9OBd6zfT+YeEmavGOaOKdh+QoYMZsWgwLr1C2YA3xX67tzJhNu2GhoSPUNzjEE5fPjs6MPfSaMZvEYaHCB49j6O/s"
+            + "i/MHvsCAs5o7PXrNxH6RF8bilWEPPsNvGHC21J2e0PuzVajhl8cjzOHXc5fr6f4HAAD//xGJfzIAAAAGSURBVAMAPK0mKVxT"
+            + "+QwAAAAASUVORK5CYII=")
+    public void drawLineJoinMiter() throws Exception {
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.lineJoin = 'miter';\n"
+                + "    context.lineWidth = 6;\n"
+                + "    context.beginPath();\n"
+                + "    context.moveTo(5, 17);\n"
+                + "    context.lineTo(10, 8);\n"
+                + "    context.lineTo(15, 17);\n"
+                + "    context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABLklEQVR4AeySu2oCQRSGl9SBXB4ipEmXJiSkTJMmCUmZJgQS"
+            + "LFS81GqvnYUgaGMliLVPYCdoITY+gOAjCPodcZfZnTPrgpbK/3lmzuXf3dk98478OxkefqBJzvCXy6yhC2WI1T5DMWjuHL6I"
+            + "JZAcQVec4Q0jaYgqQ+IWVMUZyuCVMnVJTmoEWy7DR1pT4NI/hWew5DLMWp12Qu3RDN+Y/YR9eqfB6tMM8zQmVS7aGDX8o+EJ"
+            + "kuqBxtBZm4bnFIugaUCyD5rkiWR2WzMNC2SuQVOFpOuDvqAmpgTPMw1l4JVsD0y12AxhAlUw1WbzAnJBQthQEjIob+6bzQyW"
+            + "UANfDRYLGMMH/MAIApl3GCRZdOAO6jAFX3MWYnpPVM/UZUi/t+IveBTWvuRopObvQ3EDAAD//4EKc+UAAAAGSURBVAMAyMAm"
+            + "KRVYII8AAAAASUVORK5CYII=")
+    public void drawLineJoinRound() throws Exception {
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.lineJoin = 'round';\n"
+                + "    context.lineWidth = 6;\n"
+                + "    context.beginPath();\n"
+                + "    context.moveTo(5, 17);\n"
+                + "    context.lineTo(10, 8);\n"
+                + "    context.lineTo(15, 17);\n"
+                + "    context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABIElEQVR4AeySrW4CQRSFN3VNTZs06VM0NU1dbZuAAywCEgQC"
+            + "geDHEH4MBhwCBQZL0DwBjgQEwfAAJDwCgu9CdjO7e2chgaAg59uZOXfuyTC7T86Nf4/A6y/07nfY4Mwa2LqiTvhBS93CO76q"
+            + "qMC22nEyW6ch/LQF/rA1AzblKXxBSLZA6wmMhJox96ZaYIrqP5xTkg0x8EkLrPh2RC+qwXIwsMCGb7hUv2zMgScz8AW3CJqm"
+            + "mBPQVMZ8hqPMwBLOK2hqYsoHzhDSG453TWagNMQpjsHUgMUMltABU0MWfyC9DI5jBoohjfKW0yzWsIMuuOoz2cICEpCFOXgK"
+            + "BrqFEZNP6MEKXG2YSKi8OPVObYH0OXsecncMPsnfk5rPdBcHAAAA//9GRiCmAAAABklEQVQDAFchJilYW2vqAAAAAElFTkSu"
+            + "QmCC")
+    public void drawLineJoinBevel() throws Exception {
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.lineJoin = 'bevel';\n"
+                + "    context.lineWidth = 6;\n"
+                + "    context.beginPath();\n"
+                + "    context.moveTo(5, 17);\n"
+                + "    context.lineTo(10, 8);\n"
+                + "    context.lineTo(15, 17);\n"
+                + "    context.stroke();\n");
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("butt")
+    public void lineCapDefault() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+               "log(context.lineCap);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"butt", "round", "round", "square", "square", "square"})
+    public void lineCapGetSet() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "log(context.lineCap);\n"
+                + "context.lineCap = 'round'\n"
+                + "log(context.lineCap);\n"
+                + "context.lineCap = 'SquARE'\n"
+                + "log(context.lineCap);\n"
+                + "context.lineCap = 'square'\n"
+                + "log(context.lineCap);\n"
+                + "context.lineCap = '  butt '\n"
+                + "log(context.lineCap);\n"
+                + "context.lineCap = '  unknow '\n"
+                + "log(context.lineCap);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAALklEQVR4AdTRsQ0AAAgCQXT/nZUBKGjfSEdzYVUesXi2pYiI"
+            + "sSU/ETOmpCCWeQAAAP//NWxm8gAAAAZJREFUAwALrgYppm2j7wAAAABJRU5ErkJggg==")
+    public void drawLineCapButt() throws Exception {
+        draw("<canvas id='myCanvas' width='10', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.lineCap = 'butt';\n"
+                + "    context.lineWidth = 6;\n"
+                + "    context.beginPath();\n"
+                + "    context.moveTo(6, 5);\n"
+                + "    context.lineTo(6, 15);\n"
+                + "    context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAAdklEQVR4AeySwQmAMBRDP951QxfQeXQBN9QFTELpIf8fRK+K"
+            + "KWn+I4XSIR5+n8ANh5xN9LAR3sjBgsnYRM8sgTMA/5V5I5scVOagQ33/g/0qKvP6eq6iTZk3HgWozMEV4A6xhaJnll4PmOBg"
+            + "gqHoYfN7VFgtNwAAAP//ybmhIAAAAAZJREFUAwD8YQ4p7/bWhAAAAABJRU5ErkJggg==")
+    public void drawLineCapRound() throws Exception {
+        draw("<canvas id='myCanvas' width='10', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.lineCap = 'round';\n"
+                + "    context.lineWidth = 6;\n"
+                + "    context.beginPath();\n"
+                + "    context.moveTo(6, 5);\n"
+                + "    context.lineTo(6, 15);\n"
+                + "    context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAANUlEQVR4AeySMQoAAAgCq///uQwaHcLZyIYIg8OKZ8mHjQdM"
+            + "ITvCkLcdOZfbGs+CSAymfx4HAAD//5I7/cIAAAAGSURBVAMA6AgGKb9SbOsAAAAASUVORK5CYII=")
+    public void drawLineCapSquare() throws Exception {
+        draw("<canvas id='myCanvas' width='10', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.lineCap = 'square';\n"
+                + "    context.lineWidth = 6;\n"
+                + "    context.beginPath();\n"
+                + "    context.moveTo(6, 5);\n"
+                + "    context.lineTo(6, 15);\n"
+                + "    context.stroke();\n");
+    }
+
     private void draw(final String canvasSetup, final String drawJS) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

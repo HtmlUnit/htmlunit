@@ -36,11 +36,14 @@ import java.util.Set;
  * map interface but only for compatibility reason in the sense of replacing a
  * regular map. Iterator and streaming methods are either not implemented or
  * less efficient.
+ * </p>
  * <p>
  * It goes the extra mile to avoid the overhead of wrapper objects.
+ * </p>
  * <p>
  * Because you typically know what you do, we run minimal index checks only and
  * rely on the default exceptions by Java. Why should we do things twice?
+ * </p>
  * <p>
  * Important Note: This is meant for small maps because to save on memory
  * allocation and churn, we are not keeping a wrapper for a reference from the
@@ -48,10 +51,12 @@ import java.util.Set;
  * we have to iterate the entire list. Mostly, half of it most likely, but still
  * expensive enough. When you have something small like 10 to 20 entries, this
  * won't matter that much especially when a remove might be a rare event.
+ * </p>
  * <p>
  * This is based on FashHashMap from XLT which is based on a version from:
  * https://github.com/mikvor/hashmapTest/blob/master/src/main/java/map/objobj/ObjObjMap.java
  * No concrete license specified at the source. The project is public domain.
+ * </p>
  *
  * @param <K> the type of the key
  * @param <V> the type of the value
@@ -167,7 +172,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
-     * Adds a key and value to the internal position structure
+     * Adds a key and value to the internal position structure.
      *
      * @param key the key
      * @param value the value to store
@@ -414,7 +419,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
-     * Get us the start index from where we search or insert into the map
+     * Get us the start index from where we search or insert into the map.
      *
      * @param key the key to calculate the position for
      * @return the start position
@@ -429,6 +434,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
      *
      * <p>
      * Note that this function will return 1 when the argument is 0.
+     * </p>
      *
      * @param x a long integer smaller than or equal to 2<sup>62</sup>.
      * @return the least power of two greater than or equal to the specified value.
@@ -575,6 +581,8 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
+     * Returns the first value.
+     *
      * @return the first value.
      */
     public V getFirst() {
@@ -582,6 +590,8 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
+     * Returns the last value.
+     *
      * @return the last value.
      */
     public V getLast() {
@@ -672,7 +682,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
-     * We have to overwrite the export due to the use of static object as marker
+     * We have to overwrite the export due to the use of static object as marker.
      *
      * @param aInputStream the inputstream to read from
      * @throws IOException when the reading from the source fails
@@ -703,7 +713,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
-     * We have to overwrite the export due to the use of static object as marker
+     * We have to overwrite the export due to the use of static object as marker.
      *
      * @param aOutputStream the stream to write to
      * @throws IOException in case we have issue writing our data to the stream

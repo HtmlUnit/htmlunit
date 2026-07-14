@@ -44,6 +44,8 @@ import org.htmlunit.javascript.configuration.JsxSymbol;
  * @author Ronald Brill
  * @author Marek Gawlicki
  * @author Markus Winter
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList">MDN Documentation</a>
  */
 @JsxClass
 public class DOMTokenList extends HtmlUnitScriptable {
@@ -81,6 +83,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code value} property.
      * @return the value
      */
     @JsxGetter
@@ -96,6 +99,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the {@code value} property.
      * @param value the new value
      */
     @JsxSetter
@@ -271,7 +275,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     /**
-     * Toggle the token, by adding or removing.
+     * Toggles the token, adding or removing it.
      * @param token the token to add or remove
      * @return whether the string now contains the token or not
      */

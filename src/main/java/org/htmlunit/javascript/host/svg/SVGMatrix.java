@@ -25,10 +25,12 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.DOMException;
 
 /**
- * A JavaScript object for {@code SVGMatrix}.
- * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/SVGMatrix">MDN doc</a>
+ * JavaScript host object for {@code SVGMatrix}.
+ *
  * @author Marc Guillemot
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGMatrix">MDN Documentation</a>
  */
 @JsxClass
 public class SVGMatrix extends HtmlUnitScriptable {
@@ -55,7 +57,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -63,7 +65,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Instantiates and configure scope and prototype.
+     * Instantiates and configures the scope and prototype.
+     *
      * @param scope the parent scope
      */
     public SVGMatrix(final VarScope scope) {
@@ -73,7 +76,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the <code>a</code> entry of the matrix.
+     * Returns the {@code a} entry of the matrix.
+     *
      * @return the field
      */
     @JsxGetter
@@ -82,7 +86,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the <code>b</code> entry of the matrix.
+     * Returns the {@code b} entry of the matrix.
+     *
      * @return the field
      */
     @JsxGetter
@@ -91,7 +96,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the <code>c</code> entry of the matrix.
+     * Returns the {@code c} entry of the matrix.
+     *
      * @return the field
      */
     @JsxGetter
@@ -100,7 +106,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the <code>d</code> entry of the matrix.
+     * Returns the {@code d} entry of the matrix.
+     *
      * @return the field
      */
     @JsxGetter
@@ -109,7 +116,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the <code>e</code> entry of the matrix.
+     * Returns the {@code e} entry of the matrix.
+     *
      * @return the field
      */
     @JsxGetter
@@ -118,7 +126,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the <code>f</code> entry of the matrix.
+     * Returns the {@code f} entry of the matrix.
+     *
      * @return the field
      */
     @JsxGetter
@@ -127,7 +136,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the <code>a</code> entry of the matrix.
+     * Sets the {@code a} entry of the matrix.
+     *
      * @param newValue the new value for the field
      */
     @JsxSetter
@@ -136,7 +146,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the <code>b</code> entry of the matrix.
+     * Sets the {@code b} entry of the matrix.
+     *
      * @param newValue the new value for the field
      */
     @JsxSetter
@@ -145,7 +156,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the <code>c</code> entry of the matrix.
+     * Sets the {@code c} entry of the matrix.
+     *
      * @param newValue the new value for the field
      */
     @JsxSetter
@@ -154,7 +166,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the <code>d</code> entry of the matrix.
+     * Sets the {@code d} entry of the matrix.
+     *
      * @param newValue the new value for the field
      */
     @JsxSetter
@@ -163,7 +176,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the <code>e</code> entry of the matrix.
+     * Sets the {@code e} entry of the matrix.
+     *
      * @param newValue the new value for the field
      */
     @JsxSetter
@@ -172,7 +186,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Sets the <code>f</code> entry of the matrix.
+     * Sets the {@code f} entry of the matrix.
+     *
      * @param newValue the new value for the field
      */
     @JsxSetter
@@ -181,7 +196,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Transforms the matrix.
+     * Returns a new matrix that is the result of flipping this matrix along the x-axis.
+     *
      * @return the resulting matrix
      */
     @JsxFunction
@@ -198,7 +214,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Transforms the matrix.
+     * Returns a new matrix that is the result of flipping this matrix along the y-axis.
+     *
      * @return the resulting matrix
      */
     @JsxFunction
@@ -215,7 +232,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Transforms the matrix.
+     * Returns the inverse of this matrix.
+     *
      * @return the resulting matrix
      */
     @JsxFunction
@@ -241,7 +259,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Transforms the matrix.
+     * Returns a new matrix that is the result of multiplying this matrix by the given matrix.
+     *
      * @param by the matrix to multiply by
      * @return the resulting matrix
      */
@@ -260,8 +279,9 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Rotates the matrix.
-     * @param angle the rotation angle
+     * Returns a new matrix that is the result of rotating this matrix by the given angle.
+     *
+     * @param angle the rotation angle in degrees
      * @return the resulting matrix
      */
     @JsxFunction
@@ -283,7 +303,9 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Transforms the matrix.
+     * Returns a new matrix that is the result of rotating this matrix by the angle
+     * defined by the given vector.
+     *
      * @param x the x-coordinate of the vector
      * @param y the y-coordinate of the vector
      * @return the resulting matrix
@@ -314,7 +336,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Transforms the matrix.
+     * Returns a new matrix that is the result of scaling this matrix uniformly by the given factor.
+     *
      * @param factor the scale factor
      * @return the resulting matrix
      */
@@ -324,9 +347,11 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Transforms the matrix.
-     * @param factorX the factor for the x-axis
-     * @param factorY the factor for the y-axis
+     * Returns a new matrix that is the result of scaling this matrix non-uniformly
+     * by the given factors along each axis.
+     *
+     * @param factorX the scale factor along the x-axis
+     * @param factorY the scale factor along the y-axis
      * @return the resulting matrix
      */
     @JsxFunction
@@ -344,8 +369,10 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Transforms the matrix.
-     * @param angle the skew angle
+     * Returns a new matrix that is the result of skewing this matrix along the x-axis
+     * by the given angle.
+     *
+     * @param angle the skew angle in degrees
      * @return the resulting matrix
      */
     @JsxFunction
@@ -365,8 +392,10 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Transforms the matrix.
-     * @param angle the skew angle
+     * Returns a new matrix that is the result of skewing this matrix along the y-axis
+     * by the given angle.
+     *
+     * @param angle the skew angle in degrees
      * @return the resulting matrix
      */
     @JsxFunction
@@ -386,9 +415,10 @@ public class SVGMatrix extends HtmlUnitScriptable {
     }
 
     /**
-     * Translates the matrix.
-     * @param x the distance along the x-axis
-     * @param y the distance along the y-axis
+     * Returns a new matrix that is the result of translating this matrix by the given distances.
+     *
+     * @param x the distance to translate along the x-axis
+     * @param y the distance to translate along the y-axis
      * @return the resulting matrix
      */
     @JsxFunction

@@ -263,6 +263,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * is single-select, then calling this method will deselect all other options.
      * <p>
      * Only options that are actually in the document may be selected.
+     * </p>
      *
      * @param isSelected true if the option is to become selected
      * @param optionValue the value of the option that is to change
@@ -281,6 +282,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * is single-select, then calling this method will deselect all other options.
      * <p>
      * Only options that are actually in the document may be selected.
+     * </p>
      *
      * @param isSelected true if the option is to become selected
      * @param optionValue the value of the option that is to change
@@ -309,6 +311,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * is single-select, then calling this method will deselect all other options.
      * <p>
      * Only options that are actually in the document may be selected.
+     * </p>
      *
      * @param isSelected true if the option is to become selected
      * @param selectedOption the value of the option that is to change
@@ -327,6 +330,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * is single-select, then calling this method will deselect all other options.
      * <p>
      * Only options that are actually in the document may be selected.
+     * </p>
      *
      * @param isSelected true if the option is to become selected
      * @param selectedOption the value of the option that is to change
@@ -414,7 +418,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Indicates if this select is submittable
+     * Indicates if this select is submittable.
      * @return {@code false} if not
      */
     boolean isValidForSubmission() {
@@ -544,6 +548,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
+     * Returns the size or 1 if not defined or not convertable to int.
+     *
      * @return the size or 1 if not defined or not convertable to int
      */
     public final int getSize() {

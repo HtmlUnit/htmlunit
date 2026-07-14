@@ -4574,6 +4574,8 @@ public final class StyleAttributes implements Serializable {
         }
 
         /**
+         * Returns the default value for this attribute.
+         *
          * @param browserVersion the browser version
          * @return the default value for this attribute
          */

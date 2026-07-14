@@ -43,7 +43,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
     private String customValidity_;
 
     /**
-     * Creates an instance of HtmlObject
+     * Creates an instance of HtmlObject.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

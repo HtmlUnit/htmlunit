@@ -32,7 +32,7 @@ public class HtmlMeter extends HtmlElement implements LabelableElement {
     public static final String TAG_NAME = "meter";
 
     /**
-     * Creates an instance of HtmlMeter
+     * Creates an instance of HtmlMeter.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

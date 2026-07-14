@@ -50,15 +50,13 @@ import org.htmlunit.websocket.WebSocketAdapter;
 import org.htmlunit.websocket.WebSocketListener;
 
 /**
- * A JavaScript object for {@code WebSocket}.
+ * JavaScript host object for {@code WebSocket}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Madis Pärn
  *
- * @see <a href=
- *      "https://developer.mozilla.org/en/WebSockets/WebSockets_reference/WebSocket">Mozilla
- *      documentation</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket">MDN Documentation</a>
  */
 @JsxClass
 public class WebSocket extends EventTarget implements AutoCloseable {
@@ -98,11 +96,11 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * Creates a new instance.
+     * Creates a new instance connected to the given URL.
      *
-     * @param url    the URL to which to connect
-     * @param scope  the scope
-     * @param window the top level window
+     * @param url the URL to connect to
+     * @param scope the scope
+     * @param window the top-level window
      */
     private WebSocket(final String url, final VarScope scope, final Window window) {
         super();
@@ -246,14 +244,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      *
-     * @param cx        the current context
-     * @param scope     the scope
-     * @param args      the arguments to the WebSocket constructor
-     * @param ctorObj   the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param cx the current context
+     * @param scope the scope
+     * @param args the constructor arguments
+     * @param ctorObj the function object
+     * @param inNewExpr whether invoked via {@code new}
+     * @return the new {@code WebSocket} instance
      */
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope, final Object[] args,
@@ -385,10 +383,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * Returns The current state of the connection. The possible values are:
-     * {@link #CONNECTING}, {@link #OPEN}, {@link #CLOSING} or {@link #CLOSED}.
+     * Returns the current state of the connection.
+     * Possible values are {@link #CONNECTING}, {@link #OPEN}, {@link #CLOSING}, or {@link #CLOSED}.
      *
-     * @return the current state of the connection
+     * @return the current ready state
      */
     @JsxGetter
     public int getReadyState() {
@@ -400,7 +398,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * @return the url
+     * Returns the URL of the WebSocket connection.
+     *
+     * @return the URL string
      */
     @JsxGetter
     public String getUrl() {
@@ -411,7 +411,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * @return the sub protocol used
+     * Returns the sub-protocol in use, or an empty string if no sub-protocol was selected.
+     *
+     * @return the sub-protocol
      */
     @JsxGetter
     public String getProtocol() {
@@ -419,7 +421,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * @return the sub protocol used
+     * Returns the number of bytes of data that have been queued but not yet transmitted.
+     *
+     * @return the buffered amount in bytes
      */
     @JsxGetter
     public long getBufferedAmount() {
@@ -427,7 +431,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * @return the used binary type
+     * Returns the binary data type used when receiving binary messages.
+     *
+     * @return the binary type ({@code "blob"} or {@code "arraybuffer"})
      */
     @JsxGetter
     public String getBinaryType() {
@@ -435,9 +441,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * Sets the used binary type.
+     * Sets the binary data type used when receiving binary messages.
      *
-     * @param type the type
+     * @param type the new binary type; must be {@code "blob"} or {@code "arraybuffer"}
      */
     @JsxSetter
     public void setBinaryType(final String type) {
@@ -455,13 +461,11 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * Closes the WebSocket connection or connection attempt, if any. If the
-     * connection is already {@link #CLOSED}, this method does nothing.
+     * Closes the WebSocket connection or connection attempt, if any.
+     * If the connection is already {@link #CLOSED}, this method does nothing.
      *
-     * @param code   A numeric value indicating the status code explaining why the
-     *               connection is being closed
-     * @param reason A human-readable string explaining why the connection is
-     *               closing
+     * @param code a numeric value indicating the status code explaining why the connection is being closed
+     * @param reason a human-readable string explaining why the connection is closing
      */
     @JsxFunction
     public void close(final Object code, final Object reason) {
@@ -496,7 +500,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /**
      * Transmits data to the server over the WebSocket connection.
      *
-     * @param content the body of the message being sent with the request
+     * @param content the data to send
      */
     @JsxFunction
     public void send(final Object content) {

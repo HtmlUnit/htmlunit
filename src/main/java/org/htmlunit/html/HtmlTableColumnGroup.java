@@ -34,7 +34,7 @@ public class HtmlTableColumnGroup extends HtmlElement {
     public static final String TAG_NAME = "colgroup";
 
     /**
-     * Creates an instance of HtmlTableColumnGroup
+     * Creates an instance of HtmlTableColumnGroup.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

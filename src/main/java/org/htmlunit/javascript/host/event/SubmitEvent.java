@@ -70,7 +70,9 @@ public class SubmitEvent extends Event {
     }
 
     /**
-     * @return the submitter
+     * Returns the element that triggered the form submission.
+     *
+     * @return the submitter element, or {@code null} if none is available
      */
     @JsxGetter
     public HTMLElement getSubmitter() {

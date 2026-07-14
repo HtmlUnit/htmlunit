@@ -67,12 +67,15 @@ import org.w3c.dom.TypeInfo;
 import org.xml.sax.SAXException;
 
 /**
+ * A DOM element in an HTML or XML document.
+ *
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Tom Anderson
  * @author Ronald Brill
  * @author Frank Danek
  * @author Sven Strickroth
+ * @author Ronny Shapiro
  */
 public class DomElement extends DomNamespaceNode implements Element {
 
@@ -347,10 +350,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      * {@inheritDoc}
      */
     @Override
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         final boolean hasChildren = getFirstChild() != null;
 
-        if (tagBefore) {
+        if (indentBefore) {
             printWriter.print("\r\n");
             printWriter.print(indent);
         }
@@ -360,8 +363,8 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         if (hasChildren) {
             printWriter.print(">");
-            final boolean tag = printChildrenAsXml(indent, true, printWriter);
-            if (tag) {
+            final boolean indBefore = printChildrenAsXml(indent, false, printWriter);
+            if (indBefore) {
                 printWriter.print("\r\n");
                 printWriter.print(indent);
             }
@@ -378,7 +381,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             printWriter.print("/>");
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -761,6 +764,8 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
+     * Returns the identifier of this element.
+     *
      * @return the identifier of this element
      */
     public final String getId() {
@@ -814,7 +819,9 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * @return an Iterable over the DomElement children of this object, i.e. excluding the non-element nodes
+     * Returns an {@link Iterable} over the {@link DomElement} children of this object, i.e. excluding the non-element nodes.
+     *
+     * @return an {@link Iterable} over the {@link DomElement} children of this object, i.e. excluding the non-element nodes
      */
     public final Iterable<DomElement> getChildElements() {
         return new ChildElementsIterable(this);
@@ -865,7 +872,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         /**
-         * @return is there a next one ?
+         * {@inheritDoc}
          */
         @Override
         public boolean hasNext() {
@@ -873,7 +880,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         /**
-         * @return the next one
+         * {@inheritDoc}
          */
         @Override
         public DomElement next() {
@@ -986,6 +993,8 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
+     * Returns true if this is an {@link DisabledElement} and disabled.
+     *
      * @return true if this is an {@link DisabledElement} and disabled
      */
     protected boolean isDisabledElementAndDisabled() {

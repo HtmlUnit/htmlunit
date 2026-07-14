@@ -71,8 +71,8 @@ public class AwtRenderingBackend implements RenderingBackend {
     private Color fillColor_;
     private Color strokeColor_;
 
-    private int lineCap_;
-    private int lineJoin_;
+    private LineCap lineCap_;
+    private LineJoin lineJoin_;
     private float miterLimit_;
 
     private final List<Path2D> subPaths_;
@@ -279,8 +279,8 @@ public class AwtRenderingBackend implements RenderingBackend {
         graphics2D_.setColor(Color.black);
         graphics2D_.clearRect(0, 0, imageWidth, imageHeight);
 
-        lineCap_ = BasicStroke.CAP_BUTT;
-        lineJoin_ = BasicStroke.JOIN_MITER;
+        lineCap_ = LineCap.BUTT;
+        lineJoin_ = LineJoin.MITER;
         miterLimit_ = 10.0f;
 
         subPaths_ = new ArrayList<>();
@@ -946,8 +946,10 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] stroke()");
         }
 
-        graphics2D_.setStroke(new BasicStroke(getLineWidth(), lineCap_, lineJoin_, miterLimit_));
+        graphics2D_.setStroke(new BasicStroke(getLineWidth(),
+                toAwtLineCap(lineCap_), toAwtLineJoin(lineJoin_), miterLimit_));
         graphics2D_.setColor(strokeColor_);
+
         for (final Path2D path2d : subPaths_) {
             if (hasSegments(path2d)) {
                 graphics2D_.draw(path2d);
@@ -964,7 +966,8 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] strokeRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }
 
-        graphics2D_.setStroke(new BasicStroke(getLineWidth(), lineCap_, lineJoin_, miterLimit_));
+        graphics2D_.setStroke(new BasicStroke(getLineWidth(),
+                toAwtLineCap(lineCap_), toAwtLineJoin(lineJoin_), miterLimit_));
         graphics2D_.setColor(strokeColor_);
         graphics2D_.draw(rectPath(x, y, w, h));
     }
@@ -1066,6 +1069,50 @@ public class AwtRenderingBackend implements RenderingBackend {
         subPaths_.add(nextPath);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LineJoin getLineJoin() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] getLineJoin()");
+        }
+        return lineJoin_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setLineJoin(final LineJoin lineJoin) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setLineJoin(" + lineJoin + ")");
+        }
+        lineJoin_ = lineJoin;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LineCap getLineCap() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] getLineCap()");
+        }
+        return lineCap_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setLineCap(final LineCap lineCap) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setLineCap(" + lineCap + ")");
+        }
+        lineCap_ = lineCap;
+    }
+
     private Path2D getCurrentSubPath() {
         if (subPaths_.isEmpty()) {
             final Path2D subPath = new Path2D.Double();
@@ -1126,6 +1173,22 @@ public class AwtRenderingBackend implements RenderingBackend {
         return new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 
+    private static int toAwtLineJoin(final LineJoin lineJoin) {
+        return switch (lineJoin) {
+            case MITER -> BasicStroke.JOIN_MITER;
+            case ROUND -> BasicStroke.JOIN_ROUND;
+            case BEVEL -> BasicStroke.JOIN_BEVEL;
+        };
+    }
+
+    private static int toAwtLineCap(final LineCap lineCap) {
+        return switch (lineCap) {
+            case ROUND -> BasicStroke.CAP_ROUND;
+            case SQUARE -> BasicStroke.CAP_SQUARE;
+            case BUTT -> BasicStroke.CAP_BUTT;
+        };
+    }
+
     private static final class SaveState {
         private final AffineTransform transformation_;
         private final float globalAlpha_;
@@ -1134,8 +1197,8 @@ public class AwtRenderingBackend implements RenderingBackend {
         private final Color strokeColor_;
         private final Shape clip_;
 
-        private final int lineCap_;
-        private final int lineJoin_;
+        private final LineCap lineCap_;
+        private final LineJoin lineJoin_;
         private final float miterLimit_;
 
         private final Font font_;

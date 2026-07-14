@@ -23,10 +23,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgMarker;
 
 /**
- * A JavaScript object for {@code SVGMarkerElement}.
+ * JavaScript host object for {@code SVGMarkerElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGMarkerElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgMarker.class)
 public class SVGMarkerElement extends SVGElement {
@@ -60,7 +62,7 @@ public class SVGMarkerElement extends SVGElement {
     public static final int SVG_MARKER_ORIENT_AUTO_START_REVERSE = 3;
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

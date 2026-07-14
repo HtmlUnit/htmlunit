@@ -28,7 +28,8 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.util.StringUtils;
 
 /**
- * Implementation of an {@link AttachmentHandler} that mimics how browsers handle attachments, specifically
+ * Implementation of an {@link AttachmentHandler} that mimics how browsers handle attachments.
+ * Specifically
  * <ul>
  * <li>download file into a default folder when attachment response is detected</li>
  * <li>infer filename from octet stream response and use that when saving file</li>

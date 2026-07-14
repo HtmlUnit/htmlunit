@@ -119,6 +119,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * <p>
      * Note that this acts like 'pasting' the text, but to simulate characters entry
      * you should use {@link #type(String)}.
+     * </p>
      *
      * @param newValue the new value
      */
@@ -422,7 +423,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
 

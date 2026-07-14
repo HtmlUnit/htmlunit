@@ -203,6 +203,8 @@ public class Cookie implements Serializable {
     }
 
     /**
+     * Returns the SameSite value or {@code null} if not set.
+     *
      * @return the SameSite value or {@code null} if not set.
      */
     public String getSameSite() {

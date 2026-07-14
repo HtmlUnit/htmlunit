@@ -30,11 +30,13 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code Worker}.
+ * JavaScript host object for {@code Worker}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker">MDN Documentation</a>
  */
 @JsxClass
 public class Worker extends EventTarget {
@@ -68,13 +70,14 @@ public class Worker extends EventTarget {
     }
 
     /**
-     * For instantiation in JavaScript.
+     * Creates an instance of this object.
+     *
      * @param cx the current context
      * @param scope the scope
-     * @param args the URIs
+     * @param args the constructor arguments
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr whether invoked via {@code new}
+     * @return the new {@code Worker} instance
      * @throws Exception in case of problem
      */
     @JsxConstructor
@@ -94,8 +97,9 @@ public class Worker extends EventTarget {
     }
 
     /**
-     * Post the provided message to the WebWorker execution.
-     * @param message the message
+     * Posts the provided message to the worker's execution context.
+     *
+     * @param message the message to post
      */
     @JsxFunction
     public void postMessage(final Object message) {
@@ -103,8 +107,8 @@ public class Worker extends EventTarget {
     }
 
     /**
-     * Immediately terminates the Worker. This does not offer the worker
-     * an opportunity to finish its operations; it is stopped at once.
+     * Immediately terminates the worker without giving it the opportunity to
+     * finish any currently executing operations.
      */
     @JsxFunction
     public void terminate() {
@@ -112,8 +116,9 @@ public class Worker extends EventTarget {
     }
 
     /**
-     * Sets the value of the onmessage event handler.
-     * @param onmessage the new handler
+     * Sets the {@code onmessage} event handler.
+     *
+     * @param onmessage the new {@code onmessage} event handler
      */
     @JsxSetter
     public void setOnmessage(final Object onmessage) {
@@ -121,8 +126,9 @@ public class Worker extends EventTarget {
     }
 
     /**
-     * Gets the value of the onmessage event handler.
-     * @return the handler
+     * Returns the {@code onmessage} event handler.
+     *
+     * @return the {@code onmessage} event handler
      */
     @JsxGetter
     public Function getOnmessage() {

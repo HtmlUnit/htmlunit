@@ -32,7 +32,7 @@ import org.htmlunit.util.UrlUtils;
 final class HTMLHyperlinkElementUtils {
 
     /**
-     * Private ctor to keep Checkstyle happy
+     * Private ctor to keep Checkstyle happy.
      */
     private HTMLHyperlinkElementUtils() {
     }

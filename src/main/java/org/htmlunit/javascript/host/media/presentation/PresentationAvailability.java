@@ -26,6 +26,8 @@ import org.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PresentationAvailability">MDN Documentation</a>
  */
 @JsxClass({CHROME, EDGE})
 public class PresentationAvailability extends EventTarget {

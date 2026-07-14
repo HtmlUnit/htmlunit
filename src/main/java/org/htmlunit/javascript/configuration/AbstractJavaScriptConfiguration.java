@@ -75,6 +75,8 @@ public abstract class AbstractJavaScriptConfiguration {
     }
 
     /**
+     * Returns the classes configured by this configuration.
+     *
      * @return the classes configured by this configuration
      */
     protected abstract Class<? extends HtmlUnitScriptable>[] getClasses();

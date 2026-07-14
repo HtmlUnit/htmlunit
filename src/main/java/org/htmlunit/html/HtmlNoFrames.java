@@ -35,7 +35,7 @@ public class HtmlNoFrames extends HtmlElement {
     public static final String TAG_NAME = "noframes";
 
     /**
-     * Creates an instance of HtmlNoFrames
+     * Creates an instance of HtmlNoFrames.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

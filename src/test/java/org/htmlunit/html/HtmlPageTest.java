@@ -71,6 +71,7 @@ import org.w3c.dom.NodeList;
  * @author Frank Danek
  * @author Ronald Brill
  * @author Lai Quang Duong
+ * @author Ronny Shapiro
  */
 public class HtmlPageTest extends SimpleWebTestCase {
 
@@ -1044,11 +1045,9 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String expected = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
                 + "<html>\r\n"
                 + "  <head/>\r\n"
-                + "  <body>\r\n"
-                + "    <noscript>"
-                            + "&lt;p&gt;&lt;strong&gt;your browser does not support JavaScript&lt;/strong&gt;&lt;/p&gt;"
-                            + "</noscript>\r\n"
-                + "  </body>\r\n"
+                + "  <body><noscript>"
+                + "&lt;p&gt;&lt;strong&gt;your browser does not support JavaScript&lt;/strong&gt;&lt;/p&gt;"
+                + "</noscript></body>\r\n"
                 + "</html>";
 
         final HtmlPage page = loadPage(html);

@@ -1837,10 +1837,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("align,getSVGDocument(),height,name,src,type,width")
-    @HtmlUnitNYI(CHROME = "align,height,name,width",
-            EDGE = "align,height,name,width",
-            FF_ESR = "align,height,name,width",
-            FF = "align,height,name,width")
+    @HtmlUnitNYI(CHROME = "align,height,name,src,type,width",
+            EDGE = "align,height,name,src,type,width",
+            FF_ESR = "align,height,name,src,type,width",
+            FF = "align,height,name,src,type,width")
     public void embed() throws Exception {
         test("embed");
     }

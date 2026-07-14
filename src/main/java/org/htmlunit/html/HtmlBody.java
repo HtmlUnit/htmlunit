@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import java.io.PrintWriter;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -175,5 +176,16 @@ public class HtmlBody extends HtmlElement {
         style.setDefaultLocalStyleAttribute("margin-right", "8px");
         style.setDefaultLocalStyleAttribute("margin-top", "8px");
         style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
+        // enforce always a line break before
+        super.printXml(indent, true, printWriter);
+        // enforce always a line break after
+        return true;
     }
 }

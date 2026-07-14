@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeMergeNode;
 
 /**
- * A JavaScript object for {@code SVGFEMergeNodeElement}.
+ * JavaScript host object for {@code SVGFEMergeNodeElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFEMergeNodeElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeMergeNode.class)
 public class SVGFEMergeNodeElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

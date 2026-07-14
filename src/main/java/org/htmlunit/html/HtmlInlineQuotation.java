@@ -34,7 +34,7 @@ public class HtmlInlineQuotation extends HtmlElement {
     public static final String TAG_NAME = "q";
 
     /**
-     * Creates an instance of HtmlInlineQuotation
+     * Creates an instance of HtmlInlineQuotation.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

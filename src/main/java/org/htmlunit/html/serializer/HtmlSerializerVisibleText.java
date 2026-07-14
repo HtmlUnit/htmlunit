@@ -1031,6 +1031,8 @@ public class HtmlSerializerVisibleText {
         }
 
         /**
+         * Returns true if some content was already added.
+         *
          * @return true if some content was already added
          */
         public boolean wasContentAdded() {
@@ -1045,6 +1047,8 @@ public class HtmlSerializerVisibleText {
         }
 
         /**
+         * Returns the constructed text.
+         *
          * @return the constructed text.
          */
         public String getText() {

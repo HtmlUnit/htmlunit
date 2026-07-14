@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code SVGTransform}.
+ * JavaScript host object for {@code SVGTransform}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform">MDN Documentation</a>
  */
 @JsxClass
 public class SVGTransform extends HtmlUnitScriptable {
@@ -51,7 +53,7 @@ public class SVGTransform extends HtmlUnitScriptable {
     public static final int SVG_TRANSFORM_SKEWY = 6;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {

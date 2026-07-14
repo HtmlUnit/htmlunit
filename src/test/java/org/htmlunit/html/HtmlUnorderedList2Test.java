@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 public class HtmlUnorderedList2Test extends SimpleWebTestCase {
 

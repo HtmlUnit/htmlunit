@@ -8,6 +8,31 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Chrome/Edge 150, Bugfixes">
+            <action type="fix" dev="Ronny Shapiro">
+                asXml(): emit formatting line breaks only where the document contains whitespace;
+                adjacent elements no longer gain a fabricated line break that renders as a space.
+            </action>
+            <action type="update" dev="rbri">
+                Many, many javadoc improvements.
+            </action>
+            <action type="update" dev="rbri">
+                MDN links added to all js classes.
+            </action>
+            <action type="add" dev="rbri">
+                CanvasRenderingContext2D lineCap property support added.
+            </action>
+            <action type="add" dev="rbri">
+                CanvasRenderingContext2D lineJoin property support added.
+            </action>
+            <action type="add" dev="rbri" issue="#1149">
+                Checkstyle rule set updated: JavadocStyle -> SummaryJavadoc.
+            </action>
+            <action type="update" dev="Lai Quang Duong">
+                Missing getter/setter for src and type property of HTMLEmbedElement added.
+            </action>
+            <action type="add" dev="rbri">
+                Various additions to the web site content.
+            </action>
             <action type="add" dev="rbri">
                 The document &apos;Details about HtmlUnit Security&apos; added to the documentation pages.
             </action>

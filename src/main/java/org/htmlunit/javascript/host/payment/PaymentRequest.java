@@ -22,16 +22,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code PaymentRequest}.
+ * JavaScript host object for {@code PaymentRequest}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PaymentRequest">MDN Documentation</a>
  */
 @JsxClass({CHROME, EDGE})
 public class PaymentRequest extends EventTarget {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

@@ -39,7 +39,7 @@ public class DomCDataSection extends DomText implements CDATASection {
     }
 
     /**
-     * @return the node type constant, in this case {@link org.w3c.dom.Node#CDATA_SECTION_NODE}
+     * {@inheritDoc}
      */
     @Override
     public short getNodeType() {
@@ -58,7 +58,7 @@ public class DomCDataSection extends DomText implements CDATASection {
      * {@inheritDoc}
      */
     @Override
-    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         printWriter.print("<![CDATA[");
         printWriter.print(getData());
         printWriter.print("]]>");

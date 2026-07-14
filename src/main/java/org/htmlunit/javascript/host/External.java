@@ -26,18 +26,20 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 
 /**
- * A JavaScript object for {@code External}.
+ * JavaScript host object for {@code External}.
  *
  * @author Peter Faller
  * @author Ronald Brill
  * @author Ahmed Ashour
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/External">MDN Documentation</a>
  */
 @JsxClass({CHROME, EDGE})
 @JsxClass(isJSObject = false, value = {FF, FF_ESR})
 public class External extends HtmlUnitScriptable {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -45,7 +47,7 @@ public class External extends HtmlUnitScriptable {
     }
 
     /**
-     * Empty implementation.
+     * Empty implementation of {@code AddSearchProvider}.
      */
     @JsxFunction(functionName = "AddSearchProvider")
     public void addSearchProvider() {
@@ -53,8 +55,9 @@ public class External extends HtmlUnitScriptable {
     }
 
     /**
-     * Empty implementation.
-     * @return 0
+     * Empty implementation of {@code IsSearchProviderInstalled}.
+     *
+     * @return {@code undefined}
      */
     @JsxFunction(functionName = "IsSearchProviderInstalled")
     public Object isSearchProviderInstalled() {

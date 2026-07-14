@@ -711,6 +711,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     }
 
     /**
+     * Returns the configuration of the globalThis class.
+     *
      * @return the configuration of the globalThis class
      */
     public ClassConfiguration getWindowClassConfiguration() {

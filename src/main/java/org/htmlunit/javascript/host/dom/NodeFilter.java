@@ -22,6 +22,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 /**
  * A JavaScript object for {@code NodeFilter}.
  *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeFilter">MDN Documentation</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
  *     DOM-Level-2-Traversal-Range</a>
  *

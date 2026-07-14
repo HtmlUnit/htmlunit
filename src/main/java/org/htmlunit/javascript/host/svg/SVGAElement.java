@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgAnchor;
 
 /**
- * A JavaScript object for {@code SVGAElement}.
+ * JavaScript host object for {@code SVGAElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGAElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgAnchor.class)
 public class SVGAElement extends SVGGraphicsElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     @Override

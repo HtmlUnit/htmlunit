@@ -28,6 +28,8 @@ import org.htmlunit.javascript.host.html.HTMLElement;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord">MDN Documentation</a>
  */
 @JsxClass
 public class MutationRecord extends HtmlUnitScriptable {
@@ -127,6 +129,7 @@ public class MutationRecord extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code addedNodes} property.
      * @return the {@code addedNodes} property
      */
     @JsxGetter
@@ -150,6 +153,7 @@ public class MutationRecord extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code removedNodes} property.
      * @return the {@code removedNodes} property
      */
     @JsxGetter
@@ -173,6 +177,7 @@ public class MutationRecord extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code previousSibling} property.
      * @return the {@code previousSibling} property
      */
     @JsxGetter
@@ -189,6 +194,7 @@ public class MutationRecord extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code nextSibling} property.
      * @return the {@code nextSibling} property
      */
     @JsxGetter

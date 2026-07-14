@@ -140,11 +140,8 @@
         <module name="JavadocVariable">
             <property name="accessModifiers" value="protected"/>
         </module>
-        <module name="JavadocStyle">
-            <property name="scope" value="protected"/>
-            <property name="checkFirstSentence" value="true"/>
-            <property name="checkEmptyJavadoc" value="false"/>
-            <property name="checkHtml" value="true"/>
+        <module name="SummaryJavadoc">
+            <property name="violateExecutionOnNonTightHtml" value="true"/>
         </module>
         <module name="InvalidJavadocPosition"/>
         <module name="JavadocContentLocation"/>

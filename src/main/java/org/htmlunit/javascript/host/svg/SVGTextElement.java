@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgText;
 
 /**
- * A JavaScript object for {@code SVGTextElement}.
+ * JavaScript host object for {@code SVGTextElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGTextElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgText.class)
 public class SVGTextElement extends SVGTextPositioningElement {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

@@ -58,6 +58,7 @@ public class Keyboard {
      * <p>
      * An example of predefined values is
      * {@link org.htmlunit.javascript.host.event.KeyboardEvent#DOM_VK_PAGE_DOWN}.
+     * </p>
      *
      * @param keyCode the key code
      */
@@ -73,6 +74,7 @@ public class Keyboard {
      * <p>
      * An example of predefined values is
      * {@link org.htmlunit.javascript.host.event.KeyboardEvent#DOM_VK_PAGE_DOWN}.
+     * </p>
      *
      * @param keyCode the key code.
      */
@@ -92,6 +94,7 @@ public class Keyboard {
      * <p>
      * If the length of the item is 1, then it is a character.
      * If the length of the item is 2, the first is the key code, the second is boolean whether pressing or not
+     * </p>
      *
      * @return the keys
      */

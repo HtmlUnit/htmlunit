@@ -39,9 +39,11 @@ import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.util.UrlUtils;
 
 /**
- * A JavaScript object for {@code BroadcastChannel}.
+ * JavaScript host object for {@code BroadcastChannel}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel">MDN Documentation</a>
  */
 @JsxClass
 public class BroadcastChannel extends EventTarget {
@@ -49,13 +51,14 @@ public class BroadcastChannel extends EventTarget {
     private String name_;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
+     *
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the constructor arguments
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr whether invoked via {@code new}
+     * @return the new {@code BroadcastChannel} instance
      */
     @JsxConstructor
     public static BroadcastChannel jsConstructor(final Context cx, final VarScope scope,
@@ -81,6 +84,7 @@ public class BroadcastChannel extends EventTarget {
 
     /**
      * Returns the channel name.
+     *
      * @return the channel name
      */
     @JsxGetter
@@ -89,8 +93,9 @@ public class BroadcastChannel extends EventTarget {
     }
 
     /**
-     * Returns the value of the {@code onmessage} property.
-     * @return the value of the {@code onmessage} property
+     * Returns the {@code onmessage} event handler.
+     *
+     * @return the {@code onmessage} event handler
      */
     @JsxGetter
     public Function getOnmessage() {
@@ -98,8 +103,9 @@ public class BroadcastChannel extends EventTarget {
     }
 
     /**
-     * Sets the value of the {@code onmessage} property.
-     * @param onmessage the value of the {@code onmessage} property
+     * Sets the {@code onmessage} event handler.
+     *
+     * @param onmessage the {@code onmessage} event handler
      */
     @JsxSetter
     public void setOnmessage(final Object onmessage) {
@@ -107,8 +113,9 @@ public class BroadcastChannel extends EventTarget {
     }
 
     /**
-     * Returns the value of the {@code onmessageerror} property.
-     * @return the value of the {@code onmessageerror} property
+     * Returns the {@code onmessageerror} event handler.
+     *
+     * @return the {@code onmessageerror} event handler
      */
     @JsxGetter
     public Function getOnmessageerror() {
@@ -116,8 +123,9 @@ public class BroadcastChannel extends EventTarget {
     }
 
     /**
-     * Sets the value of the {@code onmessageerror} property.
-     * @param onmessageerror the value of the {@code onmessageerror} property
+     * Sets the {@code onmessageerror} event handler.
+     *
+     * @param onmessageerror the {@code onmessageerror} event handler
      */
     @JsxSetter
     public void setOnmessageerror(final Object onmessageerror) {
@@ -125,9 +133,10 @@ public class BroadcastChannel extends EventTarget {
     }
 
     /**
-     * Posts a message to all other BroadcastChannel objects with the same name.
+     * Posts a message to all other {@code BroadcastChannel} objects with the same name.
+     *
      * @param message the message to send
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/postMessage">MDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/postMessage">MDN Documentation</a>
      */
     @JsxFunction
     public void postMessage(final Object message) {
@@ -176,7 +185,7 @@ public class BroadcastChannel extends EventTarget {
     }
 
     /**
-     * Closes the BroadcastChannel object, indicating it won't get any new messages,
+     * Closes this {@code BroadcastChannel}, indicating it will no longer receive messages
      * and allowing it to be garbage collected.
      */
     @JsxFunction

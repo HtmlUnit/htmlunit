@@ -42,6 +42,8 @@ public class HtmlDetails extends HtmlElement {
     }
 
     /**
+     * Returns the {@code open} property.
+     *
      * @return the {@code open} property
      */
     public boolean isOpen() {

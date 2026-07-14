@@ -20,10 +20,12 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code MessageChannel}.
+ * JavaScript host object for {@code MessageChannel}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel">MDN Documentation</a>
  */
 @JsxClass
 public class MessageChannel extends HtmlUnitScriptable {
@@ -32,7 +34,7 @@ public class MessageChannel extends HtmlUnitScriptable {
     private MessagePort port2_;
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
@@ -40,8 +42,9 @@ public class MessageChannel extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns {@code port1} property.
-     * @return {@code port1} property.
+     * Returns the {@code port1} property.
+     *
+     * @return the {@code port1} property
      */
     @JsxGetter
     public MessagePort getPort1() {
@@ -54,8 +57,9 @@ public class MessageChannel extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns {@code port2} property.
-     * @return {@code port2} property.
+     * Returns the {@code port2} property.
+     *
+     * @return the {@code port2} property
      */
     @JsxGetter
     public MessagePort getPort2() {

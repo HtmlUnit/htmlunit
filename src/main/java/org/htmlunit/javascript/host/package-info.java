@@ -14,7 +14,7 @@
  */
 
 /**
- * Implementations of the various JavaScript host objects - users of HtmlUnit shouldn't
+ * Implementations of the various JavaScript host objects — users of HtmlUnit should not
  * need anything in this package.
  */
 package org.htmlunit.javascript.host;

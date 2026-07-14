@@ -24,12 +24,15 @@ import org.htmlunit.javascript.host.AudioScheduledSourceNode;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode">MDN Documentation</a>
  */
 @JsxClass
 public class AudioBufferSourceNode extends AudioScheduledSourceNode {
 
     /**
      * Creates an instance.
+     * @param baCtx the required audio context
      */
     @Override
     @JsxConstructor

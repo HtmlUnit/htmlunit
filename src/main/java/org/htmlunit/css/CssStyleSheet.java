@@ -159,7 +159,7 @@ public class CssStyleSheet implements Serializable {
     /** The CSS import rules and their corresponding stylesheets. */
     private final Map<CSSImportRuleImpl, CssStyleSheet> imports_ = new HashMap<>();
 
-    /** cache parsed media strings */
+    /** cache parsed media strings. */
     private static final Map<String, MediaListImpl> MEDIA = new HashMap<>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
@@ -1264,6 +1264,8 @@ public class CssStyleSheet implements Serializable {
     }
 
     /**
+     * Returns the {@link CssStyleSheet} imported by this rule.
+     *
      * @param importRule the {@link CSSImportRuleImpl} that imports the {@link CssStyleSheet}
      * @return the {@link CssStyleSheet} imported by this rule
      */

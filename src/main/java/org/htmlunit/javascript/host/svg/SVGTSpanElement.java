@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgTSpan;
 
 /**
- * A JavaScript object for {@code SVGTSpanElement}.
+ * JavaScript host object for {@code SVGTSpanElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGTSpanElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgTSpan.class)
 public class SVGTSpanElement extends SVGTextPositioningElement {
 
     /**
-     * JavaScript constructor.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

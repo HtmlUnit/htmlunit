@@ -19,16 +19,18 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgFeDiffuseLighting;
 
 /**
- * A JavaScript object for {@code SVGFEDiffuseLightingElement}.
+ * JavaScript host object for {@code SVGFEDiffuseLightingElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGFEDiffuseLightingElement">MDN Documentation</a>
  */
 @JsxClass(domClass = SvgFeDiffuseLighting.class)
 public class SVGFEDiffuseLightingElement extends SVGElement {
 
     /**
-     * Creates an instance.
+     * Creates an instance of this object.
      */
     @Override
     @JsxConstructor

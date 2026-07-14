@@ -26,10 +26,13 @@ import org.htmlunit.html.HtmlPage;
  * (such as spread operator usage in array push and for-of loops over array copies)
  * to equivalent ES5-compatible code. This is necessary because these features are
  * not yet supported by the JavaScript engine htmlunit-corejs (Rhino).
+ * </p>
  * <p>
  * The class can be chained with other {@link ScriptPreProcessor} instances via its constructor.
+ * </p>
  * <p>
  * Supported patches include:
+ * </p>
  * <ul>
  *   <li>Replacing <code>result.push(...toArray(...))</code> with <code>result.push.apply(result, toArray(...))</code></li>
  *   <li>Replacing <code>result.push(...findAttributeTargets(...))</code> with <code>result.push.apply(result, findAttributeTargets(...))</code></li>
@@ -38,6 +41,7 @@ import org.htmlunit.html.HtmlPage;
  * </ul>
  * <p>
  * <b>Usage Example:</b>
+ * </p>
  * <pre>
  * try (WebClient webClient = new WebClient()) {
  *     webClient.setScriptPreProcessor(new HtmxTwoZeroSevenScriptPreProcessor());
