@@ -42,10 +42,13 @@ public final class Platform {
     private static FontUtil FontUtil_;
 
     /**
-     * @param imageWidth the width of the image this backend is for
-     * @param imageHeight the height of the image this backend is for
-     * @return a new {@link RenderingBackend}. If the {@link AwtRenderingBackend} can't be used a
-     *         {@link NoOpRenderingBackend} is used instead.
+     * Creates a rendering backend for an image with the specified dimensions.
+     *
+     * @param imageWidth the width of the image
+     * @param imageHeight the height of the image
+     * @return a new {@link RenderingBackend} instance, or a
+     *         {@link NoOpRenderingBackend} if the
+     *         {@link AwtRenderingBackend} cannot be created
      */
     public static RenderingBackend getRenderingBackend(final int imageWidth, final int imageHeight) {
         // for Android
@@ -60,8 +63,10 @@ public final class Platform {
     }
 
     /**
-     * @return a new {@link FontUtil}. If the {@link AwtFontUtil} can't be used a
-     *         {@link NoOpFontUtil} is used instead.
+     * Returns the shared font utility instance.
+     *
+     * @return the shared {@link FontUtil} instance, or a
+     *         {@link NoOpFontUtil} if the {@link AwtFontUtil} cannot be created
      */
     public static FontUtil getFontUtil() {
         // for Android
@@ -81,9 +86,12 @@ public final class Platform {
     }
 
     /**
+     * Creates an {@link ImageData} instance by reading image data from the specified input stream.
+     *
      * @param inputStream the {@link InputStream} to read from
-     * @return a new {@link ImageData} object constructed from the given inputStream
-     * @throws IOException in case of error
+     * @return a new {@link ImageData} instance created from the specified input stream,
+     *         or a {@link NoOpImageData} if image processing is unavailable
+     * @throws IOException if an I/O error occurs while reading the image data
      */
     public static ImageData buildImageData(final InputStream inputStream) throws IOException {
         try {

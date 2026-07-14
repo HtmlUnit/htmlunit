@@ -87,11 +87,13 @@ public final class HttpClientConverter {
     }
 
     /**
-     * @param cookieString the string to parse
-     * @param pageUrl the page url as root
-     * @param browserVersion the {@link BrowserVersion}
-     * @return a list of {@link org.htmlunit.http.Cookie}'s
-     * @throws MalformedCookieException in case the cookie does not conform to the spec
+     * Parses the specified cookie string into HtmlUnit cookie objects.
+     *
+     * @param cookieString the {@code Set-Cookie} header value to parse
+     * @param pageUrl the URL of the page from which the cookie originates
+     * @param browserVersion the browser version used to determine cookie parsing behavior
+     * @return a list of parsed {@link org.htmlunit.http.Cookie} instances
+     * @throws MalformedCookieException if the cookie string does not conform to the cookie specification
      */
     public static List<org.htmlunit.http.Cookie> parseCookie(final String cookieString, final URL pageUrl,
                                                              final BrowserVersion browserVersion)

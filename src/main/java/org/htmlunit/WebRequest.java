@@ -89,14 +89,20 @@ public class WebRequest implements Serializable {
     // private transient Charset defaultResponseContentCharset_ = StandardCharsets.UTF_8;
     private transient Charset defaultResponseContentCharset_ = StandardCharsets.ISO_8859_1;
 
-    /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
+    /*
+     * These two are mutually exclusive; additionally, requestBody_ should only be
+     * set for POST requests.
+     */
     private List<NameValuePair> requestParameters_ = Collections.emptyList();
     private String requestBody_;
 
     /**
+     * Creates or updates this object..
+     *
      * Instantiates a {@link WebRequest} for the specified URL.
-     * @param url the target URL
-     * @param acceptHeader the accept header to use
+     *
+     * @param url                  the target URL
+     * @param acceptHeader         the accept header to use
      * @param acceptEncodingHeader the accept encoding header to use
      */
     public WebRequest(final URL url, final String acceptHeader, final String acceptEncodingHeader) {
@@ -111,9 +117,12 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Instantiates a {@link WebRequest} for the specified URL.
-     * @param url the target URL
-     * @param charset the charset to use
+     *
+     * @param url        the target URL
+     * @param charset    the charset to use
      * @param refererUrl the url be used by the referer header
      */
     public WebRequest(final URL url, final Charset charset, final URL refererUrl) {
@@ -123,6 +132,8 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Returns a new request for about:blank.
+     *
      * @return a new request for about:blank
      */
     public static WebRequest newAboutBlankRequest() {
@@ -130,7 +141,10 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Instantiates a {@link WebRequest} for the specified URL.
+     *
      * @param url the target URL
      */
     public WebRequest(final URL url) {
@@ -138,8 +152,12 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Instantiates a {@link WebRequest} for the specified URL using the specified HTTP submit method.
-     * @param url the target URL
+     * Creates or updates this object..
+     *
+     * Instantiates a {@link WebRequest} for the specified URL using the specified
+     * HTTP submit method.
+     *
+     * @param url          the target URL
      * @param submitMethod the HTTP submit method to use
      */
     public WebRequest(final URL url, final HttpMethod submitMethod) {
@@ -149,6 +167,9 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns the target URL.
+     *
+     * Returns the target URL.
+     *
      * @return the target URL
      */
     public URL getUrl() {
@@ -156,8 +177,11 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Sets the target URL. The URL may be simplified if needed (for instance eliminating
-     * irrelevant path portions like "/./").
+     * Creates or updates this object.
+     *
+     * Sets the target URL. The URL may be simplified if needed (for instance
+     * eliminating irrelevant path portions like "/./").
+     *
      * @param url the target URL
      */
     public void setUrl(URL url) {
@@ -210,12 +234,10 @@ public class WebRequest implements Serializable {
     }
 
     /*
-     * Strip a URL string of "/./" and "/../" occurrences.
-     * <p>
-     * One trick here is to repeatedly create new matchers on a given
-     * pattern, so that we can see whether it needs to be re-applied;
-     * unfortunately .replaceAll() doesn't re-process its own output,
-     * so if we create a new match with a replacement, it is missed.
+     * Strip a URL string of "/./" and "/../" occurrences. <p> One trick here is to
+     * repeatedly create new matchers on a given pattern, so that we can see whether
+     * it needs to be re-applied; unfortunately .replaceAll() doesn't re-process its
+     * own output, so if we create a new match with a replacement, it is missed.
      */
     private static String removeDots(final String path) {
         String newPath = path;
@@ -252,6 +274,9 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns the proxy host to use.
+     *
+     * Returns the proxy host to use.
+     *
      * @return the proxy host to use
      */
     public String getProxyHost() {
@@ -259,7 +284,10 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object.
+     *
      * Sets the proxy host to use.
+     *
      * @param proxyHost the proxy host to use
      */
     public void setProxyHost(final String proxyHost) {
@@ -268,6 +296,9 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns the proxy port to use.
+     *
+     * Returns the proxy port to use.
+     *
      * @return the proxy port to use
      */
     public int getProxyPort() {
@@ -275,7 +306,10 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object.
+     *
      * Sets the proxy port to use.
+     *
      * @param proxyPort the proxy port to use
      */
     public void setProxyPort(final int proxyPort) {
@@ -284,6 +318,9 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns the proxy scheme to use.
+     *
+     * Returns the proxy scheme to use.
+     *
      * @return the proxy scheme to use
      */
     public String getProxyScheme() {
@@ -291,8 +328,12 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Sets the proxy scheme to use.
+     *
      * @param proxyScheme the proxy scheme to use
+     *
      */
     public void setProxyScheme(final String proxyScheme) {
         proxyScheme_ = proxyScheme;
@@ -300,30 +341,45 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns whether SOCKS proxy or not.
+     *
+     * Returns whether SOCKS proxy or not.
+     *
      * @return whether SOCKS proxy or not
+     *
      */
     public boolean isSocksProxy() {
         return isSocksProxy_;
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Sets whether SOCKS proxy or not.
+     *
      * @param isSocksProxy whether SOCKS proxy or not
+     *
      */
     public void setSocksProxy(final boolean isSocksProxy) {
         isSocksProxy_ = isSocksProxy;
     }
 
     /**
+     * Returns the timeout to use.
+     *
      * @return the timeout to use
+     *
      */
     public int getTimeout() {
         return timeout_;
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Sets the timeout to use.
+     *
      * @param timeout the timeout to use
+     *
      */
     public void setTimeout(final int timeout) {
         timeout_ = timeout;
@@ -331,22 +387,33 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns the form encoding type to use.
+     *
+     * Returns the form encoding type to use.
+     *
      * @return the form encoding type to use
+     *
      */
     public FormEncodingType getEncodingType() {
         return encodingType_;
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Sets the form encoding type to use.
+     *
      * @param encodingType the form encoding type to use
+     *
      */
     public void setEncodingType(final FormEncodingType encodingType) {
         encodingType_ = encodingType;
     }
 
     /**
-     * <p>Retrieves the request parameters used. Similar to the servlet api function
+     * Returns the request parameters to use.
+     *
+     * <p>
+     * Retrieves the request parameters used. Similar to the servlet api function
      * getParameterMap() this works depending on the request type and collects the
      * url parameters and the body stuff.<br>
      * The value is also normalized - null is converted to an empty string.</p>
@@ -416,52 +483,77 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * Returns the request parameters to use.
      *
-     * Retrieves the request parameters to use. If set, these request parameters will overwrite any
-     * request parameters which may be present in the {@link #getUrl() URL}. Should not be used in
-     * combination with the {@link #setRequestBody(String) request body}.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT
+     * YOUR OWN RISK.</span><br>
+     *
+     * Retrieves the request parameters to use. If set, these request parameters
+     * will overwrite any request parameters which may be present in the
+     * {@link #getUrl() URL}. Should not be used in combination with the
+     * {@link #setRequestBody(String) request body}.
+     *
      * @return the request parameters to use
+     *
      */
     public List<NameValuePair> getRequestParameters() {
         return requestParameters_;
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * Creates or updates this object..
      *
-     * Sets the request parameters to use. If set, these request parameters will overwrite any request
-     * parameters which may be present in the {@link #getUrl() URL}. Should not be used in combination
-     * with the {@link #setRequestBody(String) request body}.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT
+     * YOUR OWN RISK.</span><br>
+     *
+     * Sets the request parameters to use. If set, these request parameters will
+     * overwrite any request parameters which may be present in the {@link #getUrl()
+     * URL}. Should not be used in combination with the
+     * {@link #setRequestBody(String) request body}.
+     *
      * @param requestParameters the request parameters to use
      * @throws RuntimeException if the request body has already been set
+     *
      */
     public void setRequestParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
         if (requestBody_ != null) {
             final String msg = "Trying to set the request parameters, but the request body has already been specified;"
-                             + "the two are mutually exclusive!";
+                    + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
         }
         requestParameters_ = requestParameters;
     }
 
     /**
-     * Returns the body content to be submitted if this is a <code>POST</code> request. Ignored for all other request
-     * types. Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
-     * @return the body content to be submitted if this is a <code>POST</code> request
+     * Returns the body content to be submitted if this is a <code>POST</code>
+     * request.
+     *
+     * Returns the body content to be submitted if this is a <code>POST</code>
+     * request. Ignored for all other request types. Should not be used in
+     * combination with {@link #setRequestParameters(List) request parameters}.
+     *
+     * @return the body content to be submitted if this is a <code>POST</code>
+     *         request
+     *
      */
     public String getRequestBody() {
         return requestBody_;
     }
 
     /**
-     * Sets the body content to be submitted if this is a {@code POST}, {@code PUT} or {@code PATCH} request.
-     * Other request types result in {@link RuntimeException}.
-     * Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
-     * @param requestBody the body content to be submitted if this is a {@code POST}, {@code PUT}
-     *        or {@code PATCH} request
-     * @throws RuntimeException if the request parameters have already been set
-     *                          or this is not a {@code POST}, {@code PUT} or {@code PATCH} request.
+     * Creates or updates this object..
+     *
+     * Sets the body content to be submitted if this is a {@code POST}, {@code PUT}
+     * or {@code PATCH} request. Other request types result in
+     * {@link RuntimeException}. Should not be used in combination with
+     * {@link #setRequestParameters(List) request parameters}.
+     *
+     * @param requestBody the body content to be submitted if this is a
+     *                    {@code POST}, {@code PUT} or {@code PATCH} request
+     * @throws RuntimeException if the request parameters have already been set or
+     *                          this is not a {@code POST}, {@code PUT} or
+     *                          {@code PATCH} request.
+     *
      */
     public void setRequestBody(final String requestBody) throws RuntimeException {
         if (requestParameters_ != null && !requestParameters_.isEmpty()) {
@@ -482,15 +574,23 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns the HTTP submit method to use.
+     *
+     * Returns the HTTP submit method to use.
+     *
      * @return the HTTP submit method to use
+     *
      */
     public HttpMethod getHttpMethod() {
         return httpMethod_;
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Sets the HTTP submit method to use.
+     *
      * @param submitMethod the HTTP submit method to use
+     *
      */
     public void setHttpMethod(final HttpMethod submitMethod) {
         httpMethod_ = submitMethod;
@@ -498,24 +598,38 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns the additional HTTP headers to use.
+     *
+     * Returns the additional HTTP headers to use.
+     *
      * @return the additional HTTP headers to use
+     *
      */
     public Map<String, String> getAdditionalHeaders() {
         return additionalHeaders_;
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Sets the additional HTTP headers to use.
+     *
      * @param additionalHeaders the additional HTTP headers to use
+     *
      */
     public void setAdditionalHeaders(final Map<String, String> additionalHeaders) {
         additionalHeaders_ = additionalHeaders;
     }
 
     /**
-     * Returns whether the specified header name is already included in the additional HTTP headers.
+     * Creates or updates this object..
+     *
+     * Returns whether the specified header name is already included in the
+     * additional HTTP headers.
+     *
      * @param name the name of the additional HTTP header
-     * @return true if the specified header name is included in the additional HTTP headers
+     * @return true if the specified header name is included in the additional HTTP
+     *         headers
+     *
      */
     public boolean isAdditionalHeader(final String name) {
         for (final String key : additionalHeaders_.keySet()) {
@@ -527,9 +641,13 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Returns the header value associated with this name.
+     *
      * @param name the name of the additional HTTP header
      * @return the value or null
+     *
      */
     public String getAdditionalHeader(final String name) {
         String newKey = name;
@@ -543,8 +661,12 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Sets the referer HTTP header - only if the provided url is valid.
+     *
      * @param url the url for the referer HTTP header
+     *
      */
     public void setRefererHeader(final URL url) {
         if (url == null || !url.getProtocol().startsWith("http")) {
@@ -560,9 +682,13 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Sets the specified name/value pair in the additional HTTP headers.
-     * @param name the name of the additional HTTP header
+     *
+     * @param name  the name of the additional HTTP header
      * @param value the value of the additional HTTP header
+     *
      */
     public void setAdditionalHeader(final String name, final String value) {
         String newKey = name;
@@ -576,8 +702,12 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Removed the specified name/value pair from the additional HTTP headers.
+     *
      * @param name the name of the additional HTTP header
+     *
      */
     public void removeAdditionalHeader(String name) {
         for (final String key : additionalHeaders_.keySet()) {
@@ -590,24 +720,36 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Returns the credentials if set as part of the url.
+     *
      * Returns the credentials to use.
+     *
      * @return the credentials if set as part of the url
+     *
      */
     public Credentials getUrlCredentials() {
         return urlCredentials_;
     }
 
     /**
+     * Returns the credentials if set from the external builder.
+     *
      * Returns the credentials to use.
+     *
      * @return the credentials if set from the external builder
+     *
      */
     public Credentials getCredentials() {
         return credentials_;
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Sets the credentials to use.
+     *
      * @param credentials the credentials to use
+     *
      */
     public void setCredentials(final Credentials credentials) {
         credentials_ = credentials;
@@ -615,34 +757,53 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns the character set to use to perform the request.
+     *
+     * Returns the character set to use to perform the request.
+     *
      * @return the character set to use to perform the request
+     *
      */
     public Charset getCharset() {
         return charset_;
     }
 
     /**
-     * Sets the character set to use to perform the request. The default value
-     * is {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
+     * Creates or updates this object.
+     *
+     * Sets the character set to use to perform the request. The default value is
+     * {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
+     *
      * @param charset the character set to use to perform the request
+     *
      */
     public void setCharset(final Charset charset) {
         charset_ = charset;
     }
 
     /**
-     * @return the default character set to use for the response when it does not specify one.
+     * Returns the default character set to use for the response when it does not
+     * specify one.
+     *
+     * @return the default character set to use for the response when it does not
+     *         specify one.
+     *
      */
     public Charset getDefaultResponseContentCharset() {
         return defaultResponseContentCharset_;
     }
 
     /**
-     * Sets the default character set to use for the response when it does not specify one.
+     * Creates or updates this object.
+     *
+     * Sets the default character set to use for the response when it does not
+     * specify one.
      * <p>
      * Unless set, the default is {@link java.nio.charset.StandardCharsets#UTF_8}.
      * </p>
-     * @param defaultResponseContentCharset the default character set of the response
+     *
+     * @param defaultResponseContentCharset the default character set of the
+     *                                      response
+     *
      */
     public void setDefaultResponseContentCharset(final Charset defaultResponseContentCharset) {
         WebAssert.notNull("defaultResponseContentCharset", defaultResponseContentCharset);
@@ -650,8 +811,11 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object..
+     *
      * @param hint the hint to check for
      * @return true if the hint is enabled
+     *
      */
     public boolean hasHint(final HttpHint hint) {
         if (httpHints_ == null) {
@@ -661,8 +825,12 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Creates or updates this object..
+     *
      * Enables the hint.
+     *
      * @param hint the hint to add
+     *
      */
     public void addHint(final HttpHint hint) {
         if (httpHints_ == null) {
@@ -673,7 +841,11 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns a string representation of this object.
+     *
+     * Returns a string representation of this object.
+     *
      * @return a string representation of this object
+     *
      */
     @Override
     public String toString() {

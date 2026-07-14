@@ -46,6 +46,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code availHeight} property.
+     *
      * @return the {@code availHeight} property
      */
     public int getAvailHeight() {
@@ -61,6 +63,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code availLeft} property.
+     *
      * @return the {@code availLeft} property
      */
     public int getAvailLeft() {
@@ -76,6 +80,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code availTop} property.
+     *
      * @return the {@code availTop} property
      */
     public int getAvailTop() {
@@ -91,6 +97,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code availWidth} property.
+     *
      * @return the {@code availWidth} property
      */
     public int getAvailWidth() {
@@ -106,6 +114,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code colorDepth} property.
+     *
      * @return the {@code colorDepth} property
      */
     public int getColorDepth() {
@@ -121,6 +131,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code deviceXDPI} property.
+     *
      * @return the {@code deviceXDPI} property
      */
     public int getDeviceXDPI() {
@@ -136,6 +148,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code deviceYDPI} property.
+     *
      * @return the {@code deviceYDPI} property
      */
     public int getDeviceYDPI() {
@@ -151,6 +165,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code height} property.
+     *
      * @return the {@code height} property
      */
     public int getHeight() {
@@ -166,6 +182,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code left} property.
+     *
      * @return the {@code left} property
      */
     public int getLeft() {
@@ -181,6 +199,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code pixelDepth} property.
+     *
      * @return the {@code pixelDepth} property
      */
     public int getPixelDepth() {
@@ -196,6 +216,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code top} property.
+     *
      * @return the {@code top} property
      */
     public int getTop() {
@@ -211,6 +233,8 @@ public class Screen implements Serializable {
     }
 
     /**
+     * Returns the value of the {@code width} property.
+     *
      * @return the {@code width} property
      */
     public int getWidth() {

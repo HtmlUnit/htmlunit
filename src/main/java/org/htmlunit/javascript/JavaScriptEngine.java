@@ -1267,9 +1267,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
-     * @param error the error
-     * @param message the message
-     * @return a new EcmaError
+     * Constructs a new ECMAScript error.
+     *
+     * @param error the error type
+     * @param message the error message
+     * @return the constructed {@link EcmaError}
      */
     public static EcmaError constructError(final String error, final String message) {
         return ScriptRuntime.constructError(error, message);
@@ -1435,49 +1437,61 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
-     * @param o the object to convert
-     * @return int value
+     * Converts the specified value to a 32-bit integer.
+     *
+     * @param o the value to convert
+     * @return the converted 32-bit integer value
      */
     public static int toInt32(final Object o) {
         return ScriptRuntime.toInt32(o);
     }
 
     /**
-     * @param o the object to convert
-     * @return double value
+     * Converts the specified value to an integer.
+     *
+     * @param o the value to convert
+     * @return the converted integer value as a {@code double}
      */
     public static double toInteger(final Object o) {
         return ScriptRuntime.toInteger(o);
     }
 
     /**
-     * @param args an array
-     * @param index the index in the array
-     * @return double value
+     * Converts the value at the specified array index to an integer.
+     *
+     * @param args the array containing the value to convert
+     * @param index the index of the value in the array
+     * @return the converted integer value as a {@code double}
      */
     public static double toInteger(final Object[] args, final int index) {
         return ScriptRuntime.toInteger(args, index);
     }
 
     /**
+     * Determines whether the specified value is {@code undefined}.
+     *
      * @param obj the value to check
-     * @return whether obj is undefined
+     * @return {@code true} if the specified value is {@code undefined}
      */
     public static boolean isUndefined(final Object obj) {
         return org.htmlunit.corejs.javascript.Undefined.isUndefined(obj);
     }
 
     /**
+     * Determines whether the specified value is {@code NaN}.
+     *
      * @param obj the value to check
-     * @return whether obj is NAN
+     * @return {@code true} if the specified value is {@code NaN}
      */
     public static boolean isNaN(final Object obj) {
         return ScriptRuntime.isNaN(obj);
     }
 
     /**
+     * Determines whether the specified value is a JavaScript {@code Array}.
+     *
      * @param obj the value to check
-     * @return whether obj is an Array
+     * @return {@code true} if the specified value is a JavaScript {@code Array}
      */
     public static boolean isArray(final Object obj) {
         return (obj instanceof Scriptable s)
@@ -1485,17 +1499,21 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Determines whether the specified {@link Scriptable} is array-like.
+     *
      * @param obj the value to check
-     * @return true if the passed in {@link Scriptable} looks like an array
+     * @return {@code true} if the specified {@link Scriptable} is array-like
      */
     public static boolean isArrayLike(final Scriptable obj) {
         return ScriptRuntime.isArrayLike(obj);
     }
 
     /**
-     * @param cx the Context
-     * @param obj the value to check
-     * @return the length of the array like {@link Scriptable}
+     * Returns the length of the specified array-like {@link Scriptable}.
+     *
+     * @param cx the JavaScript context
+     * @param obj the array-like value
+     * @return the length of the specified array-like {@link Scriptable}
      */
     public static long lengthOfArrayLike(final Context cx, final Scriptable obj) {
         return AbstractEcmaObjectOperations.lengthOfArrayLike(cx, obj);

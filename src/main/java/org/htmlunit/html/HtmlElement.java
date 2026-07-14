@@ -424,6 +424,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * Returns the same value as returned by {@link #getTagName()}.
+     *
      * @return the same value as returned by {@link #getTagName()}
      */
     @Override
@@ -1239,6 +1241,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * Returns the value of the 'hidden' attribute or an empty string if not set.
+     *
      * @return the value of the 'hidden' attribute or an empty string if not set.
      */
     public String getHidden() {
@@ -1246,6 +1250,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * Returns true if the hidden attribute is set.
+     *
      * @return true if the hidden attribute is set.
      */
     public boolean isHidden() {
@@ -1428,6 +1434,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * Returns the true if the required attribute is set.
+     *
      * @return the true if the required attribute is set
      */
     public boolean isRequired() {
@@ -1435,6 +1443,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * Returns the true if the required attribute is supported and set.
+     *
      * @return the true if the required attribute is supported and set
      */
     public boolean isOptional() {
@@ -1503,6 +1513,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * Returns this element's top offset, which is the calculated left position of this.
+     *
      * @return this element's top offset, which is the calculated left position of this
      *         element relative to the <code>offsetParent</code>.
      */
@@ -1551,6 +1563,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * Returns this element's left offset, which is the calculated left position of this.
+     *
      * @return this element's left offset, which is the calculated left position of this
      *         element relative to the <code>offsetParent</code>.
      */

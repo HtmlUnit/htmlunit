@@ -104,10 +104,13 @@ public class WebClientOptions implements Serializable {
     private boolean isFetchPolyfillEnabled_;
 
     /**
-     * Sets the SSLContext; if this is set it is used and some other settings are ignored
-     * (protocol, keyStore, keyStorePassword, trustStore, sslClientCertificateStore, sslClientCertificatePassword).
-     * <p>This property is transient (because SSLContext is not serializable)
+     * Sets the SSLContext; if this is set it is used and some other settings are
+     * ignored (protocol, keyStore, keyStorePassword, trustStore,
+     * sslClientCertificateStore, sslClientCertificatePassword).
+     * <p>
+     * This property is transient (because SSLContext is not serializable)
      * </p>
+     *
      * @param sslContext the SSLContext, {@code null} to use for default value
      */
     public void setSSLContext(final SSLContext sslContext) {
@@ -115,10 +118,13 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Gets the SSLContext; if this is set this is used and some other settings are ignored
-     * (protocol, keyStore, keyStorePassword, trustStore, sslClientCertificateStore, sslClientCertificatePassword).
-     * <p>This property is transient (because SSLContext is not serializable)
+     * Gets the SSLContext; if this is set this is used and some other settings are
+     * ignored (protocol, keyStore, keyStorePassword, trustStore,
+     * sslClientCertificateStore, sslClientCertificatePassword).
+     * <p>
+     * This property is transient (because SSLContext is not serializable)
      * </p>
+     *
      * @return the SSLContext
      */
     public SSLContext getSSLContext() {
@@ -126,9 +132,11 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * If set to {@code true}, the client will accept connections to any host, regardless of
-     * whether they have valid certificates or not. This is especially useful when you are trying to
-     * connect to a server with expired or corrupt certificates.
+     * If set to {@code true}, the client will accept connections to any host,
+     * regardless of whether they have valid certificates or not. This is especially
+     * useful when you are trying to connect to a server with expired or corrupt
+     * certificates.
+     *
      * @param useInsecureSSL whether or not to use insecure SSL
      */
     public void setUseInsecureSSL(final boolean useInsecureSSL) {
@@ -137,15 +145,18 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Indicates if insecure SSL should be used.
-     * @return {@code true} if insecure SSL should be used. Default is {@code false}.
+     *
+     * @return {@code true} if insecure SSL should be used. Default is
+     *         {@code false}.
      */
     public boolean isUseInsecureSSL() {
         return useInsecureSSL_;
     }
 
     /**
-     * Sets whether or not redirections will be followed automatically on receipt of a redirect
-     * status code from the server.
+     * Sets whether or not redirections will be followed automatically on receipt of
+     * a redirect status code from the server.
+     *
      * @param enabled true to enable automatic redirection
      */
     public void setRedirectEnabled(final boolean enabled) {
@@ -153,35 +164,42 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the redirect limit for page refresh operations using HTTP refresh headers or meta tags.
-     * This prevents infinite refresh loops by limiting the number of consecutive refreshes allowed.
-     * Set to -1 to allow unlimited refreshes.
+     * Sets the redirect limit for page refresh operations using HTTP refresh
+     * headers or meta tags. This prevents infinite refresh loops by limiting the
+     * number of consecutive refreshes allowed. Set to -1 to allow unlimited
+     * refreshes.
      *
-     * <p>Note: The {@link NiceRefreshHandler} and {@link ImmediateRefreshHandler}
-     * have additional loop protection that may trigger before this limit.</p>
+     * <p>
+     * Note: The {@link NiceRefreshHandler} and {@link ImmediateRefreshHandler} have
+     * additional loop protection that may trigger before this limit.
+     * </p>
      *
-     * @param pageRefreshLimit the maximum number of refresh loops, or -1 for unlimited
+     * @param pageRefreshLimit the maximum number of refresh loops, or -1 for
+     *                         unlimited
      */
     public void setPageRefreshLimit(final int pageRefreshLimit) {
         pageRefreshLimit_ = pageRefreshLimit;
     }
 
     /**
-     * Returns the directory to be used for storing the response content in
-     * a temporary file see {@link #getMaxInMemory()}.
-     * @return the directory to be used for storing temp files or null to use the system default
+     * Returns the directory to be used for storing the response content in a
+     * temporary file see {@link #getMaxInMemory()}.
+     *
+     * @return the directory to be used for storing temp files or null to use the
+     *         system default
      */
     public File getTempFileDirectory() {
         return tempFileDirectory_;
     }
 
     /**
-     * Sets the directory to be used for storing response content in temporary files.
-     * See {@link #setMaxInMemory(int)} for when temporary files are created.
+     * Sets the directory to be used for storing response content in temporary
+     * files. See {@link #setMaxInMemory(int)} for when temporary files are created.
      * If the directory doesn't exist, it will be created automatically.
      *
-     * @param tempFileDirectory the directory to use, or {@code null} for system default
-     * @throws IOException if directory creation fails
+     * @param tempFileDirectory the directory to use, or {@code null} for system
+     *                          default
+     * @throws IOException              if directory creation fails
      * @throws IllegalArgumentException if the path points to an existing file
      */
     public void setTempFileDirectory(final File tempFileDirectory) throws IOException {
@@ -199,8 +217,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns whether or not redirections will be followed automatically on receipt of
-     * a redirect status code from the server.
+     * Returns whether or not redirections will be followed automatically on receipt
+     * of a redirect status code from the server.
+     *
      * @return true if automatic redirection is enabled
      */
     public boolean isRedirectEnabled() {
@@ -208,11 +227,12 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns the limit to be used when a page refreshes itself by using a
-     * http refresh header or meta tag. Negative values are interpreted as
-     * endless refresh support.
+     * Returns the limit to be used when a page refreshes itself by using a http
+     * refresh header or meta tag. Negative values are interpreted as endless
+     * refresh support.
      *
-     * @return pageRefreshLimit the number of refresh loops before throwing an exception
+     * @return pageRefreshLimit the number of refresh loops before throwing an
+     *         exception
      */
     public int getPageRefreshLimit() {
         return pageRefreshLimit_;
@@ -222,19 +242,20 @@ public class WebClientOptions implements Serializable {
      * Sets the SSL client certificate {@link KeyStore} to use.
      * <p>
      * If the web server requires Renegotiation, you have to set system property
-     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
-     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
+     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in <a href=
+     * "http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
      * </p>
      * <p>
-     * In some cases the impl seems to pick old certificates from the {@link KeyStore}. To avoid
-     * that, wrap your {@link KeyStore} inside your own {@link KeyStore} impl and filter out outdated
-     * certificates.
+     * In some cases the impl seems to pick old certificates from the
+     * {@link KeyStore}. To avoid that, wrap your {@link KeyStore} inside your own
+     * {@link KeyStore} impl and filter out outdated certificates.
      * </p>
-     * <p>This property is transient (because KeyStore is not serializable)
+     * <p>
+     * This property is transient (because KeyStore is not serializable)
      * </p>
      *
-     * @param keyStore {@link KeyStore} to use
+     * @param keyStore         {@link KeyStore} to use
      * @param keyStorePassword the keystore password
      */
     public void setSSLClientCertificateKeyStore(final KeyStore keyStore, final char[] keyStorePassword) {
@@ -243,20 +264,23 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the SSL client certificate to use.
-     * The needed parameters are used to construct a {@link java.security.KeyStore}.
+     * Sets the SSL client certificate to use. The needed parameters are used to
+     * construct a {@link java.security.KeyStore}.
      * <p>
      * If the web server requires Renegotiation, you have to set system property
-     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
-     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
+     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in <a href=
+     * "http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
      * </p>
-     * <p>This property is transient (because KeyStore is not serializable)
+     * <p>
+     * This property is transient (because KeyStore is not serializable)
      * </p>
      *
-     * @param keyStoreUrl the URL which locates the certificate {@link KeyStore}
+     * @param keyStoreUrl      the URL which locates the certificate
+     *                         {@link KeyStore}
      * @param keyStorePassword the certificate {@link KeyStore} password
-     * @param keyStoreType the type of certificate {@link KeyStore}, usually {@code jks} or {@code pkcs12}
+     * @param keyStoreType     the type of certificate {@link KeyStore}, usually
+     *                         {@code jks} or {@code pkcs12}
      *
      */
     public void setSSLClientCertificateKeyStore(final URL keyStoreUrl, final String keyStorePassword,
@@ -271,29 +295,31 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the SSL client certificate {@link KeyStore} to use. The parameters are used to
-     * construct the {@link KeyStore}.
+     * Sets the SSL client certificate {@link KeyStore} to use. The parameters are
+     * used to construct the {@link KeyStore}.
      * <p>
      * If the web server requires Renegotiation, you have to set system property
-     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
-     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
+     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in <a href=
+     * "http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
      * </p>
      * <p>
-     * In some cases the impl seems to pick old certificates from the {@link KeyStore}. To avoid
-     * that, wrap your {@link KeyStore} inside your own {@link KeyStore} impl and filter out outdated
-     * certificates. Provide the {@link KeyStore} to the options instead of the input stream.
+     * In some cases the impl seems to pick old certificates from the
+     * {@link KeyStore}. To avoid that, wrap your {@link KeyStore} inside your own
+     * {@link KeyStore} impl and filter out outdated certificates. Provide the
+     * {@link KeyStore} to the options instead of the input stream.
      * </p>
      *
-     * @param keyStoreInputStream the input stream which represents the {@link KeyStore} holding the certificates
-     * @param keyStorePassword the {@link KeyStore} password
-     * @param keyStoreType the type of {@link KeyStore}, usually {@code jks} or {@code pkcs12}
+     * @param keyStoreInputStream the input stream which represents the
+     *                            {@link KeyStore} holding the certificates
+     * @param keyStorePassword    the {@link KeyStore} password
+     * @param keyStoreType        the type of {@link KeyStore}, usually {@code jks}
+     *                            or {@code pkcs12}
      */
-    public void setSSLClientCertificateKeyStore(final InputStream keyStoreInputStream,
-            final String keyStorePassword, final String keyStoreType) {
+    public void setSSLClientCertificateKeyStore(final InputStream keyStoreInputStream, final String keyStorePassword,
+            final String keyStoreType) {
         try {
-            setSSLClientCertificateKeyStore(
-                    getKeyStore(keyStoreInputStream, keyStorePassword, keyStoreType),
+            setSSLClientCertificateKeyStore(getKeyStore(keyStoreInputStream, keyStorePassword, keyStoreType),
                     keyStorePassword.toCharArray());
         }
         catch (final Exception e) {
@@ -303,7 +329,8 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Gets the SSLClientCertificateStore.
-     * <p>This property is transient (because KeyStore is not serializable)
+     * <p>
+     * This property is transient (because KeyStore is not serializable)
      * </p>
      *
      * @return the KeyStore for use on SSL connections
@@ -314,6 +341,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Gets the SSLClientCertificatePassword.
+     *
      * @return the password
      */
     public char[] getSSLClientCertificatePassword() {
@@ -322,6 +350,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Gets the protocol versions enabled for use on SSL connections.
+     *
      * @return the protocol versions enabled for use on SSL connections
      * @see #setSSLClientProtocols(String...)
      */
@@ -330,8 +359,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the protocol versions enabled for use on SSL connections,
-     * {@code null} to use default ones.
+     * Sets the protocol versions enabled for use on SSL connections, {@code null}
+     * to use default ones.
      *
      * @param sslClientProtocols the protocol versions
      * @see javax.net.ssl.SSLSocket#setEnabledProtocols(String[])
@@ -345,6 +374,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Gets the cipher suites enabled for use on SSL connections.
+     *
      * @return the cipher suites enabled for use on SSL connections
      * @see #setSSLClientCipherSuites(String...)
      */
@@ -353,8 +383,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the cipher suites enabled for use on SSL connections,
-     * {@code null} to use default ones.
+     * Sets the cipher suites enabled for use on SSL connections, {@code null} to
+     * use default ones.
      *
      * @param sslClientCipherSuites the cipher suites
      * @see javax.net.ssl.SSLSocket#setEnabledCipherSuites(String[])
@@ -374,7 +404,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns {@code true} if JavaScript is enabled and the script engine was loaded successfully.
+     * Returns {@code true} if JavaScript is enabled and the script engine was
+     * loaded successfully.
      *
      * @return {@code true} if JavaScript is enabled
      */
@@ -383,9 +414,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Enables/disables CSS support. By default, this property is enabled.
-     * If disabled HtmlUnit will not download the linked css files and also
-     * not triggered the associated onload/onerror events.
+     * Enables/disables CSS support. By default, this property is enabled. If
+     * disabled HtmlUnit will not download the linked css files and also not
+     * triggered the associated onload/onerror events.
      *
      * @param enabled {@code true} to enable CSS support
      */
@@ -403,9 +434,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Enable/disable the popup window blocker. By default, the popup blocker is disabled, and popup
-     * windows are allowed. When set to {@code true}, <code>window.open()</code> has no effect and
-     * returns {@code null}.
+     * Enable/disable the popup window blocker. By default, the popup blocker is
+     * disabled, and popup windows are allowed. When set to {@code true},
+     * <code>window.open()</code> has no effect and returns {@code null}.
      *
      * @param enabled {@code true} to enable the popup window blocker
      */
@@ -423,7 +454,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Enables/disables "Do Not Track" support. By default, this property is disabled.
+     * Enables/disables "Do Not Track" support. By default, this property is
+     * disabled.
      *
      * @param enabled {@code true} to enable "Do Not Track" support
      */
@@ -441,9 +473,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Specify whether or not the content of the resulting document will be
-     * printed to the console in the event of a failing response code.
-     * Successful response codes are in the range 200-299. The default is true.
+     * Specify whether or not the content of the resulting document will be printed
+     * to the console in the event of a failing response code. Successful response
+     * codes are in the range 200-299. The default is true.
      *
      * @param enabled True to enable this feature
      */
@@ -452,11 +484,11 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns {@code true} if the content of the resulting document will be printed to
-     * the console in the event of a failing response code.
+     * Returns {@code true} if the content of the resulting document will be printed
+     * to the console in the event of a failing response code.
      *
-     * @return {@code true} if the content of the resulting document will be printed to
-     *         the console in the event of a failing response code
+     * @return {@code true} if the content of the resulting document will be printed
+     *         to the console in the event of a failing response code
      * @see #setPrintContentOnFailingStatusCode
      */
     public boolean isPrintContentOnFailingStatusCode() {
@@ -464,9 +496,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Specify whether or not an exception will be thrown in the event of a
-     * failing status code. Successful status codes are in the range 200-299.
-     * The default is true.
+     * Specify whether or not an exception will be thrown in the event of a failing
+     * status code. Successful status codes are in the range 200-299. The default is
+     * true.
      *
      * @param enabled {@code true} to enable this feature
      */
@@ -475,8 +507,11 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns {@code true} if an exception will be thrown in the event of a failing response code.
-     * @return {@code true} if an exception will be thrown in the event of a failing response code
+     * Returns {@code true} if an exception will be thrown in the event of a failing
+     * response code.
+     *
+     * @return {@code true} if an exception will be thrown in the event of a failing
+     *         response code
      * @see #setThrowExceptionOnFailingStatusCode
      */
     public boolean isThrowExceptionOnFailingStatusCode() {
@@ -484,9 +519,10 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Indicates if an exception should be thrown when a script execution fails
-     * (the default) or if it should be caught and just logged to allow page
-     * execution to continue.
+     * Indicates if an exception should be thrown when a script execution fails (the
+     * default) or if it should be caught and just logged to allow page execution to
+     * continue.
+     *
      * @return {@code true} if an exception is thrown on script error (the default)
      */
     public boolean isThrowExceptionOnScriptError() {
@@ -495,6 +531,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Changes the behavior of this webclient when a script error occurs.
+     *
      * @param enabled indicates if exception should be thrown or not
      */
     public void setThrowExceptionOnScriptError(final boolean enabled) {
@@ -503,6 +540,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Returns the client's current homepage.
+     *
      * @return the client's current homepage
      */
     public String getHomePage() {
@@ -511,6 +549,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets the client's homepage.
+     *
      * @param homePage the new homepage URL
      */
     public void setHomePage(final String homePage) {
@@ -519,6 +558,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Returns the proxy configuration for this client.
+     *
      * @return the proxy configuration for this client
      */
     public ProxyConfig getProxyConfig() {
@@ -527,6 +567,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets the proxy configuration for this client.
+     *
      * @param proxyConfig the proxy configuration for this client
      */
     public void setProxyConfig(final ProxyConfig proxyConfig) {
@@ -535,8 +576,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Gets the timeout value for the {@link WebConnection}.
-     * The default timeout is 90 seconds.
+     * Gets the timeout value for the {@link WebConnection}. The default timeout is
+     * 90 seconds.
+     *
      * @return the timeout value in milliseconds
      * @see #setTimeout(int)
      * @see #setConnectionTimeToLive(long)
@@ -546,10 +588,16 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * <p>Sets the timeout of the {@link WebConnection}. Set to zero for an infinite wait.</p>
+     * <p>
+     * Sets the timeout of the {@link WebConnection}. Set to zero for an infinite
+     * wait.
+     * </p>
      *
-     * <p>Note: The timeout is used twice. The first is for making the socket connection, the second is
-     * for data retrieval. If the time is critical you must allow for twice the time specified here.</p>
+     * <p>
+     * Note: The timeout is used twice. The first is for making the socket
+     * connection, the second is for data retrieval. If the time is critical you
+     * must allow for twice the time specified here.
+     * </p>
      *
      * @param timeout the value of the timeout in milliseconds
      */
@@ -567,27 +615,32 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the connection time-to-live for the HttpClient connection pool.
-     * This is useful when working with web pages behind DNS-based load balancers
-     * where IP addresses may change frequently.
+     * Sets the connection time-to-live for the HttpClient connection pool. This is
+     * useful when working with web pages behind DNS-based load balancers where IP
+     * addresses may change frequently.
      *
-     * @param connectionTimeToLive the timeout in milliseconds, or -1 to disable (default)
+     * @param connectionTimeToLive the timeout in milliseconds, or -1 to disable
+     *                             (default)
      */
     public void setConnectionTimeToLive(final long connectionTimeToLive) {
         connectionTimeToLive_ = connectionTimeToLive;
     }
 
     /**
-     * Sets the SSL protocol, used only when {@link #setUseInsecureSSL(boolean)} is set to {@code true}.
+     * Sets the SSL protocol, used only when {@link #setUseInsecureSSL(boolean)} is
+     * set to {@code true}.
+     *
      * @param sslInsecureProtocol the SSL protocol for insecure SSL connections,
-     *      {@code null} to use for default value
+     *                            {@code null} to use for default value
      */
     public void setSSLInsecureProtocol(final String sslInsecureProtocol) {
         sslInsecureProtocol_ = sslInsecureProtocol;
     }
 
     /**
-     * Gets the SSL protocol, to be used only when {@link #setUseInsecureSSL(boolean)} is set to {@code true}.
+     * Gets the SSL protocol, to be used only when
+     * {@link #setUseInsecureSSL(boolean)} is set to {@code true}.
+     *
      * @return the SSL protocol for insecure SSL connections
      */
     public String getSSLInsecureProtocol() {
@@ -595,16 +648,19 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the SSL server certificate trust store. All server certificates will be validated against
-     * this trust store.
-     * <p>This property is transient (because KeyStore is not serializable)
+     * Sets the SSL server certificate trust store. All server certificates will be
+     * validated against this trust store.
+     * <p>
+     * This property is transient (because KeyStore is not serializable)
      * </p>
-     * <p>The needed parameters are used to construct a {@link java.security.KeyStore}.
+     * <p>
+     * The needed parameters are used to construct a {@link java.security.KeyStore}.
      * </p>
      *
-     * @param sslTrustStoreUrl the URL which locates the trust store
+     * @param sslTrustStoreUrl      the URL which locates the trust store
      * @param sslTrustStorePassword the trust store password
-     * @param sslTrustStoreType the type of trust store, usually {@code jks} or {@code pkcs12}
+     * @param sslTrustStoreType     the type of trust store, usually {@code jks} or
+     *                              {@code pkcs12}
      */
     public void setSSLTrustStore(final URL sslTrustStoreUrl, final String sslTrustStorePassword,
             final String sslTrustStoreType) {
@@ -622,8 +678,10 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Gets the SSL TrustStore.
-     * <p>This property is transient (because KeyStore is not serializable)
+     * <p>
+     * This property is transient (because KeyStore is not serializable)
      * </p>
+     *
      * @return the SSL TrustStore for insecure SSL connections
      */
     public KeyStore getSSLTrustStore() {
@@ -632,7 +690,7 @@ public class WebClientOptions implements Serializable {
 
     private static KeyStore getKeyStore(final InputStream inputStream, final String keystorePassword,
             final String keystoreType)
-                    throws IOException, KeyStoreException, NoSuchAlgorithmException, CertificateException {
+            throws IOException, KeyStoreException, NoSuchAlgorithmException, CertificateException {
         if (inputStream == null) {
             return null;
         }
@@ -644,9 +702,10 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns the maximum bytes stored in memory before content is saved to temporary files.
-     * When response content exceeds this limit, it will be written to a temporary file
-     * in the directory specified by {@link #getTempFileDirectory()}.
+     * Returns the maximum bytes stored in memory before content is saved to
+     * temporary files. When response content exceeds this limit, it will be written
+     * to a temporary file in the directory specified by
+     * {@link #getTempFileDirectory()}.
      *
      * @return the maximum bytes in memory (default: 500 * 1024)
      * @see #setMaxInMemory(int)
@@ -657,8 +716,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the maximum bytes to have in memory, after which the content is saved to a temporary file.
-     * Set this to zero or -1 to deactivate the saving at all.
+     * Sets the maximum bytes to have in memory, after which the content is saved to
+     * a temporary file. Set this to zero or -1 to deactivate the saving at all.
+     *
      * @param maxInMemory maximum bytes in memory
      */
     public void setMaxInMemory(final int maxInMemory) {
@@ -666,7 +726,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns the maximum number of {@link Page pages} kept in {@link WebWindow#getHistory()}.
+     * Returns the maximum number of {@link Page pages} kept in
+     * {@link WebWindow#getHistory()}.
+     *
      * @return the maximum number of pages in history
      */
     public int getHistorySizeLimit() {
@@ -676,8 +738,9 @@ public class WebClientOptions implements Serializable {
     /**
      * Sets the History size limit. HtmlUnit uses SoftReferences&lt;Page&gt; for
      * storing the pages that are part of the history. If you like to fine tune this
-     * you can use {@link #setHistoryPageCacheLimit(int)} to limit the number of page references
-     * stored by the history.
+     * you can use {@link #setHistoryPageCacheLimit(int)} to limit the number of
+     * page references stored by the history.
+     *
      * @param historySizeLimit maximum number of pages in history
      */
     public void setHistorySizeLimit(final int historySizeLimit) {
@@ -686,6 +749,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Returns the maximum number of {@link Page pages} to cache in history.
+     *
      * @return the maximum number of pages to cache in history
      */
     public int getHistoryPageCacheLimit() {
@@ -693,14 +757,16 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the maximum number of {@link Page pages} to cache in history.
-     * If this value is smaller than the {{@link #getHistorySizeLimit()} than
-     * HtmlUnit will only use soft references for the first historyPageCacheLimit
-     * entries in the history. For older entries only the url is saved; the page
-     * will be (re)retrieved on demand.
+     * Sets the maximum number of {@link Page pages} to cache in history. If this
+     * value is smaller than the {{@link #getHistorySizeLimit()} than HtmlUnit will
+     * only use soft references for the first historyPageCacheLimit entries in the
+     * history. For older entries only the url is saved; the page will be
+     * (re)retrieved on demand.
+     *
      * @param historyPageCacheLimit maximum number of pages to cache in history
-     *        default is Integer.MAX_VALUE; negative values are having the same effect
-     *        as setting this to zero.
+     *                              default is Integer.MAX_VALUE; negative values
+     *                              are having the same effect as setting this to
+     *                              zero.
      */
     public void setHistoryPageCacheLimit(final int historyPageCacheLimit) {
         historyPageCacheLimit_ = historyPageCacheLimit;
@@ -709,8 +775,8 @@ public class WebClientOptions implements Serializable {
     /**
      * Returns local address to be used for request execution.
      * <p>
-     * On machines with multiple network interfaces, this parameter can be used to select the network interface
-     * from which the connection originates.
+     * On machines with multiple network interfaces, this parameter can be used to
+     * select the network interface from which the connection originates.
      * </p>
      * <p>
      * Default: {@code null}
@@ -723,10 +789,11 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the local network interface address for outgoing HTTP requests.
-     * Useful on multi-homed machines to control which network interface is used.
+     * Sets the local network interface address for outgoing HTTP requests. Useful
+     * on multi-homed machines to control which network interface is used.
      *
-     * @param localAddress the local IP address to bind to, or {@code null} for automatic selection
+     * @param localAddress the local IP address to bind to, or {@code null} for
+     *                     automatic selection
      */
     public void setLocalAddress(final InetAddress localAddress) {
         localAddress_ = localAddress;
@@ -734,7 +801,9 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets whether to automatically download images by default, or not.
-     * @param downloadImages whether to automatically download images by default, or not
+     *
+     * @param downloadImages whether to automatically download images by default, or
+     *                       not
      */
     public void setDownloadImages(final boolean downloadImages) {
         downloadImages_ = downloadImages;
@@ -742,6 +811,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Returns whether to automatically download images by default, or not.
+     *
      * @return whether to automatically download images by default, or not.
      */
     public boolean isDownloadImages() {
@@ -749,8 +819,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the screen width.
-     * This value is used by JavaScript's screen.width property.
+     * Sets the screen width. This value is used by JavaScript's screen.width
+     * property.
      *
      * @param screenWidth the screen width in pixels (must be positive)
      */
@@ -786,10 +856,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns the Neko HTML parser reader buffer size.
-     * This controls the internal buffer size used by the NekoHTML parser
-     * for reading HTML content. Larger buffers can improve performance
-     * for large documents but consume more memory.
+     * Returns the Neko HTML parser reader buffer size. This controls the internal
+     * buffer size used by the NekoHTML parser for reading HTML content. Larger
+     * buffers can improve performance for large documents but consume more memory.
      *
      * @return the buffer size in bytes, or -1 for parser default
      */
@@ -798,9 +867,9 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the Neko HTML parser reader buffer size.
-     * A larger buffer size can improve parsing performance for large HTML documents
-     * but will consume more memory. Set to -1 to use the parser's default buffer size.
+     * Sets the Neko HTML parser reader buffer size. A larger buffer size can
+     * improve parsing performance for large HTML documents but will consume more
+     * memory. Set to -1 to use the parser's default buffer size.
      *
      * @param nekoReaderBufferSize the buffer size in bytes, or -1 for default
      */
@@ -827,8 +896,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns the maximum size in bytes for WebSocket text messages.
-     * Set to -1 to use the default.
+     * Returns the maximum size in bytes for WebSocket text messages. Set to -1 to
+     * use the default.
      *
      * @return the maximum text message size in bytes, or -1 for default
      */
@@ -837,18 +906,19 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the maximum size in bytes for WebSocket text messages.
-     * This limit applies to individual text frames received by the WebSocket.
+     * Sets the maximum size in bytes for WebSocket text messages. This limit
+     * applies to individual text frames received by the WebSocket.
      *
-     * @param webSocketMaxTextMessageSize the maximum size in bytes, or -1 for default
+     * @param webSocketMaxTextMessageSize the maximum size in bytes, or -1 for
+     *                                    default
      */
     public void setWebSocketMaxTextMessageSize(final int webSocketMaxTextMessageSize) {
         webSocketMaxTextMessageSize_ = webSocketMaxTextMessageSize;
     }
 
     /**
-     * Returns the maximum size in bytes for WebSocket binary messages.
-     * Set to -1 to use the default.
+     * Returns the maximum size in bytes for WebSocket binary messages. Set to -1 to
+     * use the default.
      *
      * @return the maximum binary message size in bytes, or -1 for default
      */
@@ -857,10 +927,11 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the maximum size in bytes for WebSocket binary messages.
-     * This limit applies to individual binary frames received by the WebSocket.
+     * Sets the maximum size in bytes for WebSocket binary messages. This limit
+     * applies to individual binary frames received by the WebSocket.
      *
-     * @param webSocketMaxBinaryMessageSize the maximum size in bytes, or -1 for default
+     * @param webSocketMaxBinaryMessageSize the maximum size in bytes, or -1 for
+     *                                      default
      */
     public void setWebSocketMaxBinaryMessageSize(final int webSocketMaxBinaryMessageSize) {
         webSocketMaxBinaryMessageSize_ = webSocketMaxBinaryMessageSize;
@@ -868,6 +939,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets whether or not fetch polyfill should be used.
+     *
      * @param enabled true to enable fetch polyfill
      */
     public void setFetchPolyfillEnabled(final boolean enabled) {
@@ -875,6 +947,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
+     * Returns true if the fetch api polyfill is enabled.
+     *
      * @return true if the fetch api polyfill is enabled
      */
     public boolean isFetchPolyfillEnabled() {
@@ -891,6 +965,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
+     * Returns {@code true} if Geolocation is enabled.
+     *
      * @return {@code true} if Geolocation is enabled
      */
     public boolean isGeolocationEnabled() {
@@ -898,6 +974,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
+     * Returns the {@link Geolocation}.
+     *
      * @return the {@link Geolocation}
      */
     public Geolocation getGeolocation() {
@@ -906,6 +984,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets the {@link Geolocation} to be used.
+     *
      * @param geolocation the new location or null
      */
     public void setGeolocation(final Geolocation geolocation) {
@@ -927,22 +1006,20 @@ public class WebClientOptions implements Serializable {
         /**
          * Ctor.
          *
-         * @param latitude the latitude coordinate in decimal degrees
-         * @param longitude the longitude coordinate in decimal degrees
-         * @param accuracy the accuracy of the position in meters
-         * @param altitude the altitude in meters above sea level, or null if unavailable
-         * @param altitudeAccuracy the accuracy of the altitude in meters, or null if unavailable
-         * @param heading the direction of travel in degrees (0-359), or null if unavailable
-         * @param speed the current speed in meters per second, or null if unavailable
+         * @param latitude         the latitude coordinate in decimal degrees
+         * @param longitude        the longitude coordinate in decimal degrees
+         * @param accuracy         the accuracy of the position in meters
+         * @param altitude         the altitude in meters above sea level, or null if
+         *                         unavailable
+         * @param altitudeAccuracy the accuracy of the altitude in meters, or null if
+         *                         unavailable
+         * @param heading          the direction of travel in degrees (0-359), or null
+         *                         if unavailable
+         * @param speed            the current speed in meters per second, or null if
+         *                         unavailable
          */
-        public Geolocation(
-                final double latitude,
-                final double longitude,
-                final double accuracy,
-                final Double altitude,
-                final Double altitudeAccuracy,
-                final Double heading,
-                final Double speed) {
+        public Geolocation(final double latitude, final double longitude, final double accuracy, final Double altitude,
+                final Double altitudeAccuracy, final Double heading, final Double speed) {
             latitude_ = latitude;
             longitude_ = longitude;
             accuracy_ = accuracy;
@@ -953,6 +1030,8 @@ public class WebClientOptions implements Serializable {
         }
 
         /**
+         * Returns the accuracy.
+         *
          * @return the accuracy
          */
         public double getAccuracy() {
@@ -960,6 +1039,8 @@ public class WebClientOptions implements Serializable {
         }
 
         /**
+         * Returns the latitude.
+         *
          * @return the latitude
          */
         public double getLatitude() {
@@ -967,6 +1048,8 @@ public class WebClientOptions implements Serializable {
         }
 
         /**
+         * Returns the longitude.
+         *
          * @return the longitude
          */
         public double getLongitude() {
@@ -974,6 +1057,8 @@ public class WebClientOptions implements Serializable {
         }
 
         /**
+         * Returns the longitude.
+         *
          * @return the longitude
          */
         public Double getAltitude() {
@@ -981,6 +1066,8 @@ public class WebClientOptions implements Serializable {
         }
 
         /**
+         * Returns the altitudeAccuracy.
+         *
          * @return the altitudeAccuracy
          */
         public Double getAltitudeAccuracy() {
@@ -988,6 +1075,8 @@ public class WebClientOptions implements Serializable {
         }
 
         /**
+         * Returns the heading.
+         *
          * @return the heading
          */
         public Double getHeading() {
@@ -995,6 +1084,8 @@ public class WebClientOptions implements Serializable {
         }
 
         /**
+         * Returns the speed.
+         *
          * @return the speed
          */
         public Double getSpeed() {
@@ -1003,23 +1094,27 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * If set to {@code true}, the client will accept XMLHttpRequests to URL's
-     * using the 'file' protocol. Allowing this introduces security problems and is
-     * therefore not allowed by current browsers. But some browsers have special settings
-     * to open this door; therefore we have this option also.
+     * If set to {@code true}, the client will accept XMLHttpRequests to URL's using
+     * the 'file' protocol. Allowing this introduces security problems and is
+     * therefore not allowed by current browsers. But some browsers have special
+     * settings to open this door; therefore we have this option also.
      *
-     * <p><b>Security Warning:</b> Enabling this feature may expose local files
-     * to web content, which can be a serious security risk.</p>
+     * <p>
+     * <b>Security Warning:</b> Enabling this feature may expose local files to web
+     * content, which can be a serious security risk.
+     * </p>
      *
-     * @param fileProtocolForXMLHttpRequestsAllowed whether or not allow (local) file access
+     * @param fileProtocolForXMLHttpRequestsAllowed whether or not allow (local)
+     *                                              file access
      */
     public void setFileProtocolForXMLHttpRequestsAllowed(final boolean fileProtocolForXMLHttpRequestsAllowed) {
         fileProtocolForXMLHttpRequestsAllowed_ = fileProtocolForXMLHttpRequestsAllowed;
     }
 
     /**
-     * Indicates if the client will accept XMLHttpRequests to URL's
-     * using the 'file' protocol.
+     * Indicates if the client will accept XMLHttpRequests to URL's using the 'file'
+     * protocol.
+     *
      * @return {@code true} if access to local files is allowed.
      */
     public boolean isFileProtocolForXMLHttpRequestsAllowed() {

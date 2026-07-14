@@ -42,8 +42,10 @@ public class HttpDelete extends HttpEntityEnclosingRequestBase {
     }
 
     /**
-     * @param uri the uri
-     * @throws IllegalArgumentException if the uri is invalid.
+     * Constructs a new HTTP DELETE request for the specified URI.
+     *
+     * @param uri the request URI
+     * @throws IllegalArgumentException if the specified URI is invalid
      */
     public HttpDelete(final String uri) {
         super();

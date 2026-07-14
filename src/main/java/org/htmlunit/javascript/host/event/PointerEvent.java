@@ -221,6 +221,8 @@ public class PointerEvent extends MouseEvent {
     }
 
     /**
+     * Returns whether this is the primary pointer.
+     *
      * @return whether this is the primary pointer
      */
     @JsxGetter(propertyName = "isPrimary")

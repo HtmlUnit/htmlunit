@@ -150,6 +150,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Returns the value.
+     *
      * @return the value
      */
     public String getValue() {
@@ -684,6 +686,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Returns returns the raw value.
+     *
      * @return returns the raw value
      */
     protected Object getInternalValue() {
@@ -897,6 +901,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Returns if the element executes pattern validation on blank strings.
+     *
      * @return if the element executes pattern validation on blank strings
      */
     protected boolean isBlankPatternValidated() {
@@ -1004,6 +1010,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Returns whether this is a checkbox or a radio button.
+     *
      * @return whether this is a checkbox or a radio button
      */
     public boolean isCheckable() {
@@ -1012,6 +1020,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Returns false for type submit/reset/image/button otherwise true.
+     *
      * @return false for type submit/reset/image/button otherwise true
      */
     public boolean isSubmitable() {
@@ -1073,6 +1083,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Returns the value of the attribute {@code formnovalidate} or an empty string if that attribute isn't defined.
+     *
      * @return the value of the attribute {@code formnovalidate} or an empty string if that attribute isn't defined
      */
     public final boolean isFormNoValidate() {
@@ -1094,6 +1106,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Returns the {@code type} property.
+     *
      * @return the {@code type} property
      */
     public final String getType() {

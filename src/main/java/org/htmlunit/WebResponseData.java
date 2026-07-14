@@ -222,21 +222,27 @@ public class WebResponseData implements Serializable {
     }
 
     /**
-     * @return response headers
+     * Returns the response headers.
+     *
+     * @return the response headers
      */
     public List<NameValuePair> getResponseHeaders() {
         return responseHeaders_;
     }
 
     /**
-     * @return response status code
+     * Returns the HTTP status code.
+     *
+     * @return the HTTP status code
      */
     public int getStatusCode() {
         return statusCode_;
     }
 
     /**
-     * @return response status message
+     * Returns the HTTP status message.
+     *
+     * @return the HTTP status message
      */
     public String getStatusMessage() {
         return statusMessage_;

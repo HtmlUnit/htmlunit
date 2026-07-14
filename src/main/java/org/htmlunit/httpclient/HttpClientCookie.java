@@ -41,7 +41,9 @@ public class HttpClientCookie extends Cookie {
     }
 
     /**
-     * @return an HttpClient ClientCookie version of this cookie
+     * Returns the underlying HttpClient representation of this cookie.
+     *
+     * @return the corresponding HttpClient {@link ClientCookie}
      */
     public ClientCookie getHttpClientCookie() {
         return httpClientCookie_;
