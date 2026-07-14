@@ -360,7 +360,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         if (hasChildren) {
             printWriter.print(">");
-            final boolean tag = printChildrenAsXml(indent, true, printWriter);
+            final boolean tag = printChildrenAsXml(indent, false, printWriter);
             if (tag) {
                 printWriter.print("\r\n");
                 printWriter.print(indent);
@@ -378,7 +378,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             printWriter.print("/>");
         }
 
-        return true;
+        return false;
     }
 
     /**
