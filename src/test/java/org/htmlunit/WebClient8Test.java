@@ -59,15 +59,45 @@ public class WebClient8Test extends SimpleWebTestCase {
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
             final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
-            assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n<html>\r\n"
-                    + "  <head>\r\n"
-                    + "    <title>foo</title>\r\n"
-                    + "  </head>\r\n"
-                    + "  <body>\r\n"
-                    + "    <div>Hello <b>HtmlUnit</b>\r\n"
-                    + "    </div>\r\n"
-                    + "  </body>\r\n"
-                    + "</html>",
+            assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
+                    + "<html><head><title>foo</title></head>"
+                    + "<body><div>Hello <b>HtmlUnit</b></div></body></html>",
+                    page.asXml());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void asXmlNoWhitespaceBetweenAdjacentElements() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>"
+                + "<body><div><span>a</span><span>b</span></div></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
+                    + "<html><head><title>foo</title></head>"
+                    + "<body><div><span>a</span><span>b</span></div></body></html>",
+                    page.asXml());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void asXmlWhitespaceOnlyTextBetweenElements() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>"
+                + "<body><div><span>a</span> <span>b</span></div></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
+                    + "<html><head><title>foo</title></head>"
+                    + "<body><div><span>a</span>\r\n      <span>b</span></div></body></html>",
                     page.asXml());
         }
     }

@@ -68,12 +68,8 @@ public class HtmlUnorderedList2Test extends SimpleWebTestCase {
 
         assertEquals("<ul id=\"myNode\"></ul>", element.asXml());
         assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
-                + "<html>\r\n"
-                + "  <head/>\r\n"
-                + "  <body>\r\n"
-                + "    <ul id=\"myNode\"></ul>\n"
+                + "<html><head/><body>\r\n    <ul id=\"myNode\"></ul>\n"
                 + "foo\n"
-                + "</body>\r\n"
-                + "</html>", page.asXml());
+                + "</body></html>", page.asXml());
     }
 }

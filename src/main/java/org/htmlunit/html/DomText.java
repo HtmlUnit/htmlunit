@@ -141,6 +141,9 @@ public class DomText extends DomCharacterData implements Text {
             printWriter.print(data);
             tag = false;
         }
+        else if (data != null && !data.isEmpty()) {
+            tag = true;
+        }
         return printChildrenAsXml(indent, tag, printWriter);
     }
 

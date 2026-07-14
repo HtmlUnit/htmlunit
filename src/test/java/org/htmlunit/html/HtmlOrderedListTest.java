@@ -70,12 +70,8 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
 
         // assertEquals("<ol id=\"myNode\"></ol>", element.asXml());
         assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
-                + "<html>\r\n"
-                + "  <head/>\r\n"
-                + "  <body>\r\n"
-                + "    <ol id=\"myNode\"></ol>\n"
+                + "<html><head/><body>\r\n    <ol id=\"myNode\"></ol>\n"
                 + "foo\n"
-                + "</body>\r\n"
-                + "</html>", page.asXml());
+                + "</body></html>", page.asXml());
     }
 }
