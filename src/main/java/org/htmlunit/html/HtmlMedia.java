@@ -53,7 +53,9 @@ public abstract class HtmlMedia extends HtmlElement {
     }
 
     /**
-     * @return the value of the {@code src} value
+     * Returns the fully qualified source URL.
+     *
+     * @return the fully qualified value of the {@code src} attribute
      */
     public String getSrc() {
         final String src = getSrcAttribute();

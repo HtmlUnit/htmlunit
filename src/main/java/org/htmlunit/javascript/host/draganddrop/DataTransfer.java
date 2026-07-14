@@ -40,6 +40,8 @@ public class DataTransfer extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code files} property.
+     *
      * @return the {@code files} property
      */
     @JsxGetter
@@ -48,6 +50,8 @@ public class DataTransfer extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code items} property.
+     *
      * @return the {@code items} property
      */
     @JsxGetter

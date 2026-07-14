@@ -149,6 +149,8 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
                     int startLine);
 
     /**
+     * Returns this JavaScript engine's {@link HtmlUnitContextFactory}.
+     *
      * @return this JavaScript engine's {@link HtmlUnitContextFactory}
      */
     HtmlUnitContextFactory getContextFactory();

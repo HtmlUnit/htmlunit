@@ -234,9 +234,11 @@ public final class HttpUtils {
     }
 
     /**
-     * @param parameters the paramters
-     * @param charset the charset
-     * @return the query string from the given parameters
+     * Converts the specified form parameters to a URL-encoded query string.
+     *
+     * @param parameters the form parameters
+     * @param charset the character set to use for encoding
+     * @return the URL-encoded query string
      */
     public static String toQueryFormFields(final Iterable<? extends NameValuePair> parameters, final Charset charset) {
         final StringBuilder result = new StringBuilder();

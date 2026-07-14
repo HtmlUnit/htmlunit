@@ -51,6 +51,8 @@ public class DataTransferItemList extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@code length} property.
+     *
      * @return the {@code length} property
      */
     @JsxGetter
@@ -131,6 +133,7 @@ public class DataTransferItemList extends HtmlUnitScriptable {
     /**
      * Removes the DataTransferItem at the specified index from the list. If the index is less
      * than zero or greater than one less than the length of the list, the list will not be changed.
+     *
      * @param index the zero-based index number of the item in the drag data list to remove.
      *        If the index doesn't correspond to an existing item in the list, the list is left unchanged.
      */
@@ -158,8 +161,9 @@ public class DataTransferItemList extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns an Iterator allowing to go through all keys contained in this object.
-     * @return a NativeArrayIterator
+     * Returns an iterator over the values in this object.
+     *
+     * @return a native array iterator
      */
     @JsxSymbol(symbolName = "iterator")
     public Scriptable values() {
@@ -167,8 +171,9 @@ public class DataTransferItemList extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the file list for the parent {@code DataTransfer} object.
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
-     * Maintains the file list for the parent DataTrasnfer object.
+     *
      * @return the {@code files} property
      */
     public FileList getFiles() {

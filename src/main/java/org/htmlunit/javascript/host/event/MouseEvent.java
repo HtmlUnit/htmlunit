@@ -474,7 +474,9 @@ public class MouseEvent extends UIEvent {
     }
 
     /**
-     * @param metaKey whether Meta has been pressed during this event or not
+     * Sets whether the Meta key was pressed during this event.
+     *
+     * @param metaKey whether the Meta key was pressed during this event
      */
     protected void setMetaKey(final boolean metaKey) {
         metaKey_ = metaKey;

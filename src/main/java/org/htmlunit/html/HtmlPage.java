@@ -389,7 +389,10 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * @return the <code>body</code> element, or {@code null} if it does not yet exist
+     * Returns the document's {@code body} element.
+     *
+     * @return the document's {@code body} element, or {@code null} if it does
+     *         not exist
      */
     public HtmlBody getBody() {
         final DomElement doc = getDocumentElement();
@@ -2592,8 +2595,11 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     * Returns the currently active element.
      *
-     * @return the element with focus or the body
+     * @return the element that currently has focus, or the document's
+     *         {@code body} element if no element has focus, or {@code null}
+     *         if the document has no {@code body} element
      */
     public HtmlElement getActiveElement() {
         final DomElement activeElement = getFocusedElement();
@@ -2774,7 +2780,9 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * @return the CSSPropertiesCache for this page
+     * Returns the computed styles cache for this page.
+     *
+     * @return the computed styles cache for this page
      */
     private ComputedStylesCache getCssPropertiesCache() {
         if (computedStylesCache_ == null) {
