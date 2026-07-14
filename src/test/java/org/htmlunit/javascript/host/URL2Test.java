@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link URL}.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 public class URL2Test extends SimpleWebTestCase {
 
@@ -43,6 +44,7 @@ public class URL2Test extends SimpleWebTestCase {
 
         final WebClient wc = getWebClientWithMockWebConnection();
         final HtmlPage page = wc.getPage(URL_FIRST);
+
         final HtmlPage otherPage = (HtmlPage) wc.openWindow(URL_SECOND, "other").getEnclosedPage();
 
         final String blobUrl1 = (String) page.executeJavaScript(
@@ -80,15 +82,12 @@ public class URL2Test extends SimpleWebTestCase {
     @Test
     public void createObjectURLFromFile() throws Exception {
         final String html = DOCTYPE_HTML + "<html><body></body></html>";
-        getMockWebConnection().setResponse(URL_FIRST, html);
-
-        final WebClient wc = getWebClientWithMockWebConnection();
-        final HtmlPage page = wc.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(html);
 
         final String blobUrl = (String) page.executeJavaScript(
                 "URL.createObjectURL(new File(['file'], 'foo.txt', {type: 'text/plain'}))").getJavaScriptResult();
 
-        final WebResponse response = wc.loadWebResponse(new WebRequest(UrlUtils.toUrlUnsafe(blobUrl)));
+        final WebResponse response = getWebClient().loadWebResponse(new WebRequest(UrlUtils.toUrlUnsafe(blobUrl)));
         assertEquals("file", response.getContentAsString());
         assertEquals("text/plain", response.getResponseHeaderValue(HttpHeader.CONTENT_TYPE));
         assertEquals("inline; filename=\"foo.txt\"", response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION));
@@ -100,16 +99,13 @@ public class URL2Test extends SimpleWebTestCase {
     @Test
     public void revokeObjectURL() throws Exception {
         final String html = DOCTYPE_HTML + "<html><body></body></html>";
-        getMockWebConnection().setResponse(URL_FIRST, html);
-
-        final WebClient wc = getWebClientWithMockWebConnection();
-        final HtmlPage page = wc.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(html);
 
         final String blobUrl = (String) page.executeJavaScript(
                 "URL.createObjectURL(new Blob(['blob'], {type: 'text/plain'}))").getJavaScriptResult();
-        assertEquals("blob", wc.loadWebResponse(new WebRequest(UrlUtils.toUrlUnsafe(blobUrl))).getContentAsString());
+        assertEquals("blob", getWebClient().loadWebResponse(new WebRequest(UrlUtils.toUrlUnsafe(blobUrl))).getContentAsString());
 
         page.executeJavaScript("URL.revokeObjectURL('" + blobUrl + "');");
-        assertEquals(null, wc.getBlobUrlStore().resolve(blobUrl));
+        assertEquals(null, getWebClient().getBlobUrlStore().resolve(blobUrl));
     }
 }

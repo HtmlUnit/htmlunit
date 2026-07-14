@@ -23,7 +23,6 @@ import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -128,12 +127,11 @@ public class URL extends HtmlUnitScriptable {
      *
      * @param objectURL the object URL previously returned by {@link #createObjectURL(Object)}
      *
-     * @param objectURL the object URL to revoke
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL_static">MDN Documentation</a>
      */
     @JsxStaticFunction
     public static void revokeObjectURL(final Scriptable objectURL) {
-        final String url = Context.toString(objectURL);
+        final String url = JavaScriptEngine.toString(objectURL);
         if (!url.startsWith("blob:")) {
             return;
         }
@@ -349,8 +347,14 @@ public class URL extends HtmlUnitScriptable {
         }
 
         final String userInfo = url_.getUserInfo();
-        final int idx = userInfo == null ? -1 : userInfo.indexOf(':');
-        return idx == -1 ? "" : userInfo.substring(idx + 1);
+        if (userInfo != null) {
+            final int idx = userInfo.indexOf(':');
+            if (idx > -1) {
+                return userInfo.substring(idx + 1);
+            }
+        }
+
+        return "";
     }
 
     /**

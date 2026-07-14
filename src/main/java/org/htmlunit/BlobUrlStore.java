@@ -24,6 +24,7 @@ import org.htmlunit.javascript.host.file.Blob;
  * <a href="https://w3c.github.io/FileAPI/#BlobURLStore">Blob URL Store</a>.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 public class BlobUrlStore {
 
@@ -41,6 +42,7 @@ public class BlobUrlStore {
 
     /**
      * Adds an entry.
+     *
      * @param blobUrl the generated {@code blob:} URL
      * @param object the {@link Blob} (or {@code File}) the URL refers to
      * @param owningPage the page that created the URL
@@ -51,6 +53,7 @@ public class BlobUrlStore {
 
     /**
      * <a href="https://w3c.github.io/FileAPI/#blob-url-resolve">Resolve a blob URL</a>.
+     *
      * @param blobUrl the {@code blob:} URL to resolve
      * @return the stored {@link Blob}, or {@code null} if there is no entry
      */
@@ -61,6 +64,7 @@ public class BlobUrlStore {
 
     /**
      * Removes an entry.
+     *
      * @param blobUrl the {@code blob:} URL to remove
      */
     public void remove(final String blobUrl) {
@@ -69,6 +73,7 @@ public class BlobUrlStore {
 
     /**
      * See <a href="https://w3c.github.io/FileAPI/#lifeTime">Lifetime of blob URLs</a>.
+     *
      * @param owningPage the unloading page
      */
     void removeForPage(final Page owningPage) {
@@ -78,7 +83,7 @@ public class BlobUrlStore {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * <p>Removes all entries.
+     * Removes all entries.
      */
     public void clear() {
         store_.clear();

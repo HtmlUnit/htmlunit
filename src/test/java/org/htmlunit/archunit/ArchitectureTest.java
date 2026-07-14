@@ -650,6 +650,36 @@ public class ArchitectureTest {
         .should().dependOnClassesThat().haveFullyQualifiedName("org.htmlunit.corejs.javascript.Undefined");
 
     /**
+     * Do not use core-js Context.toBoolean().
+     */
+    @ArchTest
+    public static final ArchRule corejsContextToBooleanRule = noClasses()
+        .that()
+            .resideOutsideOfPackage("org.htmlunit.corejs..")
+
+        .should().callMethod(org.htmlunit.corejs.javascript.Context.class, "toBoolean", Object.class);
+
+    /**
+     * Do not use core-js Context.toNumber().
+     */
+    @ArchTest
+    public static final ArchRule corejsContextToNumberRule = noClasses()
+        .that()
+            .resideOutsideOfPackage("org.htmlunit.corejs..")
+
+        .should().callMethod(org.htmlunit.corejs.javascript.Context.class, "toNumber", Object.class);
+
+    /**
+     * Do not use core-js Context.toString().
+     */
+    @ArchTest
+    public static final ArchRule corejsContextToStringRule = noClasses()
+        .that()
+            .resideOutsideOfPackage("org.htmlunit.corejs..")
+
+        .should().callMethod(org.htmlunit.corejs.javascript.Context.class, "toString", Object.class);
+
+    /**
      * Do not use core-js ScriptRuntime outside of the JavaScriptEngine.
      */
     @ArchTest

@@ -1519,6 +1519,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Returns the top call scope.
+     *
      * @return the top call scope
      */
     public static TopLevel getTopCallScope() {
