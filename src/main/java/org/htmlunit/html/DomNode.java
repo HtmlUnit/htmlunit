@@ -1406,6 +1406,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Returns an iterable over the children of this node.
+     *
      * @return an {@link Iterable} over the children of this node
      */
     public final Iterable<DomNode> getChildren() {
@@ -1525,7 +1527,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         /**
-         * @return the next node, if there is one
+         * Returns the next node in the iteration.
+         *
+         * @return the next node, or {@code null} if there are no more nodes
          */
         public DomNode nextNode() {
             currentNode_ = nextNode_;
@@ -1601,7 +1605,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         /**
-         * @return the next node, if there is one
+         * Returns the next node in the iteration.
+         *
+         * @return the next node, or {@code null} if there are no more nodes
          */
         @SuppressWarnings("unchecked")
         public T nextNode() {
@@ -2140,8 +2146,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * @param selectorString the selector to test
-     * @return the selected {@link DomElement} or null.
+     * Returns the closest ancestor element, or this element, that matches the
+     * specified CSS selector.
+     *
+     * @param selectorString the CSS selector to test
+     * @return the closest matching {@link DomElement}, or {@code null} if no
+     *         matching element is found
      */
     public DomElement closest(final String selectorString) {
         try {
