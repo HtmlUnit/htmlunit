@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Chrome/Edge 150, Bugfixes">
+            <action type="update" dev="rbri">
+                Many, many javadoc improvements.
+            </action>
+            <action type="update" dev="rbri">
+                MDN links added to all js classes.
+            </action>
             <action type="add" dev="rbri">
                 CanvasRenderingContext2D lineCap property support added.
             </action>
