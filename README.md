@@ -1,6 +1,6 @@
 # ![HtmlUnit Logo](https://github.com/HtmlUnit/htmlunit/blob/master/src/site/resources/images/htmlunit.png)
 
-Version 5.2.0 / June 20, 2026
+Version 5.3.0 / July 15, 2026
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -68,7 +68,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>5.2.0</version>
+    <version>5.3.0</version>
 </dependency>
 ```
 
@@ -77,7 +77,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '5.2.0'
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '5.3.0'
 ```
 
 ## Getting Started
@@ -261,7 +261,7 @@ repositories {
 }
 // ...
 dependencies {
-    implementation group: 'org.htmlunit', name: 'htmlunit', version: '5.3.0-SNAPSHOT'
+    implementation group: 'org.htmlunit', name: 'htmlunit', version: '5.4.0-SNAPSHOT'
   // ...
 }
 ```

@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.3.0" date="July xx, 2026" description="Chrome/Edge 150, Bugfixes">
+        <release version="5.3.0" date="July 15, 2026" description="Chrome/Edge 150, Bugfixes">
             <action type="update" dev="Lai Quang Duong">
                 Make XMLHttpRequest check blob url's origin properly instead of
                 throwing No permitted "Access-Control-Allow-Origin" header everytime
