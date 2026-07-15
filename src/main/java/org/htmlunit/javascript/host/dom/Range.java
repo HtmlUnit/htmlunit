@@ -456,15 +456,21 @@ public class Range extends AbstractRange {
                     rect.setPrototype(getPrototype(rect.getClass()));
                     rectList.add(rect);
                 }
-                else if (node instanceof DomText) {
+                else if (node instanceof DomText domText) {
                     // Text nodes have no scriptable; delegate to the parent element
                     final DomNode parent = node.getParentNode();
                     if (parent != null) {
                         final HtmlUnitScriptable parentScriptable = parent.getScriptableObject();
                         if (parentScriptable instanceof HTMLElement parentElement) {
                             final DOMRect rect = parentElement.getBoundingClientRect();
-                            rect.setParentScope(getParentScope());
-                            rect.setPrototype(getPrototype(rect.getClass()));
+
+                            // getClientRects() on a range is supposed to return the bounds
+                            // of the selected text only — not the entire parent element
+                            // guess but better than using the too big width from bounding rect
+                            final double width = domText.getTextContent().length()
+                                                    * getBrowserVersion().getPixelsPerChar();
+
+                            rect.setWidth(Math.min(rect.getWidth(), width));
                             rectList.add(rect);
                         }
                     }

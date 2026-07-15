@@ -456,8 +456,6 @@ public class RangeTest extends WebDriverTestCase {
 
     /**
      * Tests getClientRects() for a range over a text node (setStart/setEnd with char offsets).
-     * Previously returned an empty list because DomText nodes were skipped in the
-     * HTMLElement instanceof check, and containedNodes() returned empty for same-node ranges.
      * @throws Exception if an error occurs
      */
     @Test
@@ -466,10 +464,10 @@ public class RangeTest extends WebDriverTestCase {
             FF = {"1", "x=8 y=8.5 w=35.55000305175781 h=17"},
             FF_ESR = {"1", "x=8 y=8.5 w=35.55000305175781 h=17"})
     @HtmlUnitNYI(
-            CHROME = {"1", "x=8 y=8 w=1240 h=18"},
-            EDGE = {"1", "x=8 y=8 w=1240 h=18"},
-            FF = {"1", "x=8 y=8 w=1240 h=18"},
-            FF_ESR = {"1", "x=8 y=8 w=1240 h=18"})
+            CHROME = {"1", "x=8 y=8 w=110 h=18"},
+            EDGE = {"1", "x=8 y=8 w=110 h=18"},
+            FF = {"1", "x=8 y=8 w=110 h=18"},
+            FF_ESR = {"1", "x=8 y=8 w=110 h=18"})
     public void getClientRectsOnTextNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -795,6 +793,48 @@ public class RangeTest extends WebDriverTestCase {
             + "  var fragment = r.cloneContents();\n"
             + "  log(fragment.textContent);\n"       // must be "ello"
             + "  log(d.textContent);\n"              // must be unchanged
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"text: x=8 y=8 w=35.552085876464844 h=17.33333396911621",
+                       "element: x=43.552085876464844 y=8 w=39.59375 h=17.33333396911621"},
+            FF = {"text: x=8 y=8.666671752929688 w=35.55000305175781 h=17.333328247070312",
+                  "element: x=43.55000305175781 y=8.666671752929688 w=39.59999084472656 h=17.333328247070312"},
+            FF_ESR = {"text: x=8 y=8.666671752929688 w=35.55000305175781 h=17.333328247070312",
+                      "element: x=43.55000305175781 y=8.666671752929688 w=39.59999084472656 h=17.333328247070312"})
+    @HtmlUnitNYI(
+            CHROME = {"text: x=8 y=8 w=50 h=18", "element: x=58 y=8 w=50 h=18"},
+            EDGE = {"text: x=8 y=8 w=50 h=18", "element: x=58 y=8 w=50 h=18"},
+            FF = {"text: x=8 y=8 w=50 h=18", "element: x=58 y=8 w=50 h=18"},
+            FF_ESR = {"text: x=8 y=8 w=50 h=18", "element: x=58 y=8 w=50 h=18"})
+    public void getClientRectsCoordinates() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <div id='d'>Hello<span id='s'>World</span></div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = document.getElementById('s');\n"
+
+            // text node range
+            + "  var r1 = document.createRange();\n"
+            + "  r1.setStart(d.firstChild, 0);\n"
+            + "  r1.setEnd(d.firstChild, 5);\n"
+            + "  var rect1 = r1.getClientRects()[0];\n"
+            + "  log('text: x=' + rect1.x + ' y=' + rect1.y + ' w=' + rect1.width + ' h=' + rect1.height);\n"
+
+            // element range
+            + "  var r2 = document.createRange();\n"
+            + "  r2.setStart(d, 1);\n"
+            + "  r2.setEnd(d, 2);\n"
+            + "  var rect2 = r2.getClientRects()[0];\n"
+            + "  log('element: x=' + rect2.x + ' y=' + rect2.y + ' w=' + rect2.width + ' h=' + rect2.height);\n"
+
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }

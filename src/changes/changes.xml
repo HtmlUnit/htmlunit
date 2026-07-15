@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="5.4.0" date="August xx, 2026" description="Chrome/Edge 150, Bugfixes">
+            <action type="update" dev="rbri">
+                Improved width estimation for DOMText when calculating getClientRects().
+            </action>
+        </release>
+
+
         <release version="5.3.0" date="July 15, 2026" description="Chrome/Edge 150, Bugfixes">
             <action type="update" dev="Lai Quang Duong">
                 Make XMLHttpRequest check blob url's origin properly instead of
