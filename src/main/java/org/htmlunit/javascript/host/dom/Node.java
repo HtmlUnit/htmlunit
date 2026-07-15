@@ -1042,7 +1042,7 @@ public class Node extends EventTarget {
      * Returns the child elements of this node.
      *
      * @return a live collection of this node's child elements
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children">MDN documentation</a>
      */
     protected HTMLCollection getChildren() {
         final DomNode node = getDomNodeOrDie();

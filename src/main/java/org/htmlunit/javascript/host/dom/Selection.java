@@ -29,8 +29,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 /**
  * A JavaScript object for {@code Selection}.
  *
- * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535869.aspx">MSDN Documentation</a>
- * @see <a href="https://developer.mozilla.org/en/DOM/Selection">Gecko DOM Reference</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Selection">MDN Documentation</a>
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Frank Danek

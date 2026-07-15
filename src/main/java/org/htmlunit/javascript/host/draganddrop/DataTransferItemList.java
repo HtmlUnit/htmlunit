@@ -74,7 +74,7 @@ public class DataTransferItemList extends HtmlUnitScriptable {
      * @param args the arguments passed into the method
      * @param function the function
      * @return the newly-created {@link DataTransferItem} object
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536782.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add">MDN documentation</a>
      */
     @JsxFunction
     public static DataTransferItem add(final Context context, final VarScope scope,

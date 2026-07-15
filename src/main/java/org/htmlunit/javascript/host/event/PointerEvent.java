@@ -33,7 +33,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 /**
  * JavaScript object representing a {@code PointerEvent}.
  * @see <a href="http://www.w3.org/TR/pointerevents/">W3C Spec</a>
- * @see <a href="http://msdn.microsoft.com/en-us/library/ie/hh772103.aspx">MSDN</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent">MDN</a>
  *
  * @author Frank Danek
  * @author Ahmed Ashour

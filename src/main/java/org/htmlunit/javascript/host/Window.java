@@ -401,7 +401,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @param replace whether to replace in the history list or no
      * @return the newly opened window, or {@code null} if popup windows have been disabled
      * @see org.htmlunit.WebClientOptions#isPopupBlockerEnabled()
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">MDN documentation</a>
      */
     @JsxFunction
     public WindowProxy open(final Object url, final Object name, final Object features,
@@ -1709,9 +1709,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     /**
      * Prints the current page. The current implementation uses the {@link PrintHandler}
      * defined for the {@link WebClient} to process the window.
-     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref85.html">
-     *     Mozilla documentation</a>
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536672.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/print">MDN documentation</a>
      */
     @JsxFunction
     public void print() {
