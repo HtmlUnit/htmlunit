@@ -217,7 +217,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     @HtmlUnitNYI(CHROME = "something",
-            EDGE = "initialsomething",
+            EDGE = "something",
             FF = "something",
             FF_ESR = "something")
     public void contentEditablePlaintextBody() throws Exception {
