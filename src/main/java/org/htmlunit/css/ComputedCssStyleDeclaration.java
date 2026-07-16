@@ -1527,17 +1527,62 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     /**
      * Returns the element's width in pixels, possibly including its padding and border.
+     *
      * @param includeBorder whether or not to include the border width in the returned value
      * @param includePadding whether or not to include the padding width in the returned value
      * @return the element's width in pixels, possibly including its padding and border
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
+        return getCalculatedWidth(includeBorder, includePadding, false);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * <p>
+     * Returns the calculated width of this element in pixels.
+     * </p>
+     *
+     * <p>This method is the primary entry point for width calculation and is used by both
+     * {@code offsetWidth}/{@code clientWidth} and {@code getBoundingClientRect()}. The
+     * {@code shrinkWrapBlock} flag controls how block elements with no explicit width are sized:
+     * </p>
+     * <ul>
+     *   <li>{@code false} (normal flow): block elements fill their containing block's width,
+     *       matching the behaviour of {@code offsetWidth} and {@code clientWidth}.</li>
+     *   <li>{@code true} (shrink-wrap): block elements that contain only inline/text children
+     *       shrink to their content width instead of filling the parent. This is used by
+     *       {@code getBoundingClientRect()} to approximate the visual bounding box of elements
+     *       such as a plain {@code <div>HelloWorld</div>}, where the rendered width is the
+     *       text width rather than the viewport width.</li>
+     * </ul>
+     *
+     * <p>Note that shrink-wrapping is only applied when {@code shrinkWrapBlock} is {@code true}
+     * AND the element has exclusively inline or text-node children ({@link #hasOnlyInlineOrTextChildren}).
+     * Elements with block-level children always fill the parent width regardless of this flag,
+     * because their children may themselves expand to fill the available space.
+     * </p>
+     * <p>The {@code includeBorder} and {@code includePadding} flags control whether the
+     * element's border and padding are added to the returned value, corresponding to the
+     * difference between {@code clientWidth} (padding included, border excluded) and
+     * {@code offsetWidth} (both included).
+     * </p>
+     *
+     * @param includeBorder {@code true} to add horizontal border widths to the result
+     * @param includePadding {@code true} to add horizontal padding to the result
+     * @param shrinkWrapBlock {@code true} to shrink-wrap block elements to their content width
+     *        when they contain only inline/text children; {@code false} for normal block flow
+     *        where block elements fill the containing block width
+     * @return the calculated width in pixels
+     */
+    public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding,
+                                    final boolean shrinkWrapBlock) {
         final DomElement element = getDomElement();
 
         if (!element.isAttachedToPage()) {
             return 0;
         }
-        int width = getCalculatedWidth(element);
+
+        int width = getCalculatedWidth(element, shrinkWrapBlock);
         if (!"border-box".equals(getStyleAttribute(Definition.BOX_SIZING, true))) {
             if (includeBorder) {
                 width += getBorderHorizontal();
@@ -1553,7 +1598,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         return width;
     }
 
-    private int getCalculatedWidth(final DomElement element) {
+    private int getCalculatedWidth(final DomElement element, final boolean shrinkWrapBlock) {
         final Integer cachedWidth = getCachedWidth();
         if (cachedWidth != null) {
             return cachedWidth.intValue();
@@ -1621,11 +1666,23 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     width = windowWidth - 16;
                 }
                 else {
-                    // Block elements take up 100% of the parent's width.
                     final ComputedCssStyleDeclaration parentStyle =
                             parent.getPage().getEnclosingWindow().getComputedStyle((DomElement) parent, null);
-                    width = parentStyle.getCalculatedWidth(false, false)
-                                - (getBorderHorizontal() + getPaddingHorizontal());
+
+                    final int parentWidth = parentStyle.getCalculatedWidth(false, false)
+                                                - (getBorderHorizontal() + getPaddingHorizontal());
+
+                    // If the block has no explicit width, check if it only contains
+                    // inline/text content — if so, shrink-wrap to content width
+                    // rather than inheriting full parent width.
+                    if (shrinkWrapBlock && hasOnlyInlineOrTextChildren(element)) {
+                        final int contentWidth = getContentWidth();
+                        width = contentWidth > 0 ? contentWidth : parentWidth;
+                    }
+                    else {
+                        // otherwise Block elements take up 100% of the parent's width.
+                        width = parentWidth;
+                    }
                 }
             }
             else if (element instanceof HtmlSubmitInput
@@ -1684,6 +1741,19 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         return updateCachedWidth(width);
+    }
+
+    private static boolean hasOnlyInlineOrTextChildren(final DomElement element) {
+        for (final DomNode child : element.getChildren()) {
+            if (child instanceof HtmlElement e) {
+                final String childDisplay = e.getPage().getEnclosingWindow()
+                        .getComputedStyle(e, null).getDisplay();
+                if (BLOCK.equals(childDisplay)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -2142,7 +2212,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 overflow = getStyleAttribute(Definition.OVERFLOW, true);
             }
             scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
-                && (ignoreSize || getContentWidth() > getCalculatedWidth(element));
+                && (ignoreSize || getContentWidth() > getCalculatedWidth(element, false));
         }
         else {
             overflow = getStyleAttribute(Definition.OVERFLOW_Y_, false);

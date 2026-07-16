@@ -2855,6 +2855,80 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * A block div with only text content should shrink-wrap to its text width,
+     * not inherit the full parent/viewport width.
+     * Previously getBoundingClientRect().width returned the full viewport width (e.g. 1256px)
+     * for any block div with no explicit width, even when it contained only short text.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_blockDivTextOnlyShrinkWraps() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var w = d.getBoundingClientRect().width;\n"
+            + "    log(w > 0 && w < 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A block div with block children should still fill the parent width, not shrink-wrap.
+     * Verifies that the shrink-wrap fix only applies to inline/text-only content.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_blockDivWithBlockChildrenFillsParent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var outer = document.getElementById('outer');\n"
+            + "    var inner = document.getElementById('inner');\n"
+            + "    var outerW = outer.getBoundingClientRect().width;\n"
+            + "    var innerW = inner.getBoundingClientRect().width;\n"
+            + "    // outer contains a block child — must fill parent, not shrink to 'Hi'\n"
+            + "    log(outerW >= innerW);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='outer'><div id='inner'>Hi</div></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An inline-block div should always shrink-wrap regardless of content type.
+     * Baseline check to ensure inline-block behaviour is unaffected by the block fix.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_inlineBlockShrinkWraps() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var w = d.getBoundingClientRect().width;\n"
+            + "    log(w > 0 && w < 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display:inline-block'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

@@ -9,6 +9,9 @@
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Chrome/Edge 150, Bugfixes">
             <action type="update" dev="rbri">
+                Method getBoundingClientRect() has to shringWrap block elements for width calculation.
+            </action>
+            <action type="update" dev="rbri">
                 Improved width estimation for DOMText when calculating getClientRects().
             </action>
         </release>
