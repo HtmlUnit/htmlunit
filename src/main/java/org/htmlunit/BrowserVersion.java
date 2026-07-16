@@ -296,7 +296,6 @@ public final class BrowserVersion implements Serializable {
     private final HashSet<MediaResourceType> maybeMediaResource_;
     private final HashSet<MediaResourceType> probablyMediaResources_;
 
-
     /**
      * Creates a new browser version instance.
      *
@@ -919,7 +918,6 @@ public final class BrowserVersion implements Serializable {
     public int getPixelsPerChar() {
         return 10;
     }
-
 
     /**
      * Performs this operation.

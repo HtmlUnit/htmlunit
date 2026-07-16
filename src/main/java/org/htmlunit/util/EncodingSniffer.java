@@ -684,17 +684,21 @@ public final class EncodingSniffer {
         private final String name_;
         private final String value_;
         private final int updatedIndex_;
+
         Attribute(final String name, final String value, final int updatedIndex) {
             name_ = name;
             value_ = value;
             updatedIndex_ = updatedIndex;
         }
+
         String getName() {
             return name_;
         }
+
         String getValue() {
             return value_;
         }
+
         int getUpdatedIndex() {
             return updatedIndex_;
         }

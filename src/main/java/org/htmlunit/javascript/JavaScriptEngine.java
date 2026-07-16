@@ -875,6 +875,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 }
                 return ScriptRuntime.doTopCall(function, cx, scope, thisObject, args, cx.isStrictMode());
             }
+
             @Override
             protected String getSourceCode(final Context cx) {
                 return cx.decompileFunction(function, 2);
