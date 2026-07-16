@@ -681,7 +681,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @see <a href="http://www.w3.org/TR/CSS2/visufx.html#visibility">CSS2 Visibility</a>
      * @see <a href="http://www.w3.org/TR/CSS2/visuren.html#propdef-display">CSS2 Display</a>
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms531180.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/visibility">MDN CSS visibility</a>
      * @return {@code true} if the node is visible to the user, {@code false} otherwise
      * @see #mayBeDisplayed()
      */
