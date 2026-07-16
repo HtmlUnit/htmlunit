@@ -17,11 +17,17 @@ package org.htmlunit.javascript.host.dom;
 import java.util.HashSet;
 
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
+import org.htmlunit.WebWindow;
+import org.htmlunit.css.ComputedCssStyleDeclaration;
+import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.html.DomDocumentFragment;
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
+import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -457,22 +463,9 @@ public class Range extends AbstractRange {
                     rectList.add(rect);
                 }
                 else if (node instanceof DomText domText) {
-                    // Text nodes have no scriptable; delegate to the parent element
-                    final DomNode parent = node.getParentNode();
-                    if (parent != null) {
-                        final HtmlUnitScriptable parentScriptable = parent.getScriptableObject();
-                        if (parentScriptable instanceof HTMLElement parentElement) {
-                            final DOMRect rect = parentElement.getBoundingClientRect();
-
-                            // getClientRects() on a range is supposed to return the bounds
-                            // of the selected text only — not the entire parent element
-                            // guess but better than using the too big width from bounding rect
-                            final double width = domText.getTextContent().length()
-                                                    * getBrowserVersion().getPixelsPerChar();
-
-                            rect.setWidth(Math.min(rect.getWidth(), width));
-                            rectList.add(rect);
-                        }
+                    final DOMRect rect = getTextNodeRect(domText);
+                    if (rect != null) {
+                        rectList.add(rect);
                     }
                 }
             }
@@ -499,26 +492,20 @@ public class Range extends AbstractRange {
             // simple impl for now
             for (final DomNode node : getSimpleRange().containedNodes()) {
                 final HtmlUnitScriptable scriptable = node.getScriptableObject();
+
+                DOMRect childRect = null;
                 if (scriptable instanceof HTMLElement element) {
-                    final DOMRect childRect = element.getBoundingClientRect();
+                    childRect = element.getBoundingClientRect();
+                }
+                else if (node instanceof DomText domText) {
+                    childRect = getTextNodeRect(domText);
+                }
+
+                if (childRect != null) {
                     rect.setX(Math.min(rect.getX(), childRect.getX()));
                     rect.setY(Math.min(rect.getY(), childRect.getY()));
                     rect.setWidth(Math.max(rect.getWidth(), childRect.getWidth()));
                     rect.setHeight(Math.max(rect.getHeight(), childRect.getHeight()));
-                }
-                else if (node instanceof DomText) {
-                    // Text nodes have no scriptable; delegate to the parent element
-                    final DomNode parent = node.getParentNode();
-                    if (parent != null) {
-                        final HtmlUnitScriptable parentScriptable = parent.getScriptableObject();
-                        if (parentScriptable instanceof HTMLElement parentElement) {
-                            final DOMRect childRect = parentElement.getBoundingClientRect();
-                            rect.setX(Math.min(rect.getX(), childRect.getX()));
-                            rect.setY(Math.min(rect.getY(), childRect.getY()));
-                            rect.setWidth(Math.max(rect.getWidth(), childRect.getWidth()));
-                            rect.setHeight(Math.max(rect.getHeight(), childRect.getHeight()));
-                        }
-                    }
                 }
             }
 
@@ -527,5 +514,55 @@ public class Range extends AbstractRange {
         catch (final IllegalStateException e) {
             throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
+    }
+
+    private DOMRect getTextNodeRect(final DomText node) {
+        // Text nodes have no scriptable; use to the parent element for some calculation
+        final DomNode parent = node.getParentNode();
+        if (!(parent instanceof HtmlElement parentHtml)) {
+            return null;
+        }
+
+        final HTMLElement parentScriptable = parentHtml.getScriptableObject();
+        final DOMRect parentRect = parentScriptable.getBoundingClientRect();
+
+        final SgmlPage page = parent.getPage();
+        final WebWindow webWindow = page.getEnclosingWindow();
+        final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) parent, null);
+        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+
+        final int fontHeight = browserVersion.getFontHeight(style.getStyleAttribute(Definition.FONT_SIZE, true));
+        final float pixelsPerChar = fontHeight / 1.8f;
+
+        // Estimate the x offset of the text node's start within the parent.
+        // Sum the widths of all preceding text/inline siblings to get the base offset.
+        float siblingOffset = 0;
+        for (final DomNode sibling : parent.getChildren()) {
+            if (sibling == node) {
+                break;
+            }
+            if (sibling instanceof DomText sibText) {
+                siblingOffset += sibText.getVisibleText().length() * pixelsPerChar;
+            }
+            else if (sibling instanceof HtmlElement siblingEl) {
+                final ComputedCssStyleDeclaration sibStyle =
+                        webWindow.getComputedStyle(siblingEl, null);
+                siblingOffset += sibStyle.getCalculatedWidth(true, true, true);
+            }
+        }
+
+        final boolean startIsThisNode = getSimpleRange().getStartContainer() == node;
+        final boolean endIsThisNode   = getSimpleRange().getEndContainer() == node;
+
+        final int startChar = startIsThisNode ? getSimpleRange().getStartOffset() : 0;
+        final int endChar   = endIsThisNode   ? getSimpleRange().getEndOffset()   : node.getVisibleText().length();
+
+        final double rectLeft  = parentRect.getX() + siblingOffset + startChar * pixelsPerChar;
+        final double rectWidth = (endChar - startChar) * pixelsPerChar;
+
+        final DOMRect rect = new DOMRect(rectLeft, parentRect.getY(), rectWidth, fontHeight);
+        rect.setParentScope(getParentScope());
+        rect.setPrototype(getPrototype(rect.getClass()));
+        return rect;
     }
 }

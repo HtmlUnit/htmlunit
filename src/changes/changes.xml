@@ -9,10 +9,17 @@
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Chrome/Edge 150, Bugfixes">
             <action type="update" dev="rbri">
-                Method getBoundingClientRect() has to shringWrap block elements for width calculation.
+                Range.getClientRects() and Range.getBoundingClientRect() now handle DomText nodes correctly.
             </action>
             <action type="update" dev="rbri">
-                Improved width estimation for DOMText when calculating getClientRects().
+                Range.getBoundingClientRect() now uses shrink-wrap width calculation for block elements,
+                returning a tight bounding box around the actual content rather than the full
+                containing block width.
+            </action>
+            <action type="update" dev="rbri">
+                Range.getTextNodeRect() now correctly determines character offsets when the range
+                boundaries are set on a parent element rather than directly on the text node,
+                returning the full text width instead of a single character width.
             </action>
         </release>
 

@@ -408,20 +408,20 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts(
             DEFAULT = {"4",
-                       "x=15.109375 y=8 w=8 h=17",
-                       "x=15.109375 y=8 w=8 h=17",
-                       "x=23.109375 y=8 w=7.109375 h=17",
-                       "x=23.109375 y=8 w=7.109375 h=17"},
+                       "x=15.104166984558105 y=8 w=8.000000953674316 h=17.33333396911621",
+                       "x=15.104166984558105 y=8 w=8.000000953674316 h=17.33333396911621",
+                       "x=23.104167938232422 y=8 w=7.104166030883789 h=17.33333396911621",
+                       "x=23.104167938232422 y=8 w=7.104166030883789 h=17.33333396911621"},
             FF = {"4",
-                  "x=15.100006103515625 y=8.5 w=8 h=17",
-                  "x=15.100006103515625 y=8.5 w=8 h=17",
-                  "x=23.100006103515625 y=8.5 w=7.0999908447265625 h=17",
-                  "x=23.100006103515625 y=8.5 w=7.0999908447265625 h=17"},
+                  "x=15.100006103515625 y=8.666671752929688 w=8 h=17.333328247070312",
+                  "x=15.100006103515625 y=8.666671752929688 w=8 h=17.333328247070312",
+                  "x=23.100006103515625 y=8.666671752929688 w=7.0999908447265625 h=17.333328247070312",
+                  "x=23.100006103515625 y=8.666671752929688 w=7.0999908447265625 h=17.333328247070312"},
             FF_ESR = {"4",
-                      "x=15.100006103515625 y=8.5 w=8 h=17",
-                      "x=15.100006103515625 y=8.5 w=8 h=17",
-                      "x=23.100006103515625 y=8.5 w=7.0999908447265625 h=17",
-                      "x=23.100006103515625 y=8.5 w=7.0999908447265625 h=17"})
+                      "x=15.100006103515625 y=8.666671752929688 w=8 h=17.333328247070312",
+                      "x=15.100006103515625 y=8.666671752929688 w=8 h=17.333328247070312",
+                      "x=23.100006103515625 y=8.666671752929688 w=7.0999908447265625 h=17.333328247070312",
+                      "x=23.100006103515625 y=8.666671752929688 w=7.0999908447265625 h=17.333328247070312"})
     @HtmlUnitNYI(
             CHROME = {"4", "x=18 y=8 w=10 h=18", "x=18 y=8 w=10 h=18", "x=28 y=8 w=10 h=18", "x=28 y=8 w=10 h=18"},
             EDGE = {"4", "x=18 y=8 w=10 h=18", "x=18 y=8 w=10 h=18", "x=28 y=8 w=10 h=18", "x=28 y=8 w=10 h=18"},
@@ -460,14 +460,14 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(
-            DEFAULT = {"1", "x=8 y=8 w=35.546875 h=17"},
-            FF = {"1", "x=8 y=8.5 w=35.55000305175781 h=17"},
-            FF_ESR = {"1", "x=8 y=8.5 w=35.55000305175781 h=17"})
+            DEFAULT = {"1", "x=8 y=8 w=35.552085876464844 h=17.33333396911621"},
+            FF = {"1", "x=8 y=8.666671752929688 w=35.55000305175781 h=17.333328247070312"},
+            FF_ESR = {"1", "x=8 y=8.666671752929688 w=35.55000305175781 h=17.333328247070312"})
     @HtmlUnitNYI(
-            CHROME = {"1", "x=8 y=8 w=110 h=18"},
-            EDGE = {"1", "x=8 y=8 w=110 h=18"},
-            FF = {"1", "x=8 y=8 w=110 h=18"},
-            FF_ESR = {"1", "x=8 y=8 w=110 h=18"})
+            CHROME = {"1", "x=8 y=8 w=50 h=18"},
+            EDGE = {"1", "x=8 y=8 w=50 h=18"},
+            FF = {"1", "x=8 y=8 w=50 h=18"},
+            FF_ESR = {"1", "x=8 y=8 w=50 h=18"})
     public void getClientRectsOnTextNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -599,13 +599,13 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "x=8 y=8 w=78.859375 h=17",
-            FF = "x=8 y=8.5 w=79.14999389648438 h=17",
-            FF_ESR = "x=8 y=8.5 w=79.14999389648438 h=17")
-    @HtmlUnitNYI(CHROME = "x=8 y=8 w=1240 h=18",
-            EDGE = "x=8 y=8 w=1240 h=18",
-            FF = "x=8 y=8 w=1240 h=18",
-            FF_ESR = "x=8 y=8 w=1240 h=18")
+    @Alerts(DEFAULT = "x=8 y=8 w=78.85417175292969 h=17.33333396911621",
+            FF = "x=8 y=8.666671752929688 w=79.14999389648438 h=17.333328247070312",
+            FF_ESR = "x=8 y=8.666671752929688 w=79.14999389648438 h=17.333328247070312")
+    @HtmlUnitNYI(CHROME = "x=8 y=8 w=110 h=18",
+            EDGE = "x=8 y=8 w=110 h=18",
+            FF = "x=8 y=8 w=110 h=18",
+            FF_ESR = "x=8 y=8 w=110 h=18")
     public void getBoundingClientRect() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body><div id='d'>Hello World</div>\n"
@@ -835,6 +835,112 @@ public class RangeTest extends WebDriverTestCase {
             + "  var rect2 = r2.getClientRects()[0];\n"
             + "  log('element: x=' + rect2.x + ' y=' + rect2.y + ' w=' + rect2.width + ' h=' + rect2.height);\n"
 
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests the coordinates returned by getBoundingClientRect() for a range over a text node.
+     * The rect should match the getClientRects() result since it's the union of a single rect.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"x=8 y=8 w=35.552085876464844 h=17.33333396911621"},
+            FF = {"x=8 y=8.666671752929688 w=35.55000305175781 h=17.333328247070312"},
+            FF_ESR = {"x=8 y=8.666671752929688 w=35.55000305175781 h=17.333328247070312"})
+    @HtmlUnitNYI(CHROME = "x=8 y=8 w=50 h=18",
+                 EDGE   = "x=8 y=8 w=50 h=18",
+                 FF     = "x=8 y=8 w=50 h=18",
+                 FF_ESR = "x=8 y=8 w=50 h=18")
+    public void getBoundingClientRectOnTextNodeCoordinates() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <div id='d'>Hello</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var textNode = document.getElementById('d').firstChild;\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(textNode, 0);\n"
+            + "  r.setEnd(textNode, 5);\n"
+            + "  var rect = r.getBoundingClientRect();\n"
+            + "  log('x=' + rect.x + ' y=' + rect.y + ' w=' + rect.width + ' h=' + rect.height);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests that getClientRects() x coordinate shifts right for a mid-string start offset.
+     * A range starting at char 5 must have a greater x than one starting at char 0.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void getClientRectsTextNodeXOffsetIncreases() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <div id='d'>Hello World</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var textNode = document.getElementById('d').firstChild;\n"
+            + "  var r1 = document.createRange();\n"
+            + "  r1.setStart(textNode, 0);\n"
+            + "  r1.setEnd(textNode, 5);\n"
+            + "  var r2 = document.createRange();\n"
+            + "  r2.setStart(textNode, 5);\n"
+            + "  r2.setEnd(textNode, 11);\n"
+            + "  log(r2.getClientRects()[0].x > r1.getClientRects()[0].x);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests that getClientRects() x coordinate of a text node accounts for preceding inline siblings.
+     * The text node after a <span> must have a greater x than the same text as the first child.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void getClientRectsTextNodeXOffsetAfterSibling() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <div id='withSibling'><span>AAA</span>Hello</div>\n"
+            + "  <div id='noSibling'>Hello</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function textRect(divId) {\n"
+            + "    var d = document.getElementById(divId);\n"
+            + "    var textNode = d.lastChild;\n"  // the 'Hello' text node in both cases
+            + "    var r = document.createRange();\n"
+            + "    r.setStart(textNode, 0);\n"
+            + "    r.setEnd(textNode, 5);\n"
+            + "    return r.getClientRects()[0];\n"
+            + "  }\n"
+            + "  log(textRect('withSibling').x > textRect('noSibling').x);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests that getClientRects() width for a partial text range is positive
+     * and less than the full parent element width.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void getClientRectsTextNodeWidthSane() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <div id='d'>Hello World</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var textNode = d.firstChild;\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(textNode, 0);\n"
+            + "  r.setEnd(textNode, 5);\n"
+            + "  var w = r.getClientRects()[0].width;\n"
+            + "  var parentW = d.getBoundingClientRect().width;\n"
+            + "  log(w > 0 && w < parentW);\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }

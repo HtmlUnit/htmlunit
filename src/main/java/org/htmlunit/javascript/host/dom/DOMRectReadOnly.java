@@ -59,7 +59,7 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
      * @param width the width coordinate of the rectangle surrounding the object content
      * @param height the height of the rectangle surrounding the object content
      */
-    public DOMRectReadOnly(final int x, final int y, final int width, final int height) {
+    public DOMRectReadOnly(final double x, final double y, final double width, final double height) {
         xVal_ = x;
         yVal_ = y;
         width_ = width;

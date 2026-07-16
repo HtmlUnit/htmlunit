@@ -68,7 +68,7 @@ public class DOMRect extends DOMRectReadOnly {
      * @param width the width of the rectangle
      * @param height the height of the rectangle
      */
-    public DOMRect(final int x, final int y, final int width, final int height) {
+    public DOMRect(final double x, final double y, final double width, final double height) {
         super(x, y, width, height);
     }
 
