@@ -944,4 +944,61 @@ public class RangeTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Tests that getClientRects() x coordinate of a text node preceded by
+     * a whitespace-only text node is not shifted by the whitespace width.
+     * Whitespace-only text nodes collapse visually in HTML and must not
+     * contribute to the sibling offset calculation.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void getClientRectsTextNodeWhitespaceOnlySiblingIgnored() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <div id='with'>\n"      // has whitespace-only text node before 'Hello'
+            + "Hello</div>\n"
+            + "  <div id='without'>Hello</div>\n"    // no preceding whitespace text node
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function textX(divId) {\n"
+            + "    var textNode = document.getElementById(divId).lastChild;\n"
+            + "    var r = document.createRange();\n"
+            + "    r.setStart(textNode, 0);\n"
+            + "    r.setEnd(textNode, 5);\n"
+            + "    return r.getClientRects()[0].x;\n"
+            + "  }\n"
+            // both divs are at the same x — whitespace node must not shift the result
+            + "  log(textX('with') === textX('without'));\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests that getClientRects() x coordinate of a text node preceded by
+     * an inline element sibling correctly accounts for that sibling's width.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void getClientRectsTextNodeAfterInlineSiblingShifted() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <div id='with'><span id='s'>AAA</span>Hello</div>\n"
+            + "  <div id='without'>Hello</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function textX(divId) {\n"
+            + "    var textNode = document.getElementById(divId).lastChild;\n"
+            + "    var r = document.createRange();\n"
+            + "    r.setStart(textNode, 0);\n"
+            + "    r.setEnd(textNode, 5);\n"
+            + "    return r.getClientRects()[0].x;\n"
+            + "  }\n"
+            // text after a span must be further right than text with no preceding sibling
+            + "  log(textX('with') > textX('without'));\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }

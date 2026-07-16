@@ -9,6 +9,10 @@
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Chrome/Edge 150, Bugfixes">
             <action type="update" dev="rbri">
+                Range.getClientRects() and Range.getBoundingClientRect() ignoring whitespace-only text nodes
+                and block-level siblings when calculating the horizontal offset of a text node.
+            </action>
+            <action type="update" dev="rbri">
                 Range.getClientRects() and Range.getBoundingClientRect() now handle DomText nodes correctly.
             </action>
             <action type="update" dev="rbri">

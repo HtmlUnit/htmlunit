@@ -542,11 +542,15 @@ public class Range extends AbstractRange {
                 break;
             }
             if (sibling instanceof DomText sibText) {
-                siblingOffset += sibText.getVisibleText().length() * pixelsPerChar;
+                // skip whitespace-only text nodes — they collapse to nothing in HTML
+                final String visible = sibText.getVisibleText().trim();
+                if (!visible.isEmpty()) {
+                    siblingOffset += visible.length() * pixelsPerChar;
+                }
             }
-            else if (sibling instanceof HtmlElement siblingEl) {
+            else if (sibling instanceof HtmlElement siblingElement) {
                 final ComputedCssStyleDeclaration sibStyle =
-                        webWindow.getComputedStyle(siblingEl, null);
+                        webWindow.getComputedStyle(siblingElement, null);
                 siblingOffset += sibStyle.getCalculatedWidth(true, true, true);
             }
         }
@@ -555,7 +559,9 @@ public class Range extends AbstractRange {
         final boolean endIsThisNode   = getSimpleRange().getEndContainer() == node;
 
         final int startChar = startIsThisNode ? getSimpleRange().getStartOffset() : 0;
-        final int endChar   = endIsThisNode   ? getSimpleRange().getEndOffset()   : node.getVisibleText().length();
+
+        final String visibleText = node.getVisibleText().trim();
+        final int endChar = endIsThisNode ? getSimpleRange().getEndOffset() : visibleText.length();
 
         final double rectLeft  = parentRect.getX() + siblingOffset + startChar * pixelsPerChar;
         final double rectWidth = (endChar - startChar) * pixelsPerChar;
