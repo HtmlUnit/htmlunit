@@ -981,7 +981,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "<body onload='log(document.getElementById(\"myScript\").src);'></body>\n"
             + "</html>";
 
-        final String script = new String(ByteOrderMark.UTF_8.getBytes())
+        final String script = new String(ByteOrderMark.UTF_8.getBytes(), UTF_8)
                 + "log('" + "\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627"
                             + "\u064b\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627\u064b" + "');";
         getMockWebConnection().setResponse(URL_SECOND, script, MimeType.TEXT_JAVASCRIPT, UTF_8);
