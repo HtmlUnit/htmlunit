@@ -102,15 +102,30 @@ public class ExternalTest {
                     for (var plugin : model.getBuild().getPlugins()) {
                         checkVersion(plugin.getGroupId(), plugin.getArtifactId(), plugin.getVersion(),
                                 model, ignorePattern, wrongVersions);
+
+                        // NEW: check dependencies declared inside the plugin itself
+                        if (plugin.getDependencies() != null) {
+                            for (var dep : plugin.getDependencies()) {
+                                checkVersion(dep.getGroupId(), dep.getArtifactId(), dep.getVersion(),
+                                        model, ignorePattern, wrongVersions);
+                            }
+                        }
                     }
                 }
 
-                // Plugins declared under <build><pluginManagement><plugins>
                 if (model.getBuild().getPluginManagement() != null
                         && model.getBuild().getPluginManagement().getPlugins() != null) {
                     for (var plugin : model.getBuild().getPluginManagement().getPlugins()) {
                         checkVersion(plugin.getGroupId(), plugin.getArtifactId(), plugin.getVersion(),
                                 model, ignorePattern, wrongVersions);
+
+                        // NEW
+                        if (plugin.getDependencies() != null) {
+                            for (var dep : plugin.getDependencies()) {
+                                checkVersion(dep.getGroupId(), dep.getArtifactId(), dep.getVersion(),
+                                        model, ignorePattern, wrongVersions);
+                            }
+                        }
                     }
                 }
             }
@@ -308,6 +323,12 @@ System.out.println("assertVersion(" + groupId);
                         || version.startsWith("3.20.")
                         || version.startsWith("3.21.")
                         || version.startsWith("3.22."))) {
+            return true;
+        }
+
+        // spotbugs 13 requires jdk 21
+        if ("checkstyle".equals(artifactId)
+                && (version.startsWith("13."))) {
             return true;
         }
 
