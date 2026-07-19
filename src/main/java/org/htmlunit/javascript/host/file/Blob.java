@@ -61,28 +61,28 @@ public class Blob extends HtmlUnitScriptable {
     /**
      * The backend used for saving the blob.
      */
-    protected abstract static class Backend implements Serializable {
+    protected interface Backend extends Serializable {
 
         /**
          * Returns the name.
          *
          * @return the name
          */
-        abstract String getName();
+        String getName();
 
         /**
          * Returns the last modified timestamp as long.
          *
          * @return the last modified timestamp as long
          */
-        abstract long getLastModified();
+        long getLastModified();
 
         /**
          * Returns the size.
          *
          * @return the size
          */
-        abstract long getSize();
+        long getSize();
 
         /**
          * Returns the type.
@@ -90,7 +90,7 @@ public class Blob extends HtmlUnitScriptable {
          * @param browserVersion the {@link BrowserVersion}
          * @return the type
          */
-        abstract String getType(BrowserVersion browserVersion);
+        String getType(BrowserVersion browserVersion);
 
         /**
          * Returns the text.
@@ -98,7 +98,7 @@ public class Blob extends HtmlUnitScriptable {
          * @return the text
          * @throws IOException in case of error
          */
-        abstract String getText() throws IOException;
+        String getText() throws IOException;
 
         /**
          * Returns the bytes.
@@ -107,14 +107,7 @@ public class Blob extends HtmlUnitScriptable {
          * @param end the end position
          * @return the bytes
          */
-        abstract byte[] getBytes(int start, int end);
-
-        /**
-         * Ctor.
-         */
-        Backend() {
-            // to make it package protected
-        }
+        byte[] getBytes(int start, int end);
 
         /**
          * Returns the KeyDataPair for this Blob/File.
@@ -124,14 +117,14 @@ public class Blob extends HtmlUnitScriptable {
          * @param contentType the content type
          * @return the KeyDataPair to hold the data
          */
-        abstract KeyDataPair getKeyDataPair(String name, String fileName, String contentType);
+        KeyDataPair getKeyDataPair(String name, String fileName, String contentType);
     }
 
     /**
      * Implementation of the {@link Backend} that stores the bytes in memory.
      *
      */
-    protected static class InMemoryBackend extends Backend {
+    protected static class InMemoryBackend implements Backend {
         private final String fileName_;
         private final String type_;
         private final long lastModified_;

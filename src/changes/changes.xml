@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Chrome/Edge 150, Bugfixes">
+            <action type="update" dev="rhino">
+                The url/anchor hostname setter handling got some fixes.
+            </action>
             <action type="update" dev="rbri" due-to="Lai Quang Duong">
                 core-js: support for a common workaround for subclassing built-in objects (like Set) without
                 using ES6 class/extends syntax, by using Reflect.construct() with a newTarget argument added.
