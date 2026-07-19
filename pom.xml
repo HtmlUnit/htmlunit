@@ -42,7 +42,7 @@
 
         <htmlunit-csp.version>5.3.0</htmlunit-csp.version>
         <htmlunit-cssparser.version>5.3.0</htmlunit-cssparser.version>
-        <htmlunit-corejs.version>5.3.0</htmlunit-corejs.version>
+        <htmlunit-corejs.version>5.4.0-SNAPSHOT</htmlunit-corejs.version>
         <htmlunit-neko.version>5.3.0</htmlunit-neko.version>
         <htmlunit-websocketclient.version>5.3.0</htmlunit-websocketclient.version>
         <htmlunit-xpath.version>5.3.0</htmlunit-xpath.version>

@@ -467,6 +467,11 @@ public class NativeReflectTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * Test common workaround for subclassing built-in objects (like Set) without using ES6
+     * class/extends syntax, by using Reflect.construct() with a newTarget argument.
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"1,2,3,4", "true", "true", "true"})
     public void constructSubclassBuiltin() throws Exception {
@@ -486,6 +491,198 @@ public class NativeReflectTest extends WebDriverTestCase {
                 + "  log(set instanceof CustomSet);\n"
                 + "  log(set instanceof Set);\n"
                 + "  log(Object.getPrototypeOf(set) === CustomSet.prototype)\n;"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test common workaround for subclassing built-in objects (like Map) without using ES6
+     * class/extends syntax, by using Reflect.construct() with a newTarget argument.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a,b,c", "true", "true", "true"})
+    public void constructSubclassBuiltinMap() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function CustomMap() {\n"
+                + "  return Reflect.construct(Map, arguments, this.constructor);\n"
+                + "}\n"
+                + "CustomMap.prototype = Object.create(Map.prototype);\n"
+                + "CustomMap.prototype.constructor = CustomMap;\n"
+                + "var map = new CustomMap([['a', 1], ['b', 2]]);\n"
+                + "map.set('c', 3);\n"
+                + "log(Array.from(map.keys()));\n"
+                + "log(map instanceof CustomMap);\n"
+                + "log(map instanceof Map);\n"
+                + "log(Object.getPrototypeOf(map) === CustomMap.prototype);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test the same workaround for Array, which additionally propagates the subclass through
+     * derived methods (map/filter/slice/...) via Symbol.species, and has exotic "length" and
+     * isArray behavior that Set/Map don't.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1,2,3", "true", "true", "true", "false", "true"})
+    public void constructSubclassBuiltinArray() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function CustomArray() {\n"
+                + "  return Reflect.construct(Array, arguments, this.constructor);\n"
+                + "}\n"
+                + "CustomArray.prototype = Object.create(Array.prototype);\n"
+                + "CustomArray.prototype.constructor = CustomArray;\n"
+                + "var arr = new CustomArray(1, 2, 3);\n"
+                + "var mapped = arr.map(function(x) { return x * 2; });\n"
+                + "log(Array.from(arr));\n"
+                + "log(arr instanceof CustomArray);\n"
+                + "log(arr instanceof Array);\n"
+                + "log(Array.isArray(arr));\n"
+                + "log(mapped instanceof CustomArray);\n"
+                + "log(Object.getPrototypeOf(arr) === CustomArray.prototype);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test the workaround for WeakSet, which has no Symbol.iterator/Array.from support, so
+     * membership must be verified via has() instead of reading contents out.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true"})
+    public void constructSubclassBuiltinWeakSet() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function CustomWeakSet() {\n"
+                + "  return Reflect.construct(WeakSet, arguments, this.constructor);\n"
+                + "}\n"
+                + "CustomWeakSet.prototype = Object.create(WeakSet.prototype);\n"
+                + "CustomWeakSet.prototype.constructor = CustomWeakSet;\n"
+                + "var key = {};\n"
+                + "var ws = new CustomWeakSet([key]);\n"
+                + "ws.add({});\n"
+                + "log(ws.has(key));\n"
+                + "log(ws instanceof CustomWeakSet);\n"
+                + "log(ws instanceof WeakSet);\n"
+                + "log(Object.getPrototypeOf(ws) === CustomWeakSet.prototype);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test the workaround for a typed array (Uint8Array), which is species-driven like Array
+     * (slice/subarray return instances via Symbol.species) and has an overloaded constructor
+     * signature (length vs buffer vs iterable) that Set/Map don't have.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1,2,3", "true", "false", "true", "true"})
+    public void constructSubclassBuiltinTypedArray() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function CustomUint8Array() {\n"
+                + "  return Reflect.construct(Uint8Array, arguments, this.constructor);\n"
+                + "}\n"
+                + "CustomUint8Array.prototype = Object.create(Uint8Array.prototype);\n"
+                + "CustomUint8Array.prototype.constructor = CustomUint8Array;\n"
+                + "var ta = new CustomUint8Array([1, 2, 3]);\n"
+                + "var sliced = ta.slice(1);\n"
+                + "log(Array.from(ta));\n"
+                + "log(Object.getPrototypeOf(ta) === CustomUint8Array.prototype);\n"
+                + "log(Object.getPrototypeOf(ta) === Uint8Array.prototype);\n"
+                + "log(Object.getPrototypeOf(sliced) === Uint8Array.prototype);\n"
+                + "log(Object.getPrototypeOf(sliced) !== CustomUint8Array.prototype);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test the workaround applied to Proxy, which is expected to diverge from Set/Map/Array: a
+     * Proxy without a getPrototypeOf trap forwards [[GetPrototypeOf]] to its target rather than to
+     * whatever prototype Reflect.construct's newTarget would otherwise assign, since ProxyCreate
+     * ignores newTarget entirely. So the proxy's actual prototype must be Object.prototype
+     * (inherited from its target, a plain object), and must NOT be CustomProxy.prototype, even
+     * though construction otherwise looks identical to the Set/Map/Array cases.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "true"})
+    public void constructSubclassBuiltinProxy() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function CustomProxy() {\n"
+                + "  return Reflect.construct(Proxy, arguments, this.constructor);\n"
+                + "}\n"
+                + "CustomProxy.prototype = Object.create(Proxy.prototype || Object.prototype);\n"
+                + "CustomProxy.prototype.constructor = CustomProxy;\n"
+                + "var target = {};\n"
+                + "var p = new CustomProxy(target, {});\n"
+                + "log(Object.getPrototypeOf(p) === Object.prototype);\n"
+                + "log(Object.getPrototypeOf(p) === Object.getPrototypeOf(target));\n"
+                + "log(Object.getPrototypeOf(p) !== CustomProxy.prototype);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test the workaround for Error, included as a contrast case: unlike Set/Map/Array, naive
+     * ES5-style inheritance (Error.call(this, message)) already gets most behavior "for free"
+     * without Reflect.construct, since Error does not hold hidden internal slots the way the
+     * collection/typed-array types do. This test documents that the Reflect.construct approach
+     * still works, and still correctly wires up the prototype chain and instanceof checks.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"boom", "true", "true", "true"})
+    public void constructSubclassBuiltinError() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function CustomError() {\n"
+                + "  var err = Reflect.construct(Error, arguments, this.constructor);\n"
+                + "  return err;\n"
+                + "}\n"
+                + "CustomError.prototype = Object.create(Error.prototype);\n"
+                + "CustomError.prototype.constructor = CustomError;\n"
+                + "var err = new CustomError('boom');\n"
+                + "log(err.message);\n"
+                + "log(err instanceof CustomError);\n"
+                + "log(err instanceof Error);\n"
+                + "log(Object.getPrototypeOf(err) === CustomError.prototype);\n"
                 + "</script>\n"
                 + "</body></html>";
 
