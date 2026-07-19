@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
-
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.UUID;
@@ -259,14 +257,27 @@ public class URL extends HtmlUnitScriptable {
      * @throws MalformedURLException if the resulting URL is malformed
      */
     @JsxSetter
-    public void setHostname(final String hostname) throws MalformedURLException {
-        if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
-            if (!org.htmlunit.util.StringUtils.isBlank(hostname)) {
-                url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
+    public void setHostname(String hostname) {
+        if (hostname != null) {
+            if (hostname.indexOf(' ') > -1) {
+                return;
+            }
+
+            final int idx = hostname.indexOf('#');
+            if (idx > -1) {
+                hostname = hostname.substring(0, idx);
             }
         }
-        else if (!org.htmlunit.util.StringUtils.isEmptyOrNull(hostname)) {
+
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(hostname)) {
+            return;
+        }
+
+        try {
             url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
+        }
+        catch (final MalformedURLException  e) {
+            // do nothing
         }
     }
 

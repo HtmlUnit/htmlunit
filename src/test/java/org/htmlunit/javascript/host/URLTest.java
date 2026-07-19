@@ -536,24 +536,19 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"developer.mozilla.org",
                        "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                        "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"},
             CHROME =  {"developer.mozilla.org",
                        "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
-                       "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"},
+                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"},
             EDGE = {"developer.mozilla.org",
                     "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                    "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
-                    "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"})
+                    "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"})
     @HtmlUnitNYI(CHROME =  {"developer.mozilla.org",
                             "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                            "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
-                            "%20%20", "https:// /en-US/docs/Web/API/URL/host"},
+                            "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"},
                 EDGE = {"developer.mozilla.org",
                         "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                        "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
-                        "%20%20", "https:// /en-US/docs/Web/API/URL/host"})
+                        "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"})
     public void hostname() throws Exception {
         final String html = DOCTYPE_HTML
                         + "<html>\n"
@@ -572,8 +567,87 @@ public class URLTest extends WebDriverTestCase {
                         + "        u.hostname = 'htmlunit-dev.org';\n"
                         + "        log(u.hostname);\n"
                         + "        log(u.toString());\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  </script>\n"
+                        + "</head>\n"
+                        + "<body onload='test()'>\n"
+                        + "</body>\n"
+                        + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"developer.mozilla.org",
+                       "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                       "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host"},
+            CHROME =  {"developer.mozilla.org",
+                       "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host",
+                       "html%20unit", "https://html%20unit/en-US/docs/Web/API/URL/host"},
+            EDGE = {"developer.mozilla.org",
+                    "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host",
+                    "html%20unit", "https://html%20unit/en-US/docs/Web/API/URL/host"})
+    @HtmlUnitNYI(
+            CHROME =  {"developer.mozilla.org",
+                       "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                       "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host"},
+            EDGE = {"developer.mozilla.org",
+                    "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                    "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host"})
+    public void hostnameBlank() throws Exception {
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
+                        + "<head>\n"
+                        + "  <script>\n"
+                        + LOG_TITLE_FUNCTION
+                        + "    function test() {\n"
+                        + "      if (typeof window.URL === 'function') {\n"
+                        + "        var u = new URL('https://developer.mozilla.org:443/en-US/docs/Web/API/URL/host');\n"
+                        + "        log(u.hostname);\n"
 
                         + "        u.hostname = '  ';\n"
+                        + "        log(u.hostname);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.hostname = 'html unit';\n"
+                        + "        log(u.hostname);\n"
+                        + "        log(u.toString());\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  </script>\n"
+                        + "</head>\n"
+                        + "<body onload='test()'>\n"
+                        + "</body>\n"
+                        + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"developer.mozilla.org",
+             "html", "https://html/en-US/docs/Web/API/URL/host",
+             "html", "https://html/en-US/docs/Web/API/URL/host"})
+    public void hostnameInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
+                        + "<head>\n"
+                        + "  <script>\n"
+                        + LOG_TITLE_FUNCTION
+                        + "    function test() {\n"
+                        + "      if (typeof window.URL === 'function') {\n"
+                        + "        var u = new URL('https://developer.mozilla.org:443/en-US/docs/Web/API/URL/host');\n"
+                        + "        log(u.hostname);\n"
+
+                        + "        u.hostname = 'html#unit';\n"
+                        + "        log(u.hostname);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.hostname = '#htmlunit';\n"
                         + "        log(u.hostname);\n"
                         + "        log(u.toString());\n"
                         + "      }\n"

@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
@@ -343,14 +342,27 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/hostname">MDN Documentation</a>
      */
     @JsxSetter
-    public void setHostname(final String hostname) throws Exception {
-        if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
-            if (!StringUtils.isBlank(hostname)) {
-                setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+    public void setHostname(String hostname) throws Exception {
+        if (hostname != null) {
+            if (hostname.indexOf(' ') > -1) {
+                return;
+            }
+
+            final int idx = hostname.indexOf('#');
+            if (idx > -1) {
+                hostname = hostname.substring(0, idx);
             }
         }
-        else if (!StringUtils.isEmptyOrNull(hostname)) {
+
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(hostname)) {
+            return;
+        }
+
+        try {
             setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+        }
+        catch (final MalformedURLException  e) {
+            // do nothing
         }
     }
 
