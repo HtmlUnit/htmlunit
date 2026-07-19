@@ -16,7 +16,6 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 
@@ -59,10 +58,6 @@ public class RhinoTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false",
-            FF = "false",
-            FF_ESR = "false")
     public void isStrict_evalVar() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
