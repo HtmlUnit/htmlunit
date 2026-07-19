@@ -89,21 +89,54 @@ public class ExternalTest {
             final Pattern ignorePattern = Pattern.compile("" + model.getProperties().get("maven.version.ignore"));
 
             final List<String> wrongVersions = new LinkedList<>();
+
+            // Dependencies
             for (var dep : model.getDependencies()) {
-                String version = dep.getVersion();
-                if (version.startsWith("${")) {
-                    version = "" + model.getProperties().get(version.substring(2, version.length() - 1));
+                checkVersion(dep.getGroupId(), dep.getArtifactId(), dep.getVersion(),
+                        model, ignorePattern, wrongVersions);
+            }
+
+            // Plugins declared directly under <build><plugins>
+            if (model.getBuild() != null) {
+                if (model.getBuild().getPlugins() != null) {
+                    for (var plugin : model.getBuild().getPlugins()) {
+                        checkVersion(plugin.getGroupId(), plugin.getArtifactId(), plugin.getVersion(),
+                                model, ignorePattern, wrongVersions);
+                    }
                 }
-                try {
-                    assertVersion(dep.getGroupId(), dep.getArtifactId(), version, ignorePattern);
-                }
-                catch (final AssertionError e) {
-                    wrongVersions.add(e.getMessage());
+
+                // Plugins declared under <build><pluginManagement><plugins>
+                if (model.getBuild().getPluginManagement() != null
+                        && model.getBuild().getPluginManagement().getPlugins() != null) {
+                    for (var plugin : model.getBuild().getPluginManagement().getPlugins()) {
+                        checkVersion(plugin.getGroupId(), plugin.getArtifactId(), plugin.getVersion(),
+                                model, ignorePattern, wrongVersions);
+                    }
                 }
             }
+
             if (!wrongVersions.isEmpty()) {
                 Assertions.fail(String.join("\n ", wrongVersions));
             }
+        }
+    }
+
+    private static void checkVersion(String groupId, String artifactId, String rawVersion,
+                            Model model, Pattern ignorePattern, List<String> wrongVersions) throws Exception {
+        if (rawVersion == null) {
+            // e.g. version inherited from a parent/BOM - nothing to resolve locally
+            return;
+        }
+
+        String version = rawVersion;
+        if (version.startsWith("${")) {
+            version = "" + model.getProperties().get(version.substring(2, version.length() - 1));
+        }
+
+        try {
+            assertVersion(groupId, artifactId, version, ignorePattern);
+        } catch (final AssertionError e) {
+            wrongVersions.add(e.getMessage());
         }
     }
 
@@ -219,6 +252,7 @@ public class ExternalTest {
     private static void assertVersion(final String groupId, final String artifactId,
                             final String pomVersion, final Pattern ignorePattern)
             throws Exception {
+System.out.println("assertVersion(" + groupId);
         String latestMavenCentralVersion = null;
         String url = MAVEN_REPO_URL_
                         + groupId.replace('.', '/') + '/'
@@ -270,7 +304,10 @@ public class ExternalTest {
             final String version, final Pattern ignorePattern) {
         // version > 3.12.0 does not work with our site.xml and also not with a refactored one
         if ("maven-site-plugin".equals(artifactId)
-                && (version.startsWith("3.12.1") || version.startsWith("3.20.") || version.startsWith("3.21."))) {
+                && (version.startsWith("3.12.1")
+                        || version.startsWith("3.20.")
+                        || version.startsWith("3.21.")
+                        || version.startsWith("3.22."))) {
             return true;
         }
 
