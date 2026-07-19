@@ -254,7 +254,6 @@ public class URL extends HtmlUnitScriptable {
      * Sets the {@code hostname} property.
      *
      * @param hostname the new hostname value
-     * @throws MalformedURLException if the resulting URL is malformed
      */
     @JsxSetter
     public void setHostname(String hostname) {
