@@ -1612,9 +1612,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"localhost",
-                       "html", "http://html:22222/foo.html#O",
-                       "html", "http://html:22222/foo.html#O"})
+    @Alerts({"localhost",
+             "html", "http://html:22222/foo.html#O",
+             "html", "http://html:22222/foo.html#O"})
     public void readWriteAnchorHostnameInvalid() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

@@ -534,21 +534,9 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"developer.mozilla.org",
-                       "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"},
-            CHROME =  {"developer.mozilla.org",
-                       "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"},
-            EDGE = {"developer.mozilla.org",
-                    "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                    "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"})
-    @HtmlUnitNYI(CHROME =  {"developer.mozilla.org",
-                            "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                            "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"},
-                EDGE = {"developer.mozilla.org",
-                        "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                        "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"})
+    @Alerts({"developer.mozilla.org",
+             "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+             "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"})
     public void hostname() throws Exception {
         final String html = DOCTYPE_HTML
                         + "<html>\n"
