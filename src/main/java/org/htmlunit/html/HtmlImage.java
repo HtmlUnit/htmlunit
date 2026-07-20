@@ -687,6 +687,17 @@ public class HtmlImage extends HtmlElement {
                                                                     browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
                     request.setRefererHeader(page.getUrl());
+
+                    // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
+                    // an <img> load is never user-activated, and is initiated by the
+                    // containing page; the crossorigin attribute (any value) forces
+                    // CORS mode, otherwise images default to no-cors.
+                    request.setFetchDestination(WebRequest.FetchDestination.IMAGE);
+                    request.setRequestingUrl(page.getUrl());
+                    if (hasAttribute("crossorigin")) {
+                        request.setFetchModeOverride(WebRequest.FetchMode.CORS);
+                    }
+
                     imageWebResponse_ = webClient.loadWebResponse(request);
                 }
             }

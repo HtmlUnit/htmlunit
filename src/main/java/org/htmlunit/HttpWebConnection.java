@@ -809,6 +809,148 @@ public class HttpWebConnection implements WebConnection {
         return new WebResponse(responseData, webRequest, loadTime);
     }
 
+    /**
+     * Returns the {@code Sec-Fetch-Mode} value to use for this request: the explicit
+     * override set on the request if any, otherwise the default mode implied by its
+     * {@link WebRequest.FetchDestination}.
+     * @param webRequest the request
+     * @return the {@code Sec-Fetch-Mode} header value
+     */
+    private static String computeSecFetchMode(final WebRequest webRequest) {
+        final WebRequest.FetchMode override = webRequest.getFetchModeOverride();
+        if (override != null) {
+            return override.getValue();
+        }
+        return defaultFetchModeFor(webRequest.getFetchDestination()).getValue();
+    }
+
+    /**
+     * The default {@link WebRequest.FetchMode} implied by a given
+     * {@link WebRequest.FetchDestination}, absent an explicit override.
+     * @param destination the destination
+     * @return the default mode for that destination
+     */
+    private static WebRequest.FetchMode defaultFetchModeFor(final WebRequest.FetchDestination destination) {
+        switch (destination) {
+            case DOCUMENT:
+            case IFRAME:
+            case FRAME:
+                return WebRequest.FetchMode.NAVIGATE;
+
+            // fonts are always fetched in CORS mode regardless of crossorigin attribute;
+            // XHR/fetch() default to CORS mode too (fetch() can override to no-cors/same-origin,
+            // via WebRequest.setFetchModeOverride)
+            case FONT:
+            case MANIFEST:
+            case EMPTY:
+                return WebRequest.FetchMode.CORS;
+
+            // workers can never be cross-origin
+            case WORKER:
+            case SHARED_WORKER:
+            case SERVICE_WORKER:
+                return WebRequest.FetchMode.SAME_ORIGIN;
+
+            case WEBSOCKET:
+                return WebRequest.FetchMode.WEBSOCKET;
+
+            // image, script, style, object, embed, audio, video, track, report
+            default:
+                return WebRequest.FetchMode.NO_CORS;
+        }
+    }
+
+    /**
+     * Computes the {@code Sec-Fetch-Site} value for this request by comparing the
+     * request's {@link WebRequest#getRequestingUrl() initiator} against the target
+     * URL.
+     * @param webRequest the request
+     * @param targetUrl the target URL (passed separately since callers already have it)
+     * @return one of {@code none}, {@code same-origin}, {@code same-site} or {@code cross-site}
+     */
+    private static String computeSecFetchSite(final WebRequest webRequest, final URL targetUrl) {
+        final URL requestingUrl = webRequest.getRequestingUrl();
+        if (requestingUrl == null) {
+            // no initiator - e.g. a typed URL, bookmark, or other browser-chrome-initiated navigation
+            return "none";
+        }
+        if (isSameOrigin(requestingUrl, targetUrl)) {
+            return "same-origin";
+        }
+        if (isSameSite(requestingUrl, targetUrl)) {
+            return "same-site";
+        }
+        return "cross-site";
+    }
+
+    private static boolean isSameOrigin(final URL a, final URL b) {
+        return a.getProtocol().equals(b.getProtocol())
+                && a.getHost().equalsIgnoreCase(b.getHost())
+                && effectivePort(a) == effectivePort(b);
+    }
+
+    private static int effectivePort(final URL url) {
+        final int port = url.getPort();
+        return port == -1 ? url.getDefaultPort() : port;
+    }
+
+    /**
+     * Same-site comparison per the Fetch Metadata / HTML "same site" algorithm: same
+     * scheme and same registrable domain (eTLD+1), ignoring port and subdomain.
+     * <p>
+     * TODO: this currently uses a simplistic "last two labels" heuristic for the
+     * registrable domain, which is wrong for domains under multi-part public suffixes
+     * (e.g. {@code co.uk}). If HtmlUnit already has a public-suffix-list-aware domain
+     * matcher for cookie handling, that should be reused here instead.
+     * </p>
+     *
+     * @param a first URL
+     * @param b second URL
+     * @return whether both URLs are considered "same-site"
+     */
+    private static boolean isSameSite(final URL a, final URL b) {
+        if (!a.getProtocol().equals(b.getProtocol())) {
+            return false;
+        }
+        return registrableDomain(a.getHost()).equalsIgnoreCase(registrableDomain(b.getHost()));
+    }
+
+    private static String registrableDomain(final String host) {
+        final String[] labels = host.split("\\.");
+        if (labels.length <= 2) {
+            return host;
+        }
+        return labels[labels.length - 2] + '.' + labels[labels.length - 1];
+    }
+
+    /**
+     * Returns whether the given URL is a "potentially trustworthy origin" as defined by
+     * the Secure Contexts spec, which gates whether {@code Sec-Fetch-*} headers (and
+     * {@code Upgrade-Insecure-Requests}) are sent at all. Note that {@code localhost}
+     * and loopback addresses are considered trustworthy even over plain HTTP.
+     * @param url the target URL
+     * @return whether the origin is potentially trustworthy
+     */
+    private static boolean isPotentiallyTrustworthy(final URL url) {
+        final String protocol = url.getProtocol();
+        if ("https".equals(protocol) || "wss".equals(protocol) || "file".equals(protocol)) {
+            return true;
+        }
+        if (!"http".equals(protocol) && !"ws".equals(protocol)) {
+            // be conservative for schemes not explicitly handled here (e.g. about:, data:, blob:
+            // callers should special-case these before reaching HTTP request construction)
+            return false;
+        }
+
+        final String host = url.getHost();
+        return "localhost".equalsIgnoreCase(host)
+                || host.toLowerCase(java.util.Locale.ROOT).endsWith(".localhost")
+                || "127.0.0.1".equals(host)
+                || host.startsWith("127.")
+                || "::1".equals(host)
+                || "[::1]".equals(host);
+    }
+
     private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) {
         final List<HttpRequestInterceptor> list = new ArrayList<>();
         final Map<String, String> requestHeaders = webRequest.getAdditionalHeaders();
@@ -819,6 +961,11 @@ public class HttpWebConnection implements WebConnection {
         if (port > 0 && port != url.getDefaultPort()) {
             host.append(':').append(port);
         }
+
+        // Sec-Fetch-* headers (https://www.w3.org/TR/fetch-metadata/) are only sent
+        // to potentially-trustworthy target origins; computed once up front.
+        final boolean sendSecFetchHeaders = isPotentiallyTrustworthy(url);
+        final String secFetchMode = sendSecFetchHeaders ? computeSecFetchMode(webRequest) : null;
 
         // make sure the headers are added in the right order
         final String[] headerNames = webClient_.getBrowserVersion().getHeaderNamesOrdered();
@@ -856,11 +1003,17 @@ public class HttpWebConnection implements WebConnection {
                 if (headerValue != null) {
                     list.add(new SecFetchDestHeaderHttpRequestInterceptor(headerValue));
                 }
+                else if (sendSecFetchHeaders) {
+                    list.add(new SecFetchDestHeaderHttpRequestInterceptor(webRequest.getFetchDestination().getValue()));
+                }
             }
             else if (HttpHeader.SEC_FETCH_MODE.equals(header)) {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_MODE);
                 if (headerValue != null) {
                     list.add(new SecFetchModeHeaderHttpRequestInterceptor(headerValue));
+                }
+                else if (sendSecFetchHeaders) {
+                    list.add(new SecFetchModeHeaderHttpRequestInterceptor(secFetchMode));
                 }
             }
             else if (HttpHeader.SEC_FETCH_SITE.equals(header)) {
@@ -868,11 +1021,22 @@ public class HttpWebConnection implements WebConnection {
                 if (headerValue != null) {
                     list.add(new SecFetchSiteHeaderHttpRequestInterceptor(headerValue));
                 }
+                else if (sendSecFetchHeaders) {
+                    list.add(new SecFetchSiteHeaderHttpRequestInterceptor(computeSecFetchSite(webRequest, url)));
+                }
             }
             else if (HttpHeader.SEC_FETCH_USER.equals(header)) {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_USER);
                 if (headerValue != null) {
                     list.add(new SecFetchUserHeaderHttpRequestInterceptor(headerValue));
+                }
+
+                // Per spec, sent only for navigations backed by real user activation;
+                // real browsers omit it entirely otherwise (never send "?0").
+                else if (sendSecFetchHeaders
+                        && WebRequest.FetchMode.NAVIGATE.getValue().equals(secFetchMode)
+                        && webRequest.isUserActivation()) {
+                    list.add(new SecFetchUserHeaderHttpRequestInterceptor("?1"));
                 }
             }
             else if (HttpHeader.SEC_CH_UA.equals(header)) {

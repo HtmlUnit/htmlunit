@@ -1832,18 +1832,6 @@ public class WebClient implements Serializable, AutoCloseable {
             wrs.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, getBrowserVersion().getAcceptLanguageHeader());
         }
 
-        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_DEST)) {
-            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_DEST, "document");
-        }
-        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_MODE)) {
-            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "navigate");
-        }
-        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_SITE)) {
-            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_SITE, "same-origin");
-        }
-        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_USER)) {
-            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_USER, "?1");
-        }
         if (getBrowserVersion().hasFeature(HTTP_HEADER_PRIORITY)
                 && !wrs.isAdditionalHeader(HttpHeader.PRIORITY)) {
             wrs.setAdditionalHeader(HttpHeader.PRIORITY, "u=0, i");
@@ -1861,10 +1849,6 @@ public class WebClient implements Serializable, AutoCloseable {
                 && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM)) {
             wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM,
                     getBrowserVersion().getSecClientHintUserAgentPlatformHeader());
-        }
-
-        if (!wrs.isAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS)) {
-            wrs.setAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS, "1");
         }
     }
 

@@ -165,6 +165,13 @@ public class HtmlAnchor extends HtmlElement {
             pingRequest.setAdditionalHeader(HttpHeader.PING_FROM, page.getUrl().toExternalForm());
             pingRequest.setAdditionalHeader(HttpHeader.PING_TO, url.toExternalForm());
             pingRequest.setRequestBody("PING");
+
+            // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
+            // hyperlink-auditing (ping) requests have no destination and are always no-cors
+            pingRequest.setFetchDestination(WebRequest.FetchDestination.EMPTY);
+            pingRequest.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
+            pingRequest.setRequestingUrl(page.getUrl());
+
             webClient.loadWebResponse(pingRequest);
         }
 
@@ -172,6 +179,20 @@ public class HtmlAnchor extends HtmlElement {
                                                             browser.getAcceptEncodingHeader());
         // use the page encoding even if this is a GET requests
         webRequest.setCharset(page.getCharset());
+
+        // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
+        // this is a top-level navigation, initiated by the page containing the link.
+        // The initiator must be set regardless of "noreferrer", since Sec-Fetch-Site
+        // reflects the true relationship between initiator and target even when the
+        // Referer header itself is suppressed.
+        // TODO: userActivation is hardcoded to true here because doClickStateUpdate()
+        // currently has no way to tell a real (WebDriver-simulated) click apart from a
+        // script-triggered one (e.g. anchor.click()); real browsers only send
+        // Sec-Fetch-User for the former. Once the click/event dispatch path exposes a
+        // trusted/user-gesture flag, thread it through instead of hardcoding this.
+        webRequest.setFetchDestination(WebRequest.FetchDestination.DOCUMENT);
+        webRequest.setRequestingUrl(page.getUrl());
+        webRequest.setUserActivation(true);
 
         if (!relContainsNoreferrer()) {
             webRequest.setRefererHeader(page.getUrl());

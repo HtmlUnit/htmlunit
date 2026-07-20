@@ -67,11 +67,121 @@ public class WebRequest implements Serializable {
         BlockCookies
     }
 
+    /**
+     * The destination of a request, as defined by the Fetch spec
+     * (<a href="https://fetch.spec.whatwg.org/#concept-request-destination">
+     * https://fetch.spec.whatwg.org/#concept-request-destination</a>).
+     * <p>
+     * This is used to compute the value of the {@code Sec-Fetch-Dest} request
+     * header (see <a href="https://www.w3.org/TR/fetch-metadata/">
+     * https://www.w3.org/TR/fetch-metadata/</a>) and also determines the default
+     * {@link FetchMode} to be used, unless explicitly overridden via
+     * {@link #setFetchModeOverride(FetchMode)}.
+     * </p>
+     */
+    public enum FetchDestination {
+        /** A top-level document, e.g. loaded by the address bar, a link, or a form submission. */
+        DOCUMENT("document"),
+        /** A nested browsing context of type {@code <iframe>}. */
+        IFRAME("iframe"),
+        /** A nested browsing context of type {@code <frame>}. */
+        FRAME("frame"),
+        /** An {@code <object>} element. */
+        OBJECT("object"),
+        /** An {@code <embed>} element. */
+        EMBED("embed"),
+        /** An image, e.g. {@code <img>}, a CSS background-image, or a favicon. */
+        IMAGE("image"),
+        /** A classic or module script, e.g. {@code <script src>}. */
+        SCRIPT("script"),
+        /** A stylesheet, e.g. {@code <link rel=stylesheet>} or a CSS {@code @import}. */
+        STYLE("style"),
+        /** A font resource, e.g. loaded via {@code @font-face}. */
+        FONT("font"),
+        /** An {@code <audio>} resource. */
+        AUDIO("audio"),
+        /** A {@code <video>} resource. */
+        VIDEO("video"),
+        /** A {@code <track>} resource. */
+        TRACK("track"),
+        /** A dedicated worker script. */
+        WORKER("worker"),
+        /** A shared worker script. */
+        SHARED_WORKER("sharedworker"),
+        /** A service worker script. */
+        SERVICE_WORKER("serviceworker"),
+        /** A web app manifest, e.g. {@code <link rel=manifest>}. */
+        MANIFEST("manifest"),
+        /** A reporting endpoint request. */
+        REPORT("report"),
+        /** A WebSocket handshake request. */
+        WEBSOCKET("websocket"),
+        /** No specific destination, e.g. {@code XMLHttpRequest} or {@code fetch()}. */
+        EMPTY("empty");
+
+        private final String value_;
+
+        FetchDestination(final String value) {
+            value_ = value;
+        }
+
+        /**
+         * Returns the value to be used for the {@code Sec-Fetch-Dest} header.
+         *
+         * @return the value to be used for the {@code Sec-Fetch-Dest} header
+         */
+        public String getValue() {
+            return value_;
+        }
+    }
+
+    /**
+     * The mode of a request, as defined by the Fetch spec
+     * (<a href="https://fetch.spec.whatwg.org/#concept-request-mode">
+     * https://fetch.spec.whatwg.org/#concept-request-mode</a>).
+     * <p>
+     * This is used to compute the value of the {@code Sec-Fetch-Mode} request
+     * header. Most {@link FetchDestination}s imply a fixed mode; this only needs
+     * to be set explicitly to override that default - e.g. for a {@code fetch()}
+     * call using an explicit {@code mode} option, or a subresource request using
+     * the {@code crossorigin} attribute.
+     * </p>
+     */
+    public enum FetchMode {
+        /** Same-origin requests, e.g. worker scripts, or {@code fetch()} with {@code mode: 'same-origin'}. */
+        SAME_ORIGIN("same-origin"),
+        /** Subresource requests without CORS, e.g. {@code <img>} without {@code crossorigin}. */
+        NO_CORS("no-cors"),
+        /** CORS-enabled requests, e.g. {@code XMLHttpRequest}, {@code fetch()} default, or module scripts. */
+        CORS("cors"),
+        /** Navigations, e.g. top-level document loads, {@code <iframe>}/{@code <frame>} loads. */
+        NAVIGATE("navigate"),
+        /** WebSocket handshake requests. */
+        WEBSOCKET("websocket");
+
+        private final String value_;
+
+        FetchMode(final String value) {
+            value_ = value;
+        }
+
+        /**
+         * Returns the value to be used for the {@code Sec-Fetch-Mode} header.
+         *
+         * @return the value to be used for the {@code Sec-Fetch-Mode} header
+         */
+        public String getValue() {
+            return value_;
+        }
+    }
+
     private static final Pattern DOT_PATTERN = Pattern.compile("/\\./");
     private static final Pattern DOT_DOT_PATTERN = Pattern.compile("/(?!\\.\\.)[^/]*/\\.\\./");
     private static final Pattern REMOVE_DOTS_PATTERN = Pattern.compile("^/(\\.\\.?/)*");
 
-    private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
+    // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
+    private String url_;
+
     private String proxyHost_;
     private int proxyPort_;
     private String proxyScheme_;
@@ -96,6 +206,16 @@ public class WebRequest implements Serializable {
     private List<NameValuePair> requestParameters_ = Collections.emptyList();
     private String requestBody_;
 
+    // Sec-Fetch-* support; see https://www.w3.org/TR/fetch-metadata/
+    private FetchDestination fetchDestination_ = FetchDestination.EMPTY;
+    private FetchMode fetchModeOverride_;
+    private boolean userActivation_;
+
+    // String instead of java.net.URL for the same serialization reason as url_ above;
+    // null means "no initiator" (e.g. a browser-chrome-initiated navigation), which
+    // maps to Sec-Fetch-Site: none.
+    private String requestingUrl_;
+
     /**
      * Creates or updates this object..
      *
@@ -114,6 +234,16 @@ public class WebRequest implements Serializable {
             setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, acceptEncodingHeader);
         }
         timeout_ = -1;
+
+        // for backward compatibility
+        // setFetchDestination(FetchDestination.DOCUMENT);
+        // setFetchModeOverride(FetchMode.NAVIGATE);
+//        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_SITE)) {
+//            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_SITE, "same-origin");
+//        }
+//        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_USER)) {
+//            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_USER, "?1");
+//        }
     }
 
     /**
@@ -679,6 +809,109 @@ public class WebRequest implements Serializable {
         catch (final MalformedURLException ignored) {
             // bad luck us the whole url from the pager
         }
+    }
+
+    /**
+     * Returns the destination of this request, used to compute the
+     * {@code Sec-Fetch-Dest} header (and, unless overridden, the default
+     * {@code Sec-Fetch-Mode}). Defaults to {@link FetchDestination#EMPTY},
+     * which is correct for plain {@code XMLHttpRequest}/{@code fetch()} calls.
+     *
+     * @return the destination of this request
+     */
+    public FetchDestination getFetchDestination() {
+        return fetchDestination_;
+    }
+
+    /**
+     * Sets the destination of this request.
+     *
+     * @param fetchDestination the destination of this request, or {@code null}
+     *                         to reset to {@link FetchDestination#EMPTY}
+     */
+    public void setFetchDestination(final FetchDestination fetchDestination) {
+        fetchDestination_ = fetchDestination == null ? FetchDestination.EMPTY : fetchDestination;
+    }
+
+    /**
+     * Returns the explicit mode override for this request, if any. When
+     * {@code null} (the default), the mode is derived from the
+     * {@link #getFetchDestination() destination}.
+     *
+     * @return the mode override, or {@code null} if none was set
+     */
+    public FetchMode getFetchModeOverride() {
+        return fetchModeOverride_;
+    }
+
+    /**
+     * Sets an explicit mode override for this request, e.g. for a {@code fetch()}
+     * call using an explicit {@code mode} option, or a subresource request using
+     * the {@code crossorigin} attribute (which forces CORS mode).
+     *
+     * @param fetchMode the mode to use, or {@code null} to derive it from the
+     *                  {@link #getFetchDestination() destination}
+     */
+    public void setFetchModeOverride(final FetchMode fetchMode) {
+        fetchModeOverride_ = fetchMode;
+    }
+
+    /**
+     * Returns whether this request is the result of a navigation backed by
+     * genuine user activation (e.g. a click on a link, a typed URL, or a form
+     * submitted via a click on its submit button) as opposed to one triggered
+     * purely by script (e.g. {@code location.href = ...}, a {@code <meta
+     * http-equiv="refresh">}, or an automatically-loaded {@code <iframe>}).
+     * <p>
+     * Only relevant for requests whose {@code Sec-Fetch-Mode} is {@code
+     * navigate}; used to compute the presence of the {@code Sec-Fetch-User}
+     * header, which real browsers omit entirely (never send as {@code ?0})
+     * whenever this is {@code false}.
+     * </p>
+     *
+     * @return whether this request was triggered by a real user gesture
+     */
+    public boolean isUserActivation() {
+        return userActivation_;
+    }
+
+    /**
+     * Sets whether this request is the result of a navigation backed by genuine
+     * user activation.
+     *
+     * @param userActivation whether this request was triggered by a real user
+     *                       gesture
+     */
+    public void setUserActivation(final boolean userActivation) {
+        userActivation_ = userActivation;
+    }
+
+    /**
+     * Returns the URL of the document or script that initiated this request, used
+     * to compute the {@code Sec-Fetch-Site} header. {@code null} means there is
+     * no initiator (e.g. a browser-chrome-initiated navigation such as a typed
+     * URL or bookmark), which maps to {@code Sec-Fetch-Site: none}.
+     * <p>
+     * Note this is tracked separately from the {@code Referer} header: unlike
+     * the referrer, it must not be affected by referrer-policy stripping, since
+     * {@code Sec-Fetch-Site} always reflects the true relationship between the
+     * initiator and the target, even when no {@code Referer} header is sent.
+     * </p>
+     *
+     * @return the URL of the initiator, or {@code null} if there is none
+     */
+    public URL getRequestingUrl() {
+        return requestingUrl_ == null ? null : UrlUtils.toUrlSafe(requestingUrl_);
+    }
+
+    /**
+     * Sets the URL of the document or script that initiated this request.
+     *
+     * @param requestingUrl the URL of the initiator, or {@code null} if there is
+     *                      none
+     */
+    public void setRequestingUrl(final URL requestingUrl) {
+        requestingUrl_ = requestingUrl == null ? null : requestingUrl.toExternalForm();
     }
 
     /**
