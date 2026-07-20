@@ -338,6 +338,20 @@ public class HtmlForm extends HtmlElement {
         }
         request.setCharset(enc);
 
+        // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
+        // a form submission is a top-level navigation, initiated by the page
+        // containing the form. The initiator must be set regardless of
+        // "noreferrer", since Sec-Fetch-Site reflects the true relationship
+        // between initiator and target even when the Referer header itself is
+        // suppressed. Unlike anchor clicks, this method actually knows whether
+        // the submission was caused by a real submit control (submitElement != null,
+        // e.g. a click on a submit button/input) or triggered purely by script
+        // (submitElement == null, e.g. form.submit()) - see this method's javadoc -
+        // so Sec-Fetch-User can be set correctly rather than hardcoded.
+        request.setFetchDestination(WebRequest.FetchDestination.DOCUMENT);
+        request.setRequestingUrl(htmlPage.getUrl());
+        request.setUserActivation(submitElement != null);
+
         // forms are ignoring the rel='noreferrer'
         if (browser.hasFeature(FORM_IGNORE_REL_NOREFERRER)
                 || !relContainsNoreferrer()) {

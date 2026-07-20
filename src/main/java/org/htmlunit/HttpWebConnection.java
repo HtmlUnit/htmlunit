@@ -965,7 +965,9 @@ public class HttpWebConnection implements WebConnection {
         // Sec-Fetch-* headers (https://www.w3.org/TR/fetch-metadata/) are only sent
         // to potentially-trustworthy target origins; computed once up front.
         final boolean sendSecFetchHeaders = isPotentiallyTrustworthy(url);
-        final String secFetchMode = sendSecFetchHeaders ? computeSecFetchMode(webRequest) : null;
+        // computed unconditionally: also drives Upgrade-Insecure-Requests below,
+        // which is not gated by origin trustworthiness the way Sec-Fetch-* is
+        final String secFetchMode = computeSecFetchMode(webRequest);
 
         // make sure the headers are added in the right order
         final String[] headerNames = webClient_.getBrowserVersion().getHeaderNamesOrdered();
@@ -1067,6 +1069,12 @@ public class HttpWebConnection implements WebConnection {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS);
                 if (headerValue != null) {
                     list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor(headerValue));
+                }
+
+                // Real browsers only send this for navigations (top-level, iframe, frame),
+                // never for subresource fetches (image/script/style/xhr/...).
+                else if (WebRequest.FetchMode.NAVIGATE.getValue().equals(secFetchMode)) {
+                    list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor("1"));
                 }
             }
             else if (HttpHeader.REFERER.equals(header)) {
