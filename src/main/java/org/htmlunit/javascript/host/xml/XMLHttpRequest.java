@@ -52,6 +52,7 @@ import org.htmlunit.HttpMethod;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
+import org.htmlunit.WebRequest.FetchMode;
 import org.htmlunit.WebRequest.HttpHint;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
@@ -701,6 +702,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             // https://xhr.spec.whatwg.org/#response-body
             request.setDefaultResponseContentCharset(UTF_8);
             request.setRefererHeader(pageUrl);
+
+            request.setFetchDestination(WebRequest.FetchDestination.EMPTY);
+            request.setFetchModeOverride(FetchMode.CORS);
+            request.setRequestingUrl(pageUrl);
 
             try {
                 HttpMethod.validateHttpMethodName(method);

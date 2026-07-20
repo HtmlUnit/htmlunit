@@ -15,6 +15,7 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.ANCHOR_SEND_PING_REQUEST;
+import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,6 +26,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.FormEncodingType;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
 import org.htmlunit.Page;
@@ -157,22 +159,43 @@ public class HtmlAnchor extends HtmlElement {
 
         final URL url = getTargetUrl(href, page);
 
+        final URL pageUrl = page.getUrl();
+
         final WebClient webClient = page.getWebClient();
         final BrowserVersion browser = webClient.getBrowserVersion();
         if (ATTRIBUTE_NOT_DEFINED != getPingAttribute() && browser.hasFeature(ANCHOR_SEND_PING_REQUEST)) {
             final URL pingUrl = getTargetUrl(getPingAttribute(), page);
             final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
-            pingRequest.setAdditionalHeader(HttpHeader.PING_FROM, page.getUrl().toExternalForm());
+            pingRequest.setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, browser.getAcceptEncodingHeader());
+            pingRequest.setAdditionalHeader(HttpHeader.PING_FROM, pageUrl.toExternalForm());
             pingRequest.setAdditionalHeader(HttpHeader.PING_TO, url.toExternalForm());
+            pingRequest.setEncodingType(FormEncodingType.TEXT_PLAIN); // text/ping
+            try {
+                pingRequest.setAdditionalHeader(HttpHeader.ORIGIN,
+                        UrlUtils.getUrlWithProtocolAndAuthority(pageUrl).toExternalForm());
+            }
+            catch (final MalformedURLException e) {
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Invalid origin url '" + pageUrl + "'");
+                }
+            }
+            if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
+                pingRequest.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "max-age=0");
+            }
             pingRequest.setRequestBody("PING");
 
             // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
             // hyperlink-auditing (ping) requests have no destination and are always no-cors
             pingRequest.setFetchDestination(WebRequest.FetchDestination.EMPTY);
             pingRequest.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
-            pingRequest.setRequestingUrl(page.getUrl());
+            pingRequest.setRequestingUrl(pageUrl);
 
-            webClient.loadWebResponse(pingRequest);
+            try {
+                webClient.loadWebResponse(pingRequest);
+            }
+            catch (final Exception e) {
+                // ignore
+            }
         }
 
         final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader(),
@@ -191,7 +214,7 @@ public class HtmlAnchor extends HtmlElement {
         // Sec-Fetch-User for the former. Once the click/event dispatch path exposes a
         // trusted/user-gesture flag, thread it through instead of hardcoding this.
         webRequest.setFetchDestination(WebRequest.FetchDestination.DOCUMENT);
-        webRequest.setRequestingUrl(page.getUrl());
+        webRequest.setRequestingUrl(pageUrl);
         webRequest.setUserActivation(true);
 
         if (!relContainsNoreferrer()) {

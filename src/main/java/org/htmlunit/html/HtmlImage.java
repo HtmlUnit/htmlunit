@@ -693,6 +693,7 @@ public class HtmlImage extends HtmlElement {
                     // containing page; the crossorigin attribute (any value) forces
                     // CORS mode, otherwise images default to no-cors.
                     request.setFetchDestination(WebRequest.FetchDestination.IMAGE);
+                    request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
                     request.setRequestingUrl(page.getUrl());
                     if (hasAttribute("crossorigin")) {
                         request.setFetchModeOverride(WebRequest.FetchMode.CORS);

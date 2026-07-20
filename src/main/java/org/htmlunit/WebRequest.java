@@ -236,14 +236,9 @@ public class WebRequest implements Serializable {
         timeout_ = -1;
 
         // for backward compatibility
-        // setFetchDestination(FetchDestination.DOCUMENT);
-        // setFetchModeOverride(FetchMode.NAVIGATE);
-//        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_SITE)) {
-//            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_SITE, "same-origin");
-//        }
-//        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_USER)) {
-//            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_USER, "?1");
-//        }
+        setFetchDestination(FetchDestination.DOCUMENT);
+        setFetchModeOverride(FetchMode.NAVIGATE);
+        setUserActivation(true);
     }
 
     /**

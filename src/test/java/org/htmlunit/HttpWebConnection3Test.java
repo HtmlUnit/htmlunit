@@ -64,6 +64,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"
             + "Content-Type: text/plain\r\n"
+            + "Connection: close\r\n"
             + "\r\n"
             + "Hi";
 
@@ -108,6 +109,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: " + htmlResponse.length() + "\r\n"
             + "Content-Type: text/html\r\n"
+            + "Connection: close\r\n"
             + "Set-Cookie: name=value\r\n"
             + "\r\n"
             + htmlResponse;
@@ -152,6 +154,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"
             + "Content-Type: text/plain\r\n"
+            + "Connection: close\r\n"
             + "\r\n"
             + "Hi";
 
@@ -205,6 +208,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String response2 = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -244,6 +248,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String response2 = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -282,6 +287,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String response2 = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -460,11 +466,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/plain\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -670,11 +678,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/plain\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -833,11 +843,198 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/plain\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + "Hi";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, html, hi)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+            driver.findElement(By.id("my")).click();
+
+            final String[] expectedHeaders = getExpectedAlerts();
+            for (int i = 0; i < expectedHeaders.length; i++) {
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
+                        getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
+                        getBrowserVersion().getHtmlAcceptHeader());
+            }
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * Tests a anchor click request.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"POST /test2?h HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "Content-Length: 4",
+                      "sec-ch-ua-platform: \"Windows\"",
+                      "Cache-Control: max-age=0",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
+                      "sec-ch-ua-mobile: ?0",
+                      "Ping-To: http://localhost:§§PORT§§/2.html",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Content-Type: text/ping",
+                      "Ping-From: http://localhost:§§PORT§§/",
+                      "Accept: */*",
+                      "Origin: http://localhost:§§PORT§§",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-Mode: no-cors",
+                      "Sec-Fetch-Dest: empty",
+                      "Accept-Encoding: gzip, deflate, br, zstd",
+                      "Accept-Language: en-US,en;q=0.9",
+                      "",
+                      "PING"},
+            EDGE = {"POST /test2?h HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "Content-Length: 4",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Cache-Control: max-age=0",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "Ping-To: http://localhost:§§PORT§§/2.html",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Content-Type: text/ping",
+                    "Ping-From: http://localhost:§§PORT§§/",
+                    "Accept: */*",
+                    "Origin: http://localhost:§§PORT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Dest: empty",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Accept-Language: en-US,en;q=0.9",
+                    "",
+                    "PING"},
+            FF = {"GET /2.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1",
+                  "Priority: u=0, i"},
+            FF_ESR = {"GET /2.html HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: §§ACCEPT§§",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate, br, zstd",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Upgrade-Insecure-Requests: 1",
+                      "Sec-Fetch-Dest: document",
+                      "Sec-Fetch-Mode: navigate",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-User: ?1",
+                      "Priority: u=0, i"})
+    @HtmlUnitNYI(
+            CHROME = {"POST /test2?h HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
+                      "sec-ch-ua-mobile: ?0",
+                      "sec-ch-ua-platform: \"Windows\"",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-Mode: no-cors",
+                      "Sec-Fetch-Dest: empty",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Accept-Language: en-US,en;q=0.9",
+                      "Origin: http://localhost:§§PORT§§",
+                      "Cache-Control: max-age=0",
+                      "Ping-To: http://localhost:§§PORT§§/2.html",
+                      "Ping-From: http://localhost:§§PORT§§/",
+                      "Content-Length: 4",
+                      "Content-Type: text/plain; charset=ISO-8859-1", // text/ping
+                      "",
+                      "PING"},
+            EDGE = {"POST /test2?h HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: */*",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Dest: empty",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9",
+                    "Origin: http://localhost:§§PORT§§",
+                    "Cache-Control: max-age=0",
+                    "Ping-To: http://localhost:§§PORT§§/2.html",
+                    "Ping-From: http://localhost:§§PORT§§/",
+                    "Content-Length: 4",
+                    "Content-Type: text/plain; charset=ISO-8859-1", // text/ping
+                    "",
+                    "PING"},
+            FF = {"GET /2.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1",
+                  "Priority: u=0, i"},
+            FF_ESR = {"GET /2.html HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: §§ACCEPT§§",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Upgrade-Insecure-Requests: 1",
+                      "Sec-Fetch-Dest: document",
+                      "Sec-Fetch-Mode: navigate",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-User: ?1",
+                      "Priority: u=0, i"})
+    public void anchorPing() throws Exception {
+        String html = DOCTYPE_HTML
+                + "<html><body><a id='my' href='2.html' ping='test2?h'>Click me</a></body></html>";
+        html = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + (html.length()) + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + html;
+        final String hi = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/plain\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -988,11 +1185,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/plain\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -1141,11 +1340,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/plain\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -1285,11 +1486,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/javascript\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + ";;";
 
@@ -1436,11 +1639,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 0\r\n"
                 + "Content-Type: text/javascript\r\n"
+                + "Connection: close\r\n"
                 + "\r\n";
 
         shutDownAll();
@@ -1598,11 +1803,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String htmlResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + html.length() + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String imageResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: image/png\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -1613,7 +1820,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             driver.get("http://localhost:" + primitiveWebServer.getPort());
 
             // force image download in htmlunit
-            final String height = driver.findElement(By.tagName("img")).getAttribute("height");
+            driver.findElement(By.tagName("img")).getAttribute("height");
 
             final String[] expectedHeaders = getExpectedAlerts();
             for (int i = 0; i < expectedHeaders.length; i++) {
@@ -1696,13 +1903,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                            "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
                            "sec-ch-ua-platform: \"Windows\"",
-                           "Upgrade-Insecure-Requests: 1", // wrong
                            "User-Agent: §§USER_AGENT§§",
                            "Accept: text/css,*/*;q=0.1",
                            "Sec-Fetch-Site: same-origin",
-                           "Sec-Fetch-Mode: navigate", // wrong
-                           "Sec-Fetch-User: ?1", // wrong
-                           "Sec-Fetch-Dest: document", // wrong
+                           "Sec-Fetch-Mode: no-cors",
+                           "Sec-Fetch-Dest: style",
                            "Referer: http://localhost:§§PORT§§/",
                            "Accept-Encoding: gzip, deflate, br",
                            "Accept-Language: en-US,en;q=0.9"},
@@ -1712,13 +1917,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
-                    "Upgrade-Insecure-Requests: 1", // wrong
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: text/css,*/*;q=0.1",
                     "Sec-Fetch-Site: same-origin",
-                    "Sec-Fetch-Mode: navigate", // wrong
-                    "Sec-Fetch-User: ?1", // wrong
-                    "Sec-Fetch-Dest: document", // wrong
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Dest: style",
                     "Referer: http://localhost:§§PORT§§/",
                     "Accept-Encoding: gzip, deflate, br",
                     "Accept-Language: en-US,en;q=0.9"},
@@ -1730,11 +1933,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Accept-Encoding: gzip, deflate, br",
                   "Connection: keep-alive",
                   "Referer: http://localhost:§§PORT§§/",
-                  "Upgrade-Insecure-Requests: 1", // wrong
-                  "Sec-Fetch-Dest: document", // wrong
-                  "Sec-Fetch-Mode: navigate", // wrong
+                  "Sec-Fetch-Dest: style",
+                  "Sec-Fetch-Mode: no-cors",
                   "Sec-Fetch-Site: same-origin",
-                  "Sec-Fetch-User: ?1", // wrong
                   "Priority: u=0, i"},
             FF_ESR = {"GET /style.css HTTP/1.1",
                       "Host: localhost:§§PORT§§",
@@ -1744,11 +1945,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Accept-Encoding: gzip, deflate, br",
                       "Connection: keep-alive",
                       "Referer: http://localhost:§§PORT§§/",
-                      "Upgrade-Insecure-Requests: 1", // wrong
-                      "Sec-Fetch-Dest: document", // wrong
-                      "Sec-Fetch-Mode: navigate", // wrong
+                      "Sec-Fetch-Dest: style",
+                      "Sec-Fetch-Mode: no-cors",
                       "Sec-Fetch-Site: same-origin",
-                      "Sec-Fetch-User: ?1", // wrong
                       "Priority: u=0, i"})
     public void stylesheet() throws Exception {
         final String html = DOCTYPE_HTML
@@ -1756,11 +1955,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String htmlResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + html.length() + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String cssResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 0\r\n"
                 + "Content-Type: text/css\r\n"
+                + "Connection: close\r\n"
                 + "\r\n";
 
         shutDownAll();
@@ -1842,35 +2043,32 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-Dest: empty",
                       "Sec-Fetch-Mode: cors",
                       "Sec-Fetch-Site: same-origin"})
-    @HtmlUnitNYI(CHROME = {"GET /ajax.json HTTP/1.1",
-                           "Host: localhost:§§PORT§§",
-                           "Connection: keep-alive",
-                           "sec-ch-ua: §§SEC_USER_AGENT§§",
-                           "sec-ch-ua-mobile: ?0",
-                           "sec-ch-ua-platform: \"Windows\"",
-                           "Upgrade-Insecure-Requests: 1", // wrong
-                           "User-Agent: §§USER_AGENT§§",
-                           "Accept: */*",
-                           "Sec-Fetch-Site: same-origin",
-                           "Sec-Fetch-Mode: navigate", // wrong
-                           "Sec-Fetch-User: ?1", // wrong
-                           "Sec-Fetch-Dest: document", // wrong
-                           "Referer: http://localhost:§§PORT§§/",
-                           "Accept-Encoding: gzip, deflate, br",
-                           "Accept-Language: en-US,en;q=0.9"},
+    @HtmlUnitNYI(
+            CHROME = {"GET /ajax.json HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
+                      "sec-ch-ua-mobile: ?0",
+                      "sec-ch-ua-platform: \"Windows\"",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-Mode: cors",
+                      "Sec-Fetch-Dest: empty",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Accept-Language: en-US,en;q=0.9"},
             EDGE = {"GET /ajax.json HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: keep-alive",
                     "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
-                    "Upgrade-Insecure-Requests: 1", // wrong
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: */*",
                     "Sec-Fetch-Site: same-origin",
-                    "Sec-Fetch-Mode: navigate", // wrong
-                    "Sec-Fetch-User: ?1", // wrong
-                    "Sec-Fetch-Dest: document", // wrong
+                    "Sec-Fetch-Mode: cors",
+                    "Sec-Fetch-Dest: empty",
                     "Referer: http://localhost:§§PORT§§/",
                     "Accept-Encoding: gzip, deflate, br",
                     "Accept-Language: en-US,en;q=0.9"},
@@ -1882,11 +2080,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Accept-Encoding: gzip, deflate, br",
                   "Connection: keep-alive",
                   "Referer: http://localhost:§§PORT§§/",
-                  "Upgrade-Insecure-Requests: 1", // wrong
-                  "Sec-Fetch-Dest: document", // wrong
-                  "Sec-Fetch-Mode: navigate", // wrong
+                  "Sec-Fetch-Dest: empty",
+                  "Sec-Fetch-Mode: cors",
                   "Sec-Fetch-Site: same-origin",
-                  "Sec-Fetch-User: ?1"}, // wrong
+                  "Priority: u=0, i"},
             FF_ESR = {"GET /ajax.json HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
@@ -1895,11 +2092,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Accept-Encoding: gzip, deflate, br",
                       "Connection: keep-alive",
                       "Referer: http://localhost:§§PORT§§/",
-                      "Upgrade-Insecure-Requests: 1", // wrong
-                      "Sec-Fetch-Dest: document", // wrong
-                      "Sec-Fetch-Mode: navigate", // wrong
+                      "Sec-Fetch-Dest: empty",
+                      "Sec-Fetch-Mode: cors",
                       "Sec-Fetch-Site: same-origin",
-                      "Sec-Fetch-User: ?1"}) // wrong
+                      "Priority: u=0, i"})
     public void xmlHttpRequestGet() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
@@ -1913,11 +2109,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String htmlResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + html.length() + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String ajaxResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: application/json\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "{}";
 
@@ -2082,11 +2280,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/plain\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -2248,11 +2448,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/plain\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 

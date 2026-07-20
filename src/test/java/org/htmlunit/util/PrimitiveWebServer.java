@@ -27,6 +27,7 @@ import java.net.SocketException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -49,7 +50,7 @@ public class PrimitiveWebServer implements Closeable {
     private final String otherResponse_;
     private ServerSocket server_;
     private Charset charset_ = StandardCharsets.ISO_8859_1;
-    private final List<String> requests_ = new ArrayList<>();
+    private final List<String> requests_ = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * Constructs a new SimpleWebServer.
@@ -98,57 +99,58 @@ public class PrimitiveWebServer implements Closeable {
             boolean first = true;
             try {
                 while (true) {
-                    final Socket socket = server_.accept();
-                    final InputStream in = socket.getInputStream();
-                    final CharArrayWriter writer = new CharArrayWriter();
+                    try (final Socket socket = server_.accept()) {
+                        final InputStream in = socket.getInputStream();
+                        final CharArrayWriter writer = new CharArrayWriter();
 
-                    String requestString = writer.toString();
-                    int i;
+                        String requestString = writer.toString();
+                        int i;
 
-                    while ((i = in.read()) != -1) {
-                        writer.append((char) i);
-                        requestString = writer.toString();
+                        while ((i = in.read()) != -1) {
+                            writer.append((char) i);
+                            requestString = writer.toString();
 
-                        if (i == '\n' && requestString.endsWith("\r\n\r\n")) {
-                            break;
+                            if (i == '\n' && requestString.endsWith("\r\n\r\n")) {
+                                break;
+                            }
                         }
-                    }
-                    final int contentLengthPos = StringUtils.indexOfIgnoreCase(requestString, HttpHeader.CONTENT_LENGTH);
-                    if (contentLengthPos > -1) {
-                        final int endPos = requestString.indexOf('\n', contentLengthPos + 16);
-                        final String toParse = requestString.substring(contentLengthPos + 16, endPos);
-                        final int contentLength = Integer.parseInt(toParse.trim());
+                        final int contentLengthPos = StringUtils.indexOfIgnoreCase(requestString, HttpHeader.CONTENT_LENGTH);
+                        if (contentLengthPos > -1) {
+                            final int endPos = requestString.indexOf('\n', contentLengthPos + 16);
+                            final String toParse = requestString.substring(contentLengthPos + 16, endPos);
+                            final int contentLength = Integer.parseInt(toParse.trim());
 
-                        if (contentLength > 0) {
-                            final byte[] charArray = new byte[contentLength];
-                            IOUtils.read(in, charArray, 0, contentLength);
-                            requestString += new String(charArray);
+                            if (contentLength > 0) {
+                                final byte[] charArray = new byte[contentLength];
+                                IOUtils.readFully(in, charArray);
+                                requestString += new String(charArray);
+                            }
                         }
-                    }
 
-                    final String response;
-                    if (requestString.isEmpty()
-                            || requestString.contains("/favicon.ico")) {
-                        response = "HTTP/1.1 404 Not Found\r\n"
-                                + "Content-Length: 0\r\n"
-                                + "Connection: close\r\n"
-                                + "\r\n";
-                    }
-                    else {
-                        requests_.add(requestString);
-                        if (first || otherResponse_ == null) {
-                            response = firstResponse_;
+                        final String response;
+                        if (requestString.isEmpty()
+                                || requestString.contains("/favicon.ico")) {
+                            response = "HTTP/1.1 404 Not Found\r\n"
+                                    + "Content-Length: 0\r\n"
+                                    + "Connection: close\r\n"
+                                    + "\r\n";
                         }
                         else {
-                            response = otherResponse_;
+                            requests_.add(requestString);
+                            if (first || otherResponse_ == null) {
+                                response = firstResponse_;
+                            }
+                            else {
+                                response = otherResponse_;
+                            }
+                            first = false;
                         }
-                        first = false;
-                    }
 
-                    try (OutputStream out = socket.getOutputStream()) {
+                        final OutputStream out = socket.getOutputStream();
                         final int headPos = response.indexOf("\r\n\r\n");
                         out.write(response.substring(0, headPos + 4).getBytes(StandardCharsets.US_ASCII));
                         out.write(response.substring(headPos + 4).getBytes(charset_));
+                        out.flush();
                     }
                 }
             }

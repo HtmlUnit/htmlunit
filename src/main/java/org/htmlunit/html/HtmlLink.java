@@ -27,6 +27,7 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
+import org.htmlunit.WebRequest.FetchMode;
 import org.htmlunit.WebResponse;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.cssparser.dom.MediaListImpl;
@@ -255,6 +256,10 @@ public class HtmlLink extends HtmlElement {
         // use the page encoding even if this is a GET requests
         request.setCharset(page.getCharset());
         request.setRefererHeader(page.getUrl());
+
+        request.setFetchDestination(WebRequest.FetchDestination.STYLE);
+        request.setFetchModeOverride(FetchMode.NO_CORS);
+        request.setRequestingUrl(page.getUrl());
 
         return request;
     }
