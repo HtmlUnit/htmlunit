@@ -1974,4 +1974,331 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
         }
     }
+
+    /**
+     * Tests a form submitted purely by script ({@code form.submit()}), as opposed to via
+     * a click on a submit control. Real browsers do not consider this a user-activated
+     * navigation, so no Sec-Fetch-User header is sent at all (never {@code ?0}).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"GET /foo?text1=me HTTP/1.1",
+                       "Host: localhost:§§PORT§§",
+                       "Connection: keep-alive",
+                       "sec-ch-ua: §§SEC_USER_AGENT§§",
+                       "sec-ch-ua-mobile: ?0",
+                       "sec-ch-ua-platform: \"Windows\"",
+                       "Upgrade-Insecure-Requests: 1",
+                       "User-Agent: §§USER_AGENT§§",
+                       "Accept: §§ACCEPT§§",
+                       "Sec-Fetch-Site: same-origin",
+                       "Sec-Fetch-Mode: navigate",
+                       "Sec-Fetch-Dest: document",
+                       "Referer: http://localhost:§§PORT§§/",
+                       "Accept-Encoding: gzip, deflate, br, zstd",
+                       "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /foo?text1=me HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /foo?text1=me HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Priority: u=0, i"},
+            FF_ESR = {"GET /foo?text1=me HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: §§ACCEPT§§",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate, br, zstd",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Upgrade-Insecure-Requests: 1",
+                      "Sec-Fetch-Dest: document",
+                      "Sec-Fetch-Mode: navigate",
+                      "Sec-Fetch-Site: same-origin",
+                      "Priority: u=0, i"})
+    @HtmlUnitNYI(
+            CHROME = {"GET /foo?text1=me HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+             EDGE = {"GET /foo?text1=me HTTP/1.1",
+                     "Host: localhost:§§PORT§§",
+                     "Connection: keep-alive",
+                     "sec-ch-ua: §§SEC_USER_AGENT§§",
+                     "sec-ch-ua-mobile: ?0",
+                     "sec-ch-ua-platform: \"Windows\"",
+                     "Upgrade-Insecure-Requests: 1",
+                     "User-Agent: §§USER_AGENT§§",
+                     "Accept: §§ACCEPT§§",
+                     "Sec-Fetch-Site: same-origin",
+                     "Sec-Fetch-Mode: navigate",
+                     "Sec-Fetch-Dest: document",
+                     "Referer: http://localhost:§§PORT§§/",
+                     "Accept-Encoding: gzip, deflate, br",
+                     "Accept-Language: en-US,en;q=0.9"},
+             FF = {"GET /foo?text1=me HTTP/1.1",
+                   "Host: localhost:§§PORT§§",
+                   "User-Agent: §§USER_AGENT§§",
+                   "Accept: §§ACCEPT§§",
+                   "Accept-Language: en-US,en;q=0.9",
+                   "Accept-Encoding: gzip, deflate, br",
+                   "Connection: keep-alive",
+                   "Referer: http://localhost:§§PORT§§/",
+                   "Upgrade-Insecure-Requests: 1",
+                   "Sec-Fetch-Dest: document",
+                   "Sec-Fetch-Mode: navigate",
+                   "Sec-Fetch-Site: same-origin",
+                   "Priority: u=0, i"},
+             FF_ESR = {"GET /foo?text1=me HTTP/1.1",
+                       "Host: localhost:§§PORT§§",
+                       "User-Agent: §§USER_AGENT§§",
+                       "Accept: §§ACCEPT§§",
+                       "Accept-Language: en-US,en;q=0.5",
+                       "Accept-Encoding: gzip, deflate, br",
+                       "Connection: keep-alive",
+                       "Referer: http://localhost:§§PORT§§/",
+                       "Upgrade-Insecure-Requests: 1",
+                       "Sec-Fetch-Dest: document",
+                       "Sec-Fetch-Mode: navigate",
+                       "Sec-Fetch-Site: same-origin",
+                       "Priority: u=0, i"})
+    public void formSubmitFromScript() throws Exception {
+        String html = DOCTYPE_HTML
+            + "<html><body><form id='f' action='foo' method='get' accept-charset='iso-8859-1'>\n"
+            + "<input name='text1' value='me'>\n"
+            + "</form>\n"
+            + "<script>document.getElementById('f').submit();</script>\n"
+            + "</body></html>";
+        html = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + (html.length()) + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
+        final String hi = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/plain\r\n"
+                + "\r\n"
+                + "Hi";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, html, hi)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final String[] expectedHeaders = getExpectedAlerts();
+            for (int i = 0; i < expectedHeaders.length; i++) {
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
+                        getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
+                        getBrowserVersion().getHtmlAcceptHeader());
+            }
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * Tests a link "clicked" purely by script ({@code anchor.click()}), as opposed to a
+     * real (WebDriver-simulated) click. Real browsers do not consider this a user-activated
+     * navigation, so no Sec-Fetch-User header is sent at all.
+     * <p>
+     * Unlike {@link #formSubmitFromScript()}, HtmlAnchor#doClickStateUpdate() currently has
+     * no way to distinguish this from a real click, so it still (incorrectly) sends
+     * Sec-Fetch-User: ?1 - see the {@code TODO} in HtmlAnchor for the missing plumbing.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"GET /2.html HTTP/1.1",
+                       "Host: localhost:§§PORT§§",
+                       "Connection: keep-alive",
+                       "sec-ch-ua: §§SEC_USER_AGENT§§",
+                       "sec-ch-ua-mobile: ?0",
+                       "sec-ch-ua-platform: \"Windows\"",
+                       "Upgrade-Insecure-Requests: 1",
+                       "User-Agent: §§USER_AGENT§§",
+                       "Accept: §§ACCEPT§§",
+                       "Sec-Fetch-Site: same-origin",
+                       "Sec-Fetch-Mode: navigate",
+                       "Sec-Fetch-Dest: document",
+                       "Referer: http://localhost:§§PORT§§/",
+                       "Accept-Encoding: gzip, deflate, br, zstd",
+                       "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /2.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /2.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Priority: u=0, i"},
+            FF_ESR = {"GET /2.html HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: §§ACCEPT§§",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate, br, zstd",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Upgrade-Insecure-Requests: 1",
+                      "Sec-Fetch-Dest: document",
+                      "Sec-Fetch-Mode: navigate",
+                      "Sec-Fetch-Site: same-origin",
+                      "Priority: u=0, i"})
+    @HtmlUnitNYI(CHROME = {"GET /2.html HTTP/1.1",
+                           "Host: localhost:§§PORT§§",
+                           "Connection: keep-alive",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
+                           "sec-ch-ua-mobile: ?0",
+                           "sec-ch-ua-platform: \"Windows\"",
+                           "Upgrade-Insecure-Requests: 1",
+                           "User-Agent: §§USER_AGENT§§",
+                           "Accept: §§ACCEPT§§",
+                           "Sec-Fetch-Site: same-origin",
+                           "Sec-Fetch-Mode: navigate",
+                           "Sec-Fetch-User: ?1", // wrong
+                           "Sec-Fetch-Dest: document",
+                           "Referer: http://localhost:§§PORT§§/",
+                           "Accept-Encoding: gzip, deflate, br",
+                           "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /2.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-User: ?1", // wrong
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /2.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1", // wrong
+                  "Priority: u=0, i"},
+            FF_ESR = {"GET /2.html HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: §§ACCEPT§§",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Upgrade-Insecure-Requests: 1",
+                      "Sec-Fetch-Dest: document",
+                      "Sec-Fetch-Mode: navigate",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-User: ?1", // wrong
+                      "Priority: u=0, i"})
+    public void anchorClickFromScript() throws Exception {
+        String html = DOCTYPE_HTML
+                + "<html><body><a id='my' href='2.html'>Click me</a>\n"
+                + "<script>document.getElementById('my').click();</script>\n"
+                + "</body></html>";
+        html = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + (html.length()) + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
+        final String hi = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/plain\r\n"
+                + "\r\n"
+                + "Hi";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, html, hi)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final String[] expectedHeaders = getExpectedAlerts();
+            for (int i = 0; i < expectedHeaders.length; i++) {
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
+                        getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
+                        getBrowserVersion().getHtmlAcceptHeader());
+            }
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
 }
