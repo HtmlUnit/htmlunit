@@ -936,7 +936,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                            "Accept: §§ACCEPT§§",
                            "Sec-Fetch-Site: same-origin",
                            "Sec-Fetch-Mode: navigate",
-                           "Sec-Fetch-User: ?1",
                            "Sec-Fetch-Dest: document",
                            "Referer: http://localhost:§§PORT§§/",
                            "Accept-Encoding: gzip, deflate, br",
@@ -952,7 +951,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept: §§ACCEPT§§",
                     "Sec-Fetch-Site: same-origin",
                     "Sec-Fetch-Mode: navigate",
-                    "Sec-Fetch-User: ?1",
                     "Sec-Fetch-Dest: document",
                     "Referer: http://localhost:§§PORT§§/",
                     "Accept-Encoding: gzip, deflate, br",
@@ -969,7 +967,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Dest: document",
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
-                  "Sec-Fetch-User: ?1",
                   "Priority: u=0, i"},
             FF_ESR = {"GET /foo HTTP/1.1",
                       "Host: localhost:§§PORT§§",
@@ -983,7 +980,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-Dest: document",
                       "Sec-Fetch-Mode: navigate",
                       "Sec-Fetch-Site: same-origin",
-                      "Sec-Fetch-User: ?1",
                       "Priority: u=0, i"})
     public void locationSetHref() throws Exception {
         final String url = "http://localhost:" + WebTestCase.PORT_PRIMITIVE_SERVER;
@@ -1094,7 +1090,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                            "Accept: §§ACCEPT§§",
                            "Sec-Fetch-Site: same-origin",
                            "Sec-Fetch-Mode: navigate",
-                           "Sec-Fetch-User: ?1",
                            "Sec-Fetch-Dest: document",
                            "Referer: http://localhost:§§PORT§§/",
                            "Accept-Encoding: gzip, deflate, br",
@@ -1110,7 +1105,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept: §§ACCEPT§§",
                     "Sec-Fetch-Site: same-origin",
                     "Sec-Fetch-Mode: navigate",
-                    "Sec-Fetch-User: ?1",
                     "Sec-Fetch-Dest: document",
                     "Referer: http://localhost:§§PORT§§/",
                     "Accept-Encoding: gzip, deflate, br",
@@ -1127,7 +1121,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Dest: document",
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
-                  "Sec-Fetch-User: ?1",
                   "Priority: u=0, i"},
             FF_ESR = {"GET /?newSearch HTTP/1.1",
                       "Host: localhost:§§PORT§§",
@@ -1141,7 +1134,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-Dest: document",
                       "Sec-Fetch-Mode: navigate",
                       "Sec-Fetch-Site: same-origin",
-                      "Sec-Fetch-User: ?1",
                       "Priority: u=0, i"})
     public void locationSetSearch() throws Exception {
         String html = DOCTYPE_HTML
@@ -1241,12 +1233,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                            "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
                            "sec-ch-ua-platform: \"Windows\"",
-                           "Upgrade-Insecure-Requests: 1", // wrong
                            "User-Agent: §§USER_AGENT§§",
                            "Accept: §§ACCEPT§§",
                            "Sec-Fetch-Site: same-origin",
                            "Sec-Fetch-Mode: no-cors",
-                           "Sec-Fetch-User: ?1", // wrong
                            "Sec-Fetch-Dest: script",
                            "Referer: http://localhost:§§PORT§§/",
                            "Accept-Encoding: gzip, deflate, br",
@@ -1257,12 +1247,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
-                    "Upgrade-Insecure-Requests: 1", // wrong
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: §§ACCEPT§§",
                     "Sec-Fetch-Site: same-origin",
                     "Sec-Fetch-Mode: no-cors",
-                    "Sec-Fetch-User: ?1", // wrong
                     "Sec-Fetch-Dest: script",
                     "Referer: http://localhost:§§PORT§§/",
                     "Accept-Encoding: gzip, deflate, br",
@@ -1275,11 +1263,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Accept-Encoding: gzip, deflate, br",
                   "Connection: keep-alive",
                   "Referer: http://localhost:§§PORT§§/",
-                  "Upgrade-Insecure-Requests: 1", // wrong
                   "Sec-Fetch-Dest: script",
                   "Sec-Fetch-Mode: no-cors",
                   "Sec-Fetch-Site: same-origin",
-                  "Sec-Fetch-User: ?1", /* wrong */
                   "Priority: u=0, i"},
             FF_ESR = {"GET /script.js HTTP/1.1",
                       "Host: localhost:§§PORT§§",
@@ -1289,11 +1275,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Accept-Encoding: gzip, deflate, br",
                       "Connection: keep-alive",
                       "Referer: http://localhost:§§PORT§§/",
-                      "Upgrade-Insecure-Requests: 1", // wrong
                       "Sec-Fetch-Dest: script",
                       "Sec-Fetch-Mode: no-cors",
                       "Sec-Fetch-Site: same-origin",
-                      "Sec-Fetch-User: ?1", /* wrong */
                       "Priority: u=0, i"})
     public void loadJavascript() throws Exception {
         String html = DOCTYPE_HTML
@@ -1393,12 +1377,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                            "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
                            "sec-ch-ua-platform: \"Windows\"",
-                           "Upgrade-Insecure-Requests: 1", // wrong
                            "User-Agent: §§USER_AGENT§§",
                            "Accept: §§ACCEPT§§",
                            "Sec-Fetch-Site: same-origin",
                            "Sec-Fetch-Mode: no-cors",
-                           "Sec-Fetch-User: ?1", // wrong
                            "Sec-Fetch-Dest: script",
                            "Referer: http://localhost:§§PORT§§/",
                            "Accept-Encoding: gzip, deflate, br",
@@ -1409,12 +1391,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
-                    "Upgrade-Insecure-Requests: 1", // wrong
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: §§ACCEPT§§",
                     "Sec-Fetch-Site: same-origin",
                     "Sec-Fetch-Mode: no-cors",
-                    "Sec-Fetch-User: ?1", // wrong
                     "Sec-Fetch-Dest: script",
                     "Referer: http://localhost:§§PORT§§/",
                     "Accept-Encoding: gzip, deflate, br",
@@ -1427,11 +1407,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Accept-Encoding: gzip, deflate, br",
                   "Connection: keep-alive",
                   "Referer: http://localhost:§§PORT§§/",
-                  "Upgrade-Insecure-Requests: 1", // wrong
                   "Sec-Fetch-Dest: script",
                   "Sec-Fetch-Mode: no-cors",
                   "Sec-Fetch-Site: same-origin",
-                  "Sec-Fetch-User: ?1", /* wrong */
                   "Priority: u=0, i"},
             FF_ESR = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
                       "Host: localhost:§§PORT§§",
@@ -1441,11 +1419,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Accept-Encoding: gzip, deflate, br",
                       "Connection: keep-alive",
                       "Referer: http://localhost:§§PORT§§/",
-                      "Upgrade-Insecure-Requests: 1", // wrong
                       "Sec-Fetch-Dest: script",
                       "Sec-Fetch-Mode: no-cors",
                       "Sec-Fetch-Site: same-origin",
-                      "Sec-Fetch-User: ?1", /* wrong */
                       "Priority: u=0, i"})
     // this fails on our CI but I have no idea why
     // seems like the request for downloading the script never reaches the

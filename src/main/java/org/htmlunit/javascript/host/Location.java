@@ -347,6 +347,10 @@ public class Location extends HtmlUnitScriptable {
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
             request.setRefererHeader(callingPage.getUrl());
 
+            request.setFetchDestination(WebRequest.FetchDestination.DOCUMENT);
+            request.setRequestingUrl(getUrl());
+            request.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
+
             webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, null, "JS set location");
         }
@@ -626,6 +630,11 @@ public class Location extends HtmlUnitScriptable {
 
         final WebRequest webRequest = new WebRequest(url,
                 browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
+
+        webRequest.setFetchDestination(WebRequest.FetchDestination.DOCUMENT);
+        webRequest.setRequestingUrl(getUrl());
+        webRequest.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
+
         webRequest.setRefererHeader(getUrl());
 
         webWindow.getWebClient().getPage(webWindow, webRequest);

@@ -1082,9 +1082,10 @@ public class HtmlPage extends SgmlPage {
 
         // at least overwrite this headers
         request.setAdditionalHeader(HttpHeader.ACCEPT, client.getBrowserVersion().getScriptAcceptHeader());
-        request.setAdditionalHeader(HttpHeader.SEC_FETCH_SITE, "same-origin");
-        request.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "no-cors");
-        request.setAdditionalHeader(HttpHeader.SEC_FETCH_DEST, "script");
+
+        request.setFetchDestination(WebRequest.FetchDestination.SCRIPT);
+        request.setRequestingUrl(referringRequest.getUrl());
+        request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
 
         request.setRefererHeader(referringRequest.getUrl());
         request.setCharset(scriptCharset);
