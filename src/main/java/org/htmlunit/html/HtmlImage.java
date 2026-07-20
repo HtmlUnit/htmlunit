@@ -18,6 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_BLANK_SRC_AS_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE;
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
+import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
 import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0;
 import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0;
 
@@ -34,6 +35,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
@@ -687,6 +689,10 @@ public class HtmlImage extends HtmlElement {
                                                                     browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
                     request.setRefererHeader(page.getUrl());
+                    if (browser.hasFeature(HTTP_HEADER_CH_UA)) {
+                        request.setAdditionalHeader(HttpHeader.ORIGIN,
+                                UrlUtils.getUrlWithProtocolAndAuthority(page.getUrl()).toExternalForm());
+                    }
 
                     // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
                     // an <img> load is never user-activated, and is initiated by the
