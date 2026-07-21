@@ -2951,6 +2951,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "\r\n"
                 + "Hi";
 
+        shutDownAll();
         try (PrimitiveWebServer crossServer = new PrimitiveWebServer(PORT_PROXY_SERVER, null, targetResponse, null, null)) {
             final String index = DOCTYPE_HTML
                     + "<html><body><a id='my' href='hop'>Click me</a></body></html>";
@@ -2966,7 +2967,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     + "Connection: close\r\n"
                     + "\r\n";
 
-            shutDownAll();
             try (PrimitiveWebServer originServer = new PrimitiveWebServer(null, indexResponse, redirectResponse)) {
                 final WebDriver driver = getWebDriver();
 
@@ -2977,6 +2977,192 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
                 // the request that actually landed on the cross-site server
                 final String request = crossServer.getRequests().get(0);
+                final String[] headers = request.split("\\r\\n");
+                assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+            }
+        }
+    }
+
+    /**
+     * Tests the redirect-chain "poisoning" rule: per spec, Sec-Fetch-Site walks the
+     * *entire* redirect URL history, so if any hop was cross-site, the final value
+     * stays cross-site even if the last hop lands back on the original site.
+     * Chain here: localhost -&gt; (redirect) -&gt; host1.htmlunit-dev.org -&gt;
+     * (redirect) -&gt; back to localhost. Real browsers still report cross-site on
+     * that final localhost request.
+     * <p>
+     * This is expected to currently FAIL: the implementation only compares the
+     * original initiator against each hop's URL independently, so it will likely
+     * recompute "same-origin" on the final hop instead of remembering the
+     * cross-site hop in between. Same PrimitiveWebServer-multi-port caveat as
+     * {@link #redirectToCrossSiteHost()} applies.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(
+          CHROME = {"GET /final.html HTTP/1.1",
+                    "Host: localhost:22225",
+                    "Connection: keep-alive",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                    "Sec-Fetch-Site: cross-site",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-User: ?1",
+                    "Sec-Fetch-Dest: document",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Referer: http://localhost:22225/",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Accept-Language: en-US,en;q=0.9"},
+          EDGE = {"GET /final.html HTTP/1.1",
+                  "Host: localhost:22225",
+                  "Connection: keep-alive",
+                  "Upgrade-Insecure-Requests: 1",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                  "Sec-Fetch-Site: cross-site",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-User: ?1",
+                  "Sec-Fetch-Dest: document",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "sec-ch-ua-mobile: ?0",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "Referer: http://localhost:22225/",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Accept-Language: en-US,en;q=0.9"},
+          FF = {"GET /final.html HTTP/1.1",
+                "Host: localhost:22225",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate, br, zstd",
+                "Referer: http://localhost:22225/",
+                "Connection: keep-alive",
+                "Upgrade-Insecure-Requests: 1",
+                "Sec-Fetch-Dest: document",
+                "Sec-Fetch-Mode: navigate",
+                "Sec-Fetch-Site: cross-site",
+                "Sec-Fetch-User: ?1",
+                "Priority: u=0, i"},
+          FF_ESR = {"GET /final.html HTTP/1.1",
+                    "Host: localhost:22225",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Referer: http://localhost:22225/",
+                    "Connection: keep-alive",
+                    "Upgrade-Insecure-Requests: 1",
+                    "Sec-Fetch-Dest: document",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Site: cross-site",
+                    "Sec-Fetch-User: ?1",
+                      "Priority: u=0, i"})
+    @HtmlUnitNYI(
+          CHROME = {"GET /final.html HTTP/1.1",
+                    "Host: localhost:22225",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                    "Sec-Fetch-Site: same-origin", // cross-site
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-User: ?1",
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:22225/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+          EDGE = {"GET /final.html HTTP/1.1",
+                  "Host: localhost:22225",
+                  "Connection: keep-alive",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "sec-ch-ua-mobile: ?0",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "Upgrade-Insecure-Requests: 1",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                  "Sec-Fetch-Site: same-origin", // cross-site
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-User: ?1",
+                  "Sec-Fetch-Dest: document",
+                  "Referer: http://localhost:22225/",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Accept-Language: en-US,en;q=0.9"},
+          FF = {"GET /final.html HTTP/1.1",
+                "Host: localhost:22225",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate, br",
+                "Connection: keep-alive",
+                "Referer: http://localhost:22225/",
+                "Upgrade-Insecure-Requests: 1",
+                "Sec-Fetch-Dest: document",
+                "Sec-Fetch-Mode: navigate",
+                "Sec-Fetch-Site: same-origin", // cross-site
+                "Sec-Fetch-User: ?1",
+                "Priority: u=0, i"},
+          FF_ESR = {"GET /final.html HTTP/1.1",
+                    "Host: localhost:22225",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:22225/",
+                    "Upgrade-Insecure-Requests: 1",
+                    "Sec-Fetch-Dest: document",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Site: same-origin", // cross-site
+                    "Sec-Fetch-User: ?1",
+                      "Priority: u=0, i"})
+    public void redirectChainBackToOriginStaysCrossSite() throws Exception {
+        final String originUrl = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
+
+        // built first: cross-server bounces back to the well-known origin port
+        final String bounceBackResponse = "HTTP/1.1 302 Found\r\n"
+                + "Content-Length: 0\r\n"
+                + "Location: " + originUrl + "final.html\r\n"
+                + "\r\n";
+
+        shutDownAll();
+        try (PrimitiveWebServer crossServer = new PrimitiveWebServer(PORT_PROXY_SERVER, null, bounceBackResponse, null, null)) {
+            final String index = DOCTYPE_HTML
+                    + "<html><body><a id='my' href='hop'>Click me</a></body></html>";
+            final String indexResponse = "HTTP/1.1 200 OK\r\n"
+                    + "Content-Length: " + index.length() + "\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "Connection: close\r\n"
+                   + "\r\n"
+                    + index;
+            final String redirectToCrossResponse = "HTTP/1.1 302 Found\r\n"
+                    + "Content-Length: 0\r\n"
+                    + "Location: http://host1.htmlunit-dev.org:" + crossServer.getPort() + "/hop2\r\n"
+                    + "Connection: close\r\n"
+                    + "\r\n";
+            final String finalResponse = "HTTP/1.1 200 OK\r\n"
+                    + "Content-Length: 2\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "Connection: close\r\n"
+                    + "\r\n"
+                    + "Hi";
+
+            try (PrimitiveWebServer originServer = new PrimitiveWebServer(null, indexResponse, redirectToCrossResponse, finalResponse)) {
+                final WebDriver driver = getWebDriver();
+
+                driver.get(originUrl);
+                driver.findElement(By.id("my")).click();
+
+                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer);
+
+                // request 0 = index, request 1 = redirected "hop" request 2 = back on origin
+                final String request = originServer.getRequests().get(2);
                 final String[] headers = request.split("\\r\\n");
                 assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
             }
