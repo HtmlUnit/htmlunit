@@ -47,6 +47,7 @@ public class PrimitiveWebServer implements Closeable {
 
     private final int port_;
     private final String firstResponse_;
+    private final String secondResponse_;
     private final String otherResponse_;
     private ServerSocket server_;
     private Charset charset_ = StandardCharsets.ISO_8859_1;
@@ -62,8 +63,22 @@ public class PrimitiveWebServer implements Closeable {
      */
     public PrimitiveWebServer(final Charset charset, final String firstResponse, final String otherResponse)
             throws Exception {
+        this(charset, firstResponse, null, otherResponse);
+    }
+
+    /**
+     * Constructs a new SimpleWebServer.
+     *
+     * @param charset the charset
+     * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @throws Exception in case of error
+     */
+    public PrimitiveWebServer(final Charset charset, final String firstResponse, final String secondResponse, final String otherResponse)
+            throws Exception {
         port_ = WebTestCase.PORT_PRIMITIVE_SERVER;
         firstResponse_ = firstResponse;
+        secondResponse_ = secondResponse;
         otherResponse_ = otherResponse;
         if (charset != null) {
             charset_ = charset;
@@ -96,7 +111,7 @@ public class PrimitiveWebServer implements Closeable {
         }
 
         new Thread(() -> {
-            boolean first = true;
+            int responseCount = 0;
             try {
                 while (true) {
                     try (final Socket socket = server_.accept()) {
@@ -137,13 +152,16 @@ public class PrimitiveWebServer implements Closeable {
                         }
                         else {
                             requests_.add(requestString);
-                            if (first || otherResponse_ == null) {
+                            if (responseCount == 0 || otherResponse_ == null) {
                                 response = firstResponse_;
+                            }
+                            else if (responseCount == 1 && secondResponse_ != null) {
+                                response = secondResponse_;
                             }
                             else {
                                 response = otherResponse_;
                             }
-                            first = false;
+                            responseCount++;
                         }
 
                         final OutputStream out = socket.getOutputStream();
