@@ -483,16 +483,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             driver.get("http://localhost:" + primitiveWebServer.getPort());
             driver.findElement(By.id("submit")).click();
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getHtmlAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -696,16 +688,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             Thread.sleep(4_000);
             driver.findElement(By.id("submit")).click();
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getHtmlAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -860,16 +844,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             driver.get("http://localhost:" + primitiveWebServer.getPort());
             driver.findElement(By.id("my")).click();
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getHtmlAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1045,16 +1021,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             driver.get("http://localhost:" + primitiveWebServer.getPort());
             driver.findElement(By.id("my")).click();
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getHtmlAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1201,16 +1169,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getHtmlAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1356,16 +1316,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getHtmlAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1502,16 +1454,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getScriptAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithScriptReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1654,16 +1598,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getScriptAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithScriptReplacement(primitiveWebServer);
 
             // let's try some wait on our CI server
             final long endTime = System.currentTimeMillis() + Duration.ofSeconds(4).toMillis();
@@ -1820,14 +1755,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             // force image download in htmlunit
             driver.findElement(By.tagName("img")).getAttribute("height");
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1968,14 +1897,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -2133,14 +2056,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 Assertions.fail("Still no request / request count:" + primitiveWebServer.getRequests().size());
             }
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -2294,16 +2211,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getHtmlAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -2462,16 +2371,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getHtmlAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -2623,16 +2524,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             driver.get("http://localhost:" + primitiveWebServer.getPort());
             driver.findElement(By.id("my")).click();
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
-                        getBrowserVersion().getHtmlAcceptHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -2781,17 +2674,211 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             // force image download in htmlunit
             driver.findElement(By.tagName("img")).getAttribute("height");
 
-            final String[] expectedHeaders = getExpectedAlerts();
-            for (int i = 0; i < expectedHeaders.length; i++) {
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
-                        getBrowserVersion().getUserAgent());
-                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
-                        getBrowserVersion().getSecClientHintUserAgentHeader());
-            }
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
         }
+    }
+
+    /**
+     * Tests that Sec-Fetch-User survives a same-origin redirect hop for a
+     * user-activated navigation. Real browsers preserve user activation across
+     * a redirect chain, so the final (post-redirect) request should still carry
+     * Sec-Fetch-User: ?1, not just the initial (pre-redirect) one.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(
+        CHROME = {"GET /target.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "Upgrade-Insecure-Requests: 1",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-User: ?1",
+                  "Sec-Fetch-Dest: document",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "sec-ch-ua-mobile: ?0",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Accept-Language: en-US,en;q=0.9"},
+        EDGE = {"GET /target.html HTTP/1.1",
+                "Host: localhost:§§PORT§§",
+                "Connection: keep-alive",
+                "Upgrade-Insecure-Requests: 1",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                "Sec-Fetch-Site: same-origin",
+                "Sec-Fetch-Mode: navigate",
+                "Sec-Fetch-User: ?1",
+                "Sec-Fetch-Dest: document",
+                "sec-ch-ua: §§SEC_USER_AGENT§§",
+                "sec-ch-ua-mobile: ?0",
+                "sec-ch-ua-platform: \"Windows\"",
+                "Referer: http://localhost:§§PORT§§/",
+                "Accept-Encoding: gzip, deflate, br, zstd",
+                "Accept-Language: en-US,en;q=0.9"},
+        FF = {"GET /target.html HTTP/1.1",
+              "Host: localhost:§§PORT§§",
+              "User-Agent: §§USER_AGENT§§",
+              "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+              "Accept-Language: en-US,en;q=0.9",
+              "Accept-Encoding: gzip, deflate, br, zstd",
+              "Referer: http://localhost:§§PORT§§/",
+              "Connection: keep-alive",
+              "Upgrade-Insecure-Requests: 1",
+              "Sec-Fetch-Dest: document",
+              "Sec-Fetch-Mode: navigate",
+              "Sec-Fetch-Site: same-origin",
+              "Sec-Fetch-User: ?1",
+              "Priority: u=0, i"},
+        FF_ESR = {"GET /target.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Connection: keep-alive",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1",
+                  "Priority: u=0, i"})
+    @HtmlUnitNYI(
+        CHROME = {"GET /target.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "sec-ch-ua-mobile: ?0",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "Upgrade-Insecure-Requests: 1",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-User: ?1",
+                  "Sec-Fetch-Dest: document",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Accept-Language: en-US,en;q=0.9"},
+        EDGE = {"GET /target.html HTTP/1.1",
+                "Host: localhost:§§PORT§§",
+                "Connection: keep-alive",
+                "sec-ch-ua: §§SEC_USER_AGENT§§",
+                "sec-ch-ua-mobile: ?0",
+                "sec-ch-ua-platform: \"Windows\"",
+                "Upgrade-Insecure-Requests: 1",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                "Sec-Fetch-Site: same-origin",
+                "Sec-Fetch-Mode: navigate",
+                "Sec-Fetch-User: ?1",
+                "Sec-Fetch-Dest: document",
+                "Referer: http://localhost:§§PORT§§/",
+                "Accept-Encoding: gzip, deflate, br",
+                "Accept-Language: en-US,en;q=0.9"},
+        FF = {"GET /target.html HTTP/1.1",
+              "Host: localhost:§§PORT§§",
+              "User-Agent: §§USER_AGENT§§",
+              "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+              "Accept-Language: en-US,en;q=0.9",
+              "Accept-Encoding: gzip, deflate, br",
+              "Connection: keep-alive",
+              "Referer: http://localhost:§§PORT§§/",
+              "Upgrade-Insecure-Requests: 1",
+              "Sec-Fetch-Dest: document",
+              "Sec-Fetch-Mode: navigate",
+              "Sec-Fetch-Site: same-origin",
+              "Sec-Fetch-User: ?1",
+              "Priority: u=0, i"},
+        FF_ESR = {"GET /target.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1",
+                  "Priority: u=0, i"})
+    public void redirectSameOriginPreservesSecFetchUser() throws Exception {
+        final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
+
+        final String index = DOCTYPE_HTML
+                + "<html><body><a id='my' href='hop'>Click me</a></body></html>";
+        final String indexResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + index.length() + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + index;
+        final String redirectResponse = "HTTP/1.1 302 Found\r\n"
+                + "Content-Length: 0\r\n"
+                + "Location: " + url + "target.html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n";
+        final String targetResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + "Hi";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null,
+                indexResponse, redirectResponse, targetResponse)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get(url);
+            driver.findElement(By.id("my")).click();
+
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
+            // request 0 = index, request 1 = the redirected "hop" request, request 2 = the
+            // auto-followed final request - assert on the final one
+            final String request = primitiveWebServer.getRequests().get(2);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    private String[] getExpectedAlertsWithHtmlReplacement(PrimitiveWebServer primitiveWebServer) {
+        final String[] expectedHeaders = getExpectedAlerts();
+        for (int i = 0; i < expectedHeaders.length; i++) {
+            expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+            expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
+                    getBrowserVersion().getUserAgent());
+            expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                    getBrowserVersion().getSecClientHintUserAgentHeader());
+            expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
+                    getBrowserVersion().getHtmlAcceptHeader());
+        }
+        return expectedHeaders;
+    }
+
+    private String[] getExpectedAlertsWithScriptReplacement(PrimitiveWebServer primitiveWebServer) {
+        final String[] expectedHeaders = getExpectedAlerts();
+        for (int i = 0; i < expectedHeaders.length; i++) {
+            expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+            expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
+                    getBrowserVersion().getUserAgent());
+            expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                    getBrowserVersion().getSecClientHintUserAgentHeader());
+            expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
+                    getBrowserVersion().getScriptAcceptHeader());
+        }
+        return expectedHeaders;
     }
 }

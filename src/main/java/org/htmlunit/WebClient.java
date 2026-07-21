@@ -1707,6 +1707,10 @@ public class WebClient implements Serializable, AutoCloseable {
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
+                wrs.setFetchDestination(webRequest.getFetchDestination());
+                wrs.setFetchModeOverride(webRequest.getFetchModeOverride());
+                wrs.setRequestingUrl(webRequest.getRequestingUrl());
+
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
             else if (status == HttpStatus.TEMPORARY_REDIRECT_307
