@@ -689,10 +689,6 @@ public class HtmlImage extends HtmlElement {
                                                                     browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
                     request.setRefererHeader(page.getUrl());
-                    if (browser.hasFeature(HTTP_HEADER_CH_UA)) {
-                        request.setAdditionalHeader(HttpHeader.ORIGIN,
-                                UrlUtils.getUrlWithProtocolAndAuthority(page.getUrl()).toExternalForm());
-                    }
 
                     // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
                     // an <img> load is never user-activated, and is initiated by the
@@ -701,8 +697,14 @@ public class HtmlImage extends HtmlElement {
                     request.setFetchDestination(WebRequest.FetchDestination.IMAGE);
                     request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
                     request.setRequestingUrl(page.getUrl());
+
                     if (hasAttribute("crossorigin")) {
                         request.setFetchModeOverride(WebRequest.FetchMode.CORS);
+
+                        if (browser.hasFeature(HTTP_HEADER_CH_UA)) {
+                            request.setAdditionalHeader(HttpHeader.ORIGIN,
+                                    UrlUtils.getUrlWithProtocolAndAuthority(page.getUrl()).toExternalForm());
+                        }
                     }
 
                     imageWebResponse_ = webClient.loadWebResponse(request);
