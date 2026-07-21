@@ -170,6 +170,14 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * {@inheritDoc}
      */
     @Override
+    public boolean isCrossorigin() {
+        return hasAttribute("crossorigin");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean mayBeDisplayed() {
         return false;
     }

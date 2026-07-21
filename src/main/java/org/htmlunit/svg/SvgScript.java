@@ -140,6 +140,14 @@ public class SvgScript extends SvgElement implements ScriptElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isCrossorigin() {
+        return hasAttribute("crossorigin");
+    }
+
+    /**
      * Executes the <code>onreadystatechange</code> handler as well as executing
      * the script itself, if necessary. {@inheritDoc}
      */

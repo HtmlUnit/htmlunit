@@ -184,7 +184,7 @@ public final class ScriptElementSupport {
                     final Document doc = win.getDocument();
                     try {
                         doc.setCurrentScript(element.getScriptableObject());
-                        result = page.loadExternalJavaScriptFile(src, charset);
+                        result = page.loadExternalJavaScriptFile(src, charset, script.isCrossorigin());
                     }
                     finally {
                         doc.setCurrentScript(null);

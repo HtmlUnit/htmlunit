@@ -1328,7 +1328,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"GET /script.js HTTP/1.1",
+    @Alerts(
+            CHROME = {"GET /script.js HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "Connection: keep-alive",
                       "sec-ch-ua-platform: \"Windows\"",
@@ -1432,9 +1433,158 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-Mode: no-cors",
                       "Sec-Fetch-Site: same-origin",
                       "Priority: u=0, i"})
-    public void loadJavascript() throws Exception {
+    public void javascript() throws Exception {
         String html = DOCTYPE_HTML
                 + "<html><head> <script src=\"script.js\"></script> </head><body></body></html>";
+        html = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + (html.length()) + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + html;
+        final String hi = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/javascript\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + ";;";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, html, hi)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final String[] expectedHeaders = getExpectedAlertsWithScriptReplacement(primitiveWebServer);
+
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * Tests the Sec-Fetch-* headers sent for a classic &lt;script crossorigin src&gt;
+     * request. The presence of the crossorigin attribute (regardless of its value)
+     * forces CORS mode, unlike a plain &lt;script src&gt; which uses no-cors
+     * (see {@link #loadJavascript()}).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(
+          CHROME = {"GET /script.js HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "Origin: http://localhost:§§PORT§§",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "User-Agent: §§USER_AGENT§§",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: cors",
+                    "Sec-Fetch-Dest: script",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Accept-Language: en-US,en;q=0.9"},
+          EDGE = {"GET /script.js HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "Origin: http://localhost:§§PORT§§",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "User-Agent: §§USER_AGENT§§",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "sec-ch-ua-mobile: ?0",
+                  "Accept: §§ACCEPT§§",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-Mode: cors",
+                  "Sec-Fetch-Dest: script",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Accept-Language: en-US,en;q=0.9"},
+          FF = {"GET /script.js HTTP/1.1",
+                "Host: localhost:§§PORT§§",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: §§ACCEPT§§",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate, br, zstd",
+                "Connection: keep-alive",
+                "Referer: http://localhost:§§PORT§§/",
+                "Sec-Fetch-Dest: script",
+                "Sec-Fetch-Mode: cors",
+                "Sec-Fetch-Site: same-origin",
+                "Priority: u=2"},
+          FF_ESR = {"GET /script.js HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Sec-Fetch-Dest: script",
+                    "Sec-Fetch-Mode: cors",
+                    "Sec-Fetch-Site: same-origin",
+                    "Priority: u=2"})
+    @HtmlUnitNYI(
+          CHROME = {"GET /script.js HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: cors",
+                    "Sec-Fetch-Dest: script",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9",
+                    "Origin: http://localhost:§§PORT§§"},
+          EDGE = {"GET /script.js HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "sec-ch-ua-mobile: ?0",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-Mode: cors",
+                  "Sec-Fetch-Dest: script",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Origin: http://localhost:§§PORT§§"},
+          FF = {"GET /script.js HTTP/1.1",
+                "Host: localhost:§§PORT§§",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: §§ACCEPT§§",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate, br",
+                "Connection: keep-alive",
+                "Referer: http://localhost:§§PORT§§/",
+                "Sec-Fetch-Dest: script",
+                "Sec-Fetch-Mode: cors",
+                "Sec-Fetch-Site: same-origin",
+                "Priority: u=0, i"},
+          FF_ESR = {"GET /script.js HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Sec-Fetch-Dest: script",
+                    "Sec-Fetch-Mode: cors",
+                    "Sec-Fetch-Site: same-origin",
+                    "Priority: u=0, i"})
+    public void javascriptCrossOrigin() throws Exception {
+        String html = DOCTYPE_HTML
+                + "<html><head> <script crossorigin src=\"script.js\"></script> </head><body></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
@@ -1574,7 +1724,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     // seems like the request for downloading the script never reaches the
     // PrimitiveWebServer
     @DisabledOnOs(OS.LINUX)
-    public void loadJavascriptCharset() throws Exception {
+    public void javascriptCharset() throws Exception {
         String html = DOCTYPE_HTML
                 + "<html><head>"
                 + "<meta http-equiv='Content-Type' content='text/html; charset=GB2312'>"

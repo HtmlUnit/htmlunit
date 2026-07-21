@@ -35,6 +35,12 @@ public interface ScriptElement {
     boolean isDeferred();
 
     /**
+     * Returns {@code true} if this crossorigin attribute is available.
+     * @return {@code true} if this crossorigin attribute is available.
+     */
+    boolean isCrossorigin();
+
+    /**
      * Sets if executed.
      * @param executed if executed
      */

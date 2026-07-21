@@ -15,6 +15,7 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
+import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.io.File;
@@ -999,7 +1000,8 @@ public class HtmlPage extends SgmlPage {
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute, final Charset scriptCharset)
+    JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute,
+                            final Charset scriptCharset, final boolean crossorigin)
         throws FailingHttpStatusCodeException {
 
         final WebClient client = getWebClient();
@@ -1031,7 +1033,7 @@ public class HtmlPage extends SgmlPage {
 
         final Object script;
         try {
-            script = loadJavaScriptFromUrl(scriptURL, scriptCharset);
+            script = loadJavaScriptFromUrl(scriptURL, scriptCharset, crossorigin);
         }
         catch (final IOException e) {
             client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
@@ -1070,7 +1072,8 @@ public class HtmlPage extends SgmlPage {
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    private Object loadJavaScriptFromUrl(final URL url, final Charset scriptCharset) throws IOException,
+    private Object loadJavaScriptFromUrl(final URL url, final Charset scriptCharset,
+                    final boolean crossorigin) throws IOException,
         FailingHttpStatusCodeException {
 
         final WebRequest referringRequest = getWebResponse().getWebRequest();
@@ -1097,6 +1100,15 @@ public class HtmlPage extends SgmlPage {
         }
         else {
             request.setDefaultResponseContentCharset(StandardCharsets.UTF_8);
+        }
+
+        if (crossorigin) {
+            request.setFetchModeOverride(WebRequest.FetchMode.CORS);
+
+            if (client.getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)) {
+                request.setAdditionalHeader(HttpHeader.ORIGIN,
+                        UrlUtils.getUrlWithProtocolAndAuthority(url).toExternalForm());
+            }
         }
 
         // our cache is a bit strange;
