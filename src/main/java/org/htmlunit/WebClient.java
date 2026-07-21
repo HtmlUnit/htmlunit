@@ -16,8 +16,6 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
-import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_PRIORITY;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -1830,30 +1828,6 @@ public class WebClient implements Serializable, AutoCloseable {
                 wrs.setAdditionalHeader(name, value);
             }
         });
-
-        // Add standard HtmlUnit headers to the web request if still not present there yet.
-        if (!wrs.isAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE)) {
-            wrs.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, getBrowserVersion().getAcceptLanguageHeader());
-        }
-
-        if (getBrowserVersion().hasFeature(HTTP_HEADER_PRIORITY)
-                && !wrs.isAdditionalHeader(HttpHeader.PRIORITY)) {
-            wrs.setAdditionalHeader(HttpHeader.PRIORITY, "u=0, i");
-        }
-
-        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
-                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA)) {
-            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA, getBrowserVersion().getSecClientHintUserAgentHeader());
-        }
-        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
-                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE)) {
-            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE, "?0");
-        }
-        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
-                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM)) {
-            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM,
-                    getBrowserVersion().getSecClientHintUserAgentPlatformHeader());
-        }
     }
 
     /**

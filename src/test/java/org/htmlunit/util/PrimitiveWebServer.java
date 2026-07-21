@@ -71,12 +71,28 @@ public class PrimitiveWebServer implements Closeable {
      *
      * @param charset the charset
      * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @param secondResponse the second response, must contain the full response (to start with "HTTP/1.1 200 OK") or null if not used
      * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
      * @throws Exception in case of error
      */
     public PrimitiveWebServer(final Charset charset, final String firstResponse, final String secondResponse, final String otherResponse)
             throws Exception {
-        port_ = WebTestCase.PORT_PRIMITIVE_SERVER;
+        this(WebTestCase.PORT_PRIMITIVE_SERVER, charset, firstResponse, secondResponse, otherResponse);
+    }
+
+    /**
+     * Constructs a new SimpleWebServer.
+     *
+     * @param port the port
+     * @param charset the charset
+     * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @param secondResponse the second response, must contain the full response (to start with "HTTP/1.1 200 OK") or null if not used
+     * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @throws Exception in case of error
+     */
+    public PrimitiveWebServer(final int port, final Charset charset, final String firstResponse, final String secondResponse, final String otherResponse)
+            throws Exception {
+        port_ = port;
         firstResponse_ = firstResponse;
         secondResponse_ = secondResponse;
         otherResponse_ = otherResponse;

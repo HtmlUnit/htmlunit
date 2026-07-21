@@ -14,6 +14,9 @@
  */
 package org.htmlunit;
 
+import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
+import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_PRIORITY;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
@@ -953,24 +956,29 @@ public class HttpWebConnection implements WebConnection {
 
     private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) {
         final List<HttpRequestInterceptor> list = new ArrayList<>();
-        final Map<String, String> requestHeaders = webRequest.getAdditionalHeaders();
+        final Map<String, String> requestHeaders = new HashMap<>(webRequest.getAdditionalHeaders());
         final URL url = webRequest.getUrl();
         final StringBuilder host = new StringBuilder(url.getHost());
+
+        final BrowserVersion browserVersion = webClient_.getBrowserVersion();
 
         final int port = url.getPort();
         if (port > 0 && port != url.getDefaultPort()) {
             host.append(':').append(port);
         }
 
-        // Sec-Fetch-* headers (https://www.w3.org/TR/fetch-metadata/) are only sent
-        // to potentially-trustworthy target origins; computed once up front.
-        final boolean sendSecFetchHeaders = isPotentiallyTrustworthy(url);
+        // Both Sec-Fetch-* (https://www.w3.org/TR/fetch-metadata/) and Client Hints
+        // (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-CH-UA) are
+        // only sent to potentially-trustworthy target origins; computed once up front.
+        final boolean isSecureContext = isPotentiallyTrustworthy(url);
+
         // computed unconditionally: also drives Upgrade-Insecure-Requests below,
-        // which is not gated by origin trustworthiness the way Sec-Fetch-* is
+        // which is not gated by origin trustworthiness the way Sec-Fetch-*/Client
+        // Hints are
         final String secFetchMode = computeSecFetchMode(webRequest);
 
         // make sure the headers are added in the right order
-        final String[] headerNames = webClient_.getBrowserVersion().getHeaderNamesOrdered();
+        final String[] headerNames = browserVersion.getHeaderNamesOrdered();
         for (final String header : headerNames) {
             if (HttpHeader.HOST.equals(header)) {
                 list.add(new HostHeaderHttpRequestInterceptor(host.toString()));
@@ -978,19 +986,27 @@ public class HttpWebConnection implements WebConnection {
             else if (HttpHeader.USER_AGENT.equals(header)) {
                 String headerValue = webRequest.getAdditionalHeader(HttpHeader.USER_AGENT);
                 if (headerValue == null) {
-                    headerValue = webClient_.getBrowserVersion().getUserAgent();
+                    headerValue = browserVersion.getUserAgent();
                 }
                 list.add(new UserAgentHeaderHttpRequestInterceptor(headerValue));
+                requestHeaders.remove(HttpHeader.USER_AGENT);
             }
             else if (HttpHeader.ACCEPT.equals(header)) {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.ACCEPT);
                 if (headerValue != null) {
                     list.add(new AcceptHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.ACCEPT);
                 }
             }
             else if (HttpHeader.ACCEPT_LANGUAGE.equals(header)) {
-                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE);
+                String headerValue = webRequest.getAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE);
                 if (headerValue != null) {
+                    list.add(new AcceptLanguageHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.ACCEPT_LANGUAGE);
+                }
+                else {
+                    // Add standard HtmlUnit headers to the web request if still not present there yet.
+                    headerValue = browserVersion.getAcceptLanguageHeader();
                     list.add(new AcceptLanguageHeaderHttpRequestInterceptor(headerValue));
                 }
             }
@@ -998,14 +1014,16 @@ public class HttpWebConnection implements WebConnection {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.ACCEPT_ENCODING);
                 if (headerValue != null) {
                     list.add(new AcceptEncodingHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.ACCEPT_ENCODING);
                 }
             }
             else if (HttpHeader.SEC_FETCH_DEST.equals(header)) {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_DEST);
                 if (headerValue != null) {
                     list.add(new SecFetchDestHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.SEC_FETCH_DEST);
                 }
-                else if (sendSecFetchHeaders) {
+                else if (isSecureContext) {
                     list.add(new SecFetchDestHeaderHttpRequestInterceptor(webRequest.getFetchDestination().getValue()));
                 }
             }
@@ -1013,8 +1031,9 @@ public class HttpWebConnection implements WebConnection {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_MODE);
                 if (headerValue != null) {
                     list.add(new SecFetchModeHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.SEC_FETCH_MODE);
                 }
-                else if (sendSecFetchHeaders) {
+                else if (isSecureContext) {
                     list.add(new SecFetchModeHeaderHttpRequestInterceptor(secFetchMode));
                 }
             }
@@ -1022,8 +1041,9 @@ public class HttpWebConnection implements WebConnection {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_SITE);
                 if (headerValue != null) {
                     list.add(new SecFetchSiteHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.SEC_FETCH_SITE);
                 }
-                else if (sendSecFetchHeaders) {
+                else if (isSecureContext) {
                     list.add(new SecFetchSiteHeaderHttpRequestInterceptor(computeSecFetchSite(webRequest, url)));
                 }
             }
@@ -1031,44 +1051,80 @@ public class HttpWebConnection implements WebConnection {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_USER);
                 if (headerValue != null) {
                     list.add(new SecFetchUserHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.SEC_FETCH_USER);
                 }
 
                 // Per spec, sent only for navigations backed by real user activation;
                 // real browsers omit it entirely otherwise (never send "?0").
-                else if (sendSecFetchHeaders
+                else if (isSecureContext
                         && WebRequest.FetchMode.NAVIGATE.getValue().equals(secFetchMode)
                         && webRequest.isUserActivation()) {
                     list.add(new SecFetchUserHeaderHttpRequestInterceptor("?1"));
                 }
             }
             else if (HttpHeader.SEC_CH_UA.equals(header)) {
-                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_CH_UA);
-                if (headerValue != null) {
-                    list.add(new SecClientHintUserAgentHeaderHttpRequestInterceptor(headerValue));
+                // Client Hints require a secure context, same as Sec-Fetch-*
+                // (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-CH-UA)
+                if (isSecureContext) {
+                    String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_CH_UA);
+                    if (headerValue != null) {
+                        list.add(new SecClientHintUserAgentHeaderHttpRequestInterceptor(headerValue));
+                        requestHeaders.remove(HttpHeader.SEC_CH_UA);
+                    }
+                    else {
+                        if (browserVersion.hasFeature(HTTP_HEADER_CH_UA)) {
+                            headerValue = browserVersion.getSecClientHintUserAgentHeader();
+                            list.add(new SecClientHintUserAgentHeaderHttpRequestInterceptor(headerValue));
+                        }
+                    }
                 }
             }
             else if (HttpHeader.SEC_CH_UA_MOBILE.equals(header)) {
-                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE);
-                if (headerValue != null) {
-                    list.add(new SecClientHintUserAgentMobileHeaderHttpRequestInterceptor(headerValue));
+                if (isSecureContext) {
+                    final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE);
+                    if (headerValue != null) {
+                        list.add(new SecClientHintUserAgentMobileHeaderHttpRequestInterceptor(headerValue));
+                        requestHeaders.remove(HttpHeader.SEC_CH_UA_MOBILE);
+                    }
+                    else {
+                        if (browserVersion.hasFeature(HTTP_HEADER_CH_UA)) {
+                            list.add(new SecClientHintUserAgentMobileHeaderHttpRequestInterceptor("?0"));
+                        }
+                    }
                 }
             }
             else if (HttpHeader.SEC_CH_UA_PLATFORM.equals(header)) {
-                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM);
-                if (headerValue != null) {
-                    list.add(new SecClientHintUserAgentPlatformHeaderHttpRequestInterceptor(headerValue));
+                if (isSecureContext) {
+                    String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM);
+                    if (headerValue != null) {
+                        list.add(new SecClientHintUserAgentPlatformHeaderHttpRequestInterceptor(headerValue));
+                        requestHeaders.remove(HttpHeader.SEC_CH_UA_PLATFORM);
+                    }
+                    else {
+                        if (browserVersion.hasFeature(HTTP_HEADER_CH_UA)) {
+                            headerValue = browserVersion.getSecClientHintUserAgentPlatformHeader();
+                            list.add(new SecClientHintUserAgentPlatformHeaderHttpRequestInterceptor(headerValue));
+                        }
+                    }
                 }
             }
             else if (HttpHeader.PRIORITY.equals(header)) {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.PRIORITY);
                 if (headerValue != null) {
                     list.add(new PriorityHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.PRIORITY);
+                }
+                else {
+                    if (browserVersion.hasFeature(HTTP_HEADER_PRIORITY)) {
+                        list.add(new PriorityHeaderHttpRequestInterceptor("u=0, i"));
+                    }
                 }
             }
             else if (HttpHeader.UPGRADE_INSECURE_REQUESTS.equals(header)) {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS);
                 if (headerValue != null) {
                     list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.UPGRADE_INSECURE_REQUESTS);
                 }
 
                 // Real browsers only send this for navigations (top-level, iframe, frame),
@@ -1081,6 +1137,7 @@ public class HttpWebConnection implements WebConnection {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.REFERER);
                 if (headerValue != null) {
                     list.add(new RefererHeaderHttpRequestInterceptor(headerValue));
+                    requestHeaders.remove(HttpHeader.REFERER);
                 }
             }
             else if (HttpHeader.CONNECTION.equals(header)) {

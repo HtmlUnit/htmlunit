@@ -942,8 +942,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Accept-Encoding: gzip, deflate, br",
                       "Accept-Language: en-US,en;q=0.9",
                       "Origin: http://localhost:§§PORT§§",
-                      "Cache-Control: max-age=0",
                       "Ping-To: http://localhost:§§PORT§§/2.html",
+                      "Cache-Control: max-age=0",
                       "Ping-From: http://localhost:§§PORT§§/",
                       "Content-Length: 4",
                       "Content-Type: text/plain; charset=ISO-8859-1", // text/ping
@@ -963,8 +963,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept-Encoding: gzip, deflate, br",
                     "Accept-Language: en-US,en;q=0.9",
                     "Origin: http://localhost:§§PORT§§",
-                    "Cache-Control: max-age=0",
                     "Ping-To: http://localhost:§§PORT§§/2.html",
+                    "Cache-Control: max-age=0",
                     "Ping-From: http://localhost:§§PORT§§/",
                     "Content-Length: 4",
                     "Content-Type: text/plain; charset=ISO-8859-1", // text/ping
@@ -2851,6 +2851,135 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             final String request = primitiveWebServer.getRequests().get(2);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * Tests a redirect that crosses to a genuinely different site
+     * ("host1.htmlunit-dev.org" is not same-site with "localhost"). The final
+     * request should carry Sec-Fetch-Site: cross-site, even though it was the
+     * redirect response (not the original navigation) that crossed origins.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(
+          CHROME = {"GET /target.html HTTP/1.1",
+                    "Host: host1.htmlunit-dev.org:§§PORT§§",
+                    "Connection: keep-alive",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                    "Referer: http://localhost:22225/",
+                    "Accept-Encoding: gzip, deflate",
+                    "Accept-Language: en-US,en;q=0.9"},
+          EDGE = {"GET /target.html HTTP/1.1",
+                  "Host: host1.htmlunit-dev.org:§§PORT§§",
+                  "Connection: keep-alive",
+                  "Upgrade-Insecure-Requests: 1",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                  "Referer: http://localhost:22225/",
+                  "Accept-Encoding: gzip, deflate",
+                  "Accept-Language: en-US,en;q=0.9"},
+          FF = {"GET /target.html HTTP/1.1",
+                "Host: host1.htmlunit-dev.org:§§PORT§§",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate",
+                "Referer: http://localhost:22225/",
+                "Connection: keep-alive",
+                "Upgrade-Insecure-Requests: 1",
+                "Priority: u=0, i"},
+          FF_ESR = {"GET /target.html HTTP/1.1",
+                    "Host: host1.htmlunit-dev.org:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate",
+                    "Referer: http://localhost:22225/",
+                    "Connection: keep-alive",
+                    "Upgrade-Insecure-Requests: 1",
+                    "Priority: u=0, i"})
+    @HtmlUnitNYI(
+          CHROME = {"GET /target.html HTTP/1.1",
+                    "Host: host1.htmlunit-dev.org:§§PORT§§",
+                    "Connection: keep-alive",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                    "Referer: http://localhost:22225/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+          EDGE = {"GET /target.html HTTP/1.1",
+                  "Host: host1.htmlunit-dev.org:§§PORT§§",
+                  "Connection: keep-alive",
+                  "Upgrade-Insecure-Requests: 1",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                  "Referer: http://localhost:22225/",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Accept-Language: en-US,en;q=0.9"},
+          FF = {"GET /target.html HTTP/1.1",
+                "Host: host1.htmlunit-dev.org:§§PORT§§",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate, br",
+                "Connection: keep-alive",
+                "Referer: http://localhost:22225/",
+                "Upgrade-Insecure-Requests: 1",
+                "Priority: u=0, i"},
+          FF_ESR = {"GET /target.html HTTP/1.1",
+                    "Host: host1.htmlunit-dev.org:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:22225/",
+                    "Upgrade-Insecure-Requests: 1",
+                    "Priority: u=0, i"})
+    public void redirectToCrossSiteHost() throws Exception {
+        final String originUrl = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
+
+        final String targetResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + "Hi";
+
+        try (PrimitiveWebServer crossServer = new PrimitiveWebServer(PORT_PROXY_SERVER, null, targetResponse, null, null)) {
+            final String index = DOCTYPE_HTML
+                    + "<html><body><a id='my' href='hop'>Click me</a></body></html>";
+            final String indexResponse = "HTTP/1.1 200 OK\r\n"
+                    + "Content-Length: " + index.length() + "\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "Connection: close\r\n"
+                    + "\r\n"
+                    + index;
+            final String redirectResponse = "HTTP/1.1 302 Found\r\n"
+                    + "Content-Length: 0\r\n"
+                    + "Location: http://host1.htmlunit-dev.org:" + crossServer.getPort() + "/target.html\r\n"
+                    + "Connection: close\r\n"
+                    + "\r\n";
+
+            shutDownAll();
+            try (PrimitiveWebServer originServer = new PrimitiveWebServer(null, indexResponse, redirectResponse)) {
+                final WebDriver driver = getWebDriver();
+
+                driver.get(originUrl);
+                driver.findElement(By.id("my")).click();
+
+                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer);
+
+                // the request that actually landed on the cross-site server
+                final String request = crossServer.getRequests().get(0);
+                final String[] headers = request.split("\\r\\n");
+                assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+            }
         }
     }
 
