@@ -4008,6 +4008,157 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
                     "Sec-Fetch-Site: same-origin",
                     "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Dest: frame",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Accept-Language: en-US,en;q=0.9"},
+          EDGE = {"GET /frame.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "sec-ch-ua-mobile: ?0",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "Upgrade-Insecure-Requests: 1",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Dest: frame",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Accept-Language: en-US,en;q=0.9"},
+          FF = {"GET /frame.html HTTP/1.1",
+                "Host: localhost:§§PORT§§",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate, br, zstd",
+                "Connection: keep-alive",
+                "Referer: http://localhost:§§PORT§§/",
+                "Upgrade-Insecure-Requests: 1",
+                "Sec-Fetch-Dest: frame",
+                "Sec-Fetch-Mode: navigate",
+                "Sec-Fetch-Site: same-origin",
+                "Priority: u=4"},
+          FF_ESR = {"GET /frame.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Upgrade-Insecure-Requests: 1",
+                    "Sec-Fetch-Dest: frame",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Site: same-origin",
+                    "Priority: u=4"})
+    @HtmlUnitNYI(
+          CHROME = {"GET /frame.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Dest: frame",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+          EDGE = {"GET /frame.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "sec-ch-ua-mobile: ?0",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "Upgrade-Insecure-Requests: 1",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Dest: frame",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Accept-Language: en-US,en;q=0.9"},
+          FF = {"GET /frame.html HTTP/1.1",
+                "Host: localhost:§§PORT§§",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate, br",
+                "Connection: keep-alive",
+                "Referer: http://localhost:§§PORT§§/",
+                "Upgrade-Insecure-Requests: 1",
+                "Sec-Fetch-Dest: frame",
+                "Sec-Fetch-Mode: navigate",
+                "Sec-Fetch-Site: same-origin",
+                "Priority: u=0, i"},
+          FF_ESR = {"GET /frame.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Upgrade-Insecure-Requests: 1",
+                    "Sec-Fetch-Dest: frame",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Site: same-origin",
+                    "Priority: u=0, i"})
+    public void frameLoad() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><frameset><frame src='frame.html'></frameset></html>";
+        final String htmlResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
+        final String frameResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + "Hi";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, htmlResponse, frameResponse)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * Tests the Sec-Fetch-* headers sent for an &lt;iframe src&gt; auto-load. Unlike an
+     * anchor/form navigation, there is no click or user gesture involved at all here, so
+     * real browsers never send Sec-Fetch-User for it - not even the (hardcoded, still
+     * wrong for anchor/area) "?1" HtmlUnit currently sends for those.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(
+          CHROME = {"GET /frame.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
                     "Sec-Fetch-Dest: iframe",
                     "Referer: http://localhost:§§PORT§§/",
                     "Accept-Encoding: gzip, deflate, br, zstd",
