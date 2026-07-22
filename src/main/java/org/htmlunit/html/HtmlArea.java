@@ -14,22 +14,28 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.ANCHOR_SEND_PING_REQUEST;
 import static org.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.HttpHeader;
+import org.htmlunit.HttpMethod;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.geometry.Circle2D;
 import org.htmlunit.util.geometry.Polygon2D;
@@ -93,7 +99,37 @@ public class HtmlArea extends HtmlElement {
                 throw new IllegalStateException(
                         "Not a valid url: " + getHrefAttribute(), e);
             }
-            final WebRequest request = new WebRequest(url, page.getCharset(), page.getUrl());
+
+            final BrowserVersion browser = webClient.getBrowserVersion();
+            if (ATTRIBUTE_NOT_DEFINED != getPingAttribute() && browser.hasFeature(ANCHOR_SEND_PING_REQUEST)) {
+                final URL pingUrl = enclosingPage.getFullyQualifiedUrl(getPingAttribute());
+                final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
+                pingRequest.setAdditionalHeader(HttpHeader.PING_FROM, page.getUrl().toExternalForm());
+                pingRequest.setAdditionalHeader(HttpHeader.PING_TO, url.toExternalForm());
+                pingRequest.setRequestBody("PING");
+
+                // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
+                // hyperlink-auditing (ping) requests have no destination and are always no-cors
+                pingRequest.setFetchDestination(WebRequest.FetchDestination.EMPTY);
+                pingRequest.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
+                pingRequest.setRequestingUrl(page.getUrl());
+
+                webClient.loadWebResponse(pingRequest);
+            }
+
+            // rel="noreferrer" suppresses the Referer header only; Sec-Fetch-Site
+            // (set below via markAsNavigation) still reflects the true initiator
+            // relationship regardless.
+            final WebRequest request = new WebRequest(url, page.getCharset(),
+                    relContainsNoreferrer() ? null : page.getUrl());
+
+            // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
+            // this is a top-level navigation, initiated by the page containing the
+            // image map. TODO: userActivation is hardcoded to true here for the same
+            // reason as HtmlAnchor#doClickStateUpdate() - this method has no way to
+            // tell a real click apart from a script-triggered one (e.g. area.click()).
+            request.markAsNavigation(page.getUrl(), true);
+
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
             final String target = enclosingPage.getResolvedTarget(getTargetAttribute());
             webClient.getPage(webClient.openTargetWindow(webWindow, target, WebClient.TARGET_SELF), request);
@@ -209,6 +245,35 @@ public class HtmlArea extends HtmlElement {
      */
     public final String getTargetAttribute() {
         return getAttributeDirect("target");
+    }
+
+    /**
+     * Returns the value of the attribute {@code rel}. Refer to the
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute {@code rel} or an empty string if that attribute isn't defined
+     */
+    public final String getRelAttribute() {
+        return getAttributeDirect("rel");
+    }
+
+    /**
+     * Returns the value of the attribute {@code ping}.
+     *
+     * @return the value of the attribute {@code ping}
+     */
+    public final String getPingAttribute() {
+        return getAttributeDirect("ping");
+    }
+
+    private boolean relContainsNoreferrer() {
+        String rel = getRelAttribute();
+        if (rel != null) {
+            rel = rel.toLowerCase(Locale.ROOT);
+            return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "noreferrer");
+        }
+        return false;
     }
 
     /**

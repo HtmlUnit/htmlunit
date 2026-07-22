@@ -213,9 +213,7 @@ public class HtmlAnchor extends HtmlElement {
         // script-triggered one (e.g. anchor.click()); real browsers only send
         // Sec-Fetch-User for the former. Once the click/event dispatch path exposes a
         // trusted/user-gesture flag, thread it through instead of hardcoding this.
-        webRequest.setFetchDestination(WebRequest.FetchDestination.DOCUMENT);
-        webRequest.setRequestingUrl(pageUrl);
-        webRequest.setUserActivation(true);
+        webRequest.markAsNavigation(page.getUrl(), true);
 
         if (!relContainsNoreferrer()) {
             webRequest.setRefererHeader(page.getUrl());

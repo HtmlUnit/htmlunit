@@ -910,6 +910,28 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Convenience method for the common case of a top-level navigation (an
+     * anchor/area click, a form submission, a script-driven location change, ...):
+     * sets {@link FetchDestination#DOCUMENT}, the initiator URL, and whether the
+     * navigation was backed by genuine user activation, all in one call.
+     * <p>
+     * Every navigation-triggering call site needs all three of these set
+     * together for correct {@code Sec-Fetch-*} headers; bundling them here
+     * makes it harder for a call site to set some of them and forget the rest.
+     * </p>
+     *
+     * @param requestingUrl the URL of the page initiating this navigation, or
+     *                      {@code null} if there is none (e.g. a typed URL)
+     * @param userActivation whether this navigation was triggered by a real
+     *                       user gesture as opposed to script
+     */
+    public void markAsNavigation(final URL requestingUrl, final boolean userActivation) {
+        setFetchDestination(FetchDestination.DOCUMENT);
+        setRequestingUrl(requestingUrl);
+        setUserActivation(userActivation);
+    }
+
+    /**
      * Creates or updates this object..
      *
      * Sets the specified name/value pair in the additional HTTP headers.

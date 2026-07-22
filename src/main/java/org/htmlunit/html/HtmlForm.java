@@ -348,9 +348,7 @@ public class HtmlForm extends HtmlElement {
         // e.g. a click on a submit button/input) or triggered purely by script
         // (submitElement == null, e.g. form.submit()) - see this method's javadoc -
         // so Sec-Fetch-User can be set correctly rather than hardcoded.
-        request.setFetchDestination(WebRequest.FetchDestination.DOCUMENT);
-        request.setRequestingUrl(htmlPage.getUrl());
-        request.setUserActivation(submitElement != null);
+        request.markAsNavigation(htmlPage.getUrl(), submitElement != null);
 
         // forms are ignoring the rel='noreferrer'
         if (browser.hasFeature(FORM_IGNORE_REL_NOREFERRER)

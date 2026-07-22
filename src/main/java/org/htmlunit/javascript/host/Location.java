@@ -343,17 +343,15 @@ public class Location extends HtmlUnitScriptable {
                 url = UrlUtils.getUrlWithNewRef(url, null);
             }
 
-            final WebRequest request = new WebRequest(url,
+            final WebRequest webRequest = new WebRequest(url,
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
-            request.setRefererHeader(callingPage.getUrl());
+            webRequest.setRefererHeader(callingPage.getUrl());
 
-            request.setFetchDestination(WebRequest.FetchDestination.DOCUMENT);
-            request.setRequestingUrl(getUrl());
-            request.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
-            request.setUserActivation(false);
+            webRequest.markAsNavigation(getUrl(), false);
+            webRequest.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
 
             webWindow = window_.getWebWindow();
-            webWindow.getWebClient().download(webWindow, "", request, true, null, "JS set location");
+            webWindow.getWebClient().download(webWindow, "", webRequest, true, null, "JS set location");
         }
         catch (final MalformedURLException e) {
             if (LOG.isErrorEnabled()) {
@@ -632,10 +630,8 @@ public class Location extends HtmlUnitScriptable {
         final WebRequest webRequest = new WebRequest(url,
                 browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
 
-        webRequest.setFetchDestination(WebRequest.FetchDestination.DOCUMENT);
-        webRequest.setRequestingUrl(getUrl());
+        webRequest.markAsNavigation(getUrl(), false);
         webRequest.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
-        webRequest.setUserActivation(false);
 
         webRequest.setRefererHeader(getUrl());
 
