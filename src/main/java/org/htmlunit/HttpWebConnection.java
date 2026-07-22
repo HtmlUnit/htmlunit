@@ -999,15 +999,10 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (HttpHeader.ACCEPT_LANGUAGE.equals(header)) {
-                String headerValue = webRequest.getAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE);
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE);
                 if (headerValue != null) {
                     list.add(new AcceptLanguageHeaderHttpRequestInterceptor(headerValue));
                     requestHeaders.remove(HttpHeader.ACCEPT_LANGUAGE);
-                }
-                else {
-                    // Add standard HtmlUnit headers to the web request if still not present there yet.
-                    headerValue = browserVersion.getAcceptLanguageHeader();
-                    list.add(new AcceptLanguageHeaderHttpRequestInterceptor(headerValue));
                 }
             }
             else if (HttpHeader.ACCEPT_ENCODING.equals(header)) {

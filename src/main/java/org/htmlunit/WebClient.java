@@ -1828,6 +1828,14 @@ public class WebClient implements Serializable, AutoCloseable {
                 wrs.setAdditionalHeader(name, value);
             }
         });
+
+        // Add standard HtmlUnit headers to the web request if still not present there yet.
+        if (!wrs.isAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE)) {
+            wrs.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, getBrowserVersion().getAcceptLanguageHeader());
+        }
+
+        // the sec- stuff is done later in the HttpWebConnection
+        // this implies that stuff is not visible in the MockWebConnection
     }
 
     /**
