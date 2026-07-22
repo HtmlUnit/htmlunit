@@ -8,6 +8,25 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Chrome/Edge 150, Bugfixes">
+            <action type="update" dev="rbri">
+                The (i)frames  request now sends also the acceppt header.
+            </action>
+            <action type="update" dev="rbri">
+                Area link handling is now in sync with anchor (implementation shared via new class HyperlinkElementSupport
+                and new interface HyperlinkElement). This addes e.g. 'ping' and 'download' attribute support.
+            </action>
+            <action type="update" dev="rbri">
+                Script web request respects the 'crossorigin' attribute.
+            </action>
+            <action type="update" dev="rbri">
+                Anchor ping request now sends also the acceppt encoding and cache control headers.
+            </action>
+            <action type="update" dev="rbri">
+                Anchor web request respects the 'crossorigin' attribute.
+            </action>
+            <action type="update" dev="rbri">
+                Major update of the WebRequest to improve the Sec-Fetch-* HTTP header support.
+            </action>
             <action type="update" dev="rhino">
                 The url/anchor hostname setter handling got some fixes.
             </action>
