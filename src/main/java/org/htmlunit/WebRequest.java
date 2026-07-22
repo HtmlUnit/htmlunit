@@ -919,6 +919,11 @@ public class WebRequest implements Serializable {
      * together for correct {@code Sec-Fetch-*} headers; bundling them here
      * makes it harder for a call site to set some of them and forget the rest.
      * </p>
+     * <p>
+     * For navigations whose destination is not {@link FetchDestination#DOCUMENT}
+     * (e.g. an {@code <iframe>}/{@code <frame>} load), use
+     * {@link #markAsNavigation(FetchDestination, URL, boolean)} instead.
+     * </p>
      *
      * @param requestingUrl the URL of the page initiating this navigation, or
      *                      {@code null} if there is none (e.g. a typed URL)
@@ -926,7 +931,24 @@ public class WebRequest implements Serializable {
      *                       user gesture as opposed to script
      */
     public void markAsNavigation(final URL requestingUrl, final boolean userActivation) {
-        setFetchDestination(FetchDestination.DOCUMENT);
+        markAsNavigation(FetchDestination.DOCUMENT, requestingUrl, userActivation);
+    }
+
+    /**
+     * Same as {@link #markAsNavigation(URL, boolean)}, but for navigations whose
+     * destination isn't a top-level {@link FetchDestination#DOCUMENT} - currently
+     * only {@code <iframe>}/{@code <frame>} loads ({@link FetchDestination#IFRAME}/
+     * {@link FetchDestination#FRAME}).
+     *
+     * @param destination the navigation's destination
+     * @param requestingUrl the URL of the page initiating this navigation, or
+     *                      {@code null} if there is none
+     * @param userActivation whether this navigation was triggered by a real
+     *                       user gesture as opposed to script
+     */
+    public void markAsNavigation(final FetchDestination destination, final URL requestingUrl,
+            final boolean userActivation) {
+        setFetchDestination(destination);
         setRequestingUrl(requestingUrl);
         setUserActivation(userActivation);
     }

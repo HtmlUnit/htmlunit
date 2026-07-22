@@ -191,22 +191,35 @@ public abstract class BaseFrameElement extends HtmlElement {
             }
 
             final Charset pageCharset = page.getCharset();
-            final WebRequest request = new WebRequest(url, pageCharset, pageUrl);
 
-            if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
+            if (isAlreadyLoadedByAncestor(url, pageCharset)) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
                 return;
             }
+
+            final WebRequest webRequest = new WebRequest(url, webClient.getBrowserVersion().getHtmlAcceptHeader(),
+                                                            webClient.getBrowserVersion().getAcceptEncodingHeader());
+            webRequest.setCharset(pageCharset);
+            webRequest.setRefererHeader(pageUrl);
 
             // Use parent document's charset as container charset if same origin
             // https://html.spec.whatwg.org/multipage/parsing.html#determining-the-character-encoding
             if (Objects.equals(pageUrl.getProtocol(), url.getProtocol())
                     && Objects.equals(pageUrl.getAuthority(), url.getAuthority())) {
-                request.setDefaultResponseContentCharset(pageCharset);
+                webRequest.setDefaultResponseContentCharset(pageCharset);
             }
 
+            // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/): a frame/iframe
+            // load is a navigation initiated by the containing page, but - unlike a click
+            // or form submission - never carries user activation, since there is no
+            // gesture involved in an automatic <iframe>/<frame> load.
+            final WebRequest.FetchDestination fetchDestination = this instanceof HtmlInlineFrame
+                    ? WebRequest.FetchDestination.IFRAME
+                    : WebRequest.FetchDestination.FRAME;
+            webRequest.markAsNavigation(fetchDestination, pageUrl, false);
+
             try {
-                webClient.getPage(enclosedWindow_, request);
+                webClient.getPage(enclosedWindow_, webRequest);
             }
             catch (final IOException e) {
                 if (LOG.isErrorEnabled()) {
