@@ -14,6 +14,7 @@
  */
 package org.htmlunit.httpclient;
 
+import java.net.IDN;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.http.conn.util.InetAddressUtils;
+import org.apache.http.conn.util.PublicSuffixMatcher;
+import org.apache.http.conn.util.PublicSuffixMatcherLoader;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
@@ -39,8 +43,38 @@ import org.htmlunit.util.UrlUtils;
  */
 public final class HttpClientConverter {
 
+    private static final PublicSuffixMatcher PUBLIC_SUFFIX_MATCHER = PublicSuffixMatcherLoader.getDefault();
+
     private HttpClientConverter() {
         // util class
+    }
+
+    /**
+     * Returns the "registrable domain" (effective TLD+1) for the given host, per the
+     * public suffix list (https://publicsuffix.org/). Backed by Apache HttpClient's own
+     * {@link PublicSuffixMatcher}, already on the classpath as part of the httpclient
+     * dependency this class already uses elsewhere for cookie handling - no new
+     * dependency needed, and it avoids the wrong results a naive "last two labels"
+     * heuristic would give for domains under multi-part public suffixes (e.g. a
+     * {@code co.uk}-style suffix, or a private-section entry like {@code github.io}).
+     * <p>
+     * Note this is deliberately unrelated to {@link HtmlUnitDomainHandler}'s cookie
+     * domain-matching: RFC 6265 cookie domain-match is a simple suffix/subdomain check
+     * against a single cookie-supplied domain, not a registrable-domain computation
+     * between two hosts, so there is nothing to share between the two.
+     * </p>
+     * @param host the host part of a URL
+     * @return the registrable domain, or the host itself if it doesn't have one (e.g.
+     *         a bare public suffix, a single-label host like {@code localhost}, or an
+     *         IP address - which per the HTML "obtain a site" algorithm is always its
+     *         own site, never run through the public suffix list at all)
+     */
+    public static String registrableDomain(final String host) {
+        if (InetAddressUtils.isIPv4Address(host) || InetAddressUtils.isIPv6Address(host)) {
+            return host;
+        }
+        final String domainRoot = IDN.toASCII(PUBLIC_SUFFIX_MATCHER.getDomainRoot(host));
+        return domainRoot == null ? host : domainRoot;
     }
 
     /**

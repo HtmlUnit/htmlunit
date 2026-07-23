@@ -111,6 +111,7 @@ import org.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import org.htmlunit.httpclient.HtmlUnitCookieStore;
 import org.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.httpclient.SocksConnectionSocketFactory;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.MimeType;
@@ -900,12 +901,6 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Same-site comparison per the Fetch Metadata / HTML "same site" algorithm: same
      * scheme and same registrable domain (eTLD+1), ignoring port and subdomain.
-     * <p>
-     * TODO: this currently uses a simplistic "last two labels" heuristic for the
-     * registrable domain, which is wrong for domains under multi-part public suffixes
-     * (e.g. {@code co.uk}). If HtmlUnit already has a public-suffix-list-aware domain
-     * matcher for cookie handling, that should be reused here instead.
-     * </p>
      *
      * @param a first URL
      * @param b second URL
@@ -915,15 +910,12 @@ public class HttpWebConnection implements WebConnection {
         if (!a.getProtocol().equals(b.getProtocol())) {
             return false;
         }
-        return registrableDomain(a.getHost()).equalsIgnoreCase(registrableDomain(b.getHost()));
-    }
 
-    private static String registrableDomain(final String host) {
-        final String[] labels = host.split("\\.");
-        if (labels.length <= 2) {
-            return host;
-        }
-        return labels[labels.length - 2] + '.' + labels[labels.length - 1];
+        final String registrableDomainA = HttpClientConverter.registrableDomain(a.getHost());
+        final String registrableDomainB = HttpClientConverter.registrableDomain(b.getHost());
+
+        // both are normalized and in lower case
+        return registrableDomainA.equals(registrableDomainB);
     }
 
     /**
