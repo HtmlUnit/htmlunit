@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.net.URL;
+import java.net.http.HttpClient;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -41,7 +42,6 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.htmlunit.WebServerTestCase;
-import org.htmlunit.html.HtmlFileInput;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +52,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Tests for {@link HtmlFileInput}.
+ * Tests for {@link HttpClient}.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
