@@ -248,7 +248,7 @@ public class NativeErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "10",
-            FF = "undefined",
+            FF = "128",
             FF_ESR = "undefined")
     public void stackTraceLimit() throws Exception {
         final String html = DOCTYPE_HTML

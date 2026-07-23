@@ -15,6 +15,7 @@
 package org.htmlunit.javascript;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
+import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT_128;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL;
 
 import java.io.IOException;
@@ -462,6 +463,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(globalThis, "Error");
         if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
             errorObject.defineProperty("stackTraceLimit", 10, ScriptableObject.EMPTY);
+        }
+        else if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT_128)) {
+            errorObject.defineProperty("stackTraceLimit", 128, ScriptableObject.EMPTY);
         }
         else {
             ScriptableObject.deleteProperty(errorObject, "stackTraceLimit");

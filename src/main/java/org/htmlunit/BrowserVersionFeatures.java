@@ -250,6 +250,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_ERROR_STACK_TRACE_LIMIT,
 
+    /** Javascript {@code Error.stackTraceLimit}. */
+    @BrowserFeature(FF)
+    JS_ERROR_STACK_TRACE_LIMIT_128,
+
     /** Javascript InputEvent reads the inputType property from data. */
     @BrowserFeature({FF, FF_ESR})
     JS_EVENT_INPUT_CTOR_INPUTTYPE,

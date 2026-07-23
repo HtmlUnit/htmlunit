@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="5.4.0" date="August xx, 2026" description="Chrome/Edge 150, Bugfixes">
+        <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="update" dev="rbri">
+                Error.stackTraceLimit is available in FF 153.
+            </action>
             <action type="update" dev="rbri">
                 The (i)frames  request now sends also the acceppt header.
             </action>
