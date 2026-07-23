@@ -403,9 +403,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"uninitialized", "complete"},
-            CHROME = {"complete", "complete"},
-            EDGE = {"complete", "complete"})
+    @Alerts(DEFAULT = {"complete", "complete"},
+            FF_ESR = {"uninitialized", "complete"})
     @HtmlUnitNYI(CHROME = {"loading", "complete"},
             EDGE = {"loading", "complete"},
             FF = {"loading", "complete"},
