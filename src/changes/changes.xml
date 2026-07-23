@@ -9,6 +9,9 @@
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
             <action type="update" dev="rbri">
+                The area element supports the 'type' property in FF 153.
+            </action>
+            <action type="update" dev="rbri">
                 Error.stackTraceLimit is available in FF 153.
             </action>
             <action type="update" dev="rbri">

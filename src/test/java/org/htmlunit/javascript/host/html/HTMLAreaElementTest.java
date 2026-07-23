@@ -87,6 +87,87 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            FF = {"", "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown"})
+    public void getType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    alertType('idWithout');\n"
+            + "    alertType('idEmpty');\n"
+            + "    alertType('idText');\n"
+            + "    alertType('idCase');\n"
+            + "    alertType('idWhitespace');\n"
+            + "    alertType('idPdf');\n"
+            + "    alertType('idUnknown');\n"
+            + "  }\n"
+            + "  function alertType(id) {\n"
+            + "    var anchor = document.getElementById(id);\n"
+            + "    log(anchor.type);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <map><area id='idWithout' href='" + URL_SECOND + "'/></map>\n"
+            + "  <map><area id='idEmpty' href='" + URL_SECOND + "' type=''/></map>\n"
+            + "  <map><area id='idText' href='" + URL_SECOND + "' type='text/html'/></map>\n"
+            + "  <map><area id='idCase' href='" + URL_SECOND + "' type='TExT/hTMl'/></map>\n"
+            + "  <map><area id='idWhitespace' href='" + URL_SECOND + "' type=' text/html '/></map>\n"
+            + "  <map><area id='idPdf' href='" + URL_SECOND + "' type='application/pdf'/></map>\n"
+            + "  <map><area id='idUnknown' href='" + URL_SECOND + "' type='unknown'/></map>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "", " TExT/hTMl  ", "unknown", "application/pdf"},
+            FF = {"text/html", "", " TExT/hTMl  ", "unknown", "application/pdf"})
+    public void setType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  function test() {\n"
+            + "    var anchor = document.getElementById('id');\n"
+            + "    log(anchor.type);\n"
+
+            + "    anchor.type = '';\n"
+            + "    log(anchor.type);\n"
+
+            + "    anchor.type = ' TExT/hTMl  ';\n"
+            + "    log(anchor.type);\n"
+
+            + "    anchor.type = 'unknown';\n"
+            + "    log(anchor.type);\n"
+
+            + "    anchor.type = 'application/pdf';\n"
+            + "    log(anchor.type);\n"
+
+            + "  }\n"
+            + "  function alertType(id) {\n"
+            + "    var anchor = document.getElementById(id);\n"
+            + "    log(anchor.type);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <map><area id='id' href='" + URL_SECOND + "'  type='text/html'/></map>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"[object HTMLButtonElement]", "[object HTMLButtonElement]",
                        "§§URL§§", "http://srv/htmlunit.org"},
             FF = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"},

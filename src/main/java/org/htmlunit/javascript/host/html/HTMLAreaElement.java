@@ -16,10 +16,12 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlArea;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
@@ -92,6 +94,24 @@ public class HTMLAreaElement extends HTMLElement {
     @Override
     protected boolean isEndTagForbidden() {
         return true;
+    }
+
+    /**
+     * Returns the {@code type} attribute.
+     * @return the {@code type} attribute
+     */
+    @JsxGetter(FF)
+    public String getType() {
+        return getDomNodeOrDie().getAttributeDirect(DomElement.TYPE_ATTRIBUTE);
+    }
+
+    /**
+     * Sets the {@code type} attribute.
+     * @param type the {@code type} attribute value
+     */
+    @JsxSetter(FF)
+    public void setType(final String type) {
+        getDomNodeOrDie().setAttribute(DomElement.TYPE_ATTRIBUTE, type);
     }
 
     /**
