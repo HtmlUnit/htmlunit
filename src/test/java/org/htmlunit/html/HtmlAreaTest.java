@@ -30,7 +30,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Tests for {@link HtmlArea}.
@@ -386,7 +388,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
             + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
             + "<map name='somename'>\n"
-            + "  <area href='javascript:log(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
+            + "  <area href='javascript:log(\"clicked\")' id='a2' shape='rect' coords='0,0,145,126'/>\n"
             + "</map></body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -400,7 +402,13 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         verifyTitle2(driver);
 
-        driver.findElement(By.id("a2")).click();
+        if (useRealBrowser() && getBrowserVersion().isFirefox()) {
+            final WebElement img = driver.findElement(By.tagName("img"));
+            new Actions(driver).moveToElement(img, 10, 10).click().perform();
+        }
+        else {
+            driver.findElement(By.id("a2")).click();
+        }
 
         verifyTitle2(driver, "clicked");
         if (driver instanceof HtmlUnitDriver) {
@@ -414,7 +422,6 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("clicked")
-    @BuggyWebDriver(FF = "Todo", FF_ESR = "Todo")
     public void click_javascriptUrlMixedCase() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -426,7 +433,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
             + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
             + "<map name='somename'>\n"
-            + "  <area href='javasCRIpT:log(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
+            + "  <area href='javasCRIpT:log(\"clicked\")' id='a2' shape='rect' coords='0,0,145,126'/>\n"
             + "</map>\n"
             + "</body></html>";
 
@@ -441,7 +448,13 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         verifyTitle2(driver);
 
-        driver.findElement(By.id("a2")).click();
+        if (useRealBrowser() && getBrowserVersion().isFirefox()) {
+            final WebElement img = driver.findElement(By.tagName("img"));
+            new Actions(driver).moveToElement(img, 10, 10).click().perform();
+        }
+        else {
+            driver.findElement(By.id("a2")).click();
+        }
 
         verifyTitle2(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver) {
@@ -455,7 +468,6 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("clicked")
-    @BuggyWebDriver(FF = "Todo", FF_ESR = "Todo")
     public void click_javascriptUrlLeadingWhitespace() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -467,7 +479,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
             + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
             + "<map name='somename'>\n"
-            + "  <area href='    javascript:log(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
+            + "  <area href='    javascript:log(\"clicked\")' id='a2' shape='rect' coords='0,0,145,126'/>\n"
             + "</map></body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -481,7 +493,13 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         verifyTitle2(driver);
 
-        driver.findElement(By.id("a2")).click();
+        if (useRealBrowser() && getBrowserVersion().isFirefox()) {
+            final WebElement img = driver.findElement(By.tagName("img"));
+            new Actions(driver).moveToElement(img, 10, 10).click().perform();
+        }
+        else {
+            driver.findElement(By.id("a2")).click();
+        }
 
         verifyTitle2(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver) {
@@ -496,7 +514,6 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @BuggyWebDriver(FF = "Todo", FF_ESR = "Todo")
     public void thisInJavascriptHref() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -508,7 +525,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
             + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
             + "<map name='somename'>\n"
-            + "  <area href='javascript:log(this == window)' id='a2' shape='rect' coords='0,0,30,30'/>\n"
+            + "  <area href='javascript:log(this == window)' id='a2' shape='rect' coords='0,0,145,126'/>\n"
             + "</map></body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -522,7 +539,13 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         verifyTitle2(driver);
 
-        driver.findElement(By.id("a2")).click();
+        if (useRealBrowser() && getBrowserVersion().isFirefox()) {
+            final WebElement img = driver.findElement(By.tagName("img"));
+            new Actions(driver).moveToElement(img, 10, 10).click().perform();
+        }
+        else {
+            driver.findElement(By.id("a2")).click();
+        }
 
         verifyTitle2(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver) {
