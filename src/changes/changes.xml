@@ -8,6 +8,16 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="update" dev="rbri">
+                module java.net.http is now required
+            </action>
+            <action type="update" dev="rbri">
+                neko: major update - the select tag now allows arbitry tags https://github.com/whatwg/html/pull/10557
+                (https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select)
+            </action>
+            <action type="update" dev="rbri">
+                neko: the input tag closes select tags
+            </action>
             <action type="add" dev="rbri">
                 Navigator sendBeacon() method added.
             </action>
