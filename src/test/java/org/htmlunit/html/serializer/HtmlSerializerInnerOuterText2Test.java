@@ -24,7 +24,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Tests for {@link HtmlSerializerVisibleText}.
+ * Tests for {@link HtmlSerializerInnerOuterText}.
  * This contains the tests for plain controls.
  *
  * @author Ronald Brill
@@ -729,10 +729,6 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
             FF_ESR = "")
-    @HtmlUnitNYI(CHROME = "A B C D EF G H I Second",
-            EDGE = "A B C D EF G H I Second",
-            FF = "A B C D EF G H I Second",
-            FF_ESR = "A B C D EF G H I Second")
     public void getInnerTextWhiteSpaceSelect() throws Exception {
         getInnerTextWhiteSpaceSelect(null);
     }
@@ -745,10 +741,6 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
             FF_ESR = "")
-    @HtmlUnitNYI(CHROME = "A B C D EF G H I Second",
-            EDGE = "A B C D EF G H I Second",
-            FF = "A B C D EF G H I Second",
-            FF_ESR = "A B C D EF G H I Second")
     public void getInnerTextWhiteSpaceSelectNormal() throws Exception {
         getInnerTextWhiteSpaceSelect("normal");
     }
@@ -761,10 +753,6 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
             FF_ESR = "")
-    @HtmlUnitNYI(CHROME = "A B C D EF G H I Second",
-            EDGE = "A B C D EF G H I Second",
-            FF = "A B C D EF G H I Second",
-            FF_ESR = "A B C D EF G H I Second")
     public void getInnerTextWhiteSpaceSelectNowrap() throws Exception {
         getInnerTextWhiteSpaceSelect("nowrap");
     }
@@ -777,10 +765,6 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
             FF_ESR = "")
-    @HtmlUnitNYI(CHROME = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
-            EDGE = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
-            FF = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
-            FF_ESR = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ")
     public void getInnerTextWhiteSpaceSelectPre() throws Exception {
         getInnerTextWhiteSpaceSelect("pre");
     }
@@ -793,10 +777,6 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
             FF_ESR = "")
-    @HtmlUnitNYI(CHROME = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
-            EDGE = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
-            FF = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
-            FF_ESR = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ")
     public void getInnerTextWhiteSpaceSelectPreWrap() throws Exception {
         getInnerTextWhiteSpaceSelect("pre-wrap");
     }
@@ -809,10 +789,6 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
             FF_ESR = "")
-    @HtmlUnitNYI(CHROME = "A B C D\nEF\nG\nH I\nSecond\n",
-            EDGE = "A B C D\nEF\nG\nH I\nSecond\n",
-            FF = "A B C D\nEF\nG\nH I\nSecond\n",
-            FF_ESR = "A B C D\nEF\nG\nH I\nSecond\n")
     public void getInnerTextWhiteSpaceSelectPreLine() throws Exception {
         getInnerTextWhiteSpaceSelect("pre-line");
     }
@@ -827,6 +803,105 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
                     + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
             + "      <option>  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </option>\n"
             + "      <option>Second</option>\n"
+            + "    </select>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = (String) ((JavascriptExecutor) driver)
+                .executeScript("return document.getElementById('tester').innerText");
+        assertEquals(getExpectedAlerts()[0], text);
+    }
+
+
+    /**
+     * Verifies getInnerText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "A B C D EF G H I\nJ K L M\nSecond\nThird Fourth\nLast",
+            FF = "",
+            FF_ESR = "")
+    public void getInnerTextWhiteSpaceOptgroupSelect() throws Exception {
+        getInnerTextWhiteSpaceSelectOptgroup(null);
+    }
+
+    /**
+     * Verifies getInnerText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "A B C D EF G H I\nJ K L M\nSecond\nThird Fourth\nLast",
+            FF = "",
+            FF_ESR = "")
+    public void getInnerTextWhiteSpaceSelectOptgroupNormal() throws Exception {
+        getInnerTextWhiteSpaceSelectOptgroup("normal");
+    }
+
+    /**
+     * Verifies getInnerText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "A B C D EF G H I\nJ K L M\nSecond\nThird Fourth\nLast",
+            FF = "",
+            FF_ESR = "")
+    public void getInnerTextWhiteSpaceSelectOptgroupNowrap() throws Exception {
+        getInnerTextWhiteSpaceSelectOptgroup("nowrap");
+    }
+
+    /**
+     * Verifies getInnerText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "A B C D EF G H I\nJ K L M\nSecond\nThird Fourth\nLast",
+            FF = "",
+            FF_ESR = "")
+    public void getInnerTextWhiteSpaceSelectOptgroupPre() throws Exception {
+        getInnerTextWhiteSpaceSelectOptgroup("pre");
+    }
+
+    /**
+     * Verifies getInnerText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "A B C D EF G H I\nJ K L M\nSecond\nThird Fourth\nLast",
+            FF = "",
+            FF_ESR = "")
+    public void getInnerTextWhiteSpaceSelectOptgroupPreWrap() throws Exception {
+        getInnerTextWhiteSpaceSelectOptgroup("pre-wrap");
+    }
+
+    /**
+     * Verifies getInnerText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "A B C D EF G H I\nJ K L M\nSecond\nThird Fourth\nLast",
+            FF = "",
+            FF_ESR = "")
+    public void getInnerTextWhiteSpaceSelectOptgroupPreLine() throws Exception {
+        getInnerTextWhiteSpaceSelectOptgroup("pre-line");
+    }
+
+    private void getInnerTextWhiteSpaceSelectOptgroup(final String whiteSpace) throws Exception {
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <select id='tester' "
+                    + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
+            + "      <optgroup label='Group \t  1 \n  one'>\n"
+            + "        <option>  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </option>\n"
+            + "        <option>  J  K\tL \n M  </option>\n"
+            + "      </optgroup>\n"
+            + "      <optgroup label='Group 2'>\n"
+            + "        <option>Second</option>\n"
+            + "        <option>  Third \r\n Fourth  </option>\n"
+            + "      </optgroup>\n"
+            + "      <option>Last</option>\n"
             + "    </select>\n"
             + "</body></html>";
 

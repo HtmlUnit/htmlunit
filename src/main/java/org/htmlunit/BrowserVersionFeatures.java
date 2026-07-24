@@ -285,6 +285,10 @@ public enum BrowserVersionFeatures {
     JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0,
 
     /** Indicates that innerText add a nl when reaching svg element. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_INNER_TEXT_SELECT_EMPTY,
+
+    /** Indicates that innerText add a nl when reaching svg element. */
     @BrowserFeature({CHROME, EDGE})
     JS_INNER_TEXT_SVG_NL,
 

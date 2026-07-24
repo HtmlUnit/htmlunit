@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html.serializer;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SELECT_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 
 import org.htmlunit.BrowserVersion;
@@ -30,8 +31,10 @@ import org.htmlunit.html.HtmlDetails;
 import org.htmlunit.html.HtmlHead;
 import org.htmlunit.html.HtmlListItem;
 import org.htmlunit.html.HtmlNoFrames;
+import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlParagraph;
 import org.htmlunit.html.HtmlScript;
+import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlSummary;
 import org.htmlunit.html.HtmlSvg;
@@ -75,7 +78,7 @@ public class HtmlSerializerInnerOuterText {
         // included scripts are ignored, but if we ask for the script itself....
         if (node instanceof ScriptElement) {
             final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
-            appendChildren(builder, node, Mode.WHITE_SPACE_NORMAL, false);
+            appendChildren(builder, node, Mode.WHITE_SPACE_NORMAL, false, false);
             return builder.getText();
         }
 
@@ -83,7 +86,7 @@ public class HtmlSerializerInnerOuterText {
         final boolean insideHead = node instanceof HtmlTitle;
 
         final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
-        appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL), insideHead);
+        appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL), insideHead, false);
         return builder.getText();
     }
 
@@ -94,11 +97,12 @@ public class HtmlSerializerInnerOuterText {
      * @param node the node to process
      * @param mode the {@link Mode} to use for processing
      * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
      */
     protected void appendChildren(final HtmlSerializerTextBuilder builder, final DomNode node,
-            final Mode mode, final boolean insideHead) {
+            final Mode mode, final boolean insideHead, final boolean insideSelect) {
         for (final DomNode child : node.getChildren()) {
-            appendNode(builder, child, mode, insideHead);
+            appendNode(builder, child, mode, insideHead, insideSelect);
         }
     }
 
@@ -110,9 +114,14 @@ public class HtmlSerializerInnerOuterText {
      * @param node the node to process
      * @param mode the {@link Mode} to use for processing
      * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
      */
     protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node,
-            final Mode mode, final boolean insideHead) {
+            final Mode mode, final boolean insideHead, final boolean insideSelect) {
+        if (insideSelect && node instanceof HtmlBreak) {
+            return;
+        }
+
         if (node instanceof DomText text) {
             appendText(builder, text, mode);
         }
@@ -120,19 +129,19 @@ public class HtmlSerializerInnerOuterText {
             appendBreak(builder, break1);
         }
         else if (node instanceof HtmlParagraph paragraph) {
-            appendParagraph(builder, paragraph, mode, insideHead);
+            appendParagraph(builder, paragraph, mode, insideHead, insideSelect);
         }
         else if (node instanceof HtmlListItem item) {
-            appendListItem(builder, item, mode, insideHead);
+            appendListItem(builder, item, mode, insideHead, insideSelect);
         }
         else if (node instanceof HtmlDetails details) {
-            appendDetails(builder, details, mode, insideHead);
+            appendDetails(builder, details, mode, insideHead, insideSelect);
         }
         else if (node instanceof HtmlHead) {
-            appendChildren(builder, node, mode, true);
+            appendChildren(builder, node, mode, true, insideSelect);
         }
         else if (node instanceof HtmlNoFrames) {
-            appendChildren(builder, node, Mode.PLAIN, insideHead);
+            appendChildren(builder, node, Mode.PLAIN, insideHead, insideSelect);
         }
         else if (node instanceof HtmlTitle && !insideHead) {
             // nothing to do
@@ -142,27 +151,30 @@ public class HtmlSerializerInnerOuterText {
         }
         else if (node instanceof ScriptElement) {
             if (insideHead) {
-                appendChildren(builder, node, mode, insideHead);
+                appendChildren(builder, node, mode, insideHead, insideSelect);
             }
         }
+        else if (node instanceof HtmlSelect select) {
+            appendSelect(builder, select, mode, insideHead, insideSelect);
+        }
         else if (node instanceof HtmlDefinitionTerm item) {
-            appendDefinitionTerm(builder, item, mode, insideHead);
+            appendDefinitionTerm(builder, item, mode, insideHead, insideSelect);
         }
         else if (node instanceof HtmlSvg) {
             if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_NL)) {
                 builder.appendRequiredLineBreak();
-                appendChildren(builder, node, mode, insideHead);
+                appendChildren(builder, node, mode, insideHead, insideSelect);
                 builder.appendRequiredLineBreak();
             }
             else {
-                appendChildren(builder, node, mode, insideHead);
+                appendChildren(builder, node, mode, insideHead, insideSelect);
             }
         }
         else if (node instanceof SvgTitle) {
             // nothing to do
         }
         else {
-            appendChildren(builder, node, mode, insideHead);
+            appendChildren(builder, node, mode, insideHead, insideSelect);
         }
     }
 
@@ -207,11 +219,12 @@ public class HtmlSerializerInnerOuterText {
      * @param htmlParagraph the target to process
      * @param mode the {@link Mode} to use for processing
      * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
      */
     protected void appendParagraph(final HtmlSerializerTextBuilder builder,
-            final HtmlParagraph htmlParagraph, final Mode mode, final boolean insideHead) {
+            final HtmlParagraph htmlParagraph, final Mode mode, final boolean insideHead, final boolean insideSelect) {
         builder.appendRequiredLineBreak();
-        appendChildren(builder, htmlParagraph, mode, insideHead);
+        appendChildren(builder, htmlParagraph, mode, insideHead, insideSelect);
         builder.appendRequiredLineBreak();
     }
 
@@ -222,11 +235,12 @@ public class HtmlSerializerInnerOuterText {
      * @param htmlListItem the target to process
      * @param mode the {@link Mode} to use for processing
      * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
      */
     protected void appendListItem(final HtmlSerializerTextBuilder builder,
-            final HtmlListItem htmlListItem, final Mode mode, final boolean insideHead) {
+            final HtmlListItem htmlListItem, final Mode mode, final boolean insideHead, final boolean insideSelect) {
         builder.appendRequiredLineBreak();
-        appendChildren(builder, htmlListItem, mode, insideHead);
+        appendChildren(builder, htmlListItem, mode, insideHead, insideSelect);
         builder.appendRequiredLineBreak();
     }
 
@@ -236,17 +250,19 @@ public class HtmlSerializerInnerOuterText {
      * @param htmlDetails the target to process
      * @param mode the {@link Mode} to use for processing
      * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
      */
     protected void appendDetails(final HtmlSerializerTextBuilder builder,
-                    final HtmlDetails htmlDetails, final Mode mode, final boolean insideHead) {
+                    final HtmlDetails htmlDetails, final Mode mode,
+                    final boolean insideHead, final boolean insideSelect) {
         if (htmlDetails.isOpen()) {
-            appendChildren(builder, htmlDetails, mode, insideHead);
+            appendChildren(builder, htmlDetails, mode, insideHead, insideSelect);
             return;
         }
 
         for (final DomNode child : htmlDetails.getChildren()) {
             if (child instanceof HtmlSummary) {
-                appendNode(builder, child, mode, insideHead);
+                appendNode(builder, child, mode, insideHead, insideSelect);
             }
         }
     }
@@ -258,12 +274,60 @@ public class HtmlSerializerInnerOuterText {
      * @param htmlDefinitionTerm the target to process
      * @param mode the {@link Mode} to use for processing
      * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
      */
     protected void appendDefinitionTerm(final HtmlSerializerTextBuilder builder,
-            final HtmlDefinitionTerm htmlDefinitionTerm, final Mode mode, final boolean insideHead) {
+            final HtmlDefinitionTerm htmlDefinitionTerm, final Mode mode,
+            final boolean insideHead, final boolean insideSelect) {
         builder.appendRequiredLineBreak();
-        appendChildren(builder, htmlDefinitionTerm, mode, insideHead);
+        appendChildren(builder, htmlDefinitionTerm, mode, insideHead, insideSelect);
         builder.appendRequiredLineBreak();
+    }
+
+    /**
+     * Process {@link HtmlSelect}.
+     * <p>
+     * Select and its Option children are rendered as native form-control widgets in real browsers,
+     * not as normal inline/block boxes. The widget's internal text drawing doesn't go through the
+     * same CSS text-layout pipeline that divs or spans use,
+     * so properties like white-space: pre on a &lt;select&gt; or &lt;option&gt; get ignored by Chrome/Firefox/etc.
+     * </p>
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlSelect the target to process
+     * @param mode the {@link Mode} to use for processing
+     * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
+     */
+    protected void appendSelect(final HtmlSerializerTextBuilder builder,
+            final HtmlSelect htmlSelect, final Mode mode, final boolean insideHead, final boolean insideSelect) {
+        if (browserVersion_.hasFeature(JS_INNER_TEXT_SELECT_EMPTY)) {
+            return;
+        }
+
+        appendDescendantOptions(builder, htmlSelect, Mode.WHITE_SPACE_NORMAL, insideHead, true);
+    }
+
+    /**
+     * Iterate over all descendant options.
+     *
+     * @param builder the StringBuilder to add to
+     * @param node the node to process
+     * @param mode the {@link Mode} to use for processing
+     * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
+     */
+    protected void appendDescendantOptions(final HtmlSerializerTextBuilder builder, final DomNode node,
+            final Mode mode, final boolean insideHead, final boolean insideSelect) {
+        for (final DomNode child : node.getChildNodes()) {
+            if (child instanceof HtmlOption) {
+                builder.appendRequiredLineBreak();
+                appendChildren(builder, child, Mode.WHITE_SPACE_NORMAL, insideHead, true);
+            }
+            else {
+                appendDescendantOptions(builder, child, Mode.WHITE_SPACE_NORMAL, insideHead, true);
+            }
+        }
     }
 
     private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {

@@ -9,6 +9,9 @@
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
             <action type="update" dev="rbri">
+                Method innerText() for selects generates now the same output as the real browsers.
+            </action>
+            <action type="update" dev="rbri">
                 module java.net.http is now required
             </action>
             <action type="update" dev="rbri">

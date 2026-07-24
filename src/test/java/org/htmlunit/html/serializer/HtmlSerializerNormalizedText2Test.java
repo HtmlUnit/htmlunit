@@ -757,8 +757,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H"
-            + " I")
+    @Alerts("A B C D EF G H \n I")
     public void getNormalizedTextWhiteSpaceSelect() throws Exception {
         getNormalizedTextWhiteSpaceSelect(null);
     }
@@ -768,8 +767,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H"
-            + " I")
+    @Alerts("A B C D EF G H \n I")
     public void getNormalizedTextWhiteSpaceSelectNormal() throws Exception {
         getNormalizedTextWhiteSpaceSelect("normal");
     }
@@ -779,8 +777,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H"
-            + " I")
+    @Alerts("A B C D EF G H \n I")
     public void getNormalizedTextWhiteSpaceSelectNowrap() throws Exception {
         getNormalizedTextWhiteSpaceSelect("nowrap");
     }
@@ -790,8 +787,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H"
-            + " I")
+    @Alerts("A B C D EF G H \n I")
     public void getNormalizedTextWhiteSpaceSelectPre() throws Exception {
         getNormalizedTextWhiteSpaceSelect("pre");
     }
@@ -801,8 +797,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H"
-            + " I")
+    @Alerts("A B C D EF G H \n I")
     public void getNormalizedTextWhiteSpaceSelectPreWrap() throws Exception {
         getNormalizedTextWhiteSpaceSelect("pre-wrap");
     }
@@ -812,8 +807,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H"
-            + " I")
+    @Alerts("A B C D EF G H \n I")
     public void getNormalizedTextWhiteSpaceSelectPreLine() throws Exception {
         getNormalizedTextWhiteSpaceSelect("pre-line");
     }
