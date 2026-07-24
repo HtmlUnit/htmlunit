@@ -10689,16 +10689,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webdriver")
     @HtmlUnitNYI(CHROME = "appCodeName,appName,appVersion,connection,cookieEnabled,doNotTrack,geolocation,"
                 + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,platform,"
-                + "plugins,product,productSub,userAgent,vendor,vendorSub",
+                + "plugins,product,productSub,sendBeacon(),userAgent,vendor,vendorSub",
             EDGE = "appCodeName,appName,appVersion,connection,cookieEnabled,doNotTrack,geolocation,"
                 + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,platform,"
-                + "plugins,product,productSub,userAgent,vendor,vendorSub",
+                + "plugins,product,productSub,sendBeacon(),userAgent,vendor,vendorSub",
             FF = "appCodeName,appName,appVersion,buildID,cookieEnabled,doNotTrack,geolocation,javaEnabled(),"
                 + "language,languages,mediaDevices,mimeTypes,onLine,oscpu,pdfViewerEnabled,platform,plugins,"
-                + "product,productSub,taintEnabled(),userAgent,vendor,vendorSub",
+                + "product,productSub,sendBeacon(),taintEnabled(),userAgent,vendor,vendorSub",
             FF_ESR = "appCodeName,appName,appVersion,buildID,cookieEnabled,doNotTrack,geolocation,"
                 + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,oscpu,pdfViewerEnabled,"
-                + "platform,plugins,product,productSub,taintEnabled(),userAgent,vendor,vendorSub")
+                + "platform,plugins,product,productSub,sendBeacon(),taintEnabled(),userAgent,vendor,vendorSub")
     public void navigator() throws Exception {
         testString("", "navigator");
     }

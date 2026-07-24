@@ -14,9 +14,13 @@
  */
 package org.htmlunit.javascript.host;
 
+import java.util.List;
+
+import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -574,5 +578,177 @@ public class NavigatorTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests {@code navigator.sendBeacon()} with a plain string payload.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void sendBeaconString() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(navigator.sendBeacon('" + URL_SECOND + "', 'HtmlUnit'));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
+        }
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+
+        final String contentType = getMockWebConnection().getLastWebRequest()
+                .getAdditionalHeader(HttpHeader.CONTENT_TYPE);
+        final String requestBody = getMockWebConnection().getLastWebRequest().getRequestBody();
+
+        assertEquals("text/plain;charset=utf-8", contentType.replace(" ", ""));
+        assertEquals("HtmlUnit", requestBody);
+    }
+
+    /**
+     * Tests {@code navigator.sendBeacon()} with a {@code Blob} payload.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void sendBeaconBlob() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var blob = new Blob(['HtmlUnit'], {type: 'text/plain'});\n"
+            + "  log(navigator.sendBeacon('" + URL_SECOND + "', blob));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
+        }
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+
+        final String contentType = getMockWebConnection().getLastWebRequest()
+                .getAdditionalHeader(HttpHeader.CONTENT_TYPE);
+        final String requestBody = getMockWebConnection().getLastWebRequest().getRequestBody();
+
+        assertEquals("text/plain", contentType);
+        assertEquals("HtmlUnit", requestBody);
+    }
+
+    /**
+     * Tests {@code navigator.sendBeacon()} with a {@code URLSearchParams} payload.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void sendBeaconURLSearchParams() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var params = new URLSearchParams();\n"
+            + "  params.append('key', 'value');\n"
+            + "  log(navigator.sendBeacon('" + URL_SECOND + "', params));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
+        }
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+
+        final String contentType = getMockWebConnection().getLastWebRequest()
+                .getAdditionalHeader(HttpHeader.CONTENT_TYPE);
+        final List<NameValuePair> requestParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+
+        assertEquals("application/x-www-form-urlencoded;charset=utf-8", contentType.replace(" ", ""));
+        assertEquals(1, requestParams.size());
+        assertEquals("[key=value]", requestParams.toString());
+    }
+
+    /**
+     * Tests {@code navigator.sendBeacon()} with a {@code FormData} payload.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void sendBeaconFormData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var data = new FormData();\n"
+            + "  data.append('key', 'value');\n"
+            + "  log(navigator.sendBeacon('" + URL_SECOND + "', data));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
+        }
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+
+        final String contentType = getMockWebConnection().getLastWebRequest()
+                .getAdditionalHeader(HttpHeader.CONTENT_TYPE);
+        final String requestBody = getMockWebConnection().getLastWebRequest().getRequestBody();
+
+        assertTrue(contentType.startsWith("multipart/form-data; boundary="));
+        assertTrue(requestBody.contains("name=\"key\""));
+        assertTrue(requestBody.contains("value"));
+    }
+
+    /**
+     * Tests {@code navigator.sendBeacon()} with a typed-array (ArrayBufferView) payload.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "null"})
+    @HtmlUnitNYI(
+            CHROME = {"true", "text/plain; charset=iso-8859-1"},
+            EDGE = {"true", "text/plain; charset=iso-8859-1"},
+            FF = {"true", "text/plain; charset=iso-8859-1"},
+            FF_ESR = {"true", "text/plain; charset=iso-8859-1"})
+    public void sendBeaconArrayBufferView() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var bytes = new Uint8Array([72, 116, 109, 108, 85, 110, 105, 116]);\n"
+            + "  log(navigator.sendBeacon('" + URL_SECOND + "', bytes));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html, getExpectedAlerts()[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
+        }
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+
+        final String contentType = getMockWebConnection().getLastWebRequest()
+                .getAdditionalHeader(HttpHeader.CONTENT_TYPE);
+        final String requestBody = getMockWebConnection().getLastWebRequest().getRequestBody();
+
+        assertEquals(getExpectedAlerts()[1], "" + contentType);
+        assertEquals("HtmlUnit", requestBody);
     }
 }

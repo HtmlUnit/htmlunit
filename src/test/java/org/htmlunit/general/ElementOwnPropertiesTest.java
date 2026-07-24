@@ -19219,19 +19219,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "appCodeName[GCE],appName[GCE],appVersion[GCE],connection[GCE],constructor(),"
                 + "cookieEnabled[GCE],doNotTrack[GCE],geolocation[GCE],javaEnabled(),language[GCE],languages[GCE],"
                 + "mediaDevices[GCE],mimeTypes[GCE],onLine[GCE],pdfViewerEnabled[GCE],platform[GCE],plugins[GCE],"
-                + "product[GCE],productSub[GCE],userAgent[GCE],vendor[GCE],vendorSub[GCE]",
+                + "product[GCE],productSub[GCE],sendBeacon(),userAgent[GCE],vendor[GCE],vendorSub[GCE]",
             EDGE = "appCodeName[GCE],appName[GCE],appVersion[GCE],connection[GCE],constructor(),"
                 + "cookieEnabled[GCE],doNotTrack[GCE],geolocation[GCE],javaEnabled(),language[GCE],languages[GCE],"
                 + "mediaDevices[GCE],mimeTypes[GCE],onLine[GCE],pdfViewerEnabled[GCE],platform[GCE],plugins[GCE],"
-                + "product[GCE],productSub[GCE],userAgent[GCE],vendor[GCE],vendorSub[GCE]",
+                + "product[GCE],productSub[GCE],sendBeacon(),userAgent[GCE],vendor[GCE],vendorSub[GCE]",
             FF = "appCodeName[GCE],appName[GCE],appVersion[GCE],buildID[GCE],constructor(),cookieEnabled[GCE],"
                 + "doNotTrack[GCE],geolocation[GCE],javaEnabled(),language[GCE],languages[GCE],mediaDevices[GCE],"
                 + "mimeTypes[GCE],onLine[GCE],oscpu[GCE],pdfViewerEnabled[GCE],platform[GCE],plugins[GCE],"
-                + "product[GCE],productSub[GCE],taintEnabled(),userAgent[GCE],vendor[GCE],vendorSub[GCE]",
+                + "product[GCE],productSub[GCE],sendBeacon(),taintEnabled(),userAgent[GCE],vendor[GCE],vendorSub[GCE]",
             FF_ESR = "appCodeName[GCE],appName[GCE],appVersion[GCE],buildID[GCE],constructor(),cookieEnabled[GCE],"
                 + "doNotTrack[GCE],geolocation[GCE],javaEnabled(),language[GCE],languages[GCE],mediaDevices[GCE],"
                 + "mimeTypes[GCE],onLine[GCE],oscpu[GCE],pdfViewerEnabled[GCE],platform[GCE],plugins[GCE],"
-                + "product[GCE],productSub[GCE],taintEnabled(),userAgent[GCE],vendor[GCE],vendorSub[GCE]")
+                + "product[GCE],productSub[GCE],sendBeacon(),taintEnabled(),userAgent[GCE],vendor[GCE],vendorSub[GCE]")
     public void navigator() throws Exception {
         testString("", "navigator");
     }

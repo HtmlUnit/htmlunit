@@ -14,26 +14,46 @@
  */
 package org.htmlunit.javascript.host;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.htmlunit.FormEncodingType;
+import org.htmlunit.HttpHeader;
+import org.htmlunit.HttpMethod;
 import org.htmlunit.WebClient;
+import org.htmlunit.WebRequest;
+import org.htmlunit.WebRequest.HttpHint;
+import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.geo.Geolocation;
 import org.htmlunit.javascript.host.media.MediaDevices;
 import org.htmlunit.javascript.host.network.NetworkInformation;
+// TODO verify actual package - not visible from XMLHttpRequest.java's import list,
+// which suggests it may already share a package with XMLHttpRequest rather than
+// living here; adjust this import (and the FormData branch below) accordingly.
+import org.htmlunit.javascript.host.xml.FormData;
 import org.htmlunit.util.StringUtils;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * JavaScript host object for {@code Navigator}.
@@ -50,6 +70,8 @@ import org.htmlunit.util.StringUtils;
  */
 @JsxClass
 public class Navigator extends HtmlUnitScriptable {
+
+    private static final Log LOG = LogFactory.getLog(Navigator.class);
 
     private PluginArray plugins_;
     private MimeTypeArray mimeTypes_;
@@ -406,5 +428,118 @@ public class Navigator extends HtmlUnitScriptable {
             mediaDevices_.setParentScope(getParentScope());
         }
         return mediaDevices_;
+    }
+
+    /**
+     * The {@code sendBeacon()} method.
+     * <p>
+     * Note: real browsers queue the beacon and return immediately, continuing to
+     * attempt delivery even after the page unloads. This implementation instead sends
+     * the request synchronously (mirroring how {@code HyperlinkElementSupport} already
+     * handles hyperlink-auditing/{@code ping} requests and swallows any network error,
+     * since there is no caller left to report it to by the time
+     * a real browser would encounter it either.
+     * </p>
+     *
+     * @param url the URL to send the data to
+     * @param data the data to send; USVString, {@link Blob}, {@link URLSearchParams},
+     *             {@code FormData}, and ArrayBufferView are supported, per spec
+     * @return {@code true} if the browser successfully queued the data for transfer,
+     *         {@code false} otherwise (e.g. the URL could not be resolved)
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon">
+     *      MDN Documentation</a>
+     */
+    @JsxFunction
+    public boolean sendBeacon(final String url, final Object data) {
+        final Window window = getWindow();
+        final WebWindow webWindow = window.getWebWindow();
+        final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+        final URL pageUrl = page.getUrl();
+
+        final URL targetUrl;
+        try {
+            targetUrl = page.getFullyQualifiedUrl(url);
+        }
+        catch (final MalformedURLException e) {
+            if (LOG.isInfoEnabled()) {
+                LOG.info("sendBeacon(): invalid url '" + url + "'", e);
+            }
+            return false;
+        }
+
+        final WebRequest request = new WebRequest(targetUrl, HttpMethod.POST);
+
+        // a beacon is always a POST, so per Fetch's "Origin header" rules this is
+        // added unconditionally, same as HyperlinkElementSupport's ping request
+        try {
+            request.setRefererHeader(pageUrl);
+            request.setAdditionalHeader(HttpHeader.ORIGIN,
+                    UrlUtils.getUrlWithProtocolAndAuthority(pageUrl).toExternalForm());
+        }
+        catch (final MalformedURLException e) {
+            if (LOG.isInfoEnabled()) {
+                LOG.info("sendBeacon(): invalid origin url '" + pageUrl + "'", e);
+            }
+        }
+
+        // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/): a beacon has no
+        // destination and is always no-cors, matching hyperlink-auditing (ping) requests.
+        request.setFetchDestination(WebRequest.FetchDestination.EMPTY);
+        request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
+        request.setRequestingUrl(pageUrl);
+
+        fillRequestBody(request, data);
+
+        final WebClient webClient = webWindow.getWebClient();
+        try {
+            webClient.loadWebResponse(request);
+        }
+        catch (final IOException e) {
+            if (LOG.isInfoEnabled()) {
+                LOG.info("sendBeacon(): request failed", e);
+            }
+            // per spec this still returns true - queuing succeeded even if delivery didn't
+        }
+        return true;
+    }
+
+    /**
+     * Fills in the request body for {@link #sendBeacon(String, Object)}, dispatching on
+     * the data's type the same way {@code XMLHttpRequest#prepareRequestContent} does for
+     * the body types the Beacon spec actually allows (unlike XHR, this excludes
+     * {@code Document} types).
+     *
+     * @param request the request to fill in
+     * @param data the data passed to {@code sendBeacon()}, possibly {@code null}/undefined
+     */
+    private static void fillRequestBody(final WebRequest request, final Object data) {
+        if (data == null || JavaScriptEngine.isUndefined(data)) {
+            return;
+        }
+
+        if (data instanceof FormData formData) {
+            formData.fillRequest(request);
+        }
+        else if (data instanceof URLSearchParams params) {
+            params.fillRequest(request);
+            request.setCharset(UTF_8);
+            request.addHint(HttpHint.IncludeCharsetInContentTypeHeader);
+        }
+        else if (data instanceof Blob blob) {
+            blob.fillRequest(request);
+        }
+        else if (data instanceof NativeArrayBufferView view) {
+            request.setRequestBody(new String(view.getBuffer().getBuffer(), UTF_8));
+            request.setEncodingType(null);
+        }
+        else {
+            final String body = JavaScriptEngine.toString(data);
+            if (!body.isEmpty()) {
+                request.setRequestBody(body);
+                request.setEncodingType(FormEncodingType.TEXT_PLAIN);
+                request.setCharset(UTF_8);
+                request.addHint(HttpHint.IncludeCharsetInContentTypeHeader);
+            }
+        }
     }
 }

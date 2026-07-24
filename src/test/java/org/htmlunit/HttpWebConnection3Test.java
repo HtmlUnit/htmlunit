@@ -4116,11 +4116,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String htmlResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + html.length() + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String frameResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -4267,11 +4269,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String htmlResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + html.length() + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String frameResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -4422,11 +4426,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String htmlResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + html.length() + "\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html;
         final String frameResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
                 + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + "Hi";
 
@@ -4435,6 +4441,195 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             final WebDriver driver = getWebDriver();
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+
+    /**
+     * Tests the Sec-Fetch-* headers sent for a same-origin &lt;iframe crossorigin src&gt;
+     * request - included for symmetry with {@link #imageCrossOrigin()} and
+     * {@link #scriptCrossOrigin()}, but note the crossorigin attribute is NOT part of the
+     * HTML spec for &lt;iframe&gt; (unlike img/script/link); real browsers should ignore it
+     * entirely here, so this should come out identical to {@link #iframeLoad()} - Sec-Fetch-Mode
+     * stays "navigate" regardless. Worth keeping mainly as a regression guard against
+     * accidentally wiring up a crossorigin-forces-cors rule for iframes the way it's wired
+     * for img/script/link.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(
+          CHROME = {"POST /beacon.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "Content-Length: 8",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "User-Agent: §§USER_AGENT§§",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "Content-Type: text/plain;charset=UTF-8",
+                    "sec-ch-ua-mobile: ?0",
+                    "Accept: */*",
+                    "Origin: http://localhost:§§PORT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Dest: empty",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Accept-Language: en-US,en;q=0.9",
+                    "",
+                    "HtmlUnit"},
+          EDGE = {"POST /beacon.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "Content-Length: 8",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "User-Agent: §§USER_AGENT§§",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "Content-Type: text/plain;charset=UTF-8",
+                  "sec-ch-ua-mobile: ?0",
+                  "Accept: */*",
+                  "Origin: http://localhost:§§PORT§§",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-Mode: no-cors",
+                  "Sec-Fetch-Dest: empty",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "",
+                  "HtmlUnit"},
+          FF = {"POST /beacon.html HTTP/1.1",
+                "Host: localhost:§§PORT§§",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: */*",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate, br, zstd",
+                "Content-Type: text/plain;charset=UTF-8",
+                "Content-Length: 8",
+                "Origin: http://localhost:§§PORT§§",
+                "Connection: keep-alive",
+                "Referer: http://localhost:§§PORT§§/",
+                "Sec-Fetch-Dest: empty",
+                "Sec-Fetch-Mode: no-cors",
+                "Sec-Fetch-Site: same-origin",
+                "Priority: u=6",
+                "",
+                "HtmlUnit"},
+          FF_ESR = {"POST /beacon.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: */*",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Content-Type: text/plain;charset=UTF-8",
+                    "Content-Length: 8",
+                    "Origin: http://localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Sec-Fetch-Dest: empty",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Site: same-origin",
+                    "Priority: u=6",
+                    "",
+                    "HtmlUnit"})
+    @HtmlUnitNYI(
+          CHROME = {"POST /beacon.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: */*",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Dest: empty",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate",
+                    "Accept-Language: en-US,en;q=0.9",
+                    "Origin: http://localhost:§§PORT§§",
+                    "Content-Length: 8",
+                    "Content-Type: text/plain; charset=UTF-8",
+                    "",
+                    "HtmlUnit"},
+          EDGE = {"POST /beacon.html HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "sec-ch-ua: §§SEC_USER_AGENT§§",
+                  "sec-ch-ua-mobile: ?0",
+                  "sec-ch-ua-platform: \"Windows\"",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: */*",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-Mode: no-cors",
+                  "Sec-Fetch-Dest: empty",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Encoding: gzip, deflate",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Origin: http://localhost:§§PORT§§",
+                  "Content-Length: 8",
+                  "Content-Type: text/plain; charset=UTF-8",
+                  "",
+                  "HtmlUnit"},
+          FF = {"POST /beacon.html HTTP/1.1",
+                "Host: localhost:§§PORT§§",
+                "User-Agent: §§USER_AGENT§§",
+                "Accept: */*",
+                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Encoding: gzip, deflate",
+                "Connection: keep-alive",
+                "Referer: http://localhost:§§PORT§§/",
+                "Sec-Fetch-Dest: empty",
+                "Sec-Fetch-Mode: no-cors",
+                "Sec-Fetch-Site: same-origin",
+                "Priority: u=0, i",
+                "Origin: http://localhost:§§PORT§§",
+                "Content-Length: 8",
+                "Content-Type: text/plain; charset=UTF-8",
+                "",
+                "HtmlUnit"},
+          FF_ESR = {"POST /beacon.html HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: */*",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Sec-Fetch-Dest: empty",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Site: same-origin",
+                    "Priority: u=0, i",
+                    "Origin: http://localhost:§§PORT§§",
+                    "Content-Length: 8",
+                    "Content-Type: text/plain; charset=UTF-8",
+                    "",
+                    "HtmlUnit"})
+    public void sendBeacon() throws Exception {
+        String html = DOCTYPE_HTML
+                + "<html><body>"
+                + "<script>navigator.sendBeacon('beacon.html', 'HtmlUnit');</script>\n"
+                + "</body></html>";
+        final String htmlResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + html;
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, htmlResponse, htmlResponse)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+            if (useRealBrowser()) {
+                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
+            }
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 
