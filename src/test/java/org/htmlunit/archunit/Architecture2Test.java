@@ -172,6 +172,8 @@ public class Architecture2Test {
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.general.huge.ElementClosesElementTest")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.general.huge.ElementClosesElement2Test")
+
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlAreaTest")
         .should().callMethod(BrowserVersion.class, "isFirefox");
 
     /**
