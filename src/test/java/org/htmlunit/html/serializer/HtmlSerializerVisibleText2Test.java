@@ -797,10 +797,11 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "       A B C D EF G H\nI\n      Second\n    ",
-            FF = "A B C D EF G H I\nSecond",
+            FF = "A B C D EF G H\nI\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
-    @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
-            EDGE = "A B C D EF G H I\nSecond")
+    @HtmlUnitNYI(CHROME = "A B C D EF G H\nI\nSecond",
+            EDGE = "A B C D EF G H\nI\nSecond",
+            FF_ESR = "A B C D EF G H\nI\nSecond")
     public void getVisibleTextWhiteSpaceSelect() throws Exception {
         getVisibleTextWhiteSpaceSelect(null);
     }
@@ -811,10 +812,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H\nI\nSecond",
-            FF = "A B C D EF G H I\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
-    @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
-            EDGE = "A B C D EF G H I\nSecond")
+    @HtmlUnitNYI(FF_ESR = "A B C D EF G H\nI\nSecond")
     public void getVisibleTextWhiteSpaceSelectNormal() throws Exception {
         getVisibleTextWhiteSpaceSelect("normal");
     }
@@ -825,10 +824,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H\nI\nSecond",
-            FF = "A B C D EF G H I\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
-    @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
-            EDGE = "A B C D EF G H I\nSecond")
+    @HtmlUnitNYI(FF_ESR = "A B C D EF G H\nI\nSecond")
     public void getVisibleTextWhiteSpaceSelectNowrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("nowrap");
     }
@@ -839,12 +836,12 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "       A B C D EF G H\nI\n      Second\n    ",
-            FF = "A B C D EF G H I\nSecond",
+            FF = "A B C D EF G H\nI\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
-    @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            EDGE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            FF = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            FF_ESR = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
+    @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H  \n I  \n      Second\n    ",
+            EDGE = "        A B  C     D \nEF\nG \n H  \n I  \n      Second\n    ",
+            FF = "        A B  C     D \nEF\nG \n H  \n I  \n      Second\n    ",
+            FF_ESR = "        A B  C     D \nEF\nG \n H  \n I  \n      Second\n    ")
     public void getVisibleTextWhiteSpaceSelectPre() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre");
     }
@@ -855,12 +852,12 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "       A B C D EF G H\nI\n      Second\n    ",
-            FF = "A B C D EF G H I\nSecond",
+            FF = "A B C D EF G H\nI\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
-    @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            EDGE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            FF = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            FF_ESR = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
+    @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H  \n I  \n      Second\n    ",
+            EDGE = "        A B  C     D \nEF\nG \n H  \n I  \n      Second\n    ",
+            FF = "        A B  C     D \nEF\nG \n H  \n I  \n      Second\n    ",
+            FF_ESR = "        A B  C     D \nEF\nG \n H  \n I  \n      Second\n    ")
     public void getVisibleTextWhiteSpaceSelectPreWrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-wrap");
     }
@@ -871,12 +868,11 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H\nI\nSecond",
-            FF = "A B C D EF G H I\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
-    @HtmlUnitNYI(CHROME = "A B C D \nEF\nG \n H I\n Second",
-            EDGE = "A B C D \nEF\nG \n H I\n Second",
-            FF = "A B C D \nEF\nG \n H I\n Second",
-            FF_ESR = "A B C D \nEF\nG \n H I\n Second")
+    @HtmlUnitNYI(CHROME = "A B C D \nEF\nG \n H\nI\n Second",
+            EDGE = "A B C D \nEF\nG \n H\nI\n Second",
+            FF = "A B C D \nEF\nG \n H\nI\n Second",
+            FF_ESR = "A B C D \nEF\nG \n H\nI\n Second")
     public void getVisibleTextWhiteSpaceSelectPreLine() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-line");
     }

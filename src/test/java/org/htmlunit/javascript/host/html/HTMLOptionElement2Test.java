@@ -1442,8 +1442,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false-null", "true-true", "true-null",
                        "false-selected", "false-null", "true-true"},
-            FF = {"false-null", "true-true", "true-null",
-                  "false-selected", "false-null", "false-true"},
+            FF = {"false-null", "false-true", "false-null",
+                  "true-selected", "false-null", "true-true"},
             FF_ESR = {"false-null", "true-true", "true-null",
                       "false-selected", "false-null", "false-true"})
     @HtmlUnitNYI(FF = {"false-null", "true-true", "true-null", "false-selected", "false-null", "true-true"},
