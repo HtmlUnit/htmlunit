@@ -19,6 +19,7 @@
  */
 module org.htmlunit {
     requires java.desktop;
+    requires java.net.http;
     requires java.xml;
     requires jdk.xml.dom;
 
