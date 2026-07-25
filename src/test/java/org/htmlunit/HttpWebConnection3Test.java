@@ -2733,7 +2733,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             final String[] expectedHeaders = getExpectedAlertsWithScriptReplacement(primitiveWebServer);
 
             // let's try some wait on our CI server
-            final long endTime = System.currentTimeMillis() + Duration.ofSeconds(4).toMillis();
+            final long endTime = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
             while (primitiveWebServer.getRequests().isEmpty()
                         && System.currentTimeMillis() < endTime) {
                 Thread.sleep(100);
@@ -3038,6 +3038,205 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     }
 
     /**
+     * Tests a same-origin XMLHttpRequest POST with a plain string body - the counterpart to
+     * {@link #xmlHttpRequestGet()}, needed to find out whether XHR POST follows the same
+     * header order as XHR GET (Category 2) or turns out to be its own distinct ordering the
+     * way {@code ping} (a POST) turned out to differ from {@code formPost} (also a POST).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"POST /ajax.json HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "Content-Length: 8",
+                      "sec-ch-ua-platform: \"Windows\"",
+                      "User-Agent: §§USER_AGENT§§",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
+                      "Content-Type: text/plain;charset=UTF-8",
+                      "sec-ch-ua-mobile: ?0",
+                      "Accept: */*",
+                      "Origin: http://localhost:§§PORT§§",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-Mode: cors",
+                      "Sec-Fetch-Dest: empty",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Accept-Encoding: gzip, deflate, br, zstd",
+                      "Accept-Language: en-US,en;q=0.9",
+                      "",
+                      "HtmlUnit"},
+            EDGE = {"POST /ajax.json HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "Content-Length: 8",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "User-Agent: §§USER_AGENT§§",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "Content-Type: text/plain;charset=UTF-8",
+                    "sec-ch-ua-mobile: ?0",
+                    "Accept: */*",
+                    "Origin: http://localhost:§§PORT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: cors",
+                    "Sec-Fetch-Dest: empty",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br, zstd",
+                    "Accept-Language: en-US,en;q=0.9",
+                    "",
+                    "HtmlUnit"},
+            FF = {"POST /ajax.json HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: */*",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate, br, zstd",
+                  "Content-Type: text/plain;charset=UTF-8",
+                  "Content-Length: 8",
+                  "Origin: http://localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Sec-Fetch-Dest: empty",
+                  "Sec-Fetch-Mode: cors",
+                  "Sec-Fetch-Site: same-origin",
+                  "",
+                  "HtmlUnit"},
+            FF_ESR = {"POST /ajax.json HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate, br, zstd",
+                      "Content-Type: text/plain;charset=UTF-8",
+                      "Content-Length: 8",
+                      "Origin: http://localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Sec-Fetch-Dest: empty",
+                      "Sec-Fetch-Mode: cors",
+                      "Sec-Fetch-Site: same-origin",
+                      "",
+                      "HtmlUnit"})
+    @HtmlUnitNYI(
+            CHROME = {"POST /ajax.json HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
+                      "sec-ch-ua-mobile: ?0",
+                      "sec-ch-ua-platform: \"Windows\"",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-Mode: cors",
+                      "Sec-Fetch-Dest: empty",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Accept-Language: en-US,en;q=0.9",
+                      "Origin: http://localhost:§§PORT§§",
+                      "Content-Length: 8",
+                      "Content-Type: text/plain; charset=UTF-8",
+                      "",
+                      "HtmlUnit"},
+            EDGE = {"POST /ajax.json HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: */*",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: cors",
+                    "Sec-Fetch-Dest: empty",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9",
+                    "Origin: http://localhost:§§PORT§§",
+                    "Content-Length: 8",
+                    "Content-Type: text/plain; charset=UTF-8",
+                    "",
+                    "HtmlUnit"},
+            FF = {"POST /ajax.json HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: */*",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Sec-Fetch-Dest: empty",
+                  "Sec-Fetch-Mode: cors",
+                  "Sec-Fetch-Site: same-origin",
+                  "Priority: u=0, i",
+                  "Origin: http://localhost:§§PORT§§",
+                  "Content-Length: 8",
+                  "Content-Type: text/plain; charset=UTF-8",
+                  "",
+                  "HtmlUnit"},
+            FF_ESR = {"POST /ajax.json HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Sec-Fetch-Dest: empty",
+                      "Sec-Fetch-Mode: cors",
+                      "Sec-Fetch-Site: same-origin",
+                      "Priority: u=0, i",
+                      "Origin: http://localhost:§§PORT§§",
+                      "Content-Length: 8",
+                      "Content-Type: text/plain; charset=UTF-8",
+                      "",
+                      "HtmlUnit"})
+    public void xmlHttpRequestPostString() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + "  function doXhr() {\n"
+                + "    var x = new XMLHttpRequest();\n"
+                + "    x.open('POST', 'ajax.json', true);\n"
+                + "    x.send('HtmlUnit');\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='doXhr()'></body></html>";
+        final String htmlResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + html;
+        final String ajaxResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: application/json\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + "{}";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, htmlResponse, ajaxResponse)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final long endTime = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
+            while (primitiveWebServer.getRequests().size() < 2
+                        && System.currentTimeMillis() < endTime) {
+                Thread.sleep(100);
+            }
+
+            if (primitiveWebServer.getRequests().size() < 2) {
+                Assertions.fail("Still no request / request count:" + primitiveWebServer.getRequests().size());
+            }
+
+            final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
+
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
      * Tests the Sec-Fetch-* headers sent for a same-origin XMLHttpRequest.
      * Real browsers: Sec-Fetch-Mode: cors, Sec-Fetch-Dest: empty, no Sec-Fetch-User.
      * HtmlUnit currently hardcodes Sec-Fetch-Mode: navigate, Sec-Fetch-Dest: document
@@ -3178,7 +3377,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
 
-            final long endTime = System.currentTimeMillis() + Duration.ofSeconds(4).toMillis();
+            final long endTime = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
             while (primitiveWebServer.getRequests().size() < 2
                         && System.currentTimeMillis() < endTime) {
                 Thread.sleep(100);
@@ -3195,6 +3394,141 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
         }
     }
+    /**
+     * Tests a cross-origin (cross-site) XMLHttpRequest GET - the counterpart to
+     * {@link #xmlHttpRequestGet()} (same-origin), mirroring the same-origin/cross-origin
+     * pairing already present for {@link #image()}/{@link #imageCrossOrigin()} and
+     * {@link #javascript()}/{@link #javascriptCrossOrigin()}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"GET /ajax.json HTTP/1.1",
+                      "Host: host1.htmlunit-dev.org:§§PORT§§",
+                      "Connection: keep-alive",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Origin: http://localhost:22225",
+                      "Referer: http://localhost:22225/",
+                      "Accept-Encoding: gzip, deflate",
+                      "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /ajax.json HTTP/1.1",
+                    "Host: host1.htmlunit-dev.org:§§PORT§§",
+                    "Connection: keep-alive",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: */*",
+                    "Origin: http://localhost:22225",
+                    "Referer: http://localhost:22225/",
+                    "Accept-Encoding: gzip, deflate",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /ajax.json HTTP/1.1",
+                  "Host: host1.htmlunit-dev.org:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: */*",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate",
+                  "Origin: http://localhost:22225",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:22225/"},
+            FF_ESR = {"GET /ajax.json HTTP/1.1",
+                      "Host: host1.htmlunit-dev.org:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate",
+                      "Origin: http://localhost:22225",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:22225/"})
+    @HtmlUnitNYI(CHROME = {"GET /ajax.json HTTP/1.1",
+                           "Host: host1.htmlunit-dev.org:§§PORT§§",
+                           "Connection: keep-alive",
+                           "User-Agent: §§USER_AGENT§§",
+                           "Accept: */*",
+                           "Referer: http://localhost:22225/",
+                           "Accept-Encoding: gzip, deflate, br",
+                           "Accept-Language: en-US,en;q=0.9",
+                           "Origin: http://localhost:22225"},
+            EDGE = {"GET /ajax.json HTTP/1.1",
+                    "Host: host1.htmlunit-dev.org:§§PORT§§",
+                    "Connection: keep-alive",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: */*",
+                    "Referer: http://localhost:22225/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9",
+                    "Origin: http://localhost:22225"},
+            FF = {"GET /ajax.json HTTP/1.1",
+                  "Host: host1.htmlunit-dev.org:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: */*",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate, br",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:22225/",
+                  "Priority: u=0, i", // wrong
+                  "Origin: http://localhost:22225"},
+            FF_ESR = {"GET /ajax.json HTTP/1.1",
+                      "Host: host1.htmlunit-dev.org:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:22225/",
+                      "Priority: u=0, i", // wrong
+                      "Origin: http://localhost:22225"})
+    public void xmlHttpRequestGetCrossOrigin() throws Exception {
+        final String ajaxResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: application/json\r\n"
+                + "Access-Control-Allow-Origin: *\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + "{}";
+
+        shutDownAll();
+        try (PrimitiveWebServer crossServer = new PrimitiveWebServer(PORT_PROXY_SERVER,
+                null, ajaxResponse, ajaxResponse, ajaxResponse)) {
+            final String html = DOCTYPE_HTML
+                    + "<html><head><script>\n"
+                    + "  function doXhr() {\n"
+                    + "    var x = new XMLHttpRequest();\n"
+                    + "    x.open('GET', 'http://host1.htmlunit-dev.org:" + crossServer.getPort()
+                            + "/ajax.json', true);\n"
+                    + "    x.send();\n"
+                    + "  }\n"
+                    + "</script></head>\n"
+                    + "<body onload='doXhr()'></body></html>";
+            final String htmlResponse = "HTTP/1.1 200 OK\r\n"
+                    + "Content-Length: " + html.length() + "\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "Connection: close\r\n"
+                    + "\r\n"
+                    + html;
+
+            try (PrimitiveWebServer originServer = new PrimitiveWebServer(null, htmlResponse, htmlResponse)) {
+                final WebDriver driver = getWebDriver();
+
+                driver.get("http://localhost:" + originServer.getPort());
+
+                final long endTime = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
+                while (crossServer.getRequests().isEmpty()
+                            && System.currentTimeMillis() < endTime) {
+                    Thread.sleep(100);
+                }
+
+                if (crossServer.getRequests().isEmpty()) {
+                    Assertions.fail("Still no request / request count:" + crossServer.getRequests().size());
+                }
+
+                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer);
+
+                final String request = crossServer.getRequests().get(0);
+                final String[] headers = request.split("\\r\\n");
+                assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+            }
+        }
+    }
 
     /**
      * Tests the CORS preflight (OPTIONS) request triggered by a cross-origin XHR using a
@@ -3203,10 +3537,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * Access-Control-Request-Headers instead of a body - and it's not yet known whether
      * Sec-Fetch-* headers even apply to the preflight itself as opposed to only the actual
      * follow-up request.
-     * <p>
-     * NOTE: needs two concurrent {@link PrimitiveWebServer} instances (one per origin), same
-     * as {@link #redirectToCrossSiteHost()} - unverified whether the constructor used here
-     * actually supports that; double check before relying on it.
      *
      * @throws Exception if the test fails
      */
@@ -3353,7 +3683,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
                 driver.get("http://localhost:" + originServer.getPort());
 
-                final long endTime = System.currentTimeMillis() + Duration.ofSeconds(4).toMillis();
+                final long endTime = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
                 while (crossServer.getRequests().size() < 2
                             && System.currentTimeMillis() < endTime) {
                     Thread.sleep(100);
