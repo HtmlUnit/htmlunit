@@ -8,62 +8,64 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
-            <action type="update" dev="rbri">
-                Improved headers for xhr preflight requests.
+            <action type="update" dev="rbri" issue="#1152">
+                Improved headers for XHR preflight requests.
             </action>
             <action type="update" dev="rbri">
-                Method innerText() for selects generates now the same output as the real browsers.
+                The innerText() method for select elements now generates the same output as real browsers.
             </action>
             <action type="update" dev="rbri">
-                module java.net.http is now required
+                The java.net.http module is now required.
             </action>
             <action type="update" dev="rbri">
-                neko: major update - the select tag now allows arbitry tags https://github.com/whatwg/html/pull/10557
+                neko: Major update - the select element now allows arbitrary tags.
+                https://github.com/whatwg/html/pull/10557
                 (https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select)
             </action>
             <action type="update" dev="rbri">
-                neko: the input tag closes select tags
+                neko: The input element closes select elements.
             </action>
             <action type="add" dev="rbri">
-                Navigator sendBeacon() method added.
+                Navigator.sendBeacon() method added.
             </action>
             <action type="update" dev="rbri">
-                The area element supports the 'type' property in FF 153.
+                The area element supports the 'type' property in Firefox 153.
             </action>
             <action type="update" dev="rbri">
-                Error.stackTraceLimit is available in FF 153.
+                Error.stackTraceLimit is available in Firefox 153.
             </action>
-            <action type="update" dev="rbri">
-                The (i)frames  request now sends also the acceppt header.
+            <action type="update" dev="rbri" issue="#1152">
+                (I)frame requests now also send the Accept header.
             </action>
-            <action type="update" dev="rbri">
-                Area link handling is now in sync with anchor (implementation shared via new class HyperlinkElementSupport
-                and new interface HyperlinkElement). This addes e.g. 'ping' and 'download' attribute support.
+            <action type="update" dev="rbri" issue="#1152">
+                Area link handling is now in sync with anchor handling (implementation shared via the new
+                HyperlinkElementSupport class and the new HyperlinkElement interface). This adds support
+                for the 'ping' and 'download' attributes, among others.
             </action>
-            <action type="update" dev="rbri">
-                Script web request respects the 'crossorigin' attribute.
+            <action type="update" dev="rbri" issue="#1152">
+                Script web requests now respect the 'crossorigin' attribute.
             </action>
-            <action type="update" dev="rbri">
-                Anchor ping request now sends also the acceppt encoding and cache control headers.
+            <action type="update" dev="rbri" issue="#1152">
+                Anchor ping requests now also send the Accept-Encoding and Cache-Control headers.
             </action>
-            <action type="update" dev="rbri">
-                Anchor web request respects the 'crossorigin' attribute.
+            <action type="update" dev="rbri" issue="#1152">
+                Anchor web requests now respect the 'crossorigin' attribute.
             </action>
-            <action type="update" dev="rbri">
-                Major update of the WebRequest to improve the Sec-Fetch-* HTTP header support.
+            <action type="update" dev="rbri" issue="#1152">
+                Major update to WebRequest to improve support for the Sec-Fetch-* HTTP headers.
             </action>
             <action type="update" dev="rhino">
-                The url/anchor hostname setter handling got some fixes.
+                The URL/anchor hostname setter received several fixes.
             </action>
             <action type="update" dev="rbri" due-to="Lai Quang Duong">
-                core-js: support for a common workaround for subclassing built-in objects (like Set) without
-                using ES6 class/extends syntax, by using Reflect.construct() with a newTarget argument added.
+                core-js: Added support for a common workaround for subclassing built-in objects (such as Set)
+                without using ES6 class/extends syntax, by using Reflect.construct() with a newTarget argument.
             </action>
             <action type="update" dev="rhino">
-                core-js: Improved strict mode handling for direct eval calls.
+                core-js: Improved strict mode handling for direct eval() calls.
             </action>
             <action type="update" dev="rbri">
-                Range.getClientRects() and Range.getBoundingClientRect() ignoring whitespace-only text nodes
+                Range.getClientRects() and Range.getBoundingClientRect() now ignore whitespace-only text nodes
                 and block-level siblings when calculating the horizontal offset of a text node.
             </action>
             <action type="update" dev="rbri">
@@ -77,7 +79,7 @@
             <action type="update" dev="rbri">
                 Range.getTextNodeRect() now correctly determines character offsets when the range
                 boundaries are set on a parent element rather than directly on the text node,
-                returning the full text width instead of a single character width.
+                returning the full text width instead of a single-character width.
             </action>
         </release>
 
