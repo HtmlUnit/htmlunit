@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.lang.ref.Cleaner;
 import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
@@ -72,8 +73,25 @@ public interface DownloadedContent extends Serializable {
      * Implementation keeping content on the file system.
      */
     class OnFile implements DownloadedContent {
+
         private final File file_;
-        private final boolean temporary_;
+        private final Cleaner.Cleanable cleanable_;
+
+        private static final class OnFileCleaningAction implements Runnable {
+            private File file_;
+
+            OnFileCleaningAction(final File file) {
+                file_ = file;
+            }
+
+            @Override
+            public synchronized void run() {
+                if (file_ != null) {
+                    FileUtils.deleteQuietly(file_);
+                    file_ = null;
+                }
+            }
+        }
 
         /**
          * Ctor.
@@ -83,7 +101,12 @@ public interface DownloadedContent extends Serializable {
          */
         OnFile(final File file, final boolean temporary) {
             file_ = file;
-            temporary_ = temporary;
+            if (temporary) {
+                cleanable_ = WebClient.registerCleanerAction(this, new OnFileCleaningAction(file));
+            }
+            else {
+                cleanable_ = null;
+            }
         }
 
         @Override
@@ -93,8 +116,8 @@ public interface DownloadedContent extends Serializable {
 
         @Override
         public void cleanUp() {
-            if (temporary_) {
-                FileUtils.deleteQuietly(file_);
+            if (cleanable_ != null) {
+                cleanable_.clean();
             }
         }
 
@@ -104,16 +127,11 @@ public interface DownloadedContent extends Serializable {
         }
 
         @Override
-        protected void finalize() throws Throwable {
-            super.finalize();
-            cleanUp();
-        }
-
-        @Override
         public long length() {
             if (file_ == null) {
                 return 0;
             }
+
             return file_.length();
         }
     }

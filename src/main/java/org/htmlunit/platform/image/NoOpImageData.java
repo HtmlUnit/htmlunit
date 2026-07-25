@@ -41,15 +41,6 @@ public class NoOpImageData implements ImageData {
      * {@inheritDoc}
      */
     @Override
-    protected void finalize() throws Throwable {
-        close();
-        super.finalize();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void close() {
         // nothing to do
     }

@@ -16,12 +16,14 @@ package org.htmlunit.platform.image;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.Cleaner;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import org.htmlunit.WebClient;
 import org.htmlunit.platform.geom.IntDimension2D;
 
 /**
@@ -47,7 +49,56 @@ public class ImageIOImageData implements ImageData {
 
     // private static final Log LOG = LogFactory.getLog(ImageIOImageData.class);
 
-    private final ImageReader imageReader_;
+    private IntDimension2D dim_;
+
+    private final ImageIOImageDataCleaningAction cleaningAction_;
+    private final Cleaner.Cleanable cleanable_;
+
+    private static final class ImageIOImageDataCleaningAction implements Runnable {
+        private ImageReader imageReader_;
+        private InputStream inputStream_;
+
+        ImageIOImageDataCleaningAction(final ImageReader imageReader, final InputStream inputStream) {
+            imageReader_ = imageReader;
+            inputStream_ = inputStream;
+        }
+
+        synchronized ImageReader getImageReader() {
+            if (imageReader_ == null) {
+                throw new IllegalStateException("ImageIOImageData is closed");
+            }
+            return imageReader_;
+        }
+
+        @Override
+        public synchronized void run() {
+            if (imageReader_ == null) {
+                return;
+            }
+
+            try (ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
+                // nothing
+            }
+            catch (final IOException e) {
+                // optionally log
+            }
+            finally {
+                imageReader_.setInput(null);
+                imageReader_.dispose();
+                imageReader_ = null;
+            }
+
+            try {
+                inputStream_.close();
+            }
+            catch (final IOException e) {
+                // optionally log
+            }
+            finally {
+                inputStream_ = null;
+            }
+        }
+    }
 
     /**
      * Ctor.
@@ -59,12 +110,15 @@ public class ImageIOImageData implements ImageData {
         final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
         if (!iter.hasNext()) {
             iis.close();
+            inputStream.close();
             throw new IOException("No image detected in response");
         }
+
         final ImageReader imageReader = iter.next();
         imageReader.setInput(iis);
 
-        imageReader_ = imageReader;
+        cleaningAction_ = new ImageIOImageDataCleaningAction(imageReader, inputStream);
+        cleanable_ = WebClient.registerCleanerAction(this, cleaningAction_);
 
         // dispose all others
         while (iter.hasNext()) {
@@ -78,7 +132,7 @@ public class ImageIOImageData implements ImageData {
      * @return the {@link ImageReader}
      */
     public ImageReader getImageReader() {
-        return imageReader_;
+        return cleaningAction_.getImageReader();
     }
 
     /**
@@ -86,29 +140,18 @@ public class ImageIOImageData implements ImageData {
      */
     @Override
     public IntDimension2D getWidthHeight() throws IOException {
-        return new IntDimension2D(imageReader_.getWidth(0), imageReader_.getHeight(0));
+        if (dim_ == null) {
+            final ImageReader imgReader = cleaningAction_.getImageReader();
+            dim_ = new IntDimension2D(imgReader.getWidth(0), imgReader.getHeight(0));
+        }
+        return dim_;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void finalize() throws Throwable {
-        close();
-        super.finalize();
-    }
-
-    @Override
-    @SuppressWarnings("PMD.UnusedLocalVariable")
-    public void close() throws IOException {
-        if (imageReader_ != null) {
-            try (ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
-                // nothing
-            }
-            finally {
-                imageReader_.setInput(null);
-                imageReader_.dispose();
-            }
-        }
+    public void close() {
+        cleanable_.clean();
     }
 }

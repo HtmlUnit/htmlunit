@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="fix" dev="rbri">
+                Fix a possible resource leak by making sure ImageIOImageData closes the base stream.
+            </action>
+            <action type="update" dev="rbri">
+                DownloadedContent.OnFile and ImageIOImageData now use Cleaner instead of finalize().
+            </action>
             <action type="update" dev="rbri" issue="#1152">
                 Improved headers for XHR preflight requests.
             </action>

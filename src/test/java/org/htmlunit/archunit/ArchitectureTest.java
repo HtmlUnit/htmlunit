@@ -543,6 +543,7 @@ public class ArchitectureTest {
     public static final ArchRule androidImageio = noClasses()
          .that()
             .doNotHaveFullyQualifiedName("org.htmlunit.platform.image.ImageIOImageData")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.image.ImageIOImageData$ImageIOImageDataCleaningAction")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
             .and().resideOutsideOfPackage("org.htmlunit.jetty..")

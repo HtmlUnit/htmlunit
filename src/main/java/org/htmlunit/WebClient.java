@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.lang.ref.Cleaner;
+import java.lang.ref.Cleaner.Cleanable;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -161,6 +163,8 @@ public class WebClient implements Serializable, AutoCloseable {
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
     private static final WebResponseData RESPONSE_DATA_NO_HTTP_RESPONSE = new WebResponseData(
             0, "No HTTP Response", Collections.emptyList());
+
+    static final Cleaner CLEANER = Cleaner.create();
 
     /**
      * These response headers are not copied from a 304 response to the cached
@@ -1360,6 +1364,18 @@ public class WebClient implements Serializable, AutoCloseable {
         if (windows_.remove(webWindow)) {
             fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
         }
+    }
+
+    /**
+     * Registers an object and a cleaning action to run when the object
+     * becomes phantom reachable. This forwards the call to our static {@link Cleaner}.
+     *
+     * @param obj   the object to monitor
+     * @param action a {@code Runnable} to invoke when the object becomes phantom reachable
+     * @return a {@code Cleanable} instance
+     */
+    public static Cleanable registerCleanerAction(final Object obj, final Runnable action) {
+        return CLEANER.register(obj, action);
     }
 
     /**

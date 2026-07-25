@@ -3394,6 +3394,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
         }
     }
+
     /**
      * Tests a cross-origin (cross-site) XMLHttpRequest GET - the counterpart to
      * {@link #xmlHttpRequestGet()} (same-origin), mirroring the same-origin/cross-origin
