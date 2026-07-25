@@ -404,6 +404,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     XHR_LOAD_ALWAYS_AFTER_DONE,
 
+    /** Indicates if the XMLHttpRequest preflight request includes the 'Sec-Fetch-Mode=cors' header. */
+    @BrowserFeature({CHROME, EDGE})
+    XHR_PREFLIGHT_CORS,
+
     /** If state unsent the response text is empty even if the response type is wrong. */
     @BrowserFeature({FF, FF_ESR})
     XHR_RESPONSE_TEXT_EMPTY_UNSENT,

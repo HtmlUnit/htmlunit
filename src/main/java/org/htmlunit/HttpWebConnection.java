@@ -1116,7 +1116,8 @@ public class HttpWebConnection implements WebConnection {
 
                 // Real browsers only send this for navigations (top-level, iframe, frame),
                 // never for subresource fetches (image/script/style/xhr/...).
-                else if (WebRequest.FetchMode.NAVIGATE.getValue().equals(secFetchMode)) {
+                else if (WebRequest.FetchMode.NAVIGATE.getValue().equals(secFetchMode)
+                            && HttpMethod.OPTIONS != webRequest.getHttpMethod()) {
                     list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor("1"));
                 }
             }

@@ -3197,6 +3197,183 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     }
 
     /**
+     * Tests the CORS preflight (OPTIONS) request triggered by a cross-origin XHR using a
+     * non-simple method (PUT) and a custom header. This is a structurally distinct request
+     * category from anything else in this file - no payload, Access-Control-Request-Method/
+     * Access-Control-Request-Headers instead of a body - and it's not yet known whether
+     * Sec-Fetch-* headers even apply to the preflight itself as opposed to only the actual
+     * follow-up request.
+     * <p>
+     * NOTE: needs two concurrent {@link PrimitiveWebServer} instances (one per origin), same
+     * as {@link #redirectToCrossSiteHost()} - unverified whether the constructor used here
+     * actually supports that; double check before relying on it.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"OPTIONS /target HTTP/1.1",
+                      "Host: host1.htmlunit-dev.org:§§PORT§§",
+                      "Connection: keep-alive",
+                      "Accept: */*",
+                      "Access-Control-Request-Method: PUT",
+                      "Access-Control-Request-Headers: x-custom",
+                      "Origin: http://localhost:22225",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Sec-Fetch-Mode: cors",
+                      "Referer: http://localhost:22225/",
+                      "Accept-Encoding: gzip, deflate",
+                      "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"OPTIONS /target HTTP/1.1",
+                    "Host: host1.htmlunit-dev.org:§§PORT§§",
+                    "Connection: keep-alive",
+                    "Accept: */*",
+                    "Access-Control-Request-Method: PUT",
+                    "Access-Control-Request-Headers: x-custom",
+                    "Origin: http://localhost:22225",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Sec-Fetch-Mode: cors",
+                    "Referer: http://localhost:22225/",
+                    "Accept-Encoding: gzip, deflate",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"OPTIONS /target HTTP/1.1",
+                  "Host: host1.htmlunit-dev.org:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: */*",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate",
+                  "Access-Control-Request-Method: PUT",
+                  "Access-Control-Request-Headers: x-custom",
+                  "Referer: http://localhost:22225/",
+                  "Origin: http://localhost:22225",
+                  "Connection: keep-alive",
+                  "Priority: u=4"},
+            FF_ESR = {"OPTIONS /target HTTP/1.1",
+                      "Host: host1.htmlunit-dev.org:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate",
+                      "Access-Control-Request-Method: PUT",
+                      "Access-Control-Request-Headers: x-custom",
+                      "Referer: http://localhost:22225/",
+                      "Origin: http://localhost:22225",
+                      "Connection: keep-alive",
+                      "Priority: u=4"})
+    @HtmlUnitNYI(
+            CHROME = {"OPTIONS /target HTTP/1.1",
+                      "Host: host1.htmlunit-dev.org:§§PORT§§",
+                      "Connection: keep-alive",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Sec-Fetch-Mode: cors",
+                      "Referer: http://localhost:22225/",
+                      "Accept-Encoding: gzip, deflate",
+                      "Accept-Language: en-US,en;q=0.9",
+                      "Origin: http://localhost:22225",
+                      "Access-Control-Request-Method: PUT",
+                      "Access-Control-Request-Headers: x-custom",
+                      "Content-Length: 0"}, // wrong
+            EDGE = {"OPTIONS /target HTTP/1.1",
+                    "Host: host1.htmlunit-dev.org:§§PORT§§",
+                    "Connection: keep-alive",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: */*",
+                    "Sec-Fetch-Mode: cors",
+                    "Referer: http://localhost:22225/",
+                    "Accept-Encoding: gzip, deflate",
+                    "Accept-Language: en-US,en;q=0.9",
+                    "Origin: http://localhost:22225",
+                    "Access-Control-Request-Method: PUT",
+                    "Access-Control-Request-Headers: x-custom",
+                    "Content-Length: 0"}, // wrong
+            FF = {"OPTIONS /target HTTP/1.1",
+                  "Host: host1.htmlunit-dev.org:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: */*",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "Accept-Encoding: gzip, deflate",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:22225/",
+                  "Priority: u=0, i",
+                  "Origin: http://localhost:22225",
+                  "Access-Control-Request-Method: PUT",
+                  "Access-Control-Request-Headers: x-custom",
+                  "Content-Length: 0"}, // wrong
+            FF_ESR = {"OPTIONS /target HTTP/1.1",
+                      "Host: host1.htmlunit-dev.org:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: */*",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:22225/",
+                      "Priority: u=0, i",
+                      "Origin: http://localhost:22225",
+                      "Access-Control-Request-Method: PUT",
+                      "Access-Control-Request-Headers: x-custom",
+                      "Content-Length: 0"}) // wrong
+    public void xmlHttpRequestPreflight() throws Exception {
+        final String preflightResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 0\r\n"
+                + "Access-Control-Allow-Origin: *\r\n"
+                + "Access-Control-Allow-Methods: PUT\r\n"
+                + "Access-Control-Allow-Headers: X-Custom\r\n"
+                + "Connection: close\r\n"
+                + "\r\n";
+        final String actualResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/plain\r\n"
+                + "Access-Control-Allow-Origin: *\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + "Hi";
+
+        shutDownAll();
+        try (PrimitiveWebServer crossServer = new PrimitiveWebServer(PORT_PROXY_SERVER,
+                                                null, preflightResponse, actualResponse, actualResponse)) {
+            final String html = DOCTYPE_HTML
+                    + "<html><head><script>\n"
+                    + "  function doXhr() {\n"
+                    + "    var x = new XMLHttpRequest();\n"
+                    + "    x.open('PUT', 'http://host1.htmlunit-dev.org:" + crossServer.getPort() + "/target', true);\n"
+                    + "    x.setRequestHeader('X-Custom', 'value');\n"
+                    + "    x.send('body');\n"
+                    + "  }\n"
+                    + "</script></head>\n"
+                    + "<body onload='doXhr()'></body></html>";
+            final String htmlResponse = "HTTP/1.1 200 OK\r\n"
+                    + "Content-Length: " + html.length() + "\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "Connection: close\r\n"
+                    + "\r\n"
+                    + html;
+
+            try (PrimitiveWebServer originServer = new PrimitiveWebServer(null, htmlResponse, htmlResponse)) {
+                final WebDriver driver = getWebDriver();
+
+                driver.get("http://localhost:" + originServer.getPort());
+
+                final long endTime = System.currentTimeMillis() + Duration.ofSeconds(4).toMillis();
+                while (crossServer.getRequests().size() < 2
+                            && System.currentTimeMillis() < endTime) {
+                    Thread.sleep(100);
+                }
+
+                if (crossServer.getRequests().size() < 2) {
+                    Assertions.fail("Still no request / request count:" + crossServer.getRequests().size());
+                }
+
+                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer);
+
+                // request 0 = the OPTIONS preflight
+                final String request = crossServer.getRequests().get(0);
+                final String[] headers = request.split("\\r\\n");
+                assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+            }
+        }
+    }
+
+    /**
      * Tests a form submitted purely by script ({@code form.submit()}), as opposed to via
      * a click on a submit control. Real browsers do not consider this a user-activated
      * navigation, so no Sec-Fetch-User header is sent at all (never {@code ?0}).

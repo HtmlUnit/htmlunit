@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.xml;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
 import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
+import static org.htmlunit.BrowserVersionFeatures.XHR_PREFLIGHT_CORS;
 import static org.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TEXT_EMPTY_UNSENT;
 import static org.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
 
@@ -942,7 +943,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * Performs the actual send operation.
      */
     void doSend() {
-        final WebClient wc = getWindow().getWebWindow().getWebClient();
+        final Window window = getWindow();
+        final WebWindow webWindow = window.getWebWindow();
+        final WebClient wc = webWindow.getWebClient();
 
         // accessing to local resource is forbidden for security reason
         if (!wc.getOptions().isFileProtocolForXMLHttpRequestsAllowed()
@@ -960,7 +963,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             else {
                 throw JavaScriptEngine.asJavaScriptException(
-                        getWindow(),
+                        window,
                         "Not allowed to load local resource: " + webRequest_.getUrl(),
                         DOMException.NETWORK_ERR);
             }
@@ -970,6 +973,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         try {
             if (!isSameOrigin_ && isPreflight()) {
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
+                preflightRequest.setEncodingType(null);
 
                 // preflight request shouldn't have cookies
                 preflightRequest.addHint(HttpHint.BlockCookies);
@@ -1001,6 +1005,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     preflightRequest.setTimeout(timeout_);
                 }
 
+                if (getBrowserVersion().hasFeature(XHR_PREFLIGHT_CORS)) {
+                    // preflightRequest.setFetchModeOverride(FetchMode.CORS);
+                    preflightRequest.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "cors");
+                }
+
+                final HtmlPage containingPage = (HtmlPage) webWindow.getEnclosedPage();
+                preflightRequest.setRefererHeader(containingPage.getUrl());
+
                 // do the preflight request
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
                 if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
@@ -1016,7 +1028,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }
                     throw JavaScriptEngine.asJavaScriptException(
-                            getWindow(),
+                            window,
                             "No permitted \"Access-Control-Allow-Origin\" header.",
                             DOMException.NETWORK_ERR);
                 }
@@ -1139,7 +1151,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     fireJavascriptEvent(Event.TYPE_LOAD_END);
                 }
 
-                throw JavaScriptEngine.asJavaScriptException(getWindow(),
+                throw JavaScriptEngine.asJavaScriptException(window,
                         e.getMessage(), DOMException.NETWORK_ERR);
             }
         }
