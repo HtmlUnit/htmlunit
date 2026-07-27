@@ -361,28 +361,32 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"4", "#text:\\n\\s\\s", "A:null", "DIV:null", "#text:Z\\n\\n\\n", "3",
-                "innerDiv", "BODY:null", "3", "A:null", "A:null", "#text:Y",
-                "outerA", "BODY:null", "1", "#text:V", "true", "false",
-                "outerA", "DIV:null", "1", "#text:W", "false", "false",
-                "innerA", "DIV:null", "1", "#text:X", "false", "true"})
+    @Alerts({"4", "#text:\\n\\s\\s", "A:null", "DIV:null", "#text:Z\\n\\n\\n",
+             "3", "innerDiv", "BODY:null", "3", "A:null", "A:null", "#text:Y",
+             "outerA", "BODY:null", "1", "#text:V", "true", "false",
+             "outerA", "DIV:null", "1", "#text:W", "false", "false",
+             "innerA", "DIV:null", "1", "#text:X", "false", "true"})
     @HtmlUnitNYI(
-            CHROME = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
-                      "2", "innerDiv", "A:null", "1", "#text:W", "TypeError",
+            CHROME = {"4", "#text:\\n\\s\\s", "A:null", "DIV:null", "#text:Z\\n\\n",
+                      "3", "innerDiv", "A:null", "1", "#text:W", "TypeError",
                       "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                      "innerA", "BODY:null", "1", "#text:X", "false", "true", "TypeError"},
-            EDGE = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
-                    "2", "innerDiv", "A:null", "1", "#text:W", "TypeError",
+                      "outerA", "DIV:null", "0", "TypeError",
+                      "innerA", "DIV:null", "1", "#text:X", "false", "true"},
+            EDGE = {"4", "#text:\\n\\s\\s", "A:null", "DIV:null", "#text:Z\\n\\n",
+                    "3", "innerDiv", "A:null", "1", "#text:W", "TypeError",
                     "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                    "innerA", "BODY:null", "1", "#text:X", "false", "true", "TypeError"},
-            FF = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
-                  "2", "innerDiv", "A:null", "1", "#text:W", "TypeError",
+                    "outerA", "DIV:null", "0", "TypeError",
+                    "innerA", "DIV:null", "1", "#text:X", "false", "true"},
+            FF = {"4", "#text:\\n\\s\\s", "A:null", "DIV:null", "#text:Z\\n\\n",
+                  "3", "innerDiv", "A:null", "1", "#text:W", "TypeError",
                   "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                  "innerA", "BODY:null", "1", "#text:X", "false", "true", "TypeError"},
-            FF_ESR = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
-                      "2", "innerDiv", "A:null", "1", "#text:W", "TypeError",
+                  "outerA", "DIV:null", "0", "TypeError",
+                  "innerA", "DIV:null", "1", "#text:X", "false", "true"},
+            FF_ESR = {"4", "#text:\\n\\s\\s", "A:null", "DIV:null", "#text:Z\\n\\n",
+                      "3", "innerDiv", "A:null", "1", "#text:W", "TypeError",
                       "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                      "innerA", "BODY:null", "1", "#text:X", "false", "true", "TypeError"})
+                      "outerA", "DIV:null", "0", "TypeError",
+                      "innerA", "DIV:null", "1", "#text:X", "false", "true"})
     // Input:
     // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div>Z</a>
     // CHROME and IE generate:

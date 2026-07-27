@@ -8,6 +8,18 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="update" dev="rbri">
+                neko: Remove the &lt;comment&gt; tag suport (https://github.com/HtmlUnit/htmlunit-neko/issues/173).
+            </action>
+            <action type="update" dev="rbri">
+                neko: A new &lt;nobr&gt; start tag closes an &lt;nobr&gt; that is still open, even across intervening block elements.
+            </action>
+            <action type="update" dev="rbri">
+                neko: A new &lt;a&gt; start tag closes an &lt;a&gt; that is still open, even across intervening block elements.
+            </action>
+            <action type="update" dev="rbri">
+                neko: Some performance optimizations and code cleanup.
+            </action>
             <action type="fix" dev="rbri">
                 Fix a possible resource leak by making sure ImageIOImageData closes the base stream.
             </action>
