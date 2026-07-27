@@ -556,7 +556,7 @@ public class HTMLDocument extends Document {
     public HtmlUnitScriptable getElementById(final String id) {
         implicitCloseIfNecessary();
         final DomElement domElement = getPage().getElementById(id);
-        if (null == domElement) {
+        if (domElement == null) {
             // Just fall through - result is already set to null
             if (LOG.isDebugEnabled()) {
                 LOG.debug("getElementById(" + id + "): no DOM node found with this id");

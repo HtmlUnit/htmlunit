@@ -102,7 +102,7 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
     @JsxFunction
     public static boolean isInNet(final String host, final String pattern, final String mask) {
         final String dnsResolve = dnsResolve(host);
-        if (null == dnsResolve) {
+        if (dnsResolve == null) {
             return false;
         }
 

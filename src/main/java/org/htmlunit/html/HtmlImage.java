@@ -724,7 +724,7 @@ public class HtmlImage extends HtmlElement {
     private void readImageIfNeeded() throws IOException {
         downloadImageIfNeeded();
         if (imageData_ == null) {
-            if (null == imageWebResponse_) {
+            if (imageWebResponse_ == null) {
                 throw new IOException("No image response available (src='" + getSrcAttribute() + "')");
             }
             imageData_ = Platform.buildImageData(imageWebResponse_.getContentAsStream());

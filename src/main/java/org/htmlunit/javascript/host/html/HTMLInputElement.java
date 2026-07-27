@@ -99,7 +99,7 @@ public class HTMLInputElement extends HTMLElement {
     @JsxSetter
     @Override
     public void setValue(final Object newValue) {
-        if (null == newValue) {
+        if (newValue == null) {
             getDomNodeOrDie().setValue("");
             getDomNodeOrDie().valueModifiedByJavascript();
             return;

@@ -591,7 +591,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     final String content = domElem.getVisibleText();
                     // do this only for small content
                     // at least for empty div's this is more correct
-                    if (null == content) {
+                    if (content == null) {
                         return getDefaultValue() + "px";
                     }
                     return getEmptyHeight(domElem) + "px";
@@ -1068,7 +1068,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         Integer cachedTop = getCachedTop();
 
         int top = 0;
-        if (null == cachedTop) {
+        if (cachedTop == null) {
             final String position = getPositionWithInheritance();
             if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
                 top = getTopForAbsolutePositionWithInheritance();

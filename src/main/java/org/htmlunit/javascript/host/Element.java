@@ -1013,7 +1013,7 @@ public class Element extends Node {
     public void setOuterHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode parent = domNode.getParentNode();
-        if (null == parent) {
+        if (parent == null) {
             return;
         }
 
@@ -1110,7 +1110,7 @@ public class Element extends Node {
             final boolean isHtml = !(scriptObject instanceof HTMLScriptElement)
                     && !(scriptObject instanceof HTMLStyleElement);
             printChildren(builder, node, isHtml);
-            if (null == htmlElement || !htmlElement.isEndTagForbidden()) {
+            if (htmlElement == null || !htmlElement.isEndTagForbidden()) {
                 builder.append("</").append(tag).append('>');
             }
         }

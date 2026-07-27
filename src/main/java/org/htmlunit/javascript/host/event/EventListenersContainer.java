@@ -188,7 +188,7 @@ public class EventListenersContainer implements Serializable {
      * @return {@code true} if the listener was added; {@code false} if it was already registered
      */
     public boolean addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        if (null == listener) {
+        if (listener == null) {
             return true;
         }
 

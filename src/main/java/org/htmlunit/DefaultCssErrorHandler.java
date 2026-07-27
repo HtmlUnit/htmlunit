@@ -72,7 +72,7 @@ public class DefaultCssErrorHandler implements CSSErrorHandler, Serializable {
         final int line = exception.getLineNumber();
         final int col = exception.getColumnNumber();
 
-        if (null == uri) {
+        if (uri == null) {
             return "[" + line + ":" + col + "] " + exception.getMessage();
         }
         return "'" + uri + "' [" + line + ":" + col + "] " + exception.getMessage();

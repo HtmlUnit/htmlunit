@@ -202,7 +202,7 @@ public class HtmlLink extends HtmlElement {
     public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request,
             final boolean isStylesheetRequest, final String type) throws IOException {
         final WebClient webClient = getPage().getWebClient();
-        if (null == request) {
+        if (request == null) {
             request = getWebRequest();
         }
 

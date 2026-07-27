@@ -438,7 +438,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
         @Override
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             final AbstractList nodes = nodeList_.get();
-            if (null == nodes) {
+            if (nodes == null) {
                 return;
             }
             if (nodes.attributeChangeSensitive_) {
@@ -453,7 +453,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
          */
         private void handleChangeOnCache(final HtmlAttributeChangeEvent event) {
             final AbstractList nodes = nodeList_.get();
-            if (null == nodes) {
+            if (nodes == null) {
                 return;
             }
 

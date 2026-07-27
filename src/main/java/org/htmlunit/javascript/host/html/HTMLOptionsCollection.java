@@ -270,7 +270,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
             }
         }
 
-        if (null == beforeOption) {
+        if (beforeOption == null) {
             htmlSelect_.appendOption(htmlOption);
             return;
         }

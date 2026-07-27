@@ -87,7 +87,7 @@ public class HTMLTextAreaElement extends HTMLElement {
     @JsxSetter
     @Override
     public void setValue(final Object value) {
-        if (null == value) {
+        if (value == null) {
             getDomNodeOrDie().setText("");
             return;
         }

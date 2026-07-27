@@ -199,7 +199,7 @@ public abstract class HtmlElement extends DomElement {
         final HtmlPage htmlPage = getHtmlPageOrNull();
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
-        if (null == htmlPage) {
+        if (htmlPage == null) {
             super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
             return;
@@ -295,7 +295,7 @@ public abstract class HtmlElement extends DomElement {
         final HtmlPage htmlPage = getHtmlPageOrNull();
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
-        if (null == htmlPage) {
+        if (htmlPage == null) {
             return super.setAttributeNode(attribute);
         }
 
@@ -339,7 +339,7 @@ public abstract class HtmlElement extends DomElement {
         final HtmlPage htmlPage = getHtmlPageOrNull();
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
-        if (null == htmlPage) {
+        if (htmlPage == null) {
             super.removeAttribute(attributeName);
             return;
         }

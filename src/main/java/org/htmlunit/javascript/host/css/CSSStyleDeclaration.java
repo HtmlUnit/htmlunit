@@ -204,7 +204,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param important the priority (e.g. empty string, or "important")
      */
     protected void setStyleAttribute(final String name, String newValue, final String important) {
-        if (null == newValue || "null".equals(newValue)) {
+        if (newValue == null || "null".equals(newValue)) {
             newValue = "";
         }
 
@@ -1961,7 +1961,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         }
 
         String valueString = JavaScriptEngine.toString(value);
-        if (null == value) {
+        if (value == null) {
             valueString = "";
         }
 

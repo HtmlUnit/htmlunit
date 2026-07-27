@@ -381,7 +381,7 @@ public class XmlSerializer {
 
         // clone the specified element, if possible
         final DomAttr attr = newMap.get(attrName);
-        if (null == attr) {
+        if (attr == null) {
             return newMap;
         }
 

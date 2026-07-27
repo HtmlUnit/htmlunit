@@ -1065,7 +1065,7 @@ public class Document extends Node {
     }
 
     private boolean hasCommand(final String cmd, final boolean includeBold) {
-        if (null == cmd) {
+        if (cmd == null) {
             return false;
         }
 

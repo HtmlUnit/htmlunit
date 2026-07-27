@@ -115,7 +115,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @return "xml", "html", "javascript", "text" or "unknown"
      */
     public static PageType determinePageType(final String contentType) {
-        if (null == contentType) {
+        if (contentType == null) {
             return PageType.UNKNOWN;
         }
 

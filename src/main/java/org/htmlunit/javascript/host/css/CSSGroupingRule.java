@@ -177,7 +177,7 @@ public class CSSGroupingRule extends CSSRule {
             }
 
             final CSSRule cssRule = CSSRule.create(getParentStyleSheet(), rule);
-            if (null == cssRule) {
+            if (cssRule == null) {
                 cssRulesIndexFix_.add(pos);
             }
             else {

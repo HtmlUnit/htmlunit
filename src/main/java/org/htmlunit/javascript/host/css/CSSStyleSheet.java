@@ -208,7 +208,7 @@ public class CSSStyleSheet extends StyleSheet {
             }
 
             final CSSRule cssRule = CSSRule.create(this, rule);
-            if (null == cssRule) {
+            if (cssRule == null) {
                 cssRulesIndexFix_.add(pos);
             }
             else {
