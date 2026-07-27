@@ -267,7 +267,6 @@ public class ExternalTest {
     private static void assertVersion(final String groupId, final String artifactId,
                             final String pomVersion, final Pattern ignorePattern)
             throws Exception {
-System.out.println("assertVersion(" + groupId);
         String latestMavenCentralVersion = null;
         String url = MAVEN_REPO_URL_
                         + groupId.replace('.', '/') + '/'
