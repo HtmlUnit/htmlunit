@@ -117,23 +117,21 @@ public class XmlPage extends SgmlPage {
         super(webResponse, enclosingWindow);
 
         try {
-            try {
-                final Document document = XmlUtils.buildDocument(webResponse);
-                node_ = document.getFirstChild();
+            final Document document = XmlUtils.buildDocument(webResponse);
+            node_ = document.getFirstChild();
+        }
+        catch (final SAXException e) {
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Failed parsing XML document '" + webResponse.getWebRequest().getUrl() + "'", e);
             }
-            catch (final SAXException e) {
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Failed parsing XML document '" + webResponse.getWebRequest().getUrl() + "'", e);
-                }
-                if (!ignoreSAXException) {
-                    throw new IOException(
-                            "Failed parsing XML document '" + webResponse.getWebRequest().getUrl() + "'", e);
-                }
+            if (!ignoreSAXException) {
+                throw new IOException(
+                        "Failed parsing XML document '" + webResponse.getWebRequest().getUrl() + "'", e);
             }
         }
         catch (final ParserConfigurationException e) {
             if (LOG.isWarnEnabled()) {
-                if (null == webResponse) {
+                if (webResponse == null) {
                     LOG.warn("Failed parsing XML empty document: " + e.getMessage(), e);
                 }
                 else {
