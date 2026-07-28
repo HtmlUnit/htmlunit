@@ -9,6 +9,14 @@
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
             <action type="update" dev="rbri">
+                neko: Remove the &lt;SOUND&gt;, &lt;ILAYER&gt;, &lt;LAYER&gt;, &lt;NOLAYER&gt;, &lt;NEXTID&gt;, &lt;MULTICOL&gt;, 
+                &lt;BLINK&gt;, &lt;SPACER&gt;, and &lt;XML&gt; tag suport.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: HTMLWriterFilter now serializes &lt;textarea&gt; and &lt;title&gt; element content with entity encoding
+                (https://github.com/HtmlUnit/htmlunit-neko/issues/173).
+            </action>
+            <action type="update" dev="rbri">
                 neko: Remove the &lt;comment&gt; tag suport (https://github.com/HtmlUnit/htmlunit-neko/issues/173).
             </action>
             <action type="update" dev="rbri">
