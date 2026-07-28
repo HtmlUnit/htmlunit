@@ -1165,4 +1165,58 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Verifies that {@code basefont} is handled as specified in the HTML parsing algorithm:
+     * the start tag is processed as if found in the head ("redirect to 'in head'"), the element
+     * is inserted and immediately popped off the stack of open elements, so it can never have
+     * children even without a matching end tag.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void basefont() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<body>\n"
+                + "<basefont id='b' color='red' size='5'>\n"
+                + "<h1>Hello</h1>\n"
+                + "</body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var childNodes = document.getElementById('b').childNodes;\n"
+                + "  log(childNodes.length);\n"
+                + "</script>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies that {@code bgsound} is handled as specified in the HTML parsing algorithm:
+     * the start tag is processed as if found in the head ("redirect to 'in head'"), the element
+     * is inserted and immediately popped off the stack of open elements, so it can never have
+     * children even without a matching end tag.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void bgsound() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<body>\n"
+                + "<bgsound id='b' src=\"x.wav\">\n"
+                + "<p>Hello</p>\n"
+                + "</body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var childNodes = document.getElementById('b').childNodes;\n"
+                + "  log(childNodes.length);\n"
+                + "</script>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
