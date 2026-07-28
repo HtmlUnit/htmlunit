@@ -6,8 +6,8 @@ Version 5.3.0 / July 15, 2026
 
 [![Maven Central Version](https://img.shields.io/maven-central/v/org.htmlunit/htmlunit)](https://central.sonatype.com/artifact/org.htmlunit/htmlunit)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/HtmlUnit/htmlunit/badge)](https://securityscorecards.dev/viewer/?uri=github.com/HtmlUnit/htmlunit)
-[![Scarf: Commercial Users](https://api.scarf.sh/v2/packages/HTML-Unit/e4454d4c-c1a0-44d6-8af9-ab9ee18b428c/commercial-users-badge)
-[![Scarf: Downloads](https://api.scarf.sh/v2/packages/HTML-Unit/e4454d4c-c1a0-44d6-8af9-ab9ee18b428c/downloads-badge)
+[![Scarf: Commercial Users]](https://api.scarf.sh/v2/packages/HTML-Unit/e4454d4c-c1a0-44d6-8af9-ab9ee18b428c/commercial-users-badge)
+[![Scarf: Downloads]](https://api.scarf.sh/v2/packages/HTML-Unit/e4454d4c-c1a0-44d6-8af9-ab9ee18b428c/downloads-badge)
 
 
 ### Homepage
