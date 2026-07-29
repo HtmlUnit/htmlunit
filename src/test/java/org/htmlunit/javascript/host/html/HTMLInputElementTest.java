@@ -2756,4 +2756,43 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"original", "from js", "original", "changed"})
+    public void reset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let inpt = document.getElementById('theInput');\n"
+            + "    let frm = document.getElementById('theForm');\n"
+
+            + "    log(inpt.value);\n"
+
+            + "    inpt.value = 'from js';\n"
+            + "    log(inpt.value);\n"
+
+            + "    frm.reset();\n"
+            + "    log(inpt.value);\n"
+
+            // Since the dirty flag should now be false, changing the content attribute
+            // should update the live value again.
+            + "    inpt.setAttribute('value', 'changed');\n"
+            + "    log(inpt.value);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<form id=\"theForm\">\n"
+            + "  <input id='theInput' type='text' value='original'>\r\n"
+            + "</form>\r\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
 }

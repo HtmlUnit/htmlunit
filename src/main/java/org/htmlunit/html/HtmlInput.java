@@ -471,7 +471,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     public void reset() {
         setValue(getDefaultValue());
-        isValueDirty_ = true;
+        isValueDirty_ = false;
     }
 
     /**
@@ -564,7 +564,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return {@code true} if this element is read only
      */
     public boolean isReadOnly() {
-        return hasAttribute("readOnly");
+        return hasAttribute("readonly");
     }
 
     /**
