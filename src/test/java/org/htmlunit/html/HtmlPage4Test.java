@@ -49,7 +49,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class HtmlPage4Test extends WebServerTestCase {
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void refresh() throws Exception {
@@ -111,7 +111,7 @@ public class HtmlPage4Test extends WebServerTestCase {
     }
 
     /**
-     * @exception Exception if an error occurs
+     * @throws Exception if an error occurs
      */
     @Test
     @Alerts("hello")

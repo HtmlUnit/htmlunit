@@ -42,7 +42,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
 
     /**
      * Tests that selecting one radio button will deselect all the others.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void radioButtonsAreMutuallyExclusive() throws Exception {
@@ -163,7 +163,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
 
     /**
      * Tests that clicking a radio button will select it.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void clickRadioButton() throws Exception {
@@ -189,7 +189,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
 
     /**
      * Tests that default type of input is text.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void inputNoType() throws Exception {

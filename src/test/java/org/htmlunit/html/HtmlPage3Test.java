@@ -153,7 +153,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void constructor() throws Exception {
@@ -203,7 +203,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts({"[object HTMLInputElement]", "1"})
@@ -228,7 +228,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts({"[object HTMLInputElement]", "1"})

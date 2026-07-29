@@ -983,7 +983,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("ti </head> <body> 1234 </body> </html>")

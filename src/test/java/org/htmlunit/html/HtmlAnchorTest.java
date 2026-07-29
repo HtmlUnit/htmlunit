@@ -688,7 +688,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", "First"})
@@ -719,7 +719,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", "First"})

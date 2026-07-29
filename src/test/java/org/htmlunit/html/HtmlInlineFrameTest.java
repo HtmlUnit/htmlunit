@@ -490,7 +490,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
 
     /**
      * See issue #1825.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void brokenIframe() throws Exception {

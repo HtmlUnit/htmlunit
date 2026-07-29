@@ -35,7 +35,7 @@ public interface PageCreator {
      *
      * @param webResponse the response from the server
      * @param webWindow the window that this page will be loaded into
-     * @exception IOException If an io problem occurs
+     * @throws IOException If an io problem occurs
      * @return the new page
      */
     Page createPage(WebResponse webResponse, WebWindow webWindow) throws IOException;

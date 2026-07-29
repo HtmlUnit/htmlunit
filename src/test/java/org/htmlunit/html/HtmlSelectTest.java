@@ -47,7 +47,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
     /**
      * Test the good path of submitting a select.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void select() throws Exception {
@@ -81,7 +81,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
     /**
      * Tests submitting the select with no options selected.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void select_MultipleSelectNoneSelected() throws Exception {
@@ -114,7 +114,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
     /**
      * Tests changing the selected option.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void select_ChangeSelectedOption_SingleSelect() throws Exception {
@@ -148,7 +148,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
     /**
      * Tests changing the selected option.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void select_ChangeSelectedOption_MultipleSelect() throws Exception {
@@ -184,7 +184,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
     /**
      * Tests multiple selected options on multiple select lists.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void select_MultipleSelectMultipleSelected() throws Exception {
@@ -213,7 +213,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * Test multiple selected options on single select lists. This is erroneous HTML, but
      * browsers simply use the last option.
      *
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void select_SingleSelectMultipleSelected() throws Exception {
@@ -241,7 +241,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * Test no selected options on single select lists. This is erroneous HTML, but
      * browsers simply assume the first one to be selected
      *
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void select_SingleSelectNoneSelected() throws Exception {
@@ -268,7 +268,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
     /**
      * Tests no selected options on single select lists with a size more than 1.
      *
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void select_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
@@ -291,7 +291,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
     /**
      * Tests changing the selected option.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void setSelected_IllegalValue() throws Exception {
@@ -547,7 +547,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
     /**
      * Test that asNormalizedText() returns a blank string if nothing is selected.
      *
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void asNormalizedTextWhenNothingSelected() throws Exception {
@@ -588,7 +588,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
     /**
      * Test that setSelectedAttribute returns the right page.
      *
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void setSelectedAttributeReturnedPage() throws Exception {

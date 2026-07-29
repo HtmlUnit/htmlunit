@@ -523,7 +523,7 @@ public abstract class HtmlElement extends DomElement {
      * Simulates typing the specified text while this element has focus.
      * Note that for some elements, typing '\n' submits the enclosed form.
      * @param text the text you with to simulate typing
-     * @exception IOException If an IO error occurs
+     * @throws IOException If an IO error occurs
      */
     public void type(final String text) throws IOException {
         for (final char ch : text.toCharArray()) {
@@ -539,7 +539,7 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param c the character you wish to simulate typing
      * @return the page that occupies this window after typing
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     public Page type(final char c) throws IOException {
         return type(c, true);
@@ -554,7 +554,7 @@ public abstract class HtmlElement extends DomElement {
      * @param c the character you wish to simulate typing
      * @param lastType is this the last character to type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     private Page type(final char c, final boolean lastType)
         throws IOException {
@@ -667,7 +667,7 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param keyboard the keyboard
      * @return the page that occupies this window after typing
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     public Page type(final Keyboard keyboard) throws IOException {
         Page page = null;

@@ -1755,7 +1755,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void tableCell() throws Exception {
@@ -1792,7 +1792,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void tableCellWithLineBreaks() throws Exception {

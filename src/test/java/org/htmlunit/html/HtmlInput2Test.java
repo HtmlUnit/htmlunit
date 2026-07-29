@@ -277,7 +277,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
 
     /**
      * Tests that clicking a radio button will select it.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined"})

@@ -112,7 +112,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
      * to an (accepted - at least in a first time -) regression in
      * NekoHTML, it doesn't work anymore.
      * testSimple_withWrongLineCol ensures that no other regression occurs here.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void simple() throws Exception {
@@ -123,7 +123,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
      * Currently, NekoHtml doesn't deliver right information about the line
      * for the warning. Let this test run with wrong expectation
      * on line and col to avoid that other regression occur.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void simple_withWrongLineCol() throws Exception {
@@ -176,7 +176,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
 
     /**
      * Test parsing of a fragment.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void parseFragment() throws Exception {

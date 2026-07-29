@@ -740,7 +740,7 @@ public class HtmlImage extends HtmlElement {
      * @param x the x position of the click
      * @param y the y position of the click
      * @return the page contained by this image's window after the click
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     public Page click(final int x, final int y) throws IOException {
         lastClickX_ = x;
@@ -760,7 +760,7 @@ public class HtmlImage extends HtmlElement {
      * same as the original page, depending on JavaScript event handlers, etc.
      *
      * @return the page contained by this image's window after the click
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     @Override
     @SuppressWarnings("unchecked")

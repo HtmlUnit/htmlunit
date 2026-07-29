@@ -768,7 +768,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
     /**
      * Not testable with Selenium.
      *
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", "First"})
@@ -796,7 +796,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
     /**
      * Not testable with Selenium.
      *
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", "First"})
@@ -830,7 +830,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
     /**
      * Not testable with Selenium.
      *
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", "First",

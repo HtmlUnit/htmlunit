@@ -32,7 +32,7 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
     /**
      * Tests getTableCell(int,int).
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void getCellAt() throws Exception {
@@ -64,7 +64,7 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
     /**
      * Tests getCellAt(int,int) with colspan.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void getCellAtColspan() throws Exception {
@@ -106,7 +106,7 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
     /**
      * Tests getCellAt(int,int).
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void getCellAtComplex() throws Exception {
@@ -264,7 +264,7 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
     /**
      * Tests getTableCell(int,int) for a cell that doesn't exist.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void getTableCell_NotFound() throws Exception {

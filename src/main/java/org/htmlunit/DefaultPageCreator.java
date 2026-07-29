@@ -150,7 +150,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     /**
      * Determines the kind of page to create from the content type.
      * @param webResponse the response to investigate
-     * @exception IOException if an IO problem occurs
+     * @throws IOException if an IO problem occurs
      * @return "xml", "html", "javascript", "text" or "unknown"
      */
     public static PageType determinePageType(final WebResponse webResponse) throws IOException {
@@ -207,7 +207,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      *
      * @param webResponse the response from the server
      * @param webWindow the window that this page will be loaded into
-     * @exception IOException if an IO problem occurs
+     * @throws IOException if an IO problem occurs
      * @return the new page object
      */
     @Override

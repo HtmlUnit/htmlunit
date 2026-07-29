@@ -152,7 +152,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
     /**
      * We couldn't document.write() script elements that contained the '&lt;' character...
-     * @exception Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts("true")

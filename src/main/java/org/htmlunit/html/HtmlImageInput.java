@@ -96,7 +96,7 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
      * that wish to expose it will override and make it public.
      *
      * @return the Page that is the result of submitting this page to the server
-     * @exception IOException If an IO error occurs
+     * @throws IOException If an IO error occurs
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -127,8 +127,8 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
      * @param x the x coordinate of the pointing device at the time of clicking
      * @param y the y coordinate of the pointing device at the time of clicking
      * @return the page that is loaded after the click has taken place
-     * @exception IOException If an IO error occurs
-     * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
+     * @throws IOException If an IO error occurs
+     * @throws ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
     public <P extends Page> P click(final int x, final int y) throws IOException, ElementNotFoundException {
         wasPositionSpecified_ = true;
@@ -149,7 +149,7 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
      * @param <P> the page type
      * @return the page contained in the current window as returned by
      *         {@link org.htmlunit.WebClient#getCurrentWindow()}
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     @Override
     public <P extends Page> P click(final Event event,

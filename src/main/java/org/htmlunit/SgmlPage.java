@@ -362,7 +362,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * @param entityReferenceExpansion The value of this flag determines
      *        whether entity reference nodes are expanded.
      * @return The newly created <code>NodeIterator</code>.
-     * @exception DOMException
+     * @throws DOMException
      *            NOT_SUPPORTED_ERR: Raised if the specified <code>root</code> is <code>null</code>.
      */
     public DomNodeIterator createNodeIterator(final Node root, final int whatToShow, final NodeFilter filter,

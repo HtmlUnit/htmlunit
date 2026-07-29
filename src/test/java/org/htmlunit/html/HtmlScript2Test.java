@@ -118,7 +118,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("Hello")
@@ -137,7 +137,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
     /**
      * See https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#JavaScript_types.
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"})
@@ -172,7 +172,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", "5", "7"})

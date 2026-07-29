@@ -699,7 +699,7 @@ public class HtmlPage extends SgmlPage {
      * Returns the first form that matches the specified name.
      * @param name the name to search for
      * @return the first form
-     * @exception ElementNotFoundException If no forms match the specified result.
+     * @throws ElementNotFoundException If no forms match the specified result.
      */
     public HtmlForm getFormByName(final String name) throws ElementNotFoundException {
         final List<HtmlForm> forms = getDocumentElement()
@@ -724,7 +724,7 @@ public class HtmlPage extends SgmlPage {
      *
      * @param relativeUrl the relative URL
      * @return the fully-qualified URL for the specified relative URL
-     * @exception MalformedURLException if an error occurred when creating a URL object
+     * @throws MalformedURLException if an error occurred when creating a URL object
      */
     public URL getFullyQualifiedUrl(String relativeUrl) throws MalformedURLException {
         // to handle http: and http:/ in FF (Bug #474)
@@ -1588,7 +1588,7 @@ public class HtmlPage extends SgmlPage {
      * Returns the first frame contained in this page with the specified name.
      * @param name the name to search for
      * @return the first frame found
-     * @exception ElementNotFoundException If no frame exist in this page with the specified name.
+     * @throws ElementNotFoundException If no frame exist in this page with the specified name.
      */
     public FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
         for (final BaseFrameElement frameElement : frameElements_) {

@@ -35,7 +35,7 @@ import org.openqa.selenium.interactions.Actions;
 public class HtmlSelect2Test extends WebDriverTestCase {
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"false", "false", "false", "true"})
@@ -70,7 +70,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"false", "true", "true", "true"})
@@ -106,7 +106,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"false", "true", "false", "true"})

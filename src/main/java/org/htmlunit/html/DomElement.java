@@ -940,7 +940,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     public <P extends Page> P click() throws IOException {
         return click(false, false, false);
@@ -961,7 +961,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param altKey {@code true} if ALT is pressed during the click
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
@@ -985,7 +985,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param triggerMouseEvents if true trigger the mouse events also
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
             final boolean triggerMouseEvents) throws IOException {
@@ -1018,7 +1018,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param disableProcessLabelAfterBubbling ignore label processing
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
@@ -1134,7 +1134,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param ignoreVisibility whether to ignore visibility or not
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P click(final Event event,
@@ -1240,7 +1240,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @param <P> the page type
      * @return the page that occupies this element's window after the element has been double-clicked
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     public <P extends Page> P dblClick() throws IOException {
         return dblClick(false, false, false);
@@ -1258,7 +1258,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param altKey {@code true} if ALT is pressed during the double click
      * @param <P> the page type
      * @return the page that occupies this element's window after the element has been double-clicked
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)

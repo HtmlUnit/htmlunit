@@ -38,7 +38,7 @@ public class PageReloadTest extends WebDriverTestCase {
     private static final String RELOAD_URL_ANCHOR = RELOAD_URL + ANCHOR;
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(PATHNAME)
@@ -47,7 +47,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -56,7 +56,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_url_hash() throws Exception {
@@ -64,7 +64,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_url_differentHash() throws Exception {
@@ -72,7 +72,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_url_url() throws Exception {
@@ -80,7 +80,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_url_urlHash() throws Exception {
@@ -88,7 +88,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_url_differentUrl() throws Exception {
@@ -96,7 +96,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -105,7 +105,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_url_differentUrlHash() throws Exception {
@@ -113,7 +113,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_url_differentUrlDifferentHash() throws Exception {
@@ -121,7 +121,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(PATHNAME)
@@ -130,7 +130,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_urlHash_hash() throws Exception {
@@ -138,7 +138,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_urlHash_differentHash() throws Exception {
@@ -146,7 +146,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_urlHash_url() throws Exception {
@@ -154,7 +154,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_urlHash_urlHash() throws Exception {
@@ -162,7 +162,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_urlHash_differentUrl() throws Exception {
@@ -170,7 +170,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -179,7 +179,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_urlHash_differentUrlHash() throws Exception {
@@ -187,7 +187,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void link_urlHash_differentUrlDifferentHash() throws Exception {
@@ -195,7 +195,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(PATHNAME)
@@ -204,7 +204,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -213,7 +213,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_url_hash() throws Exception {
@@ -221,7 +221,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_url_differentHash() throws Exception {
@@ -229,7 +229,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_url_url() throws Exception {
@@ -237,7 +237,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_url_urlHash() throws Exception {
@@ -245,7 +245,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_url_differentUrl() throws Exception {
@@ -253,7 +253,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -262,7 +262,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_url_differentUrlHash() throws Exception {
@@ -270,7 +270,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_url_differentUrlDifferentHash() throws Exception {
@@ -278,7 +278,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(PATHNAME)
@@ -287,7 +287,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_urlHash_hash() throws Exception {
@@ -295,7 +295,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_urlHash_differentHash() throws Exception {
@@ -303,7 +303,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_urlHash_url() throws Exception {
@@ -311,7 +311,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_urlHash_urlHash() throws Exception {
@@ -319,7 +319,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_urlHash_differentUrl() throws Exception {
@@ -327,7 +327,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -336,7 +336,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void javascript_urlHash_differentUrlHash() throws Exception {
@@ -344,7 +344,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGet_url_emptyUrl() throws Exception {
@@ -352,7 +352,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGetV_url_emptyUrl() throws Exception {
@@ -360,7 +360,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("1")
@@ -369,7 +369,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGetV_url_emptyHash() throws Exception {
@@ -377,7 +377,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -387,7 +387,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -397,7 +397,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR2 })
@@ -407,7 +407,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -416,7 +416,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGet_url_url() throws Exception {
@@ -424,7 +424,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGetV_url_url() throws Exception {
@@ -432,7 +432,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -442,7 +442,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -451,7 +451,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGet_url_differentUrl() throws Exception {
@@ -459,7 +459,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGetV_url_differentUrl() throws Exception {
@@ -467,7 +467,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGet_url_differentUrlEmptyHash() throws Exception {
@@ -475,7 +475,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -485,7 +485,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGetV_url_differentUrlEmptyHash() throws Exception {
@@ -493,7 +493,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -503,7 +503,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -512,7 +512,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -521,7 +521,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -532,7 +532,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -542,7 +542,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -552,7 +552,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -561,7 +561,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR2 })
@@ -571,7 +571,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -581,7 +581,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGet_urlHash_url() throws Exception {
@@ -589,7 +589,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGetV_urlHash_url() throws Exception {
@@ -597,7 +597,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -607,7 +607,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -617,7 +617,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGet_urlHash_differentUrl() throws Exception {
@@ -625,7 +625,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGetV_urlHash_differentUrl() throws Exception {
@@ -633,7 +633,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGet_urlHash_differentUrlEmptyHash() throws Exception {
@@ -641,7 +641,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -650,7 +650,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitGetV_urlHash_differentUrlEmptyHash() throws Exception {
@@ -658,7 +658,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -667,7 +667,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -677,7 +677,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -687,7 +687,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_url_emptyUrl() throws Exception {
@@ -695,7 +695,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_url_emptyUrl() throws Exception {
@@ -703,7 +703,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -712,7 +712,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -721,7 +721,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_url_hash() throws Exception {
@@ -729,7 +729,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_url_hash() throws Exception {
@@ -737,7 +737,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_url_differentHash() throws Exception {
@@ -745,7 +745,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_url_differentHash() throws Exception {
@@ -753,7 +753,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_url_url() throws Exception {
@@ -761,7 +761,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_url_url() throws Exception {
@@ -769,7 +769,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_url_urlHash() throws Exception {
@@ -777,7 +777,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_url_urlHash() throws Exception {
@@ -785,7 +785,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_url_differentUrl() throws Exception {
@@ -793,7 +793,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_url_differentUrl() throws Exception {
@@ -801,7 +801,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -811,7 +811,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_url_differentUrlHash() throws Exception {
@@ -819,7 +819,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -829,7 +829,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_url_differentUrlHash() throws Exception {
@@ -837,7 +837,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_url_differentUrlDifferentHash() throws Exception {
@@ -845,7 +845,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_url_differentUrlDifferentHash() throws Exception {
@@ -853,7 +853,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -863,7 +863,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -873,7 +873,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_urlHash_hash() throws Exception {
@@ -881,7 +881,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_urlHash_hash() throws Exception {
@@ -889,7 +889,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_urlHash_differentHash() throws Exception {
@@ -897,7 +897,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_urlHash_differentHash() throws Exception {
@@ -905,7 +905,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_urlHash_url() throws Exception {
@@ -913,7 +913,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_urlHash_url() throws Exception {
@@ -921,7 +921,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_urlHash_urlHash() throws Exception {
@@ -929,7 +929,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_urlHash_urlHash() throws Exception {
@@ -937,7 +937,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_urlHash_differentUrl() throws Exception {
@@ -945,7 +945,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_urlHash_differentUrl() throws Exception {
@@ -953,7 +953,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -963,7 +963,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_urlHash_differentUrlHash() throws Exception {
@@ -971,7 +971,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -981,7 +981,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_urlHash_differentUrlHash() throws Exception {
@@ -989,7 +989,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPost_urlHash_differentUrlDifferentHash() throws Exception {
@@ -997,7 +997,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void submitPostV_urlHash_differentUrlDifferentHash() throws Exception {
@@ -1005,7 +1005,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGet_url_emptyUrl() throws Exception {
@@ -1013,7 +1013,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGetV_url_emptyUrl() throws Exception {
@@ -1021,7 +1021,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("1")
@@ -1030,7 +1030,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGetV_url_emptyHash() throws Exception {
@@ -1038,7 +1038,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -1048,7 +1048,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1057,7 +1057,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR2 })
@@ -1067,7 +1067,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -1076,7 +1076,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGet_url_url() throws Exception {
@@ -1084,7 +1084,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGetV_url_url() throws Exception {
@@ -1092,7 +1092,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -1102,7 +1102,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1111,7 +1111,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGet_url_differentUrl() throws Exception {
@@ -1119,7 +1119,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGetV_url_differentUrl() throws Exception {
@@ -1127,7 +1127,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGet_url_differentUrlEmptyHash() throws Exception {
@@ -1135,7 +1135,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1144,7 +1144,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGetV_url_differentUrlEmptyHash() throws Exception {
@@ -1152,7 +1152,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1161,7 +1161,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -1170,7 +1170,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -1179,7 +1179,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -1189,7 +1189,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1199,7 +1199,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -1209,7 +1209,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1218,7 +1218,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR2 })
@@ -1228,7 +1228,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -1238,7 +1238,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGet_urlHash_url() throws Exception {
@@ -1246,7 +1246,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGetV_urlHash_url() throws Exception {
@@ -1254,7 +1254,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts({"1", ANCHOR})
@@ -1264,7 +1264,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1273,7 +1273,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGet_urlHash_differentUrl() throws Exception {
@@ -1281,7 +1281,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGetV_urlHash_differentUrl() throws Exception {
@@ -1289,7 +1289,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGet_urlHash_differentUrlEmptyHash() throws Exception {
@@ -1297,7 +1297,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1306,7 +1306,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitGetV_urlHash_differentUrlEmptyHash() throws Exception {
@@ -1315,7 +1315,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1324,7 +1324,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -1334,7 +1334,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR2)
@@ -1344,7 +1344,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_url_emptyUrl() throws Exception {
@@ -1352,7 +1352,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_url_emptyUrl() throws Exception {
@@ -1360,7 +1360,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -1369,7 +1369,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -1378,7 +1378,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_url_hash() throws Exception {
@@ -1386,7 +1386,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_url_hash() throws Exception {
@@ -1394,7 +1394,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_url_differentHash() throws Exception {
@@ -1402,7 +1402,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_url_differentHash() throws Exception {
@@ -1410,7 +1410,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_url_url() throws Exception {
@@ -1418,7 +1418,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_url_url() throws Exception {
@@ -1426,7 +1426,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_url_urlHash() throws Exception {
@@ -1434,7 +1434,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_url_urlHash() throws Exception {
@@ -1442,7 +1442,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_url_differentUrl() throws Exception {
@@ -1450,7 +1450,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_url_differentUrl() throws Exception {
@@ -1458,7 +1458,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -1468,7 +1468,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_url_differentUrlHash() throws Exception {
@@ -1476,7 +1476,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -1486,7 +1486,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_url_differentUrlHash() throws Exception {
@@ -1494,7 +1494,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_url_differentUrlDifferentHash() throws Exception {
@@ -1502,7 +1502,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_url_differentUrlDifferentHash() throws Exception {
@@ -1510,7 +1510,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1520,7 +1520,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts(ANCHOR)
@@ -1530,7 +1530,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_urlHash_hash() throws Exception {
@@ -1538,7 +1538,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_urlHash_hash() throws Exception {
@@ -1546,7 +1546,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_urlHash_differentHash() throws Exception {
@@ -1554,7 +1554,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_urlHash_differentHash() throws Exception {
@@ -1562,7 +1562,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_urlHash_url() throws Exception {
@@ -1570,7 +1570,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_urlHash_url() throws Exception {
@@ -1578,7 +1578,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_urlHash_urlHash() throws Exception {
@@ -1586,7 +1586,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_urlHash_urlHash() throws Exception {
@@ -1594,7 +1594,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_urlHash_differentUrl() throws Exception {
@@ -1602,7 +1602,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_urlHash_differentUrl() throws Exception {
@@ -1610,7 +1610,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -1620,7 +1620,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_urlHash_differentUrlHash() throws Exception {
@@ -1628,7 +1628,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     @Alerts("")
@@ -1638,7 +1638,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_urlHash_differentUrlHash() throws Exception {
@@ -1646,7 +1646,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPost_urlHash_differentUrlDifferentHash() throws Exception {
@@ -1654,7 +1654,7 @@ public class PageReloadTest extends WebDriverTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void jsSubmitPostV_urlHash_differentUrlDifferentHash() throws Exception {

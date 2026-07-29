@@ -2509,7 +2509,7 @@ public class WebClientTest extends SimpleWebTestCase {
     }
 
     /**
-     * @exception Exception If the test fails
+     * @throws Exception If the test fails
      */
     @Test
     public void loginFlowClickSubmitRedirect() throws Exception {
