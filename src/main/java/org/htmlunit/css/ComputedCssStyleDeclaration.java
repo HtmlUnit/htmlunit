@@ -213,6 +213,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /** The computed, cached shrink-wrapped width (used by getBoundingClientRect()). */
     private Integer shrinkWrapWidth_;
 
+    /** The computed, cached content width (sum/max of children's widths) of the element. */
+    private Integer contentWidth_;
+
     /**
      * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
      * taking child elements into account.
@@ -1775,6 +1778,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the total width of the element's children
      */
     public int getContentWidth() {
+        final Integer cachedContentWidth = getCachedContentWidth();
+        if (cachedContentWidth != null) {
+            return cachedContentWidth.intValue();
+        }
+
         int inlineWidth = 0;
         int maxBlockWidth = 0;
         final DomElement element = getDomElement();
@@ -1830,7 +1838,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 }
             }
         }
-        return Math.max(maxBlockWidth, inlineWidth);
+
+        return updateCachedContentWidth(Math.max(maxBlockWidth, inlineWidth));
     }
 
     /**
@@ -2327,6 +2336,24 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public int updateCachedShrinkWrapWidth(final int width) {
         shrinkWrapWidth_ = Integer.valueOf(width);
         return width;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached content width
+     */
+    public Integer getCachedContentWidth() {
+        return contentWidth_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param contentWidth the new value
+     * @return the param contentWidth
+     */
+    public int updateCachedContentWidth(final int contentWidth) {
+        contentWidth_ = Integer.valueOf(contentWidth);
+        return contentWidth;
     }
 
     /**
