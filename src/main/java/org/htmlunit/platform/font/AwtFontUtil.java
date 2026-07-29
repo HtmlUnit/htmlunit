@@ -31,8 +31,12 @@ public class AwtFontUtil implements FontUtil {
 
     @Override
     public int countLines(final String content, final int pixelWidth, final String fontSize) {
-        final String[] lines = StringUtils.split(content, '\n');
         int lineCount = 0;
+        if (content == null) {
+            return lineCount;
+        }
+
+        final String[] lines = StringUtils.splitByWholeSeparatorPreserveAllTokens(content, "\n");
         final int fontSizeInt = CssPixelValueConverter.pixelValue(fontSize);
         final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, true);
         for (final String line : lines) {
