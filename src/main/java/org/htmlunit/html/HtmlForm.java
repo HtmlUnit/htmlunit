@@ -335,6 +335,20 @@ public class HtmlForm extends HtmlElement {
         request.setRequestParameters(parameters);
         if (HttpMethod.POST == method) {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
+
+            if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
+                request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "max-age=0");
+            }
+
+            try {
+                request.setAdditionalHeader(HttpHeader.ORIGIN,
+                        UrlUtils.getUrlWithProtocolAndAuthority(htmlPage.getUrl()).toExternalForm());
+            }
+            catch (final MalformedURLException e) {
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Invalid origin url '" + htmlPage.getUrl() + "'");
+                }
+            }
         }
         request.setCharset(enc);
 
@@ -351,26 +365,8 @@ public class HtmlForm extends HtmlElement {
         request.markAsNavigation(htmlPage.getUrl(), submitElement != null);
 
         // forms are ignoring the rel='noreferrer'
-        if (browser.hasFeature(FORM_IGNORE_REL_NOREFERRER)
-                || !relContainsNoreferrer()) {
+        if (browser.hasFeature(FORM_IGNORE_REL_NOREFERRER) || !relContainsNoreferrer()) {
             request.setRefererHeader(htmlPage.getUrl());
-        }
-
-        if (HttpMethod.POST == method) {
-            try {
-                request.setAdditionalHeader(HttpHeader.ORIGIN,
-                        UrlUtils.getUrlWithProtocolAndAuthority(htmlPage.getUrl()).toExternalForm());
-            }
-            catch (final MalformedURLException e) {
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("Invalid origin url '" + htmlPage.getUrl() + "'");
-                }
-            }
-        }
-        if (HttpMethod.POST == method) {
-            if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
-                request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "max-age=0");
-            }
         }
 
         return request;
