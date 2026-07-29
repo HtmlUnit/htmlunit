@@ -150,6 +150,8 @@ public abstract class HtmlElement extends DomElement {
     protected static final String ATTRIBUTE_CHECKED = "checked";
     /** Constant 'hidden'. */
     protected static final String ATTRIBUTE_HIDDEN = "hidden";
+    /** Constant 'readonly'. */
+    protected static final String ATTRIBUTE_READONLY = "readonly";
 
     /** The listeners which are to be notified of attribute changes. */
     private final List<HtmlAttributeChangeListener> attributeListeners_ = new ArrayList<>();

@@ -223,7 +223,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      *         or an empty string if that attribute isn't defined.
      */
     public final String getReadOnlyAttribute() {
-        return getAttributeDirect("readonly");
+        return getAttributeDirect(ATTRIBUTE_READONLY);
     }
 
     /**
@@ -544,10 +544,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public void setReadOnly(final boolean isReadOnly) {
         if (isReadOnly) {
-            setAttribute("readonly", "");
+            setAttribute(ATTRIBUTE_READONLY, "");
         }
         else {
-            removeAttribute("readonly");
+            removeAttribute(ATTRIBUTE_READONLY);
         }
     }
 
@@ -564,7 +564,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return {@code true} if this element is read only
      */
     public boolean isReadOnly() {
-        return hasAttribute("readonly");
+        return hasAttribute(ATTRIBUTE_READONLY);
     }
 
     /**

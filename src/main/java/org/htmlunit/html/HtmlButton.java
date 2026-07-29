@@ -131,7 +131,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return {@code true} if this element is read only
      */
     public boolean isReadOnly() {
-        return hasAttribute("readOnly");
+        return hasAttribute(ATTRIBUTE_READONLY);
     }
 
     /**
