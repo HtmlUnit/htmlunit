@@ -9,6 +9,9 @@
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
             <action type="fix" dev="rbri">
+                HtmlSelect should not drop invalid size attributes on page attachment.
+            </action>
+            <action type="fix" dev="rbri">
                 Fixed reset of the isValueDirty flag for HtmlInput.
             </action>
             <action type="update" dev="rbri">

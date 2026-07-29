@@ -79,12 +79,10 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         try {
             size = Integer.parseInt(getSizeAttribute());
             if (size < 0) {
-                removeAttribute("size");
                 size = 0;
             }
         }
         catch (final NumberFormatException e) {
-            removeAttribute("size");
             size = 0;
         }
 
@@ -548,22 +546,25 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns the size or 1 if not defined or not convertable to int.
+     * Returns the size or 0 if not defined or not convertable to int.
      *
-     * @return the size or 1 if not defined or not convertable to int
+     * @return the size or 0 if not defined or not convertable to int
      */
     public final int getSize() {
-        int size = 0;
         final String sizeAttribute = getSizeAttribute();
         if (ATTRIBUTE_NOT_DEFINED != sizeAttribute && ATTRIBUTE_VALUE_EMPTY != sizeAttribute) {
             try {
-                size = Integer.parseInt(sizeAttribute);
+                final int size = Integer.parseInt(getSizeAttribute());
+                if (size < 0) {
+                    return 0;
+                }
+                return size;
             }
             catch (final NumberFormatException ignored) {
                 // silently ignore
             }
         }
-        return size;
+        return 0;
     }
 
     /**
@@ -610,7 +611,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return {@code true} if this element is read only
      */
     public boolean isReadOnly() {
-        return hasAttribute("readonly");
+        return hasAttribute(ATTRIBUTE_READONLY);
     }
 
     /**

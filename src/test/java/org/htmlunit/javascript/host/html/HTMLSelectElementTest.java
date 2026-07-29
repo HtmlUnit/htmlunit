@@ -1960,7 +1960,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("5")
+    @Alerts({"5", "null"})
     public void size() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1969,12 +1969,64 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var select = document.getElementById('mySelect');\n"
-            + "    log(select.size + 5);//to test if int or string\n"
+            + "    log(select.size + 5);\n" //to test if int or string
+            + "    log(select.getAttribute('size'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <select id='mySelect'/>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "one"})
+    public void sizeNotNumeric() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var select = document.getElementById('mySelect');\n"
+            + "    log(select.size);\n"
+            + "    log(select.getAttribute('size'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='mySelect' size='one'/>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "-2"})
+    public void sizeNegative() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var select = document.getElementById('mySelect');\n"
+            + "    log(select.size);\n"
+            + "    log(select.getAttribute('size'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='mySelect' size='-2'/>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
