@@ -195,11 +195,23 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         Definition.WIDOWS,
         Definition.WORD_SPACING);
 
+    /** Default font sizes for heading elements, used when no explicit font-size is set. */
+    private static final Map<Class<? extends HtmlElement>, String> HEADING_DEFAULT_FONT_SIZES = Map.of(
+        HtmlHeading1.class, "32px",
+        HtmlHeading2.class, "24px",
+        HtmlHeading3.class, "19px",
+        HtmlHeading4.class, "16px",
+        HtmlHeading5.class, "13px",
+        HtmlHeading6.class, "11px");
+
     /** Denotes a value which should be returned as is. */
     public static final String EMPTY_FINAL = new String("");
 
     /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc.). */
     private Integer width_;
+
+    /** The computed, cached shrink-wrapped width (used by getBoundingClientRect()). */
+    private Integer shrinkWrapWidth_;
 
     /**
      * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
@@ -1599,18 +1611,18 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     private int getCalculatedWidth(final DomElement element, final boolean shrinkWrapBlock) {
-        final Integer cachedWidth = getCachedWidth();
-        if (cachedWidth != null) {
-            return cachedWidth.intValue();
+        final Integer cached = shrinkWrapBlock ? getCachedShrinkWrapWidth() : getCachedWidth();
+        if (cached != null) {
+            return cached.intValue();
         }
 
         if (!element.mayBeDisplayed()) {
-            return updateCachedWidth(0);
+            return shrinkWrapBlock ? updateCachedShrinkWrapWidth(0) : updateCachedWidth(0);
         }
 
         final String display = getDisplay();
         if (NONE.equals(display)) {
-            return updateCachedWidth(0);
+            return shrinkWrapBlock ? updateCachedShrinkWrapWidth(0) : updateCachedWidth(0);
         }
 
         final int width;
@@ -1622,21 +1634,23 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 && parent instanceof HtmlElement) {
             // hack: TODO find a way to specify default values for different tags
             if (element instanceof HtmlCanvas) {
-                return updateCachedWidth(300);
+                return shrinkWrapBlock ? updateCachedShrinkWrapWidth(300) : updateCachedWidth(300);
             }
 
             // iframes have a default width of 300px (like canvas)
             if (element instanceof HtmlInlineFrame iframe) {
                 final String widthAttribute = iframe.getAttributeDirect("width");
                 if (DomElement.ATTRIBUTE_NOT_DEFINED != widthAttribute) {
-                    return updateCachedWidth(CssPixelValueConverter.pixelValue(widthAttribute));
+                    final int w = CssPixelValueConverter.pixelValue(widthAttribute);
+                    return shrinkWrapBlock ? updateCachedShrinkWrapWidth(w) : updateCachedWidth(w);
                 }
 
-                return updateCachedWidth(300);
+                return shrinkWrapBlock ? updateCachedShrinkWrapWidth(300) : updateCachedWidth(300);
             }
 
             if (element instanceof HtmlFrame) {
-                return updateCachedWidth(element.getPage().getEnclosingWindow().getInnerWidth());
+                final int w = element.getPage().getEnclosingWindow().getInnerWidth();
+                return shrinkWrapBlock ? updateCachedShrinkWrapWidth(w) : updateCachedWidth(w);
             }
 
             // Width not explicitly set.
@@ -1740,7 +1754,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 });
         }
 
-        return updateCachedWidth(width);
+        return shrinkWrapBlock ? updateCachedShrinkWrapWidth(width) : updateCachedWidth(width);
     }
 
     private static boolean hasOnlyInlineOrTextChildren(final DomElement element) {
@@ -1974,68 +1988,13 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
         }
         else {
-            final String fontSize;
+            final String headingDefault = HEADING_DEFAULT_FONT_SIZES.get(element.getClass());
+            final boolean isHeading = headingDefault != null;
 
-            boolean isHeading = false;
-            if (element instanceof HtmlHeading1) {
-                isHeading = true;
+            final String fontSize;
+            if (isHeading) {
                 final String value = getStyleAttribute(Definition.FONT_SIZE, false);
-                if (value.isEmpty()) {
-                    fontSize = "32px";
-                }
-                else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
-                }
-            }
-            else if (element instanceof HtmlHeading2) {
-                isHeading = true;
-                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
-                if (value.isEmpty()) {
-                    fontSize = "24px";
-                }
-                else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
-                }
-            }
-            else if (element instanceof HtmlHeading3) {
-                isHeading = true;
-                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
-                if (value.isEmpty()) {
-                    fontSize = "19px";
-                }
-                else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
-                }
-            }
-            else if (element instanceof HtmlHeading4) {
-                isHeading = true;
-                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
-                if (value.isEmpty()) {
-                    fontSize = "16px";
-                }
-                else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
-                }
-            }
-            else if (element instanceof HtmlHeading5) {
-                isHeading = true;
-                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
-                if (value.isEmpty()) {
-                    fontSize = "13px";
-                }
-                else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
-                }
-            }
-            else if (element instanceof HtmlHeading6) {
-                isHeading = true;
-                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
-                if (value.isEmpty()) {
-                    fontSize = "11px";
-                }
-                else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
-                }
+                fontSize = value.isEmpty() ? headingDefault : getStyleAttribute(Definition.FONT_SIZE, true);
             }
             else {
                 fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
@@ -2349,6 +2308,24 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     public int updateCachedWidth(final int width) {
         width_ = Integer.valueOf(width);
+        return width;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached width
+     */
+    public Integer getCachedShrinkWrapWidth() {
+        return shrinkWrapWidth_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param width the new value
+     * @return the param width
+     */
+    public int updateCachedShrinkWrapWidth(final int width) {
+        shrinkWrapWidth_ = Integer.valueOf(width);
         return width;
     }
 
