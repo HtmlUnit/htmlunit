@@ -197,9 +197,9 @@ public class HtmlArea extends HtmlElement implements HyperlinkElement {
     }
 
     /**
-     * Returns the value of the attribute {@code ping}.
+     * Returns the value of the attribute {@code ping} or an empty string if that attribute isn't defined.
      *
-     * @return the value of the attribute {@code ping}
+     * @return the value of the attribute {@code ping} or an empty string if that attribute isn't defined
      */
     @Override
     public final String getPingAttribute() {
@@ -207,9 +207,9 @@ public class HtmlArea extends HtmlElement implements HyperlinkElement {
     }
 
     /**
-     * Returns the value of the attribute {@code download}.
+     * Returns the value of the attribute {@code download} or an empty string if that attribute isn't defined.
      *
-     * @return the value of the attribute {@code download}
+     * @return the value of the attribute {@code download} or an empty string if that attribute isn't defined
      */
     @Override
     public final String getDownloadAttribute() {
@@ -337,10 +337,16 @@ public class HtmlArea extends HtmlElement implements HyperlinkElement {
 
         try {
             if (coords.length > 1) {
-                final Polygon2D path = new Polygon2D(Double.parseDouble(coords[0]), Double.parseDouble(coords[1]));
+                double x = Double.parseDouble(coords[0].trim());
+                double y = Double.parseDouble(coords[1].trim());
+
+                final Polygon2D path = new Polygon2D(x, y);
 
                 for (int i = 2; i + 1 < coords.length; i += 2) {
-                    path.lineTo(Double.parseDouble(coords[i]), Double.parseDouble(coords[i + 1]));
+                    x = Double.parseDouble(coords[i].trim());
+                    y = Double.parseDouble(coords[i + 1].trim());
+
+                    path.lineTo(x, y);
                 }
                 return path;
             }
