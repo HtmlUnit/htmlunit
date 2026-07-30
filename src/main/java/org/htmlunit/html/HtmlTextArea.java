@@ -171,12 +171,16 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     private void setTextInternal(final String newValue) {
+        final String oldValue = getText();
+
         rawValue_ = newValue;
         isValueDirty_ = true;
 
-        final int pos = newValue.length();
-        setSelectionStart(pos);
-        setSelectionEnd(pos);
+        if (!newValue.equals(oldValue)) {
+            final int pos = newValue.length();
+            setSelectionStart(pos);
+            setSelectionEnd(pos);
+        }
     }
 
     /**

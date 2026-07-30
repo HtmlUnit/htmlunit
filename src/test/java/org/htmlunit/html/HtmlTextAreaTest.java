@@ -330,7 +330,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         HtmlTextArea input = (HtmlTextArea) page.getElementById("foo");
         input = (HtmlTextArea) input.cloneNode(true);
         input.type("4711");
-        assertEquals("4711", input.getTextContent());
+        assertEquals("4711", input.getText());
+        assertEquals("", input.getTextContent());
     }
 
     /**
@@ -355,7 +356,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         input.reset();
         input.type("0815");
 
-        assertEquals("0815", input.getTextContent());
+        assertEquals("0815", input.getText());
+        assertEquals("", input.getTextContent());
     }
 
     /**
@@ -380,6 +382,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         input.setTextContent("");
         input.type("0815");
 
-        assertEquals("0815", input.getTextContent());
+        assertEquals("47110815", input.getText());
+        assertEquals("", input.getTextContent());
     }
 }

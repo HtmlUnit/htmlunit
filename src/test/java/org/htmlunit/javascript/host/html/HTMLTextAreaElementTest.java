@@ -19,6 +19,7 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -286,6 +287,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * Case 4a: pins down WHICH of two existing text-node children actually receives
      * the new value, and which gets cleared, when .value is set on a textarea with
@@ -947,10 +949,10 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    var textarea = document.form1.question;\n"
-            + "    textarea.value = 'X';\n"                          // dirty = true
-            + "    textarea.appendChild(document.createTextNode('-appended'));\n" // silently ignored by value, but DOES change children
+            + "    textarea.value = 'X';\n"
+            + "    textarea.appendChild(document.createTextNode('-appended'));\n"
             + "    document.form1.reset();\n"
-            + "    log(textarea.value);\n"                           // expect 'original-appended', not 'original'
+            + "    log(textarea.value);\n"
             + "  </script>\n"
             + "</body>\n"
             + "</html>";
@@ -1136,6 +1138,325 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Even though a same-value assignment leaves the selection
+     * untouched, the dirty flag must still flip to true (per spec: "set the
+     * element's dirty value flag to true" happens unconditionally, only the
+     * cursor move is conditional). Proven indirectly: if the flag were still
+     * false, a later child mutation would still be reflected in .value; if the
+     * flag correctly flipped true, the later child mutation must be ignored.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello")
+    public void settingValueToSameValue_stillSetsDirtyFlag() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>hello</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'hello';\n"
+            + "    textarea.appendChild(document.createTextNode(' world'));\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Selection must be preserved across MULTIPLE consecutive same-value
+     * assignments, not just the first one -- confirms the comparison is always
+     * against the current value at the time of each call, not just a one-time
+     * check.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "2"})
+    public void settingValueToSameValueTwice_selectionPreservedBothTimes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>hello</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'hello';\n"
+            + "    textarea.selectionStart = 1;\n"
+            + "    textarea.selectionEnd = 2;\n"
+            + "    textarea.value = 'hello';\n"
+            + "    log(textarea.selectionStart);\n"
+            + "    log(textarea.selectionEnd);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The "old value" comparison must be against the CURRENT raw value, not the
+     * page's originally-parsed text. After dirtying to 'X', setting .value back
+     * to the ORIGINAL text ('hello') is a change relative to the current raw
+     * value ('X'), so the cursor MUST move -- even though 'hello' matches what
+     * was there at parse time.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"5", "5"})
+    public void settingValueBackToOriginalText_cursorMovesBecauseCurrentValueDiffers() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>hello</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"
+            + "    textarea.selectionStart = 0;\n"
+            + "    textarea.selectionEnd = 0;\n"
+            + "    textarea.value = 'hello';\n"
+            + "    log(textarea.selectionStart);\n"
+            + "    log(textarea.selectionEnd);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Edge case: assigning the empty string to an already-empty value should
+     * also be treated as "no change" -- no cursor move, but still dirties the
+     * flag.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void settingEmptyValueToAlreadyEmptyValue_selectionUnchangedButDirty() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'></textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = '';\n"
+            + "    textarea.appendChild(document.createTextNode('late'));\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Confirms the ordinary changing-value path still moves the cursor to the
+     * end -- guards against the new conditional accidentally suppressing the
+     * cursor move for genuine changes, not just same-value assignments.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"7", "7"})
+    public void settingValueToDifferentValue_cursorStillMovesToEnd() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>hello</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.selectionStart = 0;\n"
+            + "    textarea.selectionEnd = 0;\n"
+            + "    textarea.value = 'goodbye';\n"
+            + "    log(textarea.selectionStart);\n"
+            + "    log(textarea.selectionEnd);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Confirms that typing into a textarea (real keyboard simulation, not a
+     * scripted .value assignment) updates .value but leaves .textContent /
+     * childNodes untouched -- the JS-observable version of the typingAndClone()
+     * Java-level test, verifying the same value/textContent split holds for real
+     * browsers, not just HtmlUnit's internal model.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"4711", "", "0"})
+    public void typingUpdatesValueButNotTextContent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <textarea id='foo'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textarea = driver.findElement(By.id("foo"));
+        textarea.click();
+        textarea.sendKeys("4711");
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final String value = (String) js.executeScript("return arguments[0].value;", textarea);
+        final String textContent = (String) js.executeScript("return arguments[0].textContent;", textarea);
+        final Long childNodeCount = (Long) js.executeScript("return arguments[0].childNodes.length;", textarea);
+
+        assertEquals(getExpectedAlerts()[0], value);
+        assertEquals(getExpectedAlerts()[1], textContent);
+        assertEquals(getExpectedAlerts()[2], String.valueOf(childNodeCount));
+    }
+
+    /**
+     * Companion case: same real-keyboard-typing scenario, but starting from a
+     * textarea that already has parsed content -- confirms typed characters
+     * don't get appended to (or otherwise disturb) the existing child text node,
+     * even though .value correctly reflects the combined typed result.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"seed-typed", "seed"})
+    public void typingIntoNonEmptyTextareaLeavesOriginalChildTextNodeUnchanged() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <textarea id='foo'>seed</textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textarea = driver.findElement(By.id("foo"));
+        textarea.click();
+        // move caret to end before typing, since click() alone doesn't guarantee position
+        textarea.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        textarea.sendKeys("-typed");
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final String value = (String) js.executeScript("return arguments[0].value;", textarea);
+        final String textContent = (String) js.executeScript("return arguments[0].textContent;", textarea);
+
+        assertEquals(getExpectedAlerts()[0], value);
+        assertEquals(getExpectedAlerts()[1], textContent);
+    }
+
+    /**
+     * After typing (which dirties .value but never touches the DOM
+     * children), clicking a reset button should bring .value back in sync with
+     * .textContent -- since reset() clears the dirty flag and .textContent was
+     * never disturbed by typing in the first place, the two must now be equal.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"seed-typed", "seed", "seed"})
+    public void resetAfterTyping_valueMatchesTextContentAgain() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <textarea id='foo'>seed</textarea>\n"
+            + "    <input id='resetBtn' type='reset'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textarea = driver.findElement(By.id("foo"));
+        textarea.click();
+        textarea.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        textarea.sendKeys("-typed");
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final String valueBeforeReset = (String) js.executeScript("return arguments[0].value;", textarea);
+        final String textContentBeforeReset =
+                (String) js.executeScript("return arguments[0].textContent;", textarea);
+
+        driver.findElement(By.id("resetBtn")).click();
+
+        final String valueAfterReset = (String) js.executeScript("return arguments[0].value;", textarea);
+        final String textContentAfterReset =
+                (String) js.executeScript("return arguments[0].textContent;", textarea);
+
+        assertEquals(getExpectedAlerts()[0], valueBeforeReset);
+        assertEquals(getExpectedAlerts()[1], textContentBeforeReset);
+        assertEquals(getExpectedAlerts()[2], valueAfterReset);
+        assertEquals(textContentAfterReset, valueAfterReset);
+    }
+
+    /**
+     * If the DOM children are mutated by script WHILE .value is dirty
+     * (typing already happened, so children-changed effects on .value are
+     * suppressed), a subsequent reset() must pick up whatever the children
+     * CURRENTLY contain -- including that mutation -- not the page's original
+     * parsed text. Confirmed here by asserting .value equals the LIVE
+     * .textContent (which already reflects the mutation) immediately after the
+     * reset button click, using real typing + a real click rather than only
+     * scripted reset().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"seed-typed", "seed-appended", "seed-appended"})
+    public void resetAfterTypingAndChildMutationWhileDirty_valueMatchesCurrentTextContent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <textarea id='foo'>seed</textarea>\n"
+            + "    <input id='resetBtn' type='reset'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textarea = driver.findElement(By.id("foo"));
+        textarea.click();
+        textarea.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        textarea.sendKeys("-typed");   // dirties .value; children still just "seed"
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        // mutate the children directly WHILE .value is dirty -- must have no
+        // effect on .value yet, but DOES change what reset() should pick up
+        js.executeScript("arguments[0].appendChild(document.createTextNode('-appended'));", textarea);
+
+        final String valueBeforeReset = (String) js.executeScript("return arguments[0].value;", textarea);
+        final String textContentBeforeReset =
+                (String) js.executeScript("return arguments[0].textContent;", textarea);
+
+        driver.findElement(By.id("resetBtn")).click();
+
+        final String valueAfterReset = (String) js.executeScript("return arguments[0].value;", textarea);
+
+        assertEquals(getExpectedAlerts()[0], valueBeforeReset);
+        assertEquals(getExpectedAlerts()[1], textContentBeforeReset);
+        assertEquals(getExpectedAlerts()[2], valueAfterReset);
     }
 
     /**
