@@ -18,6 +18,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -90,25 +91,1046 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests that setValue doesn't has side effect. Test for bug 1155063.
+     * Verifies that repeatedly setting a textarea's value via JavaScript reuses
+     * the existing child text node instead of removing and recreating it on every
+     * assignment.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"TEXTAREA", "INPUT"})
-    public void setValue() throws Exception {
+    @Alerts({"true", "true", "TEXTAREA"})
+    public void setValuePreservesChildTextNodeIdentity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>initial</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    var firstNode = textarea.childNodes[0];\n"
+
+            + "    textarea.value = 'some text';\n"
+            + "    log(textarea.childNodes[0] === firstNode);\n"
+
+            + "    textarea.value = 'other text';\n"
+            + "    log(textarea.childNodes[0] === firstNode);\n"
+            + "    log(document.form1.elements[0].tagName);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies that the text node created by the *first* .value assignment
+     * on an initially-empty textarea is then reused (not recreated) on the
+     * *second* assignment -- i.e. the "no child yet" -> "has child, reuse it"
+     * transition works correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void setValueReusesNodeCreatedByPreviousAssignment() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <form name='form1'>\n"
             + "    <textarea name='question'></textarea>\n"
-            + "    <input type='button' name='btn_submit' value='Next'>\n"
             + "  </form>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
-            + "    document.form1.question.value = 'some text';\n"
-            + "    log(document.form1.elements[0].tagName);\n"
-            + "    log(document.form1.elements[1].tagName);\n"
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'first';\n"
+            + "    var node = textarea.childNodes[0];\n"
+            + "    textarea.value = 'second';\n"
+            + "    log(textarea.childNodes[0] === node);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies the "scan forward past non-text siblings" branch of
+     * setTextInternal() -- when a comment node precedes the text node, setting
+     * .value should locate and update the existing text node in place (via
+     * setData()) rather than disturbing the comment or creating a new node.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "2"})
+    public void setValueWithLeadingCommentReusesTextNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>initial</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.insertBefore(document.createComment('c'), textarea.firstChild);\n"
+            + "    var textNode = textarea.childNodes[1];\n"
+            + "    textarea.value = 'changed';\n"
+            + "    log(textarea.childNodes[1] === textNode);\n"
+            + "    log(textarea.childNodes.length);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies the remove-and-recreate fallback path -- when a textarea
+     * has children but none of them is a text node (e.g. only a comment), setting
+     * .value should remove the non-text child and end up with exactly one text
+     * node containing the new value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "created"})
+    public void setValueWithNoExistingTextNodeCreatesOne() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'></textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.appendChild(document.createComment('c1'));\n"
+            + "    textarea.appendChild(document.createComment('c2'));\n"
+            + "    textarea.value = 'created';\n"
+            + "    log(textarea.childNodes.length);\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Checks whether setting .value when a textarea has
+     * MULTIPLE pre-existing text-node children only updates the first one via
+     * setData(), while getText()/.value concatenates all text children. If so,
+     * the reported value after assignment would incorrectly include leftover
+     * content from the second (untouched) text node. This is a separate concern
+     * from the node-identity fix and may expose an independent bug; confirm
+     * expected behavior against a real browser before trusting the @Alerts value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"foobar", "2", "X", "2"})
+    public void setValueWithMultipleExistingTextNodes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'></textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.appendChild(document.createTextNode('foo'));\n"
+            + "    textarea.appendChild(document.createTextNode('bar'));\n"
+            + "    log(textarea.value);\n"
+            + "    log(textarea.childNodes.length);\n"
+
+            + "    textarea.value = 'X';\n"
+            + "    log(textarea.value);\n"
+            + "    log(textarea.childNodes.length);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Case 5: verifies the selection/caret position lands at the end of the new
+     * value after a .value assignment that reuses an existing text node -- to
+     * confirm the identity fix didn't inadvertently change the selectionStart/
+     * selectionEnd behavior at the end of setTextInternal().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"5", "5"})
+    public void setValueMovesSelectionToEndAfterReuse() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>initial</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'hello';\n"
+            + "    log(textarea.selectionStart);\n"
+            + "    log(textarea.selectionEnd);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * Case 4a: pins down WHICH of two existing text-node children actually receives
+     * the new value, and which gets cleared, when .value is set on a textarea with
+     * multiple pre-existing text nodes. Resolves the ambiguity left open by
+     * setValueWithMultipleExistingTextNodes() (which only checked the combined
+     * .value and childNodes.length, not per-node data or identity/position).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"foo", "bar", "true", "true"})
+    public void setValueWithMultipleExistingTextNodes_identifiesTargetNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'></textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    var n1 = document.createTextNode('foo');\n"
+            + "    var n2 = document.createTextNode('bar');\n"
+            + "    textarea.appendChild(n1);\n"
+            + "    textarea.appendChild(n2);\n"
+            + "    textarea.value = 'X';\n"
+            + "    log(n1.data);\n"
+            + "    log(n2.data);\n"
+            + "    log(textarea.childNodes[0] === n1);\n"
+            + "    log(textarea.childNodes[1] === n2);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies the "clear all but one" behavior generalizes to three or
+     * more pre-existing text nodes, rather than a rule that only happens to look
+     * correct with exactly two (e.g. a pairwise first/last swap).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"X", "3", "a", "b", "c"})
+    public void setValueWithThreeExistingTextNodes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'></textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    var n1 = document.createTextNode('a');\n"
+            + "    var n2 = document.createTextNode('b');\n"
+            + "    var n3 = document.createTextNode('c');\n"
+            + "    textarea.appendChild(n1);\n"
+            + "    textarea.appendChild(n2);\n"
+            + "    textarea.appendChild(n3);\n"
+            + "    textarea.value = 'X';\n"
+            + "    log(textarea.value);\n"
+            + "    log(textarea.childNodes.length);\n"
+            + "    log(n1.data);\n"
+            + "    log(n2.data);\n"
+            + "    log(n3.data);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies that text nodes separated by a non-text sibling (a comment)
+     * are still all cleared-not-removed, and that the comment itself is left
+     * untouched and in its original position.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"X", "3", "3", "8", "3", "foo", "c", "bar"})
+    public void setValueWithTextNodesInterleavedWithComment() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'></textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    var n1 = document.createTextNode('foo');\n"
+            + "    var n2 = document.createComment('c');\n"
+            + "    var n3 = document.createTextNode('bar');\n"
+            + "    textarea.appendChild(n1);\n"
+            + "    textarea.appendChild(n2);\n"
+            + "    textarea.appendChild(n3);\n"
+            + "    textarea.value = 'X';\n"
+            + "    log(textarea.value);\n"
+            + "    log(textarea.childNodes.length);\n"
+            + "    log(textarea.childNodes[0].nodeType);\n"
+            + "    log(textarea.childNodes[1].nodeType);\n"
+            + "    log(textarea.childNodes[2].nodeType);\n"
+            + "    log(n1.data);\n"
+            + "    log(n2.data);\n"
+            + "    log(n3.data);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies behavior when the new value itself is the empty string,
+     * with multiple pre-existing text nodes -- checks whether "clear, don't remove"
+     * still holds, or whether browsers collapse/remove nodes differently when the
+     * net result is empty.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "2", "foo", "bar"})
+    public void setValueEmptyStringWithMultipleExistingTextNodes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'></textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    var n1 = document.createTextNode('foo');\n"
+            + "    var n2 = document.createTextNode('bar');\n"
+            + "    textarea.appendChild(n1);\n"
+            + "    textarea.appendChild(n2);\n"
+            + "    textarea.value = '';\n"
+            + "    log(textarea.value);\n"
+            + "    log(textarea.childNodes.length);\n"
+            + "    log(n1.data);\n"
+            + "    log(n2.data);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies the still-unconfirmed fallback branch -- setting
+     * .value when a textarea has children but NONE of them is a text node (only a
+     * comment). Determines whether the comment is removed and replaced by a new
+     * text node, or kept alongside a newly-appended text node.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"created", "1"})
+    public void setValueWithOnlyNonTextChildCreatesTextNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'></textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.appendChild(document.createComment('c'));\n"
+            + "    textarea.value = 'created';\n"
+            + "    log(textarea.value);\n"
+            + "    log(textarea.childNodes.length);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A textarea parsed with text content should report that content as both
+     * its .value and its .defaultValue immediately, with no script interaction
+     * required.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello world", "hello world"})
+    public void initialValueMatchesParsedContent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>hello world</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    log(textarea.value);\n"
+            + "    log(textarea.defaultValue);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Per the HTML parsing algorithm, a single leading newline immediately
+     * after the opening tag is stripped from both .value and .defaultValue.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello", "5"})
+    public void initialValueStripsLeadingNewline() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>\nhello</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    log(textarea.value);\n"
+            + "    log(textarea.value.length);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An empty textarea has an empty .value and .defaultValue, and no
+     * childNodes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "", "0"})
+    public void initialStateOfEmptyTextarea() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'></textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    log(textarea.value);\n"
+            + "    log(textarea.defaultValue);\n"
+            + "    log(textarea.childNodes.length);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Appending a text node to a textarea whose value has never been set via
+     * script (dirty flag still false) should update .value to include the new
+     * text, since children-changed-steps re-derive the raw value from child
+     * content while clean.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("foobar")
+    public void appendingTextNodeUpdatesValueWhileClean() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.appendChild(document.createTextNode('bar'));\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Removing a child text node from a still-clean textarea should update
+     * .value to reflect the remaining content.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void removingTextNodeUpdatesValueWhileClean() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foobar</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.removeChild(textarea.firstChild);\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Directly mutating an existing child text node's data (not replacing
+     * the node, just its data) while still clean should also update .value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("changed")
+    public void mutatingChildTextNodeDataUpdatesValueWhileClean() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.firstChild.data = 'changed';\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Setting .textContent on a still-clean textarea should update .value,
+     * per the spec's explicit "textContent IDL attribute changes value" hook.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("bar")
+    public void settingTextContentUpdatesValueWhileClean() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.textContent = 'bar';\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Setting .innerHTML on a still-clean textarea replaces its children,
+     * which should also trigger the same children-changed sync as any other
+     * child mutation.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("bar")
+    public void settingInnerHtmlUpdatesValueWhileClean() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.innerHTML = 'bar';\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Per spec discussion, browsers move the text entry cursor to the end of
+     * the control when .textContent changes while the dirty flag is false (the
+     * same cursor-repositioning behavior as the .value setter). Confirms whether
+     * this applies here too.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void settingTextContentMovesCursorToEndWhileClean() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.textContent = 'hello';\n"
+            + "    log(textarea.selectionStart);\n"
+            + "    log(textarea.selectionEnd);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Once .value has been set via script, the dirty flag is true, so a
+     * subsequent child-append no longer affects .value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("X")
+    public void settingValueThenAppendingChild_appendHasNoEffect() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"
+            + "    textarea.appendChild(document.createTextNode('bar'));\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same as settingValueThenAppendingChild_appendHasNoEffect,
+     * but removing an existing child after dirtying should also
+     * have no effect on .value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("X")
+    public void settingValueThenRemovingChild_removeHasNoEffect() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"
+            + "    textarea.removeChild(textarea.firstChild);\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Guard applies to .textContent assignment after dirtying -- once
+     * .value has been set, setting .textContent should NOT change .value (only
+     * the children, decoupled from the raw value).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("X")
+    public void settingValueThenSettingTextContent_textContentHasNoEffectOnValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"
+            + "    textarea.textContent = 'ignored';\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The .value setter itself must not touch the DOM child nodes at all --
+     * childNodes.length and content should be exactly what they were before the
+     * assignment.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "true", "foo"})
+    public void settingValueDoesNotModifyChildNodes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    var node = textarea.firstChild;\n"
+            + "    textarea.value = 'X';\n"
+            + "    log(textarea.childNodes.length);\n"
+            + "    log(textarea.firstChild === node);\n"
+            + "    log(textarea.firstChild.data);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The .value setter moves the text entry cursor to the end of the
+     * control.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"5", "5"})
+    public void settingValueMovesCursorToEnd() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>initial</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'hello';\n"
+            + "    log(textarea.selectionStart);\n"
+            + "    log(textarea.selectionEnd);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Per spec discussion, browsers should do nothing (not even move the
+     * cursor) when .value is set to the SAME value it already holds. Worth
+     * confirming since this is a known point of spec/browser divergence.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "2"})
+    public void settingValueToSameValue_selectionUnchanged() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>hello</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.selectionStart = 1;\n"
+            + "    textarea.selectionEnd = 2;\n"
+            + "    textarea.value = 'hello';\n"
+            + "    log(textarea.selectionStart);\n"
+            + "    log(textarea.selectionEnd);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * After dirtying via .value, calling the form's reset() should bring
+     * .value back to the current child text content and clear the dirty flag,
+     * so that a SUBSEQUENT child mutation is once again reflected in .value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"foo", "foobar"})
+    public void resetClearsDirtyFlag_laterChildMutationAffectsValueAgain() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>foo</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"
+            + "    document.form1.reset();\n"
+            + "    log(textarea.value);\n"
+            + "    textarea.appendChild(document.createTextNode('bar'));\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * If the child nodes were mutated WHILE the dirty flag was
+     * true (so children-changed-steps were suppressed and never synced), reset()
+     * should still pick up whatever the children currently contain at the moment
+     * of reset, NOT the original text present when the page first loaded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("original-appended")
+    public void resetReflectsCurrentChildContentNotOriginalParsedContent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>original</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"                          // dirty = true
+            + "    textarea.appendChild(document.createTextNode('-appended'));\n" // silently ignored by value, but DOES change children
+            + "    document.form1.reset();\n"
+            + "    log(textarea.value);\n"                           // expect 'original-appended', not 'original'
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Baseline reset case -- dirty then reset with untouched children should
+     * simply restore the original parsed text.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("original")
+    public void resetRestoresOriginalValueWhenChildrenUntouched() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>original</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"
+            + "    document.form1.reset();\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Reset triggered via a &lt;button type=reset&gt; click (real user-style
+     * reset path) should behave identically to a scripted form.reset() call.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("original")
+    public void resetViaResetButtonClickBehavesSameAsScriptedReset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>original</textarea>\n"
+            + "    <input id='resetBtn' type='reset'>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("resetBtn")).click();
+        final String value = (String) ((JavascriptExecutor) driver)
+                .executeScript("return document.form1.question.value;");
+        assertEquals(getExpectedAlerts()[0], value);
+    }
+
+    /**
+     * The .defaultValue always reflects the current child text content,
+     * regardless of the dirty flag -- even after .value has been dirtied and
+     * decoupled from the children.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"original", "X"})
+    public void defaultValueReflectsChildContentRegardlessOfDirtyFlag() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>original</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"
+            + "    log(textarea.defaultValue);\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Setting .defaultValue mutates the child nodes (it's specified in terms
+     * of textContent), which in turn triggers children-changed-steps -- so while
+     * still CLEAN, setting .defaultValue should also update .value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("newDefault")
+    public void settingDefaultValueWhileClean_alsoUpdatesValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>original</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.defaultValue = 'newDefault';\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same operation as E2, but performed AFTER .value has already been
+     * dirtied -- setting .defaultValue should still update the children (so
+     * .defaultValue itself changes) but must NOT affect the already-dirtied
+     * .value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"newDefault", "X"})
+    public void settingDefaultValueWhileDirty_doesNotUpdateValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'>\n"
+            + "    <textarea name='question'>original</textarea>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var textarea = document.form1.question;\n"
+            + "    textarea.value = 'X';\n"
+            + "    textarea.defaultValue = 'newDefault';\n"
+            + "    log(textarea.defaultValue);\n"
+            + "    log(textarea.value);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Per spec discussion, textContent/defaultValue/value
+     * "should" all agree when a textarea has nested-element children containing
+     * text (rather than direct text-node children) -- but real browsers are
+     * known to disagree with the spec AND with each other on this exact case.
+     * Run this primarily to document actual current behavior across browsers,
+     * not to assert a single "correct" answer.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TEXT", "", ""})
+    public void nestedElementTextContentInteraction() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var t = document.createElement('textarea');\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.appendChild(document.createTextNode('TEXT'));\n"
+            + "    t.appendChild(span);\n"
+            + "    document.body.appendChild(t);\n"
+            + "    log(t.textContent);\n"
+            + "    log(t.defaultValue);\n"
+            + "    log(t.value);\n"
             + "  </script>\n"
             + "</body>\n"
             + "</html>";

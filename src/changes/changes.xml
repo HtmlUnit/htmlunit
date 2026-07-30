@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="update" dev="rbri">
+                Major refactoring of the value handling for textarea - setting the value no longer manipulates the DOM,
+                instead a separate value and dirty flag are maintained (this is now in sync with the spec and the input element).
+            </action>
             <action type="remove" dev="rbri">
                 Method isReadonly() removed from HtmlSelect; because there is no readonly support for this control.
             </action>

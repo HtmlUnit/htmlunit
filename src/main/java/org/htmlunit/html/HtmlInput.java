@@ -66,8 +66,21 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "input";
 
+    /**
+     * The element's raw value (spec term), decoupled from the DOM child nodes
+     * once {@link #valueDirty_} is {@code true}. Mirrors {@code HtmlInput}'s
+     * dirty-value-flag model rather than reading/writing child text nodes directly.
+     */
     private String rawValue_;
+
+    /**
+     * The dirty value flag (spec term). While {@code false}, the raw value tracks
+     * the element's child text content automatically. Once {@code true} (set by
+     * the {@code value} setter, or by a user edit/type), child mutations no
+     * longer affect the raw value until {@link #reset()} clears the flag again.
+     */
     private boolean isValueDirty_;
+
     private boolean valueModifiedByJavascript_;
     private Object valueAtFocus_;
     private String customValidity_;
