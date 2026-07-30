@@ -1460,6 +1460,205 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     }
 
     /**
+     * After dirtying .value via real typing (so it has diverged from
+     * the child text content), a deep clone must preserve BOTH the dirtied value
+     * AND its decoupling from textContent -- not silently revert to the (cloned)
+     * children's content.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"seed-typed", "seed"})
+    public void cloneNodeAfterTyping_cloneRetainsDirtiedValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <textarea id='foo'>seed</textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textarea = driver.findElement(By.id("foo"));
+        textarea.click();
+        textarea.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        textarea.sendKeys("-typed");
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final String cloneValue = (String) js.executeScript(
+                "return arguments[0].cloneNode(true).value;", textarea);
+        final String cloneTextContent = (String) js.executeScript(
+                "return arguments[0].cloneNode(true).textContent;", textarea);
+
+        assertEquals(getExpectedAlerts()[0], cloneValue);
+        assertEquals(getExpectedAlerts()[1], cloneTextContent);
+    }
+
+    /**
+     * A deep clone's children must be independent of the original's -- mutating
+     * the original's children AFTER cloning must not affect the clone's
+     * .textContent or (for a still-clean clone) its .value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"changed", "seed"})
+    public void cloneNodeDeep_childrenAreIndependentOfOriginal() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <textarea id='foo'>seed</textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textarea = driver.findElement(By.id("foo"));
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(
+            "var c = arguments[0].cloneNode(true);"
+            + "c.id = 'clone';"
+            + "document.body.appendChild(c);",
+            textarea);
+
+        // mutate the ORIGINAL's children only, after cloning
+        js.executeScript(
+            "arguments[0].removeChild(arguments[0].firstChild);"
+            + "arguments[0].appendChild(document.createTextNode('changed'));",
+            textarea);
+
+        final String originalValue = (String) js.executeScript("return arguments[0].value;", textarea);
+        final String cloneValue = (String) js.executeScript(
+                "return document.getElementById('clone').value;");
+
+        assertEquals(getExpectedAlerts()[0], originalValue);
+        assertEquals(getExpectedAlerts()[1], cloneValue);
+    }
+
+    /**
+     * A shallow clone (deep=false) doesn't copy children at all -- but since the
+     * dirtied value lives on the element itself, not in the DOM tree, a shallow
+     * clone of an already-dirtied textarea must still preserve the dirtied
+     * value, even though its childNodes/textContent end up empty.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"seed-typed", ""})
+    public void cloneNodeShallowAfterTyping_stillRetainsDirtiedValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <textarea id='foo'>seed</textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textarea = driver.findElement(By.id("foo"));
+        textarea.click();
+        textarea.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        textarea.sendKeys("-typed");
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final String cloneValue = (String) js.executeScript(
+                "return arguments[0].cloneNode(false).value;", textarea);
+        final String cloneTextContent = (String) js.executeScript(
+                "return arguments[0].cloneNode(false).textContent;", textarea);
+
+        assertEquals(getExpectedAlerts()[0], cloneValue);
+        assertEquals(getExpectedAlerts()[1], cloneTextContent);
+    }
+
+    /**
+     * After cloning a still-CLEAN textarea and attaching the clone to the
+     * document, typing independently into the original and the clone (real
+     * keyboard input on each) must not cross-contaminate either one's value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"original-text", "clone-text"})
+    public void cloneNodeThenIndependentTyping_noCrossContamination() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <textarea id='foo'></textarea>\n"
+            + "  <script>\n"
+            + "    var c = document.getElementById('foo').cloneNode(true);\n"
+            + "    c.id = 'clone';\n"
+            + "    document.body.appendChild(c);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement original = driver.findElement(By.id("foo"));
+        final WebElement clone = driver.findElement(By.id("clone"));
+
+        original.click();
+        original.sendKeys("original-text");
+        clone.click();
+        clone.sendKeys("clone-text");
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final String originalValue = (String) js.executeScript("return arguments[0].value;", original);
+        final String cloneValue = (String) js.executeScript("return arguments[0].value;", clone);
+
+        assertEquals(getExpectedAlerts()[0], originalValue);
+        assertEquals(getExpectedAlerts()[1], cloneValue);
+    }
+
+    /**
+     * Resetting a clone (via a real click on its OWN form's reset button) must
+     * only affect the clone -- the original, sitting in a separate form, must be
+     * untouched.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"seed-original-dirtied", "seed"})
+    public void cloneNodeThenResetOnCloneOnly_doesNotAffectOriginal() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <textarea id='foo'>seed</textarea>\n"
+            + "    <input id='resetBtn1' type='reset'>\n"
+            + "  </form>\n"
+            + "  <form id='form2'>\n"
+            + "    <input id='resetBtn2' type='reset'>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + "    var c = document.getElementById('foo').cloneNode(true);\n"
+            + "    c.id = 'clone';\n"
+            + "    document.getElementById('form2').appendChild(c);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement original = driver.findElement(By.id("foo"));
+        final WebElement clone = driver.findElement(By.id("clone"));
+
+        original.click();
+        original.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        original.sendKeys("-original-dirtied");
+
+        clone.click();
+        clone.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        clone.sendKeys("-clone-dirtied");
+
+        // reset only form2, which contains the clone
+        driver.findElement(By.id("resetBtn2")).click();
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final String originalValue = (String) js.executeScript("return arguments[0].value;", original);
+        final String cloneValue = (String) js.executeScript("return arguments[0].value;", clone);
+
+        assertEquals(getExpectedAlerts()[0], originalValue);
+        assertEquals(getExpectedAlerts()[1], cloneValue);
+    }
+
+    /**
      * @throws Exception if test fails
      */
     @Test
