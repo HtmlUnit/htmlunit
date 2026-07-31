@@ -1273,4 +1273,31 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * Test for https://github.com/HtmlUnit/htmlunit/issues/239.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"pt1 = [object Promise]", "pt2 = [object Object]", "true"})
+    public void symbolSpecies() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var emptyFunc=function() {};\n"
+            + "  var p = Promise.resolve(1);\n"
+            + "  p.constructor = {};\n"
+            + "  var pt1 = p.then(emptyFunc);\n"
+            + "  log('pt1 = ' + pt1);\n"
+
+            + "  var t = function(e) { e(emptyFunc, emptyFunc); };\n"
+            + "  p.constructor[Symbol.species] = t;\n"
+            + "  var pt2 = p.then(emptyFunc);\n"
+            + "  log('pt2 = ' + pt2);\n"
+            + "  log(pt2 instanceof t);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
