@@ -64,8 +64,8 @@ public class TinyMceTest extends WebDriverTestCase {
             EDGE = {"89", "1"})
     @HtmlUnitNYI(CHROME = {"70", "50"},
             EDGE = {"70", "50"},
-            FF = {"70", "50"},
-            FF_ESR = {"70", "50"})
+            FF = {"89", "45"},
+            FF_ESR = {"89", "45"})
     public void basic() throws Exception {
         test("basic", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));
     }
