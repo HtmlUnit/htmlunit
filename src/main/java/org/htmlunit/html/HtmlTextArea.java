@@ -208,11 +208,16 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public void reset() {
+        final String oldValue = getText();
+
         isValueDirty_ = false;
 
-        final int pos = computeValueFromChildText().length();
-        setSelectionStart(pos);
-        setSelectionEnd(pos);
+        final String newValue = computeValueFromChildText();
+        if (!newValue.equals(oldValue)) {
+            final int pos = newValue.length();
+            setSelectionStart(pos);
+            setSelectionEnd(pos);
+        }
     }
 
     /**

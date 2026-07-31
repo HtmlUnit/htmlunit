@@ -25,6 +25,7 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -2794,5 +2795,507 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * Setting .value to the value it already holds must not move the selection
+     * (per spec, comparing against oldAPIValue before the assignment).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "2"})
+    public void settingValueToSameValue_selectionUnchanged() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  input.selectionStart = 1;\n"
+            + "  input.selectionEnd = 2;\n"
+            + "  input.value = 'hello';\n"
+            + "  log(input.selectionStart);\n"
+            + "  log(input.selectionEnd);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='hello'>\n"
+            + "</body></html>";
 
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Even though a same-value assignment leaves the selection
+     * untouched, the dirty flag must still flip to true. Proven indirectly: if
+     * the flag were still false, a later change to the 'value' content attribute
+     * would still be reflected in .value; if the flag correctly flipped true,
+     * that later attribute change must be ignored.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello")
+    public void settingValueToSameValue_stillSetsDirtyFlag() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  input.value = 'hello';\n"
+            + "  input.setAttribute('value', 'changed');\n"
+            + "  log(input.value);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='hello'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Selection must be preserved across MULTIPLE consecutive same-value
+     * assignments, not just the first one.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "2"})
+    public void settingValueToSameValueTwice_selectionPreservedBothTimes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  input.value = 'hello';\n"
+            + "  input.selectionStart = 1;\n"
+            + "  input.selectionEnd = 2;\n"
+            + "  input.value = 'hello';\n"
+            + "  log(input.selectionStart);\n"
+            + "  log(input.selectionEnd);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='hello'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The "old value" comparison must be against the CURRENT raw value, not the
+     * page's originally-parsed value attribute. After dirtying to 'X', setting
+     * .value back to the ORIGINAL text ('hello') is a change relative to the
+     * current raw value ('X'), so the cursor MUST move -- even though 'hello'
+     * matches the original value attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"5", "5"})
+    public void settingValueBackToOriginalText_cursorMovesBecauseCurrentValueDiffers() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  input.value = 'X';\n"
+            + "  input.selectionStart = 0;\n"
+            + "  input.selectionEnd = 0;\n"
+            + "  input.value = 'hello';\n"
+            + "  log(input.selectionStart);\n"
+            + "  log(input.selectionEnd);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='hello'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Assigning the empty string to an already-empty value should
+     * also be treated as "no change" -- no cursor move, but still dirties the
+     * flag.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void settingEmptyValueToAlreadyEmptyValue_selectionUnchangedButDirty() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  input.value = '';\n"
+            + "  input.setAttribute('value', 'late');\n"
+            + "  log(input.value);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value=''>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The ordinary changing-value path must still
+     * move the cursor to the end -- guards against the same-value fix
+     * accidentally suppressing the cursor move for genuine changes too.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"7", "7"})
+    public void settingValueToDifferentValue_cursorMovesToEnd() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  input.selectionStart = 0;\n"
+            + "  input.selectionEnd = 0;\n"
+            + "  input.value = 'goodbye';\n"
+            + "  log(input.selectionStart);\n"
+            + "  log(input.selectionEnd);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='hello'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * After reset(), selectionStart and selectionEnd must be
+     * consistent with each other (start <= end), not left in an inverted state.
+     * Targets the current HtmlSelectableTextInput.reset() implementation, which
+     * only calls setSelectionEnd(0) without also resetting selectionStart --
+     * after the preceding setValue() call moved selectionStart to the END of
+     * the default value, this leaves start > end unless something else clamps
+     * it.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"8", "8"})
+    public void resetSetsSelectionStartAndEndConsistently() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var input = document.getElementById('theInput');\n"
+            + "  var frm = document.getElementById('theForm');\n"
+            + "  input.value = 'dirtied';\n"
+            + "  input.selectionStart = 1;\n"
+            + "  input.selectionEnd = 2;\n"
+            + "  frm.reset();\n"
+            + "  log(input.selectionStart);\n"
+            + "  log(input.selectionEnd);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='theForm'>\n"
+            + "  <input id='theInput' type='text' value='original'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * If the 'value' content
+     * attribute is changed by script WHILE .value is dirty (so the
+     * dirty-flag guard suppresses the sync), a subsequent reset() must pick up
+     * whatever the attribute CURRENTLY holds -- not the page's originally-parsed
+     * value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("updated")
+    public void resetReflectsCurrentAttributeNotOriginalParsedValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var input = document.getElementById('theInput');\n"
+            + "  var frm = document.getElementById('theForm');\n"
+            + "  input.value = 'X';\n"
+            + "  input.setAttribute('value', 'updated');\n"
+            + "  frm.reset();\n"
+            + "  log(input.value);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='theForm'>\n"
+            + "  <input id='theInput' type='text' value='original'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Reset triggered via a real click on a &lt;input type=reset&gt; button
+     * should behave identically to a scripted form.reset() call -- the existing
+     * reset() test only exercises the scripted path.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("original")
+    public void resetViaResetButtonClick_matchesScriptedReset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<form id='theForm'>\n"
+            + "  <input id='theInput' type='text' value='original'>\n"
+            + "  <input id='resetBtn' type='reset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("theInput"));
+        input.click();
+        input.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        input.sendKeys("-typed");
+
+        driver.findElement(By.id("resetBtn")).click();
+
+        final String value = input.getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], value);
+    }
+
+    /**
+     * The reset() called on a field whose value was NEVER
+     * changed (dirty flag never set) -- with the setValue() fix applied, the
+     * cursor-move there is conditional on old-value != new-value, so when
+     * reset() restores the SAME value that was already showing, that condition
+     * is false and the cursor-move is skipped entirely. This checks what
+     * selectionStart/selectionEnd end up being in that case: whatever they were
+     * BEFORE reset() (since nothing moves them), which may or may not match what
+     * real browsers do -- real browsers might unconditionally reposition the
+     * cursor as part of the reset algorithm itself, independent of the value
+     * setter's own conditional logic.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"5", "5", "original", "5", "5"})
+    public void resetOnNeverDirtiedInput_selectionPosition() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<form id='theForm'>\n"
+            + "  <input id='theInput' type='text' value='original'>\n"
+            + "  <input id='resetBtn' type='reset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("theInput"));
+
+        // click into the field and move the caret somewhere in the middle,
+        // WITHOUT ever changing its value (no sendKeys/typing, no .value set)
+        input.click();
+        input.sendKeys(Keys.ARROW_LEFT, Keys.ARROW_LEFT, Keys.ARROW_LEFT);
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final Long selStartBeforeReset = (Long) js.executeScript(
+                "return arguments[0].selectionStart;", input);
+        final Long selEndBeforeReset = (Long) js.executeScript(
+                "return arguments[0].selectionEnd;", input);
+
+        driver.findElement(By.id("resetBtn")).click();
+
+        final Long selStartAfterReset = (Long) js.executeScript(
+                "return arguments[0].selectionStart;", input);
+        final Long selEndAfterReset = (Long) js.executeScript(
+                "return arguments[0].selectionEnd;", input);
+        final String valueAfterReset = input.getDomProperty("value");
+
+        assertEquals(getExpectedAlerts()[0], String.valueOf(selStartBeforeReset));
+        assertEquals(getExpectedAlerts()[1], String.valueOf(selEndBeforeReset));
+        assertEquals(getExpectedAlerts()[2], valueAfterReset);
+        assertEquals(getExpectedAlerts()[3], String.valueOf(selStartAfterReset));
+        assertEquals(getExpectedAlerts()[4], String.valueOf(selEndAfterReset));
+    }
+
+    /**
+     * Same "never touched" scenario, but with an explicit
+     * mid-field selection RANGE (not just a collapsed caret) set beforehand via
+     * script, to check whether reset() collapses/repositions a real selection
+     * range too, or only affects a collapsed caret position.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"original", "2", "5"})
+    public void resetOnNeverDirtiedInputWithExplicitSelectionRange_selectionPosition() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<form id='theForm'>\n"
+            + "  <input id='theInput' type='text' value='original'>\n"
+            + "  <input id='resetBtn' type='reset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("theInput"));
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setSelectionRange(2, 5);", input);
+
+        driver.findElement(By.id("resetBtn")).click();
+
+        final Long selStartAfterReset = (Long) js.executeScript(
+                "return arguments[0].selectionStart;", input);
+        final Long selEndAfterReset = (Long) js.executeScript(
+                "return arguments[0].selectionEnd;", input);
+        final String valueAfterReset = input.getDomProperty("value");
+
+        assertEquals(getExpectedAlerts()[0], valueAfterReset);
+        assertEquals(getExpectedAlerts()[1], String.valueOf(selStartAfterReset));
+        assertEquals(getExpectedAlerts()[2], String.valueOf(selEndAfterReset));
+    }
+
+    /**
+     * Confirms that typing into a text input (real keyboard simulation via
+     * sendKeys, not a scripted .value assignment) updates .value but leaves the
+     * 'value' content attribute untouched.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"seed-typed", "seed"})
+    public void typingUpdatesValueButNotAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <input id='foo' value='seed'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("foo"));
+        input.click();
+        input.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        input.sendKeys("-typed");
+
+        final String value = input.getDomProperty("value");
+        final String attribute = input.getDomAttribute("value");
+
+        assertEquals(getExpectedAlerts()[0], value);
+        assertEquals(getExpectedAlerts()[1], attribute);
+    }
+
+    /**
+     * After dirtying .value via real typing, a clone must preserve the
+     * dirtied value rather than reverting to the (cloned) 'value' attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"seed-typed", "seed"})
+    public void cloneNodeAfterTyping_cloneRetainsDirtiedValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <input id='foo' value='seed'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("foo"));
+        input.click();
+        input.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        input.sendKeys("-typed");
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final String cloneValue = (String) js.executeScript(
+                "return arguments[0].cloneNode(true).value;", input);
+        final String cloneAttribute = (String) js.executeScript(
+                "return arguments[0].cloneNode(true).getAttribute('value');", input);
+
+        assertEquals(getExpectedAlerts()[0], cloneValue);
+        assertEquals(getExpectedAlerts()[1], cloneAttribute);
+    }
+
+    /**
+     * After cloning a still-CLEAN input and attaching the clone to the document,
+     * typing independently into the original and the clone must not
+     * cross-contaminate either one's value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"original-text", "clone-text"})
+    public void cloneNodeThenIndependentTyping_noCrossContamination() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <input id='foo' value=''>\n"
+            + "  <script>\n"
+            + "    var c = document.getElementById('foo').cloneNode(true);\n"
+            + "    c.id = 'clone';\n"
+            + "    document.body.appendChild(c);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement original = driver.findElement(By.id("foo"));
+        final WebElement clone = driver.findElement(By.id("clone"));
+
+        original.click();
+        original.sendKeys("original-text");
+        clone.click();
+        clone.sendKeys("clone-text");
+
+        final String originalValue = original.getDomProperty("value");
+        final String cloneValue = clone.getDomProperty("value");
+
+        assertEquals(getExpectedAlerts()[0], originalValue);
+        assertEquals(getExpectedAlerts()[1], cloneValue);
+    }
+
+    /**
+     * Resetting a clone (via a real click on its OWN form's reset button) must
+     * only affect the clone -- the original, sitting in a separate form, must be
+     * untouched.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"seed-original-dirtied", "seed"})
+    public void cloneNodeThenResetOnCloneOnly_doesNotAffectOriginal() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <input id='foo' value='seed'>\n"
+            + "    <input id='resetBtn1' type='reset'>\n"
+            + "  </form>\n"
+            + "  <form id='form2'>\n"
+            + "    <input id='resetBtn2' type='reset'>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + "    var c = document.getElementById('foo').cloneNode(true);\n"
+            + "    c.id = 'clone';\n"
+            + "    document.getElementById('form2').appendChild(c);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement original = driver.findElement(By.id("foo"));
+        final WebElement clone = driver.findElement(By.id("clone"));
+
+        original.click();
+        original.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        original.sendKeys("-original-dirtied");
+
+        clone.click();
+        clone.sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+        clone.sendKeys("-clone-dirtied");
+
+        // reset only form2, which contains the clone
+        driver.findElement(By.id("resetBtn2")).click();
+
+        final String originalValue = original.getDomProperty("value");
+        final String cloneValue = clone.getDomProperty("value");
+
+        assertEquals(getExpectedAlerts()[0], originalValue);
+        assertEquals(getExpectedAlerts()[1], cloneValue);
+    }
 }

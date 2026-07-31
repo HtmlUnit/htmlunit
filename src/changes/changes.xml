@@ -8,8 +8,20 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="fix" dev="rbri">
+                Fixed HtmlTextArea.reset(): the text entry cursor/selection is now only moved to the end of the restored
+                value when that value actually differs from the current one, instead of always being forced to the end.
+            </action>
+            <action type="fix" dev="rbri">
+                Fixed HtmlInput/HtmlSelectableTextInput: setting the value to the value it already holds no longer moves
+                the text entry cursor/selection to the end, mirroring the same fix applied to HtmlTextArea.
+            </action>
+            <action type="fix" dev="rbri">
+                Fixed HtmlSelectableTextInput.reset(): removed a leftover selection reset that left selectionStart and
+                selectionEnd in an inconsistent state after a form reset.
+            </action>
             <action type="update" dev="rbri">
-                Major refactoring of the value handling for textarea - setting the value no longer manipulates the DOM,
+                Major refactoring of the value handling for textarea; setting the value no longer manipulates the DOM,
                 instead a separate value and dirty flag are maintained (this is now in sync with the spec and the input element).
             </action>
             <action type="remove" dev="rbri">

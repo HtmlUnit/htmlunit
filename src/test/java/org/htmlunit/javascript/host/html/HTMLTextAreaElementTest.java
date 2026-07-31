@@ -1020,6 +1020,97 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     }
 
     /**
+     * The reset() called on a field whose
+     * value was NEVER changed. Unlike the current HtmlInput.setValue() fix
+     * (conditional on old-value != new-value), HtmlTextArea.reset() as currently
+     * written ALWAYS moves the cursor to the end unconditionally -- it does not
+     * go through setText()/setTextInternal() at all, so it has no "did the value
+     * actually change" guard. This checks whether that unconditional behavior
+     * matches real browsers, or whether real browsers also skip the cursor move
+     * when nothing actually changed (in which case HtmlTextArea.reset() would
+     * need the same kind of conditional guard added).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"5", "5", "original", "5", "5"})
+    public void resetOnNeverDirtiedTextarea_selectionPosition() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<form id='theForm'>\n"
+            + "  <textarea id='theTextarea'>original</textarea>\n"
+            + "  <input id='resetBtn' type='reset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textarea = driver.findElement(By.id("theTextarea"));
+
+        // click into the field and move the caret, WITHOUT ever changing its
+        // value (no sendKeys typing, no .value assignment)
+        textarea.click();
+        textarea.sendKeys(Keys.ARROW_LEFT, Keys.ARROW_LEFT, Keys.ARROW_LEFT);
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        final Long selStartBeforeReset = (Long) js.executeScript(
+                "return arguments[0].selectionStart;", textarea);
+        final Long selEndBeforeReset = (Long) js.executeScript(
+                "return arguments[0].selectionEnd;", textarea);
+
+        driver.findElement(By.id("resetBtn")).click();
+
+        final Long selStartAfterReset = (Long) js.executeScript(
+                "return arguments[0].selectionStart;", textarea);
+        final Long selEndAfterReset = (Long) js.executeScript(
+                "return arguments[0].selectionEnd;", textarea);
+        final String valueAfterReset = textarea.getDomProperty("value");
+
+        assertEquals(getExpectedAlerts()[0], String.valueOf(selStartBeforeReset));
+        assertEquals(getExpectedAlerts()[1], String.valueOf(selEndBeforeReset));
+        assertEquals(getExpectedAlerts()[2], valueAfterReset);
+        assertEquals(getExpectedAlerts()[3], String.valueOf(selStartAfterReset));
+        assertEquals(getExpectedAlerts()[4], String.valueOf(selEndAfterReset));
+    }
+
+    /**
+     * Same "never touched" scenario, but with
+     * an explicit mid-field selection RANGE set beforehand via script, to check
+     * whether reset() collapses/repositions a real selection range too, or only
+     * affects a collapsed caret position.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"original", "2", "5"})
+    public void resetOnNeverDirtiedTextareaWithExplicitSelectionRange_selectionPosition() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<form id='theForm'>\n"
+            + "  <textarea id='theTextarea'>original</textarea>\n"
+            + "  <input id='resetBtn' type='reset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textarea = driver.findElement(By.id("theTextarea"));
+
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setSelectionRange(2, 5);", textarea);
+
+        driver.findElement(By.id("resetBtn")).click();
+
+        final Long selStartAfterReset = (Long) js.executeScript(
+                "return arguments[0].selectionStart;", textarea);
+        final Long selEndAfterReset = (Long) js.executeScript(
+                "return arguments[0].selectionEnd;", textarea);
+        final String valueAfterReset = textarea.getDomProperty("value");
+
+        assertEquals(getExpectedAlerts()[0], valueAfterReset);
+        assertEquals(getExpectedAlerts()[1], String.valueOf(selStartAfterReset));
+        assertEquals(getExpectedAlerts()[2], String.valueOf(selEndAfterReset));
+    }
+
+    /**
      * The .defaultValue always reflects the current child text content,
      * regardless of the dirty flag -- even after .value has been dirtied and
      * decoupled from the children.

@@ -68,7 +68,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * The element's raw value (spec term), decoupled from the DOM child nodes
-     * once {@link #valueDirty_} is {@code true}. Mirrors {@code HtmlInput}'s
+     * once {@link #isValueDirty_} is {@code true}. Mirrors {@code HtmlInput}'s
      * dirty-value-flag model rather than reading/writing child text nodes directly.
      */
     private String rawValue_;
