@@ -19,8 +19,6 @@ import static org.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
@@ -45,7 +43,7 @@ import org.htmlunit.util.StringUtils;
 public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement,
                 LabelableElement, ValidatableElement {
 
-    private static final Log LOG = LogFactory.getLog(HtmlButton.class);
+    // private static final Log LOG = LogFactory.getLog(HtmlButton.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "button";
@@ -115,31 +113,36 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      *
+     * This implementation is empty; buttons have no reset-specific behavior.
+     *
      * @see SubmittableElement#reset()
      */
     @Override
     public void reset() {
-        LOG.debug("reset() not implemented for this element");
+        // Empty.
     }
 
     /**
      * {@inheritDoc}
+     *
+     * This implementation is empty; buttons do not maintain a default value.
      *
      * @see SubmittableElement#setDefaultValue(String)
      */
     @Override
     public void setDefaultValue(final String defaultValue) {
-        LOG.debug("setDefaultValue() not implemented for this element");
+        // Empty.
     }
 
     /**
      * {@inheritDoc}
      *
+     * This implementation returns an empty string; buttons do not maintain a default value.
+     *
      * @see SubmittableElement#getDefaultValue()
      */
     @Override
     public String getDefaultValue() {
-        LOG.debug("getDefaultValue() not implemented for this element");
         return "";
     }
 

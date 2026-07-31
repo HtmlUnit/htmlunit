@@ -9,6 +9,9 @@
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
             <action type="remove" dev="rbri">
+                Document HtmlButton's no-op implementations for reset and default value handling, and remove extraneous debug logging.
+            </action>
+            <action type="remove" dev="rbri">
                 Method isReadonly() removed from HtmlButton; because there is no readonly support for this control.
             </action>
             <action type="update" dev="rbri">
