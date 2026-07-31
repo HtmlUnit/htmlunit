@@ -207,27 +207,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final boolean isDisabled() {
-        if (hasAttribute(ATTRIBUTE_DISABLED)) {
-            return true;
-        }
-
-        DomNode node = getParentNode();
-        while (node != null) {
-            if (node instanceof DisabledElement element
-                    && element.isDisabled()) {
-                return true;
-            }
-            node = node.getParentNode();
-        }
-
-        return false;
-    }
-
-    /**
      * Returns the value of the attribute {@code readonly}. Refer to the
      * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
@@ -994,7 +973,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         }
 
         try (Context cx = HtmlUnitContextFactory.getGlobal().enterContext()) {
+            // compile the raw pattern first: this is a validity check only (result discarded).
+            // Wrapping with "^(?:...)$ " cannot mask a genuinely invalid pattern -- the wrapper
+            // contributes a balanced open/close pair, so any unmatched parent/bracket or other
+            // structural defect in the raw pattern persists identically once wrapped.
             RegExpEngineAccess.compile(cx, pattern, "");
+
             final RegExpEngineAccess.CompiledRegExp compiled
                     = RegExpEngineAccess.compile(cx, "^(?:" + pattern + ")$", "");
 

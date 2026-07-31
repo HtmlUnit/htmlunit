@@ -595,27 +595,6 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final boolean isDisabled() {
-        if (hasAttribute(ATTRIBUTE_DISABLED)) {
-            return true;
-        }
-
-        Node node = getParentNode();
-        while (node != null) {
-            if (node instanceof DisabledElement element
-                    && element.isDisabled()) {
-                return true;
-            }
-            node = node.getParentNode();
-        }
-
-        return false;
-    }
-
-    /**
      * Returns the value of the attribute {@code tabindex}. Refer to the <a
      * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *

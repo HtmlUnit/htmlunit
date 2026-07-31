@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="update" dev="rbri">
+                DisabledElement now implements Element and provides a default implementation of isDisabled().
+            </action>
             <action type="fix" dev="rbri">
                 Fixed HtmlTextArea.reset(): the text entry cursor/selection is now only moved to the end of the restored
                 value when that value actually differs from the current one, instead of always being forced to the end.

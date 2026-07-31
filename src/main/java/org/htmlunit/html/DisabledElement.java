@@ -14,13 +14,16 @@
  */
 package org.htmlunit.html;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 /**
  * A marker interface for those classes that can be disabled.
  *
  * @author David D. Kilzer
  * @author Ronald Brill
  */
-public interface DisabledElement {
+public interface DisabledElement extends Element {
 
     /** The "disabled" attribute name. */
     String ATTRIBUTE_DISABLED = "disabled";
@@ -29,7 +32,22 @@ public interface DisabledElement {
      * Returns {@code true} if the disabled attribute is set for this element.
      * @return {@code true} if the disabled attribute is set for this element
      */
-    boolean isDisabled();
+    default boolean isDisabled() {
+        if (hasAttribute(ATTRIBUTE_DISABLED)) {
+            return true;
+        }
+
+        Node node = getParentNode();
+        while (node != null) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
+                return true;
+            }
+            node = node.getParentNode();
+        }
+
+        return false;
+    }
 
     /**
      * Returns the value of the attribute {@code disabled}. Refer to the

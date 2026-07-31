@@ -93,25 +93,4 @@ public class HtmlFieldSet extends HtmlElement implements DisabledElement, Valida
     public final String getDisabledAttribute() {
         return getAttributeDirect(ATTRIBUTE_DISABLED);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final boolean isDisabled() {
-        if (hasAttribute(ATTRIBUTE_DISABLED)) {
-            return true;
-        }
-
-        DomNode node = getParentNode();
-        while (node != null) {
-            if (node instanceof DisabledElement element
-                    && element.isDisabled()) {
-                return true;
-            }
-            node = node.getParentNode();
-        }
-
-        return false;
-    }
 }

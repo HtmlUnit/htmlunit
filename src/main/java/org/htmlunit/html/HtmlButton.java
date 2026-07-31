@@ -26,7 +26,6 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
-import org.w3c.dom.Node;
 
 /**
  * Wrapper for the HTML element "button".
@@ -102,27 +101,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
         }
 
         super.doClickStateUpdate(shiftKey, ctrlKey);
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final boolean isDisabled() {
-        if (hasAttribute(ATTRIBUTE_DISABLED)) {
-            return true;
-        }
-
-        Node node = getParentNode();
-        while (node != null) {
-            if (node instanceof DisabledElement element
-                    && element.isDisabled()) {
-                return true;
-            }
-            node = node.getParentNode();
-        }
-
         return false;
     }
 
@@ -245,7 +223,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code type} or the default value if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttribute(TYPE_ATTRIBUTE);
+        return getAttributeDirect(TYPE_ATTRIBUTE);
     }
 
     /**

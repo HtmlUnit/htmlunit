@@ -24,7 +24,6 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
-import org.w3c.dom.Node;
 
 /**
  * Wrapper for the HTML element "textarea".
@@ -289,7 +288,8 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     /**
-     * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
+     * {@inheritDoc}
+     * This implementation is empty; only check boxes and radio buttons
      * really care what the default checked value is.
      * @see SubmittableElement#setDefaultChecked(boolean)
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
@@ -343,27 +343,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     public final String getColumnsAttribute() {
         return getAttributeDirect("cols");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final boolean isDisabled() {
-        if (hasAttribute(ATTRIBUTE_DISABLED)) {
-            return true;
-        }
-
-        Node node = getParentNode();
-        while (node != null) {
-            if (node instanceof DisabledElement element
-                    && element.isDisabled()) {
-                return true;
-            }
-            node = node.getParentNode();
-        }
-
-        return false;
     }
 
     /**

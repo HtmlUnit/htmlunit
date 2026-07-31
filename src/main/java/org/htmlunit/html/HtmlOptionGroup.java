@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
-import org.w3c.dom.Node;
 
 /**
  * Wrapper for the HTML element "optgroup".
@@ -46,31 +45,6 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
     HtmlOptionGroup(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-    }
-
-    /**
-     * Returns whether this element is disabled.
-     *
-     * @return {@code true} if this element is disabled, either because it has
-     *         the {@code disabled} attribute or because one of its ancestor
-     *         elements is disabled
-     */
-    @Override
-    public final boolean isDisabled() {
-        if (hasAttribute(ATTRIBUTE_DISABLED)) {
-            return true;
-        }
-
-        Node node = getParentNode();
-        while (node != null) {
-            if (node instanceof DisabledElement element
-                    && element.isDisabled()) {
-                return true;
-            }
-            node = node.getParentNode();
-        }
-
-        return false;
     }
 
     /**
