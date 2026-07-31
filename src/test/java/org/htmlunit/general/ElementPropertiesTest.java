@@ -1620,13 +1620,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "name,popoverTargetAction,popoverTargetElement,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,value,"
                 + "willValidate")
-    @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,formNoValidate,labels,name,setCustomValidity()"
+    @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,formNoValidate,labels,name,reportValidity(),setCustomValidity()"
                 + ",type,validity,value,willValidate",
-            EDGE = "checkValidity(),disabled,form,formNoValidate,labels,name,setCustomValidity(),"
+            EDGE = "checkValidity(),disabled,form,formNoValidate,labels,name,reportValidity(),setCustomValidity(),"
                 + "type,validity,value,willValidate",
-            FF_ESR = "checkValidity(),disabled,form,formNoValidate,labels,name,setCustomValidity(),"
+            FF_ESR = "checkValidity(),disabled,form,formNoValidate,labels,name,reportValidity(),setCustomValidity(),"
                 + "type,validity,value,willValidate",
-            FF = "checkValidity(),disabled,form,formNoValidate,labels,name,setCustomValidity(),"
+            FF = "checkValidity(),disabled,form,formNoValidate,labels,name,reportValidity(),setCustomValidity(),"
                 + "type,validity,value,willValidate")
     public void button() throws Exception {
         test("button");
@@ -1865,10 +1865,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts("checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,willValidate")
-    @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
-            EDGE = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
-            FF_ESR = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
-            FF = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,name,reportValidity(),setCustomValidity(),validity,willValidate",
+            EDGE = "checkValidity(),disabled,form,name,reportValidity(),setCustomValidity(),validity,willValidate",
+            FF_ESR = "checkValidity(),disabled,form,name,reportValidity(),setCustomValidity(),validity,willValidate",
+            FF = "checkValidity(),disabled,form,name,reportValidity(),setCustomValidity(),validity,willValidate")
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -1925,13 +1925,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "noValidate,rel,relList,reportValidity(),requestSubmit(),reset(),submit(),"
                 + "target")
     @HtmlUnitNYI(CHROME = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                + "noValidate,rel,relList,requestSubmit(),reset(),submit(),target",
+                + "noValidate,rel,relList,reportValidity(),requestSubmit(),reset(),submit(),target",
             EDGE = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                + "noValidate,rel,relList,requestSubmit(),reset(),submit(),target",
+                + "noValidate,rel,relList,reportValidity(),requestSubmit(),reset(),submit(),target",
             FF_ESR = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                + "noValidate,rel,relList,requestSubmit(),reset(),submit(),target",
+                + "noValidate,rel,relList,reportValidity(),requestSubmit(),reset(),submit(),target",
             FF = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                + "noValidate,rel,relList,requestSubmit(),reset(),submit(),target")
+                + "noValidate,rel,relList,reportValidity(),requestSubmit(),reset(),submit(),target")
     public void form() throws Exception {
         test("form");
     }
@@ -2558,13 +2558,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
                 + "declare,form,getSVGDocument(),height,hspace,name,reportValidity(),setCustomValidity(),standby,"
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate")
-    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,reportValidity(),setCustomValidity(),"
                     + "validity,width,willValidate",
-            EDGE = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+            EDGE = "align,border,checkValidity(),form,height,name,reportValidity(),setCustomValidity(),"
                     + "validity,width,willValidate",
-            FF_ESR = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+            FF_ESR = "align,border,checkValidity(),form,height,name,reportValidity(),setCustomValidity(),"
                     + "validity,width,willValidate",
-            FF = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+            FF = "align,border,checkValidity(),form,height,name,reportValidity(),setCustomValidity(),"
                     + "validity,width,willValidate")
     public void object() throws Exception {
         test("object");
@@ -2615,10 +2615,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts("checkValidity(),defaultValue,form,htmlFor,labels,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,value,willValidate")
-    @HtmlUnitNYI(CHROME = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
-            EDGE = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
-            FF_ESR = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
-            FF = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),form,labels,name,reportValidity(),setCustomValidity(),validity,willValidate",
+            EDGE = "checkValidity(),form,labels,name,reportValidity(),setCustomValidity(),validity,willValidate",
+            FF_ESR = "checkValidity(),form,labels,name,reportValidity(),setCustomValidity(),validity,willValidate",
+            FF = "checkValidity(),form,labels,name,reportValidity(),setCustomValidity(),validity,willValidate")
     public void output() throws Exception {
         test("output");
     }
@@ -2867,13 +2867,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "size,type,validationMessage,validity,value,"
                 + "willValidate")
     @HtmlUnitNYI(CHROME = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
-                + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
+                + "reportValidity(),required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
             EDGE = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
-                + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
+                + "reportValidity(),required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
             FF_ESR = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
-                + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
+                + "reportValidity(),required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
             FF = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
-                + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate")
+                + "reportValidity(),required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate")
     public void select() throws Exception {
         test("select");
     }
@@ -3136,16 +3136,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "type,validationMessage,validity,value,willValidate,"
                 + "wrap")
     @HtmlUnitNYI(CHROME = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,"
-                + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart"
+                + "placeholder,readOnly,reportValidity(),required,rows,select(),selectionEnd,selectionStart"
                 + ",setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             EDGE = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,"
-                + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,"
+                + "placeholder,readOnly,reportValidity(),required,rows,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             FF_ESR = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,placeholder,"
-                + "readOnly,required,rows,select(),selectionEnd,selectionStart,"
+                + "readOnly,reportValidity(),required,rows,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             FF = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,placeholder,"
-                + "readOnly,required,rows,select(),selectionEnd,selectionStart,"
+                + "readOnly,reportValidity(),required,rows,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate")
     public void textarea() throws Exception {
         test("textarea");
@@ -3389,24 +3389,24 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate")
     @HtmlUnitNYI(CHROME = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,formNoValidate,"
-                + "height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,"
+                + "height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,reportValidity(),"
                 + "required,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),size,src,step,type,validity,value,width,willValidate",
             EDGE = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,formNoValidate,"
-                + "height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,"
+                + "height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,reportValidity(),"
                 + "required,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),size,src,step,type,validity,value,width,willValidate",
             FF_ESR = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,disabled,"
                 + "files,form,formNoValidate,"
-                + "height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,required,"
-                + "select(),selectionEnd,selectionStart,"
+                + "height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,reportValidity(),"
+                + "required,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),size,src,step,textLength,type,"
                 + "validity,value,width,willValidate",
             FF = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,disabled,"
                 + "files,form,formNoValidate,"
-                + "height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,required,"
-                + "select(),selectionEnd,selectionStart,"
+                + "height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,reportValidity(),"
+                + "required,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),size,src,step,textLength,type,"
                 + "validity,value,width,willValidate")
     public void input() throws Exception {

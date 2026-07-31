@@ -3691,13 +3691,17 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "type[GSCE],validationMessage[GCE],validity[GCE],value[GSCE],"
                 + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled[GSCE],form[GCE],formNoValidate[GSCE],"
-                + "labels[GCE],name[GSCE],setCustomValidity(),type[GSCE],validity[GCE],value[GSCE],willValidate[GCE]",
+                + "labels[GCE],name[GSCE],reportValidity(),"
+                + "setCustomValidity(),type[GSCE],validity[GCE],value[GSCE],willValidate[GCE]",
             EDGE = "checkValidity(),constructor(),disabled[GSCE],form[GCE],formNoValidate[GSCE],"
-                + "labels[GCE],name[GSCE],setCustomValidity(),type[GSCE],validity[GCE],value[GSCE],willValidate[GCE]",
+                + "labels[GCE],name[GSCE],reportValidity(),"
+                + "setCustomValidity(),type[GSCE],validity[GCE],value[GSCE],willValidate[GCE]",
             FF_ESR = "checkValidity(),constructor(),disabled[GSCE],form[GCE],formNoValidate[GSCE],"
-                + "labels[GCE],name[GSCE],setCustomValidity(),type[GSCE],validity[GCE],value[GSCE],willValidate[GCE]",
+                + "labels[GCE],name[GSCE],reportValidity(),"
+                + "setCustomValidity(),type[GSCE],validity[GCE],value[GSCE],willValidate[GCE]",
             FF = "checkValidity(),constructor(),disabled[GSCE],form[GCE],formNoValidate[GSCE],"
-                + "labels[GCE],name[GSCE],setCustomValidity(),type[GSCE],validity[GCE],value[GSCE],willValidate[GCE]")
+                + "labels[GCE],name[GSCE],reportValidity(),"
+                + "setCustomValidity(),type[GSCE],validity[GCE],value[GSCE],willValidate[GCE]")
     public void button() throws Exception {
         test("button");
     }
@@ -5525,13 +5529,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "setCustomValidity(),type[GCE],validationMessage[GCE],validity[GCE],"
                 + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
-                + "setCustomValidity(),validity[GCE],willValidate[GCE]",
+                + "reportValidity(),setCustomValidity(),validity[GCE],willValidate[GCE]",
             EDGE = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
-                + "setCustomValidity(),validity[GCE],willValidate[GCE]",
+                + "reportValidity(),setCustomValidity(),validity[GCE],willValidate[GCE]",
             FF_ESR = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
-                + "setCustomValidity(),validity[GCE],willValidate[GCE]",
+                + "reportValidity(),setCustomValidity(),validity[GCE],willValidate[GCE]",
             FF = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
-                + "setCustomValidity(),validity[GCE],willValidate[GCE]")
+                + "reportValidity(),setCustomValidity(),validity[GCE],willValidate[GCE]")
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -6038,16 +6042,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "target[GSCE]")
     @HtmlUnitNYI(CHROME = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
                 + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
-                + "requestSubmit(),reset(),submit(),target[GSCE]",
+                + "reportValidity(),requestSubmit(),reset(),submit(),target[GSCE]",
             EDGE = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
                 + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
-                + "requestSubmit(),reset(),submit(),target[GSCE]",
+                + "reportValidity(),requestSubmit(),reset(),submit(),target[GSCE]",
             FF_ESR = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
                 + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
-                + "requestSubmit(),reset(),submit(),target[GSCE]",
+                + "reportValidity(),requestSubmit(),reset(),submit(),target[GSCE]",
             FF = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
                 + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
-                + "requestSubmit(),reset(),submit(),target[GSCE]")
+                + "reportValidity(),requestSubmit(),reset(),submit(),target[GSCE]")
     public void form() throws Exception {
         test("form");
     }
@@ -9786,13 +9790,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "width[GSCE],"
                 + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
-                + "name[GSCE],setCustomValidity(),validity[GCE],width[GSCE],willValidate[GCE]",
+                + "name[GSCE],reportValidity(),setCustomValidity(),validity[GCE],width[GSCE],willValidate[GCE]",
             EDGE = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
-                + "name[GSCE],setCustomValidity(),validity[GCE],width[GSCE],willValidate[GCE]",
+                + "name[GSCE],reportValidity(),setCustomValidity(),validity[GCE],width[GSCE],willValidate[GCE]",
             FF_ESR = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
-                + "name[GSCE],setCustomValidity(),validity[GCE],width[GSCE],willValidate[GCE]",
+                + "name[GSCE],reportValidity(),setCustomValidity(),validity[GCE],width[GSCE],willValidate[GCE]",
             FF = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
-                + "name[GSCE],setCustomValidity(),validity[GCE],width[GSCE],willValidate[GCE]")
+                + "name[GSCE],reportValidity(),setCustomValidity(),validity[GCE],width[GSCE],willValidate[GCE]")
     public void object() throws Exception {
         test("object");
     }
@@ -9873,13 +9877,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "checkValidity(),constructor(),defaultValue[GSCE],form[GCE],htmlFor[GSCE],labels[GCE],name[GSCE],"
                 + "reportValidity(),setCustomValidity(),type[GCE],validationMessage[GCE],validity[GCE],value[GSCE],"
                 + "willValidate[GCE]")
-    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],setCustomValidity(),"
+    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],reportValidity(),setCustomValidity(),"
                 + "validity[GCE],willValidate[GCE]",
-            EDGE = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],setCustomValidity(),"
+            EDGE = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],reportValidity(),setCustomValidity(),"
                 + "validity[GCE],willValidate[GCE]",
-            FF_ESR = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],setCustomValidity(),"
+            FF_ESR = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],reportValidity(),setCustomValidity(),"
                 + "validity[GCE],willValidate[GCE]",
-            FF = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],setCustomValidity(),"
+            FF = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],reportValidity(),setCustomValidity(),"
                 + "validity[GCE],willValidate[GCE]")
     public void output() throws Exception {
         test("output");
@@ -12101,19 +12105,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "showPicker(),size[GSCE],type[GCE],validationMessage[GCE],validity[GCE],value[GSCE],"
                 + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "add(),checkValidity(),constructor(),disabled[GSCE],form[GCE],item(),"
-                + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],options[GCE],remove(),required[GSCE],"
+                + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],options[GCE],remove(),reportValidity(),required[GSCE],"
                 + "selectedIndex[GSCE],setCustomValidity(),size[GSCE],type[GCE],validity[GCE],value[GSCE],"
                 + "willValidate[GCE]",
             EDGE = "add(),checkValidity(),constructor(),disabled[GSCE],form[GCE],item(),"
-                + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],options[GCE],remove(),required[GSCE],"
+                + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],options[GCE],remove(),reportValidity(),required[GSCE],"
                 + "selectedIndex[GSCE],setCustomValidity(),size[GSCE],type[GCE],validity[GCE],value[GSCE],"
                 + "willValidate[GCE]",
             FF_ESR = "add(),checkValidity(),constructor(),disabled[GSCE],form[GCE],item(),"
-                + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],options[GCE],remove(),required[GSCE],"
+                + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],options[GCE],remove(),reportValidity(),required[GSCE],"
                 + "selectedIndex[GSCE],setCustomValidity(),size[GSCE],type[GCE],validity[GCE],value[GSCE],"
                 + "willValidate[GCE]",
             FF = "add(),checkValidity(),constructor(),disabled[GSCE],form[GCE],item(),"
-                + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],options[GCE],remove(),required[GSCE],"
+                + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],options[GCE],remove(),reportValidity(),required[GSCE],"
                 + "selectedIndex[GSCE],setCustomValidity(),size[GSCE],type[GCE],validity[GCE],value[GSCE],"
                 + "willValidate[GCE]")
     public void select() throws Exception {
@@ -13783,24 +13787,28 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "wrap[GSCE]")
     @HtmlUnitNYI(CHROME = "checkValidity(),cols[GSCE],constructor(),defaultValue[GSCE],disabled[GSCE],"
                 + "form[GCE],labels[GCE],"
-                + "maxLength[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],required[GSCE],"
+                + "maxLength[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],"
+                + "reportValidity(),required[GSCE],"
                 + "rows[GSCE],select(),selectionEnd[GSCE],"
                 + "selectionStart[GSCE],setCustomValidity(),setSelectionRange(),textLength[GCE],type[GCE],"
                 + "validity[GCE],value[GSCE],willValidate[GCE]",
             EDGE = "checkValidity(),cols[GSCE],constructor(),defaultValue[GSCE],disabled[GSCE],"
                 + "form[GCE],labels[GCE],"
-                + "maxLength[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],required[GSCE],"
+                + "maxLength[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],"
+                + "reportValidity(),required[GSCE],"
                 + "rows[GSCE],select(),selectionEnd[GSCE],"
                 + "selectionStart[GSCE],setCustomValidity(),setSelectionRange(),textLength[GCE],type[GCE],"
                 + "validity[GCE],value[GSCE],willValidate[GCE]",
             FF_ESR = "checkValidity(),cols[GSCE],constructor(),defaultValue[GSCE],disabled[GSCE],"
                 + "form[GCE],labels[GCE],maxLength[GSCE],minLength[GSCE],name[GSCE],"
-                + "placeholder[GSCE],readOnly[GSCE],required[GSCE],rows[GSCE],select(),selectionEnd[GSCE],"
+                + "placeholder[GSCE],readOnly[GSCE],"
+                + "reportValidity(),required[GSCE],rows[GSCE],select(),selectionEnd[GSCE],"
                 + "selectionStart[GSCE],setCustomValidity(),setSelectionRange(),textLength[GCE],type[GCE],"
                 + "validity[GCE],value[GSCE],willValidate[GCE]",
             FF = "checkValidity(),cols[GSCE],constructor(),defaultValue[GSCE],disabled[GSCE],"
                 + "form[GCE],labels[GCE],maxLength[GSCE],minLength[GSCE],name[GSCE],"
-                + "placeholder[GSCE],readOnly[GSCE],required[GSCE],rows[GSCE],select(),selectionEnd[GSCE],"
+                + "placeholder[GSCE],readOnly[GSCE],"
+                + "reportValidity(),required[GSCE],rows[GSCE],select(),selectionEnd[GSCE],"
                 + "selectionStart[GSCE],setCustomValidity(),setSelectionRange(),textLength[GCE],type[GCE],"
                 + "validity[GCE],value[GSCE],willValidate[GCE]")
     public void textarea() throws Exception {
@@ -14938,28 +14946,28 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "accept[GSCE],align[GSCE],alt[GSCE],autocomplete[GSCE],checked[GSCE],checkValidity(),"
                 + "constructor(),defaultChecked[GSCE],defaultValue[GSCE],disabled[GSCE],files[GCE],form[GCE],"
                 + "formNoValidate[GSCE],height[GSCE],labels[GCE],max[GSCE],maxLength[GSCE],"
-                + "min[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],required[GSCE],"
+                + "min[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],reportValidity(),required[GSCE],"
                 + "select(),selectionEnd[GSCE],selectionStart[GSCE],setCustomValidity(),"
                 + "setSelectionRange(),size[GSCE],src[GSCE],step[GSCE],type[GSCE],validity[GCE],value[GSCE],"
                 + "width[GSCE],willValidate[GCE]",
             EDGE = "accept[GSCE],align[GSCE],alt[GSCE],autocomplete[GSCE],checked[GSCE],checkValidity(),"
                 + "constructor(),defaultChecked[GSCE],defaultValue[GSCE],disabled[GSCE],files[GCE],form[GCE],"
                 + "formNoValidate[GSCE],height[GSCE],labels[GCE],max[GSCE],maxLength[GSCE],"
-                + "min[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],required[GSCE],"
+                + "min[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],reportValidity(),required[GSCE],"
                 + "select(),selectionEnd[GSCE],selectionStart[GSCE],setCustomValidity(),"
                 + "setSelectionRange(),size[GSCE],src[GSCE],step[GSCE],type[GSCE],validity[GCE],value[GSCE],"
                 + "width[GSCE],willValidate[GCE]",
             FF_ESR = "accept[GSCE],align[GSCE],alt[GSCE],autocomplete[GSCE],checked[GSCE],checkValidity(),"
                 + "constructor(),defaultChecked[GSCE],defaultValue[GSCE],disabled[GSCE],files[GCE],form[GCE],"
                 + "formNoValidate[GSCE],height[GSCE],labels[GCE],max[GSCE],maxLength[GSCE],"
-                + "min[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],required[GSCE],"
+                + "min[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],reportValidity(),required[GSCE],"
                 + "select(),selectionEnd[GSCE],selectionStart[GSCE],setCustomValidity(),"
                 + "setSelectionRange(),size[GSCE],src[GSCE],step[GSCE],textLength[GCE],type[GSCE],"
                 + "validity[GCE],value[GSCE],width[GSCE],willValidate[GCE]",
             FF = "accept[GSCE],align[GSCE],alt[GSCE],autocomplete[GSCE],checked[GSCE],checkValidity(),"
                 + "constructor(),defaultChecked[GSCE],defaultValue[GSCE],disabled[GSCE],files[GCE],form[GCE],"
                 + "formNoValidate[GSCE],height[GSCE],labels[GCE],max[GSCE],maxLength[GSCE],"
-                + "min[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],required[GSCE],"
+                + "min[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],reportValidity(),required[GSCE],"
                 + "select(),selectionEnd[GSCE],selectionStart[GSCE],setCustomValidity(),"
                 + "setSelectionRange(),size[GSCE],src[GSCE],step[GSCE],textLength[GCE],type[GSCE],"
                 + "validity[GCE],value[GSCE],width[GSCE],willValidate[GCE]")

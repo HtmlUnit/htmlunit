@@ -378,6 +378,15 @@ public class HTMLTextAreaElement extends HTMLElement {
     }
 
     /**
+     * Performs the same validity checking steps as the checkValidity() method.
+     * @return {@code true} if the element is valid
+     */
+    @JsxFunction
+    public boolean reportValidity() {
+        return checkValidity();
+    }
+
+    /**
      * Returns the {@code required} property.
      * @return the {@code required} property
      */

@@ -16,9 +16,11 @@ package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 /**
@@ -463,6 +465,340 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
                 + "    <button id='i5' style='display: none'></button>"
                 + "  </form>\n"
                 + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A button with type='button' is barred from constraint validation
+     * (per willValidate() already returning false for it) -- so setting a custom
+     * validity message on it must NOT make checkValidity()/validity.valid report
+     * it as invalid.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void setCustomValidityWithTypeButton_notInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.willValidate);\n"
+            + "    log(b.validity.customError);\n"
+            + "    log(b.validity.valid);\n"
+            + "    log(b.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='button'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same as above, but for type='reset'.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void setCustomValidityWithTypeReset_notInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.willValidate);\n"
+            + "    log(b.validity.customError);\n"
+            + "    log(b.validity.valid);\n"
+            + "    log(b.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='reset'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Baseline/contrast case: a default (type='submit') button DOES participate
+     * in constraint validation, so a custom validity message must correctly make
+     * it invalid.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false"})
+    public void setCustomValidityWithTypeSubmit_isInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.willValidate);\n"
+            + "    log(b.validity.customError);\n"
+            + "    log(b.validity.valid);\n"
+            + "    log(b.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Clearing a previously-set custom validity message (empty string) must
+     * restore validity for a type='submit' button.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "true"})
+    public void clearCustomValidity_restoresValid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.validity.valid);\n"
+            + "    b.setCustomValidity('');\n"
+            + "    log(b.validity.customError);\n"
+            + "    log(b.validity.valid);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Baseline checkValidity()/validity.valid without any custom validity set at
+     * all.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "true"})
+    public void checkValidityWithoutCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('submitBtn').checkValidity());\n"
+            + "    log(document.getElementById('resetBtn').checkValidity());\n"
+            + "    log(document.getElementById('buttonBtn').checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='submitBtn' type='submit'>s</button>\n"
+            + "    <button id='resetBtn' type='reset'>r</button>\n"
+            + "    <button id='buttonBtn' type='button'>b</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The reportValidity() returns the same boolean as checkValidity() for
+     * a button with a custom validity message set.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void reportValidityMatchesCheckValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.checkValidity());\n"
+            + "    log(b.reportValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§?")
+    @HtmlUnitNYI(CHROME = "§§URL§§",
+            EDGE = "§§URL§§",
+            FF = "§§URL§§",
+            FF_ESR = "§§URL§§")
+    public void clickSubmitButtonSubmitsForm() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <form id='form1' action='" + URL_SECOND + "'>\n"
+            + "    <button id='btn' type='submit'>submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("btn")).click();
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
+        }
+        expandExpectedAlertsVariables(URL_SECOND);
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+    }
+
+    /**
+     * A type='reset' button click should reset the form's fields without
+     * navigating away.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("original")
+    public void clickResetButtonResetsForm() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <form id='form1'>\n"
+            + "    <input id='text1' value='original'>\n"
+            + "    <button id='btn' type='reset'>reset</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement text1 = driver.findElement(By.id("text1"));
+        text1.click();
+        text1.sendKeys("-changed");
+
+        driver.findElement(By.id("btn")).click();
+
+        assertEquals(getExpectedAlerts()[0], text1.getDomProperty("value"));
+    }
+
+    /**
+     * A type='button' click must neither submit nor reset the form.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§", "original-changed"})
+    public void clickPlainButtonDoesNotSubmitOrReset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <form id='form1' action='" + URL_SECOND + "'>\n"
+            + "    <input id='text1' value='original'>\n"
+            + "    <button id='btn' type='button'>plain</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement text1 = driver.findElement(By.id("text1"));
+        text1.click();
+        text1.sendKeys("-changed");
+
+        driver.findElement(By.id("btn")).click();
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+        assertEquals(getExpectedAlerts()[1], text1.getDomProperty("value"));
+    }
+
+    /**
+     * Clicking a disabled submit button must not submit the form.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§")
+    public void clickDisabledSubmitButtonDoesNotSubmit() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <form id='form1' action='" + URL_SECOND + "'>\n"
+            + "    <button id='btn' type='submit' disabled>submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("btn")).click();
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void disabledFieldsetPropagatesToButton() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('b').disabled);\n"
+            + "    log(document.getElementById('b').willValidate);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <fieldset disabled>\n"
+            + "      <button id='b' type='submit'>btn</button>\n"
+            + "    </fieldset>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The form.reset() with a button present must be a silent no-op for the button
+     * itself (HtmlButton.reset() is documented as intentionally doing nothing).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void formResetDoesNotAffectButton() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    var valueBefore = b.value;\n"
+            + "    document.getElementById('form1').reset();\n"
+            + "    log(valueBefore === b.value);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <button id='b' value='original'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

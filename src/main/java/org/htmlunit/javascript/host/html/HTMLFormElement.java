@@ -555,6 +555,15 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
+     * Performs the same validity checking steps as the checkValidity() method.
+     * @return {@code true} if the element is valid
+     */
+    @JsxFunction
+    public boolean reportValidity() {
+        return checkValidity();
+    }
+
+    /**
      * Returns the value of the property {@code novalidate}.
      * @return the value of this property
      */

@@ -88,6 +88,15 @@ public class HTMLFieldSetElement extends HTMLElement {
     }
 
     /**
+     * Performs the same validity checking steps as the checkValidity() method.
+     * @return {@code true} if the element is valid
+     */
+    @JsxFunction
+    public boolean reportValidity() {
+        return checkValidity();
+    }
+
+    /**
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override

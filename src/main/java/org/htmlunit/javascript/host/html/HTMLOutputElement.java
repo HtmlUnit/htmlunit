@@ -104,6 +104,15 @@ public class HTMLOutputElement extends HTMLElement {
     }
 
     /**
+     * Performs the same validity checking steps as the checkValidity() method.
+     * @return {@code true} if the element is valid
+     */
+    @JsxFunction
+    public boolean reportValidity() {
+        return checkValidity();
+    }
+
+    /**
      * Returns a {@link ValidityState} object representing the validity states of this element.
      * @return a {@link ValidityState} object representing the validity states of this element
      */

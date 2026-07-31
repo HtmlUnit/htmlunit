@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="add" dev="rbri">
+                Method reportValidity() support to various form controls added.
+            </action>
+            <action type="fix" dev="rbri">
+                Various HtmlButton validation processing related fixed.
+            </action>
             <action type="remove" dev="rbri">
                 Document HtmlButton's no-op implementations for reset and default value handling, and remove extraneous debug logging.
             </action>
