@@ -621,6 +621,48 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false", "true", "true",
+             "true", "true", "true", "true", "true", "true",
+             "true", "true", "true", "true", "true", "true"})
+    public void checkValidityDisabled() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    testButton(document.getElementById('submitBtn'));\n"
+            + "    testButton(document.getElementById('resetBtn'));\n"
+            + "    testButton(document.getElementById('buttonBtn'));\n"
+            + "  }\n"
+
+            + "  function testButton(b) {\n"
+            + "    log(b.checkValidity());\n"
+            + "    log(b.reportValidity());\n"
+
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.checkValidity());\n"
+            + "    log(b.reportValidity());\n"
+
+            + "    b.disabled = true;\n"
+            + "    log(b.checkValidity());\n"
+            + "    log(b.reportValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='submitBtn' type='submit'>s</button>\n"
+            + "    <button id='resetBtn' type='reset'>r</button>\n"
+            + "    <button id='buttonBtn' type='button'>b</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * The reportValidity() returns the same boolean as checkValidity() for
      * a button with a custom validity message set.
      * @throws Exception if the test fails

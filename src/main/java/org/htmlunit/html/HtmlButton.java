@@ -316,10 +316,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isValid() {
-        if (TYPE_RESET.equals(getType()) || TYPE_BUTTON.equals(getType())) {
-            return true;
-        }
-
         return super.isValid() && !isCustomErrorValidityState();
     }
 

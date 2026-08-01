@@ -66,7 +66,7 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        return ((HtmlButton) getDomNodeOrDie()).getType();
+        return getDomNodeOrDie().getType();
     }
 
     /**
@@ -150,7 +150,8 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        return getDomNodeOrDie().isValid();
+        final HtmlButton button = getDomNodeOrDie();
+        return !button.willValidate() || button.isValid();
     }
 
     /**
@@ -175,13 +176,18 @@ public class HTMLButtonElement extends HTMLElement {
         return validityState;
     }
 
+    @Override
+    public HtmlButton getDomNodeOrDie() {
+        return (HtmlButton) super.getDomNodeOrDie();
+    }
+
     /**
      * Returns whether this element will be validated when the form is submitted.
      * @return always {@code false}
      */
     @JsxGetter
     public boolean isWillValidate() {
-        return ((HtmlButton) getDomNodeOrDie()).willValidate();
+        return getDomNodeOrDie().willValidate();
     }
 
     /**
@@ -190,7 +196,7 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        ((HtmlButton) getDomNodeOrDie()).setCustomValidity(message);
+        getDomNodeOrDie().setCustomValidity(message);
     }
 
     /**
@@ -199,7 +205,7 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxGetter
     public boolean isFormNoValidate() {
-        return ((HtmlButton) getDomNodeOrDie()).isFormNoValidate();
+        return getDomNodeOrDie().isFormNoValidate();
     }
 
     /**
@@ -208,6 +214,6 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxSetter
     public void setFormNoValidate(final boolean value) {
-        ((HtmlButton) getDomNodeOrDie()).setFormNoValidate(value);
+        getDomNodeOrDie().setFormNoValidate(value);
     }
 }

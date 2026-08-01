@@ -2612,4 +2612,270 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Baseline: a default (type='submit') button with no custom validity issue
+     * matches :valid and not :invalid.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void cssValidMatchesSubmitButtonWithNoError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A default (type='submit') button with a custom validity message matches
+     * :invalid and not :valid.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void cssInvalidMatchesSubmitButtonWithCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A type='button' element is barred from constraint validation --
+     * it must match NEITHER :valid NOR :invalid, even with no custom validity
+     * issue at all.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesPlainButtonType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='button'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same as above, but ALSO with a custom validity message set -- the barring
+     * must take priority over the (otherwise would-be-invalid) custom error;
+     * neither pseudo-class should match.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesPlainButtonTypeEvenWithCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='button'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A type='reset' is barred the same way as type='button' -- neither
+     * pseudo-class should match, custom validity or not.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesResetButtonType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='reset'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A DISABLED submit button is also barred from constraint
+     * validation -- neither pseudo-class should match, even with a custom
+     * validity message set.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesDisabledSubmitButton() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit' disabled>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Redundant-barring sanity check: type='button' AND disabled AND a custom
+     * validity message all at once -- still neither pseudo-class should match.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesDisabledPlainButtonWithCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='button' disabled>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Dynamic transition: a button barred via type='button' (with a leftover
+     * custom validity message set while barred) is switched to type='submit' at
+     * runtime. It must now correctly participate in validation and show
+     * :invalid -- confirms the barred/not-barred state is evaluated fresh each
+     * time, not cached from whatever it was when setCustomValidity() was
+     * originally called.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "false", "true"})
+    public void cssMatchingUpdatesWhenTypeChangesFromButtonToSubmit() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+
+            + "    b.type = 'submit';\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='button'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Dynamic transition, the other direction: an initially-valid submit button
+     * is switched to type='button' at runtime -- it must stop matching :valid
+     * (or :invalid) entirely once barred, even though it was clean before the
+     * change.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false", "false", "false"})
+    public void cssMatchingUpdatesWhenTypeChangesFromSubmitToButton() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+
+            + "    b.type = 'button';\n"
+            + "    log(b.matches(':valid'));\n"
+            + "    log(b.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -918,14 +918,22 @@ public class CssStyleSheet implements Serializable {
                 return true;
 
             case "valid":
-                if (element instanceof HtmlForm || element instanceof ValidatableElement) {
-                    return ((HtmlElement) element).isValid();
+                if (element instanceof ValidatableElement validatable) {
+                    return validatable.willValidate()
+                                && ((HtmlElement) validatable).isValid();
+                }
+                else if (element instanceof HtmlForm form) {
+                    return form.isValid();
                 }
                 return false;
 
             case "invalid":
-                if (element instanceof HtmlForm || element instanceof ValidatableElement) {
-                    return !((HtmlElement) element).isValid();
+                if (element instanceof ValidatableElement validatable) {
+                    return validatable.willValidate()
+                                && !((HtmlElement) validatable).isValid();
+                }
+                else if (element instanceof HtmlForm form) {
+                    return !form.isValid();
                 }
                 return false;
 
