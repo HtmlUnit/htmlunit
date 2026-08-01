@@ -2878,4 +2878,328 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * A textarea with no 'required' and no custom validity issue
+     * matches :valid and not :invalid.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void cssValidMatchesTextareaWithNoError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t'>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A textarea with a custom validity message matches :invalid and not
+     * :valid.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void cssInvalidMatchesTextareaWithCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    t.setCustomValidity('some error');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t'>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A required, empty textarea matches :invalid (valueMissing).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void cssInvalidMatchesRequiredEmptyTextarea() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' required></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A required, non-empty textarea matches :valid.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void cssValidMatchesRequiredNonEmptyTextarea() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' required>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A DISABLED, required,
+     * empty textarea must match NEITHER :valid NOR :invalid -- disabled bars it
+     * from constraint validation entirely, regardless of the would-be
+     * valueMissing violation.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesDisabledRequiredEmptyTextarea() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' required disabled></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A READONLY, required, empty textarea. Per spec, readonly bars an element
+     * from constraint validation the same way disabled does.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesReadonlyRequiredEmptyTextarea() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' required readonly></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same as above but with a custom validity message set as well -- readonly
+     * barring must take priority over the custom error too, same as disabled
+     * does.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesReadonlyTextareaEvenWithCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    t.setCustomValidity('some error');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' readonly>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Redundant-barring sanity check: disabled AND readonly AND required AND a
+     * custom validity message, all at once -- still neither pseudo-class should
+     * match.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesDisabledAndReadonlyTextarea() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    t.setCustomValidity('some error');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' required disabled readonly></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Dynamic transition: a required, empty textarea starts out correctly
+     * :invalid, then is made readonly at runtime -- must stop matching
+     * :invalid (or :valid) once barred, confirming the barred state is
+     * evaluated fresh rather than cached from page load.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "false", "false", "true"})
+    public void cssMatchingUpdatesWhenReadonlyToggledAtRuntime() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+
+            + "    t.readOnly = true;\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+
+            + "    t.readOnly = false;\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' required></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Dynamic transition, disabled variant: same idea as above but toggling
+     * disabled instead of readonly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "false", "false", "true"})
+    public void cssMatchingUpdatesWhenDisabledToggledAtRuntime() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+
+            + "    t.disabled = true;\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+
+            + "    t.disabled = false;\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' required></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Disabled propagated via an enclosing &lt;fieldset disabled&gt; must bar
+     * the textarea from validation the same way an own 'disabled' attribute
+     * does -- exercises the isDisabled() parent-chain walk in combination with
+     * CSS matching, not just the element's own attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void cssNeitherMatchesTextareaInDisabledFieldset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.matches(':valid'));\n"
+            + "    log(t.matches(':invalid'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <fieldset disabled>\n"
+            + "      <textarea id='t' required></textarea>\n"
+            + "    </fieldset>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

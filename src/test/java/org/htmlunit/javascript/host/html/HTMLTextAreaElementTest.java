@@ -2562,4 +2562,243 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * An enabled, editable textarea with no custom validity issue
+     * reports checkValidity() true and an empty validationMessage.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void checkValidityWithoutCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.checkValidity());\n"
+            // + "    log(t.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t'>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An enabled, editable textarea with a custom validity message set must
+     * report checkValidity() false.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false"})
+    public void setCustomValidityOnEditableTextarea_isInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    t.setCustomValidity('some error');\n"
+            + "    log(t.willValidate);\n"
+            + "    log(t.validity.customError);\n"
+            + "    log(t.validity.valid);\n"
+            + "    log(t.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t'>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A DISABLED textarea with a custom validity message must still
+     * report checkValidity() true -- disabled bars it from constraint
+     * validation entirely, so the custom error must not surface through
+     * checkValidity(), even though willValidate is already known to be false
+     * for this case.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void setCustomValidityOnDisabledTextarea_notInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    t.setCustomValidity('some error');\n"
+            + "    log(t.willValidate);\n"
+            + "    log(t.validity.customError);\n"
+            + "    log(t.validity.valid);\n"
+            + "    log(t.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' disabled>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same as above but for READONLY instead of disabled -- the
+     * existing willValidate() test already confirms readonly returns
+     * willValidate=false.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void setCustomValidityOnReadonlyTextarea_notInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    t.setCustomValidity('some error');\n"
+            + "    log(t.willValidate);\n"
+            + "    log(t.validity.customError);\n"
+            + "    log(t.validity.valid);\n"
+            + "    log(t.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' readonly>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Clearing a previously-set custom validity message (empty string) must
+     * restore validity for an editable textarea.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "true"})
+    public void clearCustomValidity_restoresValid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    t.setCustomValidity('some error');\n"
+            + "    log(t.validity.valid);\n"
+            + "    t.setCustomValidity('');\n"
+            + "    log(t.validity.customError);\n"
+            + "    log(t.validity.valid);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t'>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The validationMessage should reflect the custom validity message for a
+     * validation-participating (editable) textarea, and should be empty for a
+     * barred-from-validation (disabled) one, regardless of a custom message
+     * being set.
+     * @throws Exception if the test fails
+     */
+    // @Test
+    @Alerts({"editable error", ""})
+    public void validationMessageReflectsCustomValidityWhereApplicable() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var editable = document.getElementById('editable');\n"
+            + "    var disabled = document.getElementById('disabled');\n"
+            + "    editable.setCustomValidity('editable error');\n"
+            + "    disabled.setCustomValidity('disabled error');\n"
+            + "    log(editable.validationMessage);\n"
+            + "    log(disabled.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='editable'>content</textarea>\n"
+            + "    <textarea id='disabled' disabled>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void reportValidityMatchesCheckValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    t.setCustomValidity('some error');\n"
+            + "    log(t.checkValidity());\n"
+            + "    log(t.reportValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t'>content</textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A required, empty textarea is genuinely invalid (valueMissing)
+     * when editable, but must report checkValidity() true if ALSO disabled.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void requiredEmptyDisabledTextarea_checkValidityTrue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var editable = document.getElementById('editable');\n"
+            + "    var disabled = document.getElementById('disabled');\n"
+            + "    log(editable.checkValidity());\n"
+            + "    log(disabled.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='editable' required></textarea>\n"
+            + "    <textarea id='disabled' required disabled></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

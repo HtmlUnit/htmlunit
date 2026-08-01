@@ -1044,7 +1044,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0-1"})
+    @Alerts("0-1")
     public void resetClearsRealFileSelectionWithoutSpuriousChange() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -1083,7 +1083,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0"})
+    @Alerts("0")
     public void resetOnNeverTouchedFileInput_noChangeEventFired() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
