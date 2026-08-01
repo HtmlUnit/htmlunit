@@ -339,7 +339,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "    var file = document.getElementById('testId');\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
-            + "    document.getElementById('testReset').click;\n"
+            + "    document.getElementById('testReset').click();\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    try{\n"
@@ -347,13 +347,13 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "    } catch(e) { logEx(e); }\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
-            + "    document.getElementById('testReset').click;\n"
+            + "    document.getElementById('testReset').click();\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.defaultValue = 'newDefault';\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
-            + "    document.forms[0].reset;\n"
+            + "    document.forms[0].reset();\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
@@ -383,7 +383,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "    var file = document.getElementById('testId');\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
-            + "    document.forms[0].reset;\n"
+            + "    document.forms[0].reset();\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    try{\n"
@@ -391,13 +391,13 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "    } catch(e) { logEx(e); }\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
-            + "    document.forms[0].reset;\n"
+            + "    document.forms[0].reset();\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.defaultValue = 'newDefault';\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
-            + "    document.forms[0].reset;\n"
+            + "    document.forms[0].reset();\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
@@ -896,6 +896,20 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         validation("<input type='file' id='e1' required>\n", "");
     }
 
+    /**
+     * A DISABLED + required file input with no files selected must
+     * still report itself as valid, since disabled fields are barred from
+     * constraint validation entirely.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-false-true",
+             "false"})
+    public void validationRequiredDisabled() throws Exception {
+        validation("<input type='file' id='e1' required disabled>\n", "");
+    }
+
     private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -1020,5 +1034,119 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("f")).sendKeys(dir.getAbsolutePath());
         driver.findElement(By.id("clickMe")).click();
         verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Method reset() must not fire a change event, and must not try to
+     * resurrect a fake File from the 'value' attribute. This uses
+     * a REAL file selection (via sendKeys) so reset() has something genuine to
+     * clear, and counts onchange firings across the whole sequence.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0-1"})
+    public void resetClearsRealFileSelectionWithoutSpuriousChange() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var changeCount = 0;\n"
+            + "</script>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='file' id='f' onchange='changeCount++;'>\n"
+            + "  <input type='reset' id='resetBtn'>\n"
+            + "</form>\n"
+            + "<button id='check' onclick='"
+                    + "log(document.getElementById(\"f\").files.length + \"-\" + changeCount);"
+                    + "'>check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
+        try {
+            driver.findElement(By.id("f")).sendKeys(tmpFile.getAbsolutePath());
+        }
+        finally {
+            assertTrue(tmpFile.delete());
+        }
+
+        driver.findElement(By.id("resetBtn")).click();
+        driver.findElement(By.id("check")).click();
+
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Calling reset() on a file input that was NEVER touched (no real selection made)
+     * must be a true no-op -- specifically must NOT fire a change event, since
+     * nothing actually changed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0"})
+    public void resetOnNeverTouchedFileInput_noChangeEventFired() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    document.getElementById('resetBtn').click();\n"
+            + "    log(document.getElementById('f').files.length);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='file' id='f' onchange='log(\"unexpected change\");'>\n"
+            + "  <input type='reset' id='resetBtn'>\n"
+            + "</form>\n"
+            + "<button id='go' onclick='test()'>go</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("go")).click();
+
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Changing the 'type' attribute of an
+     * input away from 'file' and then back to 'file' should leave it with an
+     * empty value/file selection, not retain a stale selection from before the
+     * type change.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "0"})
+    public void changingTypeAwayFromFileAndBackClearsSelection() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var input = document.getElementById('f');\n"
+            + "    input.type = 'text';\n"
+            + "    input.type = 'file';\n"
+            + "    log(input.value);\n"
+            + "    log(input.files.length);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input type='file' id='f'>\n"
+            + "  <button id='go' onclick='test()'>go</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
+        try {
+            driver.findElement(By.id("f")).sendKeys(tmpFile.getAbsolutePath());
+        }
+        finally {
+            assertTrue(tmpFile.delete());
+        }
+
+        driver.findElement(By.id("go")).click();
+        verifyTitle2(driver, getExpectedAlerts());   // expect "" and "0"
     }
 }

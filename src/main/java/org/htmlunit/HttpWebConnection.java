@@ -467,8 +467,7 @@ public class HttpWebConnection implements WebConnection {
                 filename = pairWithFile.getValue();
             }
 
-            builder.addBinaryBody(pairWithFile.getName(), new ByteArrayInputStream(data),
-                    contentType, filename);
+            builder.addBinaryBody(pairWithFile.getName(), data, contentType, filename);
             return;
         }
 

@@ -15,6 +15,7 @@
 package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -761,5 +762,75 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HtmlFileInput file = page.getHtmlElementById("fileId");
         file.setValue("");
         assertEquals(0, file.getFiles().length);
+    }
+
+    /**
+     * Methods setData()/getData() are pure Java API (not exposed to JS at all, since
+     * real browsers have no equivalent) and are completely untested in this
+     * file. Verifies the getter/setter round-trip and that in-memory data is
+     * actually used during submission instead of reading the file from disk.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void setDataIsUsedInsteadOfFileContentOnSubmit() throws Exception {
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "  <input name='myInput' type='file' id='myInput'><br>\n"
+                + "  <input type='submit' value='Upload' id='mySubmit'>\n"
+                + "</form>\n"
+                + "</body></html>\n";
+        getMockWebConnection().setDefaultResponse("hello", MimeType.TEXT_PLAIN);
+
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlFileInput input = (HtmlFileInput) page.getElementById("myInput");
+
+        final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
+        try {
+            org.apache.commons.io.FileUtils.writeStringToFile(tmpFile, "content on disk", "UTF-8");
+            input.setFiles(tmpFile);
+
+            input.setData("in-memory content".getBytes("UTF-8"));
+            page.getElementById("mySubmit").click();
+        }
+        finally {
+            assertTrue(tmpFile.delete());
+        }
+
+        final String requestBody = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertTrue(requestBody, requestBody.contains("in-memory content"));
+        assertFalse(requestBody, requestBody.contains("content on disk"));
+    }
+
+    /**
+     * Plain Java-level round trip for setData()/getData()/setContentType()/
+     * getContentType().
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void setDataGetDataSetContentTypeRoundTrip() throws Exception {
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><body>\n"
+                + "<form id='form1'>\n"
+                + "  <input type='file' id='f' name='f'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlFileInput input = (HtmlFileInput) page.getElementById("f");
+
+        assertNull(input.getData());
+        assertNull(input.getContentType());
+
+        final byte[] data = "hello".getBytes("UTF-8");
+        input.setData(data);
+        input.setContentType("text/custom");
+
+        assertArrayEquals(data, input.getData());
+        assertEquals("text/custom", input.getContentType());
+
+        input.setContentType(null);
+        assertNull(input.getContentType());
     }
 }

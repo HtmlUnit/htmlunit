@@ -107,19 +107,28 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
         final List<NameValuePair> list = new ArrayList<>();
         for (final File file : files_) {
-            String contentType;
-            if (contentType_ == null) {
-                contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeType(file);
-                if (StringUtils.isEmptyOrNull(contentType)) {
-                    contentType = MimeType.APPLICATION_OCTET_STREAM;
+            final Charset charset = getPage().getCharset();
+
+            final KeyDataPair keyDataPair;
+            if (data_ == null) {
+                String contentType;
+                if (contentType_ == null) {
+                    contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeType(file);
+                    if (StringUtils.isEmptyOrNull(contentType)) {
+                        contentType = MimeType.APPLICATION_OCTET_STREAM;
+                    }
                 }
+                else {
+                    contentType = contentType_;
+                }
+
+                keyDataPair = new KeyDataPair(getNameAttribute(), file, null, contentType, charset);
             }
             else {
-                contentType = contentType_;
+                keyDataPair = new KeyDataPair(getNameAttribute(), null, file.getName(),
+                                                MimeType.APPLICATION_OCTET_STREAM, charset);
+                keyDataPair.setData(data_);
             }
-            final Charset charset = getPage().getCharset();
-            final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, null, contentType, charset);
-            keyDataPair.setData(data_);
             list.add(keyDataPair);
         }
         return list.toArray(new NameValuePair[0]);
@@ -280,11 +289,34 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
     }
 
     /**
+     * {@inheritDoc}
+     * Per spec, the reset algorithm for a file upload control is special-cased:
+     * it simply empties the list of selected files. Unlike other input types,
+     * there is no "restore to the value attribute" step at all -- a browser can
+     * never resurrect a specific file selection from markup, for the same
+     * security reason the 'value' attribute is unsettable and fake-pathed in
+     * the first place. Deliberately does NOT call super.reset() (which would
+     * try to reconstruct a fake File from the 'value' attribute via setValue())
+     * and deliberately does NOT fire a change event, matching the same
+     * "reset fires a reset event, not a change event" principle already applied
+     * to HtmlInput/HtmlTextArea.
+     * @see SubmittableElement#reset()
+     */
+    @Override
+    public void reset() {
+        files_ = new File[0];
+    }
+
+    /**
      * Returns whether this element satisfies all form validation constraints set.
      * @return whether this element satisfies all form validation constraints set
      */
     @Override
     public boolean isValid() {
+        if (isDisabled()) {
+            return true;
+        }
+
         return isCustomValidityValid()
                 && (!isRequiredSupported()
                         || ATTRIBUTE_NOT_DEFINED == getAttributeDirect("required")
