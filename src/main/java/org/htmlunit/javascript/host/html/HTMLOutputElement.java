@@ -100,7 +100,8 @@ public class HTMLOutputElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        return getDomNodeOrDie().isValid();
+        final HtmlOutput output = getDomNodeOrDie();
+        return !output.willValidate() || output.isValid();
     }
 
     /**
@@ -131,7 +132,7 @@ public class HTMLOutputElement extends HTMLElement {
      */
     @JsxGetter
     public boolean isWillValidate() {
-        return ((HtmlOutput) getDomNodeOrDie()).willValidate();
+        return getDomNodeOrDie().willValidate();
     }
 
     /**
@@ -140,6 +141,14 @@ public class HTMLOutputElement extends HTMLElement {
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        ((HtmlOutput) getDomNodeOrDie()).setCustomValidity(message);
+        getDomNodeOrDie().setCustomValidity(message);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HtmlOutput getDomNodeOrDie() {
+        return (HtmlOutput) super.getDomNodeOrDie();
     }
 }

@@ -94,4 +94,160 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void setCustomValidityOnPlainOutput() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var o = document.getElementById('o');\n"
+                + "      log(o.willValidate);\n"
+                + "      o.setCustomValidity('some error');\n"
+                + "      log(o.validity.customError);\n"
+                + "      log(o.validity.valid);\n"
+                + "      log(o.checkValidity());\n"
+                // + "      log(o.validationMessage);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='o'></output>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true", "true"})
+    public void checkValidityMirrorsWillValidateAcrossAllCases() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').checkValidity());\n"
+                + "      log(document.getElementById('i2').checkValidity());\n"
+                + "      log(document.getElementById('i3').checkValidity());\n"
+                + "      log(document.getElementById('i4').checkValidity());\n"
+                + "      log(document.getElementById('i5').checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='i1'>button</output>"
+                + "    <output id='i2' disabled></output>"
+                + "    <output id='i3' hidden></output>"
+                + "    <output id='i4' readonly></output>"
+                + "    <output id='i5' style='display: none'></output>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The reportValidity() coverage, entirely absent currently -- confirms it
+     * returns the same boolean as checkValidity() for a plain output with a
+     * custom validity message set.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void reportValidityMatchesCheckValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var o = document.getElementById('o');\n"
+                + "      o.setCustomValidity('some error');\n"
+                + "      log(o.checkValidity());\n"
+                + "      log(o.reportValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='o'></output>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Clearing a previously-set custom validity message (empty string) must be
+     * reversible -- checked via .validity.customError and .validity.valid
+     * regardless of which way the plain-output ambiguity above resolves.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true"})
+    public void clearCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var o = document.getElementById('o');\n"
+                + "      o.setCustomValidity('some error');\n"
+                + "      log(o.validity.customError);\n"
+                + "      o.setCustomValidity('');\n"
+                + "      log(o.validity.customError);\n"
+                + "      log(o.validity.valid);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='o'></output>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An output that IS a descendant of a disabled fieldset. Since
+     * willValidate() already reports false uniformly for output regardless of
+     * its OWN attributes, this checks whether fieldset-ancestor disabling is
+     * even independently observable for output at all, or whether it's just
+     * redundant with the element's own always-false state.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void outputInsideDisabledFieldset() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var o = document.getElementById('o');\n"
+                + "      log(o.willValidate);\n"
+                + "      o.setCustomValidity('some error');\n"
+                + "      log(o.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <fieldset disabled><output id='o'></output></fieldset>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
