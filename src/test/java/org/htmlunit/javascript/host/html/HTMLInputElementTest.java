@@ -3549,9 +3549,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 //
 //        loadPageVerifyTitle2(html);
 //    }
-
     /**
-     * reportValidity() is untested anywhere in this file -- basic coverage that
+     * The reportValidity() is untested anywhere in this file -- basic coverage that
      * it returns the same boolean as checkValidity() for an input with a custom
      * validity message set.
      * @throws Exception if the test fails

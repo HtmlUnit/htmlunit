@@ -211,7 +211,7 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
-//
+
 //    /**
 //     * The validationMessage must always be empty on an &lt;object&gt;, even with a
 //     * custom validity message set and even when additionally barred via an

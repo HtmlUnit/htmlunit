@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -191,7 +193,22 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
      */
     @Override
     public boolean willValidate() {
-        return false;
+        if (hasFeature(HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY)) {
+            return false;
+        }
+        return super.willValidate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isCustomValidityValid() {
+        if (hasFeature(HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY)) {
+            return true;
+        }
+
+        return super.isCustomValidityValid();
     }
 
     /**

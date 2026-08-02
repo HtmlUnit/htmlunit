@@ -14,13 +14,11 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
 import static org.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 
 import java.net.MalformedURLException;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -865,16 +863,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     protected boolean isCustomValidityValid() {
-        if (isCustomErrorValidityState()) {
-            final String type = getAttributeDirect(TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
-            if (!"button".equals(type)
-                    && !"hidden".equals(type)
-                    && !"reset".equals(type)
-                    && !("image".equals(type) && hasFeature(HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY))) {
-                return false;
-            }
-        }
-        return true;
+        return !isCustomErrorValidityState();
     }
 
     @Override

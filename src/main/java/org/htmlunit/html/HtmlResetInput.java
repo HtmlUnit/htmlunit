@@ -106,4 +106,12 @@ public class HtmlResetInput extends HtmlInput implements LabelableElement {
     public boolean willValidate() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isCustomValidityValid() {
+        return true;
+    }
 }

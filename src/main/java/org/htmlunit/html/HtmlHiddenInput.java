@@ -89,4 +89,12 @@ public class HtmlHiddenInput extends HtmlInput {
     public boolean willValidate() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isCustomValidityValid() {
+        return true;
+    }
 }
