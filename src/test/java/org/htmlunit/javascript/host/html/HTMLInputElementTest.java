@@ -3298,4 +3298,316 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], originalValue);
         assertEquals(getExpectedAlerts()[1], cloneValue);
     }
+
+    /**
+     * An editable text input with a custom validity message must
+     * report checkValidity() false.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false"})
+    public void setCustomValidityOnEditableInput_isInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.setCustomValidity('some error');\n"
+            + "    log(i.willValidate);\n"
+            + "    log(i.validity.customError);\n"
+            + "    log(i.validity.valid);\n"
+            + "    log(i.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A DISABLED input with a custom validity message must still
+     * report checkValidity() true -- disabled bars it from constraint
+     * validation entirely, so the custom error must not surface through
+     * checkValidity(), even though willValidate is already known to be false
+     * for this case.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void setCustomValidityOnDisabledInput_notInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.setCustomValidity('some error');\n"
+            + "    log(i.willValidate);\n"
+            + "    log(i.validity.customError);\n"
+            + "    log(i.validity.valid);\n"
+            + "    log(i.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' disabled>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same as above but for READONLY instead of disabled -- readonly
+     * also bars a text-type input from constraint validation per spec.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void setCustomValidityOnReadonlyInput_notInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.setCustomValidity('some error');\n"
+            + "    log(i.willValidate);\n"
+            + "    log(i.validity.customError);\n"
+            + "    log(i.validity.valid);\n"
+            + "    log(i.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' readonly>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same as above but for type='hidden' -- a hidden-type input is
+     * barred from constraint validation via a THIRD, distinct mechanism (its
+     * own type state), not disabled or readonly. willValidateHidden() already
+     * confirms willValidate is false for this type; this confirms
+     * checkValidity() is consistent with that, given the routing bug found
+     * elsewhere was specifically about checkValidity() not always consulting
+     * willValidate() even when willValidate() itself was correct.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void setCustomValidityOnHiddenInput_notInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.setCustomValidity('some error');\n"
+            + "    log(i.willValidate);\n"
+            + "    log(i.validity.customError);\n"
+            + "    log(i.validity.valid);\n"
+            + "    log(i.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='hidden'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A required, empty text input is genuinely invalid (valueMissing)
+     * when editable, but must report checkValidity() true if ALSO disabled --
+     * confirms the disabled-barring check takes priority over an actual
+     * constraint violation, not just over a custom validity message.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void requiredEmptyDisabledInput_checkValidityTrue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var editable = document.getElementById('editable');\n"
+            + "    var disabled = document.getElementById('disabled');\n"
+            + "    log(editable.checkValidity());\n"
+            + "    log(disabled.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='editable' type='text' required>\n"
+            + "    <input id='disabled' type='text' required disabled>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same as above, but for readonly instead of disabled.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void requiredEmptyReadonlyInput_checkValidityTrue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var editable = document.getElementById('editable');\n"
+            + "    var readonly = document.getElementById('readonly');\n"
+            + "    log(editable.checkValidity());\n"
+            + "    log(readonly.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='editable' type='text' required>\n"
+            + "    <input id='readonly' type='text' required readonly>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Clearing a previously-set custom validity message (empty string) must
+     * restore validity for an editable input -- confirms setCustomValidity is
+     * reversible, not just settable.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "true"})
+    public void clearCustomValidity_restoresValid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.setCustomValidity('some error');\n"
+            + "    log(i.validity.valid);\n"
+            + "    i.setCustomValidity('');\n"
+            + "    log(i.validity.customError);\n"
+            + "    log(i.validity.valid);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+//    /**
+//     * The validationMessage should reflect the custom validity message for a
+//     * validation-participating (editable) input, and should be empty for a
+//     * barred-from-validation (disabled) one, regardless of a custom message
+//     * being set.
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts({"editable error", ""})
+//    public void validationMessageReflectsCustomValidityWhereApplicable() throws Exception {
+//        final String html = DOCTYPE_HTML
+//            + "<html><head>\n"
+//            + "<script>\n"
+//            + LOG_TITLE_FUNCTION
+//            + "  function test() {\n"
+//            + "    var editable = document.getElementById('editable');\n"
+//            + "    var disabled = document.getElementById('disabled');\n"
+//            + "    editable.setCustomValidity('editable error');\n"
+//            + "    disabled.setCustomValidity('disabled error');\n"
+//            + "    log(editable.validationMessage);\n"
+//            + "    log(disabled.validationMessage);\n"
+//            + "  }\n"
+//            + "</script></head>\n"
+//            + "<body onload='test()'>\n"
+//            + "  <form>\n"
+//            + "    <input id='editable' type='text'>\n"
+//            + "    <input id='disabled' type='text' disabled>\n"
+//            + "  </form>\n"
+//            + "</body></html>";
+//
+//        loadPageVerifyTitle2(html);
+//    }
+
+    /**
+     * reportValidity() is untested anywhere in this file -- basic coverage that
+     * it returns the same boolean as checkValidity() for an input with a custom
+     * validity message set.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void reportValidityMatchesCheckValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.setCustomValidity('some error');\n"
+            + "    log(i.checkValidity());\n"
+            + "    log(i.reportValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Basic .validity object coverage independent of setCustomValidity() --
+     * only the bare checkValidity() boolean is tested anywhere currently; this
+     * confirms .validity.valueMissing and .validity.valid reflect a genuine
+     * (non-custom) constraint violation correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false", "false", "true"})
+    public void validityValueMissingForRequiredEmptyInput() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validity.valueMissing);\n"
+            + "    log(i.validity.valid);\n"
+            + "    i.value = 'something';\n"
+            + "    log(i.validity.valueMissing);\n"
+            + "    log(i.validity.valid);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
