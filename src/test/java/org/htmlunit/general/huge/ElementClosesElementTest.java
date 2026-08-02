@@ -75,6 +75,18 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     public static Collection<Arguments> data() throws Exception {
         final List<Arguments> list = new ArrayList<>();
         final List<String> strings = new ArrayList<>(DefaultElementFactory.SUPPORTED_TAGS_);
+
+        // no longer supported but we still like to test this
+        strings.add("blink");
+        strings.add("ilayer");
+        strings.add("layer");
+        strings.add("multicol");
+        strings.add("nextid");
+        strings.add("nolayer");
+        strings.add("sound");
+        strings.add("spacer");
+        strings.add("xml");
+
         strings.add("unknown");
 
         for (final String parent : strings) {
