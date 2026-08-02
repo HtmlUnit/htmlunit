@@ -756,6 +756,9 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         return !StringUtils.isEmptyOrNull(customValidity_);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isValidValidityState() {
         return !isCustomErrorValidityState()
@@ -767,7 +770,25 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isValueMissingValidityState() {
-        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
-                && getSelectedOptions().isEmpty();
+        if (ATTRIBUTE_NOT_DEFINED == getAttributeDirect(ATTRIBUTE_REQUIRED)) {
+            return false;
+        }
+
+        final List<HtmlOption> selected = getSelectedOptions();
+        if (selected.isEmpty()) {
+            return true;
+        }
+
+        // per spec, this only applies to single-selection selects; a multi-select
+        // or size>1 select with at least one option selected is never "missing"
+        if (!isMultipleSelectEnabled() && getSize() <= 1) {
+            final List<HtmlOption> options = getOptions();
+            return !options.isEmpty()
+                    && selected.size() == 1
+                    && selected.get(0) == options.get(0)
+                    && selected.get(0).getValueAttribute().isEmpty();
+        }
+
+        return false;
     }
 }

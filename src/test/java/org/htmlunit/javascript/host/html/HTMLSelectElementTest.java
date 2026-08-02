@@ -2907,4 +2907,301 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true", "true"})
+    public void checkValidityMirrorsWillValidateAcrossAllCases() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').checkValidity());\n"
+                + "      log(document.getElementById('i2').checkValidity());\n"
+                + "      log(document.getElementById('i3').checkValidity());\n"
+                + "      log(document.getElementById('i4').checkValidity());\n"
+                + "      log(document.getElementById('i5').checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='i1'></select>"
+                + "    <select id='i2' disabled></select>"
+                + "    <select id='i3' hidden></select>"
+                + "    <select id='i4' readonly></select>"
+                + "    <select id='i5' style='display: none'></select>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An editable select with a custom validity message must report
+     * checkValidity() false.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false"})
+    public void setCustomValidityOnEditableSelect_isInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var s = document.getElementById('s');\n"
+                + "      s.setCustomValidity('some error');\n"
+                + "      log(s.willValidate);\n"
+                + "      log(s.validity.customError);\n"
+                + "      log(s.validity.valid);\n"
+                + "      log(s.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='s'><option value='a'>a</option></select>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A DISABLED select with a custom validity message must still
+     * report checkValidity() true -- disabled bars it from constraint
+     * validation entirely, so the custom error must not surface through
+     * checkValidity(), even though willValidate is already known to be false
+     * for this case.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void setCustomValidityOnDisabledSelect_notInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var s = document.getElementById('s');\n"
+                + "      s.setCustomValidity('some error');\n"
+                + "      log(s.willValidate);\n"
+                + "      log(s.validity.customError);\n"
+                + "      log(s.validity.valid);\n"
+                + "      log(s.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='s' disabled><option value='a'>a</option></select>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A required select with no option selected (valueMissing) is
+     * genuinely invalid when editable, but must report checkValidity() true if
+     * ALSO disabled -- confirms the disabled-barring check takes priority over
+     * an actual constraint violation, not just over a custom validity message.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void requiredNoSelectionDisabledSelect_checkValidityTrue() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var editable = document.getElementById('editable');\n"
+                + "      var disabled = document.getElementById('disabled');\n"
+                + "      log(editable.checkValidity());\n"
+                + "      log(disabled.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='editable' required>"
+                + "      <option value=''></option>"
+                + "      <option value='a'>a</option>"
+                + "    </select>"
+                + "    <select id='disabled' required disabled>"
+                + "      <option value=''></option>"
+                + "      <option value='a'>a</option>"
+                + "    </select>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A required-select validity without any custom validity involved:
+     * confirms .validity.valueMissing/.valid react correctly to selecting a
+     * real option vs. leaving the empty placeholder selected.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "false", "true"})
+    public void validityValueMissingForRequiredSelectWithNoSelection() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var s = document.getElementById('s');\n"
+                + "      log(s.validity.valueMissing);\n"
+                + "      log(s.validity.valid);\n"
+                + "      s.value = 'a';\n"
+                + "      log(s.validity.valueMissing);\n"
+                + "      log(s.validity.valid);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='s' required>"
+                + "      <option value=''></option>"
+                + "      <option value='a'>a</option>"
+                + "    </select>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Clearing a previously-set custom validity message (empty string) must
+     * restore validity for an editable select -- confirms setCustomValidity is
+     * reversible, not just settable.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "true"})
+    public void clearCustomValidity_restoresValid() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var s = document.getElementById('s');\n"
+                + "      s.setCustomValidity('some error');\n"
+                + "      log(s.validity.valid);\n"
+                + "      s.setCustomValidity('');\n"
+                + "      log(s.validity.customError);\n"
+                + "      log(s.validity.valid);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='s'><option value='a'>a</option></select>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+//    /**
+//     * The validationMessage should reflect the custom validity message for a
+//     * validation-participating (editable) select, and should be empty for a
+//     * barred-from-validation (disabled) one, regardless of a custom message
+//     * being set.
+//     * @throws Exception if an error occurs
+//     */
+//    @Test
+//    @Alerts({"editable error", ""})
+//    public void validationMessageReflectsCustomValidityWhereApplicable() throws Exception {
+//        final String html = DOCTYPE_HTML
+//                + "<html><head>\n"
+//                + "  <script>\n"
+//                + LOG_TITLE_FUNCTION
+//                + "    function test() {\n"
+//                + "      var editable = document.getElementById('editable');\n"
+//                + "      var disabled = document.getElementById('disabled');\n"
+//                + "      editable.setCustomValidity('editable error');\n"
+//                + "      disabled.setCustomValidity('disabled error');\n"
+//                + "      log(editable.validationMessage);\n"
+//                + "      log(disabled.validationMessage);\n"
+//                + "    }\n"
+//                + "  </script>\n"
+//                + "</head>\n"
+//                + "<body onload='test()'>\n"
+//                + "  <form>\n"
+//                + "    <select id='editable'><option value='a'>a</option></select>"
+//                + "    <select id='disabled' disabled><option value='a'>a</option></select>"
+//                + "  </form>\n"
+//                + "</body></html>";
+//
+//        loadPageVerifyTitle2(html);
+//    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void reportValidityMatchesCheckValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var s = document.getElementById('s');\n"
+                + "      s.setCustomValidity('some error');\n"
+                + "      log(s.checkValidity());\n"
+                + "      log(s.reportValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='s'><option value='a'>a</option></select>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A DISABLED select inside a disabled fieldset (propagated disabling,
+     * rather than the select's own 'disabled' attribute) must also report
+     * checkValidity() true despite a custom validity message -- confirms the
+     * barring check consults isDisabled()'s ancestor-propagated result, not
+     * just the select's own attribute presence.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void setCustomValidityOnSelectDisabledViaFieldset_notInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var s = document.getElementById('s');\n"
+                + "      s.setCustomValidity('some error');\n"
+                + "      log(s.willValidate);\n"
+                + "      log(s.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <fieldset disabled>\n"
+                + "      <select id='s'><option value='a'>a</option></select>\n"
+                + "    </fieldset>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -400,7 +400,8 @@ public class HTMLSelectElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        return getDomNodeOrDie().isValid();
+        final HtmlSelect input = getDomNodeOrDie();
+        return !input.willValidate() || input.isValid();
     }
 
     /**
