@@ -1865,10 +1865,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts("checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,willValidate")
-    @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,name,reportValidity(),setCustomValidity(),validity,willValidate",
-            EDGE = "checkValidity(),disabled,form,name,reportValidity(),setCustomValidity(),validity,willValidate",
-            FF_ESR = "checkValidity(),disabled,form,name,reportValidity(),setCustomValidity(),validity,willValidate",
-            FF = "checkValidity(),disabled,form,name,reportValidity(),setCustomValidity(),validity,willValidate")
+    @HtmlUnitNYI(
+            CHROME = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),"
+                    + "type,validity,willValidate",
+            EDGE = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),"
+                    + "type,validity,willValidate",
+            FF_ESR = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),"
+                    + "type,validity,willValidate",
+            FF = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),"
+                    + "type,validity,willValidate")
     public void fieldset() throws Exception {
         test("fieldset");
     }

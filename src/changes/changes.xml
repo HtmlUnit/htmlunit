@@ -8,6 +8,16 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="add" dev="rbri">
+                Property HTMLFieldSetElement.type added.
+            </action>
+            <action type="add" dev="rbri">
+                Method HTMLFieldSetElement.elements() added.
+            </action>
+            <action type="fix" dev="rbri">
+                Fixed DisabledElement.isDisabled(): a disabled fieldset no longer disables descendants of its
+                first legend element, matching the spec's exemption for controls placed inside a fieldset's legend.
+            </action>
             <action type="fix" dev="rbri">
                 Fixed checkValidity()/reportValidity() and the CSS :valid/:invalid pseudo-classes
                 for HtmlButtons, HtmlTextarea.
@@ -17,8 +27,8 @@
                 'value' attribute; it now simply clears the selected files, without firing a change event.
             </action>
             <action type="fix" dev="rbri">
-                 HtmlFileInput.isValid(): a disabled file input is no longer incorrectly reported as invalid
-                 by checkValidity() when 'required' is set and no file is selected
+                HtmlFileInput.isValid(): a disabled file input is no longer incorrectly reported as invalid
+                by checkValidity() when 'required' is set and no file is selected
             </action>
             <action type="add" dev="rbri">
                 Method reportValidity() support to various form controls added.

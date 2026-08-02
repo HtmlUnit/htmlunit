@@ -5528,14 +5528,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "checkValidity(),constructor(),disabled[GSCE],elements[GCE],form[GCE],name[GSCE],reportValidity(),"
                 + "setCustomValidity(),type[GCE],validationMessage[GCE],validity[GCE],"
                 + "willValidate[GCE]")
-    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
-                + "reportValidity(),setCustomValidity(),validity[GCE],willValidate[GCE]",
-            EDGE = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
-                + "reportValidity(),setCustomValidity(),validity[GCE],willValidate[GCE]",
-            FF_ESR = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
-                + "reportValidity(),setCustomValidity(),validity[GCE],willValidate[GCE]",
-            FF = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
-                + "reportValidity(),setCustomValidity(),validity[GCE],willValidate[GCE]")
+    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled[GSCE],elements[GCE],form[GCE],name[GSCE],"
+                + "reportValidity(),setCustomValidity(),type[GCE],validity[GCE],willValidate[GCE]",
+            EDGE = "checkValidity(),constructor(),disabled[GSCE],elements[GCE],form[GCE],name[GSCE],"
+                + "reportValidity(),setCustomValidity(),type[GCE],validity[GCE],willValidate[GCE]",
+            FF_ESR = "checkValidity(),constructor(),disabled[GSCE],elements[GCE],form[GCE],name[GSCE],"
+                + "reportValidity(),setCustomValidity(),type[GCE],validity[GCE],willValidate[GCE]",
+            FF = "checkValidity(),constructor(),disabled[GSCE],elements[GCE],form[GCE],name[GSCE],"
+                + "reportValidity(),setCustomValidity(),type[GCE],validity[GCE],willValidate[GCE]")
     public void fieldset() throws Exception {
         test("fieldset");
     }

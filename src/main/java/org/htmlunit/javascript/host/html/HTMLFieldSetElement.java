@@ -14,9 +14,19 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import java.io.Serializable;
+import java.util.function.Predicate;
+
 import org.htmlunit.html.DomElement;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlFieldSet;
 import org.htmlunit.html.HtmlForm;
+import org.htmlunit.html.HtmlInput;
+import org.htmlunit.html.HtmlObject;
+import org.htmlunit.html.HtmlOutput;
+import org.htmlunit.html.HtmlSelect;
+import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -79,12 +89,30 @@ public class HTMLFieldSetElement extends HTMLElement {
     }
 
     /**
+     * Returns the {@code type} property; always "fieldset".
+     * @return the {@code type} property
+     */
+    @JsxGetter
+    public String getType() {
+        return "fieldset";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HtmlFieldSet getDomNodeOrDie() {
+        return (HtmlFieldSet) super.getDomNodeOrDie();
+    }
+
+    /**
      * Checks whether the element has any constraints and whether it satisfies them.
      * @return {@code true} if the element is valid
      */
     @JsxFunction
     public boolean checkValidity() {
-        return getDomNodeOrDie().isValid();
+        final HtmlFieldSet fieldSet = getDomNodeOrDie();
+        return !fieldSet.willValidate() || fieldSet.isValid();
     }
 
     /**
@@ -133,7 +161,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      */
     @JsxGetter
     public boolean isWillValidate() {
-        return ((HtmlFieldSet) getDomNodeOrDie()).willValidate();
+        return getDomNodeOrDie().willValidate();
     }
 
     /**
@@ -142,6 +170,51 @@ public class HTMLFieldSetElement extends HTMLElement {
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        ((HtmlFieldSet) getDomNodeOrDie()).setCustomValidity(message);
+        getDomNodeOrDie().setCustomValidity(message);
+    }
+
+    /**
+     * Returns the fieldset's associated form controls -- listed elements whose
+     * closest fieldset element ancestor is this fieldset.
+     * <p>
+     * Per spec, this is purely a tree-position question: it does not consult
+     * the 'form' attribute or form ownership at all (a control physically
+     * inside this fieldset is included even if 'form' points elsewhere), and a
+     * nested inner &lt;fieldset&gt;'s own descendants are excluded here even
+     * though they're still tree-descendants of this fieldset -- only the inner
+     * fieldset ELEMENT itself counts, since it is the listed element whose
+     * closest fieldset ancestor is this one.
+     * </p>
+     *
+     * @return the fieldset's associated form controls
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement/elements">MDN Documentation</a>
+     */
+    @JsxGetter
+    public HTMLCollection getElements() {
+        final DomElement elt = getDomNodeOrDie();
+
+        final HTMLCollection elements = new HTMLCollection(elt, true);
+
+        elements.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> isListedElement(node));
+
+        return elements;
+    }
+
+    /**
+     * Checks whether {@code node} belongs to the HTML "listed" category of
+     * form-associated elements (button, fieldset, input except type=image,
+     * object, output, select, textarea).
+     *
+     * @param node the node to check
+     * @return {@code true} if {@code node} is a listed element
+     */
+    private static boolean isListedElement(final DomNode node) {
+        return node instanceof HtmlInput
+                || node instanceof HtmlButton
+                || node instanceof HtmlFieldSet
+                || node instanceof HtmlObject
+                || node instanceof HtmlOutput
+                || node instanceof HtmlSelect
+                || node instanceof HtmlTextArea;
     }
 }
