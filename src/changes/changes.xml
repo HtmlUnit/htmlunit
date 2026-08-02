@@ -23,7 +23,7 @@
             </action>
             <action type="fix" dev="rbri">
                 Fixed checkValidity()/reportValidity() and the CSS :valid/:invalid pseudo-classes
-                for HtmlButtons, HtmlTextarea, HtmlInput's.
+                for HtmlButtons, HtmlTextarea, HtmlInput's, HtmlObject.
             </action>
             <action type="fix" dev="rbri">
                 HtmlFileInput.reset(): a form reset no longer tries to reconstruct a fake File from the

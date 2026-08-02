@@ -173,7 +173,8 @@ public class HTMLObjectElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        return getDomNodeOrDie().isValid();
+        final HtmlObject object = getDomNodeOrDie();
+        return !object.willValidate() || object.isValid();
     }
 
     /**
@@ -204,7 +205,7 @@ public class HTMLObjectElement extends HTMLElement {
      */
     @JsxGetter
     public boolean isWillValidate() {
-        return ((HtmlObject) getDomNodeOrDie()).willValidate();
+        return getDomNodeOrDie().willValidate();
     }
 
     /**
@@ -213,6 +214,14 @@ public class HTMLObjectElement extends HTMLElement {
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        ((HtmlObject) getDomNodeOrDie()).setCustomValidity(message);
+        getDomNodeOrDie().setCustomValidity(message);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HtmlObject getDomNodeOrDie() {
+        return (HtmlObject) super.getDomNodeOrDie();
     }
 }

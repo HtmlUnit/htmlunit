@@ -81,4 +81,167 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * Method willValidate must always be false
+     * for an &lt;object&gt;, regardless of hidden/style/disabled-ancestor
+     * state.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false"})
+    public void willValidateAlwaysFalse() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').willValidate);\n"
+                + "      log(document.getElementById('i2').willValidate);\n"
+                + "      log(document.getElementById('i3').willValidate);\n"
+                + "      log(document.getElementById('i4').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='i1'></object>"
+                + "    <object id='i2' hidden></object>"
+                + "    <object id='i3' style='display: none'></object>"
+                + "    <fieldset disabled><object id='i4'></object></fieldset>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The checkValidity() must always return true on an &lt;object&gt;, regardless
+     * of hidden/style/disabled-ancestor state.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true"})
+    public void checkValidityAlwaysTrue() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').checkValidity());\n"
+                + "      log(document.getElementById('i2').checkValidity());\n"
+                + "      log(document.getElementById('i3').checkValidity());\n"
+                + "      log(document.getElementById('i4').checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='i1'></object>"
+                + "    <object id='i2' hidden></object>"
+                + "    <object id='i3' style='display: none'></object>"
+                + "    <fieldset disabled><object id='i4'></object></fieldset>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The reportValidity() must always return true on an &lt;object&gt;, mirroring
+     * checkValidity().
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true"})
+    public void reportValidityAlwaysTrue() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').reportValidity());\n"
+                + "      log(document.getElementById('i2').reportValidity());\n"
+                + "      log(document.getElementById('i3').reportValidity());\n"
+                + "      log(document.getElementById('i4').reportValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='i1'></object>"
+                + "    <object id='i2' hidden></object>"
+                + "    <object id='i3' style='display: none'></object>"
+                + "    <fieldset disabled><object id='i4'></object></fieldset>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Since an &lt;object&gt; is never itself a candidate for
+     * constraint validation, a custom validity message set on it must have NO
+     * effect on checkValidity() -- must still report true, and
+     * .validity.valid must still be true.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "true"})
+    public void setCustomValidityDoesNotAffectCheckValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var o = document.getElementById('o');\n"
+                + "      o.setCustomValidity('some error');\n"
+                + "      log(o.willValidate);\n"
+                + "      log(o.validity.valid);\n"
+                + "      log(o.checkValidity());\n"
+                // + "      log(o.validationMessage);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='o'></object>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+//
+//    /**
+//     * The validationMessage must always be empty on an &lt;object&gt;, even with a
+//     * custom validity message set and even when additionally barred via an
+//     * ancestor disabled fieldset.
+//     * @throws Exception if an error occurs
+//     */
+//    @Test
+//    @Alerts({"", ""})
+//    public void validationMessageAlwaysEmpty() throws Exception {
+//        final String html = DOCTYPE_HTML
+//                + "<html><head>\n"
+//                + "  <script>\n"
+//                + LOG_TITLE_FUNCTION
+//                + "    function test() {\n"
+//                + "      var plain = document.getElementById('plain');\n"
+//                + "      var inFieldset = document.getElementById('inFieldset');\n"
+//                + "      plain.setCustomValidity('error1');\n"
+//                + "      inFieldset.setCustomValidity('error2');\n"
+//                + "      log(plain.validationMessage);\n"
+//                + "      log(inFieldset.validationMessage);\n"
+//                + "    }\n"
+//                + "  </script>\n"
+//                + "</head>\n"
+//                + "<body onload='test()'>\n"
+//                + "  <form>\n"
+//                + "    <object id='plain'></object>"
+//                + "    <fieldset disabled><object id='inFieldset'></object></fieldset>"
+//                + "  </form>\n"
+//                + "</body></html>";
+//
+//        loadPageVerifyTitle2(html);
+//    }
 }
