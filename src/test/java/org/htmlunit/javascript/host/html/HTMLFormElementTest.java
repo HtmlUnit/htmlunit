@@ -3645,4 +3645,330 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * A control with a CUSTOM validity message (not a built-in constraint like
+     * required) must also block submission.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first")
+    public void submitBlockedByCustomValidityOnAnyControl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head><title>first</title>\n"
+            + "<script>\n"
+            + "  function markInvalid() {\n"
+            + "    document.getElementsByName('test')[0].setCustomValidity('custom error');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='markInvalid()'>\n"
+            + "  <form name='testForm' action='" + URL_SECOND + "'>\n"
+            + "    <input type='submit' id='submit'>\n"
+            + "    <input name='test' value='anything'>"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2 = "<?xml version='1.0'?>\n"
+            + "<html>\n"
+            + "<head><title>second</title></head>\n"
+            + "<body>OK</body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("submit")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
+
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
+    /**
+     * A DISABLED, required, empty field must NOT block submission.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    @HtmlUnitNYI(CHROME = "first",
+            EDGE = "first",
+            FF = "first",
+            FF_ESR = "first")
+    public void submitNotBlockedByDisabledRequiredEmptyField() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head><title>first</title></head>\n"
+            + "<body>\n"
+            + "  <form name='testForm' action='" + URL_SECOND + "'>\n"
+            + "    <input type='submit' id='submit'>\n"
+            + "    <input name='test' value='' required='required' disabled>"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2 = "<?xml version='1.0'?>\n"
+            + "<html>\n"
+            + "<head><title>second</title></head>\n"
+            + "<body>OK</body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("submit")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
+
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
+    /**
+     * The form.checkValidity() must return false when a required field is empty.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("false")
+    public void formCheckValidityFalseWhenRequiredFieldEmpty() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('f').checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='f'>\n"
+            + "    <input name='test' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The form.checkValidity() must return true when all fields are individually
+     * valid.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void formCheckValidityTrueWhenAllFieldsValid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('f').checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='f'>\n"
+            + "    <input name='test' value='filled' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A disabled, required, empty field must be SKIPPED by
+     * form.checkValidity() (since willValidate is false for it), not counted
+     * as either passing or failing -- so the form is valid overall as long as
+     * every OTHER, non-barred field is valid.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void formCheckValidityIgnoresDisabledFields() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('f').checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='f'>\n"
+            + "    <input name='disabledField' value='' required disabled>\n"
+            + "    <input name='okField' value='filled'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A &lt;button type='button'&gt; with a custom validity message
+     * set must NOT cause form.checkValidity() to fail.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void formCheckValidityIgnoresBarredButtonType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    document.getElementById('btn').setCustomValidity('button error');\n"
+            + "    log(document.getElementById('f').checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='f'>\n"
+            + "    <input name='okField' value='filled'>\n"
+            + "    <button id='btn' type='button'>not a submitter</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The form.reportValidity() must return the same boolean as
+     * form.checkValidity() for the same invalid form.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void formReportValidityMatchesCheckValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var f = document.getElementById('f');\n"
+            + "    log(f.checkValidity());\n"
+            + "    log(f.reportValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='f'>\n"
+            + "    <input name='test' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The form.reportValidity() -- interactive validation -- must focus
+     * the FIRST invalid control it finds when the form is invalid.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("invalid1")
+    @HtmlUnitNYI(CHROME = "",
+            EDGE = "",
+            FF = "",
+            FF_ESR = "")
+    public void formReportValidityFocusesFirstInvalidControl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    document.getElementById('f').reportValidity();\n"
+            + "    log(document.activeElement.id);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='f'>\n"
+            + "    <input id='valid1' value='ok'>\n"
+            + "    <input id='invalid1' value='' required>\n"
+            + "    <input id='invalid2' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Contrast to the above: form.checkValidity() -- static validation -- must
+     * NOT move focus at all, even though the form is invalid.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void formCheckValidityDoesNotMoveFocus() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var before = document.activeElement === document.body;\n"
+            + "    document.getElementById('f').checkValidity();\n"
+            + "    var after = document.activeElement === document.body;\n"
+            + "    log(before);\n"
+            + "    log(after);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='f'>\n"
+            + "    <input id='invalid1' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The form.checkValidity() must fire an 'invalid' event on the failing control.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("invalid fired")
+    public void formCheckValidityFiresInvalidEventOnFailingControl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    document.getElementById('i1').addEventListener('invalid', function() {\n"
+            + "      log('invalid fired');\n"
+            + "    });\n"
+            + "    document.getElementById('f').checkValidity();\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='f'>\n"
+            + "    <input id='i1' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * With MULTIPLE invalid controls, form.checkValidity() must fire
+     * 'invalid' on EACH of them.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"i1 invalid", "i2 invalid", "false"})
+    public void formCheckValidityFiresInvalidEventOnAllFailingControls() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    document.getElementById('i1').addEventListener('invalid', function() {\n"
+            + "      log('i1 invalid');\n"
+            + "    });\n"
+            + "    document.getElementById('i2').addEventListener('invalid', function() {\n"
+            + "      log('i2 invalid');\n"
+            + "    });\n"
+            + "    log(document.getElementById('f').checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='f'>\n"
+            + "    <input id='i1' value='' required>\n"
+            + "    <input id='i2' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

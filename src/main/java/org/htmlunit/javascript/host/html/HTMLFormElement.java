@@ -547,11 +547,26 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
     /**
      * Checks whether the element has any constraints and whether it satisfies them.
-     * @return {@code true} if the element is valid
+     * <p>
+     * NOTE: this deliberately does NOT go through each control's JS peer/host
+     * object -- the org.htmlunit.html (DOM) layer is not permitted to reach
+     * back up into org.htmlunit.javascript.host.*. Instead,
+     * {@link ValidatableHTMLElement#doCheckValidity(HtmlElement)} operates
+     * purely on the Java HtmlElement side, firing the 'invalid' event directly
+     * via the element itself; this still reaches any 'invalid' listeners
+     * attached via addEventListener, since event dispatch doesn't require
+     * going through a specific JS peer to notify listeners.
+     * </p>
+     * @return {@code true} if every one of the form's validatable controls is valid
      */
     @JsxFunction
     public boolean checkValidity() {
-        return getDomNodeOrDie().isValid();
+        boolean allValid = true;
+        for (final HtmlElement element : ((HtmlForm) getDomNodeOrDie()).getFormElements()) {
+            final boolean elementValid = ValidatableHTMLElement.doCheckValidity(element);
+            allValid = allValid && elementValid;
+        }
+        return allValid;
     }
 
     /**
