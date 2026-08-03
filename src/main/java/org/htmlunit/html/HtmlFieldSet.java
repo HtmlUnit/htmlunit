@@ -30,7 +30,7 @@ import org.htmlunit.util.StringUtils;
  * @author Ronald Brill
  * @author Lai Quang Duong
  */
-public class HtmlFieldSet extends HtmlElement implements DisabledElement, ValidatableElement {
+public class HtmlFieldSet extends HtmlElement implements DisabledElement, ValidatableHtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "fieldset";

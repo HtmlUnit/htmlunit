@@ -43,7 +43,7 @@ import org.htmlunit.util.StringUtils;
  * @author Lai Quang Duong
  */
 public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, SelectableTextInput, ValidatableElement {
+                LabelableElement, SelectableTextInput, ValidatableHtmlElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "textarea";
 

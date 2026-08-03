@@ -33,7 +33,7 @@ import org.htmlunit.xml.XmlPage;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlObject extends HtmlElement implements ValidatableElement {
+public class HtmlObject extends HtmlElement implements ValidatableHtmlElement {
 
     private static final Log LOG = LogFactory.getLog(HtmlObject.class);
 

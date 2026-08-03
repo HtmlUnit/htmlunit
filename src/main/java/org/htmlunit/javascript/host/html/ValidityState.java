@@ -15,7 +15,7 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.html.DomNode;
-import org.htmlunit.html.ValidatableElement;
+import org.htmlunit.html.ValidatableHtmlElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -40,8 +40,8 @@ public class ValidityState extends HtmlUnitScriptable {
         // nothing to do
     }
 
-    private ValidatableElement getValidatableElementOrDie() {
-        return (ValidatableElement) getDomNodeOrDie();
+    private ValidatableHtmlElement getValidatableElementOrDie() {
+        return (ValidatableHtmlElement) getDomNodeOrDie();
     }
 
     /**

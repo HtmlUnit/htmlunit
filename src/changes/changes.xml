@@ -8,6 +8,7 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+                INCOMPATIBLE CHANGE: org.htmlunit.html.ValidatableElement renamed to ValidatableHtmlElement.
             <action type="fix" dev="rbri">
                 neko: section no longer closes select.
             </action>

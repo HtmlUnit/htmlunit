@@ -57,7 +57,7 @@ import org.xml.sax.helpers.AttributesImpl;
  * @author Lai Quang Duong
  */
 public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement,
-    ValidatableElement  {
+    ValidatableHtmlElement  {
 
     private static final Log LOG = LogFactory.getLog(HtmlInput.class);
 

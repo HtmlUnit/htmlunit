@@ -41,7 +41,7 @@ import org.htmlunit.util.StringUtils;
  * @author Lai Quang Duong
  */
 public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, ValidatableElement {
+                LabelableElement, ValidatableHtmlElement {
 
     // private static final Log LOG = LogFactory.getLog(HtmlButton.class);
 

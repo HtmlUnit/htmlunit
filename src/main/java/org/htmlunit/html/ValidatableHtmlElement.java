@@ -14,15 +14,18 @@
  */
 package org.htmlunit.html;
 
+import org.htmlunit.javascript.host.html.ValidatableHTMLElement;
+
 /**
- * An element that supports client-side validation using the Constraint Validation API.
+ * An {@link HtmlElement} that supports client-side validation using the Constraint Validation API.
+ * This uses {@link ValidatableHTMLElement}.
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation">
  *      Constraint Validation API</a>
  *
  * @author Ronald Brill
  */
-public interface ValidatableElement {
+public interface ValidatableHtmlElement {
 
     /**
      * Returns whether the element is a candidate for constraint validation.

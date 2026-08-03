@@ -45,7 +45,7 @@ import org.w3c.dom.Node;
  * @author Lai Quang Duong
  */
 public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, ValidatableElement {
+                LabelableElement, ValidatableHtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "select";
