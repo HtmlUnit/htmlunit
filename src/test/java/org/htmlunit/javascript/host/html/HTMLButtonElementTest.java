@@ -872,6 +872,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if an error occurs
      */

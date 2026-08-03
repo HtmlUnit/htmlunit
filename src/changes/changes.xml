@@ -8,13 +8,13 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
-           <action type="fix" dev="rbri">
-               Fixed HTMLFormElement.checkValidity()/reportValidity(): the aggregate check over a form's controls
-               now correctly fires on every failing control.
-           </action>
-           <action type="add" dev="rbri">
-               Fixed checkValidity()/reportValidity(): a failing control now correctly fires a cancelable 'invalid'
-               event (and reportValidity() additionally focuses the first invalid control).
+            <action type="fix" dev="rbri">
+                Fixed HTMLFormElement.checkValidity()/reportValidity(): the aggregate check over a form's controls
+                now correctly fires on every failing control.
+            </action>
+            <action type="add" dev="rbri">
+                Fixed checkValidity()/reportValidity(): a failing control now correctly fires a cancelable 'invalid'
+                event (and reportValidity() additionally focuses the first invalid control).
             </action>
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: org.htmlunit.html.ValidatableElement renamed to ValidatableHtmlElement.
