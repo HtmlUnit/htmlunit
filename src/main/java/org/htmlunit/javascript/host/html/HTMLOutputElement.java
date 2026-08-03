@@ -113,6 +113,16 @@ public class HTMLOutputElement extends HTMLElement {
     }
 
     /**
+     * Returns the message describing why the element's value fails constraint
+     * validation, or "" if it's valid or barred from validation.
+     * @return the validation message
+     */
+    @JsxGetter
+    public String getValidationMessage() {
+        return ValidatableHTMLElement.getValidationMessage(getDomNodeOrDie());
+    }
+
+    /**
      * Returns a {@link ValidityState} object representing the validity states of this element.
      * @return a {@link ValidityState} object representing the validity states of this element
      */

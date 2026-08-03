@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -84,5 +86,38 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
     @Override
     protected boolean isMinMaxLengthSupported() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Per spec, a non-empty value must be a valid absolute URL. An empty value
+     * is never a type mismatch on its own (that's valueMissing's concern, if
+     * 'required' is set). {@link java.net.URI} is used as a practical
+     * approximation of the WHATWG URL Standard parser this codebase doesn't
+     * implement -- it isn't a perfect match for every edge case a real
+     * browser's parser accepts or rejects, but requiring an absolute URI
+     * (a URI with a scheme) captures the core constraint correctly.
+     */
+    @Override
+    public boolean hasTypeMismatchValidityState() {
+        final String value = getValue();
+        if (StringUtils.isEmptyOrNull(value)) {
+            return false;
+        }
+
+        try {
+            return !new URI(value.trim()).isAbsolute();
+        }
+        catch (final URISyntaxException e) {
+            return true;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTypeMismatchMessage() {
+        return "Please enter a URL.";
     }
 }

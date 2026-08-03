@@ -68,20 +68,6 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
         return raw.trim();
     }
 
-    @Override
-    public boolean isValid() {
-        final boolean isValid = super.isValid();
-        if (!isValid) {
-            return false;
-        }
-
-        final String val = getValue();
-        if (StringUtils.isNotBlank(val)) {
-            return DEFAULT_PATTERN.matcher(val).matches();
-        }
-        return true;
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -104,5 +90,29 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
     @Override
     protected boolean isMinMaxLengthSupported() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Per spec, a non-empty value must match the (deliberately simplified,
+     * RFC-5322-approximating) email pattern above. An empty value is never
+     * a type mismatch on its own -- that's valueMissing's concern, if
+     * 'required' is set.
+     */
+    @Override
+    public boolean hasTypeMismatchValidityState() {
+        final String val = getValue();
+        if (StringUtils.isBlank(val)) {
+            return false;
+        }
+        return !DEFAULT_PATTERN.matcher(val).matches();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTypeMismatchMessage() {
+        return "Please enter an email address.";
     }
 }

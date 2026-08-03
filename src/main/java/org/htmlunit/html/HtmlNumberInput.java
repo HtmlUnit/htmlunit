@@ -129,14 +129,14 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
      * {@inheritDoc}
      */
     @Override
-    public boolean isValid() {
-        if (!super.isValid()) {
-            return false;
+    public boolean hasRangeOverflowValidityState() {
+        if (super.hasRangeOverflowValidityState()) {
+            return true;
         }
 
         String rawValue = getRawValue();
         if (org.htmlunit.util.StringUtils.isBlank(rawValue)) {
-            return true;
+            return false;
         }
 
         if (!hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
@@ -145,7 +145,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
         if (!rawValue.isEmpty()) {
             if (org.htmlunit.util.StringUtils.equalsChar('-', rawValue)
                     || org.htmlunit.util.StringUtils.equalsChar('+', rawValue)) {
-                return false;
+                return true;
             }
 
             // if we have no step, the value has to be an integer
@@ -154,12 +154,12 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
                 final int lastPos = val.length() - 1;
                 if (lastPos >= 0 && val.charAt(lastPos) == '.') {
                     if (hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
-                        return false;
+                        return true;
                     }
                     val = val.substring(0, lastPos);
                 }
                 if (!StringUtils.containsOnly(val, VALID_INT_CHARS)) {
-                    return false;
+                    return true;
                 }
             }
 
@@ -168,21 +168,143 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
                 value = new BigDecimal(rawValue);
             }
             catch (final NumberFormatException e) {
-                return false;
+                return true;
+            }
+
+            if (!getMax().isEmpty()) {
+                try {
+                    final BigDecimal max = new BigDecimal(getMax());
+                    if (value.compareTo(max) > 0) {
+                        return true;
+                    }
+                }
+                catch (final NumberFormatException ignored) {
+                    // ignore
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasRangeUnderflowValidityState() {
+        if (super.hasRangeUnderflowValidityState()) {
+            return true;
+        }
+
+        String rawValue = getRawValue();
+        if (org.htmlunit.util.StringUtils.isBlank(rawValue)) {
+            return false;
+        }
+
+        if (!hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
+            rawValue = rawValue.replaceAll("\\s", "");
+        }
+        if (!rawValue.isEmpty()) {
+            if (org.htmlunit.util.StringUtils.equalsChar('-', rawValue)
+                    || org.htmlunit.util.StringUtils.equalsChar('+', rawValue)) {
+                return true;
+            }
+
+            // if we have no step, the value has to be an integer
+            if (getStep().isEmpty()) {
+                String val = rawValue;
+                final int lastPos = val.length() - 1;
+                if (lastPos >= 0 && val.charAt(lastPos) == '.') {
+                    if (hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
+                        return true;
+                    }
+                    val = val.substring(0, lastPos);
+                }
+                if (!StringUtils.containsOnly(val, VALID_INT_CHARS)) {
+                    return true;
+                }
+            }
+
+            final BigDecimal value;
+            try {
+                value = new BigDecimal(rawValue);
+            }
+            catch (final NumberFormatException e) {
+                return true;
             }
 
             if (!getMin().isEmpty()) {
                 try {
                     final BigDecimal min = new BigDecimal(getMin());
                     if (value.compareTo(min) < 0) {
-                        return false;
+                        return true;
+                    }
+                }
+                catch (final NumberFormatException ignored) {
+                    // ignore
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isStepMismatchValidityState() {
+        if (super.isStepMismatchValidityState()) {
+            return true;
+        }
+
+        String rawValue = getRawValue();
+        if (org.htmlunit.util.StringUtils.isBlank(rawValue)) {
+            return false;
+        }
+
+        if (!hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
+            rawValue = rawValue.replaceAll("\\s", "");
+        }
+        if (!rawValue.isEmpty()) {
+            if (org.htmlunit.util.StringUtils.equalsChar('-', rawValue)
+                    || org.htmlunit.util.StringUtils.equalsChar('+', rawValue)) {
+                return true;
+            }
+
+            // if we have no step, the value has to be an integer
+            if (getStep().isEmpty()) {
+                String val = rawValue;
+                final int lastPos = val.length() - 1;
+                if (lastPos >= 0 && val.charAt(lastPos) == '.') {
+                    if (hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
+                        return true;
+                    }
+                    val = val.substring(0, lastPos);
+                }
+                if (!StringUtils.containsOnly(val, VALID_INT_CHARS)) {
+                    return true;
+                }
+            }
+
+            final BigDecimal value;
+            try {
+                value = new BigDecimal(rawValue);
+            }
+            catch (final NumberFormatException e) {
+                return true;
+            }
+
+            if (!getMin().isEmpty()) {
+                try {
+                    final BigDecimal min = new BigDecimal(getMin());
+                    if (value.compareTo(min) < 0) {
+                        return true;
                     }
 
                     if (!getStep().isEmpty()) {
                         try {
                             final BigDecimal step = new BigDecimal(getStep());
                             if (value.subtract(min).abs().remainder(step).doubleValue() > 0.0) {
-                                return false;
+                                return true;
                             }
                         }
                         catch (final NumberFormatException ignored) {
@@ -194,18 +316,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
                     // ignore
                 }
             }
-            if (!getMax().isEmpty()) {
-                try {
-                    final BigDecimal max = new BigDecimal(getMax());
-                    if (value.compareTo(max) > 0) {
-                        return false;
-                    }
-                }
-                catch (final NumberFormatException ignored) {
-                    // ignore
-                }
-            }
         }
-        return true;
+        return false;
     }
 }

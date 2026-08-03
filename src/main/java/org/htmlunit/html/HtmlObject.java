@@ -306,6 +306,14 @@ public class HtmlObject extends HtmlElement implements ValidatableHtmlElement {
      * {@inheritDoc}
      */
     @Override
+    public String getCustomValidity() {
+        return customValidity_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
     }

@@ -2555,8 +2555,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"false", "false", "false", "false", "false"},
             FF = {"true", "false", "true", "false", "true"},
             FF_ESR = {"true", "false", "true", "false", "true"})
-    @HtmlUnitNYI(FF = {"false", "false", "false", "false", "false"},
-            FF_ESR = {"false", "false", "false", "false", "false"})
     public void willValidateImage() throws Exception {
         willValidate("type='image'");
     }
@@ -2974,7 +2972,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"8", "8"})
+    @Alerts(DEFAULT = {"8", "8"},
+            FF = {"1", "2"},
+            FF_ESR = {"1", "2"})
+    @HtmlUnitNYI(FF = {"8", "8"},
+            FF_ESR = {"8", "8"})
     public void resetSetsSelectionStartAndEndConsistently() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -3709,6 +3711,469 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <form>\n"
             + "    <input id='i' type='text' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "Please fill out this field."})
+    public void validationMessage_valueMissing_input() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validity.valueMissing);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "Please select an item in the list."})
+    public void validationMessage_valueMissing_select() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s = document.getElementById('s');\n"
+            + "    log(s.validity.valueMissing);\n"
+            + "    log(s.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <select id='s' required>"
+            + "      <option value=''></option>"
+            + "      <option value='a'>a</option>"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "Please fill out this field."})
+    public void validationMessage_valueMissing_textarea() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.validity.valueMissing);\n"
+            + "    log(t.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <textarea id='t' required></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "Please match the requested format."})
+    public void validationMessage_patternMismatch() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validity.patternMismatch);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='abc' pattern='[0-9]+'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(
+            DEFAULT = "Please match the requested format.",
+            FF = "Please match the requested format: digits only.",
+            FF_ESR = "Please match the requested format: digits only.")
+    @HtmlUnitNYI(FF = "Please match the requested format.",
+            FF_ESR = "Please match the requested format.")
+    public void validationMessage_patternMismatch_withTitle() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='abc' pattern='[0-9]+' title='digits only'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", ""})
+    public void validationMessage_tooLong_input() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.value = '12345';\n"
+            + "    log(i.validity.tooLong);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' maxlength='3'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", ""})
+    public void validationMessage_tooShort_input() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.value = 'ab';\n"
+            + "    log(i.validity.tooShort);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' minlength='5'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(
+            DEFAULT = {"true", "Value must be less than or equal to 10."},
+            FF = {"true", "Please select a value that is no more than 10."},
+            FF_ESR = {"true", "Please select a value that is no more than 10."})
+    @HtmlUnitNYI(
+            CHROME = {"true", "Value must be less than or equal to the maximum."},
+            EDGE = {"true", "Value must be less than or equal to the maximum."},
+            FF = {"true", "Value must be less than or equal to the maximum."},
+            FF_ESR = {"true", "Value must be less than or equal to the maximum."})
+    public void validationMessage_rangeOverflow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validity.rangeOverflow);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='number' value='50' max='10'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(
+            DEFAULT = {"true", "Value must be greater than or equal to 10."},
+            FF = {"true", "Please select a value that is no less than 10."},
+            FF_ESR = {"true", "Please select a value that is no less than 10."})
+    @HtmlUnitNYI(
+            CHROME = {"true", "Value must be greater than or equal to the minimum."},
+            EDGE = {"true", "Value must be greater than or equal to the minimum."},
+            FF = {"true", "Value must be greater than or equal to the minimum."},
+            FF_ESR = {"true", "Value must be greater than or equal to the minimum."})
+    public void validationMessage_rangeUnderflow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validity.rangeUnderflow);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='number' value='1' min='10'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(
+            DEFAULT = {"true", "Please enter a valid value. The two nearest valid values are 2 and 4."},
+            FF = {"true", "Please select a valid value. The two nearest valid values are 2 and 4."},
+            FF_ESR = {"true", "Please select a valid value. The two nearest valid values are 2 and 4."})
+    @HtmlUnitNYI(
+            CHROME = {"true", "Please enter a valid value."},
+            EDGE = {"true", "Please enter a valid value."},
+            FF = {"true", "Please enter a valid value."},
+            FF_ESR = {"true", "Please enter a valid value."})
+    public void validationMessage_stepMismatch() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validity.stepMismatch);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='number' value='3' step='2' min='0'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(
+            DEFAULT = {"true", "Please include an '@' in the email address. 'not-an-email' is missing an '@'."},
+            FF = {"true", "Please enter an email address."},
+            FF_ESR = {"true", "Please enter an email address."})
+    @HtmlUnitNYI(CHROME = {"true", "Please enter an email address."},
+            EDGE = {"true", "Please enter an email address."})
+    public void validationMessage_typeMismatch_email() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validity.typeMismatch);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='email' value='not-an-email'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "Please enter a URL."})
+    public void validationMessage_typeMismatch_url() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validity.typeMismatch);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='url' value='not a url'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "Please enter a valid value, thanks!"})
+    public void validationMessage_customError_exactStringEchoedBack() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.setCustomValidity('Please enter a valid value, thanks!');\n"
+            + "    log(i.validity.customError);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='anything'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true", "Please match the requested format."})
+    public void validationMessage_priority_patternMismatchAlone() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    log(i.validity.valueMissing);\n"
+            + "    log(i.validity.patternMismatch);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='abc' pattern='[0-9]+' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true","true", "custom message wins"})
+    public void validationMessage_priority_customErrorBeatsValueMissing() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.setCustomValidity('custom message wins');\n"
+            + "    log(i.validity.valueMissing);\n"
+            + "    log(i.validity.customError);\n"
+            + "    log(i.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("")
+    public void validationMessage_emptyWhenValid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('i').validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='fine'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("")
+    public void validationMessage_emptyWhenBarredViaDisabled() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('i').validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='' required disabled>\n"
             + "  </form>\n"
             + "</body></html>";
 

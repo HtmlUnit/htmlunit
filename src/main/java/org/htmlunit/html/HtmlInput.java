@@ -859,7 +859,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         return !isValueMissingValidityState()
                 && isCustomValidityValid()
                 && isMaxLengthValid() && isMinLengthValid()
-                && !hasPatternMismatchValidityState();
+                && !hasPatternMismatchValidityState()
+                && !hasTypeMismatchValidityState()
+                && !hasRangeOverflowValidityState()
+                && !hasRangeUnderflowValidityState()
+                && !isStepMismatchValidityState()
+                && !hasBadInputValidityState();
     }
 
     protected boolean isCustomValidityValid() {
@@ -991,6 +996,14 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * {@inheritDoc}
      */
     @Override
+    public String getCustomValidity() {
+        return customValidity_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
     }
@@ -1058,7 +1071,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 && !isValueMissingValidityState()
                 && !isTooLongValidityState()
                 && !isTooShortValidityState()
-                && !hasPatternMismatchValidityState();
+                && !hasPatternMismatchValidityState()
+                && !hasTypeMismatchValidityState()
+                && !hasRangeOverflowValidityState()
+                && !hasRangeUnderflowValidityState()
+                && !isStepMismatchValidityState()
+                && !hasBadInputValidityState();
     }
 
     @Override

@@ -634,6 +634,14 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
+    public String getCustomValidity() {
+        return customValidity_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
     }

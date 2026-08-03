@@ -736,6 +736,14 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
+    public String getCustomValidity() {
+        return customValidity_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
     }
@@ -790,5 +798,13 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         }
 
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValueMissingMessage() {
+        return "Please select an item in the list.";
     }
 }

@@ -61,6 +61,14 @@ public class HtmlFieldSet extends HtmlElement implements DisabledElement, Valida
      * {@inheritDoc}
      */
     @Override
+    public String getCustomValidity() {
+        return customValidity_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
     }

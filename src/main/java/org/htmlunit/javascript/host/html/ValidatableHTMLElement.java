@@ -71,4 +71,17 @@ public interface ValidatableHTMLElement {
         }
         return valid;
     }
+
+    /**
+     * Returns the validation message describing the currently failing
+     * constraint, or "" if valid or barred from validation.
+     * @param elem the {@link HtmlElement} to work on
+     * @return the validation message
+     */
+    static String getValidationMessage(final HtmlElement elem) {
+        if (!(elem instanceof ValidatableHtmlElement valElem)) {
+            return "";
+        }
+        return valElem.getValidationMessage();
+    }
 }

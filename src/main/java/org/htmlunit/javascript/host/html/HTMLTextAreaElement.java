@@ -405,6 +405,16 @@ public class HTMLTextAreaElement extends HTMLElement {
     }
 
     /**
+     * Returns the message describing why the element's value fails constraint
+     * validation, or "" if it's valid or barred from validation.
+     * @return the validation message
+     */
+    @JsxGetter
+    public String getValidationMessage() {
+        return ValidatableHTMLElement.getValidationMessage(getDomNodeOrDie());
+    }
+
+    /**
      * {@inheritDoc}
      */
     @JsxGetter

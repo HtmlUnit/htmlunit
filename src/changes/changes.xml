@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="add" dev="rbri">
+                Implemented the validationMessage property for HtmlButton, HtmlTextArea, HtmlInput, HtmlObject, HtmlOutput, and HtmlSelect.
+            </action>
             <action type="fix" dev="rbri">
                 Fixed HTMLFormElement.checkValidity()/reportValidity(): the aggregate check over a form's controls
                 now correctly fires on every failing control.
@@ -23,10 +26,10 @@
                 neko: section no longer closes select.
             </action>
             <action type="add" dev="rbri">
-                Property HTMLFieldSetElement.type added.
+                Added HTMLFieldSetElement.type property.
             </action>
             <action type="add" dev="rbri">
-                Method HTMLFieldSetElement.elements() added.
+                Property HTMLFieldSetElement.elements added.
             </action>
             <action type="fix" dev="rbri">
                 Fixed DisabledElement.isDisabled(): a disabled fieldset no longer disables descendants of its
@@ -34,7 +37,7 @@
             </action>
             <action type="fix" dev="rbri">
                 Fixed checkValidity()/reportValidity() and the CSS :valid/:invalid pseudo-classes
-                for HtmlButtons, HtmlTextarea, HtmlInput's, HtmlObject, HtmlOutput, HtmlSelect.
+                for HtmlButton, HtmlTextarea, HtmlInput, HtmlObject, HtmlOutput, and  HtmlSelect.
             </action>
             <action type="fix" dev="rbri">
                 HtmlFileInput.reset(): a form reset no longer tries to reconstruct a fake File from the
@@ -42,19 +45,19 @@
             </action>
             <action type="fix" dev="rbri">
                 HtmlFileInput.isValid(): a disabled file input is no longer incorrectly reported as invalid
-                by checkValidity() when 'required' is set and no file is selected
+                by checkValidity() when 'required' is set and no file is selected.
             </action>
             <action type="add" dev="rbri">
                 Method reportValidity() support to various form controls added.
             </action>
             <action type="fix" dev="rbri">
-                Various HtmlButton validation processing related fixed.
+                Various fixes to HtmlButton validation processing.
             </action>
             <action type="remove" dev="rbri">
                 Document HtmlButton's no-op implementations for reset and default value handling, and remove extraneous debug logging.
             </action>
             <action type="remove" dev="rbri">
-                Method isReadonly() removed from HtmlButton; because there is no readonly support for this control.
+                Method isReadonly() removed from HtmlButton because there is no readonly support for this control.
             </action>
             <action type="update" dev="rbri">
                 DisabledElement now implements Element and provides a default implementation of isDisabled().
