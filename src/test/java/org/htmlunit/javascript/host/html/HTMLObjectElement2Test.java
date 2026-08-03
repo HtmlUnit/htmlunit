@@ -187,7 +187,7 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"false", "false", "true"})
+    @Alerts({"false", "false", "true", ""})
     public void setCustomValidityDoesNotAffectCheckValidity() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -199,7 +199,7 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
                 + "      log(o.willValidate);\n"
                 + "      log(o.validity.valid);\n"
                 + "      log(o.checkValidity());\n"
-                // + "      log(o.validationMessage);\n"
+                + "      log(o.validationMessage);\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -212,38 +212,38 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-//    /**
-//     * The validationMessage must always be empty on an &lt;object&gt;, even with a
-//     * custom validity message set and even when additionally barred via an
-//     * ancestor disabled fieldset.
-//     * @throws Exception if an error occurs
-//     */
-//    @Test
-//    @Alerts({"", ""})
-//    public void validationMessageAlwaysEmpty() throws Exception {
-//        final String html = DOCTYPE_HTML
-//                + "<html><head>\n"
-//                + "  <script>\n"
-//                + LOG_TITLE_FUNCTION
-//                + "    function test() {\n"
-//                + "      var plain = document.getElementById('plain');\n"
-//                + "      var inFieldset = document.getElementById('inFieldset');\n"
-//                + "      plain.setCustomValidity('error1');\n"
-//                + "      inFieldset.setCustomValidity('error2');\n"
-//                + "      log(plain.validationMessage);\n"
-//                + "      log(inFieldset.validationMessage);\n"
-//                + "    }\n"
-//                + "  </script>\n"
-//                + "</head>\n"
-//                + "<body onload='test()'>\n"
-//                + "  <form>\n"
-//                + "    <object id='plain'></object>"
-//                + "    <fieldset disabled><object id='inFieldset'></object></fieldset>"
-//                + "  </form>\n"
-//                + "</body></html>";
-//
-//        loadPageVerifyTitle2(html);
-//    }
+    /**
+     * The validationMessage must always be empty on an &lt;object&gt;, even with a
+     * custom validity message set and even when additionally barred via an
+     * ancestor disabled fieldset.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", ""})
+    public void validationMessageAlwaysEmpty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var plain = document.getElementById('plain');\n"
+                + "      var inFieldset = document.getElementById('inFieldset');\n"
+                + "      plain.setCustomValidity('error1');\n"
+                + "      inFieldset.setCustomValidity('error2');\n"
+                + "      log(plain.validationMessage);\n"
+                + "      log(inFieldset.validationMessage);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='plain'></object>"
+                + "    <fieldset disabled><object id='inFieldset'></object></fieldset>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * A object with a custom validity message set must

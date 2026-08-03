@@ -99,7 +99,7 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"false", "true", "false", "true"})
+    @Alerts({"false", "true", "false", "true", ""})
     public void setCustomValidityOnPlainOutput() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -112,7 +112,7 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
                 + "      log(o.validity.customError);\n"
                 + "      log(o.validity.valid);\n"
                 + "      log(o.checkValidity());\n"
-                // + "      log(o.validationMessage);\n"
+                + "      log(o.validationMessage);\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"

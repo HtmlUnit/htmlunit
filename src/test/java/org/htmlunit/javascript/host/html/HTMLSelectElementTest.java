@@ -3110,39 +3110,39 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-//    /**
-//     * The validationMessage should reflect the custom validity message for a
-//     * validation-participating (editable) select, and should be empty for a
-//     * barred-from-validation (disabled) one, regardless of a custom message
-//     * being set.
-//     * @throws Exception if an error occurs
-//     */
-//    @Test
-//    @Alerts({"editable error", ""})
-//    public void validationMessageReflectsCustomValidityWhereApplicable() throws Exception {
-//        final String html = DOCTYPE_HTML
-//                + "<html><head>\n"
-//                + "  <script>\n"
-//                + LOG_TITLE_FUNCTION
-//                + "    function test() {\n"
-//                + "      var editable = document.getElementById('editable');\n"
-//                + "      var disabled = document.getElementById('disabled');\n"
-//                + "      editable.setCustomValidity('editable error');\n"
-//                + "      disabled.setCustomValidity('disabled error');\n"
-//                + "      log(editable.validationMessage);\n"
-//                + "      log(disabled.validationMessage);\n"
-//                + "    }\n"
-//                + "  </script>\n"
-//                + "</head>\n"
-//                + "<body onload='test()'>\n"
-//                + "  <form>\n"
-//                + "    <select id='editable'><option value='a'>a</option></select>"
-//                + "    <select id='disabled' disabled><option value='a'>a</option></select>"
-//                + "  </form>\n"
-//                + "</body></html>";
-//
-//        loadPageVerifyTitle2(html);
-//    }
+    /**
+     * The validationMessage should reflect the custom validity message for a
+     * validation-participating (editable) select, and should be empty for a
+     * barred-from-validation (disabled) one, regardless of a custom message
+     * being set.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"editable error", ""})
+    public void validationMessageReflectsCustomValidityWhereApplicable() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var editable = document.getElementById('editable');\n"
+                + "      var disabled = document.getElementById('disabled');\n"
+                + "      editable.setCustomValidity('editable error');\n"
+                + "      disabled.setCustomValidity('disabled error');\n"
+                + "      log(editable.validationMessage);\n"
+                + "      log(disabled.validationMessage);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='editable'><option value='a'>a</option></select>"
+                + "    <select id='disabled' disabled><option value='a'>a</option></select>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * @throws Exception if an error occurs

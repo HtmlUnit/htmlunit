@@ -3519,38 +3519,39 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-//    /**
-//     * The validationMessage should reflect the custom validity message for a
-//     * validation-participating (editable) input, and should be empty for a
-//     * barred-from-validation (disabled) one, regardless of a custom message
-//     * being set.
-//     * @throws Exception if the test fails
-//     */
-//    @Test
-//    @Alerts({"editable error", ""})
-//    public void validationMessageReflectsCustomValidityWhereApplicable() throws Exception {
-//        final String html = DOCTYPE_HTML
-//            + "<html><head>\n"
-//            + "<script>\n"
-//            + LOG_TITLE_FUNCTION
-//            + "  function test() {\n"
-//            + "    var editable = document.getElementById('editable');\n"
-//            + "    var disabled = document.getElementById('disabled');\n"
-//            + "    editable.setCustomValidity('editable error');\n"
-//            + "    disabled.setCustomValidity('disabled error');\n"
-//            + "    log(editable.validationMessage);\n"
-//            + "    log(disabled.validationMessage);\n"
-//            + "  }\n"
-//            + "</script></head>\n"
-//            + "<body onload='test()'>\n"
-//            + "  <form>\n"
-//            + "    <input id='editable' type='text'>\n"
-//            + "    <input id='disabled' type='text' disabled>\n"
-//            + "  </form>\n"
-//            + "</body></html>";
-//
-//        loadPageVerifyTitle2(html);
-//    }
+    /**
+     * The validationMessage should reflect the custom validity message for a
+     * validation-participating (editable) input, and should be empty for a
+     * barred-from-validation (disabled) one, regardless of a custom message
+     * being set.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"editable error", ""})
+    public void validationMessageReflectsCustomValidityWhereApplicable() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var editable = document.getElementById('editable');\n"
+            + "    var disabled = document.getElementById('disabled');\n"
+            + "    editable.setCustomValidity('editable error');\n"
+            + "    disabled.setCustomValidity('disabled error');\n"
+            + "    log(editable.validationMessage);\n"
+            + "    log(disabled.validationMessage);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='editable' type='text'>\n"
+            + "    <input id='disabled' type='text' disabled>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     /**
      * The reportValidity() is untested anywhere in this file -- basic coverage that
      * it returns the same boolean as checkValidity() for an input with a custom
