@@ -223,6 +223,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_a() throws Exception {
+        test("body", "a");
+    }
+
+    @Alerts("0")
     void _body_abbr() throws Exception {
         test("body", "abbr");
     }
@@ -230,11 +235,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _body_acronym() throws Exception {
         test("body", "acronym");
-    }
-
-    @Alerts("0")
-    void _body_a() throws Exception {
-        test("body", "a");
     }
 
     @Alerts("0")
@@ -263,6 +263,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_b() throws Exception {
+        test("body", "b");
+    }
+
+    @Alerts("0")
     void _body_base() throws Exception {
         test("body", "base");
     }
@@ -288,6 +293,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_blink() throws Exception {
+        test("body", "blink");
+    }
+
+    @Alerts("0")
     void _body_blockquote() throws Exception {
         test("body", "blockquote");
     }
@@ -295,11 +305,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _body_body() throws Exception {
         test("body", "body");
-    }
-
-    @Alerts("0")
-    void _body_b() throws Exception {
-        test("body", "b");
     }
 
     @Alerts("0")
@@ -333,6 +338,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_col() throws Exception {
+        test("body", "col");
+    }
+
+    @Alerts("0")
+    void _body_colgroup() throws Exception {
+        test("body", "colgroup");
+    }
+
+    @Alerts("0")
     void _body_data() throws Exception {
         test("body", "data");
     }
@@ -340,11 +355,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _body_datalist() throws Exception {
         test("body", "datalist");
-    }
-
-    @Alerts("0")
-    void _body_dfn() throws Exception {
-        test("body", "dfn");
     }
 
     @Alerts("0")
@@ -360,6 +370,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _body_details() throws Exception {
         test("body", "details");
+    }
+
+    @Alerts("0")
+    void _body_dfn() throws Exception {
+        test("body", "dfn");
     }
 
     @Alerts("0")
@@ -388,13 +403,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _body_embed() throws Exception {
-        test("body", "embed");
+    void _body_em() throws Exception {
+        test("body", "em");
     }
 
     @Alerts("0")
-    void _body_em() throws Exception {
-        test("body", "em");
+    void _body_embed() throws Exception {
+        test("body", "embed");
     }
 
     @Alerts("0")
@@ -418,13 +433,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _body_form() throws Exception {
-        test("body", "form");
+    void _body_footer() throws Exception {
+        test("body", "footer");
     }
 
     @Alerts("0")
-    void _body_footer() throws Exception {
-        test("body", "footer");
+    void _body_form() throws Exception {
+        test("body", "form");
     }
 
     @Alerts("0")
@@ -435,16 +450,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _body_frameset() throws Exception {
         test("body", "frameset");
-    }
-
-    @Alerts("0")
-    void _body_head() throws Exception {
-        test("body", "head");
-    }
-
-    @Alerts("0")
-    void _body_header() throws Exception {
-        test("body", "header");
     }
 
     @Alerts("0")
@@ -478,6 +483,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_head() throws Exception {
+        test("body", "head");
+    }
+
+    @Alerts("0")
+    void _body_header() throws Exception {
+        test("body", "header");
+    }
+
+    @Alerts("0")
     void _body_hgroup() throws Exception {
         test("body", "hgroup");
     }
@@ -493,23 +508,28 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_i() throws Exception {
+        test("body", "i");
+    }
+
+    @Alerts("0")
     void _body_iframe() throws Exception {
         test("body", "iframe");
     }
 
     @Alerts("0")
-    void _body_q() throws Exception {
-        test("body", "q");
-    }
-
-    @Alerts("0")
-    void _body_img() throws Exception {
-        test("body", "img");
+    void _body_ilayer() throws Exception {
+        test("body", "ilayer");
     }
 
     @Alerts("0")
     void _body_image() throws Exception {
         test("body", "image");
+    }
+
+    @Alerts("0")
+    void _body_img() throws Exception {
+        test("body", "img");
     }
 
     @Alerts("0")
@@ -520,11 +540,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _body_ins() throws Exception {
         test("body", "ins");
-    }
-
-    @Alerts("0")
-    void _body_i() throws Exception {
-        test("body", "i");
     }
 
     @Alerts("0")
@@ -548,11 +563,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _body_listing() throws Exception {
-        test("body", "listing");
-    }
-
-    @Alerts("0")
     void _body_li() throws Exception {
         test("body", "li");
     }
@@ -560,6 +570,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _body_link() throws Exception {
         test("body", "link");
+    }
+
+    @Alerts("0")
+    void _body_listing() throws Exception {
+        test("body", "listing");
     }
 
     @Alerts("0")
@@ -598,8 +613,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_multicol() throws Exception {
+        test("body", "multicol");
+    }
+
+    @Alerts("0")
     void _body_nav() throws Exception {
         test("body", "nav");
+    }
+
+    @Alerts("0")
+    void _body_nextid() throws Exception {
+        test("body", "nextid");
     }
 
     @Alerts("0")
@@ -678,6 +703,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_q() throws Exception {
+        test("body", "q");
+    }
+
+    @Alerts("0")
     void _body_rb() throws Exception {
         test("body", "rb");
     }
@@ -738,8 +768,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_sound() throws Exception {
+        test("body", "sound");
+    }
+
+    @Alerts("0")
     void _body_source() throws Exception {
         test("body", "source");
+    }
+
+    @Alerts("0")
+    void _body_spacer() throws Exception {
+        test("body", "spacer");
     }
 
     @Alerts("0")
@@ -788,16 +828,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _body_col() throws Exception {
-        test("body", "col");
-    }
-
-    @Alerts("0")
-    void _body_colgroup() throws Exception {
-        test("body", "colgroup");
-    }
-
-    @Alerts("0")
     void _body_tbody() throws Exception {
         test("body", "tbody");
     }
@@ -808,13 +838,8 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _body_th() throws Exception {
-        test("body", "th");
-    }
-
-    @Alerts("0")
-    void _body_tr() throws Exception {
-        test("body", "tr");
+    void _body_template() throws Exception {
+        test("body", "template");
     }
 
     @Alerts("0")
@@ -828,18 +853,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_th() throws Exception {
+        test("body", "th");
+    }
+
+    @Alerts("0")
     void _body_thead() throws Exception {
         test("body", "thead");
-    }
-
-    @Alerts("0")
-    void _body_tt() throws Exception {
-        test("body", "tt");
-    }
-
-    @Alerts("0")
-    void _body_template() throws Exception {
-        test("body", "template");
     }
 
     @Alerts("0")
@@ -853,8 +873,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_tr() throws Exception {
+        test("body", "tr");
+    }
+
+    @Alerts("0")
     void _body_track() throws Exception {
         test("body", "track");
+    }
+
+    @Alerts("0")
+    void _body_tt() throws Exception {
+        test("body", "tt");
     }
 
     @Alerts("0")
@@ -865,6 +895,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _body_ul() throws Exception {
         test("body", "ul");
+    }
+
+    @Alerts("0")
+    void _body_unknown() throws Exception {
+        test("body", "unknown");
     }
 
     @Alerts("0")
@@ -883,13 +918,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _body_xmp() throws Exception {
-        test("body", "xmp");
+    void _body_xml() throws Exception {
+        test("body", "xml");
     }
 
     @Alerts("0")
-    void _body_unknown() throws Exception {
-        test("body", "unknown");
+    void _body_xmp() throws Exception {
+        test("body", "xmp");
     }
 
     @Alerts("2")
@@ -913,6 +948,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_a() throws Exception {
+        test("frameset", "a");
+    }
+
+    @Alerts("0")
     void _frameset_abbr() throws Exception {
         test("frameset", "abbr");
     }
@@ -920,11 +960,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _frameset_acronym() throws Exception {
         test("frameset", "acronym");
-    }
-
-    @Alerts("0")
-    void _frameset_a() throws Exception {
-        test("frameset", "a");
     }
 
     @Alerts("0")
@@ -953,6 +988,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_b() throws Exception {
+        test("frameset", "b");
+    }
+
+    @Alerts("0")
     void _frameset_base() throws Exception {
         test("frameset", "base");
     }
@@ -978,6 +1018,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_blink() throws Exception {
+        test("frameset", "blink");
+    }
+
+    @Alerts("0")
     void _frameset_blockquote() throws Exception {
         test("frameset", "blockquote");
     }
@@ -985,11 +1030,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _frameset_body() throws Exception {
         test("frameset", "body");
-    }
-
-    @Alerts("0")
-    void _frameset_b() throws Exception {
-        test("frameset", "b");
     }
 
     @Alerts("0")
@@ -1028,6 +1068,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_col() throws Exception {
+        test("frameset", "col");
+    }
+
+    @Alerts("0")
+    void _frameset_colgroup() throws Exception {
+        test("frameset", "colgroup");
+    }
+
+    @Alerts("0")
     void _frameset_data() throws Exception {
         test("frameset", "data");
     }
@@ -1035,11 +1085,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _frameset_datalist() throws Exception {
         test("frameset", "datalist");
-    }
-
-    @Alerts("0")
-    void _frameset_dfn() throws Exception {
-        test("frameset", "dfn");
     }
 
     @Alerts("0")
@@ -1055,6 +1100,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _frameset_details() throws Exception {
         test("frameset", "details");
+    }
+
+    @Alerts("0")
+    void _frameset_dfn() throws Exception {
+        test("frameset", "dfn");
     }
 
     @Alerts("0")
@@ -1083,13 +1133,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _frameset_embed() throws Exception {
-        test("frameset", "embed");
+    void _frameset_em() throws Exception {
+        test("frameset", "em");
     }
 
     @Alerts("0")
-    void _frameset_em() throws Exception {
-        test("frameset", "em");
+    void _frameset_embed() throws Exception {
+        test("frameset", "embed");
     }
 
     @Alerts("0")
@@ -1113,13 +1163,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _frameset_form() throws Exception {
-        test("frameset", "form");
+    void _frameset_footer() throws Exception {
+        test("frameset", "footer");
     }
 
     @Alerts("0")
-    void _frameset_footer() throws Exception {
-        test("frameset", "footer");
+    void _frameset_form() throws Exception {
+        test("frameset", "form");
     }
 
     @Alerts("0")
@@ -1130,16 +1180,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _frameset_frameset() throws Exception {
         test("frameset", "frameset");
-    }
-
-    @Alerts("0")
-    void _frameset_head() throws Exception {
-        test("frameset", "head");
-    }
-
-    @Alerts("0")
-    void _frameset_header() throws Exception {
-        test("frameset", "header");
     }
 
     @Alerts("0")
@@ -1173,6 +1213,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_head() throws Exception {
+        test("frameset", "head");
+    }
+
+    @Alerts("0")
+    void _frameset_header() throws Exception {
+        test("frameset", "header");
+    }
+
+    @Alerts("0")
     void _frameset_hgroup() throws Exception {
         test("frameset", "hgroup");
     }
@@ -1188,23 +1238,28 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_i() throws Exception {
+        test("frameset", "i");
+    }
+
+    @Alerts("0")
     void _frameset_iframe() throws Exception {
         test("frameset", "iframe");
     }
 
     @Alerts("0")
-    void _frameset_q() throws Exception {
-        test("frameset", "q");
-    }
-
-    @Alerts("0")
-    void _frameset_img() throws Exception {
-        test("frameset", "img");
+    void _frameset_ilayer() throws Exception {
+        test("frameset", "ilayer");
     }
 
     @Alerts("0")
     void _frameset_image() throws Exception {
         test("frameset", "image");
+    }
+
+    @Alerts("0")
+    void _frameset_img() throws Exception {
+        test("frameset", "img");
     }
 
     @Alerts("0")
@@ -1215,11 +1270,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _frameset_ins() throws Exception {
         test("frameset", "ins");
-    }
-
-    @Alerts("0")
-    void _frameset_i() throws Exception {
-        test("frameset", "i");
     }
 
     @Alerts("0")
@@ -1243,11 +1293,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _frameset_listing() throws Exception {
-        test("frameset", "listing");
-    }
-
-    @Alerts("0")
     void _frameset_li() throws Exception {
         test("frameset", "li");
     }
@@ -1255,6 +1300,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _frameset_link() throws Exception {
         test("frameset", "link");
+    }
+
+    @Alerts("0")
+    void _frameset_listing() throws Exception {
+        test("frameset", "listing");
     }
 
     @Alerts("0")
@@ -1293,8 +1343,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_multicol() throws Exception {
+        test("frameset", "multicol");
+    }
+
+    @Alerts("0")
     void _frameset_nav() throws Exception {
         test("frameset", "nav");
+    }
+
+    @Alerts("0")
+    void _frameset_nextid() throws Exception {
+        test("frameset", "nextid");
     }
 
     @Alerts("0")
@@ -1378,6 +1438,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_q() throws Exception {
+        test("frameset", "q");
+    }
+
+    @Alerts("0")
     void _frameset_rb() throws Exception {
         test("frameset", "rb");
     }
@@ -1438,8 +1503,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_sound() throws Exception {
+        test("frameset", "sound");
+    }
+
+    @Alerts("0")
     void _frameset_source() throws Exception {
         test("frameset", "source");
+    }
+
+    @Alerts("0")
+    void _frameset_spacer() throws Exception {
+        test("frameset", "spacer");
     }
 
     @Alerts("0")
@@ -1488,16 +1563,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _frameset_col() throws Exception {
-        test("frameset", "col");
-    }
-
-    @Alerts("0")
-    void _frameset_colgroup() throws Exception {
-        test("frameset", "colgroup");
-    }
-
-    @Alerts("0")
     void _frameset_tbody() throws Exception {
         test("frameset", "tbody");
     }
@@ -1508,13 +1573,8 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _frameset_th() throws Exception {
-        test("frameset", "th");
-    }
-
-    @Alerts("0")
-    void _frameset_tr() throws Exception {
-        test("frameset", "tr");
+    void _frameset_template() throws Exception {
+        test("frameset", "template");
     }
 
     @Alerts("0")
@@ -1528,18 +1588,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_th() throws Exception {
+        test("frameset", "th");
+    }
+
+    @Alerts("0")
     void _frameset_thead() throws Exception {
         test("frameset", "thead");
-    }
-
-    @Alerts("0")
-    void _frameset_tt() throws Exception {
-        test("frameset", "tt");
-    }
-
-    @Alerts("0")
-    void _frameset_template() throws Exception {
-        test("frameset", "template");
     }
 
     @Alerts("0")
@@ -1553,8 +1608,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_tr() throws Exception {
+        test("frameset", "tr");
+    }
+
+    @Alerts("0")
     void _frameset_track() throws Exception {
         test("frameset", "track");
+    }
+
+    @Alerts("0")
+    void _frameset_tt() throws Exception {
+        test("frameset", "tt");
     }
 
     @Alerts("0")
@@ -1565,6 +1630,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _frameset_ul() throws Exception {
         test("frameset", "ul");
+    }
+
+    @Alerts("0")
+    void _frameset_unknown() throws Exception {
+        test("frameset", "unknown");
     }
 
     @Alerts("0")
@@ -1583,13 +1653,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_xml() throws Exception {
+        test("frameset", "xml");
+    }
+
+    @Alerts("0")
     void _frameset_xmp() throws Exception {
         test("frameset", "xmp");
     }
 
-    @Alerts("0")
-    void _frameset_unknown() throws Exception {
-        test("frameset", "unknown");
+    @Alerts("2")
+    void _head_a() throws Exception {
+        test("head", "a");
     }
 
     @Alerts("2")
@@ -1600,11 +1675,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _head_acronym() throws Exception {
         test("head", "acronym");
-    }
-
-    @Alerts("2")
-    void _head_a() throws Exception {
-        test("head", "a");
     }
 
     @Alerts("2")
@@ -1633,6 +1703,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_b() throws Exception {
+        test("head", "b");
+    }
+
+    @Alerts("2")
     void _head_base() throws Exception {
         test("head", "base");
     }
@@ -1658,6 +1733,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_blink() throws Exception {
+        test("head", "blink");
+    }
+
+    @Alerts("2")
     void _head_blockquote() throws Exception {
         test("head", "blockquote");
     }
@@ -1665,11 +1745,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _head_body() throws Exception {
         test("head", "body");
-    }
-
-    @Alerts("2")
-    void _head_b() throws Exception {
-        test("head", "b");
     }
 
     @Alerts("2")
@@ -1708,6 +1783,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_col() throws Exception {
+        test("head", "col");
+    }
+
+    @Alerts("2")
+    void _head_colgroup() throws Exception {
+        test("head", "colgroup");
+    }
+
+    @Alerts("2")
     void _head_data() throws Exception {
         test("head", "data");
     }
@@ -1715,11 +1800,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _head_datalist() throws Exception {
         test("head", "datalist");
-    }
-
-    @Alerts("2")
-    void _head_dfn() throws Exception {
-        test("head", "dfn");
     }
 
     @Alerts("2")
@@ -1735,6 +1815,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _head_details() throws Exception {
         test("head", "details");
+    }
+
+    @Alerts("2")
+    void _head_dfn() throws Exception {
+        test("head", "dfn");
     }
 
     @Alerts("2")
@@ -1763,13 +1848,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
-    void _head_embed() throws Exception {
-        test("head", "embed");
+    void _head_em() throws Exception {
+        test("head", "em");
     }
 
     @Alerts("2")
-    void _head_em() throws Exception {
-        test("head", "em");
+    void _head_embed() throws Exception {
+        test("head", "embed");
     }
 
     @Alerts("2")
@@ -1793,13 +1878,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
-    void _head_form() throws Exception {
-        test("head", "form");
+    void _head_footer() throws Exception {
+        test("head", "footer");
     }
 
     @Alerts("2")
-    void _head_footer() throws Exception {
-        test("head", "footer");
+    void _head_form() throws Exception {
+        test("head", "form");
     }
 
     @Alerts("2")
@@ -1810,16 +1895,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _head_frameset() throws Exception {
         test("head", "frameset");
-    }
-
-    @Alerts("2")
-    void _head_head() throws Exception {
-        test("head", "head");
-    }
-
-    @Alerts("2")
-    void _head_header() throws Exception {
-        test("head", "header");
     }
 
     @Alerts("2")
@@ -1853,6 +1928,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_head() throws Exception {
+        test("head", "head");
+    }
+
+    @Alerts("2")
+    void _head_header() throws Exception {
+        test("head", "header");
+    }
+
+    @Alerts("2")
     void _head_hgroup() throws Exception {
         test("head", "hgroup");
     }
@@ -1868,23 +1953,28 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_i() throws Exception {
+        test("head", "i");
+    }
+
+    @Alerts("2")
     void _head_iframe() throws Exception {
         test("head", "iframe");
     }
 
     @Alerts("2")
-    void _head_q() throws Exception {
-        test("head", "q");
-    }
-
-    @Alerts("2")
-    void _head_img() throws Exception {
-        test("head", "img");
+    void _head_ilayer() throws Exception {
+        test("head", "ilayer");
     }
 
     @Alerts("2")
     void _head_image() throws Exception {
         test("head", "image");
+    }
+
+    @Alerts("2")
+    void _head_img() throws Exception {
+        test("head", "img");
     }
 
     @Alerts("2")
@@ -1895,11 +1985,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _head_ins() throws Exception {
         test("head", "ins");
-    }
-
-    @Alerts("2")
-    void _head_i() throws Exception {
-        test("head", "i");
     }
 
     @Alerts("2")
@@ -1923,11 +2008,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
-    void _head_listing() throws Exception {
-        test("head", "listing");
-    }
-
-    @Alerts("2")
     void _head_li() throws Exception {
         test("head", "li");
     }
@@ -1935,6 +2015,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _head_link() throws Exception {
         test("head", "link");
+    }
+
+    @Alerts("2")
+    void _head_listing() throws Exception {
+        test("head", "listing");
     }
 
     @Alerts("2")
@@ -1973,8 +2058,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_multicol() throws Exception {
+        test("head", "multicol");
+    }
+
+    @Alerts("2")
     void _head_nav() throws Exception {
         test("head", "nav");
+    }
+
+    @Alerts("2")
+    void _head_nextid() throws Exception {
+        test("head", "nextid");
     }
 
     @Alerts("2")
@@ -2058,6 +2153,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_q() throws Exception {
+        test("head", "q");
+    }
+
+    @Alerts("2")
     void _head_rb() throws Exception {
         test("head", "rb");
     }
@@ -2118,8 +2218,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_sound() throws Exception {
+        test("head", "sound");
+    }
+
+    @Alerts("2")
     void _head_source() throws Exception {
         test("head", "source");
+    }
+
+    @Alerts("2")
+    void _head_spacer() throws Exception {
+        test("head", "spacer");
     }
 
     @Alerts("2")
@@ -2168,16 +2278,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
-    void _head_col() throws Exception {
-        test("head", "col");
-    }
-
-    @Alerts("2")
-    void _head_colgroup() throws Exception {
-        test("head", "colgroup");
-    }
-
-    @Alerts("2")
     void _head_tbody() throws Exception {
         test("head", "tbody");
     }
@@ -2188,13 +2288,8 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
-    void _head_th() throws Exception {
-        test("head", "th");
-    }
-
-    @Alerts("2")
-    void _head_tr() throws Exception {
-        test("head", "tr");
+    void _head_template() throws Exception {
+        test("head", "template");
     }
 
     @Alerts("2")
@@ -2208,18 +2303,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_th() throws Exception {
+        test("head", "th");
+    }
+
+    @Alerts("2")
     void _head_thead() throws Exception {
         test("head", "thead");
-    }
-
-    @Alerts("2")
-    void _head_tt() throws Exception {
-        test("head", "tt");
-    }
-
-    @Alerts("2")
-    void _head_template() throws Exception {
-        test("head", "template");
     }
 
     @Alerts("2")
@@ -2233,8 +2323,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
+    void _head_tr() throws Exception {
+        test("head", "tr");
+    }
+
+    @Alerts("2")
     void _head_track() throws Exception {
         test("head", "track");
+    }
+
+    @Alerts("2")
+    void _head_tt() throws Exception {
+        test("head", "tt");
     }
 
     @Alerts("2")
@@ -2245,6 +2345,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _head_ul() throws Exception {
         test("head", "ul");
+    }
+
+    @Alerts("2")
+    void _head_unknown() throws Exception {
+        test("head", "unknown");
     }
 
     @Alerts("2")
@@ -2263,13 +2368,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("2")
-    void _head_xmp() throws Exception {
-        test("head", "xmp");
+    void _head_xml() throws Exception {
+        test("head", "xml");
     }
 
     @Alerts("2")
-    void _head_unknown() throws Exception {
-        test("head", "unknown");
+    void _head_xmp() throws Exception {
+        test("head", "xmp");
     }
 
     @Alerts("2")
@@ -2283,6 +2388,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_a() throws Exception {
+        test("html", "a");
+    }
+
+    @Alerts("0")
     void _html_abbr() throws Exception {
         test("html", "abbr");
     }
@@ -2290,11 +2400,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _html_acronym() throws Exception {
         test("html", "acronym");
-    }
-
-    @Alerts("0")
-    void _html_a() throws Exception {
-        test("html", "a");
     }
 
     @Alerts("0")
@@ -2323,6 +2428,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_b() throws Exception {
+        test("html", "b");
+    }
+
+    @Alerts("0")
     void _html_base() throws Exception {
         test("html", "base");
     }
@@ -2348,6 +2458,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_blink() throws Exception {
+        test("html", "blink");
+    }
+
+    @Alerts("0")
     void _html_blockquote() throws Exception {
         test("html", "blockquote");
     }
@@ -2355,11 +2470,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _html_body() throws Exception {
         test("html", "body");
-    }
-
-    @Alerts("0")
-    void _html_b() throws Exception {
-        test("html", "b");
     }
 
     @Alerts("0")
@@ -2393,6 +2503,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_col() throws Exception {
+        test("html", "col");
+    }
+
+    @Alerts("0")
+    void _html_colgroup() throws Exception {
+        test("html", "colgroup");
+    }
+
+    @Alerts("0")
     void _html_data() throws Exception {
         test("html", "data");
     }
@@ -2400,11 +2520,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _html_datalist() throws Exception {
         test("html", "datalist");
-    }
-
-    @Alerts("0")
-    void _html_dfn() throws Exception {
-        test("html", "dfn");
     }
 
     @Alerts("0")
@@ -2420,6 +2535,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _html_details() throws Exception {
         test("html", "details");
+    }
+
+    @Alerts("0")
+    void _html_dfn() throws Exception {
+        test("html", "dfn");
     }
 
     @Alerts("0")
@@ -2448,13 +2568,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _html_embed() throws Exception {
-        test("html", "embed");
+    void _html_em() throws Exception {
+        test("html", "em");
     }
 
     @Alerts("0")
-    void _html_em() throws Exception {
-        test("html", "em");
+    void _html_embed() throws Exception {
+        test("html", "embed");
     }
 
     @Alerts("0")
@@ -2478,13 +2598,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _html_form() throws Exception {
-        test("html", "form");
+    void _html_footer() throws Exception {
+        test("html", "footer");
     }
 
     @Alerts("0")
-    void _html_footer() throws Exception {
-        test("html", "footer");
+    void _html_form() throws Exception {
+        test("html", "form");
     }
 
     @Alerts("0")
@@ -2495,16 +2615,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _html_frameset() throws Exception {
         test("html", "frameset");
-    }
-
-    @Alerts("0")
-    void _html_head() throws Exception {
-        test("html", "head");
-    }
-
-    @Alerts("0")
-    void _html_header() throws Exception {
-        test("html", "header");
     }
 
     @Alerts("0")
@@ -2538,6 +2648,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_head() throws Exception {
+        test("html", "head");
+    }
+
+    @Alerts("0")
+    void _html_header() throws Exception {
+        test("html", "header");
+    }
+
+    @Alerts("0")
     void _html_hgroup() throws Exception {
         test("html", "hgroup");
     }
@@ -2553,23 +2673,28 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_i() throws Exception {
+        test("html", "i");
+    }
+
+    @Alerts("0")
     void _html_iframe() throws Exception {
         test("html", "iframe");
     }
 
     @Alerts("0")
-    void _html_q() throws Exception {
-        test("html", "q");
-    }
-
-    @Alerts("0")
-    void _html_img() throws Exception {
-        test("html", "img");
+    void _html_ilayer() throws Exception {
+        test("html", "ilayer");
     }
 
     @Alerts("0")
     void _html_image() throws Exception {
         test("html", "image");
+    }
+
+    @Alerts("0")
+    void _html_img() throws Exception {
+        test("html", "img");
     }
 
     @Alerts("0")
@@ -2580,11 +2705,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _html_ins() throws Exception {
         test("html", "ins");
-    }
-
-    @Alerts("0")
-    void _html_i() throws Exception {
-        test("html", "i");
     }
 
     @Alerts("0")
@@ -2608,11 +2728,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _html_listing() throws Exception {
-        test("html", "listing");
-    }
-
-    @Alerts("0")
     void _html_li() throws Exception {
         test("html", "li");
     }
@@ -2620,6 +2735,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _html_link() throws Exception {
         test("html", "link");
+    }
+
+    @Alerts("0")
+    void _html_listing() throws Exception {
+        test("html", "listing");
     }
 
     @Alerts("0")
@@ -2658,8 +2778,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_multicol() throws Exception {
+        test("html", "multicol");
+    }
+
+    @Alerts("0")
     void _html_nav() throws Exception {
         test("html", "nav");
+    }
+
+    @Alerts("0")
+    void _html_nextid() throws Exception {
+        test("html", "nextid");
     }
 
     @Alerts("0")
@@ -2738,6 +2868,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_q() throws Exception {
+        test("html", "q");
+    }
+
+    @Alerts("0")
     void _html_rb() throws Exception {
         test("html", "rb");
     }
@@ -2798,8 +2933,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_sound() throws Exception {
+        test("html", "sound");
+    }
+
+    @Alerts("0")
     void _html_source() throws Exception {
         test("html", "source");
+    }
+
+    @Alerts("0")
+    void _html_spacer() throws Exception {
+        test("html", "spacer");
     }
 
     @Alerts("0")
@@ -2848,16 +2993,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _html_col() throws Exception {
-        test("html", "col");
-    }
-
-    @Alerts("0")
-    void _html_colgroup() throws Exception {
-        test("html", "colgroup");
-    }
-
-    @Alerts("0")
     void _html_tbody() throws Exception {
         test("html", "tbody");
     }
@@ -2868,13 +3003,8 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _html_th() throws Exception {
-        test("html", "th");
-    }
-
-    @Alerts("0")
-    void _html_tr() throws Exception {
-        test("html", "tr");
+    void _html_template() throws Exception {
+        test("html", "template");
     }
 
     @Alerts("0")
@@ -2888,18 +3018,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_th() throws Exception {
+        test("html", "th");
+    }
+
+    @Alerts("0")
     void _html_thead() throws Exception {
         test("html", "thead");
-    }
-
-    @Alerts("0")
-    void _html_tt() throws Exception {
-        test("html", "tt");
-    }
-
-    @Alerts("0")
-    void _html_template() throws Exception {
-        test("html", "template");
     }
 
     @Alerts("0")
@@ -2913,8 +3038,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _html_tr() throws Exception {
+        test("html", "tr");
+    }
+
+    @Alerts("0")
     void _html_track() throws Exception {
         test("html", "track");
+    }
+
+    @Alerts("0")
+    void _html_tt() throws Exception {
+        test("html", "tt");
     }
 
     @Alerts("0")
@@ -2925,6 +3060,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _html_ul() throws Exception {
         test("html", "ul");
+    }
+
+    @Alerts("0")
+    void _html_unknown() throws Exception {
+        test("html", "unknown");
     }
 
     @Alerts("0")
@@ -2943,23 +3083,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _html_xmp() throws Exception {
-        test("html", "xmp");
+    void _html_xml() throws Exception {
+        test("html", "xml");
     }
 
     @Alerts("0")
-    void _html_unknown() throws Exception {
-        test("html", "unknown");
-    }
-
-    @Alerts("2")
-    void _img_br() throws Exception {
-        test("img", "br");
-    }
-
-    @Alerts("2")
-    void _img_p() throws Exception {
-        test("img", "p");
+    void _html_xmp() throws Exception {
+        test("html", "xmp");
     }
 
     @Alerts("2")
@@ -2970,6 +3100,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _image_p() throws Exception {
         test("image", "p");
+    }
+
+    @Alerts("2")
+    void _img_br() throws Exception {
+        test("img", "br");
+    }
+
+    @Alerts("2")
+    void _img_p() throws Exception {
+        test("img", "p");
     }
 
     @Alerts("2")
@@ -3013,6 +3153,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_a() throws Exception {
+        test("script", "a");
+    }
+
+    @Alerts("0")
     void _script_abbr() throws Exception {
         test("script", "abbr");
     }
@@ -3020,11 +3165,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _script_acronym() throws Exception {
         test("script", "acronym");
-    }
-
-    @Alerts("0")
-    void _script_a() throws Exception {
-        test("script", "a");
     }
 
     @Alerts("0")
@@ -3053,6 +3193,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_b() throws Exception {
+        test("script", "b");
+    }
+
+    @Alerts("0")
     void _script_base() throws Exception {
         test("script", "base");
     }
@@ -3078,6 +3223,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_blink() throws Exception {
+        test("script", "blink");
+    }
+
+    @Alerts("0")
     void _script_blockquote() throws Exception {
         test("script", "blockquote");
     }
@@ -3085,11 +3235,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _script_body() throws Exception {
         test("script", "body");
-    }
-
-    @Alerts("0")
-    void _script_b() throws Exception {
-        test("script", "b");
     }
 
     @Alerts("0")
@@ -3128,6 +3273,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_col() throws Exception {
+        test("script", "col");
+    }
+
+    @Alerts("0")
+    void _script_colgroup() throws Exception {
+        test("script", "colgroup");
+    }
+
+    @Alerts("0")
     void _script_data() throws Exception {
         test("script", "data");
     }
@@ -3135,11 +3290,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _script_datalist() throws Exception {
         test("script", "datalist");
-    }
-
-    @Alerts("0")
-    void _script_dfn() throws Exception {
-        test("script", "dfn");
     }
 
     @Alerts("0")
@@ -3155,6 +3305,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _script_details() throws Exception {
         test("script", "details");
+    }
+
+    @Alerts("0")
+    void _script_dfn() throws Exception {
+        test("script", "dfn");
     }
 
     @Alerts("0")
@@ -3183,13 +3338,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _script_embed() throws Exception {
-        test("script", "embed");
+    void _script_em() throws Exception {
+        test("script", "em");
     }
 
     @Alerts("0")
-    void _script_em() throws Exception {
-        test("script", "em");
+    void _script_embed() throws Exception {
+        test("script", "embed");
     }
 
     @Alerts("0")
@@ -3213,13 +3368,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _script_form() throws Exception {
-        test("script", "form");
+    void _script_footer() throws Exception {
+        test("script", "footer");
     }
 
     @Alerts("0")
-    void _script_footer() throws Exception {
-        test("script", "footer");
+    void _script_form() throws Exception {
+        test("script", "form");
     }
 
     @Alerts("0")
@@ -3230,16 +3385,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _script_frameset() throws Exception {
         test("script", "frameset");
-    }
-
-    @Alerts("0")
-    void _script_head() throws Exception {
-        test("script", "head");
-    }
-
-    @Alerts("0")
-    void _script_header() throws Exception {
-        test("script", "header");
     }
 
     @Alerts("0")
@@ -3273,6 +3418,16 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_head() throws Exception {
+        test("script", "head");
+    }
+
+    @Alerts("0")
+    void _script_header() throws Exception {
+        test("script", "header");
+    }
+
+    @Alerts("0")
     void _script_hgroup() throws Exception {
         test("script", "hgroup");
     }
@@ -3288,23 +3443,28 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_i() throws Exception {
+        test("script", "i");
+    }
+
+    @Alerts("0")
     void _script_iframe() throws Exception {
         test("script", "iframe");
     }
 
     @Alerts("0")
-    void _script_q() throws Exception {
-        test("script", "q");
-    }
-
-    @Alerts("0")
-    void _script_img() throws Exception {
-        test("script", "img");
+    void _script_ilayer() throws Exception {
+        test("script", "ilayer");
     }
 
     @Alerts("0")
     void _script_image() throws Exception {
         test("script", "image");
+    }
+
+    @Alerts("0")
+    void _script_img() throws Exception {
+        test("script", "img");
     }
 
     @Alerts("0")
@@ -3315,11 +3475,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _script_ins() throws Exception {
         test("script", "ins");
-    }
-
-    @Alerts("0")
-    void _script_i() throws Exception {
-        test("script", "i");
     }
 
     @Alerts("0")
@@ -3343,11 +3498,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _script_listing() throws Exception {
-        test("script", "listing");
-    }
-
-    @Alerts("0")
     void _script_li() throws Exception {
         test("script", "li");
     }
@@ -3355,6 +3505,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _script_link() throws Exception {
         test("script", "link");
+    }
+
+    @Alerts("0")
+    void _script_listing() throws Exception {
+        test("script", "listing");
     }
 
     @Alerts("0")
@@ -3393,8 +3548,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_multicol() throws Exception {
+        test("script", "multicol");
+    }
+
+    @Alerts("0")
     void _script_nav() throws Exception {
         test("script", "nav");
+    }
+
+    @Alerts("0")
+    void _script_nextid() throws Exception {
+        test("script", "nextid");
     }
 
     @Alerts("0")
@@ -3478,6 +3643,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_q() throws Exception {
+        test("script", "q");
+    }
+
+    @Alerts("0")
     void _script_rb() throws Exception {
         test("script", "rb");
     }
@@ -3538,8 +3708,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_sound() throws Exception {
+        test("script", "sound");
+    }
+
+    @Alerts("0")
     void _script_source() throws Exception {
         test("script", "source");
+    }
+
+    @Alerts("0")
+    void _script_spacer() throws Exception {
+        test("script", "spacer");
     }
 
     @Alerts("0")
@@ -3588,16 +3768,6 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _script_col() throws Exception {
-        test("script", "col");
-    }
-
-    @Alerts("0")
-    void _script_colgroup() throws Exception {
-        test("script", "colgroup");
-    }
-
-    @Alerts("0")
     void _script_tbody() throws Exception {
         test("script", "tbody");
     }
@@ -3608,13 +3778,8 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _script_th() throws Exception {
-        test("script", "th");
-    }
-
-    @Alerts("0")
-    void _script_tr() throws Exception {
-        test("script", "tr");
+    void _script_template() throws Exception {
+        test("script", "template");
     }
 
     @Alerts("0")
@@ -3628,18 +3793,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_th() throws Exception {
+        test("script", "th");
+    }
+
+    @Alerts("0")
     void _script_thead() throws Exception {
         test("script", "thead");
-    }
-
-    @Alerts("0")
-    void _script_tt() throws Exception {
-        test("script", "tt");
-    }
-
-    @Alerts("0")
-    void _script_template() throws Exception {
-        test("script", "template");
     }
 
     @Alerts("0")
@@ -3653,8 +3813,18 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _script_tr() throws Exception {
+        test("script", "tr");
+    }
+
+    @Alerts("0")
     void _script_track() throws Exception {
         test("script", "track");
+    }
+
+    @Alerts("0")
+    void _script_tt() throws Exception {
+        test("script", "tt");
     }
 
     @Alerts("0")
@@ -3665,6 +3835,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _script_ul() throws Exception {
         test("script", "ul");
+    }
+
+    @Alerts("0")
+    void _script_unknown() throws Exception {
+        test("script", "unknown");
     }
 
     @Alerts("0")
@@ -3683,13 +3858,13 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    void _script_xmp() throws Exception {
-        test("script", "xmp");
+    void _script_xml() throws Exception {
+        test("script", "xml");
     }
 
     @Alerts("0")
-    void _script_unknown() throws Exception {
-        test("script", "unknown");
+    void _script_xmp() throws Exception {
+        test("script", "xmp");
     }
 
     @Alerts("2")
