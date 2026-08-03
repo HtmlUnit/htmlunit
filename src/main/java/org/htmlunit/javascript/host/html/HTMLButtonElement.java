@@ -150,8 +150,7 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        final HtmlButton button = getDomNodeOrDie();
-        return !button.willValidate() || button.isValid();
+        return ValidatableHTMLElement.doCheckValidity(getDomNodeOrDie());
     }
 
     /**
@@ -160,7 +159,7 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxFunction
     public boolean reportValidity() {
-        return checkValidity();
+        return ValidatableHTMLElement.doReportValidity(getDomNodeOrDie());
     }
 
     /**

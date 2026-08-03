@@ -250,4 +250,58 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void outputCheckValidityInvalidEventBehaviorOnPlainOutput() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var o = document.getElementById('o');\n"
+                + "      o.addEventListener('invalid', function() { log('invalid fired'); });\n"
+                + "      o.setCustomValidity('some error');\n"
+                + "      log(o.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='o'></output>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void outputReportValidityFocusBehaviorOnPlainOutput() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var o = document.getElementById('o');\n"
+                + "      o.setCustomValidity('some error');\n"
+                + "      log(o.reportValidity());\n"
+                + "      log(document.activeElement === o);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='o'></output>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

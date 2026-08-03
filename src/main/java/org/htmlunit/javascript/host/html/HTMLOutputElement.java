@@ -100,8 +100,7 @@ public class HTMLOutputElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        final HtmlOutput output = getDomNodeOrDie();
-        return !output.willValidate() || output.isValid();
+        return ValidatableHTMLElement.doCheckValidity(getDomNodeOrDie());
     }
 
     /**
@@ -110,7 +109,7 @@ public class HTMLOutputElement extends HTMLElement {
      */
     @JsxFunction
     public boolean reportValidity() {
-        return checkValidity();
+        return ValidatableHTMLElement.doReportValidity(getDomNodeOrDie());
     }
 
     /**

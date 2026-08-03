@@ -111,8 +111,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        final HtmlFieldSet fieldSet = getDomNodeOrDie();
-        return !fieldSet.willValidate() || fieldSet.isValid();
+        return ValidatableHTMLElement.doCheckValidity(getDomNodeOrDie());
     }
 
     /**
@@ -121,7 +120,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      */
     @JsxFunction
     public boolean reportValidity() {
-        return checkValidity();
+        return ValidatableHTMLElement.doReportValidity(getDomNodeOrDie());
     }
 
     /**

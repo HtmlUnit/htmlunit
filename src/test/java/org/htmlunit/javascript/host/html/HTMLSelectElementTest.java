@@ -3204,4 +3204,116 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"invalid fired", "false"})
+    public void selectCheckValidityFiresInvalidEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s = document.getElementById('s');\n"
+            + "    s.addEventListener('invalid', function() { log('invalid fired'); });\n"
+            + "    log(s.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <select id='s' required>"
+            + "      <option value=''></option>"
+            + "      <option value='a'>a</option>"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void selectCheckValidityDoesNotFireInvalidWhenActuallyValid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s = document.getElementById('s');\n"
+            + "    s.addEventListener('invalid', function() { log('unexpected invalid fired'); });\n"
+            + "    log(s.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <select id='s' required>"
+            + "      <option value=''></option>"
+            + "      <option value='a' selected>a</option>"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void selectCheckValidityDoesNotFireInvalidOnDisabledControl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s = document.getElementById('s');\n"
+            + "    s.addEventListener('invalid', function() { log('unexpected invalid fired'); });\n"
+            + "    log(s.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <select id='s' required disabled>"
+            + "      <option value=''></option>"
+            + "      <option value='a'>a</option>"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"invalid fired", "false"})
+    public void selectReportValidityFiresInvalidEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s = document.getElementById('s');\n"
+            + "    s.addEventListener('invalid', function() { log('invalid fired'); });\n"
+            + "    log(s.reportValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <select id='s' required>"
+            + "      <option value=''></option>"
+            + "      <option value='a'>a</option>"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

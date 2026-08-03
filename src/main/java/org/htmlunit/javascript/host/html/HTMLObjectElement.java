@@ -173,8 +173,7 @@ public class HTMLObjectElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        final HtmlObject object = getDomNodeOrDie();
-        return !object.willValidate() || object.isValid();
+        return ValidatableHTMLElement.doCheckValidity(getDomNodeOrDie());
     }
 
     /**
@@ -183,7 +182,7 @@ public class HTMLObjectElement extends HTMLElement {
      */
     @JsxFunction
     public boolean reportValidity() {
-        return checkValidity();
+        return ValidatableHTMLElement.doReportValidity(getDomNodeOrDie());
     }
 
     /**

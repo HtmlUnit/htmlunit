@@ -844,4 +844,108 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Button has no 'required' concept, so this uses setCustomValidity() to
+     * force an invalid state instead.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"invalid fired", "false"})
+    public void buttonCheckValidityFiresInvalidEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.addEventListener('invalid', function() { log('invalid fired'); });\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void buttonCheckValidityDoesNotFireInvalidWhenActuallyValid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.addEventListener('invalid', function() { log('unexpected invalid fired'); });\n"
+            + "    log(b.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void buttonCheckValidityDoesNotFireInvalidOnDisabledControl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.addEventListener('invalid', function() { log('unexpected invalid fired'); });\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit' disabled>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"invalid fired", "false"})
+    public void buttonReportValidityFiresInvalidEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    b.addEventListener('invalid', function() { log('invalid fired'); });\n"
+            + "    b.setCustomValidity('some error');\n"
+            + "    log(b.reportValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b' type='submit'>btn</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

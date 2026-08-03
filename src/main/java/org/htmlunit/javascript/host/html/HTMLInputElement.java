@@ -732,8 +732,7 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        final HtmlInput input = getDomNodeOrDie();
-        return !input.willValidate() || input.isValid();
+        return ValidatableHTMLElement.doCheckValidity(getDomNodeOrDie());
     }
 
     /**
@@ -742,7 +741,7 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxFunction
     public boolean reportValidity() {
-        return checkValidity();
+        return ValidatableHTMLElement.doCheckValidity(getDomNodeOrDie());
     }
 
     /**

@@ -1024,4 +1024,62 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * A fieldset with a custom validity message set must
+     * never fire 'invalid' via checkValidity().
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void fieldsetCheckValidityNeverFiresInvalidEvenWithCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var f = document.getElementById('f');\n"
+                + "      f.addEventListener('invalid', function() { log('unexpected invalid fired'); });\n"
+                + "      f.setCustomValidity('some error');\n"
+                + "      log(f.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <fieldset id='f'></fieldset>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The reportValidity() must also never focus the fieldset, since it
+     * never counts as invalid in the first place.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void fieldsetReportValidityNeverFocusesEvenWithCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var f = document.getElementById('f');\n"
+                + "      f.setCustomValidity('some error');\n"
+                + "      log(f.reportValidity());\n"
+                + "      log(document.activeElement === f);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <fieldset id='f'></fieldset>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -374,8 +374,7 @@ public class HTMLTextAreaElement extends HTMLElement {
      */
     @JsxFunction
     public boolean checkValidity() {
-        final HtmlTextArea textArea = getDomNodeOrDie();
-        return !textArea.willValidate() || textArea.isValid();
+        return ValidatableHTMLElement.doCheckValidity(getDomNodeOrDie());
     }
 
     /**
@@ -384,7 +383,7 @@ public class HTMLTextAreaElement extends HTMLElement {
      */
     @JsxFunction
     public boolean reportValidity() {
-        return checkValidity();
+        return ValidatableHTMLElement.doReportValidity(getDomNodeOrDie());
     }
 
     /**

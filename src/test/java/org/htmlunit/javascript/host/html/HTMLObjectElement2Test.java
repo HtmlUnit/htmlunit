@@ -244,4 +244,61 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
 //
 //        loadPageVerifyTitle2(html);
 //    }
+
+    /**
+     * A object with a custom validity message set must
+     * never fire 'invalid' via checkValidity().
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void objectCheckValidityNeverFiresInvalidEvenWithCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var o = document.getElementById('o');\n"
+                + "      o.addEventListener('invalid', function() { log('unexpected invalid fired'); });\n"
+                + "      o.setCustomValidity('some error');\n"
+                + "      log(o.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='o'></object>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The reportValidity() must also never focus the object.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void objectReportValidityNeverFocusesEvenWithCustomValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var o = document.getElementById('o');\n"
+                + "      o.setCustomValidity('some error');\n"
+                + "      log(o.reportValidity());\n"
+                + "      log(document.activeElement === o);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='o'></object>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

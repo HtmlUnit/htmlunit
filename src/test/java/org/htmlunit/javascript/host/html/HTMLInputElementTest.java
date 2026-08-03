@@ -3609,4 +3609,109 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"invalid fired", "false"})
+    public void elementCheckValidityFiresInvalidEventDirectly() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i1 = document.getElementById('i1');\n"
+            + "    i1.addEventListener('invalid', function() {\n"
+            + "      log('invalid fired');\n"
+            + "    });\n"
+            + "    log(i1.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i1' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void checkValidityDoesNotFireInvalidWhenActuallyValid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.addEventListener('invalid', function() { log('unexpected invalid fired'); });\n"
+            + "    log(i.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='filled' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Companion negative check for a BARRED (disabled) control: even though a
+     * disabled+required+empty input has an underlying constraint violation,
+     * 'invalid' must not fire since it's excluded from validation entirely.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void checkValidityDoesNotFireInvalidOnDisabledControl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.addEventListener('invalid', function() { log('unexpected invalid fired'); });\n"
+            + "    log(i.checkValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='' required disabled>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"invalid fired", "false"})
+    public void inputReportValidityFiresInvalidEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.addEventListener('invalid', function() { log('invalid fired'); });\n"
+            + "    log(i.reportValidity());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input id='i' type='text' value='' required>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
