@@ -261,7 +261,7 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"false", "false", "true", "some error"})
+    @Alerts({"false", "false", "true", ""})
     public void setCustomValidityOnFieldset_doesNotAffectCheckValidity() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
