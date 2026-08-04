@@ -1847,17 +1847,17 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                     "true",
                     "§§URL§§", "1"})
     @HtmlUnitNYI(FF = {"null",
-            " 210 ",
-            "false",
-            "false-false-false-false-false-false-false-false-false-true-false",
-            "true",
-            "§§URL§§", "1"},
+                       " 210 ",
+                       "false",
+                       "true-false-false-false-false-false-false-false-false-false-false",
+                       "true",
+                       "§§URL§§", "1"},
             FF_ESR = {"null",
-                    " 210 ",
-                    "false",
-                    "false-false-false-false-false-false-false-false-false-true-false",
-                    "true",
-                    "§§URL§§", "1"})
+                      " 210 ",
+                      "false",
+                      "true-false-false-false-false-false-false-false-false-false-false",
+                      "true",
+                      "§§URL§§", "1"})
     public void patternValidationTrimType() throws Exception {
         validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k'>\n", "", " 210 ");
     }
