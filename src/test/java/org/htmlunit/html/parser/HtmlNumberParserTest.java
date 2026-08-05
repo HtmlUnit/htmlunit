@@ -61,13 +61,19 @@ public class HtmlNumberParserTest {
     @Test
     public void validExponent() {
         valid(
+            "0e0",
+            "-0e0",
+            "01e2",
+            "123E0",
             "1e0",
             "1e1",
             "1e+1",
             "1e-1",
             ".5e2",
             "1.e2",
-            "-1.5E-123");
+            "-1.5E-123",
+            "1e999999",
+            "1e-999999");
     }
 
     /**
@@ -99,7 +105,13 @@ public class HtmlNumberParserTest {
         invalid(
             "+.5",
             "1.",
-            "-123.");
+            "-123.",
+            "..",
+            "...",
+            ".1.",
+            "..1",
+            "-.",
+            "-.e1");
     }
 
     /**
@@ -114,7 +126,14 @@ public class HtmlNumberParserTest {
             "1e+",
             "1e-",
             ".e1",
-            "+1E999");
+            "+1E999",
+            "1e++1",
+            "1e--1",
+            "1e+-1",
+            "1e-+1",
+            "1E",
+            "1E+",
+            "1E-");
     }
 
     /**
@@ -172,6 +191,17 @@ public class HtmlNumberParserTest {
             assertFalse(HtmlNumberParser.isValid(value), value);
             assertNull(HtmlNumberParser.parse(value), value);
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void parse() {
+        assertEquals(new BigDecimal("123"), HtmlNumberParser.parse("123"));
+        assertEquals(new BigDecimal("1.5"), HtmlNumberParser.parse("1.5"));
+        assertEquals(new BigDecimal("1E2"), HtmlNumberParser.parse("1e2"));
+        assertEquals(new BigDecimal("0.01"), HtmlNumberParser.parse("1e-2"));
     }
 
     /**
@@ -274,6 +304,9 @@ public class HtmlNumberParserTest {
     public void emptyAndNullAreInvalid() {
         assertFalse(HtmlNumberParser.isValid(""));
         assertFalse(HtmlNumberParser.isValid(null));
+
+        assertNull(HtmlNumberParser.parse(""));
+        assertNull(HtmlNumberParser.parse(null));
     }
 
     /**
@@ -281,8 +314,16 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void leadingZerosAccepted() {
-        // untested against real browsers so far -- worth a WebDriver-level
-        // confirmation too, not just this unit-level check
-        assertTrue(HtmlNumberParser.isValid("007"));
+        assertEquals(new BigDecimal("7"), HtmlNumberParser.parse("007"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void plusSignInExponentStillAccepted() {
+        assertTrue(HtmlNumberParser.isValid("1e+2"));
+        assertEquals(new BigDecimal("1E2"), HtmlNumberParser.parse("1e+2"));
+    }
+
 }
