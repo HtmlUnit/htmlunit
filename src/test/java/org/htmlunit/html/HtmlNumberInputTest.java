@@ -42,6 +42,124 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class HtmlNumberInputTest extends WebDriverTestCase {
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1234", "-12.34", "", "4.321", "", "4", "", "0", "", "-0", "", "", "", ""})
+    public void getSetValue() throws Exception {
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    let i = document.getElementById('tester');\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = '-12.34';\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = '+12.34';\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = 4.321;\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = 'ab';\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = 4;\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = '7 ';\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = 0;\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = '+';\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = '-0';\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = '-';\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = '1.';\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = '-34.';\n"
+                + "    log(i.value);\n"
+
+                + "    i.value = '.';\n"
+                + "    log(i.value);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form id='form1'>\n"
+                + "    <input type='number' name='tester' id='tester' value='1234'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(htmlContent);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234", "-12.34", "", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "", "", ""},
+            FF = {"1234", "-12.34", "", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "1", "-34", ""},
+            FF_ESR = {"1234", "-12.34", "+12.34", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "1", "-34", ""})
+    public void getValue() throws Exception {
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log(document.getElementById('t1').value);\n"
+                + "    log(document.getElementById('t2').value);\n"
+                + "    log(document.getElementById('t3').value);\n"
+                + "    log(document.getElementById('t4').value);\n"
+                + "    log(document.getElementById('t5').value);\n"
+                + "    log(document.getElementById('t6').value);\n"
+                + "    log(document.getElementById('t7').value);\n"
+                + "    log(document.getElementById('t8').value);\n"
+                + "    log(document.getElementById('t9').value);\n"
+                + "    log(document.getElementById('t10').value);\n"
+                + "    log(document.getElementById('t11').value);\n"
+                + "    log(document.getElementById('t12').value);\n"
+                + "    log(document.getElementById('t13').value);\n"
+                + "    log(document.getElementById('t14').value);\n"
+                + "    log(document.getElementById('t15').value);\n"
+                + "    log(document.getElementById('t16').value);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form id='form1'>\n"
+                + "    <input type='number' name='t1' id='t1' value='1234'>\n"
+                + "    <input type='number' name='t2' id='t2' value='-12.34'>\n"
+                + "    <input type='number' name='t3' id='t3' value='+12.34'>\n"
+                + "    <input type='number' name='t4' id='t4' value='4.321'>\n"
+                + "    <input type='number' name='t5' id='t5' value='ab'>\n"
+                + "    <input type='number' name='t6' id='t6' value=''>\n"
+                + "    <input type='number' name='t7' id='t7'>\n"
+                + "    <input type='number' name='t8' id='t8' value=4>\n"
+                + "    <input type='number' name='t9' id='t9' value='7 '>\n"
+                + "    <input type='number' name='t10' id='t10' value=' 7.4'>\n"
+                + "    <input type='number' name='t11' id='t11' value='+'>\n"
+                + "    <input type='number' name='t12' id='t12' value='-0'>\n"
+                + "    <input type='number' name='t13' id='t13' value='-0'>\n"
+                + "    <input type='number' name='t14' id='t14' value='1.'>\n"
+                + "    <input type='number' name='t15' id='t15' value='-34.'>\n"
+                + "    <input type='number' name='t16' id='t16' value='.'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(htmlContent);
+    }
+
+    /**
      * Verifies getVisibleText().
      * @throws Exception if the test fails
      */
@@ -2160,5 +2278,284 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         }
         assertEquals(getExpectedAlerts()[5], getMockWebConnection().getLastWebRequest().getUrl());
         assertEquals(Integer.parseInt(getExpectedAlerts()[6]), getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * Matches the maxValidation boundary already covered for min:
+     * a value EQUAL to max must NOT be an overflow.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void maxValidationBoundary_valueEqualsMax() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var foo = document.getElementById('foo');\n"
+                + "    log(foo.checkValidity());\n"
+                + "    log(foo.validity.rangeOverflow);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <input type='number' max='10' id='foo' value='10'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A malformed (non-numeric) value, checked against the FULL
+     * validity state (not just the aggregate checkValidity() boolean) --
+     * badInput must be true while rangeOverflow/rangeUnderflow/stepMismatch
+     * all stay false, even though min/max/step are all present and would
+     * otherwise be checkable.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "false", "false", "false", "false", "true"})
+    public void badInputFullValidityState_malformedValueNotRangeOrStep() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var i = document.getElementById('i');\n"
+                + "    i.value = 'abc';\n"
+                + "    log(i.value);\n"
+
+                + "    log(i.validity.badInput);\n"
+                + "    log(i.validity.rangeOverflow);\n"
+                + "    log(i.validity.rangeUnderflow);\n"
+                + "    log(i.validity.stepMismatch);\n"
+                + "    log(i.validity.valid);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input id='i' type='number' max='10' min='0' step='2'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Same as above, but for a sign-only value ('-') specifically -- a
+     * different unparseable-intermediate-state case than plain garbage text.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "false", "false", "false", "false"})
+    public void badInputFullValidityState_signOnlyNotRangeOrStep() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var i = document.getElementById('i');\n"
+                + "    i.value = '-';\n"
+                + "    log(i.value);\n"
+
+                + "    log(i.validity.badInput);\n"
+                + "    log(i.validity.rangeOverflow);\n"
+                + "    log(i.validity.rangeUnderflow);\n"
+                + "    log(i.validity.stepMismatch);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input id='i' type='number' max='10' min='0' step='2'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void validationMessageNonEmptyForRangeOverflow() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var i = document.getElementById('i');\n"
+                + "    log(i.validationMessage.length > 0);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input id='i' type='number' value='50' max='10'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The validationMessage must be empty for a valid value.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("")
+    public void validationMessageEmptyWhenValid() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log(document.getElementById('i').validationMessage);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input id='i' type='number' value='5'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The customError must take priority over rangeOverflow in
+     * validationMessage.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "custom message wins"})
+    public void validationMessageCustomErrorBeatsRangeOverflow() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var i = document.getElementById('i');\n"
+                + "    i.setCustomValidity('custom message wins');\n"
+                + "    log(i.validity.rangeOverflow);\n"
+                + "    log(i.validity.customError);\n"
+                + "    log(i.validationMessage);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input id='i' type='number' value='50' max='10'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void reportValidityMatchesCheckValidity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var i = document.getElementById('i');\n"
+                + "    log(i.checkValidity());\n"
+                + "    log(i.reportValidity());\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input id='i' type='number' value='50' max='10'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"invalid fired","false"})
+    public void checkValidityFiresInvalidEventForRangeOverflow() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var i = document.getElementById('i');\n"
+                + "    i.addEventListener('invalid', function() { log('invalid fired'); });\n"
+                + "    log(i.checkValidity());\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input id='i' type='number' value='50' max='10'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void checkValidityDoesNotFireInvalidWhenInRange() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var i = document.getElementById('i');\n"
+                + "    i.addEventListener('invalid', function() { log('unexpected invalid fired'); });\n"
+                + "    log(i.checkValidity());\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input id='i' type='number' value='5' max='10'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A DISABLED input with a genuinely out-of-range value must
+     * report checkValidity() true -- the existing willValidate() test (o1-o5)
+     * checks disabled/hidden/readonly/style generically, but never combines
+     * disabled with an actual constraint-violating value the way this does.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void rangeOverflowIgnoredWhenDisabled() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var editable = document.getElementById('editable');\n"
+                + "    var disabled = document.getElementById('disabled');\n"
+                + "    log(editable.checkValidity());\n"
+                + "    log(disabled.checkValidity());\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input id='editable' type='number' value='50' max='10'>\n"
+                + "    <input id='disabled' type='number' value='50' max='10' disabled>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

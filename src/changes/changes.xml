@@ -8,6 +8,16 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+		HtmlNumberInput
+            <action type="fix" dev="rbri">
+                HTMLNumberInput value property getter no longer uses a format that matches the browser locale.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLNumberInput now sanitizes the value in the setter, not in the getter as before.
+            </action>
+            <action type="add" dev="rbri">
+                Add a new Html spec conform number parser - HtmlNumberParser and use it from HtmlNumberInput.
+            </action>
             <action type="add" dev="rbri">
                 Implemented the validationMessage property for HtmlButton, HtmlTextArea, HtmlInput, HtmlObject, HtmlOutput, and HtmlSelect.
             </action>

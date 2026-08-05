@@ -18,12 +18,10 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_ACCEPT_ALL;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
+import org.htmlunit.html.parser.HtmlNumberParser;
 import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.StringUtils;
 
@@ -53,8 +51,23 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
-        final String value = getValueAttribute();
-        if (!value.isEmpty() && !StringUtils.containsOnly(value, VALID_CHARS)) {
+        String value = getValueAttribute();
+        if (!value.isEmpty() && !HtmlNumberParser.isValid(value)) {
+            // Firefox (including ESR) is more lenient than Chrome/Edge when
+            // parsing the INITIAL 'value' ATTRIBUTE specifically -- this
+            // leniency does NOT apply to the .value setter (see
+            // HtmlNumberInputTest#getSetValue, which shows uniform strict
+            // rejection across all browsers there). Scoped narrowly to this
+            // constructor path only; HtmlNumberParser itself stays strict.
+            if (hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)
+                    && value.endsWith(".")) {
+                value = value.substring(0, value.length() - 1);
+                if (HtmlNumberParser.isValid(value)) {
+                    setRawValue(value);
+                    return;
+                }
+            }
+
             setRawValue("");
         }
     }
@@ -90,88 +103,13 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
      * {@inheritDoc}
      */
     @Override
-    public String getValue() {
-        final String raw = getRawValue();
-
-        if (StringUtils.isBlank(raw)) {
-            return "";
+    public void setValue(final String newValue) {
+        if (StringUtils.isBlank(newValue) || !HtmlNumberParser.isValid(newValue)) {
+            super.setValue("");
+            return;
         }
 
-        if (StringUtils.equalsChar('-', raw)
-                || StringUtils.equalsChar('+', raw)) {
-            return raw;
-        }
-
-        try {
-            final String lang = getPage().getWebClient().getBrowserVersion().getBrowserLanguage();
-            final NumberFormat format = NumberFormat.getInstance(Locale.forLanguageTag(lang));
-            format.parse(raw);
-
-            return raw.trim();
-        }
-        catch (final ParseException ignored) {
-            // ignore
-        }
-
-        if (hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
-            return raw;
-        }
-
-        return "";
-    }
-
-    /**
-     * Attempts to parse the current raw value as a well-formed number per
-     * this input's syntax rules (sign-only values, missing-step non-integer
-     * values, and anything BigDecimal itself rejects all count as
-     * unparseable). Centralizes what used to be duplicated, near-identically,
-     * across hasRangeOverflowValidityState(), hasRangeUnderflowValidityState(),
-     * and isStepMismatchValidityState().
-     *
-     * @return the parsed value, or {@code null} if the raw value is blank
-     *     OR is non-blank but not a well-formed number (the latter case is
-     *     what {@link #hasBadInputValidityState()} reports, NOT any of the
-     *     range/step methods -- callers here must not treat "unparseable"
-     *     as a range/step violation)
-     */
-    private BigDecimal parseNumericValue() {
-        String rawValue = getRawValue();
-        if (StringUtils.isBlank(rawValue)) {
-            return null;
-        }
-
-        if (!hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
-            rawValue = rawValue.replaceAll("\\s", "");
-        }
-        if (rawValue.isEmpty()) {
-            return null;
-        }
-
-        if (StringUtils.equalsChar('-', rawValue) || StringUtils.equalsChar('+', rawValue)) {
-            return null;
-        }
-
-        // if we have no step, the value has to be an integer
-        if (getStep().isEmpty()) {
-            String val = rawValue;
-            final int lastPos = val.length() - 1;
-            if (lastPos >= 0 && val.charAt(lastPos) == '.') {
-                if (hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
-                    return null;
-                }
-                val = val.substring(0, lastPos);
-            }
-            if (!StringUtils.containsOnly(val, VALID_INT_CHARS)) {
-                return null;
-            }
-        }
-
-        try {
-            return new BigDecimal(rawValue);
-        }
-        catch (final NumberFormatException e) {
-            return null;
-        }
+        super.setValue(newValue);
     }
 
     /**
@@ -210,7 +148,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return false;
         }
 
-        final BigDecimal value = parseNumericValue();
+        final BigDecimal value = HtmlNumberParser.parse(rawValue);
         if (value == null) {
             return false;
         }
@@ -235,7 +173,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return false;
         }
 
-        final BigDecimal value = parseNumericValue();
+        final BigDecimal value = HtmlNumberParser.parse(rawValue);
         if (value == null) {
             return false;
         }
@@ -260,7 +198,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return false;
         }
 
-        final BigDecimal value = parseNumericValue();
+        final BigDecimal value = HtmlNumberParser.parse(rawValue);
         if (value == null) {
             return false;
         }
@@ -291,6 +229,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
         if (StringUtils.isBlank(rawValue)) {
             return false;
         }
-        return parseNumericValue() == null;
+
+        return !HtmlNumberParser.isValid(rawValue);
     }
 }
