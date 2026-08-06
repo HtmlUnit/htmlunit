@@ -51,22 +51,10 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
-        String value = getValueAttribute();
-        if (!value.isEmpty() && !HtmlNumberParser.isValid(value)) {
-            // Firefox (including ESR) is more lenient than Chrome/Edge when
-            // parsing the INITIAL 'value' ATTRIBUTE specifically -- this
-            // leniency does NOT apply to the .value setter (see
-            // HtmlNumberInputTest#getSetValue, which shows uniform strict
-            // rejection across all browsers there). Scoped narrowly to this
-            // constructor path only; HtmlNumberParser itself stays strict.
-            if (hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)
-                    && value.endsWith(".")) {
-                value = value.substring(0, value.length() - 1);
-                if (HtmlNumberParser.isValid(value)) {
-                    setRawValue(value);
-                    return;
-                }
-            }
+        final String value = getValueAttribute();
+        if (!value.isEmpty()
+                // Firefox is more lenient when parsing the INITIAL 'value' ATTRIBUTE specifically
+                && !HtmlNumberParser.isValid(value, false, hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE))) {
 
             setRawValue("");
         }
@@ -103,8 +91,41 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
      * {@inheritDoc}
      */
     @Override
+    public String getValue() {
+        String raw = getRawValue();
+
+        if (StringUtils.isBlank(raw)) {
+            return "";
+        }
+
+        if (StringUtils.equalsChar('-', raw) || StringUtils.equalsChar('+', raw)) {
+            return raw;
+        }
+
+        // Confirmed via real-browser testing (typeIntegerWithDot): mid-typing a
+        // trailing '.' with otherwise-valid digits before it (e.g. "1.") reports
+        // the pre-dot value ("1"), not "" and not the raw "1."
+        if (raw.endsWith(".")) {
+            raw = raw.substring(0, raw.length() - 1);
+        }
+
+        if (!HtmlNumberParser.isValid(raw, !hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE), false)) {
+            return "";
+        }
+
+        if (raw.length() > 1 && raw.charAt(0) == '+') {
+            raw = raw.substring(1, raw.length());
+        }
+
+        return raw;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setValue(final String newValue) {
-        if (StringUtils.isBlank(newValue) || !HtmlNumberParser.isValid(newValue)) {
+        if (StringUtils.isBlank(newValue) || !HtmlNumberParser.isValid(newValue, false, false)) {
             super.setValue("");
             return;
         }
@@ -148,7 +169,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return false;
         }
 
-        final BigDecimal value = HtmlNumberParser.parse(rawValue);
+        final BigDecimal value = HtmlNumberParser.parse(rawValue, true, true);
         if (value == null) {
             return false;
         }
@@ -173,7 +194,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return false;
         }
 
-        final BigDecimal value = HtmlNumberParser.parse(rawValue);
+        final BigDecimal value = HtmlNumberParser.parse(rawValue, true, true);
         if (value == null) {
             return false;
         }
@@ -198,14 +219,14 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return false;
         }
 
-        final BigDecimal value = HtmlNumberParser.parse(rawValue);
+        final BigDecimal value = HtmlNumberParser.parse(rawValue, true, true);
         if (value == null) {
             return false;
         }
 
-        final BigDecimal step = parseAttributeAsBigDecimal(getStep());
+        BigDecimal step = parseAttributeAsBigDecimal(getStep());
         if (step == null) {
-            return false;
+            step = BigDecimal.ONE;
         }
 
         BigDecimal min = parseAttributeAsBigDecimal(getMin());
@@ -230,6 +251,6 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return false;
         }
 
-        return !HtmlNumberParser.isValid(rawValue);
+        return !HtmlNumberParser.isValid(rawValue, !hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE), true);
     }
 }

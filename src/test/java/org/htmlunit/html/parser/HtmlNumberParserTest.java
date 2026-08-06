@@ -127,6 +127,7 @@ public class HtmlNumberParserTest {
             "1e-",
             ".e1",
             "+1E999",
+            "1.e+",
             "1e++1",
             "1e--1",
             "1e+-1",
@@ -181,15 +182,15 @@ public class HtmlNumberParserTest {
 
     private static void valid(final String... values) {
         for (final String value : values) {
-            assertTrue(HtmlNumberParser.isValid(value), value);
-            assertNotNull(HtmlNumberParser.parse(value), value);
+            assertTrue(HtmlNumberParser.isValid(value, false, false), value);
+            assertNotNull(HtmlNumberParser.parse(value, false, false), value);
         }
     }
 
     private static void invalid(final String... values) {
         for (final String value : values) {
-            assertFalse(HtmlNumberParser.isValid(value), value);
-            assertNull(HtmlNumberParser.parse(value), value);
+            assertFalse(HtmlNumberParser.isValid(value, false, false), value);
+            assertNull(HtmlNumberParser.parse(value, false, false), value);
         }
     }
 
@@ -198,10 +199,11 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void parse() {
-        assertEquals(new BigDecimal("123"), HtmlNumberParser.parse("123"));
-        assertEquals(new BigDecimal("1.5"), HtmlNumberParser.parse("1.5"));
-        assertEquals(new BigDecimal("1E2"), HtmlNumberParser.parse("1e2"));
-        assertEquals(new BigDecimal("0.01"), HtmlNumberParser.parse("1e-2"));
+        assertEquals(new BigDecimal("123"), HtmlNumberParser.parse("123", false, false));
+        assertEquals(new BigDecimal("1.5"), HtmlNumberParser.parse("1.5", false, false));
+        assertEquals(new BigDecimal("1E2"), HtmlNumberParser.parse("1e2", false, false));
+        assertEquals(new BigDecimal("1E5"), HtmlNumberParser.parse("1e+5", false, false));
+        assertEquals(new BigDecimal("0.01"), HtmlNumberParser.parse("1e-2", false, false));
     }
 
     /**
@@ -209,9 +211,9 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void validPlainIntegers() {
-        assertTrue(HtmlNumberParser.isValid("0"));
-        assertTrue(HtmlNumberParser.isValid("1234"));
-        assertTrue(HtmlNumberParser.isValid("-1234"));
+        assertTrue(HtmlNumberParser.isValid("0", false, false));
+        assertTrue(HtmlNumberParser.isValid("1234", false, false));
+        assertTrue(HtmlNumberParser.isValid("-1234", false, false));
     }
 
     /**
@@ -219,9 +221,9 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void leadingPlusIsInvalid() {
-        assertFalse(HtmlNumberParser.isValid("+12.34"));
-        assertFalse(HtmlNumberParser.isValid("+1234"));
-        assertFalse(HtmlNumberParser.isValid("+"));
+        assertFalse(HtmlNumberParser.isValid("+12.34", false, false));
+        assertFalse(HtmlNumberParser.isValid("+1234", false, false));
+        assertFalse(HtmlNumberParser.isValid("+", false, false));
     }
 
     /**
@@ -229,9 +231,9 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void exponentSignBothAccepted() {
-        assertTrue(HtmlNumberParser.isValid("1e+5"));
-        assertTrue(HtmlNumberParser.isValid("1e-5"));
-        assertTrue(HtmlNumberParser.isValid("1E5"));
+        assertTrue(HtmlNumberParser.isValid("1e+5", false, false));
+        assertTrue(HtmlNumberParser.isValid("1e-5", false, false));
+        assertTrue(HtmlNumberParser.isValid("1E5", false, false));
     }
 
     /**
@@ -239,9 +241,9 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void signOnlyIsInvalid() {
-        assertFalse(HtmlNumberParser.isValid("-"));
-        assertFalse(HtmlNumberParser.isValid("+"));
-        assertFalse(HtmlNumberParser.isValid("."));
+        assertFalse(HtmlNumberParser.isValid("-", false, false));
+        assertFalse(HtmlNumberParser.isValid("+", false, false));
+        assertFalse(HtmlNumberParser.isValid(".", false, false));
     }
 
     /**
@@ -249,8 +251,8 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void trailingWhitespaceIsInvalid() {
-        assertFalse(HtmlNumberParser.isValid("7 "));
-        assertFalse(HtmlNumberParser.isValid(" 7"));
+        assertFalse(HtmlNumberParser.isValid("7 ", false, false));
+        assertFalse(HtmlNumberParser.isValid(" 7", false, false));
     }
 
     /**
@@ -261,8 +263,8 @@ public class HtmlNumberParserTest {
         // parse() succeeding is all that matters here -- the CALLER must
         // keep the original raw string ("-0"), not regenerate it from the
         // returned BigDecimal, which normalizes to "0"
-        assertTrue(HtmlNumberParser.isValid("-0"));
-        final BigDecimal parsed = HtmlNumberParser.parse("-0");
+        assertTrue(HtmlNumberParser.isValid("-0", false, false));
+        final BigDecimal parsed = HtmlNumberParser.parse("-0", false, false);
         // documents the trap: this is "0", NOT "-0" -- callers must not
         // use parsed.toString() as the sanitized value
         assertEquals("0", parsed.toString());
@@ -273,7 +275,7 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void lonePeriodIsInvalid() {
-        assertFalse(HtmlNumberParser.isValid("."));
+        assertFalse(HtmlNumberParser.isValid(".", false, false));
     }
 
     /**
@@ -281,7 +283,7 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void leadingDecimalPointNoIntegerPart() {
-        assertTrue(HtmlNumberParser.isValid(".5"));
+        assertTrue(HtmlNumberParser.isValid(".5", false, false));
     }
 
     /**
@@ -289,12 +291,9 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void trailingDecimalPointNoFractionalPart() {
-        // OPEN QUESTION, tied to the existing JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE
-        // feature flag in HtmlNumberInput -- real browsers are known to
-        // disagree on this exact case; confirm which behavior(s) this
-        // parser needs to support before locking in an assertion here
+        assertFalse(HtmlNumberParser.isValid("1.", false, false));
 
-        assertFalse(HtmlNumberParser.isValid("1."));
+        assertTrue(HtmlNumberParser.isValid("1.", false, true));
     }
 
     /**
@@ -302,11 +301,11 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void emptyAndNullAreInvalid() {
-        assertFalse(HtmlNumberParser.isValid(""));
-        assertFalse(HtmlNumberParser.isValid(null));
+        assertFalse(HtmlNumberParser.isValid("", false, false));
+        assertFalse(HtmlNumberParser.isValid(null, false, false));
 
-        assertNull(HtmlNumberParser.parse(""));
-        assertNull(HtmlNumberParser.parse(null));
+        assertNull(HtmlNumberParser.parse("", false, false));
+        assertNull(HtmlNumberParser.parse(null, false, false));
     }
 
     /**
@@ -314,7 +313,8 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void leadingZerosAccepted() {
-        assertEquals(new BigDecimal("7"), HtmlNumberParser.parse("007"));
+        assertTrue(HtmlNumberParser.isValid("007", false, false));
+        assertEquals(new BigDecimal("7"), HtmlNumberParser.parse("007", false, false));
     }
 
     /**
@@ -322,8 +322,8 @@ public class HtmlNumberParserTest {
      */
     @Test
     public void plusSignInExponentStillAccepted() {
-        assertTrue(HtmlNumberParser.isValid("1e+2"));
-        assertEquals(new BigDecimal("1E2"), HtmlNumberParser.parse("1e+2"));
+        assertTrue(HtmlNumberParser.isValid("1e+2", false, false));
+        assertEquals(new BigDecimal("1E2"), HtmlNumberParser.parse("1e+2", false, false));
     }
 
 }

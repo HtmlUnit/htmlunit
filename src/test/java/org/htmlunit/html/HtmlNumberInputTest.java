@@ -111,6 +111,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1234", "-12.34", "", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "", "", ""},
             FF = {"1234", "-12.34", "", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "1", "-34", ""},
             FF_ESR = {"1234", "-12.34", "+12.34", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "1", "-34", ""})
+    @HtmlUnitNYI(FF_ESR = {"1234", "-12.34", "", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "1", "-34", ""})
     public void getValue() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -248,6 +249,111 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"", "true-false-false-false-false-false-false-false-false-false-false", "false",
+                       "5", "false-false-false-false-false-false-false-false-false-true-false", "true"},
+            FF = {"", "true-false-false-false-false-false-false-false-false-false-false", "false",
+                  "", "true-false-false-false-false-false-false-false-false-false-false", "false"},
+            FF_ESR = {"", "true-false-false-false-false-false-false-false-false-false-false", "false",
+                      "+5", "false-false-false-false-false-false-false-false-false-true-false", "true"})
+    @HtmlUnitNYI(
+            FF_ESR = {"", "true-false-false-false-false-false-false-false-false-false-false", "false",
+                    "", "true-false-false-false-false-false-false-false-false-false-false", "false"})
+    public void typeLeadingPlusWithDigits() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                + "+ '-' + s.customError"
+                + "+ '-' + s.patternMismatch"
+                + "+ '-' + s.rangeOverflow"
+                + "+ '-' + s.rangeUnderflow"
+                + "+ '-' + s.stepMismatch"
+                + "+ '-' + s.tooLong"
+                + "+ '-' + s.tooShort"
+                + " + '-' + s.typeMismatch"
+                + " + '-' + s.valid"
+                + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('inpt');\n"
+                + "    log(input.value);\n"
+                + "    logValidityState(input.validity);\n"
+                + "    log(input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt'>\n"
+                + "  <button id='check' type='button' onclick='test()'>check</button>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("inpt")).sendKeys("+");
+        driver.findElement(By.id("check")).click();
+
+        driver.findElement(By.id("inpt")).sendKeys("5");
+        driver.findElement(By.id("check")).click();
+
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "true-false-false-false-false-false-false-false-false-false-false", "false",
+             "-5", "false-false-false-false-false-false-false-false-false-true-false", "true"})
+    public void typeLeadingMinusWithDigits() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                + "+ '-' + s.customError"
+                + "+ '-' + s.patternMismatch"
+                + "+ '-' + s.rangeOverflow"
+                + "+ '-' + s.rangeUnderflow"
+                + "+ '-' + s.stepMismatch"
+                + "+ '-' + s.tooLong"
+                + "+ '-' + s.tooShort"
+                + " + '-' + s.typeMismatch"
+                + " + '-' + s.valid"
+                + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('inpt');\n"
+                + "    log(input.value);\n"
+                + "    logValidityState(input.validity);\n"
+                + "    log(input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt'>\n"
+                + "  <button id='check' type='button' onclick='test()'>check</button>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("inpt")).sendKeys("-");
+        driver.findElement(By.id("check")).click();
+
+        driver.findElement(By.id("inpt")).sendKeys("5");
+        driver.findElement(By.id("check")).click();
+
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"123", "true"})
     public void typeIntegerValid() throws Exception {
         final String html = DOCTYPE_HTML
@@ -346,22 +452,34 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1", "1--null-true", "1", "1--null-true", "1.2", "1.2--null-false"})
-    @HtmlUnitNYI(CHROME = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
-            EDGE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
-            FF = {"1", "1--null-true", "", "--null-false", "1.2", "1.2--null-false"},
-            FF_ESR = {"1", "1--null-true", "", "--null-false", "1.2", "1.2--null-false"})
+    @Alerts({"1", "1--null-true-false-false-false-false-false-false-false-false-false-true-false",
+             "1", "1--null-true-false-false-false-false-false-false-false-false-false-true-false",
+             "1.2", "1.2--null-false-false-false-false-false-false-true-false-false-false-false-false"})
     public void typeIntegerWithDot() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + "    function logValidityState(s) {\n"
+                + "      return s.badInput"
+                + "            + '-' + s.customError"
+                + "            + '-' + s.patternMismatch"
+                + "            + '-' + s.rangeOverflow"
+                + "            + '-' + s.rangeUnderflow"
+                + "            + '-' + s.stepMismatch"
+                + "            + '-' + s.tooLong"
+                + "            + '-' + s.tooShort"
+                + "            + '-' + s.typeMismatch"
+                + "            + '-' + s.valid"
+                + "            + '-' + s.valueMissing;\n"
+                + "    }\n"
                 + "  function test() {\n"
                 + "    var input = document.getElementById('inpt');\n"
                 + "    document.title = input.value + '-' "
-                + "+ input.defaultValue + '-' "
-                + "+ input.getAttribute('value')+ '-' "
-                + "+ input.checkValidity();\n"
+                + "                     + input.defaultValue + '-' "
+                + "                     + input.getAttribute('value') + '-' "
+                + "                     + input.checkValidity() + '-' "
+                + "                     + logValidityState(input.validity);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -1932,12 +2050,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({" 210 ",
-            "",
-            "true",
-            "false-false-false-false-false-false-false-false-false-true-false",
-            "true",
-            "§§URL§§?k=",
-            "2"})
+             "",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=",
+             "2"})
     public void patternValidationTrimInitial() throws Exception {
         validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k' value=' 210 '>\n", "", null);
     }
@@ -1947,31 +2065,19 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null",
-            "210",
-            "true",
-            "false-false-false-false-false-false-false-false-false-true-false",
-            "true",
-            "§§URL§§?k=210", "2"},
-            FF = {"null",
-                    "",
-                    "false",
-                    "true-false-false-false-false-false-false-false-false-false-false",
-                    "true",
-                    "§§URL§§", "1"},
-            FF_ESR = {"null",
-                    "",
-                    "false",
-                    "true-false-false-false-false-false-false-false-false-false-false",
-                    "true",
-                    "§§URL§§", "1"})
-    @HtmlUnitNYI(FF = {"null",
-                       " 210 ",
-                       "false",
-                       "true-false-false-false-false-false-false-false-false-false-false",
+                       "210",
                        "true",
-                       "§§URL§§", "1"},
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=210", "2"},
+            FF = {"null",
+                  "",
+                  "false",
+                  "true-false-false-false-false-false-false-false-false-false-false",
+                  "true",
+                  "§§URL§§", "1"},
             FF_ESR = {"null",
-                      " 210 ",
+                      "",
                       "false",
                       "true-false-false-false-false-false-false-false-false-false-false",
                       "true",

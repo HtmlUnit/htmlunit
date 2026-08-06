@@ -53,12 +53,14 @@ public final class HtmlNumberParser {
      * </p>
      *
      * @param value the string to validate
+     * @param acceptLeadingPlus set this to true to accept strings like "+7"
+     * @param acceptDotAtEnd set this to true to accept strings like "1."
      * @return {@code true} if the supplied string is a valid HTML floating-point
      *         number; {@code false} otherwise
-     * @see #parse(String)
+     * @see #parse(String, boolean, boolean)
      */
-    public static boolean isValid(final String value) {
-        return parse(value) != null;
+    public static boolean isValid(final String value, final boolean acceptLeadingPlus, final boolean acceptDotAtEnd) {
+        return parse(value, acceptLeadingPlus, acceptDotAtEnd) != null;
     }
 
     /**
@@ -74,10 +76,12 @@ public final class HtmlNumberParser {
      * </p>
      *
      * @param value the string to parse
+     * @param acceptLeadingPlus set this to true to accept strings like "+7"
+     * @param acceptDotAtEnd set this to true to accept strings like "1."
      * @return the parsed value, or {@code null} if the supplied string is not a
      *         valid HTML floating-point number
      */
-    public static BigDecimal parse(final String value) {
+    public static BigDecimal parse(final String value, final boolean acceptLeadingPlus, final boolean acceptDotAtEnd) {
         if (value == null || value.isEmpty()) {
             return null;
         }
@@ -88,8 +92,17 @@ public final class HtmlNumberParser {
         final StringBuilder normalized = new StringBuilder(len + 5);
 
         // sign
-        if (value.charAt(pos) == '-') {
-            normalized.append(value.charAt(pos++));
+        final char sign = value.charAt(pos);
+        if (sign == '-') {
+            normalized.append(sign);
+            pos++;
+            if (pos == len) {
+                return null;
+            }
+        }
+        else if (acceptLeadingPlus && sign == '+') {
+            normalized.append(sign);
+            pos++;
             if (pos == len) {
                 return null;
             }
@@ -168,7 +181,8 @@ public final class HtmlNumberParser {
             return null;
         }
 
-        if (pos > 0 && value.charAt(pos - 1) == '.') {
+        if (!acceptDotAtEnd
+                && pos > 0 && value.charAt(pos - 1) == '.') {
             return null;
         }
 

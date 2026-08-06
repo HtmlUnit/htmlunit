@@ -8,7 +8,12 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
-		HtmlNumberInput
+            <action type="fix" dev="rbri">
+                HTMLNumberInput the different validation methods using a relexed version of the number parser.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLNumberInput value property getter still does some cleanup on the raw value (e.g. removes a trailing dot).
+            </action>
             <action type="fix" dev="rbri">
                 HTMLNumberInput value property getter no longer uses a format that matches the browser locale.
             </action>
