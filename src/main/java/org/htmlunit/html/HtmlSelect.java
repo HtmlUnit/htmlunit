@@ -16,6 +16,7 @@ package org.htmlunit.html;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -193,7 +194,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param index the index of the option to remove
      */
     public void removeOption(final int index) {
-        final ChildElementsIterator iterator = new ChildElementsIterator(this);
+        final Iterator<HtmlElement> iterator = getHtmlElementDescendants().iterator();
         int i = 0;
         while (iterator.hasNext()) {
             final DomElement element = iterator.next();
@@ -215,7 +216,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param newOption the new option to replace to indexed option
      */
     public void replaceOption(final int index, final HtmlOption newOption) {
-        final ChildElementsIterator iterator = new ChildElementsIterator(this);
+        final Iterator<HtmlElement> iterator = getHtmlElementDescendants().iterator();
         int i = 0;
         while (iterator.hasNext()) {
             final DomElement element = iterator.next();

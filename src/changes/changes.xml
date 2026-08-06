@@ -9,7 +9,10 @@
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
             <action type="fix" dev="rbri">
-                HTMLNumberInput the different validation methods using a relexed version of the number parser.
+                HtmlSelect methods removeOption() and replaceOption() support for optgroups fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLNumberInput the different validation methods using a relaxed version of the number parser.
             </action>
             <action type="fix" dev="rbri">
                 HTMLNumberInput value property getter still does some cleanup on the raw value (e.g. removes a trailing dot).
