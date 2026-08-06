@@ -69,6 +69,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         input.type("4711");
         assertEquals("", input.getValueAttribute());
         assertEquals("4711", input.getValue());
+        assertEquals("4711", input.getRawValue());
     }
 
     /**
@@ -95,6 +96,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
 
         assertEquals("", input.getValueAttribute());
         assertEquals("0815", input.getValue());
+        assertEquals("0815", input.getRawValue());
     }
 
     /**
@@ -121,6 +123,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
 
         assertEquals("", input.getValueAttribute());
         assertEquals("47110815", input.getValue());
+        assertEquals("47110815", input.getRawValue());
     }
 
     /**
@@ -147,6 +150,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
 
         assertEquals("", input.getValueAttribute());
         assertEquals("0815", input.getValue());
+        assertEquals("0815", input.getRawValue());
     }
 
     /**
@@ -308,6 +312,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         input.type("9876543333210");
         assertEquals("123456789012345", input.getValueAttribute());
         assertEquals("9876543333210", input.getValue());
+        assertEquals("9876543333210", input.getRawValue());
     }
 
     /**
@@ -323,15 +328,22 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         t.type('6');
         assertEquals("", t.getValueAttribute());
         assertEquals("246", t.getValue());
+        assertEquals("246", t.getRawValue());
+
         t.type(KeyboardEvent.DOM_VK_LEFT);
         assertEquals("", t.getValueAttribute());
         assertEquals("246", t.getValue());
+        assertEquals("246", t.getRawValue());
+
         t.type('0');
         assertEquals("", t.getValueAttribute());
         assertEquals("2406", t.getValue());
+        assertEquals("2406", t.getRawValue());
+
         t.type(KeyboardEvent.DOM_VK_SPACE);
         assertEquals("", t.getValueAttribute());
-        assertEquals("240 6", t.getValue());
+        assertEquals("", t.getValue());
+        assertEquals("240 6", t.getRawValue());
     }
 
     /**
@@ -347,13 +359,18 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         t.type('7');
         assertEquals("", t.getValueAttribute());
         assertEquals("247", t.getValue());
+        assertEquals("247", t.getRawValue());
+
         t.type(KeyboardEvent.DOM_VK_LEFT);
         t.type(KeyboardEvent.DOM_VK_LEFT);
         assertEquals("", t.getValueAttribute());
         assertEquals("247", t.getValue());
+        assertEquals("247", t.getRawValue());
+
         t.type(KeyboardEvent.DOM_VK_DELETE);
         assertEquals("", t.getValueAttribute());
         assertEquals("27", t.getValue());
+        assertEquals("27", t.getRawValue());
     }
 
     /**
@@ -383,6 +400,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
         assertEquals(getExpectedAlerts()[4], input.getValue());
+        assertEquals(getExpectedAlerts()[4], input.getRawValue());
     }
 
     /**
@@ -412,5 +430,6 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
         assertEquals(getExpectedAlerts()[4], input.getValue());
+        assertEquals(getExpectedAlerts()[4], input.getRawValue());
     }
 }
