@@ -59,7 +59,7 @@ public interface ValidatableHTMLElement {
 
     /**
      * Interactively validates -- same static check and 'invalid' event as
-     * {@link #doCheckValidity()}, but additionally focuses the element if
+     * {@link #doCheckValidity(HtmlElement)}, but additionally focuses the element if
      * it's invalid.
      * @param elem the {@link HtmlElement} to work on
      * @return {@code true} if valid or barred from validation, {@code false} otherwise

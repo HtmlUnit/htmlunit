@@ -154,9 +154,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
     /**
      * {@inheritDoc}
      * A raw value that isn't even a well-formed number is
-     * {@link #hasBadInputValidityState()}'s concern, not a range violation
-     * -- distinguished here via {@link #parseNumericValue()} returning
-     * {@code null} only for genuinely malformed (non-blank) input.
+     * {@link #hasBadInputValidityState()}'s concern, not a range violation.
      */
     @Override
     public boolean hasRangeOverflowValidityState() {

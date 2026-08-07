@@ -115,7 +115,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * conditions can occur if the element is in single select mode:</p>
      * <ul>
      *   <li>if multiple options are erroneously selected, the last one is returned</li>
-     *   <li>if no options are selected, the first one is returned</li>
+     *   <li>if no options are selected, an empty list is returned</li>
      * </ul>
      *
      * @return the currently selected options
