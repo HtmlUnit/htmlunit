@@ -43,8 +43,8 @@
         <htmlunit-csp.version>5.4.0</htmlunit-csp.version>
         <htmlunit-cssparser.version>5.4.0</htmlunit-cssparser.version>
         <htmlunit-corejs.version>5.4.0-SNAPSHOT</htmlunit-corejs.version>
-        <htmlunit-neko.version>5.4.0-SNAPSHOT</htmlunit-neko.version>
-        <htmlunit-websocketclient.version>5.4.0-SNAPSHOT</htmlunit-websocketclient.version>
+        <htmlunit-neko.version>5.4.0</htmlunit-neko.version>
+        <htmlunit-websocketclient.version>5.4.0</htmlunit-websocketclient.version>
         <htmlunit-xpath.version>5.4.0</htmlunit-xpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
@@ -59,7 +59,7 @@
         <selenium.devtools.artifactId>selenium-devtools-v150</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
-        <junit.version>6.1.2</junit.version>
+        <junit.version>6.1.3</junit.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>12.1.12</jetty.version>
         <quercus.version>4.0.66</quercus.version>
