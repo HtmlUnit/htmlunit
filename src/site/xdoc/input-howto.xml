@@ -1,0 +1,794 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Working with Form Controls: Usage, Values and Validation</title>
+        <author email="rbri@GargoyleSoftware.com">Ronald Brill</author>
+    </properties>
+
+    <body>
+        <section name="Content" id="content">
+            <macro name="toc">
+            </macro>
+        </section>
+
+        <section name="Overview">
+            <p>
+                This page is a guide to working with HTML form controls through HtmlUnit's
+                plain Java API. It covers three things, in order:
+                the general shape of the form-control classes and the everyday operations you'll use
+                on them; the different, easily-confused ways to read and write a control's
+                <em>value</em>; and the full HTML Constraint Validation API as HtmlUnit implements it.
+            </p>
+        </section>
+
+        <section name="The form control class hierarchy">
+            <p>
+                Every form control in a parsed page is represented by a subclass of
+                <code>HtmlElement</code>. The two most important base types are:
+            </p>
+            <ul>
+                <li><code>HtmlInput</code> -- the base class for every <code>&lt;input&gt;</code>
+                    element, regardless of its <code>type</code> attribute.</li>
+                <li><code>HtmlSelectableTextInput</code> -- an <code>HtmlInput</code> subclass that
+                    adds text-selection and simulated-typing support, used by every text-like input
+                    type.</li>
+            </ul>
+            <p>
+                HtmlUnit creates a different concrete class per <code>type</code> attribute value, so
+                that each type can implement exactly the constraints and behavior real browsers give
+                it. The most commonly used ones:
+            </p>
+            <ul>
+                <li><code>HtmlTextInput</code> (<code>type="text"</code>, and the default when
+                    <code>type</code> is absent or unrecognized)</li>
+                <li><code>HtmlNumberInput</code>, <code>HtmlEmailInput</code>, <code>HtmlUrlInput</code>,
+                    <code>HtmlTelInput</code>, <code>HtmlSearchInput</code>, <code>HtmlPasswordInput</code>
+                    -- all text-like, each with its own additional constraint (see
+                    <em>Constraint validation</em> below)</li>
+                <li><code>HtmlCheckBoxInput</code> and <code>HtmlRadioButtonInput</code> -- boolean
+                    "checked" controls rather than text controls</li>
+                <li><code>HtmlFileInput</code> -- represents a file-upload control; see
+                    <em>File inputs</em> below</li>
+                <li><code>HtmlSubmitInput</code>, <code>HtmlResetInput</code>, <code>HtmlButtonInput</code>,
+                    <code>HtmlImageInput</code> -- the various button-like input types</li>
+                <li><code>HtmlHiddenInput</code> -- never a candidate for constraint validation and
+                    never focusable, but otherwise a plain value holder</li>
+                <li><code>HtmlDateInput</code>, <code>HtmlTimeInput</code>, <code>HtmlColorInput</code>,
+                    <code>HtmlRangeInput</code> and the other less common HTML5 types each have their
+                    own class as well.</li>
+            </ul>
+            <p>
+                Outside the <code>&lt;input&gt;</code> family, <code>HtmlSelect</code>,
+                <code>HtmlTextArea</code> and <code>HtmlButton</code> (the standalone
+                <code>&lt;button&gt;</code> element, not <code>&lt;input type="submit"&gt;</code>) are
+                the other major form-control classes; both value handling and validation apply to
+                them too, and are covered later on this page.
+            </p>
+            <p>
+                If a script changes an input's <code>type</code> attribute at runtime, HtmlUnit
+                internally replaces the Java object backing that DOM node with an instance of the
+                correct class for the new type, carrying the old value across via
+                <code>adjustValueAfterTypeChange()</code> -- each subclass decides for itself what,
+                if anything, of the old value still makes sense under the new type (for example,
+                switching <em>into</em> <code>type="file"</code> always clears the value, since a
+                real browser can never carry a text value over into a file selection).
+            </p>
+        </section>
+
+        <section name="Finding form controls">
+            <p>
+                The usual DOM-style lookups work as expected --
+                <code>page.getHtmlElementById(String)</code>,
+                <code>page.getElementByName(String)</code>, or the generic
+                <code>DomElement</code> traversal/query methods. <code>HtmlForm</code> additionally
+                offers form-scoped convenience lookups that are usually more direct when you already
+                know which form you're working with:
+            </p>
+            <source><![CDATA[
+final HtmlForm form = page.getFormByName("login");
+
+final HtmlTextInput username = form.getInputByName("username");
+final List<HtmlInput> allChecked = form.getInputsByValue("on"); // e.g. matching checkboxes
+final List<HtmlRadioButtonInput> options = form.getRadioButtonsByName("plan");]]></source>
+            <p>
+                <code>HtmlForm.getElements()</code> / the JavaScript-visible <code>elements</code>
+                collection return every "listed" control associated with the form -- inputs, selects,
+                textareas, buttons, fieldsets and objects -- in document order, regardless of whether
+                they're physically nested inside the <code>&lt;form&gt;</code> tag or associated with
+                it purely via a <code>form="..."</code> attribute elsewhere in the page.
+            </p>
+        </section>
+
+        <section name="Clicking, typing, focus and selection">
+            <p>
+                <code>click()</code> simulates a real mouse click, including whatever side effects a
+                real click has for that specific control -- a submit button submits its form, a reset
+                button resets it, a checkbox toggles its checked state, and so on. This is almost
+                always the right method to call to simulate user interaction with a button, rather
+                than calling a lower-level state-changing method directly.
+            </p>
+            <p>
+                <code>type(String)</code> (available on any <code>HtmlSelectableTextInput</code> or
+                <code>HtmlTextArea</code>) simulates real keystroke-by-keystroke typing, character by
+                character, including firing the same key and input events a real browser would, and
+                respecting whatever character-level restrictions the control type imposes (for
+                example, a number input silently ignores non-numeric keystrokes unless the relevant
+                browser-version feature says otherwise). This is different from -- and usually more
+                faithful to real-browser behavior than -- calling <code>setValue(String)</code>,
+                which behaves like scripted assignment (comparable to JavaScript's <code>.value =</code>)
+                rather than user input. See <em>Three ways to set a value</em> below for the concrete
+                differences this can produce.
+            </p>
+            <p>
+                <code>focus()</code> and <code>removeFocus()</code> move keyboard focus to or away
+                from a control, the same way clicking into a field or tabbing away from it would.
+                <code>select()</code> (on selectable text controls) selects the entire current value,
+                and <code>getSelectedText()</code>, <code>getSelectionStart()</code>/
+                <code>setSelectionStart(int)</code> and <code>getSelectionEnd()</code>/
+                <code>setSelectionEnd(int)</code> give fine-grained access to the current text
+                selection/cursor position, mirroring the same-named JavaScript properties.
+            </p>
+        </section>
+
+        <section name="Checkboxes and radio buttons">
+            <p>
+                <code>HtmlCheckBoxInput</code> and <code>HtmlRadioButtonInput</code> don't hold a
+                free-form text value the way other inputs do -- their state is a simple boolean,
+                accessed via <code>isChecked()</code> / <code>setChecked(boolean)</code>. Calling
+                <code>setChecked(true)</code> on a radio button automatically unchecks every other
+                radio button in the same named group within the same form, exactly as a real browser
+                would.
+            </p>
+            <p>
+                <code>isDefaultChecked()</code> reflects the <code>checked</code> attribute as parsed
+                from markup -- the state the control reverts to on a form reset -- independently of
+                whatever the live <code>isChecked()</code> state currently is, the same relationship
+                <code>getDefaultValue()</code> has to <code>getValue()</code> for text controls.
+            </p>
+            <source><![CDATA[
+final HtmlRadioButtonInput yearly = form.getRadioButtonsByName("plan").stream()
+        .filter(r -> "yearly".equals(r.getValueAttribute()))
+        .findFirst().orElseThrow();
+yearly.setChecked(true);]]></source>
+        </section>
+
+        <section name="File inputs">
+            <p>
+                <code>HtmlFileInput</code> deliberately does <em>not</em> support setting its value
+                to an arbitrary string the way a text input does -- real browsers never allow a page
+                to pre-fill a file chooser's selection for security reasons, and HtmlUnit follows the
+                same rule. Instead, use one of:
+            </p>
+            <ul>
+                <li><code>setFiles(File...)</code> -- point the control at one or more real files on
+                    disk, as if the user had picked them in a native file-chooser dialog. Passing
+                    more than one file requires the <code>multiple</code> attribute to be present, or
+                    an <code>IllegalStateException</code> is thrown.</li>
+                <li><code>setDirectory(File)</code> -- recursively selects every file in a directory,
+                    for controls with the non-standard <code>webkitdirectory</code> attribute.</li>
+                <li><code>setData(byte[])</code> / <code>getData()</code> and
+                    <code>setContentType(String)</code> / <code>getContentType()</code> -- an
+                    HtmlUnit-only convenience with no browser equivalent at all: lets a test supply
+                    the bytes (and MIME type) to actually submit, without needing a real file on
+                    disk. When set, this in-memory data is used during form submission instead of
+                    reading the selected file's real contents.</li>
+            </ul>
+            <p>
+                <code>getValue()</code> on a file input never returns the real file path -- it
+                returns the empty string if nothing is selected, or the same
+                <code>C:\fakepath\filename</code>-style placeholder real browsers use, for the same
+                privacy reason setting an arbitrary value isn't allowed in the first place.
+            </p>
+        </section>
+
+        <section name="Buttons and form submission">
+            <p>
+                <code>HtmlButton</code> and the button-like <code>HtmlInput</code> subtypes
+                (<code>HtmlSubmitInput</code>, <code>HtmlResetInput</code>, <code>HtmlButtonInput</code>)
+                all respond to <code>click()</code> according to their effective type:
+                <code>submit</code> (the default if no <code>type</code> attribute is present)
+                submits the enclosing form, <code>reset</code> resets it, and <code>button</code>
+                does neither on its own -- it only runs whatever <code>onclick</code> handler script
+                the page attaches, if any.
+            </p>
+            <p>
+                Submitting a form runs the form's constraint validation first (see
+                <em>checkValidity(), reportValidity() and the 'invalid' event</em> below) unless the
+                form has the <code>novalidate</code> attribute, or the specific button that triggered
+                submission has <code>formnovalidate</code>. If validation fails, the submission never
+                happens -- no request is sent -- exactly as in a real browser.
+            </p>
+            <p>
+                Resetting a form (via a reset button's <code>click()</code>, or calling
+                <code>HtmlForm.reset()</code> directly) calls <code>reset()</code> on every one of the
+                form's associated controls in turn. Most controls restore their live value from their
+                current default value and clear their internal "dirty" state (see the next section);
+                a plain <code>HtmlButton</code>'s own <code>reset()</code> is intentionally a no-op,
+                since a button has nothing to reset.
+            </p>
+        </section>
+
+        <section name="Value handling">
+            <p>
+                The remainder of this page covers two topics in detail: how to read and write a
+                control's value correctly, and how HtmlUnit's constraint-validation API works. Both
+                apply across every text-like <code>HtmlInput</code> subtype, <code>HtmlTextArea</code>,
+                and (with its own specific rules, covered separately) <code>HtmlSelect</code>.
+            </p>
+        </section>
+
+        <section name="getValue(), getValueAttribute() and getRawValue()">
+            <p>
+                These three methods are easy to confuse because they can return the same string in
+                the simplest cases -- but they answer three different questions, and they diverge as
+                soon as a script (or a real user) interacts with the field.
+            </p>
+            <p>
+                <strong>getValueAttribute()</strong> reads the literal <code>value="..."</code>
+                attribute as it currently stands in the HTML/DOM tree. This is the control's
+                <em>default value</em> -- what the field would reset back to on a form reset. It
+                never changes just because someone typed into the field or called
+                <code>setValue()</code>; it only changes if the attribute itself is modified (via
+                <code>setValueAttribute()</code>, or the equivalent <code>defaultValue</code>
+                property from JavaScript).
+            </p>
+            <p>
+                <strong>getRawValue()</strong> returns the control's current, unsanitized internal
+                value -- whatever is "really" stored right now, decoupled from the DOM attribute.
+                The first time a script calls <code>setValue()</code> or the user types into the
+                field, the control's <em>dirty value flag</em> is set, and from that point on
+                <code>getRawValue()</code> reflects the live edited content, independent of whatever
+                the <code>value</code> attribute says.
+            </p>
+            <p>
+                <strong>getValue()</strong> is what most code should actually call. For a plain text
+                input it is effectively the sanitized form of <code>getRawValue()</code>. For some
+                control types (see below for <code>HtmlNumberInput</code>) it additionally normalizes
+                or rejects content that <code>getRawValue()</code> would return unchanged.
+            </p>
+            <source><![CDATA[
+public void value() throws Exception {
+    try (WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.wetator.org/testform/");
+        final HtmlTextInput input = page.getHtmlElementById("project");
+
+        // before any edit, all three agree
+        System.out.println(input.getValueAttribute());  // "initial"
+        System.out.println(input.getRawValue());        // "initial"
+        System.out.println(input.getValue());           // "initial"
+
+        input.type("my fancy HtmlUnit project");
+
+        // the attribute never moved -- it is still the DEFAULT value
+        System.out.println(input.getValueAttribute()); // "initial"
+        // but the live value has
+        System.out.println(input.getRawValue());        // "edited"
+        System.out.println(input.getValue());           // "edited"
+    }
+}]]></source>
+            <p>
+                Calling <code>reset()</code> (the same method a form's reset algorithm calls on every
+                one of its controls) clears the dirty flag and re-derives the live value from the
+                <em>current</em> default value -- not necessarily the value the page had when it was
+                first loaded, since a script may have changed <code>defaultValue</code>/the
+                <code>value</code> attribute in the meantime.
+            </p>
+            <source><![CDATA[
+input.setDefaultValue("changed-default");
+input.reset();
+System.out.println(input.getValue()); // "changed-default", not "initial"]]></source>
+        </section>
+
+        <section name="Three ways to set a value">
+            <p>
+                A text-like input's value can be changed through three genuinely different code
+                paths, and it's worth being explicit about them because they don't always apply the
+                same rules -- this matters most for <code>HtmlNumberInput</code> (see the next
+                section), but the general distinction applies more broadly:
+            </p>
+            <ul>
+                <li><strong>The initial <code>value</code> attribute</strong>, parsed once when the
+                    page loads.</li>
+                <li><strong><code>setValue(String)</code></strong> (and the equivalent JavaScript
+                    <code>.value</code> setter) -- scripted assignment, comparable to a program
+                    directly overwriting the field, with no simulation of individual keystrokes.</li>
+                <li><strong><code>type(String)</code></strong> -- simulated real typing, character by
+                    character, which can expose different intermediate states than a single
+                    <code>setValue()</code> call would, and respects per-keystroke input filtering
+                    that <code>setValue()</code> does not.</li>
+            </ul>
+            <p>
+                For most control types these three paths end up agreeing on the final result. Where
+                they diverge, it's almost always because a specific control type applies extra
+                sanitization or leniency to one path but not another -- see the next section for a
+                concrete, fully worked-out example.
+            </p>
+        </section>
+
+        <section name="HtmlNumberInput: parsing and sanitization">
+            <p>
+                <code>HtmlNumberInput</code> layers extra behavior on top of the three methods above,
+                because a number input's textual content has to be checked against the HTML
+                specification's own, fairly strict, floating-point-number grammar -- which is
+                <em>not</em> the same grammar as a Java or JavaScript numeric literal.
+            </p>
+            <p>
+                The grammar (implemented by the internal <code>HtmlNumberParser</code> helper) accepts:
+            </p>
+            <ul>
+                <li>an optional single leading <code>-</code> (a leading <code>+</code> is
+                    <em>not</em> accepted -- this is a common surprise, since it differs from
+                    JavaScript's own <code>Number()</code>/<code>parseFloat()</code>),</li>
+                <li>one or more ASCII digits, optionally with a single decimal point and further
+                    digits,</li>
+                <li>an optional exponent (<code>e</code> or <code>E</code>), which -- unlike the
+                    number's own leading sign -- <em>does</em> accept both <code>+</code> and
+                    <code>-</code>,</li>
+                <li>nothing else: no whitespace anywhere, no thousands separators, no
+                    <code>NaN</code>/<code>Infinity</code>, no hex/binary/octal notation.</li>
+            </ul>
+            <p>
+                <code>getValue()</code> on a number input returns the value trimmed and
+                locale-normalized if it parses successfully, or the empty string if it does not
+                (unless the rare <code>JS_INPUT_NUMBER_ACCEPT_ALL</code> browser feature is active for
+                the configured <code>BrowserVersion</code>, in which case the raw text is returned
+                even when unparseable). <code>getRawValue()</code> always returns the literal
+                characters that are currently in the field, valid or not.
+            </p>
+            <source><![CDATA[
+final HtmlNumberInput number = page.getHtmlElementById("qty");
+
+number.setValue("42");
+System.out.println(number.getValue());    // "42"
+
+number.setValue("not-a-number");
+System.out.println(number.getValue());    // ""      -- sanitized away
+System.out.println(number.getRawValue()); // "not-a-number" -- untouched
+
+number.setValue("+5");
+System.out.println(number.getValue());    // "" -- leading '+' is never valid]]></source>
+            <p>
+                This is the clearest example of the three value-setting paths genuinely disagreeing.
+                Take the string <code>"1."</code> -- a digit followed by a decimal point with nothing
+                after it:
+            </p>
+            <ul>
+                <li>Set via the <strong>initial <code>value</code> attribute</strong>, some configured
+                    browser versions silently correct it to <code>"1"</code>, while others reject it
+                    outright to the empty string.</li>
+                <li>Set via <strong><code>setValue("1.")</code></strong>, it is rejected outright to
+                    the empty string, uniformly, with no browser-specific leniency at all.</li>
+                <li>Reached via <strong><code>type("1.")</code></strong> (simulating the user typing
+                    <code>1</code> then <code>.</code>), the field's live value after those two
+                    keystrokes reports <code>"1"</code> -- the longest already-valid prefix of what
+                    has been typed so far -- not the raw <code>"1."</code> and not the empty string.
+                    A further keystroke continues from the full typed text, so typing <code>2</code>
+                    next correctly produces <code>"1.2"</code>, not <code>"12"</code>.</li>
+            </ul>
+            <p>
+                If your test needs to simulate a user filling in a number field, prefer
+                <code>type(String)</code> over <code>setValue(String)</code> whenever the exact,
+                keystroke-by-keystroke intermediate state matters -- for example, when asserting on
+                <code>checkValidity()</code> partway through typing, rather than only after the field
+                is fully filled in.
+            </p>
+        </section>
+
+        <section name="HtmlTextArea: the dirty value flag and reset">
+            <p>
+                A <code>&lt;textarea&gt;</code>'s value works differently from an
+                <code>&lt;input&gt;</code>'s in one important respect: an input's value always lives
+                in a plain string attribute, but a textarea's <em>default</em> value is its child
+                text content -- the literal text between the opening and closing tags. HtmlUnit
+                exposes the live value through <code>getText()</code> / <code>setText(String)</code>
+                (mirroring the JavaScript <code>value</code> property), and the default through
+                <code>getDefaultValue()</code> / <code>setDefaultValue(String)</code> (mirroring
+                <code>defaultValue</code>), the same pairing as for <code>HtmlInput</code>.
+            </p>
+            <p>
+                The relationship between the two is governed by a <em>dirty value flag</em>, exactly
+                as the HTML specification defines it. While the flag is clean (the textarea has never
+                been edited by script or by the user), <code>getText()</code> is always computed
+                fresh from the current child text content -- so mutating the DOM children directly
+                (for example, via <code>setDefaultValue()</code>, or lower-level DOM manipulation)
+                is immediately reflected in <code>getText()</code>. The moment <code>setText()</code>
+                is called (or the user types into the field), the flag becomes dirty, and from then
+                on the live value is held independently -- child-content changes no longer affect it
+                at all, until a reset clears the flag again.
+            </p>
+            <source><![CDATA[
+final HtmlTextArea comments = page.getHtmlElementById("comments"); // <textarea>seed</textarea>
+
+System.out.println(comments.getText()); // "seed"
+
+comments.setText("edited");             // dirties the flag
+System.out.println(comments.getText()); // "edited"
+
+// once dirty, further changes to the underlying default no longer
+// affect the live value
+comments.setDefaultValue("new-default");
+System.out.println(comments.getText());        // still "edited"
+System.out.println(comments.getDefaultValue()); // "new-default"]]></source>
+            <p>
+                <strong>reset()</strong> clears the dirty flag and re-derives the live value from
+                whatever the child text content <em>currently</em> is -- not the page's originally
+                parsed text, and not necessarily whatever <code>getDefaultValue()</code> last
+                returned either, if the children were mutated some other way while the flag was
+                still dirty (in which case those mutations had no visible effect on
+                <code>getText()</code> until this exact moment, since they happened while the flag
+                was dirty and therefore ignored).
+            </p>
+            <source><![CDATA[
+comments.reset();
+System.out.println(comments.getText()); // "new-default" -- picks up the current child content]]></source>
+            <p>
+                Like text-type inputs, setting the value to the value it already holds is treated as
+                a near no-op: the dirty flag still becomes (or stays) set, but the text entry cursor
+                is <em>not</em> moved, unlike a genuine change, which always moves the cursor to the
+                end of the new value. <code>readonly</code> is a real, spec-supported attribute for
+                <code>&lt;textarea&gt;</code> (unlike for <code>&lt;select&gt;</code> or
+                <code>&lt;button&gt;</code>, covered below) and bars the control from constraint
+                validation the same way <code>disabled</code> does.
+            </p>
+            <p>
+                Cloning a textarea (<code>cloneNode(boolean)</code>) correctly carries the dirty flag
+                and live value across to the clone as independent state -- a clone of a dirtied
+                textarea keeps the dirtied value, decoupled from its own (independently cloned) child
+                content, and typing into the original afterward has no effect on the clone or vice
+                versa.
+            </p>
+        </section>
+
+
+        <section name="Constraint validation">
+            <p>
+                Every control that can participate in HTML's Constraint Validation API implements
+                <code>ValidatableHtmlElement</code>. The methods on that interface answer three
+                related but distinct questions:
+            </p>
+            <ol>
+                <li><strong>Does this control take part in validation at all?</strong> --
+                    <code>willValidate()</code></li>
+                <li><strong>If it does take part, does its current value satisfy its own
+                    constraints?</strong> -- <code>isValid()</code> /
+                    <code>isValidValidityState()</code> and the individual
+                    <code>isXxxValidityState()</code>/<code>hasXxxValidityState()</code> methods</li>
+                <li><strong>Combining both of the above, is the control valid right now, and why
+                    not if it isn't?</strong> -- <code>checkValidity()</code>,
+                    <code>reportValidity()</code>, <code>getValidationMessage()</code></li>
+            </ol>
+            <p>
+                It is important to understand that question 2 <em>on its own</em> deliberately
+                ignores question 1. A disabled, empty, required text input is "invalid" in the pure
+                constraint-checking sense (<code>isValueMissingValidityState()</code> returns
+                <code>true</code>), but it is also barred from validation entirely
+                (<code>willValidate()</code> returns <code>false</code>), and the two are combined
+                only at the higher-level methods. This is exactly how real browsers behave: a
+                disabled field never blocks form submission and never shows a validation message,
+                no matter how "wrong" its content looks.
+            </p>
+        </section>
+
+        <section name="willValidate(): is this control barred from validation?">
+            <p>
+                <code>willValidate()</code> returns <code>false</code> if the control is barred from
+                constraint validation, and <code>true</code> otherwise. A control is barred when any
+                of the following apply:
+            </p>
+            <ul>
+                <li>it has the <code>disabled</code> attribute set, directly or inherited from an
+                    enclosing <code>&lt;fieldset disabled&gt;</code> -- <em>except</em> for controls
+                    that are themselves inside that fieldset's first <code>&lt;legend&gt;</code>
+                    child, which are exempt from the fieldset's disabling,</li>
+                <li>it is a text-like input or a textarea with the <code>readonly</code> attribute
+                    set (readonly on a <code>&lt;select&gt;</code> or <code>&lt;button&gt;</code> has
+                    no such effect, since neither element supports a real <code>readonly</code>
+                    attribute),</li>
+                <li>it is an <code>&lt;input type="hidden"&gt;</code>,</li>
+                <li>it is a <code>&lt;button&gt;</code> with <code>type="button"</code> or
+                    <code>type="reset"</code> (only <code>type="submit"</code> buttons -- the
+                    default -- participate in validation),</li>
+                <li>it is a <code>&lt;fieldset&gt;</code> or <code>&lt;object&gt;</code> element --
+                    these always report <code>false</code>, since neither is itself a candidate for
+                    constraint validation, regardless of any attribute.</li>
+            </ul>
+            <source><![CDATA[
+final HtmlTextInput required = page.getHtmlElementById("required");
+final HtmlTextInput disabled = page.getHtmlElementById("disabledRequired");
+
+System.out.println(required.willValidate()); // true
+System.out.println(disabled.willValidate());  // false, even though it's also required+empty]]></source>
+        </section>
+
+        <section name="isValid(), isValidValidityState() and the individual validity checks">
+            <p>
+                <code>isValid()</code> (and the near-identical <code>isValidValidityState()</code>)
+                answer the pure constraint question, without regard to
+                <code>willValidate()</code>. Internally each returns <code>true</code> only if none
+                of the following individual checks report a problem. Each check corresponds directly
+                to one property on the standard DOM <code>ValidityState</code> object, and each is
+                individually callable, which is useful for building a custom error message without
+                relying on the generic text from <code>getValidationMessage()</code>:
+            </p>
+            <ul>
+                <li><code>isCustomErrorValidityState()</code> -- <code>true</code> if
+                    <code>setCustomValidity(String)</code> was called with a non-empty message and
+                    it has not since been cleared</li>
+                <li><code>isValueMissingValidityState()</code> -- <code>true</code> if the control
+                    has a <code>required</code> attribute and no value (for <code>&lt;select&gt;</code>,
+                    this specifically means the auto-selected first option has an empty value and
+                    nothing else was explicitly selected)</li>
+                <li><code>hasPatternMismatchValidityState()</code> -- value present but doesn't
+                    match the <code>pattern</code> attribute</li>
+                <li><code>isTooLongValidityState()</code> / <code>isTooShortValidityState()</code>
+                    -- value longer/shorter than <code>maxlength</code>/<code>minlength</code>
+                    (only once the control's value has actually been edited by the user or a
+                    script -- an over-long initial attribute value alone does not trigger this)</li>
+                <li><code>hasTypeMismatchValidityState()</code> -- value doesn't match the required
+                    syntax for the control's type (e.g. <code>email</code>, <code>url</code>)</li>
+                <li><code>hasRangeOverflowValidityState()</code> /
+                    <code>hasRangeUnderflowValidityState()</code> -- numeric value outside
+                    <code>max</code>/<code>min</code> (number/range inputs)</li>
+                <li><code>isStepMismatchValidityState()</code> -- numeric value not aligned to the
+                    <code>step</code> attribute, measured from <code>min</code> (or zero, if
+                    <code>min</code> is absent)</li>
+                <li><code>hasBadInputValidityState()</code> -- the user's input could not be
+                    converted at all (for example, a number input whose text simply doesn't parse
+                    as a number). This is distinct from a range or step violation: a value that
+                    fails to parse can never be "too big" or "misaligned", it just isn't a number in
+                    the first place.</li>
+            </ul>
+            <source><![CDATA[
+final HtmlNumberInput qty = page.getHtmlElementById("qty");
+qty.setValue("not-a-number");
+
+System.out.println(qty.hasBadInputValidityState());       // true
+System.out.println(qty.hasRangeOverflowValidityState());  // false -- there's no number to compare
+System.out.println(qty.isStepMismatchValidityState());    // false -- same reason
+System.out.println(qty.isValid());                        // false, because of badInput]]></source>
+        </section>
+
+        <section name="checkValidity(), reportValidity() and the 'invalid' event">
+            <p>
+                These are the two methods application code (and HtmlUnit's own form-submission logic)
+                should normally call, rather than combining <code>willValidate()</code> and
+                <code>isValid()</code> by hand every time.
+            </p>
+            <p>
+                <code>checkValidity()</code> performs <em>static</em> validation: it returns
+                <code>true</code> if the control is either barred from validation or actually valid,
+                and <code>false</code> otherwise. If it returns <code>false</code>, a cancelable
+                <code>invalid</code> DOM event is fired on the control -- but no focus change happens.
+            </p>
+            <p>
+                <code>reportValidity()</code> does exactly the same static check and fires the same
+                event, but additionally moves focus to the control if it is invalid. This mirrors
+                the real-browser distinction between a script silently checking validity
+                (<code>checkValidity()</code>) and a user-facing "please fix this field"
+                interaction (<code>reportValidity()</code>).
+            </p>
+            <p>
+                A <code>&lt;form&gt;</code>'s own <code>checkValidity()</code>/
+                <code>reportValidity()</code> run this same check across every one of the form's
+                associated controls. Barred controls are skipped entirely -- neither counted as
+                passing nor failing -- and every genuinely invalid control (not just the first one
+                found) fires its own <code>invalid</code> event. <code>reportValidity()</code> at
+                the form level focuses only the <em>first</em> invalid control it finds.
+            </p>
+            <source><![CDATA[
+final HtmlForm form = page.getHtmlElementById("myForm");
+if (!form.checkValidity()) {
+    // at least one control is genuinely invalid; every failing control
+    // has already had its 'invalid' event fired
+}]]></source>
+        </section>
+
+        <section name="Custom validity and validation messages">
+            <p>
+                <code>setCustomValidity(String message)</code> lets application code (or a test)
+                mark a control as invalid for a reason the built-in constraints don't express, by
+                supplying a non-empty message. Passing an empty string clears it again. A non-empty
+                custom message always wins over every other constraint -- but, like every other
+                constraint, it is still ignored entirely if the control is barred from validation
+                (<code>willValidate()</code> is <code>false</code>).
+            </p>
+            <p>
+                <code>getCustomValidity()</code> returns the raw string most recently passed to
+                <code>setCustomValidity()</code>, or the empty string if none is currently set.
+            </p>
+            <p>
+                <code>getValidationMessage()</code> returns a human-readable description of why the
+                control currently fails validation, or the empty string if it is valid or barred.
+                If a custom validity message is set, that exact string is returned unchanged.
+                Otherwise, the message describes whichever single built-in constraint is failing,
+                checked in this priority order: custom error, pattern mismatch, range overflow,
+                range underflow, step mismatch, too long, too short, type mismatch, bad input, value
+                missing. The wording for each built-in case is generic by design (for example,
+                <code>"Please fill out this field."</code> for a missing value) -- some control
+                types with control-specific data available (such as a number input's actual
+                <code>min</code>/<code>max</code>) may produce a more specific message that
+                interpolates the relevant value.
+            </p>
+            <source><![CDATA[
+final HtmlTextInput email = page.getHtmlElementById("email");
+email.setCustomValidity("We already have an account with this address.");
+
+System.out.println(email.checkValidity());        // false
+System.out.println(email.getValidationMessage());  // "We already have an account with this address."
+
+email.setCustomValidity("");
+System.out.println(email.checkValidity());        // back to whatever the built-in constraints say]]></source>
+        </section>
+
+        <section name="HtmlButton: validation specifics">
+            <p>
+                <code>HtmlButton</code> (the standalone <code>&lt;button&gt;</code> element)
+                participates in constraint validation, but its story is much simpler than a text
+                control's -- a button has no value the user edits, so none of the built-in
+                constraints that depend on a value (<code>required</code>, <code>pattern</code>,
+                <code>minlength</code>/<code>maxlength</code>, and so on) apply to it at all. The
+                only way a button ever becomes invalid is an explicit
+                <code>setCustomValidity(String)</code> call.
+            </p>
+            <p>
+                Whether a button is even a <em>candidate</em> for validation in the first place
+                depends entirely on its effective <code>type</code>: only <code>type="submit"</code>
+                (the default, if no <code>type</code> attribute is present) participates.
+                <code>type="button"</code> and <code>type="reset"</code> are both barred --
+                <code>willValidate()</code> is <code>false</code> for either, exactly as for a
+                disabled control, and for the same reason <code>checkValidity()</code> ignores
+                <em>any</em> custom validity message set on such a button.
+            </p>
+            <source><![CDATA[
+final HtmlButton plain = page.getHtmlElementById("plainBtn"); // <button type="button">
+plain.setCustomValidity("this will never surface");
+
+System.out.println(plain.willValidate());  // false
+System.out.println(plain.checkValidity()); // true -- barred, so the custom message is ignored]]></source>
+            <p>
+                <code>HtmlButton</code> has no standard <code>readonly</code> attribute at all (per
+                spec, only text-like inputs and <code>&lt;textarea&gt;</code> support it) -- if
+                <code>isReadOnly()</code> reports <code>true</code> for a button in your markup,
+                treat that as informational only; it has no effect on <code>willValidate()</code> or
+                any other real browser behavior.
+            </p>
+            <p>
+                Because a button carries no editable value, <code>reset()</code>,
+                <code>setDefaultValue(String)</code> and <code>getDefaultValue()</code> are all
+                intentionally no-ops on <code>HtmlButton</code> -- this is by design, not a missing
+                feature, matching the fact that a real button genuinely has nothing to reset. A
+                button's <code>value</code> attribute (accessible via <code>getValueAttribute()</code>
+                / <code>setValueAttribute(String)</code>) is submitted as part of the form data when
+                the button triggers submission, but it isn't something a user edits the way a text
+                input's value is, so there's no dirty-flag concept for it at all.
+            </p>
+        </section>
+
+
+        <section name="HtmlSelect: validation specifics">
+            <p>
+                <code>HtmlSelect</code> has its own value-and-selection model, since a
+                <code>&lt;select&gt;</code> doesn't hold a single text value the way an
+                <code>&lt;input&gt;</code> does -- it holds a set of <code>&lt;option&gt;</code>
+                children, zero or more of which are selected.
+            </p>
+            <p>
+                <code>getOptions()</code>, <code>getOptionSize()</code>, <code>getOption(int)</code>
+                and <code>getSelectedOptions()</code> all search the <em>entire descendant tree</em>
+                of the select, not just its direct children -- so options grouped inside one or more
+                <code>&lt;optgroup&gt;</code> elements are found correctly, exactly as in a real
+                browser:
+            </p>
+            <source><![CDATA[
+<select id="country">
+  <optgroup label="Europe">
+    <option value="de">Germany</option>
+    <option value="fr">France</option>
+  </optgroup>
+  <optgroup label="Asia">
+    <option value="jp">Japan</option>
+  </optgroup>
+</select>]]></source>
+            <source><![CDATA[
+final HtmlSelect select = page.getHtmlElementById("country");
+System.out.println(select.getOptionSize()); // 3 -- both optgroups are searched]]></source>
+            <p>
+                <strong>getSelectedOptions()</strong> behaves differently depending on whether the
+                select allows multiple selections (<code>isMultipleSelectEnabled()</code>):
+            </p>
+            <ul>
+                <li>in <strong>multiple-select mode</strong>, it returns every option whose
+                    <code>isSelected()</code> is <code>true</code>, in document order;</li>
+                <li>in <strong>single-select mode</strong>, if more than one option is (erroneously)
+                    marked selected, only the <em>last</em> one encountered in document order is
+                    returned; if nothing at all is currently selected, an <strong>empty list</strong>
+                    is returned -- it does <em>not</em> fall back to "the first option" on its own.</li>
+            </ul>
+            <p>
+                That last point is worth calling out explicitly: a single-select <code>&lt;select&gt;</code>
+                with at least one option is normally never in a truly unselected state, because
+                HtmlUnit automatically selects the first option for you once, when the page finishes
+                loading (if nothing else was explicitly selected), and again automatically after
+                removing or replacing options via <code>removeOption()</code>/
+                <code>replaceOption()</code>. But if every option is deselected some other way (for
+                example, calling <code>setSelectedIndex(-1)</code> directly, or removing the
+                <code>selected</code> state from script), <code>getSelectedOptions()</code> will
+                genuinely return an empty list until something re-establishes a selection.
+            </p>
+            <source><![CDATA[
+final HtmlSelect select = page.getHtmlElementById("country");
+
+// right after page load, single-select mode: the first option is
+// auto-selected if nothing else was
+System.out.println(select.getSelectedOptions()); // [Germany]
+
+select.setSelectedIndex(-1);
+System.out.println(select.getSelectedOptions()); // [] -- empty, not [Germany]
+
+select.setSelectedIndex(2);
+System.out.println(select.getSelectedOptions()); // [Japan]]]></source>
+            <p>
+                <code>getSelectedIndex()</code> / <code>setSelectedIndex(int)</code> give you the
+                same information as a plain integer index into <code>getOptions()</code> rather than
+                a list of <code>HtmlOption</code> objects; <code>getSelectedIndex()</code> returns
+                <code>-1</code> when nothing is selected, matching the empty-list case above.
+                Setting a negative or out-of-range index simply results in nothing being selected.
+            </p>
+        </section>
+
+        <section name="HtmlSelect: the size attribute and default selection">
+            <p>
+                <code>getSize()</code> returns the parsed <code>size</code> attribute as an
+                <code>int</code>, defaulting to <code>0</code> if the attribute is absent or isn't a
+                valid non-negative integer. This intentionally diverges from the HTML specification
+                itself, which defines the <em>default rendered</em> size as <code>1</code> for a
+                single select and <code>4</code> for a multiple select when the attribute is absent
+                -- <code>getSize()</code> is a raw attribute accessor, not a rendering computation, so
+                treat a return value of <code>0</code> as "no explicit size was set", not as a claim
+                about how the control would actually be drawn.
+            </p>
+            <p>
+                Whether a select gets a default selection at all depends on both
+                <code>isMultipleSelectEnabled()</code> and this size value: HtmlUnit auto-selects the
+                first option, once, when the page finishes loading, only if the select is in
+                single-select mode <em>and</em> its size is <code>1</code> or less (i.e. it renders as
+                a dropdown, not a scrollable list box) <em>and</em> nothing was already explicitly
+                selected in the markup.
+            </p>
+        </section>
+
+        <section name="HtmlSelect and required">
+            <p>
+                A <code>&lt;select required&gt;</code> follows the same
+                <code>isValueMissingValidityState()</code> mechanism described earlier, but the rule
+                for what counts as "missing" is specific to how a select's default selection works.
+                It only applies to a <strong>single-select</strong> select with size <code>1</code>
+                or less (the same rendering condition that triggers auto-selection, described above):
+                the value is considered missing if the option that ends up selected is the
+                <em>first</em> option in the list, and that first option's effective value is the
+                empty string, with nothing else explicitly selected instead.
+            </p>
+            <source><![CDATA[
+<select required>
+  <option value=""></option>
+  <option value="a">Option A</option>
+</select>]]></source>
+            <p>
+                For the select above, with nothing explicitly selected, the auto-selected first
+                option has an empty value -- so <code>isValid()</code> is <code>false</code> and
+                <code>checkValidity()</code> reports a missing value, exactly like a browser's native
+                validation would show a "please select an item" message. Explicitly selecting the
+                second option (either in markup with <code>selected</code>, or via
+                <code>setSelectedIndex(1)</code>) clears the missing-value state immediately.
+            </p>
+            <p>
+                A multiple-select, or a single-select with <code>size</code> greater than
+                <code>1</code>, is only considered to have a missing value if <em>literally nothing</em>
+                is selected at all -- there is no "empty first option" special case for those, since
+                browsers don't auto-select anything for them in the first place.
+            </p>
+        </section>
+
+    </body>
+</document>

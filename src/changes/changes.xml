@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+        <release version="5.4.0" date="August xx, 2026" description="Firefox 153, input validation, Bugfixes">
+            <action type="add" dev="rhino">
+                docu: Detailed description about input html elements usage.
+            </action>
+            <action type="add" dev="rhino">
+                core-js: ES2021 WeakRef and FinalizationRegistry with full standard compliance added.
+            </action>
             <action type="update" dev="rbri">
                 websocket-client: jetty updated to 12.1.12.
             </action>
@@ -133,6 +139,9 @@
             </action>
             <action type="update" dev="rbri">
                 neko: A new &lt;a&gt; start tag closes an &lt;a&gt; that is still open, even across intervening block elements.
+            </action>
+            <action type="add" dev="Rick Mitchell">
+                csp: Multi-policy AND query APIs added.
             </action>
             <action type="update" dev="rbri">
                 neko: Some performance optimizations and code cleanup.
