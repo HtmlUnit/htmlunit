@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.4.0" date="August xx, 2026" description="Firefox 153, input validation, Bugfixes">
+        <release version="5.4.0" date="August 07, 2026" description="Firefox 153, neko, input validation, Bugfixes">
             <action type="add" dev="rhino">
                 docu: Detailed description about input html elements usage.
             </action>
