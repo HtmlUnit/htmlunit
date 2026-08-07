@@ -17,9 +17,9 @@ package org.htmlunit.javascript.host;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.File;
-import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -233,6 +233,7 @@ public class URLTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function get(url) {\n"
             + "  try {\n"
             + "    var xhr = new XMLHttpRequest();\n"
@@ -246,11 +247,11 @@ public class URLTest extends WebDriverTestCase {
             + "    var files = document.testForm.fileupload.files;\n"
 
             + "    var url = window.URL.createObjectURL(files[0]);\n"
-            + "    alert(url);\n"
-            + "    alert(get(url));\n"
-            + "    alert(get(url + '#ignored'));\n"
+            + "    log(url);\n"
+            + "    log(get(url));\n"
+            + "    log(get(url + '#ignored'));\n"
             + "    window.URL.revokeObjectURL(url);\n"
-            + "    alert(get(url));\n"
+            + "    log(get(url));\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -274,12 +275,12 @@ public class URLTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            final List<String> alerts = getCollectedAlerts(driver, 4);
-            final String blobUrl = alerts.get(0);
+            final String[] alerts = StringUtils.split(driver.getTitle(), "§");
+            final String blobUrl = alerts[0];
             assertEquals("blob:http://localhost:" + PORT + "/", blobUrl.substring(0, blobUrl.lastIndexOf('/') + 1));
-            assertEquals("200:Hello HtmlUnit", alerts.get(1));
-            assertEquals("200:Hello HtmlUnit", alerts.get(2));
-            assertEquals("No entry for '" + blobUrl + "' in the BlobUrlStore.", alerts.get(3));
+            assertEquals("200:Hello HtmlUnit", alerts[1]);
+            assertEquals("200:Hello HtmlUnit", alerts[2]);
+            assertEquals("No entry for '" + blobUrl + "' in the BlobUrlStore.", alerts[3]);
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
