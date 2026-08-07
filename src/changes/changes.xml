@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.4.0" date="August xx, 2026" description="Firefox 153, Bugfixes">
+            <action type="update" dev="rbri">
+                websocket-client: jetty updated to 12.1.12.
+            </action>
             <action type="fix" dev="rbri">
                 HtmlSelect methods removeOption() and replaceOption() support for optgroups fixed.
             </action>
