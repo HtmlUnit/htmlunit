@@ -78,10 +78,10 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(150, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(151, "Chrome");
 
     /** Latest Edge. */
-    public static final BrowserVersion EDGE = new BrowserVersion(150, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(151, "Edge");
 
     /**
      * Array with all supported browsers.
@@ -202,8 +202,8 @@ public final class BrowserVersion implements Serializable {
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
 
-        CHROME.secClientHintUserAgentHeader_ = "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
+        CHROME.secClientHintUserAgentHeader_ = "\"Not=A?Brand\";v=\"99\", \"Google Chrome\";v=\""
+                + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
                 + CHROME.getBrowserVersionNumeric() + "\"";
 
         CHROME.fontHeights_ = new int[] {
@@ -249,8 +249,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
 
-        EDGE.secClientHintUserAgentHeader_ = "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Microsoft Edge\";v=\""
+        EDGE.secClientHintUserAgentHeader_ = "\"Not=A?Brand\";v=\"99\", \"Microsoft Edge\";v=\""
+                + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
                 + EDGE.getBrowserVersionNumeric() + "\"";
 
         EDGE.fontHeights_ = new int[] {
