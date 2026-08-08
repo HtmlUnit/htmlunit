@@ -29,9 +29,7 @@ public class FontFaceSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function FontFaceSet() { [native code] }",
-            FF_ESR = "function FontFaceSet() { [native code] }")
+    @Alerts("function FontFaceSet() { [native code] }")
     public void window() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -92,14 +90,9 @@ public class FontFaceSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
-                       "false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError"},
-            FF = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
-                  "true", "function FontFaceSet() { [native code] }", "function FontFaceSet() { [native code] }",
-                  "[object FontFaceSet]", "function EventTarget() { [native code] }"},
-            FF_ESR = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
-                      "true", "function FontFaceSet() { [native code] }", "function FontFaceSet() { [native code] }",
-                      "[object FontFaceSet]", "function EventTarget() { [native code] }"})
+    @Alerts({"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
+             "true", "function FontFaceSet() { [native code] }", "function FontFaceSet() { [native code] }",
+             "[object FontFaceSet]", "function EventTarget() { [native code] }"})
     public void windowScope() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html></body>\n"

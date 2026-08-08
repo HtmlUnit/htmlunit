@@ -197,13 +197,6 @@ public class HostClassScopeTest extends WebDriverTestCase {
         test("FileSystemFileEntry");
     }
 
-    @Alerts(DEFAULT = {"false", "undefined", "undefined"},
-            FF = {"true", "function", "function"},
-            FF_ESR = {"true", "function", "function"})
-    void _FontFaceSet() throws Exception {
-        test("FontFaceSet");
-    }
-
     @Alerts(DEFAULT = {"true", "function", "function"},
             FF = {"false", "undefined", "undefined"},
             FF_ESR = {"false", "undefined", "undefined"})

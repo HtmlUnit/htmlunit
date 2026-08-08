@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -33,8 +28,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet">MDN Documentation</a>
  */
-@JsxClass(isJSObject = false, value = {CHROME, EDGE})
-@JsxClass({FF, FF_ESR})
+@JsxClass
 public class FontFaceSet extends EventTarget {
 
     /**

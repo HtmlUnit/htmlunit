@@ -2546,9 +2546,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function",
-            FF_ESR = "function")
+    @Alerts("function")
     public void fontFaceSet() throws Exception {
         test("FontFaceSet");
     }
