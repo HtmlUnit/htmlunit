@@ -46,6 +46,6 @@ public class HtmlTrack extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        return DisplayStyle.INLINE;
+        return DisplayStyle.EMPTY;
     }
 }

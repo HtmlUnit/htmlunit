@@ -976,10 +976,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
              "table-cell", "table-header-group", "inline", "table-row", "", "inline"})
-    @HtmlUnitNYI(FF = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-                       "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
-            FF_ESR = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-                      "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
     public void defaultDisplayValues_T() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <table id='table'>\n"
