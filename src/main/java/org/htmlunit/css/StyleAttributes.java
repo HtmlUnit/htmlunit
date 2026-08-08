@@ -2644,7 +2644,7 @@ public final class StyleAttributes implements Serializable {
         POSITION("position", "position", chromeAndEdge("static"), ff("static")),
 
         /** The style property {@code positionAnchor}. */
-        POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdgeNone(), ffLatest("normal")),
+        POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdge("normal"), ffLatest("normal")),
 
         /** The style property {@code position-anchor}. */
         POSITION_ANCHOR_("position-anchor", "position-anchor", ffLatest("normal")),
@@ -2777,6 +2777,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code ruby-align}. */
         RUBY_ALIGN_("ruby-align", "ruby-align", ff("space-around")),
+
+        /** The style property {@code rubyOverhang}. */
+        RUBY_OVERHANG("rubyOverhang", "ruby-overhang", chromeAndEdge("auto")),
 
         /** The style property {@code rubyPosition}. */
         RUBY_POSITION("rubyPosition", "ruby-position", chromeAndEdge("over"),
