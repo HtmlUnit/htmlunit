@@ -914,16 +914,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"inline", "inline", "none", "block", "inline-block", "inline",
-                       "inline", "inline", "inline", "inline", "inline", "block", "inline"},
-            FF = {"inline", "inline", "none", "block", "inline-block", "inline",
-                  "", "inline", "inline", "inline", "inline", "block", "inline"},
-            FF_ESR = {"inline", "inline", "none", "block", "inline-block", "inline",
-                      "", "inline", "inline", "inline", "inline", "block", "inline"})
-    @HtmlUnitNYI(FF = {"inline", "inline", "none", "block", "inline-block", "inline",
-                       "inline", "inline", "inline", "inline", "inline", "block", "inline"},
-            FF_ESR = {"inline", "inline", "none", "block", "inline-block", "inline",
-                      "inline", "inline", "inline", "inline", "inline", "block", "inline"})
+    @Alerts({"inline", "inline", "none", "block", "inline-block", "inline",
+             "", "inline", "inline", "inline", "inline", "block", "inline"})
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"
@@ -982,12 +974,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-                       "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
-            FF = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-                  "table-cell", "table-header-group", "inline", "table-row", "", "inline"},
-            FF_ESR = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-                      "table-cell", "table-header-group", "inline", "table-row", "", "inline"})
+    @Alerts({"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
+             "table-cell", "table-header-group", "inline", "table-row", "", "inline"})
     @HtmlUnitNYI(FF = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
                        "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
             FF_ESR = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",

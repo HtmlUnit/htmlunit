@@ -47,6 +47,6 @@ public class HtmlSource extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        return DisplayStyle.INLINE;
+        return DisplayStyle.EMPTY;
     }
 }
