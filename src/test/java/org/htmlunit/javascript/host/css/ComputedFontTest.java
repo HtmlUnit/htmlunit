@@ -109,14 +109,10 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"15px arial, sans-serif", "15px arial, sans-serif",
-                       "normal", "normal",
-                       "oblique 15px arial, sans-serif", "italic 15px arial, sans-serif",
-                       "oblique", "italic"},
-            FF = {"15px arial, sans-serif", "15px arial, sans-serif", "normal", "normal",
-                  "oblique 15px arial, sans-serif", "oblique 15px arial, sans-serif", "oblique", "oblique"},
-            FF_ESR = {"15px arial, sans-serif", "15px arial, sans-serif", "normal", "normal",
-                      "oblique 15px arial, sans-serif", "oblique 15px arial, sans-serif", "oblique", "oblique"})
+    @Alerts({"15px arial, sans-serif", "15px arial, sans-serif",
+             "normal", "normal",
+             "oblique 15px arial, sans-serif", "oblique 15px arial, sans-serif",
+             "oblique", "oblique"})
     @HtmlUnitNYI(CHROME = {"", "16px \"Times New Roman\"", "", "normal", "",
                            "16px \"Times New Roman\"", "oblique", "oblique"},
             EDGE = {"", "16px \"Times New Roman\"", "", "normal", "",

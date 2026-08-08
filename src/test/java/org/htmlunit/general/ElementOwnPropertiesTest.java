@@ -509,13 +509,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "activeViewTransition[GCE],after(),animate(),append(),ariaActiveDescendantElement[GSCE],"
-                + "ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],ariaBrailleRoleDescription[GSCE],"
-                + "ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],ariaColIndex[GSCE],ariaColIndexText[GSCE],"
-                + "ariaColSpan[GSCE],ariaControlsElements[GSCE],ariaCurrent[GSCE],ariaDescribedByElements[GSCE],"
-                + "ariaDescription[GSCE],ariaDetailsElements[GSCE],ariaDisabled[GSCE],"
-                + "ariaErrorMessageElements[GSCE],ariaExpanded[GSCE],ariaFlowToElements[GSCE],ariaHasPopup[GSCE],"
-                + "ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],ariaLabel[GSCE],"
+    @Alerts(CHROME = "activeViewTransition[GCE],after(),animate(),append(),ariaActionsElements[GSCE],"
+                + "ariaActiveDescendantElement[GSCE],ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],"
+                + "ariaBrailleRoleDescription[GSCE],ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],"
+                + "ariaColIndex[GSCE],ariaColIndexText[GSCE],ariaColSpan[GSCE],ariaControlsElements[GSCE],"
+                + "ariaCurrent[GSCE],ariaDescribedByElements[GSCE],ariaDescription[GSCE],ariaDetailsElements[GSCE],"
+                + "ariaDisabled[GSCE],ariaErrorMessageElements[GSCE],ariaExpanded[GSCE],ariaFlowToElements[GSCE],"
+                + "ariaHasPopup[GSCE],ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],ariaLabel[GSCE],"
                 + "ariaLabelledByElements[GSCE],ariaLevel[GSCE],ariaLive[GSCE],ariaModal[GSCE],ariaMultiLine[GSCE],"
                 + "ariaMultiSelectable[GSCE],ariaNotify(),ariaOrientation[GSCE],ariaPlaceholder[GSCE],"
                 + "ariaPosInSet[GSCE],ariaPressed[GSCE],ariaReadOnly[GSCE],ariaRelevant[GSCE],ariaRequired[GSCE],"
@@ -543,13 +543,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "startViewTransition(),tagName[GCE],toggleAttribute(),webkitMatchesSelector(),"
                 + "webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
-            EDGE = "activeViewTransition[GCE],after(),animate(),append(),ariaActiveDescendantElement[GSCE],"
-                + "ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],ariaBrailleRoleDescription[GSCE],"
-                + "ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],ariaColIndex[GSCE],ariaColIndexText[GSCE],"
-                + "ariaColSpan[GSCE],ariaControlsElements[GSCE],ariaCurrent[GSCE],ariaDescribedByElements[GSCE],"
-                + "ariaDescription[GSCE],ariaDetailsElements[GSCE],ariaDisabled[GSCE],"
-                + "ariaErrorMessageElements[GSCE],ariaExpanded[GSCE],ariaFlowToElements[GSCE],ariaHasPopup[GSCE],"
-                + "ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],ariaLabel[GSCE],"
+            EDGE = "activeViewTransition[GCE],after(),animate(),append(),ariaActionsElements[GSCE],"
+                + "ariaActiveDescendantElement[GSCE],ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],"
+                + "ariaBrailleRoleDescription[GSCE],ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],"
+                + "ariaColIndex[GSCE],ariaColIndexText[GSCE],ariaColSpan[GSCE],ariaControlsElements[GSCE],"
+                + "ariaCurrent[GSCE],ariaDescribedByElements[GSCE],ariaDescription[GSCE],ariaDetailsElements[GSCE],"
+                + "ariaDisabled[GSCE],ariaErrorMessageElements[GSCE],ariaExpanded[GSCE],ariaFlowToElements[GSCE],"
+                + "ariaHasPopup[GSCE],ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],ariaLabel[GSCE],"
                 + "ariaLabelledByElements[GSCE],ariaLevel[GSCE],ariaLive[GSCE],ariaModal[GSCE],ariaMultiLine[GSCE],"
                 + "ariaMultiSelectable[GSCE],ariaNotify(),ariaOrientation[GSCE],ariaPlaceholder[GSCE],"
                 + "ariaPosInSet[GSCE],ariaPressed[GSCE],ariaReadOnly[GSCE],ariaRelevant[GSCE],ariaRequired[GSCE],"
@@ -716,13 +716,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "activeViewTransition[GCE],after(),animate(),append(),ariaActiveDescendantElement[GSCE],"
-                + "ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],ariaBrailleRoleDescription[GSCE],"
-                + "ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],ariaColIndex[GSCE],ariaColIndexText[GSCE],"
-                + "ariaColSpan[GSCE],ariaControlsElements[GSCE],ariaCurrent[GSCE],ariaDescribedByElements[GSCE],"
-                + "ariaDescription[GSCE],ariaDetailsElements[GSCE],ariaDisabled[GSCE],"
-                + "ariaErrorMessageElements[GSCE],ariaExpanded[GSCE],ariaFlowToElements[GSCE],ariaHasPopup[GSCE],"
-                + "ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],ariaLabel[GSCE],"
+    @Alerts(CHROME = "activeViewTransition[GCE],after(),animate(),append(),ariaActionsElements[GSCE],"
+                + "ariaActiveDescendantElement[GSCE],ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],"
+                + "ariaBrailleRoleDescription[GSCE],ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],"
+                + "ariaColIndex[GSCE],ariaColIndexText[GSCE],ariaColSpan[GSCE],ariaControlsElements[GSCE],"
+                + "ariaCurrent[GSCE],ariaDescribedByElements[GSCE],ariaDescription[GSCE],ariaDetailsElements[GSCE],"
+                + "ariaDisabled[GSCE],ariaErrorMessageElements[GSCE],ariaExpanded[GSCE],ariaFlowToElements[GSCE],"
+                + "ariaHasPopup[GSCE],ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],ariaLabel[GSCE],"
                 + "ariaLabelledByElements[GSCE],ariaLevel[GSCE],ariaLive[GSCE],ariaModal[GSCE],ariaMultiLine[GSCE],"
                 + "ariaMultiSelectable[GSCE],ariaNotify(),ariaOrientation[GSCE],ariaPlaceholder[GSCE],"
                 + "ariaPosInSet[GSCE],ariaPressed[GSCE],ariaReadOnly[GSCE],ariaRelevant[GSCE],ariaRequired[GSCE],"
@@ -750,13 +750,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "startViewTransition(),tagName[GCE],toggleAttribute(),webkitMatchesSelector(),"
                 + "webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
-            EDGE = "activeViewTransition[GCE],after(),animate(),append(),ariaActiveDescendantElement[GSCE],"
-                + "ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],ariaBrailleRoleDescription[GSCE],"
-                + "ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],ariaColIndex[GSCE],ariaColIndexText[GSCE],"
-                + "ariaColSpan[GSCE],ariaControlsElements[GSCE],ariaCurrent[GSCE],ariaDescribedByElements[GSCE],"
-                + "ariaDescription[GSCE],ariaDetailsElements[GSCE],ariaDisabled[GSCE],"
-                + "ariaErrorMessageElements[GSCE],ariaExpanded[GSCE],ariaFlowToElements[GSCE],ariaHasPopup[GSCE],"
-                + "ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],ariaLabel[GSCE],"
+            EDGE = "activeViewTransition[GCE],after(),animate(),append(),ariaActionsElements[GSCE],"
+                + "ariaActiveDescendantElement[GSCE],ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],"
+                + "ariaBrailleRoleDescription[GSCE],ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],"
+                + "ariaColIndex[GSCE],ariaColIndexText[GSCE],ariaColSpan[GSCE],ariaControlsElements[GSCE],"
+                + "ariaCurrent[GSCE],ariaDescribedByElements[GSCE],ariaDescription[GSCE],ariaDetailsElements[GSCE],"
+                + "ariaDisabled[GSCE],ariaErrorMessageElements[GSCE],ariaExpanded[GSCE],ariaFlowToElements[GSCE],"
+                + "ariaHasPopup[GSCE],ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],ariaLabel[GSCE],"
                 + "ariaLabelledByElements[GSCE],ariaLevel[GSCE],ariaLive[GSCE],ariaModal[GSCE],ariaMultiLine[GSCE],"
                 + "ariaMultiSelectable[GSCE],ariaNotify(),ariaOrientation[GSCE],ariaPlaceholder[GSCE],"
                 + "ariaPosInSet[GSCE],ariaPressed[GSCE],ariaReadOnly[GSCE],ariaRelevant[GSCE],ariaRequired[GSCE],"
@@ -15141,8 +15141,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
-            EDGE = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
+    @Alerts(CHROME = "animation[GCE],animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE],"
+                + "pseudoTarget[GCE]",
+            EDGE = "animation[GCE],animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE],"
+                + "pseudoTarget[GCE]",
             FF = "animation[GCE],animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]",
             FF_ESR = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
@@ -16164,8 +16166,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
-            EDGE = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
+    @Alerts(CHROME = "animation[GCE],constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE],"
+                + "pseudoTarget[GCE]",
+            EDGE = "animation[GCE],constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE],"
+                + "pseudoTarget[GCE]",
             FF = "animation[GCE],constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]",
             FF_ESR = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
@@ -16259,10 +16263,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "constructor(),deltaMode[GCE],deltaX[GCE],deltaY[GCE],deltaZ[GCE],DOM_DELTA_LINE[E],"
-                + "DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E],wheelDelta[GCE],wheelDeltaX[GCE],"
+                + "DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E],momentum[GCE],wheelDelta[GCE],wheelDeltaX[GCE],"
                 + "wheelDeltaY[GCE]",
             EDGE = "constructor(),deltaMode[GCE],deltaX[GCE],deltaY[GCE],deltaZ[GCE],DOM_DELTA_LINE[E],"
-                + "DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E],wheelDelta[GCE],wheelDeltaX[GCE],"
+                + "DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E],momentum[GCE],wheelDelta[GCE],wheelDeltaX[GCE],"
                 + "wheelDeltaY[GCE]",
             FF = "constructor(),deltaMode[GCE],deltaX[GCE],deltaY[GCE],deltaZ[GCE],DOM_DELTA_LINE[E],"
                 + "DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E],wheelDelta[GCE],wheelDeltaX[GCE],"
@@ -18633,8 +18637,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
-            EDGE = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
+    @Alerts(CHROME = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),textStream(),type[GCE]",
+            EDGE = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),textStream(),type[GCE]",
             FF = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
             FF_ESR = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]")
     @HtmlUnitNYI(CHROME = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
@@ -18896,11 +18900,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "credentials[GCE],destination[GCE],duplex[GCE],formData(),headers[GCE],integrity[GCE],"
                 + "isHistoryNavigation[GCE],isReloadNavigation[GCE],json(),keepalive[GCE],method[GCE],mode[GCE],"
                 + "redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],targetAddressSpace[GCE],text(),"
+                + "textStream(),"
                 + "url[GCE]",
             EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),cache[GCE],clone(),constructor(),"
                 + "credentials[GCE],destination[GCE],duplex[GCE],formData(),headers[GCE],integrity[GCE],"
                 + "isHistoryNavigation[GCE],isReloadNavigation[GCE],json(),keepalive[GCE],method[GCE],mode[GCE],"
                 + "redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],targetAddressSpace[GCE],text(),"
+                + "textStream(),"
                 + "url[GCE]",
             FF = "arrayBuffer(),blob(),bodyUsed[GCE],bytes(),cache[GCE],clone(),constructor(),credentials[GCE],"
                 + "destination[GCE],formData(),headers[GCE],integrity[GCE],json(),keepalive[GCE],method[GCE],"
@@ -18924,13 +18930,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),"
-                + "clone(),constructor(),formData(),headers[GCE],"
-                + "json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
+    @Alerts(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),clone(),constructor(),formData(),"
+                + "headers[GCE],json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),textStream(),"
+                + "type[GCE],"
                 + "url[GCE]",
-            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),"
-                + "clone(),constructor(),formData(),headers[GCE],"
-                + "json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
+            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),clone(),constructor(),formData(),"
+                + "headers[GCE],json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),textStream(),"
+                + "type[GCE],"
                 + "url[GCE]",
             FF = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),clone(),constructor(),formData(),"
                 + "headers[GCE],json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
@@ -19300,8 +19306,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "addEventListener(),constructor(),dispatchEvent(),removeEventListener(),when()",
-            EDGE = "addEventListener(),constructor(),dispatchEvent(),removeEventListener(),when()",
+    @Alerts(CHROME = "add(),check(),clear(),constructor(),delete(),entries(),forEach(),has(),keys(),load(),"
+                + "onloading[GSCE],onloadingdone[GSCE],onloadingerror[GSCE],ready[GCE],size[GCE],status[GCE],"
+                + "values()",
+            EDGE = "add(),check(),clear(),constructor(),delete(),entries(),forEach(),has(),keys(),load(),"
+                + "onloading[GSCE],onloadingdone[GSCE],onloadingerror[GSCE],ready[GCE],size[GCE],status[GCE],"
+                + "values()",
             FF = "add(),check(),clear(),constructor(),delete(),entries(),forEach(),has(),"
                 + "keys(),load(),onloading[GSCE],onloadingdone[GSCE],onloadingerror[GSCE],ready[GCE],"
                 + "size[GCE],status[GCE],values()",
