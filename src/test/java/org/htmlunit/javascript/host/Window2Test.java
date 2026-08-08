@@ -951,7 +951,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"true", "617", "-617", "true", "16", "-1256"},
-            EDGE = {"true", "629", "139", "true", "16", "24"},
+            EDGE = {"true", "629", "-629", "true", "16", "-1248"},
             FF = {"true", "674", "94", "true", "16", "16"},
             FF_ESR = {"true", "674", "94", "true", "16", "16"})
     @HtmlUnitNYI(CHROME = {"true", "605", "147", "true", "0", "16"},
@@ -981,7 +981,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"true", "0", "-617", "true", "true", "-1256"},
-            EDGE = {"true", "0", "139", "true", "true", "24"},
+            EDGE = {"true", "0", "-629", "true", "true", "-1248"},
             FF = {"true", "0", "94", "true", "true", "16"},
             FF_ESR = {"true", "0", "94", "true", "true", "16"})
     @HtmlUnitNYI(CHROME = {"true", "0", "147", "true", "true", "16"},
@@ -1046,7 +1046,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"false", "1234"},
-            EDGE = {"true", "1234"},
+            EDGE = {"false", "1234"},
             FF = {"true", "1234"},
             FF_ESR = {"true", "1234"})
     @HtmlUnitNYI(CHROME = {"true", "1234"})
@@ -1069,7 +1069,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"false", "1234"},
-            EDGE = {"true", "1234"},
+            EDGE = {"false", "1234"},
             FF = {"true", "1234"},
             FF_ESR = {"true", "1234"})
     @HtmlUnitNYI(CHROME = {"true", "1234"})
