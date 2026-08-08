@@ -2502,9 +2502,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF = "function FontFaceSet() { [native code] }",
-            FF_ESR = "function FontFaceSet() { [native code] }")
+    @Alerts("function FontFaceSet() { [native code] }")
     public void fontFaceSet() throws Exception {
         test("FontFaceSet");
     }
