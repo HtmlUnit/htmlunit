@@ -973,6 +973,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
+
         assertEquals(URL_FIRST + "?textfield1=blue", driver.getCurrentUrl());
     }
 
@@ -998,6 +999,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
+
         assertEquals(URL_FIRST + "?textfield1=foo", driver.getCurrentUrl());
     }
 

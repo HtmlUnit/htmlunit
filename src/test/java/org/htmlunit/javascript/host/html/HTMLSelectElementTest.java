@@ -188,6 +188,9 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         final WebDriver webdriver = loadPageVerifyTitle2(html);
         webdriver.findElement(By.id("clickMe")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
 
         assertEquals(URL_FIRST + "foo?submit=button", webdriver.getCurrentUrl());
         assertSame("method", HttpMethod.GET, getMockWebConnection().getLastMethod());
