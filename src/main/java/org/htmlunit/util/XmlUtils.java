@@ -23,7 +23,6 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -184,23 +183,23 @@ public final class XmlUtils {
 
         @Override
         public int read(final char[] cbuf, final int off, final int len) throws IOException {
-            int result = reader_.read(cbuf, off, len);
+            int readLength = reader_.read(cbuf, off, len);
 
-            if (wasBlank_ && result > -1) {
-                for (int i = 0; i < result; i++) {
+            if (wasBlank_ && readLength > -1) {
+                for (int i = 0; i < readLength; i++) {
                     final char ch = cbuf[off + i];
                     if (!Character.isWhitespace(ch)) {
                         wasBlank_ = false;
                         if (i > 0) {
                             // skipt the leading whitespace
-                            System.arraycopy(cbuf, i, cbuf, off, len - i);
-                            result -= i;
+                            readLength -= i;
+                            System.arraycopy(cbuf, off + i, cbuf, off, readLength);
                         }
                         break;
                     }
                 }
             }
-            return result;
+            return readLength;
         }
     }
 
@@ -353,46 +352,19 @@ public final class XmlUtils {
      * @return the namespace URI bound to the prefix, or {@code null} if none is found
      */
     public static String lookupNamespaceURI(final DomElement element, final String prefix) {
-        String uri;
-        if (prefix.isEmpty()) {
-            uri = element.getAttributeDirect("xmlns");
-        }
-        else {
-            uri = element.getAttribute("xmlns:" + prefix);
-        }
-        if (ATTRIBUTE_NOT_DEFINED == uri) {
-            final DomNode parentNode = element.getParentNode();
-            if (parentNode instanceof DomElement domElement) {
-                uri = lookupNamespaceURI(domElement, prefix);
-            }
-        }
-        return uri;
-    }
+        final String uri = prefix.isEmpty()
+                ? element.getAttributeDirect("xmlns")
+                : element.getAttribute("xmlns:" + prefix);
 
-    /**
-     * Searches for the prefix associated with the specified namespace URI, starting from the given element.
-     *
-     * @param element the element to start searching from
-     * @param namespace the namespace URI to look up
-     * @return the prefix bound to the namespace URI, or {@code null} if none is found
-     */
-    public static String lookupPrefix(final DomElement element, final String namespace) {
-        final Map<String, DomAttr> attributes = element.getAttributesMap();
-        for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-            final String name = entry.getKey();
-            final DomAttr value = entry.getValue();
-            if (name.startsWith("xmlns:") && value.getValue().equals(namespace)) {
-                return name.substring(6);
-            }
+        if (ATTRIBUTE_NOT_DEFINED != uri) {
+            return uri;
         }
-        for (final DomNode child : element.getChildren()) {
-            if (child instanceof DomElement domElement) {
-                final String prefix = lookupPrefix(domElement, namespace);
-                if (prefix != null) {
-                    return prefix;
-                }
-            }
+
+        final DomNode parentNode = element.getParentNode();
+        if (parentNode instanceof DomElement domElement) {
+            return lookupNamespaceURI(domElement, prefix);
         }
+
         return null;
     }
 }

@@ -556,7 +556,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("http://myNS")
+    @Alerts({"http://myNS", "null"})
     public void createNSResolver() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -573,9 +573,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    text += '  </xsl:template>\\n';\n"
             + "    text += '</xsl:stylesheet>';\n"
             + "    var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
-            + "    if (doc.createNSResolver) {\n"
-            + "      log(doc.createNSResolver(doc.documentElement).lookupNamespaceURI('xsl'));\n"
-            + "    }\n"
+
+            + "    var res = doc.createNSResolver(doc.documentElement);"
+            + "    log(res.lookupNamespaceURI('xsl'));\n"
+            + "    log(res.lookupNamespaceURI('unknown'));\n"
             + "  }\n"
             + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head>\n"

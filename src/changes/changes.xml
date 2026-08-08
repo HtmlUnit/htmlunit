@@ -8,6 +8,13 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
+            <action type="fix" dev="rbri">
+                NSResolver.lookupNamespaceURI() now returns null for unkown namespaces.
+            </action>
+            <action type="fix" dev="rbri">
+                TrackBlankContentAndSkipLeadingWhitespaceReader.read() wrong array indices in the whitespace-skip arraycopy
+                codebranch fixed.
+            </action>
             <action type="update" dev="rbri">
                 Chrome/Edge: FontFaceSet is now supported.
             </action>
