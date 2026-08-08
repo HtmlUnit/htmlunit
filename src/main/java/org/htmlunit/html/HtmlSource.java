@@ -47,6 +47,9 @@ public class HtmlSource extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        return DisplayStyle.EMPTY;
+        if (getParentNode() instanceof HtmlAudio) {
+            return DisplayStyle.EMPTY;
+        }
+        return DisplayStyle.INLINE;
     }
 }

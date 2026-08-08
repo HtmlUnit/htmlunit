@@ -46,6 +46,9 @@ public class HtmlTrack extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        return DisplayStyle.EMPTY;
+        if (getParentNode() instanceof HtmlVideo) {
+            return DisplayStyle.EMPTY;
+        }
+        return DisplayStyle.INLINE;
     }
 }
