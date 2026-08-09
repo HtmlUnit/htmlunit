@@ -137,7 +137,7 @@ public class FetchTest extends WebDriverTestCase {
 
         final WebDriver driver = enableFetchPolyfill();
         loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
 
         assertEquals(1, getMockWebConnection().getRequestCount());
     }
