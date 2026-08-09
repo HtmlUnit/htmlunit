@@ -132,9 +132,7 @@ public class HostParentOfFTest extends HostParentOf {
         test("FontFace", "FontFace");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            FF = "true/false",
-            FF_ESR = "true/false")
+    @Alerts("true/false")
     void _FontFaceSet_FontFaceSet() throws Exception {
         test("FontFaceSet", "FontFaceSet");
     }

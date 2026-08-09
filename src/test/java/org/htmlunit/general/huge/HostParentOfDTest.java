@@ -1582,9 +1582,7 @@ public class HostParentOfDTest extends HostParentOf {
         test("EventTarget", "FileReader");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            FF = "true/true",
-            FF_ESR = "true/true")
+    @Alerts("true/true")
     void _EventTarget_FontFaceSet() throws Exception {
         test("EventTarget", "FontFaceSet");
     }
