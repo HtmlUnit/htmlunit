@@ -14,7 +14,7 @@
                 longer incorrectly resolves to a width of 0.
             </action>
             <action type="fix" dev="rbri">
-                Fixed getBoundingClientRect()/width calculation: an inline-block element with an explicit 
+                Fixed getBoundingClientRect()/width calculation: an inline-block element with an explicit
                 width: auto now correctly shrink-wraps to its content, instead of incorrectly filling the full
                 window width the same way an ordinary block element does.
             </action>

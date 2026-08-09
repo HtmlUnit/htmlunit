@@ -511,9 +511,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
         test("FocusEvent");
     }
 
-    @Alerts(DEFAULT = "exception",
-            FF = "false",
-            FF_ESR = "false")
+    @Alerts("false")
     void _FontFaceSet() throws Exception {
         test("FontFaceSet");
     }
