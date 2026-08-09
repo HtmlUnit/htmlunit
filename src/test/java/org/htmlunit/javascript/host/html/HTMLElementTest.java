@@ -2996,6 +2996,29 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * An empty inline-block div with {@code width: auto} should have zero width
+     * when it has no content, padding, border, or minimum width.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_emptyInlineBlockDivHasZeroWidth() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var w = d.getBoundingClientRect().width;\n"
+            + "    log(w == 0);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display:inline-block'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * A block div with {@code width: max-content} should shrink-wrap to the width
      * of its content rather than occupy the full width of its containing block.
      * @throws Exception if the test fails
