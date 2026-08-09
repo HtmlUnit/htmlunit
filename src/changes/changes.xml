@@ -8,6 +8,22 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
+            <action type="fix" dev="rbri">
+                Fixed getBoundingClientRect()/width calculation: a block-level element sized via a shrink-to-fit
+                CSS width keyword (max-content, min-content) or containing only text (no child element boxes) no
+                longer incorrectly resolves to a width of 0.
+            </action>
+            <action type="fix" dev="rbri">
+                Fixed getBoundingClientRect()/width calculation: an inline-block element with an explicit 
+                width: auto now correctly shrink-wraps to its content, instead of incorrectly filling the full
+                window width the same way an ordinary block element does.
+            </action>
+            <action type="fix" dev="rbri">
+                Fixed getBoundingClientRect()/width calculation: an ordinary block-level element with no explicit
+                width no longer incorrectly resolves to a content-based (shrink-wrapped) width; it now correctly
+                fills the full width of its containing block, as normal CSS block flow requires.
+                (regression from 5.2.0)
+            </action>
             <action type="update" dev="rbri">
                 Default display of 'track' elements is the empty string.
             </action>

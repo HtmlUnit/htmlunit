@@ -210,9 +210,6 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc.). */
     private Integer width_;
 
-    /** The computed, cached shrink-wrapped width (used by getBoundingClientRect()). */
-    private Integer shrinkWrapWidth_;
-
     /** The computed, cached content width (sum/max of children's widths) of the element. */
     private Integer contentWidth_;
 
@@ -1548,56 +1545,13 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the element's width in pixels, possibly including its padding and border
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
-        return getCalculatedWidth(includeBorder, includePadding, false);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
-     * <p>
-     * Returns the calculated width of this element in pixels.
-     * </p>
-     *
-     * <p>This method is the primary entry point for width calculation and is used by both
-     * {@code offsetWidth}/{@code clientWidth} and {@code getBoundingClientRect()}. The
-     * {@code shrinkWrapBlock} flag controls how block elements with no explicit width are sized:
-     * </p>
-     * <ul>
-     *   <li>{@code false} (normal flow): block elements fill their containing block's width,
-     *       matching the behaviour of {@code offsetWidth} and {@code clientWidth}.</li>
-     *   <li>{@code true} (shrink-wrap): block elements that contain only inline/text children
-     *       shrink to their content width instead of filling the parent. This is used by
-     *       {@code getBoundingClientRect()} to approximate the visual bounding box of elements
-     *       such as a plain {@code <div>HelloWorld</div>}, where the rendered width is the
-     *       text width rather than the viewport width.</li>
-     * </ul>
-     *
-     * <p>Note that shrink-wrapping is only applied when {@code shrinkWrapBlock} is {@code true}
-     * AND the element has exclusively inline or text-node children ({@link #hasOnlyInlineOrTextChildren}).
-     * Elements with block-level children always fill the parent width regardless of this flag,
-     * because their children may themselves expand to fill the available space.
-     * </p>
-     * <p>The {@code includeBorder} and {@code includePadding} flags control whether the
-     * element's border and padding are added to the returned value, corresponding to the
-     * difference between {@code clientWidth} (padding included, border excluded) and
-     * {@code offsetWidth} (both included).
-     * </p>
-     *
-     * @param includeBorder {@code true} to add horizontal border widths to the result
-     * @param includePadding {@code true} to add horizontal padding to the result
-     * @param shrinkWrapBlock {@code true} to shrink-wrap block elements to their content width
-     *        when they contain only inline/text children; {@code false} for normal block flow
-     *        where block elements fill the containing block width
-     * @return the calculated width in pixels
-     */
-    public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding,
-                                    final boolean shrinkWrapBlock) {
         final DomElement element = getDomElement();
 
         if (!element.isAttachedToPage()) {
             return 0;
         }
 
-        int width = getCalculatedWidth(element, shrinkWrapBlock);
+        int width = getCalculatedWidth(element);
         if (!"border-box".equals(getStyleAttribute(Definition.BOX_SIZING, true))) {
             if (includeBorder) {
                 width += getBorderHorizontal();
@@ -1613,164 +1567,279 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         return width;
     }
 
-    private int getCalculatedWidth(final DomElement element, final boolean shrinkWrapBlock) {
-        final Integer cached = shrinkWrapBlock ? getCachedShrinkWrapWidth() : getCachedWidth();
+    /**
+     * Computes and caches the "used" (rendered) width of this element in pixels,
+     * following (a simplified approximation of) the CSS width-resolution
+     * algorithm: explicit style widths win outright; otherwise the width falls
+     * back through several special cases (fixed-size tags, floated/positioned
+     * elements, block-level fill-parent, form-control defaults) before finally
+     * shrink-wrapping to content as a last resort.
+     *
+     * @param element the element to compute the width for
+     * @return the calculated width, in pixels
+     */
+    private int getCalculatedWidth(final DomElement element) {
+        final Integer cached = getCachedWidth();
         if (cached != null) {
             return cached.intValue();
         }
 
+        // an element that isn't rendered at all has no box, and therefore no width
         if (!element.mayBeDisplayed()) {
-            return shrinkWrapBlock ? updateCachedShrinkWrapWidth(0) : updateCachedWidth(0);
+            return updateCachedWidth(0);
         }
 
         final String display = getDisplay();
-        if (NONE.equals(display)) {
-            return shrinkWrapBlock ? updateCachedShrinkWrapWidth(0) : updateCachedWidth(0);
+        if (NONE.equals(getDisplay())) {
+            return updateCachedWidth(0);
         }
 
-        final int width;
         final String styleWidth = getStyleAttribute(Definition.WIDTH, true);
         final DomNode parent = element.getParentNode();
 
-        // width is ignored for inline elements
-        if ((INLINE.equals(display) || StringUtils.isEmptyOrNull(styleWidth))
-                && parent instanceof HtmlElement) {
-            // hack: TODO find a way to specify default values for different tags
-            if (element instanceof HtmlCanvas) {
-                return shrinkWrapBlock ? updateCachedShrinkWrapWidth(300) : updateCachedWidth(300);
-            }
-
-            // iframes have a default width of 300px (like canvas)
-            if (element instanceof HtmlInlineFrame iframe) {
-                final String widthAttribute = iframe.getAttributeDirect("width");
-                if (DomElement.ATTRIBUTE_NOT_DEFINED != widthAttribute) {
-                    final int w = CssPixelValueConverter.pixelValue(widthAttribute);
-                    return shrinkWrapBlock ? updateCachedShrinkWrapWidth(w) : updateCachedWidth(w);
-                }
-
-                return shrinkWrapBlock ? updateCachedShrinkWrapWidth(300) : updateCachedWidth(300);
-            }
-
-            if (element instanceof HtmlFrame) {
-                final int w = element.getPage().getEnclosingWindow().getInnerWidth();
-                return shrinkWrapBlock ? updateCachedShrinkWrapWidth(w) : updateCachedWidth(w);
-            }
-
-            // Width not explicitly set.
-            final String cssFloat = getCssFloat();
-            final String position = getStyleAttribute(Definition.POSITION, true);
-            if ("right".equals(cssFloat)
-                    || "left".equals(cssFloat)
-                    || ABSOLUTE.equals(position)
-                    || FIXED.equals(position)) {
-
-                // Shrink-wrap to child content regardless of display type (block, inline, etc.).
-                // An absolutely/fixed-positioned or floated element sizes itself around its children.
-                final int contentWidth = getContentWidth();
-                if (contentWidth > 0) {
-                    width = contentWidth;
-                }
-                else {
-                    // No rendered children – fall back to text content approximation.
-                    final BrowserVersion browserVersion =
-                            getDomElement().getPage().getWebClient().getBrowserVersion();
-                    width = element.getVisibleText().length() * browserVersion.getPixelsPerChar();
-                }
-            }
-            else if (BLOCK.equals(display)) {
-                final int windowWidth = element.getPage().getEnclosingWindow().getInnerWidth();
-                if (element instanceof HtmlBody) {
-                    width = windowWidth - 16;
-                }
-                else {
-                    final ComputedCssStyleDeclaration parentStyle =
-                            parent.getPage().getEnclosingWindow().getComputedStyle((DomElement) parent, null);
-
-                    final int parentWidth = parentStyle.getCalculatedWidth(false, false)
-                                                - (getBorderHorizontal() + getPaddingHorizontal());
-
-                    // If the block has no explicit width, check if it only contains
-                    // inline/text content — if so, shrink-wrap to content width
-                    // rather than inheriting full parent width.
-                    if (shrinkWrapBlock && hasOnlyInlineOrTextChildren(element)) {
-                        final int contentWidth = getContentWidth();
-                        width = contentWidth > 0 ? contentWidth : parentWidth;
-                    }
-                    else {
-                        // otherwise Block elements take up 100% of the parent's width.
-                        width = parentWidth;
-                    }
-                }
-            }
-            else if (element instanceof HtmlSubmitInput
-                        || element instanceof HtmlResetInput
-                        || element instanceof HtmlButtonInput
-                        || element instanceof HtmlButton
-                        || element instanceof HtmlFileInput) {
-                // use asNormalizedText() here because getVisibleText() returns an empty string
-                // for submit and reset buttons
-                final String text = element.asNormalizedText();
-                final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
-                // default font for buttons is a bit smaller than the body font size
-                width = 10 + (int) (text.length() * browserVersion.getPixelsPerChar() * 0.9);
-            }
-            else if (element instanceof HtmlTextInput || element instanceof HtmlPasswordInput) {
-                final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
-                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_173)) {
-                    return 173;
-                }
-                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_157)) {
-                    return 157;
-                }
-                width = 161; // FF
-            }
-            else if (element instanceof HtmlRadioButtonInput || element instanceof HtmlCheckBoxInput) {
-                final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
-                if (browserVersion.hasFeature(JS_CLIENTWIDTH_RADIO_CHECKBOX_14)) {
-                    width = 14;
-                }
-                else {
-                    width = 13;
-                }
-            }
-            else if (element instanceof HtmlTextArea) {
-                width = 100; // wild guess
-            }
-            else if (element instanceof HtmlImage image) {
-                width = image.getWidthOrDefault();
-            }
-            else {
-                // Inline elements take up however much space is required by their children.
-                width = getContentWidth();
-            }
+        // "width" has no effect on inline elements, and the two shrink-to-fit
+        // keywords are handled as part of the "not explicitly set" path below
+        // rather than as an explicit pixel width
+        final boolean widthNotExplicitlySet = INLINE.equals(display)
+                || StringUtils.isEmptyOrNull(styleWidth)
+                || AUTO.equals(styleWidth)
+                || isShrinkToFitKeyword(styleWidth);
+        if (widthNotExplicitlySet && parent instanceof HtmlElement) {
+            return updateCachedWidth(computeWidthWhenNotExplicitlySet(element, display, styleWidth, parent));
         }
-        else if (AUTO.equals(styleWidth)) {
-            width = element.getPage().getEnclosingWindow().getInnerWidth();
+
+        if (AUTO.equals(styleWidth)) {
+            // no parent to size against (or width wasn't handled above) --
+            // fall back to the window's own width
+            return updateCachedWidth(element.getPage().getEnclosingWindow().getInnerWidth());
         }
-        else {
-            // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = CssPixelValueConverter.pixelValue(element,
-                    new CssPixelValueConverter.CssValue(0, element.getPage().getEnclosingWindow().getInnerWidth()) {
+
+        // width was explicitly set in the style attribute to a real value (e.g.
+        // "200px", "50%") -- resolve it via the normal CSS pixel-value converter,
+        // which knows how to handle relative units against the window as a
+        // percentage base
+        return updateCachedWidth(CssPixelValueConverter.pixelValue(element,
+                new CssPixelValueConverter.CssValue(0, element.getPage().getEnclosingWindow().getInnerWidth()) {
                     @Override public String get(final ComputedCssStyleDeclaration style) {
                         return style.getStyleAttribute(Definition.WIDTH, true);
                     }
-                });
-        }
-
-        return shrinkWrapBlock ? updateCachedShrinkWrapWidth(width) : updateCachedWidth(width);
+                }));
     }
 
-    private static boolean hasOnlyInlineOrTextChildren(final DomElement element) {
-        for (final DomNode child : element.getChildren()) {
-            if (child instanceof HtmlElement e) {
-                final String childDisplay = e.getPage().getEnclosingWindow()
-                        .getComputedStyle(e, null).getDisplay();
-                if (BLOCK.equals(childDisplay)) {
-                    return false;
-                }
-            }
+    /**
+     * Returns whether {@code styleWidth} is one of the CSS sizing keywords that
+     * mean "shrink-wrap to content" rather than a concrete length -- these are
+     * treated the same as "no explicit width" for the purposes of this class'
+     * (simplified) width algorithm.
+     *
+     * @param styleWidth the raw {@code width} style value to check
+     * @return {@code true} if {@code styleWidth} is {@code max-content} or
+     *     {@code min-content}
+     */
+    private static boolean isShrinkToFitKeyword(final String styleWidth) {
+        return "max-content".equals(styleWidth) || "min-content".equals(styleWidth);
+    }
+
+    /**
+     * Computes the width for an element whose style doesn't pin down an explicit
+     * pixel width -- either nothing was specified, the element is inline (where
+     * width is ignored), or a shrink-to-fit keyword was used. Tries, in order:
+     * a fixed default for certain special tags (canvas, iframe, frame); shrink-
+     * wrapping for floated/absolutely-or-fixed-positioned elements; filling the
+     * containing block for an ordinary block element; a hardcoded default for
+     * specific form-control tags; and finally shrink-wrapping to content as the
+     * general fallback.
+     *
+     * @param element the element being sized
+     * @param display the element's resolved {@code display} value
+     * @param styleWidth the element's raw {@code width} style value
+     * @param parent the element's parent node (known to be an {@link HtmlElement}
+     *     by the caller)
+     * @return the computed width, in pixels
+     */
+    private int computeWidthWhenNotExplicitlySet(final DomElement element, final String display,
+            final String styleWidth, final DomNode parent) {
+
+        // hack: TODO find a way to specify default values for different tags
+        final Integer fixedDefault = getFixedDefaultWidth(element);
+        if (fixedDefault != null) {
+            return fixedDefault;
         }
-        return true;
+
+        // an absolutely/fixed-positioned or floated element shrink-wraps to its
+        // children regardless of display type (block, inline, etc.) -- it's
+        // taken out of normal flow, so it never "fills" a containing block
+        if (isFloatedOrOutOfNormalFlow()) {
+            return shrinkToFitWidth(element);
+        }
+
+        // an ordinary block-level element (not using a shrink-to-fit keyword)
+        // fills the full width of its containing block, per normal CSS flow
+        if (BLOCK.equals(display) && !isShrinkToFitKeyword(styleWidth)) {
+            return fillsParentWidth(element, parent);
+        }
+
+        final Integer formControlDefault = getDefaultWidthForFormControl(element);
+        if (formControlDefault != null) {
+            return formControlDefault;
+        }
+
+        // last resort: inline elements, and block elements using a shrink-to-fit
+        // width keyword, take up however much space is required by their content
+        return shrinkToFitWidth(element);
+    }
+
+    /**
+     * Returns whether this element is floated or taken out of normal document
+     * flow (absolute/fixed positioning) -- such elements always shrink-wrap to
+     * their content, never fill their containing block, regardless of their
+     * {@code display} value.
+     *
+     * @return {@code true} if this element is floated left/right, or absolutely
+     *     or fixed positioned
+     */
+    private boolean isFloatedOrOutOfNormalFlow() {
+        final String cssFloat = getCssFloat();
+        final String position = getStyleAttribute(Definition.POSITION, true);
+        return "right".equals(cssFloat) || "left".equals(cssFloat)
+                || ABSOLUTE.equals(position) || FIXED.equals(position);
+    }
+
+    /**
+     * Shrink-wraps to the rendered width of the element's children, falling back
+     * to a text-length approximation when there is no rendered child content --
+     * for example, an element containing only a text node, which contributes no
+     * child element box for {@link #getContentWidth()} to measure.
+     * <p>
+     * This fallback previously existed only in the floated/out-of-flow code
+     * path; a block element sized via a shrink-to-fit width keyword (e.g.
+     * {@code max-content}) reached an equivalent "shrink to content"
+     * computation through a separate call site that lacked the fallback,
+     * incorrectly resolving to {@code 0} for text-only content. Both call sites
+     * now share this one implementation.
+     * </p>
+     *
+     * @param element the element to shrink-wrap
+     * @return the shrink-to-fit width, in pixels
+     */
+    private int shrinkToFitWidth(final DomElement element) {
+        final int contentWidth = getContentWidth();
+        if (contentWidth > 0) {
+            return contentWidth;
+        }
+
+        // no rendered child content -- approximate from the element's own
+        // visible text instead
+        final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
+        return element.getVisibleText().length() * browserVersion.getPixelsPerChar();
+    }
+
+    /**
+     * Computes the width of an ordinary block-level element that fills its
+     * containing block: the window's inner width minus a fixed margin allowance
+     * for {@code <body>}, or the parent's own calculated width (minus this
+     * element's own border/padding) for anything else.
+     *
+     * @param element the block-level element being sized
+     * @param parent the element's parent node
+     * @return the fill-parent width, in pixels
+     */
+    private int fillsParentWidth(final DomElement element, final DomNode parent) {
+        final int windowWidth = element.getPage().getEnclosingWindow().getInnerWidth();
+        if (element instanceof HtmlBody) {
+            // approximate default body margin
+            return windowWidth - 16;
+        }
+
+        final ComputedCssStyleDeclaration parentStyle =
+                parent.getPage().getEnclosingWindow().getComputedStyle((DomElement) parent, null);
+        return parentStyle.getCalculatedWidth(false, false) - (getBorderHorizontal() + getPaddingHorizontal());
+    }
+
+    /**
+     * Returns a fixed, hardcoded default width for element types that real
+     * browsers give an intrinsic size to regardless of content -- currently
+     * {@code <canvas>}, {@code <iframe>} and {@code <frame>}.
+     *
+     * @param element the element to check
+     * @return the fixed default width in pixels, or {@code null} if
+     *     {@code element} isn't one of the special-cased tag types
+     */
+    private static Integer getFixedDefaultWidth(final DomElement element) {
+        if (element instanceof HtmlCanvas) {
+            return 300;
+        }
+
+        // iframes have a default width of 300px, like canvas -- unless an
+        // explicit 'width' HTML attribute (not CSS style) says otherwise
+        if (element instanceof HtmlInlineFrame iframe) {
+            final String widthAttribute = iframe.getAttributeDirect("width");
+            if (DomElement.ATTRIBUTE_NOT_DEFINED != widthAttribute) {
+                return CssPixelValueConverter.pixelValue(widthAttribute);
+            }
+            return 300;
+        }
+
+        if (element instanceof HtmlFrame) {
+            // a <frame> (inside a <frameset>) takes the full width of its
+            // enclosing window
+            return element.getPage().getEnclosingWindow().getInnerWidth();
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns a hardcoded default width for specific form-control tags that
+     * real browsers size intrinsically based on their native widget rendering
+     * rather than pure CSS content flow -- buttons (sized from their label
+     * text), text/password inputs, checkboxes/radio buttons, textareas and
+     * images.
+     *
+     * @param element the element to check
+     * @return the default width in pixels, or {@code null} if {@code element}
+     *     isn't one of the special-cased form-control types
+     */
+    private Integer getDefaultWidthForFormControl(final DomElement element) {
+        final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
+
+        if (element instanceof HtmlSubmitInput
+                || element instanceof HtmlResetInput
+                || element instanceof HtmlButtonInput
+                || element instanceof HtmlButton
+                || element instanceof HtmlFileInput) {
+            // use asNormalizedText() here because getVisibleText() returns an
+            // empty string for submit and reset buttons; default font for
+            // buttons is a bit smaller than the body font size, hence the 0.9
+            // scale factor
+            final String text = element.asNormalizedText();
+            return 10 + (int) (text.length() * browserVersion.getPixelsPerChar() * 0.9);
+        }
+
+        if (element instanceof HtmlTextInput || element instanceof HtmlPasswordInput) {
+            // native text-input widget width varies by rendering engine/version
+            if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_173)) {
+                return 173;
+            }
+            if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_157)) {
+                return 157;
+            }
+            return 161; // FF
+        }
+
+        if (element instanceof HtmlRadioButtonInput || element instanceof HtmlCheckBoxInput) {
+            return browserVersion.hasFeature(JS_CLIENTWIDTH_RADIO_CHECKBOX_14) ? 14 : 13;
+        }
+
+        if (element instanceof HtmlTextArea) {
+            return 100; // wild guess
+        }
+
+        if (element instanceof HtmlImage image) {
+            return image.getWidthOrDefault();
+        }
+
+        return null;
     }
 
     /**
@@ -2180,7 +2249,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 overflow = getStyleAttribute(Definition.OVERFLOW, true);
             }
             scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
-                && (ignoreSize || getContentWidth() > getCalculatedWidth(element, false));
+                && (ignoreSize || getContentWidth() > getCalculatedWidth(element));
         }
         else {
             overflow = getStyleAttribute(Definition.OVERFLOW_Y_, false);
@@ -2317,24 +2386,6 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     public int updateCachedWidth(final int width) {
         width_ = Integer.valueOf(width);
-        return width;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
-     * @return the cached width
-     */
-    public Integer getCachedShrinkWrapWidth() {
-        return shrinkWrapWidth_;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
-     * @param width the new value
-     * @return the param width
-     */
-    public int updateCachedShrinkWrapWidth(final int width) {
-        shrinkWrapWidth_ = Integer.valueOf(width);
         return width;
     }
 

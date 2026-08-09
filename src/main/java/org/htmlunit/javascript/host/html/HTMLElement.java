@@ -564,10 +564,6 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public int getOffsetWidth() {
-        return getOffsetWidth(false);
-    }
-
-    private int getOffsetWidth(final boolean shrinkWrapBlock) {
         if (isDisplayNone() || !getDomNodeOrDie().isAttachedToPage()) {
             return 0;
         }
@@ -578,7 +574,7 @@ public class HTMLElement extends Element {
             return event.getClientX() - getPosX() + 50;
         }
         final ComputedCssStyleDeclaration style = getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
-        return style.getCalculatedWidth(true, true, shrinkWrapBlock);
+        return style.getCalculatedWidth(true, true);
     }
 
     /**
@@ -995,7 +991,7 @@ public class HTMLElement extends Element {
 
         textRectangle.setY(top);
         textRectangle.setX(left);
-        textRectangle.setWidth(getOffsetWidth(true));
+        textRectangle.setWidth(getOffsetWidth());
         textRectangle.setHeight(getOffsetHeight());
 
         return textRectangle;

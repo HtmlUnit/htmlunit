@@ -551,7 +551,7 @@ public class Range extends AbstractRange {
             else if (sibling instanceof HtmlElement siblingElement) {
                 final ComputedCssStyleDeclaration sibStyle =
                         webWindow.getComputedStyle(siblingElement, null);
-                siblingOffset += sibStyle.getCalculatedWidth(true, true, true);
+                siblingOffset += sibStyle.getCalculatedWidth(true, true);
             }
         }
 

@@ -2855,26 +2855,47 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
-     * A block div with only text content should shrink-wrap to its text width,
-     * not inherit the full parent/viewport width.
-     * Previously getBoundingClientRect().width returned the full viewport width (e.g. 1256px)
-     * for any block div with no explicit width, even when it contained only short text.
+     * A block div with only text content should occupy the available width of
+     * its containing block, rather than shrink-wrap to the width of its text.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("true")
-    public void getBoundingClientRect_blockDivTextOnlyShrinkWraps() throws Exception {
+    public void getBoundingClientRect_blockDivTextOnlyFillsParent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d = document.getElementById('d');\n"
             + "    var w = d.getBoundingClientRect().width;\n"
-            + "    log(w > 0 && w < 200);\n"
+            + "    log(w > 1000);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='d'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An empty block div should occupy the available width of its containing block,
+     * rather than shrink-wrap to zero width.
+     * @throws Exception if the test fails
+      */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_emptyBlockDivFillsParent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var w = d.getBoundingClientRect().width;\n"
+            + "    log(w > 1000);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d'></div>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -2907,7 +2928,6 @@ public class HTMLElementTest extends WebDriverTestCase {
 
     /**
      * An inline-block div should always shrink-wrap regardless of content type.
-     * Baseline check to ensure inline-block behaviour is unaffected by the block fix.
      * @throws Exception if the test fails
      */
     @Test
@@ -2924,6 +2944,122 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='d' style='display:inline-block'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An inline-block div with {@code width: auto} should shrink-wrap to its content
+     * rather than occupy the full width of its containing block.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_inlineBlockAutoWidthShrinkWraps() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var w = d.getBoundingClientRect().width;\n"
+            + "    log(w > 0 && w < 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display:inline-block; width:auto'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * An inline-block div with an explicit width should use that width rather than
+     * shrink-wrapping to its content.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_inlineBlockExplicitWidth() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var w = d.getBoundingClientRect().width;\n"
+            + "    log(w == 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display:inline-block; width:200px'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A block div with {@code width: max-content} should shrink-wrap to the width
+     * of its content rather than occupy the full width of its containing block.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_blockDivMaxContentShrinkWraps() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var w = d.getBoundingClientRect().width;\n"
+            + "    log(w > 0 && w < 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display: block; width: max-content'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A block div with {@code width: min-content} should shrink-wrap to the width
+     * of its content rather than occupy the full width of its containing block.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_blockDivMinContentShrinkWraps() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var w = d.getBoundingClientRect().width;\n"
+            + "    log(w > 0 && w < 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display: block; width: min-content'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+    * A span with only text content should shrink-wrap to the width of its text
+    * rather than occupy the full width of its containing block.
+    * @throws Exception if the test fails
+    */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_spanTextOnlyShrinkWraps() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var w = d.getBoundingClientRect().width;\n"
+            + "    log(w > 0 && w < 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='d'>Hi</span>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }
