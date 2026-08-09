@@ -15,10 +15,7 @@
 
 <script>
   function printOut() {
-    html2canvas(document.querySelector('#printId'), {
-        allowTaint: true,
-        scale: 2 
-    }).then(function (canvas) {
+    html2canvas(document.querySelector('#printId'), {}).then(function (canvas) {
         document.getElementById('myLog').value = canvas.toDataURL();
     })
   }
