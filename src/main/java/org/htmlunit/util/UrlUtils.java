@@ -549,18 +549,24 @@ public final class UrlUtils {
      */
     public static URL getUrlWithNewUserPassword(final URL u, final String newUserPassword)
             throws MalformedURLException {
-        String newUserInfo = newUserPassword == null ? "" : ':' + newUserPassword;
+        final StringBuilder newUserInfo = new StringBuilder();
+
         final String userInfo = u.getUserInfo();
         if (StringUtils.isNotBlank(userInfo)) {
             final int colonIdx = userInfo.indexOf(':');
             if (colonIdx > -1) {
-                newUserInfo = userInfo.substring(0, colonIdx) + newUserInfo;
+                newUserInfo.append(userInfo, 0, colonIdx);
             }
             else {
-                newUserInfo = userInfo + newUserInfo;
+                newUserInfo.append(userInfo);
             }
         }
-        return createNewUrl(u.getProtocol(), newUserInfo.isEmpty() ? null : newUserInfo,
+
+        if (newUserPassword != null) {
+            newUserInfo.append(':').append(newUserPassword);
+        }
+
+        return createNewUrl(u.getProtocol(), newUserInfo.isEmpty() ? null : newUserInfo.toString(),
                 u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
     }
 
