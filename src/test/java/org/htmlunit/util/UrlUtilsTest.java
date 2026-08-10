@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.junit.jupiter.api.Test;
@@ -337,7 +336,7 @@ public class UrlUtilsTest {
 //        assertEquals("http://a/../g",        UrlUtils.resolveUrl(baseUrl, "/../g"));
         assertEquals("http://a/g",        UrlUtils.resolveUrl(baseUrl, "../../../g"));
         assertEquals("http://a/g",     UrlUtils.resolveUrl(baseUrl, "../../../../g"));
-        assertEquals("http://a/./g",         UrlUtils.resolveUrl(baseUrl, "/./g"));
+        assertEquals("http://a/g",         UrlUtils.resolveUrl(baseUrl, "/./g"));
         assertEquals("http://a/g",        UrlUtils.resolveUrl(baseUrl, "/../g"));
 
         assertEquals("http://a/g",           UrlUtils.resolveUrl(baseUrl, "/../../g"));
@@ -372,7 +371,7 @@ public class UrlUtilsTest {
         assertEquals("http://a/f.html", UrlUtils.resolveUrl("http://a/otherFile.html", "../f.html"));
         assertEquals("http://a/f.html", UrlUtils.resolveUrl("http://a/otherFile.html", "../../f.html"));
 
-        assertEquals("http://a/a/./b", UrlUtils.resolveUrl(baseUrl, "/a/./b"));
+        assertEquals("http://a/a/b", UrlUtils.resolveUrl(baseUrl, "/a/./b"));
     }
 
     /**

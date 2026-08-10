@@ -157,7 +157,6 @@ public final class UrlUtils {
         pchar.set(',');
 
         final BitSet segment = new BitSet(256);
-        segment.or(pchar);
         segment.set(';');
         segment.or(pchar);
 
@@ -165,12 +164,8 @@ public final class UrlUtils {
         pathSegments.set('/');
         pathSegments.or(segment);
 
-        final BitSet absPath = new BitSet(256);
-        absPath.set('/');
-        absPath.or(pathSegments);
-
         final BitSet allowedAbsPath = new BitSet(256);
-        allowedAbsPath.or(absPath);
+        allowedAbsPath.or(pathSegments);
 
         final BitSet allowedFragment = new BitSet(256);
         allowedFragment.or(uric);
@@ -381,7 +376,7 @@ public final class UrlUtils {
         }
 
         final StringBuilder result = new StringBuilder(new String(input, US_ASCII));
-        int state = -0;
+        int state = 0;
         int offset = 0;
         for (int i = 0; i < input.length; i++) {
             final byte b = input[i];
@@ -997,6 +992,7 @@ public final class UrlUtils {
      */
     private static Url resolveUrl(final Url baseUrl, final String relativeUrl) {
         final Url url = parseUrl(relativeUrl);
+
         // Step 1: The base URL is established according to the rules of
         //         Section 3.  If the base URL is the empty string (unknown),
         //         the embedded URL is interpreted as an absolute URL and
@@ -1004,6 +1000,7 @@ public final class UrlUtils {
         if (baseUrl == null) {
             return url;
         }
+
         // Step 2: Both the base and embedded URLs are parsed into their
         //         component parts as described in Section 2.4.
         //      a) If the embedded URL is entirely empty, it inherits the
@@ -1020,6 +1017,7 @@ public final class UrlUtils {
         //      c) Otherwise, the embedded URL inherits the scheme of
         //         the base URL.
         url.scheme_ = baseUrl.scheme_;
+
         // Step 3: If the embedded URL's <net_loc> is non-empty, we skip to
         //         Step 7.  Otherwise, the embedded URL inherits the <net_loc>
         //         (if any) of the base URL.
@@ -1027,12 +1025,14 @@ public final class UrlUtils {
             return url;
         }
         url.location_ = baseUrl.location_;
+
         // Step 4: If the embedded URL path is preceded by a slash "/", the
         //         path is not relative and we skip to Step 7.
         if (url.path_ != null && !url.path_.isEmpty() && url.path_.charAt(0) == '/') {
-            url.path_ = removeLeadingSlashPoints(url.path_);
+            url.path_ = normalizeDotSegments(url.path_);
             return url;
         }
+
         // Step 5: If the embedded URL path is empty (and not preceded by a
         //         slash), then the embedded URL inherits the base URL path,
         //         and
@@ -1054,6 +1054,7 @@ public final class UrlUtils {
             url.query_ = baseUrl.query_;
             return url;
         }
+
         // Step 6: The last segment of the base URL's path (anything
         //         following the rightmost slash "/", or the entire path if no
         //         slash is present) is removed and the embedded URL's path is
@@ -1074,23 +1075,43 @@ public final class UrlUtils {
         }
 
         path = path.concat(url.path_);
-        //      a) All occurrences of "./", where "." is a complete path
-        //         segment, are removed.
-        int pathSegmentIndex;
+        url.path_ = normalizeDotSegments(path);
 
+        // Step 7: The resulting URL components, including any inherited from
+        //         the base URL, are recombined to give the absolute form of
+        //         the embedded URL.
+        return url;
+    }
+
+    /**
+     * Applies the RFC1808 Section 4, Step 6 dot-segment removal rules (a)-(d)
+     * to {@code path}, followed by the browser-specific leading-"../" collapse.
+     * Used both for the merged base+relative path in Step 6 itself, and for an
+     * embedded URL whose own path is already absolute (Step 4) -- an absolute
+     * path reference needs the same normalization a merged path gets, it just
+     * isn't merged with anything first.
+     *
+     * @param path the path to normalize; must already be the final path to
+     *     clean up (already merged with the base path, if applicable)
+     * @return the normalized path
+     */
+    private static String normalizeDotSegments(String path) {
+        // a) All occurrences of "./", where "." is a complete path
+        //    segment, are removed.
+        int pathSegmentIndex;
         while ((pathSegmentIndex = path.indexOf("/./")) >= 0) {
             path = path.substring(0, pathSegmentIndex + 1).concat(path.substring(pathSegmentIndex + 3));
         }
-        //      b) If the path ends with "." as a complete path segment,
-        //         that "." is removed.
+        // b) If the path ends with "." as a complete path segment,
+        //    that "." is removed.
         if (path.endsWith("/.")) {
             path = path.substring(0, path.length() - 1);
         }
-        //      c) All occurrences of "<segment>/../", where <segment> is a
-        //         complete path segment not equal to "..", are removed.
-        //         Removal of these path segments is performed iteratively,
-        //         removing the leftmost matching pattern on each iteration,
-        //         until no matching pattern remains.
+        // c) All occurrences of "<segment>/../", where <segment> is a
+        //    complete path segment not equal to "..", are removed.
+        //    Removal of these path segments is performed iteratively,
+        //    removing the leftmost matching pattern on each iteration,
+        //    until no matching pattern remains.
         while ((pathSegmentIndex = path.indexOf("/../")) > 0) {
             final String pathSegment = path.substring(0, pathSegmentIndex);
             final int slashIndex = pathSegment.lastIndexOf('/');
@@ -1104,9 +1125,9 @@ public final class UrlUtils {
                 path = path.substring(pathSegmentIndex + 4);
             }
         }
-        //      d) If the path ends with "<segment>/..", where <segment> is a
-        //         complete path segment not equal to "..", that
-        //         "<segment>/.." is removed.
+        // d) If the path ends with "<segment>/..", where <segment> is a
+        //    complete path segment not equal to "..", that
+        //    "<segment>/.." is removed.
         if (path.endsWith("/..")) {
             final String pathSegment = path.substring(0, path.length() - 3);
             final int slashIndex = pathSegment.lastIndexOf('/');
@@ -1116,13 +1137,7 @@ public final class UrlUtils {
             }
         }
 
-        path = removeLeadingSlashPoints(path);
-
-        url.path_ = path;
-        // Step 7: The resulting URL components, including any inherited from
-        //         the base URL, are recombined to give the absolute form of
-        //         the embedded URL.
-        return url;
+        return removeLeadingSlashPoints(path);
     }
 
     /**
