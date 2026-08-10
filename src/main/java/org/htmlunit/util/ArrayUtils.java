@@ -49,6 +49,7 @@ public final class ArrayUtils {
      * @param strings the string array to check
      * @param expected the string to search for
      * @return {@code true} if at least one element equals the expected string
+     * @throws IllegalArgumentException if expected is null
      */
     public static boolean contains(final String[] strings, final String expected) {
         if (expected == null) {
@@ -117,6 +118,7 @@ public final class ArrayUtils {
      * @param strings the string array to check
      * @param expected the string to search for
      * @return {@code true} if at least one element equals the expected string, ignoring case
+     * @throws IllegalArgumentException if expected is null
      */
     public static boolean containsIgnoreCase(final String[] strings, final String expected) {
         if (expected == null) {
