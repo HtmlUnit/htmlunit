@@ -47,6 +47,7 @@ import org.htmlunit.util.StringUtils;
  * @see org.htmlunit.WebClient#getAttachmentHandler()
  * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
  */
+@FunctionalInterface
 public interface AttachmentHandler extends Serializable {
 
     /**

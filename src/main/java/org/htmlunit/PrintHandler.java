@@ -27,6 +27,7 @@ import org.htmlunit.html.HtmlPage;
  *
  * @author Ronald Brill
  */
+@FunctionalInterface
 public interface PrintHandler extends Serializable {
 
     /**

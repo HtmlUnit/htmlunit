@@ -9,6 +9,10 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
             <action type="update" dev="rbri">
+                AttachmentHandler, PrintHandler, PromptHandler, RefreshHandler, ScriptPreProcessor, StatusHandler,
+                and WebStartHandler marked as @FunctionalInterface.
+            </action>
+            <action type="update" dev="rbri">
                 Simplified EncodingSniffer.translateEncodingLabel(): now always returns the translator's
                 normalized encoding name instead of sometimes returning the original (possibly mixed-case) input.
             </action>

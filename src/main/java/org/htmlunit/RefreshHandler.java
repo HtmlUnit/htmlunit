@@ -24,6 +24,7 @@ import java.net.URL;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
+@FunctionalInterface
 public interface RefreshHandler {
 
     /**

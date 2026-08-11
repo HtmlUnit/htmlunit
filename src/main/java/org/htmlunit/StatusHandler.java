@@ -22,6 +22,7 @@ import java.io.Serializable;
  * @author Mike Bowler
  * @author Ronald Brill
  */
+@FunctionalInterface
 public interface StatusHandler extends Serializable {
 
     /**

@@ -24,6 +24,7 @@ import org.htmlunit.html.HtmlPage;
  * @author Ben Curren
  * @author Ronald Brill
  */
+@FunctionalInterface
 public interface ScriptPreProcessor {
 
     /**

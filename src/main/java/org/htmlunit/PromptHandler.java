@@ -24,6 +24,7 @@ import java.io.Serializable;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
+@FunctionalInterface
 public interface PromptHandler extends Serializable {
 
     /**

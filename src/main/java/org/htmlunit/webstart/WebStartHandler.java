@@ -23,6 +23,7 @@ import org.htmlunit.WebResponse;
  *
  * @author Ronald Brill
  */
+@FunctionalInterface
 public interface WebStartHandler extends Serializable {
 
     /**
