@@ -157,11 +157,9 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
                 domBuilder.setFeature(HTMLScanner.CDATA_EARLY_CLOSING, false);
             }
 
-            if (webClient != null) {
-                final int bufferSize = webClient.getOptions().getNekoReaderBufferSize();
-                if (bufferSize > 0) {
-                    domBuilder.setProperty(HTMLScanner.READER_BUFFER_SIZE, bufferSize);
-                }
+            final int bufferSize = webClient.getOptions().getNekoReaderBufferSize();
+            if (bufferSize > 0) {
+                domBuilder.setProperty(HTMLScanner.READER_BUFFER_SIZE, bufferSize);
             }
         }
         catch (final Exception e) {

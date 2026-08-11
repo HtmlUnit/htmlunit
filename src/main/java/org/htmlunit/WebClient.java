@@ -2385,7 +2385,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * <p><span style="color:red">Experimental API: May be changed in next release
-     * and may not yet work perfectly!</span></p>
+     * and may not yet work perfectly!.</span></p>
      *
      * <p>This shuts down the whole client and restarts with a new empty window.
      * Cookies and other states are preserved.

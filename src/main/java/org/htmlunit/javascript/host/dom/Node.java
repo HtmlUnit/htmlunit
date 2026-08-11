@@ -517,10 +517,11 @@ public class Node extends EventTarget {
         }
 
         final Object movedNodeObject = args[0];
-        if (!(movedNodeObject instanceof Node)) {
+        if (!(movedNodeObject instanceof Node movedNode)) {
             throw JavaScriptEngine.typeError(
                     "Failed to execute 'moveBefore' on 'Element': parameter 1 is not of type 'Node'.");
         }
+
         final Object referenceNodeObject = args[1];
         if (referenceNodeObject != null && !(referenceNodeObject instanceof Node)) {
             throw JavaScriptEngine.typeError(
@@ -530,7 +531,7 @@ public class Node extends EventTarget {
         final Node node = (Node) thisObj;
         try {
             if (referenceNodeObject == null) {
-                node.getDomNodeOrDie().moveBefore(((Node) movedNodeObject).getDomNodeOrDie(), null);
+                node.getDomNodeOrDie().moveBefore(movedNode.getDomNodeOrDie(), null);
                 return;
             }
 
@@ -839,17 +840,17 @@ public class Node extends EventTarget {
 
     /**
      * Compares the positions of this node and the provided node within the document.
-     * @param node node object that specifies the node to check
+     * @param nodeObject node object that specifies the node to check
      * @return how the node is positioned relatively to the reference node.
      * @see <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition">DOM level 3</a>
      * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
      */
     @JsxFunction
-    public int compareDocumentPosition(final Object node) {
-        if (!(node instanceof Node)) {
+    public int compareDocumentPosition(final Object nodeObject) {
+        if (!(nodeObject instanceof Node node)) {
             throw JavaScriptEngine.typeError("Could not convert JavaScript argument arg 0");
         }
-        return getDomNodeOrDie().compareDocumentPosition(((Node) node).getDomNodeOrDie());
+        return getDomNodeOrDie().compareDocumentPosition(node.getDomNodeOrDie());
     }
 
     /**
