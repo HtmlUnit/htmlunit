@@ -14,15 +14,26 @@
  */
 package org.htmlunit.util;
 
+import static java.nio.charset.StandardCharsets.UTF_16BE;
+import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.htmlunit.util.EncodingSniffer.contentTypeEndsWith;
 import static org.htmlunit.util.EncodingSniffer.extractEncodingFromContentType;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromCssDeclaration;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromMetaTag;
+import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromUnicodeBom;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromXmlDeclaration;
+import static org.htmlunit.util.EncodingSniffer.toCharset;
+import static org.htmlunit.util.EncodingSniffer.translateEncodingLabel;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
+import java.util.Collections;
+import java.util.List;
 
 import org.htmlunit.HttpHeader;
 import org.junit.jupiter.api.Test;
@@ -182,4 +193,237 @@ public class EncodingSnifferTest {
         assertSame(expectedEncoding, extractEncodingFromContentType(contentType));
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromUnicodeBom_utf8() throws Exception {
+        final byte[] bom = {(byte) 0xEF, (byte) 0xBB, (byte) 0xBF, 'x'};
+        assertSame(UTF_8, sniffEncodingFromUnicodeBom(bom));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromUnicodeBom_utf16be() throws Exception {
+        final byte[] bom = {(byte) 0xFE, (byte) 0xFF, 'x'};
+        assertSame(UTF_16BE, sniffEncodingFromUnicodeBom(bom));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromUnicodeBom_utf16le() throws Exception {
+        final byte[] bom = {(byte) 0xFF, (byte) 0xFE, 'x'};
+        assertSame(UTF_16LE, sniffEncodingFromUnicodeBom(bom));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromUnicodeBom_noBom_returnsNull() throws Exception {
+        final byte[] plain = {'<', 'h', 't', 'm', 'l'};
+        assertNull(sniffEncodingFromUnicodeBom(plain));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromUnicodeBom_nullInput_returnsNull() throws Exception {
+        assertNull(sniffEncodingFromUnicodeBom(null));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromUnicodeBom_emptyInput_returnsNull() throws Exception {
+        assertNull(sniffEncodingFromUnicodeBom(new byte[0]));
+    }
+
+    /**
+     * A buffer shorter than a full BOM must not throw, and must report no
+     * match.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromUnicodeBom_tooShortForBom_returnsNull() throws Exception {
+        final byte[] tooShort = {(byte) 0xEF, (byte) 0xBB}; // UTF-8 BOM is 3 bytes
+        assertNull(sniffEncodingFromUnicodeBom(tooShort));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentTypeEndsWith_matches() throws Exception {
+        final List<NameValuePair> headers = Collections.singletonList(
+                new NameValuePair(HttpHeader.CONTENT_TYPE, "application/xhtml+xml"));
+
+        assertTrue(contentTypeEndsWith(headers, "+xml"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentTypeEndsWith_ignoresCharsetParameter() throws Exception {
+        final List<NameValuePair> headers = Collections.singletonList(
+                new NameValuePair(HttpHeader.CONTENT_TYPE, "application/xhtml+xml; charset=utf-8"));
+
+        assertTrue(contentTypeEndsWith(headers, "+xml"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentTypeEndsWith_noMatch_returnsFalse() throws Exception {
+        final List<NameValuePair> headers = Collections.singletonList(
+                new NameValuePair(HttpHeader.CONTENT_TYPE, "text/html"));
+
+        assertFalse(contentTypeEndsWith(headers, "+xml"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentTypeEndsWith_noContentTypeHeader_returnsFalse() throws Exception {
+        final List<NameValuePair> headers = Collections.singletonList(
+                new NameValuePair("X-Other", "application/xhtml+xml"));
+
+        assertFalse(contentTypeEndsWith(headers, "+xml"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentTypeEndsWith_caseInsensitive() throws Exception {
+        final List<NameValuePair> headers = Collections.singletonList(
+                new NameValuePair(HttpHeader.CONTENT_TYPE, "APPLICATION/XHTML+XML"));
+
+        assertTrue(contentTypeEndsWith(headers, "+xml"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromMetaTag_charsetXUserDefined_mapsToWindows1252() throws Exception {
+        meta(Charset.forName("windows-1252"), "<meta charset='x-user-defined'/>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromMetaTag_contentXUserDefined_mapsToWindows1252() throws Exception {
+        meta(Charset.forName("windows-1252"),
+                "<meta http-equiv='Content-Type' content='text/html; charset=x-user-defined'/>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromMetaTag_charsetUtf16be_remappedToUtf8() throws Exception {
+        meta(UTF_8, "<meta charset='utf-16be'/>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromMetaTag_charsetUtf16le_remappedToUtf8() throws Exception {
+        meta(UTF_8, "<meta charset='utf-16le'/>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromXmlDeclaration_encodingWordWithNoQuoteAtAll_doesNotThrow() throws Exception {
+        xmlDeclaration(null, "<?xml version=\"1.0\" encoding standalone=\"no\"?>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromXmlDeclaration_encodingAsSubstringNoQuote_doesNotThrow() throws Exception {
+        xmlDeclaration(null, "<?xml version=\"1.0\" fooencodingbar?>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromXmlDeclaration_openingQuoteButNoClosingQuote_doesNotThrow() throws Exception {
+        xmlDeclaration(null, "<?xml version=\"1.0\" encoding=\"utf-8?>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void toCharset_validLabel() throws Exception {
+        assertSame(UTF_8, toCharset("utf-8"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void toCharset_unknownLabel_returnsNull() throws Exception {
+        assertNull(toCharset("this-is-not-a-real-charset"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void toCharset_nullOrEmpty_returnsNull() throws Exception {
+        assertNull(toCharset(null));
+        assertNull(toCharset(""));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void translateEncodingLabel_knownAlias() throws Exception {
+        // "latin1" is a common alias that should normalize to a real charset name
+        assertTrue(translateEncodingLabel("latin1") != null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void translateEncodingLabel_unknownLabel_returnsNull() throws Exception {
+        assertNull(translateEncodingLabel("this-is-not-a-real-charset"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void translateEncodingLabel_nullOrEmpty_returnsNull() throws Exception {
+        assertNull(translateEncodingLabel(null));
+        assertNull(translateEncodingLabel(""));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromCssDeclaration_noClosingQuote_returnsNull() throws Exception {
+        cssDeclaration(null, "@charset \"utf-8");
+    }
 }

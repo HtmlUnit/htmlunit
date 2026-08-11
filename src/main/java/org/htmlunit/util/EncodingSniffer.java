@@ -467,25 +467,26 @@ public final class EncodingSniffer {
             final int index = ArrayUtils.indexOf(bytes, (byte) '?', 2);
             if (index + 1 < bytes.length && bytes[index + 1] == '>') {
                 final String declaration = new String(bytes, 0, index + 2, US_ASCII);
+
                 int start = declaration.indexOf("encoding");
                 if (start != -1) {
                     start += 8;
-                    final char delimiter;
-                outer:
-                    while (true) {
-                        switch (declaration.charAt(start)) {
-                            case '"':
-                            case '\'':
-                                delimiter = declaration.charAt(start);
-                                start = start + 1;
-                                break outer;
-
-                            default:
-                                start++;
+                    Character delimiter = null;
+                    while (start < declaration.length()) {
+                        final char c = declaration.charAt(start);
+                        if (c == '"' || c == '\'') {
+                            delimiter = c;
+                            start++;
+                            break;
+                        }
+                        start++;
+                    }
+                    if (delimiter != null) {
+                        final int end = declaration.indexOf(delimiter, start);
+                        if (end != -1) {
+                            encoding = toCharset(declaration.substring(start, end));
                         }
                     }
-                    final int end = declaration.indexOf(delimiter, start);
-                    encoding = toCharset(declaration.substring(start, end));
                 }
             }
         }
@@ -517,7 +518,7 @@ public final class EncodingSniffer {
 
         Charset encoding = null;
         final int index = ArrayUtils.indexOf(bytes, (byte) '"', CSS_CHARSET_DECLARATION_PREFIX.length);
-        if (index + 1 < bytes.length && bytes[index + 1] == ';') {
+        if (index != -1 && index + 1 < bytes.length && bytes[index + 1] == ';') {
             encoding = toCharset(new String(bytes, CSS_CHARSET_DECLARATION_PREFIX.length, index - CSS_CHARSET_DECLARATION_PREFIX.length, US_ASCII));
             // https://www.w3.org/TR/css-syntax-3/#input-byte-stream "Why use utf-8 when the declaration says utf-16?"
             if (encoding == UTF_16BE || encoding == UTF_16LE) {
@@ -719,7 +720,7 @@ public final class EncodingSniffer {
         final String encLC = encodingLabel.toLowerCase(Locale.ROOT);
         final String enc = StandardEncodingTranslator.INSTANCE.encodingNameFromLabel(encodingLabel);
         if (encLC.equals(enc)) {
-            return encodingLabel;
+            return encLC;
         }
         return enc;
     }
