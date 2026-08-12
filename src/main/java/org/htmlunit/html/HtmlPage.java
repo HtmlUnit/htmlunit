@@ -1427,11 +1427,12 @@ public class HtmlPage extends SgmlPage {
             final char separator = urlPart.charAt(0);
             if (";, \r\n\t".indexOf(separator) >= 0) {
                 urlPart = StringUtils.stripStart(urlPart, ";, \r\n\t");
-                if (urlPart.toLowerCase(Locale.ROOT).startsWith("url")) {
+                urlPart = urlPart.toLowerCase(Locale.ROOT);
+                if (urlPart.startsWith("url")) {
                     urlPart = urlPart.substring(3);
                     urlPart = urlPart.trim();
 
-                    if (urlPart.toLowerCase().startsWith("=")) {
+                    if (urlPart.length() > 0 && urlPart.charAt(0) == '=') {
                         urlPart = urlPart.substring(1);
                         urlPart = urlPart.trim();
                     }
