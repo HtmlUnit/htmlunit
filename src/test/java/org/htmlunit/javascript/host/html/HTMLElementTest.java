@@ -2743,16 +2743,25 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"400", "100"})
+    @Alerts({"400", "100", "50", "80", "400", "100", "50", "0"})
     public void getBoundingClientRect2() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    var d1 = document.getElementById('div1');\n"
-            + "    var pos = d1.getBoundingClientRect();\n"
+            + "    var d0 = document.getElementById('outer');\n"
+            + "    var pos = d0.getBoundingClientRect();\n"
             + "    log(pos.left);\n"
             + "    log(pos.top);\n"
+            + "    log(pos.width);\n"
+            + "    log(pos.height);\n"
+
+            + "    var d1 = document.getElementById('div1');\n"
+            + "    pos = d1.getBoundingClientRect();\n"
+            + "    log(pos.left);\n"
+            + "    log(pos.top);\n"
+            + "    log(pos.width);\n"
+            + "    log(pos.height);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>"
@@ -2801,7 +2810,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object DOMRect]", "0", "0"})
+    @Alerts({"[object DOMRect]", "0", "0", "0", "0"})
     public void getBoundingClientRectDisconnected() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2814,6 +2823,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      log(pos);\n"
             + "      log(pos.left);\n"
             + "      log(pos.top);\n"
+            + "      log(pos.width);\n"
+            + "      log(pos.height);\n"
             + "    } catch(e) { logEx(e);}\n"
             + "  }\n"
             + "</script>\n"

@@ -1526,8 +1526,25 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final boolean isInline = INLINE.equals(getDisplay()) && !(element instanceof HtmlInlineFrame);
-        // height is ignored for inline elements
-        if (isInline || super.getHeight().isEmpty()) {
+        final String styleHeight = super.getHeight();
+
+        // an EXPLICIT, non-auto height wins outright -- mirrors what
+        // getBlockSize() already does for the same underlying style value,
+        // and what getCalculatedWidth() does for an explicit width
+        if (!isInline
+                && !StringUtils.isEmptyOrNull(styleHeight)
+                && !AUTO.equals(styleHeight)) {
+            return updateCachedHeight(CssPixelValueConverter.pixelValue(element,
+                    new CssPixelValueConverter.CssValue(0, element.getPage().getEnclosingWindow().getInnerHeight()) {
+                        @Override public String get(final ComputedCssStyleDeclaration style) {
+                            return style.getStyleAttribute(Definition.HEIGHT, true);
+                        }
+                    }));
+        }
+
+        // height is ignored for inline elements, and AUTO/unset falls back to
+        // content-based sizing
+        if (isInline || StringUtils.isEmptyOrNull(styleHeight) || AUTO.equals(styleHeight)) {
             final int contentHeight = getContentHeight();
             if (contentHeight > 0) {
                 return updateCachedHeight(contentHeight);
