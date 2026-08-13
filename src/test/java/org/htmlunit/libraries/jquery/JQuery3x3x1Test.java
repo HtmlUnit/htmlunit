@@ -10262,10 +10262,10 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @HtmlUnitNYI(CHROME = "2, 0, 2",
-            EDGE = "2, 0, 2",
-            FF = "2, 0, 2",
-            FF_ESR = "2, 0, 2")
+    @HtmlUnitNYI(CHROME = "1, 1, 2",
+            EDGE = "1, 1, 2",
+            FF = "1, 1, 2",
+            FF_ESR = "1, 1, 2")
     public void dimensions__window_vs__large_document() throws Exception {
         runTest("dimensions: window vs. large document");
     }
