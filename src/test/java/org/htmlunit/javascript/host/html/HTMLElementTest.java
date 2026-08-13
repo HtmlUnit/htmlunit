@@ -3099,6 +3099,265 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * A block div with text content should have a non-zero height based on font/line-height.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_blockDivTextOnlyHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    log(h > 0 && h < 100);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An empty block div with no height/padding/border should have zero height.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_emptyBlockDivHasZeroHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    log(h == 0);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A block div containing child elements should expand its height to enclose them.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_blockDivExpandsToChildHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var outer = document.getElementById('outer');\n"
+            + "    var inner = document.getElementById('inner');\n"
+            + "    var outerH = outer.getBoundingClientRect().height;\n"
+            + "    var innerH = inner.getBoundingClientRect().height;\n"
+            + "    log(outerH >= innerH && outerH >= 100);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='outer'><div id='inner' style='height: 100px;'>Hi</div></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An inline-block div with height: auto should calculate height based on content.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_inlineBlockAutoHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    log(h > 0 && h < 100);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display:inline-block; height:auto'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An inline-block div with an explicit height should return that exact height.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_inlineBlockExplicitHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    log(h == 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display:inline-block; height:200px'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An empty inline-block div with height: auto should have zero height.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_emptyInlineBlockDivHasZeroHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    log(h == 0);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display:inline-block'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A block div with height: max-content should size its height to fit content.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false")
+    public void getBoundingClientRect_blockDivMaxContentHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    log(h > 0 && h < 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display: block; height: max-content'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A block div with height: min-content should size its height to fit content.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false")
+    public void getBoundingClientRect_blockDivMinContentHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    log(h > 0 && h < 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='display: block; height: min-content'>Hi</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A span with only text content should have height determined by line-height/font.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_spanTextOnlyHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    log(h > 0 && h < 200);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='d'>Hi</span>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests height calculation when defined as percentage relative to container.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRect_HeightPercent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    log(h == 100);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div style='height: 200px;'>\n"
+            + "    <div id='d' style='height: 50%;'>Test</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies that padding and border increase the total height returned by getBoundingClientRect().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true",
+            FF = "true",
+            FF_ESR = "true")
+    public void getBoundingClientRect_heightIncludesPaddingAndBorder() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var h = d.getBoundingClientRect().height;\n"
+            + "    // 100px height + 10px top/bottom padding + 5px top/bottom border = 130px\n"
+            + "    log(h == 130);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' style='height: 100px; padding: 10px 0; border: 5px solid black;'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

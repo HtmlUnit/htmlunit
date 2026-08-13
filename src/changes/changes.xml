@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
+            <action type="fix" dev="rbri">
+                Fixed getBoundingClientRect()/height calculation: the height property from style is now
+                used if available.
+            </action>
             <action type="update" dev="rbri">
                 AttachmentHandler, PrintHandler, PromptHandler, RefreshHandler, ScriptPreProcessor, StatusHandler,
                 and WebStartHandler marked as @FunctionalInterface.
