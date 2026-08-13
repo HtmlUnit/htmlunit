@@ -9,6 +9,9 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
             <action type="fix" dev="rbri">
+                Small optimizations for ComputedCssStyleDeclaration.
+            </action>
+            <action type="fix" dev="rbri">
                 Fixed getBoundingClientRect()/height calculation: the height property from style is now
                 used if available.
             </action>
@@ -23,7 +26,7 @@
             <action type="fix" dev="rbri">
                 Fixed EncodingSniffer.sniffEncodingFromCssDeclaration(): a missing closing quote after the
                 @charset declaration's opening quote is now explicitly detected and handled.
-             </action>
+            </action>
             <action type="fix" dev="rbri">
                 Fixed EncodingSniffer.sniffEncodingFromXmlDeclaration(): a malformed XML declaration containing the
                 word "encoding" not followed by a quoted value no longer throws a StringIndexOutOfBoundsException;

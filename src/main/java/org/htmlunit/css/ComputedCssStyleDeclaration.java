@@ -208,37 +208,37 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public static final String EMPTY_FINAL = new String("");
 
     /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc.). */
-    private Integer width_;
+    private int cachedWidth_ = Integer.MIN_VALUE;
 
     /** The computed, cached content width (sum/max of children's widths) of the element. */
-    private Integer contentWidth_;
+    private int cachedContentWidth_ = Integer.MIN_VALUE;
 
     /**
      * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
      * taking child elements into account.
      */
-    private Integer height_;
+    private int cachedHeight_ = Integer.MIN_VALUE;
 
     /**
      * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
      * <b>not</b> taking child elements into account.
      */
-    private Integer emptyHeight_;
-
-    /** The computed, cached horizontal padding (left + right) of the element to which this computed style belongs. */
-    private Integer paddingHorizontal_;
-
-    /** The computed, cached vertical padding (top + bottom) of the element to which this computed style belongs. */
-    private Integer paddingVertical_;
-
-    /** The computed, cached horizontal border (left + right) of the element to which this computed style belongs. */
-    private Integer borderHorizontal_;
-
-    /** The computed, cached vertical border (top + bottom) of the element to which this computed style belongs. */
-    private Integer borderVertical_;
+    private int cachedEmptyHeight_ = Integer.MIN_VALUE;
 
     /** The computed, cached top of the element to which this computed style belongs. */
-    private Integer top_;
+    private int cachedTop_ = Integer.MIN_VALUE;
+
+    /** The computed, cached horizontal padding (left + right) of the element to which this computed style belongs. */
+    private int cachedPaddingHorizontal_ = Integer.MIN_VALUE;
+
+    /** The computed, cached vertical padding (top + bottom) of the element to which this computed style belongs. */
+    private int cachedPaddingVertical_ = Integer.MIN_VALUE;
+
+    /** The computed, cached horizontal border (left + right) of the element to which this computed style belongs. */
+    private int cachedBorderHorizontal_ = Integer.MIN_VALUE;
+
+    /** The computed, cached vertical border (top + bottom) of the element to which this computed style belongs. */
+    private int cachedBorderVertical_ = Integer.MIN_VALUE;
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
@@ -606,7 +606,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     if (content == null) {
                         return getDefaultValue() + "px";
                     }
-                    return getEmptyHeight(domElem) + "px";
+                    return calculateIntrinsicHeight(domElem) + "px";
                 }
                 return value;
             }
@@ -1077,10 +1077,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the computed top (Y coordinate), relative to the node's parent's top edge
      */
     public int getTop(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
-        Integer cachedTop = getCachedTop();
+        final Integer cachedTop = getCachedTop();
 
         int top = 0;
-        if (cachedTop == null) {
+        if (cachedTop == Integer.MIN_VALUE) {
             final String position = getPositionWithInheritance();
             if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
                 top = getTopForAbsolutePositionWithInheritance();
@@ -1102,7 +1102,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                         if (isBlock(display)) {
                             int prevTop = 0;
                             final Integer eCachedTop = style.getCachedTop();
-                            if (eCachedTop == null) {
+                            if (eCachedTop == Integer.MIN_VALUE) {
                                 final String prevPosition = style.getPositionWithInheritance();
                                 if (ABSOLUTE.equals(prevPosition) || FIXED.equals(prevPosition)) {
                                     prevTop += style.getTopForAbsolutePositionWithInheritance();
@@ -1132,11 +1132,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     top += CssPixelValueConverter.pixelValue(t);
                 }
             }
-            cachedTop = Integer.valueOf(top);
-            setCachedTop(cachedTop);
+            setCachedTop(top);
         }
         else {
-            top = cachedTop.intValue();
+            top = cachedTop;
         }
 
         if (includeMargin) {
@@ -1516,9 +1515,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the element's calculated height, taking both relevant CSS and the element's children into account
      */
     private int getCalculatedHeight(final DomElement element) {
-        final Integer cachedHeight = getCachedHeight();
-        if (cachedHeight != null) {
-            return cachedHeight.intValue();
+        final int cachedHeight = getCachedHeight();
+        if (cachedHeight != Integer.MIN_VALUE) {
+            return cachedHeight;
         }
 
         if (element instanceof HtmlImage image) {
@@ -1551,7 +1550,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
         }
 
-        return updateCachedHeight(getEmptyHeight(element));
+        return updateCachedHeight(calculateIntrinsicHeight(element));
     }
 
     /**
@@ -1596,9 +1595,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the calculated width, in pixels
      */
     private int getCalculatedWidth(final DomElement element) {
-        final Integer cached = getCachedWidth();
-        if (cached != null) {
-            return cached.intValue();
+        final int cached = getCachedWidth();
+        if (cached != Integer.MIN_VALUE) {
+            return cached;
         }
 
         // an element that isn't rendered at all has no box, and therefore no width
@@ -1864,9 +1863,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the total width of the element's children
      */
     public int getContentWidth() {
-        final Integer cachedContentWidth = getCachedContentWidth();
-        if (cachedContentWidth != null) {
-            return cachedContentWidth.intValue();
+        final int cachedContentWidth = getCachedContentWidth();
+        if (cachedContentWidth != Integer.MIN_VALUE) {
+            return cachedContentWidth;
         }
 
         int inlineWidth = 0;
@@ -1929,14 +1928,15 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * Returns the element's calculated height taking relevant CSS into account, but <b>not</b> the element's child
-     *         elements.
+     * Calculates the intrinsic or base text-line height of an element
+     * without performing full child-element flow layout.
+     *
      * @return the element's calculated height
      */
-    private int getEmptyHeight(final DomElement element) {
-        final Integer cachedEmptyHeight = getCachedEmptyHeight();
-        if (cachedEmptyHeight != null) {
-            return cachedEmptyHeight.intValue();
+    private int calculateIntrinsicHeight(final DomElement element) {
+        final int cachedEmptyHeight = getCachedEmptyHeight();
+        if (cachedEmptyHeight != Integer.MIN_VALUE) {
+            return cachedEmptyHeight;
         }
 
         if (!element.mayBeDisplayed()) {
@@ -2136,7 +2136,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 final String styleHeight = getStyleAttribute(Definition.HEIGHT, true);
                 if (styleHeight.endsWith("%")) {
                     if (page instanceof HtmlPage htmlPage && !htmlPage.isQuirksMode()) {
-                        return defaultHeight;
+                        return updateCachedEmptyHeight(defaultHeight);
                     }
                 }
             }
@@ -2279,15 +2279,15 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
 
             scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
-                && (ignoreSize || getContentHeight() > getEmptyHeight(element));
+                && (ignoreSize || getContentHeight() > calculateIntrinsicHeight(element));
         }
         return scrollable;
     }
 
     private int getBorderHorizontal() {
-        final Integer borderHorizontal = getCachedBorderHorizontal();
-        if (borderHorizontal != null) {
-            return borderHorizontal.intValue();
+        final int borderHorizontal = getCachedBorderHorizontal();
+        if (borderHorizontal != Integer.MIN_VALUE) {
+            return borderHorizontal;
         }
 
         final int border = NONE.equals(getDisplay()) ? 0 : getBorderLeftValue() + getBorderRightValue();
@@ -2295,9 +2295,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     private int getBorderVertical() {
-        final Integer borderVertical = getCachedBorderVertical();
-        if (borderVertical != null) {
-            return borderVertical.intValue();
+        final int borderVertical = getCachedBorderVertical();
+        if (borderVertical != Integer.MIN_VALUE) {
+            return borderVertical;
         }
 
         final int border = NONE.equals(getDisplay()) ? 0 : getBorderTopValue() + getBorderBottomValue();
@@ -2337,9 +2337,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     private int getPaddingHorizontal() {
-        final Integer paddingHorizontal = getCachedPaddingHorizontal();
-        if (paddingHorizontal != null) {
-            return paddingHorizontal.intValue();
+        final int paddingHorizontal = getCachedPaddingHorizontal();
+        if (paddingHorizontal != Integer.MIN_VALUE) {
+            return paddingHorizontal;
         }
 
         final int padding = NONE.equals(getDisplay()) ? 0 : getPaddingLeftValue() + getPaddingRightValue();
@@ -2347,9 +2347,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     private int getPaddingVertical() {
-        final Integer paddingVertical = getCachedPaddingVertical();
-        if (paddingVertical != null) {
-            return paddingVertical.intValue();
+        final int paddingVertical = getCachedPaddingVertical();
+        if (paddingVertical != Integer.MIN_VALUE) {
+            return paddingVertical;
         }
 
         final int padding = NONE.equals(getDisplay()) ? 0 : getPaddingTopValue() + getPaddingBottomValue();
@@ -2392,8 +2392,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @return the cached width
      */
-    public Integer getCachedWidth() {
-        return width_;
+    public int getCachedWidth() {
+        return cachedWidth_;
     }
 
     /**
@@ -2402,34 +2402,34 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the param width
      */
     public int updateCachedWidth(final int width) {
-        width_ = Integer.valueOf(width);
-        return width;
+        cachedWidth_ = width;
+        return cachedWidth_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @return the cached content width
      */
-    public Integer getCachedContentWidth() {
-        return contentWidth_;
+    public int getCachedContentWidth() {
+        return cachedContentWidth_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @param contentWidth the new value
-     * @return the param contentWidth
+     * @return the contentWidth
      */
     public int updateCachedContentWidth(final int contentWidth) {
-        contentWidth_ = Integer.valueOf(contentWidth);
-        return contentWidth;
+        cachedContentWidth_ = contentWidth;
+        return cachedContentWidth_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @return the cached height
      */
-    public Integer getCachedHeight() {
-        return height_;
+    public int getCachedHeight() {
+        return cachedHeight_;
     }
 
     /**
@@ -2438,16 +2438,16 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the param height
      */
     public int updateCachedHeight(final int height) {
-        height_ = Integer.valueOf(height);
-        return height;
+        cachedHeight_ = height;
+        return cachedHeight_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @return the cached emptyHeight
      */
-    public Integer getCachedEmptyHeight() {
-        return emptyHeight_;
+    public int getCachedEmptyHeight() {
+        return cachedEmptyHeight_;
     }
 
     /**
@@ -2456,32 +2456,32 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the param emptyHeight
      */
     public int updateCachedEmptyHeight(final int emptyHeight) {
-        emptyHeight_ = Integer.valueOf(emptyHeight);
-        return emptyHeight;
+        cachedEmptyHeight_ = emptyHeight;
+        return cachedEmptyHeight_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @return the cached top
      */
-    public Integer getCachedTop() {
-        return top_;
+    public int getCachedTop() {
+        return cachedTop_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @param top the new value
      */
-    public void setCachedTop(final Integer top) {
-        top_ = top;
+    public void setCachedTop(final int top) {
+        cachedTop_ = top;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @return the cached padding horizontal
      */
-    public Integer getCachedPaddingHorizontal() {
-        return paddingHorizontal_;
+    public int getCachedPaddingHorizontal() {
+        return cachedPaddingHorizontal_;
     }
 
     /**
@@ -2490,16 +2490,16 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the param paddingHorizontal
      */
     public int updateCachedPaddingHorizontal(final int paddingHorizontal) {
-        paddingHorizontal_ = Integer.valueOf(paddingHorizontal);
-        return paddingHorizontal;
+        cachedPaddingHorizontal_ = paddingHorizontal;
+        return cachedPaddingHorizontal_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @return the cached padding vertical
      */
-    public Integer getCachedPaddingVertical() {
-        return paddingVertical_;
+    public int getCachedPaddingVertical() {
+        return cachedPaddingVertical_;
     }
 
     /**
@@ -2508,34 +2508,34 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the param paddingVertical
      */
     public int updateCachedPaddingVertical(final int paddingVertical) {
-        paddingVertical_ = Integer.valueOf(paddingVertical);
-        return paddingVertical;
+        cachedPaddingVertical_ = paddingVertical;
+        return cachedPaddingVertical_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @return the cached border horizontal
      */
-    public Integer getCachedBorderHorizontal() {
-        return borderHorizontal_;
+    public int getCachedBorderHorizontal() {
+        return cachedBorderHorizontal_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @param borderHorizontal the new value
-     * @return the param borderHorizontal
+     * @return the borderHorizontal
      */
     public int updateCachedBorderHorizontal(final int borderHorizontal) {
-        borderHorizontal_ = Integer.valueOf(borderHorizontal);
-        return borderHorizontal;
+        cachedBorderHorizontal_ = borderHorizontal;
+        return cachedBorderHorizontal_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      * @return the cached border vertical
      */
-    public Integer getCachedBorderVertical() {
-        return borderVertical_;
+    public int getCachedBorderVertical() {
+        return cachedBorderVertical_;
     }
 
     /**
@@ -2544,8 +2544,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the param borderVertical
      */
     public int updateCachedBorderVertical(final int borderVertical) {
-        borderVertical_ = Integer.valueOf(borderVertical);
-        return borderVertical;
+        cachedBorderVertical_ = borderVertical;
+        return cachedBorderVertical_;
     }
 
     /**
