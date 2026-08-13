@@ -181,10 +181,10 @@ public class HtmlPage6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Error 400 Ambiguous URI empty segment", "1", "§§URL§§"})
-    @HtmlUnitNYI(CHROME = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            EDGE = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            FF = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            FF_ESR = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"})
+    @HtmlUnitNYI(CHROME = {"wrong§", "2", "§§URL§§2;url=§§URL1§§second/"},
+            EDGE = {"wrong§", "2", "§§URL§§2;url=§§URL1§§second/"},
+            FF = {"wrong§", "2", "§§URL§§2;url=§§URL1§§second/"},
+            FF_ESR = {"wrong§", "2", "§§URL§§2;url=§§URL1§§second/"})
     public void refresh_MetaTag_DoubleComma() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='1,2;URL=§§URL§§'>");
     }
@@ -362,10 +362,10 @@ public class HtmlPage6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Error 400 Ambiguous URI empty segment", "1", "§§URL§§"})
-    @HtmlUnitNYI(CHROME = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            EDGE = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            FF = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            FF_ESR = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"})
+    @HtmlUnitNYI(CHROME = {"wrong§", "2", "§§URL§§2;url=§§URL1§§second/"},
+            EDGE = {"wrong§", "2", "§§URL§§2;url=§§URL1§§second/"},
+            FF = {"wrong§", "2", "§§URL§§2;url=§§URL1§§second/"},
+            FF_ESR = {"wrong§", "2", "§§URL§§2;url=§§URL1§§second/"})
     public void refresh_HttpResponseHeader_DoubleComma() throws Exception {
         testRefresh_HttpResponseHeader("1,2;URL=§§URL§§");
     }
