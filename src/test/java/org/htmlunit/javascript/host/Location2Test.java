@@ -1328,25 +1328,25 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "2", "§§URL§§a.html", "§§URL§§a.html", "§§URL§§a.html#1",
                         "load",
-                        "1 http://localhost:22222/a.html",
-                        "2 http://localhost:22222/a.html#1",
-                        "3 http://localhost:22222/a.html#1",
+                        "1 http://localhost:§§PORT§§/a.html",
+                        "2 http://localhost:§§PORT§§/a.html#1",
+                        "3 http://localhost:§§PORT§§/a.html#1",
                         "load",
-                        "4 http://localhost:22222/a.html#1"},
+                        "4 http://localhost:§§PORT§§/a.html#1"},
             FF = { "1", "2", "§§URL§§a.html", "null", "§§URL§§a.html#1",
                    "load",
-                   "1 http://localhost:22222/a.html",
-                   "2 http://localhost:22222/a.html#1",
-                   "3 http://localhost:22222/a.html#1",
+                   "1 http://localhost:§§PORT§§/a.html",
+                   "2 http://localhost:§§PORT§§/a.html#1",
+                   "3 http://localhost:§§PORT§§/a.html#1",
                    "load",
-                   "4 http://localhost:22222/a.html#1"},
+                   "4 http://localhost§§PORT§§/a.html#1"},
             FF_ESR = { "1", "2", "§§URL§§a.html", "null", "§§URL§§a.html#1",
                        "load",
-                       "1 http://localhost:22222/a.html",
-                       "2 http://localhost:22222/a.html#1",
-                       "3 http://localhost:22222/a.html#1",
+                       "1 http://localhost:§§PORT§§/a.html",
+                       "2 http://localhost:§§PORT§§/a.html#1",
+                       "3 http://localhost:§§PORT§§/a.html#1",
                        "load",
-                        "4 http://localhost:22222/a.html#1"})
+                        "4 http://localhost:§§PORT§§/a.html#1"})
     public void reloadGetHashDetails() throws Exception {
         shutDownAll();
 

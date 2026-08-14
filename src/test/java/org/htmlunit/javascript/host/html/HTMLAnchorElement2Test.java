@@ -1613,8 +1613,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"localhost",
-             "html", "http://html:22222/foo.html#O",
-             "html", "http://html:22222/foo.html#O"})
+             "html", "http://html:§§PORT§§/foo.html#O",
+             "html", "http://html:§§PORT§§/foo.html#O"})
     public void readWriteAnchorHostnameInvalid() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1640,7 +1640,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        expandExpectedAlertsVariables("" + PORT);
+        expandExpectedAlertsVariables("");
         loadPageVerifyTitle2(html);
     }
 

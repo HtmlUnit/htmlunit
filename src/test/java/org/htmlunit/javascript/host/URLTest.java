@@ -107,7 +107,7 @@ public class URLTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      if (typeof window.URL === 'function') {\n"
             + "        log(new URL('data:,foo'));\n"
-            + "        log(new URL('data:,foo', 'http://localhost:22222/test/index.html'));\n"
+            + "        log(new URL('data:,foo', 'http://localhost:" + PORT + "/test/index.html'));\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"

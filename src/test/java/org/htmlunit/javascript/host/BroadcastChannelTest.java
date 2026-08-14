@@ -33,10 +33,10 @@ public class BroadcastChannelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"channel1", "i got [object MessageEvent]", "i got data Hello from main page!",
-             "i got origin http://localhost:22222", "i got lastEventId ",
+             "i got origin http://localhost:§§PORT§§", "i got lastEventId ",
              "i got source null", "i got ports ",
              "got [object MessageEvent]", "got data post: Response from iframe",
-             "got origin http://localhost:22222", "got lastEventId ", "got source null", "got ports "})
+             "got origin http://localhost:§§PORT§§", "got lastEventId ", "got source null", "got ports "})
     public void basicBroadcastTest() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>\n"
@@ -79,6 +79,7 @@ public class BroadcastChannelTest extends WebDriverTestCase {
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
+        expandExpectedAlertsVariables("");
 
         final WebDriver driver = loadPage2(html);
         verifySessionStorage2(driver, getExpectedAlerts());

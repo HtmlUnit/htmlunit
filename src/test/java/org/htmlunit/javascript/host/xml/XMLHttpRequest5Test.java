@@ -346,7 +346,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                     + "    try {\n"
                     + "    var doc = document;\n"
                     + "      var xhr = new XMLHttpRequest();\n"
-                    + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                    + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                     + "      xhr.send(doc);\n"
                     + "  } catch (exception) { \n"
                     + "    alert(exception);\n"
@@ -362,7 +362,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                              + "    try {\n"
                              + "    var doc = document;\n"
                              + "      var xhr = new XMLHttpRequest();\n"
-                             + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                             + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                              + "      xhr.send(doc);\n"
                              + "  } catch (exception) { \n"
                              + "    alert(exception);\n"
@@ -378,7 +378,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "    try {\n"
                            + "    var doc = document;\n"
                            + "      var xhr = new XMLHttpRequest();\n"
-                           + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                           + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                            + "      xhr.send(doc);\n"
                            + "  } catch (exception) { \n"
                            + "    alert(exception);\n"
@@ -394,7 +394,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "    try {\n"
                            + "    var doc = document;\n"
                            + "      var xhr = new XMLHttpRequest();\n"
-                           + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                           + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                            + "      xhr.send(doc);\n"
                            + "  } catch (exception) { \n"
                            + "    alert(exception);\n"
@@ -410,7 +410,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "    try {\n"
                            + "    var doc = document;\n"
                            + "      var xhr = new XMLHttpRequest();\n"
-                           + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                           + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                            + "      xhr.send(doc);\n"
                            + "  } catch (exception) { \n"
                            + "    alert(exception);\n"
@@ -422,6 +422,8 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     public void sendDocument() throws Exception {
         final String createXmlDoc =
                 "    var doc = document;\n";
+
+        expandExpectedAlertsVariables("");
         sendXMLDocument(DOCTYPE_HTML, createXmlDoc, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
@@ -436,7 +438,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                     + "    try {\n"
                     + "    var doc = document;\n"
                     + "      var xhr = new XMLHttpRequest();\n"
-                    + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                    + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                     + "      xhr.send(doc);\n"
                     + "  } catch (exception) { \n"
                     + "    alert(exception);\n"
@@ -451,7 +453,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                              + "    try {\n"
                              + "    var doc = document;\n"
                              + "      var xhr = new XMLHttpRequest();\n"
-                             + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                             + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                              + "      xhr.send(doc);\n"
                              + "  } catch (exception) { \n"
                              + "    alert(exception);\n"
@@ -466,7 +468,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "    try {\n"
                            + "    var doc = document;\n"
                            + "      var xhr = new XMLHttpRequest();\n"
-                           + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                           + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                            + "      xhr.send(doc);\n"
                            + "  } catch (exception) { \n"
                            + "    alert(exception);\n"
@@ -481,7 +483,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "    try {\n"
                            + "    var doc = document;\n"
                            + "      var xhr = new XMLHttpRequest();\n"
-                           + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                           + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                            + "      xhr.send(doc);\n"
                            + "  } catch (exception) { \n"
                            + "    alert(exception);\n"
@@ -496,7 +498,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "    try {\n"
                            + "    var doc = document;\n"
                            + "      var xhr = new XMLHttpRequest();\n"
-                           + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
+                           + "      xhr.open('POST', 'http://localhost:§§PORT§§/second/', false);\n"
                            + "      xhr.send(doc);\n"
                            + "  } catch (exception) { \n"
                            + "    alert(exception);\n"
@@ -508,6 +510,8 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     public void sendDocumentNoDoctype() throws Exception {
         final String createXmlDoc =
                 "    var doc = document;\n";
+
+        expandExpectedAlertsVariables("");
         sendXMLDocument("", createXmlDoc, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 

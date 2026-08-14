@@ -909,7 +909,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
         final List<WebElement> anchors = driver.findElements(By.tagName("a"));
         assertEquals(1, anchors.size());
-        assertEquals("http://localhost:22222/start.html", anchors.get(0).getAttribute("href"));
+        assertEquals("http://localhost:" + PORT + "/start.html", anchors.get(0).getAttribute("href"));
         assertEquals("click here", anchors.get(0).getText());
     }
 

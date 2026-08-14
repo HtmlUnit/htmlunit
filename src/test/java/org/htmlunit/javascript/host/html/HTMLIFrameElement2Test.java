@@ -987,9 +987,9 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"loaded", "§§URL§§", "[object HTMLDocument]", "http://localhost:22222/second/",
-                "1", "[object Window]", "[object HTMLDocument]", "http://localhost:22222/second/",
-                "0", "#[object Window]", "#[object HTMLDocument]", "http://localhost:22222/second/"})
+    @Alerts({"loaded", "§§URL§§", "[object HTMLDocument]", "http://localhost:§§PORT§§/second/",
+                "1", "[object Window]", "[object HTMLDocument]", "http://localhost:§§PORT§§/second/",
+                "0", "#[object Window]", "#[object HTMLDocument]", "http://localhost:§§PORT§§/second/"})
     public void detach() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"

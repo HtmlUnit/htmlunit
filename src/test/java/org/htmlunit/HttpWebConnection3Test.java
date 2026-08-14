@@ -3409,8 +3409,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Connection: keep-alive",
                       "User-Agent: §§USER_AGENT§§",
                       "Accept: */*",
-                      "Origin: http://localhost:22225",
-                      "Referer: http://localhost:22225/",
+                      "Origin: http://localhost:§§PORT2§§",
+                      "Referer: http://localhost:§§PORT2§§/",
                       "Accept-Encoding: gzip, deflate",
                       "Accept-Language: en-US,en;q=0.9"},
             EDGE = {"GET /ajax.json HTTP/1.1",
@@ -3418,8 +3418,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Connection: keep-alive",
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: */*",
-                    "Origin: http://localhost:22225",
-                    "Referer: http://localhost:22225/",
+                    "Origin: http://localhost:§§PORT2§§",
+                    "Referer: http://localhost:§§PORT2§§/",
                     "Accept-Encoding: gzip, deflate",
                     "Accept-Language: en-US,en;q=0.9"},
             FF = {"GET /ajax.json HTTP/1.1",
@@ -3428,36 +3428,36 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Accept: */*",
                   "Accept-Language: en-US,en;q=0.9",
                   "Accept-Encoding: gzip, deflate",
-                  "Origin: http://localhost:22225",
+                  "Origin: http://localhost:§§PORT2§§",
                   "Connection: keep-alive",
-                  "Referer: http://localhost:22225/"},
+                  "Referer: http://localhost:§§PORT2§§/"},
             FF_ESR = {"GET /ajax.json HTTP/1.1",
                       "Host: host1.htmlunit-dev.org:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
                       "Accept: */*",
                       "Accept-Language: en-US,en;q=0.5",
                       "Accept-Encoding: gzip, deflate",
-                      "Origin: http://localhost:22225",
+                      "Origin: http://localhost:§§PORT2§§",
                       "Connection: keep-alive",
-                      "Referer: http://localhost:22225/"})
+                      "Referer: http://localhost:§§PORT2§§/"})
     @HtmlUnitNYI(CHROME = {"GET /ajax.json HTTP/1.1",
                            "Host: host1.htmlunit-dev.org:§§PORT§§",
                            "Connection: keep-alive",
                            "User-Agent: §§USER_AGENT§§",
                            "Accept: */*",
-                           "Referer: http://localhost:22225/",
+                           "Referer: http://localhost:§§PORT2§§/",
                            "Accept-Encoding: gzip, deflate, br",
                            "Accept-Language: en-US,en;q=0.9",
-                           "Origin: http://localhost:22225"},
+                           "Origin: http://localhost:§§PORT2§§"},
             EDGE = {"GET /ajax.json HTTP/1.1",
                     "Host: host1.htmlunit-dev.org:§§PORT§§",
                     "Connection: keep-alive",
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: */*",
-                    "Referer: http://localhost:22225/",
+                    "Referer: http://localhost:§§PORT2§§/",
                     "Accept-Encoding: gzip, deflate, br",
                     "Accept-Language: en-US,en;q=0.9",
-                    "Origin: http://localhost:22225"},
+                    "Origin: http://localhost:§§PORT2§§"},
             FF = {"GET /ajax.json HTTP/1.1",
                   "Host: host1.htmlunit-dev.org:§§PORT§§",
                   "User-Agent: §§USER_AGENT§§",
@@ -3465,9 +3465,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Accept-Language: en-US,en;q=0.9",
                   "Accept-Encoding: gzip, deflate, br",
                   "Connection: keep-alive",
-                  "Referer: http://localhost:22225/",
+                  "Referer: http://localhost:§§PORT2§§/",
                   "Priority: u=0, i", // wrong
-                  "Origin: http://localhost:22225"},
+                  "Origin: http://localhost:§§PORT2§§"},
             FF_ESR = {"GET /ajax.json HTTP/1.1",
                       "Host: host1.htmlunit-dev.org:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
@@ -3475,9 +3475,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Accept-Language: en-US,en;q=0.5",
                       "Accept-Encoding: gzip, deflate, br",
                       "Connection: keep-alive",
-                      "Referer: http://localhost:22225/",
+                      "Referer: http://localhost:§§PORT2§§/",
                       "Priority: u=0, i", // wrong
-                      "Origin: http://localhost:22225"})
+                      "Origin: http://localhost:§§PORT2§§"})
     public void xmlHttpRequestGetCrossOrigin() throws Exception {
         final String ajaxResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 2\r\n"
@@ -3522,7 +3522,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     Assertions.fail("Still no request / request count:" + crossServer.getRequests().size());
                 }
 
-                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer);
+                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer, originServer);
 
                 final String request = crossServer.getRequests().get(0);
                 final String[] headers = request.split("\\r\\n");
@@ -3548,10 +3548,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Accept: */*",
                       "Access-Control-Request-Method: PUT",
                       "Access-Control-Request-Headers: x-custom",
-                      "Origin: http://localhost:22225",
+                      "Origin: http://localhost:§§PORT2§§",
                       "User-Agent: §§USER_AGENT§§",
                       "Sec-Fetch-Mode: cors",
-                      "Referer: http://localhost:22225/",
+                      "Referer: http://localhost:§§PORT2§§/",
                       "Accept-Encoding: gzip, deflate",
                       "Accept-Language: en-US,en;q=0.9"},
             EDGE = {"OPTIONS /target HTTP/1.1",
@@ -3560,10 +3560,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept: */*",
                     "Access-Control-Request-Method: PUT",
                     "Access-Control-Request-Headers: x-custom",
-                    "Origin: http://localhost:22225",
+                    "Origin: http://localhost:§§PORT2§§",
                     "User-Agent: §§USER_AGENT§§",
                     "Sec-Fetch-Mode: cors",
-                    "Referer: http://localhost:22225/",
+                    "Referer: http://localhost:§§PORT2§§/",
                     "Accept-Encoding: gzip, deflate",
                     "Accept-Language: en-US,en;q=0.9"},
             FF = {"OPTIONS /target HTTP/1.1",
@@ -3574,8 +3574,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Accept-Encoding: gzip, deflate",
                   "Access-Control-Request-Method: PUT",
                   "Access-Control-Request-Headers: x-custom",
-                  "Referer: http://localhost:22225/",
-                  "Origin: http://localhost:22225",
+                  "Referer: http://localhost:§§PORT2§§/",
+                  "Origin: http://localhost:§§PORT2§§",
                   "Connection: keep-alive",
                   "Priority: u=4"},
             FF_ESR = {"OPTIONS /target HTTP/1.1",
@@ -3586,8 +3586,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Accept-Encoding: gzip, deflate",
                       "Access-Control-Request-Method: PUT",
                       "Access-Control-Request-Headers: x-custom",
-                      "Referer: http://localhost:22225/",
-                      "Origin: http://localhost:22225",
+                      "Referer: http://localhost:§§PORT2§§/",
+                      "Origin: http://localhost:§§PORT2§§",
                       "Connection: keep-alive",
                       "Priority: u=4"})
     @HtmlUnitNYI(
@@ -3597,10 +3597,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "User-Agent: §§USER_AGENT§§",
                       "Accept: */*",
                       "Sec-Fetch-Mode: cors",
-                      "Referer: http://localhost:22225/",
+                      "Referer: http://localhost:§§PORT2§§/",
                       "Accept-Encoding: gzip, deflate",
                       "Accept-Language: en-US,en;q=0.9",
-                      "Origin: http://localhost:22225",
+                      "Origin: http://localhost:§§PORT2§§",
                       "Access-Control-Request-Method: PUT",
                       "Access-Control-Request-Headers: x-custom",
                       "Content-Length: 0"}, // wrong
@@ -3610,10 +3610,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: */*",
                     "Sec-Fetch-Mode: cors",
-                    "Referer: http://localhost:22225/",
+                    "Referer: http://localhost:§§PORT2§§/",
                     "Accept-Encoding: gzip, deflate",
                     "Accept-Language: en-US,en;q=0.9",
-                    "Origin: http://localhost:22225",
+                    "Origin: http://localhost:§§PORT2§§",
                     "Access-Control-Request-Method: PUT",
                     "Access-Control-Request-Headers: x-custom",
                     "Content-Length: 0"}, // wrong
@@ -3624,9 +3624,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Accept-Language: en-US,en;q=0.9",
                   "Accept-Encoding: gzip, deflate",
                   "Connection: keep-alive",
-                  "Referer: http://localhost:22225/",
+                  "Referer: http://localhost:§§PORT2§§/",
                   "Priority: u=0, i",
-                  "Origin: http://localhost:22225",
+                  "Origin: http://localhost:§§PORT2§§",
                   "Access-Control-Request-Method: PUT",
                   "Access-Control-Request-Headers: x-custom",
                   "Content-Length: 0"}, // wrong
@@ -3637,9 +3637,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Accept-Language: en-US,en;q=0.5",
                       "Accept-Encoding: gzip, deflate",
                       "Connection: keep-alive",
-                      "Referer: http://localhost:22225/",
+                      "Referer: http://localhost:§§PORT2§§/",
                       "Priority: u=0, i",
-                      "Origin: http://localhost:22225",
+                      "Origin: http://localhost:§§PORT2§§",
                       "Access-Control-Request-Method: PUT",
                       "Access-Control-Request-Headers: x-custom",
                       "Content-Length: 0"}) // wrong
@@ -3694,7 +3694,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     Assertions.fail("Still no request / request count:" + crossServer.getRequests().size());
                 }
 
-                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer);
+                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer, originServer);
 
                 // request 0 = the OPTIONS preflight
                 final String request = crossServer.getRequests().get(0);
@@ -4196,7 +4196,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Upgrade-Insecure-Requests: 1",
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-                    "Referer: http://localhost:22225/",
+                    "Referer: http://localhost:§§PORT2§§/",
                     "Accept-Encoding: gzip, deflate",
                     "Accept-Language: en-US,en;q=0.9"},
           EDGE = {"GET /target.html HTTP/1.1",
@@ -4205,7 +4205,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Upgrade-Insecure-Requests: 1",
                   "User-Agent: §§USER_AGENT§§",
                   "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-                  "Referer: http://localhost:22225/",
+                  "Referer: http://localhost:§§PORT2§§/",
                   "Accept-Encoding: gzip, deflate",
                   "Accept-Language: en-US,en;q=0.9"},
           FF = {"GET /target.html HTTP/1.1",
@@ -4214,7 +4214,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Accept-Language: en-US,en;q=0.9",
                 "Accept-Encoding: gzip, deflate",
-                "Referer: http://localhost:22225/",
+                "Referer: http://localhost:§§PORT2§§/",
                 "Connection: keep-alive",
                 "Upgrade-Insecure-Requests: 1",
                 "Priority: u=0, i"},
@@ -4224,7 +4224,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                     "Accept-Language: en-US,en;q=0.5",
                     "Accept-Encoding: gzip, deflate",
-                    "Referer: http://localhost:22225/",
+                    "Referer: http://localhost:§§PORT2§§/",
                     "Connection: keep-alive",
                     "Upgrade-Insecure-Requests: 1",
                     "Priority: u=0, i"})
@@ -4235,7 +4235,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Upgrade-Insecure-Requests: 1",
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-                    "Referer: http://localhost:22225/",
+                    "Referer: http://localhost:§§PORT2§§/",
                     "Accept-Encoding: gzip, deflate, br",
                     "Accept-Language: en-US,en;q=0.9"},
           EDGE = {"GET /target.html HTTP/1.1",
@@ -4244,7 +4244,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Upgrade-Insecure-Requests: 1",
                   "User-Agent: §§USER_AGENT§§",
                   "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-                  "Referer: http://localhost:22225/",
+                  "Referer: http://localhost:§§PORT2§§/",
                   "Accept-Encoding: gzip, deflate, br",
                   "Accept-Language: en-US,en;q=0.9"},
           FF = {"GET /target.html HTTP/1.1",
@@ -4254,7 +4254,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 "Accept-Language: en-US,en;q=0.9",
                 "Accept-Encoding: gzip, deflate, br",
                 "Connection: keep-alive",
-                "Referer: http://localhost:22225/",
+                "Referer: http://localhost:§§PORT2§§/",
                 "Upgrade-Insecure-Requests: 1",
                 "Priority: u=0, i"},
           FF_ESR = {"GET /target.html HTTP/1.1",
@@ -4264,7 +4264,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept-Language: en-US,en;q=0.5",
                     "Accept-Encoding: gzip, deflate, br",
                     "Connection: keep-alive",
-                    "Referer: http://localhost:22225/",
+                    "Referer: http://localhost:§§PORT2§§/",
                     "Upgrade-Insecure-Requests: 1",
                     "Priority: u=0, i"})
     public void redirectToCrossSiteHost() throws Exception {
@@ -4299,7 +4299,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 driver.get(originUrl);
                 driver.findElement(By.id("my")).click();
 
-                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer);
+                final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(crossServer, originServer);
 
                 // the request that actually landed on the cross-site server
                 final String request = crossServer.getRequests().get(0);
@@ -5148,9 +5148,16 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     }
 
     private String[] getExpectedAlertsWithHtmlReplacement(PrimitiveWebServer primitiveWebServer) {
+        return getExpectedAlertsWithHtmlReplacement(primitiveWebServer, null);
+    }
+
+    private String[] getExpectedAlertsWithHtmlReplacement(PrimitiveWebServer primitiveWebServer, PrimitiveWebServer secondPrimitiveWebServer) {
         final String[] expectedHeaders = getExpectedAlerts();
         for (int i = 0; i < expectedHeaders.length; i++) {
             expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+            if (secondPrimitiveWebServer != null) {
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT2§§", "" + secondPrimitiveWebServer.getPort());
+            }
             expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
                     getBrowserVersion().getUserAgent());
             expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",

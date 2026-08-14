@@ -99,22 +99,22 @@ public abstract class WebTestCase {
     public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "22222"));
 
     /** The second listener port for the web server, used for cross-origin tests. */
-    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "22223"));
+    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "" + (PORT + 1)));
 
     /** The third listener port for the web server, used for cross-origin tests. */
-    public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "22224"));
+    public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "" + (PORT + 2)));
 
     /** The listener port used for our primitive server tests. */
     public static final int PORT_PRIMITIVE_SERVER = Integer.parseInt(
-                                                        System.getProperty("htmlunit.test.port_primitive", "22225"));
+                                                        System.getProperty("htmlunit.test.port_primitive", "" + (PORT + 3)));
 
     /** The listener port used for our proxy tests. */
     public static final int PORT_PROXY_SERVER = Integer.parseInt(
-                                                        System.getProperty("htmlunit.test.port_proxy", "22226"));
+                                                        System.getProperty("htmlunit.test.port_proxy", "" + (PORT + 4)));
 
     /** The SOCKS proxy port to use for SOCKS proxy tests. */
     public static final int SOCKS_PROXY_PORT = Integer.parseInt(
-            System.getProperty("htmlunit.test.socksproxy.port", "22227"));
+            System.getProperty("htmlunit.test.socksproxy.port", "" + (PORT + 5)));
 
     /** The SOCKS proxy host to use for SOCKS proxy tests. */
     public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
@@ -436,11 +436,21 @@ public abstract class WebTestCase {
      * @param url the URL to expand
      */
     protected void expandExpectedAlertsVariables(final String url) {
+        expandExpectedAlertsVariables(url, PORT);
+    }
+
+    /**
+     * Expand "§§URL§§" and §§PORT§§ to the provided in the expected alerts.
+     * @param url the URL to expand
+     * @param port the port to expand
+     */
+    protected void expandExpectedAlertsVariables(final String url, int port) {
         if (expectedAlerts_ == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
         for (int i = 0; i < expectedAlerts_.length; i++) {
             expectedAlerts_[i] = expectedAlerts_[i].replaceAll("§§URL§§", url);
+            expectedAlerts_[i] = expectedAlerts_[i].replaceAll("§§PORT§§", "" + port);
         }
     }
 
