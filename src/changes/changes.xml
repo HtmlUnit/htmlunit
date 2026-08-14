@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
+            <action type="update" dev="rhino">
+                core-js: Improved slot implementation to reduce memory used by function objects.
+            </action>
             <action type="fix" dev="rbri">
                 Small optimizations for ComputedCssStyleDeclaration.
             </action>
