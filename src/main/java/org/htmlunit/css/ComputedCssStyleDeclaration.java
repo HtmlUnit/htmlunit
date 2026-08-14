@@ -204,6 +204,64 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         HtmlHeading5.class, "13px",
         HtmlHeading6.class, "11px");
 
+    private static final Set<Class<? extends HtmlElement>> ZERO_HEIGHT_ELEMENT_CLASSES = Set.of(
+            HtmlAbbreviated.class,
+            HtmlAcronym.class,
+            HtmlAddress.class,
+            HtmlArticle.class,
+            HtmlAside.class,
+            HtmlBaseFont.class,
+            HtmlBidirectionalIsolation.class,
+            HtmlBidirectionalOverride.class,
+            HtmlBig.class,
+            HtmlBold.class,
+            HtmlCenter.class,
+            HtmlCitation.class,
+            HtmlCode.class,
+            HtmlData.class,
+            HtmlDefinition.class,
+            HtmlDefinitionDescription.class,
+            HtmlDefinitionTerm.class,
+            HtmlDivision.class,
+            HtmlEmphasis.class,
+            HtmlFigure.class,
+            HtmlFigureCaption.class,
+            HtmlFooter.class,
+            HtmlHeader.class,
+            HtmlItalic.class,
+            HtmlKeyboard.class,
+            HtmlLayer.class,
+            HtmlLegend.class,
+            HtmlMain.class,
+            HtmlMark.class,
+            HtmlNav.class,
+            HtmlNoBreak.class,
+            HtmlNoEmbed.class,
+            HtmlNoFrames.class,
+            HtmlNoLayer.class,
+            HtmlNoScript.class,
+            HtmlOutput.class,
+            HtmlPlainText.class,
+            HtmlRp.class,
+            HtmlRtc.class,
+            HtmlS.class,
+            HtmlSample.class,
+            HtmlSection.class,
+            HtmlSlot.class,
+            HtmlSmall.class,
+            HtmlStrike.class,
+            HtmlStrong.class,
+            HtmlSubscript.class,
+            HtmlSummary.class,
+            HtmlSuperscript.class,
+            HtmlTeletype.class,
+            HtmlTime.class,
+            HtmlUnderlined.class,
+            HtmlUnknownElement.class,
+            HtmlVariable.class,
+            HtmlWordBreak.class
+        );
+
     /** Denotes a value which should be returned as is. */
     public static final String EMPTY_FINAL = new String("");
 
@@ -305,21 +363,30 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         String value = null;
         while (queue[0] != null) {
             value = getStyleAttributeWorker(definition, getDefaultValueIfEmpty,
-                        browserVersion, true, isDefInheritable, queue);
+                                            browserVersion, isDefInheritable, queue);
         }
 
         return value;
     }
 
+    /**
+     * Internal worker to resolve inherited or default style attributes recursively without stack recursion.
+     *
+     * @param definition the CSS style attribute definition
+     * @param getDefaultValueIfEmpty whether to fall back to the default computed value if unassigned
+     * @param browserVersion the current target browser version
+     * @param isDefInheritable true if the style definition is an inheritable property
+     * @param queue single-element array used as a pointer queue for loop-based parent traversal
+     * @return the resolved computed style attribute string
+     */
     private static String getStyleAttributeWorker(final Definition definition,
                 final boolean getDefaultValueIfEmpty, final BrowserVersion browserVersion,
-                final boolean feature, final boolean isDefInheritable,
-                final ComputedCssStyleDeclaration[] queue) {
+                final boolean isDefInheritable, final ComputedCssStyleDeclaration[] queue) {
         final ComputedCssStyleDeclaration decl = queue[0];
         queue[0] = null;
 
         final DomElement domElem = decl.getDomElement();
-        if (!domElem.isAttachedToPage() && feature) {
+        if (!domElem.isAttachedToPage()) {
             return EMPTY_FINAL;
         }
 
@@ -361,8 +428,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final ComputedCssStyleDeclaration[] queue = {this};
         String value = null;
         while (queue[0] != null) {
-            value = getStyleAttributeWorker(definition, false,
-                    browserVersion, true, isDefInheritable, queue);
+            value = getStyleAttributeWorker(definition, false, browserVersion, isDefInheritable, queue);
         }
 
         if (value == null || value.isEmpty() || value.equals(defaultValue)) {
@@ -744,21 +810,19 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return "";
         }
 
-        if (domElem instanceof HtmlElement element) {
-            if (element.isHidden()) {
-                return DisplayStyle.NONE.value();
-            }
+        final HtmlElement htmlElem = (domElem instanceof HtmlElement e) ? e : null;
+
+        if (htmlElem != null && htmlElem.isHidden()) {
+            return DisplayStyle.NONE.value();
         }
 
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
         final String value = getStyleAttribute(Definition.DISPLAY.getAttributeName());
         if (StringUtils.isEmptyOrNull(value)) {
-            if (domElem instanceof HtmlElement element) {
-                return element.getDefaultStyleDisplay().value();
-            }
-            return "";
+            return htmlElem != null ? htmlElem.getDefaultStyleDisplay().value() : "";
         }
+
         return value;
     }
 
@@ -816,8 +880,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final String styleValue = style.getStyleAttribute(Definition.HEIGHT, true);
 
         if (styleValue == null || styleValue.isEmpty() || AUTO.equals(styleValue) || styleValue.endsWith("%")) {
-            final String calculatedHeight = style.getCalculatedHeight(false, false) + "px";
-            return calculatedHeight;
+            return style.getCalculatedHeight(false, false) + "px";
         }
 
         if (styleValue.endsWith("px")) {
@@ -1715,10 +1778,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      *     or fixed positioned
      */
     private boolean isFloatedOrOutOfNormalFlow() {
-        final String cssFloat = getCssFloat();
         final String position = getStyleAttribute(Definition.POSITION, true);
-        return "right".equals(cssFloat) || "left".equals(cssFloat)
-                || ABSOLUTE.equals(position) || FIXED.equals(position);
+        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+            return true;
+        }
+        final String cssFloat = getCssFloat();
+        return "right".equals(cssFloat) || "left".equals(cssFloat);
     }
 
     /**
@@ -1961,63 +2026,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         int defaultHeight;
-        if ((element instanceof HtmlAbbreviated
-                || element instanceof HtmlAcronym
-                || element instanceof HtmlAddress
-                || element instanceof HtmlArticle
-                || element instanceof HtmlAside
-                || element instanceof HtmlBaseFont
-                || element instanceof HtmlBidirectionalIsolation
-                || element instanceof HtmlBidirectionalOverride
-                || element instanceof HtmlBig
-                || element instanceof HtmlBold
-                || element instanceof HtmlCenter
-                || element instanceof HtmlCitation
-                || element instanceof HtmlCode
-                || element instanceof HtmlDefinition
-                || element instanceof HtmlDefinitionDescription
-                || element instanceof HtmlDefinitionTerm
-                || element instanceof HtmlEmphasis
-                || element instanceof HtmlFigure
-                || element instanceof HtmlFigureCaption
-                || element instanceof HtmlFooter
-                || element instanceof HtmlHeader
-                || element instanceof HtmlItalic
-                || element instanceof HtmlKeyboard
-                || element instanceof HtmlLayer
-                || element instanceof HtmlMark
-                || element instanceof HtmlNav
-                || element instanceof HtmlNoBreak
-                || element instanceof HtmlNoEmbed
-                || element instanceof HtmlNoFrames
-                || element instanceof HtmlNoLayer
-                || element instanceof HtmlNoScript
-                || element instanceof HtmlPlainText
-                || element instanceof HtmlRp
-                || element instanceof HtmlRtc
-                || element instanceof HtmlS
-                || element instanceof HtmlSample
-                || element instanceof HtmlSection
-                || element instanceof HtmlSmall
-                || element instanceof HtmlStrike
-                || element instanceof HtmlStrong
-                || element instanceof HtmlSubscript
-                || element instanceof HtmlSummary
-                || element instanceof HtmlSuperscript
-                || element instanceof HtmlTeletype
-                || element instanceof HtmlUnderlined
-                || element instanceof HtmlUnknownElement
-                || element instanceof HtmlWordBreak
-                || element instanceof HtmlMain
-                || element instanceof HtmlVariable
-
-                || element instanceof HtmlDivision
-                || element instanceof HtmlData
-                || element instanceof HtmlTime
-                || element instanceof HtmlOutput
-                || element instanceof HtmlSlot
-                || element instanceof HtmlLegend)
-                && StringUtils.isBlank(element.getTextContent())) {
+        if (ZERO_HEIGHT_ELEMENT_CLASSES.contains(element.getClass()) && StringUtils.isBlank(element.getTextContent())) {
             defaultHeight = 0;
         }
         else if (element.getFirstChild() == null) {
@@ -2179,8 +2188,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * Returns the total height of the element's children.
-     * @return the total height of the element's children
+     * Returns the total height of the element's children taking positioning into account.
+     *
+     * @return the total height of the element's children in pixels
      */
     public int getContentHeight() {
         // There are two different kinds of elements that might determine the content height:
@@ -2192,8 +2202,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return 0;
         }
 
-        ComputedCssStyleDeclaration lastFlowing = null;
-        final Set<ComputedCssStyleDeclaration> styles = new HashSet<>();
+        // Pre-size set to reduce reallocation overhead during tree scanning
+        final Set<ComputedCssStyleDeclaration> styles = new HashSet<>(8);
 
         if (node instanceof HtmlTableRow row) {
             for (final HtmlTableCell cell : row.getCellIterator()) {
@@ -2205,18 +2215,17 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
         }
         else {
+            ComputedCssStyleDeclaration lastFlowing = null;
             for (final DomNode child : node.getChildren()) {
-                if (child.mayBeDisplayed()) {
-                    if (child instanceof HtmlElement e) {
-                        final ComputedCssStyleDeclaration style =
-                                e.getPage().getEnclosingWindow().getComputedStyle(e, null);
-                        final String position = style.getPositionWithInheritance();
-                        if (STATIC.equals(position) || RELATIVE.equals(position)) {
-                            lastFlowing = style;
-                        }
-                        else if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
-                            styles.add(style);
-                        }
+                if (child.mayBeDisplayed() && child instanceof HtmlElement e) {
+                    final ComputedCssStyleDeclaration style =
+                            e.getPage().getEnclosingWindow().getComputedStyle(e, null);
+                    final String position = style.getPositionWithInheritance();
+                    if (STATIC.equals(position) || RELATIVE.equals(position)) {
+                        lastFlowing = style;
+                    }
+                    else if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+                        styles.add(style);
                     }
                 }
             }
