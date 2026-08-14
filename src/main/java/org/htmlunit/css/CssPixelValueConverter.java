@@ -16,6 +16,8 @@ package org.htmlunit.css;
 
 import static org.htmlunit.css.CssStyleSheet.AUTO;
 
+import java.util.function.Function;
+import java.util.function.IntSupplier;
 import java.util.regex.Pattern;
 
 import org.htmlunit.html.DomElement;
@@ -42,47 +44,97 @@ public final class CssPixelValueConverter {
 
     /**
      * Converts the specified length CSS attribute value into an integer number of pixels. If the
-     * specified CSS attribute value is a percentage, this method uses the specified value object
+     * specified CSS attribute value is a percentage, this method uses the specified value getters
      * to recursively retrieve the base (parent) CSS attribute value.
      * @param element the element for which the CSS attribute value is to be retrieved
-     * @param value the CSS attribute value which is to be retrieved
+     * @param styleGetter getter function to retrieve the CSS attribute value from ComputedCssStyleDeclaration
+     * @param defaultValue supplier for the default value
+     * @param windowDefaultValue supplier for the default value for the window
      * @return the integer number of pixels corresponding to the specified length CSS attribute value
      * @see #pixelValue(String)
      */
-    public static int pixelValue(final DomElement element, final CssValue value) {
+    public static int pixelValue(
+            final DomElement element,
+            final Function<ComputedCssStyleDeclaration, String> styleGetter,
+            final IntSupplier defaultValue,
+            final IntSupplier windowDefaultValue) {
         final ComputedCssStyleDeclaration style =
                 element.getPage().getEnclosingWindow().getComputedStyle(element, null);
-        final String s = value.get(style);
-        return pixelValue(element, s, value, false);
+        final String s = styleGetter.apply(style);
+        return pixelValue(element, s, styleGetter, defaultValue, windowDefaultValue, false);
     }
+
+//    /**
+//     * Converts the specified length CSS attribute value into an integer number of pixels. If the
+//     * specified CSS attribute value is a percentage, this method uses the specified value getters
+//     * to recursively retrieve the base (parent) CSS attribute value.
+//     * @param element the element for which the CSS attribute value is to be retrieved
+//     * @param styleGetter getter function to retrieve the CSS attribute value from ComputedCssStyleDeclaration
+//     * @param defaultValue the default value
+//     * @param windowDefaultValue the default value for the window
+//     * @return the integer number of pixels corresponding to the specified length CSS attribute value
+//     * @see #pixelValue(String)
+//     */
+//    public static int pixelValue(
+//            final DomElement element,
+//            final Function<ComputedCssStyleDeclaration, String> styleGetter,
+//            final int defaultValue,
+//            final int windowDefaultValue) {
+//        return pixelValue(element, styleGetter, () -> defaultValue, () -> windowDefaultValue);
+//    }
 
     /**
      * Returns the specified length CSS attribute value as a pixel length value.
      * If the specified CSS attribute value is a percentage, this method
-     * uses the specified value object to recursively retrieve the base (parent) CSS attribute value.
+     * uses the specified value getters to recursively retrieve the base (parent) CSS attribute value.
      * @param element the element for which the CSS attribute value is to be retrieved
-     * @param value the CSS attribute value which is to be retrieved
+     * @param styleGetter getter function to retrieve the CSS attribute value from ComputedCssStyleDeclaration
+     * @param defaultValue supplier for the default value
+     * @param windowDefaultValue supplier for the default value for the window
      * @return the specified length CSS attribute value as a pixel length value
-     * @see #pixelValue(DomElement, CssValue)
+     * @see #pixelValue(DomElement, Function, IntSupplier, IntSupplier)
      */
-    public static String pixelString(final DomElement element, final CssValue value) {
+    public static String pixelString(
+            final DomElement element,
+            final Function<ComputedCssStyleDeclaration, String> styleGetter,
+            final IntSupplier defaultValue,
+            final IntSupplier windowDefaultValue) {
         final ComputedCssStyleDeclaration style =
                 element.getPage().getEnclosingWindow().getComputedStyle(element, null);
-        final String styleValue = value.get(style);
+        final String styleValue = styleGetter.apply(style);
         if (styleValue.endsWith("px")) {
             return styleValue;
         }
-        return pixelValue(element, styleValue, value, false) + "px";
+        return pixelValue(element, styleValue, styleGetter, defaultValue, windowDefaultValue, false) + "px";
     }
 
+//    /**
+//     * Returns the specified length CSS attribute value as a pixel length value.
+//     * If the specified CSS attribute value is a percentage, this method
+//     * uses the specified value getters to recursively retrieve the base (parent) CSS attribute value.
+//     * @param element the element for which the CSS attribute value is to be retrieved
+//     * @param styleGetter getter function to retrieve the CSS attribute value from ComputedCssStyleDeclaration
+//     * @param defaultValue the default value
+//     * @param windowDefaultValue the default value for the window
+//     * @return the specified length CSS attribute value as a pixel length value
+//     * @see #pixelValue(DomElement, Function, int, int)
+//     */
+//    public static String pixelString(
+//            final DomElement element,
+//            final Function<ComputedCssStyleDeclaration, String> styleGetter,
+//            final int defaultValue,
+//            final int windowDefaultValue) {
+//        return pixelString(element, styleGetter, () -> defaultValue, () -> windowDefaultValue);
+//    }
+//
     /**
      * Converts the specified length string value into an integer number of pixels. This method does
-     * <b>NOT</b> handle percentages correctly; use {@link #pixelString(DomElement, CssValue)} if you
-     * need percentage support.
+     * <b>NOT</b> handle percentages correctly; use {@link #pixelString(DomElement, Function, IntSupplier, IntSupplier)}
+     * if you need percentage support.
      * @param value the length string value to convert to an integer number of pixels
      * @return the integer number of pixels corresponding to the specified length string value
      * @see <a href="http://htmlhelp.com/reference/css/units.html">CSS Units</a>
-     * @see #pixelString(DomElement, CssValue)
+     * @see #pixelString(DomElement, Function, IntSupplier, IntSupplier)
      */
     public static int pixelValue(final String value) {
         float i = StringUtils.toFloat(TO_FLOAT_PATTERN.matcher(value).replaceAll("$1"), 0);
@@ -137,7 +189,11 @@ public final class CssPixelValueConverter {
     }
 
     private static int pixelValue(final DomElement element,
-            final String styleValue, final CssValue value, final boolean percentMode) {
+            final String styleValue,
+            final Function<ComputedCssStyleDeclaration, String> styleGetter,
+            final IntSupplier defaultValue,
+            final IntSupplier windowDefaultValue,
+            final boolean percentMode) {
         if (styleValue.endsWith("%") || (styleValue.isEmpty() && element instanceof HtmlHtml)) {
             final float i = StringUtils.toFloat(TO_FLOAT_PATTERN.matcher(styleValue).replaceAll("$1"), 100);
 
@@ -146,20 +202,21 @@ public final class CssPixelValueConverter {
             if (parent instanceof DomElement parentElem) {
                 final ComputedCssStyleDeclaration style =
                         parentElem.getPage().getEnclosingWindow().getComputedStyle(parentElem, null);
-                final String parentStyleValue = value.get(style);
-                absoluteValue = pixelValue(parentElem, parentStyleValue, value, true);
+                final String parentStyleValue = styleGetter.apply(style);
+                absoluteValue = pixelValue(parentElem, parentStyleValue, styleGetter,
+                                            defaultValue, windowDefaultValue, true);
             }
             else {
-                absoluteValue = value.getWindowDefaultValue();
+                absoluteValue = windowDefaultValue.getAsInt();
             }
-            return  Math.round((i / 100f) * absoluteValue);
+            return Math.round((i / 100f) * absoluteValue);
         }
         if (AUTO.equals(styleValue)) {
-            return value.getDefaultValue();
+            return defaultValue.getAsInt();
         }
         if (styleValue.isEmpty()) {
             if (element instanceof HtmlCanvas) {
-                return value.getWindowDefaultValue();
+                return windowDefaultValue.getAsInt();
             }
 
             // if the call was originated from a percent value we have to go up until
@@ -167,58 +224,17 @@ public final class CssPixelValueConverter {
             if (percentMode) {
                 final DomNode parent = element.getParentNode();
                 if (parent == null || parent instanceof HtmlHtml) {
-                    return value.getWindowDefaultValue();
+                    return windowDefaultValue.getAsInt();
                 }
                 final DomElement parentElem = (DomElement) parent;
                 final ComputedCssStyleDeclaration style =
                         parentElem.getPage().getEnclosingWindow().getComputedStyle(parentElem, null);
-                final String parentStyleValue = value.get(style);
-                return pixelValue(parentElem, parentStyleValue, value, true);
+                final String parentStyleValue = styleGetter.apply(style);
+                return pixelValue(parentElem, parentStyleValue, styleGetter, defaultValue, windowDefaultValue, true);
             }
 
             return 0;
         }
         return pixelValue(styleValue);
-    }
-
-    /**
-     * Encapsulates the retrieval of a style attribute, given a DOM element from which to retrieve it.
-     */
-    public abstract static class CssValue {
-        private final int defaultValue_;
-        private final int windowDefaultValue_;
-
-        /**
-         * C'tor.
-         * @param defaultValue the default value
-         * @param windowDefaultValue the default value for the window
-         */
-        public CssValue(final int defaultValue, final int windowDefaultValue) {
-            defaultValue_ = defaultValue;
-            windowDefaultValue_ = windowDefaultValue;
-        }
-
-        /**
-         * Gets the default value.
-         * @return the default value
-         */
-        public int getDefaultValue() {
-            return defaultValue_;
-        }
-
-        /**
-         * Gets the default size for the window.
-         * @return the default value for the window
-         */
-        public int getWindowDefaultValue() {
-            return windowDefaultValue_;
-        }
-
-        /**
-         * Returns the CSS attribute value from the specified computed style.
-         * @param style the computed style from which to retrieve the CSS attribute value
-         * @return the CSS attribute value from the specified computed style
-         */
-        public abstract String get(ComputedCssStyleDeclaration style);
     }
 }

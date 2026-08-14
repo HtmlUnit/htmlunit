@@ -46,7 +46,6 @@ import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
-import org.htmlunit.css.CssPixelValueConverter.CssValue;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
@@ -488,38 +487,38 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final int windowWidth = domElem.getPage().getEnclosingWindow().getInnerWidth();
-        return CssPixelValueConverter.pixelString(domElem, new CssPixelValueConverter.CssValue(0, windowWidth) {
-            @Override
-            public String get(final ComputedCssStyleDeclaration style) {
-                final String value = style.getStyleAttribute(Definition.WIDTH, true);
-                if (StringUtils.isEmptyOrNull(value)) {
-                    final String position = getStyleAttribute(Definition.POSITION, true);
-                    if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
-                        final String content = domElem.getVisibleText();
-                        // do this only for small content
-                        // at least for empty div's this is more correct
-                        if (null != content && content.length() < 13) {
-                            return (content.length() * 7) + "px";
+        return CssPixelValueConverter.pixelString(domElem,
+                style -> {
+                    final String value = style.getStyleAttribute(Definition.WIDTH, true);
+                    if (StringUtils.isEmptyOrNull(value)) {
+                        final String position = getStyleAttribute(Definition.POSITION, true);
+                        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+                            final String content = domElem.getVisibleText();
+                            // do this only for small content
+                            // at least for empty div's this is more correct
+                            if (null != content && content.length() < 13) {
+                                return (content.length() * 7) + "px";
+                            }
                         }
+
+                        int windowDefaultValue = windowWidth;
+                        if (domElem instanceof HtmlBody) {
+                            windowDefaultValue -= 16;
+                        }
+                        return windowDefaultValue + "px";
+                    }
+                    else if (AUTO.equals(value)) {
+                        int windowDefaultValue = windowWidth;
+                        if (domElem instanceof HtmlBody) {
+                            windowDefaultValue -= 16;
+                        }
+                        return windowDefaultValue + "px";
                     }
 
-                    int windowDefaultValue = getWindowDefaultValue();
-                    if (domElem instanceof HtmlBody) {
-                        windowDefaultValue -= 16;
-                    }
-                    return windowDefaultValue + "px";
-                }
-                else if (AUTO.equals(value)) {
-                    int windowDefaultValue = getWindowDefaultValue();
-                    if (domElem instanceof HtmlBody) {
-                        windowDefaultValue -= 16;
-                    }
-                    return windowDefaultValue + "px";
-                }
-
-                return value;
-            }
-        });
+                    return value;
+                },
+                () -> 0,
+                () -> windowWidth);
     }
 
     /**
@@ -661,22 +660,22 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return defaultIfEmpty(super.getBlockSize(), Definition.BLOCK_SIZE);
         }
 
-        return CssPixelValueConverter.pixelString(domElem, new CssPixelValueConverter.CssValue(0, 0) {
-            @Override
-            public String get(final ComputedCssStyleDeclaration style) {
-                final String value = style.getStyleAttribute(Definition.HEIGHT, true);
-                if (StringUtils.isEmptyOrNull(value)) {
-                    final String content = domElem.getVisibleText();
-                    // do this only for small content
-                    // at least for empty div's this is more correct
-                    if (content == null) {
-                        return getDefaultValue() + "px";
+        return CssPixelValueConverter.pixelString(domElem,
+                style -> {
+                    final String value = style.getStyleAttribute(Definition.HEIGHT, true);
+                    if (StringUtils.isEmptyOrNull(value)) {
+                        final String content = domElem.getVisibleText();
+                        // do this only for small content
+                        // at least for empty div's this is more correct
+                        if (content == null) {
+                            return "0px";
+                        }
+                        return calculateIntrinsicHeight(domElem) + "px";
                     }
-                    return calculateIntrinsicHeight(domElem) + "px";
-                }
-                return value;
-            }
-        });
+                    return value;
+                },
+                () -> 0,
+                () -> 0);
     }
 
     /**
@@ -909,15 +908,15 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return defaultIfEmpty(superLeft, AUTO, null);
         }
 
-        return CssPixelValueConverter.pixelString(elem, new CssPixelValueConverter.CssValue(0, 0) {
-            @Override
-            public String get(final ComputedCssStyleDeclaration style) {
-                if (style.getDomElement() == elem) {
-                    return style.getStyleAttribute(Definition.LEFT, true);
-                }
-                return style.getStyleAttribute(Definition.WIDTH, true);
-            }
-        });
+        return CssPixelValueConverter.pixelString(elem,
+                style -> {
+                    if (style.getDomElement() == elem) {
+                        return style.getStyleAttribute(Definition.LEFT, true);
+                    }
+                    return style.getStyleAttribute(Definition.WIDTH, true);
+                },
+                () -> 0,
+                () -> 0);
     }
 
     /**
@@ -970,16 +969,15 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final int windowWidth = element.getPage().getEnclosingWindow().getInnerWidth();
-        return CssPixelValueConverter
-                .pixelString(element, new CssPixelValueConverter.CssValue(0, windowWidth) {
-                    @Override
-                    public String get(final ComputedCssStyleDeclaration style) {
-                        if (style.getDomElement() == element) {
-                            return style.getStyleAttribute(definition, true);
-                        }
-                        return style.getStyleAttribute(Definition.WIDTH, true);
+        return CssPixelValueConverter.pixelString(element,
+                style -> {
+                    if (style.getDomElement() == element) {
+                        return style.getStyleAttribute(definition, true);
                     }
-                });
+                    return style.getStyleAttribute(Definition.WIDTH, true);
+                },
+                () -> 0,
+                () -> windowWidth);
     }
 
     /**
@@ -1121,15 +1119,15 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return defaultIfEmpty(superTop, Definition.TOP);
         }
 
-        return CssPixelValueConverter.pixelString(elem, new CssPixelValueConverter.CssValue(0, 0) {
-            @Override
-            public String get(final ComputedCssStyleDeclaration style) {
-                if (style.getDomElement() == elem) {
-                    return style.getStyleAttribute(Definition.TOP, true);
-                }
-                return style.getStyleAttribute(Definition.HEIGHT, true);
-            }
-        });
+        return CssPixelValueConverter.pixelString(elem,
+                style -> {
+                    if (style.getDomElement() == elem) {
+                        return style.getStyleAttribute(Definition.TOP, true);
+                    }
+                    return style.getStyleAttribute(Definition.HEIGHT, true);
+                },
+                () -> 0,
+                () -> 0);
     }
 
     /**
@@ -1596,12 +1594,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         if (!isInline
                 && !StringUtils.isEmptyOrNull(styleHeight)
                 && !AUTO.equals(styleHeight)) {
-            return updateCachedHeight(CssPixelValueConverter.pixelValue(element,
-                    new CssPixelValueConverter.CssValue(0, element.getPage().getEnclosingWindow().getInnerHeight()) {
-                        @Override public String get(final ComputedCssStyleDeclaration style) {
-                            return style.getStyleAttribute(Definition.HEIGHT, true);
-                        }
-                    }));
+            return updateCachedHeight(
+                    CssPixelValueConverter.pixelValue(element,
+                            style -> style.getStyleAttribute(Definition.HEIGHT, true),
+                            () -> 0,
+                            () -> element.getPage().getEnclosingWindow().getInnerHeight()));
         }
 
         // height is ignored for inline elements, and AUTO/unset falls back to
@@ -1698,11 +1695,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         // which knows how to handle relative units against the window as a
         // percentage base
         return updateCachedWidth(CssPixelValueConverter.pixelValue(element,
-                new CssPixelValueConverter.CssValue(0, element.getPage().getEnclosingWindow().getInnerWidth()) {
-                    @Override public String get(final ComputedCssStyleDeclaration style) {
-                        return style.getStyleAttribute(Definition.WIDTH, true);
-                    }
-                }));
+                style -> style.getStyleAttribute(Definition.WIDTH, true),
+                () -> 0,
+                () -> element.getPage().getEnclosingWindow().getInnerWidth()));
     }
 
     /**
@@ -2163,11 +2158,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         final boolean isInline = INLINE.equals(display) && !(element instanceof HtmlInlineFrame);
 
+        final int defaultHght = defaultHeight;
         final int defaultWindowHeight = element instanceof HtmlCanvas ? 150 : windowHeight;
 
         int height = CssPixelValueConverter.pixelValue(element,
-                new CssPixelValueConverter.CssValue(defaultHeight, defaultWindowHeight) {
-                @Override public String get(final ComputedCssStyleDeclaration style) {
+                style -> {
                     final DomElement elem = style.getDomElement();
                     if (elem instanceof HtmlBody) {
                         return String.valueOf(elem.getPage().getEnclosingWindow().getInnerHeight());
@@ -2177,8 +2172,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                         return "";
                     }
                     return style.getStyleAttribute(Definition.HEIGHT, true);
-                }
-            });
+                },
+                () -> defaultHght,
+                () -> defaultWindowHeight);
 
         if (height == 0 && (isInline || super.getHeight().isEmpty())) {
             height = defaultHeight;
