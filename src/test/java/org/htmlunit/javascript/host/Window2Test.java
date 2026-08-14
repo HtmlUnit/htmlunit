@@ -1045,20 +1045,17 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"false", "1234"},
-            EDGE = {"false", "1234"},
-            FF = {"true", "1234"},
-            FF_ESR = {"true", "1234"})
-    @HtmlUnitNYI(CHROME = {"true", "1234"})
+    @Alerts(DEFAULT = {"1272", "1234"},
+            EDGE = {"0", "1234"})
+    @HtmlUnitNYI(EDGE = {"1280", "1234"})
     public void setOuterWidth() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><body onload='test()'><script>\n"
+            + "<html><body onload>\n"
+            + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "  log(window.outerWidth > 0);\n"
+            + "  log(window.outerWidth);\n"
             + "  window.outerWidth = 1234;\n"
             + "  log(window.outerWidth);\n"
-            + "}\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -1068,17 +1065,21 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"false", "1234"},
-            EDGE = {"false", "1234"},
-            FF = {"true", "1234"},
-            FF_ESR = {"true", "1234"})
-    @HtmlUnitNYI(CHROME = {"true", "1234"})
+    @Alerts(CHROME = {"768", "1234"},
+            EDGE = {"0", "1234"},
+            FF = {"768", "1234"},
+            FF_ESR = {"768", "1234"})
+    @HtmlUnitNYI(
+            CHROME = {"752", "1234"},
+            EDGE = {"743", "1234"},
+            FF = {"699", "1234"},
+            FF_ESR = {"699", "1234"})
     public void setOuterHeight() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  log(window.outerHeight > 0);\n"
+            + "  log(window.outerHeight);\n"
             + "  window.outerHeight = 1234;\n"
             + "  log(window.outerHeight);\n"
             + "}\n"
