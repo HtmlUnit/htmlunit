@@ -315,9 +315,8 @@ final HtmlTextArea textArea = page.getHtmlElementById("comments");
 final String content = textArea.getText();
 ]]></source>
             </subsection>
-        </section>
         
-        <subsection name="Buttons (&lt;input type='submit|reset'&gt; and &lt;button&gt;)">
+            <subsection name="Buttons (&lt;input type='submit|reset'&gt; and &lt;button&gt;)">
                 <p>
                     When extracting text from button controls, <code>asNormalizedText()</code> returns the label visible to the user in the browser window, taking default browser labels and whitespace normalization into account.
                 </p>
@@ -375,7 +374,57 @@ public void extractButtonText() throws Exception {
     }
 }]]></source>
             </subsection>
+            
+            <subsection name="Radio Buttons &amp; Checkboxes (&lt;input type='radio|checkbox'&gt;)">
+                <p>
+                    For toggle controls like radio buttons and checkboxes, <code>asNormalizedText()</code> explicitly prepends the control's current state (<code>"checked"</code> or <code>"unchecked"</code>) to represent its visual checked status in plain text.
+                </p>
+
+                <h4>1. Extracting State with asNormalizedText()</h4>
+                <p>
+                    Calling <code>asNormalizedText()</code> directly on an <code>HtmlRadioButtonInput</code> or <code>HtmlCheckBoxInput</code> returns either <code>"checked"</code> or <code>"unchecked"</code>. When called on a parent container (such as <code>&lt;form&gt;</code> or <code>&lt;body&gt;</code>), the checked state text is automatically combined with adjacent labels.
+                </p>
+                <source><![CDATA[
+@Test
+public void extractToggleControlState() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.example.com/form.html");
+
+        // <input type="checkbox" id="acceptTerms"> Accept terms and conditions
+        final HtmlCheckBoxInput checkbox = page.getHtmlElementById("acceptTerms");
+
+        // Returns "unchecked"
+        final String initialState = checkbox.asNormalizedText();
         
+        // Enclosing page/form text combines state with adjacent label text:
+        // Returns "unchecked Accept terms and conditions"
+        final String initialFormText = page.getBody().asNormalizedText();
+
+        // Toggle state programmatically
+        checkbox.setChecked(true);
+
+        // asNormalizedText() updates dynamically to "checked"
+        final String updatedState = checkbox.asNormalizedText();
+        
+        // Enclosing page text now returns: "checked Accept terms and conditions"
+        final String updatedFormText = page.getBody().asNormalizedText();
+    }
+}]]></source>
+
+                <h4>2. Programmatic Inspection: isChecked()</h4>
+                <p>
+                    To check the state of radio buttons and checkboxes programmatically in code, use the boolean <code>isChecked()</code> method:
+                </p>
+                <source><![CDATA[
+final HtmlCheckBoxInput checkbox = page.getHtmlElementById("acceptTerms");
+boolean isChecked = checkbox.isChecked(); // returns true or false
+
+final HtmlRadioButtonInput radio = page.getHtmlElementById("optionOne");
+boolean isRadioSelected = radio.isChecked();
+]]></source>
+            </subsection>
+        </section>
+
         <section name="Structured Extraction with Tables">
             <p>
                 For tabular data, HtmlUnit provides specialized wrappers like <code>HtmlTable</code>, <code>HtmlTableRow</code>, and <code>HtmlTableCell</code> that simplify extracting rows and columns.

@@ -39,19 +39,21 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asTextWhenNotChecked() throws Exception {
+    public void asNormalizedTextd() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head><body>\n"
             + "<form id='form1'>\n"
-            + "  <input type='radio' name='radio' id='radio'>Check me</input>\n"
+            + "  <input type='radio' name='radio' id='radio'>Check me\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);
-
         final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
+
+        assertEquals("unchecked Check me", page.asNormalizedText());
         assertEquals("unchecked", radio.asNormalizedText());
-        assertEquals("uncheckedCheck me", page.asNormalizedText());
+
         radio.setChecked(true);
+        assertEquals("checked Check me", page.asNormalizedText());
         assertEquals("checked", radio.asNormalizedText());
     }
 
@@ -65,7 +67,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
             + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='radio' name='radio' id='radio'"
-            + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
+            + "onchange='this.value=\"new\" + this.checked'>Check me\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);
@@ -89,7 +91,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
             + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='radio' name='radio' id='radio'"
-            + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
+            + "onchange='this.value=\"new\" + this.checked'>Check me\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);

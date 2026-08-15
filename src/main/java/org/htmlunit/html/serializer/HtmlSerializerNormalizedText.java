@@ -548,10 +548,10 @@ public class HtmlSerializerNormalizedText {
     protected void appendCheckBoxInput(final HtmlSerializerTextBuilder builder,
                                             final HtmlCheckBoxInput htmlCheckBoxInput) {
         if (htmlCheckBoxInput.isChecked()) {
-            builder.append("checked", Mode.NORMALIZE);
+            builder.append("checked ", Mode.NORMALIZE);
         }
         else {
-            builder.append("unchecked", Mode.NORMALIZE);
+            builder.append("unchecked ", Mode.NORMALIZE);
         }
     }
 
@@ -564,10 +564,10 @@ public class HtmlSerializerNormalizedText {
     protected void appendRadioButtonInput(final HtmlSerializerTextBuilder builder,
             final HtmlRadioButtonInput htmlRadioButtonInput) {
         if (htmlRadioButtonInput.isChecked()) {
-            builder.append("checked", Mode.NORMALIZE);
+            builder.append("checked ", Mode.NORMALIZE);
         }
         else {
-            builder.append("unchecked", Mode.NORMALIZE);
+            builder.append("unchecked ", Mode.NORMALIZE);
         }
     }
 
