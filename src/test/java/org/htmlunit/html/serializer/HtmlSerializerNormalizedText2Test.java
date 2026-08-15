@@ -591,7 +591,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     @Alerts("  A B  C     D \n"
             + "EF\n"
             + "G \n"
-            + " H  <br> I")
+            + " H  <br> I  ")
     public void getNormalizedTextWhiteSpaceTextArea() throws Exception {
         getNormalizedTextWhiteSpaceTextArea(null);
     }
@@ -604,7 +604,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     @Alerts("  A B  C     D \n"
             + "EF\n"
             + "G \n"
-            + " H  <br> I")
+            + " H  <br> I  ")
     public void getNormalizedTextWhiteSpaceTextAreaNormal() throws Exception {
         getNormalizedTextWhiteSpaceTextArea("normal");
     }
@@ -617,7 +617,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     @Alerts("  A B  C     D \n"
             + "EF\n"
             + "G \n"
-            + " H  <br> I")
+            + " H  <br> I  ")
     public void getNormalizedTextWhiteSpaceTextAreaNowrap() throws Exception {
         getNormalizedTextWhiteSpaceTextArea("nowrap");
     }
@@ -630,7 +630,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     @Alerts("  A B  C     D \n"
             + "EF\n"
             + "G \n"
-            + " H  <br> I")
+            + " H  <br> I  ")
     public void getNormalizedTextWhiteSpaceTextAreaPre() throws Exception {
         getNormalizedTextWhiteSpaceTextArea("pre");
     }
@@ -643,7 +643,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     @Alerts("  A B  C     D \n"
             + "EF\n"
             + "G \n"
-            + " H  <br> I")
+            + " H  <br> I  ")
     public void getNormalizedTextWhiteSpaceTextAreaPreWrap() throws Exception {
         getNormalizedTextWhiteSpaceTextArea("pre-wrap");
     }
@@ -656,7 +656,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     @Alerts("  A B  C     D \n"
             + "EF\n"
             + "G \n"
-            + " H  <br> I")
+            + " H  <br> I  ")
     public void getNormalizedTextWhiteSpaceTextAreaPreLine() throws Exception {
         getNormalizedTextWhiteSpaceTextArea("pre-line");
     }

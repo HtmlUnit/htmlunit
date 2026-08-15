@@ -225,7 +225,7 @@ public class HtmlSerializerNormalizedTextTest {
     public void textArea() {
         final HtmlSerializerTextBuilder serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append("  hello \t abc ", Mode.PRESERVE_BLANK_NEWLINE);
-        assertEquals("  hello   abc", serializer.getText());
+        assertEquals("  hello   abc ", serializer.getText());
     }
 
     /**
