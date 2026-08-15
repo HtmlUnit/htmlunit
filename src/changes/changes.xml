@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
+           <action type="update" dev="rbri">
+                Docu: Added comprehensive Content Extraction guide covering asNormalizedText(), CSS visibility handling,
+                click-based link navigation over manual href extraction, form controls (inputs, textareas, buttons, toggles, select lists),
+                tables, lists, and advanced serializer formatting rules.
+            </action>
             <action type="fix" dev="rbri">
                 HtmlTextArea.getNormalizedText() no longer right trims the content.
             </action>
