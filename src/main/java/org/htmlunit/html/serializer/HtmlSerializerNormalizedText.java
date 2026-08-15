@@ -60,7 +60,6 @@ import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.HtmlUnorderedList;
 import org.htmlunit.html.TableRowGroup;
 import org.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder.Mode;
-import org.htmlunit.util.StringUtils;
 
 /**
  * Utility to handle conversion from HTML code to string.
@@ -643,15 +642,13 @@ public class HtmlSerializerNormalizedText {
                 return;
             }
 
-            String text = content;
-            if (mode == Mode.PRESERVE_BLANK_NEWLINE) {
-                text = StringUtils.trimRight(text);
-            }
+            // Mode.PRESERVE_BLANK_NEWLINE is unused, it only marks
+            // the doNotTouch path for textares
 
             boolean crFound = false;
-            final int textLength = text.length();
-            for (int i = 0; i < textLength; i++) {
-                final char c = text.charAt(i);
+            final int contentLength = content.length();
+            for (int i = 0; i < contentLength; i++) {
+                final char c = content.charAt(i);
 
                 if (mode == Mode.NORMALIZE) {
                     if (isSpace(c)) {

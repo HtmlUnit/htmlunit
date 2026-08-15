@@ -65,7 +65,42 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
+        HtmlTextInput input = page.getHtmlElementById("tester");
+
+        assertEquals(getExpectedAlerts()[0], input.getValue());
+        assertEquals(getExpectedAlerts()[0], input.getValueAttribute());
+
         assertEquals(getExpectedAlerts()[0], page.getBody().asNormalizedText());
+        assertEquals(getExpectedAlerts()[0], input.asNormalizedText());
+    }
+
+    /**
+     * Verifies that asNormalizedText() returns the value string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"bla", "HtmlUnit"})
+    public void asNormalizedTextTypedText() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='text' name='tester' id='tester' value='bla'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        HtmlTextInput input = page.getHtmlElementById("tester");
+        input.select();
+        input.type("HtmlUnit");
+
+        assertEquals(getExpectedAlerts()[1], input.getValue());
+        assertEquals(getExpectedAlerts()[0], input.getValueAttribute());
+
+
+        assertEquals(getExpectedAlerts()[1], page.getBody().asNormalizedText());
+        assertEquals(getExpectedAlerts()[1], input.asNormalizedText());
     }
 
     /**

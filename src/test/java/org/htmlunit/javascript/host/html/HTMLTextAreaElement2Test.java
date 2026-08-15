@@ -66,8 +66,8 @@ public class HTMLTextAreaElement2Test extends SimpleWebTestCase {
             + "keypressed: he; "
             + "keypressed: hel; "
             + "keypressed: hell; "
-            + "changed: hello;";
-        assertEquals(expectation, log.asNormalizedText());
+            + "changed: hello; ";
+        assertEquals(expectation, log.getText());
     }
 
 }

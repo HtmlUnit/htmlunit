@@ -19,6 +19,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
+import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -110,6 +111,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(" foo \n bar\n test\n a <p>html snippet</p>\n")
     public void asNormalizedText() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -121,11 +123,38 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        final HtmlElement node = page.getHtmlElementById("tester");
-        final String expectedText = " foo \n bar\n test\n a <p>html snippet</p>";
+        final HtmlTextArea textArea = page.getHtmlElementById("tester");
 
-        assertEquals(expectedText, node.asNormalizedText());
-        assertEquals(expectedText, page.asNormalizedText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
+
+        assertEquals(getExpectedAlerts()[0], textArea.asNormalizedText());
+        assertEquals(getExpectedAlerts()[0], page.asNormalizedText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("HtmlUnit")
+    public void asNormalizedTextTypedText() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<textarea id='tester'> foo \n bar\r\n test\r a "
+            + "<p>html snippet</p>\n"
+            + "</textarea>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlTextArea textArea = page.getHtmlElementById("tester");
+        textArea.select();
+        textArea.type("HtmlUnit");
+
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
+
+        assertEquals(getExpectedAlerts()[0], textArea.asNormalizedText());
+        assertEquals(getExpectedAlerts()[0], page.asNormalizedText());
     }
 
     /**
