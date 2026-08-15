@@ -484,23 +484,84 @@ for (final HtmlOption option : select.getOptions()) {
             </subsection>
         </section>
 
-        <section name="Structured Extraction with Tables">
+        <section name="Tables, Formatting, and Advanced Element Handling">
             <p>
-                For tabular data, HtmlUnit provides specialized wrappers like <code>HtmlTable</code>, <code>HtmlTableRow</code>, and <code>HtmlTableCell</code> that simplify extracting rows and columns.
+                In addition to standard block and inline elements, <code>asNormalizedText()</code> applies specialized formatting rules to complex DOM structures such as tables, preformatted text, inline frames, and structural tags.
             </p>
-            <source><![CDATA[
-final HtmlTable table = page.getHtmlElementById("data-table");
-for (final HtmlTableRow row : table.getRows()) {
-    for (final HtmlTableCell cell : row.getCells()) {
-        System.out.print(cell.asNormalizedText() + "\t");
+
+            <subsection name="Extracting Tables (&lt;table&gt;, &lt;tr&gt;, &lt;td&gt;)">
+                <p>
+                    When serializing tables, <code>asNormalizedText()</code> formats rows and cells to preserve structural alignment in plain text:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Cell Delimiters:</strong> Cells (<code>&lt;td&gt;</code>, <code>&lt;th&gt;</code>) within the same row are separated by a tab character (<code>\t</code>).
+                    </li>
+                    <li>
+                        <strong>Row Separation:</strong> Each table row (<code>&lt;tr&gt;</code>) is placed on a new line.
+                    </li>
+                    <li>
+                        <strong>Section Ordering:</strong> Table headers (<code>&lt;thead&gt;</code>) are serialized first, body rows (<code>&lt;tbody&gt;</code>) second, and footers (<code>&lt;tfoot&gt;</code>) last, ensuring consistent logical output regardless of element order in the underlying HTML markup.
+                    </li>
+                    <li>
+                        <strong>Captions:</strong> Table captions (<code>&lt;caption&gt;</code>) are extracted at the top of the table on their own block line.
+                    </li>
+                </ul>
+                <source><![CDATA[
+@Test
+public void extractTableText() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.example.com/data-table.html");
+
+        final HtmlTable table = page.getHtmlElementById("resultsTable");
+
+        // Returns tab-separated cells and newline-separated rows:
+        // "Name\tAge\nJohn\t30\nJane\t25"
+        final String tableText = table.asNormalizedText();
     }
-    System.out.println();
 }]]></source>
             <p>
                 For deeper table manipulation details, see the dedicated <a href="tables.html">Tables guide</a>.
             </p>
-        </section>
+            </subsection>
 
+            <subsection name="Preformatted Text (&lt;pre&gt;)">
+                <p>
+                    Unlike standard HTML elements where consecutive spaces, tabs, and newlines are collapsed into single spaces, <code>asNormalizedText()</code> preserves all whitespace, tabs, and newlines inside <code>&lt;pre&gt;</code> tags.
+                </p>
+                <source><![CDATA[
+final HtmlPreformattedText pre = page.getHtmlElementById("codeBlock");
+
+// Preserves original spacing, tab indents, and newlines exactly as declared
+final String rawFormattedText = pre.asNormalizedText();]]></source>
+            </subsection>
+
+            <subsection name="Inline Frames (&lt;iframe&gt;)">
+                <p>
+                    If an <code>&lt;iframe&gt;</code> is visible, <code>asNormalizedText()</code> recursively serializes the entire text content of the enclosed frame's document inline within the parent page text.
+                </p>
+            </subsection>
+
+            <subsection name="Ignored Tags &amp; Special Handling">
+                <p>
+                    Certain HTML elements are treated specially during text normalization:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Ignored Elements:</strong> <code>&lt;script&gt;</code>, <code>&lt;style&gt;</code>, <code>&lt;noframes&gt;</code> tags, and HTML comments are completely excluded from text extraction.
+                    </li>
+                    <li>
+                        <strong>&lt;noscript&gt; Tags:</strong> If JavaScript is enabled in the <code>WebClient</code> (default), <code>&lt;noscript&gt;</code> contents are ignored. If JavaScript is disabled, their contents are included as standard text.
+                    </li>
+                    <li>
+                        <strong>Non-Breaking Spaces (&amp;nbsp;):</strong> Non-breaking space characters (<code>&amp;nbsp;</code> / <code>\u00A0</code>) are automatically converted into regular space characters (<code>' '</code>).
+                    </li>
+                    <li>
+                        <strong>Document Title (&lt;title&gt;):</strong> Calling <code>asNormalizedText()</code> directly on an <code>HtmlTitle</code> element extracts the title string without evaluating external CSS stylesheets, optimizing performance.
+                    </li>
+                </ul>
+            </subsection>
+        </section>
         <section name="Combining HtmlUnit with Jsoup">
             <p>
                 If you prefer Jsoup's fluent CSS selector and DOM manipulation API for content extraction, you can use the official 
