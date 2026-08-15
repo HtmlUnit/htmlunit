@@ -423,6 +423,65 @@ final HtmlRadioButtonInput radio = page.getHtmlElementById("optionOne");
 boolean isRadioSelected = radio.isChecked();
 ]]></source>
             </subsection>
+            
+            <subsection name="Select Elements (&lt;select&gt;) &amp; Drop-Down Lists">
+                <p>
+                    For drop-down and list controls (<code>&lt;select&gt;</code>), <code>asNormalizedText()</code> returns the text of the <strong>currently selected option(s)</strong>, formatted on separate lines.
+                </p>
+
+                <h4>1. Extracting Text with asNormalizedText()</h4>
+                <p>
+                    The output of <code>asNormalizedText()</code> directly mirrors what is visually selected by the user in the control:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Single / Default Select:</strong> For standard drop-downs (or multi-selects with active selections), <code>asNormalizedText()</code> returns the visible labels of all selected <code>&lt;option&gt;</code> elements separated by newline characters (<code>\n</code>).
+                    </li>
+                    <li>
+                        <strong>Empty or Unselected Selects:</strong> If a <code>&lt;select&gt;</code> contains no options (or no selected option), <code>asNormalizedText()</code> returns an empty string.
+                    </li>
+                </ul>
+                <source><![CDATA[
+@Test
+public void extractSelectText() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.example.com/form.html");
+
+        // <select name="options" multiple>
+        //   <option value="1" selected>foo</option>
+        //   <option value="2">bar</option>
+        //   <option value="3" selected>baz</option>
+        // </select>
+        final HtmlSelect select = page.getHtmlElementById("options");
+
+        // Returns only the selected options on separate lines:
+        // "foo\nbaz"
+        final String selectedText = select.asNormalizedText();
+        
+        // Empty <select id="emptySelect"></select> returns ""
+        final HtmlSelect emptySelect = page.getHtmlElementById("emptySelect");
+        final String emptyText = emptySelect.asNormalizedText(); // Returns ""
+    }
+}]]></source>
+
+                <h4>2. Programmatic Inspection &amp; Option Iteration</h4>
+                <p>
+                    When you need to inspect options programmatically (including non-selected items or option values vs. labels), use <code>getSelectedOptions()</code> or <code>getOptions()</code>:
+                </p>
+                <source><![CDATA[
+final HtmlSelect select = page.getHtmlElementById("countrySelect");
+
+// 1. Retrieve all currently selected option elements
+for (final HtmlOption option : select.getSelectedOptions()) {
+    String value = option.getValueAttribute(); // e.g., "DE"
+    String label = option.asNormalizedText();   // e.g., "Germany"
+}
+
+// 2. Iterate through ALL available choices in the drop-down list
+for (final HtmlOption option : select.getOptions()) {
+    System.out.println("Value: " + option.getValueAttribute() + " | Label: " + option.asNormalizedText());
+}]]></source>
+            </subsection>
         </section>
 
         <section name="Structured Extraction with Tables">
