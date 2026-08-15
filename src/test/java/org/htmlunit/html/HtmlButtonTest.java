@@ -39,6 +39,89 @@ public class HtmlButtonTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("Press Me")
+    public void normalizedText() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId').innerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form action='" + URL_SECOND + "'>\n"
+            + "  <button id='myId'>Press Me</button>\n"
+            + "  <input type='button' id='myId' value=''>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        HtmlButton button = page.getHtmlElementById("myId");
+
+        assertEquals("Press Me", page.asNormalizedText());
+        assertEquals("Press Me", button.asNormalizedText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void normalizedTextEmptyContent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId').innerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form action='" + URL_SECOND + "'>\n"
+            + "  <button id='myId' ></button>\n"
+            + "  <input type='button' id='myId' value=''>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        HtmlButton button = page.getHtmlElementById("myId");
+
+        assertEquals("", page.asNormalizedText());
+        assertEquals("", button.asNormalizedText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("B utton linetwo")
+    public void whitespaceInContent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId').innerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form action='" + URL_SECOND + "'>\n"
+            + "  <button id='myId' >  B\tutton    \n linetwo </button>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        HtmlButton button = page.getHtmlElementById("myId");
+
+        assertEquals("B utton linetwo", page.asNormalizedText());
+        assertEquals("B utton linetwo", button.asNormalizedText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void buttonClick_onClick() throws Exception {
         final String htmlContent = DOCTYPE_HTML
             + "<html><head><title>foo</title></head><body>\n"

@@ -98,7 +98,6 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts()[1], input.getValue());
         assertEquals(getExpectedAlerts()[0], input.getValueAttribute());
 
-
         assertEquals(getExpectedAlerts()[1], page.getBody().asNormalizedText());
         assertEquals(getExpectedAlerts()[1], input.asNormalizedText());
     }

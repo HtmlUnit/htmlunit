@@ -52,7 +52,14 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
+        HtmlSubmitInput submit = page.getHtmlElementById("myId");
+
+        assertEquals("", submit.getValueAttribute());
+        assertEquals("", submit.getValue());
+
         assertTrue(page.asNormalizedText().contains("Submit Query"));
+        assertEquals("Submit Query", submit.asNormalizedText());
+
         assertFalse(page.asXml().contains("Submit Query"));
     }
 
@@ -77,8 +84,48 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
+        HtmlSubmitInput submit = page.getHtmlElementById("myId");
+
+        assertEquals("", submit.getValueAttribute());
+        assertEquals("", submit.getValue());
+
         assertFalse(page.asNormalizedText().contains("Submit Query"));
+        assertEquals("", submit.asNormalizedText());
+
         assertTrue(page.asXml().contains("value=\"\""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Press Me")
+    public void value() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form action='" + URL_SECOND + "'>\n"
+            + "  <input type='submit' id='myId' value='Press Me'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        HtmlSubmitInput submit = page.getHtmlElementById("myId");
+
+        assertEquals("Press Me", submit.getValueAttribute());
+        assertEquals("Press Me", submit.getValue());
+
+        assertTrue(page.asNormalizedText().contains("Press Me"));
+        assertFalse(page.asNormalizedText().contains("Submit Query"));
+        assertEquals("Press Me", submit.asNormalizedText());
+
+        assertTrue(page.asXml().contains("value=\"Press Me\""));
     }
 
     /**
