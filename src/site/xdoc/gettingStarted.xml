@@ -23,24 +23,31 @@
                 <br/>
                 &nbsp;-&nbsp;Access the page contents.
             </p>
-            <source><![CDATA[
+<source><![CDATA[
 try (final WebClient webClient = new WebClient()) {
     final HtmlPage page = webClient.getPage("https://example.com");
 
-    System.out.println(page.getTitleText());
+    System.out.println("Title: " + page.getTitleText());
+
+    // Extract human-readable text rendered by the browser
+    final String visibleText = page.asNormalizedText();
+    System.out.println("Page Content:\n" + visibleText);
 }]]></source>
             <p>
                 The WebClient is the central entry point of the HtmlUnit API. It represents a web browser, 
                 manages network communication, executes JavaScript, maintains cookies, and provides access to the pages you load.
                 <br/>
-                The getPage() method retrieves the requested resource and returns an object representing the loaded page.
-                In this example, the returned object is an HtmlPage, which provides access to the document structure and browser APIs.
+                The <code>getPage()</code> method retrieves the requested resource and returns an object representing the loaded page.
+                In this example, the returned object is an <code>HtmlPage</code>, which provides access to the document structure and browser APIs.
                 <br/>
                 Once a page has been loaded, you can inspect its contents, locate elements, interact with forms, click links, 
                 execute JavaScript, or extract data.
+                <br/>
+                To extract rendered text exactly as a user would see it in a browser, use <code>page.asNormalizedText()</code>. 
+                This handles whitespace collapse, block element separations (with newlines), and ignores hidden script or style contents.
             </p>
             <p>
-                The following sections introduce these capabilities in more detail.        
+                The following sections introduce these capabilities in more detail.
             </p>
 
             <subsection name="When to Use HtmlUnit">
@@ -162,6 +169,10 @@ public void homePage() throws Exception {
         Assertions.assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));
     }
 }]]></source>
+            <p>
+                To learn more about extracting visible text, HTML source code, and working with links or element attributes, 
+                see the dedicated <a href="contentExtraction.html">Content Extraction</a> guide.
+            </p>
         </section>
 
         <section name="Submitting a form">
@@ -463,6 +474,10 @@ public void extractTextFromBody() throws Exception {
                 <a href="webclient.html">WebClient - the browser</a><br></br>
                 Learn how to configure browser behavior, networking, cookies,
                 proxies, JavaScript, and other browser options.
+            </li>
+            <li>
+                <a href="contentExtraction.html">Content Extraction</a><br></br>
+                Extract rendered text, raw HTML source, element attributes, and structured data.
             </li>
             <li>
                 <a href="javascript.html">Use JavaScript</a><br></br>

@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Content Extraction with HtmlUnit</title>
+        <author>RBRi</author>
+    </properties>
+
+    <body>
+        <section name="Content" id="content">
+            <macro name="toc"/>
+        </section>
+
+        <section name="Overview">
+            <p>
+                Extracting data from web pages is one of the primary use cases for HtmlUnit.
+                Because HtmlUnit models a real web browser (including DOM tree generation, CSS evaluation, and JavaScript execution),
+                it offers powerful capabilities for extracting structured data, raw text, HTML fragments, and element attributes.
+            </p>
+        </section>
+
+        <section name="Extracting Rendered Text with asNormalizedText()">
+            <p>
+                The primary method for extracting human-readable content from any DOM node or page is 
+                <code>asNormalizedText()</code>.
+            </p>
+            <p>
+                Unlike standard raw text getters, <code>asNormalizedText()</code> simulates how text is actually rendered on screen:
+            </p>
+            <ul>
+                <li>Collapses consecutive whitespace sequences into single spaces.</li>
+                <li>Appends line breaks (<code>\n</code>) between block-level CSS elements (such as <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>, or <code>&lt;tr&gt;</code>).</li>
+                <li>Ignores invisible DOM elements like <code>&lt;script&gt;</code> and <code>&lt;style&gt;</code> tags.</li>
+                <li>Respects CSS visibility settings, excluding content hidden via rules such as <code>display: none</code> or <code>visibility: hidden</code>.</li>
+            </ul>
+
+            <subsection name="Extracting Text from a Targeted Element">
+                <p>
+                    For targeted extraction, combine CSS or XPath selectors with <code>asNormalizedText()</code>:
+                </p>
+                <source><![CDATA[
+try (final WebClient webClient = new WebClient()) {
+    final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
+
+    // Locate element via CSS Selector
+    final DomNode article = page.querySelector("article.main-content");
+    if (article != null) {
+        String text = article.asNormalizedText();
+        System.out.println(text);
+    }
+}]]></source>
+            </subsection>
+
+            <subsection name="Extracting Text from the Entire Page">
+                <p>
+                    Calling <code>asNormalizedText()</code> directly on the <code>HtmlPage</code> or <code>HtmlBody</code> retrieves all visible text across the document.
+                </p>
+                <source><![CDATA[
+final String fullPageText = page.asNormalizedText();]]></source>
+            </subsection>
+        </section>
+
+        <section name="Extracting HTML / XML Source">
+            <p>
+                If you need the underlying markup rather than plain text, HtmlUnit provides <code>asXml()</code> on all DOM nodes.
+            </p>
+
+            <subsection name="Serializing the DOM with asXml()">
+                <p>
+                    Calling <code>asXml()</code> serializes the current state of a node (and its child subtree) into valid XML/HTML markup. 
+                    Because it reads from the active DOM tree, it includes any dynamic changes made by JavaScript after page load.
+                </p>
+                <ul>
+                    <li>
+                        Calling <code>page.asXml()</code> returns the entire rendered document markup.
+                    </li>
+                    <li>
+                        Calling <code>element.asXml()</code> returns the HTML/XML representation of that specific element and its descendants.
+                    </li>
+                </ul>
+                <source><![CDATA[
+// Get full serialized XML/HTML representation of the page DOM
+final String pageXml = page.asXml();
+
+// Get the HTML/XML code of a specific element and its children
+final HtmlDivision div = page.getHtmlElementById("content");
+final String divXml = div.asXml();]]></source>
+            </subsection>
+        </section>
+        <section name="Extracting Attributes and Links">
+            <p>
+                When scraping web sites, extracting element attributes (such as <code>href</code>, <code>src</code>, or <code>data-*</code> attributes) is common.
+            </p>
+            <source><![CDATA[
+// Extract all links with their target URLs
+final List<HtmlAnchor> anchors = page.getAnchors();
+for (final HtmlAnchor anchor : anchors) {
+    String text = anchor.asNormalizedText();
+    String href = anchor.getHrefAttribute();
+    System.out.println(text + " -> " + href);
+}
+
+// Extract specific image sources
+final DomNodeList<DomElement> images = page.getElementsByTagName("img");
+for (final DomElement img : images) {
+    String src = img.getAttribute("src");
+    String alt = img.getAttribute("alt");
+}]]></source>
+
+            <subsection name="Navigating Links: Prefer .click() over Extracting href">
+                <p>
+                    With traditional raw scrapers, navigating to a new page typically requires extracting the <code>href</code> attribute string and manually issuing a new GET request.
+                </p>
+                <p>
+                    Because HtmlUnit simulates a real browser, <strong>in most cases you do not need to extract the <code>href</code> attribute</strong>. Instead, simply call <code>click()</code> directly on the anchor element:
+                </p>
+                <source><![CDATA[
+// Find an anchor by its text or selector
+final HtmlAnchor link = page.getAnchorByText("Documentation");
+
+// Simulate a real user click - handles JavaScript onclick handlers, relative URLs, and redirects automatically
+final HtmlPage targetPage = link.click();]]></source>
+                <p>
+                    Using <code>click()</code> is strongly recommended over extracting `href` manually because it:
+                </p>
+                <ul>
+                    <li>Triggers any attached JavaScript <code>onclick</code> event handlers.</li>
+                    <li>Handles single-page application (SPA) client-side routing.</li>
+                    <li>Resolves relative paths, base tags, and redirects automatically.</li>
+                    <li>Maintains browser session state, cookies, and window history.</li>
+                </ul>
+            </subsection>
+        </section>
+
+        <section name="Extracting Lists (&lt;ol&gt; and &lt;ul&gt;)">
+            <p>
+                When calling <code>asNormalizedText()</code> on list elements, HtmlUnit automatically formats the text to mirror how browsers visually present list contents.
+            </p>
+
+            <subsection name="Ordered Lists (&lt;ol&gt;)">
+                <p>
+                    For ordered lists, <code>asNormalizedText()</code> automatically inserts sequential numbers (e.g., <code>1. </code>, <code>2. </code>) before each list item (<code>&lt;li&gt;</code>) 
+                    and places each item on its own line.
+                    HtmlUnit also respects the <code>start</code> attribute on <code>&lt;ol&gt;</code> tags, starting the sequence from the specified initial number. 
+                    Any direct text nodes inside the list that are not wrapped in an <code>&lt;li&gt;</code> tag are preserved on separate lines without numbers.
+                </p>
+                <source><![CDATA[
+@Test
+public void extractOrderedList() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.example.com/ordered-list.html");
+
+        // Example: <ol id="orderedList" start="5">
+        final HtmlOrderedList list = page.getHtmlElementById("orderedList");
+
+        // Yields:
+        // 5. First item
+        // 6. Second item
+        // Non-item text content
+        // 7. Third item
+        final String listText = list.asNormalizedText();
+    }
+}]]></source>
+            </subsection>
+            
+            <subsection name="Unordered Lists (&lt;ul&gt;)">
+                <p>
+                    For unordered lists, <code>asNormalizedText()</code> outputs each item on its own line without bullet symbols or numerical prefixes.
+                </p>
+                <source><![CDATA[
+@Test
+public void extractUnorderedList() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.example.com/unordered-list.html");
+
+        final HtmlUnorderedList list = page.getHtmlElementById("unorderedList");
+
+        // Yields:
+        // First item
+        // Second item
+        // Non-item text content
+        // Third item
+        final String listText = list.asNormalizedText();
+    }
+}]]></source>
+            </subsection>
+
+            <subsection name="Iterating Individual List Items">
+                <p>
+                    If you need to process individual <code>&lt;li&gt;</code> elements programmatically rather than obtaining a pre-formatted string, you can iterate over child nodes or query them by tag name:
+                </p>
+                <source><![CDATA[
+final HtmlOrderedList list = page.getHtmlElementById("orderedList");
+
+for (final DomElement item : list.getElementsByTagName("li")) {
+    String itemText = item.asNormalizedText();
+    System.out.println("Item: " + itemText);
+}]]></source>
+            </subsection>
+        </section>
+        
+        <section name="Structured Extraction with Tables">
+            <p>
+                For tabular data, HtmlUnit provides specialized wrappers like <code>HtmlTable</code>, <code>HtmlTableRow</code>, and <code>HtmlTableCell</code> that simplify extracting rows and columns.
+            </p>
+            <source><![CDATA[
+final HtmlTable table = page.getHtmlElementById("data-table");
+for (final HtmlTableRow row : table.getRows()) {
+    for (final HtmlTableCell cell : row.getCells()) {
+        System.out.print(cell.asNormalizedText() + "\t");
+    }
+    System.out.println();
+}]]></source>
+            <p>
+                For deeper table manipulation details, see the dedicated <a href="tables.html">Tables guide</a>.
+            </p>
+        </section>
+
+        <section name="Combining HtmlUnit with Jsoup">
+            <p>
+                If you prefer Jsoup's fluent CSS selector and DOM manipulation API for content extraction, you can use the official 
+                <a href="https://github.com/HtmlUnit/htmlunit-jsoup">htmlunit-jsoup</a> bridge. This allows HtmlUnit to handle JavaScript execution and browser navigation, while providing a Jsoup <code>Document</code> interface for extraction.
+            </p>
+        </section>
+
+        <section name="Where to Go Next">
+            <ul>
+                <li><a href="gettingStarted.html">Getting Started</a> - Learn the basics of loading pages and interacting with forms.</li>
+                <li><a href="javascript.html">Use JavaScript</a> - Ensure dynamic content is fully loaded before extracting text.</li>
+                <li><a href="tables.html">Use Tables</a> - Advanced table extraction techniques.</li>
+            </ul>
+        </section>
+    </body>
+</document>

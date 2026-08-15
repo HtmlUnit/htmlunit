@@ -38,6 +38,7 @@
             <item name="Get started" href="/gettingStarted.html"/>
             <item name="Security" href="/security.html"/>
             <item name="WebClient - the browser" href="/webclient.html"/>
+            <item name="Content Extraction" href="/contentExtraction.html"/>
             <item name="Use Inputs" href="/input-howto.html"/>
             <item name="Use Tables" href="/table-howto.html"/>
             <item name="File download" href="/filedownload-howto.html"/>
