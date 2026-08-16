@@ -20,7 +20,6 @@ import java.awt.font.TextAttribute;
 import java.text.AttributedString;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.css.CssPixelValueConverter;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -30,14 +29,13 @@ import org.htmlunit.css.CssPixelValueConverter;
 public class AwtFontUtil implements FontUtil {
 
     @Override
-    public int countLines(final String content, final int pixelWidth, final String fontSize) {
+    public int countLines(final String content, final int pixelWidth, final int fontSizeInt) {
         int lineCount = 0;
         if (content == null) {
             return lineCount;
         }
 
         final String[] lines = StringUtils.splitByWholeSeparatorPreserveAllTokens(content, "\n");
-        final int fontSizeInt = CssPixelValueConverter.pixelValue(fontSize);
         final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, true);
         for (final String line : lines) {
             if (org.htmlunit.util.StringUtils.isBlank(line)) {

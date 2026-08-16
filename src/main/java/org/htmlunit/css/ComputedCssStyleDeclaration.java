@@ -2125,7 +2125,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 if (pixelWidth > 0
                         && !width.isEmpty()
                         && StringUtils.isNotBlank(content)) {
-                    final int lineCount = Platform.getFontUtil().countLines(content, pixelWidth, fontSize);
+                    final int fontSizeInt = CssPixelValueConverter.pixelValue(fontSize);
+                    final int lineCount = Platform.getFontUtil().countLines(content, pixelWidth, fontSizeInt);
                     defaultHeight *= lineCount;
                 }
                 else {

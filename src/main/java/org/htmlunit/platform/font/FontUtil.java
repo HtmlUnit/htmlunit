@@ -30,9 +30,9 @@ public interface FontUtil {
      *
      * @param content the text to be layouted
      * @param pixelWidth the max width of the resulting text block
-     * @param fontSize the font size to be used
+     * @param fontSizeInt the font size to be used
      *
      * @return the number of lines the layouted text will have
      */
-    int countLines(String content, int pixelWidth, String fontSize);
+    int countLines(String content, int pixelWidth, int fontSizeInt);
 }

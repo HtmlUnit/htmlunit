@@ -64,25 +64,6 @@ public final class CssPixelValueConverter {
         return pixelValue(element, s, styleGetter, defaultValue, windowDefaultValue, false);
     }
 
-//    /**
-//     * Converts the specified length CSS attribute value into an integer number of pixels. If the
-//     * specified CSS attribute value is a percentage, this method uses the specified value getters
-//     * to recursively retrieve the base (parent) CSS attribute value.
-//     * @param element the element for which the CSS attribute value is to be retrieved
-//     * @param styleGetter getter function to retrieve the CSS attribute value from ComputedCssStyleDeclaration
-//     * @param defaultValue the default value
-//     * @param windowDefaultValue the default value for the window
-//     * @return the integer number of pixels corresponding to the specified length CSS attribute value
-//     * @see #pixelValue(String)
-//     */
-//    public static int pixelValue(
-//            final DomElement element,
-//            final Function<ComputedCssStyleDeclaration, String> styleGetter,
-//            final int defaultValue,
-//            final int windowDefaultValue) {
-//        return pixelValue(element, styleGetter, () -> defaultValue, () -> windowDefaultValue);
-//    }
-
     /**
      * Returns the specified length CSS attribute value as a pixel length value.
      * If the specified CSS attribute value is a percentage, this method
@@ -108,25 +89,6 @@ public final class CssPixelValueConverter {
         return pixelValue(element, styleValue, styleGetter, defaultValue, windowDefaultValue, false) + "px";
     }
 
-//    /**
-//     * Returns the specified length CSS attribute value as a pixel length value.
-//     * If the specified CSS attribute value is a percentage, this method
-//     * uses the specified value getters to recursively retrieve the base (parent) CSS attribute value.
-//     * @param element the element for which the CSS attribute value is to be retrieved
-//     * @param styleGetter getter function to retrieve the CSS attribute value from ComputedCssStyleDeclaration
-//     * @param defaultValue the default value
-//     * @param windowDefaultValue the default value for the window
-//     * @return the specified length CSS attribute value as a pixel length value
-//     * @see #pixelValue(DomElement, Function, int, int)
-//     */
-//    public static String pixelString(
-//            final DomElement element,
-//            final Function<ComputedCssStyleDeclaration, String> styleGetter,
-//            final int defaultValue,
-//            final int windowDefaultValue) {
-//        return pixelString(element, styleGetter, () -> defaultValue, () -> windowDefaultValue);
-//    }
-//
     /**
      * Converts the specified length string value into an integer number of pixels. This method does
      * <b>NOT</b> handle percentages correctly; use {@link #pixelString(DomElement, Function, IntSupplier, IntSupplier)}

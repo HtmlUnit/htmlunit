@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class NoOpFontUtil implements FontUtil {
     @Override
-    public int countLines(final String content, final int pixelWidth, final String fontSize) {
+    public int countLines(final String content, final int pixelWidth, final int fontSizeInt) {
         final String[] lines = StringUtils.split(content, '\n');
         return lines.length;
     }
