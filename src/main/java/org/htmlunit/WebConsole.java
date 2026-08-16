@@ -166,7 +166,7 @@ public class WebConsole implements ConsolePrinter, Serializable {
     public void print(final Context cx, final VarScope scope, final Level level,
             final Object[] args, final ScriptStackElement[] stack) {
         switch (level) {
-            case TRACE:
+            case TRACE -> {
                 if (logger_.isInfoEnabled()) {
                     String msg = format(cx, scope, args);
                     if (stack != null) {
@@ -184,37 +184,34 @@ public class WebConsole implements ConsolePrinter, Serializable {
                     }
                     logger_.info(msg);
                 }
-                break;
-            case DEBUG:
+            }
+            case DEBUG -> {
                 if (logger_.isDebugEnabled()) {
                     logger_.debug(format(cx, scope, args));
                 }
-                break;
-            case INFO:
+            }
+            case INFO -> {
                 if (logger_.isInfoEnabled()) {
                     logger_.info(format(cx, scope, args));
                 }
-                break;
-            case WARN:
+            }
+            case WARN -> {
                 if (logger_.isWarnEnabled()) {
                     logger_.warn(format(cx, scope, args));
                 }
-                break;
-            case ERROR:
+            }
+            case ERROR -> {
                 if (logger_.isErrorEnabled()) {
                     logger_.error(format(cx, scope, args));
                 }
-                break;
-
-            default:
-                break;
+            }
+            default -> { /* skip */ }
         }
     }
 
     private static String format(final Context cx, final VarScope scope, final Object[] args) {
-        String msg = NativeConsole.format(cx, scope, args);
-        msg = msg.replaceAll("\\r?\\n", "\n");
-        return msg;
+        final String msg = NativeConsole.format(cx, scope, args);
+        return msg.replaceAll("\\r?\\n", "\n");
     }
 
     private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
@@ -233,7 +230,6 @@ public class WebConsole implements ConsolePrinter, Serializable {
          * Ctor.
          */
         DefaultLogger(final Log logger) {
-            super();
             webConsoleLogger_ = logger;
         }
 
