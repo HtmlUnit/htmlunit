@@ -67,8 +67,9 @@ public abstract class DomNamespaceNode extends DomNode {
      */
     @Override
     public String getNamespaceURI() {
-        if (getPage().isHtmlPage()
-            && !(getPage() instanceof XHtmlPage)
+        final SgmlPage page = getPage();
+        if (page.isHtmlPage()
+            && !(page instanceof XHtmlPage)
             && Html.XHTML_NAMESPACE.equals(namespaceURI_)
             && XPathHelper.isProcessingXPath()) {
             // for xpath processing we have to strip the 'default' XHTML namespace for HTML pages to be able to find
@@ -113,8 +114,13 @@ public abstract class DomNamespaceNode extends DomNode {
     @Override
     public void setPrefix(final String prefix) {
         prefix_ = prefix;
-        if (prefix_ != null && localName_ != null) {
-            qualifiedName_ = prefix_ + ":" + localName_;
+        if (localName_ != null) {
+            if (prefix != null && !prefix.isEmpty()) {
+                qualifiedName_ = prefix + ":" + localName_;
+            }
+            else {
+                qualifiedName_ = localName_;
+            }
         }
     }
 
@@ -136,9 +142,10 @@ public abstract class DomNamespaceNode extends DomNode {
         // if we are importing from a namespace-aware source
         // we have to drop the XHtmlNamespace because we did this already
         // for the HTML document itself
-        final SgmlPage page = (SgmlPage) doc.getDomNodeOrDie();
-        if (page.isHtmlPage() && !(page instanceof XHtmlPage) && Html.XHTML_NAMESPACE.equals(namespaceURI_)) {
-            namespaceURI_ = null;
+        if (doc.getDomNodeOrDie() instanceof SgmlPage page) {
+            if (page.isHtmlPage() && !(page instanceof XHtmlPage) && Html.XHTML_NAMESPACE.equals(namespaceURI_)) {
+                namespaceURI_ = null;
+            }
         }
     }
 }

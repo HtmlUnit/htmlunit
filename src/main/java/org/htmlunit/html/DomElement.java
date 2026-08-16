@@ -274,9 +274,11 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public StyleElement getStyleElementCaseInSensitive(final String name) {
         final Map<String, StyleElement> map = getStyleMap();
-        for (final Map.Entry<String, StyleElement> entry : map.entrySet()) {
-            if (entry.getKey().equalsIgnoreCase(name)) {
-                return entry.getValue();
+        if (map != null) {
+            for (final Map.Entry<String, StyleElement> entry : map.entrySet()) {
+                if (entry.getKey().equalsIgnoreCase(name)) {
+                    return entry.getValue();
+                }
             }
         }
         return null;
@@ -620,16 +622,17 @@ public class DomElement extends DomNamespaceNode implements Element {
             return;
         }
 
-        final StringBuilder builder = new StringBuilder();
         final List<StyleElement> styleElements = new ArrayList<>(styleMap.values());
         styleElements.sort(STYLE_ELEMENT_COMPARATOR);
+
+        final StringBuilder builder = new StringBuilder(styleElements.size() * 32);
         for (final StyleElement e : styleElements) {
-            if (builder.length() != 0) {
+            if (builder.length() > 0) {
                 builder.append(' ');
             }
             builder.append(e.getName())
-                .append(": ")
-                .append(e.getValue());
+                   .append(": ")
+                   .append(e.getValue());
 
             final String prio = e.getPriority();
             if (StringUtils.isNotBlank(prio)) {
@@ -798,11 +801,12 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the last child element node of this element. null if this element has no child elements
      */
     public DomElement getLastElementChild() {
-        DomElement lastChild = null;
-        for (final DomElement domElement : getChildElements()) {
-            lastChild = domElement;
+        for (DomNode child = getLastChild(); child != null; child = child.getPreviousSibling()) {
+            if (child instanceof DomElement elem) {
+                return elem;
+            }
         }
-        return lastChild;
+        return null;
     }
 
     /**
@@ -811,9 +815,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public int getChildElementCount() {
         int counter = 0;
-
-        for (final DomElement domElement : getChildElements()) {
-            counter++;
+        for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
+            if (child instanceof DomElement) {
+                counter++;
+            }
         }
         return counter;
     }
@@ -1841,8 +1846,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     @Override
     public DomAttr remove(final Object key) {
         if (key instanceof String string) {
-            final String name = fixName(string);
-            return map_.remove(name);
+            return map_.remove(fixName(string));
         }
         return null;
     }
@@ -1884,8 +1888,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     @Override
     public DomAttr get(final Object key) {
         if (key instanceof String string) {
-            final String name = fixName(string);
-            return map_.get(name);
+            return map_.get(fixName(string));
         }
         return null;
     }

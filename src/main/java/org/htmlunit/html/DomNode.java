@@ -1678,7 +1678,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
          */
         @Override
         protected boolean isAccepted(final DomNode node) {
-            return DomElement.class.isAssignableFrom(node.getClass());
+            return node instanceof DomElement;
         }
     }
 
@@ -1691,7 +1691,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
          */
         @Override
         protected boolean isAccepted(final DomNode node) {
-            return HtmlElement.class.isAssignableFrom(node.getClass());
+            return node instanceof HtmlElement;
         }
     }
 
@@ -2125,10 +2125,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public DomElement getPreviousElementSibling() {
         DomNode node = getPreviousSibling();
-        while (node != null && !(node instanceof DomElement)) {
-            node = node.getPreviousSibling();
+        for ( ; node != null; node = node.getPreviousSibling()) {
+            if (node instanceof DomElement elem) {
+                return elem;
+            }
         }
-        return (DomElement) node;
+        return null;
     }
 
     /**
@@ -2139,10 +2141,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public DomElement getNextElementSibling() {
         DomNode node = getNextSibling();
-        while (node != null && !(node instanceof DomElement)) {
-            node = node.getNextSibling();
+        for ( ; node != null; node = node.getNextSibling()) {
+            if (node instanceof DomElement elem) {
+                return elem;
+            }
         }
-        return (DomElement) node;
+        return null;
     }
 
     /**
@@ -2162,22 +2166,15 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 // closest() only ever matches elements; if this node isn't one,
                 // start the search from the nearest ancestor element instead.
                 DomNode current = this;
-                while (current != null && !(current instanceof DomElement)) {
-                    current = current.getParentNode();
-                }
-
-                while (current != null) {
-                    final DomElement elem = (DomElement) current;
-                    for (final Selector selector : selectorList) {
-                        if (CssStyleSheet.selects(webClient.getBrowserVersion(), selector, elem, null, true, true)) {
-                            return elem;
+                for ( ; current != null; current = current.getParentNode()) {
+                    if (current instanceof DomElement elem) {
+                        for (final Selector selector : selectorList) {
+                            if (CssStyleSheet.selects(
+                                    webClient.getBrowserVersion(), selector, elem, null, true, true)) {
+                                return elem;
+                            }
                         }
                     }
-
-                    do {
-                        current = current.getParentNode();
-                    }
-                    while (current != null && !(current instanceof DomElement));
                 }
             }
             return null;
