@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.util.StringUtils.toRootLowerCase;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -105,13 +107,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         final boolean changed = isChecked() != isChecked;
         checkedState_ = isChecked;
         if (isChecked) {
-            final HtmlForm form = getEnclosingForm();
-            if (form != null) {
-                form.setCheckedRadioButton(this);
-            }
-            else if (page != null && page.isHtmlPage()) {
-                setCheckedForPage((HtmlPage) page);
-            }
+            updateRadioButtonSelection(page);
         }
 
         if (changed) {
@@ -132,18 +128,24 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      */
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
-        final HtmlForm form = getEnclosingForm();
         final boolean changed = !isChecked();
+        updateRadioButtonSelection(getPage());
 
-        final Page page = getPage();
+        super.doClickStateUpdate(shiftKey, ctrlKey);
+        return changed;
+    }
+
+    /**
+     * Updates radio selection within form context or page scope.
+     */
+    private void updateRadioButtonSelection(final Page page) {
+        final HtmlForm form = getEnclosingForm();
         if (form != null) {
             form.setCheckedRadioButton(this);
         }
         else if (page != null && page.isHtmlPage()) {
             setCheckedForPage((HtmlPage) page);
         }
-        super.doClickStateUpdate(shiftKey, ctrlKey);
-        return changed;
     }
 
     /**
@@ -153,14 +155,9 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         final String name = getNameAttribute();
         for (final HtmlElement htmlElement : htmlPage.getHtmlElementDescendants()) {
             if (htmlElement instanceof HtmlRadioButtonInput radioInput) {
-                if (name.equals(radioInput.getAttribute(NAME_ATTRIBUTE))
+                if (name.equals(radioInput.getNameAttribute())
                         && radioInput.getEnclosingForm() == null) {
-                    if (radioInput == this) {
-                        setCheckedInternal(true);
-                    }
-                    else {
-                        radioInput.setCheckedInternal(false);
-                    }
+                    radioInput.setCheckedInternal(radioInput == this);
                 }
             }
         }
@@ -255,7 +252,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
+        final String qualifiedNameLC = toRootLowerCase(qualifiedName);
 
         if (VALUE_ATTRIBUTE.equals(qualifiedNameLC)) {
             super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
@@ -284,15 +281,14 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         if (ATTRIBUTE_NOT_DEFINED == getAttributeDirect(ATTRIBUTE_REQUIRED)) {
             return false;
         }
-        if (ATTRIBUTE_NOT_DEFINED == getNameAttribute()) {
+        final String name = getNameAttribute();
+        if (ATTRIBUTE_NOT_DEFINED == name) {
             return false;
         }
 
-        final String name = getNameAttribute();
         for (final HtmlElement htmlElement : getPage().getHtmlElementDescendants()) {
             if (htmlElement instanceof HtmlRadioButtonInput radioInput) {
-                if (name.equals(radioInput.getAttribute(NAME_ATTRIBUTE))
-                        && radioInput.isChecked()) {
+                if (name.equals(radioInput.getNameAttribute()) && radioInput.isChecked()) {
                     return false;
                 }
             }
