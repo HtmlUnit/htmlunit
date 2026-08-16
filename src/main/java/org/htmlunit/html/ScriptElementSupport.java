@@ -131,7 +131,9 @@ public final class ScriptElementSupport {
             else {
                 try {
                     action.execute();
-                    engine.processPostponedActions();
+                    if (engine != null) {
+                        engine.processPostponedActions();
+                    }
                 }
                 catch (final RuntimeException e) {
                     throw e;
@@ -212,7 +214,7 @@ public final class ScriptElementSupport {
             final Document doc = win.getDocument();
             try {
                 doc.setCurrentScript(element.getScriptableObject());
-                executeInlineScriptIfNeeded(script);
+                executeInlineScript(script);
             }
             finally {
                 doc.setCurrentScript(null);
@@ -315,18 +317,9 @@ public final class ScriptElementSupport {
     }
 
     /**
-     * Executes this script node as inline script if necessary and/or possible.
+     * Executes this script node as inline script.
      */
-    private static void executeInlineScriptIfNeeded(final ScriptElement script) {
-        if (!isExecutionNeeded(script, false, false)) {
-            return;
-        }
-
-        final String src = script.getScriptSource();
-        if (src != ATTRIBUTE_NOT_DEFINED) {
-            return;
-        }
-
+    private static void executeInlineScript(final ScriptElement script) {
         final DomElement element = (DomElement) script;
         final String forr = element.getAttributeDirect("for");
         String event = element.getAttributeDirect("event");
@@ -354,14 +347,12 @@ public final class ScriptElementSupport {
      * Gets the script held within the script tag.
      */
     private static String getScriptCode(final DomElement element) {
-        final Iterable<DomNode> textNodes = element.getChildren();
         final StringBuilder scriptCode = new StringBuilder();
-        for (final DomNode node : textNodes) {
+        for (final DomNode node : element.getChildren()) {
             if (node instanceof DomText domText) {
                 scriptCode.append(domText.getData());
             }
         }
         return scriptCode.toString();
     }
-
 }
