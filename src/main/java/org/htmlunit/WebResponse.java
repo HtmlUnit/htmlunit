@@ -203,21 +203,21 @@ public class WebResponse implements Serializable {
 
             final String contentType = getContentType();
             switch (DefaultPageCreator.determinePageType(contentType)) {
-                case HTML:
+                case HTML -> {
                     charset = EncodingSniffer.sniffEncodingFromMetaTag(is);
                     wasContentCharsetTentative_ = true;
-                    break;
-                case XML:
+                }
+                case XML -> {
                     charset = EncodingSniffer.sniffEncodingFromXmlDeclaration(is);
                     if (charset == null) {
                         charset = UTF_8;
                     }
-                    break;
-                default:
+                }
+                default -> {
                     if (MimeType.TEXT_CSS.equals(contentType)) {
                         charset = EncodingSniffer.sniffEncodingFromCssDeclaration(is);
                     }
-                    break;
+                }
             }
 
             if (charset != null) {

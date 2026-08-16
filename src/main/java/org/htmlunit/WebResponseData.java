@@ -48,6 +48,16 @@ import org.htmlunit.util.brotli.BrotliInputStream;
 public class WebResponseData implements Serializable {
     private static final Log LOG = LogFactory.getLog(WebResponseData.class);
 
+    private static final String CONTENT_ENCODING_ERROR_HTML = """
+            <!DOCTYPE html><html>
+            <head><title>Problem loading page</title></head>
+            <body>
+            <h1>Content Encoding Error</h1>
+            <p>The page you are trying to view cannot be shown because\
+             it uses an invalid or unsupported form of compression.</p>
+            </body>
+            </html>""";
+
     private final int statusCode_;
     private final String statusMessage_;
     private final List<NameValuePair> responseHeaders_;
@@ -113,16 +123,7 @@ public class WebResponseData implements Serializable {
                 catch (final IOException e) {
                     LOG.error("Reading gzip encodec content failed.", e);
                     stream.close();
-                    stream = IOUtils.toInputStream(
-                                """
-                                <!DOCTYPE html><html>
-                                <head><title>Problem loading page</title></head>
-                                <body>
-                                <h1>Content Encoding Error</h1>
-                                <p>The page you are trying to view cannot be shown because\
-                                 it uses an invalid or unsupported form of compression.</p>
-                                </body>
-                                </html>""", ISO_8859_1);
+                    stream = IOUtils.toInputStream(CONTENT_ENCODING_ERROR_HTML, ISO_8859_1);
                 }
                 if (stream != null && bomHeaders != null) {
                     stream = BOMInputStream.builder().setInputStream(stream).setByteOrderMarks(bomHeaders).get();
@@ -137,16 +138,7 @@ public class WebResponseData implements Serializable {
                 catch (final IOException e) {
                     LOG.error("Reading Brotli encodec content failed.", e);
                     stream.close();
-                    stream = IOUtils.toInputStream(
-                                """
-                                <!DOCTYPE html><html>
-                                <head><title>Problem loading page</title></head>
-                                <body>
-                                <h1>Content Encoding Error</h1>
-                                <p>The page you are trying to view cannot be shown because\
-                                 it uses an invalid or unsupported form of compression.</p>
-                                </body>
-                                </html>""", ISO_8859_1);
+                    stream = IOUtils.toInputStream(CONTENT_ENCODING_ERROR_HTML, ISO_8859_1);
                 }
                 return stream;
             }
