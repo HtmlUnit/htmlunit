@@ -261,6 +261,7 @@ public abstract class HtmlElement extends DomElement {
                 }
             }
         }
+
         final DomNode parentNode = element.getParentNode();
         if (parentNode instanceof HtmlElement htmlElement) {
             notifyAttributeChangeListeners(event, htmlElement, oldAttributeValue, notifyMutationObservers);
@@ -696,34 +697,21 @@ public abstract class HtmlElement extends DomElement {
                 final int key = (int) entry[0];
                 final boolean pressed = (boolean) entry[1];
                 switch (key) {
-                    case KeyboardEvent.DOM_VK_SHIFT:
-                        shiftPressed_ = pressed;
-                        break;
-
-                    case KeyboardEvent.DOM_VK_CONTROL:
-                        ctrlPressed_ = pressed;
-                        break;
-
-                    case KeyboardEvent.DOM_VK_ALT:
-                        altPressed_ = pressed;
-                        break;
-
-                    default:
+                    case KeyboardEvent.DOM_VK_SHIFT -> shiftPressed_ = pressed;
+                    case KeyboardEvent.DOM_VK_CONTROL -> ctrlPressed_ = pressed;
+                    case KeyboardEvent.DOM_VK_ALT -> altPressed_ = pressed;
+                    default -> { }
                 }
-                if (pressed) {
-                    boolean keyPress = true;
-                    boolean keyUp = true;
-                    switch (key) {
-                        case KeyboardEvent.DOM_VK_SHIFT:
-                        case KeyboardEvent.DOM_VK_CONTROL:
-                        case KeyboardEvent.DOM_VK_ALT:
-                            keyPress = false;
-                            keyUp = false;
-                            break;
 
-                        default:
+                if (pressed) {
+                    if (key == KeyboardEvent.DOM_VK_SHIFT
+                            || key == KeyboardEvent.DOM_VK_CONTROL
+                            || key == KeyboardEvent.DOM_VK_ALT) {
+                        page = type(key, true, false, false, i == keys.size() - 1);
                     }
-                    page = type(key, true, keyPress, keyUp, i == keys.size() - 1);
+                    else {
+                        page = type(key, true, true, true, i == keys.size() - 1);
+                    }
                 }
                 else {
                     page = type(key, false, false, true, i == keys.size() - 1);
@@ -794,18 +782,6 @@ public abstract class HtmlElement extends DomElement {
             fireEvent(keyUp);
         }
 
-//        final HtmlForm form = getEnclosingForm();
-//        if (form != null && keyCode == '\n' && isSubmittableByEnter()) {
-//            if (!getPage().getWebClient().getBrowserVersion()
-//                    .hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
-//                final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
-//                if (submit != null) {
-//                    return submit.click();
-//                }
-//            }
-//            form.submit((SubmittableElement) this);
-//            page.getWebClient().getJavaScriptEngine().processPostponedActions();
-//        }
         return page.getWebClient().getCurrentWindow().getEnclosedPage();
     }
 
@@ -846,13 +822,13 @@ public abstract class HtmlElement extends DomElement {
         if (scriptElement.isIsContentEditable()
                 || "on".equals(((Document) scriptElement.getOwnerDocument()).getDesignMode())) {
 
-            DomNodeList<DomNode> children = getChildNodes();
-            while (!children.isEmpty()) {
-                final DomNode lastChild = children.get(children.size() - 1);
-                if (lastChild instanceof DomText text) {
-                    return text;
-                }
-                children = lastChild.getChildNodes();
+            DomNode node = this;
+            while (node.getLastChild() != null) {
+                node = node.getLastChild();
+            }
+
+            if (node instanceof DomText text) {
+                return text;
             }
 
             final DomText domText = new DomText(getPage(), "");

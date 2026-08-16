@@ -45,15 +45,15 @@ public class DomAttr extends DomNamespaceNode implements Attr {
     public DomAttr(final SgmlPage page, final String namespaceURI, final String qualifiedName, final String value,
         final boolean specified) {
         super(namespaceURI, qualifiedName, page);
-
-        if (value != null && value.isEmpty()) {
-            value_ = DomElement.ATTRIBUTE_VALUE_EMPTY;
-        }
-        else {
-            value_ = value;
-        }
-
+        value_ = normalizeValue(value);
         specified_ = specified;
+    }
+
+    private static String normalizeValue(final String value) {
+        if (value != null && value.isEmpty()) {
+            return DomElement.ATTRIBUTE_VALUE_EMPTY;
+        }
+        return value;
     }
 
     /**
@@ -109,13 +109,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public void setValue(final String value) {
-        if (value != null
-                && value.isEmpty()) {
-            value_ = DomElement.ATTRIBUTE_VALUE_EMPTY;
-        }
-        else {
-            value_ = value;
-        }
+        value_ = normalizeValue(value);
         specified_ = true;
     }
 
@@ -165,7 +159,11 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public String getCanonicalXPath() {
-        return getParentNode().getCanonicalXPath() + "/@" + getName();
+        final DomNode parent = getParentNode();
+        if (parent == null) {
+            return "/@" + getName();
+        }
+        return parent.getCanonicalXPath() + "/@" + getName();
     }
 
     /**
@@ -181,15 +179,19 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public void setTextContent(final String textContent) {
-        final boolean mappedElement =
-                getOwnerDocument() instanceof HtmlPage
+        final DomElement owner = getOwnerElement();
+        final boolean mappedElement = owner != null
+                && getOwnerDocument() instanceof HtmlPage
                 && (DomElement.NAME_ATTRIBUTE.equals(getName()) || DomElement.ID_ATTRIBUTE.equals(getName()));
+
+        final HtmlPage htmlPage = mappedElement ? (HtmlPage) getPage() : null;
+
         if (mappedElement) {
-            ((HtmlPage) getPage()).removeMappedElement(getOwnerElement(), false, false);
+            htmlPage.removeMappedElement(owner, false, false);
         }
         setValue(textContent);
         if (mappedElement) {
-            ((HtmlPage) getPage()).addMappedElement(getOwnerElement(), false);
+            htmlPage.addMappedElement(owner, false);
         }
     }
 }

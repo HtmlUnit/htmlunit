@@ -199,18 +199,6 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode cloneNode(final boolean deep) {
-        final DomText newnode = (DomText) super.cloneNode(deep);
-        selectionDelegate_ = new SimpleSelectionDelegate();
-        doTypeProcessor_ = new DoTypeProcessor(this);
-
-        return newnode;
-    }
-
-    /**
      * Moves the selection to the end.
      */
     public void moveSelectionToEnd() {
