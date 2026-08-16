@@ -8,7 +8,19 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
-           <action type="update" dev="rbri">
+            <action type="update" dev="rbri">
+                DomNodeIterator traverse() simplified and optimized.
+            </action>
+            <action type="update" dev="rbri">
+                Replace a recursive impl in DomNodeIterator with a loop.
+            </action>
+            <action type="update" dev="rbri">
+                DomDocumentType.getInternalSubset() now returns null instead of an empty string.
+            </action>
+            <action type="update" dev="rbri">
+                DomDocumentFragment and DomDocumentType now providing a default impl of getCanonicalXPath() returning an empty string.
+            </action>
+            <action type="update" dev="rbri">
                 Docu: Added comprehensive Content Extraction guide covering asNormalizedText(), CSS visibility handling,
                 click-based link navigation over manual href extraction, form controls (inputs, textareas, buttons, toggles, select lists),
                 tables, lists, and advanced serializer formatting rules.
