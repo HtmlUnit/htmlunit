@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -92,9 +91,7 @@ public final class CookieParser {
         // Create and validate the cookie
         final Cookie cookie = createCookie(parsedCookie, origin, browserVersion);
 
-        final List<Cookie> cookies = new ArrayList<>(1);
-        cookies.add(cookie);
-        return cookies;
+        return List.of(cookie);
     }
 
     /**
@@ -172,33 +169,17 @@ public final class CookieParser {
             final String attrValue = attrPair[1];
 
             switch (attrName) {
-                case "domain":
-                    result.setDomain(attrValue);
-                    break;
-                case "path":
-                    result.setPath(attrValue);
-                    break;
-                case "expires":
-                    result.setExpires(parseDate(attrValue));
-                    break;
-                case "max-age":
-                    result.setMaxAge(parseMaxAge(attrValue));
-                    break;
-                case "secure":
-                    result.setSecure(true);
-                    break;
-                case "httponly":
-                    result.setHttpOnly(true);
-                    break;
-                case "samesite":
-                    result.setSameSite(attrValue);
-                    break;
-                case "version":
-                    result.setVersion(parseVersion(attrValue));
-                    break;
-                default:
+                case "domain" -> result.setDomain(attrValue);
+                case "path" -> result.setPath(attrValue);
+                case "expires" -> result.setExpires(parseDate(attrValue));
+                case "max-age" -> result.setMaxAge(parseMaxAge(attrValue));
+                case "secure" -> result.setSecure(true);
+                case "httponly" -> result.setHttpOnly(true);
+                case "samesite" -> result.setSameSite(attrValue);
+                case "version" -> result.setVersion(parseVersion(attrValue));
+                default -> {
                     // Ignore unknown attributes
-                    break;
+                }
             }
         }
 
@@ -366,15 +347,7 @@ public final class CookieParser {
      * Checks if the domain matches according to cookie rules.
      */
     private static boolean domainMatch(final String domain, final String host) {
-        if (domain.equalsIgnoreCase(host)) {
-            return true;
-        }
-
-        if (host.endsWith("." + domain)) {
-            return true;
-        }
-
-        return false;
+        return domain.equalsIgnoreCase(host) || host.endsWith("." + domain);
     }
 
     /**
