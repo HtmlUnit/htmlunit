@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.util.StringUtils.toRootLowerCase;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -90,7 +92,6 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
     @Override
     public Page setChecked(final boolean isChecked) {
         checkedState_ = isChecked;
-
         return executeOnChangeHandlerIfAppropriate(this);
     }
 
@@ -185,7 +186,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
+        final String qualifiedNameLC = toRootLowerCase(qualifiedName);
 
         if (VALUE_ATTRIBUTE.equals(qualifiedNameLC)) {
             super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
@@ -211,7 +212,6 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
 
     @Override
     public boolean isValueMissingValidityState() {
-        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
-                && !isChecked();
+        return hasAttribute(ATTRIBUTE_REQUIRED) && !isChecked();
     }
 }
