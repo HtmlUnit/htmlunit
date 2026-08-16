@@ -122,38 +122,28 @@ public class DomNodeIterator implements NodeIterator, Serializable {
     private DomNode traverse(final boolean next) {
         DomNode node = referenceNode_;
         boolean beforeNode = pointerBeforeReferenceNode_;
+
         do {
             if (next) {
                 if (beforeNode) {
                     beforeNode = false;
                 }
-                else {
-                    final DomNode leftChild = getChild(node, true);
-                    if (leftChild == null) {
-                        final DomNode rightSibling = getSibling(node, false);
-                        if (rightSibling == null) {
-                            node = getFirstUncleNode(node);
-                        }
-                        else {
-                            node = rightSibling;
-                        }
+                else if (node != null) {
+                    final DomNode firstChild = node.getFirstChild();
+                    if (firstChild != null) {
+                        node = firstChild;
                     }
                     else {
-                        node = leftChild;
+                        final DomNode nextSibling = node.getNextSibling();
+                        node = nextSibling == null ? getFirstUncleNode(node) : nextSibling;
                     }
                 }
             }
             else {
                 if (beforeNode) {
-                    DomNode follow = getSibling(node, true);
-                    if (follow != null) {
-                        while (follow.hasChildNodes()) {
-                            final DomNode toFollow = getChild(follow, false);
-                            if (toFollow == null) {
-                                break;
-                            }
-                            follow = toFollow;
-                        }
+                    DomNode follow = node == null ? null : node.getPreviousSibling();
+                    while (follow != null && follow.hasChildNodes()) {
+                        follow = follow.getLastChild();
                     }
                     node = follow;
                 }
@@ -163,8 +153,6 @@ public class DomNodeIterator implements NodeIterator, Serializable {
             }
         }
         while (node != null && (!isNodeVisible(node) || !isAccepted(node)));
-
-        //apply filter here and loop
 
         referenceNode_ = node;
         pointerBeforeReferenceNode_ = beforeNode;
@@ -186,53 +174,19 @@ public class DomNodeIterator implements NodeIterator, Serializable {
      * Helper method to get the first uncle node in document order (preorder
      * traversal) from the given node.
      */
-    private DomNode getFirstUncleNode(final DomNode node) {
-        if (node == null || node == root_) {
-            return null;
+    private DomNode getFirstUncleNode(final DomNode startNode) {
+        DomNode curr = startNode;
+        while (curr != null && curr != root_) {
+            final DomNode parent = curr.getParentNode();
+            if (parent == null || parent == root_) {
+                return null;
+            }
+            final DomNode uncle = parent.getNextSibling();
+            if (uncle != null) {
+                return uncle;
+            }
+            curr = parent;
         }
-
-        final DomNode parent = node.getParentNode();
-        if (parent == null || parent == root_) {
-            return null;
-        }
-
-        final DomNode uncle = getSibling(parent, false);
-        if (uncle != null) {
-            return uncle;
-        }
-
-        return getFirstUncleNode(parent);
-    }
-
-    private static DomNode getChild(final DomNode node, final boolean lookLeft) {
-        if (node == null) {
-            return null;
-        }
-
-        final DomNode child;
-        if (lookLeft) {
-            child = node.getFirstChild();
-        }
-        else {
-            child = node.getLastChild();
-        }
-
-        return child;
-    }
-
-    private static DomNode getSibling(final DomNode node, final boolean lookLeft) {
-        if (node == null) {
-            return null;
-        }
-
-        final DomNode sibling;
-        if (lookLeft) {
-            sibling = node.getPreviousSibling();
-        }
-        else {
-            sibling = node.getNextSibling();
-        }
-
-        return sibling;
+        return null;
     }
 }

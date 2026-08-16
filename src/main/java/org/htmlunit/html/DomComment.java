@@ -65,7 +65,10 @@ public class DomComment extends DomCharacterData implements Comment {
     protected boolean printXml(final String indent, final boolean indentBefore, final PrintWriter printWriter) {
         printWriter.print(indent);
         printWriter.print("<!--");
-        printWriter.print(getData());
+        final String data = getData();
+        if (data != null) {
+            printWriter.print(data);
+        }
         printWriter.print("-->");
         return printChildrenAsXml(indent, true, printWriter);
     }
