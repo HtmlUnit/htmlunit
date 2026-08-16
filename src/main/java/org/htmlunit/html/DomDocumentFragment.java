@@ -91,4 +91,12 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
     public void setPrefix(final String prefix) {
         // Empty.
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCanonicalXPath() {
+        return "";
+    }
 }

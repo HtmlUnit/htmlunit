@@ -73,7 +73,7 @@ public class DomDocumentType extends DomNode implements DocumentType {
      */
     @Override
     public String getInternalSubset() {
-        return "";
+        return null;
     }
 
     /**
@@ -122,5 +122,13 @@ public class DomDocumentType extends DomNode implements DocumentType {
     @Override
     public void setPrefix(final String prefix) {
         // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCanonicalXPath() {
+        return "";
     }
 }
