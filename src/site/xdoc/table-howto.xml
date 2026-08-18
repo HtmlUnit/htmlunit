@@ -1,18 +1,22 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Table Tutorial</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="Use Tables">
+
+        <macro name="toc"/>
+
+        <section name="Using Tables" id="use_tables">
             <p>
-                The first set of examples will use this simple html.
+                The first set of examples uses this simple HTML table:
             </p>
-            <source><![CDATA[
-<html><head><title>Table sample</title></head><body>
+            <source><![CDATA[<html><head><title>Table sample</title></head><body>
     <table id="table1">
         <tr>
             <th>Number</th>
@@ -24,36 +28,35 @@
         </tr>
     </table>
 </body></html>]]></source>
+
             <p>
-            This example shows how to iterate over all the rows and cells
-            <source><![CDATA[
-final HtmlTable table = page.getHtmlElementById("table1");
+                This example demonstrates how to iterate over all rows and cells:
+            </p>
+            <source><![CDATA[final HtmlTable table = page.getHtmlElementById("table1");
 for (final HtmlTableRow row : table.getRows()) {
     System.out.println("Found row");
     for (final HtmlTableCell cell : row.getCells()) {
         System.out.println("   Found cell: " + cell.asNormalizedText());
     }
 }]]></source>
-            </p>
 
             <p>
-            The following sample shows how to access specific cells by row and column
-            <source><![CDATA[
-final WebClient webClient = new WebClient();
+                The following sample shows how to access specific cells by zero-based row and column indices:
+            </p>
+            <source><![CDATA[final WebClient webClient = new WebClient();
 final HtmlPage page = webClient.getPage("http://foo.com");
 
 final HtmlTable table = page.getHtmlElementById("table1");
-System.out.println("Cell (1,2)=" + table.getCellAt(1,2));]]></source>
-            </p>
+// Access cell at row index 1 (second row) and column index 1 (second column)
+final HtmlTableCell cell = table.getCellAt(1, 1);
+System.out.println("Cell (1,1)=" + cell.asNormalizedText());]]></source>
         </section>
 
-        <section name="More complex table">
+        <section name="Complex Tables" id="complex_tables">
             <p>
-                The next examples will use a more complicated table that includes table header, footer and body
-                sections as well as a caption
+                The next examples use a more complex table containing header, footer, and body sections as well as a caption:
             </p>
-            <source><![CDATA[
-<html><head><title>Table sample</title></head><body>
+            <source><![CDATA[<html><head><title>Table sample</title></head><body>
     <table id="table1">
         <caption>My complex table</caption>
         <thead>
@@ -84,11 +87,11 @@ System.out.println("Cell (1,2)=" + table.getCellAt(1,2));]]></source>
 </body></html>]]></source>
 
             <p>
-                HtmlTableHeader, HtmlTableFooter and HtmlTableBody sections are groupings of rows.  There can
-                be at most one header and one footer but there may be more than one body.  Each one of these
-                contains rows which can be accessed via getRows()
-            <source><![CDATA[
-final HtmlTableHeader header = table.getHeader();
+                <code>HtmlTableHeader</code>, <code>HtmlTableFooter</code>, and <code>HtmlTableBody</code> elements group rows together. 
+                A table can contain at most one header and one footer, but may contain multiple body sections.
+                Each section provides access to its rows via <code>getRows()</code>:
+            </p>
+            <source><![CDATA[final HtmlTableHeader header = table.getHeader();
 final List<HtmlTableRow> headerRows = header.getRows();
 
 final HtmlTableFooter footer = table.getFooter();
@@ -96,15 +99,13 @@ final List<HtmlTableRow> footerRows = footer.getRows();
 
 for (final HtmlTableBody body : table.getBodies()) {
     final List<HtmlTableRow> rows = body.getRows();
-    ...
+    // process rows
 }]]></source>
-            </p>
 
             <p>
-                Every table may optionally have a caption element which describes it.
-                <source><![CDATA[final String caption = table.getCaptionText()]]></source>
+                Tables may also optionally include a caption element describing their content:
             </p>
+            <source><![CDATA[final String caption = table.getCaptionText();]]></source>
         </section>
     </body>
 </document>
-
