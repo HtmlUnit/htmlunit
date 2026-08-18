@@ -4,27 +4,26 @@
 
     <properties>
         <title>Implementation hints</title>
-        <author email="rbri@rbri.de">Ronald Brill</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="Introduction">
+
+        <macro name="toc"/>
+
+        <section name="Introduction" id="introduction">
             <p>
-                In most cases the implementation of HtmlUnit follows a test driven approach.
+                In most cases, the implementation of HtmlUnit follows a test-driven development (TDD) approach.
             </p>
             <p>
-                To be able to stay in sync with the development of real browsers, we try to write
-                tests in a way that enables us to compare the results of executing the tests with real
-                browsers to our own results. This also directly leads to a test firsts approach - write
-                the test; run the test with all real browsers and adjust the expectations, run the test
-                with HtmlUnit and finally fix the implementation if needed. Additionally, we try to make the
-                test as small as possible to make the connection between a failing test and the related
-                implementation as direct as possible.
+                To stay in sync with the behavior of real browsers, we write tests that compare execution results from real browsers
+                against HtmlUnit's results. This directly leads to a test-first approach: write the test, run it across
+                real browsers to adjust expectations, execute it against HtmlUnit, and fix the underlying implementation as needed.
+                Additionally, we keep tests as concise as possible to maintain a direct connection between a test failure and its underlying code.
             </p>
             <p>
-                The most important part for this approach is the class
-                <a href="https://www.htmlunit.org/testapidocs/org/htmlunit/WebDriverTestCase.html">WebDriverTestCase</a>.
-                Please have a look at the javadoc to learn how you can switch between real browsers and HtmlUnit when running your tests.
+                The central class powering this workflow is <code><a href="https://www.htmlunit.org/testapidocs/org/htmlunit/WebDriverTestCase.html">WebDriverTestCase</a></code>.
+                Please refer to the JavaDoc for details on switching between real browser drivers and HtmlUnit when executing your test suite.
             </p>
         </section>
     </body>

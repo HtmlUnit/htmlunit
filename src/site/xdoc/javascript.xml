@@ -5,47 +5,43 @@
     <properties>
         <title>JavaScript Support</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="Content" id="content">
-            <macro name="toc">
-            </macro>
-        </section>
+        <macro name="toc"/>
 
-        <section>
+        <section name="Overview" id="overview">
             <p>
-                Core language support for JavaScript is provided by the
-                <a href="http://www.mozilla.org/rhino">Mozilla Rhino</a> engine.  What HtmlUnit provides
-                are all the browser specific host objects such as Document or Navigator.
+                Core language support for JavaScript is provided by an adapted version of the
+                <a href="https://github.com/mozilla/rhino">Mozilla Rhino</a> engine. HtmlUnit provides
+                browser-specific host objects such as <code>Document</code>, <code>Window</code>, or <code>Navigator</code>.
             </p>
         </section>
 
-        <section name="SimpleScriptable">
+        <section name="SimpleScriptable" id="simple_scriptable">
             <p>
-                All of HtmlUnit's JavaScript objects subclass SimpleScripable either directly or indirectly.
-                This class contains all the common methods needed by the HtmlUnit host objects.  Additionally,
-                it changes the way that JavaScript method lookup happens.  The rhino engine doesn't walk
-                up the class hierarchy when looking for methods starting with jsGet_, jsSet_ or jsFunction.
-                SimpleScriptable changes this so that the superclass hierarchy is walked.
+                All of HtmlUnit's JavaScript host objects subclass <code>SimpleScriptable</code> either directly or indirectly.
+                This class contains common utility methods needed by HtmlUnit host objects. Additionally,
+                it customizes how JavaScript method lookup is performed: while the standard Rhino engine does not walk up the
+                class hierarchy when looking for accessor methods starting with <code>jsGet_</code>, <code>jsSet_</code>, or <code>jsFunction_</code>,
+                <code>SimpleScriptable</code> alters this behavior so that the superclass hierarchy is walked.
             </p>
         </section>
 
-        <section name="Debugging JavaScript Errors">
+        <section name="Debugging JavaScript Errors" id="debugging_javascript_errors">
             <p>
-                Testing pages with JavaScript on them can produce a number of errors.  These errors occur for
-                several reasons.  Some browsers accept shortcuts that are not part of the DOM model and currently not
-                duplicated by HtmlUnit.  Also, HtmlUnit still does not implement all extensions that have been
-                added by the different browsers.  HtmlUnit wraps the inline code into a wrapper function but when
-                errors are reported from this code, it is hard to determine what code was really being called.  A
-                custom logger has been added to HtmlUnit to support this.  If you set 
-                'org.htmlunit.javascript' to debug level, the
-                inline code will be logged with the wrapper function to help you determine what line of code is failing.
+                Testing pages containing JavaScript can produce errors for several reasons. Some web browsers support non-standard
+                DOM shortcuts or extensions that HtmlUnit does not yet emulate. When inline JavaScript code is executed,
+                HtmlUnit wraps it in a synthetic function, which can make error stack traces harder to decipher.
             </p>
             <p>
-                One of the problems with JavaScript is finding the objects that you expect to be defined but have not
-                been defined within the code.  To help find some of these errors, HtmlUnit will produce WARN level messages
-                reporting these errors. Before submitting JavaScript bugs, please read <a href="submittingJSBugs.html">this</a>.
+                To assist with debugging, setting the logger <code>org.htmlunit.javascript</code> to the <code>DEBUG</code> log level
+                will cause HtmlUnit to log the generated wrapper functions along with the original inline code.
+            </p>
+            <p>
+                To help identify missing property definitions, HtmlUnit emits <code>WARN</code> level log entries when expected objects are undefined.
+                Before reporting JavaScript issues, please read <a href="submittingJSBugs.html">Submitting JavaScript Bugs</a>.
             </p>
         </section>
     </body>
