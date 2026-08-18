@@ -8,10 +8,7 @@
     </properties>
 
     <body>
-        <section name="Content" id="content">
-            <macro name="toc">
-            </macro>
-        </section>
+        <macro name="toc"/>
 
         <section name="Overview" id="sec_overview">
             <p>
@@ -46,7 +43,8 @@
                 HtmlUnit executes entirely within the hosting JVM. HTML parsing, DOM processing,
                 JavaScript execution, networking, and browser emulation all run as part
                 of your application's process.
-                <br/>
+            </p>
+            <p>
                 This architecture provides excellent integration and performance for
                 testing and automation, but it also means that HtmlUnit should
                 <strong>not</strong> be considered a security boundary.
@@ -65,7 +63,6 @@
                 Applications requiring these protections should execute HtmlUnit inside
                 an appropriately isolated environment.
             </p>
-
         </section>
         
         <section name="Processing Untrusted Content" id="sec_processing_untrusted_content">
@@ -111,7 +108,7 @@
                 considered disposable and recoverable.
             </p>
         
-            <subsection name="Security Responsibility Model">
+            <subsection name="Security Responsibility Model" id="sec_security_responsibility_model">
                 <p>
                     HtmlUnit focuses on browser emulation and automation functionality.
                     Security controls such as process isolation, network restrictions,
@@ -121,10 +118,11 @@
                 </p>
             </subsection>
 
-            <subsection name="Network Security">
+            <subsection name="Network Security" id="sec_network_security">
                 <p>
                     HtmlUnit performs network requests on behalf of loaded pages.
-                    <br/>
+                </p>
+                <p>
                     Depending on your application, consider:
                 </p>
                 <ul>
@@ -142,11 +140,12 @@
                 </p>
             </subsection>
 
-            <subsection name="File System and System Resources">
+            <subsection name="File System and System Resources" id="sec_filesystem_and_resources">
                 <p>
                     HtmlUnit executes within the hosting JVM and should not be treated as
                     a security boundary.
-                    <br/>
+                </p>
+                <p>
                     If an attacker successfully exploits a vulnerability in HtmlUnit,
                     one of its dependencies, the Java runtime, or related components,
                     the resulting impact would generally be limited only by the
@@ -169,11 +168,12 @@
                 </p>
             </subsection>
 
-            <subsection name="Java Security Manager">
+            <subsection name="Java Security Manager" id="sec_java_security_manager">
                 <p>
                     Older Java versions supported the Java Security Manager as an
                     application sandbox.
-                    <br/>
+                </p>
+                <p>
                     Since the Security Manager has been deprecated and removed from
                     recent Java releases, applications should instead rely on operating
                     system, container, or virtual machine isolation when processing
@@ -181,18 +181,19 @@
                 </p>
             </subsection>
         
-            <subsection name="Dependency Updates">
+            <subsection name="Dependency Updates" id="sec_dependency_updates">
                 <p>
                     Like any software that processes untrusted input, HtmlUnit and its
                     dependencies should be kept up to date.
-                    <br/>
+                </p>
+                <p>
                     Likewise, keep the Java runtime and operating system updated, since
                     vulnerabilities in either may affect the security of applications
                     using HtmlUnit.
                 </p>
             </subsection>
         
-            <subsection name="Resource Consumption">
+            <subsection name="Resource Consumption" id="sec_resource_consumption">
                 <p>
                     Malicious or poorly written web pages may consume excessive CPU time,
                     memory, network bandwidth, or other system resources.

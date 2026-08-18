@@ -8,395 +8,330 @@
     </properties>
 
     <body>
-        <section name="Content" id="content">
-            <macro name="toc">
-            </macro>
-        </section>
+        <macro name="toc"/>
 
         <section name="Request headers" id="request_headers">
             <p>
-                HtmlUnit mimics the browser as close as possible, of course this includes the sent request headers also.
-                But you can change this if needed at three levels; the request level, the client level and the BrowserVersion level.<br/>
+                HtmlUnit mimics the browser as closely as possible, which includes sending request headers.
+                You can customize headers at three different levels: Request level, WebClient level, and BrowserVersion level.
             </p>
 
             <subsection name="BrowserVersion level">
-            <p>
-              To change the request header at the BrowserVersion level you have to create your own customized browser version using
-              the BrowserVersionBuilder.
-            </p>
-            <source><![CDATA[
-final BrowserVersion browser =
+                <p>
+                    To change request headers at the BrowserVersion level, create a customized browser version using <code>BrowserVersionBuilder</code>.
+                </p>
+<source><![CDATA[final BrowserVersion browser =
     new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
           .setAcceptLanguageHeader("de-CH")
           .build();
 
 final WebClient webClient = new WebClient(browser);
-....
 ]]></source>
-            <p>
-            There are many methods available to customize basic browser behavior like
-            <ul>
-              <li>setApplicationCodeName(String)</li>
-              <li>setApplicationMinorVersion(String)</li>
-              <li>setApplicationName(String)</li>
-              <li>setApplicationVersion(String)</li>
-              <li>setBuildId(String)</li>
-              <li>setPlatform(String)</li>
-              <li>setSystemLanguage(String)</li>
-              <li>setSystemTimezone(TimeZone)</li>
-              <li>setUserAgent(String)</li>
-              <li>setVendor(String)<br/></li>
-
-              <li>setUserLanguage(String)</li>
-              <li>setBrowserLanguage(String)<br/></li>
-
-              <li>setAcceptEncodingHeader(String)</li>
-              <li>setAcceptLanguageHeader(String)</li>
-              <li>setCssAcceptHeader(String)</li>
-              <li>setHtmlAcceptHeader(String)</li>
-              <li>setImgAcceptHeader(String)</li>
-              <li>setScriptAcceptHeader(String)</li>
-              <li>setXmlHttpRequestAcceptHeader(String)</li>
-            </ul>
-            </p>
+                <p>
+                    Methods available to customize basic browser behavior and request headers include:
+                </p>
+                <ul>
+                    <li><code>setApplicationCodeName(String)</code></li>
+                    <li><code>setApplicationMinorVersion(String)</code></li>
+                    <li><code>setApplicationName(String)</code></li>
+                    <li><code>setApplicationVersion(String)</code></li>
+                    <li><code>setBuildId(String)</code></li>
+                    <li><code>setPlatform(String)</code></li>
+                    <li><code>setSystemLanguage(String)</code></li>
+                    <li><code>setSystemTimezone(TimeZone)</code></li>
+                    <li><code>setUserAgent(String)</code></li>
+                    <li><code>setVendor(String)</code></li>
+                    <li><code>setUserLanguage(String)</code></li>
+                    <li><code>setBrowserLanguage(String)</code></li>
+                    <li><code>setAcceptEncodingHeader(String)</code></li>
+                    <li><code>setAcceptLanguageHeader(String)</code></li>
+                    <li><code>setCssAcceptHeader(String)</code></li>
+                    <li><code>setHtmlAcceptHeader(String)</code></li>
+                    <li><code>setImgAcceptHeader(String)</code></li>
+                    <li><code>setScriptAcceptHeader(String)</code></li>
+                    <li><code>setXmlHttpRequestAcceptHeader(String)</code></li>
+                </ul>
             </subsection>
 
             <subsection name="WebClient level">
-            <p>
-                To change the request header at the client level use WebClient.addRequestHeader(). You are able to
-                add additional headers to every request made by this client or overwrite the default ones.<br/>
-                Example: add an addition header to every client request
-            </p>
-            <source><![CDATA[client.addRequestHeader("from htmlunit", "yes");]]></source>
-            <p>
-                Example: replace the default accept-language header for all request made by this client.
-            </p>
-            <source><![CDATA[client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, "fr");]]></source>
-            <p>
-                Example: replace the default accept-language header for all request made by this client.
-            </p>
-            <source><![CDATA[client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, fromClient);]]></source>
-            <p>
-                Example: replace the default accept-language header for all request made by this client.
-            </p>
-            <source><![CDATA[client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, fromClient);]]></source>
+                <p>
+                    To change request headers at the client level, use <code>WebClient.addRequestHeader()</code>.
+                    You can add additional headers to every request made by this client or overwrite default ones.
+                </p>
+                <p>
+                    Example: Add an additional header to every client request:
+                </p>
+                <source><![CDATA[client.addRequestHeader("from-htmlunit", "yes");]]></source>
+                <p>
+                    Example: Replace the default accept-language header for all requests made by this client:
+                </p>
+                <source><![CDATA[client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, "fr");]]></source>
             </subsection>
 
             <subsection name="Request level">
-            <p>
-                It is also possible to add/overwrite a request header for a dedicated request.
-                Example:
-            </p>
-            <source><![CDATA[
-WebRequest wr = new WebRequest(URL_FIRST);
-wr.setAdditionalHeader("from htmlunit", "yes");
-....
-client .getPage(wr);
+                <p>
+                    It is also possible to add or overwrite a request header for a specific request.
+                </p>
+<source><![CDATA[WebRequest wr = new WebRequest(URL_FIRST);
+wr.setAdditionalHeader("from-htmlunit", "yes");
+
+client.getPage(wr);
 ]]></source>
-             </subsection>
+            </subsection>
         </section>
 
-        <section name="Animations based on Window.requestAnimationFrame()"  id="animations">
+        <section name="Animations based on Window.requestAnimationFrame()" id="animations">
             <p>
-                All browsers supported by HtmlUnit are able to do animations based on the
-                <a href='https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame'>Window.requestAnimationFrame() API</a>.
-                A typical example for this is <a href='https://www.chartjs.org/'>Chart.js</a>.
-                This kind of animation support is not triggered automatically because HtmlUnit is headless.
-                The javascript part of the API is implemented but the user of the HtmlUnit library has to force the triggering of the callback(s).
+                All browsers supported by HtmlUnit are able to run animations based on the
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">Window.requestAnimationFrame() API</a>.
+                A typical example for this is <a href="https://www.chartjs.org/">Chart.js</a>.
+                Animation support is not triggered automatically because HtmlUnit runs headless.
+                The JavaScript portion of the API is fully implemented, but users must explicitly trigger callback frames.
             </p>
             <p>
                 Example:
             </p>
-            <source><![CDATA[
-try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+<source><![CDATA[try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
     HtmlPage page = webClient.getPage(uri);
     webClient.waitForBackgroundJavaScript(1_000);
 
     // page is loaded and async js done
 
-    // we are now processing the animation
+    // process animation frames
     Window window = page.getEnclosingWindow().getScriptableObject();
-    int i = 0; // to be able to limit the animation cycles
+    int i = 0; // limit animation cycles
+    int pendingFrames = 0;
     do {
         i++;
 
         // force one animation cycle
-        // this invokes all the animation callbacks registered for this
-        // window (by calling requestAnimationFrame(Object)) once.
-        int pendingFrames = window.animateAnimationsFrames();
+        // invokes all animation callbacks registered for this window once
+        pendingFrames = window.animateAnimationsFrames();
     } while (pendingFrames > 0 && i < 200);
 }
 ]]></source>
             <p>
-                Based on this you have to full control over the animation, you can skip all, but you are also
-                check the current page state after each single animation step.
+                This provides complete control over animation cycles—allowing you to skip frames or inspect page DOM state after each frame step.
             </p>
         </section>
 
         <section name="File download and Attachments" id="attachments">
             <p>
-                Normally pages are loaded inline: clicking on
-                a link, for example, loads the linked page in the current window. Attached pages are different
-                in that they are intended to be loaded outside of this flow: clicking on a link prompts the
-                user to either save the linked page, or open it outside the current window, but does not
-                load the page in the current window.
+                Normally pages are loaded inline: clicking on a link loads the linked page in the current window. Attached pages are intended to be loaded outside of this flow: clicking on a link prompts the user to either save the file or open it externally without changing the active page.
             </p>
             <p>
-                HtmlUnit complies with the semantics described above when an <tt>AttachmentHandler</tt> has
-                been registered with the org.htmlunit.WebClient via
-                org.htmlunit.WebClient#setAttachmentHandler(AttachmentHandler). When
-                no attachment handler has been registered with the <tt>WebClient</tt>, the semantics described
-                above to not apply, and attachments are loaded inline. By default, <tt>AttachmentHandler</tt>s
-                are not registered with new <tt>WebClient</tt> instances.
+                HtmlUnit complies with attachment semantics when an <code>AttachmentHandler</code> has been registered via <code>WebClient.setAttachmentHandler(AttachmentHandler)</code>. When no attachment handler is registered, attachments are loaded inline. By default, <code>AttachmentHandler</code>s are not registered on new <code>WebClient</code> instances.
             </p>
-            Please find more details and samples in the <a href="filedownload-howto.html">File download</a> section.
+            <p>
+                Please find more details and samples in the <a href="filedownload-howto.html">File download</a> section.
+            </p>
         </section>
 
-
-        <section name="Clipboard">
+        <section name="Clipboard" id="clipboard">
             <p>
-                The clipboard interaction is disabled by default for the WebClient. This avoids side effect during testing
-                and removes the need of having a running graphical subsystem (windows/X/xvfb).
+                Clipboard interaction is disabled by default for <code>WebClient</code>. This avoids side effects during test execution and removes dependencies on a running graphical desktop environment (Windows/X11/xvfb).
             </p>
             <p>
-                To enable the clipboard support set a clipboard handler for the WebClient. HtmlUnit provides the AwtClipboardHandler
-                the implements the interaction with your system/desktop clipboard. The AwtClipboardHandler works only if you are running
-                on top of an graphical subsystem (windows/X/xvfb).
-            <source><![CDATA[
-  final ClipboardHandler clipboardHandler = new AwtClipboardHandler();
-  webClient().setClipboardHandler(clipboardHandler);
+                To enable clipboard support, attach a clipboard handler to the <code>WebClient</code>. HtmlUnit provides <code>AwtClipboardHandler</code>
+                for interacting with the system desktop clipboard (requires a graphical environment):
+            </p>
+<source><![CDATA[final ClipboardHandler clipboardHandler = new AwtClipboardHandler();
+webClient.setClipboardHandler(clipboardHandler);
 ]]></source>
-            </p>
             <p>
-                Then you can control the clipboard content from your program like this.
-            <source><![CDATA[
-  clipboardHandler.setClipboardContent("HtmlUnit");
-]]></source>
+                You can then control clipboard content programmatically:
             </p>
+            <source><![CDATA[clipboardHandler.setClipboardContent("HtmlUnit");]]></source>
             <p>
-                Of course you can also implement your own ClipboardHandler to get full control and avoid interaction with the underlying
-                operation system. Writing your own ClipboardHandler is also required if you are working in headless mode.
+                You can also implement a custom <code>ClipboardHandler</code> for full control
+                or when running in headless environments.
             </p>
         </section>
 
         <section name="Content blocking" id="content_blocking">
             <p>
-                Out of the box HtmlUnit does not include any content blocking mechanism. But there are several
-                options to include your own.<br/>
+                Out of the box, HtmlUnit does not include default content blocking, but provides simple extension points
+                to add custom blocking logic.
             </p>
+
             <subsection name="Blocking based on the request (URL)">
                 <p>
-                    This simple form of content blocking works based on the requested url. Usually you have
-                    to use a list of blocked urls or some url patterns to detect the blocked url. In case
-                    the url is blocked the request is not sent to the server; instead a simple page is returned.
+                    This form of content blocking checks requested URLs against blocked lists or patterns. When blocked, the request is intercepted before hitting the network, returning a custom mock response.
                 </p>
                 <p>
-                    With HtmlUnit you can implement this using a WebConnectionWrapper.
-            <source><![CDATA[
-    try (WebClient webClient = new WebClient()) {
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        // set more options
-
-        // create a WebConnectionWrapper with an (subclassed) getResponse() impl
-        new WebConnectionWrapper(webClient) {
-
-            @Override
-            public WebResponse getResponse(final WebRequest request) throws IOException {
-                final URL url = request.getUrl();
-                // check the request url
-                // if is allowed simple call super.
-
-                if (!isBlocked(url)) {
-                    return super.getResponse(request);
-                }
-
-                // construct alternative response
-                final String content = "<html><html>";
-                final WebResponseData data = new WebResponseData(content.getBytes(StandardCharsets.UTF_8),
-                        200, "blocked", Collections.emptyList());
-                final WebResponse blocked = new WebResponse(data, request, 0L);
-                // if you like to check later on for blocked responses
-                blocked.markAsBlocked("Blocked URL: '" + url.toExternalForm() + "'");
-                return blocked;
-            }
-
-            private boolean isBlocked(final URL url) {
-                return true;
-            }
-        };
-
-        // use the client as usual
-        final HtmlPage page = webClient.getPage(url);
-    }
-            ]]></source>
+                    Implement this with a <code>WebConnectionWrapper</code>:
                 </p>
+<source><![CDATA[try (WebClient webClient = new WebClient()) {
+    webClient.getOptions().setThrowExceptionOnScriptError(false);
+
+    // create a WebConnectionWrapper with a custom getResponse() impl
+    new WebConnectionWrapper(webClient) {
+
+        @Override
+        public WebResponse getResponse(final WebRequest request) throws IOException {
+            final URL url = request.getUrl();
+
+            if (!isBlocked(url)) {
+                return super.getResponse(request);
+            }
+
+            // construct alternative response
+            final String content = "<html></html>";
+            final WebResponseData data = new WebResponseData(content.getBytes(StandardCharsets.UTF_8),
+                    200, "blocked", Collections.emptyList());
+            final WebResponse blocked = new WebResponse(data, request, 0L);
+            blocked.markAsBlocked("Blocked URL: '" + url.toExternalForm() + "'");
+            return blocked;
+        }
+
+        private boolean isBlocked(final URL url) {
+            return url.toExternalForm().contains("ad-server");
+        }
+    };
+
+    final HtmlPage page = webClient.getPage(url);
+}
+]]></source>
             </subsection>
 
             <subsection name="Blocking based on the response (headers)">
-                <p>requires HtmlUnit 3.4.0 or later</p>
+                <p><em>Requires HtmlUnit 3.4.0 or later</em></p>
                 <p>
-                    For blocking based on the response a more sophisticated approach is needed.
-                    The following sample code shows blocking base on the content length header. Using
-                    this you are able to check the header of the response and stop downloading the whole
-                    response directly. This might be helpful to improve the speed of some test cases.
+                    Response-based blocking evaluates headers (such as <code>Content-Length</code>) before downloading
+                    full response payloads, allowing early cancellation to improve test performance.
                 </p>
                 <p>
-                    For the implementation we have to deal with the real web connection to be able to
-                    access the headers before the whole content is downloaded and also to abort the
-                    download of the body itself. Therefore we have to replace the WebConnection with
-                    our own subclass of HttpWebConnection.
-            <source><![CDATA[
-    try (WebClient webClient = new WebClient()) {
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        // set more options
-  
-        // use our own sublcass of HttpWebConnection
-        webClient.setWebConnection(new HttpWebConnection(webClient) {
-            @Override
-            protected WebResponse downloadResponse(final HttpUriRequest httpMethod,
-                    final WebRequest webRequest, final HttpResponse httpResponse,
-                    final long startTime) throws IOException {
-  
-                // check content length header
-                final int contentLength = Integer.parseInt(
-                        httpResponse.getFirstHeader(HttpHeader.CONTENT_LENGTH).getValue());
-  
-                // if not too big - done
+                    Subclass <code>HttpWebConnection</code> to intercept headers prior to downloading the response body:
+                </p>
+<source><![CDATA[try (WebClient webClient = new WebClient()) {
+    webClient.getOptions().setThrowExceptionOnScriptError(false);
+
+    webClient.setWebConnection(new HttpWebConnection(webClient) {
+        @Override
+        protected WebResponse downloadResponse(final HttpUriRequest httpMethod,
+                final WebRequest webRequest, final HttpResponse httpResponse,
+                final long startTime) throws IOException {
+
+            final Header contentLengthHeader = httpResponse.getFirstHeader(HttpHeader.CONTENT_LENGTH);
+            if (contentLengthHeader != null) {
+                final int contentLength = Integer.parseInt(contentLengthHeader.getValue());
+
+                // allow small downloads
                 if (contentLength < 1_000) {
                     return super.downloadResponse(httpMethod, webRequest, httpResponse, startTime);
                 }
-  
-                // abort downloading of the content
+
+                // abort body download for large content
                 httpMethod.abort();
-  
+
                 // construct alternative response
-                final String content = "<html><html>";
+                final String content = "<html></html>";
                 final WebResponseData data = new WebResponseData(content.getBytes(StandardCharsets.UTF_8),
                         200, "blocked", Collections.emptyList());
                 final WebResponse blocked = new WebResponse(data, webRequest, 0L);
                 // if you like to check later on for blocked responses
-                blocked.markAsBlocked("Blocked URL: '" + url.toExternalForm()
+                blocked.markAsBlocked("Blocked URL: '" + webRequest.getUrl().toExternalForm()
                             + "' content length: " + contentLength);
                 return blocked;
             }
-        });
-  
-        // use the client as usual
-        final HtmlPage page = webClient.getPage(url);
-    }
-            ]]></source>
-                </p>
+
+            return super.downloadResponse(httpMethod, webRequest, httpResponse, startTime);
+        }
+    });
+
+    final HtmlPage page = webClient.getPage(url);
+}
+]]></source>
             </subsection>
 
             <subsection name="Blocking loading of frame content" id="framecontenthandler">
                 <p>
-                    By setting the FrameContentHandler of the WebClient, you can implement
-                    your own rules to decide whether the content of a frame should be loaded or not.
+                    By setting a custom <code>FrameContentHandler</code> on the <code>WebClient</code>, you can control
+                    whether specific frame documents should be loaded.
                 </p>
-                <p>
-            <source><![CDATA[
-    try (WebClient webClient = new WebClient()) {
-        // use our own FrameContentHandler
-        webClient.setFrameContentHandler(new FrameContentHandler() {
+<source><![CDATA[try (WebClient webClient = new WebClient()) {
+    webClient.setFrameContentHandler(new FrameContentHandler() {
 
-            @Override
-            public boolean loadFrameDocument(final BaseFrameElement baseFrameElement) {
-                final String src = baseFrameElement.getSrcAttribute();
-                // don't load the content from google
-                return !src.contains("google");
-            }
+        @Override
+        public boolean loadFrameDocument(final BaseFrameElement baseFrameElement) {
+            final String src = baseFrameElement.getSrcAttribute();
+            // prevent loading frame content from external trackers
+            return !src.contains("google");
+        }
 
-        });
+    });
 
-        // use the client as usual
-        final HtmlPage page = webClient.getPage(url);
-    }
-            ]]></source>
-                </p>
+    final HtmlPage page = webClient.getPage(url);
+}
+]]></source>
             </subsection>
         </section>
 
-        <section name="Multithreading/Threads Pooling" id="multithreading">
+        <section name="Multithreading / Thread Pooling" id="multithreading">
             <p>
-                HtmlUnit uses an Executor backed by a CachedThreadPool for thread handling. This should work
-                fine for common cases. The CachedThreadPool is in use since 2.54.0 to be able to support scenarios using
-                many treads e.g. because of many WebSockets.
+                HtmlUnit uses an <code>ExecutorService</code> backed by a <code>CachedThreadPool</code> for background thread
+                management (such as WebSocket and asynchronous processing).
             </p>
             <p>
-                Starting with 2.45.0 you can change this by using WebClient.setExecutor(ExecutorService). It might be
-                a good idea to also implement some thread naming to distinguish Threads used by HtmlUnit from the rest.
+                You can provide a custom executor service using <code>WebClient.setExecutor(ExecutorService)</code> to manage
+                thread pool sizing or apply custom thread naming conventions.
             </p>
         </section>
 
-        <section name="Local/Session Storage" id="sessionstorage">
+        <section name="Local / Session Storage" id="sessionstorage">
             <p>
-                HtmlUnit supports the Web Storage API.
-            </p>
-            <p>
-                But for testing purposes it might be useful to add some entries to the storage before running a test
-                and also accessing the stored content. Therefor the storage is accessible from the web client using the
-                StorageHolder implementation.
+                HtmlUnit supports the Web Storage API. The storage structures are accessible directly from <code>WebClient</code>
+                using <code>StorageHolder</code> to inspect or pre-populate data before test execution.
             </p>
 
-            <subsection name ="SessionStorage example">
-                <source><![CDATA[
-    try (WebClient webClient = new WebClient()) {
+            <subsection name="SessionStorage example">
+<source><![CDATA[try (WebClient webClient = new WebClient()) {
 
-        // get the session storage for the current window
-        final Map<String, String> sessionStorage =
-                webClient.getStorageHolder().getSessionStorage(webClient.getCurrentWindow());
+    // get session storage for current window
+    final Map<String, String> sessionStorage =
+            webClient.getStorageHolder().getSessionStorage(webClient.getCurrentWindow());
 
-        // place some data in the session storage
-        sessionStorage.put("myKey", "myData");
+    // pre-populate session storage
+    sessionStorage.put("myKey", "myData");
 
-        // load the page that consumes the session storage data
-        webClient.getPage(url);
+    // load page that consumes session storage
+    webClient.getPage(url);
 
-        // make sure the new data are in
-        assertEquals("myNewData", sessionStorage.get("myNewKey"));
-    }
-                ]]></source>
+    assertEquals("myNewData", sessionStorage.get("myNewKey"));
+}
+]]></source>
             </subsection>
 
             <subsection name="LocalStorage example">
-                <source><![CDATA[
-    try (WebClient webClient = new WebClient()) {
+<source><![CDATA[try (WebClient webClient = new WebClient()) {
 
-        // get the local storage for the url
-        // the url has to match the page url you will load later
-        final Map<String, String> localStorage = webClient.getStorageHolder().getLocalStorage(url);
+    // get local storage for target URL
+    final Map<String, String> localStorage = webClient.getStorageHolder().getLocalStorage(url);
 
-        // place some data in the session storage
-        localStorage.put("myKey", "myData");
+    // pre-populate local storage
+    localStorage.put("myKey", "myData");
 
-        // load the page that consumes the session storage data
-        webClient.getPage(url);
+    webClient.getPage(url);
 
-        // make sure the new data are in
-        assertEquals("myNewData", localStorage.get("myNewKey"));
-    }
-                ]]></source>
+    assertEquals("myNewData", localStorage.get("myNewKey"));
+}
+]]></source>
             </subsection>
         </section>
 
-        <section name="Client side certificates" id="client-certificates">
+        <section name="Client-side certificates" id="client-certificates">
             <p>
-                HtmlUnit optionally provides support for using client side certificates. You can use different way to provide
-                the certificates
-                <ul>
-                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientCertificateKeyStore-java.io.InputStream-java.lang.String-java.lang.String-'>WebClientOptions.setSSLClientCertificateKeyStore(InputStream keyStoreInputStream, String keyStorePassword, String keyStoreType)</a></li>
-                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientCertificate-java.net.URL-java.lang.String-java.lang.String-'>WebClientOptions.setSSLClientCertificateKeyStore(URL keyStoreUrl, String keyStorePassword, String keyStoreType)</a></li>
-                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientCertificateKeyStore-java.security.KeyStore-char:A-'>WebClientOptions.setSSLClientCertificateKeyStore(KeyStore keyStore, char[] keyStorePassword)</a></li>
-                </ul>
-                <ul>
-                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLTrustStore-java.net.URL-java.lang.String-java.lang.String-'>WebClientOptions.setSSLTrustStore(URL sslTrustStoreUrl, String sslTrustStorePassword, String sslTrustStoreType)</a></li>
-                </ul>
-                <ul>
-                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientProtocols-java.lang.String...-'>WebClientOptions.setSSLClientProtocols(String... sslClientProtocols)</a></li>
-                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLInsecureProtocol-java.lang.String-'>WebClientOptions.setSSLInsecureProtocol(String sslInsecureProtocol)</a></li>
-                </ul>
-                Please have a look at the javadoc for more details.
+                HtmlUnit optionally supports client-side SSL/TLS certificates and custom trust stores configured via
+                <code>WebClientOptions</code>:
             </p>
+            <ul>
+                <li><a href="/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientCertificateKeyStore-java.io.InputStream-java.lang.String-java.lang.String-"><code>WebClientOptions.setSSLClientCertificateKeyStore(InputStream, String, String)</code></a></li>
+                <li><a href="/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientCertificate-java.net.URL-java.lang.String-java.lang.String-"><code>WebClientOptions.setSSLClientCertificateKeyStore(URL, String, String)</code></a></li>
+                <li><a href="/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientCertificateKeyStore-java.security.KeyStore-char:A-"><code>WebClientOptions.setSSLClientCertificateKeyStore(KeyStore, char[])</code></a></li>
+                <li><a href="/apidocs/org/htmlunit/WebClientOptions.html#setSSLTrustStore-java.net.URL-java.lang.String-java.lang.String-"><code>WebClientOptions.setSSLTrustStore(URL, String, String)</code></a></li>
+                <li><a href="/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientProtocols-java.lang.String...-"><code>WebClientOptions.setSSLClientProtocols(String...)</code></a></li>
+                <li><a href="/apidocs/org/htmlunit/WebClientOptions.html#setSSLInsecureProtocol-java.lang.String-"><code>WebClientOptions.setSSLInsecureProtocol(String)</code></a></li>
+            </ul>
         </section>
 
     </body>
