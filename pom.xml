@@ -97,7 +97,6 @@
         <site-plugin.version>4.0.0-M16</site-plugin.version>
         <bundle-plugin.version>6.1.0</bundle-plugin.version>
         <jacoco-plugin.version>0.8.15</jacoco-plugin.version>
-        <jdepend-plugin.version>2.2.0</jdepend-plugin.version>
         <cyclonedx-plugin.version>2.9.3</cyclonedx-plugin.version>
     </properties>
 
@@ -906,11 +905,6 @@
                         <stackoverflow>http://stackoverflow.com/questions/%ISSUE%</stackoverflow>
                     </issueLinkTemplatePerSystem>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jdepend-maven-plugin</artifactId>
-                <version>${jdepend-plugin.version}</version>
             </plugin>
         </plugins>
     </reporting>
