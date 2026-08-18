@@ -13,8 +13,8 @@
 
         <section name="General" id="general">
             <p>
-                Because HtmlUnit is a headless browser, you might think HtmlUnit can be agnostic to image formats[cite: 13].
-                This is generally true, but not when inspecting layout-related details[cite: 13]. Even though HtmlUnit
+                Because HtmlUnit is a headless browser, you might think HtmlUnit can be agnostic to image formats.
+                This is generally true, but not when inspecting layout-related details. Even though HtmlUnit
                 is headless, there is still support for layout-related methods like <code>Element.getBoundingClientRect()</code>.
                 A second case is <code>Canvas.drawImage()</code>.
                 To support these, HtmlUnit must determine the dimensions of a given image (for layout calculations) and render
@@ -60,7 +60,7 @@
         </dependency>
 ]]></source>
                 <p>
-                    To verify that image decoding works as expected, run this snippet to confirm a valid <code>BufferedImage</code> is created[cite: 13]:
+                    To verify that image decoding works as expected, run this snippet to confirm a valid <code>BufferedImage</code> is created:
                 </p>
                 <source><![CDATA[final String svg = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\">"
                    + "<circle cx=\"5\" cy=\"5\" r=\"4\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" />"

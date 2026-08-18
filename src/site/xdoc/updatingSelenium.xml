@@ -1,32 +1,36 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Updating Selenium</title>
         <author email="rbri@rbri.de">RBRi</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section>
+        <macro name="toc"/>
+
+        <section name="Updating Selenium" id="updating_selenium">
             <p>
                 This document is intended for committers who are creating pull requests
-                to the selenium project.
+                for the Selenium project.
             </p>
-            <p>
-                First of all: ALWAYS work with branches.
+
+            <subsection name="Workflow Instructions" id="workflow_instructions">
+                <p>First of all: <strong>ALWAYS work with feature branches</strong>.</p>
                 <ol>
-                   <li>bring our fork master in sync with the origin</li>
-                   <li>create a new branch names 'htmlunit_x_xx'</li>
-                   <li>switch to the branch</li>
-                   <li>update the various subdirectories of 'third_party\java' with our new jar's; also update 'BUCK' and 'build.desc'</li>
-                   <li>update contents of file '.project' in directory 'java\client' (eclipse)</li>
-                   <li>update files subdirectory of '.idea\library' (IDEA)</li>
-                   <li>run the tests (start 'go test_htmlunit' from the command line)</li>
-                   <li>commit and create pull request</li>
-               </ol>
-            </p>
+                    <li>Bring your fork's <code>master</code> branch in sync with <code>upstream/master</code>.</li>
+                    <li>Create a new branch named <code>htmlunit_x_xx</code>.</li>
+                    <li>Switch to the newly created branch.</li>
+                    <li>Update the various subdirectories in <code>third_party/java</code> with the new HtmlUnit JARs, and update the build configuration files (e.g., <code>BUILD.bazel</code>, <code>BUCK</code>, or <code>build.desc</code>).</li>
+                    <li>Update the contents of <code>java/client/.project</code> for Eclipse IDE support.</li>
+                    <li>Update the library configuration files under <code>.idea/libraries</code> for IntelliJ IDEA.</li>
+                    <li>Run the test suite from the command line (e.g., execute <code>go test_htmlunit</code> or the corresponding Bazel target).</li>
+                    <li>Commit your changes and open a pull request.</li>
+                </ol>
+            </subsection>
         </section>
     </body>
 </document>
-
