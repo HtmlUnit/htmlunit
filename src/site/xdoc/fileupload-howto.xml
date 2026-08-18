@@ -8,52 +8,51 @@
     </properties>
 
     <body>
-        <section name="Content" id="content">
-            <macro name="toc">
-            </macro>
-        </section>
 
-        <section name="File uploads">
+        <macro name="toc"/>
+
+        <section name="File uploads" id="file_uploads">
             <p>
-                From the browsers point of view the file upload is supported using a special input control.
-                You can find some basics <a href="https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications">here.</a><br/>
-                To trigger the file upload from HtmlUnit you have to
-                <ul>
-                  <li>get the page</li>
-                  <li>find the file input element</li>
-                  <li>assign the path to the file you like to upload to the file input</li>
-                  <li>submit the form (by pressing the button like the user does)</li>
-                </ul>
+                From the browser's perspective, file uploading is supported using a specialized input control.
+                You can review basic web concepts on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications">MDN Web Docs</a>.
             </p>
+            <p>
+                To trigger a file upload programmatically in HtmlUnit:
+            </p>
+            <ul>
+                <li>Fetch the target page containing the upload form.</li>
+                <li>Locate the file input element (<code>HtmlFileInput</code>).</li>
+                <li>Assign the local file path or raw data payload to the file input.</li>
+                <li>Submit the form (e.g., by clicking the submit button).</li>
+            </ul>
 
             <subsection name="Upload a file using the path to a local file">
-<source><![CDATA[
-HtmlPage firstPage = client.getPage(URL_FIRST);
-HtmlForm f = firstPage.getForms().get(0);
-HtmlFileInput fileInput = f.getInputByName("myInput");
+<source><![CDATA[HtmlPage firstPage = client.getPage(URL_FIRST);
+HtmlForm form = firstPage.getForms().get(0);
+HtmlFileInput fileInput = form.getInputByName("myInput");
 
-String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
+String path = getClass().getClassLoader().getResource("testfiles/tiny-png.img").toExternalForm();
 fileInput.setValueAttribute(path);
+
 firstPage.getHtmlElementById("mySubmit").click();
 ]]></source>
             </subsection>
 
             <subsection name="Upload file content from memory">
-<source><![CDATA[
-HtmlPage firstPage = client.getPage(URL_FIRST);
-HtmlForm f = firstPage.getForms().get(0);
-HtmlFileInput fileInput = f.getInputByName("myInput");
+<source><![CDATA[HtmlPage firstPage = client.getPage(URL_FIRST);
+HtmlForm form = firstPage.getForms().get(0);
+HtmlFileInput fileInput = form.getInputByName("myInput");
 
 fileInput.setValueAttribute("dummy.txt");
 fileInput.setContentType("text/csv");
 fileInput.setData("My file data".getBytes());
+
 firstPage.getHtmlElementById("mySubmit").click();
 ]]></source>
             </subsection>
 
-            <subsection name="Upload multiple files (if the 'multiple' attribute is set for the file input control)">
-<source><![CDATA[
-String filename1 = "HtmlFileInputTest_one.txt";
+            <subsection name="Upload multiple files (if the 'multiple' attribute is set)">
+<source><![CDATA[String filename1 = "HtmlFileInputTest_one.txt";
 String path1 = getClass().getResource(filename1).toExternalForm();
 File file1 = new File(new URI(path1));
 

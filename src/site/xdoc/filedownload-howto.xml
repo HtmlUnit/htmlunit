@@ -8,145 +8,151 @@
     </properties>
 
     <body>
-        <section name="Content" id="content">
-            <macro name="toc">
-            </macro>
-        </section>
 
-        <section name="File downloads in real browsers">
+        <macro name="toc"/>
+
+        <section name="File downloads in real browsers" id="real_browsers">
             <p>
-                Because file download is a tricky story (at least with HtmlUnit), lets start from the beginning with some info about
-                file download in real browsers.<br/>
-                When surfing the internet, you usually opening url's pointing to content (files) containing (X)Html. And your favorite browser
-                'eats' this stuff and renders the content on your screen. There are also some more file types your browser is able to handle like
-                CSS or JavaScript stuff. And of course all kind of images, sound and video files. This is done behind the scenes,
-                and you can see all the fancy stuff the internet has to offer.<br/>
-                Only in three cases, your browser hands over the control about the content handling to you
+                Because file downloading can be complex, let's start with some background info about file downloads in
+                real browsers.
+            </p>
+            <p>
+                When surfing the internet, you usually open URLs pointing to (X)HTML content. Your web browser parses this data
+                and renders the content on your screen. There are also additional file types your browser handles natively,
+                such as CSS, JavaScript, images, sound, and video files. This processing occurs automatically behind the scenes.
+            </p>
+            <p>
+                There are only three primary cases where a browser delegates control of content handling to the user:
             </p>
             <ul>
-              <li>the file type (mime type) is not supported by your browser (e.g. an excel/word file) or</li>
-              <li>the <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition'>Content-Disposition Header</a>
-              of the response flags the response as <strong>attachment.</strong></li>
-              <li>The last case is triggered from the client (browser) side - if an anchor, having the 
-              <a href='https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/download'>'download'</a> property set, is clicked,
-              the content is saved as a local file.</li>
+                <li>The file type (MIME type) is not supported natively by your browser (e.g., an Excel or Word file).</li>
+                <li>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">Content-Disposition Header</a>
+                of the HTTP response explicitly marks the content as an <strong>attachment</strong>.</li>
+                <li>The request is initiated from the client side by clicking an anchor element with the
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/download"><code>download</code></a> attribute set,
+                prompting local file storage.</li>
             </ul>
             <p>
-                In all cases, the content is saved as file to your local disk and depending on some user settings this is done automatically or
-                by presenting a file dialog to let you save the file wherever you like.
+                In all three cases, the content is saved as a file on your local disk. Depending on user settings, this occurs automatically
+                or by displaying a file save dialog.
             </p>
         </section>
 
-        <section name="File downloads with HtmlUnit">
+        <section name="File downloads with HtmlUnit" id="htmlunit_downloads">
             <p>
-                Because HtmlUnit nature as headless browser, there is no real rendering. But like real browsers HtmlUnit 'understands' the pages delivered by the server.
-                If the response type is supported the content will be available as HtmlPage (or XHtmlPage) including access to all the embedded stuff
-                like javascript, css and images.
-                Like real browsers, there is also support for text only content (TextPage) and plain XML content (XmlPage).
-                <br/>
-                But HtmlUnit can't offer a file dialog because the main use cases are automatic testing and scraping. Based on this the current implementation
-                offers two ways to handle downloads:
+                Due to HtmlUnit's nature as a headless browser, there is no GUI rendering. However, like real browsers,
+                HtmlUnit parses pages delivered by the server. If the response type is supported, the content is made available
+                as an <code>HtmlPage</code> (or <code>XHtmlPage</code>), providing full programmatic access to embedded elements
+                like JavaScript, CSS, and images. HtmlUnit also provides support for text-only content (<code>TextPage</code>)
+                and plain XML content (<code>XmlPage</code>).
+            </p>
+            <p>
+                Because HtmlUnit is primarily designed for automated testing and scraping, it cannot present a graphical
+                file dialog. The current implementation offers two primary mechanisms to handle file downloads:
             </p>
 
             <subsection name="UnexpectedPage (default)">
                 <p>
-                    HtmlUnit handles all unknown content similar to known content - the content is wrapped in a page object and the page is placed inside the window.
-                    For all unknown content HtmlUnit uses the UnexpectedPage. In most cases the UnexpectedPage replaces the current (Html)page in the current window,
-                    but in some cases a new additional window gets opened (e.g. clicking an anchor with a download attribute defined).
+                    HtmlUnit handles unknown or unsupported content types similarly to known content—the data stream is
+                    wrapped inside a page object and placed within a window. For unhandled file types, HtmlUnit creates
+                    an <code>UnexpectedPage</code> instance. In most cases, <code>UnexpectedPage</code> replaces
+                    the current page in the active window, though in certain cases (such as clicking an anchor with
+                    a <code>download</code> attribute), a new target window is created.
                 </p>
                 <p>
-                You can then access the plain content stream from the enclosed UnexpectedPage.
+                    You can access the raw downloaded content stream directly from the enclosed <code>UnexpectedPage</code>:
                 </p>
-            <source><![CDATA[
-try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+<source><![CDATA[try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
     HtmlPage page = webClient.getPage(uri);
     WebWindow window = page.getEnclosingWindow();
 
-    .... // click some anchor/button that forces a file download
+    // click an anchor/button that triggers a file download
 
     UnexpectedPage downloadPage = (UnexpectedPage) window.getEnclosedPage();
 
     try (InputStream downloadedContent = downloadPage.getInputStream()) {
-
-        // e.g. save the input to a local file
-        .... 
+        // e.g., save input stream to a local file
+    }
 }
 ]]></source>
 
                 <p>
-                In the case the download is placed inside a new window you can do something like this:
-                <source><![CDATA[WebWindow newWindow = webClient().getWebWindows().get(webClient().getWebWindows().size() -1);]]></source>
+                    In cases where the download opens inside a new window, you can retrieve the window instance like this:
                 </p>
+                <source><![CDATA[WebWindow newWindow = webClient.getWebWindows().get(webClient.getWebWindows().size() - 1);]]></source>
             </subsection>
 
             <subsection name="AttachmentHandler">
                 <p>
-                    If you don't like the default behavior, you can implement your own way of processing. This is done by registering your own
-                    implementation of the AttachmentHandler interface in the WebClient.
+                    To customize default download handling, you can register a custom implementation of the <code>AttachmentHandler</code> interface
+                    on the <code>WebClient</code> instance.
                 </p>
                 <p>
-                    The AttachmentHandler based download support works in addition to the default UnexpectedPage based support. This means, if your AttachmentHandler
-                    does not handle the content, the webClient will fall back to the default solution and place an UnexpectedPage inside the window.
-                    You can overwrite the method isAttachment() in your AttachmentHandler to only handle dedicated responses - the default implementation
-                    only detects responses having a content-disposition header of type 'attachment' or having no content-disposition header at all and
-                    and content-type header of 'application/octet-stream'.
+                    The <code>AttachmentHandler</code> interface works alongside default <code>UnexpectedPage</code> handling.
+                    If your custom <code>AttachmentHandler</code> declines a response, HtmlUnit falls back to the default behavior
+                    and assigns an <code>UnexpectedPage</code> to the window. You can override the <code>isAttachment()</code> method
+                    in your handler to target specific responses. By default, <code>isAttachment()</code> detects responses
+                    with a <code>Content-Disposition</code> header of type <code>attachment</code>, or responses without
+                    a <code>Content-Disposition</code> header that have a <code>Content-Type</code> of <code>application/octet-stream</code>.
                 </p>
                 <p>
-                    The method <source><![CDATA[boolean handleAttachment(final WebResponse response, final String attachmentFilename)]]></source>
-                    is called if the response was detected as attachment (see above isAttachment()). You can process the attachment in your implementation
-                    (e.g. by saving it to a file) or simply return false. Based on the result of the call, the AttachmentHandler supports two operation modes.
+                    The <code>handleAttachment(WebResponse, String)</code> method is triggered when a response is identified as
+                    an attachment:
+                </p>
+                <source><![CDATA[boolean handleAttachment(final WebResponse response, final String attachmentFilename)]]></source>
+                <p>
+                    You can process the attachment in your implementation (for example, saving it directly to a file system)
+                    and return a boolean indicating whether the event was handled. Depending on the return value, the handler
+                    operates in two modes:
                 </p>
                 <ol>
-                  <li>
-                    <strong>true</strong> signals the rest of the code the
-                    response is handled by your code; there is NO replacement of the current page with an UnexpectedPage and also the method 
-                    <source><![CDATA[void handleAttachment(Page page, final String attachmentFilename)]]></source> from you AttachmentHandler is NOT called.
-                  </li>
-                  <li>
-                    By returning <strong>false</strong>, the response will be processed further like this:
-	                <ul>
-	                  <li>at first a new window will be created, </li>
-	                  <li>next the UnexpectedPage will be build,</li>
-	                  <li>then the method <source><![CDATA[void handleAttachment(Page page, final String attachmentFilename)]]></source> from you AttachmentHandler is called and </li>
-	                  <li>finally the UnexpectedPage will be placed inside the new window.</li>
-	                </ul>
-                  </li>
+                    <li>
+                        <strong><code>true</code></strong>: Signals that the response has been fully handled.
+                        The current page will <strong>NOT</strong> be replaced by an <code>UnexpectedPage</code>,
+                        and <code>handleAttachment(Page, String)</code> will not be called.
+                    </li>
+                    <li>
+                        <strong><code>false</code></strong>: Delegates further processing back to HtmlUnit:
+                        <ul>
+                            <li>A new web window is created.</li>
+                            <li>An <code>UnexpectedPage</code> is constructed.</li>
+                            <li>The method <code>handleAttachment(Page, String)</code> on your <code>AttachmentHandler</code>is invoked.</li>
+                            <li>The <code>UnexpectedPage</code> is placed inside the new window.</li>
+                        </ul>
+                    </li>
                 </ol>
 
                 <p>
-                    The following example code collects the attachment-response inside a list without replacing the content of the current window.
+                    The following example collects attachment responses into a list without replacing the active window content:
                 </p>
-            <source><![CDATA[
-final List<WebResponse> attachments = new ArrayList<>();
+<source><![CDATA[final List<WebResponse> attachments = new ArrayList<>();
 
 try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
 
-        client.setAttachmentHandler(new AttachmentHandler() {
-            @Override
-            public boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
-                attachments.add(response);
-                return true;
-            }
+    webClient.setAttachmentHandler(new AttachmentHandler() {
+        @Override
+        public boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
+            attachments.add(response);
+            return true;
+        }
 
-            @Override
-            public void handleAttachment(final Page page, final String attachmentFilename) {
-                throw new IllegalAccessError("handleAttachment(Page, String) called");
-            }
-        });
+        @Override
+        public void handleAttachment(final Page page, final String attachmentFilename) {
+            throw new IllegalAccessError("handleAttachment(Page, String) called unexpectedly");
+        }
+    });
 
     // start browsing
     HtmlPage page = webClient.getPage(uri);
-
-    ....
 }
 ]]></source>
                 <p>
-                    For more details check the AttachmentHandler javadoc.
+                    For additional details, refer to the <code>AttachmentHandler</code> JavaDoc API documentation.
                 </p>
                 <p>
-                    There is one special case - if you click an anchor with the download attribute set, the processing of the request is passed
-                    to the AttachmentHandler (if there is one) without calling the isAttachment() method. The response is always treated as
-                    attachment in this case.
+                    <em>Note on special cases:</em> Clicking an anchor tag with the <code>download</code> attribute
+                    set bypasses <code>isAttachment()</code> checks and directly forwards the response to the registered
+                    <code>AttachmentHandler</code>.
                 </p>
             </subsection>
         </section>
