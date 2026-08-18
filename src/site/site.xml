@@ -31,26 +31,24 @@
             <item name="Project Page" href="http://www.sourceforge.net/projects/htmlunit"/>
             <item name="Download" href="https://sourceforge.net/projects/htmlunit/files/htmlunit/"/>
         </menu>
-        <menu name="How do I...">
-            <item name="Get started" href="/gettingStarted.html"/>
-            <item name="Security" href="/security.html"/>
-            <item name="WebClient - the browser" href="/webclient.html"/>
+        <menu name="User Documentation">
+            <item name="Getting Started" href="/gettingStarted.html"/>
+            <item name="WebClient - The Browser" href="/webclient.html"/>
             <item name="Content Extraction" href="/contentExtraction.html"/>
-            <item name="Use Inputs" href="/input-howto.html"/>
-            <item name="Use Tables" href="/table-howto.html"/>
-            <item name="File download" href="/filedownload-howto.html"/>
-            <item name="File upload" href="/fileupload-howto.html"/>
-            <item name="Use the Keyboard" href="/keyboard-howto.html"/>
-            <item name="Windows and Frames" href="/window-frame.html"/>
-            <item name="Use JavaScript" href="/javascript-howto.html"/>
-            <item name="Image formats" href="/images-howto.html"/>
-            <item name="Migration" href="/migration.html"/>
-            <item name="All the details" href="/details.html"/>
-        </menu>
-        <menu name="User docs">
+            <item name="Form Inputs" href="/input-howto.html"/>
+            <item name="Tables" href="/table-howto.html"/>
+            <item name="File Download" href="/filedownload-howto.html"/>
+            <item name="File Upload" href="/fileupload-howto.html"/>
+            <item name="Keyboard Simulation" href="/keyboard-howto.html"/>
+            <item name="Windows &amp; Frames" href="/window-frame.html"/>
+            <item name="JavaScript Usage" href="/javascript-howto.html"/>
+            <item name="Image Formats" href="/images-howto.html"/>
             <item name="Logging" href="/logging.html"/>
+            <item name="Security" href="/security.html"/>
+            <item name="All Details" href="/details.html"/>
             <item name="FAQ" href="/faq.html"/>
-            <item name="History" href="/history.html"/>
+            <item name="Migration" href="/migration.html"/>
+            <item name="Project History" href="/history.html"/>
         </menu>
         <menu name="Support">
             <item name="Issues tracker" href="https://github.com/HtmlUnit/htmlunit/issues"/>

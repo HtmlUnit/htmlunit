@@ -5,13 +5,11 @@
     <properties>
         <title>HtmlUnit History</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="Content" id="content">
-            <macro name="toc">
-            </macro>
-        </section>
+        <macro name="toc"/>
 
         <section name="The beginning">
             <p>
