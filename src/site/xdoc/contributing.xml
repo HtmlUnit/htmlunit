@@ -72,6 +72,19 @@
                 Dojo, Prototype, GWT, YUI, and Sarissa. However, real-world web applications may expose unsupported properties or edge-case behavior.
             </p>
             <p>
+                Testing pages containing JavaScript can produce errors for several reasons. Some web browsers accept non-standard
+                shortcuts or DOM extensions that HtmlUnit does not yet emulate. When inline JavaScript code is executed,
+                HtmlUnit wraps it in a synthetic function, which can make error line numbers and stack traces harder to decipher.
+            </p>
+            <p>
+                To assist with debugging, setting the logger <code>org.htmlunit.javascript</code> to the <code>DEBUG</code> log level
+                causes HtmlUnit to log the generated wrapper functions alongside the original inline code.
+            </p>
+            <p>
+                To help identify missing property definitions, HtmlUnit emits <code>WARN</code> level log entries when expected objects are undefined.
+                Before submitting JavaScript issues, please read <a href="contributing.html#debugging_js_bugs">Debugging JavaScript Bugs</a>.
+            </p>
+            <p>
                 When reporting JavaScript issues, simply stating that "jQuery does not work" or "Website X fails" is not actionable.
                 Please isolate the issue down to the specific JavaScript method, property, or event handler that is failing.
             </p>

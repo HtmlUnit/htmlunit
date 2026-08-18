@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
 
@@ -11,38 +11,192 @@
     <body>
         <macro name="toc"/>
 
-        <section name="Overview" id="overview">
+        <section name="Overview and Architecture" id="overview">
             <p>
-                Core language support for JavaScript is provided by an adapted version of the
-                <a href="https://github.com/mozilla/rhino">Mozilla Rhino</a> engine. HtmlUnit provides
-                browser-specific host objects such as <code>Document</code>, <code>Window</code>, or <code>Navigator</code>.
+                Core language support for JavaScript in HtmlUnit is provided by an adapted version of the
+                <a href="https://github.com/mozilla/rhino">Mozilla Rhino</a> engine.
+                HtmlUnit builds on top of Rhino to provide all browser-specific host objects such as
+                <code>Window</code>, <code>Document</code>, or <code>Navigator</code>.
+            </p>
+
+            <subsection name="HtmlUnitScriptable" id="html_unit_scriptable">
+                <p>
+                    All of HtmlUnit's JavaScript host objects subclass <code>HtmlUnitScriptable</code> (or its proxy subclasses)
+                    either directly or indirectly. This base class implements Rhino's <code>ScriptableObject</code>
+                    and manages the binding between JavaScript host objects and their underlying <code>DomNode</code> instances.
+                </p>
+                <p>
+                    Key features provided by <code>HtmlUnitScriptable</code> include:
+                </p>
+                <ul>
+                    <li>
+                        <strong>DOM Node Binding:</strong> Connects DOM elements to their corresponding JavaScript objects via
+                        <code>getDomNodeOrDie()</code>, <code>getDomNodeOrNull()</code>, and <code>setDomNode()</code>.
+                    </li>
+                    <li>
+                        <strong>Automatic Scriptable Factory:</strong> Dynamically instantiates the appropriate JavaScript host class
+                        for a given DOM node via <code>makeScriptableFor(DomNode)</code> by walking up the Java inheritance chain.
+                    </li>
+                    <li>
+                        <strong>Preemption Property Lookup:</strong> Provides <code>getWithPreemption(String)</code> to allow host objects
+                        to resolve dynamic object content or properties before Rhino traverses the standard prototype chain.
+                    </li>
+                    <li>
+                        <strong>Scope &amp; Window Resolution:</strong> Provides helper methods like <code>getWindow()</code> and
+                        <code>getBrowserVersion()</code> to easily resolve top-level scope context from any host object.
+                    </li>
+                </ul>
+            </subsection>
+        </section>
+
+        <section name="Configuring JavaScript Execution" id="configuring_javascript">
+            <p>
+                JavaScript execution is enabled by default in <code>WebClient</code>, matching standard web browser behavior.
+            </p>
+
+            <subsection name="Handling JavaScript Exceptions" id="handling_javascript_exceptions">
+                <p>
+                    <strong>Key Difference from Real Browsers:</strong> By default, HtmlUnit halts script execution when an unhandled JavaScript error occurs.
+                    This "fail-early" practice is designed specifically for automated testing environments.
+                </p>
+                <p>
+                    You can instruct HtmlUnit to log exceptions without throwing Java exceptions by setting <code>throwExceptionOnScriptError</code> to <code>false</code>:
+                </p>
+                <source><![CDATA[final WebClient webClient = new WebClient();
+webClient.getOptions().setThrowExceptionOnScriptError(false);]]></source>
+            </subsection>
+
+            <subsection name="Completely Disabling JavaScript Support" id="disabling_javascript_completely">
+                <p>
+                    To optimize performance or reduce memory consumption, you can permanently disable JavaScript support.
+                    The most resource-efficient method uses a specific <code>WebClient</code> constructor:
+                </p>
+                <source><![CDATA[WebClient webClient = new WebClient(BrowserVersion.FIREFOX, false, null, -1);]]></source>
+            </subsection>
+
+            <subsection name="Temporarily Disabling JavaScript Support" id="disabling_javascript_temporarily">
+                <p>
+                    You can toggle JavaScript execution on or off dynamically using <code>WebClientOptions</code>.
+                    Disabling JavaScript this way prevents <code>&lt;script&gt;</code> execution and event handler invocation, though JavaScript host objects remain instantiated in memory.
+                </p>
+                <source><![CDATA[final WebClient webClient = new WebClient(BrowserVersion.FIREFOX);
+webClient.getOptions().setJavaScriptEnabled(false);
+// ... perform actions with JS disabled ...
+webClient.getOptions().setJavaScriptEnabled(true);]]></source>
+            </subsection>
+
+            <p>
+                To programmatically check whether JavaScript is active, call
+                <a href="apidocs/org/htmlunit/WebClient.html#isJavaScriptEnabled--"><code>WebClient.isJavaScriptEnabled()</code></a>,
+                which accounts for both permanent and temporary disablement states.
             </p>
         </section>
 
-        <section name="SimpleScriptable" id="simple_scriptable">
-            <p>
-                All of HtmlUnit's JavaScript host objects subclass <code>SimpleScriptable</code> either directly or indirectly.
-                This class contains common utility methods needed by HtmlUnit host objects. Additionally,
-                it customizes how JavaScript method lookup is performed: while the standard Rhino engine does not walk up the
-                class hierarchy when looking for accessor methods starting with <code>jsGet_</code>, <code>jsSet_</code>, or <code>jsFunction_</code>,
-                <code>SimpleScriptable</code> alters this behavior so that the superclass hierarchy is walked.
-            </p>
+        <section name="Practical Examples and Usage" id="practical_examples">
+
+            <subsection name="Example: Using Document.write()" id="example_document_write">
+                <p>
+                    Consider a page that dynamically populates a form table using <code>document.write()</code>:
+                </p>
+                <source><![CDATA[<html><head><title>Table sample</title></head><body>
+    <form action='/foo' name='form1'>
+    <table id="table1">
+        <script type="text/javascript">
+            for (i = 1; i <= 5; i++) {
+                document.write("<tr><td>" + i
+                    + "</td><td><input name='textfield" + i
+                    + "' type='text'></td></tr>");
+            }
+        </script>
+    </table></form>
+</body></html>]]></source>
+
+                <p>
+                    You can test that all five input fields were constructed properly:
+                </p>
+                <source><![CDATA[@Test
+public void documentWrite() throws Exception {
+    final WebClient webClient = new WebClient();
+
+    final HtmlPage page = webClient.getPage("https://myserver/test.html");
+    final HtmlForm form = page.getFormByName("form1");
+    for (int i = 1; i <= 5; i++) {
+        final String expectedName = "textfield" + i;
+        Assert.assertEquals(
+            "text", 
+            form.<HtmlInput>getInputByName(expectedName).getTypeAttribute());
+    }
+}]]></source>
+
+                <p>
+                    To test boundary constraints and verify off-by-one bounds, attempt to retrieve non-existent elements:
+                </p>
+                <source><![CDATA[try {
+    form.getInputByName("textfield0");
+    fail("Expected an ElementNotFoundException");
+}
+catch (final ElementNotFoundException e) {
+    // Expected exception path
+}
+
+try {
+    form.getInputByName("textfield6");
+    fail("Expected an ElementNotFoundException");
+}
+catch (final ElementNotFoundException e) {
+    // Expected exception path
+}]]></source>
+            </subsection>
+
+            <subsection name="Example: Watching for Alerts" id="example_alerts">
+                <p>
+                    JavaScript alert dialogs can be captured using an <code>AlertHandler</code>:
+                </p>
+                <source><![CDATA[<html><head><title>Alert sample</title></head>
+<body onload='alert("foo");'>
+</body></html>]]></source>
+
+                <p>
+                    Registering a <code>CollectingAlertHandler</code> records dialog messages into a list for assertion after page loading:
+                </p>
+                <source><![CDATA[@Test
+public void alerts() throws Exception {
+    final WebClient webClient = new WebClient();
+
+    final List<String> collectedAlerts = new ArrayList<>();
+    webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+    webClient.getPage("https://myserver/test.html");
+
+    final List<String> expectedAlerts = Collections.singletonList("foo");
+    Assert.assertEquals(expectedAlerts, collectedAlerts);
+}]]></source>
+            </subsection>
+
+            <subsection name="Prompts, Confirms, and Status Messages" id="prompts_confirms_status">
+                <p>
+                    Handling <code>prompt()</code> dialogs, <code>confirm()</code> dialogs, and status line updates follows the same handler pattern.
+                    See <code>WebClient.setPromptHandler()</code>, <code>WebClient.setConfirmHandler()</code>, and <code>WebClient.setStatusHandler()</code> for details.
+                </p>
+            </subsection>
+
+            <subsection name="Event Handlers" id="event_handlers">
+                <p>
+                    Standard DOM event handlers (e.g., <code>onload</code>, <code>onclick</code>, <code>ondblclick</code>, <code>onmouseup</code>, <code>onsubmit</code>, <code>onreadystatechange</code>) trigger automatically in response to user actions.
+                </p>
+                <p>
+                    If an unhandled custom event needs to be invoked directly, you can trigger it via script execution. However, manipulating elements as an end-user would (e.g., clicking elements and changing input focus) remains the recommended approach.
+                </p>
+            </subsection>
+
+            <subsection name="Executing JavaScript in Page Context" id="executing_javascript">
+                <p>
+                    To evaluate custom JavaScript directly within the scope of an active page or window, use <code>HtmlPage.executeJavaScript()</code>:
+                </p>
+                <source><![CDATA[final String script = "window.name;";
+final String result = (String) page.executeJavaScript(script).getJavaScriptResult();]]></source>
+            </subsection>
         </section>
 
-        <section name="Debugging JavaScript Errors" id="debugging_javascript_errors">
-            <p>
-                Testing pages containing JavaScript can produce errors for several reasons. Some web browsers support non-standard
-                DOM shortcuts or extensions that HtmlUnit does not yet emulate. When inline JavaScript code is executed,
-                HtmlUnit wraps it in a synthetic function, which can make error stack traces harder to decipher.
-            </p>
-            <p>
-                To assist with debugging, setting the logger <code>org.htmlunit.javascript</code> to the <code>DEBUG</code> log level
-                will cause HtmlUnit to log the generated wrapper functions along with the original inline code.
-            </p>
-            <p>
-                To help identify missing property definitions, HtmlUnit emits <code>WARN</code> level log entries when expected objects are undefined.
-                Before reporting JavaScript issues, please read <a href="submittingJSBugs.html">Submitting JavaScript Bugs</a>.
-            </p>
-        </section>
     </body>
 </document>
