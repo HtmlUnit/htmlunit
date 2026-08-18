@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Working with Form Controls: Usage, Values and Validation</title>
-        <author email="rbri@GargoyleSoftware.com">Ronald Brill</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="Content" id="content">
-            <macro name="toc">
-            </macro>
-        </section>
 
-        <section name="Overview">
+        <macro name="toc"/>
+
+        <section name="Overview" id="overview">
             <p>
                 This page is a guide to working with HTML form controls through HtmlUnit's
                 plain Java API. It covers three things, in order:
@@ -22,7 +21,7 @@
             </p>
         </section>
 
-        <section name="The form control class hierarchy">
+        <section name="The form control class hierarchy" id="hierarchy">
             <p>
                 Every form control in a parsed page is represented by a subclass of
                 <code>HtmlElement</code>. The two most important base types are:
@@ -76,7 +75,7 @@
             </p>
         </section>
 
-        <section name="Finding form controls">
+        <section name="Finding form controls" id="finding_controls">
             <p>
                 The usual DOM-style lookups work as expected --
                 <code>page.getHtmlElementById(String)</code>,
@@ -85,8 +84,7 @@
                 offers form-scoped convenience lookups that are usually more direct when you already
                 know which form you're working with:
             </p>
-            <source><![CDATA[
-final HtmlForm form = page.getFormByName("login");
+<source><![CDATA[final HtmlForm form = page.getFormByName("login");
 
 final HtmlTextInput username = form.getInputByName("username");
 final List<HtmlInput> allChecked = form.getInputsByValue("on"); // e.g. matching checkboxes
@@ -100,7 +98,7 @@ final List<HtmlRadioButtonInput> options = form.getRadioButtonsByName("plan");]]
             </p>
         </section>
 
-        <section name="Clicking, typing, focus and selection">
+        <section name="Clicking, typing, focus and selection" id="interactions">
             <p>
                 <code>click()</code> simulates a real mouse click, including whatever side effects a
                 real click has for that specific control -- a submit button submits its form, a reset
@@ -131,7 +129,7 @@ final List<HtmlRadioButtonInput> options = form.getRadioButtonsByName("plan");]]
             </p>
         </section>
 
-        <section name="Checkboxes and radio buttons">
+        <section name="Checkboxes and radio buttons" id="checkboxes_radios">
             <p>
                 <code>HtmlCheckBoxInput</code> and <code>HtmlRadioButtonInput</code> don't hold a
                 free-form text value the way other inputs do -- their state is a simple boolean,
@@ -146,14 +144,13 @@ final List<HtmlRadioButtonInput> options = form.getRadioButtonsByName("plan");]]
                 whatever the live <code>isChecked()</code> state currently is, the same relationship
                 <code>getDefaultValue()</code> has to <code>getValue()</code> for text controls.
             </p>
-            <source><![CDATA[
-final HtmlRadioButtonInput yearly = form.getRadioButtonsByName("plan").stream()
+<source><![CDATA[final HtmlRadioButtonInput yearly = form.getRadioButtonsByName("plan").stream()
         .filter(r -> "yearly".equals(r.getValueAttribute()))
         .findFirst().orElseThrow();
 yearly.setChecked(true);]]></source>
         </section>
 
-        <section name="File inputs">
+        <section name="File inputs" id="file_inputs">
             <p>
                 <code>HtmlFileInput</code> deliberately does <em>not</em> support setting its value
                 to an arbitrary string the way a text input does -- real browsers never allow a page
@@ -182,7 +179,7 @@ yearly.setChecked(true);]]></source>
             </p>
         </section>
 
-        <section name="Buttons and form submission">
+        <section name="Buttons and form submission" id="buttons_submission">
             <p>
                 <code>HtmlButton</code> and the button-like <code>HtmlInput</code> subtypes
                 (<code>HtmlSubmitInput</code>, <code>HtmlResetInput</code>, <code>HtmlButtonInput</code>)
@@ -209,7 +206,7 @@ yearly.setChecked(true);]]></source>
             </p>
         </section>
 
-        <section name="Value handling">
+        <section name="Value handling" id="value_handling">
             <p>
                 The remainder of this page covers two topics in detail: how to read and write a
                 control's value correctly, and how HtmlUnit's constraint-validation API works. Both
@@ -218,7 +215,7 @@ yearly.setChecked(true);]]></source>
             </p>
         </section>
 
-        <section name="getValue(), getValueAttribute() and getRawValue()">
+        <section name="getValue(), getValueAttribute() and getRawValue()" id="value_getters">
             <p>
                 These three methods are easy to confuse because they can return the same string in
                 the simplest cases -- but they answer three different questions, and they diverge as
@@ -247,8 +244,7 @@ yearly.setChecked(true);]]></source>
                 control types (see below for <code>HtmlNumberInput</code>) it additionally normalizes
                 or rejects content that <code>getRawValue()</code> would return unchanged.
             </p>
-            <source><![CDATA[
-public void value() throws Exception {
+<source><![CDATA[public void value() throws Exception {
     try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("https://www.wetator.org/testform/");
         final HtmlTextInput input = page.getHtmlElementById("project");
@@ -274,13 +270,12 @@ public void value() throws Exception {
                 first loaded, since a script may have changed <code>defaultValue</code>/the
                 <code>value</code> attribute in the meantime.
             </p>
-            <source><![CDATA[
-input.setDefaultValue("changed-default");
+<source><![CDATA[input.setDefaultValue("changed-default");
 input.reset();
 System.out.println(input.getValue()); // "changed-default", not "initial"]]></source>
         </section>
 
-        <section name="Three ways to set a value">
+        <section name="Three ways to set a value" id="set_value_methods">
             <p>
                 A text-like input's value can be changed through three genuinely different code
                 paths, and it's worth being explicit about them because they don't always apply the
@@ -306,7 +301,7 @@ System.out.println(input.getValue()); // "changed-default", not "initial"]]></so
             </p>
         </section>
 
-        <section name="HtmlNumberInput: parsing and sanitization">
+        <section name="HtmlNumberInput: parsing and sanitization" id="number_input_parsing">
             <p>
                 <code>HtmlNumberInput</code> layers extra behavior on top of the three methods above,
                 because a number input's textual content has to be checked against the HTML
@@ -336,8 +331,7 @@ System.out.println(input.getValue()); // "changed-default", not "initial"]]></so
                 even when unparseable). <code>getRawValue()</code> always returns the literal
                 characters that are currently in the field, valid or not.
             </p>
-            <source><![CDATA[
-final HtmlNumberInput number = page.getHtmlElementById("qty");
+<source><![CDATA[final HtmlNumberInput number = page.getHtmlElementById("qty");
 
 number.setValue("42");
 System.out.println(number.getValue());    // "42"
@@ -375,7 +369,7 @@ System.out.println(number.getValue());    // "" -- leading '+' is never valid]]>
             </p>
         </section>
 
-        <section name="HtmlTextArea: the dirty value flag and reset">
+        <section name="HtmlTextArea: the dirty value flag and reset" id="textarea_dirty_flag">
             <p>
                 A <code>&lt;textarea&gt;</code>'s value works differently from an
                 <code>&lt;input&gt;</code>'s in one important respect: an input's value always lives
@@ -397,8 +391,7 @@ System.out.println(number.getValue());    // "" -- leading '+' is never valid]]>
                 on the live value is held independently -- child-content changes no longer affect it
                 at all, until a reset clears the flag again.
             </p>
-            <source><![CDATA[
-final HtmlTextArea comments = page.getHtmlElementById("comments"); // <textarea>seed</textarea>
+<source><![CDATA[final HtmlTextArea comments = page.getHtmlElementById("comments"); // <textarea>seed</textarea>
 
 System.out.println(comments.getText()); // "seed"
 
@@ -419,8 +412,7 @@ System.out.println(comments.getDefaultValue()); // "new-default"]]></source>
                 <code>getText()</code> until this exact moment, since they happened while the flag
                 was dirty and therefore ignored).
             </p>
-            <source><![CDATA[
-comments.reset();
+<source><![CDATA[comments.reset();
 System.out.println(comments.getText()); // "new-default" -- picks up the current child content]]></source>
             <p>
                 Like text-type inputs, setting the value to the value it already holds is treated as
@@ -440,8 +432,7 @@ System.out.println(comments.getText()); // "new-default" -- picks up the current
             </p>
         </section>
 
-
-        <section name="Constraint validation">
+        <section name="Constraint validation" id="constraint_validation">
             <p>
                 Every control that can participate in HTML's Constraint Validation API implements
                 <code>ValidatableHtmlElement</code>. The methods on that interface answer three
@@ -470,7 +461,7 @@ System.out.println(comments.getText()); // "new-default" -- picks up the current
             </p>
         </section>
 
-        <section name="willValidate(): is this control barred from validation?">
+        <section name="willValidate(): is this control barred from validation?" id="will_validate">
             <p>
                 <code>willValidate()</code> returns <code>false</code> if the control is barred from
                 constraint validation, and <code>true</code> otherwise. A control is barred when any
@@ -493,15 +484,14 @@ System.out.println(comments.getText()); // "new-default" -- picks up the current
                     these always report <code>false</code>, since neither is itself a candidate for
                     constraint validation, regardless of any attribute.</li>
             </ul>
-            <source><![CDATA[
-final HtmlTextInput required = page.getHtmlElementById("required");
+<source><![CDATA[final HtmlTextInput required = page.getHtmlElementById("required");
 final HtmlTextInput disabled = page.getHtmlElementById("disabledRequired");
 
 System.out.println(required.willValidate()); // true
 System.out.println(disabled.willValidate());  // false, even though it's also required+empty]]></source>
         </section>
 
-        <section name="isValid(), isValidValidityState() and the individual validity checks">
+        <section name="isValid(), isValidValidityState() and the individual validity checks" id="validity_checks">
             <p>
                 <code>isValid()</code> (and the near-identical <code>isValidValidityState()</code>)
                 answer the pure constraint question, without regard to
@@ -539,8 +529,7 @@ System.out.println(disabled.willValidate());  // false, even though it's also re
                     fails to parse can never be "too big" or "misaligned", it just isn't a number in
                     the first place.</li>
             </ul>
-            <source><![CDATA[
-final HtmlNumberInput qty = page.getHtmlElementById("qty");
+<source><![CDATA[final HtmlNumberInput qty = page.getHtmlElementById("qty");
 qty.setValue("not-a-number");
 
 System.out.println(qty.hasBadInputValidityState());       // true
@@ -549,7 +538,7 @@ System.out.println(qty.isStepMismatchValidityState());    // false -- same reaso
 System.out.println(qty.isValid());                        // false, because of badInput]]></source>
         </section>
 
-        <section name="checkValidity(), reportValidity() and the 'invalid' event">
+        <section name="checkValidity(), reportValidity() and the 'invalid' event" id="check_report_validity">
             <p>
                 These are the two methods application code (and HtmlUnit's own form-submission logic)
                 should normally call, rather than combining <code>willValidate()</code> and
@@ -576,15 +565,14 @@ System.out.println(qty.isValid());                        // false, because of b
                 found) fires its own <code>invalid</code> event. <code>reportValidity()</code> at
                 the form level focuses only the <em>first</em> invalid control it finds.
             </p>
-            <source><![CDATA[
-final HtmlForm form = page.getHtmlElementById("myForm");
+<source><![CDATA[final HtmlForm form = page.getHtmlElementById("myForm");
 if (!form.checkValidity()) {
     // at least one control is genuinely invalid; every failing control
     // has already had its 'invalid' event fired
 }]]></source>
         </section>
 
-        <section name="Custom validity and validation messages">
+        <section name="Custom validity and validation messages" id="custom_validity">
             <p>
                 <code>setCustomValidity(String message)</code> lets application code (or a test)
                 mark a control as invalid for a reason the built-in constraints don't express, by
@@ -610,8 +598,7 @@ if (!form.checkValidity()) {
                 <code>min</code>/<code>max</code>) may produce a more specific message that
                 interpolates the relevant value.
             </p>
-            <source><![CDATA[
-final HtmlTextInput email = page.getHtmlElementById("email");
+<source><![CDATA[final HtmlTextInput email = page.getHtmlElementById("email");
 email.setCustomValidity("We already have an account with this address.");
 
 System.out.println(email.checkValidity());        // false
@@ -621,7 +608,7 @@ email.setCustomValidity("");
 System.out.println(email.checkValidity());        // back to whatever the built-in constraints say]]></source>
         </section>
 
-        <section name="HtmlButton: validation specifics">
+        <section name="HtmlButton: validation specifics" id="button_validation">
             <p>
                 <code>HtmlButton</code> (the standalone <code>&lt;button&gt;</code> element)
                 participates in constraint validation, but its story is much simpler than a text
@@ -640,8 +627,7 @@ System.out.println(email.checkValidity());        // back to whatever the built-
                 disabled control, and for the same reason <code>checkValidity()</code> ignores
                 <em>any</em> custom validity message set on such a button.
             </p>
-            <source><![CDATA[
-final HtmlButton plain = page.getHtmlElementById("plainBtn"); // <button type="button">
+<source><![CDATA[final HtmlButton plain = page.getHtmlElementById("plainBtn"); // <button type="button">
 plain.setCustomValidity("this will never surface");
 
 System.out.println(plain.willValidate());  // false
@@ -665,8 +651,7 @@ System.out.println(plain.checkValidity()); // true -- barred, so the custom mess
             </p>
         </section>
 
-
-        <section name="HtmlSelect: validation specifics">
+        <section name="HtmlSelect: validation specifics" id="select_validation">
             <p>
                 <code>HtmlSelect</code> has its own value-and-selection model, since a
                 <code>&lt;select&gt;</code> doesn't hold a single text value the way an
@@ -680,8 +665,7 @@ System.out.println(plain.checkValidity()); // true -- barred, so the custom mess
                 <code>&lt;optgroup&gt;</code> elements are found correctly, exactly as in a real
                 browser:
             </p>
-            <source><![CDATA[
-<select id="country">
+<source><![CDATA[<select id="country">
   <optgroup label="Europe">
     <option value="de">Germany</option>
     <option value="fr">France</option>
@@ -690,8 +674,7 @@ System.out.println(plain.checkValidity()); // true -- barred, so the custom mess
     <option value="jp">Japan</option>
   </optgroup>
 </select>]]></source>
-            <source><![CDATA[
-final HtmlSelect select = page.getHtmlElementById("country");
+<source><![CDATA[final HtmlSelect select = page.getHtmlElementById("country");
 System.out.println(select.getOptionSize()); // 3 -- both optgroups are searched]]></source>
             <p>
                 <strong>getSelectedOptions()</strong> behaves differently depending on whether the
@@ -716,8 +699,7 @@ System.out.println(select.getOptionSize()); // 3 -- both optgroups are searched]
                 <code>selected</code> state from script), <code>getSelectedOptions()</code> will
                 genuinely return an empty list until something re-establishes a selection.
             </p>
-            <source><![CDATA[
-final HtmlSelect select = page.getHtmlElementById("country");
+<source><![CDATA[final HtmlSelect select = page.getHtmlElementById("country");
 
 // right after page load, single-select mode: the first option is
 // auto-selected if nothing else was
@@ -737,7 +719,7 @@ System.out.println(select.getSelectedOptions()); // [Japan]]]></source>
             </p>
         </section>
 
-        <section name="HtmlSelect: the size attribute and default selection">
+        <section name="HtmlSelect: the size attribute and default selection" id="select_size_default">
             <p>
                 <code>getSize()</code> returns the parsed <code>size</code> attribute as an
                 <code>int</code>, defaulting to <code>0</code> if the attribute is absent or isn't a
@@ -758,7 +740,7 @@ System.out.println(select.getSelectedOptions()); // [Japan]]]></source>
             </p>
         </section>
 
-        <section name="HtmlSelect and required">
+        <section name="HtmlSelect and required" id="select_required">
             <p>
                 A <code>&lt;select required&gt;</code> follows the same
                 <code>isValueMissingValidityState()</code> mechanism described earlier, but the rule
@@ -769,8 +751,7 @@ System.out.println(select.getSelectedOptions()); // [Japan]]]></source>
                 <em>first</em> option in the list, and that first option's effective value is the
                 empty string, with nothing else explicitly selected instead.
             </p>
-            <source><![CDATA[
-<select required>
+<source><![CDATA[<select required>
   <option value=""></option>
   <option value="a">Option A</option>
 </select>]]></source>

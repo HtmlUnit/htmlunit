@@ -5,57 +5,56 @@
     <properties>
         <title>Frames Tutorial</title>
         <author>Ahmed Ashour</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="Example I">
+
+        <macro name="toc"/>
+
+        <section name="Example I" id="example_1">
             <p>
-                Getting the page inside &lt;frame&gt; element or &lt;iframe&gt; element can be done by using
-                HtmlPage.getFrames().<br/>
-                Suppose you have the following page:
+                Accessing the page enclosed inside a <code>&lt;frame&gt;</code> or <code>&lt;iframe&gt;</code> element
+                can be done by calling <code>HtmlPage.getFrames()</code>.
             </p>
-            <source><![CDATA[
-<html>
+            <p>
+                Suppose you have the following HTML page:
+            </p>
+<source><![CDATA[<html>
   <body>
-    <iframe src="two.html">
+    <iframe src="two.html"></iframe>
   </body>
 </html>]]></source>
             <p>
-                You can use the following code to get the content of <tt>two.html</tt>:
+                You can use the following code to retrieve the content of <code>two.html</code>:
             </p>
-            <source><![CDATA[
-final List<FrameWindow> window = page.getFrames();
+<source><![CDATA[final List<FrameWindow> window = page.getFrames();
 final HtmlPage pageTwo = (HtmlPage) window.get(0).getEnclosedPage();]]></source>
         </section>
 
-        <section name="Example II">
+        <section name="Example II" id="example_2">
             <p>
-                Another example that navigates API docs to get a desired page of a class:
+                The following example navigates API documentation frames to access a specific class page:
             </p>
-            <source><![CDATA[
-final WebClient client = new WebClient();
+<source><![CDATA[final WebClient client = new WebClient();
 final HtmlPage mainPage = client.getPage("https://www.htmlunit.org/apidocs/index.html");]]></source>
 
             <p>
-                To get the page of the first frame (at upper left) and click the sixth link:
+                To access the page in the first frame (upper left) and click the sixth link:
             </p>
-            <source><![CDATA[
-final HtmlPage packageListPage = (HtmlPage) mainPage.getFrames().get(0).getEnclosedPage();
+<source><![CDATA[final HtmlPage packageListPage = (HtmlPage) mainPage.getFrames().get(0).getEnclosedPage();
 packageListPage.getAnchors().get(5).click();]]></source>
 
             <p>
-                To get the page of the frame named 'packageFrame' (at lower left) and click the second link:
+                To access the page in the frame named <code>packageFrame</code> (lower left) and click the second link:
             </p>
-            <source><![CDATA[
-final HtmlPage packagePage = (HtmlPage) mainPage.getFrameByName("packageFrame").getEnclosedPage();
+<source><![CDATA[final HtmlPage packagePage = (HtmlPage) mainPage.getFrameByName("packageFrame").getEnclosedPage();
 packagePage.getAnchors().get(1).click();]]></source>
-        
+
             <p>
-                To get the page of the frame named 'classFrame' (at right):
+                To access the page in the frame named <code>classFrame</code> (right main pane):
             </p>
-            <source><![CDATA[
-final HtmlPage classPage = (HtmlPage) mainPage.getFrameByName("classFrame").getEnclosedPage();]]></source>
+                <source><![CDATA[final HtmlPage classPage = (HtmlPage) mainPage.getFrameByName("classFrame").getEnclosedPage();]]></source>
         </section>
     </body>
 </document>
-

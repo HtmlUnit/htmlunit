@@ -1,46 +1,52 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Image format support</title>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="General">
+
+        <macro name="toc"/>
+
+        <section name="General" id="general">
             <p>
-                Because HtmlUnit is a headless browsers you might think HtmlUnit can be agnostic to image formats.
-                This is in general true but not if you look at the details. Even if HtmlUnit is headless there is
-                still support for layout related methods like Element.getBoundingClientRect(). A second case is
-                Canvas.drawImage(). To support this HtmlUnit has to be able to determine the dimensions of a given
-                image (for the first case) and produce a raster version (for the second case).
+                Because HtmlUnit is a headless browser, you might think HtmlUnit can be agnostic to image formats[cite: 13].
+                This is generally true, but not when inspecting layout-related details[cite: 13]. Even though HtmlUnit
+                is headless, there is still support for layout-related methods like <code>Element.getBoundingClientRect()</code>.
+                A second case is <code>Canvas.drawImage()</code>.
+                To support these, HtmlUnit must determine the dimensions of a given image (for layout calculations) and render
+                a rasterized version (for canvas operations).
             </p>
             <p>
-                For this HtmlUnit uses <a href="https://docs.oracle.com/javase/8/docs/api/javax/imageio/package-summary.html">ImageIO</a>.
-                Sadly there is only support for JPEG, PNG, BMP, WBMP and GIF.
+                For image processing, HtmlUnit uses Java's <a href="https://docs.oracle.com/javase/8/docs/api/javax/imageio/package-summary.html">ImageIO</a>.
+                Out of the box, standard ImageIO only supports JPEG, PNG, BMP, WBMP, and GIF.
             </p>
             <p>
-                If HtmlUnit has to deal with the details of an unsupported image format a message is shown in the log and
-                the image is (more or less) ignored.
+                When HtmlUnit encounters an unsupported image format, a warning is recorded in the log and
+                the image is generally ignored.
             </p>
             <p>
-                To overcome this limitation you have to install support for more file formats from
-                <a href="https://github.com/haraldk/TwelveMonkeys">TwelveMonkeys</a>
+                To overcome this limitation, you can install additional format plugins, such as those provided by
+                <a href="https://github.com/haraldk/TwelveMonkeys">TwelveMonkeys</a>.
             </p>
-            <subsection name="Example">
+
+            <subsection name="Example" id="example">
                 <p>
-                    Add svg support to be able to include SVG images into your canvas drawings<br/>
-                    This is simply done by adding some dependencies to your project:
+                    To enable SVG support for drawing SVG images onto HTML5 canvases, add the required dependencies
+                    to your project's <code>pom.xml</code> file:
                 </p>
-<source>
-<![CDATA[        <dependency>
+<source><![CDATA[<dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
             <artifactId>imageio-batik</artifactId>
-            <version>3.6.4</version>
+            <version>3.14.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.17</version>
+            <version>1.19</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
@@ -54,16 +60,15 @@
         </dependency>
 ]]></source>
                 <p>
-                    To make sure everything is working you can execute this code and check if you get a BufferedImage.
+                    To verify that image decoding works as expected, run this snippet to confirm a valid <code>BufferedImage</code> is created[cite: 13]:
                 </p>
-<source>
-<![CDATA[        final String svg =  "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\">"
-                           + "<circle cx=\"5\" cy=\"5\" r=\"4\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" />"
-                           + "</svg>";
-        BufferedImage img = ImageIO.read(new ByteArrayInputStream(svg.getBytes(StandardCharsets.US_ASCII)));
-        System.out.println(img);]]></source>
+                <source><![CDATA[final String svg = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\">"
+                   + "<circle cx=\"5\" cy=\"5\" r=\"4\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" />"
+                   + "</svg>";
+BufferedImage img = ImageIO.read(new ByteArrayInputStream(svg.getBytes(StandardCharsets.US_ASCII)));
+System.out.println(img);
+]]></source>
             </subsection>
         </section>
     </body>
 </document>
-
