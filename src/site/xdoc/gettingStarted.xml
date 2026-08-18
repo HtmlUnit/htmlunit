@@ -8,12 +8,9 @@
     </properties>
 
     <body>
-        <section name="Content" id="content">
-            <macro name="toc">
-            </macro>
-        </section>
+        <macro name="toc"/>
 
-        <section name="Quick Start">
+        <section name="Quick Start" id="quick_start">
             <p>
                 This example demonstrates the basic workflow when using HtmlUnit:
                 <br/>
@@ -50,7 +47,7 @@ try (final WebClient webClient = new WebClient()) {
                 The following sections introduce these capabilities in more detail.
             </p>
 
-            <subsection name="When to Use HtmlUnit">
+            <subsection name="When to Use HtmlUnit" id="when_to_use_htmlunit">
             
                 <p>
                     HtmlUnit is one of several libraries for working with web content.
@@ -130,7 +127,7 @@ try (final WebClient webClient = new WebClient()) {
         
         </section>
 
-        <section name="Writing a first test">
+        <section name="Writing a first test" id="writing_a_first_test">
             <p>
                 The <a href="dependencies.html">dependencies page</a> lists all the jars that you will need
                 to have in your classpath.
@@ -142,7 +139,7 @@ try (final WebClient webClient = new WebClient()) {
             </p>
             <p><strong>Android</strong><br/>
                 Using HtmlUnit on Android has some challenges because of the subtle technical distinction
-                of java on android. Because of this, we offer a customized distribution to work around these problem.
+                of java on android. Because of this, we offer a customized distribution to work around these problems.
                 Please check out <a href="https://github.com/HtmlUnit/htmlunit-android" target="_blank">htmlunit-android</a> on github.
             </p>
             <p>
@@ -151,12 +148,11 @@ try (final WebClient webClient = new WebClient()) {
             </p>
             <p>
                 In the first sample, we create the web client and have it load the homepage from the HtmlUnit website.
-                We then verify that this page has the correct title.  Note that getPage() can return different types
-                of pages based on the content type of the returned data.  In this case, we are expecting a content
+                We then verify that this page has the correct title. Note that getPage() can return different types
+                of pages based on the content type of the returned data. In this case, we are expecting a content
                 type of text/html, so we cast the result to an org.htmlunit.html.HtmlPage.
             </p>
-            <source><![CDATA[
-@Test
+<source><![CDATA[@Test
 public void homePage() throws Exception {
     try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
@@ -175,13 +171,12 @@ public void homePage() throws Exception {
             </p>
         </section>
 
-        <section name="Submitting a form">
+        <section name="Submitting a form" id="submitting_a_form">
             <p>
                 Frequently we want to change values in a form and submit the form back to the server. The
                 following example shows how you might do this.
             </p>
-            <source><![CDATA[
-@Test
+<source><![CDATA[@Test
 public void submittingForm() throws Exception {
     try (WebClient webClient = new WebClient()) {
 
@@ -203,14 +198,13 @@ public void submittingForm() throws Exception {
     }
 }]]></source>
 
-            <subsection name="Finding form elements">
+            <subsection name="Finding form elements" id="finding_form_elements">
                 <p>
                     For filling out a form, you first have to find the form elements you like to interact with.
                 </p>
-            <source><![CDATA[
-final HtmlTextInput textField = form.getInputByName("userid");]]></source>
+<source><![CDATA[final HtmlTextInput textField = form.getInputByName("userid");]]></source>
                 <p>
-                    In addition to all the general ways of finding dom elements (see <a href="#Finding_a_specific_element">below</a>) the HtmlForm object
+                    In addition to all the general ways of finding dom elements (see <a href="#finding_a_specific_element">below</a>) the HtmlForm object
                     offers some convenient methods to find form elements:
                 </p>
                 <ul>
@@ -229,88 +223,79 @@ final HtmlTextInput textField = form.getInputByName("userid");]]></source>
                     <li>HtmlForm.getElements()</li>
                 </ul>
                 <p>
-                    All these methods are working based on a list of all dom elements associated with this form -
+                    All these methods work based on a list of all dom elements associated with this form -
                     this list includes all descendants of the form element AND all other elements associated to
-                    this form using the 'form' attribute. In general the method HtmlForm.getElements() builds this
-                    list and all other methods using this list as base for more filtering.
+                    this form using the 'form' attribute. In general, the method HtmlForm.getElements() builds this
+                    list and all other methods use this list as a base for more filtering.
                 </p>
             </subsection>
 
-            <subsection name="Text input &lt;input type='text'&gt;">
+            <subsection name="Text input &lt;input type='text'&gt;" id="text_input">
                 <p>
-                    These form elements represented as instances of class HtmlTextInput.
+                    These form elements are represented as instances of class HtmlTextInput.
                 </p>
-                <source><![CDATA[
-final HtmlTextInput textField = form.getInputByName("userid");]]></source>
+<source><![CDATA[final HtmlTextInput textField = form.getInputByName("userid");]]></source>
                 <p>
                     To replace the value with some new text you should use the method 
                     <a href='apidocs/org/htmlunit/html/HtmlElement.html#type-java.lang.String-'>HtmlElement#type(String)</a>.
                     This call takes care of setting the focus (if required; including triggering all the focus related events) and
                     then simulating the typing of the provided string (char by char, including the keyboard events).
                 </p>
-                <source><![CDATA[
-textField.type("RBRi");]]></source>
+<source><![CDATA[textField.type("RBRi");]]></source>
                 <p>
-                    If all the events not really needed, you can also use the method
+                    If all the events are not really needed, you can also use the method
                     <a href='apidocs/org/htmlunit/html/HtmlSelectableTextInput.html#setValue-java.lang.String-'>HtmlSelectableTextInput#setValue(String)</a>.
                 </p>
             </subsection>
 
-            <subsection name="Text area &lt;textarea&gt;">
+            <subsection name="Text area &lt;textarea&gt;" id="text_area">
                 <p>
-                    These form elements represented as instances of class HtmlTextArea.
+                    These form elements are represented as instances of class HtmlTextArea.
                 </p>
-                <source><![CDATA[
-final HtmlTextArea textArea = form.getTextAreaByName("comment");]]></source>
+<source><![CDATA[final HtmlTextArea textArea = form.getTextAreaByName("comment");]]></source>
                 <p>
-                    The usage of HtmlTextArea is similar to HtmlTextInput (because both derived from HtmlSelectableTextInput).
+                    The usage of HtmlTextArea is similar to HtmlTextInput (because both are derived from HtmlSelectableTextInput).
                     This means you can also use type(String) or even setValue(String) for updating these elements.
                 </p>
-                <source><![CDATA[
-textArea.type("HtmlUnit is a great library...");]]></source>
+<source><![CDATA[textArea.type("HtmlUnit is a great library...");]]></source>
             </subsection>
 
-            <subsection name="Radio buttons &lt;input type='radio'&gt; and Checkboxes &lt;input type='checkbox'&gt;">
+            <subsection name="Radio buttons &lt;input type='radio'&gt; and Checkboxes &lt;input type='checkbox'&gt;" id="radio_and_checkbox">
                 <p>
-                    These form elements represented as instances of class HtmlRadioButtonInput/HtmlCheckBoxInput.
+                    These form elements are represented as instances of class HtmlRadioButtonInput/HtmlCheckBoxInput.
                 </p>
-                <source><![CDATA[
-final HtmlRadioButtonInput countryGermany = form.getInputByName("radio_country_germany");
+<source><![CDATA[final HtmlRadioButtonInput countryGermany = form.getInputByName("radio_country_germany");
 final HtmlCheckBoxInput programmingLanguage = form.getInputByName("check_language_java");]]></source>
                 <p>
                     Usually your form contains many of these elements organized in groups. To check a radio button
-                    of a checkbox you have to use 
+                    or a checkbox you have to use 
                     <a href='apidocs/org/htmlunit/html/HtmlRadioButtonInput.html#setChecked-boolean-'>HtmlRadioButtonInput#setChecked(boolean)</a>
                     or
                     <a href='apidocs/org/htmlunit/html/HtmlCheckBoxInput.html#setChecked-boolean-'>HtmlCheckBoxInput#setChecked(boolean)</a>.
                 </p>
-                <source><![CDATA[
-countryGermany.setChecked(true);
+<source><![CDATA[countryGermany.setChecked(true);
 programmingLanguage.setChecked(true);]]></source>
                 <p>
                     Checking a single radio button will automatically uncheck all other radio buttons in the same group.
                 </p>
             </subsection>
 
-            <subsection name="Select &lt;select&gt;">
+            <subsection name="Select &lt;select&gt;" id="select">
                 <p>
-                    These form elements represented as instances of class HtmlSelect. The individual options are represented by
+                    These form elements are represented as instances of class HtmlSelect. The individual options are represented by
                     instances of class HtmlOption.
                 </p>
-                <source><![CDATA[
-final HtmlSelect currency = form.getInputByName("currency");
+<source><![CDATA[final HtmlSelect currency = form.getSelectByName("currency");]]></source>
                 <p>
                     The simplest way to select one of the options is the method
                     <a href='apidocs/org/htmlunit/html/HtmlSelect.html#setSelectedIndex-int-'>HtmlSelect.html#setSelectedIndex(int)</a>.
                 </p>
-                <source><![CDATA[
-currency.setSelectedIndex(true);]]></source>
+<source><![CDATA[currency.setSelectedIndex(0);]]></source>
                 <p>
                     To make your code more readable and robust, you have to search for the HtmlOption to select and then use
                     <a href='apidocs/org/htmlunit/html/HtmlSelect.html#setSelectedAttribute-org.htmlunit.html.HtmlOption-boolean-'>HtmlSelect.html#setSelectedAttribute(HtmlOption, boolean)</a>.
                 </p>
-                <source><![CDATA[
-HtmlOption euro = currency.getOptionByValue("Euro");
+<source><![CDATA[HtmlOption euro = currency.getOptionByValue("Euro");
 currency.setSelectedAttribute(euro, true);]]></source>
                 <p>
                     For single selection select elements, this call also deselects all other options.
@@ -318,18 +303,17 @@ currency.setSelectedAttribute(euro, true);]]></source>
             </subsection>
         </section>
 
-        <section name="Finding a specific element">
+        <section name="Finding a specific element" id="finding_a_specific_element">
             <p>
                 Once you have a reference to an HtmlPage, you can search for a specific HtmlElement by one of
                 'get' methods, or by using CSS or XPath selectors.
             </p>
-            <subsection name="Traversing the DOM tree">
+            <subsection name="Traversing the DOM tree" id="traversing_dom">
                 <p>
                     Below is an example of finding a 'div' by an ID, and getting an anchor by name:
                 </p>
-                <source><![CDATA[
-@Test
-public void getElements() throws Exception {
+<source><![CDATA[@Test
+public void getElementsById() throws Exception {
     try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("http://some_url");
 
@@ -340,9 +324,8 @@ public void getElements() throws Exception {
                 <p>
                     A simple way for finding elements might be to find all elements of a specific type.
                 </p>
-                <source><![CDATA[
- @Test
- public void getElements() throws Exception {
+<source><![CDATA[@Test
+public void getElementsByTagName() throws Exception {
     try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("http://some_url");
 
@@ -350,9 +333,9 @@ public void getElements() throws Exception {
         final Iterator<DomElement> nodesIterator = inputs.iterator();
         // now iterate
     }
- }]]></source>
+}]]></source>
                 <p>
-                    There is rich set of methods usable to locate page elements e.g.
+                    There is a rich set of methods usable to locate page elements e.g.
                 </p>
                 <ul>
                     <li>HtmlPage.getAnchors(); HtmlPage.getAnchorByHref(String); HtmlPage.getAnchorByName(String); HtmlPage.getAnchorByText(String)</li>
@@ -370,17 +353,16 @@ public void getElements() throws Exception {
                     <li>DomElement.getChildElements(); DomElement.getChildElementCount()</li>
                     <li>DomElement.getFirstElementChild(); DomElement.getLastElementChild()</li>
                     <li>HtmlElement.getEnclosingElement(String); HtmlElement.getEnclosingForm()</li>
-                    <li>DomNode.getChildNodes(); DomNode.getChildren(); DomNode.getDescendants(); DomNode.getDomElementDescendants(); DomNode.getFirstChild(); DomNode.getHtmlElementDescendants()
-                        DomNode.getLastChild(); DomNode.getNextElementSibling(); DomNode.getNextSibling(); DomNode.getPreviousElementSibling(); getPreviousSibling()</li>
+                    <li>DomNode.getChildNodes(); DomNode.getChildren(); DomNode.getDescendants(); DomNode.getDomElementDescendants(); DomNode.getFirstChild(); DomNode.getHtmlElementDescendants();
+                        DomNode.getLastChild(); DomNode.getNextElementSibling(); DomNode.getNextSibling(); DomNode.getPreviousElementSibling(); DomNode.getPreviousSibling()</li>
                 </ul>
             </subsection>
 
-            <subsection name="CSS Selectors">
+            <subsection name="CSS Selectors" id="css_selectors">
                 <p>
                     You can also use CSS selectors
                 </p>
-                <source><![CDATA[
-@Test
+<source><![CDATA[@Test
 public void cssSelector() throws Exception {
     try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
@@ -397,13 +379,12 @@ public void cssSelector() throws Exception {
 }]]></source>
             </subsection>
 
-            <subsection name="XPath queries">
+            <subsection name="XPath queries" id="xpath_queries">
                 <p>
                     XPath is the suggested way for more complex searches, a brief tutorial can be found in
                     <a href="https://www.w3schools.com/xml/xpath_intro.asp">W3Schools</a>
                 </p>
-                <source><![CDATA[
-@Test
+<source><![CDATA[@Test
 public void xpath() throws Exception {
     try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
@@ -418,7 +399,7 @@ public void xpath() throws Exception {
             </subsection>
         </section>
 
-        <section name="Extracting text">
+        <section name="Extracting text" id="extracting_text">
             <p>
                 When you need to extract text from a web page, think of it as a two-step process: find it, then extract it.
                 Use HtmlUnit's search methods (like getElementById(), XPath, or CSS selectors) to find the specific element
@@ -426,8 +407,7 @@ public void xpath() throws Exception {
                 exactly as a user would see it in their browser.<br/>
                 See following example:
             </p>
-                <source><![CDATA[
-@Test
+<source><![CDATA[@Test
 public void extractTextToc() throws Exception {
     try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
@@ -441,14 +421,13 @@ public void extractTextToc() throws Exception {
     }
 }]]></source>
 
-            <subsection name="Extracting the whole page content">
+            <subsection name="Extracting the whole page content" id="extracting_whole_page_content">
                 <p>
                     If you want to extract all text from an entire page without targeting specific elements, you can call asNormalizedText() 
                     directly on the body element. This is useful for getting a quick overview of all visible content or for full-text indexing.<br/>
                     Here's a simple example that loads a page and extracts all its text:
                 </p>
-                <source><![CDATA[
-@Test
+<source><![CDATA[@Test
 public void extractTextFromBody() throws Exception {
     try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
@@ -464,59 +443,5 @@ public void extractTextFromBody() throws Exception {
             </subsection>
         </section>
 
-    <section name="Where to Go Next">
-        <p>
-            This guide introduced the basic concepts of HtmlUnit. The following
-            pages provide more detailed information about specific topics.
-        </p>
-        <ul>
-            <li>
-                <a href="webclient.html">WebClient - the browser</a><br></br>
-                Learn how to configure browser behavior, networking, cookies,
-                proxies, JavaScript, and other browser options.
-            </li>
-            <li>
-                <a href="contentExtraction.html">Content Extraction</a><br></br>
-                Extract rendered text, raw HTML source, element attributes, and structured data.
-            </li>
-            <li>
-                <a href="javascript.html">Use JavaScript</a><br></br>
-                Execute JavaScript, interact with dynamic pages, and wait for
-                asynchronous background tasks.
-            </li>
-            <li>
-                <a href="windows.html">Windows and Frames</a><br></br>
-                Work with multiple windows, tabs, and HTML frames.
-            </li>
-            <li>
-                <a href="tables.html">Use Tables</a><br></br>
-                Convenient APIs for accessing and processing HTML tables.
-            </li>
-            <li>
-                <a href="keyboard.html">Use the Keyboard</a><br></br>
-                Simulate keyboard input and browser events.
-            </li>
-            <li>
-                <a href="fileupload.html">File Upload</a> and
-                <a href="filedownload.html">File Download</a><br></br>
-                Upload files through forms and download resources.
-            </li>
-            <li>
-                <a href="security.html">Security</a><br></br>
-                Understand HtmlUnit's security model and recommendations for
-                processing untrusted content.
-            </li>
-            <li>
-                <a href="logging.html">Logging</a><br></br>
-                Enable and configure logging to help troubleshoot applications.
-            </li>
-            <li>
-                <a href="all.html">All the Details</a><br></br>
-                A comprehensive reference covering the HtmlUnit API and advanced
-                features.
-            </li>
-        </ul>
-    
-    </section>
     </body>
 </document>

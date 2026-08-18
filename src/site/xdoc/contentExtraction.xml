@@ -586,12 +586,5 @@ final String rawFormattedText = pre.asNormalizedText();]]></source>
             </p>
         </section>
 
-        <section name="Where to Go Next">
-            <ul>
-                <li><a href="gettingStarted.html">Getting Started</a> - Learn the basics of loading pages and interacting with forms.</li>
-                <li><a href="javascript.html">Use JavaScript</a> - Ensure dynamic content is fully loaded before extracting text.</li>
-                <li><a href="tables.html">Use Tables</a> - Advanced table extraction techniques.</li>
-            </ul>
-        </section>
     </body>
 </document>
