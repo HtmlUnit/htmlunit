@@ -55,7 +55,7 @@
             </ul>
 
             <p>
-                <strong>IMPORTANT: Pull requests without tests will be rejected[cite: 11].</strong> 
+                <strong>IMPORTANT: Pull requests without tests will be rejected.</strong> 
                 If you are unsure how to write a test for a specific scenario, ask for guidance in your pull request description
                 or on the developer mailing list.
             </p>

@@ -5,51 +5,47 @@
     <properties>
         <title>HtmlUnit Coding Conventions</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="Introduction">
+        <macro name="toc"/>
+
+        <section name="Introduction" id="introduction">
             <p>
-                This page outlines the coding conventions used in HtmlUnit.  If you wish to contribute
-                code to this project then the code will be expected to follow these conventions.
+                This page outlines the coding conventions used in HtmlUnit. All code contributions 
+                to this project are expected to adhere to these conventions.
             </p>
             <p>
-                The purpose of having common coding conventions is to make the code easier to understand
-                and therefore more easily maintained.  I have worked on far too many projects where over
-                time the code became brittle or difficult to maintain.  The conventions in this document
-                are the best practices that I have adopted over time to keep the code easily maintainable
-                and robust.
+                The primary purpose of shared coding conventions is to ensure consistency, legibility, 
+                and maintainability across the codebase. The guidelines detailed in this document reflect best practices 
+                adopted to keep the codebase robust over time.
             </p>
             <p>
-                We use <a href="http://checkstyle.sourceforge.net">checkstyle</a> to check as many coding
-                conventions as possible.  Things covered by checkstyle are only documented below if we feel
-                that they require explanation.  You can run checkstyle with the following target:
-                <source>mvn checkstyle:checkstyle</source>
+                We use <a href="https://checkstyle.sourceforge.io">Checkstyle</a> to enforce coding standard rules automatically. 
+                Rules enforced by Checkstyle are only documented below if they require additional explanation. 
+                You can run Checkstyle using Maven:
             </p>
+            <source>mvn checkstyle:checkstyle</source>
         </section>
 
-        <section name="Unit tests">
+        <section name="Unit Tests" id="unit_tests">
             <p>
-                All code must have 100% automated test coverage using the <a href="http://www.junit.org">JUnit</a>
-                testing framework.  It is strongly suggested that you write the code test-first, but it is fine
-                as long as there are full tests for everything.  Run the tests with the following target:
-                <source>mvn test</source>
+                All code must have thorough test coverage built with the <a href="https://junit.org">JUnit</a> 
+                testing framework. Writing code test-first is strongly encouraged. 
+                Execute tests with the following Maven target:
             </p>
+            <source>mvn test</source>
         </section>
 
-        <section name="Abbreviations">
+        <section name="Abbreviations" id="abbreviations">
             <p>
-                Abbreviations obscure meaning, and therefore they are not to be used in variable/method names.
-                If you saw the following code, would you have any idea what it was doing?
-            </p>
-            <source>cob.getTrh()</source>
-            <p>
-                I didn't either - this was code that I have had to maintain..
+                Abbreviations obscure intent and should generally be avoided in variable and method names. 
+                Explicit, descriptive naming is preferred to ensure self-documenting code.
             </p>
             <p>
-                There are some abbreviations that are so common that it doesn't make sense to exclude them. The
-                following list contains all those abbreviations that are allowed.  If it isn't in this list,
-                it isn't allowed.
+                The following table lists the only universally permitted abbreviations. 
+                Any abbreviation not included in this list is not allowed:
             </p>
             <table>
                 <thead>
@@ -63,101 +59,87 @@
                     <tr>
                         <td>Util</td>
                         <td>Utility</td>
-                        <td>Used only in class names.  i.e. StringUtil</td>
+                        <td>Used only in class names (e.g., <code>StringUtil</code>).</td>
                     </tr>
                     <tr>
                         <td>e</td>
                         <td>Exception</td>
-                        <td>Used only in catch blocks.  i.e. catch( MyException e )</td>
+                        <td>Used only in catch blocks (e.g., <code>catch (MyException e)</code>).</td>
                     </tr>
                     <tr>
                         <td>i</td>
-                        <td>Loop variable</td>
-                        <td></td>
+                        <td>Loop index variable</td>
+                        <td>Used in standard loop iterations.</td>
                     </tr>
                 </tbody>
             </table>
             <p>
-                How do you add an abbreviation to the list?  Bring it up on the mailing list and if none of
-                the other maintainers object to it then it gets added.
+                To propose adding a new abbreviation to this list, start a thread on the developer mailing list. 
+                If no maintainers object, it will be added to the convention guidelines.
             </p>
         </section>
 
-        <section name="The final keyword">
+        <section name="The final Keyword" id="the_final_keyword">
             <p>
-                The final keyword should be used wherever possible.  It provides information to the
-                compiler about your intended use of the code.  This allows the compiler to generate
-                move efficient code and identify potential errors.
+                The <code>final</code> keyword should be applied wherever possible. 
+                It communicates intent clearly to developers and the compiler, helping prevent unintended reassignments 
+                and identifying potential state errors early.
             </p>
 
             <p>
-                Declare a variable to be final to indicate that it will only be assigned a value once.
-                Final instance variables must have been given a value by the end of the last constructor.
-                Final static variables must have been given a value by the end of the last static block.
-                Final local variables must have been given a value before being used.
-                <source>private final int fooCount = 12;</source>
+                Declare variables <code>final</code> to indicate they are assigned only once:
             </p>
+            <source>private final int fooCount = 12;</source>
 
             <p>
-                Declare method parameters method final to indicate that they will not be changed.
-                <source>public void setFooList(final List fooList) {</source>
+                Declare method parameters <code>final</code> to prevent accidental parameter reassignment:
             </p>
+            <source>public void setFooList(final List&lt;Foo&gt; fooList) {</source>
 
             <p>
-                Declare a method final to indicate that it may not be overridden
-                <source>public final int getFooCount() {</source>
+                Declare methods <code>final</code> to indicate they cannot be overridden in subclass implementations:
             </p>
+            <source>public final int getFooCount() {</source>
 
             <p>
-                Declare a class final to indicate that it may not be subclassed
-                <source>public final class FooCounter {</source>
+                Declare classes <code>final</code> when they are not designed for inheritance:
             </p>
+            <source>public final class FooCounter {</source>
         </section>
 
-        <section name="Import statements">
+        <section name="Import Statements" id="import_statements">
             <p>
-                Use fully qualified import statements not wildcards.  In other words, use
+                Use explicit, fully qualified import statements instead of wildcard imports:
             </p>
-            <source>
-import java.util.List;
-import java.util.ArrayList;
-            </source>
+            <source><![CDATA[import java.util.List;
+import java.util.ArrayList;]]></source>
+
             <p>
-            Instead of
+                Do not use wildcard imports:
             </p>
             <source>import java.util.*;</source>
+
             <p>
-                Fully qualified import statements make it much easier to maintain the source.  When I'm
-                trying to learn someone else's code, one of the first things I do is expand all the .*
-                imports so that I can figure out what class came from where.  If they're already
-                expanded then it makes it much easier to understand the code.
-            </p>
-            <p>
-                A common complaint about this convention is "how will I know if an import isn't needed
-                anymore?".  The answer is, use a tool that warns you about this.  Eclipse and IDEA can
-                be configured to warn you about unused imports.  If your editor doesn't perform this
-                check then the maven build will check it for you.
+                Explicit imports make dependencies transparent when reading and reviewing code. 
+                IDEs like Eclipse and IntelliJ IDEA can be configured to manage imports and prune unused ones automatically.
             </p>
         </section>
 
-        <section name="Indenting">
+        <section name="Indentation" id="indentation">
             <p>
-                Indent by using spaces, not tabs.  Indent four (4) spaces at a time.
+                Indent code using spaces instead of tabs. Use four (4) spaces per indentation level.
             </p>
         </section>
-        
-        <section name="Deprecation">
+
+        <section name="Deprecation" id="deprecation">
             <p>
-                From time to time code needs to be removed from public APIs. When possible we will
-                deprecate the existing API (using the javadoc @deprecated tag). Code deprecated in
-                this way should be left in the source for at least 6 months and at least 2 releases,
-                meaning the time could be longer than 6 months if there are not 2 releases in a
-                6 month' period but never less than 6 months.
-                
-                When deprecation is not possible a <a href="changes-report.html">change log</a> message
-                containing "INCOMPATIBLE CHANGE" should be added to make these changes easy to find.
+                When public API elements must be retired, deprecate the API using the JavaDoc <code>@deprecated</code> tag. 
+                Deprecated code must remain in the codebase for at least 6 months and across at least 2 major/minor releases.
             </p>
-        </section>        
+            <p>
+                When direct deprecation is not feasible, log the change in the <a href="changes-report.html">Change Log</a> 
+                flagged with <code>INCOMPATIBLE CHANGE</code> to make breaking updates explicit.
+            </p>
+        </section>
     </body>
 </document>
-

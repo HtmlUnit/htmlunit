@@ -8,6 +8,7 @@
     </properties>
 
     <body>
+
         <macro name="toc"/>
 
         <section name="Request headers" id="request_headers">

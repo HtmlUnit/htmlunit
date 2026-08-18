@@ -8,74 +8,72 @@
         <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
         <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
-        <author email="rbri@rbri.de">Ronald Brill</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="Introduction">
+
+        <macro name="toc"/>
+
+        <section name="Introduction" id="introduction">
             <p>
-                At any time, all the code in the git repository should be compilable and should pass all the unit tests.  There
-                is no guarantee that it will be full featured - this is a work in progress.
+                At any time, all the code in the Git repository should be compilable and should pass all unit tests.
+                There is no guarantee that it will be fully featured—this is a work in progress.
             </p>
         </section>
 
-        <section name="Latest build">
+        <section name="Latest build" id="latest_build">
             <p>
-            <a href="https://jenkins.wetator.org/view/HtmlUnit/">Build server</a>.
+                Continuous Integration automated builds are available at the <a href="https://jenkins.wetator.org/view/HtmlUnit/">HtmlUnit Build Server</a>.
             </p>
-
             <p>
-            Sonatype hosts HtmlUnit snapshot, which is manually updated by the team once in a while.
-            If you need a recent build feel free to contact us.
+                Sonatype hosts the HtmlUnit snapshot build, which is manually updated by the development team. If you need a recent build, feel free to contact us.
             </p>
 
             <subsection name="Maven snapshot">
-              <p>Add the snapshot repository and dependency to your pom.xml</p>
-              <source><![CDATA[<project>
-<!-- ... -->
-<repository>
-    <name>Central Portal Snapshots</name>
-    <id>central-portal-snapshots</id>
-    <url>https://central.sonatype.com/repository/maven-snapshots/</url>
-    <releases>
-        <enabled>false</enabled>
-    </releases>
-    <snapshots>
-        <enabled>true</enabled>
-    </snapshots>
-</repository>
+                <p>Add the snapshot repository and dependency configuration to your <code>pom.xml</code> file:</p>
+<source><![CDATA[<project>
+    <!-- ... -->
+    <repositories>
+        <repository>
+            <id>central-portal-snapshots</id>
+            <name>Central Portal Snapshots</name>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
-<!-- ... -->
-<dependencies>
-  <dependency>
-      <groupId>org.htmlunit</groupId>
-      <artifactId>htmlunit</artifactId>
-      <version>4.15.0-SNAPSHOT</version>
-  </dependency>
-  <!-- ... -->
-</dependencies>
-
-<!-- ... -->
+    <dependencies>
+        <dependency>
+            <groupId>org.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>4.15.0-SNAPSHOT</version>
+        </dependency>
+        <!-- ... -->
+    </dependencies>
+    <!-- ... -->
+</project>
 ]]></source>
             </subsection>
-
 
             <subsection name="Gradle snapshot">
-              <p>Add the snapshot repository and dependency to your build.gradle</p>
-              <source><![CDATA[<project>
-repositories {
-  maven { url "https://central.sonatype.com/repository/maven-snapshots/" }
-  // ...
+                <p>Add the snapshot repository and dependency configuration to your <code>build.gradle</code> file:</p>
+<source><![CDATA[repositories {
+    maven { url "https://central.sonatype.com/repository/maven-snapshots/" }
+    // ...
 }
-// ...
+
 dependencies {
     implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.15.0-SNAPSHOT'
-  // ...
+    // ...
 }
 ]]></source>
             </subsection>
-
         </section>
-
     </body>
 </document>
