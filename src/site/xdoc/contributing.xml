@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Contributing to HtmlUnit</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
+        <author>Chris Erskine</author>
+        <author>RBRi</author>
+    </properties>
+
+    <body>
+        <macro name="toc"/>
+
+        <section name="Overview" id="overview">
+            <p>
+                Contributions to HtmlUnit are always welcome! Whether you are fixing bugs, improving JavaScript emulation,
+                updating documentation, or adding test cases, your efforts help maintain a robust browser simulation engine.
+            </p>
+            <p>
+                HtmlUnit development is a volunteer effort. Following the guidelines on this page helps maintainers review,
+                reproduce, and merge your contributions efficiently.
+            </p>
+        </section>
+
+        <section name="Reporting General Bugs" id="reporting_bugs">
+            <p>
+                Issues in HtmlUnit typically stem from one of four sources: bugs in third-party dependencies,
+                unsupported browser functionality, errors in application code, or genuine bugs in HtmlUnit.
+                We track issues using the GitHub issue tracker at
+                <a href="https://github.com/HtmlUnit/htmlunit/issues">https://github.com/HtmlUnit/htmlunit/issues</a>.
+            </p>
+            <p>
+                Before submitting a bug report:
+            </p>
+            <ul>
+                <li>
+                    <strong>Test against the latest version:</strong> Verify if the issue persists in the latest release or
+                    <a href="https://jenkins.wetator.org/view/HtmlUnit/">latest snapshot build</a>.
+                </li>
+                <li>
+                    <strong>Check existing issues:</strong> Search open and recently closed issues to avoid submitting duplicates.
+                    If a matching issue exists, add your details or test cases to the discussion thread.
+                </li>
+                <li>
+                    <strong>Verify dependencies:</strong> Ensure all required JAR files specified in the
+                    <a href="dependencies.html">dependencies list</a> are present in your classpath.
+                </li>
+            </ul>
+
+            <subsection name="How to Submit Effective Bug Reports" id="effective_bug_reports">
+                <p>
+                    To fix a bug, maintainers must be able to reproduce it quickly. To help us help you:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Provide a minimal reproducible example:</strong> Reduce your HTML and Java code to the absolute
+                        minimum necessary to trigger the failure. Trimming extraneous code speeds up investigation significantly.
+                    </li>
+                    <li>
+                        <strong>Supply an automated JUnit test:</strong> Writing a failing test case allows maintainers to execute and
+                        verify the issue immediately.
+                    </li>
+                </ul>
+            </subsection>
+        </section>
+
+        <section name="Reporting and Debugging JavaScript Bugs" id="debugging_js_bugs">
+            <p>
+                HtmlUnit provides extensive JavaScript emulation, including test suites for popular frameworks like jQuery,
+                Dojo, Prototype, GWT, YUI, and Sarissa. However, real-world web applications may expose unsupported properties or edge-case behavior.
+            </p>
+            <p>
+                When reporting JavaScript issues, simply stating that "jQuery does not work" or "Website X fails" is not actionable.
+                Please isolate the issue down to the specific JavaScript method, property, or event handler that is failing.
+            </p>
+
+            <subsection name="Steps for Isolating JavaScript Errors" id="isolating_js_errors">
+                <p>
+                    Follow these recommended steps to pin down the root cause:
+                </p>
+                <ol>
+                    <li>
+                        <strong>Match target BrowserVersion:</strong> Ensure <code>WebClient</code> is instantiated with the same
+                        <code>BrowserVersion</code> as the real browser you are testing against.
+                    </li>
+                    <li>
+                        <strong>Enable Debug Logging:</strong> Set the logger <code>org.htmlunit.javascript</code> to <code>DEBUG</code> level.
+                        This will log wrapped inline code, making stack traces easier to trace back to source files.
+                    </li>
+                    <li>
+                        <strong>Use an Intercepting Proxy:</strong> Tools like <a href="https://www.charlesproxy.com/">Charles Proxy</a> allow you
+                        to intercept HTTP responses and inject debugging statements (like <code>alert()</code>) into external JS files.
+                        Use <strong>Map Local</strong> features to substitute remote JavaScript files with modified local files.
+                    </li>
+                    <li>
+                        <strong>Disable Browser Caching:</strong> Ensure your comparison browser fetches freshly modified scripts without caching.
+                    </li>
+                </ol>
+
+                <p>
+                    Example: Diagnosing <code>undefined</code> errors:
+                </p>
+                <source><![CDATA[org.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call method "getAttribute" of undefined
+(http://example.com/js/app.js#16)]]></source>
+                <p>
+                    This indicates that the target variable evaluated to <code>undefined</code> prior to the <code>getAttribute()</code> call.
+                    Inspect the call stack in your proxy or browser developer tools to determine where the object initialization diverged.
+                </p>
+            </subsection>
+
+            <subsection name="Useful Injected JavaScript Debug Techniques" id="js_debug_techniques">
+                <p>
+                    <strong>Inspecting Variable Values:</strong>
+                </p>
+                <source><![CDATA[function myFunction(a, b) {
+    var c = a + b;
+    alert(c); // Compare output between HtmlUnit and a real browser
+    return c;
+}]]></source>
+
+                <p>
+                    <strong>Inspecting the Call Stack:</strong>
+                </p>
+                <source><![CDATA[function myFunction(a, b) {
+    alert(arguments.callee.caller); // Prints the outer caller function
+    return a + b;
+}]]></source>
+
+                <p>
+                    <strong>Conditional or Flagged Alert Logging:</strong>
+                </p>
+                <source><![CDATA[var debug = false;
+
+function testExecution() {
+    debug = true; // Enable debug logging specifically for this pass
+    myFunction(1, 2);
+    debug = false;
+}
+
+function myFunction(a, b) {
+    if (debug) {
+        alert("myFunction called with: " + a + ", " + b);
+    }
+    return a + b;
+}]]></source>
+            </subsection>
+        </section>
+
+        <section name="Submitting Pull Requests" id="submitting_pull_requests">
+            <p>
+                The preferred way to submit code or documentation contributions is by opening a Pull Request against our
+                <a href="https://github.com/HtmlUnit/htmlunit">GitHub repository</a>.
+            </p>
+
+            <subsection name="Pull Request Rules and Guidelines" id="pr_rules">
+                <p>
+                    To minimize maintainer overhead and accelerate code review, all pull requests must follow these rules:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Coding Conventions:</strong> Code must strictly follow our <a href="codingConventions.html">coding conventions</a>.
+                        Run <code>mvn checkstyle:checkstyle</code> before submitting.
+                    </li>
+                    <li>
+                        <strong>Automated Unit Tests:</strong> No code changes will be merged without accompanying unit tests.
+                        When applicable, test classes should extend <code>WebDriverTestCase</code> to ensure cross-browser compatibility.
+                    </li>
+                    <li>
+                        <strong>Bug Fix Tests:</strong> Bug fixes must include a unit test that fails with the old behavior and passes with the fix applied.
+                    </li>
+                    <li>
+                        <strong>Existing Test Suite Pass:</strong> Ensure the full test suite passes locally or via your feature branch.
+                    </li>
+                    <li>
+                        <strong>License &amp; Copyright:</strong> All original source files must carry the Gargoyle Software Inc. copyright notice
+                        and be licensed under the project's <a href="license.html">Apache License 2.0</a>.
+                    </li>
+                    <li>
+                        <strong>JavaDoc &amp; Author Tags:</strong> All public methods must include clear JavaDoc documentation.
+                        Add your name to the top-level <code>@author</code> block in chronological order when modifying existing classes.
+                    </li>
+                </ul>
+
+                <p>
+                    <strong>IMPORTANT: Pull requests without accompanying unit tests will be rejected.</strong>
+                    If you need assistance constructing a WebDriver test case, post a question on your pull request draft or consult
+                    the <a href="development.html">Development Guide</a>.
+                </p>
+				<p>
+					Additional documentation updates and example improvements are always greatly appreciated.
+				</p>
+            </subsection>
+        </section>
+    </body>
+</document>
