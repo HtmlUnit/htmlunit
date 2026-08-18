@@ -1,78 +1,88 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
-        <title>Professional support</title>
+        <title>Professional Support</title>
         <author email="mguillemot@yahoo.fr">Marc Guillemot</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section name="Looking for HtmlUnit Support?">
+
+        <macro name="toc"/>
+
+        <section name="Looking for HtmlUnit Support?" id="professional_support">
             <p>
                 Some HtmlUnit committers provide professional support beyond the free support provided on a 
-                volunteer basis by users and project members on HtmlUnit's mailing lists.
+                volunteer basis by users and project members on HtmlUnit's mailing lists[cite: 9].
             </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Marc Guillemot</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Committer since</td>
-                        <td>2004</td>
-                    </tr>
-                    <tr>
-                        <td>Contact</td>
-                        <td><a href="http://mguillem.wordpress.com">http://mguillem.wordpress.com</a></td>
-                    </tr>
-                    <tr>
-                        <td>Location</td>
-                        <td>Bornheim, Germany</td>
-                    </tr>
-                    <tr>
-                        <td>Involvement in related projects</td>
-                        <td>committer to NekoHTML, contributor to Rhino</td>
-                    </tr>
-                    <tr>
-                        <td>Involvement in other Open Source projects</td>
-                        <td>committer to Groovy and Canoo WebTest</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br/>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Daniel Gredler</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Committer since</td>
-                        <td>2006</td>
-                    </tr>
-                    <tr>
-                        <td>Contact</td>
-                        <td>sdanig at users.sourceforge.net</td>
-                    </tr>
-                    <tr>
-                        <td>Location</td>
-                        <td>Atlanta, USA</td>
-                    </tr>
-                    <tr>
-                        <td>Involvement in related projects</td>
-                        <td>committer to CSSParser, contributor to Rhino</td>
-                    </tr>
-                    <tr>
-                        <td>Involvement in other Open Source projects</td>
-                        <td>committer to Tapestry</td>
-                    </tr>
-                </tbody>
-            </table>
+            <subsection name="Marc Guillemot" id="marc_guillemot">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Committer since</td>
+                            <td>2004</td>
+                        </tr>
+                        <tr>
+                            <td>Contact</td>
+                            <td><a href="https://mguillem.wordpress.com">https://mguillem.wordpress.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>Bornheim, Germany</td>
+                        </tr>
+                        <tr>
+                            <td>Involvement in related projects</td>
+                            <td>Committer to NekoHTML, contributor to Rhino</td>
+                        </tr>
+                        <tr>
+                            <td>Involvement in other Open Source projects</td>
+                            <td>Committer to Groovy and Canoo WebTest</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </subsection>
+
+            <subsection name="Daniel Gredler" id="daniel_gredler">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Committer since</td>
+                            <td>2006</td>
+                        </tr>
+                        <tr>
+                            <td>Contact</td>
+                            <td><code>danig at users.sourceforge.net</code></td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>Atlanta, USA</td>
+                        </tr>
+                        <tr>
+                            <td>Involvement in related projects</td>
+                            <td>Committer to CSSParser, contributor to Rhino</td>
+                        </tr>
+                        <tr>
+                            <td>Involvement in other Open Source projects</td>
+                            <td>Committer to Tapestry</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </subsection>
         </section>
     </body>
 </document>
-
