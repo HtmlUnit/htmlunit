@@ -1,95 +1,98 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Logging</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author>RBRi</author>
     </properties>
 
     <body>
-        <section>
-            <subsection name="Commons Logging">
+        <macro name="toc"/>
+
+        <section name="General Logging Configuration" id="general_logging">
+            <subsection name="Commons Logging" id="commons_logging">
                 <p>
-                    HtmlUnit uses the <a href="http://jakarta.apache.org/commons/logging/">commons logging</a>
-                    package from the <a href="http://jakarta.apache.org">Apache Jakarta</a> project.  Commons
-                    logging is a thin wrapper that sits on top of other logging frameworks such as
-                    <a href="http://jakarta.apache.org/log4j/docs/index.html">LOG4J</a> or
+                    HtmlUnit uses the <a href="https://commons.apache.org/proper/commons-logging/">Commons Logging</a>
+                    package from the Apache Commons project. Commons Logging is a thin wrapper that sits on top of
+                    other logging frameworks such as
+                    <a href="https://logging.apache.org/log4j/2.x/">Log4j</a> or
                     <a href="https://www.slf4j.org/">SLF4J</a>.
                 </p>
                 <p>
-                    For full details on configuring commons logging, refer to the
-                    <a href="http://jakarta.apache.org/commons/logging/">homepage</a>.
+                    For full details on configuring Commons Logging, refer to its
+                    <a href="https://commons.apache.org/proper/commons-logging/">homepage</a>.
                 </p>
                 <p>
-                    If you don't explicitly configure commons logging to use LOG4J or another logging framework
-                    then it will use the simple logger.  When using the simple logger, you can change the default
-                    logging level by setting the following system property.
+                    If you don't explicitly configure Commons Logging to use Log4j or another logging framework,
+                    it will default to SimpleLog. When using SimpleLog, you can change the default
+                    logging level by setting the following system property:
                 </p>
                 <source><![CDATA[System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");]]></source>
                 <p>
-                    Valid values for this property are "trace", "debug", "info", "warn", "error", or "fatal" (in
+                    Valid values for this property are <code>"trace"</code>, <code>"debug"</code>, <code>"info"</code>, <code>"warn"</code>, <code>"error"</code>, or <code>"fatal"</code> (in
                     order from least serious to most serious).
                 </p>
             </subsection>
-            <subsection name="Noteworthy loggers">
+
+            <subsection name="Noteworthy loggers" id="noteworthy_loggers">
                 <p>
                     In HtmlUnit, each class has its own log named according to the class's fully qualified name.
                 </p>
                 <p>
-                    HtmlUnit uses Apache HttpClient which uses "org.apache.http" to log the headers and wire content,
-                    please read more in
-                    <a href="https://hc.apache.org/httpcomponents-client-ga/logging.html">HttpClient Logging Practices</a>
+                    HtmlUnit uses Apache HttpClient which uses <code>org.apache.http</code> to log headers and wire content.
+                    Please read more in
+                    <a href="https://hc.apache.org/httpcomponents-client-5.3.x/logging.html">HttpClient Logging Practices</a>.
                 </p>
             </subsection>
         </section>
 
-        <section>
-            <subsection name="Logging JavaScript messages">
+        <section name="Subsystem Loggers" id="subsystem_loggers">
+            <subsection name="Logging JavaScript messages" id="javascript_logging">
                 <p>
-                    HtmlUnit uses a slightly modified version of Rhino for JavaScript processing (htmlunit-core-js).
-                    All JavaScript related problems are forwarded to the JavaScriptErrorListener configured for
-                    the WebClient. 
-                    The WebClient uses by default an instance of
-                    class 'org.htmlunit.javascript.DefaultJavaScriptErrorListener'.
-                    The DefaultJavaScriptErrorListener simply logs all information using commons logging.
-                    <source><![CDATA[
-final WebClient webClient = new WebClient();
+                    HtmlUnit uses a slightly modified version of Rhino for JavaScript processing (<code>htmlunit-core-js</code>).
+                    All JavaScript-related problems are forwarded to the <code>JavaScriptErrorListener</code> configured for
+                    the <code>WebClient</code>. 
+                    The <code>WebClient</code> defaults to using an instance of 
+                    <code>org.htmlunit.javascript.DefaultJavaScriptErrorListener</code>, 
+                    which simply logs all information using Commons Logging.
+                </p>
+                <source><![CDATA[final WebClient webClient = new WebClient();
 webClient.setJavaScriptErrorListener(myJavaScriptErrorListener);]]></source>
-                    If you only like to ignore all JavaScript problems use SilentJavaScriptErrorListener.
-                    <source><![CDATA[
-final WebClient webClient = new WebClient();
+                <p>
+                    If you prefer to ignore all JavaScript problems, use <code>SilentJavaScriptErrorListener</code>:
+                </p>
+                <source><![CDATA[final WebClient webClient = new WebClient();
 webClient.setJavaScriptErrorListener(new SilentJavaScriptErrorListener());]]></source>
-                </p>
             </subsection>
     
-            <subsection name="Logging HTML parsing messages">
+            <subsection name="Logging HTML parsing messages" id="html_parsing_logging">
                 <p>
-                    The package used to parse the HTML (htmlunit-neko ) has the ability to report
+                    The package used to parse HTML (<code>htmlunit-neko</code>) has the ability to report
                     the problems it encounters while parsing source.
-                    These messages may be programmatically catched or easily logged to the 
-                    'org.htmlunit.html.HTMLParserListener' log for instance by calling:
-                    <source><![CDATA[
-final WebClient webClient = new WebClient();
-webClient.setHTMLParserListener(HTMLParserListener.LOG_REPORTER);]]></source>
+                    These messages may be programmatically caught or easily logged to the 
+                    <code>org.htmlunit.html.HTMLParserListener</code> log, for instance by calling:
                 </p>
+                <source><![CDATA[final WebClient webClient = new WebClient();
+webClient.setHTMLParserListener(HTMLParserListener.LOG_REPORTER);]]></source>
             </subsection>
     
-            <subsection name="Logging CSS parsing messages">
+            <subsection name="Logging CSS parsing messages" id="css_parsing_logging">
                 <p>
-                    HtmlUnit uses a separate CSS parser package (htmlunit-cssparser).
-                    Parsing problems are reported using the CSSErrorHandler configured for the WebClient.
-                    The WebClient by default uses an instance of class 'org.htmlunit.DefaultCssErrorHandler'.
-                    The DefaultCssErrorHandler simply logs all information using commons logging.
-                    <source><![CDATA[
-final WebClient webClient = new WebClient();
-webClient.setCssErrorHandler(myCSSErrorHandler);]]></source>
-                    If you only like to ignore all CSS parsing problems use SilentCssErrorHandler.
-                    <source><![CDATA[
-final WebClient webClient = new WebClient();
-webClient.setCssErrorHandler(new SilentCssErrorHandler());]]></source>
+                    HtmlUnit uses a separate CSS parser package (<code>htmlunit-cssparser</code>).
+                    Parsing problems are reported using the <code>CSSErrorHandler</code> configured for the <code>WebClient</code>.
+                    By default, the <code>WebClient</code> uses an instance of class <code>org.htmlunit.DefaultCssErrorHandler</code>,
+                    which simply logs all information using Commons Logging.
                 </p>
+                <source><![CDATA[final WebClient webClient = new WebClient();
+webClient.setCssErrorHandler(myCSSErrorHandler);]]></source>
+                <p>
+                    If you prefer to ignore all CSS parsing problems, use <code>SilentCssErrorHandler</code>:
+                </p>
+                <source><![CDATA[final WebClient webClient = new WebClient();
+webClient.setCssErrorHandler(new SilentCssErrorHandler());]]></source>
             </subsection>
         </section>
     </body>
 </document>
-
