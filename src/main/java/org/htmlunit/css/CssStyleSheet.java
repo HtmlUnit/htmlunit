@@ -1549,7 +1549,7 @@ public class CssStyleSheet implements Serializable {
                 case MILLIMETER:
                     dpi = webWindow.getScreen().getDeviceXDPI();
                     return (dpi / 25.4f) * cssValue.getDoubleValue();
-                case QUATER:
+                case QUARTER:
                     // One quarter of a millimeter. 1Q = 1/40th of 1cm.
                     dpi = webWindow.getScreen().getDeviceXDPI();
                     return ((dpi / 25.4f) * cssValue.getDoubleValue()) / 4d;
