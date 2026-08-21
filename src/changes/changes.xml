@@ -8,6 +8,25 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
+            <action type="fix" dev="rbri">
+                cssparser: locator for the selector list now points to the first selector in that list
+                instead of the last one.
+            </action>
+            <action type="fix" dev="rbri">
+                cssparser: type QUATER renamed to QUARTER (including enum and method names).
+            </action>
+            <action type="fix" dev="rbri">
+                cssparser: @charset does not require whitespace before the charset name.
+            </action>
+            <action type="update" dev="rbri">
+                cssparser: improved parser robustness.
+            </action>
+            <action type="fix" dev="rbri">
+                cssparser: error skipping code now handles all units.
+            </action>
+            <action type="fix" dev="rbri">
+                cssparser: beginColumn/endLine values are wrong in some cases.
+            </action>
             <action type="update" dev="rbri">
                 cssparser: simplified/improved color parsing.
             </action>
