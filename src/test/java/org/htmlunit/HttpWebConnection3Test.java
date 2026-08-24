@@ -487,6 +487,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 
+            if (useRealBrowser()) {
+                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 4);
+            }
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1500,6 +1503,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 
+            if (useRealBrowser()) {
+                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 4);
+            }
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1683,6 +1689,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 
+            if (useRealBrowser()) {
+                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 4);
+            }
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -2005,6 +2014,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 
+            if (useRealBrowser()) {
+                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 4);
+            }
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
