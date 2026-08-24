@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Chrome/Edge 151, Bugfixes">
+            <action type="update" dev="rbri">
+                cssparser: 'not' and 'and' are valid identifiers and valid media (featrue) names.
+            </action>
             <action type="fix" dev="rbri">
                 cssparser: locator for the selector list now points to the first selector in that list
                 instead of the last one.
