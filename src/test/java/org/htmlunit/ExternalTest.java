@@ -316,26 +316,15 @@ public class ExternalTest {
 
     private static boolean isIgnored(final String groupId, final String artifactId,
             final String version, final Pattern ignorePattern) {
-        // version > 3.12.0 does not work with our site.xml and also not with a refactored one
-        if ("maven-site-plugin".equals(artifactId)
-                && (version.startsWith("3.12.1")
-                        || version.startsWith("3.20.")
-                        || version.startsWith("3.21.")
-                        || version.startsWith("3.22."))) {
-            return true;
-        }
 
-        // spotbugs 13 requires jdk 21
+        // checkstyle >= 13 requires jdk 21
         if ("checkstyle".equals(artifactId)
-                && (version.startsWith("13."))) {
+                && (version.startsWith("13.") || version.startsWith("14."))) {
             return true;
         }
 
         // ancient common versions
         if ("commons-io".equals(artifactId) && (version.startsWith("2003"))) {
-            return true;
-        }
-        if ("commons-net".equals(artifactId) && (version.startsWith("2003"))) {
             return true;
         }
 
