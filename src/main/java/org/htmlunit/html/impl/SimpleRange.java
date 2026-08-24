@@ -34,7 +34,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Simple implementation of an Range.
+ * Simple implementation of a DOM Range.
  *
  * @author Marc Guillemot
  * @author Daniel Gredler
@@ -63,16 +63,16 @@ public class SimpleRange implements Serializable {
     private int endOffset_;
 
     /**
-     * Constructs a range without any content.
+     * Constructs an empty range without boundary points.
      */
     public SimpleRange() {
         // Empty.
     }
 
     /**
-     * Constructs a range for the specified element.
+     * Constructs a range enclosing the contents of the specified node.
      *
-     * @param node the node for the range
+     * @param node the node whose contents will be enclosed by this range
      */
     public SimpleRange(final DomNode node) {
         startContainer_ = node;
@@ -82,10 +82,10 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Constructs a range for the provided element and start and end offset.
+     * Constructs a collapsed range at the specified offset within a node.
      *
-     * @param node the node for the range
-     * @param offset the start and end offset
+     * @param node the container node for start and end boundaries
+     * @param offset the character or node index for both start and end boundaries
      */
     public SimpleRange(final DomNode node, final int offset) {
         startContainer_ = node;
@@ -95,12 +95,12 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Constructs a range for the provided elements and offsets.
+     * Constructs a range with the specified start and end boundary points.
      *
-     * @param startNode the start node
-     * @param startOffset the start offset
-     * @param endNode the end node
-     * @param endOffset the end offset
+     * @param startNode the start container node
+     * @param startOffset the start offset within the start node
+     * @param endNode the end container node
+     * @param endOffset the end offset within the end node
      */
     public SimpleRange(final DomNode startNode, final int startOffset, final DomNode endNode, final int endOffset) {
         startContainer_ = startNode;
@@ -113,9 +113,9 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Duplicates the contents of this.
+     * Duplicates the contents of this range into a document fragment.
      *
-     * @return DocumentFragment that contains content equivalent to this
+     * @return a {@link DomDocumentFragment} containing cloned contents of this range
      */
     public DomDocumentFragment cloneContents() {
         // Clone the common ancestor.
@@ -192,18 +192,19 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Produces a new SimpleRange whose boundary-points are equal to the
-     * boundary-points of this.
+     * Produces a new {@code SimpleRange} with boundary points identical to this range.
      *
-     * @return duplicated simple
+     * @return a cloned instance of this range
      */
     public SimpleRange cloneRange() {
         return new SimpleRange(startContainer_, startOffset_, endContainer_, endOffset_);
     }
 
     /**
-     * Collapse this range onto one of its boundary-points.
-     * @param toStart if true, collapses the Range onto its start; else collapses it onto its end.
+     * Collapses this range onto one of its boundary points.
+     *
+     * @param toStart if {@code true}, collapses the range to its start boundary;
+     *                otherwise collapses it to its end boundary
      */
     public void collapse(final boolean toStart) {
         if (toStart) {
@@ -217,9 +218,7 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Removes the contents of this range from the containing document or
-     * document fragment without returning a reference to the removed
-     * content.
+     * Removes the contents of this range from the document tree.
      */
     public void deleteContents() {
         final DomNode ancestor = getCommonAncestorContainer();
@@ -282,10 +281,9 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Moves the contents of a Range from the containing document or document
-     * fragment to a new DocumentFragment.
-     * @return DocumentFragment containing the extracted contents
-     * @throws DOMException in case of error
+     * Moves the contents of this range from the document tree into a new DocumentFragment.
+     *
+     * @return a {@link DomDocumentFragment} containing the extracted contents
      */
     public DomDocumentFragment extractContents() throws DOMException {
         final DomDocumentFragment fragment = cloneContents();
@@ -298,24 +296,20 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Determines whether this range is collapsed.
+     * Indicates whether this range is collapsed (start boundary equals end boundary).
      *
-     * @return true if startContainer equals endContainer and
-     *         startOffset equals endOffset
-     * @throws DOMException in case of error
+     * @return {@code true} if start container equals end container and start offset equals end offset
      */
-    public boolean isCollapsed() throws DOMException {
+    public boolean isCollapsed() {
         return startContainer_ == endContainer_ && startOffset_ == endOffset_;
     }
 
     /**
-     * Returns the deepest common ancestor of this range's boundary points.
+     * Returns the deepest common ancestor container of this range's boundary points.
      *
-     * @return the deepest common ancestor container of this range's two
-     *         boundary-points.
-     * @throws DOMException in case of error
+     * @return the shared ancestor {@link DomNode}, or {@code null} if boundary points have no common ancestor
      */
-    public DomNode getCommonAncestorContainer() throws DOMException {
+    public DomNode getCommonAncestorContainer() {
         final HashSet<DomNode> startAncestors = new HashSet<>();
         DomNode ancestor = startContainer_;
         while (ancestor != null) {
@@ -335,34 +329,35 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Returns the node within which this range ends.
+     * Selects a node and its entire content, setting the parent as the container.
      *
-     * @return the Node within which this range ends
+     * @param node the node to select
      */
     public DomNode getEndContainer() {
         return endContainer_;
     }
 
     /**
-     * Returns the offset within the end container.
+     * Selects the contents inside a node without including the node itself.
      *
-     * @return offset within the ending node of this
+     * @param node the container node whose contents will be selected
      */
     public int getEndOffset() {
         return endOffset_;
     }
 
     /**
-     * Returns the node within which this range begins.
+     * Sets the end boundary point of this range.
      *
-     * @return the Node within which this range begins
+     * @param refNode the end container node
+     * @param offset the offset within the end node
      */
     public DomNode getStartContainer() {
         return startContainer_;
     }
 
     /**
-     * Returns the offset within the start container.
+     * Sets the start boundary point of this range.
      *
      * @return offset within the starting node of this
      */
@@ -452,9 +447,10 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Sets the attributes describing the start.
-     * @param refNode the refNode
-     * @param offset offset
+     * Sets the start boundary point of this range.
+     *
+     * @param refNode the start container node
+     * @param offset the offset within the start node
      */
     public void setStart(final DomNode refNode, final int offset) {
         startContainer_ = refNode;
