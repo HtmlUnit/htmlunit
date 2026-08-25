@@ -440,8 +440,7 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final DomNode div = page.getElementById("d");
-        final DomNode textNode = div.getFirstChild(); // "Hello "
-        final DomNode span = page.getElementById("s");
+        final DomNode textNode = div.getFirstChild();
 
         // range: from offset 5 in "Hello " up to the end of the span
         final SimpleRange range = new SimpleRange(textNode, 5, div, 2);
