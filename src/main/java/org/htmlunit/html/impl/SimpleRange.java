@@ -17,7 +17,6 @@ package org.htmlunit.html.impl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -316,26 +315,39 @@ public class SimpleRange implements Serializable {
 
     /**
      * Returns the deepest common ancestor container of this range's boundary points.
+     * <p>
+     * Uses a two-pointer algorithm that requires O(1) memory by avoiding collections
+     * like {@code HashSet}. If the two boundary nodes are at different depths in the tree,
+     * switching pointers to the opposite starting node when hitting {@code null} aligns
+     * their paths so both pointers travel the exact same total distance
+     * ({@code depth(start) + depth(end)}).
+     * </p>
      *
-     * @return the shared ancestor {@link DomNode}, or {@code null} if boundary points have no common ancestor
+     * @return the lowest common ancestor {@link DomNode}, or {@code null} if either
+     *         boundary point is {@code null} or they belong to disconnected trees
      */
     public DomNode getCommonAncestorContainer() {
-        final HashSet<DomNode> startAncestors = new HashSet<>();
-        DomNode ancestor = startContainer_;
-        while (ancestor != null) {
-            startAncestors.add(ancestor);
-            ancestor = ancestor.getParentNode();
+        if (startContainer_ == null || endContainer_ == null) {
+            return null;
         }
 
-        ancestor = endContainer_;
-        while (ancestor != null) {
-            if (startAncestors.contains(ancestor)) {
-                return ancestor;
-            }
-            ancestor = ancestor.getParentNode();
+        DomNode n1 = startContainer_;
+        DomNode n2 = endContainer_;
+
+        // Traverse upwards towards root. When a pointer reaches null (root's parent),
+        // redirect it to the other node's start container.
+        //
+        // Path length for n1: startContainer -> root -> endContainer -> LCA
+        // Path length for n2: endContainer   -> root -> startContainer -> LCA
+        //
+        // Because addition is commutative, both pointers cover equal total steps
+        // and will land on the common ancestor (or null, if disconnected) at the same time.
+        while (n1 != n2) {
+            n1 = (n1 == null) ? endContainer_ : n1.getParentNode();
+            n2 = (n2 == null) ? startContainer_ : n2.getParentNode();
         }
 
-        return null;
+        return n1;
     }
 
     /**
