@@ -1339,7 +1339,7 @@ public class Location2Test extends WebDriverTestCase {
                    "2 http://localhost:§§PORT§§/a.html#1",
                    "3 http://localhost:§§PORT§§/a.html#1",
                    "load",
-                   "4 http://localhost§§PORT§§/a.html#1"},
+                   "4 http://localhost:§§PORT§§/a.html#1"},
             FF_ESR = { "1", "2", "§§URL§§a.html", "null", "§§URL§§a.html#1",
                        "load",
                        "1 http://localhost:§§PORT§§/a.html",
@@ -1524,6 +1524,9 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("link")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(200);
+        }
         assertEquals(Integer.parseInt(getExpectedAlerts()[2]), getMockWebConnection().getRequestCount());
 
         assertEquals(HttpMethod.POST, getMockWebConnection().getLastWebRequest().getHttpMethod());

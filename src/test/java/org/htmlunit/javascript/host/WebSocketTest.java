@@ -110,13 +110,9 @@ public class WebSocketTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
                        "ws://localhost:§§URL§§/", "ws://localhost:§§URL§§/"},
-            FF = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
-                  "exception empty", "ws://localhost:§§URL§§/"},
             FF_ESR = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
                       "exception empty", "ws://localhost:§§URL§§/"})
     @HtmlUnitNYI(
-            FF = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
-                  "ws://localhost:§§URL§§/", "ws://localhost:§§URL§§/"},
             FF_ESR = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
                       "ws://localhost:§§URL§§/", "ws://localhost:§§URL§§/"})
     public void initialWithoutUrl() throws Exception {

@@ -517,6 +517,9 @@ textAlign
 textAlignLast
 textAnchor
 textAutospace
+textBox
+textBoxEdge
+textBoxTrim
 textCombineUpright
 textDecoration
 textDecorationColor

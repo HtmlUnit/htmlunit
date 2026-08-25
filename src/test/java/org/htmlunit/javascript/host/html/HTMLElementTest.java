@@ -3335,11 +3335,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @HtmlUnitNYI(CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void getBoundingClientRect_heightIncludesPaddingAndBorder() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
