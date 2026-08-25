@@ -228,6 +228,16 @@ public class SimpleRange implements Serializable {
     }
 
     private void deleteContents(final DomNode ancestor) {
+        // Handle single text/input node deletion separately
+        if (startContainer_ == endContainer_ && isOffsetChars(startContainer_)) {
+            final String text = getText(startContainer_);
+            if (startOffset_ < text.length() && endOffset_ <= text.length()) {
+                final String newText = text.substring(0, startOffset_) + text.substring(endOffset_);
+                setText(startContainer_, newText);
+            }
+            return;
+        }
+
         final DomNode start;
         if (isOffsetChars(startContainer_)) {
             start = startContainer_;
@@ -329,35 +339,34 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Selects a node and its entire content, setting the parent as the container.
+     * Returns the node within which this range ends.
      *
-     * @param node the node to select
+     * @return the Node within which this range ends
      */
     public DomNode getEndContainer() {
         return endContainer_;
     }
 
     /**
-     * Selects the contents inside a node without including the node itself.
+     * Returns the offset within the end container.
      *
-     * @param node the container node whose contents will be selected
+     * @return offset within the ending node of this
      */
     public int getEndOffset() {
         return endOffset_;
     }
 
     /**
-     * Sets the end boundary point of this range.
+     * Returns the node within which this range begins.
      *
-     * @param refNode the end container node
-     * @param offset the offset within the end node
+     * @return the Node within which this range begins
      */
     public DomNode getStartContainer() {
         return startContainer_;
     }
 
     /**
-     * Sets the start boundary point of this range.
+     * Returns the offset within the start container.
      *
      * @return offset within the starting node of this
      */
@@ -419,10 +428,18 @@ public class SimpleRange implements Serializable {
      * @param node The node to select.
      */
     public void selectNode(final DomNode node) {
-        startContainer_ = node;
-        startOffset_ = 0;
-        endContainer_ = node;
-        endOffset_ = getMaxOffset(node);
+        final DomNode parent = node.getParentNode();
+        startContainer_ = parent;
+        endContainer_ = parent;
+        // find node's index among parent's children
+        int index = 0;
+        DomNode sibling = node.getPreviousSibling();
+        while (sibling != null) {
+            index++;
+            sibling = sibling.getPreviousSibling();
+        }
+        startOffset_ = index;
+        endOffset_ = index + 1;
     }
 
     /**
@@ -437,9 +454,10 @@ public class SimpleRange implements Serializable {
     }
 
     /**
-     * Sets the attributes describing the end.
-     * @param refNode the refNode
-     * @param offset offset
+     * Sets the end boundary point of this range.
+     *
+     * @param refNode the end container node
+     * @param offset the offset within the end node
      */
     public void setEnd(final DomNode refNode, final int offset) {
         endContainer_ = refNode;

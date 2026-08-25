@@ -8,6 +8,13 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
+            <action type="fix" dev="rbri">
+                SimpleRange: selectNode() selects the node itself (so the container is the parent of the node
+                and the offsets are the node's position among siblings). This makes this spec conformant.
+            </action>
+            <action type="fix" dev="rbri">
+                SimpleRange: fix deleteContents() if start and and are the same.
+            </action>
             <action type="update" dev="rbri">
                 cssparser: 'not' and 'and' are valid identifiers and valid media (featrue) names.
             </action>
