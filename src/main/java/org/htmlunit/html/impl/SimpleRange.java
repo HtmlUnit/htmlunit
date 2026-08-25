@@ -265,7 +265,7 @@ public class SimpleRange implements Serializable {
         if (isOffsetChars(endContainer_)) {
             end = endContainer_;
             String text = getText(end);
-            if (endOffset_ > -1 && endOffset_ < text.length()) {
+            if (endOffset_ > -1 && endOffset_ <= text.length()) {
                 text = text.substring(endOffset_);
             }
             setText(end, text);
@@ -291,7 +291,12 @@ public class SimpleRange implements Serializable {
             if (foundStart && (n != start || !isOffsetChars(startContainer_))) {
                 started = true;
             }
-            if (started && !n.isAncestorOf(end)) {
+            if (started
+                    && !n.isAncestorOf(end)
+                    && n != endContainer_
+                    && !n.isAncestorOf(endContainer_)
+                    && n != startContainer_
+                    && !n.isAncestorOf(startContainer_)) {
                 i.remove();
             }
         }
@@ -617,12 +622,10 @@ public class SimpleRange implements Serializable {
             return Collections.emptyList();
         }
 
-        // When start == end (same text node), just return it directly
         if (startContainer_ == endContainer_ && isOffsetChars(startContainer_)) {
             return Collections.singletonList(startContainer_);
         }
 
-        // Resolve start node without mutating
         final DomNode start;
         if (isOffsetChars(startContainer_)) {
             start = startContainer_;
@@ -634,7 +637,6 @@ public class SimpleRange implements Serializable {
             start = startContainer_.getNextSibling();
         }
 
-        // Resolve end node without mutating
         final DomNode end;
         if (isOffsetChars(endContainer_)) {
             end = endContainer_;
@@ -659,7 +661,12 @@ public class SimpleRange implements Serializable {
             if (foundStart && (n != start || !isOffsetChars(startContainer_))) {
                 started = true;
             }
-            if (started && !n.isAncestorOf(end)) {
+            if (started
+                    && !n.isAncestorOf(end)
+                    && n != endContainer_
+                    && !n.isAncestorOf(endContainer_)
+                    && n != startContainer_
+                    && !n.isAncestorOf(startContainer_)) {
                 nodes.add(n);
             }
         }

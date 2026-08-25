@@ -127,6 +127,88 @@ public class SimpleRangeTest extends SimpleWebTestCase {
     }
 
     /**
+     * Verifies that deleteContents() correctly clears endContainer_ text
+     * when endOffset_ equals the total length of the text node.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void deleteContents_endOffsetEqualsTextLength() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='d'><span id='s1'>Hello</span><span id='s2'>World</span></div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final DomNode s1text = page.getElementById("s1").getFirstChild(); // "Hello"
+        final DomNode s2text = page.getElementById("s2").getFirstChild(); // "World" (length = 5)
+
+        // Select from offset 2 in s1text ("llo") up to offset 5 in s2text (all of "World")
+        final SimpleRange range = new SimpleRange(s1text, 2, s2text, 5);
+        range.deleteContents();
+
+        assertEquals("He", s1text.getTextContent());
+        assertEquals("", s2text.getTextContent());
+    }
+
+    /**
+     * Verifies that deleteContents() preserves the endContainer element
+     * when endOffset equals its child count and it has no next sibling.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void deleteContents_endOffsetEqualsChildCountLastChild() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='root'>"
+                + "  <div id='d1'><span id='s1'>1</span></div>"
+                + "  <div id='d2'><span id='s2'>2</span></div>"
+                + "</div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final DomNode d1 = page.getElementById("d1");
+        final DomNode d2 = page.getElementById("d2");
+
+        // Range from start of d1 (offset 0) to end of d2 (offset 1)
+        final SimpleRange range = new SimpleRange(d1, 0, d2, 1);
+        range.deleteContents();
+
+        // Children inside d1 and d2 must be deleted
+        assertNull(page.getElementById("s1"));
+        assertNull(page.getElementById("s2"));
+
+        // Boundary containers MUST remain in the DOM tree
+        assertNotNull(page.getElementById("d1"));
+        assertNotNull(page.getElementById("d2"));
+    }
+
+    /**
+     * Verifies that containedNodes() collects nodes when endOffset
+     * equals the child count of a container that has no next sibling.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void containedNodes_endOffsetEqualsChildCountLastChild() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='root'>"
+                + "  <div id='d1'><span id='s1'>1</span></div>"
+                + "  <div id='d2'><span id='s2'>2</span></div>"
+                + "</div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final DomNode d1 = page.getElementById("d1");
+        final DomNode d2 = page.getElementById("d2");
+        final DomNode s1 = page.getElementById("s1");
+        final DomNode s2 = page.getElementById("s2");
+
+        // Range selecting from d1 offset 0 to d2 offset 1 (d2.getNextSibling() == null)
+        final SimpleRange range = new SimpleRange(d1, 0, d2, 1);
+        final List<DomNode> nodes = range.containedNodes();
+
+        assertTrue(nodes.contains(s1));
+        assertTrue(nodes.contains(s2));
+    }
+
+    /**
      * @throws Exception if test fails
      */
     @Test

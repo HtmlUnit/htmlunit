@@ -9,6 +9,13 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="fix" dev="rbri">
+                SimpleRange: fix deleteContents() and containedNodes() boundary node resolution to prevent illegal deletion
+                of end container elements when offset equals child count.
+            </action>
+            <action type="fix" dev="rbri">
+                SimpleRange: fix deleteContents() text truncation off-by-one bug when endOffset equals the end container text length.
+            </action>
+            <action type="fix" dev="rbri">
                 SimpleRange: fix cloneContents() to return an empty fragment when the range is collapsed inside an element container.
             </action>
             <action type="fix" dev="rbri">
