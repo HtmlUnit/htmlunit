@@ -3176,19 +3176,28 @@ public final class StyleAttributes implements Serializable {
         TEXT_ANCHOR_("text-anchor", "text-anchor", ff("start")),
 
         /** The style property {@code textAutospace}. */
-        TEXT_AUTOSPACE("textAutospace", "text-Autospace", chromeAndEdge("no-autospace"), ffLatest("no-autospace")),
+        TEXT_AUTOSPACE("textAutospace", "text-autospace", chromeAndEdge("no-autospace"), ffLatest("no-autospace")),
 
         /** The style property {@code text-autospace}. */
-        TEXT_AUTOSPACE_("text-autospace", "text-Autospace", ffLatest("no-autospace")),
+        TEXT_AUTOSPACE_("text-autospace", "text-autospace", ffLatest("no-autospace")),
 
         /** The style property {@code textBox}. */
-        TEXT_BOX("textBox", "text-box", chromeAndEdgeNormal()),
+        TEXT_BOX("textBox", "text-box", chromeAndEdgeNormal(), ffLatest("normal")),
+
+        /** The style property {@code text-box}. */
+        TEXT_BOX_("text-box", "text-box", ffLatest("normal")),
 
         /** The style property {@code textBoxEdge}. */
-        TEXT_BOX_EDGE("textBoxEdge", "text-box-edge", chromeAndEdgeAuto()),
+        TEXT_BOX_EDGE("textBoxEdge", "text-box-edge", chromeAndEdgeAuto(), ffLatest("auto")),
+
+        /** The style property {@code text-box-edge}. */
+        TEXT_BOX_EDGE_("text-box-edge", "text-box-edge", ffLatest("auto")),
 
         /** The style property {@code textBoxTrim}. */
-        TEXT_BOX_TRIM("textBoxTrim", "text-box-trim", chromeAndEdgeNone()),
+        TEXT_BOX_TRIM("textBoxTrim", "text-box-trim", chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code text-box-trim}. */
+        TEXT_BOX_TRIM_("text-box-trim", "text-box-trim", ffLatest("none")),
 
         /** The style property {@code textCombineUpright}. */
         TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chromeAndEdgeNone(), ffNone()),
