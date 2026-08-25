@@ -9,6 +9,9 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="fix" dev="rbri">
+                SimpleRange: insertNode() now uses DomText.splitText() when inserting within text nodes for proper DOM specification compliance.
+            </action>
+            <action type="fix" dev="rbri">
                 SimpleRange: fix deleteContents() and containedNodes() boundary node resolution to prevent illegal deletion
                 of end container elements when offset equals child count.
             </action>

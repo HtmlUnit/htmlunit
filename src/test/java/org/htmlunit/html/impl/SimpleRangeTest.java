@@ -21,6 +21,7 @@ import java.util.List;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlPage;
 import org.junit.jupiter.api.Test;
 
@@ -288,6 +289,55 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         range.insertNode(span);
 
         assertEquals("<div id=\"div\">Hello<span>xyz</span>World</div>", div.asXml());
+    }
+
+    /**
+     * Verifies that insertNode() inside a DomText correctly splits the text node
+     * into two clean DomText siblings using DOM splitText.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void insertNode_splitsDomTextCorrectly() throws Exception {
+        final String html = "<html><body><div id='div'>HelloWorld</div></body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomNode div = page.getElementById("div");
+        final DomText textNode = (DomText) div.getFirstChild();
+
+        final SimpleRange range = new SimpleRange(textNode, 5, textNode, 5);
+        final DomNode span = page.createElement("span");
+        span.setTextContent("123");
+
+        range.insertNode(span);
+
+        // Verify parent contains 3 children: DomText("Hello"), Span("123"), DomText("World")
+        assertEquals(3, div.getChildNodes().getLength());
+        assertEquals("Hello", div.getChildNodes().item(0).getTextContent());
+        assertEquals("span", div.getChildNodes().item(1).getNodeName());
+        assertEquals("World", div.getChildNodes().item(2).getTextContent());
+
+        assertEquals("<div id=\"div\">Hello<span>123</span>World</div>", div.asXml());
+    }
+
+    /**
+     * Verifies that insertNode() at the end boundary of a text node (offset == length)
+     * does not duplicate text in the DOM tree.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void insertNode_atTextNodeBoundary_doesNotDuplicateText() throws Exception {
+        final String html = "<html><body><div id='div'>Hello</div></body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomNode div = page.getElementById("div");
+        final DomText textNode = (DomText) div.getFirstChild();
+
+        // Text length is 5 ("Hello"); insertion offset is 5 (at the very end of the text node)
+        final SimpleRange range = new SimpleRange(textNode, 5, textNode, 5);
+        final DomNode span = page.createElement("span");
+        span.setTextContent("123");
+
+        range.insertNode(span);
+
+        assertEquals("<div id=\"div\">Hello<span>123</span></div>", div.asXml().trim());
     }
 
     /**

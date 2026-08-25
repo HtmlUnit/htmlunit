@@ -411,7 +411,12 @@ public class SimpleRange implements Serializable {
      * @param newNode The node to insert at the start of the Range
      */
     public void insertNode(final DomNode newNode) {
-        if (isOffsetChars(startContainer_)) {
+        if (startContainer_ instanceof DomText textNode) {
+            final DomText secondPart = textNode.splitText(startOffset_);
+            final DomNode parent = textNode.getParentNode();
+            insertNodeOrDocFragment(parent, newNode, secondPart);
+        }
+        else if (isOffsetChars(startContainer_)) {
             final DomNode split = startContainer_.cloneNode(false);
             String text = getText(startContainer_);
             if (startOffset_ > -1 && startOffset_ < text.length()) {
@@ -419,7 +424,7 @@ public class SimpleRange implements Serializable {
             }
             setText(startContainer_, text);
             text = getText(split);
-            if (startOffset_ > -1 && startOffset_ < text.length()) {
+            if (startOffset_ > -1 && startOffset_ <= text.length()) {
                 text = text.substring(startOffset_);
             }
             setText(split, text);
