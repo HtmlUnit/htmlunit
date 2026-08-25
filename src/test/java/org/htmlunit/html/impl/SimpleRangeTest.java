@@ -63,6 +63,9 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         assertEquals("abcd", range.toString());
     }
 
+    /**
+     * @throws Exception if test fails
+     */
     @Test
     public void selectNodeVsSelectNodeContents() throws Exception {
         final String html = "<html><body><div id='parent'><p id='child'>text</p></div></body></html>";
@@ -84,24 +87,30 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         assertEquals(child, rangeSelectContents.getStartContainer());
         assertEquals(child, rangeSelectContents.getEndContainer());
         assertEquals(0, rangeSelectContents.getStartOffset());
-        assertEquals(1, rangeSelectContents.getEndOffset()); // 1 child node inside <p>
+        assertEquals(1, rangeSelectContents.getEndOffset());
     }
 
+    /**
+     * @throws Exception if test fails
+     */
     @Test
     public void cloneContentsSameContainerNotAncestor() throws Exception {
         final String html = "<html><body><div id='root'><p id='p1'>Hello World</p></div></body></html>";
         final HtmlPage page = loadPage(html);
         final DomNode p1 = page.getElementById("p1");
 
-        // Range where startContainer == endContainer, but neither is the root ancestor
+        // Offsets 0 to 1 select child #0 of <p> (the text node "Hello World")
         final SimpleRange range = new SimpleRange(p1, 0, p1, 1);
 
-        // Before fix: threw IllegalStateException("Unable to find end node clone.")
         final DomDocumentFragment fragment = range.cloneContents();
         assertNotNull(fragment);
-        assertEquals("<p id=\"p1\">Hello World</p>", fragment.asXml().trim());
+
+        assertEquals("Hello World", fragment.asXml().trim());
     }
 
+    /**
+     * @throws Exception if test fails
+     */
     @Test
     public void deleteContentsSameTextNode() throws Exception {
         final String html = "<html><body><div id='div'>Hello World</div></body></html>";
@@ -117,6 +126,9 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         assertEquals("Heorld", textNode.getTextContent());
     }
 
+    /**
+     * @throws Exception if test fails
+     */
     @Test
     public void constructorInvalidOffsetNormalizer() throws Exception {
         final String html = "<html><body><div id='div'>Sample</div></body></html>";
@@ -132,6 +144,9 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         assertTrue(range.isCollapsed());
     }
 
+    /**
+     * @throws Exception if test fails
+     */
     @Test
     public void collapseToStartAndEnd() throws Exception {
         final String html = "<html><body><div id='d1'>A</div><div id='d2'>B</div></body></html>";
@@ -156,6 +171,9 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         assertEquals(d2, range.getEndContainer());
     }
 
+    /**
+     * @throws Exception if test fails
+     */
     @Test
     public void getCommonAncestorContainer() throws Exception {
         final String html = "<html><body><div id='ancestor'>"
@@ -171,6 +189,9 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         assertEquals(ancestor, range.getCommonAncestorContainer());
     }
 
+    /**
+     * @throws Exception if test fails
+     */
     @Test
     public void insertNodeInsideTextNode() throws Exception {
         final String html = "<html><body><div id='div'>HelloWorld</div></body></html>";
@@ -187,6 +208,9 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         assertEquals("<div id=\"div\">Hello<span>xyz</span>World</div>", div.asXml());
     }
 
+    /**
+     * @throws Exception if test fails
+     */
     @Test
     public void containedNodes() throws Exception {
         final String html = "<html><body><div id='root'><p id='p1'>1</p><p id='p2'>2</p><p id='p3'>3</p></div></body></html>";
@@ -204,6 +228,9 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         assertTrue(nodes.contains(p3));
     }
 
+    /**
+     * @throws Exception if test fails
+     */
     @Test
     public void equalsAndHashCode() throws Exception {
         final String html = "<html><body><div id='div'>Test</div></body></html>";
@@ -248,8 +275,7 @@ public class SimpleRangeTest extends SimpleWebTestCase {
 
     /**
      * Deleting a range that spans whole element nodes (not just text
-     * offsets) -- confirms the node-removal loop in deleteContents() works
-     * correctly for element children.
+     * offsets).
      * @throws Exception if the test fails
      */
     @Test
@@ -260,8 +286,6 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final DomNode div = page.getElementById("d");
-        final DomNode spanA = page.getElementById("a");
-        final DomNode spanC = page.getElementById("c");
 
         // select from start of span A to end of span C (all three spans)
         final SimpleRange range = new SimpleRange(div, 0, div, 3);
@@ -446,6 +470,66 @@ public class SimpleRangeTest extends SimpleWebTestCase {
         assertTrue(div.getTextContent().contains("World"));
         assertTrue(wrapper.getTextContent().contains("World"));
         assertSame(div, wrapper.getParentNode());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cloneContents_elementContainer_returnsChildrenNotContainer() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='d'><span id='s1'>A</span><span id='s2'>B</span></div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomNode div = page.getElementById("d");
+
+        // Select child 0 (<span id='s1'>A</span>)
+        final SimpleRange range = new SimpleRange(div, 0, div, 1);
+        final DomDocumentFragment fragment = range.cloneContents();
+
+        assertNotNull(fragment);
+        assertEquals(1, fragment.getChildNodes().getLength());
+        assertEquals("<span id=\"s1\">A</span>", fragment.asXml().trim());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cloneContents_collapsedInElement_returnsEmptyFragment() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='d'><span id='s1'>A</span><span id='s2'>B</span></div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomNode div = page.getElementById("d");
+
+        // Collapsed at index 1 inside <div>
+        final SimpleRange range = new SimpleRange(div, 1, div, 1);
+        final DomDocumentFragment fragment = range.cloneContents();
+
+        assertNotNull(fragment);
+        assertEquals(0, fragment.getChildNodes().getLength());
+        assertEquals("", fragment.asXml().trim());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cloneContents_reversedBoundaries_handlesNodeMatching() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='d'><p id='p1'>First</p><p id='p2'>Second</p></div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomNode p1 = page.getElementById("p1");
+        final DomNode p2 = page.getElementById("p2");
+
+        // Start is p2 (after p1 in DOM order), End is p1
+        final SimpleRange range = new SimpleRange(p2, 0, p1, 1);
+
+        // Should not throw IllegalStateException("Unable to find start node clone.")
+        final DomDocumentFragment fragment = range.cloneContents();
+        assertNotNull(fragment);
     }
 
     /**

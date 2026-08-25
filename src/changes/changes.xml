@@ -9,6 +9,16 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="fix" dev="rbri">
+                SimpleRange: fix cloneContents() to return an empty fragment when the range is collapsed inside an element container.
+            </action>
+            <action type="fix" dev="rbri">
+                SimpleRange: fix cloneContents() node matching logic to prevent IllegalStateException when start and end containers are the same node.
+            </action>
+            <action type="fix" dev="rbri">
+                SimpleRange: cloneContents() now appends selected child nodes to the DocumentFragment instead of appending
+                the container element itself when startContainer equals endContainer.
+            </action>
+            <action type="fix" dev="rbri">
                 SimpleRange: selectNode() selects the node itself (so the container is the parent of the node
                 and the offsets are the node's position among siblings). This makes this spec conformant.
             </action>

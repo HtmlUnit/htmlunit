@@ -117,9 +117,13 @@ public class SimpleRange implements Serializable {
      * @return a {@link DomDocumentFragment} containing cloned contents of this range
      */
     public DomDocumentFragment cloneContents() {
+        if (isCollapsed()) {
+            final SgmlPage page = startContainer_ != null ? startContainer_.getPage() : null;
+            return new DomDocumentFragment(page);
+        }
+
         // Clone the common ancestor.
         final DomNode ancestor = getCommonAncestorContainer();
-
         if (ancestor == null) {
             return new DomDocumentFragment(null);
         }
@@ -146,8 +150,10 @@ public class SimpleRange implements Serializable {
                 if (start == e) {
                     startClone = ce;
                 }
-                else if (end == e) {
+                if (end == e) {
                     endClone = ce;
+                }
+                if (startClone != null && endClone != null) {
                     break;
                 }
             }
@@ -160,7 +166,7 @@ public class SimpleRange implements Serializable {
             throw new IllegalStateException("Unable to find end node clone.");
         }
         deleteAfter(endClone, endOffset_);
-        for (DomNode n = endClone; n != null; n = n.getParentNode()) {
+        for (DomNode n = endClone; n != null && n != ancestorClone; n = n.getParentNode()) {
             while (n.getNextSibling() != null) {
                 n.getNextSibling().remove();
             }
@@ -171,7 +177,7 @@ public class SimpleRange implements Serializable {
             throw new IllegalStateException("Unable to find start node clone.");
         }
         deleteBefore(startClone, startOffset_);
-        for (DomNode n = startClone; n != null; n = n.getParentNode()) {
+        for (DomNode n = startClone; n != null && n != ancestorClone; n = n.getParentNode()) {
             while (n.getPreviousSibling() != null) {
                 n.getPreviousSibling().remove();
             }
@@ -179,11 +185,13 @@ public class SimpleRange implements Serializable {
 
         final SgmlPage page = ancestor.getPage();
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
-        if (start == end) {
+
+        // Append text node clone directly, or append child nodes for element containers
+        if (start == end && isOffsetChars(start)) {
             fragment.appendChild(ancestorClone);
         }
         else {
-            for (final DomNode n : ancestorClone.getChildNodes()) {
+            for (final DomNode n : new ArrayList<>(ancestorClone.getChildNodes())) {
                 fragment.appendChild(n);
             }
         }
