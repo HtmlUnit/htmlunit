@@ -588,7 +588,7 @@ public class CssStyleSheet implements Serializable {
                     v3 = UNESCAPE_SELECTOR.matcher(v3).replaceAll("$1");
                 }
                 final String a3 = element.getAttributeDirect("class");
-                return selectsWhitespaceSeparated(v3, a3);
+                return matchesWhitespaceSeparated(v3, a3);
 
             case ATTRIBUTE_CONDITION:
                 final AttributeCondition attributeCondition = (AttributeCondition) condition;
@@ -644,22 +644,22 @@ public class CssStyleSheet implements Serializable {
                 final String v = beginHyphenAttributeCondition.getValue();
                 final String a = element.getAttribute(beginHyphenAttributeCondition.getLocalName());
                 if (beginHyphenAttributeCondition.isCaseInSensitive()) {
-                    return selectsHyphenSeparated(
+                    return matchesHyphenSeparated(
                             StringUtils.toRootLowerCase(v),
                             StringUtils.toRootLowerCase(a));
                 }
-                return selectsHyphenSeparated(v, a);
+                return matchesHyphenSeparated(v, a);
 
             case ONE_OF_ATTRIBUTE_CONDITION:
                 final AttributeCondition oneOfAttributeCondition = (AttributeCondition) condition;
                 final String v2 = oneOfAttributeCondition.getValue();
                 final String a2 = element.getAttribute(oneOfAttributeCondition.getLocalName());
                 if (oneOfAttributeCondition.isCaseInSensitive()) {
-                    return selectsOneOf(
+                    return matchesWhitespaceSeparated(
                             StringUtils.toRootLowerCase(v2),
                             StringUtils.toRootLowerCase(a2));
                 }
-                return selectsOneOf(v2, a2);
+                return matchesWhitespaceSeparated(v2, a2);
 
             case LANG_CONDITION:
                 final String lcLang = condition.getValue();
@@ -723,40 +723,7 @@ public class CssStyleSheet implements Serializable {
         }
     }
 
-    private static boolean selectsOneOf(final String condition, final String attribute) {
-        // attribute.equals(condition)
-        // || attribute.startsWith(condition + " ") || attriubte.endsWith(" " + condition)
-        // || attribute.contains(" " + condition + " ");
-
-        final int conditionLength = condition.length();
-        if (conditionLength < 1) {
-            return false;
-        }
-
-        final int attribLength = attribute.length();
-        if (attribLength < conditionLength) {
-            return false;
-        }
-        if (attribLength > conditionLength) {
-            if (' ' == attribute.charAt(conditionLength)
-                    && attribute.startsWith(condition)) {
-                return true;
-            }
-            if (' ' == attribute.charAt(attribLength - conditionLength - 1)
-                    && attribute.endsWith(condition)) {
-                return true;
-            }
-            if (attribLength + 1 > conditionLength) {
-                final StringBuilder tmp = new StringBuilder(conditionLength + 2);
-                tmp.append(' ').append(condition).append(' ');
-                return attribute.contains(tmp);
-            }
-            return false;
-        }
-        return attribute.equals(condition);
-    }
-
-    private static boolean selectsHyphenSeparated(final String condition, final String attribute) {
+    private static boolean matchesHyphenSeparated(final String condition, final String attribute) {
         final int conditionLength = condition.length();
         if (conditionLength < 1) {
             if (attribute != ATTRIBUTE_NOT_DEFINED) {
@@ -777,7 +744,7 @@ public class CssStyleSheet implements Serializable {
         return attribute.equals(condition);
     }
 
-    private static boolean selectsWhitespaceSeparated(final String condition, final String attribute) {
+    private static boolean matchesWhitespaceSeparated(final String condition, final String attribute) {
         final int conditionLength = condition.length();
         if (conditionLength < 1) {
             return false;

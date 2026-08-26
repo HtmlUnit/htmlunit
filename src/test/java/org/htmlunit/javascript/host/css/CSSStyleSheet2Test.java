@@ -351,5 +351,48 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         // Before the fix, 10cm calculated to ~3.78px, so min-width: 10cm incorrectly returned true.
         assertFalse(s1.getSheet().isActive());
     }
-}
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void selects_pseudoClass_has() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><style></style>\n"
+            + "  <div id='d1'><span class='foo'>a</span></div>\n"
+            + "  <div id='d2'><p>b</p></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        // :has with element selector
+        Selector selector = parseSelectors("div:has(span)").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d1"), null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d2"), null, false, true));
+
+        // :has with relative child combinator selector
+        selector = parseSelectors("div:has(> .foo)").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d1"), null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d2"), null, false, true));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void selects_conditionalSelector_oneOfAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><style></style>\n"
+            + "  <div id='d1' data-tags='foo\tbar'></div>\n"
+            + "  <div id='d2' data-tags='foo\nbar'></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        final Selector selector = parseSelectors("[data-tags~=bar]").get(0);
+
+        // Should match when values are separated by tab (\t) or newline (\n)
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d1"), null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d2"), null, false, true));
+    }
+}
