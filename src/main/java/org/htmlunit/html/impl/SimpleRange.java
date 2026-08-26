@@ -323,7 +323,9 @@ public class SimpleRange implements Serializable {
      * @return {@code true} if start container equals end container and start offset equals end offset
      */
     public boolean isCollapsed() {
-        return startContainer_ == endContainer_ && startOffset_ == endOffset_;
+        return startContainer_ != null
+                && startContainer_ == endContainer_
+                && startOffset_ == endOffset_;
     }
 
     /**
@@ -508,13 +510,67 @@ public class SimpleRange implements Serializable {
     /**
      * Reparents the contents of the Range to the given node and inserts the
      * node at the position of the start of the Range.
-     * @param newParent The node to surround the contents with.
+     * <p>
+     * Per the DOM spec, throws an {@code InvalidStateError} if any non-Text
+     * node is only partially contained by the range (i.e. the range's start
+     * or end boundary splits an element, leaving one boundary tag inside the
+     * range and the other outside). A range that spans only Text nodes, or
+     * that fully encloses every element it touches, is always valid.
+     * </p>
+     *
+     * @param newParent the node to surround the contents with
+     * @throws DOMException {@code INVALID_STATE_ERR} if any non-Text node is
+     *     partially contained in this range
      */
     public void surroundContents(final DomNode newParent) {
+        if (hasPartiallyContainedNonTextNode()) {
+            throw new DOMException(DOMException.INVALID_STATE_ERR, "The range partially contains a non-Text node.");
+        }
+
         newParent.appendChild(extractContents());
         insertNode(newParent);
         setStart(newParent, 0);
         setEnd(newParent, getMaxOffset(newParent));
+    }
+
+    /**
+     * Returns whether any non-Text node in the tree is "partially contained"
+     * by this range -- meaning it is an ancestor of exactly one boundary
+     * container, not both. Text nodes are explicitly exempted by the spec.
+     */
+    private boolean hasPartiallyContainedNonTextNode() {
+        if (startContainer_ == null || endContainer_ == null) {
+            return false;
+        }
+        if (startContainer_ == endContainer_) {
+            return false;
+        }
+
+        // Collect all ancestors of the start container (excluding the common
+        // ancestor itself, which by definition contains both sides)
+        final DomNode common = getCommonAncestorContainer();
+
+        // walk up from start -- any non-Text ancestor that is NOT also an
+        // ancestor of end (i.e. stops at or before the common ancestor) is
+        // partially contained
+        DomNode n = startContainer_.getParentNode();
+        while (n != null && n != common) {
+            if (!(n instanceof DomText)) {
+                return true;
+            }
+            n = n.getParentNode();
+        }
+
+        // walk up from end -- same check from the other side
+        n = endContainer_.getParentNode();
+        while (n != null && n != common) {
+            if (!(n instanceof DomText)) {
+                return true;
+            }
+            n = n.getParentNode();
+        }
+
+        return false;
     }
 
     /**
@@ -587,7 +643,11 @@ public class SimpleRange implements Serializable {
             final DomNodeList<DomNode> children = node.getChildNodes();
             for (int i = 0; i < offset && i < children.getLength(); i++) {
                 final DomNode child = children.get(i);
+
                 child.remove();
+                // Removing item at index i shifts the live list left; decrement both
+                // i and offset so the loop re-examines the new item at this position
+                // rather than skipping it.
                 i--;
                 offset--;
             }

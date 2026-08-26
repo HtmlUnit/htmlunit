@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html.impl;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.List;
@@ -23,7 +24,10 @@ import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlSpan;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.DOMException;
 
 /**
  * Tests for SimpleRange.
@@ -577,33 +581,6 @@ public class SimpleRangeTest extends SimpleWebTestCase {
     }
 
     /**
-     * Method surroundContents() must wrap the selected content inside the given
-     * new parent node and insert the new parent in place of the selection.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void surroundContents_wrapsSelectedContent() throws Exception {
-        final String html = "<html><body>"
-                + "<div id='d'>Hello World</div>"
-                + "</body></html>";
-        final HtmlPage page = loadPage(html);
-
-        final DomNode div = page.getElementById("d");
-        final DomNode textNode = div.getFirstChild();
-
-        final SimpleRange range = new SimpleRange(textNode, 6, textNode, 11); // "World"
-
-        final org.htmlunit.html.HtmlSpan wrapper =
-                (org.htmlunit.html.HtmlSpan) page.createElement("span");
-        range.surroundContents(wrapper);
-
-        // the wrapper must now be inside the div
-        assertTrue(div.getTextContent().contains("World"));
-        assertTrue(wrapper.getTextContent().contains("World"));
-        assertSame(div, wrapper.getParentNode());
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -806,7 +783,7 @@ public class SimpleRangeTest extends SimpleWebTestCase {
     @Test
     public void getCommonAncestorContainer_noCommonAncestor_returnsNull() throws Exception {
         final String html1 = "<html><body><div id='d1'>A</div></body></html>";
-        final String html2 = "<html><body><div id='d2'>B</div></body></html>";
+        final String html2 = "<html><body><div><div id='d2'>B</div><div></body></html>";
 
         final HtmlPage page1 = loadPage(html1);
         final HtmlPage page2 = loadPage(html2);
@@ -816,5 +793,101 @@ public class SimpleRangeTest extends SimpleWebTestCase {
 
         final SimpleRange range = new SimpleRange(d1, 0, d2, 1);
         assertNull(range.getCommonAncestorContainer());
+    }
+
+    /**
+     * Method surroundContents() must wrap the selected content inside the given
+     * new parent node and insert the new parent in place of the selection.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void surroundContents_wrapsSelectedContent() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='d'>Hello World</div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final DomNode div = page.getElementById("d");
+        final DomNode textNode = div.getFirstChild();
+
+        // "World"
+        final SimpleRange range = new SimpleRange(textNode, 6, textNode, 11);
+
+        final HtmlSpan wrapper = (HtmlSpan) page.createElement("span");
+        range.surroundContents(wrapper);
+
+        // the wrapper must now be inside the div
+        assertTrue(div.getTextContent().contains("World"));
+        assertTrue(wrapper.getTextContent().contains("World"));
+        assertSame(div, wrapper.getParentNode());
+    }
+
+    /**
+     * Surrounding a range that FULLY contains all selected nodes must succeed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void surroundContents_fullyContainedRange_succeeds() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='d'>Hello <b id='b'>World</b></div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final DomNode div = page.getElementById("d");
+
+        // select just the <b> element, fully enclosed
+        final SimpleRange range = new SimpleRange(div, 1, div, 2);
+        final HtmlSpan wrapper = (HtmlSpan) page.createElement("span");
+
+        // must not throw
+        range.surroundContents(wrapper);
+        assertNotNull(wrapper.getParentNode());
+    }
+
+    /**
+     * KEY CASE: surrounding a range that PARTIALLY contains a non-Text node
+     * (the range starts mid-element and the element's boundary is split)
+     * must throw InvalidStateError per the DOM spec.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void surroundContents_partiallyContainedNonTextNode_throws() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='d'><b id='b'>bold text</b> normal text</div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final DomNode bold = page.getElementById("b");
+        final DomNode boldText = bold.getFirstChild();       // "bold text"
+        final DomNode div = page.getElementById("d");
+        final DomNode divText = div.getLastChild();          // " normal text"
+
+        // range starts INSIDE <b> (at offset 5 of its text) and ends OUTSIDE
+        // it (in div's own text node) -- <b> is partially contained: its
+        // opening tag is inside the range, its closing tag is outside
+        final SimpleRange range = new SimpleRange(boldText, 5, divText, 7);
+        final HtmlSpan wrapper = (HtmlSpan) page.createElement("span");
+
+        Assertions.assertThrows(DOMException.class, () -> range.surroundContents(wrapper));
+    }
+
+    /**
+     * A range spanning only Text nodes (no element boundaries split) must NOT
+     * throw, even if it crosses text node boundaries -- the spec's partial-
+     * containment check is explicitly relaxed for Text nodes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void surroundContents_textOnlyRange_doesNotThrow() throws Exception {
+        final String html = "<html><body>"
+                + "<div id='d'>Hello World</div>"
+                + "</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final DomNode textNode = page.getElementById("d").getFirstChild();
+        final SimpleRange range = new SimpleRange(textNode, 0, textNode, 11);
+        final HtmlSpan wrapper = (HtmlSpan) page.createElement("span");
+
+        assertDoesNotThrow(() -> range.surroundContents(wrapper));
     }
 }
