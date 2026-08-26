@@ -9,6 +9,9 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="fix" dev="rbri">
+                CSS: Fix centimeter unit conversion in media queries and CSS values.
+            </action>
+            <action type="fix" dev="rbri">
                 CSS: Fix height-based media queries (min-height, max-height, min-device-height, max-device-height) 
                 to evaluate against height instead of width.
             </action>

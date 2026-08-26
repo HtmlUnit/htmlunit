@@ -328,4 +328,28 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         assertFalse(s3.getSheet().isActive()); // min-device-height: 500px (400 >= 500 is false)
         assertTrue(s4.getSheet().isActive());  // max-device-height: 500px (400 <= 500 is true)
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isActive_mediaQueryCentimeter() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "  <style id='s1' media='(min-width: 10cm)'></style>\n"
+            + "</head><body></body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final WebWindow window = page.getEnclosingWindow();
+
+        // Standard DPI is 96 -> 10cm is ~377.95px
+        window.setInnerWidth(100);
+
+        final HtmlStyle s1 = (HtmlStyle) page.getElementById("s1");
+
+        // 10cm (~377.95px) > innerWidth (100px), so min-width: 10cm must be false.
+        // Before the fix, 10cm calculated to ~3.78px, so min-width: 10cm incorrectly returned true.
+        assertFalse(s1.getSheet().isActive());
+    }
 }
+
