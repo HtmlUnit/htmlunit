@@ -162,7 +162,7 @@ public class CssStyleSheet implements Serializable {
     private final Map<CSSImportRuleImpl, CssStyleSheet> imports_ = new HashMap<>();
 
     /** cache parsed media strings. */
-    private static final Map<String, MediaListImpl> MEDIA = new HashMap<>();
+    private static final Map<String, MediaListImpl> MEDIA = Collections.synchronizedMap(new HashMap<>(100));
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private final String uri_;
