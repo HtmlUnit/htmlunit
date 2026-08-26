@@ -1374,28 +1374,28 @@ public class CssStyleSheet implements Serializable {
 
                     case "max-height":
                         val = pixelValue(property.getValue(), webWindow);
-                        if (val == -1 || val < webWindow.getInnerWidth()) {
+                        if (val == -1 || val < webWindow.getInnerHeight()) {
                             return false;
                         }
                         break;
 
                     case "min-height":
                         val = pixelValue(property.getValue(), webWindow);
-                        if (val == -1 || val > webWindow.getInnerWidth()) {
+                        if (val == -1 || val > webWindow.getInnerHeight()) {
                             return false;
                         }
                         break;
 
                     case "max-device-height":
                         val = pixelValue(property.getValue(), webWindow);
-                        if (val == -1 || val < webWindow.getScreen().getWidth()) {
+                        if (val == -1 || val < webWindow.getScreen().getHeight()) {
                             return false;
                         }
                         break;
 
                     case "min-device-height":
                         val = pixelValue(property.getValue(), webWindow);
-                        if (val == -1 || val > webWindow.getScreen().getWidth()) {
+                        if (val == -1 || val > webWindow.getScreen().getHeight()) {
                             return false;
                         }
                         break;
@@ -1555,7 +1555,7 @@ public class CssStyleSheet implements Serializable {
                     return ((dpi / 25.4f) * cssValue.getDoubleValue()) / 4d;
                 case CENTIMETER:
                     dpi = webWindow.getScreen().getDeviceXDPI();
-                    return (dpi / 254f) * cssValue.getDoubleValue();
+                    return (dpi / 2.54f) * cssValue.getDoubleValue();
                 case POINT:
                     dpi = webWindow.getScreen().getDeviceXDPI();
                     return (dpi / 72f) * cssValue.getDoubleValue();

@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.css;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebWindow;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.cssparser.parser.CSSErrorHandler;
@@ -291,5 +292,40 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final HtmlElement element = (HtmlElement) list.item(0);
         final ComputedCssStyleDeclaration style = htmlPage.getEnclosingWindow().getComputedStyle(element, null);
         assertEquals(getExpectedAlerts()[0], style.toString());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isActive_mediaQueryHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "  <style id='s1' media='(min-height: 500px)'></style>\n"
+            + "  <style id='s2' media='(max-height: 500px)'></style>\n"
+            + "  <style id='s3' media='(min-device-height: 1200px)'></style>\n"
+            + "  <style id='s4' media='(max-device-height: 1200px)'></style>\n"
+            + "</head><body></body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final WebWindow window = page.getEnclosingWindow();
+
+        // Set width and height to distinct values so width-vs-height bugs trigger failures
+        window.setInnerWidth(800);
+        window.setInnerHeight(300);
+        // screen is 1920x1080
+
+        final HtmlStyle s1 = (HtmlStyle) page.getElementById("s1");
+        final HtmlStyle s2 = (HtmlStyle) page.getElementById("s2");
+        final HtmlStyle s3 = (HtmlStyle) page.getElementById("s3");
+        final HtmlStyle s4 = (HtmlStyle) page.getElementById("s4");
+
+        // innerHeight is 300px
+        assertFalse(s1.getSheet().isActive()); // min-height: 500px (300 >= 500 is false)
+        assertTrue(s2.getSheet().isActive());  // max-height: 500px (300 <= 500 is true)
+
+        // device height is 1080px
+        assertFalse(s3.getSheet().isActive()); // min-device-height: 500px (400 >= 500 is false)
+        assertTrue(s4.getSheet().isActive());  // max-device-height: 500px (400 <= 500 is true)
     }
 }
