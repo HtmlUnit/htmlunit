@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host.css;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebWindow;
@@ -23,7 +25,10 @@ import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.CSSOMParser;
 import org.htmlunit.cssparser.parser.CSSParseException;
+import org.htmlunit.cssparser.parser.Locator;
+import org.htmlunit.cssparser.parser.condition.Condition;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
+import org.htmlunit.cssparser.parser.selector.ElementSelector;
 import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.parser.selector.SelectorListImpl;
@@ -430,4 +435,82 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         assertFalse(CssStyleSheet.selects(browserVersion, selector, d3, null, false, true));
         assertFalse(CssStyleSheet.selects(browserVersion, selector, d4, null, false, true));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void validateSelectors_nthPseudoClasses() throws Exception {
+        final HtmlPage page = loadPage(DOCTYPE_HTML + "<html><body></body></html>");
+
+        // Valid formulas for all nth- variants should pass validation without throwing CSSException
+        SelectorList selectors = parseSelectors(":nth-last-child(odd)");
+        CssStyleSheet.validateSelectors(selectors, page);
+
+        selectors = parseSelectors(":nth-of-type(2n+1)");
+        CssStyleSheet.validateSelectors(selectors, page);
+
+        selectors = parseSelectors(":nth-last-of-type(1)");
+        CssStyleSheet.validateSelectors(selectors, page);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void validateSelectors_invalidNthPseudoClass() throws Exception {
+        final String html = DOCTYPE_HTML + "<html><body></body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final SelectorList selectors = parseSelectors(":nth-last-child(invalid)");
+        assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectors, page));
+
+        final SelectorList selectors2 = parseSelectors(":nth-of-type(invalid)");
+        assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectors2, page));
+
+        final SelectorList selectors3 = parseSelectors(":nth-last-of-type(invalid)");
+        assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectors3, page));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void validateSelectors_nthPseudoClassValidation() throws Exception {
+        final HtmlPage page = loadPage(DOCTYPE_HTML + "<html><body></body></html>");
+
+        final Condition invalidCondition = new Condition() {
+            @Override
+            public ConditionType getConditionType() {
+                return ConditionType.PSEUDO_CLASS_CONDITION;
+            }
+            @Override
+            public String getValue() {
+                return "nth-last-child(invalid)";
+            }
+            @Override
+            public String getLocalName() {
+                return null;
+            }
+            @Override
+            public Locator getLocator() {
+                return null;
+            }
+            @Override
+            public void setLocator(Locator locator) {
+                //
+            }
+        };
+
+        final ElementSelector selector = new ElementSelector(null, null);
+        selector.addCondition(invalidCondition);
+
+        final SelectorListImpl selectorList = new SelectorListImpl();
+        selectorList.add(selector);
+
+        // Before fix: returned normally (isValidCondition returned true for nth-last-child(invalid))
+        // After fix: throws CSSException because "invalid" formula fails NTH validation
+        assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectorList, page));
+    }
+
 }

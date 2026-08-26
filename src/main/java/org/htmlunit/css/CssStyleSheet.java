@@ -1220,10 +1220,14 @@ public class CssStyleSheet implements Serializable {
                     value = value.substring(0, value.indexOf('(') + 1) + ')';
                 }
 
-                if ("nth-child()".equals(value)) {
+                if ("nth-child()".equals(value)
+                        || "nth-last-child()".equals(value)
+                        || "nth-of-type()".equals(value)
+                        || "nth-last-of-type()".equals(value)) {
                     final String arg = org.apache.commons.lang3.StringUtils
                                         .substringBetween(condition.getValue(), "(", ")").trim();
-                    return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
+                    return "even".equalsIgnoreCase(arg)
+                            || "odd".equalsIgnoreCase(arg)
                             || NTH_NUMERIC.matcher(arg).matches()
                             || NTH_COMPLEX.matcher(arg).matches();
                 }

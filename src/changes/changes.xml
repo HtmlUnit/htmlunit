@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
+            <action type="fix" dev="rbri">
+                CSS: Fix selector validation for nth-last-child, nth-of-type, and nth-last-of-type pseudo-classes.
+            </action>
             <action type="update" dev="rbri">
                 CSS: Optimize nth-child calculations by replacing floating-point division with exact integer modulo arithmetic.
             </action>
