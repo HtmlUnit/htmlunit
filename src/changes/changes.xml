@@ -9,6 +9,10 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="fix" dev="rbri">
+                CSS: Fix NullPointerException when evaluating relative selector with next sibling combinator (+) 
+                on an element without a next sibling element.
+            </action>
+            <action type="fix" dev="rbri">
                 SimpleRange: surroundContents() now correctly throws an InvalidStateError DOMException when
                 any non-Text node is only partially contained by the range.
             </action>

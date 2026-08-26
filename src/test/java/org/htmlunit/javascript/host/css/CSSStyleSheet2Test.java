@@ -253,6 +253,28 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void selects_relativeSelector_nextSiblingCombinator_nullNextSibling() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><style></style>\n"
+            + "  <div id='d1'></div>\n"
+            + "  <div id='d2'></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        final Selector selector = parseSelectors(":has(+ div)").get(0);
+
+        // d1 has a next sibling element (d2) -> true
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d1"), null, false, true));
+
+        // d2 has no next sibling element (getNextElementSibling() returns null) -> false (should not throw NPE)
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d2"), null, false, true));
+    }
+
+    /**
      * Test for #1300.
      * @throws Exception if the test fails
      */
