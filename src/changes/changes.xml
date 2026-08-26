@@ -12,9 +12,6 @@
                 CSS: Replace unbounded unsynchronized HashMap static cache for media queries with a thread-safe.
             </action>
             <action type="fix" dev="rbri">
-                CSS: Expand selector unescaping support to handle hexadecimal code point sequences and trailing whitespace in unquoted attribute selectors.
-            </action>
-            <action type="fix" dev="rbri">
                 CSS: Fix selector validation for nth-last-child, nth-of-type, and nth-last-of-type pseudo-classes.
             </action>
             <action type="update" dev="rbri">

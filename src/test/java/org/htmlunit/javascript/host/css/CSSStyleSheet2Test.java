@@ -601,4 +601,23 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         selector = parseSelectors("[data-val=\\41 ]").get(0);
         assertTrue(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void selects_escapedIdWithHexCharacters() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><style></style></head><body>\n"
+            + "  <div id='fiddle\\Foo'><span id='fiddleSpan'></span></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        final DomElement fiddle = page.getHtmlElementById("fiddle\\Foo");
+
+        // Sizzle / CSS selector #fiddle\\Foo (escaped backslash before hex character 'F')
+        final Selector selector = parseSelectors("#fiddle\\\\Foo").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, fiddle, null, false, true));
+    }
 }

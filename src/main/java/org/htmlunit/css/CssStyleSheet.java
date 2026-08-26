@@ -35,7 +35,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
@@ -149,8 +148,7 @@ public class CssStyleSheet implements Serializable {
 
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
     private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
-    private static final Pattern UNESCAPE_SELECTOR_PATTERN
-                                    = Pattern.compile("\\\\(?:([0-9a-fA-F]{1,6})[ \t\r\n\f]?|(.))");
+    private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\].:])");
 
     /** The parsed stylesheet which this host object wraps. */
     private final CSSStyleSheetImpl wrapped_;
@@ -587,7 +585,7 @@ public class CssStyleSheet implements Serializable {
             case CLASS_CONDITION:
                 String v3 = condition.getValue();
                 if (v3.indexOf('\\') > -1) {
-                    v3 = unescapeSelector(v3);
+                    v3 = UNESCAPE_SELECTOR.matcher(v3).replaceAll("$1");
                 }
                 final String a3 = element.getAttributeDirect("class");
                 return matchesWhitespaceSeparated(v3, a3);
@@ -597,7 +595,7 @@ public class CssStyleSheet implements Serializable {
                 String value = attributeCondition.getValue();
                 if (value != null) {
                     if (value.indexOf('\\') > -1) {
-                        value = unescapeSelector(value);
+                        value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
                     }
                     final String name = attributeCondition.getLocalName();
                     final String attrValue = element.getAttribute(name);
@@ -744,26 +742,6 @@ public class CssStyleSheet implements Serializable {
                     && attribute.startsWith(condition);
         }
         return attribute.equals(condition);
-    }
-
-    private static String unescapeSelector(final String value) {
-        if (value == null || !value.contains("\\")) {
-            return value;
-        }
-        final Matcher matcher = UNESCAPE_SELECTOR_PATTERN.matcher(value);
-        final StringBuilder sb = new StringBuilder(value.length());
-        while (matcher.find()) {
-            final String hex = matcher.group(1);
-            if (hex != null) {
-                final int codePoint = Integer.parseInt(hex, 16);
-                matcher.appendReplacement(sb, Matcher.quoteReplacement(new String(Character.toChars(codePoint))));
-            }
-            else {
-                matcher.appendReplacement(sb, Matcher.quoteReplacement(matcher.group(2)));
-            }
-        }
-        matcher.appendTail(sb);
-        return sb.toString();
     }
 
     private static boolean matchesWhitespaceSeparated(final String condition, final String attribute) {
