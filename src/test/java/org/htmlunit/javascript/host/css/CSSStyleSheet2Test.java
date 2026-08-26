@@ -513,4 +513,92 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectorList, page));
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void selects_escapedSelectors() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><style></style></head><body>\n"
+            + "  <div id='1a' class='foo.bar'></div>\n"
+            + "  <div id='foo:bar' class='a b'></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        final DomElement d1 = page.getHtmlElementById("1a");
+        final DomElement d2 = page.getHtmlElementById("foo:bar");
+
+        // Hex escape with single delimiting space (#\31 a matching id="1a")
+        Selector selector = parseSelectors("#\\31 a").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+
+        // 6-digit hex escape without space delimiter (#\000031a matching id="1a")
+        selector = parseSelectors("#\\000031a").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+
+        // Escaped dot character in class selector (.foo\.bar matching class="foo.bar")
+        selector = parseSelectors(".foo\\.bar").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+
+        // Escaped colon in ID selector (#foo\:bar matching id="foo:bar")
+        selector = parseSelectors("#foo\\:bar").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void selects_attributeSelector_hexEscapes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><style></style></head><body>\n"
+            + "  <div id='d1' data-val='1'></div>\n"
+            + "  <div id='d2' data-val='A'></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        final DomElement d1 = page.getHtmlElementById("d1");
+        final DomElement d2 = page.getHtmlElementById("d2");
+
+        // Hex escape \31 (with trailing space) represents '1'
+        Selector selector = parseSelectors("[data-val='\\31 ']").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+
+        // Hex escape \41 (with trailing space) represents 'A'
+        selector = parseSelectors("[data-val='\\41 ']").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
+
+        // 6-digit hex escape \000031 represents '1'
+        selector = parseSelectors("[data-val='\\000031']").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void selects_attributeSelector_unquotedHexEscapes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><style></style></head><body>\n"
+            + "  <div id='d1' data-val='1'></div>\n"
+            + "  <div id='d2' data-val='A'></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        final DomElement d1 = page.getHtmlElementById("d1");
+        final DomElement d2 = page.getHtmlElementById("d2");
+
+        // Unquoted hex escape \31 (with trailing space) represents '1'
+        // Before fix: unescapeSelector("\\31 ") returned "31 ", failing the assertion
+        Selector selector = parseSelectors("[data-val=\\31 ]").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+
+        // Unquoted hex escape \41 (with trailing space) represents 'A'
+        // Before fix: unescapeSelector("\\41 ") returned "41 ", failing the assertion
+        selector = parseSelectors("[data-val=\\41 ]").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
+    }
 }
