@@ -1009,8 +1009,12 @@ public class CssStyleSheet implements Serializable {
             return index == numerator && numerator > 0;
         }
 
-        final double n = (index - numerator) / (double) denominator;
-        return n >= 0 && n % 1 == 0;
+        final int diff = index - numerator;
+        if (denominator > 0) {
+            return diff >= 0 && diff % denominator == 0;
+        }
+        // denominator < 0
+        return diff <= 0 && diff % denominator == 0;
     }
 
     /**

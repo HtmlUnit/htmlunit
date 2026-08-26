@@ -395,4 +395,39 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d1"), null, false, true));
         assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d2"), null, false, true));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void selects_pseudoClass_nthChild() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><style></style></head><body>\n"
+            + "  <div id='d1'></div>\n"
+            + "  <div id='d2'></div>\n"
+            + "  <div id='d3'></div>\n"
+            + "  <div id='d4'></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        final DomElement d1 = page.getHtmlElementById("d1");
+        final DomElement d2 = page.getHtmlElementById("d2");
+        final DomElement d3 = page.getHtmlElementById("d3");
+        final DomElement d4 = page.getHtmlElementById("d4");
+
+        // :nth-child(2n+1) -> matches 1st and 3rd elements (d1, d3)
+        Selector selector = parseSelectors(":nth-child(2n+1)").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d3, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, d4, null, false, true));
+
+        // :nth-child(-n+2) -> matches 1st and 2nd elements (d1, d2)
+        selector = parseSelectors(":nth-child(-n+2)").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, d3, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, d4, null, false, true));
+    }
 }

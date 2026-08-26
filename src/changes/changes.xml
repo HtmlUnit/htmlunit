@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
+            <action type="update" dev="rbri">
+                CSS: Optimize nth-child calculations by replacing floating-point division with exact integer modulo arithmetic.
+            </action>
             <action type="fix" dev="rbri">
                 CSS: Fix whitespace handling in one-of attribute selector (~=) to support tabs, newlines, and other whitespace characters.
             </action>
