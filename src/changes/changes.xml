@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
+            <action type="add" dev="rhino">
+                core-js: 'new.target' support implemented.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: parameter forwarding when the Proxy 'construct' trap forwards its argument list to  Reflect.construct fixed.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: Small optimization for context handling.
+            </action>
             <action type="fix" dev="rbri">
                 CSS: Replace unbounded unsynchronized HashMap static cache for media queries with a thread-safe.
             </action>
@@ -24,11 +33,11 @@
                 CSS: Fix centimeter unit conversion in media queries and CSS values.
             </action>
             <action type="fix" dev="rbri">
-                CSS: Fix height-based media queries (min-height, max-height, min-device-height, max-device-height) 
+                CSS: Fix height-based media queries (min-height, max-height, min-device-height, max-device-height)
                 to evaluate against height instead of width.
             </action>
             <action type="fix" dev="rbri">
-                CSS: Fix NullPointerException when evaluating relative selector with next sibling combinator (+) 
+                CSS: Fix NullPointerException when evaluating relative selector with next sibling combinator (+)
                 on an element without a next sibling element.
             </action>
             <action type="fix" dev="rbri">

@@ -148,7 +148,7 @@ public class HTMLAllCollection extends AbstractList implements Callable {
      * {@inheritDoc}
      */
     @Override
-    public Object call(final Context cx, final VarScope scope, final Scriptable thisObj, final Object[] args) {
+    public Object call(final Context cx, final VarScope scope, final Object thisObj, final Object[] args) {
         boolean nullIfNotFound = false;
         if (args[0] instanceof Number number) {
             final double val = number.doubleValue();

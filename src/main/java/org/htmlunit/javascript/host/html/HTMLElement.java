@@ -356,7 +356,8 @@ public class HTMLElement extends Element {
                 try {
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                     final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
-                    final EventHandler eventHandler = new EventHandler(getDomNodeOrDie(), name.substring(2), value);
+                    final EventHandler eventHandler =
+                            new EventHandler(getParentScope(), getDomNodeOrDie(), name.substring(2), value);
                     eventHandler.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), "Function"));
                     method.invoke(this, eventHandler);
                 }

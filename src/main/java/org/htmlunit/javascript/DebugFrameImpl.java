@@ -75,7 +75,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void onEnter(final Context cx, final VarScope activation, final Scriptable thisObj, final Object[] args) {
+    public void onEnter(final Context cx, final VarScope activation, final Object thisObj, final Object[] args) {
         if (LOG.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder();
 
@@ -88,7 +88,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                 sb.append("   ");
                 parent = parent.getParentScope();
             }
-            final String functionName = getFunctionName(thisObj);
+            final String functionName = getFunctionName((Scriptable) thisObj);
             sb.append(functionName).append('(');
             final int nbParams = functionOrScript_.getParamCount();
             for (int i = 0; i < nbParams; i++) {

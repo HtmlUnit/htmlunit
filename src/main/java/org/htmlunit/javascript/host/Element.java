@@ -153,7 +153,7 @@ public class Element extends Node {
         final DomElement htmlElt = getDomNodeOrDie();
 
         // TODO: check that it is an "allowed" event for the browser, and take care to the case
-        final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
+        final BaseFunction eventHandler = new EventHandler(getParentScope(), htmlElt, eventName, attrValue);
         eventHandler.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), "Function"));
 
         setEventHandler(eventName, eventHandler);

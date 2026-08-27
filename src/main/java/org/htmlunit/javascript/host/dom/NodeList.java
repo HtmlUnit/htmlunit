@@ -208,7 +208,7 @@ public class NodeList extends AbstractList implements Callable {
      * {@inheritDoc}
      */
     @Override
-    public Object call(final Context cx, final VarScope scope, final Scriptable thisObj, final Object[] args) {
+    public Object call(final Context cx, final VarScope scope, final Object thisObj, final Object[] args) {
         if (args.length == 0) {
             throw JavaScriptEngine.reportRuntimeError("Zero arguments; need an index or a key.");
         }

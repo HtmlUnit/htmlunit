@@ -37,12 +37,13 @@ public class EventHandler extends BaseFunction {
     /**
      * Builds a function that will execute the given JavaScript code.
      *
+     * @param scope the scope
      * @param node the element for which the event is built
      * @param eventName the event name for which this handler is created
      * @param jsSnippet the JavaScript code snippet to execute
      */
-    public EventHandler(final DomNode node, final String eventName, final String jsSnippet) {
-        super();
+    public EventHandler(final VarScope scope, final DomNode node, final String eventName, final String jsSnippet) {
+        super(scope);
         node_ = node;
         eventName_ = eventName;
         jsSnippet_ = jsSnippet;
@@ -52,8 +53,8 @@ public class EventHandler extends BaseFunction {
      * {@inheritDoc}
      */
     @Override
-    public Object call(final Context cx, final VarScope scope,
-        final Scriptable thisObj, final Object[] args)
+    public Object call(final Context cx, final Object nt, final VarScope scope,
+        final Object thisObj, final Object[] args)
         throws JavaScriptException {
 
         // the js object to which this event is attached has to be the scope
@@ -92,10 +93,10 @@ public class EventHandler extends BaseFunction {
     public Object get(final String name, final Scriptable start) {
         // quick and dirty
         if ("toString".equals(name)) {
-            return new BaseFunction() {
+            return new BaseFunction(getParentScope()) {
                 @Override
-                public Object call(final Context cx, final VarScope scope,
-                        final Scriptable thisObj, final Object[] args) {
+                public Object call(final Context cx, final Object nt, final VarScope scope,
+                        final Object thisObj, final Object[] args) {
                     return "function on" + eventName_ + "(event) { " + jsSnippet_ + " }";
                 }
             };

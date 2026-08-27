@@ -46,7 +46,7 @@ public class FunctionWrapper implements Function, SymbolScriptable, Serializable
      * {@inheritDoc}
      */
     @Override
-    public Object call(final Context cx, final VarScope scope, final Scriptable thisObj, final Object[] args) {
+    public Object call(final Context cx, final VarScope scope, final Object thisObj, final Object[] args) {
         return wrapped_.call(cx, scope, thisObj, args);
     }
 
@@ -62,8 +62,8 @@ public class FunctionWrapper implements Function, SymbolScriptable, Serializable
      * {@inheritDoc}
      */
     @Override
-    public Scriptable construct(final Context cx, final VarScope scope, final Object[] args) {
-        return wrapped_.construct(cx, scope, args);
+    public Scriptable construct(final Context cx, final Object nt, final VarScope scope, final Object[] args) {
+        return wrapped_.construct(cx, nt, scope, args);
     }
 
     /**

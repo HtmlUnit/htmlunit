@@ -27,7 +27,6 @@ import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
@@ -347,10 +346,10 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(client_, html, collectedAlerts);
-        final Function mySpecialFunction = new BaseFunction() {
+        final Function mySpecialFunction = new BaseFunction(null) {
             @Override
-            public Object call(final Context cx, final VarScope scope,
-                    final Scriptable thisObj, final Object[] args) {
+            public Object call(final Context cx, final Object nt, final VarScope scope,
+                    final Object thisObj, final Object[] args) {
                 if (Thread.currentThread().isInterrupted()) {
                     throw new RuntimeException("My thread is already interrupted");
                 }

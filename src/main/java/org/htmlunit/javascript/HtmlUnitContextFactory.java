@@ -34,7 +34,6 @@ import org.htmlunit.corejs.javascript.Evaluator;
 import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.debug.Debugger;
 import org.htmlunit.html.HtmlElement;
@@ -292,7 +291,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     @Override
     protected Object doTopCall(final Callable callable,
             final Context cx, final VarScope scope,
-            final Scriptable thisObj, final Object[] args) {
+            final Object thisObj, final Object[] args) {
 
         final TimeoutContext tcx = (TimeoutContext) cx;
         tcx.startClock();
@@ -305,7 +304,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     @Override
     protected Object doTopCall(final Script script,
             final Context cx, final VarScope scope,
-            final Scriptable thisObj) {
+            final Object thisObj) {
 
         final TimeoutContext tcx = (TimeoutContext) cx;
         tcx.startClock();
