@@ -183,7 +183,7 @@ public class CssStyleSheet implements Serializable {
         CSS2_PSEUDO_CLASSES = Set.of("link", "visited", "hover", "active", "focus", "lang", "first-child");
 
         final Set<String> css3 = new HashSet<>(Arrays.asList(
-                "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
+                "checked", "disabled", "enabled", "indeterminate", "root", "target", "not()",
                 "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
                 "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
                 "optional", "required", "valid", "invalid"));
@@ -814,8 +814,8 @@ public class CssStyleSheet implements Serializable {
 
             case "checked":
                 return (element instanceof HtmlCheckBoxInput hcbi && hcbi.isChecked())
-                        || (element instanceof HtmlRadioButtonInput hrbi && hrbi.isChecked()
-                                || (element instanceof HtmlOption ho && ho.isSelected()));
+                        || (element instanceof HtmlRadioButtonInput hrbi && hrbi.isChecked())
+                                || (element instanceof HtmlOption ho && ho.isSelected());
 
             case "required":
                 return element instanceof HtmlElement he && he.isRequired();
@@ -1053,29 +1053,22 @@ public class CssStyleSheet implements Serializable {
      * @return the media parsed from the specified input source
      */
     public static MediaListImpl parseMedia(final String mediaString, final WebClient webClient) {
-        MediaListImpl media = MEDIA.get(mediaString);
-        if (media != null) {
-            return media;
-        }
+        return MEDIA.computeIfAbsent(mediaString, s -> {
+            // get us a pooled parser for efficiency because a new parser is expensive
+            try (PooledCSS3Parser pooledParser = webClient.getCSS3Parser()) {
+                final CSSOMParser parser = new CSSOMParser(pooledParser);
+                parser.setErrorHandler(webClient.getCssErrorHandler());
 
-        // get us a pooled parser for efficiency because a new parser is expensive
-        try (PooledCSS3Parser pooledParser = webClient.getCSS3Parser()) {
-            final CSSOMParser parser = new CSSOMParser(pooledParser);
-            parser.setErrorHandler(webClient.getCssErrorHandler());
-
-            media = new MediaListImpl(parser.parseMedia(mediaString));
-            MEDIA.put(mediaString, media);
-            return media;
-        }
-        catch (final Exception e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
+                return new MediaListImpl(parser.parseMedia(mediaString));
             }
-        }
+            catch (final Exception e) {
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
+                }
+            }
 
-        media = new MediaListImpl(null);
-        MEDIA.put(mediaString, media);
-        return media;
+            return new MediaListImpl(null);
+        });
     }
 
     /**

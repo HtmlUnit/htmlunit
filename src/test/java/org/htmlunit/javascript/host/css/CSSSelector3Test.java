@@ -790,6 +790,213 @@ public class CSSSelector3Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "SECTION"})
+    public void hasWithDescendantClass() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <div><span class='target'>inside</span></div>\n"
+                + "</section>\n"
+                + "<section>\n"
+                + "  <div><span>no match</span></div>\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('section:has(.target)');\n"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * :has() should match the ANCESTOR, not the element with the class itself.
+     * If the bug is present, the result will include the span or return 0
+     * instead of correctly returning the section.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "DIV"})
+    public void hasMatchesAncestorNotTarget() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<div>\n"
+                + "  <p class='highlight'>text</p>\n"
+                + "</div>\n"
+                + "<div>\n"
+                + "  <p>other</p>\n"
+                + "</div>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('div:has(.highlight)');\n"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The element matched by :has() must NOT itself carry the class —
+     * only a descendant does. This isolates the "tests element itself" bug:
+     * if selects() tests the section against .featured directly, it returns
+     * false (section has no class), so the result would be 0 instead of 1.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "SECTION"})
+    public void hasDoesNotTestElementItself() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <article class='featured'>a0</article>\n"
+                + "</section>\n"
+                + "<section class='featured'>\n"
+                + "  <article>a1</article>\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('section:has(.featured)');\n"
+                + "    log(items.length);\n"
+                // Must be the FIRST section (child has class), not the second (element itself has class)
+                + "    log(items[0].tagName);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * :has() with a deeply nested descendant (not a direct child).
+     * Tests that the traversal goes beyond one level deep.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "ARTICLE"})
+    public void hasWithDeeplyNestedDescendant() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<article>\n"
+                + "  <div>\n"
+                + "    <div>\n"
+                + "      <span>\n"
+                + "        <em id='deep'>deep</em>\n"
+                + "      </span>\n"
+                + "    </div>\n"
+                + "  </div>\n"
+                + "</article>\n"
+                + "<article>\n"
+                + "  <div><span>shallow</span></div>\n"
+                + "</article>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('article:has(#deep)');\n"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * :has() with a child combinator — only direct children qualify.
+     * section:has(> .direct) should NOT match when .direct is a grandchild.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "SECTION"})
+    public void hasWithChildCombinator() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <div class='direct'>direct child</div>\n"
+                + "</section>\n"
+                + "<section>\n"
+                + "  <div><span class='direct'>grandchild</span></div>\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('section:has(> .direct)');\n"
+                + "    log(items.length);\n"
+                // Only the first section qualifies; the second has .direct as a grandchild
+                + "    log(items[0].tagName);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * :has() should return 0 when no element has the matching descendant.
+     * Guards against false positives from the bug.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void hasNoMatch() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <article>a0</article>\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('section:has(.featured)');\n"
+                + "    log(items.length);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * @throws Exception if the test fails
