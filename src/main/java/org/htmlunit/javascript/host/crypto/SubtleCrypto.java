@@ -125,7 +125,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
 
     private NativePromise notImplemented() {
         return setupRejectedPromise(() ->
-                new DOMException("Operation is not supported", DOMException.NOT_SUPPORTED_ERR));
+                createDOMException("Operation is not supported", DOMException.NOT_SUPPORTED_ERR));
     }
 
     /**
@@ -296,13 +296,13 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             return setupRejectedPromise(() -> e);
         }
         catch (final InvalidAccessException e) {
-            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.INVALID_ACCESS_ERR));
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.INVALID_ACCESS_ERR));
         }
         catch (final IllegalArgumentException e) {
-            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
         catch (final GeneralSecurityException | UnsupportedOperationException e) {
-            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+            return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
                     DOMException.NOT_SUPPORTED_ERR));
         }
         return setupPromise(() -> createArrayBuffer(result));
@@ -397,13 +397,13 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             return setupRejectedPromise(() -> e);
         }
         catch (final InvalidAccessException e) {
-            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.INVALID_ACCESS_ERR));
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.INVALID_ACCESS_ERR));
         }
         catch (final IllegalArgumentException e) {
-            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
         catch (final GeneralSecurityException | UnsupportedOperationException e) {
-            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+            return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
                     DOMException.NOT_SUPPORTED_ERR));
         }
 
@@ -485,10 +485,10 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             return setupRejectedPromise(() -> e);
         }
         catch (final IllegalArgumentException e) {
-            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
         catch (final GeneralSecurityException | UnsupportedOperationException e) {
-            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+            return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
                     DOMException.NOT_SUPPORTED_ERR));
         }
         return setupPromise(() -> createArrayBuffer(digest));
@@ -582,10 +582,10 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             return setupRejectedPromise(() -> e);
         }
         catch (final IllegalArgumentException e) {
-            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
         catch (final GeneralSecurityException | UnsupportedOperationException e) {
-            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+            return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
                     DOMException.NOT_SUPPORTED_ERR));
         }
         return setupPromise(() -> result);
@@ -684,10 +684,10 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             return setupRejectedPromise(() -> e);
         }
         catch (final IllegalArgumentException e) {
-            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
         catch (final UnsupportedOperationException e) {
-            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+            return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
                     DOMException.NOT_SUPPORTED_ERR));
         }
         return setupPromise(() -> key);
@@ -742,7 +742,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         final byte[] result;
         try {
             if (!key.getExtractable()) {
-                return setupRejectedPromise(() -> new DOMException(
+                return setupRejectedPromise(() -> createDOMException(
                         "A parameter or an operation is not supported by the underlying object",
                         DOMException.INVALID_ACCESS_ERR));
             }
@@ -765,10 +765,10 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             }
         }
         catch (final IllegalArgumentException e) {
-            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
         catch (final UnsupportedOperationException e) {
-            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+            return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
                     DOMException.NOT_SUPPORTED_ERR));
         }
         return setupPromise(() -> createArrayBuffer(result));

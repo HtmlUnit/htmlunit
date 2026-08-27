@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
+            <action type="fix" dev="rbri">
+                SubtleCrypto promise rejections now returns a properly initialized DOMException instance with valid properties (e.g., name).
+            </action>
             <action type="add" dev="rhino">
                 core-js: 'new.target' support implemented.
             </action>

@@ -37,6 +37,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLUnknownElement;
 
@@ -405,6 +406,21 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
             final JSFunction reject = (JSFunction) getProperty(ctor, "reject");
             return (NativePromise) reject.call(Context.getCurrentContext(), scope, ctor, new Object[] {e.getMessage()});
         }
+    }
+
+    /**
+     * Creates a {@link DOMException} with proper parent scope and prototype initialized.
+     * This ensures JavaScript getters (such as {@code name}) are correctly resolved in Rhino.
+     *
+     * @param message the exception message
+     * @param errorCode the error code (e.g., {@link DOMException#SYNTAX_ERR})
+     * @return the initialized {@link DOMException} host object
+     */
+    protected DOMException createDOMException(final String message, final int errorCode) {
+        final DOMException domException = new DOMException(message, errorCode);
+        domException.setParentScope(getParentScope());
+        domException.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), domException.getClassName()));
+        return domException;
     }
 
     protected NativePromise setupRejectedPromise(final Supplier<Object> resolver) {

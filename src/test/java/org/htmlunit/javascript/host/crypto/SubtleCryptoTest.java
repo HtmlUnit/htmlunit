@@ -334,6 +334,69 @@ public class SubtleCryptoTest extends WebDriverTestCase {
     }
 
     /**
+     * Verifies that generating an ECDSA key pair with only 'verify' usage fails,
+     * because the resulting privateKey would have empty usages.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void generateKeyEcdsaVerifyOnly() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    window.crypto.subtle.generateKey(\n"
+            + "      { name: 'ECDSA', namedCurve: 'P-256' },\n"
+            + "      false,\n"
+            + "      ['verify']\n"
+            + "    ).then(function() {\n"
+            + "      log('success');\n"
+            + "    }).catch(function(e) {\n"
+            + "      logEx(e);\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that generating an RSA-OAEP key pair with only 'encrypt' usage fails,
+     * because the resulting privateKey would have empty usages.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void generateKeyRsaOaepEncryptOnly() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    window.crypto.subtle.generateKey(\n"
+            + "      {\n"
+            + "        name: 'RSA-OAEP',\n"
+            + "        modulusLength: 2048,\n"
+            + "        publicExponent: new Uint8Array([1, 0, 1]),\n"
+            + "        hash: 'SHA-256'\n"
+            + "      },\n"
+            + "      false,\n"
+            + "      ['encrypt']\n"
+            + "    ).then(function() {\n"
+            + "      log('success');\n"
+            + "    }).catch(function(e) {\n"
+            + "      logEx(e);\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
