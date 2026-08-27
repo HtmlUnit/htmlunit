@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
@@ -300,6 +301,9 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         }
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+        }
+        catch (final BadPaddingException e) {
+            return setupRejectedPromise(() -> createDOMException("Decryption failed", (short) 0)); // OperationError
         }
         catch (final GeneralSecurityException | UnsupportedOperationException e) {
             return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
