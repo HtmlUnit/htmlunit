@@ -400,6 +400,60 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("SyntaxError/DOMException")
+    public void generateKeyAesGcmInvalidUsage() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    window.crypto.subtle.generateKey(\n"
+            + "      { name: 'AES-GCM', length: 256 },\n"
+            + "      true, ['encrypt', 'sign']\n"
+            + "    ).then(function() {\n"
+            + "      log('success');\n"
+            + "    }).catch(function(e) {\n"
+            + "      logEx(e);\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void importKeyHmacInvalidUsage() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var rawKey = new Uint8Array(64);\n"
+            + "    window.crypto.subtle.importKey(\n"
+            + "      'raw', rawKey,\n"
+            + "      { name: 'HMAC', hash: { name: 'SHA-256' } },\n"
+            + "      true, ['sign', 'encrypt']\n"
+            + "    ).then(function() {\n"
+            + "      log('success');\n"
+            + "    }).catch(function(e) {\n"
+            + "      logEx(e);\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16", "rejected"},
             FF = {"rejected", "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16"},
             FF_ESR = {"rejected", "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16"})

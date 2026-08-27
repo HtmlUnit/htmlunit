@@ -917,7 +917,8 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @param algorithm the algorithm name
      * @param keyUsages the JS usages array
      * @return the validated, ordered list of usages
-     * @throws IllegalArgumentException if usages array is invalid or contains unrecognized values
+     * @throws IllegalArgumentException if usages array is invalid, contains unrecognized values,
+     *                                  or contains usages unsupported by the algorithm
      */
     static List<String> resolveKeyUsages(final String algorithm, final Scriptable keyUsages) {
         if (!JavaScriptEngine.isArrayLike(keyUsages)) {
@@ -934,9 +935,11 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             }
 
             final Set<String> supportedAlgorithms = OPERATION_TO_SUPPORTED_ALGORITHMS.get(usageStr);
-            if (supportedAlgorithms != null && supportedAlgorithms.contains(algorithm)) {
-                supportedKeyUsages.add(usageStr);
+            if (supportedAlgorithms == null || !supportedAlgorithms.contains(algorithm)) {
+                throw new IllegalArgumentException("An invalid or illegal string was specified");
             }
+
+            supportedKeyUsages.add(usageStr);
         });
 
         // maintain canonical ordering per RECOGNIZED_KEY_USAGES
