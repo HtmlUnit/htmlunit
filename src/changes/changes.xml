@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
+            <action type="fix" dev="rbri">
+                WebResponseData: Ensure BOM processing is applied consistently across Brotli and deflate decompressed streams.
+            </action>
+            <action type="fix" dev="rbri">
+                WebResponseData: Support all standard zlib headers during deflate stream decompression.
+            </action>
             <action type="update" dev="rbri">
                 Improved case-insensitive HTTP header handling in WebRequest.
             </action>

@@ -116,53 +116,45 @@ public class WebResponseData implements Serializable {
             if ("gzip-only-text/html".equals(encoding)) {
                 isGzip = MimeType.TEXT_HTML.equals(getHeader(headers, "content-type"));
             }
+
             if (isGzip) {
                 try {
                     stream = new GZIPInputStream(stream);
                 }
                 catch (final IOException e) {
-                    LOG.error("Reading gzip encodec content failed.", e);
+                    LOG.error("Reading gzip encoded content failed.", e);
                     stream.close();
                     stream = IOUtils.toInputStream(CONTENT_ENCODING_ERROR_HTML, ISO_8859_1);
                 }
-                if (stream != null && bomHeaders != null) {
-                    stream = BOMInputStream.builder().setInputStream(stream).setByteOrderMarks(bomHeaders).get();
-                }
-                return stream;
             }
-
-            if ("br".equals(encoding)) {
+            else if ("br".equals(encoding)) {
                 try {
                     stream = new BrotliInputStream(stream);
                 }
                 catch (final IOException e) {
-                    LOG.error("Reading Brotli encodec content failed.", e);
+                    LOG.error("Reading Brotli encoded content failed.", e);
                     stream.close();
                     stream = IOUtils.toInputStream(CONTENT_ENCODING_ERROR_HTML, ISO_8859_1);
                 }
-                return stream;
             }
-
-            if (StringUtils.containsIgnoreCase(encoding, "deflate")) {
+            else if (StringUtils.containsIgnoreCase(encoding, "deflate")) {
                 boolean zlibHeader = false;
-                if (stream.markSupported()) { // should be always the case as the content is in a byte[] or in a file
+                if (stream.markSupported()) {
                     stream.mark(2);
                     final byte[] buffer = new byte[2];
                     final int byteCount = IOUtils.read(stream, buffer, 0, 2);
-                    zlibHeader = byteCount == 2 && (((buffer[0] & 0xff) << 8) | (buffer[1] & 0xff)) == 0x789c;
+                    if (byteCount == 2) {
+                        final int header = ((buffer[0] & 0xff) << 8) | (buffer[1] & 0xff);
+                        zlibHeader = (header & 0x7800) == 0x7800 && (header % 31 == 0);
+                    }
                     stream.reset();
                 }
-                if (zlibHeader) {
-                    stream = new InflaterInputStream(stream);
-                }
-                else {
-                    stream = new InflaterInputStream(stream, new Inflater(true));
-                }
-                return stream;
+                stream = zlibHeader ? new InflaterInputStream(stream)
+                                    : new InflaterInputStream(stream, new Inflater(true));
             }
         }
 
-        if (stream != null && bomHeaders != null) {
+        if (stream != null && bomHeaders != null && bomHeaders.length > 0) {
             stream = BOMInputStream.builder().setInputStream(stream).setByteOrderMarks(bomHeaders).get();
         }
         return stream;
