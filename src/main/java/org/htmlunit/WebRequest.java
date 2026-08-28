@@ -30,12 +30,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import org.apache.http.auth.Credentials;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -174,10 +174,6 @@ public class WebRequest implements Serializable {
             return value_;
         }
     }
-
-    private static final Pattern DOT_PATTERN = Pattern.compile("/\\./");
-    private static final Pattern DOT_DOT_PATTERN = Pattern.compile("/(?!\\.\\.)[^/]*/\\.\\./");
-    private static final Pattern REMOVE_DOTS_PATTERN = Pattern.compile("^/(\\.\\.?/)*");
 
     // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
     private String url_;
@@ -322,7 +318,7 @@ public class WebRequest implements Serializable {
             }
         }
         else if (path.contains("/.")) {
-            url = buildUrlWithNewPath(url, removeDots(path));
+            url = buildUrlWithNewPath(url, StringUtils.removeDots(path));
         }
 
         try {
@@ -356,35 +352,6 @@ public class WebRequest implements Serializable {
                 urlCredentials_ = new HtmlUnitUsernamePasswordCredentials(username, password.toCharArray());
             }
         }
-    }
-
-    /*
-     * Strip a URL string of "/./" and "/../" occurrences. <p> One trick here is to
-     * repeatedly create new matchers on a given pattern, so that we can see whether
-     * it needs to be re-applied; unfortunately .replaceAll() doesn't re-process its
-     * own output, so if we create a new match with a replacement, it is missed.
-     */
-    private static String removeDots(final String path) {
-        String newPath = path;
-
-        // remove occurrences at the beginning
-        newPath = REMOVE_DOTS_PATTERN.matcher(newPath).replaceAll("/");
-        if ("/..".equals(newPath)) {
-            newPath = "/";
-        }
-
-        // single dots have no effect, so just remove them
-        while (DOT_PATTERN.matcher(newPath).find()) {
-            newPath = DOT_PATTERN.matcher(newPath).replaceAll("/");
-        }
-
-        // mid-path double dots should be removed WITH the previous subdirectory and replaced
-        //  with "/" BUT ONLY IF that subdirectory's not also ".." (a regex lookahead helps with this)
-        while (DOT_DOT_PATTERN.matcher(newPath).find()) {
-            newPath = DOT_DOT_PATTERN.matcher(newPath).replaceAll("/");
-        }
-
-        return newPath;
     }
 
     private static URL buildUrlWithNewPath(URL url, final String newPath) {

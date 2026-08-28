@@ -15,6 +15,11 @@
 package org.htmlunit.util;
 
 import java.nio.charset.Charset;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -53,6 +58,10 @@ public final class StringUtils {
                                 + "\\s*((0|[1-9]\\d?|100)(.\\d*)?)%\\s*,"
                                 + "\\s*((0|[1-9]\\d?|100)(.\\d*)?)%\\s*\\)");
     private static final Pattern ILLEGAL_FILE_NAME_CHARS = Pattern.compile("\\\\|/|\\||:|\\?|\\*|\"|<|>|\\p{Cntrl}");
+
+    private static final Pattern DOT_PATTERN = Pattern.compile("/\\./");
+    private static final Pattern DOT_DOT_PATTERN = Pattern.compile("/(?!\\.\\.)[^/]*/\\.\\./");
+    private static final Pattern REMOVE_DOTS_PATTERN = Pattern.compile("^/(\\.\\.?/)*");
 
     private static final Map<String, String> CAMELIZE_CACHE = new ConcurrentHashMap<>();
 
@@ -961,5 +970,66 @@ public final class StringUtils {
         }
 
         return true;
+    }
+
+    /**
+     * Removes dot segments from a URL path component per
+     * <a href="https://www.rfc-editor.org/rfc/rfc3986#section-5.2.4">RFC 3986, §5.2.4</a>.
+     *
+     * <p>Dot segments are the special path segments {@code .} (current directory)
+     * and {@code ..} (parent directory). Both forms are resolved and removed:
+     * </p>
+     * <ul>
+     *   <li>{@code .} segments are no-ops and are dropped in place.</li>
+     *   <li>{@code ..} segments remove themselves and the preceding non-{@code ..}
+     *       segment. If no such preceding segment exists (i.e. already at root),
+     *       the {@code ..} is left in place rather than producing an invalid path.</li>
+     * </ul>
+     *
+     * <p>A leading {@code /} is preserved in the output if present in the input.</p>
+     *
+     * <p>Examples:
+     * <pre>
+     *   removeDots("/a/./b")         = "/a/b"
+     *   removeDots("/a/b/../c")      = "/a/c"
+     *   removeDots("/a/.")           = "/a"
+     *   removeDots("/../a/b/../c")   = "/a/c"
+     *   removeDots("/a/../../b")     = "/../b"   (excess ".." left in place)
+     *   removeDots("/a/b/./c/../../d") = "/a/d"
+     * </pre>
+     * </p>
+     *
+     * <p>This method supersedes a previous regex-based implementation in
+     * {@code WebRequest} that missed trailing single-dot segments (e.g.
+     * {@code /a/.} was incorrectly left unchanged) and paths composed entirely
+     * of dot segments (e.g. {@code /././.} produced {@code /.} instead of
+     * {@code /}).
+     * </p>
+     *
+     * @param path the URL path component to normalize; must not be {@code null}
+     * @return the normalized path with all resolvable dot segments removed;
+     *         never {@code null}, and structurally equivalent to the input
+     *         with respect to the resource it addresses
+     */
+    public static String removeDots(final String path) {
+        final boolean leadingSlash = path.startsWith("/");
+        final String[] segments = (leadingSlash ? path.substring(1) : path).split("/", -1);
+
+        final Deque<String> stack = new ArrayDeque<>();
+        for (final String seg : segments) {
+            if ("..".equals(seg)) {
+                if (!stack.isEmpty() && !"..".equals(stack.peek())) {
+                    stack.pop();
+                }
+            }
+            else if (!".".equals(seg)) {
+                stack.push(seg);
+            }
+        }
+
+        final List<String> parts = new ArrayList<>(stack);
+        Collections.reverse(parts);
+        final String joined = String.join("/", parts);
+        return leadingSlash ? "/" + joined : joined;
     }
 }

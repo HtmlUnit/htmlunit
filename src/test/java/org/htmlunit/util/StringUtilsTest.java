@@ -595,4 +595,140 @@ public class StringUtilsTest {
         assertEquals("abc", StringUtils.trimRight("abc  "));
         assertEquals(" a b c", StringUtils.trimRight(" a b c "));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    void plainPathIsUnchanged() {
+        // 1. No-op inputs — nothing to remove
+        assertEquals("/a/b/c", StringUtils.removeDots("/a/b/c"));
+        assertEquals("/", StringUtils.removeDots("/"));
+        assertEquals("/foo", StringUtils.removeDots("/foo"));
+        assertEquals("/a/b/", StringUtils.removeDots("/a/b/"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    void leadingSingleDotSegment() {
+        // /./a  →  /a
+        assertEquals("/a", StringUtils.removeDots("/./a"));
+
+        // /../a  →  /a
+        assertEquals("/a", StringUtils.removeDots("/../a"));
+
+        // /././a  →  /a
+        assertEquals("/a", StringUtils.removeDots("/././a"));
+
+        // /../../a  →  /a
+        assertEquals("/a", StringUtils.removeDots("/../../a"));
+
+        // /./../a  →  /a
+        assertEquals("/a", StringUtils.removeDots("/./../a"));
+
+        // "/..&" is the special-cased literal handled after REMOVE_DOTS_PATTERN
+        assertEquals("/", StringUtils.removeDots("/.."));
+
+        assertEquals("/", StringUtils.removeDots("/."));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    void midPathSingleDot() {
+        // /a/./b  →  /a/b
+        assertEquals("/a/b", StringUtils.removeDots("/a/./b"));
+
+        // /a/././b  →  /a/b  (loop must re-run)
+        assertEquals("/a/b", StringUtils.removeDots("/a/././b"));
+
+        // /a/./b/./c  →  /a/b/c
+        assertEquals("/a/b/c", StringUtils.removeDots("/a/./b/./c"));
+
+        assertEquals("/a", StringUtils.removeDots("/a/."));
+
+        // /a/./  →  /a/  (DOT_PATTERN matches the middle "/./" )
+        assertEquals("/a/", StringUtils.removeDots("/a/./"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    void midPathDoubleDot() {
+        // /a/b/../c  →  /a/c
+        assertEquals("/a/c", StringUtils.removeDots("/a/b/../c"));
+
+        // /a/../b  →  /b
+        assertEquals("/b", StringUtils.removeDots("/a/../b"));
+
+        // /a/b/c/../../d  →  /a/d  (two sequential collapses, loop re-runs)
+        assertEquals("/a/d", StringUtils.removeDots("/a/b/c/../../d"));
+
+        // /a/b/../  →  /a/
+        assertEquals("/a/", StringUtils.removeDots("/a/b/../"));
+
+        assertEquals("/b", StringUtils.removeDots("/a/../../b"));
+
+        // /../  at beginning: REMOVE_DOTS_PATTERN handles it → "/"
+        assertEquals("/", StringUtils.removeDots("/../"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    void leadingAndMidSingleDots() {
+        // /./a/./b  →  leading "./" stripped first → /a/./b → /a/b
+        assertEquals("/a/b", StringUtils.removeDots("/./a/./b"));
+
+        // /../a/b/../c  →  leading "/../" → /a/b/../c  →  /a/c
+        assertEquals("/a/c", StringUtils.removeDots("/../a/b/../c"));
+
+        // /a/./b/../c  →  single dot first: /a/b/../c  →  double dot: /a/c
+        assertEquals("/a/c", StringUtils.removeDots("/a/./b/../c"));
+
+        assertEquals("/a/b/e", StringUtils.removeDots("/a/b/./c/d/../../e"));
+
+        assertEquals("/", StringUtils.removeDots("/././."));
+
+        // Backslashes are not separators; the path is treated literally.
+        assertEquals("/a\\b\\c", StringUtils.removeDots("/a\\b\\c"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    void rfc3986Example() {
+        // /a/b/c/./../../g  →  /a/g
+        assertEquals("/a/g", StringUtils.removeDots("/a/b/c/./../../g"));
+
+        // /mid/content=5/../6  →  /mid/6
+        assertEquals("/mid/6", StringUtils.removeDots("/mid/content=5/../6"));
+
+        // /../../../g  →  leading pattern strips all  → /g
+        assertEquals("/g", StringUtils.removeDots("/../../../g"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    void dotInFilename() {
+        // /a/file.txt  — the "." is inside a segment name, not a separator
+        assertEquals("/a/file.txt", StringUtils.removeDots("/a/file.txt"));
+
+        // /a/.hidden  — starts with dot but no surrounding slashes on right
+        assertEquals("/a/.hidden", StringUtils.removeDots("/a/.hidden"));
+
+        // /a/file..txt  — double dot inside a name, not a segment
+        assertEquals("/a/file..txt", StringUtils.removeDots("/a/file..txt"));
+
+        // /a/.../b  — "..." is three dots, not a special dot segment
+        assertEquals("/a/.../b", StringUtils.removeDots("/a/.../b"));
+    }
 }

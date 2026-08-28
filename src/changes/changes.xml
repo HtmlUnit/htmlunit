@@ -9,6 +9,10 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="fix" dev="rbri">
+                Moved dot-segment normalization to StringUtils.removeDots(). The new implementation is compliant
+                with RFC 3986 section 5.2.4 and fixes two edge cases missed by the previous regex approach
+            </action>
+            <action type="fix" dev="rbri">
                 SubtleCrypto now strictly validates keyUsages against the specified algorithm and rejects with a SyntaxError when unsupported usages are provided.
             </action>
             <action type="fix" dev="rbri">

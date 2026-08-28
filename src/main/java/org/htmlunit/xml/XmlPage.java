@@ -18,7 +18,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -203,7 +202,7 @@ public class XmlPage extends SgmlPage {
      */
     @Override
     public DomElement createElementNS(final String namespaceURI, final String qualifiedName) {
-        return new DomElement(namespaceURI, qualifiedName, this, new HashMap<>());
+        return new DomElement(namespaceURI, qualifiedName, this, null);
     }
 
     /**
