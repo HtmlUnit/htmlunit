@@ -155,7 +155,7 @@ public class WebResponse implements Serializable {
     /**
      * Returns the content charset specified explicitly in the {@code Content-Type} header
      * or {@code null} if none was specified.
-     * @return the content charset specified header or {@code null} if none was specified
+     * @return the content charset specified in the header or {@code null} if none was specified
      */
     public Charset getHeaderContentCharset() {
         final String contentType = getResponseHeaderValue(HttpHeader.CONTENT_TYPE_LC);
@@ -178,7 +178,7 @@ public class WebResponse implements Serializable {
      * Returns the content charset for this response, even if no charset was specified explicitly.
      * <p>
      * This method always returns a valid charset. This method first checks the {@code Content-Type}
-     * header or in the content BOM for viable charset. If not found, it attempts to determine the
+     * header or the content BOM for a viable charset. If not found, it attempts to determine the
      * charset based on the type of the content. As a last resort, this method returns the
      * value of {@link org.htmlunit.WebRequest#getDefaultResponseContentCharset()} which is
      * {@link java.nio.charset.StandardCharsets#UTF_8} by default.
@@ -189,6 +189,10 @@ public class WebResponse implements Serializable {
         wasContentCharsetTentative_ = false;
 
         try (InputStream is = getContentAsStreamWithBomIfApplicable()) {
+            if (is == null) {
+                return getWebRequest().getDefaultResponseContentCharset();
+            }
+
             if (is instanceof BOMInputStream stream) {
                 final String bomCharsetName = stream.getBOMCharsetName();
                 if (bomCharsetName != null) {
@@ -252,7 +256,7 @@ public class WebResponse implements Serializable {
     /**
      * Returns the response content as a string, using the charset/encoding specified in the server response.
      * @return the response content as a string, using the charset/encoding specified in the server response
-     *         or null if the content retrieval was failing
+     *         or {@code null} if content retrieval failed
      */
     public String getContentAsString() {
         return getContentAsString(getContentCharset());
@@ -261,9 +265,9 @@ public class WebResponse implements Serializable {
     /**
      * Returns the response content as a string, using the specified charset,
      * rather than the charset/encoding specified in the server response.
-     * If there is a bom header the charset parameter will be overwritten by the bom.
+     * If there is a BOM header, the charset parameter will be overwritten by the BOM.
      * @param encoding the charset/encoding to use to convert the response content into a string
-     * @return the response content as a string or null if the content retrieval was failing
+     * @return the response content as a string or {@code null} if content retrieval failed
      */
     public String getContentAsString(final Charset encoding) {
         if (responseData_ != null) {
@@ -295,7 +299,7 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * Returns length of the content data.
+     * Returns the length of the content data.
      * @return the length
      */
     public long getContentLength() {
@@ -308,7 +312,7 @@ public class WebResponse implements Serializable {
     /**
      * Returns the response content as an input stream.
      * @return the response content as an input stream
-     * @throws IOException in case of IOProblems
+     * @throws IOException in case of I/O problems
      */
     public InputStream getContentAsStream() throws IOException {
         return responseData_.getInputStream();
@@ -318,7 +322,7 @@ public class WebResponse implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @return the associated InputStream wrapped with a bom input stream if applicable
-     * @throws IOException in case of IO problems
+     * @throws IOException in case of I/O problems
      */
     public InputStream getContentAsStreamWithBomIfApplicable() throws IOException {
         if (responseData_ != null) {
@@ -355,7 +359,7 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * Returns whether the response has a successful HTTP status code.
+     * Returns whether the response has a successful HTTP status code or a use-proxy redirection.
      *
      * @return {@code true} if the status code is in the 2xx range or 305
      */
@@ -366,15 +370,12 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * Returns whether the response has a successful HTTP status code.
+     * Returns whether the response has a successful HTTP status code, a proxy redirection, or a not-modified status.
      *
-     * @return {@code true} if the status code is in the 2xx range or 305
+     * @return {@code true} if the status code is in the 2xx range, 304 (Not Modified), or 305 (Use Proxy)
      */
     public boolean isSuccessOrUseProxyOrNotModified() {
-        final int statusCode = getStatusCode();
-        return (statusCode >= HttpStatus.OK_200 && statusCode < HttpStatus.MULTIPLE_CHOICES_300)
-                || statusCode == HttpStatus.USE_PROXY_305
-                || statusCode == HttpStatus.NOT_MODIFIED_304;
+        return isSuccessOrUseProxy() || getStatusCode() == HttpStatus.NOT_MODIFIED_304;
     }
 
     /**
