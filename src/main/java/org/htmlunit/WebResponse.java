@@ -91,7 +91,8 @@ public class WebResponse implements Serializable {
 
     /**
      * Returns the request used to load this response.
-     * @return the request used to load this response
+     *
+     * @return the associated {@link WebRequest}
      */
     public WebRequest getWebRequest() {
         return request_;
@@ -137,7 +138,8 @@ public class WebResponse implements Serializable {
 
     /**
      * Returns the response content type.
-     * @return the content type returned from the server, e.g. "text/html"
+     * @return the content type, or an empty string if the {@code Content-Type}
+     *         header is absent
      */
     public String getContentType() {
         final String contentTypeHeader = getResponseHeaderValue(HttpHeader.CONTENT_TYPE_LC);
@@ -244,8 +246,8 @@ public class WebResponse implements Serializable {
      * For example, HTML meta-tag sniffing can be fooled by text that looks-like-a-meta-tag inside
      * JavaScript code (false positive) or if the meta-tag is after the first 1024 bytes (false negative).
      * </p>
-     * @return {@code true} if the charset of the previous call to {@link #getContentCharset()} was
-     *         "tentative".
+     * @return {@code true} if tentative; {@code false} if the charset was determined with confidence
+     *
      * @see <a href="https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence">
      *     https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence</a>
      */
@@ -321,7 +323,11 @@ public class WebResponse implements Serializable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * @return the associated InputStream wrapped with a bom input stream if applicable
+     * Returns the response content as an {@link InputStream}, wrapped in a
+     * {@link BOMInputStream} so that any leading byte-order mark is detected
+     * and skipped automatically.
+     *
+     * @return the input stream, or {@code null} if no response data is available
      * @throws IOException in case of I/O problems
      */
     public InputStream getContentAsStreamWithBomIfApplicable() throws IOException {
@@ -390,7 +396,7 @@ public class WebResponse implements Serializable {
     /**
      * Returns the reason for blocking or null.
      *
-     * @return the reason for blocking or null
+     * @return the reason for blocking, or {@code null} if the request was not blocked
      */
     public String getBlockReason() {
         return blockReason_;
