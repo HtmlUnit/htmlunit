@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
+            <action type="update" dev="rbri">
+                CookieManager: Simplify clearExpired using Collection.removeIf().
+            </action>
+            <action type="update" dev="rbri">
+                CookieManager: Replace method-level synchronization with ReentrantReadWriteLock.
+            </action>
             <action type="fix" dev="rbri">
                 WebResponseData: Ensure BOM processing is applied consistently across Brotli and deflate decompressed streams.
             </action>

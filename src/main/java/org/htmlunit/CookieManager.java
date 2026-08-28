@@ -17,18 +17,18 @@ package org.htmlunit;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.htmlunit.http.Cookie;
 
 /**
  * Manages cookies for a {@link WebClient}.
  *
- * <p>This class is thread-safe: all mutator and accessor methods are
- * synchronized on the {@code CookieManager} instance.
+ * <p>This class is thread-safe: all mutator and accessor operations are
+ * protected via a {@link ReentrantReadWriteLock}.
  * </p>
  *
  * <p>Cookie support can be turned off via {@link #setCookiesEnabled(boolean)}.
@@ -43,6 +43,8 @@ import org.htmlunit.http.Cookie;
  * @author Ronald Brill
  */
 public class CookieManager implements Serializable {
+
+    private final ReentrantReadWriteLock lock_ = new ReentrantReadWriteLock();
 
     /** Whether or not cookies are enabled. */
     private boolean cookiesEnabled_;
@@ -64,8 +66,14 @@ public class CookieManager implements Serializable {
      *
      * @param enabled {@code true} to enable cookie support, {@code false} to disable it
      */
-    public synchronized void setCookiesEnabled(final boolean enabled) {
-        cookiesEnabled_ = enabled;
+    public void setCookiesEnabled(final boolean enabled) {
+        lock_.writeLock().lock();
+        try {
+            cookiesEnabled_ = enabled;
+        }
+        finally {
+            lock_.writeLock().unlock();
+        }
     }
 
     /**
@@ -73,8 +81,14 @@ public class CookieManager implements Serializable {
      *
      * @return {@code true} if cookies are enabled, {@code false} otherwise
      */
-    public synchronized boolean isCookiesEnabled() {
-        return cookiesEnabled_;
+    public boolean isCookiesEnabled() {
+        lock_.readLock().lock();
+        try {
+            return cookiesEnabled_;
+        }
+        finally {
+            lock_.readLock().unlock();
+        }
     }
 
     /**
@@ -85,13 +99,19 @@ public class CookieManager implements Serializable {
      * @return the currently configured cookies, in an unmodifiable set;
      *         empty if cookie support is disabled
      */
-    public synchronized Set<Cookie> getCookies() {
-        if (!isCookiesEnabled()) {
-            return Collections.emptySet();
-        }
+    public Set<Cookie> getCookies() {
+        lock_.readLock().lock();
+        try {
+            if (!cookiesEnabled_) {
+                return Collections.emptySet();
+            }
 
-        final Set<Cookie> copy = new LinkedHashSet<>(cookies_);
-        return Collections.unmodifiableSet(copy);
+            final Set<Cookie> copy = new LinkedHashSet<>(cookies_);
+            return Collections.unmodifiableSet(copy);
+        }
+        finally {
+            lock_.readLock().unlock();
+        }
     }
 
     /**
@@ -105,24 +125,19 @@ public class CookieManager implements Serializable {
      * @return {@code true} if one or more cookies were found expired and removed;
      *         {@code false} otherwise, or if cookie support is disabled
      */
-    public synchronized boolean clearExpired(final Date date) {
-        if (!isCookiesEnabled()) {
-            return false;
-        }
-
-        if (date == null) {
-            return false;
-        }
-
-        boolean foundExpired = false;
-        for (final Iterator<Cookie> iter = cookies_.iterator(); iter.hasNext();) {
-            final Cookie cookie = iter.next();
-            if (cookie.getExpires() != null && date.after(cookie.getExpires())) {
-                iter.remove();
-                foundExpired = true;
+    public boolean clearExpired(final Date date) {
+        lock_.writeLock().lock();
+        try {
+            if (!cookiesEnabled_ || date == null) {
+                return false;
             }
+
+            return cookies_.removeIf(cookie ->
+                cookie.getExpires() != null && date.after(cookie.getExpires()));
         }
-        return foundExpired;
+        finally {
+            lock_.writeLock().unlock();
+        }
     }
 
     /**
@@ -135,17 +150,23 @@ public class CookieManager implements Serializable {
      * @return the matching cookie, or {@code null} if none exists or cookie
      *         support is disabled
      */
-    public synchronized Cookie getCookie(final String name) {
-        if (!isCookiesEnabled()) {
+    public Cookie getCookie(final String name) {
+        lock_.readLock().lock();
+        try {
+            if (!cookiesEnabled_) {
+                return null;
+            }
+
+            for (final Cookie cookie : cookies_) {
+                if (Objects.equals(cookie.getName(), name)) {
+                    return cookie;
+                }
+            }
             return null;
         }
-
-        for (final Cookie cookie : cookies_) {
-            if (Objects.equals(cookie.getName(), name)) {
-                return cookie;
-            }
+        finally {
+            lock_.readLock().unlock();
         }
-        return null;
     }
 
     /**
@@ -157,16 +178,22 @@ public class CookieManager implements Serializable {
      *
      * @param cookie the cookie to add
      */
-    public synchronized void addCookie(final Cookie cookie) {
-        if (!isCookiesEnabled()) {
-            return;
+    public void addCookie(final Cookie cookie) {
+        lock_.writeLock().lock();
+        try {
+            if (!cookiesEnabled_) {
+                return;
+            }
+
+            cookies_.remove(cookie);
+
+            // don't add expired cookie
+            if (cookie.getExpires() == null || cookie.getExpires().after(new Date())) {
+                cookies_.add(cookie);
+            }
         }
-
-        cookies_.remove(cookie);
-
-        // don't add expired cookie
-        if (cookie.getExpires() == null || cookie.getExpires().after(new Date())) {
-            cookies_.add(cookie);
+        finally {
+            lock_.writeLock().unlock();
         }
     }
 
@@ -177,23 +204,35 @@ public class CookieManager implements Serializable {
      * @param cookie the cookie to remove; may be {@code null}, in which case
      *               this method does nothing
      */
-    public synchronized void removeCookie(final Cookie cookie) {
-        if (!isCookiesEnabled()) {
-            return;
-        }
+    public void removeCookie(final Cookie cookie) {
+        lock_.writeLock().lock();
+        try {
+            if (!cookiesEnabled_) {
+                return;
+            }
 
-        cookies_.remove(cookie);
+            cookies_.remove(cookie);
+        }
+        finally {
+            lock_.writeLock().unlock();
+        }
     }
 
     /**
      * Removes all cookies from this manager. Does nothing if cookie support
      * is disabled.
      */
-    public synchronized void clearCookies() {
-        if (!isCookiesEnabled()) {
-            return;
-        }
+    public void clearCookies() {
+        lock_.writeLock().lock();
+        try {
+            if (!cookiesEnabled_) {
+                return;
+            }
 
-        cookies_.clear();
+            cookies_.clear();
+        }
+        finally {
+            lock_.writeLock().unlock();
+        }
     }
 }
