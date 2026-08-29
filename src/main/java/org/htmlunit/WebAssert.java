@@ -494,13 +494,13 @@ public final class WebAssert {
             for (final HtmlElement element : page.getDocumentElement().getStaticElementsByTagName(tag)) {
                 final Short tabIndex = element.getTabIndex();
                 if (tabIndex == null) {
-                    throw new AssertionError("Element <" + element.getTagName()
-                        + "> is missing the tabindex attribute.");
+                    throw new AssertionError("Element " + element.asXml()
+                        + " tabindex attribute is missing or not numeric.");
                 }
                 if (HtmlElement.TAB_INDEX_OUT_OF_BOUNDS.equals(tabIndex)) {
                     final String s = element.getAttributeDirect("tabindex");
-                    throw new AssertionError("Element <" + element.getTagName()
-                        + "> has an out-of-bounds tabindex value '" + s + "'.");
+                    throw new AssertionError("Element " + element.asXml()
+                        + " has an out-of-bounds tabindex value '" + s + "'.");
                 }
             }
         }

@@ -343,22 +343,34 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertAllTabIndexAttributesSet() throws Exception {
-        final String html1 = DOCTYPE_HTML + "<html><body><a href='#' tabindex='1'>foo</a></body></html>";
-        final HtmlPage page1 = loadPage(html1);
+        final String html = DOCTYPE_HTML + "<html><body><a href='#' tabindex='1'>foo</a></body></html>";
+        final HtmlPage page = loadPage(html);
 
-        WebAssert.assertAllTabIndexAttributesSet(page1);
+        WebAssert.assertAllTabIndexAttributesSet(page);
+    }
 
-        final String html2 = DOCTYPE_HTML + "<html><body><a href='#'>foo</a></body></html>";
-        final HtmlPage page2 = loadPage(html2);
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void assertAllTabIndexAttributesSetMissingTabindex() throws Exception {
+        final String html = DOCTYPE_HTML + "<html><body><a href='#'>foo</a></body></html>";
+        final HtmlPage page = loadPage(html);
 
-        AssertionError error = assertThrows(AssertionError.class, () -> WebAssert.assertAllTabIndexAttributesSet(page2));
-        assertEquals("Invalid tabindex value '' found on element.", error.getMessage());
+        AssertionError error = assertThrows(AssertionError.class, () -> WebAssert.assertAllTabIndexAttributesSet(page));
+        assertEquals("Element <a href=\"#\">foo</a> tabindex attribute is missing or not numeric.", error.getMessage());
+    }
 
-        final String html3 = DOCTYPE_HTML + "<html><body><a href='#' tabindex='x'>foo</a></body></html>";
-        final HtmlPage page3 = loadPage(html3);
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void assertAllTabIndexAttributesSetInvalidTabindex() throws Exception {
+        final String html = DOCTYPE_HTML + "<html><body><a href='#' tabindex='x'>foo</a></body></html>";
+        final HtmlPage page = loadPage(html);
 
-        error = assertThrows(AssertionError.class, () -> WebAssert.assertAllTabIndexAttributesSet(page3));
-        assertEquals("Invalid tabindex value 'x' found on element.", error.getMessage());
+        AssertionError error = assertThrows(AssertionError.class, () -> WebAssert.assertAllTabIndexAttributesSet(page));
+        assertEquals("Element <a href=\"#\" tabindex=\"x\">foo</a> tabindex attribute is missing or not numeric.", error.getMessage());
     }
 
     /**

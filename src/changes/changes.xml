@@ -28,7 +28,7 @@
             </action>
             <action type="update" dev="rbri">
                 WebAssert: assertAllTabIndexAttributesSet now produces distinct error messages for a missing tabindex attribute
-                versus an out-of-bounds value.
+                versus an out-of-bounds value. Error message itself is also fixed to point to the exact element.
             </action>
             <action type="update" dev="rbri">
                 WebAssert: Improved Javadoc.
