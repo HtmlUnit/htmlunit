@@ -228,6 +228,22 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(
+            DEFAULT = {"§§URL§§", "200:Hello HtmlUnit", "200:Hello HtmlUnit",
+                       "Failed to execute 'send' on 'XMLHttpRequest': Failed to load '§§URL§§'."},
+            FF = {"§§URL§§", "200:Hello HtmlUnit", "200:Hello HtmlUnit",
+                  "A network error occurred."},
+            FF_ESR = {"§§URL§§", "200:Hello HtmlUnit", "200:Hello HtmlUnit",
+                      "A network error occurred."})
+    @HtmlUnitNYI(
+            CHROME = {"§§URL§§", "200:Hello HtmlUnit", "200:Hello HtmlUnit",
+                      "No entry for '§§URL§§' in the BlobUrlStore."},
+            EDGE = {"§§URL§§", "200:Hello HtmlUnit", "200:Hello HtmlUnit",
+                    "No entry for '§§URL§§' in the BlobUrlStore."},
+            FF = {"§§URL§§", "200:Hello HtmlUnit", "200:Hello HtmlUnit",
+                  "No entry for '§§URL§§' in the BlobUrlStore."},
+            FF_ESR = {"§§URL§§", "200:Hello HtmlUnit", "200:Hello HtmlUnit",
+                      "No entry for '§§URL§§' in the BlobUrlStore."})
     public void createObjectURL() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -277,10 +293,80 @@ public class URLTest extends WebDriverTestCase {
 
             final String[] alerts = StringUtils.split(driver.getTitle(), "§");
             final String blobUrl = alerts[0];
+
+            expandExpectedAlertsVariables(blobUrl);
+
             assertEquals("blob:http://localhost:" + PORT + "/", blobUrl.substring(0, blobUrl.lastIndexOf('/') + 1));
-            assertEquals("200:Hello HtmlUnit", alerts[1]);
-            assertEquals("200:Hello HtmlUnit", alerts[2]);
-            assertEquals("No entry for '" + blobUrl + "' in the BlobUrlStore.", alerts[3]);
+            assertEquals(getExpectedAlerts()[0], blobUrl);
+            assertEquals(getExpectedAlerts()[1], alerts[1]);
+            assertEquals(getExpectedAlerts()[2], alerts[2]);
+            assertEquals(getExpectedAlerts()[3], alerts[3]);
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§", "200:Hello HtmlUnit", "200:Hello HtmlUnit"})
+    public void createObjectURL_revokeWithFragment() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function get(url) {\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('GET', url, false);\n"
+            + "    xhr.send();\n"
+            + "    return xhr.status + ':' + xhr.responseText;\n"
+            + "  } catch (e) { return e.message; }\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  if (document.testForm.fileupload.files) {\n"
+            + "    var files = document.testForm.fileupload.files;\n"
+
+            + "    var url = window.URL.createObjectURL(files[0]);\n"
+            + "    log(url);\n"
+            + "    log(get(url + '#section1'));\n"
+            + "    window.URL.revokeObjectURL(url + '#section1');\n"
+            + "    log(get(url));\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
+        try {
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", ISO_8859_1);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            final String[] alerts = StringUtils.split(driver.getTitle(), "§");
+            final String blobUrl = alerts[0];
+
+            expandExpectedAlertsVariables(blobUrl);
+
+            assertEquals("blob:http://localhost:" + PORT + "/", blobUrl.substring(0, blobUrl.lastIndexOf('/') + 1));
+            assertEquals(getExpectedAlerts()[0], blobUrl);
+            assertEquals(getExpectedAlerts()[1], alerts[1]);
+            assertEquals(getExpectedAlerts()[2], alerts[2]);
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
