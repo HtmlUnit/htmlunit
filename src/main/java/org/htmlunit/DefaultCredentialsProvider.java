@@ -31,7 +31,7 @@ import org.apache.http.client.CredentialsProvider;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 
 /**
- * Default HtmlUnit implementation of the <code>CredentialsProvider</code> interface. Provides
+ * Default HtmlUnit implementation of the {@code CredentialsProvider} interface. Provides
  * credentials for both web servers and proxies. Supports Digest
  * authentication, Socks authentication and Basic HTTP authentication.
  *
@@ -56,7 +56,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /** The {@code null} value represents any authentication scheme. */
     public static final String ANY_SCHEME = null;
 
-    private static SocksProxyAuthenticator SocksAuthenticator_;
+    // volatile: written only inside the synchronized initSocksAuthenticatorIfNeeded,
+    // but declared volatile to guard against unsynchronized reads in future refactors.
+    private static volatile SocksProxyAuthenticator SocksAuthenticator_;
     private final Map<AuthScopeProxy, Credentials> credentialsMap_ = new HashMap<>();
 
     // Because this is used for the whole JVM I try to make it as less invasive as possible.
@@ -91,8 +93,10 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * HTTP authentication. If you are using sensitive username/password information, please do
      * NOT use this method. If you add credentials using this method, any server that requires
      * authentication may receive the specified username and password.
+     *
      * @param username the username for the new credentials
      * @param password the password for the new credentials
+     * @see #addCredentials(String, char[], String, int, String)
      */
     public void addCredentials(final String username, final char[] password) {
         addCredentials(username, password, ANY_HOST, ANY_PORT, ANY_REALM);
@@ -102,6 +106,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * Adds credentials for the specified username/password on the specified host/port for the
      * specified realm. The credentials may be for any authentication scheme, including NTLM,
      * digest and basic HTTP authentication.
+     *
      * @param username the username for the new credentials
      * @param password the password for the new credentials
      * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
@@ -118,13 +123,18 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Adds NTLM credentials for the specified username/password on the specified host/port.
+     *
+     * <p>Note: due to a limitation of the underlying {@link NTCredentials} class, the password
+     * is converted to a {@link String} internally and cannot be zeroed from memory after use.
+     * </p>
+     *
      * @param username the username for the new credentials; should not include the domain to authenticate with;
-     *        for example: <code>"user"</code> is correct whereas <code>"DOMAIN\\user"</code> is not
+     *        for example: {@code "user"} is correct whereas {@code "DOMAIN\\user"} is not
      * @param password the password for the new credentials
      * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     * @param workstation The workstation the authentication request is originating from.
-     *        Essentially, the computer name for this machine.
+     * @param workstation the workstation the authentication request is originating from;
+     *        essentially, the computer name for this machine
      * @param domain the domain to authenticate within
      */
     public void addNTLMCredentials(final String username, final char[] password, final String host,
@@ -136,6 +146,12 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Adds Socks credentials for the specified username/password on the specified host/port.
+     *
+     * <p>Note: the SOCKS authenticator is a JVM-wide singleton. If multiple
+     * {@link DefaultCredentialsProvider} instances add SOCKS credentials, only the first
+     * instance's credentials will be used for SOCKS authentication.
+     * </p>
+     *
      * @param username the username for the new credentials
      * @param password the password for the new credentials
      * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
@@ -162,11 +178,19 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * {@inheritDoc}
+     *
+     * @throws IllegalArgumentException if {@code authscope} is {@code null}, if {@code credentials}
+     *         is {@code null}, or if the credentials type is not one of
+     *         {@link UsernamePasswordCredentials}, {@link HtmlUnitUsernamePasswordCredentials},
+     *         or {@link NTCredentials}
      */
     @Override
     public synchronized void setCredentials(final AuthScope authscope, final Credentials credentials) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
+        }
+        if (credentials == null) {
+            throw new IllegalArgumentException("Credentials may not be null");
         }
 
         if (credentials instanceof UsernamePasswordCredentials
@@ -179,13 +203,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         throw new IllegalArgumentException("Unsupported Credential type: " + credentials.getClass().getName());
     }
 
-    /**
-     * Find matching {@link Credentials credentials} for the given authentication scope.
-     *
-     * @param map the credentials hash map
-     * @param authscope the {@link AuthScope authentication scope}
-     * @return the credentials
-     */
+    // Callers must hold the monitor on the enclosing DefaultCredentialsProvider instance.
     private static Credentials matchCredentials(final Map<AuthScopeProxy, Credentials> map, final AuthScope authscope) {
         Credentials creds = map.get(new AuthScopeProxy(authscope));
         if (creds == null) {
@@ -218,14 +236,26 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     }
 
     /**
-     * Removes the credentials from the AuthScope.
-     * @param authscope the AuthScope to remove the credentials of
-     * @return whether it was removed or not
+     * Removes the credentials that best match the given {@link AuthScope}.
+     * An exact scope match is preferred over a fuzzy best-match, consistent
+     * with the resolution strategy used by {@link #getCredentials(AuthScope)}.
+     *
+     * @param authscope the {@link AuthScope} whose credentials should be removed;
+     *        must not be {@code null}
+     * @return {@code true} if credentials were removed; {@code false} if no match was found
      */
     public synchronized boolean removeCredentials(final AuthScope authscope) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
+
+        // try exact match first, consistent with matchCredentials
+        final AuthScopeProxy exactKey = new AuthScopeProxy(authscope);
+        if (credentialsMap_.remove(exactKey) != null) {
+            return true;
+        }
+
+        // fall back to best-match scoring
         int bestMatchFactor = -1;
         AuthScopeProxy bestMatch = null;
         for (final AuthScopeProxy proxy : credentialsMap_.keySet()) {
@@ -256,8 +286,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     }
 
     /**
-     * We have to wrap {@link AuthScope} instances in a serializable proxy so that the
-     * {@link DefaultCredentialsProvider} class can be serialized correctly.
+     * Serialization proxy for {@link AuthScope}, which is not itself {@link Serializable}.
+     * Required to allow {@link DefaultCredentialsProvider} to be serialized correctly.
      */
     private static class AuthScopeProxy implements Serializable {
         private AuthScope authScope_;

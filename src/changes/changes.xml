@@ -9,6 +9,19 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="update" dev="rbri">
+                DefaultCredentialsProvider: removeCredentials now tries an exact AuthScope match before
+                falling back to best-match scoring.
+            </action>
+            <action type="update" dev="rbri">
+                DefaultCredentialsProvider: setCredentials now throws a clear IllegalArgumentException for null credentials.
+            </action>
+            <action type="update" dev="rbri">
+                DefaultCredentialsProvider: SocksAuthenticator_ declared volatile to guard against unsynchronized reads.
+            </action>
+            <action type="update" dev="rbri">
+                DefaultCredentialsProvider: Improved Javadoc.
+            </action>
+            <action type="update" dev="rbri">
                 BlobUrlStore: Improved Javadoc.
             </action>
             <action type="update" dev="rbri">
