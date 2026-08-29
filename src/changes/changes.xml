@@ -9,6 +9,16 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="update" dev="rbri">
+                WebAssert: assertTextNotPresentInElement now chains the ElementNotFoundException cause instead of dropping it.
+            </action>
+            <action type="update" dev="rbri">
+                WebAssert: assertAllTabIndexAttributesSet now produces distinct error messages for a missing tabindex attribute
+                versus an out-of-bounds value.
+            </action>
+            <action type="update" dev="rbri">
+                WebAssert: Improved Javadoc.
+            </action>
+            <action type="update" dev="rbri">
                 DefaultCredentialsProvider: removeCredentials now tries an exact AuthScope match before
                 falling back to best-match scoring.
             </action>
