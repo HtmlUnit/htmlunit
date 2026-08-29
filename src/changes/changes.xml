@@ -9,6 +9,21 @@
     <body>
         <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="update" dev="rbri">
+                MockWebConnection: requestCount_ changed from a plain int to AtomicInteger and
+                lastRequest_ declared volatile to correct non-atomic increment and unsynchronised write under concurrent access.
+            </action>
+            <action type="update" dev="rbri">
+                MockWebConnection: getLastWebRequest, getLastAdditionalHeaders, getLastMethod, and getLastParameters
+                now throw a clear IllegalStateException instead of a NullPointerException when called before any request has been made.
+            </action>
+            <action type="update" dev="rbri">
+                MockWebConnection: the stored IOException in getRawResponse is now wrapped at throw time so the stack trace
+                points to the actual call site rather than where the exception was constructed.
+            </action>
+            <action type="update" dev="rbri">
+                MockWebConnection: Improved Javadoc.
+            </action>
+            <action type="update" dev="rbri">
                 WebAssert: assertTextNotPresentInElement now chains the ElementNotFoundException cause instead of dropping it.
             </action>
             <action type="update" dev="rbri">
