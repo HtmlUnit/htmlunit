@@ -71,19 +71,20 @@ public class BlobUrlStore {
      * @return the stored {@link Blob}, or {@code null} if no entry exists for this URL
      */
     public Blob resolve(final String blobUrl) {
-        final Entry entry = store_.get(excludeFragment(blobUrl));
+        final int fragmentIndex = blobUrl.indexOf('#');
+        final String url = fragmentIndex >= 0 ? blobUrl.substring(0, fragmentIndex) : blobUrl;
+
+        final Entry entry = store_.get(url);
         return entry == null ? null : entry.object_;
     }
 
     /**
      * Removes the entry for the given blob URL, revoking access to the associated {@link Blob}.
      *
-     * <p>Any fragment component in {@code blobUrl} is ignored during removal.</p>
-     *
      * @param blobUrl the {@code blob:} URL to revoke
      */
     public void remove(final String blobUrl) {
-        store_.remove(excludeFragment(blobUrl));
+        store_.remove(blobUrl);
     }
 
     /**
@@ -111,10 +112,5 @@ public class BlobUrlStore {
      */
     public void clear() {
         store_.clear();
-    }
-
-    private static String excludeFragment(final String blobUrl) {
-        final int fragmentIndex = blobUrl.indexOf('#');
-        return fragmentIndex >= 0 ? blobUrl.substring(0, fragmentIndex) : blobUrl;
     }
 }

@@ -46,6 +46,9 @@
             <action type="update" dev="rbri">
                 DefaultCredentialsProvider: Improved Javadoc.
             </action>
+            <action type="fix" dev="rbri">
+                BlobUrlStore: remove() no longer strips the fragment from the url.
+            </action>
             <action type="update" dev="rbri">
                 BlobUrlStore: Improved Javadoc.
             </action>
