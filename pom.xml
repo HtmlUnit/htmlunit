@@ -6,7 +6,7 @@
 
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>5.5.0-SNAPSHOT</version>
+    <version>5.5.0</version>
     <packaging>jar</packaging>
 
     <name>HtmlUnit</name>
@@ -57,7 +57,7 @@
         <!--brotli.version>0.1.2</brotli.version-->
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.48.0-SNAPSHOT</htmlunitdriver.version>
+        <htmlunitdriver.version>4.48.0</htmlunitdriver.version>
         <selenium.version>4.48.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v152</selenium.devtools.artifactId>
 

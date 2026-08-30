@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.5.0" date="August xx, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
+        <release version="5.5.0" date="August 30, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="update" dev="rbri">
                 MockWebConnection: requestCount_ changed from a plain int to AtomicInteger and
                 lastRequest_ declared volatile to correct non-atomic increment and unsynchronised write under concurrent access.
