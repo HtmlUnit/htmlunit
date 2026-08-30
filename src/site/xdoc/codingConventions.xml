@@ -137,7 +137,7 @@ import java.util.ArrayList;]]></source>
                 Deprecated code must remain in the codebase for at least 6 months and across at least 2 major/minor releases.
             </p>
             <p>
-                When direct deprecation is not feasible, log the change in the <a href="changes-report.html">Change Log</a> 
+                When direct deprecation is not feasible, log the change in the <a href="changes.html">Change Log</a> 
                 flagged with <code>INCOMPATIBLE CHANGE</code> to make breaking updates explicit.
             </p>
         </section>

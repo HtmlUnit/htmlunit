@@ -124,7 +124,7 @@
                         <a href="apidocs/index.html">Javadoc API documentation</a>
                     </li>
                     <li>
-                        <a href="changes-report.html">Change history</a>
+                        <a href="changes.html">Change history</a>
                     </li>
                     <li>
                         <a href="faq.html">Frequently Asked Questions</a>
@@ -291,7 +291,7 @@ implementation group: 'org.htmlunit', name: 'htmlunit', version: '5.3.0']]></sou
             
             
             <p>
-                Refer to the <a href="changes-report.html">changes document</a> for details on what is being added.
+                Refer to the <a href="changes.html">changes document</a> for details on what is being added.
             </p>
         </section>
     </body>
