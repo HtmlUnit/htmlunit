@@ -59,10 +59,6 @@ public final class StringUtils {
                                 + "\\s*((0|[1-9]\\d?|100)(.\\d*)?)%\\s*\\)");
     private static final Pattern ILLEGAL_FILE_NAME_CHARS = Pattern.compile("\\\\|/|\\||:|\\?|\\*|\"|<|>|\\p{Cntrl}");
 
-    private static final Pattern DOT_PATTERN = Pattern.compile("/\\./");
-    private static final Pattern DOT_DOT_PATTERN = Pattern.compile("/(?!\\.\\.)[^/]*/\\.\\./");
-    private static final Pattern REMOVE_DOTS_PATTERN = Pattern.compile("^/(\\.\\.?/)*");
-
     private static final Map<String, String> CAMELIZE_CACHE = new ConcurrentHashMap<>();
 
     /**
@@ -988,7 +984,7 @@ public final class StringUtils {
      *
      * <p>A leading {@code /} is preserved in the output if present in the input.</p>
      *
-     * <p>Examples:
+     * <p>Examples:</p>
      * <pre>
      *   removeDots("/a/./b")         = "/a/b"
      *   removeDots("/a/b/../c")      = "/a/c"
@@ -997,7 +993,6 @@ public final class StringUtils {
      *   removeDots("/a/../../b")     = "/../b"   (excess ".." left in place)
      *   removeDots("/a/b/./c/../../d") = "/a/d"
      * </pre>
-     * </p>
      *
      * <p>This method supersedes a previous regex-based implementation in
      * {@code WebRequest} that missed trailing single-dot segments (e.g.
