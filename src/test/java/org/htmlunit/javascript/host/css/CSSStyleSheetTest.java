@@ -2024,6 +2024,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "false"})
+    @HtmlUnitNYI(
+            CHROME = {"true", "true"},
+            EDGE = {"true", "true"},
+            FF = {"true", "true"},
+            FF_ESR = {"true", "true"})
     public void widthHeightPercent() throws Exception {
         widthHeightPercent(DOCTYPE_HTML);
     }
