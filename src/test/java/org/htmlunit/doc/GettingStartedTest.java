@@ -47,10 +47,10 @@ public class GettingStartedTest extends WebServerTestCase {
     public void homePage() throws Exception {
         try (WebClient webClient = new WebClient()) {
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-            Assertions.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+            Assertions.assertEquals("Welcome to HtmlUnit – HtmlUnit", page.getTitleText());
 
             final String pageAsXml = page.asXml();
-            Assertions.assertTrue(pageAsXml.contains("<body class=\"topBarDisabled\">"));
+            Assertions.assertTrue(pageAsXml.contains("<div id=\"banner\">"));
 
             final String pageAsText = page.asNormalizedText();
             Assertions.assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));
@@ -124,7 +124,7 @@ public class GettingStartedTest extends WebServerTestCase {
         try (WebClient webClient = new WebClient()) {
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
 
-            final DomNode sponsoringDiv = page.querySelector("#bodyColumn > section:nth-child(1) > div:nth-child(2)");
+            final DomNode sponsoringDiv = page.querySelector("#bodyColumn > section:nth-child(1) > div:nth-child(3)");
 
             // A normalized textual representation of this element that represents
             // what would be visible to the user if this page was shown in a web browser.
