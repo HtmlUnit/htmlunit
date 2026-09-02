@@ -48,7 +48,7 @@
         <htmlunit-corejs.version>5.5.0</htmlunit-corejs.version>
         <htmlunit-neko.version>5.5.0</htmlunit-neko.version>
         <htmlunit-websocketclient.version>5.5.0</htmlunit-websocketclient.version>
-        <htmlunit-xpath.version>5.5.0</htmlunit-xpath.version>
+        <htmlunit-xpath.version>5.6.0-SNAPSHOT</htmlunit-xpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
