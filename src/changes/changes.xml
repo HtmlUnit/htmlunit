@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="5.6.0" date="September xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                DoTypeProcessor: Processing the backspace key has to clear the current selection if it is not empty.
+            </action>
+        </release>
+
+
         <release version="5.5.0" date="August 30, 2026" description="Firefox 154, Chrome/Edge 151, Bugfixes">
             <action type="update" dev="rbri">
                 MockWebConnection: requestCount_ changed from a plain int to AtomicInteger and

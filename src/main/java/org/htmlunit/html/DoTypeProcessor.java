@@ -191,6 +191,12 @@ class DoTypeProcessor implements Serializable {
         final StringBuilder newValue = new StringBuilder(currentValue);
         switch (keyCode) {
             case DOM_VK_BACK_SPACE:
+                if (selectionEnd != selectionStart) {
+                    newValue.delete(selectionStart, selectionEnd);
+                    selectionEnd = selectionStart;
+                    break;
+                }
+
                 if (selectionStart > 0) {
                     newValue.deleteCharAt(selectionStart - 1);
                     selectionStart--;

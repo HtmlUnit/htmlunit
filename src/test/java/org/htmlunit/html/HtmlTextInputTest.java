@@ -1255,4 +1255,78 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         driver.findElement(By.id("check")).click();
         verifyTitle2(driver, getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"abcx", ""})
+    public void backspaceShouldClearSelected() throws Exception {
+        Assumptions.assumeFalse(SKIP_);
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').value);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <form>\n"
+                + "    <input type='text' id='i1' value='abcx'>\n"
+                + "  </form>\n"
+                + "  <button id='check' onclick='test()'>Test</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check")).click();
+        verifyTitle2(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 1));
+
+        driver.findElement(By.id("i1")).sendKeys(Keys.CONTROL + "a");
+        driver.findElement(By.id("i1")).sendKeys(Keys.BACK_SPACE);
+
+        driver.findElement(By.id("check")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"abcx", "aOx"})
+    public void backspaceShouldClearSelectedPart() throws Exception {
+        Assumptions.assumeFalse(SKIP_);
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').value);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <form>\n"
+                + "    <input type='text' id='i1' value='abcx'>\n"
+                + "  </form>\n"
+                + "  <button id='check' onclick='test()'>Test</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check")).click();
+        verifyTitle2(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 1));
+
+        driver.findElement(By.id("i1")).sendKeys(Keys.END);
+        driver.findElement(By.id("i1")).sendKeys(Keys.ARROW_LEFT);
+        driver.findElement(By.id("i1")).sendKeys(Keys.LEFT_SHIFT, Keys.ARROW_LEFT);
+        driver.findElement(By.id("i1")).sendKeys(Keys.LEFT_SHIFT, Keys.ARROW_LEFT);
+        driver.findElement(By.id("i1")).sendKeys(Keys.BACK_SPACE);
+        driver.findElement(By.id("i1")).sendKeys("O");
+
+        driver.findElement(By.id("check")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
 }
