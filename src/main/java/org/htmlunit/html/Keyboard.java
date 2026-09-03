@@ -27,7 +27,33 @@ import org.htmlunit.javascript.host.event.KeyboardEvent;
  */
 public class Keyboard {
 
-    private final List<Object[]> keys_ = new ArrayList<>();
+    /**
+     * Represents a single keyboard input action.
+     *
+     * <p>A {@code KeyAction} is either a typed character ({@link TypedChar})
+     * or a key-code press or release ({@link KeyCodeAction}).
+     * </p>
+     */
+    public sealed interface KeyAction permits TypedChar, KeyCodeAction { }
+
+    /**
+     * A character typed directly, e.g. via {@link Keyboard#type(char)}.
+     *
+     * @param ch the typed character
+     */
+    public record TypedChar(char ch) implements KeyAction { }
+
+    /**
+     * A key-code press or release, e.g. via {@link Keyboard#press(int)}
+     * or {@link Keyboard#release(int)}.
+     *
+     * @param keyCode the DOM key code
+     * @param pressed {@code true} if the key is being pressed,
+     *                {@code false} if it is being released
+     */
+    public record KeyCodeAction(int keyCode, boolean pressed) implements KeyAction { }
+
+    private final List<KeyAction> keys_ = new ArrayList<>();
     private final boolean startAtEnd_;
 
     /**
@@ -50,7 +76,7 @@ public class Keyboard {
      * @param ch the character
      */
     public void type(final char ch) {
-        keys_.add(new Object[] {ch});
+        keys_.add(new TypedChar(ch));
     }
 
     /**
@@ -66,7 +92,7 @@ public class Keyboard {
         if (keyCode >= KeyboardEvent.DOM_VK_A && keyCode <= KeyboardEvent.DOM_VK_Z) {
             throw new IllegalArgumentException("For key code " + keyCode + ", use type(char) instead");
         }
-        keys_.add(new Object[] {keyCode, true});
+        keys_.add(new KeyCodeAction(keyCode, true));
     }
 
     /**
@@ -79,7 +105,7 @@ public class Keyboard {
      * @param keyCode the key code.
      */
     public void release(final int keyCode) {
-        keys_.add(new Object[] {keyCode, false});
+        keys_.add(new KeyCodeAction(keyCode, false));
     }
 
     /**
@@ -91,14 +117,10 @@ public class Keyboard {
 
     /**
      * Returns the keys.
-     * <p>
-     * If the length of the item is 1, then it is a character.
-     * If the length of the item is 2, the first is the key code, the second is boolean whether pressing or not
-     * </p>
      *
-     * @return the keys
+     * @return the key actions
      */
-    List<Object[]> getKeys() {
+    List<KeyAction> getKeys() {
         return keys_;
     }
 

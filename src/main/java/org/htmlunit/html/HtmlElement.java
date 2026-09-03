@@ -673,7 +673,7 @@ public abstract class HtmlElement extends DomElement {
     public Page type(final Keyboard keyboard) throws IOException {
         Page page = null;
 
-        final List<Object[]> keys = keyboard.getKeys();
+        final List<Keyboard.KeyAction> keys = keyboard.getKeys();
 
         if (keyboard.isStartAtEnd()) {
             if (this instanceof SelectableTextInput textInput) {
@@ -688,14 +688,18 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final int size = keys.size();
-        for (int i = 0; i < size; i++) {
-            final Object[] entry = keys.get(i);
-            if (entry.length == 1) {
-                type((char) entry[0], i == keys.size() - 1);
+        int i = 0;
+        for (final Keyboard.KeyAction keyAction : keys) {
+            i++;
+            final boolean lastType = i == size;
+
+            if (keyAction instanceof Keyboard.TypedChar typedChar) {
+                type(typedChar.ch(), lastType);
             }
-            else {
-                final int key = (int) entry[0];
-                final boolean pressed = (boolean) entry[1];
+            else if (keyAction instanceof Keyboard.KeyCodeAction keyCodeAction) {
+                final int key = keyCodeAction.keyCode();
+                final boolean pressed = keyCodeAction.pressed();
+
                 switch (key) {
                     case KeyboardEvent.DOM_VK_SHIFT -> shiftPressed_ = pressed;
                     case KeyboardEvent.DOM_VK_CONTROL -> ctrlPressed_ = pressed;
@@ -707,14 +711,14 @@ public abstract class HtmlElement extends DomElement {
                     if (key == KeyboardEvent.DOM_VK_SHIFT
                             || key == KeyboardEvent.DOM_VK_CONTROL
                             || key == KeyboardEvent.DOM_VK_ALT) {
-                        page = type(key, true, false, false, i == keys.size() - 1);
+                        page = type(key, true, false, false, lastType);
                     }
                     else {
-                        page = type(key, true, true, true, i == keys.size() - 1);
+                        page = type(key, true, true, true, lastType);
                     }
                 }
                 else {
-                    page = type(key, false, false, true, i == keys.size() - 1);
+                    page = type(key, false, false, true, lastType);
                 }
             }
         }
