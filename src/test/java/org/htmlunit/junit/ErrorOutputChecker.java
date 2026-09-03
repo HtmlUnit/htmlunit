@@ -38,7 +38,8 @@ import org.junit.jupiter.api.extension.ExtensionContext;
  */
 public class ErrorOutputChecker implements BeforeEachCallback, AfterEachCallback {
     private PrintStream originalErr_;
-    private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
+    private ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
+
     private static final Pattern[] PATTERNS = {
             // jetty
             Pattern.compile(".*Logging initialized .* to org.eclipse.jetty.util.log.StdErrLog.*\r?\n"),
@@ -105,6 +106,7 @@ public class ErrorOutputChecker implements BeforeEachCallback, AfterEachCallback
 
     private void wrapSystemErr() {
         originalErr_ = System.err;
+        baos_.reset();
         System.setErr(new NSAPrintStreamWrapper(originalErr_, baos_));
     }
 
