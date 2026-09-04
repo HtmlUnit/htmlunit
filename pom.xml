@@ -57,7 +57,7 @@
         <!--brotli.version>0.1.2</brotli.version-->
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.48.0</htmlunitdriver.version>
+        <htmlunitdriver.version>4.49.0-SNAPSHOT</htmlunitdriver.version>
         <selenium.version>4.48.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v152</selenium.devtools.artifactId>
 
