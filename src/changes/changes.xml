@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="5.6.0" date="September xx, 2026" description="Bugfixes">
+        <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 153, Bugfixes">
+            <action type="update" dev="rbri">
+                websocket-client: jetty updated to 12.1.13.
+            </action>
             <action type="fix" dev="rbri">
                 DoTypeProcessor: Processing the backspace key has to clear the current selection if it is not empty.
             </action>
