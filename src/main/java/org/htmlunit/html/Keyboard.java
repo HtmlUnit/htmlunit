@@ -32,7 +32,7 @@ import org.htmlunit.javascript.host.event.KeyboardEvent;
  *
  * <h3>Core Features</h3>
  * <ul>
- *   <li><b>Character & Key Code Queuing:</b> Supports typing printable characters as well
+ *   <li><b>Character and Key Code Queuing:</b> Supports typing printable characters as well
  *       as holding and releasing raw key codes (e.g., navigation, {@code BACK_SPACE}, or modifier keys).</li>
  *   <li><b>Modifier State Persistence:</b> Tracks modifier keys so subsequent keystrokes inherit
  *       the active modifier flags during JavaScript event dispatching.</li>
