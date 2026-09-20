@@ -366,7 +366,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     public void removeParentOfActiveElement() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
-                + "<body onload='test()'>\n"
+                + "<body>\n"
                 + "<form name='form1'>\n"
                 + "  <div id='parent'>\n"
                 + "    <input id='text1' onblur='document.title += \" onblur1\"' "
