@@ -106,9 +106,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
-            FF = {"", "none"},
-            FF_ESR = {"", "none"})
+    @Alerts({"", "none"})
     public void area() throws Exception {
         test("area");
     }

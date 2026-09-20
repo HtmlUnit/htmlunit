@@ -350,9 +350,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"inline", "inline", "inline", "block", "inline", "block", "block", "none"},
-            FF = {"inline", "inline", "inline", "block", "none", "block", "block", "none"},
-            FF_ESR = {"inline", "inline", "inline", "block", "none", "block", "block", "none"})
+    @Alerts({"inline", "inline", "inline", "block", "none", "block", "block", "none"})
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"

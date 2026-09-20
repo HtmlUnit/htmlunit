@@ -3482,9 +3482,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object DOMRectList]", "1"})
-    @HtmlUnitNYI(FF = {"[object DOMRectList]", "0"},
-            FF_ESR = {"[object DOMRectList]", "0"})
+    @Alerts({"[object DOMRectList]", "0"})
     public void getClientRectsArea() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

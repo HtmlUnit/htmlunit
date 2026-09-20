@@ -1068,55 +1068,57 @@ public final class StyleAttributes implements Serializable {
         CONTENT_VISISBILITY_("content-visibility", "content-visibility", ff("visible")),
 
         /** The style property {@code cornerBlockEndShape}. */
-        CORNER_BLOCK_END_SHAPE("cornerBlockEndShape", "corner-block-end-shape", chromeAndEdge("round")),
+        CORNER_BLOCK_END_SHAPE("cornerBlockEndShape", "corner-block-end-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerBlockStartShape}. */
-        CORNER_BLOCK_START_SHAPE("cornerBlockStartShape", "corner-block-start-shape", chromeAndEdge("round")),
+        CORNER_BLOCK_START_SHAPE("cornerBlockStartShape", "corner-block-start-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerBottomLeftShape}. */
-        CORNER_BOTTOM_LEFT_SHAPE("cornerBottomLeftShape", "corner-bottom-left-shape", chromeAndEdge("round")),
+        CORNER_BOTTOM_LEFT_SHAPE("cornerBottomLeftShape", "corner-bottom-left-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerBottomRightShape}. */
-        CORNER_BOTTOM_RIGHT_SHAPE("cornerBottomRightShape", "corner-bottom-right-shape", chromeAndEdge("round")),
+        CORNER_BOTTOM_RIGHT_SHAPE("cornerBottomRightShape", "corner-bottom-right-shape",
+                chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerBottomShape}. */
-        CORNER_BOTTOM_SHAPE("cornerBottomShape", "corner-bottom-shape", chromeAndEdge("round")),
+        CORNER_BOTTOM_SHAPE("cornerBottomShape", "corner-bottom-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerEndEndShape}. */
-        CORNER_END_END_SHAPE("cornerEndEndShape", "corner-end-end-shape", chromeAndEdge("round")),
+        CORNER_END_END_SHAPE("cornerEndEndShape", "corner-end-end-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerEndStartShape}. */
-        CORNER_END_START_SHAPE("cornerEndStartShape", "corner-end-start-shape", chromeAndEdge("round")),
+        CORNER_END_START_SHAPE("cornerEndStartShape", "corner-end-start-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerInlineEndShape}. */
-        CORNER_INLINE_END_SHAPE("cornerInlineEndShape", "corner-inline-end-shape", chromeAndEdge("round")),
+        CORNER_INLINE_END_SHAPE("cornerInlineEndShape", "corner-inline-end-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerInlineStartShape}. */
-        CORNER_INLINE_START_SHAPE("cornerInlineStartShape", "corner-inline-start-shape", chromeAndEdge("round")),
+        CORNER_INLINE_START_SHAPE("cornerInlineStartShape", "corner-inline-start-shape",
+                chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerLeftShape}. */
-        CORNER_LEFT_SHAPE("cornerLeftShape", "corner-left-shape", chromeAndEdge("round")),
+        CORNER_LEFT_SHAPE("cornerLeftShape", "corner-left-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerRightShape}. */
-        CORNER_RIGHT_SHAPE("cornerRightShape", "corner-right-shape", chromeAndEdge("round")),
+        CORNER_RIGHT_SHAPE("cornerRightShape", "corner-right-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerShape}. */
-        CORNER_SHAPE("cornerShape", "corner-shape", chromeAndEdge("round")),
+        CORNER_SHAPE("cornerShape", "corner-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerStartEndShape}. */
-        CORNER_START_END_SHAPE("cornerStartEndShape", "corner-start-end-shape", chromeAndEdge("round")),
+        CORNER_START_END_SHAPE("cornerStartEndShape", "corner-start-end-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerStartStartShape}. */
-        CORNER_START_START_SHAPE("cornerStartStartShape", "corner-start-start-shape", chromeAndEdge("round")),
+        CORNER_START_START_SHAPE("cornerStartStartShape", "corner-start-start-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerTopLeftShape}. */
-        CORNER_TOP_LEFT_SHAPE("cornerTopLeftShape", "corner-top-left-shape", chromeAndEdge("round")),
+        CORNER_TOP_LEFT_SHAPE("cornerTopLeftShape", "corner-top-left-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerTopRightShape}. */
-        CORNER_TOP_RIGHT_SHAPE("cornerTopRightShape", "corner-top-right-shape", chromeAndEdge("round")),
+        CORNER_TOP_RIGHT_SHAPE("cornerTopRightShape", "corner-top-right-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code cornerTopShape}. */
-        CORNER_TOP_SHAPE("cornerTopShape", "corner-top-shape", chromeAndEdge("round")),
+        CORNER_TOP_SHAPE("cornerTopShape", "corner-top-shape", chromeAndEdge("superellipse(1)")),
 
         /** The style property {@code counterIncrement}. */
         COUNTER_INCREMENT("counterIncrement", "counter-increment", chromeAndEdgeNone(), ffNone()),
@@ -2833,6 +2835,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code scale}. */
         SCALE("scale", "scale", chromeAndEdgeNone(), ffNone()),
 
+        /** The style property {@code scrollAxisLock}. */
+        SCROLL_AXIS_LOCK("scrollAxisLock", "scroll-axis-lock", chromeAndEdgeAuto()),
+
         /** The style property {@code scrollBehavior}. */
         SCROLL_BEHAVIOR("scrollBehavior", "scroll-behavior", ffAuto(), chromeAndEdgeAuto()),
 
@@ -4507,6 +4512,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code will-change}. */
         WILL_CHANGE_("will-change", "will-change", ffAuto()),
+
+        /** The style property {@code windowDrag}. */
+        WINDOW_DRAG("windowDrag", "window-drag", chromeAndEdgeNone()),
 
         /** The style property {@code wordBreak}. */
         WORD_BREAK("wordBreak", "word-break", ffNormal(), chromeAndEdgeNormal()),
