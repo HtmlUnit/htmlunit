@@ -453,16 +453,15 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"imported: [object HTMLScriptElement]", "replaced"},
-            CHROME = {"imported: [object HTMLScriptElement]", "o", "replaced"},
-            EDGE = {"imported: [object HTMLScriptElement]", "o", "replaced"})
-    @HtmlUnitNYI(CHROME = {"imported: [object HTMLScriptElement]", "replaced"},
-            EDGE = {"imported: [object HTMLScriptElement]", "replaced"})
+    @Alerts({"imported: [object HTMLScriptElement]", "replaced"})
     public void importNode_script() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <span id='s1'></span>\n"
+            + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "function test() {\n"
             + "  try {\n"
             + "    var d = document.implementation.createDocument(null, null, null);\n"
             + "    var xhtml = \"<html xmlns='http://www.w3.org/1999/xhtml'><sc\" "
@@ -475,9 +474,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    document.body.replaceChild(importedScript, theSpan);\n"
             + "    log('replaced');\n"
             + "  } catch(e) { logEx(e) }\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <span id='s1'></span>\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -489,16 +486,15 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"imported: [object HTMLDivElement]", "replaced"},
-            CHROME = {"imported: [object HTMLDivElement]", "o", "replaced"},
-            EDGE = {"imported: [object HTMLDivElement]", "o", "replaced"})
-    @HtmlUnitNYI(CHROME = {"imported: [object HTMLDivElement]", "replaced"},
-            EDGE = {"imported: [object HTMLDivElement]", "replaced"})
+    @Alerts({"imported: [object HTMLDivElement]", "replaced"})
     public void importNode_scriptChild() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <span id='s1'></span>\n"
+            + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "function test() {\n"
             + "  try {\n"
             + "    var d = document.implementation.createDocument(null, null, null);\n"
             + "    var xhtml = \"<html xmlns='http://www.w3.org/1999/xhtml'><div id='myDiv'><sc\" "
@@ -511,9 +507,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    document.body.replaceChild(importedDiv, theSpan);\n"
             + "    log('replaced');\n"
             + "  } catch(e) { logEx(e) }\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <span id='s1'></span>\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
