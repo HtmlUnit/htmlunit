@@ -20,7 +20,25 @@ import java.util.List;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 
 /**
- * Keeps track of the typed keys.
+ * Represents a sequence of keyboard actions—such as typed characters, key presses,
+ * and key releases—used to simulate realistic user input on HTML elements.
+ * <p>
+ * A {@code Keyboard} instance acts as a keystroke recorder that queues key actions
+ * and maintains modifier state ({@code SHIFT}, {@code CONTROL}, {@code ALT}) across
+ * sequential events. When executed against an element via {@code element.type(keyboard)},
+ * it drives the full browser event lifecycle ({@code keydown}, {@code keypress},
+ * {@code input}, and {@code keyup}) and mutates DOM text values accordingly.
+ * </p>
+ *
+ * <h3>Core Features</h3>
+ * <ul>
+ *   <li><b>Character & Key Code Queuing:</b> Supports typing printable characters as well
+ *       as holding and releasing raw key codes (e.g., navigation, {@code BACK_SPACE}, or modifier keys).</li>
+ *   <li><b>Modifier State Persistence:</b> Tracks modifier keys so subsequent keystrokes inherit
+ *       the active modifier flags during JavaScript event dispatching.</li>
+ *   <li><b>Caret Positioning:</b> Supports configured cursor placement ({@link #isStartAtEnd()})
+ *       to position the selection caret at the end of input fields before typing begins.</li>
+ * </ul>
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -34,7 +52,9 @@ public class Keyboard {
      * or a key-code press or release ({@link KeyCodeAction}).
      * </p>
      */
-    public sealed interface KeyAction permits TypedChar, KeyCodeAction { }
+    public sealed interface KeyAction permits TypedChar, KeyCodeAction {
+        // tagging interface
+    }
 
     /**
      * A character typed directly, e.g. via {@link Keyboard#type(char)}.
@@ -105,6 +125,9 @@ public class Keyboard {
      * @param keyCode the key code.
      */
     public void release(final int keyCode) {
+        if (keyCode >= KeyboardEvent.DOM_VK_A && keyCode <= KeyboardEvent.DOM_VK_Z) {
+            throw new IllegalArgumentException("For key code " + keyCode + ", use type(char) instead");
+        }
         keys_.add(new KeyCodeAction(keyCode, false));
     }
 
