@@ -67,6 +67,10 @@ public class KeyboardEvent extends UIEvent {
     @JsxConstant({FF, FF_ESR})
     public static final int DOM_VK_HELP = 6;
 
+    /** Constant for {@code DOM_VK_BACK_SPACE}. */
+    @JsxConstant({FF, FF_ESR})
+    public static final int DOM_VK_BACK_SPACE = 8;
+
     /** Constant for {@code DOM_VK_TAB}. */
     @JsxConstant({FF, FF_ESR})
     public static final int DOM_VK_TAB = 9;
@@ -334,10 +338,6 @@ public class KeyboardEvent extends UIEvent {
     /** Constant for {@code DOM_VK_O}. */
     @JsxConstant({FF, FF_ESR})
     public static final int DOM_VK_O = 79;
-
-    /** Constant for {@code DOM_VK_BACK_SPACE}. */
-    @JsxConstant({FF, FF_ESR})
-    public static final int DOM_VK_BACK_SPACE = 8;
 
     /** Constant for {@code DOM_VK_P}. */
     @JsxConstant({FF, FF_ESR})

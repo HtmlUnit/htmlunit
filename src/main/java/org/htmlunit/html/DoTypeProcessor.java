@@ -232,15 +232,38 @@ class DoTypeProcessor implements Serializable {
                 break;
 
             case DOM_VK_HOME:
-                selectionStart = 0;
+                final int lastLf = currentValue.lastIndexOf('\n', selectionStart - 1);
+                final int lastCr = currentValue.lastIndexOf('\r', selectionStart - 1);
+                // In a \r\n sequence, \r comes first, so Math.min places cursor right before \r
+                final int lastBreak = Math.max(lastLf, lastCr);
+                selectionStart = (lastBreak == -1) ? 0 : lastBreak + 1;
                 break;
 
             case DOM_VK_END:
-                if (element.isShiftPressed()) {
-                    selectionEnd = newValue.length();
+                final int nextLf = currentValue.indexOf('\n', selectionStart);
+                final int nextCr = currentValue.indexOf('\r', selectionStart);
+
+                int nextBreak;
+                if (nextLf == -1) {
+                    nextBreak = nextCr;
+                }
+                else if (nextCr == -1) {
+                    nextBreak = nextLf;
                 }
                 else {
-                    selectionStart = newValue.length();
+                    // In a \r\n sequence, \r comes first, so Math.min places cursor right before \r
+                    nextBreak = Math.min(nextLf, nextCr);
+                }
+
+                if (nextBreak == -1) {
+                    nextBreak = newValue.length();
+                }
+
+                if (element.isShiftPressed()) {
+                    selectionEnd = nextBreak;
+                }
+                else {
+                    selectionStart = nextBreak;
                 }
                 break;
 

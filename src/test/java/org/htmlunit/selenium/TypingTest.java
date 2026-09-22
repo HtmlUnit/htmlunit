@@ -15,6 +15,7 @@
 package org.htmlunit.selenium;
 
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -458,5 +459,272 @@ public class TypingTest extends SeleniumTest {
         assertEquals("'World' should be appended.", "HelloWorld", input.getAttribute("value"));
         assertEquals("'World' should not be appended.", "Hello", input.getDomAttribute("value"));
         assertEquals("'World' should be appended.", "HelloWorld", input.getDomProperty("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ABCd")
+    @BuggyWebDriver(FF = "ABCD", FF_ESR = "ABCD")
+    public void sendKeysChordShiftAndAutoRelease() throws Exception {
+        final String html = "<html>\n"
+                + "<body><input type='text' id='t'/>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // SHIFT is held down only for "abc", then auto-released so "d" remains lowercase
+        t.sendKeys(Keys.chord(Keys.SHIFT, "abc"), "d");
+
+        assertEquals(getExpectedAlerts()[0], t.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Replaced")
+    @BuggyWebDriver(FF = "Initial Text", FF_ESR = "Initial Text")
+    public void sendKeysChordSelectAllAndReplace() throws Exception {
+        final String html = "<html>\n"
+                + "<body><input type='text' id='t' value='Initial Text'/>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // CTRL+A selects all text, followed immediately by replacement text
+        t.sendKeys(Keys.chord(Keys.CONTROL, "a"), "Replaced");
+
+        assertEquals(getExpectedAlerts()[0], t.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void sendKeysChordSelectAllAndDelete() throws Exception {
+        final String html = "<html>\n"
+                + "<body><input type='text' id='t' value='Clear Me'/>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // Select all text using CTRL+A chord and hit Backspace
+        t.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
+
+        assertEquals(getExpectedAlerts()[0], t.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("HELLO x WORLD")
+    @BuggyWebDriver(FF = "HELLO x world", FF_ESR = "HELLO x world")
+    public void sendKeysMultipleChords() throws Exception {
+        final String html = "<html>\n"
+                + "<body><input type='text' id='t'/>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // Verifies separate chord sequences in a single sendKeys call
+        t.sendKeys(Keys.chord(Keys.SHIFT, "hello"), " x ", Keys.chord(Keys.SHIFT, "world"));
+
+        assertEquals(getExpectedAlerts()[0], t.getAttribute("value"));
+    }
+
+    /**
+     * Verifies that HOME in a textarea moves the caret to the start of the
+     * current line, not the start of the whole text.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("line1\\nXline2")
+    public void textareaHomeMovesToLineStart() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // type two lines, move to start of second line with HOME, insert 'X'
+        t.sendKeys("line1\nline2", Keys.HOME, "X");
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that Shift+HOME in a textarea selects from the caret position
+     * back to the start of the current line (typing replaces selection).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("line1\\nX")
+    public void textareaShiftHome() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // type two lines, Shift+HOME selects "line2", "X" replaces selection
+        t.sendKeys("line1\nline2", Keys.chord(Keys.SHIFT, Keys.HOME), "X");
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies selectionStart and selectionEnd bounds after Shift+HOME in a textarea.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"6", "11"})
+    public void textareaShiftHomeSelectionRange() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.selectionStart);\n"
+            + "    log(t.selectionEnd);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        t.sendKeys("line1\nline2", Keys.chord(Keys.SHIFT, Keys.HOME));
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that HOME in a textarea handles \r\n line breaks correctly.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "line1\\nXline2",
+            FF = "line1\\n\\nXline2",
+            FF_ESR = "line1\\n\\nXline2")
+    @HtmlUnitNYI(
+            CHROME = "line1\\r\\nXline2",
+            EDGE = "line1\\r\\nXline2",
+            FF = "line1\\r\\nXline2",
+            FF_ESR = "line1\\r\\nXline2")
+    public void textareaHomeCarriageReturn() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        t.sendKeys("line1\r\nline2", Keys.HOME, "X");
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that HOME in a simple text input moves the caret to the start of the field.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Xhello")
+    public void inputHome() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input id='t' type='text'>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        t.sendKeys("hello", Keys.HOME, "X");
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that Shift+HOME in a simple text input selects to the start of the field.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("X")
+    public void inputShiftHome() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input id='t' type='text'>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // Shift+HOME selects "hello", typing "X" replaces the entire selection
+        t.sendKeys("hello", Keys.chord(Keys.SHIFT, Keys.HOME), "X");
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
     }
 }
