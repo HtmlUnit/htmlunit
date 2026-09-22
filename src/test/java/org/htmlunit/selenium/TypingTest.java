@@ -955,4 +955,125 @@ public class TypingTest extends SeleniumTest {
         driver.findElement(By.id("clickMe")).click();
         verifyTitle2(driver, getExpectedAlerts());
     }
+
+    /**
+     * Verifies CTRL+SHIFT+END selects from the current caret position to the
+     * end of the input and that typing replaces the selection.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("aX")
+    public void ctrlShiftEndSelectsToEnd() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // type 'abcd', go to start, move one right, select to end, replace
+        new Actions(driver)
+                .click(t)
+                .sendKeys("abcd")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.END)
+                .keyUp(Keys.SHIFT)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies CTRL+SHIFT+END selects from the current caret position to the
+     * end of the input and that typing replaces the selection.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("aX")
+    public void inputCtrlShiftEndSelectsToEnd() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // type 'abcd', go to start, move one right, select to end with Ctrl+Shift+END, replace with 'X'
+        new Actions(driver)
+                .click(t)
+                .sendKeys("abcd")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .keyDown(Keys.CONTROL)
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.END)
+                .keyUp(Keys.SHIFT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies SHIFT+END in a textarea selects from the current caret position
+     * to the end of the current line only.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abcd\\nlX")
+    public void textareaShiftEndSelectsToLineEnd() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("abcd\nline2")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.END)
+                .keyUp(Keys.SHIFT)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
 }

@@ -224,9 +224,11 @@ class DoTypeProcessor implements Serializable {
                     }
                 }
                 else if (element.isShiftPressed()) {
-                    selectionEnd++;
+                    if (selectionEnd < newValue.length()) {
+                        selectionEnd++;
+                    }
                 }
-                else if (selectionStart > 0) {
+                else if (selectionStart < newValue.length()) {
                     selectionStart++;
                 }
                 break;
