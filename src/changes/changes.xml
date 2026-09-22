@@ -10,6 +10,7 @@
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 153, Bugfixes">
             <action type="fix" dev="rbri">
                 Pressing HOME/END key in HtmlTextArea moves the cursor to the start/end of the current line.
+                Ctrl + HOME / Ctrl + END moves to document start/end.
             </action>
             <action type="update" dev="rbri">
                 Chrome/Edge 153: area element default style is 'none'.

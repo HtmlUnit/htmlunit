@@ -232,6 +232,11 @@ class DoTypeProcessor implements Serializable {
                 break;
 
             case DOM_VK_HOME:
+                if (element.isCtrlPressed()) {
+                    selectionStart = 0;
+                    break;
+                }
+
                 final int lastLf = currentValue.lastIndexOf('\n', selectionStart - 1);
                 final int lastCr = currentValue.lastIndexOf('\r', selectionStart - 1);
                 // In a \r\n sequence, \r comes first, so Math.min places cursor right before \r
@@ -240,30 +245,32 @@ class DoTypeProcessor implements Serializable {
                 break;
 
             case DOM_VK_END:
-                final int nextLf = currentValue.indexOf('\n', selectionStart);
-                final int nextCr = currentValue.indexOf('\r', selectionStart);
-
-                int nextBreak;
-                if (nextLf == -1) {
-                    nextBreak = nextCr;
-                }
-                else if (nextCr == -1) {
-                    nextBreak = nextLf;
+                int targetEnd;
+                if (element.isCtrlPressed()) {
+                    targetEnd = newValue.length();
                 }
                 else {
-                    // In a \r\n sequence, \r comes first, so Math.min places cursor right before \r
-                    nextBreak = Math.min(nextLf, nextCr);
-                }
-
-                if (nextBreak == -1) {
-                    nextBreak = newValue.length();
+                    final int nextLf = currentValue.indexOf('\n', selectionStart);
+                    final int nextCr = currentValue.indexOf('\r', selectionStart);
+                    if (nextLf == -1) {
+                        targetEnd = nextCr;
+                    }
+                    else if (nextCr == -1) {
+                        targetEnd = nextLf;
+                    }
+                    else {
+                        targetEnd = Math.min(nextLf, nextCr);
+                    }
+                    if (targetEnd == -1) {
+                        targetEnd = newValue.length();
+                    }
                 }
 
                 if (element.isShiftPressed()) {
-                    selectionEnd = nextBreak;
+                    selectionEnd = targetEnd;
                 }
                 else {
-                    selectionStart = nextBreak;
+                    selectionStart = targetEnd;
                 }
                 break;
 
