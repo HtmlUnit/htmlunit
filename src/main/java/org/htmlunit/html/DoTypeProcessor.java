@@ -198,8 +198,21 @@ class DoTypeProcessor implements Serializable {
                 }
 
                 if (selectionStart > 0) {
-                    newValue.deleteCharAt(selectionStart - 1);
-                    selectionStart--;
+                    if (element.isCtrlPressed()) {
+                        int targetStart = selectionStart;
+                        while (targetStart > 0 && Character.isWhitespace(newValue.charAt(targetStart - 1))) {
+                            targetStart--;
+                        }
+                        while (targetStart > 0 && !Character.isWhitespace(newValue.charAt(targetStart - 1))) {
+                            targetStart--;
+                        }
+                        newValue.delete(targetStart, selectionStart);
+                        selectionStart = targetStart;
+                    }
+                    else {
+                        newValue.deleteCharAt(selectionStart - 1);
+                        selectionStart--;
+                    }
                 }
                 break;
 
@@ -277,11 +290,36 @@ class DoTypeProcessor implements Serializable {
                 break;
 
             case DOM_VK_DELETE:
-                if (selectionEnd == selectionStart) {
-                    selectionEnd++;
+                if (selectionEnd != selectionStart) {
+                    newValue.delete(selectionStart, selectionEnd);
+                    selectionEnd = selectionStart;
+                    break;
                 }
-                newValue.delete(selectionStart, selectionEnd);
-                selectionEnd = selectionStart;
+
+                if (selectionStart < newValue.length()) {
+                    if (element.isCtrlPressed()) {
+                        int delTargetEnd = selectionStart;
+                        // 1. Skip initial whitespace at caret (if caret is on a space)
+                        while (delTargetEnd < newValue.length()
+                                && Character.isWhitespace(newValue.charAt(delTargetEnd))) {
+                            delTargetEnd++;
+                        }
+                        // 2. Skip word characters
+                        while (delTargetEnd < newValue.length()
+                                && !Character.isWhitespace(newValue.charAt(delTargetEnd))) {
+                            delTargetEnd++;
+                        }
+                        // 3. Skip trailing whitespace after the word
+                        while (delTargetEnd < newValue.length()
+                                && Character.isWhitespace(newValue.charAt(delTargetEnd))) {
+                            delTargetEnd++;
+                        }
+                        newValue.delete(selectionStart, delTargetEnd);
+                    }
+                    else {
+                        newValue.deleteCharAt(selectionStart);
+                    }
+                }
                 break;
 
             default:

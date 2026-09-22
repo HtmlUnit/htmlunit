@@ -1076,4 +1076,111 @@ public class TypingTest extends SeleniumTest {
         driver.findElement(By.id("clickMe")).click();
         verifyTitle2(driver, getExpectedAlerts());
     }
+
+    /**
+     * Verifies that CTRL+BACKSPACE in a textarea deletes the preceding word.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("line1\\nhello\\s")
+    public void textareaCtrlBackspaceDeletesWord() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("line1\nhello world")
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.BACK_SPACE)
+                .keyUp(Keys.CONTROL)
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that CTRL+BACKSPACE with trailing spaces removes spaces and the word preceding them.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello\\s")
+    public void inputCtrlBackspaceWithTrailingSpaces() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("hello world   ")
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.BACK_SPACE)
+                .keyUp(Keys.CONTROL)
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that CTRL+DELETE deletes the word following the caret.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello\\sworld")
+    public void inputCtrlDeleteDeletesNextWord() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("deleteMe world")
+                .sendKeys(Keys.HOME)
+                .sendKeys("hello ") // position caret right before 'deleteMe'
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.DELETE)
+                .keyUp(Keys.CONTROL)
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
 }
