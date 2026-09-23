@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 153, Bugfixes">
+            <action type="add" dev="rbri" due-to="Vladimir Babin" issue="#91">
+                MockWebConnection is now Serializable.
+            </action>
             <action type="update" dev="rbri">
                 Support Ctrl+Backspace and Ctrl+Delete word deletion in input fields and textareas.
             </action>
@@ -14243,7 +14246,7 @@
             <action type="fix" dev="asashour" issue="470" due-to="Bruce Chapman">
                 HtmlPage.clone() doesn't share idMap_ with original (#1708397).
             </action>
-            <action type="add" dev="asashour" issue="91" system="features">
+            <action type="add" dev="asashour" issue="#91" system="features">
                 ClickableElement: Add dblClick() (#1385295).
             </action>
             <action type="add" dev="asashour" issue="364">
