@@ -101,7 +101,7 @@
         <site-plugin.version>4.0.0-M16</site-plugin.version>
         <changes-plugin.version>3.0.0-M3</changes-plugin.version>
 
-        <bundle-plugin.version>6.1.0</bundle-plugin.version>
+        <bundle-plugin.version>6.1.2</bundle-plugin.version>
         <jacoco-plugin.version>0.8.15</jacoco-plugin.version>
         <cyclonedx-plugin.version>2.9.3</cyclonedx-plugin.version>
     </properties>
