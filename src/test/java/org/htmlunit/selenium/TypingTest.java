@@ -1223,6 +1223,7 @@ public class TypingTest extends SeleniumTest {
         driver.findElement(By.id("clickMe")).click();
         verifyTitle2(driver, getExpectedAlerts());
     }
+
     /**
      * Verifies that SHIFT+LEFT in an input extends the selection leftward,
      * and typing replaces the selected text.
@@ -1575,6 +1576,7 @@ public class TypingTest extends SeleniumTest {
         driver.findElement(By.id("clickMe")).click();
         verifyTitle2(driver, getExpectedAlerts());
     }
+
     /**
      * Verifies that CTRL+RIGHT in a text input jumps forward to the start of the next word.
      *
