@@ -1183,4 +1183,585 @@ public class TypingTest extends SeleniumTest {
         driver.findElement(By.id("clickMe")).click();
         verifyTitle2(driver, getExpectedAlerts());
     }
+
+    /**
+     * Verifies that Ctrl+RIGHT moves the caret to the end of the current/next word,
+     * without skipping an extra character when the caret is already at a space.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello\\s_world")
+    public void inputCtrlRightFromSpace() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    var t = document.getElementById('t');\n"
+            + "    log(t.value.substring(0, t.selectionStart) + '_' "
+            +          "+ t.value.substring(t.selectionStart));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t' value='hello world'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // place caret after "hello" (position 5), which is on the space
+        t.sendKeys(Keys.HOME);
+        for (int i = 0; i < 5; i++) {
+            t.sendKeys(Keys.ARROW_RIGHT);
+        }
+
+        // Ctrl+Right from a space should land at end of "world" (position 11)
+        // the off-by-one bug causes it to land at position 10 ("worl_d") instead
+        t.sendKeys(Keys.chord(Keys.CONTROL, Keys.ARROW_RIGHT));
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+    /**
+     * Verifies that SHIFT+LEFT in an input extends the selection leftward,
+     * and typing replaces the selected text.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abcXf")
+    public void inputShiftLeftExtendsSelection() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // type "abcdef", move left once (caret before 'f'), then SHIFT+LEFT twice
+        // to select "cd", then replace with "X"
+        new Actions(driver)
+                .click(t)
+                .sendKeys("abcdef")
+                .sendKeys(Keys.ARROW_LEFT)
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.ARROW_LEFT)
+                .sendKeys(Keys.ARROW_LEFT)
+                .keyUp(Keys.SHIFT)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that SHIFT+LEFT in a textarea extends the selection leftward,
+     * and typing replaces the selected text.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abcXf")
+    public void textareaShiftLeftExtendsSelection() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("abcdef")
+                .sendKeys(Keys.ARROW_LEFT)
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.ARROW_LEFT)
+                .sendKeys(Keys.ARROW_LEFT)
+                .keyUp(Keys.SHIFT)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that CTRL+DELETE in an input deletes only the word after the caret,
+     * without consuming trailing whitespace after the word.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello\\s\\sworld")
+    public void inputCtrlDeleteStopsAtWordBoundary() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // "hello  delete  world" - caret placed before "delete"
+        // CTRL+DELETE should remove "delete" only, leaving both surrounding spaces intact
+        new Actions(driver)
+                .click(t)
+                .sendKeys("hello  delete  world")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_RIGHT) // skip "hello"
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT) // now at "delete"
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.DELETE)
+                .keyUp(Keys.CONTROL)
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that CTRL+DELETE in a textarea deletes only the word after the caret,
+     * without consuming trailing whitespace after the word.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello\\s\\sworld")
+    public void textareaCtrlDeleteStopsAtWordBoundary() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("hello  delete  world")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.DELETE)
+                .keyUp(Keys.CONTROL)
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that CTRL+LEFT in a text input moves the caret back to the start of the preceding word.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello\\sXworld")
+    public void inputCtrlArrowLeftJumpsWord() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("hello world")
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.LEFT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that multiple CTRL+LEFT key presses jump back word-by-word.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("one\\sXtwo\\sthree")
+    public void inputCtrlArrowLeftMultipleJumps() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("one two three")
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.LEFT)
+                .sendKeys(Keys.LEFT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that CTRL+LEFT jumps past trailing spaces to the start of the word.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello\\sXworld\\s\\s\\s")
+    public void inputCtrlArrowLeftWithTrailingSpaces() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("hello world   ")
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.LEFT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that CTRL+LEFT works in a textarea element.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("line1\\nhello\\sXworld")
+    public void textareaCtrlArrowLeftJumpsWord() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("line1\nhello world")
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.LEFT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies CTRL+SHIFT+LEFT selects the preceding word so that typing replaces it.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello\\sX")
+    public void inputCtrlShiftArrowLeftSelectsWord() throws Exception {
+        final String html ="<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("hello world")
+                .keyDown(Keys.CONTROL)
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.LEFT)
+                .keyUp(Keys.SHIFT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+    /**
+     * Verifies that CTRL+RIGHT in a text input jumps forward to the start of the next word.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("one\\sXtwo\\sthree")
+    public void sendKeys_inputCtrlArrowRightJumpsWord() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("one two three")
+                .sendKeys(Keys.HOME)
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.RIGHT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that multiple CTRL+RIGHT key presses jump forward word-by-word.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("one\\stwo\\sXthree")
+    public void inputCtrlArrowRightMultipleJumps() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("one two three")
+                .sendKeys(Keys.HOME)
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.RIGHT)
+                .sendKeys(Keys.RIGHT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that CTRL+SHIFT+RIGHT selects the next word so that typing replaces it.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Xworld")
+    public void inputCtrlShiftArrowRightSelectsWord() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("hello world")
+                .sendKeys(Keys.HOME)
+                .keyDown(Keys.CONTROL)
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.RIGHT)
+                .keyUp(Keys.SHIFT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies CTRL+RIGHT in a textarea across line boundaries.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("line1\\nthree\\sXfour")
+    public void textareaCtrlArrowRightJumpsWord() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("line1\nthree four")
+                .sendKeys(Keys.HOME) // moves to start of line 2 ('three')
+                .keyDown(Keys.CONTROL)
+                .sendKeys(Keys.RIGHT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies CTRL+SHIFT+RIGHT in a textarea selects the next word.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("line1\\nXfour")
+    public void textareaCtrlShiftArrowRightSelectsWord() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("line1\nthree four")
+                .sendKeys(Keys.HOME) // moves to start of line 2
+                .keyDown(Keys.CONTROL)
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.RIGHT)
+                .keyUp(Keys.SHIFT)
+                .keyUp(Keys.CONTROL)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
 }

@@ -218,7 +218,19 @@ class DoTypeProcessor implements Serializable {
 
             case DOM_VK_LEFT:
                 if (element.isCtrlPressed()) {
-                    while (selectionStart > 0 && newValue.charAt(selectionStart - 1) != ' ') {
+                    int targetPos = selectionStart;
+                    // 1. Skip whitespace to the left of caret
+                    while (targetPos > 0 && Character.isWhitespace(newValue.charAt(targetPos - 1))) {
+                        targetPos--;
+                    }
+                    // 2. Skip word characters to the left
+                    while (targetPos > 0 && !Character.isWhitespace(newValue.charAt(targetPos - 1))) {
+                        targetPos--;
+                    }
+                    selectionStart = targetPos;
+                }
+                else if (element.isShiftPressed()) {
+                    if (selectionStart > 0) {
                         selectionStart--;
                     }
                 }
@@ -229,11 +241,20 @@ class DoTypeProcessor implements Serializable {
 
             case DOM_VK_RIGHT:
                 if (element.isCtrlPressed()) {
-                    if (selectionStart < newValue.length()) {
-                        selectionStart++;
+                    int targetPos = selectionStart;
+                    // 1. Skip word characters to the right
+                    while (targetPos < newValue.length() && !Character.isWhitespace(newValue.charAt(targetPos))) {
+                        targetPos++;
                     }
-                    while (selectionStart < newValue.length() && newValue.charAt(selectionStart - 1) != ' ') {
-                        selectionStart++;
+                    // 2. Skip whitespace to the right
+                    while (targetPos < newValue.length() && Character.isWhitespace(newValue.charAt(targetPos))) {
+                        targetPos++;
+                    }
+                    if (element.isShiftPressed()) {
+                        selectionEnd = targetPos;
+                    }
+                    else {
+                        selectionStart = targetPos;
                     }
                 }
                 else if (element.isShiftPressed()) {
@@ -254,8 +275,9 @@ class DoTypeProcessor implements Serializable {
 
                 final int lastLf = currentValue.lastIndexOf('\n', selectionStart - 1);
                 final int lastCr = currentValue.lastIndexOf('\r', selectionStart - 1);
-                // In a \r\n sequence, \r comes first, so Math.min places cursor right before \r
+                // In a \r\n sequence, \n comes last, so Math.pax places cursor left before \n
                 final int lastBreak = Math.max(lastLf, lastCr);
+                // right after \n
                 selectionStart = (lastBreak == -1) ? 0 : lastBreak + 1;
                 break;
 
