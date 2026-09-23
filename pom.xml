@@ -91,7 +91,7 @@
         <spotbugs-plugin.version>4.10.4.0</spotbugs-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
         <enforcer-plugin.version>3.6.3</enforcer-plugin.version>
-        <compiler-plugin.version>3.15.0</compiler-plugin.version>
+        <compiler-plugin.version>3.16.0</compiler-plugin.version>
         <jar-plugin.version>3.5.1</jar-plugin.version>
         <assembly-plugin.version>3.8.0</assembly-plugin.version>
         <source-plugin.version>3.4.0</source-plugin.version>
