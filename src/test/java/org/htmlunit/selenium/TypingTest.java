@@ -2130,4 +2130,159 @@ public class TypingTest extends SeleniumTest {
         driver.findElement(By.id("clickMe")).click();
         verifyTitle2(driver, getExpectedAlerts());
     }
+
+    /**
+     * Verifies that pressing SPACE on a checkbox toggles its checked state.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void spaceTogglesCheckbox() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function logState() {\n"
+            + "    log(document.getElementById('c').checked);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='checkbox' id='c' onchange='logState()'/>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement c = driver.findElement(By.id("c"));
+
+        c.sendKeys(Keys.SPACE); // toggles to true
+        c.sendKeys(Keys.SPACE); // toggles to false
+
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that pressing SPACE on a radio button checks it.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void spaceSelectsRadioButton() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function logState() {\n"
+            + "    log(document.getElementById('r').checked);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='radio' id='r' name='group' onchange='logState()'/>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement r = driver.findElement(By.id("r"));
+
+        r.sendKeys(Keys.SPACE); // checks radio button
+
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that pressing SPACE on a button triggers its click event.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("clicked")
+    public void spaceTriggersButton() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <button id='b' onclick='log(\"clicked\")'>Click me</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement b = driver.findElement(By.id("b"));
+
+        b.sendKeys(Keys.SPACE);
+
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that pressing SPACE on an input button triggers its click event.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("clicked")
+    public void spaceTriggersInputButton() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='button' id='b' value='Click me' onclick='log(\"clicked\")'/>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement b = driver.findElement(By.id("b"));
+
+        b.sendKeys(Keys.SPACE);
+
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that pressing SPACE on an input submit triggers its click event.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("clicked")
+    public void spaceTriggersInputSubmit() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <form onsubmit='return false;'>\n"
+            + "    <input type='submit' id='b' value='Submit' onclick='log(\"clicked\")'/>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement b = driver.findElement(By.id("b"));
+
+        b.sendKeys(Keys.SPACE);
+
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that pressing SPACE on an input reset triggers its click event.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("clicked")
+    public void spaceTriggersInputReset() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <form>\n"
+            + "    <input type='reset' id='b' value='Reset' onclick='log(\"clicked\")'/>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement b = driver.findElement(By.id("b"));
+
+        b.sendKeys(Keys.SPACE);
+
+        verifyTitle2(driver, getExpectedAlerts());
+    }
 }

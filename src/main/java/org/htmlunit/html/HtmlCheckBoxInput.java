@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.javascript.host.event.KeyboardEvent;
 
 /**
  * Wrapper for the HTML element "input".
@@ -93,6 +94,19 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
     public Page setChecked(final boolean isChecked) {
         checkedState_ = isChecked;
         return executeOnChangeHandlerIfAppropriate(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final int keyCode, final boolean lastType) throws IOException {
+        if (keyCode == KeyboardEvent.DOM_VK_SPACE) {
+            click();
+            return;
+        }
+
+        super.doType(keyCode, lastType);
     }
 
     /**

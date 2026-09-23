@@ -9,6 +9,9 @@
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 153, Bugfixes">
             <action type="add" dev="rbri">
+                Pressing Space key on checkboxes, radio buttons, and button controls now activates or toggles the element.
+            </action>
+            <action type="add" dev="rbri">
                 Up/Down Arrow key navigation support added.
             </action>
             <action type="update" dev="rbri">
