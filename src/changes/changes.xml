@@ -8,11 +8,14 @@
 
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 153, Bugfixes">
-            <action type="fix" dev="rbri">
-                Improved Ctrl+Left and Ctrl+Right word navigation and selection in input fields and textareas.
+            <action type="add" dev="rbri">
+                Up/Down Arrow key navigation support added.
             </action>
             <action type="update" dev="rbri">
-                Support Ctrl+Backspace and Ctrl+Delete word deletion in input fields and textareas.
+                Improved Ctrl+Left and Ctrl+Right word navigation and selection.
+            </action>
+            <action type="add" dev="rbri">
+                Support Ctrl+Backspace and Ctrl+Delete word deletion.
             </action>
             <action type="fix" dev="rbri">
                 Right arrow key movement fixed when caret is at index 0.

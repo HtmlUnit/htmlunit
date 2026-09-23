@@ -1764,4 +1764,370 @@ public class TypingTest extends SeleniumTest {
         driver.findElement(By.id("clickMe")).click();
         verifyTitle2(driver, getExpectedAlerts());
     }
+
+    /**
+     * Verifies that ARROW_UP in a textarea moves the caret to the previous line at the same column position.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abXcde\\n12345")
+    public void textareaArrowUpMovesToPreviousLine() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // type 'abcde\n12345', move caret to start of line 2, move 2 right (col 2), UP, type 'X'
+        new Actions(driver)
+                .click(t)
+                .sendKeys("abcde\n12345")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_UP)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that ARROW_UP moves caret to the end of the previous line if that line is shorter.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abX\\n12345")
+    public void textareaArrowUpShorterPreviousLine() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("ab\n12345")
+                .sendKeys(Keys.ARROW_UP)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that ARROW_UP on the first line moves the caret to index 0.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Xfirst\\sline")
+    public void textareaArrowUpFirstLineMovesToStart() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("first line")
+                .sendKeys(Keys.ARROW_UP)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that SHIFT+ARROW_UP selects text up to the same column on the previous line.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("line1\\nliX345")
+    public void textareaShiftArrowUpSelectsLine() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("line1\nline2\n12345")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT) // col 2 on '12345'
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.ARROW_UP)
+                .keyUp(Keys.SHIFT)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that ARROW_UP in a single-line input moves the caret to index 0.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Xhello")
+    public void inputArrowUpMovesToStart() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("hello")
+                .sendKeys(Keys.ARROW_UP)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that ARROW_DOWN in a textarea moves the caret to the next line at the same column position.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("12345\\nabXcde")
+    public void textareaArrowDownMovesToNextLine() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        // type '12345\nabcde', HOME, move 2 right (col 2), DOWN, type 'X'
+        new Actions(driver)
+                .click(t)
+                .sendKeys("12345\nabcde")
+                .sendKeys(Keys.HOME) // moves to start of line 2
+                .sendKeys(Keys.ARROW_UP) // moves to start of line 1
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT) // column 2 on '12345'
+                .sendKeys(Keys.ARROW_DOWN)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that ARROW_DOWN moves caret to the end of the next line if that line is shorter.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("12345\\nabX")
+    public void textareaArrowDownShorterNextLine() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("12345\nab")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_UP) // line 1 start
+                .sendKeys(Keys.END) // end of line 1 (col 5)
+                .sendKeys(Keys.ARROW_DOWN)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that ARROW_DOWN on the last line moves the caret to the end of the text.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("last\\slineX")
+    public void textareaArrowDownLastLineMovesToEnd() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("last line")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_DOWN)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that SHIFT+ARROW_DOWN selects text down to the same column on the next line.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("12Xne2\\nline3")
+    public void textareaShiftArrowDownSelectsLine() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("12345\nline2\nline3")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_UP)
+                .sendKeys(Keys.ARROW_UP) // start of line 1
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT) // col 2 on line 1
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.ARROW_DOWN)
+                .keyUp(Keys.SHIFT)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that ARROW_DOWN in a single-line input moves the caret to the end.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("helloX")
+    public void inputArrowDownMovesToEnd() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <input type='text' id='t'/>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("hello")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_DOWN)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
 }
