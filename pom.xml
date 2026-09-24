@@ -1423,6 +1423,10 @@
             <name>MatrixNeoKozak</name>
             <email>matrixneo2026@tutamail.com</email>
         </contributor>
+        <contributor>
+            <name>Vladimir Babin</name>
+            <email>vovababin@gmail.com</email>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as dependency -->
