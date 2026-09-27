@@ -16,6 +16,8 @@ package org.htmlunit.selenium;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.Duration;
+
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
@@ -23,7 +25,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Modified from <a href=
@@ -35,6 +37,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 public class TypingTest extends SeleniumTest {
 
+    private static String getValueText(WebElement el) {
+        // Standardize on \n and strip any trailing whitespace.
+        return el.getAttribute("value").replace("\r\n", "\n").trim();
+    }
+
     @Test
     void testShouldFireKeyPressEvents() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
@@ -42,8 +49,8 @@ public class TypingTest extends SeleniumTest {
         final WebElement keyReporter = driver.findElement(By.id("keyReporter"));
         keyReporter.sendKeys("a");
 
-        WebElement result = driver.findElement(By.id("result"));
-        assertEquals("press:", result.getText());
+        final WebElement result = driver.findElement(By.id("result"));
+        assertThat(result.getText()).contains("press:");
     }
 
     @Test
@@ -54,7 +61,7 @@ public class TypingTest extends SeleniumTest {
         keyReporter.sendKeys("I");
 
         final WebElement result = driver.findElement(By.id("result"));
-        assertTrue(result.getText().contains("down:"));
+        assertThat(result.getText()).contains("down:");
     }
 
     @Test
@@ -65,7 +72,7 @@ public class TypingTest extends SeleniumTest {
         keyReporter.sendKeys("a");
 
         final WebElement result = driver.findElement(By.id("result"));
-        assertTrue(result.getText().contains("up:"));
+        assertThat(result.getText()).contains("up:");
     }
 
     @Test
@@ -75,9 +82,7 @@ public class TypingTest extends SeleniumTest {
         final WebElement keyReporter = driver.findElement(By.id("keyReporter"));
         keyReporter.sendKeys("abc def");
 
-        assertEquals("abc def", keyReporter.getAttribute("value"));
-        assertNull(keyReporter.getDomAttribute("value"));
-        assertEquals("abc def", keyReporter.getDomProperty("value"));
+        assertThat(keyReporter.getAttribute("value")).isEqualTo("abc def");
     }
 
     @Test
@@ -87,9 +92,7 @@ public class TypingTest extends SeleniumTest {
         final WebElement keyReporter = driver.findElement(By.id("keyReporter"));
         keyReporter.sendKeys("ABC DEF");
 
-        assertEquals("ABC DEF", keyReporter.getAttribute("value"));
-        assertNull(keyReporter.getDomAttribute("value"));
-        assertEquals("ABC DEF", keyReporter.getDomProperty("value"));
+        assertThat(keyReporter.getAttribute("value")).isEqualTo("ABC DEF");
     }
 
     @Test
@@ -99,9 +102,7 @@ public class TypingTest extends SeleniumTest {
         final WebElement keyReporter = driver.findElement(By.id("keyReporter"));
         keyReporter.sendKeys("\"");
 
-        assertEquals("\"", keyReporter.getAttribute("value"));
-        assertNull(keyReporter.getDomAttribute("value"));
-        assertEquals("\"", keyReporter.getDomProperty("value"));
+        assertThat(keyReporter.getAttribute("value")).isEqualTo("\"");
     }
 
     @Test
@@ -117,9 +118,7 @@ public class TypingTest extends SeleniumTest {
         final WebElement keyReporter = driver.findElement(By.id("keyReporter"));
         keyReporter.sendKeys("@");
 
-        assertEquals("@", keyReporter.getAttribute("value"));
-        assertNull(keyReporter.getDomAttribute("value"));
-        assertEquals("@", keyReporter.getDomProperty("value"));
+        assertThat(keyReporter.getAttribute("value")).isEqualTo("@");
     }
 
     @Test
@@ -129,9 +128,7 @@ public class TypingTest extends SeleniumTest {
         final WebElement keyReporter = driver.findElement(By.id("keyReporter"));
         keyReporter.sendKeys("me@eXample.com");
 
-        assertEquals("me@eXample.com", keyReporter.getAttribute("value"));
-        assertNull(keyReporter.getDomAttribute("value"));
-        assertEquals("me@eXample.com", keyReporter.getDomProperty("value"));
+        assertThat(keyReporter.getAttribute("value")).isEqualTo("me@eXample.com");
     }
 
     @Test
@@ -141,24 +138,17 @@ public class TypingTest extends SeleniumTest {
         final WebElement keyReporter = driver.findElement(By.id("keyReporter"));
         keyReporter.sendKeys(Keys.ARROW_LEFT);
 
-        assertEquals("", keyReporter.getAttribute("value"));
-        assertNull(keyReporter.getDomAttribute("value"));
-        assertEquals("", keyReporter.getDomProperty("value"));
+        assertThat(keyReporter.getAttribute("value")).isEmpty();
     }
 
-    /**
-     * @throws Exception if an error occurs
-     */
     @Test
-    void testShouldBeAbleToUseArrowKeys() throws Exception {
+    void testShouldBeAbleToUseArrowKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement keyReporter = driver.findElement(By.id("keyReporter"));
         keyReporter.sendKeys("tet", Keys.ARROW_LEFT, "s");
 
-        assertEquals("test", keyReporter.getAttribute("value"));
-        assertNull(keyReporter.getDomAttribute("value"));
-        assertEquals("test", keyReporter.getDomProperty("value"));
+        assertThat(keyReporter.getAttribute("value")).isEqualTo("test");
     }
 
     @Test
@@ -169,7 +159,7 @@ public class TypingTest extends SeleniumTest {
         element.sendKeys("I like cheese");
 
         final WebElement result = driver.findElement(By.id("result"));
-        assertEquals("I like cheese", result.getText());
+        assertThat(result.getText()).isEqualTo("I like cheese");
     }
 
     @Test
@@ -182,30 +172,30 @@ public class TypingTest extends SeleniumTest {
         final WebElement result = driver.findElement(By.id("result"));
         // Because the key down gets the result before the input element is
         // filled, we're a letter short here
-        assertEquals("I like chees", result.getText());
+        assertThat(result.getText()).isEqualTo("I like chees");
     }
 
     @Test
     public void testWillSimulateAKeyPressWhenEnteringTextIntoInputElements() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        WebElement element = driver.findElement(By.id("keyPress"));
+        final WebElement element = driver.findElement(By.id("keyPress"));
         element.sendKeys("I like cheese");
 
-        WebElement result = driver.findElement(By.id("result"));
+        final WebElement result = driver.findElement(By.id("result"));
         // Because the key down gets the result before the input element is
         // filled, we're a letter short here
-        assertEquals("I like chees", result.getText());
+        assertThat(result.getText()).isEqualTo("I like chees");
     }
 
     @Test
     public void testWillSimulateAKeyUpWhenEnteringTextIntoTextAreas() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        WebElement element = driver.findElement(By.id("keyUpArea"));
+        final WebElement element = driver.findElement(By.id("keyUpArea"));
         element.sendKeys("I like cheese");
 
-        WebElement result = driver.findElement(By.id("result"));
+        final WebElement result = driver.findElement(By.id("result"));
         assertThat(result.getText()).isEqualTo("I like cheese");
     }
 
@@ -213,10 +203,10 @@ public class TypingTest extends SeleniumTest {
     public void testWillSimulateAKeyDownWhenEnteringTextIntoTextAreas() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        WebElement element = driver.findElement(By.id("keyDownArea"));
+        final WebElement element = driver.findElement(By.id("keyDownArea"));
         element.sendKeys("I like cheese");
 
-        WebElement result = driver.findElement(By.id("result"));
+        final WebElement result = driver.findElement(By.id("result"));
         // Because the key down gets the result before the input element is
         // filled, we're a letter short here
         assertThat(result.getText()).isEqualTo("I like chees");
@@ -226,13 +216,24 @@ public class TypingTest extends SeleniumTest {
     public void testWillSimulateAKeyPressWhenEnteringTextIntoTextAreas() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        WebElement element = driver.findElement(By.id("keyPressArea"));
+        final WebElement element = driver.findElement(By.id("keyPressArea"));
         element.sendKeys("I like cheese");
 
-        WebElement result = driver.findElement(By.id("result"));
+        final WebElement result = driver.findElement(By.id("result"));
         // Because the key down gets the result before the input element is
         // filled, we're a letter short here
         assertThat(result.getText()).isEqualTo("I like chees");
+    }
+
+    @Test
+    public void testShouldFireFocusKeyEventsInTheRightOrder() {
+        final WebDriver driver = getWebDriver("/javascriptPage.html");
+
+        final WebElement result = driver.findElement(By.id("result"));
+        final WebElement element = driver.findElement(By.id("theworks"));
+
+        element.sendKeys("a");
+        assertThat(result.getText().trim()).isEqualTo("focus keydown keypress keyup");
     }
 
     @Test
@@ -241,7 +242,7 @@ public class TypingTest extends SeleniumTest {
                        "down: 37 press: 37 up: 37", "down: 39 press: 39 up: 39"},
             FF_ESR = {"down: 40 press: 40 up: 40", "down: 38 press: 38 up: 38",
                       "down: 37 press: 37 up: 37", "down: 39 press: 39 up: 39"})
-    public void shouldReportKeyCodeOfArrowKeys() {
+    void testShouldReportKeyCodeOfArrowKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
@@ -271,41 +272,37 @@ public class TypingTest extends SeleniumTest {
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
         element.sendKeys(Keys.ARROW_DOWN);
-        assertTrue(result.getText().trim().contains("down: 40"));
-        assertTrue(result.getText().trim().contains("up: 40"));
+        assertThat(result.getText().trim()).contains("down: 40", "up: 40");
 
         element.sendKeys(Keys.ARROW_UP);
-        assertTrue(result.getText().trim().contains("down: 38"));
-        assertTrue(result.getText().trim().contains("up: 38"));
+        assertThat(result.getText().trim()).contains("down: 38", "up: 38");
 
         element.sendKeys(Keys.ARROW_LEFT);
-        assertTrue(result.getText().trim().contains("down: 37"));
-        assertTrue(result.getText().trim().contains("up: 37"));
+        assertThat(result.getText().trim()).contains("down: 37", "up: 37");
 
         element.sendKeys(Keys.ARROW_RIGHT);
-        assertTrue(result.getText().trim().contains("down: 39"));
-        assertTrue(result.getText().trim().contains("up: 39"));
+        assertThat(result.getText().trim()).contains("down: 39", "up: 39");
 
         // And leave no rubbish/printable keys in the "keyReporter"
-        assertEquals("", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEmpty();
     }
 
     @Test
     void testNumericNonShiftKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        WebElement element = driver.findElement(By.id("keyReporter"));
+        final WebElement element = driver.findElement(By.id("keyReporter"));
 
-        String numericLineCharsNonShifted = "`1234567890-=[]\\;,.'/42";
+        final String numericLineCharsNonShifted = "`1234567890-=[]\\;,.'/42";
         element.sendKeys(numericLineCharsNonShifted);
 
         assertThat(element.getAttribute("value")).isEqualTo(numericLineCharsNonShifted);
     }
 
     @Test
-    // @Ignore(value = FIREFOX, reason = "Final assertion isn't 16 since keyUp not sent from shift", issue = "https://github.com/mozilla/geckodriver/issues/646")
+    @Alerts(DEFAULT = "down: 192 press: 126 up: 192 up: 16",
+            FF = "down: 192 press: 126 up: 192",
+            FF_ESR = "down: 192 press: 126 up: 192")
     public void testNumericShiftKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -315,27 +312,26 @@ public class TypingTest extends SeleniumTest {
         final String numericShiftsEtc = "~!@#$%^&*()_+{}:\"<>?|END~";
         element.sendKeys(numericShiftsEtc);
 
-        assertEquals(numericShiftsEtc, element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals(numericShiftsEtc, element.getDomProperty("value"));
-
-        assertTrue(result.getText(), result.getText().trim().contains(" up: 16"));
+        assertThat(element.getAttribute("value")).isEqualTo(numericShiftsEtc);
+        assertEquals(getExpectedAlerts()[0], result.getText().trim());
     }
 
     @Test
     void testLowerCaseAlphaKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        WebElement element = driver.findElement(By.id("keyReporter"));
+        final WebElement element = driver.findElement(By.id("keyReporter"));
 
-        String lowerAlphas = "abcdefghijklmnopqrstuvwxyz";
+        final String lowerAlphas = "abcdefghijklmnopqrstuvwxyz";
         element.sendKeys(lowerAlphas);
 
         assertThat(element.getAttribute("value")).isEqualTo(lowerAlphas);
     }
 
     @Test
-    // @Ignore(value = FIREFOX, reason = "Final assertion isn't 16 since keyUp not sent from shift", issue = "https://github.com/mozilla/geckodriver/issues/646")
+    @Alerts(DEFAULT = "down: 90 press: 90 up: 90 up: 16",
+            FF = "down: 90 press: 90 up: 90",
+            FF_ESR = "down: 90 press: 90 up: 90")
     public void testUppercaseAlphaKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -345,31 +341,26 @@ public class TypingTest extends SeleniumTest {
         final String upperAlphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         element.sendKeys(upperAlphas);
 
-        assertEquals(upperAlphas, element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals(upperAlphas, element.getDomProperty("value"));
-
-        assertTrue(result.getText(), result.getText().trim().contains(" up: 16"));
+        assertThat(element.getAttribute("value")).isEqualTo(upperAlphas);
+        assertEquals(getExpectedAlerts()[0], result.getText().trim());
     }
 
     @Test
-    // @Ignore(value = FIREFOX, reason = "Final assertion isn't 16 since keyUp not sent from shift", issue = "https://github.com/mozilla/geckodriver/issues/646")
+    @Alerts(DEFAULT = "down: 192 press: 126 up: 192 up: 16",
+            FF = "down: 192 press: 126 up: 192",
+            FF_ESR = "down: 192 press: 126 up: 192")
     public void testAllPrintableKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
-        final String allPrintable =
-                "!\"#$%&'()*+,-./0123456789:;<=>?@ ABCDEFGHIJKLMNO"
+        final String allPrintable = "!\"#$%&'()*+,-./0123456789:;<=>?@ ABCDEFGHIJKLMNO"
                 + "PQRSTUVWXYZ [\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
         element.sendKeys(allPrintable);
 
-        assertEquals(allPrintable, element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals(allPrintable, element.getDomProperty("value"));
-
-        assertTrue(result.getText(), result.getText().trim().contains(" up: 16"));
+        assertThat(element.getAttribute("value")).isEqualTo(allPrintable);
+        assertEquals(getExpectedAlerts()[0], result.getText());
     }
 
     @Test
@@ -378,12 +369,9 @@ public class TypingTest extends SeleniumTest {
 
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
-        element.sendKeys("a" + Keys.LEFT + "b" + Keys.RIGHT
-                + Keys.UP + Keys.DOWN + Keys.PAGE_UP + Keys.PAGE_DOWN + "1");
-
-        assertEquals("ba1", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("ba1", element.getDomProperty("value"));
+        element.sendKeys(
+                "a" + Keys.LEFT + "b" + Keys.RIGHT + Keys.UP + Keys.DOWN + Keys.PAGE_UP + Keys.PAGE_DOWN + "1");
+        assertThat(element.getAttribute("value")).isEqualTo("ba1");
     }
 
     @Test
@@ -393,13 +381,9 @@ public class TypingTest extends SeleniumTest {
 
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
-        element.sendKeys("abc" + Keys.HOME + "0" + Keys.LEFT + Keys.RIGHT
-                + Keys.PAGE_UP + Keys.PAGE_DOWN + Keys.END + "1" + Keys.HOME
-                + "0" + Keys.PAGE_UP + Keys.END + "111" + Keys.HOME + "00");
-
-        assertEquals("0000abc1111", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("0000abc1111", element.getDomProperty("value"));
+        element.sendKeys("abc" + Keys.HOME + "0" + Keys.LEFT + Keys.RIGHT + Keys.PAGE_UP + Keys.PAGE_DOWN + Keys.END
+                + "1" + Keys.HOME + "0" + Keys.PAGE_UP + Keys.END + "111" + Keys.HOME + "00");
+        assertThat(element.getAttribute("value")).isEqualTo("0000abc1111");
     }
 
     @Test
@@ -409,19 +393,13 @@ public class TypingTest extends SeleniumTest {
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
         element.sendKeys("abcdefghi");
-        assertEquals("abcdefghi", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("abcdefghi", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEqualTo("abcdefghi");
 
         element.sendKeys(Keys.LEFT, Keys.LEFT, Keys.DELETE);
-        assertEquals("abcdefgi", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("abcdefgi", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEqualTo("abcdefgi");
 
         element.sendKeys(Keys.LEFT, Keys.LEFT, Keys.BACK_SPACE);
-        assertEquals("abcdfgi", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("abcdfgi", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEqualTo("abcdfgi");
     }
 
     @Test
@@ -431,9 +409,7 @@ public class TypingTest extends SeleniumTest {
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
         element.sendKeys("abcd" + Keys.SPACE + "fgh" + Keys.SPACE + "ij");
-        assertEquals("abcd fgh ij", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("abcd fgh ij", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEqualTo("abcd fgh ij");
     }
 
     @Test
@@ -442,20 +418,17 @@ public class TypingTest extends SeleniumTest {
 
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
-        element.sendKeys("abcd" + Keys.MULTIPLY + Keys.SUBTRACT + Keys.ADD
-                + Keys.DECIMAL + Keys.SEPARATOR + Keys.NUMPAD0 + Keys.NUMPAD9
-                + Keys.ADD + Keys.SEMICOLON + Keys.EQUALS + Keys.DIVIDE
-                + Keys.NUMPAD3 + "abcd");
-        assertEquals("abcd*-+.,09+;=/3abcd", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("abcd*-+.,09+;=/3abcd", element.getDomProperty("value"));
+        element.sendKeys(
+                "abcd" + Keys.MULTIPLY + Keys.SUBTRACT + Keys.ADD + Keys.DECIMAL + Keys.SEPARATOR + Keys.NUMPAD0
+                        + Keys.NUMPAD9 + Keys.ADD + Keys.SEMICOLON + Keys.EQUALS + Keys.DIVIDE + Keys.NUMPAD3 + "abcd");
+        assertThat(element.getAttribute("value")).isEqualTo("abcd*-+.,09+;=/3abcd");
     }
 
     @Test
     public void testFunctionKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        WebElement element = driver.findElement(By.id("keyReporter"));
+        final WebElement element = driver.findElement(By.id("keyReporter"));
 
         element.sendKeys("FUNCTION" + Keys.F4 + "-KEYS" + Keys.F4);
         element.sendKeys("" + Keys.F4 + "-TOO" + Keys.F4);
@@ -469,39 +442,32 @@ public class TypingTest extends SeleniumTest {
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
         element.sendKeys("abcd efgh");
-        assertEquals("abcd efgh", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("abcd efgh", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEqualTo("abcd efgh");
 
         element.sendKeys(Keys.SHIFT, Keys.LEFT, Keys.LEFT, Keys.LEFT);
         element.sendKeys(Keys.DELETE);
-        assertEquals("abcd e", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("abcd e", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEqualTo("abcd e");
     }
 
     @Test
     void testChordControlHomeShiftEndDelete() {
-
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        final WebElement result = driver.findElement(By.id("result"));
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
         element.sendKeys("!\"#$%&'()*+,-./0123456789:;<=>?@ ABCDEFG");
 
-        element.sendKeys(Keys.HOME);
-        element.sendKeys("" + Keys.SHIFT + Keys.END);
-        assertTrue(result.getText(), result.getText().contains(" up: 16"));
+        element.sendKeys(Keys.END);
+        element.sendKeys("" + Keys.SHIFT + Keys.HOME);
 
         element.sendKeys(Keys.DELETE);
-        assertEquals("", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEmpty();
     }
 
     @Test
-    // @Ignore(value = FIREFOX, reason = "Firefox can't type at beginning of field", issue = "https://github.com/mozilla/geckodriver/issues/2015")
+    @Alerts(DEFAULT = "down: 36 up: 36 up: 16",
+            FF = "down: 36 up: 36",
+            FF_ESR = "down: 36 up: 36")
     public void testChordReverseShiftHomeSelectionDeletes() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -509,31 +475,20 @@ public class TypingTest extends SeleniumTest {
         final WebElement element = driver.findElement(By.id("keyReporter"));
 
         element.sendKeys("done" + Keys.HOME);
-        assertEquals("done", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("done", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEqualTo("done");
 
-        element.sendKeys(Keys.SHIFT + "ALL " + Keys.HOME);
-        assertEquals("ALL done", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("ALL done", element.getDomProperty("value"));
+        element.sendKeys(Keys.SHIFT + "all " + Keys.HOME);
+        assertThat(element.getAttribute("value")).isEqualTo("ALL done");
 
         element.sendKeys(Keys.DELETE);
-        assertEquals("done", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("done", element.getDomProperty("value"));
+        assertThat(element.getAttribute("value")).isEqualTo("done");
 
         element.sendKeys("" + Keys.END + Keys.SHIFT + Keys.HOME);
-        assertEquals("done", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("done", element.getDomProperty("value"));
-        // Note: trailing SHIFT up here
-        assertTrue(result.getText(), result.getText().trim().contains(" up: 16"));
+        assertThat(element.getAttribute("value")).isEqualTo("done");
+        assertEquals(getExpectedAlerts()[0], result.getText().trim());
 
-        element.sendKeys("" + Keys.DELETE);
-        assertEquals("", element.getAttribute("value"));
-        assertNull(element.getDomAttribute("value"));
-        assertEquals("", element.getDomProperty("value"));
+        element.sendKeys(Keys.DELETE);
+        assertThat(element.getAttribute("value")).isEmpty();
     }
 
     @Test
@@ -541,9 +496,9 @@ public class TypingTest extends SeleniumTest {
     public void testChordControlCutAndPaste() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        WebElement element = driver.findElement(By.id("keyReporter"));
+        final WebElement element = driver.findElement(By.id("keyReporter"));
 
-        String paste = "!\"#$%&'()*+,-./0123456789:;<=>?@ ABCDEFG";
+        final String paste = "!\"#$%&'()*+,-./0123456789:;<=>?@ ABCDEFG";
         element.sendKeys(paste);
         assertThat(element.getAttribute("value")).isEqualTo(paste);
 
@@ -554,7 +509,7 @@ public class TypingTest extends SeleniumTest {
         assertThat(element.getAttribute("value")).isEmpty();
 
         element.sendKeys(Keys.CONTROL, "v");
-        wait.until(elementValueToEqual(element, paste));
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(d -> paste.equals(element.getAttribute("value")));
 
         // Cut the last 3 letters.
         element.sendKeys("" + Keys.LEFT + Keys.LEFT + Keys.LEFT + Keys.SHIFT + Keys.END);
@@ -580,7 +535,7 @@ public class TypingTest extends SeleniumTest {
     void testShouldTypeIntoInputElementsThatHaveNoTypeAttribute() {
         final WebDriver driver = getWebDriver("/formPage.html");
 
-        WebElement element = driver.findElement(By.id("no-type"));
+        final WebElement element = driver.findElement(By.id("no-type"));
 
         element.sendKeys("should say cheese");
         assertThat(element.getAttribute("value")).isEqualTo("should say cheese");
@@ -590,7 +545,7 @@ public class TypingTest extends SeleniumTest {
     void testShouldNotTypeIntoElementsThatPreventKeyDownEvents() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
-        WebElement silent = driver.findElement(By.name("suppress"));
+        final WebElement silent = driver.findElement(By.name("suppress"));
 
         silent.sendKeys("s");
         assertThat(silent.getAttribute("value")).isEmpty();
@@ -610,7 +565,7 @@ public class TypingTest extends SeleniumTest {
     @Test
     void testShouldBeAbleToTypeOnAnEmailInputField() {
         final WebDriver driver = getWebDriver("/formPage.html");
-        WebElement email = driver.findElement(By.id("email"));
+        final WebElement email = driver.findElement(By.id("email"));
         email.sendKeys("foobar");
         assertThat(email.getAttribute("value")).isEqualTo("foobar");
     }
@@ -618,7 +573,7 @@ public class TypingTest extends SeleniumTest {
     @Test
     void testShouldBeAbleToTypeOnANumberInputField() {
         final WebDriver driver = getWebDriver("/formPage.html");
-        WebElement email = driver.findElement(By.id("age"));
+        final WebElement email = driver.findElement(By.id("age"));
         email.sendKeys("33");
         assertThat(email.getAttribute("value")).isEqualTo("33");
     }
@@ -626,13 +581,13 @@ public class TypingTest extends SeleniumTest {
     @Test
     void testShouldThrowIllegalArgumentException() {
         final WebDriver driver = getWebDriver("/formPage.html");
-        WebElement email = driver.findElement(By.id("age"));
+        final WebElement email = driver.findElement(By.id("age"));
         assertThrows(IllegalArgumentException.class, () -> email.sendKeys((CharSequence[]) null));
     }
 
     @Test
     void canSafelyTypeOnElementThatIsRemovedFromTheDomOnKeyPress() {
-        final WebDriver driver = getWebDriver("key_tests/remove_on_keypress.html");
+        final WebDriver driver = getWebDriver("/key_tests/remove_on_keypress.html");
 
         WebElement input = driver.findElement(By.id("target"));
         WebElement log = driver.findElement(By.id("log"));
@@ -672,7 +627,7 @@ public class TypingTest extends SeleniumTest {
 
         WebElement element = driver.findElement(By.id("emptyTextArea"));
         element.sendKeys("\n");
-        shortWait.until(ExpectedConditions.attributeToBe(element, "value", "\n"));
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(d -> "\n".equals(element.getAttribute("value")));
     }
 
     @Test
@@ -681,6 +636,6 @@ public class TypingTest extends SeleniumTest {
 
         WebElement element = driver.findElement(By.id("emptyTextArea"));
         element.sendKeys("\n\n\n");
-        shortWait.until(ExpectedConditions.attributeToBe(element, "value", "\n\n\n"));
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(d -> "\n\n\n".equals(element.getAttribute("value")));
     }
 }
