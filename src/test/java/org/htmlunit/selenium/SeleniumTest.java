@@ -18,9 +18,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 
+import org.htmlunit.ClipboardHandler;
 import org.htmlunit.WebDriverTestCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * The parent class of Selenium tests.
@@ -54,6 +56,26 @@ public class SeleniumTest extends WebDriverTestCase {
     protected WebDriver getWebDriver(final String relativePath) {
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + relativePath);
+
+        // use a simple clipboard handler to run in headless mode also
+        if (driver instanceof HtmlUnitDriver htmlUnitDriver) {
+            htmlUnitDriver.getWebClient().setClipboardHandler(
+                    new ClipboardHandler() {
+                        private String content_;
+
+                        @Override
+                        public String getClipboardContent() {
+                            return content_;
+                        }
+
+                        @Override
+                        public void setClipboardContent(final String content) {
+                            content_ = content;
+                        }
+
+                    });
+        }
+
         return driver;
     }
 
@@ -76,19 +98,6 @@ public class SeleniumTest extends WebDriverTestCase {
      */
     public static <T> SimpleAssert<T> assertThat(T actual) {
         return new SimpleAssert<>(actual);
-    }
-
-    /**
-     * Functional interface representing an action that may throw an exception.
-     */
-    @FunctionalInterface
-    public interface ThrowableRunnable {
-        /**
-         * Executes the action.
-         *
-         * @throws Throwable if an error occurs
-         */
-        void run() throws Throwable;
     }
 
     /**

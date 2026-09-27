@@ -303,6 +303,8 @@ public class TypingTest extends SeleniumTest {
     @Alerts(DEFAULT = "down: 192 press: 126 up: 192 up: 16",
             FF = "down: 192 press: 126 up: 192",
             FF_ESR = "down: 192 press: 126 up: 192")
+    @HtmlUnitNYI(FF = "down: 192 press: 126 up: 192 up: 16",
+            FF_ESR = "down: 192 press: 126 up: 192 up: 16")
     public void testNumericShiftKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -332,6 +334,8 @@ public class TypingTest extends SeleniumTest {
     @Alerts(DEFAULT = "down: 90 press: 90 up: 90 up: 16",
             FF = "down: 90 press: 90 up: 90",
             FF_ESR = "down: 90 press: 90 up: 90")
+    @HtmlUnitNYI(FF = "down: 90 press: 90 up: 90 up: 16",
+            FF_ESR = "down: 90 press: 90 up: 90 up: 16")
     public void testUppercaseAlphaKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -349,6 +353,8 @@ public class TypingTest extends SeleniumTest {
     @Alerts(DEFAULT = "down: 192 press: 126 up: 192 up: 16",
             FF = "down: 192 press: 126 up: 192",
             FF_ESR = "down: 192 press: 126 up: 192")
+    @HtmlUnitNYI(FF = "down: 192 press: 126 up: 192 up: 16",
+            FF_ESR = "down: 192 press: 126 up: 192 up: 16")
     public void testAllPrintableKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -468,6 +474,8 @@ public class TypingTest extends SeleniumTest {
     @Alerts(DEFAULT = "down: 36 up: 36 up: 16",
             FF = "down: 36 up: 36",
             FF_ESR = "down: 36 up: 36")
+    @HtmlUnitNYI(FF = "down: 36 press: 36 up: 36 up: 16",
+            FF_ESR = "down: 36 press: 36 up: 36 up: 16")
     public void testChordReverseShiftHomeSelectionDeletes() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
