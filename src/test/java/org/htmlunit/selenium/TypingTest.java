@@ -767,6 +767,84 @@ public class TypingTest extends SeleniumTest {
     }
 
     /**
+     * Verifies that SHIFT+HOME selects from the caret position back to the line start.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("line1\\nX345")
+    public void textareaShiftHomeSelectsToLineStart() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("line1\n12345")
+                .sendKeys(Keys.HOME)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT) // caret at '3' on line 2
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.HOME)
+                .keyUp(Keys.SHIFT)
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Verifies that HOME without SHIFT collapses any existing selection to the start of the line.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("line1\\nX12345")
+    public void textareaHomeCollapsesSelectionToLineStart() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(document.getElementById('t').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='t'></textarea>\n"
+            + "  <button id='clickMe' onclick='test()'>do it</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        new Actions(driver)
+                .click(t)
+                .sendKeys("line1\n12345")
+                .sendKeys(Keys.HOME)
+                .keyDown(Keys.SHIFT)
+                .sendKeys(Keys.ARROW_RIGHT)
+                .sendKeys(Keys.ARROW_RIGHT) // select 'li'
+                .keyUp(Keys.SHIFT)
+                .sendKeys(Keys.HOME) // unshifted HOME collapses selection to 0
+                .sendKeys("X")
+                .perform();
+
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
      * Verifies that CTRL+END in a textarea moves the caret to the very end
      * of the document.
      *

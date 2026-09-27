@@ -354,17 +354,26 @@ class DoTypeProcessor implements Serializable {
                 break;
 
             case DOM_VK_HOME:
+                final int targetHome;
                 if (element.isCtrlPressed()) {
-                    selectionStart = 0;
-                    break;
+                    targetHome = 0;
+                }
+                else {
+                    final int lastLf = currentValue.lastIndexOf('\n', selectionStart - 1);
+                    final int lastCr = currentValue.lastIndexOf('\r', selectionStart - 1);
+                    // Use Math.max to find the closest line break before the caret,
+                    // so the line start is positioned right after it
+                    final int lastBreak = Math.max(lastLf, lastCr);
+                    targetHome = (lastBreak == -1) ? 0 : lastBreak + 1;
                 }
 
-                final int lastLf = currentValue.lastIndexOf('\n', selectionStart - 1);
-                final int lastCr = currentValue.lastIndexOf('\r', selectionStart - 1);
-                // In a \r\n sequence, \n comes last, so Math.pax places cursor left before \n
-                final int lastBreak = Math.max(lastLf, lastCr);
-                // right after \n
-                selectionStart = (lastBreak == -1) ? 0 : lastBreak + 1;
+                if (element.isShiftPressed()) {
+                    selectionStart = targetHome;
+                }
+                else {
+                    selectionStart = targetHome;
+                    selectionEnd = targetHome;
+                }
                 break;
 
             case DOM_VK_END:
