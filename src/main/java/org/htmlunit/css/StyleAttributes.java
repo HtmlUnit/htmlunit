@@ -1432,9 +1432,6 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code font-weight}. */
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
 
-        /** The style property {@code frameSizing}. */
-        FRAME_SIZING("frameSizing", "frame-sizing", chromeAndEdgeAuto()),
-
         /** The style property {@code forcedColorAdjust}. */
         FORCED_COLOR_ADJUST("forcedColorAdjust", "forced-color-adjust",
                 chromeAndEdgeAuto(), ffAuto()),
@@ -1442,6 +1439,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code forced-color-adjust}. */
         FORCED_COLOR_ADJUST_("forced-color-adjust", "forced-color-adjust",
                 ffAuto()),
+
+        /** The style property {@code frameSizing}. */
+        FRAME_SIZING("frameSizing", "frame-sizing", chromeAndEdgeAuto()),
 
         /** The style property {@code gap}. */
         GAP("gap", "gap", chromeAndEdgeNormal(), ffNormal()),
