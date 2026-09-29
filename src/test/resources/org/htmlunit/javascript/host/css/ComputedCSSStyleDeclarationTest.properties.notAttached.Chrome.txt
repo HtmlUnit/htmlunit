@@ -237,6 +237,7 @@ fontVariantPosition=:
 fontVariationSettings=:
 fontWeight=:
 forcedColorAdjust=:
+frameSizing=:
 gap=:
 grid=:
 gridArea=:

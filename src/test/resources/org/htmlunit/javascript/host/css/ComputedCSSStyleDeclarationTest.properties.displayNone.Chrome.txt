@@ -238,6 +238,7 @@ fontVariantPosition=:normal
 fontVariationSettings=:normal
 fontWeight=:400
 forcedColorAdjust=:auto
+frameSizing=:auto
 gap=:normal
 grid=:none / none / none / row / auto / auto
 gridArea=:auto
