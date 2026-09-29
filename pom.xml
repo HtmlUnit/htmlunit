@@ -58,8 +58,8 @@
 
         <!-- selenium -->
         <htmlunitdriver.version>4.49.0-SNAPSHOT</htmlunitdriver.version>
-        <selenium.version>4.48.0</selenium.version>
-        <selenium.devtools.artifactId>selenium-devtools-v152</selenium.devtools.artifactId>
+        <selenium.version>4.49.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v153</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
         <junit.version>6.1.3</junit.version>
