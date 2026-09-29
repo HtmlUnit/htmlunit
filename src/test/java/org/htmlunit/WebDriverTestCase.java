@@ -503,6 +503,18 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * When using a real browser seep for some timem.
+     *
+     * @param  millis the length of time to sleep in milliseconds
+     * @throws InterruptedException in case of an interrupt
+     */
+    public void sleepRealBrowser(final long millis) throws InterruptedException {
+        if (useRealBrowser()) {
+            Thread.sleep(millis);
+        }
+    }
+
+    /**
      * Builds a new WebDriver instance.
      * @return the instance
      * @throws IOException in case of exception
