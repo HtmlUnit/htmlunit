@@ -979,9 +979,10 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         verifyWindowName2(driver, getExpectedAlerts()[0]);
-        Thread.sleep(100);
+        sleepRealBrowser(100);
 
         driver.findElement(By.id("click")).click();
+        sleepRealBrowser(100);
         verifyWindowName2(driver, getExpectedAlerts());
     }
 

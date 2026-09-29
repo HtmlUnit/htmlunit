@@ -973,7 +973,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
+        sleepRealBrowser(200);
 
+        assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_FIRST + "?textfield1=blue", driver.getCurrentUrl());
     }
 
@@ -999,6 +1001,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
+        sleepRealBrowser(100);
 
         assertEquals(URL_FIRST + "?textfield1=foo", driver.getCurrentUrl());
     }
@@ -1082,6 +1085,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
+        sleepRealBrowser(100);
 
         assertEquals(URL_FIRST + "?changed=foo&button1=pushme", driver.getCurrentUrl());
     }
@@ -1959,7 +1963,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
         assertEquals("abcdefg", driver.findElement(By.id("myInput")).getDomProperty("value"));
+
         driver.findElement(By.id("mySubmit")).click();
+        sleepRealBrowser(100);
 
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
@@ -1986,6 +1992,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertEquals("ab", driver.findElement(By.id("myInput")).getDomProperty("value"));
 
         driver.findElement(By.id("mySubmit")).click();
+        sleepRealBrowser(100);
 
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
