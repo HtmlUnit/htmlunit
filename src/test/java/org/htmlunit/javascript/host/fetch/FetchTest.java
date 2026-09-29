@@ -297,13 +297,13 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
-                       "[object\\sBlob]", "4", "text/plain"},
-            FF = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
-                  "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"},
-            FF_ESR = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
-                      "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"})
+    @Alerts({"200", "OK", "true", "text/plain;charset=iso-8859-1",
+             "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"})
     @HtmlUnitNYI(
+            CHROME = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
+                      "[object\\sBlob]", "4", "text/plain"},
+            EDGE = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
+                    "[object\\sBlob]", "4", "text/plain"},
             FF = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
                   "[object\\sBlob]", "4", "text/plain"},
             FF_ESR = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
