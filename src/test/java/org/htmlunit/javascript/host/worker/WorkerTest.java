@@ -518,7 +518,7 @@ public class WorkerTest extends WebDriverTestCase {
     }
 
     /**
-     * windows-1252 byte 0x80 (euro sign), header says ISO-8859-1.
+     * The windows-1252 byte 0x80 (euro sign), header says ISO-8859-1.
      * Per the Encoding Standard the label iso-8859-1 means windows-1252, so a browser that
      * honors the header decodes 0x80 as U+20AC (8364). A browser that forces UTF-8 sees an
      * invalid byte and produces U+FFFD (65533).
@@ -551,9 +551,7 @@ public class WorkerTest extends WebDriverTestCase {
      * which is a syntax error, so nothing would be posted.
      */
     @Test
-    @Alerts(DEFAULT = "5",
-            FF = "5",
-            FF_ESR = "5")
+    @Alerts("5")
     public void utf8BomLatin1Header() throws Exception {
         testJsBytes(BOM + PROBE_JS, StandardCharsets.UTF_8, "text/javascript;charset=ISO-8859-1");
     }
