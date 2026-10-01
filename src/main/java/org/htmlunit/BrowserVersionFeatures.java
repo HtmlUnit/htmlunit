@@ -386,6 +386,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
 
+    /** Take care of the response charset when reading a worker script. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_WORKER_SCRIPT_HONORS_CHARSET_HEADER,
+
     /** {@code XSLTProcessor.transformToDocument} supports output indent attribute. */
     @BrowserFeature({CHROME, EDGE})
     JS_XSLT_TRANSFORM_INDENT,

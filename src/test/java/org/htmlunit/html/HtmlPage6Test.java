@@ -212,9 +212,8 @@ public class HtmlPage6Test extends WebDriverTestCase {
 
         final int count = getMockWebConnection().getRequestCount();
         final WebDriver driver = loadPage2(firstContent);
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.multipliedBy(3).toMillis());
-        }
+        sleepRealBrowser(DEFAULT_WAIT_TIME.multipliedBy(2).toMillis());
+
         verifyTitle(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
         assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount() - count);
         if (expectedAlerts.length > 2) {
@@ -394,9 +393,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
 
         final int count = getMockWebConnection().getRequestCount();
         final WebDriver driver = loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.multipliedBy(3).toMillis());
-        }
+        sleepRealBrowser(DEFAULT_WAIT_TIME.multipliedBy(2).toMillis());
 
         // verifyTitle2(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
         verifyTitle(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
