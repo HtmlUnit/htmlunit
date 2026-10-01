@@ -1432,6 +1432,12 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code font-weight}. */
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
 
+        /** The style property {@code fontWidth}. */
+        FONT_WIDTH("fontWidth", "font-width", ffLatest("100%")),
+
+        /** The style property {@code font-width}. */
+        FONT_WIDTH_("font-width", "font-width", ffLatest("100%")),
+
         /** The style property {@code forcedColorAdjust}. */
         FORCED_COLOR_ADJUST("forcedColorAdjust", "forced-color-adjust",
                 chromeAndEdgeAuto(), ffAuto()),
