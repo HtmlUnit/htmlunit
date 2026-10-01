@@ -7,7 +7,11 @@
     </properties>
 
     <body>
-        <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Bugfixes">
+        <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
+            <action type="fix" dev="rbri">
+                Worker: fix script decoding - use UTF-8 by default and honor the Content-Type charset only
+                for Chrome/Edge.
+            </action>
             <action type="update" dev="rbri">
                 Chrome/Edge: SVGTextPathElement TEXTPATH_SIDETYPE_xxx constants available in Chrome/Edge too.
             </action>

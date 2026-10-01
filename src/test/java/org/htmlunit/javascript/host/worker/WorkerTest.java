@@ -15,10 +15,14 @@
 package org.htmlunit.javascript.host.worker;
 
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -29,6 +33,11 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  */
 public class WorkerTest extends WebDriverTestCase {
+    private static final String PROBE_JS
+                = "  var s = '3\u00C3\u00AE\u00C2\u00A6';\n"
+                        + "  postMessage(String(s.length));\n";
+    private static final String BOM = "\uFEFF";
+
 
     /**
      * @throws Exception if the test fails
@@ -343,7 +352,7 @@ public class WorkerTest extends WebDriverTestCase {
     @Alerts({"M8OuwqY=", "3\u00C3\u00AE\u00C2\u00A6"})
     public void atobUnicodeOutput() throws Exception {
         final String workerJs
-            = "  var data = btoa('3\u00C3\u00AE\u00C2\u00A6');\n"
+            = "  var data = btoa('3\\u00C3\\u00AE\\u00C2\\u00A6');\n"
             + "  postMessage(data);\n"
             + "  postMessage(atob(data));\n";
         testJs(workerJs);
@@ -447,5 +456,119 @@ public class WorkerTest extends WebDriverTestCase {
 
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    private void testJsBytes(final Charset bytesCharset, final String contentType) throws Exception {
+        testJsBytes(PROBE_JS, bytesCharset, contentType);
+    }
+
+    private void testJsBytes(final String workerJs, final Charset bytesCharset,
+        final String contentType) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script async>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js');\n"
+            + "  myWorker.onmessage = function(e) { log(e.data); };\n"
+            + "} catch(e) { logEx(e); }\n"
+            + "</script></body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"),
+                workerJs.getBytes(bytesCharset), 200, "OK", contentType,
+                Collections.<NameValuePair>emptyList());
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /** Latin-1 bytes, no charset in header. */
+    @Test
+    @Alerts("3")
+    public void latin1BytesNoCharset() throws Exception {
+        testJsBytes(StandardCharsets.ISO_8859_1, "text/javascript");
+    }
+
+    /** Latin-1 bytes, header says Latin-1. Does Firefox still force UTF-8? */
+    @Test
+    @Alerts(DEFAULT = "5",
+            FF = "3",
+            FF_ESR = "3")
+    public void latin1BytesLatin1Header() throws Exception {
+        testJsBytes(StandardCharsets.ISO_8859_1, "text/javascript;charset=ISO-8859-1");
+    }
+
+    /** UTF-8 bytes, header says UTF-8: the well-defined case, all browsers agree. */
+    @Test
+    @Alerts("5")
+    public void utf8BytesUtf8Header() throws Exception {
+        testJsBytes(StandardCharsets.UTF_8, "text/javascript;charset=UTF-8");
+    }
+
+    /**
+     * UTF-8 bytes, header says Latin-1: mirror of {@link #latin1BytesLatin1Header()}.
+     * The probe is 9 bytes in UTF-8. Honoring the header gives 9 chars, forcing UTF-8 gives 5.
+     */
+    @Test
+    @Alerts(DEFAULT = "9",
+            FF = "5",
+            FF_ESR = "5")
+    public void utf8BytesLatin1Header() throws Exception {
+        testJsBytes(StandardCharsets.UTF_8, "text/javascript;charset=ISO-8859-1");
+    }
+
+    /**
+     * windows-1252 byte 0x80 (euro sign), header says ISO-8859-1.
+     * Per the Encoding Standard the label iso-8859-1 means windows-1252, so a browser that
+     * honors the header decodes 0x80 as U+20AC (8364). A browser that forces UTF-8 sees an
+     * invalid byte and produces U+FFFD (65533).
+     */
+    @Test
+    @Alerts(DEFAULT = "8364",
+            FF = "65533",
+            FF_ESR = "65533")
+    public void windows1252EuroWithLatin1Header() throws Exception {
+        final String workerJs
+            = "  var s = '\u20AC';\n"
+            + "  postMessage(String(s.charCodeAt(0)));\n";
+        testJsBytes(workerJs, Charset.forName("windows-1252"), "text/javascript;charset=ISO-8859-1");
+    }
+
+    /**
+     * UTF-8 BOM, no charset in the header.
+     * Everything decodes as UTF-8 here anyway, so this mainly guards against a BOM
+     * breaking the default path.
+     */
+    @Test
+    @Alerts("5")
+    public void utf8BomNoCharset() throws Exception {
+        testJsBytes(BOM + PROBE_JS, StandardCharsets.UTF_8, "text/javascript");
+    }
+
+    /**
+     * UTF-8 BOM, header says ISO-8859-1. Does the BOM beat the header?
+     * If the header won, the BOM bytes EF BB BF would become three Latin-1 chars,
+     * which is a syntax error, so nothing would be posted.
+     */
+    @Test
+    @Alerts(DEFAULT = "5",
+            FF = "5",
+            FF_ESR = "5")
+    public void utf8BomLatin1Header() throws Exception {
+        testJsBytes(BOM + PROBE_JS, StandardCharsets.UTF_8, "text/javascript;charset=ISO-8859-1");
+    }
+
+    /**
+     * UTF-16LE BOM, no charset in the header.
+     * The HTML spec decodes classic worker scripts as UTF-8 only, with no UTF-16 sniffing,
+     * so a spec-following browser should fail to parse the script and post nothing.
+     * Unverified, so run it in the real browsers and adjust.
+     */
+    @Test
+    @Alerts(DEFAULT = "5",
+            FF = {},
+            FF_ESR = {})
+    public void utf16BomNoCharset() throws Exception {
+        testJsBytes(BOM + PROBE_JS, StandardCharsets.UTF_16LE, "text/javascript");
     }
 }
