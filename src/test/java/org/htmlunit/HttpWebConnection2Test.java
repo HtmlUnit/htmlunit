@@ -14,14 +14,18 @@
  */
 package org.htmlunit;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * Tests methods in {@link HttpWebConnection}.
@@ -47,6 +51,17 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, content, 404, "OK", MimeType.TEXT_HTML, headers);
 
+        if (useRealBrowser()) {
+            // browsers refuse to render a response they cannot decode
+            final WebDriverException e = assertThrows(WebDriverException.class,
+                    () -> loadPageWithAlerts2(URL_FIRST));
+            final String msg = e.getMessage();
+            Assertions.assertTrue(msg.contains("contentEncodingError")      // Firefox
+                    || msg.contains("ERR_CONTENT_DECODING_FAILED"), // Chrome / Edge
+                    msg);
+            return;
+        }
+
         // only check that no exception is thrown
         final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
         assertTrue(driver.getPageSource().length() > 100);
@@ -68,5 +83,4 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
         assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
     }
-
 }

@@ -20,6 +20,7 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Tests for {@link Element}.
@@ -2384,7 +2385,9 @@ public class ElementTest extends WebDriverTestCase {
             + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -2430,7 +2433,9 @@ public class ElementTest extends WebDriverTestCase {
             + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -2475,7 +2480,9 @@ public class ElementTest extends WebDriverTestCase {
             + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -2521,7 +2528,9 @@ public class ElementTest extends WebDriverTestCase {
             + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -2566,7 +2575,9 @@ public class ElementTest extends WebDriverTestCase {
             + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -2612,6 +2623,8 @@ public class ElementTest extends WebDriverTestCase {
             + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 }
