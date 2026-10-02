@@ -35,6 +35,19 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class SeleniumTest extends WebDriverTestCase {
 
     /**
+     * Functional interface representing an action that may throw an exception.
+     */
+    @FunctionalInterface
+    public interface ThrowableRunnable {
+        /**
+         * Executes the action.
+         *
+         * @throws Throwable if an error occurs
+         */
+        void run() throws Throwable;
+    }
+
+    /**
      * Starts the web server.
      */
     @Override
@@ -121,6 +134,17 @@ public class SeleniumTest extends WebDriverTestCase {
     }
 
     /**
+     * Creates a new fluent assertion for an exception type.
+     *
+     * @param <T> the type of the expected throwable
+     * @param type the class of the expected throwable
+     * @return an {@link ExceptionAssert} instance
+     */
+    public static <T extends Throwable> ExceptionAssert<T> assertThatExceptionOfType(Class<T> type) {
+        return new ExceptionAssert<>(type);
+    }
+
+    /**
      * Provides basic fluent assertions for object instances.
      *
      * @param <T> the type of the object under test
@@ -184,6 +208,22 @@ public class SeleniumTest extends WebDriverTestCase {
             if (!Objects.equals(actual_, expected)) {
                 throw new AssertionError(
                     formatMessage(String.format("Expected: <%s> but was: <%s>", expected, actual_))
+                );
+            }
+            return this;
+        }
+
+        /**
+         * Verifies that the actual value is not equal to the expected value.
+         *
+         * @param expected the unexpected value
+         * @return {@code this} assertion instance for method chaining
+         * @throws AssertionError if the actual value is equal to the expected value
+         */
+        public SimpleAssert<T> isNotEqualTo(T expected) {
+            if (Objects.equals(actual_, expected)) {
+                throw new AssertionError(
+                    formatMessage(String.format("Expected value not to be equal to <%s>", expected))
                 );
             }
             return this;
@@ -372,6 +412,15 @@ public class SeleniumTest extends WebDriverTestCase {
          * {@inheritDoc}
          */
         @Override
+        public StringAssert isNotEqualTo(String expected) {
+            super.isNotEqualTo(expected);
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
         public StringAssert isIn(String... values) {
             super.isIn(values);
             return this;
@@ -417,6 +466,80 @@ public class SeleniumTest extends WebDriverTestCase {
                 );
             }
             return this;
+        }
+    }
+
+    /**
+     * Provides fluent assertion capabilities for testing thrown exceptions.
+     *
+     * @param <T> the type of the expected throwable
+     */
+    public static class ExceptionAssert<T extends Throwable> {
+
+        private final Class<T> expectedType_;
+        private String description_;
+
+        /**
+         * Constructs a new exception assertion for the given exception class.
+         *
+         * @param expectedType the expected exception type
+         */
+        public ExceptionAssert(Class<T> expectedType) {
+            expectedType_ = expectedType;
+        }
+
+        /**
+         * Sets a custom contextual description for this assertion to be included
+         * in the assertion error message if the assertion fails.
+         *
+         * @param description the description pattern or message
+         * @param args optional arguments for formatting the description pattern
+         * @return {@code this} assertion instance for method chaining
+         */
+        public ExceptionAssert<T> as(String description, Object... args) {
+            if (description != null && args != null && args.length > 0) {
+                description = String.format(description, args);
+            }
+            else {
+                description_ = description;
+            }
+            return this;
+        }
+
+        /**
+         * Formats the error message by prepending the custom description if set.
+         *
+         * @param message the base assertion error message
+         * @return the formatted error message
+         */
+        protected String formatMessage(String message) {
+            if (description_ != null && !description_.isEmpty()) {
+                return "[" + description_ + "] " + message;
+            }
+            return message;
+        }
+
+        /**
+         * Asserts that executing the runnable throws an exception of the expected type.
+         *
+         * @param runnable the code block expected to throw an exception
+         * @throws AssertionError if no exception is thrown or an exception of an unexpected type is thrown
+         */
+        public void isThrownBy(ThrowableRunnable runnable) {
+            try {
+                runnable.run();
+            }
+            catch (Throwable actual) {
+                if (!expectedType_.isInstance(actual)) {
+                    throw new AssertionError(
+                        formatMessage(String.format("Expected %s to be thrown, but %s was thrown instead.",
+                            expectedType_.getName(), actual.getClass().getName())), actual);
+                }
+                return;
+            }
+            throw new AssertionError(
+                formatMessage(String.format("Expected %s to be thrown, but nothing was thrown.", expectedType_.getName()))
+            );
         }
     }
 }
