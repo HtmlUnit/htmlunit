@@ -8,6 +8,18 @@
 
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: switch ArrayBuffer impl from raw byte[] to ByteBuffer.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: fix with() value parameter not allowing a bigint for BigIntTypedArrays.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: code cleanup various equality methods.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: numeric type handling in ScriptRuntime.same fixed.
+            </action>
             <action type="fix" dev="rbri">
                 Worker: fix script decoding - use UTF-8 by default and honor the Content-Type charset only
                 for Chrome/Edge.
@@ -119,7 +131,7 @@
             <action type="fix" dev="rbri">
                 SubtleCrypto promise rejections now returns a properly initialized DOMException instance with valid properties (e.g., name).
             </action>
-            <action type="add" dev="rhino">
+            <action type="add" dev="RhinoTeam">
                 core-js: 'new.target' support implemented.
             </action>
             <action type="fix" dev="rbri">
@@ -227,7 +239,7 @@
             <action type="fix" dev="rbri">
                 HtmlTextArea.getNormalizedText() no longer right trims the content.
             </action>
-            <action type="update" dev="rhino">
+            <action type="update" dev="RhinoTeam">
                 core-js: Improved slot implementation to reduce memory used by function objects.
             </action>
             <action type="fix" dev="rbri">
@@ -295,10 +307,10 @@
 
 
         <release version="5.4.0" date="August 07, 2026" description="Firefox 153, neko, input validation, Bugfixes">
-            <action type="add" dev="rhino">
+            <action type="add" dev="RhinoTeam">
                 docu: Detailed description about input html elements usage.
             </action>
-            <action type="add" dev="rhino">
+            <action type="add" dev="RhinoTeam">
                 core-js: ES2021 WeakRef and FinalizationRegistry with full standard compliance added.
             </action>
             <action type="update" dev="rbri">
@@ -485,14 +497,14 @@
             <action type="update" dev="rbri" issue="#1152">
                 Major update to WebRequest to improve support for the Sec-Fetch-* HTTP headers.
             </action>
-            <action type="update" dev="rhino">
+            <action type="update" dev="RhinoTeam">
                 The URL/anchor hostname setter received several fixes.
             </action>
             <action type="update" dev="rbri" due-to="Lai Quang Duong">
                 core-js: Added support for a common workaround for subclassing built-in objects (such as Set)
                 without using ES6 class/extends syntax, by using Reflect.construct() with a newTarget argument.
             </action>
-            <action type="update" dev="rhino">
+            <action type="update" dev="RhinoTeam">
                 core-js: Improved strict mode handling for direct eval() calls.
             </action>
             <action type="update" dev="rbri">
@@ -6146,7 +6158,7 @@
             <action type="fix" dev="rbri">
                 Parameter encoding for string representation of URLSearchParams fixed.
             </action>
-            <action type="fix" dev="rhino">
+            <action type="fix" dev="RhinoTeam">
                 core-js: Make __proto__ more closely match the spec.
             </action>
             <action type="fix" dev="rbri">
