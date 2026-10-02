@@ -3482,7 +3482,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object DOMRectList]", "0"})
+    @Alerts(DEFAULT = {"[object DOMRectList]", "0"},
+            FF = {"[object DOMRectList]", "1"},
+            FF_ESR = {"[object DOMRectList]", "1"})
+    @HtmlUnitNYI(FF = {"[object DOMRectList]", "0"},
+            FF_ESR = {"[object DOMRectList]", "0"})
     public void getClientRectsArea() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -3503,6 +3507,87 @@ public class HTMLElementTest extends WebDriverTestCase {
                     + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
             + "  <map id='myMap' name='imgmap'>\n"
             + "    <area id='area1' shape='rect' coords='0,0,1,1'>\n"
+            + "  </map>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"img|inline|1|8,17,5,5",
+                       "area-rect|none|0|-",
+                       "area-circle|none|0|-",
+                       "area-poly|none|0|-",
+                       "area-default|none|0|-",
+                       "area-rect-block|block|1|8,26,1243,0"},
+            FF = {"img|inline|1|8,18,5,5",
+                  "area-rect|none|1|8,18,5,5",
+                  "area-circle|none|1|8,18,5,5",
+                  "area-poly|none|1|8,18,5,5",
+                  "area-default|none|1|8,18,5,5",
+                  "area-rect-block|none|1|8,18,5,5"},
+            FF_ESR = {"img|inline|1|8,18,5,5",
+                      "area-rect|none|1|8,18,5,5",
+                      "area-circle|none|1|8,18,5,5",
+                      "area-poly|none|1|8,18,5,5",
+                      "area-default|none|1|8,18,5,5",
+                      "area-rect-block|none|1|8,18,5,5"})
+    @HtmlUnitNYI(
+            CHROME = {"img|inline|1|0,0,1,1",
+                      "area-rect|none|0|-",
+                      "area-circle|none|0|-",
+                      "area-poly|none|0|-",
+                      "area-default|none|0|-",
+                      "area-rect-block|block|1|0,0,1,1"},
+            EDGE = {"img|inline|1|0,0,1,1",
+                    "area-rect|none|0|-",
+                    "area-circle|none|0|-",
+                    "area-poly|none|0|-",
+                    "area-default|none|0|-",
+                    "area-rect-block|block|1|0,0,1,1"},
+            FF = {"img|inline|1|0,0,1,1",
+                  "area-rect|none|0|-",
+                  "area-circle|none|0|-",
+                  "area-poly|none|0|-",
+                  "area-default|none|0|-",
+                  "area-rect-block|block|1|0,0,1,1"},
+            FF_ESR = {"img|inline|1|0,0,1,1",
+                      "area-rect|none|0|-",
+                      "area-circle|none|0|-",
+                      "area-poly|none|0|-",
+                      "area-default|none|0|-",
+                      "area-rect-block|block|1|0,0,1,1"})
+    public void getClientRectsAreaDetails() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function describe(name, elem) {\n"
+            + "    var rects = elem.getClientRects();\n"
+            + "    var first = '-';\n"
+            + "    if (rects.length > 0) {\n"
+            + "      var r = rects[0];\n"
+            + "      first = [r.x, r.y, r.width, r.height].map(Math.round).join(',');\n"
+            + "    }\n"
+            + "    log(name + '|' + getComputedStyle(elem).display + '|' + rects.length + '|' + first);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    describe('img', document.getElementById('myImg'));\n"
+            + "    describe('area-rect', document.getElementById('a1'));\n"
+            + "    describe('area-circle', document.getElementById('a2'));\n"
+            + "    describe('area-poly', document.getElementById('a3'));\n"
+            + "    describe('area-default', document.getElementById('a4'));\n"
+            + "    describe('area-rect-block', document.getElementById('a5'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <img id='myImg' usemap='#imgmap'"
+                    + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                    + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+            + "  <map name='imgmap'>\n"
+            + "    <area id='a1' shape='rect' coords='0,0,1,1'>\n"
+            + "    <area id='a2' shape='circle' coords='2,2,1'>\n"
+            + "    <area id='a3' shape='poly' coords='0,0,2,0,2,2'>\n"
+            + "    <area id='a4' shape='default'>\n"
+            + "    <area id='a5' shape='rect' coords='0,0,1,1' style='display: block'>\n"
             + "  </map>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
