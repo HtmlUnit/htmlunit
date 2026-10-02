@@ -90,6 +90,26 @@ public class SeleniumTest extends WebDriverTestCase {
     }
 
     /**
+     * Creates a new fluent assertion for a {@link Boolean} value.
+     *
+     * @param actual the boolean value to inspect
+     * @return a {@link BooleanAssert} instance
+     */
+    public static BooleanAssert assertThat(Boolean actual) {
+        return new BooleanAssert(actual);
+    }
+
+    /**
+     * Creates a new fluent assertion for a {@link Number} value.
+     *
+     * @param actual the number value to inspect
+     * @return a {@link NumberAssert} instance
+     */
+    public static NumberAssert assertThat(Number actual) {
+        return new NumberAssert(actual);
+    }
+
+    /**
      * Creates a new fluent assertion for an object value.
      *
      * @param <T> the type of the value being asserted
@@ -108,7 +128,10 @@ public class SeleniumTest extends WebDriverTestCase {
     public static class SimpleAssert<T> {
 
         /** The actual value under test. */
-        protected final T actual;
+        protected final T actual_;
+
+        /** Custom contextual description for assertion failure messages. */
+        protected String description_;
 
         /**
          * Constructs a new assertion wrapper around the given actual value.
@@ -116,7 +139,38 @@ public class SeleniumTest extends WebDriverTestCase {
          * @param actual the actual value
          */
         public SimpleAssert(T actual) {
-            this.actual = actual;
+            actual_ = actual;
+        }
+
+        /**
+         * Sets a custom contextual description for this assertion to be included
+         * in the assertion error message if the assertion fails.
+         *
+         * @param description the description pattern or message
+         * @param args optional arguments for formatting the description pattern
+         * @return {@code this} assertion instance for method chaining
+         */
+        public SimpleAssert<T> as(String description, Object... args) {
+            if (description != null && args != null && args.length > 0) {
+                description_ = String.format(description, args);
+            }
+            else {
+                description_ = description;
+            }
+            return this;
+        }
+
+        /**
+         * Formats the error message by prepending the custom description if set.
+         *
+         * @param message the base assertion error message
+         * @return the formatted error message
+         */
+        protected String formatMessage(String message) {
+            if (description_ != null && !description_.isEmpty()) {
+                return "[" + description_ + "] " + message;
+            }
+            return message;
         }
 
         /**
@@ -127,9 +181,9 @@ public class SeleniumTest extends WebDriverTestCase {
          * @throws AssertionError if the actual value is not equal to the expected value
          */
         public SimpleAssert<T> isEqualTo(T expected) {
-            if (!Objects.equals(actual, expected)) {
+            if (!Objects.equals(actual_, expected)) {
                 throw new AssertionError(
-                    String.format("Expected: <%s> but was: <%s>", expected, actual)
+                    formatMessage(String.format("Expected: <%s> but was: <%s>", expected, actual_))
                 );
             }
             return this;
@@ -144,14 +198,14 @@ public class SeleniumTest extends WebDriverTestCase {
          */
         public SimpleAssert<T> isIn(T... values) {
             if (values == null) {
-                throw new AssertionError("Expected values array must not be null");
+                throw new AssertionError(formatMessage("Expected values array must not be null"));
             }
             for (T value : values) {
-                if (Objects.equals(actual, value)) {
+                if (Objects.equals(actual_, value)) {
                     return this;
                 }
             }
-            throw new AssertionError(String.format("Expected <%s> to be in %s", actual, Arrays.toString(values)));
+            throw new AssertionError(formatMessage(String.format("Expected <%s> to be in %s", actual_, Arrays.toString(values))));
         }
 
         /**
@@ -163,11 +217,119 @@ public class SeleniumTest extends WebDriverTestCase {
          */
         public SimpleAssert<T> isIn(Collection<?> values) {
             if (values == null) {
-                throw new AssertionError("Expected collection must not be null");
+                throw new AssertionError(formatMessage("Expected collection must not be null"));
             }
-            if (!values.contains(actual)) {
+            if (!values.contains(actual_)) {
                 throw new AssertionError(
-                    String.format("Expected <%s> to be in %s", actual, values)
+                    formatMessage(String.format("Expected <%s> to be in %s", actual_, values))
+                );
+            }
+            return this;
+        }
+    }
+
+    /**
+     * Provides fluent assertion capabilities specifically for {@link Boolean} instances.
+     */
+    public static class BooleanAssert extends SimpleAssert<Boolean> {
+
+        /**
+         * Constructs a new boolean assertion wrapper around the given actual boolean.
+         *
+         * @param actual the actual boolean value
+         */
+        public BooleanAssert(Boolean actual) {
+            super(actual);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public BooleanAssert as(String description, Object... args) {
+            super.as(description, args);
+            return this;
+        }
+
+        /**
+         * Verifies that the actual boolean value is {@code true}.
+         *
+         * @return {@code this} assertion instance for method chaining
+         * @throws AssertionError if the actual value is not {@code true}
+         */
+        public BooleanAssert isTrue() {
+            if (!Boolean.TRUE.equals(actual_)) {
+                throw new AssertionError(
+                    formatMessage(String.format("Expected true, but was: <%s>", actual_))
+                );
+            }
+            return this;
+        }
+
+        /**
+         * Verifies that the actual boolean value is {@code false}.
+         *
+         * @return {@code this} assertion instance for method chaining
+         * @throws AssertionError if the actual value is not {@code false}
+         */
+        public BooleanAssert isFalse() {
+            if (!Boolean.FALSE.equals(actual_)) {
+                throw new AssertionError(
+                    formatMessage(String.format("Expected false, but was: <%s>", actual_))
+                );
+            }
+            return this;
+        }
+    }
+
+    /**
+     * Provides fluent assertion capabilities specifically for {@link Number} instances.
+     */
+    public static class NumberAssert extends SimpleAssert<Number> {
+
+        /**
+         * Constructs a new number assertion wrapper around the given actual number.
+         *
+         * @param actual the actual number value
+         */
+        public NumberAssert(Number actual) {
+            super(actual);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public NumberAssert as(String description, Object... args) {
+            super.as(description, args);
+            return this;
+        }
+
+        /**
+         * Verifies that the actual number is zero.
+         *
+         * @return {@code this} assertion instance for method chaining
+         * @throws AssertionError if the actual value is {@code null} or not zero
+         */
+        public NumberAssert isZero() {
+            if (actual_ == null || actual_.doubleValue() != 0.0) {
+                throw new AssertionError(
+                    formatMessage(String.format("Expected zero, but was: <%s>", actual_))
+                );
+            }
+            return this;
+        }
+
+        /**
+         * Verifies that the actual number is not zero.
+         *
+         * @return {@code this} assertion instance for method chaining
+         * @throws AssertionError if the actual value is {@code null} or zero
+         */
+        public NumberAssert isNotZero() {
+            if (actual_ == null || actual_.doubleValue() == 0.0) {
+                throw new AssertionError(
+                    formatMessage(String.format("Expected non-zero, but was: <%s>", actual_))
                 );
             }
             return this;
@@ -186,6 +348,15 @@ public class SeleniumTest extends WebDriverTestCase {
          */
         public StringAssert(String actual) {
             super(actual);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public StringAssert as(String description, Object... args) {
+            super.as(description, args);
+            return this;
         }
 
         /**
@@ -224,9 +395,9 @@ public class SeleniumTest extends WebDriverTestCase {
          */
         public StringAssert contains(CharSequence... values) {
             for (CharSequence value : values) {
-                if (!actual.contains(value)) {
+                if (!actual_.contains(value)) {
                     throw new AssertionError(
-                        String.format("Expected string to contain <%s> but was <%s>", value, actual)
+                        formatMessage(String.format("Expected string to contain <%s> but was <%s>", value, actual_))
                     );
                 }
             }
@@ -240,9 +411,9 @@ public class SeleniumTest extends WebDriverTestCase {
          * @throws AssertionError if the actual string is {@code null} or not empty
          */
         public StringAssert isEmpty() {
-            if (!actual.isEmpty()) {
+            if (!actual_.isEmpty()) {
                 throw new AssertionError(
-                    String.format("Expected string to be empty but was <%s>", actual)
+                    formatMessage(String.format("Expected string to be empty but was <%s>", actual_))
                 );
             }
             return this;
