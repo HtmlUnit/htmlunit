@@ -27,6 +27,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
@@ -125,72 +126,121 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 public void onWebSocketOpen() {
                     setReadyState(OPEN);
 
-                    final Event openEvent = new Event(Event.TYPE_OPEN);
-                    openEvent.setParentScope(scope);
-                    openEvent.setPrototype(getPrototype(openEvent.getClass()));
-                    openEvent.setSrcElement(WebSocket.this);
-                    fire(openEvent);
-                    callFunction(openHandler_, new Object[] {openEvent});
+                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+                    if (engine != null) {
+                        engine.getContextFactory().call(cx -> {
+                            final Event openEvent = new Event(Event.TYPE_OPEN);
+                            openEvent.setParentScope(scope);
+                            openEvent.setPrototype(getPrototype(openEvent.getClass()));
+                            openEvent.setSrcElement(WebSocket.this);
+                            openEvent.setTarget(WebSocket.this);
+                            executeEventLocally(openEvent);
+
+                            if (openHandler_ != null) {
+                                ScriptRuntime.doTopCall(openHandler_, cx, scope, WebSocket.this,
+                                        new Object[] {openEvent}, cx.isStrictMode());
+                            }
+
+                            return null;
+                        });
+                    }
                 }
 
                 @Override
                 public void onWebSocketClose(final int statusCode, final String reason) {
                     setReadyState(CLOSED);
 
-                    final CloseEvent closeEvent = new CloseEvent();
-                    closeEvent.setParentScope(scope);
-                    closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
-                    closeEvent.setCode(statusCode);
-                    closeEvent.setReason(reason);
-                    closeEvent.setWasClean(statusCode == 1000);
-                    fire(closeEvent);
-                    callFunction(closeHandler_, new Object[] {closeEvent});
+                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+                    if (engine != null) {
+                        engine.getContextFactory().call(cx -> {
+                            final CloseEvent closeEvent = new CloseEvent();
+                            closeEvent.setParentScope(scope);
+                            closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
+                            closeEvent.setCode(statusCode);
+                            closeEvent.setReason(reason);
+                            closeEvent.setWasClean(statusCode == 1000);
+                            closeEvent.setTarget(WebSocket.this);
+                            executeEventLocally(closeEvent);
+
+                            if (closeHandler_ != null) {
+                                ScriptRuntime.doTopCall(closeHandler_, cx, scope, WebSocket.this,
+                                        new Object[] {closeEvent}, cx.isStrictMode());
+                            }
+
+                            return null;
+                        });
+                    }
                 }
 
                 @Override
                 public void onWebSocketText(final String message) {
-                    final MessageEvent msgEvent = new MessageEvent(message);
-                    msgEvent.setParentScope(scope);
-                    msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
-                    if (originSet_) {
-                        try {
-                            URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
-                            originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
-                            msgEvent.setOrigin(originUrl.toExternalForm());
-                        }
-                        catch (final MalformedURLException e) {
-                            // ignore
-                        }
+                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+                    if (engine != null) {
+                        engine.getContextFactory().call(cx -> {
+                            final MessageEvent msgEvent = new MessageEvent(message);
+                            msgEvent.setParentScope(scope);
+                            msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
+                            if (originSet_) {
+                                try {
+                                    URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
+                                    originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
+                                    msgEvent.setOrigin(originUrl.toExternalForm());
+                                }
+                                catch (final MalformedURLException e) {
+                                    // ignore
+                                }
+                            }
+                            msgEvent.setSrcElement(WebSocket.this);
+                            msgEvent.setTarget(WebSocket.this);
+                            executeEventLocally(msgEvent);
+
+                            if (messageHandler_ != null) {
+                                ScriptRuntime.doTopCall(messageHandler_, cx, scope, WebSocket.this,
+                                        new Object[] {msgEvent}, cx.isStrictMode());
+                            }
+
+                            return null;
+                        });
                     }
-                    msgEvent.setSrcElement(WebSocket.this);
-                    fire(msgEvent);
-                    callFunction(messageHandler_, new Object[] {msgEvent});
                 }
 
                 @Override
                 public void onWebSocketBinary(final ByteBuffer payload) {
-                    final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
-                    payload.get(buffer.getBuffer());
+                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+                    if (engine != null) {
+                        engine.getContextFactory().call(cx -> {
+                            final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
+                            payload.get(buffer.getBuffer());
 
-                    buffer.setParentScope(getParentScope());
-                    buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), buffer.getClassName()));
+                            buffer.setParentScope(getParentScope());
+                            buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
+                                                buffer.getClassName()));
 
-                    final MessageEvent msgEvent = new MessageEvent(buffer);
-                    msgEvent.setParentScope(scope);
-                    msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
-                    if (originSet_) {
-                        try {
-                            URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
-                            originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
-                            msgEvent.setOrigin(originUrl.toExternalForm());
-                        }
-                        catch (final MalformedURLException e) {
-                            // ignore
-                        }
+                            final MessageEvent msgEvent = new MessageEvent(buffer);
+                            msgEvent.setParentScope(scope);
+                            msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
+                            if (originSet_) {
+                                try {
+                                    URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
+                                    originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
+                                    msgEvent.setOrigin(originUrl.toExternalForm());
+                                }
+                                catch (final MalformedURLException e) {
+                                    // ignore
+                                }
+                            }
+                            msgEvent.setSrcElement(WebSocket.this);
+                            msgEvent.setTarget(WebSocket.this);
+                            executeEventLocally(msgEvent);
+
+                            if (messageHandler_ != null) {
+                                ScriptRuntime.doTopCall(messageHandler_, cx, scope, WebSocket.this,
+                                        new Object[] {msgEvent}, cx.isStrictMode());
+                            }
+
+                            return null;
+                        });
                     }
-                    msgEvent.setSrcElement(WebSocket.this);
-                    fire(msgEvent);
-                    callFunction(messageHandler_, new Object[] {msgEvent});
                 }
 
                 @Override
@@ -209,21 +259,36 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                     setReadyState(CLOSED);
 
-                    final Event errorEvent = new Event(Event.TYPE_ERROR);
-                    errorEvent.setParentScope(scope);
-                    errorEvent.setPrototype(getPrototype(errorEvent.getClass()));
-                    errorEvent.setSrcElement(WebSocket.this);
-                    fire(errorEvent);
-                    callFunction(errorHandler_, new Object[] {errorEvent});
+                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+                    if (engine != null) {
+                        engine.getContextFactory().call(cx -> {
+                            final Event errorEvent = new Event(Event.TYPE_ERROR);
+                            errorEvent.setParentScope(scope);
+                            errorEvent.setPrototype(getPrototype(errorEvent.getClass()));
+                            errorEvent.setSrcElement(WebSocket.this);
+                            errorEvent.setTarget(WebSocket.this);
+                            executeEventLocally(errorEvent);
+                            if (errorHandler_ != null) {
+                                ScriptRuntime.doTopCall(errorHandler_, cx, scope, WebSocket.this,
+                                        new Object[] {errorEvent}, cx.isStrictMode());
+                            }
 
-                    final CloseEvent closeEvent = new CloseEvent();
-                    closeEvent.setParentScope(scope);
-                    closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
-                    closeEvent.setCode(1006);
-                    closeEvent.setReason(cause.getMessage());
-                    closeEvent.setWasClean(false);
-                    fire(closeEvent);
-                    callFunction(closeHandler_, new Object[] {closeEvent});
+                            final CloseEvent closeEvent = new CloseEvent();
+                            closeEvent.setParentScope(scope);
+                            closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
+                            closeEvent.setCode(1006);
+                            closeEvent.setReason(cause.getMessage());
+                            closeEvent.setWasClean(false);
+                            closeEvent.setTarget(WebSocket.this);
+                            executeEventLocally(closeEvent);
+                            if (closeHandler_ != null) {
+                                ScriptRuntime.doTopCall(closeHandler_, cx, scope, WebSocket.this,
+                                        new Object[] {closeEvent}, cx.isStrictMode());
+                            }
+
+                            return null;
+                        });
+                    }
                 }
             };
 
@@ -515,31 +580,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
         catch (final IOException e) {
             LOG.error("WS send error", e);
-        }
-    }
-
-    void fire(final Event evt) {
-        evt.setTarget(this);
-        evt.setParentScope(getParentScope());
-        evt.setPrototype(getPrototype(evt.getClass()));
-
-        final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
-        if (engine != null) {
-            engine.getContextFactory().call(cx -> {
-                executeEventLocally(evt);
-                return null;
-            });
-        }
-    }
-
-    void callFunction(final Function function, final Object[] args) {
-        if (function == null) {
-            return;
-        }
-        final VarScope scope = function.getParentScope();
-        final JavaScriptEngine engine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-        if (engine != null) {
-            engine.callFunction(containingPage_, function, scope, this, args);
         }
     }
 }
