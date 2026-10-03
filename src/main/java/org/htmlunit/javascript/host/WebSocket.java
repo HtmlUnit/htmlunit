@@ -45,6 +45,7 @@ import org.htmlunit.javascript.host.event.CloseEvent;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
+import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.websocket.WebSocketAdapter;
 import org.htmlunit.websocket.WebSocketListener;
@@ -208,14 +209,30 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
                     if (engine != null) {
                         engine.getContextFactory().call(cx -> {
-                            final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
-                            payload.get(buffer.getBuffer());
+                            final MessageEvent msgEvent;
 
-                            buffer.setParentScope(getParentScope());
-                            buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
-                                                buffer.getClassName()));
+                            if ("blob".equals(binaryType_)) {
+                                final byte[] bytes = new byte[payload.remaining()];
+                                payload.get(bytes);
+                                final Blob blob = new Blob(bytes, "application/octet-stream");
 
-                            final MessageEvent msgEvent = new MessageEvent(buffer);
+                                blob.setParentScope(getParentScope());
+                                blob.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
+                                                    blob.getClassName()));
+
+                                msgEvent = new MessageEvent(blob);
+                            }
+                            else {
+                                final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
+                                payload.get(buffer.getBuffer());
+
+                                buffer.setParentScope(getParentScope());
+                                buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
+                                                        buffer.getClassName()));
+
+                                msgEvent = new MessageEvent(buffer);
+                            }
+
                             msgEvent.setParentScope(scope);
                             msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
                             if (originSet_) {

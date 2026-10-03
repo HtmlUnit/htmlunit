@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
+            <action type="update" dev="rbri">
+                WebSocket property binaryType ('blob' and 'arraybuffer') used for correct handling of incoming binary messages.
+            </action>
             <action type="update" dev="RhinoTeam">
                 core-js: switch ArrayBuffer impl from raw byte[] to ByteBuffer.
             </action>

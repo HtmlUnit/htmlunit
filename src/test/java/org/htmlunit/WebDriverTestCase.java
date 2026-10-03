@@ -659,7 +659,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             stopWebServers();
         }
 
-        // The mock connection servlet call sit under both servers, so long as tests
+        // The mock connection servlet call site under both servers, so long as tests
         // keep the URLs distinct.
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/*", MockWebConnectionServlet.class);
@@ -734,7 +734,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     public static class MockWebConnectionServlet extends HttpServlet {
         private static MockWebConnection MockConnection_;
 
-        static void setMockconnection(final MockWebConnection connection) {
+        public static void setMockconnection(final MockWebConnection connection) {
             MockConnection_ = connection;
         }
 

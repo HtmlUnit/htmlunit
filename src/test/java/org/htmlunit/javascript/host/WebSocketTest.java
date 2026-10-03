@@ -27,6 +27,7 @@ import org.eclipse.jetty.websocket.api.Callback;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.Session.Listener.AutoDemanding;
 import org.htmlunit.HttpHeader;
+import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase.SSLVariant;
 import org.htmlunit.junit.annotation.Alerts;
@@ -37,6 +38,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import jakarta.servlet.Servlet;
 
 /**
  * Tests for {@link WebSocket}.
@@ -816,6 +819,381 @@ public class WebSocketTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+/**
+     * Verifies the default value of binaryType and validation behavior when assigning invalid values.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"blob", "blob", "arraybuffer", "arraybuffer", "arraybuffer", "arraybuffer", "blob"})
+    public void binaryTypeDefaultAndValidation() throws Exception {
+        stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
+        socketListeners.put("/ws", BinaryWebSocketListener.class);
+
+        final Server server = JettyServerUtils.startWebServer(PORT,
+                "src/test/resources/org/htmlunit/javascript/host", servlets, socketListeners, null, false, SSLVariant.NONE);
+        try {
+            final MockWebConnection mockWebConnection = new MockWebConnection();
+            MockWebConnectionServlet.setMockconnection(mockWebConnection);
+
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var ws = new WebSocket('ws://localhost:" + PORT + "/ws');\n"
+                + "    log(ws.binaryType);\n" // Default: 'blob'
+
+                // Invalid string -> must be ignored
+                + "    ws.binaryType = 'invalid_type';\n"
+                + "    log(ws.binaryType);\n"
+
+                // Valid setting
+                + "    ws.binaryType = 'arraybuffer';\n"
+                + "    log(ws.binaryType);\n"
+
+                // Empty string -> ignored
+                + "    ws.binaryType = '';\n"
+                + "    log(ws.binaryType);\n"
+
+                // null / undefined -> ignored
+                + "    ws.binaryType = null;\n"
+                + "    log(ws.binaryType);\n"
+
+                + "    ws.binaryType = undefined;\n"
+                + "    log(ws.binaryType);\n"
+
+                // Reset back to 'blob'
+                + "    ws.binaryType = 'blob';\n"
+                + "    log(ws.binaryType);\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            mockWebConnection.setDefaultResponse(html);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "dummy.html");
+
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
+    }
+
+    /**
+     * Verifies receiving binary messages when binaryType is set to 'arraybuffer'.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "[object ArrayBuffer]", "4", "1,2,3,4"})
+    public void receiveBinaryAsArrayBuffer() throws Exception {
+        stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
+        socketListeners.put("/ws", BinaryWebSocketListener.class);
+
+        final Server server = JettyServerUtils.startWebServer(PORT,
+                "src/test/resources/org/htmlunit/javascript/host", servlets, socketListeners, null, false, SSLVariant.NONE);
+        try {
+            final MockWebConnection mockWebConnection = new MockWebConnection();
+            MockWebConnectionServlet.setMockconnection(mockWebConnection);
+
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var ws = new WebSocket('ws://localhost:" + PORT + "/ws');\n"
+                + "    ws.binaryType = 'arraybuffer';\n"
+                + "    ws.onopen = function() {\n"
+                + "      ws.send('get_binary');\n"
+                + "    };\n"
+                + "    ws.onmessage = function(e) {\n"
+                + "      log(e.data instanceof ArrayBuffer);\n"
+                + "      log(Object.prototype.toString.call(e.data));\n"
+                + "      var view = new Uint8Array(e.data);\n"
+                + "      log(view.byteLength);\n"
+                + "      log(view[0] + ',' + view[1] + ',' + view[2] + ',' + view[3]);\n"
+                + "      ws.close();\n"
+                + "    };\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            mockWebConnection.setDefaultResponse(html);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "dummy.html");
+
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
+    }
+
+    /**
+     * Verifies receiving binary messages when binaryType is set to 'blob' (Finding 1.A).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "[object Blob]", "4", "4", "1,2,3,4"})
+    public void receiveBinaryAsBlob() throws Exception {
+        stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
+        socketListeners.put("/ws", BinaryWebSocketListener.class);
+
+        final Server server = JettyServerUtils.startWebServer(PORT,
+                "src/test/resources/org/htmlunit/javascript/host", servlets, socketListeners, null, false, SSLVariant.NONE);
+        try {
+            final MockWebConnection mockWebConnection = new MockWebConnection();
+            MockWebConnectionServlet.setMockconnection(mockWebConnection);
+
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var ws = new WebSocket('ws://localhost:" + PORT + "/ws');\n"
+                + "    ws.binaryType = 'blob';\n"
+                + "    ws.onopen = function() {\n"
+                + "      ws.send('get_binary');\n"
+                + "    };\n"
+                + "    ws.onmessage = function(e) {\n"
+                + "      log(e.data instanceof Blob);\n"
+                + "      log(Object.prototype.toString.call(e.data));\n"
+                + "      log(e.data.size);\n"
+                + "      var reader = new FileReader();\n"
+                + "      reader.onload = function() {\n"
+                + "        var view = new Uint8Array(reader.result);\n"
+                + "        log(view.byteLength);\n"
+                + "        log(view[0] + ',' + view[1] + ',' + view[2] + ',' + view[3]);\n"
+                + "        ws.close();\n"
+                + "      };\n"
+                + "      reader.readAsArrayBuffer(e.data);\n"
+                + "    };\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            mockWebConnection.setDefaultResponse(html);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "dummy.html");
+
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
+    }
+
+    /**
+     * Verifies dynamic switching of binaryType between consecutive messages.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"msg1: [object Blob]", "msg2: [object ArrayBuffer]", "msg3: [object Blob]"})
+    public void binaryTypeDynamicSwitching() throws Exception {
+        stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
+        socketListeners.put("/ws", BinaryWebSocketListener.class);
+
+        final Server server = JettyServerUtils.startWebServer(PORT,
+                "src/test/resources/org/htmlunit/javascript/host", servlets, socketListeners, null, false, SSLVariant.NONE);
+        try {
+            final MockWebConnection mockWebConnection = new MockWebConnection();
+            MockWebConnectionServlet.setMockconnection(mockWebConnection);
+
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var ws = new WebSocket('ws://localhost:" + PORT + "/ws');\n"
+                + "    var step = 0;\n"
+                + "    ws.binaryType = 'blob';\n"
+                + "    ws.onopen = function() {\n"
+                + "      ws.send('get_binary');\n"
+                + "    };\n"
+                + "    ws.onmessage = function(e) {\n"
+                + "      step++;\n"
+                + "      if (step === 1) {\n"
+                + "        log('msg1: ' + Object.prototype.toString.call(e.data));\n"
+                + "        ws.binaryType = 'arraybuffer';\n"
+                + "        ws.send('get_binary');\n"
+                + "      } else if (step === 2) {\n"
+                + "        log('msg2: ' + Object.prototype.toString.call(e.data));\n"
+                + "        ws.binaryType = 'blob';\n"
+                + "        ws.send('get_binary');\n"
+                + "      } else if (step === 3) {\n"
+                + "        log('msg3: ' + Object.prototype.toString.call(e.data));\n"
+                + "        ws.close();\n"
+                + "      }\n"
+                + "    };\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            mockWebConnection.setDefaultResponse(html);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "dummy.html");
+
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
+    }
+
+    /**
+     * Edge case: Verifies receiving an empty binary payload (0 bytes) as both Blob and ArrayBuffer.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"blob size: 0", "arraybuffer length: 0"})
+    public void receiveEmptyBinaryPayload() throws Exception {
+        stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
+        socketListeners.put("/ws", BinaryWebSocketListener.class);
+
+        final Server server = JettyServerUtils.startWebServer(PORT,
+                "src/test/resources/org/htmlunit/javascript/host", servlets, socketListeners, null, false, SSLVariant.NONE);
+        try {
+            final MockWebConnection mockWebConnection = new MockWebConnection();
+            MockWebConnectionServlet.setMockconnection(mockWebConnection);
+
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var ws = new WebSocket('ws://localhost:" + PORT + "/ws');\n"
+                + "    var step = 0;\n"
+                + "    ws.binaryType = 'blob';\n"
+                + "    ws.onopen = function() {\n"
+                + "      ws.send('get_empty_binary');\n"
+                + "    };\n"
+                + "    ws.onmessage = function(e) {\n"
+                + "      step++;\n"
+                + "      if (step === 1) {\n"
+                + "        log('blob size: ' + e.data.size);\n"
+                + "        ws.binaryType = 'arraybuffer';\n"
+                + "        ws.send('get_empty_binary');\n"
+                + "      } else if (step === 2) {\n"
+                + "        log('arraybuffer length: ' + e.data.byteLength);\n"
+                + "        ws.close();\n"
+                + "      }\n"
+                + "    };\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            mockWebConnection.setDefaultResponse(html);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "dummy.html");
+
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
+    }
+
+    /**
+     * Edge case: Verifies receiving large binary payloads (64 KB).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"65536", "first: 10", "last: 20"})
+    public void receiveLargeBinaryPayload() throws Exception {
+        stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
+        socketListeners.put("/ws", BinaryWebSocketListener.class);
+
+        final Server server = JettyServerUtils.startWebServer(PORT,
+                "src/test/resources/org/htmlunit/javascript/host", servlets, socketListeners, null, false, SSLVariant.NONE);
+        try {
+            final MockWebConnection mockWebConnection = new MockWebConnection();
+            MockWebConnectionServlet.setMockconnection(mockWebConnection);
+
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var ws = new WebSocket('ws://localhost:" + PORT + "/ws');\n"
+                + "    ws.binaryType = 'arraybuffer';\n"
+                + "    ws.onopen = function() {\n"
+                + "      ws.send('get_large_binary');\n"
+                + "    };\n"
+                + "    ws.onmessage = function(e) {\n"
+                + "      var view = new Uint8Array(e.data);\n"
+                + "      log(view.byteLength);\n"
+                + "      log('first: ' + view[0]);\n"
+                + "      log('last: ' + view[view.byteLength - 1]);\n"
+                + "      ws.close();\n"
+                + "    };\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            mockWebConnection.setDefaultResponse(html);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "dummy.html");
+
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
+    }
+
+    /**
+     * Server-side WebSocket listener for binary data testing.
+     */
+    public static class BinaryWebSocketListener implements AutoDemanding {
+        private Session session_;
+
+        @Override
+        public void onWebSocketOpen(Session session) {
+            session_ = session;
+        }
+
+        @Override
+        public void onWebSocketText(final String data) {
+            if ("get_binary".equals(data)) {
+                final byte[] payload = new byte[] {1, 2, 3, 4};
+                session_.sendBinary(ByteBuffer.wrap(payload), Callback.NOOP);
+            }
+            else if ("get_empty_binary".equals(data)) {
+                session_.sendBinary(ByteBuffer.wrap(new byte[0]), Callback.NOOP);
+            }
+            else if ("get_large_binary".equals(data)) {
+                final byte[] largePayload = new byte[65536];
+                largePayload[0] = 10;
+                largePayload[largePayload.length - 1] = 20;
+                session_.sendBinary(ByteBuffer.wrap(largePayload), Callback.NOOP);
+            }
+        }
     }
 
 //    /**
