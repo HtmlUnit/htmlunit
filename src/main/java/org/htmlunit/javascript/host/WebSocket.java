@@ -27,7 +27,6 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
@@ -137,8 +136,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             executeEventLocally(openEvent);
 
                             if (openHandler_ != null) {
-                                ScriptRuntime.doTopCall(openHandler_, cx, scope, WebSocket.this,
-                                        new Object[] {openEvent}, cx.isStrictMode());
+                                ((JavaScriptEngine) engine).callFunction(cx, openHandler_, scope, WebSocket.this,
+                                        new Object[] {openEvent});
                             }
 
                             return null;
@@ -163,8 +162,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             executeEventLocally(closeEvent);
 
                             if (closeHandler_ != null) {
-                                ScriptRuntime.doTopCall(closeHandler_, cx, scope, WebSocket.this,
-                                        new Object[] {closeEvent}, cx.isStrictMode());
+                                ((JavaScriptEngine) engine).callFunction(cx, closeHandler_, scope, WebSocket.this,
+                                        new Object[] {closeEvent});
                             }
 
                             return null;
@@ -195,8 +194,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             executeEventLocally(msgEvent);
 
                             if (messageHandler_ != null) {
-                                ScriptRuntime.doTopCall(messageHandler_, cx, scope, WebSocket.this,
-                                        new Object[] {msgEvent}, cx.isStrictMode());
+                                ((JavaScriptEngine) engine).callFunction(cx, messageHandler_, scope, WebSocket.this,
+                                        new Object[] {msgEvent});
                             }
 
                             return null;
@@ -234,8 +233,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             executeEventLocally(msgEvent);
 
                             if (messageHandler_ != null) {
-                                ScriptRuntime.doTopCall(messageHandler_, cx, scope, WebSocket.this,
-                                        new Object[] {msgEvent}, cx.isStrictMode());
+                                ((JavaScriptEngine) engine).callFunction(cx, messageHandler_, scope, WebSocket.this,
+                                        new Object[] {msgEvent});
                             }
 
                             return null;
@@ -269,8 +268,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             errorEvent.setTarget(WebSocket.this);
                             executeEventLocally(errorEvent);
                             if (errorHandler_ != null) {
-                                ScriptRuntime.doTopCall(errorHandler_, cx, scope, WebSocket.this,
-                                        new Object[] {errorEvent}, cx.isStrictMode());
+                                ((JavaScriptEngine) engine).callFunction(cx, errorHandler_, scope, WebSocket.this,
+                                        new Object[] {errorEvent});
                             }
 
                             final CloseEvent closeEvent = new CloseEvent();
@@ -282,8 +281,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             closeEvent.setTarget(WebSocket.this);
                             executeEventLocally(closeEvent);
                             if (closeHandler_ != null) {
-                                ScriptRuntime.doTopCall(closeHandler_, cx, scope, WebSocket.this,
-                                        new Object[] {closeEvent}, cx.isStrictMode());
+                                ((JavaScriptEngine) engine).callFunction(cx, closeHandler_, scope, WebSocket.this,
+                                        new Object[] {closeEvent});
                             }
 
                             return null;
