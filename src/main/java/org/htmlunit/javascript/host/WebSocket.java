@@ -555,6 +555,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         if (readyState_ != CLOSED) {
+            if (readyState_ == OPEN || readyState_ == CONNECTING) {
+                readyState_ = CLOSING;
+            }
+
             try {
                 webSocketImpl_.closeIncomingSession();
             }

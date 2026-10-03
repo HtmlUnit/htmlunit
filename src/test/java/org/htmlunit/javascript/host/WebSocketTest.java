@@ -1196,6 +1196,176 @@ public class WebSocketTest extends WebDriverTestCase {
         }
     }
 
+    /**
+     * Verifies that readyState immediately transitions to CLOSING (2) upon calling close(),
+     * and to CLOSED (3) once the close frame is processed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before close: 1", "immediately after close: 2", "onclose readyState: 3"})
+    public void closeReadyStateTransition() throws Exception {
+        stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
+        socketListeners.put("/ws", EchoWebSocketListener.class);
+
+        final Server server = JettyServerUtils.startWebServer(PORT,
+                "src/test/resources/org/htmlunit/javascript/host", servlets, socketListeners, null, false, SSLVariant.NONE);
+        try {
+            final MockWebConnection mockWebConnection = new MockWebConnection();
+            MockWebConnectionServlet.setMockconnection(mockWebConnection);
+
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var ws = new WebSocket('ws://localhost:" + PORT + "/ws');\n"
+                + "    ws.onopen = function() {\n"
+                + "      log('before close: ' + ws.readyState);\n"
+                + "      ws.close();\n"
+                + "      log('immediately after close: ' + ws.readyState);\n"
+                + "    };\n"
+                + "    ws.onclose = function() {\n"
+                + "      log('onclose readyState: ' + ws.readyState);\n"
+                + "    };\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            mockWebConnection.setDefaultResponse(html);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "dummy.html");
+
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
+    }
+
+    /**
+     * Verifies that event handlers (onopen, onmessage, onclose) are invoked exactly once per event.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onopen count: 1", "onmessage count: 1", "onclose count: 1"})
+    public void eventHandlerSingleInvocation() throws Exception {
+        stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
+        socketListeners.put("/ws", EchoWebSocketListener.class);
+
+        final Server server = JettyServerUtils.startWebServer(PORT,
+                "src/test/resources/org/htmlunit/javascript/host", servlets, socketListeners, null, false, SSLVariant.NONE);
+        try {
+            final MockWebConnection mockWebConnection = new MockWebConnection();
+            MockWebConnectionServlet.setMockconnection(mockWebConnection);
+
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var openCount = 0;\n"
+                + "    var messageCount = 0;\n"
+                + "    var closeCount = 0;\n"
+                + "    var ws = new WebSocket('ws://localhost:" + PORT + "/ws');\n"
+                + "    ws.onopen = function() {\n"
+                + "      openCount++;\n"
+                + "      ws.send('ping');\n"
+                + "    };\n"
+                + "    ws.onmessage = function(e) {\n"
+                + "      messageCount++;\n"
+                + "      ws.close();\n"
+                + "    };\n"
+                + "    ws.onclose = function() {\n"
+                + "      closeCount++;\n"
+                + "      log('onopen count: ' + openCount);\n"
+                + "      log('onmessage count: ' + messageCount);\n"
+                + "      log('onclose count: ' + closeCount);\n"
+                + "    };\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            mockWebConnection.setDefaultResponse(html);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "dummy.html");
+
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
+    }
+
+    /**
+     * Verifies bufferedAmount property existence and return type.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"initial bufferedAmount: 0", "type: number"})
+    public void bufferedAmountInitialAndType() throws Exception {
+        stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
+        socketListeners.put("/ws", EchoWebSocketListener.class);
+
+        final Server server = JettyServerUtils.startWebServer(PORT,
+                "src/test/resources/org/htmlunit/javascript/host", servlets, socketListeners, null, false, SSLVariant.NONE);
+        try {
+            final MockWebConnection mockWebConnection = new MockWebConnection();
+            MockWebConnectionServlet.setMockconnection(mockWebConnection);
+
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var ws = new WebSocket('ws://localhost:" + PORT + "/ws');\n"
+                + "    log('initial bufferedAmount: ' + ws.bufferedAmount);\n"
+                + "    log('type: ' + typeof ws.bufferedAmount);\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            mockWebConnection.setDefaultResponse(html);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "dummy.html");
+
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
+    }
+
+    /**
+     * Server-side Echo WebSocket listener helper class.
+     */
+    public static class EchoWebSocketListener implements AutoDemanding {
+        private Session session_;
+
+        @Override
+        public void onWebSocketOpen(final Session session) {
+            session_ = session;
+        }
+
+        @Override
+        public void onWebSocketText(final String data) {
+            if (session_ != null && session_.isOpen()) {
+                session_.sendText(data, Callback.NOOP);
+            }
+        }
+    }
+
 //    /**
 //     * @throws Exception if the test fails
 //     */
