@@ -30,6 +30,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.html.HtmlPage;
@@ -85,6 +86,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * the connection was still CONNECTING. Such a connection fails: error event, then close event 1006.
      */
     private static final int ABORTED = 4;
+
+    /** The close frame has 125 bytes of payload, two of them are the status code. */
+    private static final int MAX_CLOSE_REASON_BYTES = 123;
 
     private URI url_;
     private final AtomicInteger readyState_ = new AtomicInteger(CONNECTING);
@@ -497,6 +501,58 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         releaseClient();
     }
 
+    /*
+     * Arguments of close(code, reason), see https://websockets.spec.whatwg.org/#dom-websocket-close
+     */
+
+    /**
+     * The WebIDL conversion to {@code [Clamp] unsigned short}: NaN is 0, the value is clamped to 0..65535
+     * and rounded to the nearest integer, ties going to the even one (so 1000.5 is 1000).
+     *
+     * @param number the number to convert
+     * @return the converted value
+     */
+    private static int clampToUnsignedShort(final double number) {
+        if (Double.isNaN(number)) {
+            return 0;
+        }
+        return (int) Math.rint(Math.min(Math.max(number, 0d), 65535d));
+    }
+
+    private static boolean isValidCloseCode(final int code) {
+        return code == 1000 || (code >= 3000 && code <= 4999);
+    }
+
+    /**
+     * Returns the length in bytes of the UTF-8 encoding of the USVString of the given text. An unpaired
+     * surrogate is replaced by U+FFFD, which needs three bytes (String.getBytes would use one byte for '?').
+     *
+     * @param text the text
+     * @return the number of bytes
+     */
+    private static int usvUtf8Length(final String text) {
+        int length = 0;
+        for (int i = 0; i < text.length(); i++) {
+            final char c = text.charAt(i);
+            if (c < 0x80) {
+                length += 1;
+            }
+            else if (c < 0x800) {
+                length += 2;
+            }
+            else if (Character.isHighSurrogate(c) && i + 1 < text.length()
+                    && Character.isLowSurrogate(text.charAt(i + 1))) {
+                length += 4;
+                i++;
+            }
+            else {
+                // BMP character, or an unpaired surrogate that becomes U+FFFD
+                length += 3;
+            }
+        }
+        return length;
+    }
+
     /**
      * Ends the connection: switches to CLOSED and fires the close event (preceded by an error event if the
      * connection failed). May be called from any thread and any number of times, only the first call fires.
@@ -641,13 +697,32 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /**
      * Closes the WebSocket connection or connection attempt, if any.
      * If the connection is already {@link #CLOSING} or {@link #CLOSED}, this method does nothing.
+     * The arguments are validated first, whatever the state is: a code that is neither 1000 nor in the range
+     * 3000 to 4999 results in an {@code InvalidAccessError}, a reason longer than 123 bytes (UTF-8) in a
+     * {@code SyntaxError}.
      *
      * @param code a numeric value indicating the status code explaining why the connection is being closed
      * @param reason a human-readable string explaining why the connection is closing
      */
     @JsxFunction
     public void close(final Object code, final Object reason) {
-        // TODO validate code and reason (InvalidAccessError / SyntaxError) and hand them to the adapter
+        if (!Undefined.isUndefined(code)
+                && !isValidCloseCode(clampToUnsignedShort(Context.toNumber(code)))) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "WebSocket Error: the close code must be 1000 or in the range 3000 to 4999.",
+                    DOMException.INVALID_ACCESS_ERR);
+        }
+        if (!Undefined.isUndefined(reason)
+                && usvUtf8Length(JavaScriptEngine.toString(reason)) > MAX_CLOSE_REASON_BYTES) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "WebSocket Error: the close reason must not be longer than 123 bytes.",
+                    DOMException.SYNTAX_ERR);
+        }
+
+        // TODO hand the code and the reason (each only if given) to the adapter, e.g. as
+        // webSocketImpl_.closeOutgoingSession(code, reason); it only has the parameterless variant today
         final int previous = switchToClosing();
         if (previous == -1) {
             return;
