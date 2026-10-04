@@ -20,6 +20,7 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,6 +34,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -92,6 +94,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     private URI url_;
     private final AtomicInteger readyState_ = new AtomicInteger(CONNECTING);
+    // bytes handed to send() after the connection was closed; see getBufferedAmount()
+    private final AtomicLong bufferedAmount_ = new AtomicLong();
     private String binaryType_ = "blob";
 
     private HtmlPage containingPage_;
@@ -554,6 +558,26 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
+     * Returns the number of bytes send() has to count for the given data: the byte length of an ArrayBuffer or
+     * a view on it, the size of a Blob and, for everything else, the UTF-8 length of the converted string.
+     *
+     * @param content the argument of send()
+     * @return the number of bytes
+     */
+    private static long byteLengthOf(final Object content) {
+        if (content instanceof NativeArrayBuffer buffer) {
+            return buffer.getLength();
+        }
+        if (content instanceof NativeArrayBufferView view) {
+            return view.getByteLength();
+        }
+        if (content instanceof Blob blob) {
+            return blob.getSize();
+        }
+        return usvUtf8Length(JavaScriptEngine.toString(content));
+    }
+
+    /**
      * Ends the connection: switches to CLOSED and fires the close event (preceded by an error event if the
      * connection failed). May be called from any thread and any number of times, only the first call fires.
      * A connection that never was established, or that was aborted by close() while connecting, has failed
@@ -652,12 +676,15 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Returns the number of bytes of data that have been queued but not yet transmitted.
+     * Once the connection is closing or closed this value only increases: every send() adds the size of its
+     * data, which is discarded. Data sent while the connection is open is handed over to the adapter at once
+     * and is not counted, because the adapter does not tell when the data has left.
      *
      * @return the buffered amount in bytes
      */
     @JsxGetter
     public long getBufferedAmount() {
-        return 0L;
+        return bufferedAmount_.get();
     }
 
     /**
@@ -754,7 +781,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     DOMException.INVALID_STATE_ERR);
         }
         if (state != OPEN) {
-            // CLOSING or CLOSED: the data is silently discarded
+            // CLOSING or CLOSED: the data is discarded, but its size is added to bufferedAmount
+            bufferedAmount_.addAndGet(byteLengthOf(content));
             return;
         }
 
