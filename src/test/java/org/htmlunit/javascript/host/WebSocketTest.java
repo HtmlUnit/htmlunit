@@ -1452,7 +1452,7 @@ public class WebSocketTest extends WebDriverTestCase {
     }
 
     /**
-     * send() while CONNECTING has to throw an InvalidStateError. In a browser this is deterministic
+     * Calling send() while CONNECTING has to throw an InvalidStateError. In a browser this is deterministic
      * because the open event cannot fire before the current script has finished; HtmlUnit may be flaky
      * here as long as the connect callbacks are not queued on the JS thread.
      *
@@ -1474,7 +1474,7 @@ public class WebSocketTest extends WebDriverTestCase {
     }
 
     /**
-     * send() while CLOSING must not throw.
+     * Calling send() while CLOSING must not throw.
      *
      * @throws Exception if the test fails
      */
@@ -1496,7 +1496,7 @@ public class WebSocketTest extends WebDriverTestCase {
     }
 
     /**
-     * send() after CLOSED must not throw; the bufferedAmount line records what the browsers do with the
+     * Calling send() after CLOSED must not throw; the bufferedAmount line records what the browsers do with the
      * discarded data.
      *
      * @throws Exception if the test fails
@@ -1657,7 +1657,7 @@ public class WebSocketTest extends WebDriverTestCase {
     }
 
     /**
-     * close(code) validation: only 1000 and 3000-4999 are allowed (InvalidAccessError otherwise).
+     * The close(code) validation: only 1000 and 3000-4999 are allowed (InvalidAccessError otherwise).
      * The check has to happen even while the socket is still CONNECTING.
      *
      * @throws Exception if the test fails
@@ -1696,7 +1696,7 @@ public class WebSocketTest extends WebDriverTestCase {
     }
 
     /**
-     * close(1000, reason) validation: the reason may be at most 123 bytes in UTF-8 (SyntaxError otherwise).
+     * The close(1000, reason) validation: the reason may be at most 123 bytes in UTF-8 (SyntaxError otherwise).
      * The multi byte cases show whether bytes or chars are counted. The last line records what happens
      * for a reason without a code.
      *
@@ -1860,7 +1860,7 @@ public class WebSocketTest extends WebDriverTestCase {
     }
 
     /**
-     * close() while CONNECTING: the state switches to CLOSING immediately, the connection attempt fails
+     * Calling close() while CONNECTING: the state switches to CLOSING immediately, the connection attempt fails
      * and no open event may be fired afterwards, even though the server would accept the connection.
      *
      * @throws Exception if the test fails

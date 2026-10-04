@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -78,7 +79,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     public static final int CLOSED = 3;
 
     private URI url_;
-    private int readyState_ = CONNECTING;
+    private final AtomicInteger readyState_ = new AtomicInteger(CONNECTING);
     private String binaryType_ = "blob";
 
     private HtmlPage containingPage_;
@@ -115,12 +116,18 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                 @Override
                 public void onWebSocketConnecting() {
-                    setReadyState(CONNECTING);
+                    // nothing to do, CONNECTING is the initial state and is never entered again
                 }
 
                 @Override
                 public void onWebSocketOpen() {
-                    setReadyState(OPEN);
+                    if (!switchToOpen()) {
+                        // close() was called while the handshake was in flight: the connection must
+                        // not stay open (the first shutdown may have run before there was a session)
+                        // and no open event is fired
+                        shutdownAdapter();
+                        return;
+                    }
 
                     final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
                     if (engine != null) {
@@ -139,7 +146,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                 @Override
                 public void onWebSocketClose(final int statusCode, final String reason) {
-                    setReadyState(CLOSED);
+                    if (!switchToClosed()) {
+                        // the close event was already fired, e.g. after an error
+                        return;
+                    }
 
                     final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
                     if (engine != null) {
@@ -160,6 +170,11 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                 @Override
                 public void onWebSocketText(final String message) {
+                    if (readyState_.get() != OPEN) {
+                        // messages received after close() was called are dropped
+                        return;
+                    }
+
                     final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
                     if (engine != null) {
                         engine.getContextFactory().call(cx -> {
@@ -187,6 +202,11 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                 @Override
                 public void onWebSocketBinary(final ByteBuffer payload) {
+                    if (readyState_.get() != OPEN) {
+                        // messages received after close() was called are dropped
+                        return;
+                    }
+
                     final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
                     if (engine != null) {
                         engine.getContextFactory().call(cx -> {
@@ -245,11 +265,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                 @Override
                 public void onWebSocketError(final Throwable cause) {
-                    if (CLOSED == getReadyState()) {
+                    if (!switchToClosed()) {
+                        // the close event was already fired
                         return;
                     }
-
-                    setReadyState(CLOSED);
 
                     final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
                     if (engine != null) {
@@ -431,6 +450,78 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         setEventHandler(Event.TYPE_OPEN, openHandler);
     }
 
+    /*
+     * Ready state handling.
+     *
+     * readyState_ is read and written by the JS thread (close(), send(), getReadyState()) and by the
+     * threads of the websocket adapter. Every change goes through one of the three methods below. Each
+     * is a single atomic operation and returns true only for the caller that really performed the
+     * transition. That caller, and only that one, fires the matching event, which gives at most one
+     * open event and exactly one close event whatever the interleaving.
+     *
+     *   CONNECTING                  -> OPEN     switchToOpen()      handshake finished
+     *   CONNECTING | OPEN           -> CLOSING  switchToClosing()   close() called
+     *   CONNECTING | OPEN | CLOSING -> CLOSED   switchToClosed()    connection closed or failed
+     *
+     * The state never moves backwards and CLOSED is final.
+     */
+    private boolean switchToOpen() {
+        return readyState_.compareAndSet(CONNECTING, OPEN);
+    }
+
+    private boolean switchToClosing() {
+        int current = readyState_.get();
+        while (current == CONNECTING || current == OPEN) {
+            if (readyState_.compareAndSet(current, CLOSING)) {
+                return true;
+            }
+            current = readyState_.get();
+        }
+        return false;
+    }
+
+    private boolean switchToClosed() {
+        return readyState_.getAndSet(CLOSED) != CLOSED;
+    }
+
+    private void closeSessions() {
+        if (webSocketImpl_ == null) {
+            return;
+        }
+
+        try {
+            webSocketImpl_.closeIncomingSession();
+        }
+        catch (final Exception e) {
+            LOG.error("WS close error - incomingSession_.close() failed", e);
+        }
+
+        try {
+            webSocketImpl_.closeOutgoingSession();
+        }
+        catch (final Exception e) {
+            LOG.error("WS close error - outgoingSession_.close() failed", e);
+        }
+    }
+
+    private void releaseClient() {
+        if (webSocketImpl_ == null) {
+            return;
+        }
+
+        try {
+            webSocketImpl_.closeClient();
+        }
+        catch (final Exception e) {
+            LOG.error("WS close error - closeClient() failed", e);
+        }
+    }
+
+    private void shutdownAdapter() {
+        closeSessions();
+        releaseClient();
+    }
+
     /**
      * Returns the current state of the connection.
      * Possible values are {@link #CONNECTING}, {@link #OPEN}, {@link #CLOSING}, or {@link #CLOSED}.
@@ -439,11 +530,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxGetter
     public int getReadyState() {
-        return readyState_;
-    }
-
-    void setReadyState(final int readyState) {
-        readyState_ = readyState;
+        return readyState_.get();
     }
 
     /**
@@ -506,57 +593,49 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @Override
     public void close() throws IOException {
-        close(null, null);
+        // called when the page is unloaded: whatever the state is, the client has to be released
+        if (switchToClosing()) {
+            closeSessions();
+        }
+        releaseClient();
     }
 
     /**
      * Closes the WebSocket connection or connection attempt, if any.
-     * If the connection is already {@link #CLOSED}, this method does nothing.
+     * If the connection is already {@link #CLOSING} or {@link #CLOSED}, this method does nothing.
      *
      * @param code a numeric value indicating the status code explaining why the connection is being closed
      * @param reason a human-readable string explaining why the connection is closing
      */
     @JsxFunction
     public void close(final Object code, final Object reason) {
-        if (webSocketImpl_ == null) {
-            return;
-        }
-
-        if (readyState_ != CLOSED) {
-            if (readyState_ == OPEN || readyState_ == CONNECTING) {
-                readyState_ = CLOSING;
-            }
-
-            try {
-                webSocketImpl_.closeIncomingSession();
-            }
-            catch (final Throwable e) {
-                LOG.error("WS close error - incomingSession_.close() failed", e);
-            }
-
-            try {
-                webSocketImpl_.closeOutgoingSession();
-            }
-            catch (final Throwable e) {
-                LOG.error("WS close error - outgoingSession_.close() failed", e);
-            }
-        }
-
-        try {
-            webSocketImpl_.closeClient();
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
+        // TODO validate code and reason (InvalidAccessError / SyntaxError) and hand them to the adapter
+        if (switchToClosing()) {
+            shutdownAdapter();
         }
     }
 
     /**
      * Transmits data to the server over the WebSocket connection.
+     * Throws an {@code InvalidStateError} while {@link #CONNECTING}; the data is discarded when
+     * {@link #CLOSING} or {@link #CLOSED}.
      *
      * @param content the data to send
      */
     @JsxFunction
     public void send(final Object content) {
+        final int state = readyState_.get();
+        if (state == CONNECTING) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "WebSocket Error: send() is not allowed while the connection is CONNECTING.",
+                    DOMException.INVALID_STATE_ERR);
+        }
+        if (state != OPEN) {
+            // CLOSING or CLOSED: the data is silently discarded
+            return;
+        }
+
         try {
             if (content instanceof NativeArrayBuffer buffer1) {
                 final byte[] bytes = buffer1.getBuffer();
