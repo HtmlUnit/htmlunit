@@ -874,7 +874,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final HtmlUnitContextAction action = new HtmlUnitContextAction(page) {
             @Override
             public Object doRun(final Context cx) {
-                return callFunction(cx, function, scope, thisObject, args);
+                if (ScriptRuntime.hasTopCall(cx)) {
+                    return function.call(cx, scope, thisObject, args);
+                }
+                return ScriptRuntime.doTopCall(function, cx, scope, thisObject, args, cx.isStrictMode());
             }
 
             @Override
@@ -883,24 +886,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
         };
         return getContextFactory().callSecured(action, page);
-    }
-
-    /**
-     * Executes the given JavaScript function within the specified context, handling top-call evaluation if necessary.
-     *
-     * @param cx the JavaScript context
-     * @param function the JavaScript function to execute
-     * @param scope the execution scope
-     * @param thisObject the 'this' object
-     * @param args the function's arguments
-     * @return the function execution result
-     */
-    public Object callFunction(final Context cx, final Function function,
-            final VarScope scope, final Scriptable thisObject, final Object[] args) {
-        if (ScriptRuntime.hasTopCall(cx)) {
-            return function.call(cx, scope, thisObject, args);
-        }
-        return ScriptRuntime.doTopCall(function, cx, scope, thisObject, args, cx.isStrictMode());
     }
 
     /**

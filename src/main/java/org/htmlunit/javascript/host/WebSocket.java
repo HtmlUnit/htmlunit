@@ -77,10 +77,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxConstant
     public static final int CLOSED = 3;
 
-    private Function closeHandler_;
-    private Function errorHandler_;
-    private Function messageHandler_;
-    private Function openHandler_;
     private URI url_;
     private int readyState_ = CONNECTING;
     private String binaryType_ = "blob";
@@ -136,11 +132,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             openEvent.setTarget(WebSocket.this);
                             executeEventLocally(openEvent);
 
-                            if (openHandler_ != null) {
-                                ((JavaScriptEngine) engine).callFunction(cx, openHandler_, scope, WebSocket.this,
-                                        new Object[] {openEvent});
-                            }
-
                             return null;
                         });
                     }
@@ -161,11 +152,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             closeEvent.setWasClean(statusCode == 1000);
                             closeEvent.setTarget(WebSocket.this);
                             executeEventLocally(closeEvent);
-
-                            if (closeHandler_ != null) {
-                                ((JavaScriptEngine) engine).callFunction(cx, closeHandler_, scope, WebSocket.this,
-                                        new Object[] {closeEvent});
-                            }
 
                             return null;
                         });
@@ -193,11 +179,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             msgEvent.setSrcElement(WebSocket.this);
                             msgEvent.setTarget(WebSocket.this);
                             executeEventLocally(msgEvent);
-
-                            if (messageHandler_ != null) {
-                                ((JavaScriptEngine) engine).callFunction(cx, messageHandler_, scope, WebSocket.this,
-                                        new Object[] {msgEvent});
-                            }
 
                             return null;
                         });
@@ -249,11 +230,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             msgEvent.setTarget(WebSocket.this);
                             executeEventLocally(msgEvent);
 
-                            if (messageHandler_ != null) {
-                                ((JavaScriptEngine) engine).callFunction(cx, messageHandler_, scope, WebSocket.this,
-                                        new Object[] {msgEvent});
-                            }
-
                             return null;
                         });
                     }
@@ -284,10 +260,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             errorEvent.setSrcElement(WebSocket.this);
                             errorEvent.setTarget(WebSocket.this);
                             executeEventLocally(errorEvent);
-                            if (errorHandler_ != null) {
-                                ((JavaScriptEngine) engine).callFunction(cx, errorHandler_, scope, WebSocket.this,
-                                        new Object[] {errorEvent});
-                            }
 
                             final CloseEvent closeEvent = new CloseEvent();
                             closeEvent.setParentScope(scope);
@@ -297,10 +269,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             closeEvent.setWasClean(false);
                             closeEvent.setTarget(WebSocket.this);
                             executeEventLocally(closeEvent);
-                            if (closeHandler_ != null) {
-                                ((JavaScriptEngine) engine).callFunction(cx, closeHandler_, scope, WebSocket.this,
-                                        new Object[] {closeEvent});
-                            }
 
                             return null;
                         });
@@ -390,7 +358,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxGetter
     public Function getOnclose() {
-        return closeHandler_;
+        return getEventHandler(Event.TYPE_CLOSE);
     }
 
     /**
@@ -400,7 +368,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxSetter
     public void setOnclose(final Function closeHandler) {
-        closeHandler_ = closeHandler;
+        setEventHandler(Event.TYPE_CLOSE, closeHandler);
     }
 
     /**
@@ -410,7 +378,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxGetter
     public Function getOnerror() {
-        return errorHandler_;
+        return getEventHandler(Event.TYPE_ERROR);
     }
 
     /**
@@ -420,7 +388,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxSetter
     public void setOnerror(final Function errorHandler) {
-        errorHandler_ = errorHandler;
+        setEventHandler(Event.TYPE_ERROR, errorHandler);
     }
 
     /**
@@ -430,7 +398,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxGetter
     public Function getOnmessage() {
-        return messageHandler_;
+        return getEventHandler(Event.TYPE_MESSAGE);
     }
 
     /**
@@ -440,7 +408,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxSetter
     public void setOnmessage(final Function messageHandler) {
-        messageHandler_ = messageHandler;
+        setEventHandler(Event.TYPE_MESSAGE, messageHandler);
     }
 
     /**
@@ -450,7 +418,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxGetter
     public Function getOnopen() {
-        return openHandler_;
+        return getEventHandler(Event.TYPE_OPEN);
     }
 
     /**
@@ -460,7 +428,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxSetter
     public void setOnopen(final Function openHandler) {
-        openHandler_ = openHandler;
+        setEventHandler(Event.TYPE_OPEN, openHandler);
     }
 
     /**
