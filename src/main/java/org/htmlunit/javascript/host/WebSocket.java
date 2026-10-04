@@ -528,6 +528,36 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
+     * Returns the USVString of the given text: every unpaired surrogate is replaced by U+FFFD.
+     *
+     * @param text the text
+     * @return the text itself if there is nothing to replace, a converted copy otherwise
+     */
+    private static String toUsvString(final String text) {
+        StringBuilder result = null;
+        for (int i = 0; i < text.length(); i++) {
+            final char c = text.charAt(i);
+            if (Character.isHighSurrogate(c) && i + 1 < text.length()
+                    && Character.isLowSurrogate(text.charAt(i + 1))) {
+                if (result != null) {
+                    result.append(c).append(text.charAt(i + 1));
+                }
+                i++;
+            }
+            else if (Character.isSurrogate(c)) {
+                if (result == null) {
+                    result = new StringBuilder(text.length()).append(text, 0, i);
+                }
+                result.append('\uFFFD');
+            }
+            else if (result != null) {
+                result.append(c);
+            }
+        }
+        return result == null ? text : result.toString();
+    }
+
+    /**
      * Returns the length in bytes of the UTF-8 encoding of the USVString of the given text. An unpaired
      * surrogate is replaced by U+FFFD, which needs three bytes (String.getBytes would use one byte for '?').
      *
@@ -767,7 +797,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /**
      * Transmits data to the server over the WebSocket connection.
      * Throws an {@code InvalidStateError} while {@link #CONNECTING}; the data is discarded when
-     * {@link #CLOSING} or {@link #CLOSED}.
+     * {@link #CLOSING} or {@link #CLOSED}. An ArrayBuffer is sent as binary message, anything else
+     * is converted to a string and sent as text message.
      *
      * @param content the data to send
      */
@@ -793,7 +824,16 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 webSocketImpl_.send(buffer);
                 return;
             }
-            webSocketImpl_.send(content);
+            if (content instanceof NativeArrayBufferView || content instanceof Blob) {
+                // TODO send the bytes of the view / the blob; handed over unchanged for now
+                webSocketImpl_.send(content);
+                return;
+            }
+
+            // everything else is sent as text, converted like a USVString: ToString (so 42, null, undefined
+            // and objects become "42", "null", "undefined" and "[object Object]") and every unpaired
+            // surrogate replaced by U+FFFD (the UTF-8 encoder of Java would write '?' for it)
+            webSocketImpl_.send(toUsvString(JavaScriptEngine.toString(content)));
         }
         catch (final IOException e) {
             LOG.error("WS send error", e);
