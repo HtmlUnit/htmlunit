@@ -35,6 +35,8 @@ import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.background.BasicJavaScriptJob;
+import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -77,6 +79,12 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /** The connection has been closed or could not be opened. */
     @JsxConstant
     public static final int CLOSED = 3;
+
+    /**
+     * Internal state, never visible to scripts (reported as {@link #CLOSING}): close() was called while
+     * the connection was still CONNECTING. Such a connection fails: error event, then close event 1006.
+     */
+    private static final int ABORTED = 4;
 
     private URI url_;
     private final AtomicInteger readyState_ = new AtomicInteger(CONNECTING);
@@ -146,26 +154,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                 @Override
                 public void onWebSocketClose(final int statusCode, final String reason) {
-                    if (!switchToClosed()) {
-                        // the close event was already fired, e.g. after an error
-                        return;
-                    }
-
-                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
-                    if (engine != null) {
-                        engine.getContextFactory().call(cx -> {
-                            final CloseEvent closeEvent = new CloseEvent();
-                            closeEvent.setParentScope(scope);
-                            closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
-                            closeEvent.setCode(statusCode);
-                            closeEvent.setReason(reason);
-                            closeEvent.setWasClean(statusCode == 1000);
-                            closeEvent.setTarget(WebSocket.this);
-                            executeEventLocally(closeEvent);
-
-                            return null;
-                        });
-                    }
+                    connectionEnded(statusCode, reason, false);
                 }
 
                 @Override
@@ -265,33 +254,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                 @Override
                 public void onWebSocketError(final Throwable cause) {
-                    if (!switchToClosed()) {
-                        // the close event was already fired
-                        return;
-                    }
-
-                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
-                    if (engine != null) {
-                        engine.getContextFactory().call(cx -> {
-                            final Event errorEvent = new Event(Event.TYPE_ERROR);
-                            errorEvent.setParentScope(scope);
-                            errorEvent.setPrototype(getPrototype(errorEvent.getClass()));
-                            errorEvent.setSrcElement(WebSocket.this);
-                            errorEvent.setTarget(WebSocket.this);
-                            executeEventLocally(errorEvent);
-
-                            final CloseEvent closeEvent = new CloseEvent();
-                            closeEvent.setParentScope(scope);
-                            closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
-                            closeEvent.setCode(1006);
-                            closeEvent.setReason(cause.getMessage());
-                            closeEvent.setWasClean(false);
-                            closeEvent.setTarget(WebSocket.this);
-                            executeEventLocally(closeEvent);
-
-                            return null;
-                        });
-                    }
+                    connectionEnded(1006, "", true);
                 }
             };
 
@@ -453,15 +416,16 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /*
      * Ready state handling.
      *
-     * readyState_ is read and written by the JS thread (close(), send(), getReadyState()) and by the
-     * threads of the websocket adapter. Every change goes through one of the three methods below. Each
-     * is a single atomic operation and returns true only for the caller that really performed the
-     * transition. That caller, and only that one, fires the matching event, which gives at most one
-     * open event and exactly one close event whatever the interleaving.
+     * readyState_ is read and written by the JS thread (close(), send(), getReadyState()), by the threads
+     * of the websocket adapter and by queued tasks. Every change goes through one of the three methods
+     * below. Each is a single atomic operation and tells the caller which state was left, so only the
+     * caller that really performed a transition fires the matching event. That gives at most one open
+     * event and exactly one close event whatever the interleaving.
      *
      *   CONNECTING                  -> OPEN     switchToOpen()      handshake finished
-     *   CONNECTING | OPEN           -> CLOSING  switchToClosing()   close() called
-     *   CONNECTING | OPEN | CLOSING -> CLOSED   switchToClosed()    connection closed or failed
+     *   OPEN                        -> CLOSING  switchToClosing()   close() called
+     *   CONNECTING                  -> ABORTED  switchToClosing()   close() called, reported as CLOSING
+     *   any but CLOSED              -> CLOSED   switchToClosed()    connection ended, see connectionEnded()
      *
      * The state never moves backwards and CLOSED is final.
      */
@@ -469,19 +433,30 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         return readyState_.compareAndSet(CONNECTING, OPEN);
     }
 
-    private boolean switchToClosing() {
+    /**
+     * @return the state that was left, or -1 if the connection already is CLOSING or CLOSED
+     */
+    private int switchToClosing() {
         int current = readyState_.get();
         while (current == CONNECTING || current == OPEN) {
-            if (readyState_.compareAndSet(current, CLOSING)) {
-                return true;
+            final int target = current == CONNECTING ? ABORTED : CLOSING;
+            if (readyState_.compareAndSet(current, target)) {
+                return current;
             }
             current = readyState_.get();
         }
-        return false;
+        return -1;
     }
 
-    private boolean switchToClosed() {
-        return readyState_.getAndSet(CLOSED) != CLOSED;
+    /**
+     * @return the state that was left, {@link #CLOSED} if the connection was closed before
+     */
+    private int switchToClosed() {
+        return readyState_.getAndSet(CLOSED);
+    }
+
+    private static boolean connectionFailed(final int previousState, final boolean reportedAsFailure) {
+        return reportedAsFailure || previousState == CONNECTING || previousState == ABORTED;
     }
 
     private void closeSessions() {
@@ -523,6 +498,68 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
+     * Ends the connection: switches to CLOSED and fires the close event (preceded by an error event if the
+     * connection failed). May be called from any thread and any number of times, only the first call fires.
+     * A connection that never was established, or that was aborted by close() while connecting, has failed
+     * whatever the caller reports: error event, close event with code 1006 and an empty reason.
+     *
+     * @param statusCode the status code reported by the adapter
+     * @param reason the reason reported by the adapter
+     * @param reportedAsFailure whether the adapter reported an error
+     */
+    private void connectionEnded(final int statusCode, final String reason, final boolean reportedAsFailure) {
+        final int previous = switchToClosed();
+        if (previous == CLOSED) {
+            return;
+        }
+
+        final boolean failed = connectionFailed(previous, reportedAsFailure);
+
+        final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+        if (engine == null) {
+            return;
+        }
+
+        engine.getContextFactory().call(cx -> {
+            if (failed) {
+                final Event errorEvent = new Event(Event.TYPE_ERROR);
+                errorEvent.setParentScope(getParentScope());
+                errorEvent.setPrototype(getPrototype(errorEvent.getClass()));
+                errorEvent.setSrcElement(WebSocket.this);
+                errorEvent.setTarget(WebSocket.this);
+                executeEventLocally(errorEvent);
+            }
+
+            final CloseEvent closeEvent = new CloseEvent();
+            closeEvent.setParentScope(getParentScope());
+            closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
+            closeEvent.setCode(failed ? 1006 : statusCode);
+            closeEvent.setReason(failed ? "" : reason);
+            closeEvent.setWasClean(!failed && statusCode == 1000);
+            closeEvent.setTarget(WebSocket.this);
+            executeEventLocally(closeEvent);
+
+            return null;
+        });
+    }
+
+    /**
+     * Runs the task later on the JS thread of the page, like the task queue of a browser does. Used for
+     * events that have to follow the running script, e.g. after close() while connecting.
+     *
+     * @param task the task
+     */
+    private void queueTask(final Runnable task) {
+        final JavaScriptJob job = new BasicJavaScriptJob() {
+            @Override
+            public void run() {
+                task.run();
+            }
+        };
+        containingPage_.getEnclosingWindow().getJobManager().addJob(job, containingPage_);
+    }
+
+    /**
      * Returns the current state of the connection.
      * Possible values are {@link #CONNECTING}, {@link #OPEN}, {@link #CLOSING}, or {@link #CLOSED}.
      *
@@ -530,7 +567,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxGetter
     public int getReadyState() {
-        return readyState_.get();
+        final int state = readyState_.get();
+        return state == ABORTED ? CLOSING : state;
     }
 
     /**
@@ -594,7 +632,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @Override
     public void close() throws IOException {
         // called when the page is unloaded: whatever the state is, the client has to be released
-        if (switchToClosing()) {
+        if (switchToClosing() != -1) {
             closeSessions();
         }
         releaseClient();
@@ -610,8 +648,17 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxFunction
     public void close(final Object code, final Object reason) {
         // TODO validate code and reason (InvalidAccessError / SyntaxError) and hand them to the adapter
-        if (switchToClosing()) {
-            shutdownAdapter();
+        final int previous = switchToClosing();
+        if (previous == -1) {
+            return;
+        }
+
+        shutdownAdapter();
+
+        if (previous == CONNECTING) {
+            // there is no connection to wait for and the adapter has nothing to report for an attempt that
+            // was cancelled: fail the connection ourselves, after the running script (error + close 1006)
+            queueTask(() -> connectionEnded(1006, "", true));
         }
     }
 
