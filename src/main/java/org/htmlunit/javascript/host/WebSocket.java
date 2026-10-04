@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -588,6 +589,28 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
+     * Returns a copy of the bytes of the given binary data: the content of an ArrayBuffer, the part of its
+     * buffer a typed array or DataView views (offset and length, not the whole buffer), or the content of
+     * a Blob.
+     *
+     * @param content the argument of send()
+     * @return the copy, or {@code null} if the content is not binary data
+     */
+    private static byte[] copyOfBinaryData(final Object content) {
+        if (content instanceof NativeArrayBuffer buffer) {
+            return buffer.getBuffer().clone();
+        }
+        if (content instanceof NativeArrayBufferView view) {
+            final int offset = view.getByteOffset();
+            return Arrays.copyOfRange(view.getBuffer().getBuffer(), offset, offset + view.getByteLength());
+        }
+        if (content instanceof Blob blob) {
+            return blob.getBytes().clone();
+        }
+        return null;
+    }
+
+    /**
      * Returns the number of bytes send() has to count for the given data: the byte length of an ArrayBuffer or
      * a view on it, the size of a Blob and, for everything else, the UTF-8 length of the converted string.
      *
@@ -797,8 +820,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /**
      * Transmits data to the server over the WebSocket connection.
      * Throws an {@code InvalidStateError} while {@link #CONNECTING}; the data is discarded when
-     * {@link #CLOSING} or {@link #CLOSED}. An ArrayBuffer is sent as binary message, anything else
-     * is converted to a string and sent as text message.
+     * {@link #CLOSING} or {@link #CLOSED}. Anything that is not binary
+     * is converted to a string and sent as text message. Binary data (an ArrayBuffer, a typed array or
+     * DataView, which contribute only the part they view, or a Blob) is sent as binary message; it is copied
+     * before this method returns, so later changes of the buffer do not change what is sent.
      *
      * @param content the data to send
      */
@@ -818,15 +843,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         try {
-            if (content instanceof NativeArrayBuffer buffer1) {
-                final byte[] bytes = buffer1.getBuffer();
-                final ByteBuffer buffer = ByteBuffer.wrap(bytes);
-                webSocketImpl_.send(buffer);
-                return;
-            }
-            if (content instanceof NativeArrayBufferView || content instanceof Blob) {
-                // TODO send the bytes of the view / the blob; handed over unchanged for now
-                webSocketImpl_.send(content);
+            final byte[] bytes = copyOfBinaryData(content);
+            if (bytes != null) {
+                webSocketImpl_.send(ByteBuffer.wrap(bytes));
                 return;
             }
 
