@@ -1713,6 +1713,13 @@ public class WebSocketTest extends WebDriverTestCase {
             FF_ESR = {"short: ok", "empty: ok", "123 ascii: ok", "124 ascii: SyntaxError", "122 bytes: ok", "124 bytes: SyntaxError",
                       "123 bytes: ok", "126 bytes: SyntaxError", "lone surrogate: ok", "undefined: ok", "null: ok",
                       "reason without code: ok"})
+    @HtmlUnitNYI(
+            CHROME = {"short: ok", "empty: ok", "123 ascii: ok", "124 ascii: SyntaxError", "122 bytes: ok", "124 bytes: SyntaxError",
+                      "123 bytes: ok", "126 bytes: SyntaxError", "lone surrogate: ok", "undefined: ok", "null: ok",
+                      "reason without code: ok"},
+            EDGE = {"short: ok", "empty: ok", "123 ascii: ok", "124 ascii: SyntaxError", "122 bytes: ok", "124 bytes: SyntaxError",
+                    "123 bytes: ok", "126 bytes: SyntaxError", "lone surrogate: ok", "undefined: ok", "null: ok",
+                    "reason without code: ok"})
     public void closeReasonValidation() throws Exception {
         runWithServer(ControlWebSocketListener.class,
                 "  function rep(s, n) {\n"
@@ -2003,6 +2010,8 @@ public class WebSocketTest extends WebDriverTestCase {
     @Alerts(DEFAULT =  {"before open: []", "final state: 3"},
             FF = {"before open: []", "after open: []", "final state: 3"},
             FF_ESR = {"before open: []", "after open: []", "final state: 3"})
+    @HtmlUnitNYI(CHROME = {"before open: []", "after open: []", "final state: 3"},
+            EDGE = {"before open: []", "after open: []", "final state: 3"})
     public void protocolNotNegotiated() throws Exception {
         runWithServer(ControlWebSocketListener.class,
                 "  function test() {\n"

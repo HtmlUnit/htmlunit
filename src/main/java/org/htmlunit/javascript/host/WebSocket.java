@@ -20,6 +20,7 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -464,20 +465,39 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         return readyState_.getAndSet(CLOSED);
     }
 
+    /**
+     * A connection was closed cleanly if the closing handshake was completed, whatever status code it carried.
+     * The codes 1006 and 1015 are never sent, they are reported locally for a connection that was lost or failed.
+     *
+     * @param failed whether the connection failed
+     * @param statusCode the status code of the close event
+     * @return the value of {@code wasClean}
+     */
+    private static boolean wasClean(final boolean failed, final int statusCode) {
+        return !failed && statusCode != 1006 && statusCode != 1015;
+    }
+
     private static boolean connectionFailed(final int previousState, final boolean reportedAsFailure) {
         return reportedAsFailure || previousState == CONNECTING || previousState == ABORTED;
     }
 
-    private void closeSessions() {
+    /**
+     * Starts the closing handshake: the sessions are asked to close, which sends the close frame.
+     *
+     * @return {@code false} if this failed, so that no answer of the server has to be waited for
+     */
+    private boolean closeSessions() {
         if (webSocketImpl_ == null) {
-            return;
+            return false;
         }
 
+        boolean success = true;
         try {
             webSocketImpl_.closeIncomingSession();
         }
         catch (final Exception e) {
             LOG.error("WS close error - incomingSession_.close() failed", e);
+            success = false;
         }
 
         try {
@@ -485,7 +505,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
         catch (final Exception e) {
             LOG.error("WS close error - outgoingSession_.close() failed", e);
+            success = false;
         }
+        return success;
     }
 
     private void releaseClient() {
@@ -646,6 +668,12 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             return;
         }
 
+        // The connection is over, release the client. close() does not do this for an open connection,
+        // because stopping the client right after the close frame was sent cuts the closing handshake.
+        // Not on this thread: it may be one of the adapter's own, and stopping a client from its own
+        // threads can stall.
+        CompletableFuture.runAsync(this::releaseClient);
+
         final boolean failed = connectionFailed(previous, reportedAsFailure);
 
         final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
@@ -668,7 +696,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
             closeEvent.setCode(failed ? 1006 : statusCode);
             closeEvent.setReason(failed ? "" : reason);
-            closeEvent.setWasClean(!failed && statusCode == 1000);
+            closeEvent.setWasClean(wasClean(failed, statusCode));
             closeEvent.setTarget(WebSocket.this);
             executeEventLocally(closeEvent);
 
@@ -813,19 +841,30 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         // TODO hand the code and the reason (each only if given) to the adapter, e.g. as
-        // webSocketImpl_.closeOutgoingSession(code, reason); it only has the parameterless variant today
+        // webSocketImpl_.closeOutgoingSession(code, reason); it only has the parameterless variant today,
+        // so the server sees a normal closure (1000, no reason)
         final int previous = switchToClosing();
         if (previous == -1) {
             return;
         }
 
-        shutdownAdapter();
-
         if (previous == CONNECTING) {
-            // there is no connection to wait for and the adapter has nothing to report for an attempt that
-            // was cancelled: fail the connection ourselves, after the running script (error + close 1006)
-            queueTask(() -> connectionEnded(1006, "", true));
+            // there is no connection to wait for
+            shutdownAdapter();
         }
+        else if (closeSessions()) {
+            // OPEN: the closing handshake is under way. The adapter reports the end of the connection with the
+            // status code of the server, and connectionEnded() releases the client then.
+            return;
+        }
+        else {
+            // the close frame could not be sent, so there is no answer to wait for
+            releaseClient();
+        }
+
+        // the adapter has nothing to report for a cancelled attempt: fail the connection ourselves, after
+        // the running script (error + close 1006)
+        queueTask(() -> connectionEnded(1006, "", true));
     }
 
     /**
