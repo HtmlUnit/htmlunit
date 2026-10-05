@@ -63,6 +63,21 @@ public interface WebSocketAdapter {
     void closeOutgoingSession() throws Exception;
 
     /**
+     * Close the outgoing session with the given status code and reason.
+     * The status code 1005 means that no status code at all is sent (an empty close frame), the reason
+     * is only sent together with a status code.
+     * The default implementation ignores the arguments and does the same as {@link #closeOutgoingSession()},
+     * so existing implementations keep working.
+     *
+     * @param statusCode the status code of the close frame
+     * @param reason the reason of the close frame, may be empty
+     * @throws Exception in case of error
+     */
+    default void closeOutgoingSession(final int statusCode, final String reason) throws Exception {
+        closeOutgoingSession();
+    }
+
+    /**
      * Close the client.
      *
      * @throws Exception in case of error

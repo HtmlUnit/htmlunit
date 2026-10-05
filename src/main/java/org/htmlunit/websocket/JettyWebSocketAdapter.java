@@ -130,7 +130,7 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
     private final WebSocketListener listener_;
 
     private volatile Session incomingSession_;
-    private Session outgoingSession_;
+    private volatile Session outgoingSession_;
 
     /**
      * Ctor.
@@ -239,6 +239,17 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      * {@inheritDoc}
      */
     @Override
+    public void closeOutgoingSession(final int statusCode, final String reason) {
+        final Session session = outgoingSession_;
+        if (session != null) {
+            session.close(statusCode, reason, Callback.NOOP);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void closeClient() throws Exception {
         synchronized (clientLock_) {
             if (client_ != null) {
@@ -272,8 +283,10 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
         @Override
         public void onWebSocketClose(final int statusCode, final String reason, final Callback callback) {
             outgoingSession_ = null;
-            listener_.onWebSocketClose(statusCode, reason);
+
+            // complete the closing handshake first: the listener may release the client
             callback.succeed();
+            listener_.onWebSocketClose(statusCode, reason);
         }
 
         @Override

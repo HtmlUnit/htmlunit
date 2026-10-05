@@ -94,6 +94,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /** The close frame has 125 bytes of payload, two of them are the status code. */
     private static final int MAX_CLOSE_REASON_BYTES = 123;
 
+    /** The status code for "no status code": the close frame is sent without any. */
+    private static final int NO_STATUS_CODE = 1005;
+
     private URI url_;
     private final AtomicInteger readyState_ = new AtomicInteger(CONNECTING);
     // bytes handed to send() after the connection was closed; see getBufferedAmount()
@@ -482,29 +485,48 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * Starts the closing handshake: the sessions are asked to close, which sends the close frame.
+     * Starts the closing handshake with the default status code of the adapter.
      *
      * @return {@code false} if this failed, so that no answer of the server has to be waited for
      */
     private boolean closeSessions() {
+        return closeSessions(-1, null);
+    }
+
+    /**
+     * Starts the closing handshake: the sessions are asked to close, which sends the close frame. The outgoing
+     * session comes first because it is the one that takes the status code and the reason; the incoming session
+     * is the same connection and ignores the second close.
+     *
+     * @param statusCode the status code of the close frame, {@link #NO_STATUS_CODE} for a close frame without
+     *        status code, or -1 for the default of the adapter
+     * @param reason the reason of the close frame
+     * @return {@code false} if this failed, so that no answer of the server has to be waited for
+     */
+    private boolean closeSessions(final int statusCode, final String reason) {
         if (webSocketImpl_ == null) {
             return false;
         }
 
         boolean success = true;
         try {
-            webSocketImpl_.closeIncomingSession();
+            if (statusCode < 0) {
+                webSocketImpl_.closeOutgoingSession();
+            }
+            else {
+                webSocketImpl_.closeOutgoingSession(statusCode, reason);
+            }
         }
         catch (final Exception e) {
-            LOG.error("WS close error - incomingSession_.close() failed", e);
+            LOG.error("WS close error - outgoingSession_.close() failed", e);
             success = false;
         }
 
         try {
-            webSocketImpl_.closeOutgoingSession();
+            webSocketImpl_.closeIncomingSession();
         }
         catch (final Exception e) {
-            LOG.error("WS close error - outgoingSession_.close() failed", e);
+            LOG.error("WS close error - incomingSession_.close() failed", e);
             success = false;
         }
         return success;
@@ -695,7 +717,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             closeEvent.setParentScope(getParentScope());
             closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
             closeEvent.setCode(failed ? 1006 : statusCode);
-            closeEvent.setReason(failed ? "" : reason);
+            closeEvent.setReason(failed || reason == null ? "" : reason);
             closeEvent.setWasClean(wasClean(failed, statusCode));
             closeEvent.setTarget(WebSocket.this);
             executeEventLocally(closeEvent);
@@ -825,24 +847,32 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxFunction
     public void close(final Object code, final Object reason) {
-        if (!Undefined.isUndefined(code)
-                && !isValidCloseCode(clampToUnsignedShort(Context.toNumber(code)))) {
-            throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
-                    "WebSocket Error: the close code must be 1000 or in the range 3000 to 4999.",
-                    DOMException.INVALID_ACCESS_ERR);
-        }
-        if (!Undefined.isUndefined(reason)
-                && usvUtf8Length(JavaScriptEngine.toString(reason)) > MAX_CLOSE_REASON_BYTES) {
-            throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
-                    "WebSocket Error: the close reason must not be longer than 123 bytes.",
-                    DOMException.SYNTAX_ERR);
+        int statusCode = NO_STATUS_CODE;
+        if (!Undefined.isUndefined(code)) {
+            statusCode = clampToUnsignedShort(Context.toNumber(code));
+            if (!isValidCloseCode(statusCode)) {
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        "WebSocket Error: the close code must be 1000 or in the range 3000 to 4999.",
+                        DOMException.INVALID_ACCESS_ERR);
+            }
         }
 
-        // TODO hand the code and the reason (each only if given) to the adapter, e.g. as
-        // webSocketImpl_.closeOutgoingSession(code, reason); it only has the parameterless variant today,
-        // so the server sees a normal closure (1000, no reason)
+        String closeReason = "";
+        if (!Undefined.isUndefined(reason)) {
+            final String usvReason = toUsvString(JavaScriptEngine.toString(reason));
+            if (usvUtf8Length(usvReason) > MAX_CLOSE_REASON_BYTES) {
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        "WebSocket Error: the close reason must not be longer than 123 bytes.",
+                        DOMException.SYNTAX_ERR);
+            }
+            if (statusCode != NO_STATUS_CODE) {
+                // a reason can only be sent together with a status code
+                closeReason = usvReason;
+            }
+        }
+
         final int previous = switchToClosing();
         if (previous == -1) {
             return;
@@ -852,7 +882,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             // there is no connection to wait for
             shutdownAdapter();
         }
-        else if (closeSessions()) {
+        else if (closeSessions(statusCode, closeReason)) {
             // OPEN: the closing handshake is under way. The adapter reports the end of the connection with the
             // status code of the server, and connectionEnded() releases the client then.
             return;
