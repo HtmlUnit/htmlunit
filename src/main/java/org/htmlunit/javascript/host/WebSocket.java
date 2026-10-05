@@ -33,7 +33,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
@@ -427,7 +426,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         setEventHandler(Event.TYPE_OPEN, openHandler);
     }
 
-    /*
+    /**
      * Ready state handling.
      *
      * readyState_ is read and written by the JS thread (close(), send(), getReadyState()), by the threads
@@ -448,6 +447,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
+     * Return the state that was left, or -1 if the connection already is CLOSING or CLOSED.
+     *
      * @return the state that was left, or -1 if the connection already is CLOSING or CLOSED
      */
     private int switchToClosing() {
@@ -463,6 +464,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
+     * Return the state that was left, {@link #CLOSED} if the connection was closed before.
+     *
      * @return the state that was left, {@link #CLOSED} if the connection was closed before
      */
     private int switchToClosed() {
@@ -550,10 +553,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         closeSessions();
         releaseClient();
     }
-
-    /*
-     * Arguments of close(code, reason), see https://websockets.spec.whatwg.org/#dom-websocket-close
-     */
 
     /**
      * The WebIDL conversion to {@code [Clamp] unsigned short}: NaN is 0, the value is clamped to 0..65535
@@ -849,8 +848,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxFunction
     public void close(final Object code, final Object reason) {
         int statusCode = NO_STATUS_CODE;
-        if (!Undefined.isUndefined(code)) {
-            statusCode = clampToUnsignedShort(Context.toNumber(code));
+        if (!JavaScriptEngine.isUndefined(code)) {
+            statusCode = clampToUnsignedShort(JavaScriptEngine.toNumber(code));
             if (!isValidCloseCode(statusCode)) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
@@ -860,7 +859,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         String closeReason = "";
-        if (!Undefined.isUndefined(reason)) {
+        if (!JavaScriptEngine.isUndefined(reason)) {
             final String usvReason = toUsvString(JavaScriptEngine.toString(reason));
             if (usvUtf8Length(usvReason) > MAX_CLOSE_REASON_BYTES) {
                 throw JavaScriptEngine.asJavaScriptException(
