@@ -728,6 +728,17 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
+     * Returns the extensions negotiated with the server, or an empty string if no extensions are in use.
+     * The adapter does not report the negotiated extensions, so this is always an empty string.
+     *
+     * @return the extensions in use
+     */
+    @JsxGetter
+    public String getExtensions() {
+        return "";
+    }
+
+    /**
      * Returns the number of bytes of data that have been queued but not yet transmitted.
      * Once the connection is closing or closed this value only increases: every send() adds the size of its
      * data, which is discarded. Data sent while the connection is open is handed over to the adapter at once
