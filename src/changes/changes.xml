@@ -9,6 +9,9 @@
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
             <action type="update" dev="rbri">
+                websocket-client: jetty updated to 12.1.14.
+            </action>
+            <action type="update" dev="rbri">
                 WebSocket readyState immediately transitions to closing (2) upon calling close().
             </action>
             <action type="update" dev="rbri">
