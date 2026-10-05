@@ -300,9 +300,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope, final Object[] args,
             final Function ctorObj, final boolean inNewExpr) {
-        if (args.length < 1 || args.length > 2) {
+        // the url is required, the protocols are optional, additional arguments are ignored
+        if (args.length < 1) {
             throw JavaScriptEngine
-                    .typeError("WebSocket Error: constructor must have one or two String parameters.");
+                    .typeError("WebSocket Error: constructor needs at least the url as parameter.");
         }
 
         final Window win = getWindow(ctorObj);
