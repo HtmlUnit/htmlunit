@@ -1933,12 +1933,12 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Used to allow re-declaration of constants (eg: "var undefined;").
      */
     @Override
-    public boolean isConst(final String name) {
+    public boolean isConst(final Context cx, final String name) {
         if ("undefined".equals(name) || "Infinity".equals(name) || "NaN".equals(name)) {
             return false;
         }
 
-        return super.isConst(name);
+        return super.isConst(cx, name);
     }
 
     /**
