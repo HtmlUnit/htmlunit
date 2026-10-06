@@ -35,12 +35,8 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.IteratorLikeIterable;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.SymbolKey;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
@@ -384,49 +380,19 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         if (protocols instanceof Scriptable protoScriptable) {
-            if (hasProperty(protoScriptable, SymbolKey.ITERATOR)) {
-                final List<String> result = new ArrayList<>();
-
-                final Object iterator = ScriptRuntime.callIterator(protoScriptable, cx, scope);
-                try (IteratorLikeIterable itr = new IteratorLikeIterable(cx, scope, iterator)) {
-                    for (final Object elem : itr) {
+            final List<String> result = new ArrayList<>();
+            if (JavaScriptEngine.iterate(cx, scope, protoScriptable,
+                    elem -> {
                         if (elem  == Scriptable.NOT_FOUND) {
                             // a hole in the array
                             result.add(JavaScriptEngine.toString(JavaScriptEngine.UNDEFINED));
                         }
-//                        else if (elem instanceof String s) {
-//                            result.add(s);
-//                        }
                         else {
                             result.add(JavaScriptEngine.toString(elem));
                         }
-                    }
-                }
-
+                    })) {
                 return result;
             }
-
-//            if (JavaScriptEngine.isArrayLike(protoScriptable)) {
-//                final List<String> result = new ArrayList<>();
-//
-//                JavaScriptEngine.iterateArrayLike(cx, protoScriptable, elem -> {
-//                    if (elem  == Scriptable.NOT_FOUND) {
-//                        // a hole in the array
-//                        result.add(JavaScriptEngine.toString(JavaScriptEngine.UNDEFINED));
-//                    }
-//                    else if (elem instanceof String s) {
-//                        result.add(s);
-//                    }
-//                    else if (elem instanceof ScriptableObject) {
-//                        result.add(JavaScriptEngine.toString(elem));
-//                    }
-//                    else {
-//                        throw JavaScriptEngine.typeError("Invalid element in WebSocket ctor protocols argument");
-//                    }
-//                });
-//
-//                return result;
-//            }
         }
 
         return Collections.singletonList(JavaScriptEngine.toString(protocols));
@@ -974,8 +940,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxFunction
     public void close(final Object code, final Object reason) {
         int statusCode = NO_STATUS_CODE;
-        if (!Undefined.isUndefined(code)) {
-            statusCode = clampToUnsignedShort(Context.toNumber(code));
+        if (!JavaScriptEngine.isUndefined(code)) {
+            statusCode = clampToUnsignedShort(JavaScriptEngine.toNumber(code));
             if (!isValidCloseCode(statusCode)) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
@@ -985,7 +951,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         String closeReason = "";
-        if (!Undefined.isUndefined(reason)) {
+        if (!JavaScriptEngine.isUndefined(reason)) {
             final String usvReason = toUsvString(JavaScriptEngine.toString(reason));
             if (usvUtf8Length(usvReason) > MAX_CLOSE_REASON_BYTES) {
                 throw JavaScriptEngine.asJavaScriptException(

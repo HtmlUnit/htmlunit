@@ -47,6 +47,7 @@ import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.IteratorLikeIterable;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
@@ -59,6 +60,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.StackStyle;
 import org.htmlunit.corejs.javascript.Symbol;
+import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.WithScope;
@@ -1439,6 +1441,37 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         ScriptRuntime.setBuiltinProtoAndParent(uint8Array, scope, TopLevel.Builtins.Uint8Array);
 
         return uint8Array;
+    }
+
+    /**
+     * Iterates over a JavaScript object using its ES6 iterator property if available,
+     * invoking the provided consumer action on each element.
+     *
+     * <p>If the given {@link Scriptable} defines a {@link SymbolKey#ITERATOR} property,
+     * this method acquires an iterator via {@link ScriptRuntime#callIterator}, iterates over all
+     * elements, and passes each element to the {@code consumer}.</p>
+     *
+     * @param cx        the current Rhino {@link Context} executing the script
+     * @param scope     the {@link VarScope} under which evaluation takes place
+     * @param scriptable the JavaScript object or array to iterate over
+     * @param consumer  the action to perform on each element yielded by the iterator
+     * @return {@code true} if the object was iterable and iteration was executed;
+     *         {@code false} if the object lacks a {@link SymbolKey#ITERATOR} property
+     */
+    public static boolean iterate(final Context cx, final VarScope scope,
+            final Scriptable scriptable, final Consumer<Object> consumer) {
+        if (ScriptableObject.hasProperty(scriptable, SymbolKey.ITERATOR)) {
+            final Object iterator = ScriptRuntime.callIterator(scriptable, cx, scope);
+            try (IteratorLikeIterable itr = new IteratorLikeIterable(cx, scope, iterator)) {
+                for (final Object elem : itr) {
+                    consumer.accept(elem);
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
