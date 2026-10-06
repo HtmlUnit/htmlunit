@@ -19,7 +19,11 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -31,8 +35,12 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.IteratorLikeIterable;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.SymbolKey;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
@@ -299,6 +307,12 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope, final Object[] args,
             final Function ctorObj, final boolean inNewExpr) {
+        if (!inNewExpr) {
+            throw JavaScriptEngine
+                    .typeError("Failed to construct 'WebSocket': Please use the 'new' operator, "
+                            + "this DOM object constructor cannot be called as a function.");
+        }
+
         // the url is required, the protocols are optional, additional arguments are ignored
         if (args.length < 1) {
             throw JavaScriptEngine
@@ -343,7 +357,119 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.",
                     DOMException.SYNTAX_ERR);
         }
+
+        // TODO send the protocols with the handshake and use the one selected by the server for protocol
+        final List<String> protocols = toProtocols(cx, scope, args.length > 1 ? args[1] : JavaScriptEngine.UNDEFINED);
+        if (!areValidProtocols(protocols)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    win,
+                    "WebSocket Error: the protocols must be unique and may only contain token characters.",
+                    DOMException.SYNTAX_ERR);
+        }
+
         return new WebSocket(urlString, getTopLevelScope(scope), win);
+    }
+
+    /**
+     * Converts the protocols argument, which is a {@code (DOMString or sequence<DOMString>)}: undefined (or no
+     * argument) is the empty list, an array is a sequence, anything else - null and objects that are no array
+     * included - is converted to a single string.
+     *
+     * @param protocols the argument
+     * @return the protocols
+     */
+    private static List<String> toProtocols(final Context cx, final VarScope scope, final Object protocols) {
+        if (JavaScriptEngine.isUndefined(protocols)) {
+            return Collections.emptyList();
+        }
+
+        if (protocols instanceof Scriptable protoScriptable) {
+            if (hasProperty(protoScriptable, SymbolKey.ITERATOR)) {
+                final List<String> result = new ArrayList<>();
+
+                final Object iterator = ScriptRuntime.callIterator(protoScriptable, cx, scope);
+                try (IteratorLikeIterable itr = new IteratorLikeIterable(cx, scope, iterator)) {
+                    for (final Object elem : itr) {
+                        if (elem  == Scriptable.NOT_FOUND) {
+                            // a hole in the array
+                            result.add(JavaScriptEngine.toString(JavaScriptEngine.UNDEFINED));
+                        }
+//                        else if (elem instanceof String s) {
+//                            result.add(s);
+//                        }
+                        else {
+                            result.add(JavaScriptEngine.toString(elem));
+                        }
+                    }
+                }
+
+                return result;
+            }
+
+//            if (JavaScriptEngine.isArrayLike(protoScriptable)) {
+//                final List<String> result = new ArrayList<>();
+//
+//                JavaScriptEngine.iterateArrayLike(cx, protoScriptable, elem -> {
+//                    if (elem  == Scriptable.NOT_FOUND) {
+//                        // a hole in the array
+//                        result.add(JavaScriptEngine.toString(JavaScriptEngine.UNDEFINED));
+//                    }
+//                    else if (elem instanceof String s) {
+//                        result.add(s);
+//                    }
+//                    else if (elem instanceof ScriptableObject) {
+//                        result.add(JavaScriptEngine.toString(elem));
+//                    }
+//                    else {
+//                        throw JavaScriptEngine.typeError("Invalid element in WebSocket ctor protocols argument");
+//                    }
+//                });
+//
+//                return result;
+//            }
+        }
+
+        return Collections.singletonList(JavaScriptEngine.toString(protocols));
+    }
+
+    /**
+     * Checks the protocols: every one has to be a token, and none may be there more than once
+     * (compared case sensitive).
+     *
+     * @param protocols the protocols
+     * @return {@code true} if the protocols are valid
+     */
+    private static boolean areValidProtocols(final List<String> protocols) {
+        final HashSet<String> seen = new HashSet<>();
+        for (final String protocol : protocols) {
+            if (!isValidProtocol(protocol) || !seen.add(protocol)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * A protocol has to match the token production of RFC 7230: at least one character, only letters, digits
+     * and {@code !#$%&'*+-.^_`|~}. That excludes empty strings, blanks, separators like the comma and all non
+     * ASCII characters.
+     *
+     * @param protocol the protocol
+     * @return {@code true} if the protocol is a token
+     */
+    private static boolean isValidProtocol(final String protocol) {
+        if (protocol.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < protocol.length(); i++) {
+            final char c = protocol.charAt(i);
+            final boolean token = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
+                    || "!#$%&'*+-.^_`|~".indexOf(c) >= 0;
+            if (!token) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -848,8 +974,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxFunction
     public void close(final Object code, final Object reason) {
         int statusCode = NO_STATUS_CODE;
-        if (!JavaScriptEngine.isUndefined(code)) {
-            statusCode = clampToUnsignedShort(JavaScriptEngine.toNumber(code));
+        if (!Undefined.isUndefined(code)) {
+            statusCode = clampToUnsignedShort(Context.toNumber(code));
             if (!isValidCloseCode(statusCode)) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
@@ -859,7 +985,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         String closeReason = "";
-        if (!JavaScriptEngine.isUndefined(reason)) {
+        if (!Undefined.isUndefined(reason)) {
             final String usvReason = toUsvString(JavaScriptEngine.toString(reason));
             if (usvUtf8Length(usvReason) > MAX_CLOSE_REASON_BYTES) {
                 throw JavaScriptEngine.asJavaScriptException(

@@ -9,6 +9,27 @@
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
             <action type="update" dev="rbri">
+                WebSocket improved parameter check at construction.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Date.parse() now rejects values that are out of range.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Cap variable-length \u{} escapes at U+10FFFF in TokenStream.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: An accessor property's value is not constant.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Convert Java values to JavaScript on reads. On writes, unwrap only Wrapper values.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: escape() corrupting the unescaped prefix of its result.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: rewritten scope handlig, variable scoping and const handling is now in sync with the spec.
+            </action>
+            <action type="update" dev="rbri">
                 websocket-client: jetty updated to 12.1.14.
             </action>
             <action type="update" dev="rbri">

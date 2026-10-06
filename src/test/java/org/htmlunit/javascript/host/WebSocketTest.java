@@ -70,7 +70,7 @@ public class WebSocketTest extends WebDriverTestCase {
             + "    var ws = new WebSocket(location);\n"
             + "    log(ws.url);\n"
             + "    log(ws.protocol);\n"
-            // this makes our test instable because the real connect is
+            // this makes our test unstable because the real connect is
             // done by an executor and maybe already finished
             // + "    log(ws.readyState);\n"
             + "    log(ws.binaryType);\n"
@@ -1977,6 +1977,159 @@ public class WebSocketTest extends WebDriverTestCase {
                 + "    tryCtor('non ascii', '\\u00E4');\n"
                 + "    tryCtor('one invalid in array', ['a', 'a b']);\n"
                 + "    tryCtor('object', {});\n"
+                + "  }\n");
+    }
+
+    /**
+     * Iterables are sequences, whatever they are: Set, Map, typed arrays, generators, custom iterables,
+     * the arguments object and even String objects (which iterate over their characters). Non iterable
+     * array likes are converted to a single string. One line per case; "setup failed" means the engine
+     * could not even build the value, it says nothing about the constructor.
+     * <p>
+     * Do not take Node's built-in WebSocket as reference for the two array like lines: it also accepts a
+     * non standard options object as second argument and answers "ok", the browsers have to answer
+     * SyntaxError (the object becomes the string "[object Object]").
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"set: ok", "empty set: ok", "set with invalid entry: SyntaxError", "set of numbers: ok",
+             "map: SyntaxError", "typed array: ok", "typed array with duplicates: SyntaxError", "empty typed array: ok",
+             "generator: ok", "generator with duplicates: SyntaxError", "custom iterable: ok",
+             "custom iterable with duplicates: SyntaxError", "arguments object: ok", "arguments object with duplicates: SyntaxError",
+             "string object: ok", "string object, repeated character: SyntaxError", "string primitive, repeated character: ok",
+             "array like: SyntaxError", "array like, empty: SyntaxError", "sparse array: ok", "two holes: SyntaxError"})
+    public void constructorProtocolsIterables() throws Exception {
+        runWithServer(ControlWebSocketListener.class,
+                "  function iterable(items) {\n"
+                + "    var result = {};\n"
+                + "    result[Symbol.iterator] = function() {\n"
+                + "      var i = 0;\n"
+                + "      return {\n"
+                + "        next: function() {\n"
+                + "          return i < items.length ? {value: items[i++], done: false} : {value: undefined, done: true};\n"
+                + "        }\n"
+                + "      };\n"
+                + "    };\n"
+                + "    return result;\n"
+                + "  }\n"
+                + "  function tryCtor(label, factory) {\n"
+                + "    var protocols;\n"
+                + "    try {\n"
+                + "      protocols = factory();\n"
+                + "    } catch(e) {\n"
+                + "      log(label + ': setup failed ' + e.name);\n"
+                + "      return;\n"
+                + "    }\n"
+                + "    try {\n"
+                + "      var ws = new WebSocket(url, protocols);\n"
+                + "      ws.close();\n"
+                + "      log(label + ': ok');\n"
+                + "    } catch(e) { log(label + ': ' + e.name); }\n"
+                + "  }\n"
+                + "  function test() {\n"
+                + "    tryCtor('set', function() { return new Set(['a', 'b']); });\n"
+                + "    tryCtor('empty set', function() { return new Set(); });\n"
+                + "    tryCtor('set with invalid entry', function() { return new Set(['a', 'a b']); });\n"
+                + "    tryCtor('set of numbers', function() { return new Set([1, 2]); });\n"
+                + "    tryCtor('map', function() { return new Map([['a', 1]]); });\n"
+                + "    tryCtor('typed array', function() { return new Uint8Array([1, 2]); });\n"
+                + "    tryCtor('typed array with duplicates', function() { return new Uint8Array([1, 1]); });\n"
+                + "    tryCtor('empty typed array', function() { return new Uint8Array(0); });\n"
+                + "    tryCtor('generator', function() {\n"
+                + "      return new Function(\"return (function*() { yield 'a'; yield 'b'; })();\")();\n"
+                + "    });\n"
+                + "    tryCtor('generator with duplicates', function() {\n"
+                + "      return new Function(\"return (function*() { yield 'a'; yield 'a'; })();\")();\n"
+                + "    });\n"
+                + "    tryCtor('custom iterable', function() { return iterable(['x', 'y']); });\n"
+                + "    tryCtor('custom iterable with duplicates', function() { return iterable(['x', 'x']); });\n"
+                + "    tryCtor('arguments object', function() { return (function() { return arguments; })('a', 'b'); });\n"
+                + "    tryCtor('arguments object with duplicates', function() {\n"
+                + "      return (function() { return arguments; })('a', 'a');\n"
+                + "    });\n"
+                + "    tryCtor('string object', function() { return new String('chat'); });\n"
+                + "    tryCtor('string object, repeated character', function() { return new String('aa'); });\n"
+                + "    tryCtor('string primitive, repeated character', function() { return 'aa'; });\n"
+                + "    tryCtor('array like', function() { return {0: 'a', 1: 'b', length: 2}; });\n"
+                + "    tryCtor('array like, empty', function() { return {length: 0}; });\n"
+                + "    tryCtor('sparse array', function() { return ['a', , 'b']; });\n"
+                + "    tryCtor('two holes', function() { return [ , , ]; });\n"
+                + "  }\n");
+     }
+
+    /**
+     * Exotic arguments: symbols (ToString throws a TypeError), an @@iterator that is null (not iterable,
+     * so the object becomes one string), not callable, or that throws; errors thrown while iterating have
+     * to reach the caller unchanged.
+     * <p>
+     * By the spec (GetMethod) an @@iterator that is null or undefined means "not iterable", so the object is
+     * converted to a string and the answer is SyntaxError; Node's built-in WebSocket checks with the in operator
+     * and throws a TypeError instead, so it is no reference for those two lines.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"symbol element: TypeError", "symbol itself: TypeError", "iterator is null: SyntaxError",
+                       "iterator is undefined: SyntaxError", "iterator not callable: TypeError",
+                       "iterator throws: RangeError", "iterator returns a primitive: TypeError", "next throws: EvalError"},
+            FF = {"symbol element: TypeError", "symbol itself: TypeError", "iterator is null: TypeError",
+                  "iterator is undefined: SyntaxError", "iterator not callable: TypeError",
+                  "iterator throws: RangeError", "iterator returns a primitive: TypeError", "next throws: EvalError"},
+            FF_ESR = {"symbol element: TypeError", "symbol itself: TypeError", "iterator is null: TypeError",
+                  "iterator is undefined: SyntaxError", "iterator not callable: TypeError",
+                  "iterator throws: RangeError", "iterator returns a primitive: TypeError", "next throws: EvalError"})
+    @HtmlUnitNYI(
+            CHROME = {"symbol element: TypeError", "symbol itself: TypeError", "iterator is null: TypeError",
+                      "iterator is undefined: TypeError", "iterator not callable: TypeError",
+                      "iterator throws: RangeError", "iterator returns a primitive: TypeError", "next throws: EvalError"},
+            EDGE = {"symbol element: TypeError", "symbol itself: TypeError", "iterator is null: TypeError",
+                    "iterator is undefined: TypeError", "iterator not callable: TypeError",
+                    "iterator throws: RangeError", "iterator returns a primitive: TypeError", "next throws: EvalError"},
+            FF = {"symbol element: TypeError", "symbol itself: TypeError", "iterator is null: TypeError",
+                  "iterator is undefined: TypeError", "iterator not callable: TypeError",
+                  "iterator throws: RangeError", "iterator returns a primitive: TypeError", "next throws: EvalError"},
+            FF_ESR = {"symbol element: TypeError", "symbol itself: TypeError", "iterator is null: TypeError",
+                      "iterator is undefined: TypeError", "iterator not callable: TypeError",
+                      "iterator throws: RangeError", "iterator returns a primitive: TypeError", "next throws: EvalError"})
+    public void constructorProtocolsExotic() throws Exception {
+        runWithServer(ControlWebSocketListener.class,
+                "  function tryCtor(label, factory) {\n"
+                + "    var protocols;\n"
+                + "    try {\n"
+                + "      protocols = factory();\n"
+                + "    } catch(e) {\n"
+                + "      log(label + ': setup failed ' + e.name);\n"
+                + "      return;\n"
+                + "    }\n"
+                + "    try {\n"
+                + "      var ws = new WebSocket(url, protocols);\n"
+                + "      ws.close();\n"
+                + "      log(label + ': ok');\n"
+                + "    } catch(e) { log(label + ': ' + e.name); }\n"
+                + "  }\n"
+                + "  function withIterator(iterator) {\n"
+                + "    var result = {};\n"
+                + "    result[Symbol.iterator] = iterator;\n"
+                + "    return result;\n"
+                + "  }\n"
+                + "  function test() {\n"
+                + "    tryCtor('symbol element', function() { return [Symbol('a')]; });\n"
+                + "    tryCtor('symbol itself', function() { return Symbol('a'); });\n"
+                + "    tryCtor('iterator is null', function() { return withIterator(null); });\n"
+                + "    tryCtor('iterator is undefined', function() { return withIterator(undefined); });\n"
+                + "    tryCtor('iterator not callable', function() { return withIterator(1); });\n"
+                + "    tryCtor('iterator throws', function() {\n"
+                + "      return withIterator(function() { throw new RangeError('x'); });\n"
+                + "    });\n"
+                + "    tryCtor('iterator returns a primitive', function() {\n"
+                + "      return withIterator(function() { return 1; });\n"
+                + "    });\n"
+                + "    tryCtor('next throws', function() {\n"
+                + "      return withIterator(function() {\n"
+                + "        return {next: function() { throw new EvalError('x'); }};\n"
+                + "      });\n"
+                + "    });\n"
                 + "  }\n");
     }
 
