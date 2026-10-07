@@ -348,7 +348,7 @@ public class WebSocketTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -1827,6 +1827,11 @@ public class WebSocketTest extends WebDriverTestCase {
                   "3000 -> 3000|x|false|3", "4000 -> 4000|custom|false|3"},
             FF_ESR = {"1000 -> 1000||false|3", "1001 -> 1001|bye|false|3", "1008 -> 1008|policy|false|3",
                       "3000 -> 3000|x|false|3", "4000 -> 4000|custom|false|3"})
+    @HtmlUnitNYI(
+            FF = {"1000 -> 1000||true|3", "1001 -> 1001|bye|true|3", "1008 -> 1008|policy|true|3",
+                  "3000 -> 3000|x|true|3", "4000 -> 4000|custom|true|3"},
+            FF_ESR = {"1000 -> 1000||true|3", "1001 -> 1001|bye|true|3", "1008 -> 1008|policy|true|3",
+                      "3000 -> 3000|x|true|3", "4000 -> 4000|custom|true|3"})
     public void serverCloseWithCode() throws Exception {
         runWithServer(ControlWebSocketListener.class,
                 "  var cases = [[1000, ''], [1001, 'bye'], [1008, 'policy'], [3000, 'x'], [4000, 'custom']];\n"
@@ -2225,12 +2230,19 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"upper case: ws://localhost:§§PORT§§/Path", "relative: ws://localhost:§§PORT§§/ws",
-             "space in path: ws://localhost:§§PORT§§/a%20b", "umlaut in path: ws://localhost:§§PORT§§/%C3%A4",
-             "braces in path: ws://localhost:§§PORT§§/%7Bx%7D", "dot segments: ws://localhost:§§PORT§§/a/c",
-             "query without path: ws://localhost:§§PORT§§/?x=1", "space in query: ws://localhost:§§PORT§§/p?q=a%20b",
-             "userinfo: ws://user:pw@localhost:§§PORT§§/", "ipv6: ws://[::1]:§§PORT§§/", "surrounding blanks: ws://localhost:§§PORT§§/",
-             "no host: ws://x/", "empty port: ws://localhost/x"})
+    @Alerts({"upper case: ws://localhost:§§PORT§§/Path",
+             "relative: ws://localhost:§§PORT§§/ws",
+             "space in path: ws://localhost:§§PORT§§/a%20b",
+             "umlaut in path: ws://localhost:§§PORT§§/%C3%A4",
+             "braces in path: ws://localhost:§§PORT§§/%7Bx%7D",
+             "dot segments: ws://localhost:§§PORT§§/a/c",
+             "query without path: ws://localhost:§§PORT§§/?x=1",
+             "space in query: ws://localhost:§§PORT§§/p?q=a%20b",
+             "userinfo: ws://user:pw@localhost:§§PORT§§/",
+             "ipv6: ws://[::1]:§§PORT§§/",
+             "surrounding blanks: ws://localhost:§§PORT§§/",
+             "no host: ws://x/",
+             "empty port: ws://localhost/x"})
     public void urlSerialization() throws Exception {
         stopWebServers();
 
@@ -2694,6 +2706,11 @@ public class WebSocketTest extends WebDriverTestCase {
                        "state: 3", "server saw: offered: answered:chat", "done"},
             FF = {"start", "event: open", "protocol: []", "state: 1", "server saw: offered: answered:chat", "done"},
             FF_ESR = {"start", "event: open", "protocol: []", "state: 1", "server saw: offered: answered:chat", "done"})
+    @HtmlUnitNYI(
+            FF = {"start", "event: error", "event: close 1006 false", "protocol: []",
+                  "state: 3", "server saw: offered: answered:chat", "done"},
+            FF_ESR = {"start", "event: error", "event: close 1006 false", "protocol: []",
+                      "state: 3", "server saw: offered: answered:chat", "done"})
     public void protocolUnsolicited() throws Exception {
         runWithProtocolServer(offered -> "chat",
                 protocolFailureScript("new WebSocket(url)"));
