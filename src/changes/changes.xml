@@ -8,6 +8,21 @@
 
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
+            <action type="fix" dev="quantmode">
+                neko: Fix stack overflow when noframes tag precedes the html tag.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fixed calculation of the 'inNewExpr' parameter of generic varargs ctor methods.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Place the parameter of the redeclaration messages in quotes to make the msg more clear.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix for race with the GC when bootstrapping call site.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Symbol.keyFor() must throw a TypeError when its argument is not a Symbol value.
+            </action>
             <action type="update" dev="rbri">
                 WebSocket improved parameter check at construction.
             </action>
