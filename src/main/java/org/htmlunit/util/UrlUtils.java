@@ -737,7 +737,7 @@ public final class UrlUtils {
                 final char c = spec.charAt(i);
                 boolean remove = false;
 
-                if (c == '\t' | c == '\r' | c == '\n') {
+                if (c == '\t' || c == '\r' || c == '\n') {
                     remove = true;
                 }
                 else if ('\u0000' <= c && c <= '\u0020') {
