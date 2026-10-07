@@ -35,6 +35,8 @@ import org.htmlunit.jetty.util.ssl.SslContextFactory;
 import org.htmlunit.jetty.websocket.api.Callback;
 import org.htmlunit.jetty.websocket.api.Session;
 import org.htmlunit.jetty.websocket.api.Session.Listener.AutoDemanding;
+import org.htmlunit.jetty.websocket.api.UpgradeResponse;
+import org.htmlunit.jetty.websocket.client.ClientUpgradeRequest;
 import org.htmlunit.jetty.websocket.client.WebSocketClient;
 
 /**
@@ -183,20 +185,55 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
     @Override
     public void connect(final URI url) throws Exception {
         synchronized (clientLock_) {
-            final CompletableFuture<Session> connectFuture = client_.connect(new JettyWebSocketAdapterImpl(), url);
-            client_.getExecutor().execute(() -> {
-                try {
-                    listener_.onWebSocketConnecting();
-                    incomingSession_ = connectFuture.get();
-                }
-                catch (final Exception e) {
-                    if (!(e instanceof ExecutionException)
-                            || !(e.getCause() instanceof AsynchronousCloseException)) {
-                        listener_.onWebSocketConnectError(e);
-                    }
-                }
-            });
+            listenForConnect(client_.connect(new JettyWebSocketAdapterImpl(), url));
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void connect(final URI url, final List<String> protocols) throws Exception {
+        if (protocols.isEmpty()) {
+            connect(url);
+            return;
+        }
+
+        synchronized (clientLock_) {
+            final ClientUpgradeRequest request = new ClientUpgradeRequest();
+            request.setSubProtocols(protocols);
+            listenForConnect(client_.connect(new JettyWebSocketAdapterImpl(), url, request));
+        }
+    }
+
+    private void listenForConnect(final CompletableFuture<Session> connectFuture) {
+        client_.getExecutor().execute(() -> {
+            try {
+                listener_.onWebSocketConnecting();
+                incomingSession_ = connectFuture.get();
+            }
+            catch (final Exception e) {
+                if (!(e instanceof ExecutionException)
+                        || !(e.getCause() instanceof AsynchronousCloseException)) {
+                    listener_.onWebSocketConnectError(e);
+                }
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSelectedProtocol() {
+        final Session session = outgoingSession_;
+        if (session == null) {
+            return "";
+        }
+
+        final UpgradeResponse response = session.getUpgradeResponse();
+        final String protocol = response == null ? null : response.getAcceptedSubProtocol();
+        return protocol == null ? "" : protocol;
     }
 
     /**

@@ -16,15 +16,28 @@ package org.htmlunit.javascript.host;
 
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.websocket.api.Callback;
@@ -53,6 +66,11 @@ import jakarta.servlet.Servlet;
  * @author Madis Pärn
  */
 public class WebSocketTest extends WebDriverTestCase {
+    /**
+     * How long a test script waits for an event before it reports what it has (the JS variable backstop). It has
+     * to stay clearly below the time verifyTitle2 waits, otherwise a slow browser shows a truncated result.
+     */
+    private static final int PROTOCOL_TEST_BACKSTOP_MS = 500;
 
     /**
      * @throws Exception if the test fails
@@ -2441,6 +2459,437 @@ public class WebSocketTest extends WebDriverTestCase {
                         drain();
                     },
                     error -> sending_.set(false)));
+        }
+    }
+
+    /**
+     * Starts a {@link ProtocolServer} that answers with the protocol the selector returns for the offered ones
+     * ({@code null} means no Sec-WebSocket-Protocol header at all), loads a page with the given script and
+     * verifies the logged title. The script has to define test(); the JS variables url and reportUrl point
+     * to the server (reportUrl is the connection that asks the server what it saw).
+     *
+     * @param selector the protocol selection of the server
+     * @param script the JS code of the page
+     * @throws Exception in case of failure
+     */
+    private void runWithProtocolServer(final Function<List<String>, String> selector, final String script)
+            throws Exception {
+        stopWebServers();
+
+        try (ProtocolServer server = new ProtocolServer(selector)) {
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var url = 'ws://localhost:" + server.getPort() + "/';\n"
+                + "  var reportUrl = 'ws://localhost:" + server.getPort() + "/report';\n"
+                + script
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            try {
+                final WebDriver driver = loadPage2(html);
+                verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
+            }
+            catch (final Exception | Error e) {
+                // tell a technical problem from a wrong behaviour
+                if (server.getHandshakeCount() < 1) {
+                    final AssertionError error = new AssertionError("technical problem: the test server on port "
+                            + server.getPort() + " has not seen a single handshake, the page never connected");
+                    error.addSuppressed(e);
+                    throw error;
+                }
+                throw e;
+            }
+
+            if (server.getHandshakeCount() < 1) {
+                throw new AssertionError("technical problem: the test server on port " + server.getPort()
+                        + " has not seen a single handshake, the page never connected");
+            }
+        }
+    }
+
+    /**
+     * The script of a test whose connection is expected to be established: logs what the client sees and
+     * what the server was offered (first message of the server), then closes. The last line is always "done", the
+     * line before shows how the test ended: "closed" after the closing handshake or "timeout" if it did not
+     * complete within the backstop, which is a difference in behaviour and no technical problem.
+     */
+    private static String protocolSuccessScript(final String constructor) {
+        return "  var backstop = " + PROTOCOL_TEST_BACKSTOP_MS + ";\n"
+                + "  var finished = false;\n"
+                + "  function finish(reason) {\n"
+                + "    if (finished) {\n"
+                + "      return;\n"
+                + "    }\n"
+                + "    finished = true;\n"
+                + "    log(reason);\n"
+                + "    log('done');\n"
+                + "  }\n"
+                + "  function test() {\n"
+                + "    log('start');\n"
+                + "    var ws = " + constructor + ";\n"
+                + "    log('before open: [' + ws.protocol + ']');\n"
+                + "    ws.onopen = function() {\n"
+                + "      log('open: [' + ws.protocol + ']');\n"
+                + "    };\n"
+                + "    ws.onmessage = function(e) {\n"
+                + "      log(e.data);\n"
+                + "      ws.close();\n"
+                + "    };\n"
+                + "    ws.onclose = function() {\n"
+                + "      finish('closed');\n"
+                + "    };\n"
+                + "    setTimeout(function() {\n"
+                + "      finish('timeout');\n"
+                + "    }, backstop);\n"
+                + "  }\n";
+    }
+
+    /**
+     * The script of a test whose connection is expected to fail. Every event is logged the moment it happens, so
+     * even a truncated result shows what the browser did (an open event means the connection was accepted, no
+     * event at all means the browser is still waiting). The summary follows 300 ms after the close event, or after
+     * the backstop if there is none, and then what the server says it saw, read through a second connection; if that
+     * one does not connect within the backstop, this is logged instead. The last line is always "done".
+     */
+    private static String protocolFailureScript(final String constructor) {
+        return "  var backstop = " + PROTOCOL_TEST_BACKSTOP_MS + ";\n"
+                + "  var finished = false;\n"
+                + "  var probeFinished = false;\n"
+                + "  function finishProbe(text) {\n"
+                + "    if (probeFinished) {\n"
+                + "      return;\n"
+                + "    }\n"
+                + "    probeFinished = true;\n"
+                + "    if (text) {\n"
+                + "      log(text);\n"
+                + "    }\n"
+                + "    log('done');\n"
+                + "  }\n"
+                + "  function test() {\n"
+                + "    log('start');\n"
+                + "    var ws = " + constructor + ";\n"
+                + "    function finish() {\n"
+                + "      if (finished) {\n"
+                + "        return;\n"
+                + "      }\n"
+                + "      finished = true;\n"
+                + "      log('protocol: [' + ws.protocol + ']');\n"
+                + "      log('state: ' + ws.readyState);\n"
+                + "      var probe = new WebSocket(reportUrl);\n"
+                + "      probe.onmessage = function(e) {\n"
+                + "        log('server saw: ' + e.data);\n"
+                + "        probe.close();\n"
+                + "      };\n"
+                + "      probe.onclose = function() {\n"
+                + "        finishProbe();\n"
+                + "      };\n"
+                + "      setTimeout(function() {\n"
+                + "        finishProbe('server saw: no answer');\n"
+                + "      }, backstop);\n"
+                + "    }\n"
+                + "    ws.onopen = function() {\n"
+                + "      log('event: open');\n"
+                + "    };\n"
+                + "    ws.onerror = function() {\n"
+                + "      log('event: error');\n"
+                + "    };\n"
+                + "    ws.onclose = function(e) {\n"
+                + "      log('event: close ' + e.code + ' ' + e.wasClean);\n"
+                + "      setTimeout(finish, 300);\n"
+                + "    };\n"
+                + "    setTimeout(finish, backstop);\n"
+                + "  }\n";
+    }
+
+    /**
+     * Two offered protocols, the server selects the second one: it has to show up in protocol, but not before the
+     * connection is open.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"start", "before open: []", "open: [superchat]", "offered:chat|superchat answered:superchat", "closed", "done"})
+    public void protocolSelected() throws Exception {
+        runWithProtocolServer(offered -> offered.contains("superchat") ? "superchat" : null,
+                protocolSuccessScript("new WebSocket(url, ['chat', 'superchat'])"));
+    }
+
+    /**
+     * The protocols argument may be a single string.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"start", "before open: []", "open: [chat]", "offered:chat answered:chat", "closed", "done"})
+    public void protocolSelectedStringArgument() throws Exception {
+        runWithProtocolServer(offered -> offered.isEmpty() ? null : offered.get(0),
+                protocolSuccessScript("new WebSocket(url, 'chat')"));
+    }
+
+    /**
+     * The server does not select any of the offered protocols: the connection is still established and
+     * protocol stays empty.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"start", "before open: []", "closed", "done"},
+            FF = {"start", "before open: []", "open: []", "offered:chat|superchat answered:none", "closed", "done"},
+            FF_ESR = {"start", "before open: []", "open: []", "offered:chat|superchat answered:none", "closed", "done"})
+    @HtmlUnitNYI(
+            CHROME = {"start", "before open: []", "open: []", "offered:chat|superchat answered:none", "closed", "done"},
+            EDGE = {"start", "before open: []", "open: []", "offered:chat|superchat answered:none", "closed", "done"})
+    public void protocolNoneSelected() throws Exception {
+        runWithProtocolServer(offered -> null,
+                protocolSuccessScript("new WebSocket(url, ['chat', 'superchat'])"));
+    }
+
+    /**
+     * No protocols offered: the handshake must not contain the header at all (the server reports an empty list).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"start", "before open: []", "open: []", "offered: answered:none", "closed", "done"})
+    public void protocolNothingOffered() throws Exception {
+        runWithProtocolServer(offered -> null,
+                protocolSuccessScript("new WebSocket(url)"));
+    }
+
+    /**
+     * An empty array offers nothing either.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"start", "before open: []", "open: []", "offered: answered:none", "closed", "done"})
+    public void protocolEmptyArrayOffered() throws Exception {
+        runWithProtocolServer(offered -> null,
+                protocolSuccessScript("new WebSocket(url, [])"));
+    }
+
+    /**
+     * The server selects a protocol that was not offered: the connection has to fail (error, then close 1006,
+     * never open) and protocol stays empty. The last line shows what the server was offered and what it
+     * answered, so the failure is known to be caused by the mismatch.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"start", "event: error", "event: close 1006 false", "protocol: []",
+             "state: 3", "server saw: offered:chat answered:other", "done"})
+    public void protocolNotOffered() throws Exception {
+        runWithProtocolServer(offered -> "other",
+                protocolFailureScript("new WebSocket(url, 'chat')"));
+    }
+
+    /**
+     * The server selects a protocol although none was offered: the connection has to fail.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"start", "event: error", "event: close 1006 false", "protocol: []",
+                       "state: 3", "server saw: offered: answered:chat", "done"},
+            FF = {"start", "event: open", "protocol: []", "state: 1", "server saw: offered: answered:chat", "done"},
+            FF_ESR = {"start", "event: open", "protocol: []", "state: 1", "server saw: offered: answered:chat", "done"})
+    public void protocolUnsolicited() throws Exception {
+        runWithProtocolServer(offered -> "chat",
+                protocolFailureScript("new WebSocket(url)"));
+    }
+
+    /**
+     * Protocol names are compared case sensitive: offering Chat and getting chat back fails the connection.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"start", "event: error", "event: close 1006 false", "protocol: []",
+             "state: 3", "server saw: offered:Chat answered:chat", "done"})
+    public void protocolCaseSensitive() throws Exception {
+        runWithProtocolServer(offered -> "chat",
+                protocolFailureScript("new WebSocket(url, 'Chat')"));
+    }
+
+    /**
+     * A minimal WebSocket server that does the handshake by hand, so a test decides what is answered in the
+     * Sec-WebSocket-Protocol header. It remembers what the last handshake looked like. After the handshake of a
+     * normal connection it sends one text message, "offered:" plus the offered protocols joined with "|" and
+     * " answered:" plus the protocol it selected (none if it sent no header). A connection to /report gets
+     * the same summary of the last normal handshake instead. The close frame of the client is
+     * answered.
+     */
+    private static final class ProtocolServer implements AutoCloseable {
+        private static final String GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+
+        private final ServerSocket serverSocket_;
+        private final Function<List<String>, String> selector_;
+        private final AtomicInteger handshakes_ = new AtomicInteger();
+        private volatile String lastSummary_ = "no handshake";
+
+        ProtocolServer(final Function<List<String>, String> selector) throws IOException {
+            selector_ = selector;
+            serverSocket_ = new ServerSocket(0);
+
+            final Thread acceptor = new Thread(() -> {
+                try {
+                    while (true) {
+                        final Socket socket = serverSocket_.accept();
+                        final Thread handler = new Thread(() -> serve(socket));
+                        handler.setDaemon(true);
+                        handler.start();
+                    }
+                }
+                catch (final IOException e) {
+                    // the server socket was closed
+                }
+            });
+            acceptor.setDaemon(true);
+            acceptor.start();
+        }
+
+        int getPort() {
+            return serverSocket_.getLocalPort();
+        }
+
+        /**
+         * @return the number of normal handshakes, the connections to /report not counted
+         */
+        int getHandshakeCount() {
+            return handshakes_.get();
+        }
+
+        @Override
+        public void close() throws IOException {
+            serverSocket_.close();
+        }
+
+        private void serve(final Socket socket) {
+            try (Socket client = socket) {
+                final InputStream in = new BufferedInputStream(client.getInputStream());
+                final OutputStream out = client.getOutputStream();
+
+                final String requestLine = readLine(in);
+                if (requestLine == null) {
+                    return;
+                }
+                final String[] requestParts = requestLine.split(" ");
+                final boolean report = requestParts.length > 1 && "/report".equals(requestParts[1]);
+
+                String key = null;
+                final List<String> offered = new ArrayList<>();
+                String line = readLine(in);
+                while (line != null && !line.isEmpty()) {
+                    final int colon = line.indexOf(':');
+                    if (colon > 0) {
+                        final String name = line.substring(0, colon).trim();
+                        final String value = line.substring(colon + 1).trim();
+                        if ("Sec-WebSocket-Key".equalsIgnoreCase(name)) {
+                            key = value;
+                        }
+                        else if ("Sec-WebSocket-Protocol".equalsIgnoreCase(name)) {
+                            for (final String protocol : value.split(",")) {
+                                if (!protocol.trim().isEmpty()) {
+                                    offered.add(protocol.trim());
+                                }
+                            }
+                        }
+                    }
+                    line = readLine(in);
+                }
+                if (key == null) {
+                    return;
+                }
+
+                final String selected = report ? null : selector_.apply(offered);
+                final String accept = Base64.getEncoder().encodeToString(
+                        MessageDigest.getInstance("SHA-1").digest((key + GUID).getBytes(StandardCharsets.ISO_8859_1)));
+
+                final StringBuilder response = new StringBuilder("HTTP/1.1 101 Switching Protocols\r\n")
+                        .append("Upgrade: websocket\r\n")
+                        .append("Connection: Upgrade\r\n")
+                        .append("Sec-WebSocket-Accept: ").append(accept).append("\r\n");
+                if (selected != null) {
+                    response.append("Sec-WebSocket-Protocol: ").append(selected).append("\r\n");
+                }
+                response.append("\r\n");
+                out.write(response.toString().getBytes(StandardCharsets.ISO_8859_1));
+
+                final String summary = "offered:" + String.join("|", offered)
+                        + " answered:" + (selected == null ? "none" : selected);
+                final String message;
+                if (report) {
+                    message = lastSummary_;
+                }
+                else {
+                    lastSummary_ = summary;
+                    handshakes_.incrementAndGet();
+                    message = summary;
+                }
+                writeTextFrame(out, message);
+
+                // answer the close frame of the client, ignore everything else
+                while (true) {
+                    final int first = in.read();
+                    final int second = in.read();
+                    if (first < 0 || second < 0) {
+                        return;
+                    }
+
+                    long length = second & 0x7f;
+                    if (length == 126) {
+                        length = (in.read() << 8) | in.read();
+                    }
+                    else if (length == 127) {
+                        length = 0;
+                        for (int i = 0; i < 8; i++) {
+                            length = (length << 8) | in.read();
+                        }
+                    }
+                    if ((second & 0x80) != 0) {
+                        in.readNBytes(4);
+                    }
+                    in.readNBytes((int) length);
+
+                    if ((first & 0x0f) == 8) {
+                        out.write(0x88);
+                        out.write(0);
+                        out.flush();
+                        return;
+                    }
+                }
+            }
+            catch (final Exception e) {
+                // the client went away
+            }
+        }
+
+        private static void writeTextFrame(final OutputStream out, final String text) throws IOException {
+            final byte[] payload = text.getBytes(StandardCharsets.UTF_8);
+            out.write(0x81);
+            if (payload.length < 126) {
+                out.write(payload.length);
+            }
+            else {
+                out.write(126);
+                out.write(payload.length >> 8);
+                out.write(payload.length & 0xff);
+            }
+            out.write(payload);
+            out.flush();
+        }
+
+        private static String readLine(final InputStream in) throws IOException {
+            final StringBuilder line = new StringBuilder();
+            int c = in.read();
+            while (c >= 0 && c != '\n') {
+                if (c != '\r') {
+                    line.append((char) c);
+                }
+                c = in.read();
+            }
+            return c < 0 && line.length() == 0 ? null : line.toString();
         }
     }
 }

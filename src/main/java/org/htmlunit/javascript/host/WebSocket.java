@@ -108,6 +108,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     private HtmlPage containingPage_;
     private WebSocketAdapter webSocketImpl_;
+
+    // the sub-protocols offered in the handshake, and the one the server selected
+    private final List<String> requestedProtocols_;
+    private volatile String protocol_ = "";
     private boolean originSet_;
 
     /**
@@ -115,6 +119,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     public WebSocket() {
         super();
+        requestedProtocols_ = null;
     }
 
     /**
@@ -124,8 +129,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * @param scope the scope
      * @param window the top-level window
      */
-    private WebSocket(final String url, final VarScope scope, final Window window) {
+    private WebSocket(final String url, final List<String> protocols, final VarScope scope,
+            final Window window) {
         super();
+        requestedProtocols_ = protocols;
         try {
             final WebWindow webWindow = window.getWebWindow();
             containingPage_ = (HtmlPage) webWindow.getEnclosedPage();
@@ -145,27 +152,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                 @Override
                 public void onWebSocketOpen() {
-                    if (!switchToOpen()) {
-                        // close() was called while the handshake was in flight: the connection must
-                        // not stay open (the first shutdown may have run before there was a session)
-                        // and no open event is fired
-                        shutdownAdapter();
-                        return;
-                    }
-
-                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
-                    if (engine != null) {
-                        engine.getContextFactory().call(cx -> {
-                            final Event openEvent = new Event(Event.TYPE_OPEN);
-                            openEvent.setParentScope(scope);
-                            openEvent.setPrototype(getPrototype(openEvent.getClass()));
-                            openEvent.setSrcElement(WebSocket.this);
-                            openEvent.setTarget(WebSocket.this);
-                            executeEventLocally(openEvent);
-
-                            return null;
-                        });
-                    }
+                    connectionOpened();
                 }
 
                 @Override
@@ -280,7 +267,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             containingPage_.addAutoCloseable(this);
             url_ = new URI(url);
 
-            webSocketImpl_.connect(url_);
+            webSocketImpl_.connect(url_, requestedProtocols_);
         }
         catch (final Exception e) {
             if (LOG.isErrorEnabled()) {
@@ -363,7 +350,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     DOMException.SYNTAX_ERR);
         }
 
-        return new WebSocket(urlString, getTopLevelScope(scope), win);
+        return new WebSocket(urlString, List.copyOf(protocols), getTopLevelScope(scope), win);
     }
 
     /**
@@ -767,6 +754,54 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
+     * The handshake is finished: checks the sub-protocol the server selected, switches to OPEN and fires the
+     * open event. A server that selects a protocol that was not offered makes the connection fail.
+     */
+    private void connectionOpened() {
+        String selected = webSocketImpl_.getSelectedProtocol();
+        if (selected == null) {
+            selected = "";
+        }
+
+        if (!selected.isEmpty() && !requestedProtocols_.contains(selected)) {
+            // the connection fails (error + close 1006) and must not stay open; the server is told about
+            // the protocol error (1002)
+            closeSessions(1002, "");
+            connectionEnded(1006, "", true);
+            return;
+        }
+
+        if (!switchToOpen()) {
+            // close() was called while the handshake was in flight: the connection must not stay open
+            // (the first shutdown may have run before there was a session) and no open event is fired
+            shutdownAdapter();
+            return;
+        }
+
+        // set before the open event, the handlers read it
+        protocol_ = selected;
+        fireOpenEvent();
+    }
+
+    private void fireOpenEvent() {
+        final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+        if (engine == null) {
+            return;
+        }
+
+        engine.getContextFactory().call(cx -> {
+            final Event openEvent = new Event(Event.TYPE_OPEN);
+            openEvent.setParentScope(getParentScope());
+            openEvent.setPrototype(getPrototype(openEvent.getClass()));
+            openEvent.setSrcElement(WebSocket.this);
+            openEvent.setTarget(WebSocket.this);
+            executeEventLocally(openEvent);
+
+            return null;
+        });
+    }
+
+    /**
      * Ends the connection: switches to CLOSED and fires the close event (preceded by an error event if the
      * connection failed). May be called from any thread and any number of times, only the first call fires.
      * A connection that never was established, or that was aborted by close() while connecting, has failed
@@ -866,7 +901,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxGetter
     public String getProtocol() {
-        return "";
+        return protocol_;
     }
 
     /**
