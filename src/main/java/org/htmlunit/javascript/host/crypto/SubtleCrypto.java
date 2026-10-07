@@ -875,12 +875,14 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             throw new IllegalArgumentException("An invalid or illegal string was specified");
         }
         if (data instanceof NativeArrayBuffer nativeBuffer) {
-            return ByteBuffer.wrap(nativeBuffer.getBuffer());
+            return nativeBuffer.getByteBuffer();
         }
         else if (data instanceof NativeArrayBufferView arrayBufferView) {
-            final NativeArrayBuffer arrayBuffer = arrayBufferView.getBuffer();
-            return ByteBuffer.wrap(
-                    arrayBuffer.getBuffer(), arrayBufferView.getByteOffset(), arrayBufferView.getByteLength());
+            return arrayBufferView.getBuffer()
+                    .getByteBuffer()
+                    .position(arrayBufferView.getByteOffset())
+                    .limit(arrayBufferView.getByteOffset() + arrayBufferView.getByteLength())
+                    .slice();
         }
         else {
             throw JavaScriptEngine.typeError(
@@ -910,7 +912,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      */
     NativeArrayBuffer createArrayBuffer(final byte[] data) {
         final NativeArrayBuffer buffer = new NativeArrayBuffer(data.length);
-        System.arraycopy(data, 0, buffer.getBuffer(), 0, data.length);
+        buffer.getByteBuffer().put(data);
         buffer.setParentScope(getParentScope());
         buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), buffer.getClassName()));
         return buffer;

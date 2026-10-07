@@ -20,7 +20,6 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -217,7 +216,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                             }
                             else {
                                 final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
-                                payload.get(buffer.getBuffer());
+                                buffer.getByteBuffer().put(payload);
 
                                 buffer.setParentScope(getParentScope());
                                 buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
@@ -721,11 +720,17 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     private static byte[] copyOfBinaryData(final Object content) {
         if (content instanceof NativeArrayBuffer buffer) {
-            return buffer.getBuffer().clone();
+            final ByteBuffer bb = buffer.getByteBuffer();
+            final byte[] bytes = new byte[bb.remaining()];
+            bb.get(bytes);
+            return bytes;
         }
         if (content instanceof NativeArrayBufferView view) {
-            final int offset = view.getByteOffset();
-            return Arrays.copyOfRange(view.getBuffer().getBuffer(), offset, offset + view.getByteLength());
+            final ByteBuffer bb = view.getBuffer().getByteBuffer();
+            final byte[] bytes = new byte[view.getByteLength()];
+            bb.position(view.getByteOffset());
+            bb.get(bytes, 0, view.getByteLength());
+            return bytes;
         }
         if (content instanceof Blob blob) {
             return blob.getBytes().clone();

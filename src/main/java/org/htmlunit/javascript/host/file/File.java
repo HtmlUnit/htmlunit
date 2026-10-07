@@ -118,9 +118,11 @@ public class File extends Blob {
      * @param fileBits the bits
      * @param fileName the Name
      * @param properties the properties
+     * @throws IOException in case of error
      */
     @JsxConstructor
-    public void jsConstructor(final NativeArray fileBits, final String fileName, final ScriptableObject properties) {
+    public void jsConstructor(final NativeArray fileBits, final String fileName,
+            final ScriptableObject properties) throws IOException {
         if (fileBits == null
                 || JavaScriptEngine.isUndefined(fileBits)
                 || fileName == null

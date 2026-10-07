@@ -345,12 +345,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         // gzip content and the unzipped content is larger
                         if (newLength > contentLength) {
                             final NativeArrayBuffer expanded = new NativeArrayBuffer(newLength);
-                            System.arraycopy(nativeArrayBuffer.getBuffer(), 0,
-                                    expanded.getBuffer(), 0, (int) contentLength);
+                            expanded.getByteBuffer().put(0, nativeArrayBuffer.getByteBuffer(), 0, (int) contentLength);
                             contentLength = newLength;
                             nativeArrayBuffer = expanded;
                         }
-                        System.arraycopy(buffer, 0, nativeArrayBuffer.getBuffer(), offset, readLen);
+
+                        // Copy the newly read chunk into the buffer at the specified offset
+                        nativeArrayBuffer.getByteBuffer().put(offset, buffer, 0, readLen);
                         offset = (int) newLength;
                     }
                 }
@@ -358,7 +359,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 // for small responses the gzipped content might be larger than the original
                 if (offset < contentLength) {
                     final NativeArrayBuffer shrinked = new NativeArrayBuffer(offset);
-                    System.arraycopy(nativeArrayBuffer.getBuffer(), 0, shrinked.getBuffer(), 0, offset);
+                    shrinked.getByteBuffer().put(0, nativeArrayBuffer.getByteBuffer(), 0, offset);
                     nativeArrayBuffer = shrinked;
                 }
 
@@ -911,7 +912,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 data.fillRequest(webRequest_);
             }
             else if (content instanceof NativeArrayBufferView view) {
-                webRequest_.setRequestBody(new String(view.getBuffer().getBuffer(), UTF_8));
+                webRequest_.setRequestBody(
+                        UTF_8.decode(
+                            view.getBuffer()
+                                .getByteBuffer()
+                                .position(view.getByteOffset())
+                                .limit(view.getByteOffset() + view.getByteLength())
+                        ).toString());
                 if (setEncodingType) {
                     webRequest_.setEncodingType(null);
                 }

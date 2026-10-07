@@ -15,6 +15,7 @@
 package org.htmlunit.platform.canvas.rendering;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -205,7 +206,7 @@ public class NoOpRenderingBackend implements RenderingBackend {
      */
     @Override
     public void putImageData(
-            final byte[] imageDataBytes, final int imageDataHeight, final int imageDataWidth,
+            final ByteBuffer imageDataBytes, final int imageDataHeight, final int imageDataWidth,
             final int dx, final int dy, final int dirtyX, final int dirtyY,
             final int dirtyWidth, final int dirtyHeight) {
 

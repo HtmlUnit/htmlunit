@@ -14,8 +14,8 @@
  */
 package org.htmlunit.javascript.host;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.Locale;
 
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
@@ -87,18 +87,19 @@ public class TextDecoder extends HtmlUnitScriptable {
             return "";
         }
 
+        final Charset charset = getEncoding(whatwgEncoding_);
+
         if (buffer instanceof NativeArrayBuffer arrayBuffer) {
-            return new String(arrayBuffer.getBuffer(), getEncoding(whatwgEncoding_));
+            return charset.decode(arrayBuffer.getByteBuffer()).toString();
         }
 
         if (buffer instanceof NativeArrayBufferView arrayBufferView) {
             final NativeArrayBuffer arrayBuffer = arrayBufferView.getBuffer();
             if (arrayBuffer != null) {
-                final int byteLength = arrayBufferView.getByteLength();
-                final int byteOffset = arrayBufferView.getByteOffset();
-                final byte[] backedBytes = arrayBuffer.getBuffer();
-                final byte[] bytes = Arrays.copyOfRange(backedBytes, byteOffset, byteOffset + byteLength);
-                return new String(bytes, getEncoding(whatwgEncoding_));
+                final ByteBuffer bb = arrayBuffer.getByteBuffer();
+                bb.position(arrayBufferView.getByteOffset());
+                bb.limit(arrayBufferView.getByteOffset() + arrayBufferView.getByteLength());
+                return charset.decode(bb).toString();
             }
         }
 

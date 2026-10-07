@@ -1435,7 +1435,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public static NativeUint8Array newUint8Array(final VarScope scope, final byte[] elements) {
         final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(elements.length);
         ScriptRuntime.setBuiltinProtoAndParent(arrayBuffer, scope, TopLevel.Builtins.ArrayBuffer);
-        System.arraycopy(elements, 0, arrayBuffer.getBuffer(), 0, elements.length);
+        arrayBuffer.getByteBuffer().put(elements);
 
         final NativeUint8Array uint8Array = new NativeUint8Array(arrayBuffer, 0, elements.length);
         ScriptRuntime.setBuiltinProtoAndParent(uint8Array, scope, TopLevel.Builtins.Uint8Array);

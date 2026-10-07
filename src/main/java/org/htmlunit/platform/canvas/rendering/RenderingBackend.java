@@ -15,6 +15,7 @@
 package org.htmlunit.platform.canvas.rendering;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 import org.htmlunit.javascript.host.canvas.Path2D;
 
@@ -215,7 +216,7 @@ public interface RenderingBackend {
      * @param dirtyHeight height of the rectangle to be painted.
      *        Defaults to the height of the image data.
      */
-    void putImageData(byte[] imageDataBytes, int imageDataWidth, int imageDataHeight,
+    void putImageData(ByteBuffer imageDataBytes, int imageDataWidth, int imageDataHeight,
             int dx, int dy, int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight);
 
     /**

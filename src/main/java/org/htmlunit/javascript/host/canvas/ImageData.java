@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host.canvas;
 
+import java.nio.ByteBuffer;
+
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -121,8 +123,9 @@ public class ImageData extends HtmlUnitScriptable {
 
         final ImageData result = new ImageData(null, 0, 0, width, height);
         if (data != null) {
-            final byte[] bytes = data.getBuffer().getBuffer();
-            System.arraycopy(bytes, 0, result.bytes_, 0, Math.min(bytes.length, result.bytes_.length));
+            final ByteBuffer buffer = data.getBuffer().getByteBuffer();
+            final int bytesToCopy = Math.min(buffer.remaining(), result.bytes_.length);
+            buffer.get(result.bytes_, 0, bytesToCopy);
         }
         return result;
     }
@@ -167,7 +170,7 @@ public class ImageData extends HtmlUnitScriptable {
     public NativeUint8ClampedArray getData() {
         if (data_ == null) {
             final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(bytes_.length);
-            System.arraycopy(bytes_, 0, arrayBuffer.getBuffer(), 0, bytes_.length);
+            arrayBuffer.getByteBuffer().put(bytes_);
 
             data_ = new NativeUint8ClampedArray(arrayBuffer, 0, bytes_.length);
             data_.setParentScope(getParentScope());
