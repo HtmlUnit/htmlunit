@@ -98,6 +98,24 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /** The status code for "no status code": the close frame is sent without any. */
     private static final int NO_STATUS_CODE = 1005;
 
+    /** The status code of a normal closure. */
+    private static final int CLOSE_NORMAL = 1000;
+
+    /** The status code sent when the server violated the protocol, e.g. selected a sub-protocol nobody offered. */
+    private static final int CLOSE_PROTOCOL_ERROR = 1002;
+
+    /** The status code reported locally for a connection that was lost or failed; it is never sent. */
+    private static final int CLOSE_ABNORMAL = 1006;
+
+    /** The status code reported locally for a failed TLS handshake; it is never sent. */
+    private static final int CLOSE_TLS_FAILURE = 1015;
+
+    /** Returned by switchToClosing() if the connection already is CLOSING or CLOSED. */
+    private static final int NOT_CLOSABLE = -1;
+
+    /** Tells closeSessions() to close with the default status code of the adapter. */
+    private static final int DEFAULT_STATUS_CODE = -1;
+
     private final URI url_;
     private final String origin_;
 
@@ -143,109 +161,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         setDomNode(page.getDocumentElement(), false);
 
         final WebClient webClient = window.getWebWindow().getWebClient();
-        webSocketImpl_ = webClient.buildWebSocketAdapter(new WebSocketListener() {
-
-            @Override
-            public void onWebSocketConnecting() {
-                // nothing to do, CONNECTING is the initial state and is never entered again
-            }
-
-            @Override
-            public void onWebSocketOpen() {
-                connectionOpened();
-            }
-
-            @Override
-            public void onWebSocketClose(final int statusCode, final String reason) {
-                connectionEnded(statusCode, reason, false);
-            }
-
-            @Override
-            public void onWebSocketText(final String message) {
-                if (readyState_.get() != OPEN) {
-                    // messages received after close() was called are dropped
-                    return;
-                }
-
-                final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
-                if (engine != null) {
-                    engine.getContextFactory().call(cx -> {
-                        final MessageEvent msgEvent = new MessageEvent(message);
-                        msgEvent.setParentScope(scope);
-                        msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
-                        if (origin_ != null) {
-                            msgEvent.setOrigin(origin_);
-                        }
-                        msgEvent.setSrcElement(WebSocket.this);
-                        msgEvent.setTarget(WebSocket.this);
-                        executeEventLocally(msgEvent);
-
-                        return null;
-                    });
-                }
-            }
-
-            @Override
-            public void onWebSocketBinary(final ByteBuffer payload) {
-                if (readyState_.get() != OPEN) {
-                    // messages received after close() was called are dropped
-                    return;
-                }
-
-                final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
-                if (engine != null) {
-                    engine.getContextFactory().call(cx -> {
-                        final MessageEvent msgEvent;
-
-                        if ("blob".equals(binaryType_)) {
-                            final byte[] bytes = new byte[payload.remaining()];
-                            payload.get(bytes);
-                            final Blob blob = new Blob(bytes, "application/octet-stream");
-
-                            blob.setParentScope(getParentScope());
-                            blob.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
-                                                blob.getClassName()));
-
-                            msgEvent = new MessageEvent(blob);
-                        }
-                        else {
-                            final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
-                            buffer.getByteBuffer().put(payload);
-
-                            buffer.setParentScope(getParentScope());
-                            buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
-                                                    buffer.getClassName()));
-
-                            msgEvent = new MessageEvent(buffer);
-                        }
-
-                        msgEvent.setParentScope(scope);
-                        msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
-                        if (origin_ != null) {
-                            msgEvent.setOrigin(origin_);
-                        }
-                        msgEvent.setSrcElement(WebSocket.this);
-                        msgEvent.setTarget(WebSocket.this);
-                        executeEventLocally(msgEvent);
-
-                        return null;
-                    });
-                }
-            }
-
-            @Override
-            public void onWebSocketConnectError(final Throwable cause) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("WS connect error for url '" + url + "':", cause);
-                }
-                onWebSocketError(cause);
-            }
-
-            @Override
-            public void onWebSocketError(final Throwable cause) {
-                connectionEnded(1006, "", true);
-            }
-        });
+        webSocketImpl_ = webClient.buildWebSocketAdapter(new AdapterListener(scope));
 
         try {
             webSocketImpl_.start();
@@ -539,9 +455,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * Return the state that was left, or -1 if the connection already is CLOSING or CLOSED.
+     * Return the state that was left, or {@link #NOT_CLOSABLE} if the connection already is CLOSING or CLOSED.
      *
-     * @return the state that was left, or -1 if the connection already is CLOSING or CLOSED
+     * @return the state that was left, or {@link #NOT_CLOSABLE} if the connection already is CLOSING or CLOSED
      */
     private int switchToClosing() {
         int current = readyState_.get();
@@ -552,7 +468,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             }
             current = readyState_.get();
         }
-        return -1;
+        return NOT_CLOSABLE;
     }
 
     /**
@@ -573,7 +489,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * @return the value of {@code wasClean}
      */
     private static boolean wasClean(final boolean failed, final int statusCode) {
-        return !failed && statusCode != 1006 && statusCode != 1015;
+        return !failed && statusCode != CLOSE_ABNORMAL && statusCode != CLOSE_TLS_FAILURE;
     }
 
     private static boolean connectionFailed(final int previousState, final boolean reportedAsFailure) {
@@ -586,7 +502,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * @return {@code false} if this failed, so that no answer of the server has to be waited for
      */
     private boolean closeSessions() {
-        return closeSessions(-1, null);
+        return closeSessions(DEFAULT_STATUS_CODE, null);
     }
 
     /**
@@ -595,7 +511,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * is the same connection and ignores the second close.
      *
      * @param statusCode the status code of the close frame, {@link #NO_STATUS_CODE} for a close frame without
-     *        status code, or -1 for the default of the adapter
+     *        status code, or {@link #DEFAULT_STATUS_CODE} for the default of the adapter
      * @param reason the reason of the close frame
      * @return {@code false} if this failed, so that no answer of the server has to be waited for
      */
@@ -606,7 +522,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
         boolean success = true;
         try {
-            if (statusCode < 0) {
+            if (statusCode == DEFAULT_STATUS_CODE) {
                 webSocketImpl_.closeOutgoingSession();
             }
             else {
@@ -661,7 +577,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     private static boolean isValidCloseCode(final int code) {
-        return code == 1000 || (code >= 3000 && code <= 4999);
+        return code == CLOSE_NORMAL || (code >= 3000 && code <= 4999);
     }
 
     /**
@@ -782,8 +698,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         if (!selected.isEmpty() && !requestedProtocols_.contains(selected)) {
             // the connection fails (error + close 1006) and must not stay open; the server is told about
             // the protocol error (1002)
-            closeSessions(1002, "");
-            connectionEnded(1006, "", true);
+            closeSessions(CLOSE_PROTOCOL_ERROR, "");
+            connectionEnded(CLOSE_ABNORMAL, "", true);
             return;
         }
 
@@ -859,7 +775,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             final CloseEvent closeEvent = new CloseEvent();
             closeEvent.setParentScope(getParentScope());
             closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
-            closeEvent.setCode(failed ? 1006 : statusCode);
+            closeEvent.setCode(failed ? CLOSE_ABNORMAL : statusCode);
             closeEvent.setReason(failed || reason == null ? "" : reason);
             closeEvent.setWasClean(wasClean(failed, statusCode));
             closeEvent.setTarget(WebSocket.this);
@@ -997,7 +913,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @Override
     public void close() throws IOException {
         // called when the page is unloaded: whatever the state is, the client has to be released
-        if (switchToClosing() != -1) {
+        if (switchToClosing() != NOT_CLOSABLE) {
             closeSessions();
         }
         releaseClient();
@@ -1042,7 +958,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         final int previous = switchToClosing();
-        if (previous == -1) {
+        if (previous == NOT_CLOSABLE) {
             return;
         }
 
@@ -1062,7 +978,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
         // the adapter has nothing to report for a cancelled attempt: fail the connection ourselves, after
         // the running script (error + close 1006)
-        queueTask(() -> connectionEnded(1006, "", true));
+        queueTask(() -> connectionEnded(CLOSE_ABNORMAL, "", true));
     }
 
     /**
@@ -1104,6 +1020,120 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
         catch (final IOException e) {
             LOG.error("WS send error", e);
+        }
+    }
+
+    /**
+     * Bridges the callbacks of the {@link WebSocketAdapter} to this WebSocket: it switches the ready state and
+     * fires the events at the scripts. The callbacks come from the threads of the adapter.
+     */
+    private final class AdapterListener implements WebSocketListener {
+
+        private final VarScope scope_;
+
+        AdapterListener(final VarScope scope) {
+            scope_ = scope;
+        }
+
+        @Override
+        public void onWebSocketConnecting() {
+            // nothing to do, CONNECTING is the initial state and is never entered again
+        }
+
+        @Override
+        public void onWebSocketOpen() {
+            connectionOpened();
+        }
+
+        @Override
+        public void onWebSocketClose(final int statusCode, final String reason) {
+            connectionEnded(statusCode, reason, false);
+        }
+
+        @Override
+        public void onWebSocketText(final String message) {
+            if (readyState_.get() != OPEN) {
+                // messages received after close() was called are dropped
+                return;
+            }
+
+            final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+            if (engine != null) {
+                engine.getContextFactory().call(cx -> {
+                    final MessageEvent msgEvent = new MessageEvent(message);
+                    msgEvent.setParentScope(scope_);
+                    msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
+                    if (origin_ != null) {
+                        msgEvent.setOrigin(origin_);
+                    }
+                    msgEvent.setSrcElement(WebSocket.this);
+                    msgEvent.setTarget(WebSocket.this);
+                    executeEventLocally(msgEvent);
+
+                    return null;
+                });
+            }
+        }
+
+        @Override
+        public void onWebSocketBinary(final ByteBuffer payload) {
+            if (readyState_.get() != OPEN) {
+                // messages received after close() was called are dropped
+                return;
+            }
+
+            final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+            if (engine != null) {
+                engine.getContextFactory().call(cx -> {
+                    final MessageEvent msgEvent;
+
+                    if ("blob".equals(binaryType_)) {
+                        final byte[] bytes = new byte[payload.remaining()];
+                        payload.get(bytes);
+                        final Blob blob = new Blob(bytes, "application/octet-stream");
+
+                        blob.setParentScope(getParentScope());
+                        blob.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
+                                            blob.getClassName()));
+
+                        msgEvent = new MessageEvent(blob);
+                    }
+                    else {
+                        final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
+                        buffer.getByteBuffer().put(payload);
+
+                        buffer.setParentScope(getParentScope());
+                        buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
+                                                buffer.getClassName()));
+
+                        msgEvent = new MessageEvent(buffer);
+                    }
+
+                    msgEvent.setParentScope(scope_);
+                    msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
+                    if (origin_ != null) {
+                        msgEvent.setOrigin(origin_);
+                    }
+                    msgEvent.setSrcElement(WebSocket.this);
+                    msgEvent.setTarget(WebSocket.this);
+                    executeEventLocally(msgEvent);
+
+                    return null;
+                });
+            }
+        }
+
+        @Override
+        public void onWebSocketConnectError(final Throwable cause) {
+            if (LOG.isErrorEnabled()) {
+                LOG.error("WS connect error for url '" + url_ + "':", cause);
+            }
+            onWebSocketError(cause);
+        }
+
+        @Override
+        public void onWebSocketError(final Throwable cause) {
+            connectionEnded(CLOSE_ABNORMAL, "", true);
         }
     }
 }
