@@ -728,16 +728,13 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     private static byte[] copyOfBinaryData(final Object content) {
         if (content instanceof NativeArrayBuffer buffer) {
-            final ByteBuffer bb = buffer.getByteBuffer();
-            final byte[] bytes = new byte[bb.remaining()];
-            bb.get(bytes);
+            final byte[] bytes = new byte[buffer.getLength()];
+            buffer.getByteBuffer().position(0).get(bytes);
             return bytes;
         }
         if (content instanceof NativeArrayBufferView view) {
-            final ByteBuffer bb = view.getBuffer().getByteBuffer();
             final byte[] bytes = new byte[view.getByteLength()];
-            bb.position(view.getByteOffset());
-            bb.get(bytes, 0, view.getByteLength());
+            view.getBuffer().getByteBuffer().position(view.getByteOffset()).get(bytes);
             return bytes;
         }
         if (content instanceof Blob blob) {
