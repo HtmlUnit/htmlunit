@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -29,9 +30,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.Page;
 import org.htmlunit.WebClient;
-import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -99,7 +98,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /** The status code for "no status code": the close frame is sent without any. */
     private static final int NO_STATUS_CODE = 1005;
 
-    private URI url_;
+    private final URI url_;
     private final AtomicInteger readyState_ = new AtomicInteger(CONNECTING);
     // bytes handed to send() after the connection was closed; see getBufferedAmount()
     private final AtomicLong bufferedAmount_ = new AtomicLong();
@@ -119,6 +118,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     public WebSocket() {
         super();
         requestedProtocols_ = null;
+        url_ = null;
     }
 
     /**
@@ -128,152 +128,152 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * @param scope the scope
      * @param window the top-level window
      */
-    private WebSocket(final String url, final List<String> protocols, final VarScope scope,
-            final Window window) {
+    private WebSocket(final URI url, final List<String> protocols, final VarScope scope,
+            final Window window, final HtmlPage page) {
         super();
+        url_ = url;
         requestedProtocols_ = protocols;
+        containingPage_ = page;
+        originSet_ = true;
+
+        setParentScope(scope);
+        setDomNode(page.getDocumentElement(), false);
+
+        final WebClient webClient = window.getWebWindow().getWebClient();
+        webSocketImpl_ = webClient.buildWebSocketAdapter(new WebSocketListener() {
+
+            @Override
+            public void onWebSocketConnecting() {
+                // nothing to do, CONNECTING is the initial state and is never entered again
+            }
+
+            @Override
+            public void onWebSocketOpen() {
+                connectionOpened();
+            }
+
+            @Override
+            public void onWebSocketClose(final int statusCode, final String reason) {
+                connectionEnded(statusCode, reason, false);
+            }
+
+            @Override
+            public void onWebSocketText(final String message) {
+                if (readyState_.get() != OPEN) {
+                    // messages received after close() was called are dropped
+                    return;
+                }
+
+                final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+                if (engine != null) {
+                    engine.getContextFactory().call(cx -> {
+                        final MessageEvent msgEvent = new MessageEvent(message);
+                        msgEvent.setParentScope(scope);
+                        msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
+                        if (originSet_) {
+                            try {
+                                URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
+                                originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
+                                msgEvent.setOrigin(originUrl.toExternalForm());
+                            }
+                            catch (final MalformedURLException e) {
+                                // ignore
+                            }
+                        }
+                        msgEvent.setSrcElement(WebSocket.this);
+                        msgEvent.setTarget(WebSocket.this);
+                        executeEventLocally(msgEvent);
+
+                        return null;
+                    });
+                }
+            }
+
+            @Override
+            public void onWebSocketBinary(final ByteBuffer payload) {
+                if (readyState_.get() != OPEN) {
+                    // messages received after close() was called are dropped
+                    return;
+                }
+
+                final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
+                if (engine != null) {
+                    engine.getContextFactory().call(cx -> {
+                        final MessageEvent msgEvent;
+
+                        if ("blob".equals(binaryType_)) {
+                            final byte[] bytes = new byte[payload.remaining()];
+                            payload.get(bytes);
+                            final Blob blob = new Blob(bytes, "application/octet-stream");
+
+                            blob.setParentScope(getParentScope());
+                            blob.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
+                                                blob.getClassName()));
+
+                            msgEvent = new MessageEvent(blob);
+                        }
+                        else {
+                            final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
+                            buffer.getByteBuffer().put(payload);
+
+                            buffer.setParentScope(getParentScope());
+                            buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
+                                                    buffer.getClassName()));
+
+                            msgEvent = new MessageEvent(buffer);
+                        }
+
+                        msgEvent.setParentScope(scope);
+                        msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
+                        if (originSet_) {
+                            try {
+                                URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
+                                originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
+                                msgEvent.setOrigin(originUrl.toExternalForm());
+                            }
+                            catch (final MalformedURLException e) {
+                                // ignore
+                            }
+                        }
+                        msgEvent.setSrcElement(WebSocket.this);
+                        msgEvent.setTarget(WebSocket.this);
+                        executeEventLocally(msgEvent);
+
+                        return null;
+                    });
+                }
+            }
+
+            @Override
+            public void onWebSocketConnectError(final Throwable cause) {
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("WS connect error for url '" + url + "':", cause);
+                }
+                onWebSocketError(cause);
+            }
+
+            @Override
+            public void onWebSocketError(final Throwable cause) {
+                connectionEnded(1006, "", true);
+            }
+        });
+
         try {
-            final WebWindow webWindow = window.getWebWindow();
-            containingPage_ = (HtmlPage) webWindow.getEnclosedPage();
-
-            setParentScope(scope);
-            setDomNode(containingPage_.getDocumentElement(), false);
-
-            final WebClient webClient = webWindow.getWebClient();
-            originSet_ = true;
-
-            final WebSocketListener webSocketListener = new WebSocketListener() {
-
-                @Override
-                public void onWebSocketConnecting() {
-                    // nothing to do, CONNECTING is the initial state and is never entered again
-                }
-
-                @Override
-                public void onWebSocketOpen() {
-                    connectionOpened();
-                }
-
-                @Override
-                public void onWebSocketClose(final int statusCode, final String reason) {
-                    connectionEnded(statusCode, reason, false);
-                }
-
-                @Override
-                public void onWebSocketText(final String message) {
-                    if (readyState_.get() != OPEN) {
-                        // messages received after close() was called are dropped
-                        return;
-                    }
-
-                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
-                    if (engine != null) {
-                        engine.getContextFactory().call(cx -> {
-                            final MessageEvent msgEvent = new MessageEvent(message);
-                            msgEvent.setParentScope(scope);
-                            msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
-                            if (originSet_) {
-                                try {
-                                    URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
-                                    originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
-                                    msgEvent.setOrigin(originUrl.toExternalForm());
-                                }
-                                catch (final MalformedURLException e) {
-                                    // ignore
-                                }
-                            }
-                            msgEvent.setSrcElement(WebSocket.this);
-                            msgEvent.setTarget(WebSocket.this);
-                            executeEventLocally(msgEvent);
-
-                            return null;
-                        });
-                    }
-                }
-
-                @Override
-                public void onWebSocketBinary(final ByteBuffer payload) {
-                    if (readyState_.get() != OPEN) {
-                        // messages received after close() was called are dropped
-                        return;
-                    }
-
-                    final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
-                    if (engine != null) {
-                        engine.getContextFactory().call(cx -> {
-                            final MessageEvent msgEvent;
-
-                            if ("blob".equals(binaryType_)) {
-                                final byte[] bytes = new byte[payload.remaining()];
-                                payload.get(bytes);
-                                final Blob blob = new Blob(bytes, "application/octet-stream");
-
-                                blob.setParentScope(getParentScope());
-                                blob.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
-                                                    blob.getClassName()));
-
-                                msgEvent = new MessageEvent(blob);
-                            }
-                            else {
-                                final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
-                                buffer.getByteBuffer().put(payload);
-
-                                buffer.setParentScope(getParentScope());
-                                buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(),
-                                                        buffer.getClassName()));
-
-                                msgEvent = new MessageEvent(buffer);
-                            }
-
-                            msgEvent.setParentScope(scope);
-                            msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
-                            if (originSet_) {
-                                try {
-                                    URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
-                                    originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
-                                    msgEvent.setOrigin(originUrl.toExternalForm());
-                                }
-                                catch (final MalformedURLException e) {
-                                    // ignore
-                                }
-                            }
-                            msgEvent.setSrcElement(WebSocket.this);
-                            msgEvent.setTarget(WebSocket.this);
-                            executeEventLocally(msgEvent);
-
-                            return null;
-                        });
-                    }
-                }
-
-                @Override
-                public void onWebSocketConnectError(final Throwable cause) {
-                    if (LOG.isErrorEnabled()) {
-                        LOG.error("WS connect error for url '" + url + "':", cause);
-                    }
-                    onWebSocketError(cause);
-                }
-
-                @Override
-                public void onWebSocketError(final Throwable cause) {
-                    connectionEnded(1006, "", true);
-                }
-            };
-
-            webSocketImpl_ = webClient.buildWebSocketAdapter(webSocketListener);
-
             webSocketImpl_.start();
-            containingPage_.addAutoCloseable(this);
-            url_ = new URI(url);
-
             webSocketImpl_.connect(url_, requestedProtocols_);
         }
         catch (final Exception e) {
             if (LOG.isErrorEnabled()) {
-                LOG.error("WebSocket Error: 'url' parameter '" + url + "' is invalid.", e);
+                LOG.error("WebSocket Error: connecting to '" + url + "' failed.", e);
             }
-            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter '" + url + "' is invalid.");
+
+            // nothing was handed out yet, so nobody else will release the client
+            releaseClient();
+
+            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: connecting to '" + url + "' failed.");
         }
+
+        page.addAutoCloseable(this);
     }
 
     /**
@@ -302,36 +302,35 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         final Window win = getWindow(ctorObj);
+        if (!(win.getWebWindow().getEnclosedPage() instanceof HtmlPage htmlPage)) {
+            throw JavaScriptEngine.typeError("WebSocket Error: WebSocket is only available in HTML pages.");
+        }
+
         String urlString = JavaScriptEngine.toString(args[0]);
         try {
-            final Page page = win.getWebWindow().getEnclosedPage();
-            if (page instanceof HtmlPage htmlPage) {
-                URL url = htmlPage.getFullyQualifiedUrl(urlString);
+            URL url = htmlPage.getFullyQualifiedUrl(urlString);
 
-                if (url.getRef() != null) {
-                    throw JavaScriptEngine.asJavaScriptException(
-                            win,
-                            "WebSocket Error: 'url' parameter '" + urlString + "' contains a fragment identifier.",
-                            DOMException.SYNTAX_ERR);
-                }
-
-                // Per spec: only ws/wss are valid; convert http/https (relative resolution), reject everything else
-                final String scheme = url.getProtocol();
-                if ("http".equals(scheme)) {
-                    url = UrlUtils.getUrlWithNewProtocol(url, "ws");
-                }
-                else if ("https".equals(scheme)) {
-                    url = UrlUtils.getUrlWithNewProtocol(url, "wss");
-                }
-                else if (!"ws".equals(scheme) && !"wss".equals(scheme)) {
-                    throw JavaScriptEngine.asJavaScriptException(
-                            win,
-                            "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.",
-                            DOMException.SYNTAX_ERR);
-                }
-
-                urlString = url.toExternalForm();
+            if (url.getRef() != null) {
+                throw JavaScriptEngine.asJavaScriptException(win,
+                        "WebSocket Error: 'url' parameter '" + urlString + "' contains a fragment identifier.",
+                        DOMException.SYNTAX_ERR);
             }
+
+            // Per spec: only ws/wss are valid; convert http/https (relative resolution), reject everything else
+            final String scheme = url.getProtocol();
+            if ("http".equals(scheme)) {
+                url = UrlUtils.getUrlWithNewProtocol(url, "ws");
+            }
+            else if ("https".equals(scheme)) {
+                url = UrlUtils.getUrlWithNewProtocol(url, "wss");
+            }
+            else if (!"ws".equals(scheme) && !"wss".equals(scheme)) {
+                throw JavaScriptEngine.asJavaScriptException(win,
+                        "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.",
+                        DOMException.SYNTAX_ERR);
+            }
+
+            urlString = url.toExternalForm();
         }
         catch (final MalformedURLException e) {
             throw JavaScriptEngine.asJavaScriptException(
@@ -340,7 +339,16 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     DOMException.SYNTAX_ERR);
         }
 
-        // TODO send the protocols with the handshake and use the one selected by the server for protocol
+        final URI uri;
+        try {
+            uri = new URI(urlString);
+        }
+        catch (final URISyntaxException e) {
+            throw JavaScriptEngine.asJavaScriptException(win,
+                    "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.",
+                    DOMException.SYNTAX_ERR);
+        }
+
         final List<String> protocols = toProtocols(cx, scope, args.length > 1 ? args[1] : JavaScriptEngine.UNDEFINED);
         if (!areValidProtocols(protocols)) {
             throw JavaScriptEngine.asJavaScriptException(
@@ -349,7 +357,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     DOMException.SYNTAX_ERR);
         }
 
-        return new WebSocket(urlString, List.copyOf(protocols), getTopLevelScope(scope), win);
+        return new WebSocket(uri, List.copyOf(protocols), getTopLevelScope(scope), win, htmlPage);
     }
 
     /**
