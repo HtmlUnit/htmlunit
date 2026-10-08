@@ -241,11 +241,16 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      */
     @Override
     public void send(final Object content) throws IOException {
+        final Session session = outgoingSession_;
+        if (session == null) {
+            throw new IOException("WebSocket is not connected");
+        }
+
         if (content instanceof String string) {
-            outgoingSession_.sendText(string, Callback.NOOP);
+            session.sendText(string, Callback.NOOP);
         }
         else if (content instanceof ByteBuffer buffer) {
-            outgoingSession_.sendBinary(buffer, Callback.NOOP);
+            session.sendBinary(buffer, Callback.NOOP);
         }
         else {
             throw new IllegalStateException("Not Yet Implemented: WebSocket.send() was used to send non-string value");
@@ -257,8 +262,9 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      */
     @Override
     public void closeIncomingSession() {
-        if (incomingSession_ != null) {
-            incomingSession_.close();
+        final Session session = incomingSession_;
+        if (session != null) {
+            session.close();
         }
     }
 
@@ -267,8 +273,9 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      */
     @Override
     public void closeOutgoingSession() {
-        if (outgoingSession_ != null) {
-            outgoingSession_.close();
+        final Session session = outgoingSession_;
+        if (session != null) {
+            session.close();
         }
     }
 
@@ -288,14 +295,15 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      */
     @Override
     public void closeClient() throws Exception {
+        final WebSocketClient client;
         synchronized (clientLock_) {
-            if (client_ != null) {
-                client_.stop();
-                client_.destroy();
+            client = client_;
+            client_ = null;
+        }
 
-                // TODO finally ?
-                client_ = null;
-            }
+        if (client != null) {
+            client.stop();
+            client.destroy();
         }
     }
 
@@ -333,8 +341,13 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
 
         @Override
         public void onWebSocketBinary(final ByteBuffer payload, final Callback callback) {
-            listener_.onWebSocketBinary(payload);
-            callback.succeed();
+            try {
+                listener_.onWebSocketBinary(payload);
+                callback.succeed();
+            }
+            catch (final Throwable ex) {
+                callback.fail(ex);
+            }
         }
 
         @Override

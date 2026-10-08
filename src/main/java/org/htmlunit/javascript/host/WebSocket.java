@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -99,6 +99,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     private static final int NO_STATUS_CODE = 1005;
 
     private final URI url_;
+    private final String origin_;
+
     private final AtomicInteger readyState_ = new AtomicInteger(CONNECTING);
     // bytes handed to send() after the connection was closed; see getBufferedAmount()
     private final AtomicLong bufferedAmount_ = new AtomicLong();
@@ -110,7 +112,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     // the sub-protocols offered in the handshake, and the one the server selected
     private final List<String> requestedProtocols_;
     private volatile String protocol_ = "";
-    private boolean originSet_;
 
     /**
      * Creates a new instance.
@@ -119,6 +120,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         super();
         requestedProtocols_ = null;
         url_ = null;
+        origin_ = null;
     }
 
     /**
@@ -132,9 +134,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             final Window window, final HtmlPage page) {
         super();
         url_ = url;
+        origin_ = originOf(url);
+
         requestedProtocols_ = protocols;
         containingPage_ = page;
-        originSet_ = true;
 
         setParentScope(scope);
         setDomNode(page.getDocumentElement(), false);
@@ -170,15 +173,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                         final MessageEvent msgEvent = new MessageEvent(message);
                         msgEvent.setParentScope(scope);
                         msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
-                        if (originSet_) {
-                            try {
-                                URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
-                                originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
-                                msgEvent.setOrigin(originUrl.toExternalForm());
-                            }
-                            catch (final MalformedURLException e) {
-                                // ignore
-                            }
+                        if (origin_ != null) {
+                            msgEvent.setOrigin(origin_);
                         }
                         msgEvent.setSrcElement(WebSocket.this);
                         msgEvent.setTarget(WebSocket.this);
@@ -225,15 +221,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                         msgEvent.setParentScope(scope);
                         msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
-                        if (originSet_) {
-                            try {
-                                URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
-                                originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
-                                msgEvent.setOrigin(originUrl.toExternalForm());
-                            }
-                            catch (final MalformedURLException e) {
-                                // ignore
-                            }
+                        if (origin_ != null) {
+                            msgEvent.setOrigin(origin_);
                         }
                         msgEvent.setSrcElement(WebSocket.this);
                         msgEvent.setTarget(WebSocket.this);
@@ -507,9 +496,26 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      *
      * @param openHandler the event handler that fires on open
      */
+
     @JsxSetter
     public void setOnopen(final Function openHandler) {
         setEventHandler(Event.TYPE_OPEN, openHandler);
+    }
+
+    /**
+     * Returns the origin of the given url, which is the url without path, query and fragment.
+     *
+     * @param url the url of the connection
+     * @return the origin, or {@code null} if the url cannot be converted
+     */
+    private static String originOf(final URI url) {
+        try {
+            final URL originUrl = UrlUtils.getUrlWithoutPathRefQuery(UrlUtils.toUrlUnsafe(url.toString()));
+            return originUrl.toExternalForm();
+        }
+        catch (final MalformedURLException e) {
+            return null;
+        }
     }
 
     /**
@@ -831,7 +837,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         // because stopping the client right after the close frame was sent cuts the closing handshake.
         // Not on this thread: it may be one of the adapter's own, and stopping a client from its own
         // threads can stall.
-        CompletableFuture.runAsync(this::releaseClient);
+        releaseClientAsync();
 
         final boolean failed = connectionFailed(previous, reportedAsFailure);
 
@@ -861,6 +867,31 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
             return null;
         });
+    }
+
+    /**
+     * Releases the client of the adapter without blocking the calling thread.
+     * <p>
+     * The release is handed to the executor of the {@link WebClient}, the one the adapter uses for its own
+     * work. It must not run on the calling thread: that may be one of the adapter's threads, and stopping
+     * a client from its own threads can stall. If the executor rejects the task because it is already shut
+     * down (the {@link WebClient} is closing), the release runs on a short-lived daemon thread instead, so
+     * it is never lost.
+     * </p>
+     * <p>
+     * {@link #releaseClient()} logs and swallows its own failures, so there is nothing to report here.
+     * </p>
+     */
+    private void releaseClientAsync() {
+        try {
+            containingPage_.getWebClient().getExecutor().execute(this::releaseClient);
+        }
+        catch (final RejectedExecutionException e) {
+            // the executor is already shut down, which means the WebClient is closing: don't lose the release
+            final Thread thread = new Thread(this::releaseClient, "WebSocket-release");
+            thread.setDaemon(true);
+            thread.start();
+        }
     }
 
     /**
