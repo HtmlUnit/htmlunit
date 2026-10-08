@@ -62,6 +62,22 @@ import org.htmlunit.websocket.WebSocketListener;
 /**
  * JavaScript host object for {@code WebSocket}.
  *
+ * <p>Ready state handling: readyState_ is read and written by the JS thread (close(), send(),
+ * getReadyState()), by the threads of the websocket adapter and by queued tasks. Every change goes through
+ * one of the three methods switchToOpen(), switchToClosing() and switchToClosed(). Each is a single atomic
+ * operation and tells the caller which state was left, so only the caller that really performed a
+ * transition fires the matching event. That gives at most one open event and exactly one close event
+ * whatever the interleaving.</p>
+ *
+ * <pre>{@code
+ *   CONNECTING      -> OPEN      switchToOpen()      handshake finished
+ *   OPEN            -> CLOSING   switchToClosing()   close() called
+ *   CONNECTING      -> ABORTED   switchToClosing()   close() called, reported as CLOSING
+ *   any but CLOSED  -> CLOSED    switchToClosed()    connection ended, see connectionEnded()
+ * }</pre>
+ *
+ * <p>The state never moves backwards and CLOSED is final.</p>
+ *
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Madis Pärn
@@ -122,7 +138,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     private final AtomicInteger readyState_ = new AtomicInteger(CONNECTING);
     // bytes handed to send() after the connection was closed; see getBufferedAmount()
     private final AtomicLong bufferedAmount_ = new AtomicLong();
-    private String binaryType_ = "blob";
+    private volatile String binaryType_ = "blob";
 
     private HtmlPage containingPage_;
     private WebSocketAdapter webSocketImpl_;
@@ -145,8 +161,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * Creates a new instance connected to the given URL.
      *
      * @param url the URL to connect to
+     * @param protocols the sub-protocols to offer in the handshake
      * @param scope the scope
      * @param window the top-level window
+     * @param page the page this WebSocket belongs to
      */
     private WebSocket(final URI url, final List<String> protocols, final VarScope scope,
             final Window window, final HtmlPage page) {
@@ -270,6 +288,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * argument) is the empty list, an array is a sequence, anything else - null and objects that are no array
      * included - is converted to a single string.
      *
+     * @param cx the current context
+     * @param scope the scope
      * @param protocols the argument
      * @return the protocols
      */
@@ -282,7 +302,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             final List<String> result = new ArrayList<>();
             if (JavaScriptEngine.iterate(cx, scope, protoScriptable,
                     elem -> {
-                        if (elem  == Scriptable.NOT_FOUND) {
+                        if (elem == Scriptable.NOT_FOUND) {
                             // a hole in the array
                             result.add(JavaScriptEngine.toString(JavaScriptEngine.UNDEFINED));
                         }
@@ -412,7 +432,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      *
      * @param openHandler the event handler that fires on open
      */
-
     @JsxSetter
     public void setOnopen(final Function openHandler) {
         setEventHandler(Event.TYPE_OPEN, openHandler);
@@ -435,20 +454,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * Ready state handling.
+     * Switches from CONNECTING to OPEN.
      *
-     * readyState_ is read and written by the JS thread (close(), send(), getReadyState()), by the threads
-     * of the websocket adapter and by queued tasks. Every change goes through one of the three methods
-     * below. Each is a single atomic operation and tells the caller which state was left, so only the
-     * caller that really performed a transition fires the matching event. That gives at most one open
-     * event and exactly one close event whatever the interleaving.
-     *
-     *   CONNECTING                  -> OPEN     switchToOpen()      handshake finished
-     *   OPEN                        -> CLOSING  switchToClosing()   close() called
-     *   CONNECTING                  -> ABORTED  switchToClosing()   close() called, reported as CLOSING
-     *   any but CLOSED              -> CLOSED   switchToClosed()    connection ended, see connectionEnded()
-     *
-     * The state never moves backwards and CLOSED is final.
+     * @return {@code true} if this call made the transition
      */
     private boolean switchToOpen() {
         return readyState_.compareAndSet(CONNECTING, OPEN);
@@ -490,10 +498,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     private static boolean wasClean(final boolean failed, final int statusCode) {
         return !failed && statusCode != CLOSE_ABNORMAL && statusCode != CLOSE_TLS_FAILURE;
-    }
-
-    private static boolean connectionFailed(final int previousState, final boolean reportedAsFailure) {
-        return reportedAsFailure || previousState == CONNECTING || previousState == ABORTED;
     }
 
     /**
@@ -755,7 +759,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         // threads can stall.
         releaseClientAsync();
 
-        final boolean failed = connectionFailed(previous, reportedAsFailure);
+        // never established or aborted while connecting: failed, whatever the adapter reports
+        final boolean failed = reportedAsFailure || previous == CONNECTING || previous == ABORTED;
 
         final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
         if (engine == null) {
@@ -912,7 +917,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @Override
     public void close() throws IOException {
-        // called when the page is unloaded: whatever the state is, the client has to be released
+        // called when the page is unloaded: whatever the state is, the client has to be released.
+        // No events are fired here and the state does not reach CLOSED, the page is gone.
         if (switchToClosing() != NOT_CLOSABLE) {
             closeSessions();
         }

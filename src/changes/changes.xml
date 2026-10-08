@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
+            <action type="update" dev="rbri">
+                WebSocket improved error handling and more robustness updates.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Uint8Array methods fromBase64, fromHex, setFromBase64, setFromHex, toBase64, and toHex added.
+            </action>
             <action type="fix" dev="quantmode">
                 neko: Fix stack overflow when noframes tag precedes the html tag.
             </action>
