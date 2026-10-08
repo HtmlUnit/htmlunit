@@ -200,9 +200,9 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
         }
 
         synchronized (clientLock_) {
-            final ClientUpgradeRequest request = new ClientUpgradeRequest();
+            final ClientUpgradeRequest request = new ClientUpgradeRequest(url);
             request.setSubProtocols(protocols);
-            listenForConnect(client_.connect(new JettyWebSocketAdapterImpl(), url, request));
+            listenForConnect(client_.connect(new JettyWebSocketAdapterImpl(), request));
         }
     }
 
