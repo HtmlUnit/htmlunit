@@ -284,6 +284,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0,
 
+    /** Indicates that innerHTML returns an empty string for empty elements. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_INNER_HTML_VOID_ELEMENT_EMPTY,
+
     /** Indicates that innerText add a nl when reaching svg element. */
     @BrowserFeature({FF, FF_ESR})
     JS_INNER_TEXT_SELECT_EMPTY,

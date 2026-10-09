@@ -9,6 +9,9 @@
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
             <action type="fix" dev="rbri">
+                Enhanced escaping handling for 'innerHTML()' to align with browser behavior and prevent security vulnerabilities.
+            </action>
+            <action type="fix" dev="rbri">
                 Improve the configuration of the fragment parser based on the latest neko changes.
             </action>
             <action type="fix" dev="rbri" due-to="aws-sec-vdp">
