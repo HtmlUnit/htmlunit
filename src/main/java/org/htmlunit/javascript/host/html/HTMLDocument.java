@@ -711,7 +711,7 @@ public class HTMLDocument extends Document {
      */
     @Override
     public String getTitle() {
-        return getPage().getTitleText();
+        return getPage().getDocumentTitle();
     }
 
     /**

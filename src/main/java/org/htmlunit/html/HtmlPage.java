@@ -1174,9 +1174,44 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the title of this page or an empty string if the title wasn't specified.
+     * Returns the title like {@code document.title} does: the text of the first title element
+     * with ASCII whitespace stripped and collapsed. Other spaces, including the non-breaking space, are kept.
      *
-     * @return the title of this page or an empty string if the title wasn't specified
+     * @return the title like {@code document.title}
+     */
+    public String getDocumentTitle() {
+        final HtmlTitle title = getTitleElement();
+        if (title == null) {
+            return "";
+        }
+
+        final String titleTextContent = title.getTextContent();
+        final StringBuilder sb = new StringBuilder(titleTextContent.length());
+        boolean pendingSpace = false;
+        for (int i = 0; i < titleTextContent.length(); i++) {
+            final char c = titleTextContent.charAt(i);
+            if (c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r') {
+                pendingSpace = sb.length() > 0;
+            }
+            else {
+                if (pendingSpace) {
+                    sb.append(' ');
+                    pendingSpace = false;
+                }
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Returns the normalized title of this page, or an empty string if no title element is present.
+     * <p>
+     * The returned text is normalized by collapsing consecutive whitespace characters
+     * (including newlines and tabs) into a single space and trimming leading and trailing whitespace.
+     * </p>
+     *
+     * @return the normalized page title, or an empty string if the title was not specified
      */
     public String getTitleText() {
         final HtmlTitle titleElement = getTitleElement();
