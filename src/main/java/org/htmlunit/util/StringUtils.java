@@ -1027,4 +1027,46 @@ public final class StringUtils {
         final String joined = String.join("/", parts);
         return leadingSlash ? "/" + joined : joined;
     }
+
+    /**
+     * Escapes a string for use as the text content of an HTML element, as the HTML serialization algorithm
+     * does: {@code &}, {@code <}, {@code >} and the non-breaking space are replaced by their entities.
+     * Quotes are not escaped in text, and no characters are removed.
+     *
+     * @param text the text to escape
+     * @return the escaped value, or {@code null} if the input is {@code null}
+     */
+    public static String escapeHtmlText(final String text) {
+        if (text == null) {
+            return null;
+        }
+
+        final int max = text.length();
+        StringBuilder escaped = null;
+        int readOffset = 0;
+
+        for (int i = 0; i < max; i++) {
+            final String replacement = switch (text.charAt(i)) {
+                case '&' -> "&amp;";
+                case '<' -> "&lt;";
+                case '>' -> "&gt;";
+                case '\u00A0' -> "&nbsp;";
+                default -> null;
+            };
+
+            if (replacement != null) {
+                if (escaped == null) {
+                    escaped = new StringBuilder(max + 16);
+                }
+                escaped.append(text, readOffset, i).append(replacement);
+                readOffset = i + 1;
+            }
+        }
+
+        if (escaped == null) {
+            return text;
+        }
+
+        return escaped.append(text, readOffset, max).toString();
+    }
 }

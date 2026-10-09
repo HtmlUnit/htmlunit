@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -730,5 +731,118 @@ public class StringUtilsTest {
 
         // /a/.../b  — "..." is three dots, not a special dot segment
         assertEquals("/a/.../b", StringUtils.removeDots("/a/.../b"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeHtmlText() throws Exception {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 1024; i++) {
+            sb.append((char) i);
+        }
+
+        // unlike escapeXml, nothing is removed and the quotes stay as they are
+        final StringBuilder expected = new StringBuilder();
+        for (int i = 0; i < 1024; i++) {
+            if (i == '&') {
+                expected.append("&amp;");
+            }
+            else if (i == '<') {
+                expected.append("&lt;");
+            }
+            else if (i == '>') {
+                expected.append("&gt;");
+            }
+            else if (i == '\u00A0') {
+                expected.append("&nbsp;");
+            }
+            else {
+                expected.append((char) i);
+            }
+        }
+
+        assertEquals(expected.toString(), StringUtils.escapeHtmlText(sb.toString()));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeHtmlTextBorderCases() throws Exception {
+        assertNull(StringUtils.escapeHtmlText(null));
+        assertEquals("", StringUtils.escapeHtmlText(""));
+
+        assertEquals("&amp;", StringUtils.escapeHtmlText("&"));
+        assertEquals("&lt;", StringUtils.escapeHtmlText("<"));
+        assertEquals("&gt;", StringUtils.escapeHtmlText(">"));
+        assertEquals("&nbsp;", StringUtils.escapeHtmlText("\u00A0"));
+
+        // first, last, and consecutive characters
+        assertEquals("&nbsp;a", StringUtils.escapeHtmlText("\u00A0a"));
+        assertEquals("a&nbsp;", StringUtils.escapeHtmlText("a\u00A0"));
+        assertEquals("&nbsp;&nbsp;", StringUtils.escapeHtmlText("\u00A0\u00A0"));
+        assertEquals("a&amp;&amp;b", StringUtils.escapeHtmlText("a&&b"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeHtmlTextQuotes() throws Exception {
+        // quotes are only escaped in attribute values, not in text
+        assertEquals("\"q\" 'a'", StringUtils.escapeHtmlText("\"q\" 'a'"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeHtmlTextDoesNotEscapeTwice() throws Exception {
+        // an entity-like text is data and has to survive as data
+        assertEquals("&amp;amp;", StringUtils.escapeHtmlText("&amp;"));
+        assertEquals("&amp;nbsp;", StringUtils.escapeHtmlText("&nbsp;"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeHtmlTextKeepsOtherCharacters() throws Exception {
+        // not valid in XML 1.0, but the HTML serialization keeps them
+        assertEquals("\u0000\u0001\u001f", StringUtils.escapeHtmlText("\u0000\u0001\u001f"));
+        assertEquals("\uFFFE\uFFFF", StringUtils.escapeHtmlText("\uFFFE\uFFFF"));
+
+        // lone surrogates
+        assertEquals("\uD800", StringUtils.escapeHtmlText("\uD800"));
+        assertEquals("\uDFFF", StringUtils.escapeHtmlText("\uDFFF"));
+
+        // surrogate pairs, also next to a character that gets escaped
+        assertEquals("\uD83D\uDE00", StringUtils.escapeHtmlText("\uD83D\uDE00"));
+        assertEquals("\uD83D\uDE00&amp;", StringUtils.escapeHtmlText("\uD83D\uDE00&"));
+        assertEquals("&amp;\uD83D\uDE00", StringUtils.escapeHtmlText("&\uD83D\uDE00"));
+
+        // other space characters are not touched, only the plain non-breaking space is
+        assertEquals("\u2007\u202F\u3000 ", StringUtils.escapeHtmlText("\u2007\u202F\u3000 "));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeHtmlTextSameInstanceIfNothingToEscape() throws Exception {
+        final String text = "nothing to escape here";
+        assertSame(text, StringUtils.escapeHtmlText(text));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeHtmlTextInnerHtmlExample() throws Exception {
+        // the text used in InnerHtmlSerializationTest, as browsers serialize it
+        assertEquals("&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt;&nbsp;z",
+                StringUtils.escapeHtmlText("<b id=\"x\">a &amp; b & c \"q\"</b>\u00A0z"));
     }
 }
