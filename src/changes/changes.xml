@@ -8,6 +8,19 @@
 
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
+            <action type="fix" dev="rbri">
+                Improve the configuration of the fragment parser based on the latest neko changes.
+            </action>
+            <action type="fix" dev="rbri" due-to="aws-sec-vdp">
+                neko: 'allow-selfclosing-tags', 'allow-selfclosing-iframe', and 'allow-selfclosing-script' 
+                are now handled independently. This enables a more secure and browser-compliant configuration of the parser.
+            </action>
+            <action type="fix" dev="rbri">
+                Use the new getDocumentTitle() method for HTMLDocument getTitle().
+            </action>
+            <action type="add" dev="rbri">
+                Add method getDocumentTitle() to HtmlPage returning the same values as document.title does.
+            </action>
             <action type="update" dev="rbri">
                 WebSocket improved error handling and more robustness updates.
             </action>
