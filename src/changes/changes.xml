@@ -9,6 +9,11 @@
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
             <action type="fix" dev="rbri">
+                neko: a NUL character is now replaced by U+FFFD in the content of title, textarea, style, xmp,
+                iframe, noscript, noframes, noembed and plaintext, in comments and in attribute values, and is ignored in
+                regular text content, like the HTML5 tokenizer and tree construction do.
+            </action>
+            <action type="fix" dev="rbri">
                 HTMLTitleElement.text: the getter now returns the text of all text node children (elements and comments
                 are skipped) and the setter replaces all children.
             </action>
