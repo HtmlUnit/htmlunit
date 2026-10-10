@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -350,6 +351,9 @@ public class DocumentTitleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0061 0020 0062", "0061 0020 0062", "0061 0001 0062", "0061 0001 0062"},
             FF = {"0061 0001 0062", "0061 0001 0062", "0061 0001 0062", "0061 0001 0062"},
             FF_ESR = {"0061 0001 0062", "0061 0001 0062", "0061 0001 0062", "0061 0001 0062"})
+    @HtmlUnitNYI(
+            CHROME = {"0061 0001 0062", "0061 0001 0062", "0061 0001 0062", "0061 0001 0062"},
+            EDGE = {"0061 0001 0062", "0061 0001 0062", "0061 0001 0062", "0061 0001 0062"})
     public void static_controlStartOfHeading() throws Exception {
         run(false, true, "<title>a\u0001b</title>", "", "", STATIC_PROBES);
     }
@@ -361,6 +365,9 @@ public class DocumentTitleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0061 0020 0062", "0061 0020 0062", "0061 001e 0062", "0061 001e 0062"},
             FF = {"0061 001e 0062", "0061 001e 0062", "0061 001e 0062", "0061 001e 0062"},
             FF_ESR = {"0061 001e 0062", "0061 001e 0062", "0061 001e 0062", "0061 001e 0062"})
+    @HtmlUnitNYI(
+            CHROME = {"0061 001e 0062", "0061 001e 0062", "0061 001e 0062", "0061 001e 0062"},
+            EDGE = {"0061 001e 0062", "0061 001e 0062", "0061 001e 0062", "0061 001e 0062"})
     public void static_controlRecordSeparator() throws Exception {
         run(false, true, "<title>a\u001eb</title>", "", "", STATIC_PROBES);
     }
@@ -372,6 +379,9 @@ public class DocumentTitleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0061 0020 0062", "0061 0020 0062", "0061 007f 0062", "0061 007f 0062"},
             FF = {"0061 007f 0062", "0061 007f 0062", "0061 007f 0062", "0061 007f 0062"},
             FF_ESR = {"0061 007f 0062", "0061 007f 0062", "0061 007f 0062", "0061 007f 0062"})
+    @HtmlUnitNYI(
+            CHROME = {"0061 007f 0062", "0061 007f 0062", "0061 007f 0062", "0061 007f 0062"},
+            EDGE = {"0061 007f 0062", "0061 007f 0062", "0061 007f 0062", "0061 007f 0062"})
     public void static_controlDelete() throws Exception {
         run(false, true, "<title>a\u007fb</title>", "", "", STATIC_PROBES);
     }
@@ -884,7 +894,8 @@ public class DocumentTitleTest extends WebDriverTestCase {
     @Test
     @Alerts({"0061 0062", "0061 0062", "0061 0062", "0061 0045 004c 0045 004d 0062"})
     public void element_childTextContentOnly() throws Exception {
-        run(false, true, "<title>a</title>", "", "var s = document.createElement('span'); s.textContent = 'ELEM'; T().appendChild(s); T().appendChild(document.createTextNode('b'));", "c(document.title)", "c(T().text)", "c(T().textContent)");
+        run(false, true, "<title>a</title>", "",
+                "var s = document.createElement('span'); s.textContent = 'ELEM'; T().appendChild(s); T().appendChild(document.createTextNode('b'));", "c(document.title)", "c(T().text)", "c(T().textContent)");
     }
 
     /**
@@ -1003,6 +1014,23 @@ public class DocumentTitleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0061 0063", "0061 0063", "0061 0063", "0061 0062 0063"})
+    @HtmlUnitNYI(
+            CHROME = {"0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                      "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                      "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                      "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063"},
+            EDGE = {"0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                    "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                    "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                    "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063"},
+            FF = {"0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                  "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                  "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                  "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063"},
+            FF_ESR = {"0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                      "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                      "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063",
+                      "0061 003c 0062 003e 0062 003c 002f 0062 003e 0063"})
     public void xhtml_childElementIsIgnored() throws Exception {
         run(true, true, "<title>a<b>b</b>c</title>", "", "", "c(document.title)", "c(T().text)", "c(T().textContent)");
     }

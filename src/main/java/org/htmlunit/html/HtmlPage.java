@@ -1245,7 +1245,7 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        titleElement.setNodeValue(message);
+        titleElement.setText(message);
     }
 
     /**
