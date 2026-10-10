@@ -1185,7 +1185,7 @@ public class HtmlPage extends SgmlPage {
             return "";
         }
 
-        final String titleTextContent = title.getTextContent();
+        final String titleTextContent = title.getText();
         final StringBuilder sb = new StringBuilder(titleTextContent.length());
         boolean pendingSpace = false;
         for (int i = 0; i < titleTextContent.length(); i++) {
