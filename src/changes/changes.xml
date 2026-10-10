@@ -24,7 +24,7 @@
                 Improve the configuration of the fragment parser based on the latest neko changes.
             </action>
             <action type="fix" dev="rbri" due-to="aws-sec-vdp">
-                neko: 'allow-selfclosing-tags', 'allow-selfclosing-iframe', and 'allow-selfclosing-script' 
+                neko: 'allow-selfclosing-tags', 'allow-selfclosing-iframe', and 'allow-selfclosing-script'
                 are now handled independently. This enables a more secure and browser-compliant configuration of the parser.
             </action>
             <action type="fix" dev="rbri">

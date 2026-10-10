@@ -845,7 +845,7 @@ public class DocumentTitleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"d800"})
+    @Alerts("d800")
     public void set_loneSurrogateJsOnly() throws Exception {
         run(false, false, "<title>old</title>", "", "document.title = '\\uD800';", "c(document.title)");
     }

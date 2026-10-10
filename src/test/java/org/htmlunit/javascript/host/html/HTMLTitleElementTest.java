@@ -237,7 +237,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"b"})
+    @Alerts("b")
     public void textFirstChildIsElement() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -359,7 +359,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
 
 
     /**
-     * splitText creates a second text node.
+     * The splitText creates a second text node.
      * @throws Exception if the test fails
      */
     @Test
@@ -393,7 +393,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"xa"})
+    @Alerts("xa")
     public void textAfterInsertBefore() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -422,7 +422,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"b"})
+    @Alerts("b")
     public void textAfterRemoveFirstChild() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -448,7 +448,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
 
 
     /**
-     * text is the raw value, only document.title strips and collapses whitespace.
+     * The text is the raw value, only document.title strips and collapses whitespace.
      * @throws Exception if the test fails
      */
     @Test
@@ -701,7 +701,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
 
 
     /**
-     * textContent replaces all children, text reads the result.
+     * The textContent replaces all children, text reads the result.
      * @throws Exception if the test fails
      */
     @Test
@@ -732,11 +732,11 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
 
 
     /**
-     * document.title uses all text node children.
+     * The document.title uses all text node children.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"ab"})
+    @Alerts("ab")
     public void documentTitleMultipleTextNodes() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -761,11 +761,11 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
 
 
     /**
-     * document.title skips element children.
+     * The document.title skips element children.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"ab"})
+    @Alerts("ab")
     public void documentTitleIgnoresElementChildren() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -793,7 +793,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
 
 
     /**
-     * document.title follows the text setter.
+     * The document.title follows the text setter.
      * @throws Exception if the test fails
      */
     @Test
