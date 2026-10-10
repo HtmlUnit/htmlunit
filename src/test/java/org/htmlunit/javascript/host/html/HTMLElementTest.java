@@ -1463,14 +1463,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
              "New = <div><div></div></div>", "Children: 1"})
-    @HtmlUnitNYI(CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                           "New = <div></div><div></div>", "Children: 2"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <div></div><div></div>", "Children: 2"},
-            FF = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                  "New = <div></div><div></div>", "Children: 2"},
-            FF_ESR = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                      "New = <div></div><div></div>", "Children: 2"})
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageVerifyTextArea2(html);
