@@ -9,6 +9,24 @@
     <body>
         <release version="5.6.0" date="September xx, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
             <action type="fix" dev="rbri">
+                HTML parsing: a trailing slash on non void elements is only honored for XHTML pages and for fragments of
+                XHTML documents (innerHTML and co); in HTML documents it is ignored like in the browsers. XHTML pages now
+                also honor it for iframe and script.
+            </action>
+            <action type="fix" dev="rbri">
+                innerHTML/outerHTML serialization: the text of the raw text elements (iframe, xmp, noembed, noframes,
+                plaintext, noscript) is not escaped anymore, a non-breaking space is written as &amp;nbsp; for HTML
+                documents only, the children of void elements are not serialized, and script and style are serialized like
+                any other element in XHTML documents.
+            </action>
+            <action type="update" dev="rbri">
+                neko: the README now listed the allowed flag combinations for HTML, XHTML and fragment parsing.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: with ALLOW_SELFCLOSING_TAGS enabled a self-closed noembed, noframes, noscript, plaintext,
+                title, textarea, style or xmp is now an empty element.
+            </action>
+            <action type="fix" dev="rbri">
                 neko: a NUL character is now replaced by U+FFFD in the content of title, textarea, style, xmp,
                 iframe, noscript, noframes, noembed and plaintext, in comments and in attribute values, and is ignored in
                 regular text content, like the HTML5 tokenizer and tree construction do.
