@@ -1330,6 +1330,52 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
         htmlElement("video");
     }
 
+    /**
+     * Legacy (Netscape) element, unknown to the browsers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt;&nbsp;z", "<nolayer>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt;&nbsp;z</nolayer>"})
+    public void nolayer_innerHtml() throws Exception {
+        htmlElement("nolayer");
+    }
+
+    /**
+     * Legacy (Netscape) element, unknown to the browsers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt;&nbsp;z", "<layer>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt;&nbsp;z</layer>"})
+    public void layer_innerHtml() throws Exception {
+        htmlElement("layer");
+    }
+
+    /**
+     * Only the parser maps {@code image} to {@code img}; createElement creates an unknown element,
+     * so this is not a void element.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt;&nbsp;z", "<image>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt;&nbsp;z</image>"})
+    public void image_innerHtml() throws Exception {
+        htmlElement("image");
+    }
+
+    /**
+     * An {@code svg} created in the HTML namespace is an unknown element, not an svg element
+     * (see {@link #svg_innerHtml()} for the one in the svg namespace).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt;&nbsp;z", "<svg>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt;&nbsp;z</svg>"})
+    public void svg_createElement_innerHtml() throws Exception {
+        htmlElement("svg");
+    }
+
     // ---------- Foreign content: same names, but not special ----------------------
 
     /**
