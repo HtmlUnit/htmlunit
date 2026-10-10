@@ -1400,6 +1400,11 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<script xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
             FF = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
             FF_ESR = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"})
+    @HtmlUnitNYI(
+            CHROME = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
+            EDGE = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
+            FF = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
+            FF_ESR = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"})
     public void script_innerHtmlXhtml() throws Exception {
         xhtmlElement("script");
     }
@@ -1411,6 +1416,11 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<style xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
             FF = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
             FF_ESR = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"})
+    @HtmlUnitNYI(
+            CHROME = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
+            EDGE = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
+            FF = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
+            FF_ESR = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"})
     public void style_innerHtmlXhtml() throws Exception {
         xhtmlElement("style");
     }

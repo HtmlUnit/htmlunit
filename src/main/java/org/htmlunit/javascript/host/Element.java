@@ -1139,12 +1139,13 @@ public class Element extends Node {
                 return;
             }
 
-         // Add the children.
-            final boolean isHtml = !(scriptObject instanceof HTMLScriptElement)
-                    && !(scriptObject instanceof HTMLStyleElement);
-
-            // the document mode is not inherited from the parent, only the text of raw text elements is special
+            // Add the children.
             final TextEscape mode = node.getPage() instanceof XHtmlPage ? TextEscape.XML : TextEscape.HTML;
+            final boolean rawTextHost = scriptObject instanceof HTMLScriptElement
+                    || scriptObject instanceof HTMLStyleElement;
+
+            // in XML documents script and style are ordinary elements for the serializer
+            final boolean isHtml = mode == TextEscape.XML || !rawTextHost;
             final TextEscape childEscape = !isHtml || (mode == TextEscape.HTML && isRawTextElement(element))
                     ? TextEscape.NONE
                     : mode;
