@@ -149,6 +149,27 @@
             <action type="fix" dev="rbri">
                 DoTypeProcessor: Processing the backspace key has to clear the current selection if it is not empty.
             </action>
+            <action type="update" dev="rbri">
+                xpath: Bunch of dead code removed from the lexer.
+            </action>
+            <action type="update" dev="rbri">
+                xpath: OpMap shrinking improved and unit tests added.
+            </action>
+            <action type="update" dev="rbri">
+                xpath: OpMapVector memory handling improved by preallocating and reusing memory.
+            </action>
+            <action type="update" dev="rbri">
+                xpath: When an ErrorListener swallows fatal errors, a failed parse leaves XString-mutated slots in the token queue.
+                The unconditional recursive call to initXPath("/..", ..) then reuses the same Compiler, causing nextToken()
+                to throw a ClassCastException on those slots, and risking infinite recursion if the fallback itself fails.
+            </action>
+            <action type="update" dev="rbri">
+                xpath: Add OpMap.reset() to clear the token queue and op-map before each tokenize() call,
+                and guard the fallback with m_inFallbackXPath to ensure it is attempted at most once.
+            </action>
+            <action type="update" dev="rbri">
+                xpath: Code cleanup and modernization; introduce some enums, adjust variable names, and more tests.
+            </action>
         </release>
 
 
