@@ -508,14 +508,7 @@ public final class StringUtils {
             return true;
         }
 
-        if (codepoint < 0x10000) {
-            return false;
-        }
-        if (codepoint <= 0x10FFFF) {
-            return true;
-        }
-
-        return true;
+        return codepoint >= 0x10000;
     }
 
     /**

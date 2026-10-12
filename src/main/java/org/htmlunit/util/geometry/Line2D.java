@@ -122,12 +122,8 @@ public class Line2D implements Shape2D {
             }
         }
 
-        if (y < startY_ && y < endY_
-                || (y > startY_ && y > endY_)) {
-            return false;
-        }
-
-        return true;
+        return !(y < startY_ && y < endY_
+                || (y > startY_ && y > endY_));
     }
 
     /**

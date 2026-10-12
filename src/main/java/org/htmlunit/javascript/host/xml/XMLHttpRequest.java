@@ -1231,15 +1231,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     && !lcValue.startsWith(FormEncodingType.MULTIPART.getName())
                     && !lcValue.startsWith(FormEncodingType.TEXT_PLAIN.getName());
         }
-        if (HttpHeader.ACCEPT_LC.equals(name)
+        return !(HttpHeader.ACCEPT_LC.equals(name)
                 || HttpHeader.ACCEPT_LANGUAGE_LC.equals(name)
                 || HttpHeader.CONTENT_LANGUAGE_LC.equals(name)
                 || HttpHeader.REFERER_LC.equals(name)
                 || "accept-encoding".equals(name)
-                || HttpHeader.ORIGIN_LC.equals(name)) {
-            return false;
-        }
-        return true;
+                || HttpHeader.ORIGIN_LC.equals(name));
     }
 
     /**
@@ -1282,10 +1279,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
             return false;
         }
-        if (nameLowerCase.startsWith("proxy-") || nameLowerCase.startsWith("sec-")) {
-            return false;
-        }
-        return true;
+        return !nameLowerCase.startsWith("proxy-") && !nameLowerCase.startsWith("sec-");
     }
 
     /**

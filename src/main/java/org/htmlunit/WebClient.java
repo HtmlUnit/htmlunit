@@ -2710,11 +2710,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 return true;
             }
 
-            if (requestingWindow_.getEnclosedPage() != originalPage_.get()) {
-                return true;
-            }
-
-            return false;
+            return requestingWindow_.getEnclosedPage() != originalPage_.get();
         }
     }
 

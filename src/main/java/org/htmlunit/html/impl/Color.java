@@ -137,9 +137,6 @@ public class Color {
         if (green_ != other.green_) {
             return false;
         }
-        if (red_ != other.red_) {
-            return false;
-        }
-        return true;
+        return red_ == other.red_;
     }
 }
