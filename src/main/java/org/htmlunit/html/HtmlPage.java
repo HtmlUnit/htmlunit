@@ -615,7 +615,7 @@ public class HtmlPage extends SgmlPage {
     @Override
     public DomAttr createAttributeNS(final String namespaceURI, final String qualifiedName) {
         // an empty namespace is the same as no namespace
-        final String namespace = StringUtils.isEmpty(namespaceURI) ? null : namespaceURI;
+        final String namespace = org.htmlunit.util.StringUtils.isEmptyOrNull(namespaceURI) ? null : namespaceURI;
 
         final int colonPosition = qualifiedName.indexOf(':');
         final String prefix = colonPosition == -1 ? null : qualifiedName.substring(0, colonPosition);

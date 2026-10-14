@@ -1009,6 +1009,7 @@ public class DocumentTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * Comments are allowed at document level.
      * @throws Exception if an error occurs
