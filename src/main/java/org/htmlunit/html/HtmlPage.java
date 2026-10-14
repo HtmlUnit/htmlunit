@@ -43,6 +43,8 @@ import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.xml.XMLConstants;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -608,29 +610,50 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
+     * <p>Unlike {@link #createAttribute(String)} the name is not lower cased.</p>
      */
     @Override
-    public Attr createAttributeNS(final String namespaceURI, final String qualifiedName) {
-        throw new UnsupportedOperationException("HtmlPage.createAttributeNS is not yet implemented.");
+    public DomAttr createAttributeNS(final String namespaceURI, final String qualifiedName) {
+        // an empty namespace is the same as no namespace
+        final String namespace = StringUtils.isEmpty(namespaceURI) ? null : namespaceURI;
+
+        final int colonPosition = qualifiedName.indexOf(':');
+        final String prefix = colonPosition == -1 ? null : qualifiedName.substring(0, colonPosition);
+        final boolean xmlns = XMLConstants.XMLNS_ATTRIBUTE.equals(prefix)
+                || XMLConstants.XMLNS_ATTRIBUTE.equals(qualifiedName);
+
+        if ((prefix != null && namespace == null)
+                || (XMLConstants.XML_NS_PREFIX.equals(prefix) && !XMLConstants.XML_NS_URI.equals(namespace))
+                || (xmlns && !XMLConstants.XMLNS_ATTRIBUTE_NS_URI.equals(namespace))
+                || (!xmlns && XMLConstants.XMLNS_ATTRIBUTE_NS_URI.equals(namespace))) {
+            throw new DOMException(DOMException.NAMESPACE_ERR,
+                    "createAttributeNS: invalid namespace '" + namespaceURI + "' for '" + qualifiedName + "'");
+        }
+
+        return new DomAttr(this, namespace, qualifiedName, "", false);
     }
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
+     * <p>Entity references are not supported by HTML documents (DOM Level 2 Core). They are removed
+     * from the DOM standard and the browsers do not offer {@code createEntityReference}.
+     * </p>
      */
     @Override
-    public EntityReference createEntityReference(final String id) {
-        throw new UnsupportedOperationException("HtmlPage.createEntityReference is not yet implemented.");
+    public EntityReference createEntityReference(final String name) {
+        throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
+                "HtmlPage.createEntityReference: entity references are not supported by HTML documents.");
     }
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
+     * <p>DOM Level 2 Core forbids processing instructions in HTML documents, but the DOM standard and the
+     * browsers allow them and {@code document.createProcessingInstruction()} relies on this.
+     * </p>
      */
     @Override
-    public ProcessingInstruction createProcessingInstruction(final String namespaceURI, final String qualifiedName) {
-        throw new UnsupportedOperationException("HtmlPage.createProcessingInstruction is not yet implemented.");
+    public DomProcessingInstruction createProcessingInstruction(final String target, final String data) {
+        return new DomProcessingInstruction(this, target, data);
     }
 
     /**
