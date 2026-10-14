@@ -152,6 +152,7 @@ import org.htmlunit.webstart.WebStartHandler;
  * @author Lai Quang Duong
  * @author René Schwietzke
  * @author Sven Strickroth
+ * @author Ashutosh Panda
  */
 @SuppressWarnings("PMD.TooManyFields")
 public class WebClient implements Serializable, AutoCloseable {
@@ -2710,11 +2711,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 return true;
             }
 
-            if (requestingWindow_.getEnclosedPage() != originalPage_.get()) {
-                return true;
-            }
-
-            return false;
+            return requestingWindow_.getEnclosedPage() != originalPage_.get();
         }
     }
 

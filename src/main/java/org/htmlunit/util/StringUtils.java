@@ -35,6 +35,7 @@ import org.htmlunit.html.impl.Color;
  * @author Ahmed Ashour
  * @author Martin Tamme
  * @author Ronald Brill
+ * @author Ashutosh Panda
  */
 public final class StringUtils {
 
@@ -508,14 +509,7 @@ public final class StringUtils {
             return true;
         }
 
-        if (codepoint < 0x10000) {
-            return false;
-        }
-        if (codepoint <= 0x10FFFF) {
-            return true;
-        }
-
-        return true;
+        return codepoint >= 0x10000;
     }
 
     /**

@@ -116,6 +116,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Frank Danek
  * @author Carsten Steul
  * @author Sven Strickroth
+ * @author Ashutosh Panda
  */
 public class CssStyleSheet implements Serializable {
 
@@ -538,11 +539,8 @@ public class CssStyleSheet implements Serializable {
 
                     case NEXT_SIBLING_COMBINATOR:
                         final DomElement nextSibling = element.getNextElementSibling();
-                        if (nextSibling != null && selects(browserVersion, nextSibling, rs.getSelector(), pseudoElement,
-                                                            scope, fromQuerySelectorAll, throwOnSyntax)) {
-                            return true;
-                        }
-                        return false;
+                        return nextSibling != null && selects(browserVersion, nextSibling, rs.getSelector(), pseudoElement,
+                                                                scope, fromQuerySelectorAll, throwOnSyntax);
 
                     case SUBSEQUENT_SIBLING_COMBINATOR:
                         for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
