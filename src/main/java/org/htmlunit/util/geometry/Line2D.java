@@ -18,6 +18,7 @@ package org.htmlunit.util.geometry;
  * Simple 2D line segment shape.
  *
  * @author Ronald Brill
+ * @author Ashutosh Panda
  */
 public class Line2D implements Shape2D {
 

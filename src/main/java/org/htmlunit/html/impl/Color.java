@@ -21,6 +21,7 @@ import java.util.Objects;
  * independent of awt (for this).
  *
  * @author Ronald Brill
+ * @author Ashutosh Panda
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class Color {

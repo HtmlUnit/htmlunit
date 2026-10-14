@@ -35,6 +35,7 @@ import org.htmlunit.html.impl.Color;
  * @author Ahmed Ashour
  * @author Martin Tamme
  * @author Ronald Brill
+ * @author Ashutosh Panda
  */
 public final class StringUtils {
 
