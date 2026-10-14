@@ -8,7 +8,17 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes">
-            <action type="fix" dev="rbri">
+            <action type="add" dev="rbri">
+                DOMImplementation.createHTMLDocument() implemented.
+            </action>
+            <action type="add" dev="rbri">
+                HTMLDocument.appendChild() implemented.
+            </action>
+            <action type="add" dev="rbri">
+                Simple implementations for createAttributeNS(), createEntityReference() and createProcessingInstruction)
+                added to HtmlPage.
+            </action>
+            <action type="add" dev="rbri">
                 CSS pseudo class :scope support added.
             </action>
             <action type="fix" dev="rbri">

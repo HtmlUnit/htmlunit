@@ -1009,6 +1009,376 @@ public class DocumentTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+    /**
+     * Comments are allowed at document level.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "true", "3", "8", "hello"})
+    public void appendChildCommentAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var comment = document.createComment('hello');\n"
+            + "      try {\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(document.appendChild(comment) === comment);\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(document.childNodes[2].nodeType);\n"
+            + "        log(document.childNodes[2].data);\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Processing instructions are allowed at document level.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "3", "7", "target"})
+    public void appendChildProcessingInstructionAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      try {\n"
+            + "        log(document.childNodes.length);\n"
+            + "        document.appendChild(pi);\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(document.childNodes[2].nodeType);\n"
+            + "        log(document.childNodes[2].target);\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Text is not allowed at document level.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "HierarchyRequestError/DOMException", "2"})
+    public void appendChildTextAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var text = document.createTextNode('text');\n"
+            + "      log(document.childNodes.length);\n"
+            + "      try {\n"
+            + "        document.appendChild(text);\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "      log(document.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A document has only one element; this is true for a new element as well as for the
+     * root element itself.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"HierarchyRequestError/DOMException", "HierarchyRequestError/DOMException", "2"})
+    public void appendChildSecondElementAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      try {\n"
+            + "        document.appendChild(document.createElement('html'));\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "      try {\n"
+            + "        document.appendChild(document.documentElement);\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "      log(document.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A document has only one doctype.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "HierarchyRequestError/DOMException", "2"})
+    public void appendChildSecondDoctypeAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var doctype = document.implementation.createDocumentType('html', '', '');\n"
+            + "      log(document.childNodes.length);\n"
+            + "      try {\n"
+            + "        document.appendChild(doctype);\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "      log(document.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A node from another document is adopted, this is no error.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"3", "true"})
+    public void appendChildCommentFromOtherDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var other = document.implementation.createHTMLDocument('other');\n"
+            + "      var comment = other.createComment('hello');\n"
+            + "      try {\n"
+            + "        document.appendChild(comment);\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(comment.ownerDocument === document);\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Appending a node that is already a child moves it to the end.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4", "second", "first"})
+    public void appendChildMovesComment() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var first = document.createComment('first');\n"
+            + "      var second = document.createComment('second');\n"
+            + "      try {\n"
+            + "        document.appendChild(first);\n"
+            + "        document.appendChild(second);\n"
+            + "        document.appendChild(first);\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(document.childNodes[2].data);\n"
+            + "        log(document.childNodes[3].data);\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Without a root element a new one can be appended, but only one.
+     * The new root needs a head, otherwise the logging via the document title is not possible.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "2", "HierarchyRequestError/DOMException"})
+    public void appendChildRootElementAfterRemoval() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var html = document.createElement('html');\n"
+            + "      html.appendChild(document.createElement('head'));\n"
+            + "      document.removeChild(document.documentElement);\n"
+            + "      document.appendChild(html);\n"
+            + "      log(document.documentElement === html);\n"
+            + "      log(document.childNodes.length);\n"
+            + "      try {\n"
+            + "        document.appendChild(document.createElement('html'));\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The doctype has to be in front of the root element.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"HierarchyRequestError", "2", "10", "true"})
+    public void appendChildDoctypeBeforeRootElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "    function test() {\n"
+            + "      var doctype = document.implementation.createDocumentType('html', '', '');\n"
+            + "      var html = document.createElement('html');\n"
+            + "      html.appendChild(document.createElement('head'));\n"
+            + "      var result;\n"
+            + "      document.removeChild(document.doctype);\n"
+            // there is a root element, the doctype would be behind it
+            + "      try {\n"
+            + "        document.appendChild(doctype);\n"
+            + "        result = 'appended';\n"
+            + "      } catch(e) { result = e.name; }\n"
+            // an empty document, doctype and root element in the right order
+            + "      document.removeChild(document.documentElement);\n"
+            + "      document.appendChild(doctype);\n"
+            + "      document.appendChild(html);\n"
+            + "      log(result);\n"
+            + "      log(document.childNodes.length);\n"
+            + "      log(document.childNodes[0].nodeType);\n"
+            + "      log(document.childNodes[1] === html);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A fragment is allowed if it contains one element and no text and the document has no root element.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"HierarchyRequestError", "2", "HierarchyRequestError", "0", "true"})
+    public void appendChildFragmentAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var html = document.createElement('html');\n"
+            + "      html.appendChild(document.createElement('head'));\n"
+            + "      var results = [];\n"
+            + "      document.removeChild(document.documentElement);\n"
+            // two elements
+            + "      var two = document.createDocumentFragment();\n"
+            + "      two.appendChild(document.createElement('div'));\n"
+            + "      two.appendChild(document.createElement('span'));\n"
+            + "      try {\n"
+            + "        document.appendChild(two);\n"
+            + "        results.push('appended');\n"
+            + "      } catch(e) { results.push(e.name); }\n"
+            + "      results.push(two.childNodes.length);\n"
+            // text
+            + "      var withText = document.createDocumentFragment();\n"
+            + "      withText.appendChild(document.createTextNode('text'));\n"
+            + "      try {\n"
+            + "        document.appendChild(withText);\n"
+            + "        results.push('appended');\n"
+            + "      } catch(e) { results.push(e.name); }\n"
+            // one element
+            + "      var one = document.createDocumentFragment();\n"
+            + "      one.appendChild(html);\n"
+            + "      document.appendChild(one);\n"
+            + "      results.push(one.childNodes.length);\n"
+            + "      results.push(document.documentElement === html);\n"
+            + "      for (var i = 0; i < results.length; i++) {\n"
+            + "        log(results[i]);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A root element appended by script is a fully working part of the document.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "1", "true"})
+    public void appendedRootElementIsPartOfTheDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var html = document.createElement('html');\n"
+            + "      var body = document.createElement('body');\n"
+            + "      var div = document.createElement('div');\n"
+            + "      div.id = 'x';\n"
+            + "      body.appendChild(div);\n"
+            + "      html.appendChild(document.createElement('head'));\n"
+            + "      html.appendChild(body);\n"
+            + "      document.removeChild(document.documentElement);\n"
+            + "      document.appendChild(html);\n"
+            + "      log(document.getElementById('x') === div);\n"
+            + "      log(document.body === body);\n"
+            + "      log(document.querySelector('div') === div);\n"
+            + "      log(document.getElementsByTagName('div').length);\n"
+            + "      log(document.documentElement.parentNode === document);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * Regression test for appendChild of a text node.
