@@ -132,7 +132,8 @@ public class DocumentFragment extends Node {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            return NodeList.staticNodeList(getParentScope(), getDomNodeOrDie().querySelectorAll(selectors));
+            final DomNode domNode = getDomNodeOrDie();
+            return NodeList.staticNodeList(getParentScope(), domNode.querySelectorAll(selectors, domNode));
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
@@ -148,7 +149,8 @@ public class DocumentFragment extends Node {
     @JsxFunction
     public Node querySelector(final String selectors) {
         try {
-            final DomNode node = getDomNodeOrDie().querySelector(selectors);
+            final DomNode domNode = getDomNodeOrDie();
+            final DomNode node = domNode.querySelector(selectors, domNode);
             if (node != null) {
                 return node.getScriptableObject();
             }

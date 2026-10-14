@@ -84,16 +84,16 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
         Selector selector = parseSelector(sheet, "*.yui-log input");
 
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, body, null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, form, null, false, true));
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, input1, null, false, true));
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, input2, null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, button1, null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, button2, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, body, selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, form, selector, null, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, input1, selector, null, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, input2, selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, button1, selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, button2, selector, null, null, false, true));
 
         selector = parseSelector(sheet, "#m1");
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, input1, null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, input2, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, input1, selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, input2, selector, null, null, false, true));
     }
 
     private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) throws Exception {
@@ -193,10 +193,10 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final BrowserVersion browserVersion = getBrowserVersion();
 
         Selector selector = parseSelectors("#d\\:e").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d:e"), null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d:e"), selector, null, null, false, true));
 
         selector = parseSelectors("#d-e").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d-e"), null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d-e"), selector, null, null, false, true));
     }
 
     /**
@@ -251,11 +251,11 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
         final Selector selector = parseSelectors(css).get(0);
         assertEquals(selectBody,
-                CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("b"), null, false, true));
+                CssStyleSheet.selects(browserVersion, page.getHtmlElementById("b"), selector, null, null, false, true));
         assertEquals(selectDivD,
-                CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d"), null, false, true));
+                CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d"), selector, null, null, false, true));
         assertEquals(selectSpanS,
-                CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("s"), null, false, true));
+                CssStyleSheet.selects(browserVersion, page.getHtmlElementById("s"), selector, null, null, false, true));
     }
 
     /**
@@ -274,10 +274,10 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final Selector selector = parseSelectors(":has(+ div)").get(0);
 
         // d1 has a next sibling element (d2) -> true
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d1"), null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d1"), selector, null, null, false, true));
 
         // d2 has no next sibling element (getNextElementSibling() returns null) -> false (should not throw NPE)
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d2"), null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d2"), selector, null, null, false, true));
     }
 
     /**
@@ -372,13 +372,13 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
         // :has with element selector
         Selector selector = parseSelectors("div:has(span)").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d1"), null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d2"), null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d1"), selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d2"), selector, null, null, false, true));
 
         // :has with relative child combinator selector
         selector = parseSelectors("div:has(> .foo)").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d1"), null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d2"), null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d1"), selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d2"), selector, null, null, false, true));
     }
 
     /**
@@ -397,8 +397,8 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final Selector selector = parseSelectors("[data-tags~=bar]").get(0);
 
         // Should match when values are separated by tab (\t) or newline (\n)
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d1"), null, false, true));
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d2"), null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d1"), selector, null, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, page.getHtmlElementById("d2"), selector, null, null, false, true));
     }
 
     /**
@@ -423,17 +423,17 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
         // :nth-child(2n+1) -> matches 1st and 3rd elements (d1, d3)
         Selector selector = parseSelectors(":nth-child(2n+1)").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d3, null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, d4, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d1, selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, d2, selector, null, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d3, selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, d4, selector, null, null, false, true));
 
         // :nth-child(-n+2) -> matches 1st and 2nd elements (d1, d2)
         selector = parseSelectors(":nth-child(-n+2)").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, d3, null, false, true));
-        assertFalse(CssStyleSheet.selects(browserVersion, selector, d4, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d1, selector, null, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d2, selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, d3, selector, null, null, false, true));
+        assertFalse(CssStyleSheet.selects(browserVersion, d4, selector, null, null, false, true));
     }
 
     /**
@@ -531,19 +531,19 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
         // Hex escape with single delimiting space (#\31 a matching id="1a")
         Selector selector = parseSelectors("#\\31 a").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d1, selector, null, null, false, true));
 
         // 6-digit hex escape without space delimiter (#\000031a matching id="1a")
         selector = parseSelectors("#\\000031a").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d1, selector, null, null, false, true));
 
         // Escaped dot character in class selector (.foo\.bar matching class="foo.bar")
         selector = parseSelectors(".foo\\.bar").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d1, selector, null, null, false, true));
 
         // Escaped colon in ID selector (#foo\:bar matching id="foo:bar")
         selector = parseSelectors("#foo\\:bar").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d2, selector, null, null, false, true));
     }
 
     /**
@@ -564,15 +564,15 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
         // Hex escape \31 (with trailing space) represents '1'
         Selector selector = parseSelectors("[data-val='\\31 ']").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d1, selector, null, null, false, true));
 
         // Hex escape \41 (with trailing space) represents 'A'
         selector = parseSelectors("[data-val='\\41 ']").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d2, selector, null, null, false, true));
 
         // 6-digit hex escape \000031 represents '1'
         selector = parseSelectors("[data-val='\\000031']").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d1, selector, null, null, false, true));
     }
 
     /**
@@ -594,12 +594,12 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         // Unquoted hex escape \31 (with trailing space) represents '1'
         // Before fix: unescapeSelector("\\31 ") returned "31 ", failing the assertion
         Selector selector = parseSelectors("[data-val=\\31 ]").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d1, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d1, selector, null, null, false, true));
 
         // Unquoted hex escape \41 (with trailing space) represents 'A'
         // Before fix: unescapeSelector("\\41 ") returned "41 ", failing the assertion
         selector = parseSelectors("[data-val=\\41 ]").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, d2, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, d2, selector, null, null, false, true));
     }
 
     /**
@@ -618,6 +618,6 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
         // Sizzle / CSS selector #fiddle\\Foo (escaped backslash before hex character 'F')
         final Selector selector = parseSelectors("#fiddle\\\\Foo").get(0);
-        assertTrue(CssStyleSheet.selects(browserVersion, selector, fiddle, null, false, true));
+        assertTrue(CssStyleSheet.selects(browserVersion, fiddle, selector, null, null, false, true));
     }
 }

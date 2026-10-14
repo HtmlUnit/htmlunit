@@ -4296,4 +4296,51 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The names of pseudo classes (and the keywords inside of the arguments) are ASCII case insensitive.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"li1", "li3", "li2", "li3", "li1,li3", "li1,li3", "li2", "c", "t", "empty", "true"})
+    public void pseudoClassNamesAreCaseInsensitive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  log(ids(document.querySelectorAll('li:FIRST-CHILD')));\n"
+            + "  log(ids(document.querySelectorAll('li:Last-Child')));\n"
+            + "  log(ids(document.querySelectorAll('li:NTH-CHILD(2)')));\n"
+            + "  log(ids(document.querySelectorAll('li:Nth-Last-Child(1)')));\n"
+            + "  log(ids(document.querySelectorAll('li:nth-child(2N+1)')));\n"
+            + "  log(ids(document.querySelectorAll('li:nth-child(ODD)')));\n"
+            + "  log(ids(document.querySelectorAll('li:NOT(.a)')));\n"
+            + "  log(ids(document.querySelectorAll('input:CHECKED')));\n"
+            + "  log(ids(document.querySelectorAll('input:Disabled')));\n"
+            + "  log(ids(document.querySelectorAll('p:EMPTY')));\n"
+            + "  log(document.querySelector(':ROOT') === document.documentElement);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <ul id='list'>\n"
+            + "    <li id='li1' class='a'></li>\n"
+            + "    <li id='li2'></li>\n"
+            + "    <li id='li3' class='a'></li>\n"
+            + "  </ul>\n"
+            + "  <input id='c' type='checkbox' checked>\n"
+            + "  <input id='t' type='text' disabled>\n"
+            + "  <p id='empty'></p>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

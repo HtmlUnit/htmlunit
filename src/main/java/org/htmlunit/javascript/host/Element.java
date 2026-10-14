@@ -538,7 +538,8 @@ public class Element extends Node {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            return NodeList.staticNodeList(getParentScope(), getDomNodeOrDie().querySelectorAll(selectors));
+            final DomNode domNode = getDomNodeOrDie();
+            return NodeList.staticNodeList(getParentScope(), domNode.querySelectorAll(selectors, domNode));
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
@@ -559,7 +560,8 @@ public class Element extends Node {
     @JsxFunction
     public Node querySelector(final String selectors) {
         try {
-            final DomNode node = getDomNodeOrDie().querySelector(selectors);
+            final DomNode domNode = getDomNodeOrDie();
+            final DomNode node = domNode.querySelector(selectors, domNode);
             if (node != null) {
                 return node.getScriptableObject();
             }
@@ -1715,7 +1717,7 @@ public class Element extends Node {
         final String selectorString = (String) args[0];
         try {
             final DomNode domNode = thisElement.getDomNodeOrNull();
-            return domNode != null && ((DomElement) domNode).matches(selectorString);
+            return domNode != null && ((DomElement) domNode).matches(selectorString, domNode);
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(

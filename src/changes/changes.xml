@@ -7,6 +7,16 @@
     </properties>
 
     <body>
+        <release version="5.7.0" date="xxxx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                CSS pseudo class :scope support added.
+            </action>
+            <action type="fix" dev="rbri">
+                CSS pseudo class selector validation and processing is case insensitive.
+            </action>
+        </release>
+
+
         <release version="5.6.0" date="October 11, 2026" description="Chrome/Edge 154, Firefox 157, Bugfixes">
             <action type="fix" dev="rbri">
                 HTML parsing: a trailing slash on non void elements is only honored for XHTML pages and for fragments of
