@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.UrlUtils;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -3984,6 +3985,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException"})
+    @HtmlUnitNYI(
+            CHROME = {"SyntaxError/DOMException", "[object NodeList]", "SyntaxError/DOMException"},
+            EDGE = {"SyntaxError/DOMException", "[object NodeList]", "SyntaxError/DOMException"},
+            FF = {"SyntaxError/DOMException", "[object NodeList]", "SyntaxError/DOMException"},
+            FF_ESR = {"SyntaxError/DOMException", "[object NodeList]", "SyntaxError/DOMException"})
     public void scopeInvalidForms() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -4138,6 +4144,151 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  log(getComputedStyle(document.documentElement).color);\n"
             + "  log(getComputedStyle(document.body).backgroundColor);\n"
             + "  log(getComputedStyle(document.body).color);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The scoping element of a document query is the root element of this very document,
+     * not the one of the current page.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "true", "false", "1"})
+    public void scopeCreatedDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var doc = document.implementation.createHTMLDocument('test');\n"
+            + "  log(doc.querySelectorAll(':scope').length);\n"
+            + "  log(doc.querySelector(':scope') === doc.documentElement);\n"
+            + "  log(doc.querySelector(':scope') === document.documentElement);\n"
+            + "  log(doc.querySelectorAll(':scope > body').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "1"})
+    public void scopeIframeDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var frameDoc = document.getElementById('frame').contentDocument;\n"
+            + "  log(frameDoc.querySelector(':scope') === frameDoc.documentElement);\n"
+            + "  log(frameDoc.querySelector(':scope') === document.documentElement);\n"
+            + "  log(frameDoc.querySelectorAll(':scope > body').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe id='frame'></iframe>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The root element is looked up for every query.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "newRoot", "1"})
+    public void scopeReplacedRootElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var html = document.createElement('html');\n"
+            + "  html.id = 'newRoot';\n"
+            // logging uses the document title, this requires a head
+            + "  html.appendChild(document.createElement('head'));\n"
+            + "  html.appendChild(document.createElement('body'));\n"
+            + "  document.replaceChild(html, document.documentElement);\n"
+            + "  log(document.querySelectorAll(':scope').length);\n"
+            + "  log(document.querySelector(':scope').id);\n"
+            + "  log(document.querySelectorAll(':scope > body').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Without a root element there is nothing the document query can match.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "null"})
+    public void scopeWithoutRootElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var results = [];\n"
+            + "  document.removeChild(document.documentElement);\n"
+            + "  results.push(document.querySelectorAll(':scope').length);\n"
+            + "  results.push(String(document.querySelector(':scope')));\n"
+            // logging uses the document title, this requires a root element with a head
+            + "  var html = document.createElement('html');\n"
+            + "  html.appendChild(document.createElement('head'));\n"
+            + "  document.appendChild(html);\n"
+            + "  for (var i = 0; i < results.length; i++) {\n"
+            + "    log(results[i]);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * :scope has the specificity of a pseudo-class, like :root.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"rgb(255, 0, 0)", "rgb(0, 128, 0)"})
+    public void scopeInStyleSheetSpecificity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<style>\n"
+            // the pseudo-class wins against the type selector, even if it is defined first
+            + "  :scope { color: red; }\n"
+            + "  html { color: blue; }\n"
+            // same specificity, the later rule wins
+            + "  :root { background-color: blue; }\n"
+            + "  :scope { background-color: green; }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var style = getComputedStyle(document.documentElement);\n"
+            + "  log(style.color);\n"
+            + "  log(style.backgroundColor);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
