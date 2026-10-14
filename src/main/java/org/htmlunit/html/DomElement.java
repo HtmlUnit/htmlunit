@@ -1650,16 +1650,17 @@ public class DomElement extends DomNamespaceNode implements Element {
     /**
      * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
      * @param selectorString the selector to test
+     * @param scope the context scope node used for evaluating relative selectors like :scope
      * @return true if the element would be selected by the specified selector string; otherwise, returns false.
      */
-    public boolean matches(final String selectorString) {
+    public boolean matches(final String selectorString, final DomNode scope) {
         try {
             final WebClient webClient = getPage().getWebClient();
             final SelectorList selectorList = getSelectorList(selectorString, webClient);
 
             if (selectorList != null) {
                 for (final Selector selector : selectorList) {
-                    if (CssStyleSheet.selects(webClient.getBrowserVersion(), selector, this, null, true, true)) {
+                    if (CssStyleSheet.selects(webClient.getBrowserVersion(), this, selector, null, scope, true, true)) {
                         return true;
                     }
                 }

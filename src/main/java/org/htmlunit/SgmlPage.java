@@ -457,4 +457,25 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     public boolean isCharacterDataChangeListenerInUse() {
         return characterDataChangeListenerInUse_;
     }
+
+    /**
+     * Returns the first element within the document that matches the specified group of selectors.
+     * This uses null as scope.
+     * @param selectors one or more CSS selectors separated by commas
+     * @param <N> the node type
+     * @return null if no matches are found; otherwise, it returns the first matching element
+     */
+    public <N extends DomNode> N querySelector(final String selectors) {
+        return querySelector(selectors, null);
+    }
+
+    /**
+     * Retrieves all element nodes from descendants of the starting element node that match any selector
+     * within the supplied selector strings.
+     * @param selectors one or more CSS selectors separated by commas
+     * @return list of all found nodes
+     */
+    public DomNodeList<DomNode> querySelectorAll(final String selectors) {
+        return querySelectorAll(selectors, null);
+    }
 }

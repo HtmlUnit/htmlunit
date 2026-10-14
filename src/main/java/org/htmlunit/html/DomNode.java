@@ -1980,9 +1980,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Retrieves all element nodes from descendants of the starting element node that match any selector
      * within the supplied selector strings.
      * @param selectors one or more CSS selectors separated by commas
+     * @param scope the context scope node used for evaluating relative selectors like :scope
      * @return list of all found nodes
      */
-    public DomNodeList<DomNode> querySelectorAll(final String selectors) {
+    public DomNodeList<DomNode> querySelectorAll(final String selectors, final DomNode scope) {
         try {
             final WebClient webClient = getPage().getWebClient();
             final SelectorList selectorList = getSelectorList(selectors, webClient);
@@ -1991,7 +1992,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (selectorList != null) {
                 for (final DomElement child : getDomElementDescendants()) {
                     for (final Selector selector : selectorList) {
-                        if (CssStyleSheet.selects(webClient.getBrowserVersion(), selector, child, null, true, true)) {
+                        if (CssStyleSheet.selects(webClient.getBrowserVersion(), child,
+                                selector, null, scope, true, true)) {
                             elements.add(child);
                             break;
                         }
@@ -2038,12 +2040,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns the first element within the document that matches the specified group of selectors.
      * @param selectors one or more CSS selectors separated by commas
+     * @param scope the context scope node used for evaluating relative selectors like :scope
      * @param <N> the node type
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
     @SuppressWarnings("unchecked")
-    public <N extends DomNode> N querySelector(final String selectors) {
-        final DomNodeList<DomNode> list = querySelectorAll(selectors);
+    public <N extends DomNode> N querySelector(final String selectors, final DomNode scope) {
+        final DomNodeList<DomNode> list = querySelectorAll(selectors, scope);
         if (!list.isEmpty()) {
             return (N) list.get(0);
         }
@@ -2170,7 +2173,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     if (current instanceof DomElement elem) {
                         for (final Selector selector : selectorList) {
                             if (CssStyleSheet.selects(
-                                    webClient.getBrowserVersion(), selector, elem, null, true, true)) {
+                                    webClient.getBrowserVersion(), elem, selector, null, this, true, true)) {
                                 return elem;
                             }
                         }

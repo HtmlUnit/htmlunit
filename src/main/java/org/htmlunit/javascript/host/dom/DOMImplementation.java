@@ -16,10 +16,12 @@ package org.htmlunit.javascript.host.dom;
 
 import java.io.IOException;
 
+import org.htmlunit.SgmlPage;
 import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
+import org.htmlunit.html.DomDocumentType;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
@@ -200,6 +202,55 @@ public class DOMImplementation extends HtmlUnitScriptable {
                     StringUtils.isEmptyString(namespaceURI) ? null : namespaceURI, qualifiedName));
         }
         return document;
+    }
+
+    /**
+     * Creates a {@link DocumentType}.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMImplementation/createDocumentType">
+     *     createDocumentType (MDN)</a>
+     *
+     * @param qualifiedName the qualified name of the document type, e.g. {@code html}
+     * @param publicId the public identifier
+     * @param systemId the system identifier
+     * @return the newly created {@link DocumentType}
+     */
+    @JsxFunction
+    public DocumentType createDocumentType(final String qualifiedName, final String publicId,
+            final String systemId) {
+        if (!isValidDocumentTypeName(qualifiedName)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "createDocumentType: Provided string '" + qualifiedName + "' contains an invalid character",
+                    DOMException.INVALID_CHARACTER_ERR);
+        }
+
+        // the node is owned by the page of the window; if it is appended to another document
+        // the page is replaced
+        final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final DomDocumentType doctype = new DomDocumentType(page, qualifiedName, publicId, systemId);
+        return (DocumentType) getScriptableFor(doctype);
+    }
+
+    // the XML Name production, simplified in the same way as it is done for createElement:
+    // only the ASCII range is checked
+    private static boolean isValidDocumentTypeName(final String name) {
+        if (name.isEmpty()) {
+            return false;
+        }
+
+        final int first = name.charAt(0);
+        if (first < 128 && !Character.isLetter(first) && first != ':' && first != '_') {
+            return false;
+        }
+
+        final int length = name.length();
+        for (int i = 1; i < length; i++) {
+            final int c = name.charAt(i);
+            if (c < 128 && !Character.isLetterOrDigit(c) && c != ':' && c != '_' && c != '-' && c != '.') {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

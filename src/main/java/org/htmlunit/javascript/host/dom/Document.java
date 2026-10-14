@@ -1017,7 +1017,9 @@ public class Document extends Node {
     @JsxFunction
     public Node querySelector(final String selectors) {
         try {
-            final DomNode node = getDomNodeOrDie().querySelector(selectors);
+            final Element doc = getDocumentElement();
+            final DomNode scope = doc == null ? null : doc.getDomNodeOrNull();
+            final DomNode node = getDomNodeOrDie().querySelector(selectors, scope);
             if (node != null) {
                 return node.getScriptableObject();
             }
@@ -1042,7 +1044,10 @@ public class Document extends Node {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            return NodeList.staticNodeList(getParentScope(), getDomNodeOrDie().querySelectorAll(selectors));
+            final DomNode domNode = getDomNodeOrDie();
+            final Element doc = getDocumentElement();
+            final DomNode scope = doc == null ? null : doc.getDomNodeOrNull();
+            return NodeList.staticNodeList(getParentScope(), domNode.querySelectorAll(selectors, scope));
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(

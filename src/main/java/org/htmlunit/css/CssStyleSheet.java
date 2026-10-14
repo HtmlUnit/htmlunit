@@ -148,7 +148,7 @@ public class CssStyleSheet implements Serializable {
     private static final Log LOG = LogFactory.getLog(CssStyleSheet.class);
 
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
-    private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
+    private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n(?:[+-]\\d+)?", Pattern.CASE_INSENSITIVE);
     private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\].:])");
 
     /** The parsed stylesheet which this host object wraps. */
@@ -193,7 +193,7 @@ public class CssStyleSheet implements Serializable {
 
         final Set<String> css4 = new HashSet<>(Arrays.asList(
                 // only what is supported at the moment
-                "focus-within", "focus-visible"));
+                "focus-within", "focus-visible", "scope"));
         css4.addAll(CSS3_PSEUDO_CLASSES);
         CSS4_PSEUDO_CLASSES = Collections.unmodifiableSet(css4);
     }
@@ -404,12 +404,17 @@ public class CssStyleSheet implements Serializable {
      * @param selector the selector to test
      * @param element the element to test
      * @param pseudoElement the pseudo element to match, (can be {@code null})
+     * @param scope the context scope node used for evaluating relative selectors like :scope
      * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
      * @param throwOnSyntax throw exception if the selector syntax is incorrect
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
-    public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
-            final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll,
+    public static boolean selects(final BrowserVersion browserVersion,
+            final DomElement element,
+            final Selector selector,
+            final String pseudoElement,
+            final DomNode scope,
+            final boolean fromQuerySelectorAll,
             final boolean throwOnSyntax) {
         switch (selector.getSelectorType()) {
             case ELEMENT_NODE_SELECTOR:
@@ -430,7 +435,8 @@ public class CssStyleSheet implements Serializable {
                     final List<Condition> conditions = es.getConditions();
                     if (conditions != null) {
                         for (final Condition condition : conditions) {
-                            if (!selects(browserVersion, condition, element, fromQuerySelectorAll, throwOnSyntax)) {
+                            if (!selects(browserVersion, element, condition,
+                                    scope, fromQuerySelectorAll, throwOnSyntax)) {
                                 return false;
                             }
                         }
@@ -449,24 +455,24 @@ public class CssStyleSheet implements Serializable {
                     return false; // for instance parent is a DocumentFragment
                 }
                 final ChildSelector cs = (ChildSelector) selector;
-                return selects(browserVersion, cs.getSimpleSelector(), element, pseudoElement,
-                            fromQuerySelectorAll, throwOnSyntax)
-                    && selects(browserVersion, cs.getAncestorSelector(), (DomElement) parentNode,
-                            pseudoElement, fromQuerySelectorAll, throwOnSyntax);
+                return selects(browserVersion, element, cs.getSimpleSelector(), pseudoElement,
+                            scope, fromQuerySelectorAll, throwOnSyntax)
+                    && selects(browserVersion, (DomElement) parentNode, cs.getAncestorSelector(),
+                            pseudoElement, scope, fromQuerySelectorAll, throwOnSyntax);
 
             case DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 final SimpleSelector simpleSelector = ds.getSimpleSelector();
-                if (selects(browserVersion, simpleSelector, element, pseudoElement,
-                            fromQuerySelectorAll, throwOnSyntax)) {
+                if (selects(browserVersion, element, simpleSelector, pseudoElement,
+                            scope, fromQuerySelectorAll, throwOnSyntax)) {
                     DomNode ancestor = element;
                     if (simpleSelector.getSelectorType() != SelectorType.PSEUDO_ELEMENT_SELECTOR) {
                         ancestor = ancestor.getParentNode();
                     }
                     final Selector dsAncestorSelector = ds.getAncestorSelector();
                     while (ancestor instanceof DomElement) {
-                        if (selects(browserVersion, dsAncestorSelector, (DomElement) ancestor, pseudoElement,
-                                fromQuerySelectorAll, throwOnSyntax)) {
+                        if (selects(browserVersion, (DomElement) ancestor, dsAncestorSelector, pseudoElement,
+                                scope, fromQuerySelectorAll, throwOnSyntax)) {
                             return true;
                         }
                         ancestor = ancestor.getParentNode();
@@ -476,27 +482,27 @@ public class CssStyleSheet implements Serializable {
 
             case DIRECT_ADJACENT_SELECTOR:
                 final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
-                if (selects(browserVersion, das.getSimpleSelector(), element, pseudoElement,
-                            fromQuerySelectorAll, throwOnSyntax)) {
+                if (selects(browserVersion, element, das.getSimpleSelector(), pseudoElement,
+                            scope, fromQuerySelectorAll, throwOnSyntax)) {
                     DomNode prev = element.getPreviousSibling();
                     while (prev != null && !(prev instanceof DomElement)) {
                         prev = prev.getPreviousSibling();
                     }
                     return prev != null
-                            && selects(browserVersion, das.getSelector(),
-                                    (DomElement) prev, pseudoElement, fromQuerySelectorAll, throwOnSyntax);
+                            && selects(browserVersion, (DomElement) prev, das.getSelector(),
+                                    pseudoElement, scope, fromQuerySelectorAll, throwOnSyntax);
                 }
                 return false;
 
             case GENERAL_ADJACENT_SELECTOR:
                 final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
-                if (selects(browserVersion, gas.getSimpleSelector(), element, pseudoElement,
-                            fromQuerySelectorAll, throwOnSyntax)) {
+                if (selects(browserVersion, element, gas.getSimpleSelector(), pseudoElement,
+                            scope, fromQuerySelectorAll, throwOnSyntax)) {
                     for (DomNode prev1 = element.getPreviousSibling(); prev1 != null;
                                                         prev1 = prev1.getPreviousSibling()) {
                         if (prev1 instanceof DomElement domElement
-                            && selects(browserVersion, gas.getSelector(), domElement,
-                                    pseudoElement, fromQuerySelectorAll, throwOnSyntax)) {
+                            && selects(browserVersion, domElement, gas.getSelector(),
+                                    pseudoElement, scope, fromQuerySelectorAll, throwOnSyntax)) {
                             return true;
                         }
                     }
@@ -515,8 +521,8 @@ public class CssStyleSheet implements Serializable {
                 switch (rs.getCombinator()) {
                     case DESCENDANT_COMBINATOR:
                         for (final DomElement descendant : element.getDomElementDescendants()) {
-                            if (selects(browserVersion, rs.getSelector(), descendant, pseudoElement,
-                                            fromQuerySelectorAll, throwOnSyntax)) {
+                            if (selects(browserVersion, descendant, rs.getSelector(), pseudoElement,
+                                            scope, fromQuerySelectorAll, throwOnSyntax)) {
                                 return true;
                             }
                         }
@@ -524,8 +530,8 @@ public class CssStyleSheet implements Serializable {
 
                     case CHILD_COMBINATOR:
                         for (final DomElement child : element.getChildElements()) {
-                            if (selects(browserVersion, rs.getSelector(), child, pseudoElement,
-                                            fromQuerySelectorAll, throwOnSyntax)) {
+                            if (selects(browserVersion, child, rs.getSelector(), pseudoElement,
+                                            scope, fromQuerySelectorAll, throwOnSyntax)) {
                                 return true;
                             }
                         }
@@ -533,14 +539,14 @@ public class CssStyleSheet implements Serializable {
 
                     case NEXT_SIBLING_COMBINATOR:
                         final DomElement nextSibling = element.getNextElementSibling();
-                        return nextSibling != null && selects(browserVersion, rs.getSelector(), nextSibling,
-                                pseudoElement, fromQuerySelectorAll, throwOnSyntax);
+                        return nextSibling != null && selects(browserVersion, nextSibling, rs.getSelector(), pseudoElement,
+                                                                scope, fromQuerySelectorAll, throwOnSyntax);
 
                     case SUBSEQUENT_SIBLING_COMBINATOR:
                         for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
                             if (n instanceof DomElement domElement
-                                    && selects(browserVersion, rs.getSelector(), domElement, pseudoElement,
-                                                fromQuerySelectorAll, throwOnSyntax)) {
+                                    && selects(browserVersion, domElement, rs.getSelector(), pseudoElement,
+                                                scope, fromQuerySelectorAll, throwOnSyntax)) {
                                 return true;
                             }
                         }
@@ -568,12 +574,15 @@ public class CssStyleSheet implements Serializable {
      * @param browserVersion the browser version
      * @param condition the condition to test
      * @param element the element to test
+     * @param scope the context scope node used for evaluating relative selectors like :scope
      * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
      * @param throwOnSyntax throw exception if the selector syntax is incorrect
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     static boolean selects(final BrowserVersion browserVersion,
-            final Condition condition, final DomElement element,
+            final DomElement element,
+            final Condition condition,
+            final DomNode scope,
             final boolean fromQuerySelectorAll, final boolean throwOnSyntax) {
 
         switch (condition.getConditionType()) {
@@ -676,7 +685,7 @@ public class CssStyleSheet implements Serializable {
                 final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
                 final SelectorList notSelectorList = notPseudoCondition.getSelectors();
                 for (final Selector selector : notSelectorList) {
-                    if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
+                    if (selects(browserVersion, element, selector, null, scope, fromQuerySelectorAll, throwOnSyntax)) {
                         return false;
                     }
                 }
@@ -685,7 +694,7 @@ public class CssStyleSheet implements Serializable {
             case IS_PSEUDO_CLASS_CONDITION:
                 final IsPseudoClassCondition conditionIsPseudo = (IsPseudoClassCondition) condition;
                 for (final Selector selector : conditionIsPseudo.getSelectors()) {
-                    if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
+                    if (selects(browserVersion, element, selector, null, scope, fromQuerySelectorAll, throwOnSyntax)) {
                         return true;
                     }
                 }
@@ -695,7 +704,7 @@ public class CssStyleSheet implements Serializable {
                 // same as is
                 final WherePseudoClassCondition conditionWherePseudo = (WherePseudoClassCondition) condition;
                 for (final Selector selector : conditionWherePseudo.getSelectors()) {
-                    if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
+                    if (selects(browserVersion, element, selector, null, scope, fromQuerySelectorAll, throwOnSyntax)) {
                         return true;
                     }
                 }
@@ -704,14 +713,14 @@ public class CssStyleSheet implements Serializable {
             case HAS_PSEUDO_CLASS_CONDITION:
                 final HasPseudoClassCondition conditionHasPseudo = (HasPseudoClassCondition) condition;
                 for (final Selector selector : conditionHasPseudo.getSelectors()) {
-                    if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
+                    if (selects(browserVersion, element, selector, null, scope, fromQuerySelectorAll, throwOnSyntax)) {
                         return true;
                     }
                 }
                 return false;
 
             case PSEUDO_CLASS_CONDITION:
-                return selectsPseudoClass(browserVersion, condition, element);
+                return selectsPseudoClass(browserVersion, element, condition, scope);
 
             default:
                 if (LOG.isErrorEnabled()) {
@@ -771,9 +780,12 @@ public class CssStyleSheet implements Serializable {
     }
 
     @SuppressWarnings("PMD.UselessParentheses")
-    private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
-            final Condition condition, final DomElement element) {
-        final String value = condition.getValue();
+    private static boolean selectsPseudoClass(
+            final BrowserVersion browserVersion,
+            final DomElement element,
+            final Condition condition,
+            final DomNode scope) {
+        final String value = StringUtils.toRootLowerCase(condition.getValue());
         switch (value) {
             case "root":
                 return element == element.getPage().getDocumentElement();
@@ -809,6 +821,9 @@ public class CssStyleSheet implements Serializable {
                                 || (element instanceof HtmlTextArea hta && !hta.isReadOnly()));
                 }
                 return false;
+
+            case "scope":
+                return element == (scope == null ? element.getPage().getDocumentElement() : scope);
 
             case "checked":
                 return (element instanceof HtmlCheckBoxInput hcbi && hcbi.isChecked())
@@ -974,11 +989,12 @@ public class CssStyleSheet implements Serializable {
     }
 
     private static boolean getNthElement(final String nth, final int index) {
-        if ("odd".equalsIgnoreCase(nth)) {
+        // nth is already lowercase
+        if ("odd".equals(nth)) {
             return index % 2 != 0;
         }
 
-        if ("even".equalsIgnoreCase(nth)) {
+        if ("even".equals(nth)) {
             return index % 2 == 0;
         }
 
@@ -1211,6 +1227,7 @@ public class CssStyleSheet implements Serializable {
                     value = value.substring(0, value.indexOf('(') + 1) + ')';
                 }
 
+                value = StringUtils.toRootLowerCase(value);
                 if ("nth-child()".equals(value)
                         || "nth-last-child()".equals(value)
                         || "nth-of-type()".equals(value)
@@ -1572,13 +1589,16 @@ public class CssStyleSheet implements Serializable {
      * @param element the element to which style rules must apply in order for them to be added to
      *        the specified style
      * @param pseudoElement a string specifying the pseudo-element to match (maybe {@code null})
+     * @param scope the context scope node used for evaluating relative selectors like :scope
      */
-    public void modifyIfNecessary(final ComputedCssStyleDeclaration style, final DomElement element,
-            final String pseudoElement) {
+    public void modifyIfNecessary(final ComputedCssStyleDeclaration style,
+            final DomElement element,
+            final String pseudoElement,
+            final DomNode scope) {
 
         final BrowserVersion browser = element.getPage().getWebClient().getBrowserVersion();
         final List<CSSStyleSheetImpl.SelectorEntry> matchingRules =
-                selects(getRuleIndex(), browser, element, pseudoElement, false);
+                selects(getRuleIndex(), browser, element, pseudoElement, scope, false);
         for (final CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
             final CSSStyleDeclarationImpl dec = entry.getRule().getStyle();
             style.applyStyleFromSelector(dec, entry.getSelector());
@@ -1658,8 +1678,11 @@ public class CssStyleSheet implements Serializable {
 
     private List<CSSStyleSheetImpl.SelectorEntry> selects(
                             final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
-                            final BrowserVersion browserVersion, final DomElement element,
-                            final String pseudoElement, final boolean fromQuerySelectorAll) {
+                            final BrowserVersion browserVersion,
+                            final DomElement element,
+                            final String pseudoElement,
+                            final DomNode scope,
+                            final boolean fromQuerySelectorAll) {
 
         final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
 
@@ -1672,8 +1695,8 @@ public class CssStyleSheet implements Serializable {
 
             CSSStyleSheetImpl.SelectorEntry entry = iter.next();
             while (null != entry) {
-                if (selects(browserVersion, entry.getSelector(),
-                            element, pseudoElement, fromQuerySelectorAll, false)) {
+                if (selects(browserVersion, element, entry.getSelector(),
+                            pseudoElement, scope, fromQuerySelectorAll, false)) {
                     matchingRules.add(entry);
                 }
                 entry = iter.next();
@@ -1681,7 +1704,7 @@ public class CssStyleSheet implements Serializable {
 
             for (final CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
                 matchingRules.addAll(selects(child, browserVersion,
-                                                    element, pseudoElement, fromQuerySelectorAll));
+                                                    element, pseudoElement, scope, fromQuerySelectorAll));
             }
         }
 
