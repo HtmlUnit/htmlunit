@@ -539,7 +539,8 @@ public class CssStyleSheet implements Serializable {
 
                     case NEXT_SIBLING_COMBINATOR:
                         final DomElement nextSibling = element.getNextElementSibling();
-                        return nextSibling != null && selects(browserVersion, nextSibling, rs.getSelector(), pseudoElement,
+                        return nextSibling != null && selects(browserVersion, nextSibling,
+                                                                rs.getSelector(), pseudoElement,
                                                                 scope, fromQuerySelectorAll, throwOnSyntax);
 
                     case SUBSEQUENT_SIBLING_COMBINATOR:

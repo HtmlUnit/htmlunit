@@ -1427,6 +1427,7 @@
             <name>Ashutosh Panda</name>
         </contributor>
     </contributors>
+
     <dependencies>
         <!-- this includes httpclient as dependency -->
         <dependency>
