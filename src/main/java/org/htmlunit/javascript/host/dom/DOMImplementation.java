@@ -270,7 +270,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
         return true;
     }
 
-     /**
+    /**
      * Creates an {@link HTMLDocument}.
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMImplementation/createHTMLDocument">
      *     createHTMLDocument (MDN)</a>

@@ -51,6 +51,7 @@ import org.htmlunit.html.DomCharacterData;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.DomProcessingInstruction;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlElement.DisplayStyle;
@@ -1114,6 +1115,13 @@ public class Element extends Node {
                 };
             }
             builder.append(s);
+        }
+        else if (node instanceof DomProcessingInstruction pi) {
+            builder.append("<?")
+                    .append(pi.getTarget())
+                    .append(" ")
+                    .append(pi.getData())
+                    .append(">");
         }
         else if (html) {
             final DomElement element = (DomElement) node;
