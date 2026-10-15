@@ -16,6 +16,7 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -56,7 +57,10 @@ import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.ProcessingInstruction;
 
 /**
  * Tests for {@link HtmlPage}.
@@ -1973,5 +1977,239 @@ public class HtmlPageTest extends SimpleWebTestCase {
         path = "details/abc;jsessionid=42?x=y&z=z";
         page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST + path));
         assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
+    }
+
+ // ---------------------------------------------------------------------------
+    // HtmlPage.createProcessingInstruction(), createAttributeNS(), createEntityReference()
+    // methods to be added to the HtmlPage test class (JUnit 5, SimpleWebTestCase)
+    //
+    // additional imports:
+    //     import static org.junit.jupiter.api.Assertions.*;
+    //     import org.w3c.dom.DOMException;
+    //     import org.w3c.dom.Node;
+    //     import org.w3c.dom.ProcessingInstruction;
+    // ---------------------------------------------------------------------------
+
+    private static final String XML_NS = "http://www.w3.org/XML/1998/namespace";
+    private static final String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createProcessingInstruction() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        final ProcessingInstruction pi = page.createProcessingInstruction("target", "data");
+
+        assertTrue(pi instanceof DomProcessingInstruction);
+        assertEquals(Node.PROCESSING_INSTRUCTION_NODE, pi.getNodeType());
+        assertEquals("target", pi.getTarget());
+        assertEquals("data", pi.getData());
+        assertEquals("target", pi.getNodeName());
+        assertEquals("data", pi.getNodeValue());
+        assertSame(page, pi.getOwnerDocument());
+        assertNull(pi.getParentNode());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createProcessingInstructionEmptyData() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        final ProcessingInstruction pi = page.createProcessingInstruction("target", "");
+
+        assertEquals("target", pi.getTarget());
+        assertEquals("", pi.getData());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createProcessingInstructionModifyData() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        final ProcessingInstruction pi = page.createProcessingInstruction("target", "a");
+        pi.setData("b");
+        assertEquals("b", pi.getData());
+        assertEquals("b", pi.getNodeValue());
+
+        pi.setNodeValue("c");
+        assertEquals("c", pi.getData());
+        assertEquals("target", pi.getTarget());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createProcessingInstructionAppendToElement() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+        final HtmlBody body = page.getBody();
+
+        final ProcessingInstruction pi = page.createProcessingInstruction("target", "data");
+        body.appendChild(pi);
+
+        assertEquals(1, body.getChildNodes().getLength());
+        assertSame(pi, body.getFirstChild());
+        assertSame(body, pi.getParentNode());
+        assertEquals("", body.getTextContent());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createProcessingInstructionAppendToPage() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+        final int count = page.getChildNodes().getLength();
+
+        final ProcessingInstruction pi = page.createProcessingInstruction("target", "data");
+        page.appendChild(pi);
+
+        assertEquals(count + 1, page.getChildNodes().getLength());
+        assertSame(pi, page.getLastChild());
+        assertSame(page, pi.getParentNode());
+    }
+
+    /**
+     * The validation of the target and the data is done by the JavaScript function.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createProcessingInstructionDoesNotValidate() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        final ProcessingInstruction pi = page.createProcessingInstruction("1 a", "b?>c");
+
+        assertEquals("1 a", pi.getTarget());
+        assertEquals("b?>c", pi.getData());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createAttributeNS() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        final DomAttr attr = page.createAttributeNS("http://www.w3.org/1999/xlink", "xlink:href");
+
+        assertEquals(Node.ATTRIBUTE_NODE, attr.getNodeType());
+        assertEquals("xlink:href", attr.getName());
+        assertEquals("xlink", attr.getPrefix());
+        assertEquals("href", attr.getLocalName());
+        assertEquals("http://www.w3.org/1999/xlink", attr.getNamespaceURI());
+        assertEquals("", attr.getValue());
+        assertFalse(attr.getSpecified());
+        assertNull(attr.getOwnerElement());
+        assertSame(page, attr.getOwnerDocument());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createAttributeNSWithoutNamespace() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        for (final String namespace : new String[] {null, ""}) {
+            final DomAttr attr = page.createAttributeNS(namespace, "name");
+
+            assertEquals("name", attr.getName());
+            assertNull("namespace '" + namespace + "'", attr.getPrefix());
+            assertEquals("name", attr.getLocalName());
+            assertNull("namespace '" + namespace + "'", attr.getNamespaceURI());
+        }
+    }
+
+    /**
+     * Unlike createAttribute() in the JavaScript layer the name is not lower cased.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createAttributeNSKeepsCase() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        final DomAttr attr = page.createAttributeNS("http://example.org", "Ab:DataValue");
+
+        assertEquals("Ab:DataValue", attr.getName());
+        assertEquals("Ab", attr.getPrefix());
+        assertEquals("DataValue", attr.getLocalName());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createAttributeNSValidCombinations() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        final String[][] cases = {
+            {null, "name"},
+            {"", "name"},
+            {"http://example.org", "a:b"},
+            {"http://example.org", "ab"},
+            {XML_NS, "xml:lang"},
+            {XML_NS, "foo:bar"},
+            {XMLNS_NS, "xmlns"},
+            {XMLNS_NS, "xmlns:foo"}
+        };
+
+        for (final String[] c : cases) {
+            final DomAttr attr = page.createAttributeNS(c[0], c[1]);
+            assertEquals("namespace '" + c[0] + "', name '" + c[1] + "'", c[1], attr.getName());
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createAttributeNSNamespaceError() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        final String[][] cases = {
+            // a prefix needs a namespace
+            {null, "a:b"},
+            {"", "a:b"},
+            // the prefix xml needs the xml namespace
+            {null, "xml:lang"},
+            {"http://example.org", "xml:lang"},
+            // xmlns needs the xmlns namespace
+            {null, "xmlns"},
+            {"http://example.org", "xmlns"},
+            {"http://example.org", "xmlns:foo"},
+            {XML_NS, "xmlns:foo"},
+            // the xmlns namespace needs xmlns
+            {XMLNS_NS, "foo:bar"},
+            {XMLNS_NS, "bar"}
+        };
+
+        for (final String[] c : cases) {
+            final DOMException e = assertThrows(DOMException.class,
+                    () -> page.createAttributeNS(c[0], c[1]),
+                    "namespace '" + c[0] + "', name '" + c[1] + "'");
+            assertEquals("namespace '" + c[0] + "', name '" + c[1] + "'", DOMException.NAMESPACE_ERR, e.code);
+        }
+    }
+
+    /**
+     * HTML documents do not support entity references.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createEntityReference() throws Exception {
+        final HtmlPage page = loadPage("<html><body></body></html>");
+
+        for (final String name : new String[] {"nbsp", "", "a b"}) {
+            final DOMException e = assertThrows(DOMException.class,
+                    () -> page.createEntityReference(name),
+                    "name '" + name + "'");
+            assertEquals("name '" + name + "'", DOMException.NOT_SUPPORTED_ERR, e.code);
+        }
     }
 }

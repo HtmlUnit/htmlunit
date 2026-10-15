@@ -1291,7 +1291,8 @@ public class DocumentTest extends WebDriverTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageVerifyTitle2(html);
+        final WebDriver driver = loadPage2(html);
+        verifyWindowName2(driver, getExpectedAlerts());
     }
 
     /**
@@ -4110,6 +4111,462 @@ public class DocumentTest extends WebDriverTestCase {
             + "  log(document.documentElement.clientWidth);\n"
             + "</script>\n"
             + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"7", "target", "data", "target", "data", "data", "4"})
+    public void createProcessingInstruction() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      log(pi.nodeType);\n"
+            + "      log(pi.target);\n"
+            + "      log(pi.data);\n"
+            + "      log(pi.nodeName);\n"
+            + "      log(pi.nodeValue);\n"
+            + "      log(pi.textContent);\n"
+            + "      log(pi.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object ProcessingInstruction]", "true", "true", "true"})
+    public void createProcessingInstructionPrototypeChain() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      log(Object.prototype.toString.call(pi));\n"
+            + "      log(pi instanceof ProcessingInstruction);\n"
+            + "      log(pi instanceof CharacterData);\n"
+            + "      log(pi instanceof Node);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "null"})
+    public void createProcessingInstructionOwnerAndParent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      log(pi.ownerDocument === document);\n"
+            + "      log(pi.parentNode);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[]", "0", "[]"})
+    public void createProcessingInstructionEmptyData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', '');\n"
+            + "      log('[' + pi.data + ']');\n"
+            + "      log(pi.length);\n"
+            + "      log('[' + pi.nodeValue + ']');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The target is read only, the data can be changed in different ways.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"b", "c", "d", "t"})
+    public void createProcessingInstructionModification() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('t', 'a');\n"
+            + "      pi.data = 'b';\n"
+            + "      log(pi.nodeValue);\n"
+            + "      pi.nodeValue = 'c';\n"
+            + "      log(pi.data);\n"
+            + "      pi.textContent = 'd';\n"
+            + "      log(pi.data);\n"
+            + "      pi.target = 'other';\n"
+            + "      log(pi.target);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The methods of CharacterData.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"bcd", "abcdefg", "xabcdefg", "bcdefg", "Zcdefg"})
+    public void createProcessingInstructionCharacterDataMethods() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('t', 'abcdef');\n"
+            + "      log(pi.substringData(1, 3));\n"
+            + "      pi.appendData('g');\n"
+            + "      log(pi.data);\n"
+            + "      pi.insertData(0, 'x');\n"
+            + "      log(pi.data);\n"
+            + "      pi.deleteData(0, 2);\n"
+            + "      log(pi.data);\n"
+            + "      pi.replaceData(0, 1, 'Z');\n"
+            + "      log(pi.data);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Targets have to match the XML Name production.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"a:b", "_x", "a-b.c1", "xml-stylesheet"})
+    public void createProcessingInstructionValidTargets() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var targets = ['a:b', '_x', 'a-b.c1', 'xml-stylesheet'];\n"
+            + "      for (var i = 0; i < targets.length; i++) {\n"
+            + "        try {\n"
+            + "          log(document.createProcessingInstruction(targets[i], 'data').target);\n"
+            + "        } catch(e) { logEx(e); }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Only the sequence '?>' is forbidden inside of the data.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "a?b", "a>b", "?", ">"})
+    public void createProcessingInstructionSpecialData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var data = '<b>&amp;\\n\"x\"';\n"
+            + "      log(document.createProcessingInstruction('t', data).data === data);\n"
+            + "      var values = ['a?b', 'a>b', '?', '>'];\n"
+            + "      for (var i = 0; i < values.length; i++) {\n"
+            + "        try {\n"
+            + "          log(document.createProcessingInstruction('t', values[i]).data);\n"
+            + "        } catch(e) { logEx(e); }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
+             "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
+             "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException"})
+    public void createProcessingInstructionInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            // invalid targets
+            + "      var targets = ['', '1a', 'a b', 'a>b', '-a'];\n"
+            + "      for (var i = 0; i < targets.length; i++) {\n"
+            + "        try {\n"
+            + "          document.createProcessingInstruction(targets[i], 'data');\n"
+            + "          log('no error');\n"
+            + "        } catch(e) { logEx(e); }\n"
+            + "      }\n"
+            // invalid data
+            + "      try {\n"
+            + "        document.createProcessingInstruction('target', 'a?>b');\n"
+            + "        log('no error');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The arguments are converted to strings.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"null", "undefined", "12"})
+    public void createProcessingInstructionArgumentConversion() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      log(document.createProcessingInstruction('a', null).data);\n"
+            + "      log(document.createProcessingInstruction('a', undefined).data);\n"
+            + "      log(document.createProcessingInstruction('a', 12).data);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Both arguments are required.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError"})
+    public void createProcessingInstructionMissingArguments() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      try {\n"
+            + "        document.createProcessingInstruction('a');\n"
+            + "        log('no error');\n"
+            + "      } catch(e) { log(e.name); }\n"
+            + "      try {\n"
+            + "        document.createProcessingInstruction();\n"
+            + "        log('no error');\n"
+            + "      } catch(e) { log(e.name); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Every document creates its own nodes, HTML as well as XML documents.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "7", "true"})
+    public void createProcessingInstructionOtherDocuments() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var htmlDoc = document.implementation.createHTMLDocument('x');\n"
+            + "      log(htmlDoc.createProcessingInstruction('t', 'd').ownerDocument === htmlDoc);\n"
+            + "      var xmlDoc = document.implementation.createDocument(null, 'root', null);\n"
+            + "      var pi = xmlDoc.createProcessingInstruction('t', 'd');\n"
+            + "      log(pi.nodeType);\n"
+            + "      log(pi.ownerDocument === xmlDoc);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"7", "t", "d", "true", "true"})
+    public void createProcessingInstructionCloneNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('t', 'd');\n"
+            + "      var clone = pi.cloneNode(false);\n"
+            + "      log(clone.nodeType);\n"
+            + "      log(clone.target);\n"
+            + "      log(clone.data);\n"
+            + "      log(clone !== pi);\n"
+            + "      log(pi.isEqualNode(clone));\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"7", "false", "0", "null", "null"})
+    public void createProcessingInstructionNodeApi() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('t', 'd');\n"
+            + "      log(Node.PROCESSING_INSTRUCTION_NODE);\n"
+            + "      log(pi.hasChildNodes());\n"
+            + "      log(pi.childNodes.length);\n"
+            + "      log(pi.firstChild);\n"
+            + "      log(pi.nextSibling);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The text content of an element ignores processing instructions.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "true", "true", "[]", "0"})
+    public void createProcessingInstructionInElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      var div = document.createElement('div');\n"
+            + "      div.appendChild(pi);\n"
+            + "      log(div.childNodes.length);\n"
+            + "      log(div.firstChild === pi);\n"
+            + "      log(pi.parentNode === div);\n"
+            + "      log('[' + div.textContent + ']');\n"
+            + "      pi.remove();\n"
+            + "      log(div.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Inside of an HTML document the serialization of a processing instruction is
+     * {@code <?target data>}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("<?target data>")
+    public void createProcessingInstructionInnerHtml() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var div = document.createElement('div');\n"
+            + "      div.appendChild(document.createProcessingInstruction('target', 'data'));\n"
+            + "      log(div.innerHTML);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
 
         loadPageVerifyTitle2(html);
     }
