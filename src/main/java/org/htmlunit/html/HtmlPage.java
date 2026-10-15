@@ -1900,6 +1900,10 @@ public class HtmlPage extends SgmlPage {
                 calculateBase();
             }
         }
+
+        if (node instanceof DomDocumentType doctype && node.getParentNode() == this) {
+            setDocumentType(doctype);
+        }
         node.onAddedToPage();
     }
 
@@ -1924,6 +1928,11 @@ public class HtmlPage extends SgmlPage {
             if ("base".equals(node.getNodeName())) {
                 calculateBase();
             }
+            return;
+        }
+
+        if (node instanceof DomDocumentType && node == getDoctype()) {
+            setDocumentType(null);
         }
     }
 
