@@ -861,6 +861,9 @@ public class DOMImplementationTest extends WebDriverTestCase {
             FF_ESR = {"InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
                       "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
                       "InvalidCharacterError/DOMException"})
+    @HtmlUnitNYI(
+            FF_ESR = {"no error", "no error", "InvalidCharacterError/DOMException",
+                      "InvalidCharacterError/DOMException", "no error"})
     public void createDocumentTypeInvalidNames() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
