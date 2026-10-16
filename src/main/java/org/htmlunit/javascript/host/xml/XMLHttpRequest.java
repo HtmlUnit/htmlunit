@@ -1052,10 +1052,32 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             webResponse_ = wc.loadWebResponse(webRequest_);
             LOG.debug("Web response loaded successfully.");
 
+            // Determine if the final response URL (after following any redirects) is same-origin
+            final URL finalUrl = webResponse_.getWebRequest().getUrl();
+            final URL pageUrl = webRequest_.getRequestingUrl();
+
+            boolean effectiveSameOrigin = false;
+            if ("data".equals(finalUrl.getProtocol())) {
+                effectiveSameOrigin = true;
+            }
+            else if ("blob".equals(finalUrl.getProtocol())) {
+                try {
+                    final URL blobOrigin = UrlUtils.toUrlUnsafe(finalUrl.toExternalForm().substring("blob:".length()));
+                    effectiveSameOrigin = UrlUtils.isSameOrigin(pageUrl, blobOrigin);
+                }
+                catch (final MalformedURLException ignored) {
+                    effectiveSameOrigin = false;
+                }
+            }
+            else {
+                effectiveSameOrigin = UrlUtils.isSameOrigin(pageUrl, finalUrl);
+            }
+
             boolean allowOriginResponse = true;
-            if (!isSameOrigin_) {
+            if (!effectiveSameOrigin) {
                 String value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
-                allowOriginResponse = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(value);
+                allowOriginResponse = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN) != null
+                        && webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(value);
                 if (isWithCredentials()) {
                     // second step: check the allow-credentials header for true
                     value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
@@ -1065,6 +1087,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     allowOriginResponse = allowOriginResponse || ALLOW_ORIGIN_ALL.equals(value);
                 }
             }
+
             if (allowOriginResponse) {
                 if (overriddenMimeType_ != null) {
                     final int index = overriddenMimeType_.toLowerCase(Locale.ROOT).indexOf("charset=");

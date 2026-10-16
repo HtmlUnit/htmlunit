@@ -1074,4 +1074,128 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         }
     }
 
+    /**
+     * Tests that a same-origin or initial XMLHttpRequest following a 3xx redirect
+     * to a cross-origin resource lacking proper CORS headers (Access-Control-Allow-Origin)
+     * is correctly blocked, resulting in a NetworkError/DOMException instead of exposing the response body.
+     *
+     * Flow tested:
+     * 1. An attacker page (origin A) makes a synchronous XMLHttpRequest to a pivot endpoint on the same origin.
+     * 2. The pivot endpoint responds with a 3xx redirect pointing to an internal/secret cross-origin resource (origin B).
+     * 3. The underlying client follows the redirect to origin B.
+     * 4. Because origin B does not return Access-Control-Allow-Origin headers, the cross-origin response is blocked,
+     *    throwing a NetworkError and preventing unauthorized body exposure.
+     *
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
+    public void crossOriginRedirectWithoutCors() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'http://' + window.location.hostname + ':" + PORT + "/pivot';\n"
+                + "    xhr.open('GET', url, false);\n"
+                + "    xhr.send();\n"
+                + "  } catch(e) { logEx(e) }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
+                + "  log(xhr.responseText);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/secret", SecretServerServlet.class);
+        startWebServer2(".", servlets2);
+
+        final URL pageUrl = new URL(URL_FIRST, "/page");
+        final URL pivotUrl = new URL(URL_FIRST, "/pivot");
+        final URL secretUrl = new URL("http://localhost:" + PORT2 + "/secret");
+
+        getMockWebConnection().setResponse(pageUrl, html, 200, "OK", "text/html;charset=UTF-8", UTF_8, null);
+
+        final List<NameValuePair> redirectHeaders = new ArrayList<>();
+        redirectHeaders.add(new NameValuePair("Location", secretUrl.toExternalForm()));
+        getMockWebConnection().setResponse(pivotUrl, "", 302, "Found", "text/html", redirectHeaders);
+
+        loadPage2(pageUrl, null);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Secret resource servlet without CORS headers (running on PORT2).
+     */
+    public static class SecretServerServlet extends HttpServlet {
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setCharacterEncoding(UTF_8.name());
+            response.setContentType(MimeType.TEXT_HTML);
+            response.getWriter().write("INTERNAL_SECRET");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "Hello from Data URL"})
+    public void dataUrl() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'data:text/plain;charset=utf-8,Hello from Data URL';\n"
+                + "    xhr.open('GET', url, false);\n"
+                + "    xhr.send();\n"
+                + "    log(xhr.readyState);\n"
+                + "    log(xhr.status);\n"
+                + "    log(xhr.responseText);\n"
+                + "  } catch(e) { log(e) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "Hello from Blob"})
+    public void blobUrlSameOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var blob = new Blob(['Hello from Blob'], {type: 'text/plain'});\n"
+                + "    var url = URL.createObjectURL(blob);\n"
+                + "    xhr.open('GET', url, false);\n"
+                + "    xhr.send();\n"
+                + "    log(xhr.readyState);\n"
+                + "    log(xhr.status);\n"
+                + "    log(xhr.responseText);\n"
+                + "  } catch(e) { log(e) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
