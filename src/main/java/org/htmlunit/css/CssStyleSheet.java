@@ -405,7 +405,7 @@ public class CssStyleSheet implements Serializable {
      * @param element the element to test
      * @param pseudoElement the pseudo element to match, (can be {@code null})
      * @param scope the context scope node used for evaluating relative selectors like :scope
-     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String, DomNode)}
      * @param throwOnSyntax throw exception if the selector syntax is incorrect
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
