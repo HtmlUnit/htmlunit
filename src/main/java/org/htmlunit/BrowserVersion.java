@@ -72,7 +72,7 @@ public final class BrowserVersion implements Serializable {
     /** Latest Firefox. */
     public static final BrowserVersion FIREFOX = new BrowserVersion(157, "FF");
 
-    private static final int FIREFOX_ESR_NUMERIC = 140;
+    private static final int FIREFOX_ESR_NUMERIC = 153;
 
     /** Firefox ESR. */
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
@@ -120,7 +120,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.SEC_FETCH_USER,
             HttpHeader.PRIORITY};
         FIREFOX_ESR.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-        FIREFOX_ESR.acceptLanguageHeader_ = "en-US,en;q=0.5";
+        FIREFOX_ESR.acceptLanguageHeader_ = "en-US,en;q=0.9";
         FIREFOX_ESR.xmlHttpRequestAcceptHeader_ = "*/*";
         FIREFOX_ESR.imgAcceptHeader_ = "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5";
         FIREFOX_ESR.cssAcceptHeader_ = "text/css,*/*;q=0.1";
