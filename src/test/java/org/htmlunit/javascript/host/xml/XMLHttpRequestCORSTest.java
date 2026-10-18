@@ -1601,6 +1601,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"4", "200", "origin=§§URL§§;cookie=null;auth=null"},
             FF = {"NetworkError/DOMException", "4", "0", ""},
             FF_ESR = {"NetworkError/DOMException", "4", "0", ""})
+    @HtmlUnitNYI(FF = {"4", "200", "origin=§§URL§§;cookie=null;auth=null"},
+            FF_ESR = {"4", "200", "origin=§§URL§§;cookie=null;auth=null"})
     public void crossOriginRedirectDropsAuthorizationHeader() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         startSecondServer();
