@@ -1260,7 +1260,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(pageUrl, html, 200, "OK", "text/html;charset=UTF-8", UTF_8, null);
 
         loadPage2(pageUrl, null);
-        verifyTitle2(getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /** synchronous request; logs readyState, status and responseText (and the exception, if there is one). */
