@@ -1447,12 +1447,27 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
     private void postRedirect(final int code, final HttpMethod httpMethod,
             final String redirectUrl, final String content) throws Exception {
+        redirect("POST", code, httpMethod, redirectUrl, content);
+    }
+
+    /**
+     * Sends a synchronous request that is answered by a redirect and verifies the request that follows.
+     *
+     * @param requestMethod the method of the request
+     * @param code the status code of the redirect
+     * @param expectedMethod the expected method of the request that follows the redirect
+     * @param redirectUrl the target of the redirect
+     * @param content the content to send
+     * @throws Exception if the test fails
+     */
+    private void redirect(final String requestMethod, final int code, final HttpMethod expectedMethod,
+            final String redirectUrl, final String content) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    try {\n"
-            + "      xhr.open('POST', 'redirect.html', false);\n"
+            + "      xhr.open('" + requestMethod + "', 'redirect.html', false);\n"
             + "      xhr.send('" + content + "');\n"
             + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
@@ -1472,9 +1487,104 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         loadPage2(html);
 
         assertEquals(reqCount + Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
-        assertEquals(httpMethod, getMockWebConnection().getLastWebRequest().getHttpMethod());
-        assertNotNull(getMockWebConnection().getLastWebRequest().getRequestBody());
-        assertFalse(getMockWebConnection().getLastWebRequest().getRequestBody().isEmpty());
-        assertEquals(content, getMockWebConnection().getLastWebRequest().getRequestBody());
+
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        assertEquals(expectedMethod, lastRequest.getHttpMethod());
+        if (HttpMethod.GET == expectedMethod) {
+            // the body is gone, and the headers that describe it
+            assertTrue(lastRequest.getRequestBody() == null || lastRequest.getRequestBody().isEmpty());
+            for (final String name : lastRequest.getAdditionalHeaders().keySet()) {
+                assertFalse(name, HttpHeader.CONTENT_TYPE.equalsIgnoreCase(name) || "Content-Length".equalsIgnoreCase(name));
+            }
+        }
+        else {
+            assertNotNull(lastRequest.getRequestBody());
+            assertFalse(lastRequest.getRequestBody().isEmpty());
+            assertEquals(content, lastRequest.getRequestBody());
+        }
+    }
+
+    /**
+     * 301, 302 and 303 turn a POST into a GET without the body.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3")
+    public void sendPostWithRedirect301() throws Exception {
+        redirect("POST", 301, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3")
+    public void sendPostWithRedirect302() throws Exception {
+        redirect("POST", 302, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3")
+    public void sendPostWithRedirect303() throws Exception {
+        redirect("POST", 303, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
+    }
+
+    /**
+     * 301 and 302 only change the method POST.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3")
+    public void sendPutWithRedirect302() throws Exception {
+        redirect("PUT", 302, HttpMethod.PUT, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
+    }
+
+    /**
+     * 303 changes all methods but GET and HEAD.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3")
+    public void sendPutWithRedirect303() throws Exception {
+        redirect("PUT", 303, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3")
+    public void sendDeleteWithRedirect303() throws Exception {
+        redirect("DELETE", 303, HttpMethod.GET, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
+    }
+
+    /**
+     * A redirect loop ends with a network error.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("NetworkError/DOMException")
+    public void redirectLoop() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    try {\n"
+            + "      xhr.open('GET', 'loop.html', false);\n"
+            + "      xhr.send();\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", new URL(URL_FIRST, "/loop.html").toExternalForm()));
+        getMockWebConnection().setDefaultResponse("", 302, "Found", null, headers);
+
+        loadPageVerifyTitle2(html);
     }
 }
