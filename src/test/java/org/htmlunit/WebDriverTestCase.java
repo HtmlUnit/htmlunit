@@ -100,7 +100,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * "{@code test.properties}" in the HtmlUnit root directory.
  * Sample (remove the part not matching your os):
  * <pre>
-   browsers=hu,ff,chrome
+   browsers=hu,ff,chrome,chrome-bidi
 
    ff.bin=/usr/bin/firefox                              [Unix]
    ff-esr.bin=/usr/bin/firefox-esr                      [Unix]
@@ -130,6 +130,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *       <li>ff-esr, (running test using real Firefox ESR),</li>
  *       <li>chrome (running test using real Chrome),</li>
  *       <li>edge (running test using real Edge),</li>
+ *       <li>ff-bidi, ff-esr-bidi, chrome-bidi, edge-bidi (the same real browsers but the session is
+ *       started with BiDi enabled; the expectations are the same as for the classic variants),</li>
  *     </ul>
  *   </li>
  *
@@ -256,9 +258,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /** The driver cache. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<>();
 
+    /**
+     * The key of the driver cache for real browsers; the classic and the BiDi variant of a browser
+     * need their own driver.
+     */
+    protected record RealBrowserKey(BrowserVersion browserVersion, boolean bidi) {
+    }
+
     /** The driver cache for real browsers. */
-    protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_REAL_BROWSERS = new HashMap<>();
-    private static final Map<BrowserVersion, Integer> WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT = new HashMap<>();
+    protected static final Map<RealBrowserKey, WebDriver> WEB_DRIVERS_REAL_BROWSERS = new HashMap<>();
+    private static final Map<RealBrowserKey, Integer> WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT = new HashMap<>();
 
     private static Server STATIC_SERVER_;
     private static String STATIC_SERVER_STARTER_; // stack trace to save the server start code location
@@ -273,6 +282,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static final Executor EXECUTOR_POOL = Executors.newFixedThreadPool(4);
 
     private boolean useRealBrowser_;
+    private boolean useBiDi_;
 
     /**
      * The HtmlUnitDriver.
@@ -345,24 +355,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected WebDriver getWebDriver() {
         final BrowserVersion browserVersion = getBrowserVersion();
+        final RealBrowserKey realBrowserKey = realBrowserKey();
         WebDriver driver;
         if (useRealBrowser()) {
             synchronized (WEB_DRIVERS_REAL_BROWSERS) {
-                driver = WEB_DRIVERS_REAL_BROWSERS.get(browserVersion);
+                driver = WEB_DRIVERS_REAL_BROWSERS.get(realBrowserKey);
                 if (driver != null) {
                     // there seems to be a memory leak at least with FF;
                     // we have to restart sometimes
-                    Integer count = WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.get(browserVersion);
+                    Integer count = WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.get(realBrowserKey);
                     if (null == count) {
                         count = -1;
                     }
                     count += 1;
                     if (count >= 1000) {
-                        shutDownReal(browserVersion);
+                        shutDownReal(realBrowserKey);
                         driver = null;
                     }
                     else {
-                        WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.put(browserVersion, count);
+                        WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.put(realBrowserKey, count);
                     }
                 }
 
@@ -374,8 +385,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         throw new RuntimeException(e);
                     }
 
-                    WEB_DRIVERS_REAL_BROWSERS.put(browserVersion, driver);
-                    WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.put(browserVersion, 0);
+                    WEB_DRIVERS_REAL_BROWSERS.put(realBrowserKey, driver);
+                    WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.put(realBrowserKey, 0);
                 }
             }
         }
@@ -427,16 +438,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Closes the real browser drivers.
-     * @param browser the real browser to close
+     * Closes the real browser driver.
+     * @param key the real browser to close
      */
-    private static void shutDownReal(final BrowserVersion browser) {
+    private static void shutDownReal(final RealBrowserKey key) {
         synchronized (WEB_DRIVERS_REAL_BROWSERS) {
-            final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(browser);
+            final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(key);
             if (driver != null) {
                 quit(driver);
-                WEB_DRIVERS_REAL_BROWSERS.remove(browser);
-                WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(browser);
+                WEB_DRIVERS_REAL_BROWSERS.remove(key);
+                WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(key);
             }
         }
     }
@@ -504,6 +515,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * @return whether the real browser is started with BiDi enabled or not.
+     */
+    public boolean useBiDi() {
+        return useBiDi_;
+    }
+
+    /**
+     * Sets whether the real browser is started with BiDi enabled or not.
+     * @param useBiDi whether to enable BiDi or not
+     */
+    public void setUseBiDi(final boolean useBiDi) {
+        useBiDi_ = useBiDi;
+    }
+
+    private RealBrowserKey realBrowserKey() {
+        return new RealBrowserKey(getBrowserVersion(), useBiDi());
+    }
+
+    /**
      * When using a real browser seep for some timem.
      *
      * @param  millis the length of time to sleep in milliseconds
@@ -535,8 +565,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
 
                 final EdgeOptions options = new EdgeOptions();
-                // BiDi
-                // options.setCapability("webSocketUrl", true);
+                if (useBiDi()) {
+                    options.setCapability("webSocketUrl", true);
+                }
 
                 options.addArguments("--lang=" + locale);
                 // https://stackoverflow.com/questions/11289597/webdriver-how-to-specify-preferred-languages-for-chrome
@@ -573,8 +604,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
 
                 final ChromeOptions options = new ChromeOptions();
-                // BiDi
-                // options.setCapability("webSocketUrl", true);
+                if (useBiDi()) {
+                    options.setCapability("webSocketUrl", true);
+                }
 
                 options.addArguments("--lang=" + locale);
                 // https://stackoverflow.com/questions/11289597/webdriver-how-to-specify-preferred-languages-for-chrome
@@ -597,11 +629,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             if (BrowserVersion.FIREFOX.isSameBrowser(getBrowserVersion())) {
-                return createFirefoxDriver(GECKO_BIN_, FF_BIN_);
+                return createFirefoxDriver(GECKO_BIN_, FF_BIN_, useBiDi());
             }
 
             if (BrowserVersion.FIREFOX_ESR.isSameBrowser(getBrowserVersion())) {
-                return createFirefoxDriver(GECKO_BIN_, FF_ESR_BIN_);
+                return createFirefoxDriver(GECKO_BIN_, FF_ESR_BIN_, useBiDi());
             }
 
             throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
@@ -623,15 +655,23 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return webDriver_;
     }
 
-    private FirefoxDriver createFirefoxDriver(final String geckodriverBinary, final String binary) {
+    private FirefoxDriver createFirefoxDriver(final String geckodriverBinary, final String binary,
+            final boolean bidi) {
         final FirefoxDriverService service = new GeckoDriverService.Builder()
                 .withLogOutput(System.out)
                 .usingDriverExecutable(new File(geckodriverBinary))
                 .build();
 
         final FirefoxOptions options = new FirefoxOptions();
-        // BiDi
-        // options.setCapability("webSocketUrl", true);
+        options.addPreference("browser.shell.checkDefaultBrowser", false);
+        options.addPreference("browser.startup.homepage_welcomeurl", "about:blank");
+        options.addPreference("startup.homepage_welcome_url", "about:blank");
+        options.addPreference("startup.homepage_override_url", "about:blank");
+        options.addPreference("browser.aboutwelcome.enabled", false);
+
+        if (bidi) {
+            options.setCapability("webSocketUrl", true);
+        }
 
         options.setBinary(binary);
 
@@ -1597,7 +1637,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         if (useRealBrowser()) {
             synchronized (WEB_DRIVERS_REAL_BROWSERS) {
-                final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(getBrowserVersion());
+                final RealBrowserKey realBrowserKey = realBrowserKey();
+                final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(realBrowserKey);
                 if (driver != null) {
                     try {
                         final String currentWindow = driver.getWindowHandle();
@@ -1614,8 +1655,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                                 }
                                 catch (final NoSuchWindowException e) {
                                     LOG.error("Error switching to browser window; quit browser.", e);
-                                    WEB_DRIVERS_REAL_BROWSERS.remove(getBrowserVersion());
-                                    WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(getBrowserVersion());
+                                    WEB_DRIVERS_REAL_BROWSERS.remove(realBrowserKey);
+                                    WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(realBrowserKey);
                                     driver.quit();
                                     return;
                                 }
@@ -1634,8 +1675,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     }
                     catch (final NoSuchSessionException e) {
                         LOG.error("Error browser session no longer available.", e);
-                        WEB_DRIVERS_REAL_BROWSERS.remove(getBrowserVersion());
-                        WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(getBrowserVersion());
+                        WEB_DRIVERS_REAL_BROWSERS.remove(realBrowserKey);
+                        WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(realBrowserKey);
                         return;
                     }
                     catch (final WebDriverException e) {
