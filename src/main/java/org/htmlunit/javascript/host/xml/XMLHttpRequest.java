@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.xml;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
 import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
@@ -1002,89 +1003,40 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
 
-            if (!isSameOrigin_) {
-                // Cookies should not be sent for cross-origin requests when withCredentials is false
-                if (!isWithCredentials()) {
-                    webRequest_.addHint(HttpHint.BlockCookies);
-                }
-            }
-
-            webResponse_ = wc.loadWebResponse(webRequest_);
+            // follows the redirects like the fetch standard describes it
+            // and checks the CORS headers of all responses of a cross origin request
+            webResponse_ = loadWebResponseFollowingRedirects(wc);
             LOG.debug("Web response loaded successfully.");
 
-            // Determine if the final response URL (after following any redirects) is same-origin
-            final URL finalUrl = webResponse_.getWebRequest().getUrl();
-            final URL pageUrl = webRequest_.getRequestingUrl();
-
-            boolean effectiveSameOrigin = false;
-            if ("data".equals(finalUrl.getProtocol())) {
-                effectiveSameOrigin = true;
-            }
-            else if ("blob".equals(finalUrl.getProtocol())) {
-                try {
-                    final URL blobOrigin = UrlUtils.toUrlUnsafe(finalUrl.toExternalForm().substring("blob:".length()));
-                    effectiveSameOrigin = UrlUtils.isSameOrigin(pageUrl, blobOrigin);
+            if (overriddenMimeType_ != null) {
+                final int index = overriddenMimeType_.toLowerCase(Locale.ROOT).indexOf("charset=");
+                String charsetName = "";
+                if (index != -1) {
+                    charsetName = overriddenMimeType_.substring(index + "charset=".length());
                 }
-                catch (final MalformedURLException ignored) {
-                    effectiveSameOrigin = false;
-                }
-            }
-            else {
-                effectiveSameOrigin = UrlUtils.isSameOrigin(pageUrl, finalUrl);
-            }
 
-            boolean allowOriginResponse = true;
-            if (!effectiveSameOrigin) {
-                String value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
-                allowOriginResponse = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN) != null
-                        && webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(value);
-                if (isWithCredentials()) {
-                    // second step: check the allow-credentials header for true
-                    value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
-                    allowOriginResponse = allowOriginResponse && Boolean.parseBoolean(value);
+                final String charsetNameFinal = charsetName;
+                final Charset charset;
+                if (XUserDefinedCharset.NAME.equalsIgnoreCase(charsetName)) {
+                    charset = XUserDefinedCharset.INSTANCE;
                 }
                 else {
-                    allowOriginResponse = allowOriginResponse || ALLOW_ORIGIN_ALL.equals(value);
+                    charset = EncodingSniffer.toCharset(charsetName);
                 }
-            }
-
-            if (allowOriginResponse) {
-                if (overriddenMimeType_ != null) {
-                    final int index = overriddenMimeType_.toLowerCase(Locale.ROOT).indexOf("charset=");
-                    String charsetName = "";
-                    if (index != -1) {
-                        charsetName = overriddenMimeType_.substring(index + "charset=".length());
+                webResponse_ = new WebResponseWrapper(webResponse_) {
+                    @Override
+                    public String getContentType() {
+                        return overriddenMimeType_;
                     }
 
-                    final String charsetNameFinal = charsetName;
-                    final Charset charset;
-                    if (XUserDefinedCharset.NAME.equalsIgnoreCase(charsetName)) {
-                        charset = XUserDefinedCharset.INSTANCE;
-                    }
-                    else {
-                        charset = EncodingSniffer.toCharset(charsetName);
-                    }
-                    webResponse_ = new WebResponseWrapper(webResponse_) {
-                        @Override
-                        public String getContentType() {
-                            return overriddenMimeType_;
+                    @Override
+                    public Charset getContentCharset() {
+                        if (charsetNameFinal.isEmpty() || charset == null) {
+                            return super.getContentCharset();
                         }
-
-                        @Override
-                        public Charset getContentCharset() {
-                            if (charsetNameFinal.isEmpty() || charset == null) {
-                                return super.getContentCharset();
-                            }
-                            return charset;
-                        }
-                    };
-                }
-            }
-            if (!allowOriginResponse) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + webRequest_.getUrl());
-                }
-                throw new NoPermittedHeaderException("No permitted \"Access-Control-Allow-Origin\" header.");
+                        return charset;
+                    }
+                };
             }
 
             setState(HEADERS_RECEIVED);
@@ -1146,6 +1098,212 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         e.getMessage(), DOMException.NETWORK_ERR);
             }
         }
+    }
+
+    /**
+     * Loads the response of the request and follows the redirects the way the
+     * <a href="https://fetch.spec.whatwg.org/#http-redirect-fetch">fetch standard</a> describes it for a
+     * request in cors mode:
+     * <ul>
+     *   <li>only http and https locations are followed, not more than {@value #MAX_REDIRECTS} times</li>
+     *   <li>as soon as a url of another origin is involved, all responses (also the ones that redirect)
+     *       have to pass the CORS check and cookies are only sent if credentials are used</li>
+     *   <li>the Origin header is the one of the page; after a redirect from one foreign origin to another
+     *       one it is 'null'</li>
+     *   <li>a redirect to a foreign url with credentials is a network error</li>
+     *   <li>301/302 (for POST) and 303 switch to GET and drop the body; 307/308 keep method and body</li>
+     *   <li>the Authorization header and the credentials of the request are dropped if the redirect
+     *       leaves the origin</li>
+     * </ul>
+     *
+     * @param wc the web client
+     * @return the final response
+     * @throws IOException in case of a network error
+     */
+    private WebResponse loadWebResponseFollowingRedirects(final WebClient wc) throws IOException {
+        final URL pageUrl = webRequest_.getRequestingUrl();
+        final String pageOrigin = serializeOrigin(pageUrl);
+
+        WebRequest request = webRequest_;
+        // the response tainting 'cors' of the fetch standard: as soon as an url of another origin is involved
+        boolean corsTainting = !isSameOrigin_;
+        // the origin of the request is 'null' after a redirect from one foreign origin to another one
+        boolean taintedOrigin = false;
+
+        for (int redirects = 0;; redirects++) {
+            // the redirects are handled here, the web client has to return the response as it is
+            request.addHint(HttpHint.DoNotFollowRedirects);
+            if (corsTainting && !isWithCredentials()) {
+                // Cookies should not be sent for cross-origin requests when withCredentials is false
+                request.addHint(HttpHint.BlockCookies);
+            }
+
+            final WebResponse response = wc.loadWebResponse(request);
+            final String originHeader = request.getAdditionalHeaders().get(HttpHeader.ORIGIN);
+            final URL currentUrl = request.getUrl();
+
+            final URL nextUrl = wc.getOptions().isRedirectEnabled() ? getRedirectUrl(response, currentUrl) : null;
+
+            // each response of a cors request has to pass the check, also the one that redirects
+            if (corsTainting && !isCorsAllowed(response, originHeader)) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + currentUrl);
+                }
+                throw new NoPermittedHeaderException("No permitted \"Access-Control-Allow-Origin\" header.");
+            }
+
+            if (nextUrl == null) {
+                return response;
+            }
+
+            if (redirects >= MAX_REDIRECTS) {
+                throw new IOException("Too many redirects for " + webRequest_.getUrl());
+            }
+
+            final boolean crossOriginRedirect = !UrlUtils.isSameOrigin(currentUrl, nextUrl);
+            final boolean foreignTarget = !UrlUtils.isSameOrigin(pageUrl, nextUrl);
+            if (nextUrl.getUserInfo() != null && (corsTainting || foreignTarget)) {
+                throw new IOException("Redirect to a URL with credentials is not allowed: " + currentUrl);
+            }
+
+            if (crossOriginRedirect && !UrlUtils.isSameOrigin(pageUrl, currentUrl)) {
+                taintedOrigin = true;
+            }
+            corsTainting = corsTainting || foreignTarget;
+
+            request = createRedirectRequest(request, response.getStatusCode(), nextUrl, crossOriginRedirect);
+            setOriginHeader(request, corsTainting, taintedOrigin, pageOrigin);
+
+            if (corsTainting && isPreflight(request)) {
+                final WebResponse preflightResponse = sendPreflight(wc, request);
+                if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
+                        || !isPreflightAuthorized(request, preflightResponse)) {
+                    throw new NoPermittedHeaderException("No permitted \"Access-Control-Allow-Origin\" header.");
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns the url a response redirects to.
+     *
+     * @param response the response
+     * @param currentUrl the url the response was loaded from
+     * @return the url or {@code null} if the response is not a redirect (or has no location)
+     * @throws IOException if the location is invalid or not a http(s) url
+     */
+    private static URL getRedirectUrl(final WebResponse response, final URL currentUrl) throws IOException {
+        final int status = response.getStatusCode();
+        if (status != 301 && status != 302 && status != 303 && status != 307 && status != 308) {
+            return null;
+        }
+
+        String location = response.getResponseHeaderValue("Location");
+        if (location == null) {
+            return null;
+        }
+        location = new String(location.getBytes(ISO_8859_1), UTF_8);
+
+        final URL url;
+        try {
+            url = WebClient.expandUrl(currentUrl, location);
+        }
+        catch (final MalformedURLException e) {
+            throw new IOException("Invalid redirect location '" + location + "'", e);
+        }
+
+        final String protocol = url.getProtocol();
+        if (!"http".equals(protocol) && !"https".equals(protocol)) {
+            throw new IOException("Redirect to the unsupported scheme '" + protocol + "' is not allowed.");
+        }
+        return url;
+    }
+
+    /**
+     * Creates the request for the target of a redirect.
+     */
+    private static WebRequest createRedirectRequest(final WebRequest request, final int status,
+            final URL url, final boolean crossOriginRedirect) {
+        final HttpMethod method = request.getHttpMethod();
+        final boolean toGet = ((status == 301 || status == 302) && method == HttpMethod.POST)
+                || (status == 303 && method != HttpMethod.GET && method != HttpMethod.HEAD);
+
+        final WebRequest next = new WebRequest(url, toGet ? HttpMethod.GET : method);
+        next.setCharset(request.getCharset());
+        next.setDefaultResponseContentCharset(request.getDefaultResponseContentCharset());
+        next.setFetchDestination(request.getFetchDestination());
+        next.setFetchModeOverride(request.getFetchModeOverride());
+        next.setRequestingUrl(request.getRequestingUrl());
+        next.setTimeout(request.getTimeout());
+        if (request.hasHint(HttpHint.IncludeCharsetInContentTypeHeader)) {
+            next.addHint(HttpHint.IncludeCharsetInContentTypeHeader);
+        }
+
+        for (final Entry<String, String> header : request.getAdditionalHeaders().entrySet()) {
+            next.setAdditionalHeader(header.getKey(), header.getValue());
+        }
+
+        if (toGet) {
+            // the body is gone, and the headers that describe it
+            next.removeAdditionalHeader(HttpHeader.CONTENT_TYPE);
+            next.removeAdditionalHeader("Content-Length");
+            next.removeAdditionalHeader("Content-Encoding");
+            next.removeAdditionalHeader("Content-Language");
+            next.removeAdditionalHeader("Content-Location");
+        }
+        else if (request.getRequestBody() != null) {
+            next.setRequestBody(request.getRequestBody());
+            next.setEncodingType(request.getEncodingType());
+        }
+        else if (!request.getRequestParameters().isEmpty()) {
+            next.setRequestParameters(request.getRequestParameters());
+        }
+
+        if (crossOriginRedirect) {
+            // credentials are not forwarded to another origin
+            next.removeAdditionalHeader("Authorization");
+        }
+        else {
+            next.setCredentials(request.getCredentials());
+        }
+        return next;
+    }
+
+    /**
+     * The Origin header is sent for requests of another origin and for all methods but GET and HEAD.
+     */
+    private static void setOriginHeader(final WebRequest request, final boolean corsTainting,
+            final boolean taintedOrigin, final String pageOrigin) {
+        final HttpMethod method = request.getHttpMethod();
+        if (corsTainting || (method != HttpMethod.GET && method != HttpMethod.HEAD)) {
+            request.setAdditionalHeader(HttpHeader.ORIGIN, taintedOrigin ? "null" : pageOrigin);
+        }
+        else {
+            request.removeAdditionalHeader(HttpHeader.ORIGIN);
+        }
+    }
+
+    private static String serializeOrigin(final URL url) {
+        final StringBuilder origin = new StringBuilder().append(url.getProtocol()).append("://")
+                .append(url.getHost());
+        if (url.getPort() != -1) {
+            origin.append(':').append(url.getPort());
+        }
+        return origin.toString();
+    }
+
+    /**
+     * The CORS check of the fetch standard.
+     */
+    private boolean isCorsAllowed(final WebResponse response, final String origin) {
+        String value = response.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
+        final boolean allowed = origin != null && origin.equals(value);
+        if (isWithCredentials()) {
+            // second step: check the allow-credentials header for true
+            value = response.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
+            return allowed && Boolean.parseBoolean(value);
+        }
+        return allowed || ALLOW_ORIGIN_ALL.equals(value);
     }
 
     /**

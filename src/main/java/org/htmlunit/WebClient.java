@@ -1681,7 +1681,8 @@ public class WebClient implements Serializable, AutoCloseable {
         else if (status >= HttpStatus.MOVED_PERMANENTLY_301
             && status <= HttpStatus.PERMANENT_REDIRECT_308
             && status != HttpStatus.NOT_MODIFIED_304
-            && getOptions().isRedirectEnabled()) {
+            && getOptions().isRedirectEnabled()
+            && !webRequest.hasHint(WebRequest.HttpHint.DoNotFollowRedirects)) {
 
             final URL newUrl;
             String locationString = null;
