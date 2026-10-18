@@ -490,7 +490,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 LOG.debug("XMLHttpRequest.responseXML returns because of a network error ("
                         + resp.getError() + ")");
             }
-            if (resp.getError() instanceof NoPermittedHeaderException) {
+            if (resp.getError() instanceof NoPermittedHeaderException
+                    || resp.getError() instanceof RedirectException) {
                 return "";
             }
             return null;
@@ -1103,7 +1104,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     /**
      * Loads the response of the request and follows the redirects the way the
      * <a href="https://fetch.spec.whatwg.org/#http-redirect-fetch">fetch standard</a> describes it for a
-     * request in cors mode:
+     * request in cors mode:.
      * <ul>
      *   <li>only http and https locations are followed, not more than {@value #MAX_REDIRECTS} times</li>
      *   <li>as soon as a url of another origin is involved, all responses (also the ones that redirect)
@@ -1157,13 +1158,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             if (redirects >= MAX_REDIRECTS) {
-                throw new IOException("Too many redirects for " + webRequest_.getUrl());
+                throw new RedirectException("Too many redirects for " + webRequest_.getUrl());
             }
 
             final boolean crossOriginRedirect = !UrlUtils.isSameOrigin(currentUrl, nextUrl);
             final boolean foreignTarget = !UrlUtils.isSameOrigin(pageUrl, nextUrl);
             if (nextUrl.getUserInfo() != null && (corsTainting || foreignTarget)) {
-                throw new IOException("Redirect to a URL with credentials is not allowed: " + currentUrl);
+                throw new RedirectException("Redirect to a URL with credentials is not allowed: " + currentUrl);
             }
 
             if (crossOriginRedirect && !UrlUtils.isSameOrigin(pageUrl, currentUrl)) {
@@ -1209,12 +1210,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             url = WebClient.expandUrl(currentUrl, location);
         }
         catch (final MalformedURLException e) {
-            throw new IOException("Invalid redirect location '" + location + "'", e);
+            throw new RedirectException("Invalid redirect location '" + location + "'", e);
         }
 
         final String protocol = url.getProtocol();
         if (!"http".equals(protocol) && !"https".equals(protocol)) {
-            throw new IOException("Redirect to the unsupported scheme '" + protocol + "' is not allowed.");
+            throw new RedirectException("Redirect to the unsupported scheme '" + protocol + "' is not allowed.");
         }
         return url;
     }
@@ -1642,6 +1643,20 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private static final class NoPermittedHeaderException extends IOException {
         NoPermittedHeaderException(final String msg) {
             super(msg);
+        }
+    }
+
+    /**
+     * A redirect that is not allowed (or not possible); this is a network error, but
+     * like for the CORS errors the browsers do not hide the (empty) responseText.
+     */
+    private static final class RedirectException extends IOException {
+        RedirectException(final String msg) {
+            super(msg);
+        }
+
+        RedirectException(final String msg, final Throwable cause) {
+            super(msg, cause);
         }
     }
 }

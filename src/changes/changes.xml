@@ -9,6 +9,9 @@
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                XMLHttpRequest responseText has to be an empty string after a failed redirect.
+            </action>
+            <action type="fix" dev="rbri">
                 A same-origin or initial XMLHttpRequest following a 3xx redirect to a cross-origin resource
                 lacking proper CORS headers (Access-Control-Allow-Origin) must be blocked.
             </action>
