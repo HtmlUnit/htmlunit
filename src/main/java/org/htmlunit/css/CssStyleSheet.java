@@ -1574,10 +1574,14 @@ public class CssStyleSheet implements Serializable {
             if (text.endsWith("dppx")) {
                 return 96 * cssValue.getDoubleValue();
             }
+            // 'x' is an alias for 'dppx'
+            if (text.endsWith("x")) {
+                return 96 * cssValue.getDoubleValue();
+            }
         }
 
         if (LOG.isWarnEnabled()) {
-            LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'dpi', 'dpcm', or 'dppx' value.");
+            LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'dpi', 'dpcm', 'dppx' or 'x' value.");
         }
         return -1;
     }

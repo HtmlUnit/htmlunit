@@ -1567,6 +1567,43 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
+     * 'x' is an alias for 'dppx'.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"none", "1"})
+    public void mediaRule_min_resolution_x() throws Exception {
+        mediaRule("screen and (min-resolution: 0.5x)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_resolution_x_noMatch() throws Exception {
+        mediaRule("screen and (min-resolution: 100x)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"none", "1"})
+    public void mediaRule_max_resolution_x() throws Exception {
+        mediaRule("screen and (max-resolution: 100x)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_max_resolution_x_noMatch() throws Exception {
+        mediaRule("screen and (max-resolution: 0.5x)");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

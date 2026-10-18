@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri" issue="#992">
+                CSS media queries resolution unit 'x' (alias for 'dppx') support added.
+            </action>
             <action type="add" dev="rbri">
                 XMLHttpRequest: added the Firefox properties mozAnon and mozSystem (always false).
             </action>
