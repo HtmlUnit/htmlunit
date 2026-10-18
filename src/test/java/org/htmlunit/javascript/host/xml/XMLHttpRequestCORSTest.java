@@ -29,6 +29,7 @@ import java.util.Map;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.AfterEach;
@@ -1504,11 +1505,16 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"200", "NetworkError/DOMException", "NetworkError/DOMException",
-            "NetworkError/DOMException", "200"},
+                       "NetworkError/DOMException", "200"},
             FF = {"NetworkError/DOMException", "NetworkError/DOMException", "NetworkError/DOMException",
                   "NetworkError/DOMException", "NetworkError/DOMException"},
             FF_ESR = {"NetworkError/DOMException", "NetworkError/DOMException", "NetworkError/DOMException",
                       "NetworkError/DOMException", "NetworkError/DOMException"})
+    @HtmlUnitNYI(
+            CHROME = {"NetworkError/DOMException", "NetworkError/DOMException", "NetworkError/DOMException",
+                      "NetworkError/DOMException", "NetworkError/DOMException"},
+            EDGE = {"NetworkError/DOMException", "NetworkError/DOMException", "NetworkError/DOMException",
+                    "NetworkError/DOMException", "NetworkError/DOMException"})
     public void crossOriginRedirectStatusCodesWithoutCors() throws Exception {
         startSecondServer();
         final int[] codes = {301, 302, 303, 307, 308};

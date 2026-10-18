@@ -583,6 +583,24 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
+     * Returns the serialized url of the response (the final url after all redirects, without the fragment).
+     *
+     * @return the url of the response or an empty string if there is no response
+     */
+    @JsxGetter
+    public String getResponseURL() {
+        if (state_ == UNSENT || state_ == OPENED
+                || webResponse_ == null
+                || webResponse_ instanceof NetworkErrorWebResponse) {
+            return "";
+        }
+
+        final String url = webResponse_.getWebRequest().getUrl().toExternalForm();
+        final int fragment = url.indexOf('#');
+        return fragment < 0 ? url : url.substring(0, fragment);
+    }
+
+    /**
      * Returns the HTTP status message accompanying the status code (e.g. "Not Found" or "OK").
      *
      * @return the HTTP status message
@@ -663,6 +681,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxFunction
     public String getResponseHeader(final String headerName) {
         if (state_ == UNSENT || state_ == OPENED) {
+            return null;
+        }
+        if (webResponse_ instanceof NetworkErrorWebResponse) {
             return null;
         }
         if (webResponse_ != null) {

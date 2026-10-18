@@ -9,6 +9,12 @@
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                XMLHttpRequest getResponseHeader() now returns null for a network-error response.
+            </action>
+            <action type="add" dev="rbri">
+                XMLHttpRequest responseURL property added.
+            </action>
+            <action type="fix" dev="rbri">
                 XMLHttpRequest responseText has to be an empty string after a failed redirect.
             </action>
             <action type="fix" dev="rbri">
