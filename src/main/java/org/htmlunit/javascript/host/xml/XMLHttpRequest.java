@@ -149,6 +149,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private static final String ALLOW_ORIGIN_ALL = "*";
 
+    private static final int MAX_REDIRECTS = 20;
+
     private static final HashSet<String> PROHIBITED_HEADERS_ = new HashSet<>(Arrays.asList(
         "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
         HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",
@@ -979,52 +981,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         final BrowserVersion browserVersion = getBrowserVersion();
         try {
-            if (!isSameOrigin_ && isPreflight()) {
-                final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
-                preflightRequest.setEncodingType(null);
-
-                // preflight request shouldn't have cookies
-                preflightRequest.addHint(HttpHint.BlockCookies);
-
-                // header origin
-                final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
-                preflightRequest.setAdditionalHeader(HttpHeader.ORIGIN, originHeaderValue);
-
-                // header request-method
-                preflightRequest.setAdditionalHeader(
-                        HttpHeader.ACCESS_CONTROL_REQUEST_METHOD,
-                        webRequest_.getHttpMethod().name());
-
-                // header request-headers
-                final StringBuilder builder = new StringBuilder();
-                for (final Entry<String, String> header
-                        : new TreeMap<>(webRequest_.getAdditionalHeaders()).entrySet()) {
-                    final String name = org.htmlunit.util.StringUtils
-                                            .toRootLowerCase(header.getKey());
-                    if (isPreflightHeader(name, header.getValue())) {
-                        if (builder.length() != 0) {
-                            builder.append(',');
-                        }
-                        builder.append(name);
-                    }
-                }
-                preflightRequest.setAdditionalHeader(HttpHeader.ACCESS_CONTROL_REQUEST_HEADERS, builder.toString());
-                if (timeout_ > 0) {
-                    preflightRequest.setTimeout(timeout_);
-                }
-
-                if (getBrowserVersion().hasFeature(XHR_PREFLIGHT_CORS)) {
-                    // preflightRequest.setFetchModeOverride(FetchMode.CORS);
-                    preflightRequest.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "cors");
-                }
-
-                final HtmlPage containingPage = (HtmlPage) webWindow.getEnclosedPage();
-                preflightRequest.setRefererHeader(containingPage.getUrl());
-
-                // do the preflight request
-                final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
+            if (!isSameOrigin_ && isPreflight(webRequest_)) {
+                final WebResponse preflightResponse = sendPreflight(wc, webRequest_);
                 if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
-                        || !isPreflightAuthorized(preflightResponse)) {
+                        || !isPreflightAuthorized(webRequest_, preflightResponse)) {
                     setState(DONE);
                     if (async_ || browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
                         fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
@@ -1188,12 +1148,61 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
     }
 
-    private boolean isPreflight() {
-        final HttpMethod method = webRequest_.getHttpMethod();
+    /**
+     * Sends the preflight request for the given request.
+     */
+    private WebResponse sendPreflight(final WebClient wc, final WebRequest request) throws IOException {
+        final WebRequest preflightRequest = new WebRequest(request.getUrl(), HttpMethod.OPTIONS);
+        preflightRequest.setEncodingType(null);
+
+        // preflight request shouldn't have cookies
+        preflightRequest.addHint(HttpHint.BlockCookies);
+
+        // header origin
+        final String originHeaderValue = request.getAdditionalHeaders().get(HttpHeader.ORIGIN);
+        preflightRequest.setAdditionalHeader(HttpHeader.ORIGIN, originHeaderValue);
+
+        // header request-method
+        preflightRequest.setAdditionalHeader(
+                HttpHeader.ACCESS_CONTROL_REQUEST_METHOD,
+                request.getHttpMethod().name());
+
+        // header request-headers
+        final StringBuilder builder = new StringBuilder();
+        for (final Entry<String, String> header
+                : new TreeMap<>(request.getAdditionalHeaders()).entrySet()) {
+            final String name = org.htmlunit.util.StringUtils
+                                    .toRootLowerCase(header.getKey());
+            if (isPreflightHeader(name, header.getValue())) {
+                if (builder.length() != 0) {
+                    builder.append(',');
+                }
+                builder.append(name);
+            }
+        }
+        preflightRequest.setAdditionalHeader(HttpHeader.ACCESS_CONTROL_REQUEST_HEADERS, builder.toString());
+        if (timeout_ > 0) {
+            preflightRequest.setTimeout(timeout_);
+        }
+
+        if (getBrowserVersion().hasFeature(XHR_PREFLIGHT_CORS)) {
+            // preflightRequest.setFetchModeOverride(FetchMode.CORS);
+            preflightRequest.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "cors");
+        }
+
+        final HtmlPage containingPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        preflightRequest.setRefererHeader(containingPage.getUrl());
+
+        // do the preflight request
+        return wc.loadWebResponse(preflightRequest);
+    }
+
+    private static boolean isPreflight(final WebRequest request) {
+        final HttpMethod method = request.getHttpMethod();
         if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST) {
             return true;
         }
-        for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
+        for (final Entry<String, String> header : request.getAdditionalHeaders().entrySet()) {
             if (isPreflightHeader(header.getKey().toLowerCase(Locale.ROOT), header.getValue())) {
                 return true;
             }
@@ -1201,10 +1210,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         return false;
     }
 
-    private boolean isPreflightAuthorized(final WebResponse preflightResponse) {
+    private static boolean isPreflightAuthorized(final WebRequest request, final WebResponse preflightResponse) {
         final String originHeader = preflightResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
         if (!ALLOW_ORIGIN_ALL.equals(originHeader)
-                && !webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(originHeader)) {
+                && !request.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(originHeader)) {
             return false;
         }
 
@@ -1231,7 +1240,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
         }
 
-        for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
+        for (final Entry<String, String> header : request.getAdditionalHeaders().entrySet()) {
             final String key = org.htmlunit.util.StringUtils.toRootLowerCase(header.getKey());
             if (isPreflightHeader(key, header.getValue())
                     && !accessControlValues.contains(key)) {
