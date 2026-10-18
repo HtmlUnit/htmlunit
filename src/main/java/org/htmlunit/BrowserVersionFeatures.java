@@ -251,7 +251,7 @@ public enum BrowserVersionFeatures {
     JS_ERROR_STACK_TRACE_LIMIT,
 
     /** Javascript {@code Error.stackTraceLimit}. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     JS_ERROR_STACK_TRACE_LIMIT_128,
 
     /** Javascript InputEvent reads the inputType property from data. */
@@ -311,10 +311,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
-
-    /** For the 'about' protocol the location always returns an empty query. */
-    @BrowserFeature(FF_ESR)
-    JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL,
 
     /** Reload sends a referrer header. */
     @BrowserFeature({CHROME, EDGE})

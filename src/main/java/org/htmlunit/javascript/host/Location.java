@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 
 import java.io.IOException;
@@ -371,12 +370,6 @@ public class Location extends HtmlUnitScriptable {
         final URL url = getUrl();
         final String search = url.getQuery();
         if (StringUtils.isEmptyOrNull(search)) {
-            return "";
-        }
-
-        if (StringUtils.startsWithIgnoreCase(url.getProtocol(), UrlUtils.ABOUT)
-                && window_.getWebWindow().getWebClient().getBrowserVersion()
-                                .hasFeature(JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL)) {
             return "";
         }
         return "?" + search;

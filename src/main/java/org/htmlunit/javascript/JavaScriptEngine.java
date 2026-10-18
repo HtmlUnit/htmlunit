@@ -469,9 +469,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         else if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT_128)) {
             errorObject.defineProperty("stackTraceLimit", 128, ScriptableObject.EMPTY);
         }
-        else {
-            ScriptableObject.deleteProperty(errorObject, "stackTraceLimit");
-        }
 
         // add Intl
         Intl.init(scope, globalThis, browserVersion);
