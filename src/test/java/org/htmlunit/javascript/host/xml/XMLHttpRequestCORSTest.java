@@ -1220,7 +1220,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
- // ---------------------------------------------------------------------------
+
+    // ---------------------------------------------------------------------------
     // XMLHttpRequest, CORS and redirects
     // methods and servlets to be added to the test class that contains crossOriginRedirectWithoutCors
     //

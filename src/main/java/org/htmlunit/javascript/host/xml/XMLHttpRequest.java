@@ -21,6 +21,10 @@ import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
 import static org.htmlunit.BrowserVersionFeatures.XHR_PREFLIGHT_CORS;
 import static org.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TEXT_EMPTY_UNSENT;
 import static org.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -1496,6 +1500,40 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
+     * Sets the attribution reporting options of the request
+     * (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setAttributionReporting">MDN</a>).
+     * <p>
+     * The attribution reporting itself is not supported, so this only validates the argument.
+     * </p>
+     *
+     * @param options the options ({@code eventSourceEligible} and {@code triggerEligible})
+     */
+    @JsxFunction({CHROME, EDGE})
+    public void setAttributionReporting(final Object options) {
+        if (!(options instanceof ScriptableObject)) {
+            throw JavaScriptEngine.typeError("Failed to execute 'setAttributionReporting' on 'XMLHttpRequest': "
+                    + "parameter 1 is not of type 'AttributionReportingRequestOptions'.");
+        }
+    }
+
+    /**
+     * Sets the private state token options of the request
+     * (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setPrivateToken">MDN</a>).
+     * <p>
+     * Private state tokens are not supported, so this only validates the argument.
+     * </p>
+     *
+     * @param options the options ({@code version}, {@code operation}, ...)
+     */
+    @JsxFunction({CHROME, EDGE})
+    public void setPrivateToken(final Object options) {
+        if (!(options instanceof ScriptableObject)) {
+            throw JavaScriptEngine.typeError("Failed to execute 'setPrivateToken' on 'XMLHttpRequest': "
+                    + "parameter 1 is not of type 'PrivateToken'.");
+        }
+    }
+
+    /**
      * Overrides the MIME type returned by the server. This must be called before {@code send()}.
      * This may be used, for example, to force a stream to be treated and parsed as {@code text/xml},
      * even if the server does not report it as such.
@@ -1531,6 +1569,28 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxSetter
     public void setWithCredentials(final boolean withCredentials) {
         withCredentials_ = withCredentials;
+    }
+
+    /**
+     * Returns the {@code mozAnon} property; a normal web page can't create an anonymous request,
+     * therefore this is always {@code false}.
+     *
+     * @return {@code false}
+     */
+    @JsxGetter({FF, FF_ESR})
+    public boolean isMozAnon() {
+        return false;
+    }
+
+    /**
+     * Returns the {@code mozSystem} property; only privileged code can create a system request,
+     * therefore this is always {@code false}.
+     *
+     * @return {@code false}
+     */
+    @JsxGetter({FF, FF_ESR})
+    public boolean isMozSystem() {
+        return false;
     }
 
     /**

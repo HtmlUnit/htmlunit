@@ -4541,4 +4541,129 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(10), getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function", "function"},
+            FF = {"undefined", "undefined"},
+            FF_ESR = {"undefined", "undefined"})
+    public void chromeOnlyMethodsExist() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var xhr = new XMLHttpRequest();\n"
+                + "    log(typeof xhr.setAttributionReporting);\n"
+                + "    log(typeof xhr.setPrivateToken);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined"},
+            FF = {"false", "false"},
+            FF_ESR = {"false", "false"})
+    public void mozAnonAndMozSystem() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var xhr = new XMLHttpRequest();\n"
+                + "    log(xhr.mozAnon);\n"
+                + "    log(xhr.mozSystem);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ok",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void setAttributionReportingNotOpened() throws Exception {
+        callOnXhr("xhr.setAttributionReporting({eventSourceEligible: true, triggerEligible: false});", false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ok",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void setAttributionReportingOpened() throws Exception {
+        callOnXhr("xhr.setAttributionReporting({eventSourceEligible: true, triggerEligible: false});", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void setAttributionReportingNoArgument() throws Exception {
+        callOnXhr("xhr.setAttributionReporting();", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ok",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void setPrivateTokenNotOpened() throws Exception {
+        callOnXhr("xhr.setPrivateToken({version: 1, operation: 'token-request'});", false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ok",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void setPrivateTokenOpened() throws Exception {
+        callOnXhr("xhr.setPrivateToken({version: 1, operation: 'token-request'});", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void setPrivateTokenNoArgument() throws Exception {
+        callOnXhr("xhr.setPrivateToken();", true);
+    }
+
+    private void callOnXhr(final String call, final boolean open) throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var xhr = new XMLHttpRequest();\n"
+                + (open ? "    xhr.open('GET', '/foo.xml', true);\n" : "")
+                + "    try {\n"
+                + "      " + call + "\n"
+                + "      log('ok');\n"
+                + "    } catch(e) { logEx(e); }\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
+        loadPageVerifyTitle2(html);
+    }
 }
