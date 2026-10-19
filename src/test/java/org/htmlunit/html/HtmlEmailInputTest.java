@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -295,24 +294,12 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"null",
-                       "abc@email.com",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=abc%40email.com", "2"},
-            FF_ESR = {"null",
-                      "abc@email.com",
-                      "false",
-                      "false-false-false-false-false-false-false-false-true-false-false",
-                      "true",
-                      "§§URL§§", "1"})
-    @HtmlUnitNYI(FF_ESR = {"null",
-                           "abc@email.com",
-                           "true",
-                           "false-false-false-false-false-false-false-false-false-true-false",
-                           "true",
-                           "§§URL§§?k=abc%40email.com", "2"})
+    @Alerts({"null",
+             "abc@email.com",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=abc%40email.com", "2"})
     public void patternValidationTrimType() throws Exception {
         validation("<input type='email' pattern='.+@email.com' id='e1' name='k'>\n", "", " abc@email.com");
     }
