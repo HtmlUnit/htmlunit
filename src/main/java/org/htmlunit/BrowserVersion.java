@@ -450,7 +450,6 @@ public final class BrowserVersion implements Serializable {
         FIREFOX.maybeMediaResource_.addAll(ff);
 
         FIREFOX_ESR.maybeMediaResource_.addAll(ff);
-        FIREFOX_ESR.maybeMediaResource_.remove(new MediaResourceType("video/x-matroska", null));
 
         // --- maybe: Chrome / Edge (Edge is a superset of Chrome) ---
         HashSet<MediaResourceType> chrome = new HashSet<>(common);

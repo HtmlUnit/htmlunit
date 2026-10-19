@@ -379,8 +379,7 @@ public class HTMLMediaElementCanPlayTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"maybe", "maybe"},
-            FF_ESR = {"", ""})
+    @Alerts({"maybe", "maybe"})
     public void canPlayType_VideoXMatroska() throws Exception {
         canPlayType("video/x-matroska");
     }
