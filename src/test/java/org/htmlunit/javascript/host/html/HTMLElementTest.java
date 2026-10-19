@@ -223,7 +223,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
             FF = {"text", "i", "i", "[object CSSStyleProperties]", "function", "undefined", "undefined"},
-            FF_ESR = {"text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined"})
+            FF_ESR = {"text", "i", "i", "[object CSSStyleProperties]", "function", "undefined", "undefined"})
     @HtmlUnitNYI(FF = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
             FF_ESR = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
     public void attributesAccess() throws Exception {
@@ -2434,10 +2434,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"null", "body", "TypeError", "body", "body", "body",
-                       "f1", "body", "h1", "i1", "td", "TypeError", "td", "body", "body"},
-            FF_ESR = {"null", "body", "body", "body", "body", "body",
-                      "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"})
+    @Alerts({"null", "body", "TypeError", "body", "body", "body",
+             "f1", "body", "h1", "i1", "td", "TypeError", "td", "body", "body"})
     public void offsetParent_WithCSS() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -7382,8 +7380,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "P", "SPAN"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "DIV", "P", "SPAN"})
     public void moveBefore_basic() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7420,8 +7417,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "P", "DIV", "SPAN"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "P", "DIV", "SPAN"})
     public void moveBefore_moveToFirst() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7458,8 +7454,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "DIV", "SPAN", "P"})
     public void moveBefore_samePosition() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7496,8 +7491,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "DIV", "SPAN", "P"})
     public void moveBefore_samePositionFirst() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7534,8 +7528,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "DIV", "SPAN", "P"})
     public void moveBefore_itself() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7572,8 +7565,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("HierarchyRequestError/DOMException")
     public void moveBefore_ancestor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7609,8 +7601,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "NotFoundError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("NotFoundError/DOMException")
     public void moveBefore_differentParents() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7645,8 +7636,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "NotFoundError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("NotFoundError/DOMException")
     public void moveBefore_descendant() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7681,8 +7671,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "P", "SPAN", "0"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"2", "P", "SPAN", "0"})
     public void moveBefore_movedNotChild() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7718,8 +7707,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "NotFoundError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("NotFoundError/DOMException")
     public void moveBefore_referenceNotChild() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7754,8 +7742,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"SPAN", "DIV", "P", "3", "A"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"SPAN", "DIV", "P", "3", "A"})
     public void moveBefore_preservesChildren() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7794,8 +7781,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"text1", "myClass"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"text1", "myClass"})
     public void moveBefore_preservesAttributes() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7825,8 +7811,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF_ESR = "no moveBefore()")
+    @Alerts("true")
     public void moveBefore_returnValue() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7855,8 +7840,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "P", "SPAN", "SECTION"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"DIV", "P", "SPAN", "SECTION"})
     public void moveBefore_multipleOperations() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7895,8 +7879,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF_ESR = "no moveBefore()")
+    @Alerts("true")
     public void moveBefore_staysInDocument() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7925,8 +7908,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "DIV", "SPAN"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"2", "DIV", "SPAN"})
     public void moveBefore_nullReferenceNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7958,8 +7940,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"SPAN", "DIV", "DIV", "0", "1", "A"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"SPAN", "DIV", "DIV", "0", "1", "A"})
     public void moveBefore_nullLevelUp() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7999,8 +7980,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "NotFoundError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("NotFoundError/DOMException")
     public void moveBefore_detachedReferenceNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -8033,8 +8013,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("HierarchyRequestError/DOMException")
     public void moveBefore_detachedMovedNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -8067,8 +8046,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "no moveBefore()")
+    @Alerts("TypeError")
     public void moveBefore_missingArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -8101,8 +8079,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "no moveBefore()")
+    @Alerts("TypeError")
     public void moveBefore_missingReferenceNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -8135,8 +8112,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "no moveBefore()")
+    @Alerts("TypeError")
     public void moveBefore_wrongMovedNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -8169,8 +8145,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "no moveBefore()")
+    @Alerts("TypeError")
     public void moveBefore_wrongReferenceNodeNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

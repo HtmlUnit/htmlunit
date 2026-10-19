@@ -324,10 +324,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
 
-    /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    JS_OFFSET_PARENT_NULL_IF_FIXED,
-
     /** Indicates that the {@code Object.getOwnPropertyDescriptor.get} contains name. */
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,
