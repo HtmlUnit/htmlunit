@@ -55,10 +55,8 @@ public class PointerEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PointerEvent]", "click", "false", "false", "false",
-                       "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"},
-            FF_ESR = {"[object PointerEvent]", "click", "false", "false", "false",
-                      "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "undefined"})
+    @Alerts({"[object PointerEvent]", "click", "false", "false", "false",
+             "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -80,10 +78,8 @@ public class PointerEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PointerEvent]", "click", "true", "false", "false",
-                       "2", "1", "1", "0", "0", "0", "mouse", "false", "1.5707963267948966", "0", "0"},
-            FF_ESR = {"[object PointerEvent]", "click", "true", "false", "false",
-                      "2", "1", "1", "0", "0", "0", "mouse", "false", "1.5707963267948966", "0", "undefined"})
+    @Alerts({"[object PointerEvent]", "click", "true", "false", "false",
+             "2", "1", "1", "0", "0", "0", "mouse", "false", "1.5707963267948966", "0", "0"})
     public void create_ctorWithDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -117,7 +113,7 @@ public class PointerEventTest extends WebDriverTestCase {
             FF = {"[object PointerEvent]", "", "false", "false", "false",
                 "0", "0", "0", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"},
             FF_ESR = {"[object PointerEvent]", "", "false", "false", "false",
-                "0", "0", "0", "0", "0", "0", "", "false", "1.5707963267948966", "0", "undefined"})
+                "0", "0", "0", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -139,10 +135,8 @@ public class PointerEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PointerEvent]", "42", "false", "false", "false",
-                       "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"},
-            FF_ESR = {"[object PointerEvent]", "42", "false", "false", "false",
-                      "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "undefined"})
+    @Alerts({"[object PointerEvent]", "42", "false", "false", "false",
+             "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -164,10 +158,8 @@ public class PointerEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PointerEvent]", "null", "false", "false", "false",
-                       "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"},
-            FF_ESR = {"[object PointerEvent]", "null", "false", "false", "false",
-                      "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "undefined"})
+    @Alerts({"[object PointerEvent]", "null", "false", "false", "false",
+             "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -211,10 +203,8 @@ public class PointerEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PointerEvent]", "HtmlUnitEvent", "false", "false", "false",
-                       "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"},
-            FF_ESR = {"[object PointerEvent]", "HtmlUnitEvent", "false", "false", "false",
-                      "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "undefined"})
+    @Alerts({"[object PointerEvent]", "HtmlUnitEvent", "false", "false", "false",
+             "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -236,12 +226,9 @@ public class PointerEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PointerEvent]", "click", "true", "false", "false",
-                       "2", "3", "4", "5.5", "6", "7", "touch",
-                       "true", "1.4105561004354874", "0.8628261898537035", "0"},
-            FF_ESR = {"[object PointerEvent]", "click", "true", "false", "false",
-                      "2", "3", "4", "5.5", "6", "7", "touch",
-                      "true", "1.4105561004354874", "0.8628261898537035", "undefined"})
+    @Alerts({"[object PointerEvent]", "click", "true", "false", "false",
+             "2", "3", "4", "5.5", "6", "7", "touch",
+             "true", "1.4105561004354874", "0.8628261898537035", "0"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -273,10 +260,8 @@ public class PointerEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PointerEvent]", "click", "false", "false", "false",
-                       "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"},
-            FF_ESR = {"[object PointerEvent]", "click", "false", "false", "false",
-                      "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "undefined"})
+    @Alerts({"[object PointerEvent]", "click", "false", "false", "false",
+             "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0", "0"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
