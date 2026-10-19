@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR">
+            <action type="update" dev="rbri">
+                Firefox 153.5.0 ESR
+            </action>
             <action type="add" dev="rbri" issue="#992">
                 CSS media queries resolution unit 'x' (alias for 'dppx') support added.
             </action>
