@@ -7,7 +7,6 @@ MozAnimationIterationCount
 MozAnimationName
 MozAnimationPlayState
 MozAnimationTimingFunction
-MozAppearance
 MozBackfaceVisibility
 MozBorderEnd
 MozBorderEndColor
@@ -48,7 +47,6 @@ MozTransitionDuration
 MozTransitionProperty
 MozTransitionTimingFunction
 MozUserSelect
-MozWindowDragging
 WebkitAlignContent
 WebkitAlignItems
 WebkitAlignSelf
@@ -124,7 +122,10 @@ accentColor
 alignContent
 alignItems
 alignSelf
+alignmentBaseline
 all
+anchorName
+anchorScope
 animation
 animationComposition
 animationDelay
@@ -151,6 +152,7 @@ backgroundPositionX
 backgroundPositionY
 backgroundRepeat
 backgroundSize
+baselineShift
 baselineSource
 blockSize
 border
@@ -266,6 +268,7 @@ direction
 display
 dominantBaseline
 emptyCells
+fieldSizing
 fill
 fillOpacity
 fillRule
@@ -300,6 +303,7 @@ fontVariant
 fontVariantAlternates
 fontVariantCaps
 fontVariantEastAsian
+fontVariantEmoji
 fontVariantLigatures
 fontVariantNumeric
 fontVariantPosition
@@ -381,6 +385,7 @@ maskRepeat
 maskSize
 maskType
 mathDepth
+mathShift
 mathStyle
 maxBlockSize
 maxHeight
@@ -442,6 +447,12 @@ placeItems
 placeSelf
 pointerEvents
 position
+positionAnchor
+positionArea
+positionTry
+positionTryFallbacks
+positionTryOrder
+positionVisibility
 printColorAdjust
 quotes
 r
@@ -502,9 +513,11 @@ tableLayout
 textAlign
 textAlignLast
 textAnchor
+textAutospace
 textCombineUpright
 textDecoration
 textDecorationColor
+textDecorationInset
 textDecorationLine
 textDecorationSkipInk
 textDecorationStyle
@@ -542,6 +555,8 @@ unicodeBidi
 userSelect
 vectorEffect
 verticalAlign
+viewTransitionClass
+viewTransitionName
 visibility
 webkitAlignContent
 webkitAlignItems

@@ -132,26 +132,26 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code alignmentBaseline}. */
         ALIGNMENT_BASELINE("alignmentBaseline", "alignment-baseline",
-                chromeAndEdgeAuto(), ffLatest("baseline")),
+                chromeAndEdgeAuto(), ff("baseline")),
 
         /** The style property {@code alignment-baseline}. */
         ALIGNMENT_BASELINE_("alignment-baseline", "alignment-baseline",
-                ffLatest("baseline")),
+                ff("baseline")),
 
         /** The style property {@code all}. */
         ALL("all", "all", chromeAndEdgeAndFirefox("")),
 
         /** The style property {@code anchorName}. */
-        ANCHOR_NAME("anchorName", "anchor-name", chromeAndEdgeNone(), ffLatest("none")),
+        ANCHOR_NAME("anchorName", "anchor-name", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code anchor-name}. */
-        ANCHOR_NAME_("anchor-name", "anchor-name", ffLatest("none")),
+        ANCHOR_NAME_("anchor-name", "anchor-name", ff("none")),
 
         /** The style property {@code anchorScope}. */
-        ANCHOR_SCOPE("anchorScope", "anchor-scope", chromeAndEdgeNone(), ffLatest("none")),
+        ANCHOR_SCOPE("anchorScope", "anchor-scope", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code anchor-scope}. */
-        ANCHOR_SCOPE_("anchor-scope", "anchor-scope", ffLatest("none")),
+        ANCHOR_SCOPE_("anchor-scope", "anchor-scope", ff("none")),
 
         /** The style property {@code animation}. */
         ANIMATION("animation", "animation", chromeAndEdgeNone(), ffNone()),
@@ -342,11 +342,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code baselineShift}. */
         BASELINE_SHIFT("baselineShift", "baseline-shift",
-                chromeAndEdge("0px"), ffLatest("0px")),
+                chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code baseline-shift}. */
-        BASELINE_SHIFT_("baseline-shift", "baseline-shift",
-                ffLatest("0px")),
+        BASELINE_SHIFT_("baseline-shift", "baseline-shift", ff("0px")),
 
         /** The style property {@code baselineSource}. */
         BASELINE_SOURCE("baselineSource", "baseline-source", chromeAndEdgeAuto(),
@@ -1186,10 +1185,10 @@ public final class StyleAttributes implements Serializable {
         FALLBACK("fallback", "fallback", chromeAndEdgeEmpty()),
 
         /** The style property {@code fieldSizing}. */
-        FIELD_SIZING("fieldSizing", "field-sizing", chromeAndEdge("fixed"), ffLatest("fixed")),
+        FIELD_SIZING("fieldSizing", "field-sizing", chromeAndEdge("fixed"), ff("fixed")),
 
         /** The style property {@code field-sizing}. */
-        FIELD_SIZING_("field-sizing", "field-sizing", ffLatest("fixed")),
+        FIELD_SIZING_("field-sizing", "field-sizing", ff("fixed")),
 
         /** The style property {@code fill}. */
         FILL("fill", "fill", ff("rgb(0, 0, 0)"), chromeAndEdge("rgb(0, 0, 0)")),
@@ -1396,10 +1395,10 @@ public final class StyleAttributes implements Serializable {
         FONT_VARIANT_EAST_ASIAN_("font-variant-east-asian", "font-variant-east-asian", ffNormal()),
 
         /** The style property {@code fontVariantEmoji}. */
-        FONT_VARIANT_EMOJI("fontVariantEmoji", "font-variant-emoji", ffLatest("normal"), chromeAndEdgeNormal()),
+        FONT_VARIANT_EMOJI("fontVariantEmoji", "font-variant-emoji", ff("normal"), chromeAndEdgeNormal()),
 
         /** The style property {@code font-variant-emoji}. */
-        FONT_VARIANT_EMOJI_("font-variant-emoji", "font-variant-emoji", ffLatest("normal")),
+        FONT_VARIANT_EMOJI_("font-variant-emoji", "font-variant-emoji", ff("normal")),
 
         /** The style property {@code fontVariantLigatures}. */
         FONT_VARIANT_LIGATURES("fontVariantLigatures", "font-variant-ligatures", ffNormal(), chromeAndEdgeNormal()),
@@ -1910,10 +1909,10 @@ public final class StyleAttributes implements Serializable {
         MATH_DEPTH_("math-depth", "math-depth", ff("0")),
 
         /** The style property {@code mathShift}. */
-        MATH_SHIFT("mathShift", "math-shift", chromeAndEdgeNormal(), ffLatest("normal")),
+        MATH_SHIFT("mathShift", "math-shift", chromeAndEdgeNormal(), ff("normal")),
 
         /** The style property {@code math-shift}. */
-        MATH_SHIFT_("math-shift", "math-shift", ffLatest("normal")),
+        MATH_SHIFT_("math-shift", "math-shift", ff("normal")),
 
         /** The style property {@code mathStyle}. */
         MATH_STYLE("mathStyle", "math-style", chromeAndEdgeNormal(), ffNormal()),
@@ -2031,12 +2030,6 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code -moz-animation-timing-function}. */
         MOZ_ANIMATION_TIMING_FUNCTION__("-moz-animation-timing-function", "-moz-animation-timing-function",
                 ff("ease")),
-
-        /** The style property {@code MozAppearance}. */
-        MOZ_APPEARANCE("MozAppearance", "-moz-appearance", ffEsr("none")),
-
-        /** The style property {@code -moz-appearance}. */
-        MOZ_APPEARANCE__("-moz-appearance", "-moz-appearance", ffEsr("none")),
 
         /** The style property {@code MozBackfaceVisibility}. */
         MOZ_BACKFACE_VISIBILITY("MozBackfaceVisibility", "-moz-backface-visibility",
@@ -2332,12 +2325,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code -moz-user-select}. */
         MOZ_USER_SELECT_("-moz-user-select", "-moz-user-select", ffAuto()),
-
-        /** The style property {@code MozWindowDragging}. */
-        MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging", ffEsr("default")),
-
-        /** The style property {@code -moz-window-dragging}. */
-        MOZ_WINDOW_DRAGGING_("-moz-window-dragging", "-moz-window-dragging", ffEsr("default")),
 
         /** The style property {@code navigation}. */
         NAVIGATION("navigation", "navigation", chromeAndEdgeEmpty()),
@@ -2655,44 +2642,44 @@ public final class StyleAttributes implements Serializable {
         POSITION("position", "position", chromeAndEdge("static"), ff("static")),
 
         /** The style property {@code positionAnchor}. */
-        POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdge("normal"), ffLatest("normal")),
+        POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdge("normal"), ff("normal")),
 
         /** The style property {@code position-anchor}. */
-        POSITION_ANCHOR_("position-anchor", "position-anchor", ffLatest("normal")),
+        POSITION_ANCHOR_("position-anchor", "position-anchor", ff("normal")),
 
         /** The style property {@code positionArea}. */
-        POSITION_AREA("positionArea", "position-area", chromeAndEdgeNone(), ffLatest("none")),
+        POSITION_AREA("positionArea", "position-area", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code position-area}. */
-        POSITION_AREA_("position-area", "position-area", ffLatest("none")),
+        POSITION_AREA_("position-area", "position-area", ff("none")),
 
         /** The style property {@code positionTry}. */
-        POSITION_TRY("positionTry", "position-try", chromeAndEdgeNone(), ffLatest("none")),
+        POSITION_TRY("positionTry", "position-try", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code position-try}. */
-        POSITION_TRY_("position-try", "position-try", ffLatest("none")),
+        POSITION_TRY_("position-try", "position-try", ff("none")),
 
         /** The style property {@code positionTryFallbacks}. */
         POSITION_TRY_FALLBACKS("positionTryFallbacks", "position-try-fallbacks",
-                chromeAndEdgeNone(), ffLatest("none")),
+                chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code position-try-fallbacks}. */
         POSITION_TRY_FALLBACKS_("position-try-fallbacks", "position-try-fallbacks",
-                ffLatest("none")),
+                ff("none")),
 
         /** The style property {@code positionTryOrder}. */
-        POSITION_TRY_ORDER("positionTryOrder", "position-try-order", chromeAndEdgeNormal(), ffLatest("normal")),
+        POSITION_TRY_ORDER("positionTryOrder", "position-try-order", chromeAndEdgeNormal(), ff("normal")),
 
         /** The style property {@code position-try-order}. */
-        POSITION_TRY_ORDER_("position-try-order", "position-try-order", ffLatest("normal")),
+        POSITION_TRY_ORDER_("position-try-order", "position-try-order", ff("normal")),
 
         /** The style property {@code positionVisibility}. */
         POSITION_VISIBILITY("positionVisibility", "position-visibility",
-                chromeAndEdge("anchors-visible"), ffLatest("anchors-visible")),
+                chromeAndEdge("anchors-visible"), ff("anchors-visible")),
 
         /** The style property {@code position-visibility}. */
         POSITION_VISIBILITY_("position-visibility", "position-visibility",
-                ffLatest("anchors-visible")),
+                ff("anchors-visible")),
 
         /** The style property {@code prefix}. */
         PREFIX("prefix", "prefix", chromeAndEdgeEmpty()),
@@ -3190,10 +3177,10 @@ public final class StyleAttributes implements Serializable {
         TEXT_ANCHOR_("text-anchor", "text-anchor", ff("start")),
 
         /** The style property {@code textAutospace}. */
-        TEXT_AUTOSPACE("textAutospace", "text-autospace", chromeAndEdge("no-autospace"), ffLatest("no-autospace")),
+        TEXT_AUTOSPACE("textAutospace", "text-autospace", chromeAndEdge("no-autospace"), ff("no-autospace")),
 
         /** The style property {@code text-autospace}. */
-        TEXT_AUTOSPACE_("text-autospace", "text-autospace", ffLatest("no-autospace")),
+        TEXT_AUTOSPACE_("text-autospace", "text-autospace", ff("no-autospace")),
 
         /** The style property {@code textBox}. */
         TEXT_BOX("textBox", "text-box", chromeAndEdgeNormal(), ffLatest("normal")),
@@ -3235,10 +3222,10 @@ public final class StyleAttributes implements Serializable {
         TEXT_DECORATION_COLOR_("text-decoration-color", "text-decoration-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code textDecorationInset}. */
-        TEXT_DECORATION_INSET("textDecorationInset", "text-decoration-inset", ffLatest("0px")),
+        TEXT_DECORATION_INSET("textDecorationInset", "text-decoration-inset", ff("0px")),
 
         /** The style property {@code text-decoration-inset}. */
-        TEXT_DECORATION_INSET_("text-decoration-inset", "text-decoration-inset", ffLatest("0px")),
+        TEXT_DECORATION_INSET_("text-decoration-inset", "text-decoration-inset", ff("0px")),
 
         /** The style property {@code textDecorationLine}. */
         TEXT_DECORATION_LINE("textDecorationLine", "text-decoration-line", chromeAndEdgeNone(), ffNone()),
@@ -3533,19 +3520,19 @@ public final class StyleAttributes implements Serializable {
         VIEW_TIMELINE_NAME("viewTimelineName", "view-timeline-name", chromeAndEdgeNone()),
 
         /** The style property {@code viewTransitionClass}. */
-        VIEW_TRANSITION_CLASS("viewTransitionClass", "view-transition-class", chromeAndEdgeNone(), ffLatest("none")),
+        VIEW_TRANSITION_CLASS("viewTransitionClass", "view-transition-class", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code view-transition-class}. */
-        VIEW_TRANSITION_CLASS_("view-transition-class", "view-transition-class", ffLatest("none")),
+        VIEW_TRANSITION_CLASS_("view-transition-class", "view-transition-class", ff("none")),
 
         /** The style property {@code viewTransitionGroup}. */
         VIEW_TRANSITION_GROUP("viewTransitionGroup", "view-transition-group", chromeAndEdgeNormal()),
 
         /** The style property {@code viewTransitionName}. */
-        VIEW_TRANSITION_NAME("viewTransitionName", "view-transition-name", chromeAndEdgeNone(), ffLatest("none")),
+        VIEW_TRANSITION_NAME("viewTransitionName", "view-transition-name", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code view-transition-name}. */
-        VIEW_TRANSITION_NAME_("view-transition-name", "view-transition-name", ffLatest("none")),
+        VIEW_TRANSITION_NAME_("view-transition-name", "view-transition-name", ff("none")),
 
         /** The style property {@code viewTransitionScope}. */
         VIEW_TRANSITION_SCOPE("viewTransitionScope", "view-transition-scope", chromeAndEdgeNone()),
