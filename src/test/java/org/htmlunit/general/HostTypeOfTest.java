@@ -1142,8 +1142,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function")
+    @Alerts("undefined")
     public void css2Properties() throws Exception {
         test("CSS2Properties");
     }
@@ -1155,7 +1154,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function")
+            FF = "function",
+            FF_ESR = "function")
     public void cssStyleProperties() throws Exception {
         test("CSSStyleProperties");
     }

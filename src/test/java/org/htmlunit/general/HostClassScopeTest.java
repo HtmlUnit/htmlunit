@@ -115,14 +115,14 @@ public class HostClassScopeTest extends WebDriverTestCase {
         test("CSS");
     }
 
-    @Alerts(DEFAULT = {"false", "undefined", "undefined"},
-            FF_ESR = {"true", "function", "function"})
+    @Alerts({"false", "undefined", "undefined"})
     void _CSS2Properties() throws Exception {
         test("CSS2Properties");
     }
 
     @Alerts(DEFAULT = {"false", "undefined", "undefined"},
-            FF = {"true", "function", "function"})
+            FF = {"true", "function", "function"},
+            FF_ESR = {"true", "function", "function"})
     void _CSSStyleProperties() throws Exception {
         test("CSSStyleProperties");
     }
