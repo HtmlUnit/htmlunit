@@ -74,10 +74,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_SCROLL_UIEVENT,
 
-    /** Supports event type 'MutationEvent'. */
-    @BrowserFeature(FF_ESR)
-    EVENT_TYPE_MUTATIONEVENT,
-
     /** Form elements are able to refer to the for by using the form attribute. */
     @BrowserFeature({CHROME, EDGE})
     FORM_IGNORE_REL_NOREFERRER,

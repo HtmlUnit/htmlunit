@@ -199,7 +199,6 @@ import org.htmlunit.javascript.host.event.MediaStreamTrackEvent;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.event.MouseScrollEvent;
-import org.htmlunit.javascript.host.event.MutationEvent;
 import org.htmlunit.javascript.host.event.OfflineAudioCompletionEvent;
 import org.htmlunit.javascript.host.event.PageTransitionEvent;
 import org.htmlunit.javascript.host.event.PointerEvent;
@@ -598,7 +597,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MIDIPort.class, MediaDevices.class, MediaEncryptedEvent.class, MediaKeyError.class, MediaKeyMessageEvent.class,
         MediaKeySession.class, MediaQueryList.class, MediaQueryListEvent.class, MediaRecorder.class, MediaSource.class,
         MediaStream.class, MediaStreamEvent.class, MediaStreamTrack.class, MediaStreamTrackEvent.class,
-        MessageEvent.class, MessagePort.class, MutationEvent.class, NetworkInformation.class, Node.class,
+        MessageEvent.class, MessagePort.class, NetworkInformation.class, Node.class,
         NodeList.class, Notification.class, OfflineAudioCompletionEvent.class, PageTransitionEvent.class,
         PasswordCredential.class, PaymentRequest.class, PaymentResponse.class, Performance.class, PerformanceMark.class,
         PerformanceMeasure.class, PerformanceResourceTiming.class, PermissionStatus.class, PopStateEvent.class,

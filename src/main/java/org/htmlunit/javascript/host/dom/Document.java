@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MUTATIONEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -109,7 +108,6 @@ import org.htmlunit.javascript.host.event.HashChangeEvent;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
-import org.htmlunit.javascript.host.event.MutationEvent;
 import org.htmlunit.javascript.host.event.PointerEvent;
 import org.htmlunit.javascript.host.event.PopStateEvent;
 import org.htmlunit.javascript.host.event.ProgressEvent;
@@ -187,7 +185,6 @@ public class Document extends Node {
         SUPPORTED_DOM2_EVENT_TYPE_MAP = Map.of(
                 "HTMLEvents", Event.class,
                 "MouseEvents", MouseEvent.class,
-                "MutationEvents", MutationEvent.class,
                 "UIEvents", UIEvent.class);
 
         SUPPORTED_DOM3_EVENT_TYPE_MAP = Map.ofEntries(
@@ -195,7 +192,6 @@ public class Document extends Node {
                 Map.entry("KeyboardEvent", KeyboardEvent.class),
                 Map.entry("MouseEvent", MouseEvent.class),
                 Map.entry("MessageEvent", MessageEvent.class),
-                Map.entry("MutationEvent", MutationEvent.class),
                 Map.entry("UIEvent", UIEvent.class),
                 Map.entry("CustomEvent", CustomEvent.class),
                 Map.entry("CompositionEvent", CompositionEvent.class),
@@ -1203,11 +1199,7 @@ public class Document extends Node {
             clazz = SUPPORTED_DOM3_EVENT_TYPE_MAP.get(eventType);
         }
 
-        if (MutationEvent.class == clazz
-                && !getBrowserVersion().hasFeature(EVENT_TYPE_MUTATIONEVENT)) {
-            clazz = null;
-        }
-        else if (clazz == null
+        if (clazz == null
                 && ("Events".equals(eventType)
                     || "HashChangeEvent".equals(eventType)
                     || "BeforeUnloadEvent".equals(eventType)
