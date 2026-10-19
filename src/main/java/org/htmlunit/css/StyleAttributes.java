@@ -25,7 +25,6 @@ import static org.htmlunit.css.BrowserConfiguration.chromeAndEdgeNotIterable;
 import static org.htmlunit.css.BrowserConfiguration.edge;
 import static org.htmlunit.css.BrowserConfiguration.ff;
 import static org.htmlunit.css.BrowserConfiguration.ffAuto;
-import static org.htmlunit.css.BrowserConfiguration.ffEsr;
 import static org.htmlunit.css.BrowserConfiguration.ffLatest;
 import static org.htmlunit.css.BrowserConfiguration.ffNone;
 import static org.htmlunit.css.BrowserConfiguration.ffNormal;
@@ -918,11 +917,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code columnRule}. */
         COLUMN_RULE("columnRule", "column-rule", chromeAndEdge("3px rgb(0, 0, 0)"),
-                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("3px none rgb(0, 0, 0)")),
+                ff("3px none rgb(0, 0, 0)")),
 
         /** The style property {@code column-rule}. */
         COLUMN_RULE_("column-rule", "column-rule",
-                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("3px none rgb(0, 0, 0)")),
+                ff("3px none rgb(0, 0, 0)")),
 
         /** The style property {@code columnRuleBreak}. */
         COLUMN_RULE_BREAK("columnRuleBreak", "column-rule-break", chromeAndEdgeNormal()),
@@ -975,10 +974,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code columnRuleWidth}. */
         COLUMN_RULE_WIDTH("columnRuleWidth", "column-rule-width", chromeAndEdge("3px"),
-                ffEsr("0px"), ffLatest("3px")),
+                ff("3px")),
 
         /** The style property {@code column-rule-width}. */
-        COLUMN_RULE_WIDTH_("column-rule-width", "column-rule-width", ffEsr("0px"), ffLatest("3px")),
+        COLUMN_RULE_WIDTH_("column-rule-width", "column-rule-width", ff("3px")),
 
         /** The style property {@code columnSpan}. */
         COLUMN_SPAN("columnSpan", "column-span", chromeAndEdgeNone(), ffNone()),
@@ -2391,7 +2390,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code outline}. */
         OUTLINE("outline", "outline", chromeAndEdge("rgb(0, 0, 0) none 3px"),
-                ffEsr("rgb(0, 0, 0) 0px"), ffLatest("rgb(0, 0, 0) 3px")),
+                ff("rgb(0, 0, 0) 3px")),
 
         /** The style property {@code outlineColor}. */
         OUTLINE_COLOR("outlineColor", "outline-color", chromeAndEdge("rgb(0, 0, 0)"),
@@ -2414,10 +2413,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code outlineWidth}. */
         OUTLINE_WIDTH("outlineWidth", "outline-width", chromeAndEdge("3px"),
-                ffEsr("0px"), ffLatest("3px")),
+                ff("3px")),
 
         /** The style property {@code outline-width}. */
-        OUTLINE_WIDTH_("outline-width", "outline-width", ffEsr("0px"), ffLatest("3px")),
+        OUTLINE_WIDTH_("outline-width", "outline-width", ff("3px")),
 
         /** The style property {@code overflow}. */
         OVERFLOW("overflow", "overflow", chromeAndEdge("visible"), ff("visible")),
@@ -3208,11 +3207,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code textDecoration}. */
         TEXT_DECORATION("textDecoration", "text-decoration", chromeAndEdgeNone(),
-                ffEsr("rgb(0, 0, 0)"), ffLatest("none")),
+                ff("none")),
 
         /** The style property {@code text-decoration}. */
         TEXT_DECORATION_("text-decoration", "text-decoration",
-                ffEsr("rgb(0, 0, 0)"), ffLatest("none")),
+                ff("none")),
 
         /** The style property {@code textDecorationColor}. */
         TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color",
