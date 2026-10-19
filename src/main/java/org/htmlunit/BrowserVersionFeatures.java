@@ -222,10 +222,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_CLIENTHEIGHT_RUBY_17,
 
-    /** ClientWidth for text/password input is 157. */
-    @BrowserFeature(FF)
-    JS_CLIENTWIDTH_INPUT_TEXT_157,
-
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTWIDTH_INPUT_TEXT_173,
