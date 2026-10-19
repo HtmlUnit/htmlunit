@@ -1444,8 +1444,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                        "false-selected", "false-null", "true-true"},
             FF = {"false-null", "false-true", "false-null",
                   "true-selected", "false-null", "true-true"},
-            FF_ESR = {"false-null", "true-true", "true-null",
-                      "false-selected", "false-null", "false-true"})
+            FF_ESR = {"false-null", "false-true", "false-null",
+                    "true-selected", "false-null", "true-true"})
     @HtmlUnitNYI(FF = {"false-null", "true-true", "true-null", "false-selected", "false-null", "true-true"},
             FF_ESR = {"false-null", "true-true", "true-null", "false-selected", "false-null", "true-true"})
     public void setSelectedAttribute() throws Exception {

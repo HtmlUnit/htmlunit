@@ -1223,8 +1223,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts({"32 commands supported", "not supported: foo, 123"})
     @BuggyWebDriver(
             CHROME = {"31 commands supported", "not supported: Paste, foo, 123"},
-            EDGE = {"31 commands supported", "not supported: Paste, foo, 123"},
-            FF_ESR = {"31 commands supported", "not supported: Paste, foo, 123"})
+            EDGE = {"31 commands supported", "not supported: Paste, foo, 123"})
     public void queryCommandSupported_common() throws Exception {
         final String[] commands = {"BackColor", "Bold",
             "Copy", "CreateLink", "Cut", "Delete",
@@ -1590,8 +1589,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "a", "a", "b", "b"},
-            FF = {"", "a=", "a=", "a=; b=", "a=; b="})
-    @HtmlUnitNYI(FF = {"", "a", "a", "b", "b"})
+            FF = {"", "a=", "a=", "a=; b=", "a=; b="},
+            FF_ESR = {"", "a=", "a=", "a=; b=", "a=; b="})
+    @HtmlUnitNYI(
+            FF = {"", "a", "a", "b", "b"},
+            FF_ESR = {"", "a", "a", "b", "b"})
     public void cookie_write2() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1620,8 +1622,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "a", "b"},
-            FF = {"", "a=", "a="})
-    @HtmlUnitNYI(FF = {"", "a", "b"})
+            FF = {"", "a=", "a="},
+            FF_ESR = {"", "a=", "a="})
+    @HtmlUnitNYI(
+            FF = {"", "a", "b"},
+            FF_ESR = {"", "a", "b"})
     public void cookie_write_valueOnly() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2690,8 +2695,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
-            FF_ESR = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-")
+    @Alerts("complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
     @HtmlUnitNYI(CHROME = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             EDGE = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             FF = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
@@ -3241,9 +3245,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
-            FF_ESR = "no moveBefore()")
-    @HtmlUnitNYI(CHROME = "success", EDGE = "success", FF = "success")
+    @Alerts("HierarchyRequestError/DOMException")
+    @HtmlUnitNYI(
+            CHROME = "success",
+            EDGE = "success",
+            FF = "success",
+            FF_ESR = "success")
     public void moveBefore_basic() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

@@ -20,7 +20,6 @@ import java.util.Collections;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -110,8 +109,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1234", "-12.34", "", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "", "", ""},
             FF = {"1234", "-12.34", "", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "1", "-34", ""},
-            FF_ESR = {"1234", "-12.34", "+12.34", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "1", "-34", ""})
-    @HtmlUnitNYI(FF_ESR = {"1234", "-12.34", "", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "1", "-34", ""})
+            FF_ESR = {"1234", "-12.34", "", "4.321", "", "", "", "4", "", "", "", "-0", "-0", "1", "-34", ""})
     public void getValue() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -254,10 +252,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             FF = {"", "true-false-false-false-false-false-false-false-false-false-false", "false",
                   "", "true-false-false-false-false-false-false-false-false-false-false", "false"},
             FF_ESR = {"", "true-false-false-false-false-false-false-false-false-false-false", "false",
-                      "+5", "false-false-false-false-false-false-false-false-false-true-false", "true"})
-    @HtmlUnitNYI(
-            FF_ESR = {"", "true-false-false-false-false-false-false-false-false-false-false", "false",
-                    "", "true-false-false-false-false-false-false-false-false-false-false", "false"})
+                      "", "true-false-false-false-false-false-false-false-false-false-false", "false"})
     public void typeLeadingPlusWithDigits() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
