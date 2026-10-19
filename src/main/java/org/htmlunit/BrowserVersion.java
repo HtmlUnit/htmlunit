@@ -78,7 +78,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(154, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(156, "Chrome");
 
     /** Latest Edge. */
     public static final BrowserVersion EDGE = new BrowserVersion(154, "Edge");
@@ -196,15 +196,15 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.COOKIE};
         CHROME.acceptLanguageHeader_ = "en-US,en;q=0.9";
         CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
-                                            + "q=0.9,image/avif,image/webp,image/apng,*/*;"
+                                            + "q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.7";
-        CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
+        CHROME.imgAcceptHeader_ = "image/jxl,image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
 
-        CHROME.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
+        CHROME.secClientHintUserAgentHeader_ = "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\""
                 + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Not A(Brand\";v=\"99\"";
+                + CHROME.getBrowserVersionNumeric() + "\"";
 
         CHROME.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
