@@ -892,7 +892,7 @@ public class Element extends Node {
      * @param args the arguments passed into the method
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF})
+    @JsxFunction
     public static void moveBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.moveBefore(context, scope, thisObj, args, function);

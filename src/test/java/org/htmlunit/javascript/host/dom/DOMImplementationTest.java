@@ -856,14 +856,8 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"no error", "no error", "InvalidCharacterError/DOMException",
-                       "InvalidCharacterError/DOMException", "no error"},
-            FF_ESR = {"InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
-                      "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
-                      "InvalidCharacterError/DOMException"})
-    @HtmlUnitNYI(
-            FF_ESR = {"no error", "no error", "InvalidCharacterError/DOMException",
-                      "InvalidCharacterError/DOMException", "no error"})
+    @Alerts({"no error", "no error", "InvalidCharacterError/DOMException",
+             "InvalidCharacterError/DOMException", "no error"})
     public void createDocumentTypeInvalidNames() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
