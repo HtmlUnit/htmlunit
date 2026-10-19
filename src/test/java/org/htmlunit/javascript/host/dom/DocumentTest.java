@@ -4474,7 +4474,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("<?target data>")
+    @Alerts(DEFAULT = "<?target data>",
+            CHROME = "<?target data?>")
+    @HtmlUnitNYI(CHROME = "<?target data>")
     public void createProcessingInstructionInnerHtml() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

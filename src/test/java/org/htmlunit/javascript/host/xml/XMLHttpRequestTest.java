@@ -4621,9 +4621,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ok",
+    @Alerts(DEFAULT = "InvalidStateError/DOMException",
             FF = "TypeError",
             FF_ESR = "TypeError")
+    @HtmlUnitNYI(CHROME = "ok", EDGE = "ok")
     public void setPrivateTokenNotOpened() throws Exception {
         callOnXhr("xhr.setPrivateToken({version: 1, operation: 'token-request'});", false);
     }

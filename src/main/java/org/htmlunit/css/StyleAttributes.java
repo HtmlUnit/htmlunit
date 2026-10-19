@@ -1811,6 +1811,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code margin-top}. */
         MARGIN_TOP_("margin-top", "margin-top", ff("0px")),
 
+        /** The style property {@code marginTrim}. */
+        MARGIN_TRIM("marginTrim", "margin-trim", chrome("none")),
+
         /** The style property {@code marker}. */
         MARKER("marker", "marker", chromeAndEdgeNone(), ffNone()),
 
@@ -3238,6 +3241,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code text-decoration-skip-ink}. */
         TEXT_DECORATION_SKIP_INK_("text-decoration-skip-ink", "text-decoration-skip-ink", ffAuto()),
+
+        /** The style property {@code textDecorationSkipSpaces}. */
+        TEXT_DECORATION_SKIP_SPACES("textDecorationSkipSpaces", "text-decoration-spaces-ink",
+                chrome("start end")),
 
         /** The style property {@code textDecorationStyle}. */
         TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", chromeAndEdge("solid"), ff("solid")),

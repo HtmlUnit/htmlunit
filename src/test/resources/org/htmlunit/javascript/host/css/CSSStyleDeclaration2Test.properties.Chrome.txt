@@ -305,6 +305,7 @@ marginInlineStart
 marginLeft
 marginRight
 marginTop
+marginTrim
 marker
 markerEnd
 markerMid
@@ -515,6 +516,7 @@ textDecoration
 textDecorationColor
 textDecorationLine
 textDecorationSkipInk
+textDecorationSkipSpaces
 textDecorationStyle
 textDecorationThickness
 textEmphasis

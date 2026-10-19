@@ -101,7 +101,7 @@ public class NumberFormat extends HtmlUnitScriptable {
         FF_FORMATS_.put("fr-CH", "',");
 
         FF_ESR_FORMATS_.putAll(commonFormats);
-        FF_FORMATS_.put("fr-CH", "',");
+        FF_ESR_FORMATS_.put("fr-CH", "',");
 
         commonFormats.put("be", ",.");
         commonFormats.put("mk", ",.");

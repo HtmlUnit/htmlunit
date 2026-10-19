@@ -18543,7 +18543,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),generateKey(),"
+    @Alerts(CHROME = "constructor(),decapsulateBits(),decapsulateKey(),decrypt(),deriveBits(),deriveKey(),digest(),"
+                + "encapsulateBits(),encapsulateKey(),encrypt(),exportKey(),generateKey(),getPublicKey(),"
                 + "importKey(),sign(),unwrapKey(),verify(),"
                 + "wrapKey()",
             EDGE = "constructor(),decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),generateKey(),"
@@ -18555,6 +18556,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor(),decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),generateKey(),"
                 + "importKey(),sign(),unwrapKey(),verify(),"
                 + "wrapKey()")
+    @HtmlUnitNYI(CHROME = "constructor(),decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),generateKey(),"
+                + "importKey(),sign(),unwrapKey(),verify(),wrapKey()")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");
     }

@@ -80,7 +80,7 @@ public class WorkerNavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
-                        + "(KHTML,\\slike\\sGecko)\\sChrome/154.0.0.0\\sSafari/537.36",
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/156.0.0.0\\sSafari/537.36",
             EDGE = "5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
                         + "(KHTML,\\slike\\sGecko)\\sChrome/154.0.0.0\\sSafari/537.36\\sEdg/154.0.0.0",
             FF = "5.0\\s(Windows)",
@@ -163,7 +163,7 @@ public class WorkerNavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
-                        + "(KHTML,\\slike\\sGecko)\\sChrome/154.0.0.0\\sSafari/537.36",
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/156.0.0.0\\sSafari/537.36",
             EDGE = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
                         + "(KHTML,\\slike\\sGecko)\\sChrome/154.0.0.0\\sSafari/537.36\\sEdg/154.0.0.0",
             FF = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64;\\srv:157.0)\\sGecko/20100101\\sFirefox/157.0",
