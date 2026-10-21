@@ -8,6 +8,58 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
+            <action type="fix" dev="RhinoTeam">
+                core-js: More fixes for lexical scoping.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix 'this' for FinalizationRegistry.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Function.prototype.toString() dropping the name of object literal methods.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTagBalancer: the nesting depth of the generated document is now limited to 512 elements (like
+                browsers do); elements beyond that depth are reported as empty elements. This protects tree
+                consumers against stack overflows caused by thousands of unclosed tags.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLScanner: fixed an ArrayIndexOutOfBoundsException (found by a fuzzer) when the input ends in the
+                middle of the end tag of a title, textarea, style or similar element. A read that hit the end of the
+                input consumed nothing, but the following rewind still moved the read position back; the cut off end
+                tag is now handled as plain text.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLTagBalancer: elements like &lt;a&gt; and &lt;nobr&gt; are now un-nested like real browsers do
+                (limited form of the HTML5 adoption agency algorithm / active formatting elements), e.g.
+                &lt;a href="1"&gt;1&lt;div&gt;&lt;a href="2"&gt;2&lt;/a&gt;&lt;/div&gt; no longer produces nested anchors.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLTagBalancer: the formatting elements are reopened correctly after an end tag closed
+                them together with other (special) elements.
+            </action>
+            <action type="add" dev="rbri">
+                HTMLTagBalancer: new HTML5_SPECIAL flag for HTMLElements. Element to mark the elements
+                that stop the un-nesting of formatting elements.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTagBalancer: protection against denial of service attacks - the searches on the element stack
+                (parent lookup, implicit close, end tag matching, table/form context, &lt;a&gt;/&lt;nobr&gt; un-nesting) are
+                limited to 100 stack entries, so crafted input with a deep element stack no longer causes quadratic
+                parsing time. This changes the result for html where an end tag has to close more than 100 unclosed
+                elements; the end tag is now ignored.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTagBalancer: the element stack now grows geometrically up to a limit and linearly beyond, and is
+                shrunk again when the parser is reset after a very large document.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTagBalancer: performance improvements - O(1) "is element open" check using counters for all
+                element types, cheaper handling of discarded html/body start tags, and fewer attribute copies for
+                non formatting inline elements.
+            </action>
+            <action type="update" dev="rbri">
+                Chrome 156
+            </action>
             <action type="update" dev="rbri">
                 Firefox 153.5.0 ESR
             </action>
