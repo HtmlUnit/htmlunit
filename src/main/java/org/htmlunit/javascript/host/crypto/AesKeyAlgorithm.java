@@ -41,10 +41,6 @@ final class AesKeyAlgorithm {
             throw new UnsupportedOperationException("AES " + name);
         }
         name_ = name;
-
-        if (!SUPPORTED_LENGTHS.contains(length)) {
-            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
-        }
         length_ = length;
     }
 

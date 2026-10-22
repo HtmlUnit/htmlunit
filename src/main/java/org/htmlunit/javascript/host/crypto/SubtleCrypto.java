@@ -21,6 +21,7 @@ import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
@@ -43,6 +44,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
@@ -130,6 +132,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
 
     private static class InvalidAccessException extends RuntimeException {
         InvalidAccessException(final String message) {
+            super(message);
+        }
+    }
+
+    private static class OperationException extends RuntimeException {
+        OperationException(final String message) {
             super(message);
         }
     }
@@ -223,14 +231,21 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                 case "AES-CBC": {
                     // https://w3c.github.io/webcrypto/#aes-cbc-operations
                     final byte[] iv = extractBuffer(algorithmObj, "iv");
-                    if (iv == null || iv.length != 16) {
+                    if (iv == null) {
                         throw new IllegalArgumentException(
                                 "Data provided to an operation does not meet requirements");
+                    }
+                    if (iv.length != 16) {
+                        throw new OperationException("The iv must be 16 bytes long");
+                    }
+                    final byte[] input = toByteArray(inputData);
+                    if (cipherMode == Cipher.DECRYPT_MODE && (input.length == 0 || input.length % 16 != 0)) {
+                        throw new OperationException("The ciphertext length must be a non-zero multiple of 16 bytes");
                     }
                     final SecretKey secretKey = getInternalKey(key, SecretKey.class);
                     final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
                     cipher.init(cipherMode, secretKey, new IvParameterSpec(iv));
-                    result = cipher.doFinal(toByteArray(inputData));
+                    result = cipher.doFinal(input);
                     break;
                 }
                 case "AES-GCM": {
@@ -246,12 +261,16 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     if (tagLengthProp instanceof Number num) {
                         tagLength = num.intValue();
                         if (!VALID_AES_GCM_TAG_LENGTHS.contains(tagLength)) {
-                            throw new IllegalArgumentException(
-                                    "Data provided to an operation does not meet requirements");
+                            throw new OperationException("The tag length " + tagLength + " is not supported");
                         }
                     }
                     else {
                         tagLength = 128;
+                    }
+
+                    final byte[] input = toByteArray(inputData);
+                    if (cipherMode == Cipher.DECRYPT_MODE && input.length * 8L < tagLength) {
+                        throw new OperationException("The ciphertext is shorter than the tag");
                     }
 
                     final SecretKey secretKey = getInternalKey(key, SecretKey.class);
@@ -264,15 +283,18 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                         cipher.updateAAD(toByteArray(aad));
                     }
 
-                    result = cipher.doFinal(toByteArray(inputData));
+                    result = cipher.doFinal(input);
                     break;
                 }
                 case "AES-CTR": {
                     // https://w3c.github.io/webcrypto/#aes-ctr-operations
                     final byte[] counter = extractBuffer(algorithmObj, "counter");
-                    if (counter == null || counter.length != 16) {
+                    if (counter == null) {
                         throw new IllegalArgumentException(
                                 "Data provided to an operation does not meet requirements");
+                    }
+                    if (counter.length != 16) {
+                        throw new OperationException("The counter must be 16 bytes long");
                     }
 
                     final Object lengthProp = ScriptableObject.getProperty(algorithmObj, "length");
@@ -282,8 +304,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     }
                     final int counterLength = numLength.intValue();
                     if (counterLength < 1 || counterLength > 128) {
-                        throw new IllegalArgumentException(
-                                "Data provided to an operation does not meet requirements");
+                        throw new OperationException("The counter length must be between 1 and 128 bits");
                     }
 
                     final SecretKey secretKey = getInternalKey(key, SecretKey.class);
@@ -336,15 +357,22 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         catch (final DataException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.DATA_ERR));
         }
+        catch (final OperationException e) {
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.OPERATION_ERR));
+        }
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
         catch (final BadPaddingException e) {
             return setupRejectedPromise(() -> createDOMException("Decryption failed", DOMException.OPERATION_ERR));
         }
-        catch (final GeneralSecurityException | UnsupportedOperationException e) {
+        catch (final NoSuchAlgorithmException | NoSuchPaddingException | UnsupportedOperationException e) {
             return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
                     DOMException.NOT_SUPPORTED_ERR));
+        }
+        catch (final GeneralSecurityException e) {
+            return setupRejectedPromise(() -> createDOMException("The operation failed: " + e.getMessage(),
+                    DOMException.OPERATION_ERR));
         }
         return setupPromise(() -> createArrayBuffer(result));
     }
@@ -503,9 +531,13 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
-        catch (final GeneralSecurityException | UnsupportedOperationException e) {
+        catch (final NoSuchAlgorithmException | UnsupportedOperationException e) {
             return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
                     DOMException.NOT_SUPPORTED_ERR));
+        }
+        catch (final GeneralSecurityException e) {
+            return setupRejectedPromise(() -> createDOMException("The operation failed: " + e.getMessage(),
+                    DOMException.OPERATION_ERR));
         }
 
         if (isSigning) {
@@ -651,6 +683,9 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     if (usages.isEmpty()) {
                         throw new IllegalArgumentException("An invalid or illegal string was specified");
                     }
+                    if (!AesKeyAlgorithm.SUPPORTED_LENGTHS.contains(aesParams.getLength())) {
+                        throw new OperationException("The AES key length must be 128, 192 or 256 bits");
+                    }
 
                     final KeyGenerator keyGen = KeyGenerator.getInstance("AES");
                     keyGen.init(aesParams.getLength());
@@ -665,6 +700,9 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
                     if (usages.isEmpty()) {
                         throw new IllegalArgumentException("An invalid or illegal string was specified");
+                    }
+                    if (hmacParams.getLength() == 0) {
+                        throw new OperationException("The HMAC key length must not be 0");
                     }
 
                     final KeyGenerator keyGen = KeyGenerator.getInstance(hmacParams.getJavaName());
@@ -682,13 +720,21 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         catch (final EcmaError e) {
             return setupRejectedPromise(() -> JavaScriptEngine.toErrorObject(e, getParentScope()));
         }
+        catch (final OperationException e) {
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.OPERATION_ERR));
+        }
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
-        catch (final GeneralSecurityException | UnsupportedOperationException e) {
+        catch (final NoSuchAlgorithmException | UnsupportedOperationException e) {
             return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),
                     DOMException.NOT_SUPPORTED_ERR));
         }
+        catch (final GeneralSecurityException e) {
+            return setupRejectedPromise(() -> createDOMException("The operation failed: " + e.getMessage(),
+                    DOMException.OPERATION_ERR));
+        }
+
         return setupPromise(() -> result);
     }
 
@@ -828,6 +874,10 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         }
 
         if (AesKeyAlgorithm.isSupported(algorithm)) {
+            if (!AesKeyAlgorithm.SUPPORTED_LENGTHS.contains(bitLength)) {
+                throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
+            }
+
             final AesKeyAlgorithm aesAlgo = new AesKeyAlgorithm(algorithm, bitLength);
             final Scriptable scriptableAlgorithm = aesAlgo.toScriptableObject(getParentScope());
             final SecretKey internalKey = new SecretKeySpec(rawBytes, "AES");

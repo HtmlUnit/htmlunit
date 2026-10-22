@@ -1259,4 +1259,239 @@ public class SubtleCryptoTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * AES-CBC: wrong iv length and ciphertext length.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"OperationError/DOMException", "OperationError/DOMException",
+             "OperationError/DOMException", "OperationError/DOMException"})
+    public void aesCbcOperationError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    function cbc(ivLength) {\n"
+            + "      return { name: 'AES-CBC', iv: new Uint8Array(ivLength) };\n"
+            + "    }\n"
+            + "    subtle.importKey('raw', new Uint8Array(16), 'AES-CBC', false, ['encrypt', 'decrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        run([\n"
+            + "          function() { return subtle.encrypt(cbc(8), key, data); },\n"
+            + "          function() { return subtle.decrypt(cbc(8), key, data); },\n"
+            + "          function() { return subtle.decrypt(cbc(16), key, new Uint8Array(17)); },\n"
+            + "          function() { return subtle.decrypt(cbc(16), key, new Uint8Array(0)); }\n"
+            + "        ]);\n"
+            + "      });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * AES-CTR: wrong counter length and counter bit length.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"OperationError/DOMException", "OperationError/DOMException",
+             "OperationError/DOMException"})
+    public void aesCtrOperationError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    function ctr(counterLength, length) {\n"
+            + "      return { name: 'AES-CTR', counter: new Uint8Array(counterLength), length: length };\n"
+            + "    }\n"
+            + "    subtle.importKey('raw', new Uint8Array(16), 'AES-CTR', false, ['encrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        run([\n"
+            + "          function() { return subtle.encrypt(ctr(8, 64), key, data); },\n"
+            + "          function() { return subtle.encrypt(ctr(16, 0), key, data); },\n"
+            + "          function() { return subtle.encrypt(ctr(16, 129), key, data); }\n"
+            + "        ]);\n"
+            + "      });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * AES-GCM: invalid tag length and ciphertext shorter than the tag.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"OperationError/DOMException", "OperationError/DOMException",
+             "OperationError/DOMException"})
+    public void aesGcmOperationError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    function gcm(tagLength) {\n"
+            + "      return { name: 'AES-GCM', iv: new Uint8Array(12), tagLength: tagLength };\n"
+            + "    }\n"
+            + "    subtle.importKey('raw', new Uint8Array(16), 'AES-GCM', false, ['encrypt', 'decrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        run([\n"
+            + "          function() { return subtle.encrypt(gcm(100), key, data); },\n"
+            + "          function() { return subtle.encrypt(gcm(0), key, data); },\n"
+            + "          function() { return subtle.decrypt(gcm(128), key, new Uint8Array(5)); }\n"
+            + "        ]);\n"
+            + "      });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * generateKey() with parameters that can not be used to generate a key.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"OperationError/DOMException", "OperationError/DOMException",
+             "OperationError/DOMException", "OperationError/DOMException",
+             "OperationError/DOMException"})
+    public void generateKeyOperationError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    function rsa(publicExponent, modulusLength) {\n"
+            + "      return { name: 'RSA-PSS', modulusLength: modulusLength,\n"
+            + "               publicExponent: new Uint8Array(publicExponent), hash: 'SHA-256' };\n"
+            + "    }\n"
+            + "    run([\n"
+            + "      function() { return subtle.generateKey({ name: 'AES-CBC', length: 100 }, true, ['encrypt']); },\n"
+            + "      function() { return subtle.generateKey({ name: 'AES-KW', length: 512 }, true, ['wrapKey']); },\n"
+            + "      function() { return subtle.generateKey(rsa([1], 2048), true, ['sign']); },\n"
+            + "      function() { return subtle.generateKey(rsa([4], 2048), true, ['sign']); },\n"
+            + "      function() { return subtle.generateKey(rsa([1, 0, 1], 0), true, ['sign']); }\n"
+            + "    ]);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * RSA operations that fail (salt too long, message too long).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"OperationError/DOMException", "OperationError/DOMException"})
+    public void rsaOperationError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    function params(name) {\n"
+            + "      return { name: name, modulusLength: 2048,\n"
+            + "               publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' };\n"
+            + "    }\n"
+            + "    Promise.all([\n"
+            + "      subtle.generateKey(params('RSA-PSS'), false, ['sign', 'verify']),\n"
+            + "      subtle.generateKey(params('RSA-OAEP'), false, ['encrypt', 'decrypt'])\n"
+            + "    ]).then(function(pairs) {\n"
+            + "      var pss = { name: 'RSA-PSS', saltLength: 1000 };\n"
+            + "      var tooLong = new Uint8Array(300);\n"
+            + "      run([\n"
+            + "        function() { return subtle.sign(pss, pairs[0].privateKey, data); },\n"
+            + "        function() { return subtle.encrypt({ name: 'RSA-OAEP' }, pairs[1].publicKey, tooLong); }\n"
+            + "      ]);\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * generateKey() HMAC with length 0.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "OperationError/DOMException",
+            FF = "DataError/DOMException",
+            FF_ESR = "DataError/DOMException")
+    @HtmlUnitNYI(FF = "OperationError/DOMException",
+            FF_ESR = "OperationError/DOMException")
+    public void generateKeyHmacLengthZero() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    var params = { name: 'HMAC', hash: 'SHA-256', length: 0 };\n"
+            + "    run([\n"
+            + "      function() { return subtle.generateKey(params, true, ['sign']); }\n"
+            + "    ]);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }

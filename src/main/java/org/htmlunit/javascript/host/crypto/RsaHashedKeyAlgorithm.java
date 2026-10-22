@@ -49,13 +49,9 @@ final class RsaHashedKeyAlgorithm {
             throw new UnsupportedOperationException("RSA " + name);
         }
         name_ = name;
-
-        if (modulusLength <= 0) {
-            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
-        }
         modulusLength_ = modulusLength;
 
-        if (publicExponent == null || publicExponent.length == 0) {
+        if (publicExponent == null) {
             throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
         }
         publicExponent_ = publicExponent.clone();

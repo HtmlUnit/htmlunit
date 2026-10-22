@@ -40,10 +40,6 @@ final class HmacKeyAlgorithm {
             throw new UnsupportedOperationException("HMAC " + hash);
         }
         hash_ = hash;
-
-        if (length <= 0) {
-            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
-        }
         length_ = length;
     }
 
