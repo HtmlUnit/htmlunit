@@ -237,6 +237,7 @@ fontVariantPosition
 fontVariationSettings
 fontWeight
 forcedColorAdjust
+frameSizing
 gap
 grid
 gridArea
@@ -440,6 +441,7 @@ ruleWidth
 rx
 ry
 scale
+scrollAxisLock
 scrollBehavior
 scrollInitialTarget
 scrollMargin
@@ -728,6 +730,7 @@ whiteSpaceCollapse
 widows
 width
 willChange
+windowDrag
 wordBreak
 wordSpacing
 wordWrap

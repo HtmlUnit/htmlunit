@@ -163,8 +163,10 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "value1",
-            FF = "")
-    @HtmlUnitNYI(FF = "value1")
+            FF = "",
+            FF_ESR = "")
+    @HtmlUnitNYI(FF = "value1",
+            FF_ESR = "value1")
     public void emptyCookieName() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "=value1"));

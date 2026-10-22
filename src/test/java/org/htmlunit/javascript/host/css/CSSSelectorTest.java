@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.UrlUtils;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -3522,6 +3523,822 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "      <input type='text' id='t' required>\n"
             + "    </fieldset>\n"
             + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "[object HTMLHtmlElement]"})
+    public void scopeDocumentQuery() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll(':scope');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0]);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "container"})
+    public void scopeElementQuery() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var body = document.body;\n"
+            + "  var list = body.querySelectorAll(':scope > #container');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "child1", "child2"})
+    public void scopeChildCombinator() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  var list = container.querySelectorAll(':scope > .target');\n"
+            + "  log(list.length);\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    log(list[i].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='child1' class='target'></div>\n"
+            + "    <div>\n"
+            + "      <div id='grandchild' class='target'></div>\n"
+            + "    </div>\n"
+            + "    <div id='child2' class='target'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void scopeMatchesMethod() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  var other = document.getElementById('other');\n"
+            + "  log(container.matches(':scope'));\n"
+            + "  log(other.matches(':scope'));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='other'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "[object HTMLHtmlElement]"})
+    public void scopeDocumentFallbackQuery() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll(':scope');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0]);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void scopeDetachedFragment() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var fragment = document.createDocumentFragment();\n"
+            + "  var div = document.createElement('div');\n"
+            + "  div.id = 'child';\n"
+            + "  fragment.appendChild(div);\n"
+            + "  log(div.matches(':scope'));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void scopeDocumentDefaultIsRoot() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var htmlEl = document.documentElement;\n"
+            + "  log(document.querySelector(':scope') === htmlEl);\n"
+            + "  log(document.querySelectorAll(':scope')[0] === htmlEl);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"middle", "deep"})
+    public void scopeNestedContexts() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var outer = document.getElementById('outer');\n"
+            + "  var inner = document.getElementById('inner');\n"
+            + "  log(outer.querySelector(':scope > div').id);\n"
+            + "  log(inner.querySelector(':scope > div').id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='outer'>\n"
+            + "    <div id='middle'>\n"
+            + "      <div id='inner'>\n"
+            + "        <div id='deep'></div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"child1", "null"})
+    public void scopeQuerySelector() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  log(container.querySelector(':scope > .target').id);\n"
+            + "  log(container.querySelector(':scope > .missing'));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='child1' class='target'></div>\n"
+            + "    <div>\n"
+            + "      <div id='grandchild' class='target'></div>\n"
+            + "    </div>\n"
+            + "    <div id='child2' class='target'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The scoping element itself is never part of the result of an element query.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "null"})
+    public void scopeAloneInElementQuery() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  log(container.querySelectorAll(':scope').length);\n"
+            + "  log(container.querySelector(':scope'));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='child'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"3", "child1", "grandchild", "child2", "3", "4"})
+    public void scopeDescendantCombinator() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  var list = container.querySelectorAll(':scope .target');\n"
+            + "  log(list.length);\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    log(list[i].id);\n"
+            + "  }\n"
+            + "  log(container.querySelectorAll(':scope > *').length);\n"
+            + "  log(container.querySelectorAll(':scope *').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='child1' class='target'></div>\n"
+            + "    <div>\n"
+            + "      <div id='grandchild' class='target'></div>\n"
+            + "    </div>\n"
+            + "    <div id='child2' class='target'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"b", "b,c", "a", "c", "b", "a,c"})
+    public void scopeSiblingCombinatorsAndPseudoClasses() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  log(ids(container.querySelectorAll(':scope > #a + .item')));\n"
+            + "  log(ids(container.querySelectorAll(':scope > #a ~ .item')));\n"
+            + "  log(ids(container.querySelectorAll(':scope > .item:first-child')));\n"
+            + "  log(ids(container.querySelectorAll(':scope > .item:last-child')));\n"
+            + "  log(ids(container.querySelectorAll(':scope > .item:nth-child(2)')));\n"
+            + "  log(ids(container.querySelectorAll(':scope > :not(#b)')));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='a' class='item'></div>\n"
+            + "    <div id='b' class='item'></div>\n"
+            + "    <div id='c' class='item'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"a,c", "a,inner"})
+    public void scopeSelectorList() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  log(ids(container.querySelectorAll(':scope > #a, :scope > #c')));\n"
+            // the result is in document order, not in the order of the selector list
+            + "  log(ids(container.querySelectorAll('#inner, :scope > #a')));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='a'></div>\n"
+            + "    <div id='b'>\n"
+            + "      <div id='inner'></div>\n"
+            + "    </div>\n"
+            + "    <div id='c'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Siblings of the scoping element are not descendants and therefore never found by an element query.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0", "1"})
+    public void scopeSiblingOfContextIsNotFound() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  log(container.querySelectorAll(':scope + div').length);\n"
+            + "  log(container.querySelectorAll(':scope ~ div').length);\n"
+            + "  log(document.body.querySelectorAll(':scope > #container + #next').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='child'></div>\n"
+            + "  </div>\n"
+            + "  <div id='next'></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "0", "true"})
+    public void scopeInsideNot() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  log(document.querySelectorAll(':not(:scope)').length == document.querySelectorAll('*').length - 1);\n"
+            + "  log(document.querySelectorAll('html:not(:scope)').length);\n"
+            + "  log(container.querySelectorAll('div:not(:scope)').length == container.querySelectorAll('div').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='child1'></div>\n"
+            + "    <div id='child2'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "2"})
+    public void scopeCaseInsensitive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var container = document.getElementById('container');\n"
+            + "  log(container.querySelectorAll(':SCOPE > .target').length);\n"
+            + "  log(container.querySelectorAll(':Scope > .target').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='child1' class='target'></div>\n"
+            + "    <div>\n"
+            + "      <div id='grandchild' class='target'></div>\n"
+            + "    </div>\n"
+            + "    <div id='child2' class='target'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException"})
+    @HtmlUnitNYI(
+            CHROME = {"SyntaxError/DOMException", "[object NodeList]", "SyntaxError/DOMException"},
+            EDGE = {"SyntaxError/DOMException", "[object NodeList]", "SyntaxError/DOMException"},
+            FF = {"SyntaxError/DOMException", "[object NodeList]", "SyntaxError/DOMException"},
+            FF_ESR = {"SyntaxError/DOMException", "[object NodeList]", "SyntaxError/DOMException"})
+    public void scopeInvalidForms() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    log(document.querySelectorAll(':scope()'));\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "  try {\n"
+            + "    log(document.querySelectorAll('::scope'));\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "  try {\n"
+            + "    log(document.querySelectorAll(':scopes'));\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * For matches() the element itself is the scoping element.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "true", "true", "true", "false", "true", "true"})
+    public void scopeMatchesWithCombinators() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var other = document.getElementById('other');\n"
+            + "  log(other.matches(':scope > div'));\n"
+            + "  log(other.matches(':scope div'));\n"
+            + "  log(other.matches('div:scope'));\n"
+            + "  log(other.matches(':scope.inner'));\n"
+            + "  log(other.matches(':scope, .nope'));\n"
+            + "  log(other.matches(':not(:scope)'));\n"
+            + "  log(other.matches('#container > :scope'));\n"
+            + "  log(other.matches('#container :scope'));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container' class='outer'>\n"
+            + "    <div id='other' class='inner'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void scopeClosest() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var other = document.getElementById('other');\n"
+            + "  log(other.closest(':scope') === other);\n"
+            + "  log(other.closest('#container > :scope') === other);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <div id='other'></div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "3", "p2", "true"})
+    public void scopeDetachedElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var div = document.createElement('div');\n"
+            + "  div.innerHTML = '<p id=\"p1\"></p><div><p id=\"p2\"></p></div><p id=\"p3\"></p>';\n"
+            + "  log(div.querySelectorAll(':scope > p').length);\n"
+            + "  log(div.querySelectorAll(':scope p').length);\n"
+            + "  log(div.querySelector(':scope > div > p').id);\n"
+            + "  log(div.matches(':scope'));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * For a document query the scoping element is the root element.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "2", "true", "0", "1", "1"})
+    public void scopeDocumentChildCombinator() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(document.querySelectorAll(':scope > body').length);\n"
+            + "  log(document.querySelectorAll(':scope > head, :scope > body').length);\n"
+            + "  log(document.querySelector(':scope > body') === document.body);\n"
+            + "  log(document.querySelectorAll(':scope > div').length);\n"
+            + "  log(document.querySelectorAll(':scope body').length);\n"
+            + "  log(document.documentElement.querySelectorAll(':scope > body').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='container'></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Inside of a style sheet there is no scoping element, :scope matches the root element.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"rgb(255, 0, 0)", "rgb(0, 0, 255)", "rgb(255, 0, 0)"})
+    public void scopeInStyleSheet() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<style>\n"
+            + "  :scope { color: red; }\n"
+            + "  :scope > body { background-color: blue; }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(getComputedStyle(document.documentElement).color);\n"
+            + "  log(getComputedStyle(document.body).backgroundColor);\n"
+            + "  log(getComputedStyle(document.body).color);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The scoping element of a document query is the root element of this very document,
+     * not the one of the current page.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "true", "false", "1"})
+    public void scopeCreatedDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var doc = document.implementation.createHTMLDocument('test');\n"
+            + "  log(doc.querySelectorAll(':scope').length);\n"
+            + "  log(doc.querySelector(':scope') === doc.documentElement);\n"
+            + "  log(doc.querySelector(':scope') === document.documentElement);\n"
+            + "  log(doc.querySelectorAll(':scope > body').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "1"})
+    public void scopeIframeDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var frameDoc = document.getElementById('frame').contentDocument;\n"
+            + "  log(frameDoc.querySelector(':scope') === frameDoc.documentElement);\n"
+            + "  log(frameDoc.querySelector(':scope') === document.documentElement);\n"
+            + "  log(frameDoc.querySelectorAll(':scope > body').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe id='frame'></iframe>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The root element is looked up for every query.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "newRoot", "1"})
+    public void scopeReplacedRootElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var html = document.createElement('html');\n"
+            + "  html.id = 'newRoot';\n"
+            // logging uses the document title, this requires a head
+            + "  html.appendChild(document.createElement('head'));\n"
+            + "  html.appendChild(document.createElement('body'));\n"
+            + "  document.replaceChild(html, document.documentElement);\n"
+            + "  log(document.querySelectorAll(':scope').length);\n"
+            + "  log(document.querySelector(':scope').id);\n"
+            + "  log(document.querySelectorAll(':scope > body').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Without a root element there is nothing the document query can match.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "null"})
+    public void scopeWithoutRootElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var results = [];\n"
+            + "  document.removeChild(document.documentElement);\n"
+            + "  results.push(document.querySelectorAll(':scope').length);\n"
+            + "  results.push(String(document.querySelector(':scope')));\n"
+            // logging uses the document title, this requires a root element with a head
+            + "  var html = document.createElement('html');\n"
+            + "  html.appendChild(document.createElement('head'));\n"
+            + "  document.appendChild(html);\n"
+            + "  for (var i = 0; i < results.length; i++) {\n"
+            + "    log(results[i]);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * :scope has the specificity of a pseudo-class, like :root.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"rgb(255, 0, 0)", "rgb(0, 128, 0)"})
+    public void scopeInStyleSheetSpecificity() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<style>\n"
+            // the pseudo-class wins against the type selector, even if it is defined first
+            + "  :scope { color: red; }\n"
+            + "  html { color: blue; }\n"
+            // same specificity, the later rule wins
+            + "  :root { background-color: blue; }\n"
+            + "  :scope { background-color: green; }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var style = getComputedStyle(document.documentElement);\n"
+            + "  log(style.color);\n"
+            + "  log(style.backgroundColor);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The names of pseudo classes (and the keywords inside of the arguments) are ASCII case insensitive.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"li1", "li3", "li2", "li3", "li1,li3", "li1,li3", "li2", "c", "t", "empty", "true"})
+    public void pseudoClassNamesAreCaseInsensitive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  log(ids(document.querySelectorAll('li:FIRST-CHILD')));\n"
+            + "  log(ids(document.querySelectorAll('li:Last-Child')));\n"
+            + "  log(ids(document.querySelectorAll('li:NTH-CHILD(2)')));\n"
+            + "  log(ids(document.querySelectorAll('li:Nth-Last-Child(1)')));\n"
+            + "  log(ids(document.querySelectorAll('li:nth-child(2N+1)')));\n"
+            + "  log(ids(document.querySelectorAll('li:nth-child(ODD)')));\n"
+            + "  log(ids(document.querySelectorAll('li:NOT(.a)')));\n"
+            + "  log(ids(document.querySelectorAll('input:CHECKED')));\n"
+            + "  log(ids(document.querySelectorAll('input:Disabled')));\n"
+            + "  log(ids(document.querySelectorAll('p:EMPTY')));\n"
+            + "  log(document.querySelector(':ROOT') === document.documentElement);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <ul id='list'>\n"
+            + "    <li id='li1' class='a'></li>\n"
+            + "    <li id='li2'></li>\n"
+            + "    <li id='li3' class='a'></li>\n"
+            + "  </ul>\n"
+            + "  <input id='c' type='checkbox' checked>\n"
+            + "  <input id='t' type='text' disabled>\n"
+            + "  <p id='empty'></p>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

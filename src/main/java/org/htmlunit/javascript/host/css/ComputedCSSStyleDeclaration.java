@@ -43,16 +43,12 @@ import org.htmlunit.util.StringUtils;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration">MDN Documentation</a>
  */
 @JsxClass(value = FF, className = "CSSStyleProperties")
-@JsxClass(value = FF_ESR, className = "CSS2Properties")
+@JsxClass(value = FF_ESR, className = "CSSStyleProperties")
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** Symbol.toStringTag support. */
-    @JsxSymbolConstant(FF)
+    @JsxSymbolConstant({FF, FF_ESR})
     public static final String TO_STRING_TAG_FF = "CSSStyleProperties";
-
-    /** Symbol.toStringTag support. */
-    @JsxSymbolConstant(FF_ESR)
-    public static final String TO_STRING_TAG_FF_ESR = "CSS2Properties";
 
     /**
      * Creates an instance.

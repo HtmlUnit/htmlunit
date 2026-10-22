@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host.crypto;
 
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
 import java.util.Set;
 
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -97,12 +98,19 @@ final class RsaHashedKeyAlgorithm {
     private static byte[] extractBytes(final Object value) {
         if (value instanceof NativeArrayBufferView view) {
             final NativeArrayBuffer buf = view.getBuffer();
-            final byte[] result = new byte[view.getByteLength()];
-            System.arraycopy(buf.getBuffer(), view.getByteOffset(), result, 0, result.length);
-            return result;
+            if (buf != null) {
+                final byte[] result = new byte[view.getByteLength()];
+                final ByteBuffer bb = buf.getByteBuffer();
+                bb.position(view.getByteOffset());
+                bb.get(result, 0, result.length);
+                return result;
+            }
         }
         if (value instanceof NativeArrayBuffer buf) {
-            return buf.getBuffer().clone();
+            final ByteBuffer bb = buf.getByteBuffer();
+            final byte[] result = new byte[bb.remaining()];
+            bb.get(result);
+            return result;
         }
         return null;
     }

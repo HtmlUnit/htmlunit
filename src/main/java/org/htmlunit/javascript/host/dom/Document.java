@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MUTATIONEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -109,7 +108,6 @@ import org.htmlunit.javascript.host.event.HashChangeEvent;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
-import org.htmlunit.javascript.host.event.MutationEvent;
 import org.htmlunit.javascript.host.event.PointerEvent;
 import org.htmlunit.javascript.host.event.PopStateEvent;
 import org.htmlunit.javascript.host.event.ProgressEvent;
@@ -187,7 +185,6 @@ public class Document extends Node {
         SUPPORTED_DOM2_EVENT_TYPE_MAP = Map.of(
                 "HTMLEvents", Event.class,
                 "MouseEvents", MouseEvent.class,
-                "MutationEvents", MutationEvent.class,
                 "UIEvents", UIEvent.class);
 
         SUPPORTED_DOM3_EVENT_TYPE_MAP = Map.ofEntries(
@@ -195,7 +192,6 @@ public class Document extends Node {
                 Map.entry("KeyboardEvent", KeyboardEvent.class),
                 Map.entry("MouseEvent", MouseEvent.class),
                 Map.entry("MessageEvent", MessageEvent.class),
-                Map.entry("MutationEvent", MutationEvent.class),
                 Map.entry("UIEvent", UIEvent.class),
                 Map.entry("CustomEvent", CustomEvent.class),
                 Map.entry("CompositionEvent", CompositionEvent.class),
@@ -1017,7 +1013,9 @@ public class Document extends Node {
     @JsxFunction
     public Node querySelector(final String selectors) {
         try {
-            final DomNode node = getDomNodeOrDie().querySelector(selectors);
+            final Element doc = getDocumentElement();
+            final DomNode scope = doc == null ? null : doc.getDomNodeOrNull();
+            final DomNode node = getDomNodeOrDie().querySelector(selectors, scope);
             if (node != null) {
                 return node.getScriptableObject();
             }
@@ -1042,7 +1040,10 @@ public class Document extends Node {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            return NodeList.staticNodeList(getParentScope(), getDomNodeOrDie().querySelectorAll(selectors));
+            final DomNode domNode = getDomNodeOrDie();
+            final Element doc = getDocumentElement();
+            final DomNode scope = doc == null ? null : doc.getDomNodeOrNull();
+            return NodeList.staticNodeList(getParentScope(), domNode.querySelectorAll(selectors, scope));
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
@@ -1198,11 +1199,7 @@ public class Document extends Node {
             clazz = SUPPORTED_DOM3_EVENT_TYPE_MAP.get(eventType);
         }
 
-        if (MutationEvent.class == clazz
-                && !getBrowserVersion().hasFeature(EVENT_TYPE_MUTATIONEVENT)) {
-            clazz = null;
-        }
-        else if (clazz == null
+        if (clazz == null
                 && ("Events".equals(eventType)
                     || "HashChangeEvent".equals(eventType)
                     || "BeforeUnloadEvent".equals(eventType)
@@ -3543,14 +3540,56 @@ public class Document extends Node {
 
     /**
      * Creates a new ProcessingInstruction.
-     * @param target the target
-     * @param data the data
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method: target and data
+     * @param function the function
      * @return the new ProcessingInstruction
      */
     @JsxFunction
-    public HtmlUnitScriptable createProcessingInstruction(final String target, final String data) {
-        final ProcessingInstruction node = getPage().createProcessingInstruction(target, data);
-        return getScriptableFor(node);
+    public static HtmlUnitScriptable createProcessingInstruction(final Context context, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (args.length < 2) {
+            throw JavaScriptEngine.typeError("Failed to execute 'createProcessingInstruction' on 'Document': "
+                    + "2 arguments required, but only " + args.length + " present.");
+        }
+
+        final Document document = (Document) thisObj;
+        final String target = JavaScriptEngine.toString(args[0]);
+        final String data = JavaScriptEngine.toString(args[1]);
+
+        if (data.contains("?>") || !isValidProcessingInstructionTarget(target)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    document.getWindow(),
+                    "createProcessingInstruction: Provided string contains an invalid character",
+                    org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
+        }
+
+        final ProcessingInstruction node = document.getPage().createProcessingInstruction(target, data);
+        return document.getScriptableFor(node);
+    }
+
+    // the XML Name production, simplified in the same way as it is done for createElement:
+    // only the ASCII range is checked
+    private static boolean isValidProcessingInstructionTarget(final String target) {
+        if (target.isEmpty()) {
+            return false;
+        }
+
+        final int first = target.charAt(0);
+        if (first < 128 && !Character.isLetter(first) && first != ':' && first != '_') {
+            return false;
+        }
+
+        final int length = target.length();
+        for (int i = 1; i < length; i++) {
+            final int c = target.charAt(i);
+            if (c < 128 && !Character.isLetterOrDigit(c) && c != ':' && c != '_' && c != '-' && c != '.') {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

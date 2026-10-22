@@ -59,13 +59,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                        "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
             FF = {"[object CSSStyleProperties]", "[object CSSStyleProperties]",
                   "[object CSSStyleProperties]", "[object CSSStyleProperties]"},
-            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]",
-                      "[object CSS2Properties]", "[object CSS2Properties]"})
+            FF_ESR = {"[object CSSStyleProperties]", "[object CSSStyleProperties]",
+                    "[object CSSStyleProperties]", "[object CSSStyleProperties]"})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                        "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                       "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
-    // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
+    // FIXME FF returns CSSStyleProperties vs. default returns CSSStyleDeclaration :(
     public void scriptableToString() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -3457,7 +3457,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
             FF = {"[object CSSStyleProperties]", "[object CSSStyleProperties]", "green", "abc"},
-            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"})
+            FF_ESR = {"[object CSSStyleProperties]", "[object CSSStyleProperties]", "green", "abc"})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"})
     public void setStyle() throws Exception {

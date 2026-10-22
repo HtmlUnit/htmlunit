@@ -632,15 +632,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "9", "10", "12", "13", "32", "/", ">"},
-            FF_ESR = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                      "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
-                      "20", "21", "22", "23", "24", "25", "26","27", "28", "29",
-                      "30", "31", "32",
-                      "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
-                      "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
-                      "{", "|", "}", "~", "127"})
-    @HtmlUnitNYI(FF_ESR = {"0", "9", "10", "12", "13", "32", "/", ">"})
+    @Alerts({"0", "9", "10", "12", "13", "32", "/", ">"})
     public void documentCreateElementValidTagNamesAscii() throws Exception {
         expandExpectedAlertsVariables("\\\\");
 
@@ -712,12 +704,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[128-999]",
-            FF_ESR = {"[170]", "[181]", "[183]", "[186]", "[192-214]", "[216-246]", "[248-305]", "[308-318]", "[321-328]",
-                      "[330-382]", "[384-451]", "[461-496]", "[500-501]", "[506-535]", "[592-680]",
-                      "[699-705]", "[720-721]", "[768-837]", "[864-865]", "[902-906]", "[908]", "[910-929]",
-                      "[931-974]", "[976-982]", "[986]", "[988]", "[990]", "[992]", "[994-999]"})
-    @HtmlUnitNYI(FF_ESR = "[128-999]")
+    @Alerts("[128-999]")
     public void documentCreateElementValidTagNames1000() throws Exception {
         testValidTagNames("x", 128, 1000);
     }
@@ -726,12 +713,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[128-999]",
-            FF_ESR = {"[170]", "[181]", "[186]", "[192-214]", "[216-246]", "[248-305]", "[308-318]", "[321-328]",
-                      "[330-382]", "[384-451]", "[461-496]", "[500-501]", "[506-535]", "[592-680]",
-                      "[699-705]", "[902]", "[904-906]", "[908]", "[910-929]",
-                      "[931-974]", "[976-982]", "[986]", "[988]", "[990]", "[992]", "[994-999]"})
-    @HtmlUnitNYI(FF_ESR = "[128-999]")
+    @Alerts("[128-999]")
     public void documentCreateElementValidTagNamesFirstChar1000() throws Exception {
         testValidTagNames("", 128, 1000);
     }
@@ -740,14 +722,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[1000-1999]",
-            FF_ESR = {"[1000-1011]", "[1025-1036]", "[1038-1103]", "[1105-1116]", "[1118-1153]", "[1155-1158]",
-                      "[1168-1220]", "[1223-1224]", "[1227-1228]", "[1232-1259]", "[1262-1269]", "[1272-1273]",
-                      "[1329-1366]", "[1369]", "[1377-1414]", "[1425-1441]", "[1443-1465]", "[1467-1469]",
-                      "[1471]", "[1473-1474]", "[1476]", "[1488-1514]", "[1520-1522]", "[1569-1594]",
-                      "[1600-1618]", "[1632-1641]", "[1648-1719]", "[1722-1726]", "[1728-1742]",
-                      "[1744-1747]", "[1749-1768]", "[1770-1773]", "[1776-1785]"})
-    @HtmlUnitNYI(FF_ESR = "[1000-1999]")
+    @Alerts("[1000-1999]")
     public void documentCreateElementValidTagNames2000() throws Exception {
         testValidTagNames("x", 1000, 2000);
     }
@@ -756,12 +731,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[1000-1999]",
-            FF_ESR = {"[1000-1011]", "[1025-1036]", "[1038-1103]", "[1105-1116]", "[1118-1153]", "[1168-1220]",
-                      "[1223-1224]", "[1227-1228]", "[1232-1259]", "[1262-1269]", "[1272-1273]", "[1329-1366]",
-                      "[1369]", "[1377-1414]", "[1488-1514]", "[1520-1522]", "[1569-1594]", "[1601-1610]",
-                      "[1649-1719]", "[1722-1726]", "[1728-1742]", "[1744-1747]", "[1749]", "[1765-1766]"})
-    @HtmlUnitNYI(FF_ESR = "[1000-1999]")
+    @Alerts("[1000-1999]")
     public void documentCreateElementValidTagNamesFirstChar2000() throws Exception {
         testValidTagNames("", 1000, 2000);
     }
@@ -770,22 +740,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[2000-2999]",
-            FF_ESR = {"[2305-2307]", "[2309-2361]", "[2364-2381]", "[2385-2388]", "[2392-2403]", "[2406-2415]",
-                      "[2433-2435]", "[2437-2444]", "[2447-2448]", "[2451-2472]",
-                      "[2474-2480]", "[2482]", "[2486-2489]", "[2492]", "[2494-2500]", "[2503-2504]", "[2507-2509]",
-                      "[2519]", "[2524-2525]", "[2527-2531]", "[2534-2545]", "[2562]",
-                      "[2565-2570]", "[2575-2576]", "[2579-2600]", "[2602-2608]", "[2610-2611]", "[2613-2614]",
-                      "[2616-2617]", "[2620]", "[2622-2626]", "[2631-2632]", "[2635-2637]", "[2649-2652]",
-                      "[2654]", "[2662-2676]", "[2689-2691]", "[2693-2699]", "[2701]", "[2703-2705]",
-                      "[2707-2728]", "[2730-2736]", "[2738-2739]", "[2741-2745]", "[2748-2757]", "[2759-2761]",
-                      "[2763-2765]", "[2784]", "[2790-2799]", "[2817-2819]", "[2821-2828]", "[2831-2832]",
-                      "[2835-2856]", "[2858-2864]", "[2866-2867]", "[2870-2873]", "[2876-2883]", "[2887-2888]",
-                      "[2891-2893]", "[2902-2903]", "[2908-2909]", "[2911-2913]", "[2918-2927]", "[2946-2947]",
-                      "[2949-2954]", "[2958-2960]", "[2962-2965]", "[2969-2970]", "[2972]", "[2974-2975]",
-                      "[2979-2980]", "[2984-2986]", "[2990-2997]", "[2999]"})
-    @HtmlUnitNYI(
-            FF_ESR = "[2000-2999]")
+    @Alerts("[2000-2999]")
     public void documentCreateElementValidTagNames3000() throws Exception {
         testValidTagNames("x", 2000, 3000);
     }
@@ -794,17 +749,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[2000-2999]",
-            FF_ESR = {"[2309-2361]", "[2365]", "[2392-2401]", "[2437-2444]", "[2447-2448]", "[2451-2472]",
-                      "[2474-2480]", "[2482]", "[2486-2489]", "[2524-2525]", "[2527-2529]", "[2544-2545]",
-                      "[2565-2570]", "[2575-2576]", "[2579-2600]", "[2602-2608]", "[2610-2611]", "[2613-2614]",
-                      "[2616-2617]", "[2649-2652]", "[2654]", "[2674-2676]", "[2693-2699]", "[2701]", "[2703-2705]",
-                      "[2707-2728]", "[2730-2736]", "[2738-2739]", "[2741-2745]", "[2749]", "[2784]", "[2821-2828]",
-                      "[2831-2832]", "[2835-2856]", "[2858-2864]", "[2866-2867]", "[2870-2873]", "[2877]",
-                      "[2908-2909]", "[2911-2913]", "[2949-2954]", "[2958-2960]", "[2962-2965]", "[2969-2970]",
-                      "[2972]", "[2974-2975]", "[2979-2980]", "[2984-2986]", "[2990-2997]", "[2999]"})
-    @HtmlUnitNYI(
-            FF_ESR = "[2000-2999]")
+    @Alerts("[2000-2999]")
     public void documentCreateElementValidTagNamesFirstChar3000() throws Exception {
         testValidTagNames("", 2000, 3000);
     }
@@ -813,21 +758,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[3000-3999]",
-            FF_ESR = {"[3000-3001]", "[3006-3010]", "[3014-3016]", "[3018-3021]", "[3031]", "[3047-3055]",
-                      "[3073-3075]", "[3077-3084]", "[3086-3088]", "[3090-3112]", "[3114-3123]", "[3125-3129]",
-                      "[3134-3140]", "[3142-3144]", "[3146-3149]", "[3157-3158]", "[3168-3169]", "[3174-3183]",
-                      "[3202-3203]", "[3205-3212]", "[3214-3216]", "[3218-3240]", "[3242-3251]", "[3253-3257]",
-                      "[3262-3268]", "[3270-3272]", "[3274-3277]", "[3285-3286]", "[3294]", "[3296-3297]",
-                      "[3302-3311]", "[3330-3331]", "[3333-3340]", "[3342-3344]", "[3346-3368]", "[3370-3385]",
-                      "[3390-3395]", "[3398-3400]", "[3402-3405]", "[3415]", "[3424-3425]", "[3430-3439]",
-                      "[3585-3630]", "[3632-3642]", "[3648-3662]", "[3664-3673]", "[3713-3714]", "[3716]",
-                      "[3719-3720]", "[3722]", "[3725]", "[3732-3735]", "[3737-3743]", "[3745-3747]", "[3749]",
-                      "[3751]", "[3754-3755]", "[3757-3758]", "[3760-3769]", "[3771-3773]", "[3776-3780]",
-                      "[3782]", "[3784-3789]", "[3792-3801]", "[3864-3865]", "[3872-3881]", "[3893]", "[3895]",
-                      "[3897]", "[3902-3911]", "[3913-3945]", "[3953-3972]", "[3974-3979]", "[3984-3989]",
-                      "[3991]", "[3993-3999]"})
-    @HtmlUnitNYI(FF_ESR = "[3000-3999]")
+    @Alerts("[3000-3999]")
     public void documentCreateElementValidTagNames4000() throws Exception {
         testValidTagNames("x", 3000, 4000);
     }
@@ -836,15 +767,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[3000-3999]",
-            FF_ESR = {"[3000-3001]", "[3077-3084]", "[3086-3088]", "[3090-3112]", "[3114-3123]", "[3125-3129]",
-                      "[3168-3169]", "[3205-3212]", "[3214-3216]", "[3218-3240]", "[3242-3251]", "[3253-3257]",
-                      "[3294]", "[3296-3297]", "[3333-3340]", "[3342-3344]", "[3346-3368]", "[3370-3385]",
-                      "[3424-3425]", "[3585-3630]", "[3632]", "[3634-3635]", "[3648-3653]", "[3713-3714]",
-                      "[3716]", "[3719-3720]", "[3722]", "[3725]", "[3732-3735]", "[3737-3743]", "[3745-3747]",
-                      "[3749]", "[3751]", "[3754-3755]", "[3757-3758]", "[3760]", "[3762-3763]", "[3773]",
-                      "[3776-3780]", "[3904-3911]", "[3913-3945]"})
-    @HtmlUnitNYI(FF_ESR = "[3000-3999]")
+    @Alerts("[3000-3999]")
     public void documentCreateElementValidTagNamesFirstChar4000() throws Exception {
         testValidTagNames("", 3000, 4000);
     }
@@ -1001,6 +924,378 @@ public class DocumentTest extends WebDriverTestCase {
             + "        log(document.childNodes[1].tagName);\n"
             + "        log(document.getElementsByTagName('div').length);\n"
             + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Comments are allowed at document level.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "true", "3", "8", "hello"})
+    public void appendChildCommentAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var comment = document.createComment('hello');\n"
+            + "      try {\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(document.appendChild(comment) === comment);\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(document.childNodes[2].nodeType);\n"
+            + "        log(document.childNodes[2].data);\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Processing instructions are allowed at document level.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "3", "7", "target"})
+    public void appendChildProcessingInstructionAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      try {\n"
+            + "        log(document.childNodes.length);\n"
+            + "        document.appendChild(pi);\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(document.childNodes[2].nodeType);\n"
+            + "        log(document.childNodes[2].target);\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Text is not allowed at document level.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "HierarchyRequestError/DOMException", "2"})
+    public void appendChildTextAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var text = document.createTextNode('text');\n"
+            + "      log(document.childNodes.length);\n"
+            + "      try {\n"
+            + "        document.appendChild(text);\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "      log(document.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A document has only one element; this is true for a new element as well as for the
+     * root element itself.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"HierarchyRequestError/DOMException", "HierarchyRequestError/DOMException", "2"})
+    public void appendChildSecondElementAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      try {\n"
+            + "        document.appendChild(document.createElement('html'));\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "      try {\n"
+            + "        document.appendChild(document.documentElement);\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "      log(document.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A document has only one doctype.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "HierarchyRequestError/DOMException", "2"})
+    public void appendChildSecondDoctypeAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var doctype = document.implementation.createDocumentType('html', '', '');\n"
+            + "      log(document.childNodes.length);\n"
+            + "      try {\n"
+            + "        document.appendChild(doctype);\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "      log(document.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A node from another document is adopted, this is no error.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"3", "true"})
+    public void appendChildCommentFromOtherDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var other = document.implementation.createHTMLDocument('other');\n"
+            + "      var comment = other.createComment('hello');\n"
+            + "      try {\n"
+            + "        document.appendChild(comment);\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(comment.ownerDocument === document);\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Appending a node that is already a child moves it to the end.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4", "second", "first"})
+    public void appendChildMovesComment() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var first = document.createComment('first');\n"
+            + "      var second = document.createComment('second');\n"
+            + "      try {\n"
+            + "        document.appendChild(first);\n"
+            + "        document.appendChild(second);\n"
+            + "        document.appendChild(first);\n"
+            + "        log(document.childNodes.length);\n"
+            + "        log(document.childNodes[2].data);\n"
+            + "        log(document.childNodes[3].data);\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Without a root element a new one can be appended, but only one.
+     * The new root needs a head, otherwise the logging via the document title is not possible.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "2", "HierarchyRequestError/DOMException"})
+    public void appendChildRootElementAfterRemoval() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var html = document.createElement('html');\n"
+            + "      html.appendChild(document.createElement('head'));\n"
+            + "      document.removeChild(document.documentElement);\n"
+            + "      document.appendChild(html);\n"
+            + "      log(document.documentElement === html);\n"
+            + "      log(document.childNodes.length);\n"
+            + "      try {\n"
+            + "        document.appendChild(document.createElement('html'));\n"
+            + "        log('appended');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The doctype has to be in front of the root element.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"HierarchyRequestError", "2", "10", "true"})
+    public void appendChildDoctypeBeforeRootElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "    function test() {\n"
+            + "      var doctype = document.implementation.createDocumentType('html', '', '');\n"
+            + "      var html = document.createElement('html');\n"
+            + "      html.appendChild(document.createElement('head'));\n"
+            + "      var result;\n"
+            + "      document.removeChild(document.doctype);\n"
+            // there is a root element, the doctype would be behind it
+            + "      try {\n"
+            + "        document.appendChild(doctype);\n"
+            + "        result = 'appended';\n"
+            + "      } catch(e) { result = e.name; }\n"
+            // an empty document, doctype and root element in the right order
+            + "      document.removeChild(document.documentElement);\n"
+            + "      document.appendChild(doctype);\n"
+            + "      document.appendChild(html);\n"
+            + "      log(result);\n"
+            + "      log(document.childNodes.length);\n"
+            + "      log(document.childNodes[0].nodeType);\n"
+            + "      log(document.childNodes[1] === html);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyWindowName2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * A fragment is allowed if it contains one element and no text and the document has no root element.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"HierarchyRequestError", "2", "HierarchyRequestError", "0", "true"})
+    public void appendChildFragmentAtDocumentLevel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var html = document.createElement('html');\n"
+            + "      html.appendChild(document.createElement('head'));\n"
+            + "      var results = [];\n"
+            + "      document.removeChild(document.documentElement);\n"
+            // two elements
+            + "      var two = document.createDocumentFragment();\n"
+            + "      two.appendChild(document.createElement('div'));\n"
+            + "      two.appendChild(document.createElement('span'));\n"
+            + "      try {\n"
+            + "        document.appendChild(two);\n"
+            + "        results.push('appended');\n"
+            + "      } catch(e) { results.push(e.name); }\n"
+            + "      results.push(two.childNodes.length);\n"
+            // text
+            + "      var withText = document.createDocumentFragment();\n"
+            + "      withText.appendChild(document.createTextNode('text'));\n"
+            + "      try {\n"
+            + "        document.appendChild(withText);\n"
+            + "        results.push('appended');\n"
+            + "      } catch(e) { results.push(e.name); }\n"
+            // one element
+            + "      var one = document.createDocumentFragment();\n"
+            + "      one.appendChild(html);\n"
+            + "      document.appendChild(one);\n"
+            + "      results.push(one.childNodes.length);\n"
+            + "      results.push(document.documentElement === html);\n"
+            + "      for (var i = 0; i < results.length; i++) {\n"
+            + "        log(results[i]);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A root element appended by script is a fully working part of the document.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "1", "true"})
+    public void appendedRootElementIsPartOfTheDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var html = document.createElement('html');\n"
+            + "      var body = document.createElement('body');\n"
+            + "      var div = document.createElement('div');\n"
+            + "      div.id = 'x';\n"
+            + "      body.appendChild(div);\n"
+            + "      html.appendChild(document.createElement('head'));\n"
+            + "      html.appendChild(body);\n"
+            + "      document.removeChild(document.documentElement);\n"
+            + "      document.appendChild(html);\n"
+            + "      log(document.getElementById('x') === div);\n"
+            + "      log(document.body === body);\n"
+            + "      log(document.querySelector('div') === div);\n"
+            + "      log(document.getElementsByTagName('div').length);\n"
+            + "      log(document.documentElement.parentNode === document);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -3739,6 +4034,464 @@ public class DocumentTest extends WebDriverTestCase {
             + "  log(document.documentElement.clientWidth);\n"
             + "</script>\n"
             + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"7", "target", "data", "target", "data", "data", "4"})
+    public void createProcessingInstruction() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      log(pi.nodeType);\n"
+            + "      log(pi.target);\n"
+            + "      log(pi.data);\n"
+            + "      log(pi.nodeName);\n"
+            + "      log(pi.nodeValue);\n"
+            + "      log(pi.textContent);\n"
+            + "      log(pi.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object ProcessingInstruction]", "true", "true", "true"})
+    public void createProcessingInstructionPrototypeChain() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      log(Object.prototype.toString.call(pi));\n"
+            + "      log(pi instanceof ProcessingInstruction);\n"
+            + "      log(pi instanceof CharacterData);\n"
+            + "      log(pi instanceof Node);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "null"})
+    public void createProcessingInstructionOwnerAndParent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      log(pi.ownerDocument === document);\n"
+            + "      log(pi.parentNode);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[]", "0", "[]"})
+    public void createProcessingInstructionEmptyData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', '');\n"
+            + "      log('[' + pi.data + ']');\n"
+            + "      log(pi.length);\n"
+            + "      log('[' + pi.nodeValue + ']');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The target is read only, the data can be changed in different ways.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"b", "c", "d", "t"})
+    public void createProcessingInstructionModification() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('t', 'a');\n"
+            + "      pi.data = 'b';\n"
+            + "      log(pi.nodeValue);\n"
+            + "      pi.nodeValue = 'c';\n"
+            + "      log(pi.data);\n"
+            + "      pi.textContent = 'd';\n"
+            + "      log(pi.data);\n"
+            + "      pi.target = 'other';\n"
+            + "      log(pi.target);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The methods of CharacterData.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"bcd", "abcdefg", "xabcdefg", "bcdefg", "Zcdefg"})
+    public void createProcessingInstructionCharacterDataMethods() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('t', 'abcdef');\n"
+            + "      log(pi.substringData(1, 3));\n"
+            + "      pi.appendData('g');\n"
+            + "      log(pi.data);\n"
+            + "      pi.insertData(0, 'x');\n"
+            + "      log(pi.data);\n"
+            + "      pi.deleteData(0, 2);\n"
+            + "      log(pi.data);\n"
+            + "      pi.replaceData(0, 1, 'Z');\n"
+            + "      log(pi.data);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Targets have to match the XML Name production.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"a:b", "_x", "a-b.c1", "xml-stylesheet"})
+    public void createProcessingInstructionValidTargets() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var targets = ['a:b', '_x', 'a-b.c1', 'xml-stylesheet'];\n"
+            + "      for (var i = 0; i < targets.length; i++) {\n"
+            + "        try {\n"
+            + "          log(document.createProcessingInstruction(targets[i], 'data').target);\n"
+            + "        } catch(e) { logEx(e); }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Only the sequence '?>' is forbidden inside of the data.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "a?b", "a>b", "?", ">"})
+    public void createProcessingInstructionSpecialData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var data = '<b>&amp;\\n\"x\"';\n"
+            + "      log(document.createProcessingInstruction('t', data).data === data);\n"
+            + "      var values = ['a?b', 'a>b', '?', '>'];\n"
+            + "      for (var i = 0; i < values.length; i++) {\n"
+            + "        try {\n"
+            + "          log(document.createProcessingInstruction('t', values[i]).data);\n"
+            + "        } catch(e) { logEx(e); }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
+             "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
+             "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException"})
+    public void createProcessingInstructionInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            // invalid targets
+            + "      var targets = ['', '1a', 'a b', 'a>b', '-a'];\n"
+            + "      for (var i = 0; i < targets.length; i++) {\n"
+            + "        try {\n"
+            + "          document.createProcessingInstruction(targets[i], 'data');\n"
+            + "          log('no error');\n"
+            + "        } catch(e) { logEx(e); }\n"
+            + "      }\n"
+            // invalid data
+            + "      try {\n"
+            + "        document.createProcessingInstruction('target', 'a?>b');\n"
+            + "        log('no error');\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The arguments are converted to strings.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"null", "undefined", "12"})
+    public void createProcessingInstructionArgumentConversion() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      log(document.createProcessingInstruction('a', null).data);\n"
+            + "      log(document.createProcessingInstruction('a', undefined).data);\n"
+            + "      log(document.createProcessingInstruction('a', 12).data);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Both arguments are required.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError"})
+    public void createProcessingInstructionMissingArguments() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      try {\n"
+            + "        document.createProcessingInstruction('a');\n"
+            + "        log('no error');\n"
+            + "      } catch(e) { log(e.name); }\n"
+            + "      try {\n"
+            + "        document.createProcessingInstruction();\n"
+            + "        log('no error');\n"
+            + "      } catch(e) { log(e.name); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Every document creates its own nodes, HTML as well as XML documents.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "7", "true"})
+    public void createProcessingInstructionOtherDocuments() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var htmlDoc = document.implementation.createHTMLDocument('x');\n"
+            + "      log(htmlDoc.createProcessingInstruction('t', 'd').ownerDocument === htmlDoc);\n"
+            + "      var xmlDoc = document.implementation.createDocument(null, 'root', null);\n"
+            + "      var pi = xmlDoc.createProcessingInstruction('t', 'd');\n"
+            + "      log(pi.nodeType);\n"
+            + "      log(pi.ownerDocument === xmlDoc);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"7", "t", "d", "true", "true"})
+    public void createProcessingInstructionCloneNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('t', 'd');\n"
+            + "      var clone = pi.cloneNode(false);\n"
+            + "      log(clone.nodeType);\n"
+            + "      log(clone.target);\n"
+            + "      log(clone.data);\n"
+            + "      log(clone !== pi);\n"
+            + "      log(pi.isEqualNode(clone));\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"7", "false", "0", "null", "null"})
+    public void createProcessingInstructionNodeApi() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('t', 'd');\n"
+            + "      log(Node.PROCESSING_INSTRUCTION_NODE);\n"
+            + "      log(pi.hasChildNodes());\n"
+            + "      log(pi.childNodes.length);\n"
+            + "      log(pi.firstChild);\n"
+            + "      log(pi.nextSibling);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The text content of an element ignores processing instructions.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "true", "true", "[]", "0"})
+    public void createProcessingInstructionInElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var pi = document.createProcessingInstruction('target', 'data');\n"
+            + "      var div = document.createElement('div');\n"
+            + "      div.appendChild(pi);\n"
+            + "      log(div.childNodes.length);\n"
+            + "      log(div.firstChild === pi);\n"
+            + "      log(pi.parentNode === div);\n"
+            + "      log('[' + div.textContent + ']');\n"
+            + "      pi.remove();\n"
+            + "      log(div.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Inside of an HTML document the serialization of a processing instruction is
+     * {@code <?target data>}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "<?target data>",
+            CHROME = "<?target data?>")
+    @HtmlUnitNYI(CHROME = "<?target data>")
+    public void createProcessingInstructionInnerHtml() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var div = document.createElement('div');\n"
+            + "      div.appendChild(document.createProcessingInstruction('target', 'data'));\n"
+            + "      log(div.innerHTML);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
 
         loadPageVerifyTitle2(html);
     }

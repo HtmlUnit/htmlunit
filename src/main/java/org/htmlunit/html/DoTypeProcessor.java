@@ -19,6 +19,7 @@ import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_BACK_SPACE
 import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_DECIMAL;
 import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_DELETE;
 import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_DIVIDE;
+import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_DOWN;
 import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_END;
 import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_EQUALS;
 import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_HOME;
@@ -31,6 +32,7 @@ import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SEMICOLON;
 import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SEPARATOR;
 import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SPACE;
 import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SUBTRACT;
+import static org.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_UP;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -198,14 +200,39 @@ class DoTypeProcessor implements Serializable {
                 }
 
                 if (selectionStart > 0) {
-                    newValue.deleteCharAt(selectionStart - 1);
-                    selectionStart--;
+                    if (element.isCtrlPressed()) {
+                        int targetStart = selectionStart;
+                        while (targetStart > 0 && Character.isWhitespace(newValue.charAt(targetStart - 1))) {
+                            targetStart--;
+                        }
+                        while (targetStart > 0 && !Character.isWhitespace(newValue.charAt(targetStart - 1))) {
+                            targetStart--;
+                        }
+                        newValue.delete(targetStart, selectionStart);
+                        selectionStart = targetStart;
+                    }
+                    else {
+                        newValue.deleteCharAt(selectionStart - 1);
+                        selectionStart--;
+                    }
                 }
                 break;
 
             case DOM_VK_LEFT:
                 if (element.isCtrlPressed()) {
-                    while (selectionStart > 0 && newValue.charAt(selectionStart - 1) != ' ') {
+                    int targetPos = selectionStart;
+                    // 1. Skip whitespace to the left of caret
+                    while (targetPos > 0 && Character.isWhitespace(newValue.charAt(targetPos - 1))) {
+                        targetPos--;
+                    }
+                    // 2. Skip word characters to the left
+                    while (targetPos > 0 && !Character.isWhitespace(newValue.charAt(targetPos - 1))) {
+                        targetPos--;
+                    }
+                    selectionStart = targetPos;
+                }
+                else if (element.isShiftPressed()) {
+                    if (selectionStart > 0) {
                         selectionStart--;
                     }
                 }
@@ -216,40 +243,200 @@ class DoTypeProcessor implements Serializable {
 
             case DOM_VK_RIGHT:
                 if (element.isCtrlPressed()) {
-                    if (selectionStart < newValue.length()) {
-                        selectionStart++;
+                    int targetPos = selectionStart;
+                    // 1. Skip word characters to the right
+                    while (targetPos < newValue.length() && !Character.isWhitespace(newValue.charAt(targetPos))) {
+                        targetPos++;
                     }
-                    while (selectionStart < newValue.length() && newValue.charAt(selectionStart - 1) != ' ') {
-                        selectionStart++;
+                    // 2. Skip whitespace to the right
+                    while (targetPos < newValue.length() && Character.isWhitespace(newValue.charAt(targetPos))) {
+                        targetPos++;
+                    }
+                    if (element.isShiftPressed()) {
+                        selectionEnd = targetPos;
+                    }
+                    else {
+                        selectionStart = targetPos;
                     }
                 }
                 else if (element.isShiftPressed()) {
-                    selectionEnd++;
+                    if (selectionEnd < newValue.length()) {
+                        selectionEnd++;
+                    }
                 }
-                else if (selectionStart > 0) {
+                else if (selectionStart < newValue.length()) {
                     selectionStart++;
                 }
                 break;
 
+            case DOM_VK_UP:
+                final int lastLfUp = currentValue.lastIndexOf('\n', selectionStart - 1);
+                final int lastCrUp = currentValue.lastIndexOf('\r', selectionStart - 1);
+                final int lastBreakUp = Math.max(lastLfUp, lastCrUp);
+
+                if (lastBreakUp == -1) {
+                    selectionStart = 0;
+                }
+                else {
+                    final int currentLineStart = lastBreakUp + 1;
+                    final int column = selectionStart - currentLineStart;
+
+                    final int prevLineEnd = (lastBreakUp > 0 && newValue.charAt(lastBreakUp) == '\n'
+                            && newValue.charAt(lastBreakUp - 1) == '\r') ? lastBreakUp - 1 : lastBreakUp;
+
+                    final int prevLf = currentValue.lastIndexOf('\n', prevLineEnd - 1);
+                    final int prevCr = currentValue.lastIndexOf('\r', prevLineEnd - 1);
+                    final int prevBreak = Math.max(prevLf, prevCr);
+
+                    final int prevLineStart = (prevBreak == -1) ? 0 : prevBreak + 1;
+                    final int prevLineLength = prevLineEnd - prevLineStart;
+
+                    selectionStart = prevLineStart + Math.min(column, prevLineLength);
+                }
+                break;
+
+            case DOM_VK_DOWN:
+                final int lastLfDown = currentValue.lastIndexOf('\n', selectionStart - 1);
+                final int lastCrDown = currentValue.lastIndexOf('\r', selectionStart - 1);
+                final int lastBreakDown = Math.max(lastLfDown, lastCrDown);
+                final int currentLineStartDown = (lastBreakDown == -1) ? 0 : lastBreakDown + 1;
+                final int columnDown = selectionStart - currentLineStartDown;
+
+                final int nextLfDown = currentValue.indexOf('\n', selectionStart);
+                final int nextCrDown = currentValue.indexOf('\r', selectionStart);
+                final int nextBreakDown;
+                if (nextLfDown == -1) {
+                    nextBreakDown = nextCrDown;
+                }
+                else if (nextCrDown == -1) {
+                    nextBreakDown = nextLfDown;
+                }
+                else {
+                    nextBreakDown = Math.min(nextLfDown, nextCrDown);
+                }
+
+                final int targetDown;
+                if (nextBreakDown == -1) {
+                    targetDown = newValue.length();
+                }
+                else {
+                    int nextLineStart = nextBreakDown + 1;
+                    if (newValue.charAt(nextBreakDown) == '\r' && nextLineStart < newValue.length()
+                            && newValue.charAt(nextLineStart) == '\n') {
+                        nextLineStart++;
+                    }
+
+                    final int followingLf = currentValue.indexOf('\n', nextLineStart);
+                    final int followingCr = currentValue.indexOf('\r', nextLineStart);
+                    final int followingBreak;
+                    if (followingLf == -1) {
+                        followingBreak = followingCr;
+                    }
+                    else if (followingCr == -1) {
+                        followingBreak = followingLf;
+                    }
+                    else {
+                        followingBreak = Math.min(followingLf, followingCr);
+                    }
+
+                    final int nextLineEnd = (followingBreak == -1) ? newValue.length() : followingBreak;
+                    final int nextLineLength = nextLineEnd - nextLineStart;
+
+                    targetDown = nextLineStart + Math.min(columnDown, nextLineLength);
+                }
+
+                if (element.isShiftPressed()) {
+                    selectionEnd = targetDown;
+                }
+                else {
+                    selectionStart = targetDown;
+                }
+                break;
+
             case DOM_VK_HOME:
-                selectionStart = 0;
+                final int targetHome;
+                if (element.isCtrlPressed()) {
+                    targetHome = 0;
+                }
+                else {
+                    final int lastLf = currentValue.lastIndexOf('\n', selectionStart - 1);
+                    final int lastCr = currentValue.lastIndexOf('\r', selectionStart - 1);
+                    // Use Math.max to find the closest line break before the caret,
+                    // so the line start is positioned right after it
+                    final int lastBreak = Math.max(lastLf, lastCr);
+                    targetHome = (lastBreak == -1) ? 0 : lastBreak + 1;
+                }
+
+                if (element.isShiftPressed()) {
+                    selectionStart = targetHome;
+                }
+                else {
+                    selectionStart = targetHome;
+                    selectionEnd = targetHome;
+                }
                 break;
 
             case DOM_VK_END:
-                if (element.isShiftPressed()) {
-                    selectionEnd = newValue.length();
+                int targetEnd;
+                if (element.isCtrlPressed()) {
+                    targetEnd = newValue.length();
                 }
                 else {
-                    selectionStart = newValue.length();
+                    final int nextLf = currentValue.indexOf('\n', selectionStart);
+                    final int nextCr = currentValue.indexOf('\r', selectionStart);
+                    if (nextLf == -1) {
+                        targetEnd = nextCr;
+                    }
+                    else if (nextCr == -1) {
+                        targetEnd = nextLf;
+                    }
+                    else {
+                        targetEnd = Math.min(nextLf, nextCr);
+                    }
+                    if (targetEnd == -1) {
+                        targetEnd = newValue.length();
+                    }
+                }
+
+                if (element.isShiftPressed()) {
+                    selectionEnd = targetEnd;
+                }
+                else {
+                    selectionStart = targetEnd;
                 }
                 break;
 
             case DOM_VK_DELETE:
-                if (selectionEnd == selectionStart) {
-                    selectionEnd++;
+                if (selectionEnd != selectionStart) {
+                    newValue.delete(selectionStart, selectionEnd);
+                    selectionEnd = selectionStart;
+                    break;
                 }
-                newValue.delete(selectionStart, selectionEnd);
-                selectionEnd = selectionStart;
+
+                if (selectionStart < newValue.length()) {
+                    if (element.isCtrlPressed()) {
+                        int delTargetEnd = selectionStart;
+                        // 1. Skip initial whitespace at caret (if caret is on a space)
+                        while (delTargetEnd < newValue.length()
+                                && Character.isWhitespace(newValue.charAt(delTargetEnd))) {
+                            delTargetEnd++;
+                        }
+                        // 2. Skip word characters
+                        while (delTargetEnd < newValue.length()
+                                && !Character.isWhitespace(newValue.charAt(delTargetEnd))) {
+                            delTargetEnd++;
+                        }
+                        // 3. Skip trailing whitespace after the word
+                        while (delTargetEnd < newValue.length()
+                                && Character.isWhitespace(newValue.charAt(delTargetEnd))) {
+                            delTargetEnd++;
+                        }
+                        newValue.delete(selectionStart, delTargetEnd);
+                    }
+                    else {
+                        newValue.deleteCharAt(selectionStart);
+                    }
+                }
                 break;
 
             default:

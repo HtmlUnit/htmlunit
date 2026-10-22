@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ronald Brill
  */
-public class HtmlPageTest5 extends SimpleWebTestCase {
+public class HtmlPage5Test extends SimpleWebTestCase {
     /**
      * Test tabbing to the next element.
      * @throws Exception if something goes wrong

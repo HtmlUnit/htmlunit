@@ -20,7 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RB_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RT_9;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RUBY_17;
-import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_157;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_14;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
@@ -1897,10 +1896,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_173)) {
                 return 173;
             }
-            if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_157)) {
-                return 157;
-            }
-            return 161; // FF
+            return 157; // FF
         }
 
         if (element instanceof HtmlRadioButtonInput || element instanceof HtmlCheckBoxInput) {

@@ -1257,10 +1257,11 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "40",
-            FF = "18",
+            FF = "0",
             FF_ESR = "18")
     @HtmlUnitNYI(CHROME = "18",
-            EDGE = "18")
+            EDGE = "18",
+            FF = "18")
     public void optgroup() throws Exception {
         test("optgroup");
     }

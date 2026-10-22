@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -32,12 +31,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"left", "right", "bottom", "middle", "top",
-                       "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
-            FF_ESR = {"left", "right", "bottom", "middle", "top",
-                      "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""})
-    @HtmlUnitNYI(FF_ESR = {"left", "right", "bottom", "middle", "top",
-                           "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""})
+    @Alerts({"left", "right", "bottom", "middle", "top",
+             "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""})
     public void getAlign() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -68,12 +63,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
-                       "absbottom", "absmiddle", "baseline", "texttop"},
-            FF_ESR = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
-                      "absbottom", "absmiddle", "bottom", "texttop"})
-    @HtmlUnitNYI(FF_ESR = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
-                           "absbottom", "absmiddle", "baseline", "texttop"})
+    @Alerts({"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+             "absbottom", "absmiddle", "baseline", "texttop"})
     public void setAlign() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

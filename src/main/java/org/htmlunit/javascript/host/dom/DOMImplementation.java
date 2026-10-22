@@ -16,10 +16,16 @@ package org.htmlunit.javascript.host.dom;
 
 import java.io.IOException;
 
+import org.htmlunit.SgmlPage;
 import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.html.DomDocumentType;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
@@ -194,12 +200,74 @@ public class DOMImplementation extends HtmlUnitScriptable {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(document.getClass()));
+
+        final XmlPage page = (XmlPage) document.getDomNodeOrDie();
+        if (doctype != null) {
+            // the doctype is in front of the root element
+            final DomDocumentType doctypeNode = (DomDocumentType) doctype.getDomNodeOrDie();
+            page.appendChild(doctypeNode);
+            page.setDocumentType(doctypeNode);
+        }
         if (qualifiedName != null && !qualifiedName.isEmpty()) {
-            final XmlPage page = (XmlPage) document.getDomNodeOrDie();
             page.appendChild(page.createElementNS(
                     StringUtils.isEmptyString(namespaceURI) ? null : namespaceURI, qualifiedName));
         }
         return document;
+    }
+
+    /**
+     * Creates a {@link DocumentType}.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMImplementation/createDocumentType">
+     *     createDocumentType (MDN)</a>
+     *
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method: qualifiedName, publicId and systemId
+     * @param function the function
+     * @return the newly created {@link DocumentType}
+     */
+    @JsxFunction
+    public static DocumentType createDocumentType(final Context context, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (args.length < 3) {
+            throw JavaScriptEngine.typeError("Failed to execute 'createDocumentType' on 'DOMImplementation': "
+                    + "3 arguments required, but only " + args.length + " present.");
+        }
+
+        final DOMImplementation implementation = (DOMImplementation) thisObj;
+        final String qualifiedName = JavaScriptEngine.toString(args[0]);
+        final String publicId = JavaScriptEngine.toString(args[1]);
+        final String systemId = JavaScriptEngine.toString(args[2]);
+
+        if (!isValidDocumentTypeName(qualifiedName)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    implementation.getWindow(),
+                    "createDocumentType: Provided string '" + qualifiedName + "' contains an invalid character",
+                    DOMException.INVALID_CHARACTER_ERR);
+        }
+
+        // the node is owned by the page of the window; if it is appended to another document
+        // the page is replaced
+        final SgmlPage page = (SgmlPage) implementation.getWindow().getWebWindow().getEnclosedPage();
+        final DomDocumentType doctype = new DomDocumentType(page, qualifiedName, publicId, systemId);
+        return (DocumentType) implementation.getScriptableFor(doctype);
+    }
+
+    // The name does not have to be a valid XML name (the empty string, '1a' or '-a' are fine), the
+    // browsers only reject ASCII whitespace and '>' (and NULL).
+    // Do not share this with the check of the processing instruction target, there the Name
+    // production is still required.
+    private static boolean isValidDocumentTypeName(final String name) {
+        final int length = name.length();
+        for (int i = 0; i < length; i++) {
+            final char c = name.charAt(i);
+            if (c == '>' || c == '\u0000'
+                    || c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r') {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

@@ -81,7 +81,7 @@ public class TextEncoder extends HtmlUnitScriptable {
         final byte[] bytes = txt.getBytes(StandardCharsets.UTF_8);
 
         final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(bytes.length);
-        System.arraycopy(bytes, 0, arrayBuffer.getBuffer(), 0, bytes.length);
+        arrayBuffer.getByteBuffer().put(bytes);
 
         final NativeUint8Array result = new NativeUint8Array(arrayBuffer, 0, bytes.length);
         result.setParentScope(getParentScope());

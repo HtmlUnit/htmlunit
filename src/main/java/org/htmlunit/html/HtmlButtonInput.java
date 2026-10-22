@@ -14,9 +14,11 @@
  */
 package org.htmlunit.html;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
+import org.htmlunit.javascript.host.event.KeyboardEvent;
 
 /**
  * Wrapper for the HTML element "input" where type is "button".
@@ -49,6 +51,19 @@ public class HtmlButtonInput extends HtmlInput implements LabelableElement {
     @Override
     public void reset() {
         // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final int keyCode, final boolean lastType) throws IOException {
+        if (keyCode == KeyboardEvent.DOM_VK_SPACE) {
+            click();
+            return;
+        }
+
+        super.doType(keyCode, lastType);
     }
 
     /**

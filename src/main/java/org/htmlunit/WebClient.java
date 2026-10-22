@@ -152,6 +152,7 @@ import org.htmlunit.webstart.WebStartHandler;
  * @author Lai Quang Duong
  * @author René Schwietzke
  * @author Sven Strickroth
+ * @author Ashutosh Panda
  */
 @SuppressWarnings("PMD.TooManyFields")
 public class WebClient implements Serializable, AutoCloseable {
@@ -1680,7 +1681,8 @@ public class WebClient implements Serializable, AutoCloseable {
         else if (status >= HttpStatus.MOVED_PERMANENTLY_301
             && status <= HttpStatus.PERMANENT_REDIRECT_308
             && status != HttpStatus.NOT_MODIFIED_304
-            && getOptions().isRedirectEnabled()) {
+            && getOptions().isRedirectEnabled()
+            && !webRequest.hasHint(WebRequest.HttpHint.DoNotFollowRedirects)) {
 
             final URL newUrl;
             String locationString = null;
@@ -2710,11 +2712,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 return true;
             }
 
-            if (requestingWindow_.getEnclosedPage() != originalPage_.get()) {
-                return true;
-            }
-
-            return false;
+            return requestingWindow_.getEnclosedPage() != originalPage_.get();
         }
     }
 

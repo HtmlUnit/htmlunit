@@ -253,9 +253,13 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebDriverTestCase")
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.HttpWebConnectionProxyTest")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$ChatWebSocketListener")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$CookiesWebSocketListener")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$EventsWebSocketListener")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$BinaryWebSocketListener")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$ControlWebSocketListener")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$EchoWebSocketListener")
         .should()
             .dependOnClassesThat().resideInAnyPackage("org.eclipse.jetty..");
 

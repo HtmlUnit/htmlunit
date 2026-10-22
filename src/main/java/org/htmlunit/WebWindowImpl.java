@@ -411,7 +411,8 @@ public abstract class WebWindowImpl implements WebWindow {
                             LOG.trace("modifyIfNecessary: " + cssStyleSheet
                                         + ", " + computedsStyleDeclaration + ", " + element);
                         }
-                        cssStyleSheet.modifyIfNecessary(computedsStyleDeclaration, element, normalizedPseudo);
+                        cssStyleSheet.modifyIfNecessary(computedsStyleDeclaration,
+                                        element, normalizedPseudo, htmlPage.getDocumentElement());
                     }
                 }
             }

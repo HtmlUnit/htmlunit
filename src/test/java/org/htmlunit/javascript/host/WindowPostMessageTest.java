@@ -113,7 +113,9 @@ public class WindowPostMessageTest extends WebDriverTestCase {
                 + "<html><body><p>inside frame</p></body></html>";
 
         getMockWebConnection().setResponse(URL_THIRD, iframe);
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -179,7 +181,9 @@ public class WindowPostMessageTest extends WebDriverTestCase {
                 + "<html><body><p>inside frame</p></body></html>";
 
         getMockWebConnection().setResponse(URL_THIRD, iframe);
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -224,7 +228,9 @@ public class WindowPostMessageTest extends WebDriverTestCase {
                 + "<html><body><p>inside frame</p></body></html>";
 
         getMockWebConnection().setResponse(URL_THIRD, iframe);
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**

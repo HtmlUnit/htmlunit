@@ -244,6 +244,136 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
+     * The responseURL is empty until the response is available.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1: ", "2: ", "3: §§URL§§foo.xml"})
+    public void responseURLSync() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      function test() {\n"
+                + "        var xhr = new XMLHttpRequest();\n"
+                + "        log('1: ' + xhr.responseURL);\n"
+                + "        xhr.open('GET', '/foo.xml', false);\n"
+                + "        log('2: ' + xhr.responseURL);\n"
+                + "        xhr.send();\n"
+                + "        log('3: ' + xhr.responseURL);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The responseURL is available as soon as the headers are received.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0: ", "1: ", "2: §§URL§§foo.xml", "3: §§URL§§foo.xml", "4: §§URL§§foo.xml"})
+    public void responseURLAsync() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      function test() {\n"
+                + "        var xhr = new XMLHttpRequest();\n"
+                + "        xhr.onreadystatechange = function() {\n"
+                + "          log(xhr.readyState + ': ' + xhr.responseURL);\n"
+                + "        };\n"
+                + "        log('0: ' + xhr.responseURL);\n"
+                + "        xhr.open('GET', '/foo.xml', true);\n"
+                + "        xhr.send();\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * The fragment is not part of the responseURL.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§foo.xml")
+    public void responseURLFragment() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      function test() {\n"
+                + "        var xhr = new XMLHttpRequest();\n"
+                + "        xhr.open('GET', '/foo.xml#fragment', false);\n"
+                + "        xhr.send();\n"
+                + "        log(xhr.responseURL);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The responseURL is the url after the redirects.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§response.html", "Result"})
+    public void responseURLRedirect() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      function test() {\n"
+                + "        var xhr = new XMLHttpRequest();\n"
+                + "        xhr.open('GET', '/redirect.html', false);\n"
+                + "        xhr.send();\n"
+                + "        log(xhr.responseURL);\n"
+                + "        log(xhr.responseText);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", new URL(URL_FIRST, "/response.html").toExternalForm()));
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "/redirect.html"), "", 302, "Found", null, headers);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "/response.html"), "Result");
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Checks that not passing the async flag to <code>open()</code>
      * results in async execution.  If this gets interpreted as {@code false}
      * then you will see the alert order 1-2-4-3 instead of 1-2-3-4.
@@ -3738,6 +3868,55 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"", "blob", "[object Blob]", "36", "text/plain"})
+    public void responseResponseTypeBlobWithCharset() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      var xhr;\n"
+                + "      function test() {\n"
+                + "        xhr = new XMLHttpRequest();\n"
+                + "        log(xhr.responseText);\n"
+
+                + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                + "        xhr.responseType = 'blob';\n"
+                + "        log(xhr.responseType);\n"
+
+                + "        xhr.onreadystatechange = onStateChange;\n"
+                + "        xhr.send('');\n"
+                + "      }\n"
+
+                + "      function onStateChange(e) {\n"
+                + "        if (xhr.readyState == 4) {\n"
+                + "          try {\n"
+                + "            log(xhr.response);\n"
+                + "            log(xhr.response.size);\n"
+                + "            log(xhr.response.type);\n"
+                + "          } catch(ex) { logEx(e); }\n"
+                + "        }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String xml =
+                "<xml>\n"
+                        + "<content>blah</content>\n"
+                        + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_PLAIN + ";charset=iso-8859-1");
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"", "blob", "[object Blob]", "0"})
     public void responseResponseTypeBlobEmpty() throws Exception {
         final String html = DOCTYPE_HTML
@@ -4328,7 +4507,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"readyState: 4", "status: 0", "statusText: ", "headers: "})
+    @Alerts({"readyState: 4", "status: 0", "statusText: ", "headers: ", "responseURL: "})
     public void statusTextAndHeadersWhenLocalFileAccessForbidden() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -4343,6 +4522,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 + "          log('status: ' + xhr.status);\n"
                 + "          log('statusText: ' + xhr.statusText);\n"
                 + "          log('headers: ' + xhr.getAllResponseHeaders());\n"
+                + "          log('responseURL: ' + xhr.responseURL);\n"
                 + "        };\n"
 
                 + "        try {\n"
@@ -4361,5 +4541,130 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(10), getWebDriver(), getExpectedAlerts());
     }
-}
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function", "function"},
+            FF = {"undefined", "undefined"},
+            FF_ESR = {"undefined", "undefined"})
+    public void chromeOnlyMethodsExist() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var xhr = new XMLHttpRequest();\n"
+                + "    log(typeof xhr.setAttributionReporting);\n"
+                + "    log(typeof xhr.setPrivateToken);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined"},
+            FF = {"false", "false"},
+            FF_ESR = {"false", "false"})
+    public void mozAnonAndMozSystem() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var xhr = new XMLHttpRequest();\n"
+                + "    log(xhr.mozAnon);\n"
+                + "    log(xhr.mozSystem);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ok",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void setAttributionReportingNotOpened() throws Exception {
+        callOnXhr("xhr.setAttributionReporting({eventSourceEligible: true, triggerEligible: false});", false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ok",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void setAttributionReportingOpened() throws Exception {
+        callOnXhr("xhr.setAttributionReporting({eventSourceEligible: true, triggerEligible: false});", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void setAttributionReportingNoArgument() throws Exception {
+        callOnXhr("xhr.setAttributionReporting();", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "InvalidStateError/DOMException",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    @HtmlUnitNYI(CHROME = "ok", EDGE = "ok")
+    public void setPrivateTokenNotOpened() throws Exception {
+        callOnXhr("xhr.setPrivateToken({version: 1, operation: 'token-request'});", false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ok",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void setPrivateTokenOpened() throws Exception {
+        callOnXhr("xhr.setPrivateToken({version: 1, operation: 'token-request'});", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void setPrivateTokenNoArgument() throws Exception {
+        callOnXhr("xhr.setPrivateToken();", true);
+    }
+
+    private void callOnXhr(final String call, final boolean open) throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var xhr = new XMLHttpRequest();\n"
+                + (open ? "    xhr.open('GET', '/foo.xml', true);\n" : "")
+                + "    try {\n"
+                + "      " + call + "\n"
+                + "      log('ok');\n"
+                + "    } catch(e) { logEx(e); }\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
+        loadPageVerifyTitle2(html);
+    }
+}

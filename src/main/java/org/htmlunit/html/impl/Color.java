@@ -21,6 +21,7 @@ import java.util.Objects;
  * independent of awt (for this).
  *
  * @author Ronald Brill
+ * @author Ashutosh Panda
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class Color {
@@ -137,9 +138,6 @@ public class Color {
         if (green_ != other.green_) {
             return false;
         }
-        if (red_ != other.red_) {
-            return false;
-        }
-        return true;
+        return red_ == other.red_;
     }
 }

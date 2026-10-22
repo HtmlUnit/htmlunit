@@ -70,18 +70,18 @@ import org.htmlunit.util.StringUtils;
 public final class BrowserVersion implements Serializable {
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(154, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(157, "FF");
 
-    private static final int FIREFOX_ESR_NUMERIC = 140;
+    private static final int FIREFOX_ESR_NUMERIC = 153;
 
     /** Firefox ESR. */
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(151, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(156, "Chrome");
 
     /** Latest Edge. */
-    public static final BrowserVersion EDGE = new BrowserVersion(151, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(154, "Edge");
 
     /**
      * Array with all supported browsers.
@@ -120,7 +120,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.SEC_FETCH_USER,
             HttpHeader.PRIORITY};
         FIREFOX_ESR.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-        FIREFOX_ESR.acceptLanguageHeader_ = "en-US,en;q=0.5";
+        FIREFOX_ESR.acceptLanguageHeader_ = "en-US,en;q=0.9";
         FIREFOX_ESR.xmlHttpRequestAcceptHeader_ = "*/*";
         FIREFOX_ESR.imgAcceptHeader_ = "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5";
         FIREFOX_ESR.cssAcceptHeader_ = "text/css,*/*;q=0.1";
@@ -196,14 +196,14 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.COOKIE};
         CHROME.acceptLanguageHeader_ = "en-US,en;q=0.9";
         CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
-                                            + "q=0.9,image/avif,image/webp,image/apng,*/*;"
+                                            + "q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.7";
-        CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
+        CHROME.imgAcceptHeader_ = "image/jxl,image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
 
-        CHROME.secClientHintUserAgentHeader_ = "\"Not=A?Brand\";v=\"99\", \"Google Chrome\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
+        CHROME.secClientHintUserAgentHeader_ = "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\""
+                + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
                 + CHROME.getBrowserVersionNumeric() + "\"";
 
         CHROME.fontHeights_ = new int[] {
@@ -249,9 +249,9 @@ public final class BrowserVersion implements Serializable {
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
 
-        EDGE.secClientHintUserAgentHeader_ = "\"Not=A?Brand\";v=\"99\", \"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\"";
+        EDGE.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
+                + EDGE.getBrowserVersionNumeric() + "\", \"Microsoft Edge\";v=\""
+                + EDGE.getBrowserVersionNumeric() + "\", \"Not A(Brand\";v=\"99\"";
 
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
@@ -450,7 +450,6 @@ public final class BrowserVersion implements Serializable {
         FIREFOX.maybeMediaResource_.addAll(ff);
 
         FIREFOX_ESR.maybeMediaResource_.addAll(ff);
-        FIREFOX_ESR.maybeMediaResource_.remove(new MediaResourceType("video/x-matroska", null));
 
         // --- maybe: Chrome / Edge (Edge is a superset of Chrome) ---
         HashSet<MediaResourceType> chrome = new HashSet<>(common);

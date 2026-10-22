@@ -44,7 +44,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
             FF = {"[object CSSStyleProperties]", "[object CSSStyleProperties]"},
-            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]"})
+            FF_ESR = {"[object CSSStyleProperties]", "[object CSSStyleProperties]"})
     public void scriptableToString() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -350,9 +350,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"inline", "inline", "inline", "block", "inline", "block", "block", "none"},
-            FF = {"inline", "inline", "inline", "block", "none", "block", "block", "none"},
-            FF_ESR = {"inline", "inline", "inline", "block", "none", "block", "block", "none"})
+    @Alerts({"inline", "inline", "inline", "block", "none", "block", "block", "none"})
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -1712,9 +1710,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "underline", "none", "underline"},
-            FF_ESR = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"})
-    @HtmlUnitNYI(FF_ESR = { "underline", "rgb(0, 0, 0)", "underline"})
+    @Alerts({ "underline", "none", "underline"})
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

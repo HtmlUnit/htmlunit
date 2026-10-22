@@ -1046,11 +1046,14 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1272", "1234"},
+            CHROME = {"0", "1234"},
             EDGE = {"0", "1234"})
-    @HtmlUnitNYI(EDGE = {"1280", "1234"})
+    @HtmlUnitNYI(
+            CHROME = {"1272", "1234"},
+            EDGE = {"1280", "1234"})
     public void setOuterWidth() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><body onload>\n"
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  log(window.outerWidth);\n"
@@ -1065,7 +1068,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"768", "1234"},
+    @Alerts(CHROME = {"0", "1234"},
             EDGE = {"0", "1234"},
             FF = {"768", "1234"},
             FF_ESR = {"768", "1234"})
@@ -1076,13 +1079,12 @@ public class Window2Test extends WebDriverTestCase {
             FF_ESR = {"699", "1234"})
     public void setOuterHeight() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><body onload='test()'><script>\n"
+            + "<html><body>\n"
+            + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "function test() {\n"
             + "  log(window.outerHeight);\n"
             + "  window.outerHeight = 1234;\n"
             + "  log(window.outerHeight);\n"
-            + "}\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);

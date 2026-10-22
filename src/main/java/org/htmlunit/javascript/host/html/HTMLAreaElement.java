@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -100,7 +101,7 @@ public class HTMLAreaElement extends HTMLElement {
      * Returns the {@code type} attribute.
      * @return the {@code type} attribute
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF, FF_ESR})
     public String getType() {
         return getDomNodeOrDie().getAttributeDirect(DomElement.TYPE_ATTRIBUTE);
     }
@@ -109,7 +110,7 @@ public class HTMLAreaElement extends HTMLElement {
      * Sets the {@code type} attribute.
      * @param type the {@code type} attribute value
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF, FF_ESR})
     public void setType(final String type) {
         getDomNodeOrDie().setAttribute(DomElement.TYPE_ATTRIBUTE, type);
     }

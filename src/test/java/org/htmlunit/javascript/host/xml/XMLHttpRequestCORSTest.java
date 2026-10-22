@@ -20,6 +20,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,8 +29,10 @@ import java.util.Map;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -48,6 +51,25 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Lai Quang Duong
  */
 public class XMLHttpRequestCORSTest extends WebDriverTestCase {
+
+    /**
+     * The second server replaces the mock-connection server on PORT2. The base class only starts the mock
+     * servers if PORT2 is free, so we have to stop them; otherwise later tests (e.g. baseUrlRelativeRequest)
+     * would talk to our servlets on PORT2 instead of the mock connection.
+     * @throws Exception if stopping fails
+     */
+    @AfterEach
+    public void stopSecondServer() throws Exception {
+        stopWebServers();
+    }
+
+    private static void startSecondServer() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/echo", EchoServlet.class);
+        servlets2.put("/redirect", RedirectServlet.class);
+        startWebServer2(".", servlets2);
+    }
+
 
     /**
      * @throws Exception if the test fails.
@@ -567,11 +589,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
+
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", servlets2);
 
-        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        loadPage2(html, new URL(URL_FIRST, "/preflight1"), new HashMap<>(), servlets2);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -611,11 +633,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = null;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PINGOTHER";
+
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", servlets2);
 
-        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        loadPage2(html, new URL(URL_FIRST, "/preflight1"), new HashMap<>(), servlets2);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -652,11 +674,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PING, X-PONG";
+
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", servlets2);
 
-        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        loadPage2(html, new URL(URL_FIRST, "/preflight1"), new HashMap<>(), servlets2);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -691,11 +713,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "*";
+
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", servlets2);
 
-        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        loadPage2(html, new URL(URL_FIRST, "/preflight1"), new HashMap<>(), servlets2);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -1074,4 +1096,679 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         }
     }
 
+    /**
+     * Tests that a same-origin or initial XMLHttpRequest following a 3xx redirect
+     * to a cross-origin resource lacking proper CORS headers (Access-Control-Allow-Origin)
+     * is correctly blocked, resulting in a NetworkError/DOMException instead of exposing the response body.
+     *
+     * Flow tested:
+     * 1. An attacker page (origin A) makes a synchronous XMLHttpRequest to a pivot endpoint on the same origin.
+     * 2. The pivot endpoint responds with a 3xx redirect pointing to an internal/secret cross-origin resource (origin B).
+     * 3. The underlying client follows the redirect to origin B.
+     * 4. Because origin B does not return Access-Control-Allow-Origin headers, the cross-origin response is blocked,
+     *    throwing a NetworkError and preventing unauthorized body exposure.
+     *
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
+    public void crossOriginRedirectWithoutCors() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'http://' + window.location.hostname + ':" + PORT + "/pivot';\n"
+                + "    xhr.open('GET', url, false);\n"
+                + "    xhr.send();\n"
+                + "  } catch(e) { logEx(e) }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
+                + "  log(xhr.responseText);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/secret", SecretServerServlet.class);
+        startWebServer2(".", servlets2);
+
+        final URL pageUrl = new URL(URL_FIRST, "/page");
+        final URL pivotUrl = new URL(URL_FIRST, "/pivot");
+        final URL secretUrl = new URL("http://localhost:" + PORT2 + "/secret");
+
+        getMockWebConnection().setResponse(pageUrl, html, 200, "OK", "text/html;charset=UTF-8", UTF_8, null);
+
+        final List<NameValuePair> redirectHeaders = new ArrayList<>();
+        redirectHeaders.add(new NameValuePair("Location", secretUrl.toExternalForm()));
+        getMockWebConnection().setResponse(pivotUrl, "", 302, "Found", "text/html", redirectHeaders);
+
+        loadPage2(pageUrl, null);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Secret resource servlet without CORS headers (running on PORT2).
+     */
+    public static class SecretServerServlet extends HttpServlet {
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setCharacterEncoding(UTF_8.name());
+            response.setContentType(MimeType.TEXT_HTML);
+            response.getWriter().write("INTERNAL_SECRET");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "Hello from Data URL"})
+    public void dataUrl() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'data:text/plain;charset=utf-8,Hello from Data URL';\n"
+                + "    xhr.open('GET', url, false);\n"
+                + "    xhr.send();\n"
+                + "    log(xhr.readyState);\n"
+                + "    log(xhr.status);\n"
+                + "    log(xhr.responseText);\n"
+                + "  } catch(e) { log(e) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "Hello from Blob"})
+    public void blobUrlSameOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var blob = new Blob(['Hello from Blob'], {type: 'text/plain'});\n"
+                + "    var url = URL.createObjectURL(blob);\n"
+                + "    xhr.open('GET', url, false);\n"
+                + "    xhr.send();\n"
+                + "    log(xhr.readyState);\n"
+                + "    log(xhr.status);\n"
+                + "    log(xhr.responseText);\n"
+                + "  } catch(e) { log(e) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    // ---------------------------------------------------------------------------
+    // XMLHttpRequest, CORS and redirects
+    // methods and servlets to be added to the test class that contains crossOriginRedirectWithoutCors
+    //
+    // assumed to be available (as used by crossOriginRedirectWithoutCors): PORT, PORT2, URL_FIRST,
+    // startWebServer2(), getMockWebConnection(), expandExpectedAlertsVariables(), verifyTitle2(),
+    // loadPage2(), NameValuePair, MimeType
+    // additional imports:
+    //     import java.net.URLEncoder;
+    // ---------------------------------------------------------------------------
+
+    // origin A: the page (localhost:PORT), origin B: localhost:PORT2, origin C: 127.0.0.1:PORT2
+    // (the host differs, so C is a third origin that is served by the second server)
+
+    private static String originA() {
+        return "http://localhost:" + PORT;
+    }
+
+    private static String originB() {
+        return "http://localhost:" + PORT2;
+    }
+
+    private static String originC() {
+        return "http://127.0.0.1:" + PORT2;
+    }
+
+    private static String enc(final String value) {
+        return URLEncoder.encode(value, UTF_8);
+    }
+
+    private void pivot(final String path, final int status, final String location) throws Exception {
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", location));
+        getMockWebConnection().setResponse(new URL(URL_FIRST, path), "", status, "Redirect", "text/html", headers);
+    }
+
+    private void loadAndVerify(final String html) throws Exception {
+        final URL pageUrl = new URL(URL_FIRST, "/page");
+        getMockWebConnection().setResponse(pageUrl, html, 200, "OK", "text/html;charset=UTF-8", UTF_8, null);
+
+        loadPage2(pageUrl, null);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /** synchronous request; logs readyState, status and responseText (and the exception, if there is one). */
+    private static String xhrPage(final String before, final String afterOpen, final String url) {
+        return DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + before
+                + "  try {\n"
+                + "    xhr.open('GET', '" + url + "', false);\n"
+                + afterOpen
+                + "    xhr.send();\n"
+                + "  } catch(e) { logEx(e) }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
+                + "  log(xhr.responseText);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+    }
+
+    /** asynchronous request; logs status and responseText or 'error', status and responseText. */
+    private static String asyncXhrPage(final String before, final String afterOpen, final String url) {
+        return DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + before
+                + "  xhr.onload = function() {\n"
+                + "    log(xhr.status);\n"
+                + "    log(xhr.responseText);\n"
+                + "  };\n"
+                + "  xhr.onerror = function() {\n"
+                + "    log('error');\n"
+                + "    log(xhr.status);\n"
+                + "    log('[' + xhr.responseText + ']');\n"
+                + "  };\n"
+                + "  xhr.open('GET', '" + url + "');\n"
+                + afterOpen
+                + "  xhr.send();\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+    }
+
+    /** one synchronous request per url; logs the status or the exception. */
+    private static String multiXhrPage(final String... urls) {
+        final StringBuilder list = new StringBuilder();
+        for (final String url : urls) {
+            if (list.length() > 0) {
+                list.append(", ");
+            }
+            list.append('\'').append(url).append('\'');
+        }
+
+        return DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var urls = [" + list + "];\n"
+                + "  for (var i = 0; i < urls.length; i++) {\n"
+                + "    var xhr = new XMLHttpRequest();\n"
+                + "    try {\n"
+                + "      xhr.open('GET', urls[i], false);\n"
+                + "      xhr.send();\n"
+                + "      log(xhr.status);\n"
+                + "    } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+    }
+
+    /**
+     * Answers with the Origin, Cookie and Authorization header of the request.
+     * The response header Access-Control-Allow-Origin is taken from the parameter 'acao' (none if missing),
+     * Access-Control-Allow-Credentials is sent if the parameter 'acac' is 'true'.
+     */
+    public static class EchoServlet extends HttpServlet {
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            final String acao = request.getParameter("acao");
+            if (acao != null) {
+                response.setHeader("Access-Control-Allow-Origin", acao);
+            }
+            if ("true".equals(request.getParameter("acac"))) {
+                response.setHeader("Access-Control-Allow-Credentials", "true");
+            }
+
+            response.setCharacterEncoding(UTF_8.name());
+            response.setContentType(MimeType.TEXT_PLAIN);
+            response.getWriter().write("origin=" + request.getHeader("Origin")
+                    + ";cookie=" + request.getHeader("Cookie")
+                    + ";auth=" + request.getHeader("Authorization"));
+        }
+    }
+
+    /**
+     * Redirects to the url of the parameter 'to' using the status of the parameter 'status' (default 302).
+     * The response header Access-Control-Allow-Origin is taken from the parameter 'acao' (none if missing).
+     */
+    public static class RedirectServlet extends HttpServlet {
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            final String acao = request.getParameter("acao");
+            if (acao != null) {
+                response.setHeader("Access-Control-Allow-Origin", acao);
+            }
+
+            final String status = request.getParameter("status");
+            response.setStatus(status == null ? 302 : Integer.parseInt(status));
+            response.setHeader("Location", request.getParameter("to"));
+        }
+    }
+
+    // ---------------------------------------------------------------------------
+    // the page origin is not left, or the target allows the access
+    // ---------------------------------------------------------------------------
+
+    /**
+     * A redirect inside of the origin is always fine.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "FINAL"})
+    public void sameOriginRedirect() throws Exception {
+        pivot("/pivot", 302, new URL(URL_FIRST, "/final").toExternalForm());
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "/final"), "FINAL");
+
+        loadAndVerify(xhrPage("", "", originA() + "/pivot"));
+    }
+
+    /**
+     * The request starts inside of the origin, only the final response needs the CORS header.
+     * The Origin header is the one of the page; no cookies and no authorization are sent.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "origin=§§URL§§;cookie=null;auth=null"})
+    public void crossOriginRedirectWithCorsWildcard() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo?acao=*");
+
+        loadAndVerify(xhrPage("", "", originA() + "/pivot"));
+    }
+
+    /**
+     * The final response is also readable if it allows exactly the origin of the page.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "origin=§§URL§§;cookie=null;auth=null"})
+    public void crossOriginRedirectWithCorsOrigin() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo?acao=" + enc(originA()));
+
+        loadAndVerify(xhrPage("", "", originA() + "/pivot"));
+    }
+
+    /**
+     * The final url is available after a redirect that was allowed.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "§§URL§§/echo?acao=*"})
+    public void crossOriginRedirectResponseUrl() throws Exception {
+        expandExpectedAlertsVariables(new URL(originB()));
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo?acao=*");
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  xhr.open('GET', '" + originA() + "/pivot', false);\n"
+                + "  xhr.send();\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
+                + "  log(xhr.responseURL);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadAndVerify(html);
+    }
+
+    /**
+     * All redirect status codes are followed.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"200", "200", "200", "200", "200"})
+    public void crossOriginRedirectStatusCodesWithCors() throws Exception {
+        startSecondServer();
+        final int[] codes = {301, 302, 303, 307, 308};
+        final String[] urls = new String[codes.length];
+        for (int i = 0; i < codes.length; i++) {
+            pivot("/pivot" + codes[i], codes[i], originB() + "/echo?acao=*");
+            urls[i] = originA() + "/pivot" + codes[i];
+        }
+
+        loadAndVerify(multiXhrPage(urls));
+    }
+
+    // ---------------------------------------------------------------------------
+    // the response has to be blocked
+    // ---------------------------------------------------------------------------
+
+    /**
+     * An Access-Control-Allow-Origin header for another origin does not help.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
+    public void crossOriginRedirectWithWrongOrigin() throws Exception {
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo?acao=" + enc("http://other.example.com"));
+
+        loadAndVerify(xhrPage("", "", originA() + "/pivot"));
+    }
+
+    /**
+     * All redirect status codes are blocked.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"200", "NetworkError/DOMException", "NetworkError/DOMException",
+                       "NetworkError/DOMException", "200"},
+            FF = {"NetworkError/DOMException", "NetworkError/DOMException", "NetworkError/DOMException",
+                  "NetworkError/DOMException", "NetworkError/DOMException"},
+            FF_ESR = {"NetworkError/DOMException", "NetworkError/DOMException", "NetworkError/DOMException",
+                      "NetworkError/DOMException", "NetworkError/DOMException"})
+    @HtmlUnitNYI(
+            CHROME = {"NetworkError/DOMException", "NetworkError/DOMException", "NetworkError/DOMException",
+                      "NetworkError/DOMException", "NetworkError/DOMException"},
+            EDGE = {"NetworkError/DOMException", "NetworkError/DOMException", "NetworkError/DOMException",
+                    "NetworkError/DOMException", "NetworkError/DOMException"})
+    public void crossOriginRedirectStatusCodesWithoutCors() throws Exception {
+        startSecondServer();
+        final int[] codes = {301, 302, 303, 307, 308};
+        final String[] urls = new String[codes.length];
+        for (int i = 0; i < codes.length; i++) {
+            pivot("/pivot" + codes[i], codes[i], originB() + "/echo");
+            urls[i] = originA() + "/pivot" + codes[i];
+        }
+
+        loadAndVerify(multiXhrPage(urls));
+    }
+
+    /**
+     * A scheme relative location is a cross origin location.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
+    public void crossOriginRedirectSchemeRelativeLocation() throws Exception {
+        startSecondServer();
+        pivot("/pivot", 302, "//localhost:" + PORT2 + "/echo");
+
+        loadAndVerify(xhrPage("", "", originA() + "/pivot"));
+    }
+
+    /**
+     * A redirect to a url that contains credentials is not allowed for another origin,
+     * not even if the target allows the access.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
+    public void crossOriginRedirectUserInfoInLocation() throws Exception {
+        startSecondServer();
+        pivot("/pivot", 302, "http://user:password@localhost:" + PORT2 + "/echo?acao=*");
+
+        loadAndVerify(xhrPage("", "", originA() + "/pivot"));
+    }
+
+    /**
+     * Only http and https locations are followed.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "NetworkError/DOMException", "NetworkError/DOMException",
+             "NetworkError/DOMException", "NetworkError/DOMException"})
+    public void redirectToNonHttpSchemes() throws Exception {
+        final String[] locations = {
+            "file:///etc/passwd", "data:text/plain,secret", "about:blank", "ftp://localhost/secret",
+            "javascript:alert(1)"
+        };
+        final String[] urls = new String[locations.length];
+        for (int i = 0; i < locations.length; i++) {
+            pivot("/pivot" + i, 302, locations[i]);
+            urls[i] = originA() + "/pivot" + i;
+        }
+
+        loadAndVerify(multiXhrPage(urls));
+    }
+
+    // ---------------------------------------------------------------------------
+    // credentials
+    // ---------------------------------------------------------------------------
+
+    /**
+     * Cookies are shared between ports, but they must not be sent to another origin.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "origin=§§URL§§;cookie=null;auth=null"})
+    public void crossOriginRedirectDoesNotForwardCookies() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo?acao=*");
+
+        loadAndVerify(xhrPage("  document.cookie = 'secretCookie=1; path=/';\n", "", originA() + "/pivot"));
+    }
+
+    /**
+     * The Authorization header is removed if the request leaves the origin.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "200", "origin=§§URL§§;cookie=null;auth=null"},
+            FF = {"NetworkError/DOMException", "4", "0", ""},
+            FF_ESR = {"NetworkError/DOMException", "4", "0", ""})
+    @HtmlUnitNYI(FF = {"4", "200", "origin=§§URL§§;cookie=null;auth=null"},
+            FF_ESR = {"4", "200", "origin=§§URL§§;cookie=null;auth=null"})
+    public void crossOriginRedirectDropsAuthorizationHeader() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo?acao=*");
+
+        loadAndVerify(xhrPage("", "    xhr.setRequestHeader('Authorization', 'Bearer secret');\n",
+                originA() + "/pivot"));
+    }
+
+    /**
+     * The wildcard is not allowed for requests with credentials.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"error", "0", "[]"})
+    public void crossOriginRedirectWithCredentialsAndWildcard() throws Exception {
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo?acao=*&acac=true");
+
+        loadAndVerify(asyncXhrPage("", "  xhr.withCredentials = true;\n", originA() + "/pivot"));
+    }
+
+    /**
+     * With credentials the origin has to be named and the credentials have to be allowed;
+     * then the cookies are sent.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"200", "origin=§§URL§§;cookie=c=1;auth=null"})
+    public void crossOriginRedirectWithCredentials() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo?acac=true&acao=" + enc(originA()));
+
+        loadAndVerify(asyncXhrPage("  document.cookie = 'c=1; path=/';\n",
+                "  xhr.withCredentials = true;\n", originA() + "/pivot"));
+    }
+
+    // ---------------------------------------------------------------------------
+    // the request goes to another origin and is redirected there
+    // ---------------------------------------------------------------------------
+
+    /**
+     * Each response of a cross origin request needs the CORS header, also the response that redirects.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
+    public void crossOriginRequestRedirectWithoutCorsOnRedirectResponse() throws Exception {
+        startSecondServer();
+
+        final String target = originB() + "/echo?acao=*";
+        loadAndVerify(xhrPage("", "", originB() + "/redirect?to=" + enc(target)));
+    }
+
+    /**
+     * The Origin stays the same as long as the redirect stays inside of the origin of the server.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "origin=§§URL§§;cookie=null;auth=null"})
+    public void crossOriginRequestRedirectWithCors() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+
+        final String target = originB() + "/echo?acao=*";
+        loadAndVerify(xhrPage("", "", originB() + "/redirect?acao=*&to=" + enc(target)));
+    }
+
+    /**
+     * After a redirect from a cross origin server to a third origin the Origin of the request is
+     * 'null'; this is what the final response is checked against.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "origin=null;cookie=null;auth=null"})
+    public void crossOriginToCrossOriginRedirectOriginIsNull() throws Exception {
+        startSecondServer();
+
+        final String target = originC() + "/echo?acao=*";
+        loadAndVerify(xhrPage("", "", originB() + "/redirect?acao=*&to=" + enc(target)));
+    }
+
+    /**
+     * The origin of the page is not good enough for the final response (the Origin is 'null').
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
+    public void crossOriginToCrossOriginRedirectNeedsNullOrWildcard() throws Exception {
+        startSecondServer();
+
+        final String target = originC() + "/echo?acao=" + enc(originA());
+        loadAndVerify(xhrPage("", "", originB() + "/redirect?acao=*&to=" + enc(target)));
+    }
+
+    // ---------------------------------------------------------------------------
+    // what is visible after the request was blocked
+    // ---------------------------------------------------------------------------
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"error", "4", "0", "[]"})
+    public void asyncCrossOriginRedirectWithoutCors() throws Exception {
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo");
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  xhr.onload = function() { log('load'); log(xhr.responseText); };\n"
+                + "  xhr.onerror = function() {\n"
+                + "    log('error');\n"
+                + "    log(xhr.readyState);\n"
+                + "    log(xhr.status);\n"
+                + "    log('[' + xhr.responseText + ']');\n"
+                + "  };\n"
+                + "  xhr.open('GET', '" + originA() + "/pivot');\n"
+                + "  xhr.send();\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadAndVerify(html);
+    }
+
+    /**
+     * Nothing of the blocked response may be visible.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "[]", "[]", "null", "[]", "null", "[]", "[]"})
+    public void crossOriginRedirectWithoutCorsExposesNothing() throws Exception {
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo");
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  try {\n"
+                + "    xhr.open('GET', '" + originA() + "/pivot', false);\n"
+                + "    xhr.send();\n"
+                + "  } catch(e) { logEx(e) }\n"
+                + "  log('[' + xhr.response + ']');\n"
+                + "  log('[' + xhr.responseText + ']');\n"
+                + "  log(xhr.responseXML);\n"
+                + "  log('[' + xhr.getAllResponseHeaders() + ']');\n"
+                + "  log(xhr.getResponseHeader('Content-Type'));\n"
+                + "  log('[' + xhr.statusText + ']');\n"
+                + "  log('[' + xhr.responseURL + ']');\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadAndVerify(html);
+    }
 }
+

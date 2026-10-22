@@ -23,6 +23,7 @@ import org.htmlunit.Page;
 import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.javascript.host.event.Event;
+import org.htmlunit.javascript.host.event.KeyboardEvent;
 
 /**
  * Wrapper for the HTML element "input".
@@ -117,6 +118,19 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
             }
         }
         return page;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final int keyCode, final boolean lastType) throws IOException {
+        if (keyCode == KeyboardEvent.DOM_VK_SPACE) {
+            click();
+            return;
+        }
+
+        super.doType(keyCode, lastType);
     }
 
     /**

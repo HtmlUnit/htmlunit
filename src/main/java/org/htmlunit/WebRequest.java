@@ -64,7 +64,10 @@ public class WebRequest implements Serializable {
         IncludeCharsetInContentTypeHeader,
 
         /** Disable sending of stored cookies and receiving of new cookies. */
-        BlockCookies
+        BlockCookies,
+
+        /** Do not follow redirects; the response of the redirect is returned as it is. */
+        DoNotFollowRedirects
     }
 
     /**

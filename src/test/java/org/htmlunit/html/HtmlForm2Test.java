@@ -420,8 +420,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "text/html,application/xhtml+xml,application/xml;q=0.9,"
-                    + "image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    @Alerts(CHROME = "text/html,application/xhtml+xml,application/xml;"
+                    + "q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;"
+                    + "q=0.8,application/signed-exchange;v=b3;q=0.7",
+            EDGE = "text/html,application/xhtml+xml,application/xml;"
+                    + "q=0.9,image/avif,image/webp,image/apng,*/*;"
+                    + "q=0.8,application/signed-exchange;v=b3;q=0.7",
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             FF_ESR = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     public void acceptHeader() throws Exception {

@@ -568,7 +568,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
                   "1", "[object CSSPageRule]", "margin: 1cm;", "string margin: 1cm"},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                       "1", "[object CSSPageRule]", "margin: 1cm;", "string margin: 1cm"})
-    // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
+    // FIXME FF returns CSSStyleProperties vs. default returns CSSStyleDeclaration :(
     public void style() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

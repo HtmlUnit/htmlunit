@@ -366,20 +366,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     public void removeParentOfActiveElement() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
-                + "<head>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var elem = document.getElementById('text1');\n"
-                + "  elem.focus();\n"
-                + "  document.title += ' ' + document.activeElement;\n"
-
-                + "  var elem = document.getElementById('parent');\n"
-                + "  elem.parentNode.removeChild(elem);\n"
-                + "  document.title += ' ' + document.activeElement;\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body onload='test()'>\n"
+                + "<body>\n"
                 + "<form name='form1'>\n"
                 + "  <div id='parent'>\n"
                 + "    <input id='text1' onblur='document.title += \" onblur1\"' "
@@ -388,6 +375,15 @@ public class HtmlElement2Test extends WebDriverTestCase {
                                 + "onfocusout='document.title += \" onfocusout2\"'>\n"
                 + "  </div>\n"
                 + "</form>\n"
+                + "<script>\n"
+                + "  var elem = document.getElementById('text1');\n"
+                + "  elem.focus();\n"
+                + "  document.title += ' ' + document.activeElement;\n"
+
+                + "  var elem = document.getElementById('parent');\n"
+                + "  elem.parentNode.removeChild(elem);\n"
+                + "  document.title += ' ' + document.activeElement;\n"
+                + "</script>\n"
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);

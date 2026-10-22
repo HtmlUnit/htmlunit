@@ -148,7 +148,7 @@ public class FileReader extends EventTarget {
         fireEvent(new ProgressEvent(this, Event.TYPE_PROGRESS, true, bytes.length, bytes.length));
 
         final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
-        System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
+        buffer.getByteBuffer().put(bytes);
         buffer.setParentScope(getParentScope());
         buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), buffer.getClassName()));
 

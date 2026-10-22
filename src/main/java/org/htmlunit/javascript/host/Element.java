@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
+import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_VOID_ELEMENT_EMPTY;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -50,10 +51,12 @@ import org.htmlunit.html.DomCharacterData;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.DomProcessingInstruction;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlElement.DisplayStyle;
 import org.htmlunit.html.HtmlTemplate;
+import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -102,6 +105,8 @@ public class Element extends Node {
     private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
     private static final Pattern PRINT_NODE_PATTERN = Pattern.compile(" {2}");
     private static final Pattern PRINT_NODE_QUOTE_PATTERN = Pattern.compile("\"");
+
+    private enum TextEscape { NONE, XML, HTML }
 
     private NamedNodeMap attributes_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
@@ -534,7 +539,8 @@ public class Element extends Node {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            return NodeList.staticNodeList(getParentScope(), getDomNodeOrDie().querySelectorAll(selectors));
+            final DomNode domNode = getDomNodeOrDie();
+            return NodeList.staticNodeList(getParentScope(), domNode.querySelectorAll(selectors, domNode));
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
@@ -555,7 +561,8 @@ public class Element extends Node {
     @JsxFunction
     public Node querySelector(final String selectors) {
         try {
-            final DomNode node = getDomNodeOrDie().querySelector(selectors);
+            final DomNode domNode = getDomNodeOrDie();
+            final DomNode node = domNode.querySelector(selectors, domNode);
             if (node != null) {
                 return node.getScriptableObject();
             }
@@ -885,7 +892,7 @@ public class Element extends Node {
      * @param args the arguments passed into the method
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF})
+    @JsxFunction
     public static void moveBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.moveBefore(context, scope, thisObj, args, function);
@@ -974,20 +981,39 @@ public class Element extends Node {
     /**
      * Helper for {@code getInnerHTML}, reusable by {@code HTMLTemplateElement}.
      *
-     * @param domNode the node to serialize
+     * @param domNode the node to serializep
      * @return the contents of this node as HTML
      */
     protected String getInnerHTML(final DomNode domNode) {
+        if (isEndTagForbidden() && getBrowserVersion().hasFeature(JS_INNER_HTML_VOID_ELEMENT_EMPTY)) {
+            return "";
+        }
+
         final StringBuilder buf = new StringBuilder();
 
         final String tagName = getTagName();
-        boolean isPlain = "SCRIPT".equals(tagName);
+        final boolean isPlain = "SCRIPT".equals(tagName) || "STYLE".equals(tagName);
 
-        isPlain = isPlain || "STYLE".equals(tagName);
+        final TextEscape mode = domNode.getPage() instanceof XHtmlPage ? TextEscape.XML : TextEscape.HTML;
+        final boolean rawText = domNode instanceof DomElement e && mode == TextEscape.HTML && isRawTextElement(e);
 
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printChildren(buf, domNode, !isPlain);
+        printChildren(buf, domNode, !isPlain, isPlain || rawText ? TextEscape.NONE : mode);
         return buf.toString();
+    }
+
+    /**
+     * HTML serialization writes the text children of these elements as is.
+     */
+    private static boolean isRawTextElement(final DomElement element) {
+        if (!(element instanceof HtmlElement) || element.getPage() instanceof XHtmlPage) {
+            return false; // svg/math elements and XML serialization always escape
+        }
+        return switch (element.getLocalName()) {
+            case "iframe", "xmp", "noembed", "noframes", "plaintext" -> true;
+            case "noscript" -> element.getPage().getWebClient().isJavaScriptEnabled();
+            default -> false;
+        };
     }
 
     /**
@@ -1000,7 +1026,7 @@ public class Element extends Node {
     public String getOuterHTML() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printNode(buf, getDomNodeOrDie(), true);
+        printNode(buf, getDomNodeOrDie(), true, TextEscape.HTML);
         return buf.toString();
     }
 
@@ -1046,28 +1072,29 @@ public class Element extends Node {
         parseHtmlSnippet(proxyDomNode, valueStr);
     }
 
+    protected final void printChildren(final StringBuilder builder, final DomNode node,
+            final boolean html, final TextEscape escape) {
+        if (node instanceof HtmlTemplate template) {
+            for (final DomNode child : template.getContent().getChildren()) {
+                printNode(builder, child, html, escape);
+            }
+            return;
+        }
+        for (final DomNode child : node.getChildren()) {
+            printNode(builder, child, html, escape);
+        }
+    }
+
     /**
      * Serializes the children of the given node to the provided builder.
      *
      * @param builder the builder to write to
      * @param node the node whose children are to be serialized
      * @param html whether to use HTML serialization
+     * @param escape whether to use HTML escaping
      */
-    protected final void printChildren(final StringBuilder builder, final DomNode node, final boolean html) {
-        if (node instanceof HtmlTemplate template) {
-
-            for (final DomNode child : template.getContent().getChildren()) {
-                printNode(builder, child, html);
-            }
-            return;
-        }
-
-        for (final DomNode child : node.getChildren()) {
-            printNode(builder, child, html);
-        }
-    }
-
-    protected void printNode(final StringBuilder builder, final DomNode node, final boolean html) {
+    protected void printNode(final StringBuilder builder, final DomNode node,
+            final boolean html, final TextEscape escape) {
         if (node instanceof DomComment) {
             if (html) {
                 // Remove whitespace sequences.
@@ -1079,12 +1106,22 @@ public class Element extends Node {
             builder.append("<![CDATA[").append(node.getNodeValue()).append("]]>");
         }
         else if (node instanceof DomCharacterData) {
-            // Remove whitespace sequences, possibly escape XML characters.
             String s = node.getNodeValue();
             if (html) {
-                s = StringUtils.escapeXmlChars(s);
+                s = switch (escape) {
+                    case HTML -> StringUtils.escapeHtmlText(s);
+                    case XML -> StringUtils.escapeXmlChars(s);   // & < > only, nbsp stays as is
+                    case NONE -> s;
+                };
             }
             builder.append(s);
+        }
+        else if (node instanceof DomProcessingInstruction pi) {
+            builder.append("<?")
+                    .append(pi.getTarget())
+                    .append(" ")
+                    .append(pi.getData())
+                    .append(">");
         }
         else if (html) {
             final DomElement element = (DomElement) node;
@@ -1106,13 +1143,24 @@ public class Element extends Node {
                 builder.append(' ').append(name).append("=\"").append(value).append('\"');
             }
             builder.append('>');
-            // Add the children.
-            final boolean isHtml = !(scriptObject instanceof HTMLScriptElement)
-                    && !(scriptObject instanceof HTMLStyleElement);
-            printChildren(builder, node, isHtml);
-            if (htmlElement == null || !htmlElement.isEndTagForbidden()) {
-                builder.append("</").append(tag).append('>');
+
+            if (htmlElement != null && htmlElement.isEndTagForbidden()) {
+                // void element: neither children nor an end tag are serialized
+                return;
             }
+
+            // Add the children.
+            final TextEscape mode = node.getPage() instanceof XHtmlPage ? TextEscape.XML : TextEscape.HTML;
+            final boolean rawTextHost = scriptObject instanceof HTMLScriptElement
+                    || scriptObject instanceof HTMLStyleElement;
+
+            // in XML documents script and style are ordinary elements for the serializer
+            final boolean isHtml = mode == TextEscape.XML || !rawTextHost;
+            final TextEscape childEscape = !isHtml || (mode == TextEscape.HTML && isRawTextElement(element))
+                    ? TextEscape.NONE
+                    : mode;
+            printChildren(builder, node, isHtml, childEscape);
+            builder.append("</").append(tag).append('>');
         }
         else {
             if (node instanceof HtmlElement element) {
@@ -1125,7 +1173,7 @@ public class Element extends Node {
                     builder.append('\n');
                 }
                 if (!"script".equals(element.getTagName())) {
-                    printChildren(builder, node, html);
+                    printChildren(builder, node, html, escape);
                 }
             }
         }
@@ -1677,7 +1725,7 @@ public class Element extends Node {
         final String selectorString = (String) args[0];
         try {
             final DomNode domNode = thisElement.getDomNodeOrNull();
-            return domNode != null && ((DomElement) domNode).matches(selectorString);
+            return domNode != null && ((DomElement) domNode).matches(selectorString, domNode);
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(

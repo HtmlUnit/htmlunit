@@ -15,8 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
@@ -39,6 +37,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.BaseFrameElement;
+import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.FrameWindow;
@@ -192,7 +191,7 @@ public class HTMLDocument extends Document {
      * @param args the arguments passed into the method
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF})
+    @JsxFunction
     public static void moveBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.moveBefore(context, scope, thisObj, args, function);
@@ -540,10 +539,41 @@ public class HTMLDocument extends Document {
      */
     @Override
     public Node appendChild(final Object childObject) {
-        throw JavaScriptEngine.asJavaScriptException(
-                getWindow(),
-                "Node cannot be inserted at the specified point in the hierarchy.",
-                org.htmlunit.javascript.host.dom.DOMException.HIERARCHY_REQUEST_ERR);
+        if (childObject instanceof Node childNode
+                && !isInsertableAtEnd(getPage(), childNode.getDomNodeOrDie())) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Node cannot be inserted at the specified point in the hierarchy.",
+                    org.htmlunit.javascript.host.dom.DOMException.HIERARCHY_REQUEST_ERR);
+        }
+        return super.appendChild(childObject);
+    }
+
+    /**
+     * Pre-insertion validity of a node that is appended to a document (DOM standard, "ensure
+     * pre-insertion validity"): at most one element, at most one doctype and the doctype has to be
+     * in front of the element; text is not allowed; comments and processing instructions are always fine.
+     */
+    private static boolean isInsertableAtEnd(final HtmlPage page, final DomNode node) {
+        if (node instanceof DomDocumentFragment fragment) {
+            int elements = 0;
+            for (final DomNode child : fragment.getChildren()) {
+                if (child instanceof org.w3c.dom.Element) {
+                    elements++;
+                }
+                else if (child instanceof org.w3c.dom.Text) {
+                    return false;
+                }
+            }
+            return elements == 0 || (elements == 1 && page.getDocumentElement() == null);
+        }
+        if (node instanceof org.w3c.dom.Element) {
+            return page.getDocumentElement() == null;
+        }
+        if (node instanceof org.w3c.dom.DocumentType) {
+            return page.getDoctype() == null && page.getDocumentElement() == null;
+        }
+        return node instanceof org.w3c.dom.Comment || node instanceof org.w3c.dom.ProcessingInstruction;
     }
 
     /**
@@ -711,7 +741,7 @@ public class HTMLDocument extends Document {
      */
     @Override
     public String getTitle() {
-        return getPage().getTitleText();
+        return getPage().getDocumentTitle();
     }
 
     /**

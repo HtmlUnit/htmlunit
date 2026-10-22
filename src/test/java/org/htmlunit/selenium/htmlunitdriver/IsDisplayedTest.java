@@ -12,8 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.selenium;
+package org.htmlunit.selenium.htmlunitdriver;
 
+import org.htmlunit.selenium.SeleniumTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 

@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -688,5 +689,345 @@ public class DOMImplementationTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"10", "html", "-//W3C//DTD HTML 4.01//EN", "http://www.w3.org/TR/html4/strict.dtd", "html"})
+    public void createDocumentType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var dt = document.implementation.createDocumentType('html',\n"
+            + "          '-//W3C//DTD HTML 4.01//EN', 'http://www.w3.org/TR/html4/strict.dtd');\n"
+            + "      log(dt.nodeType);\n"
+            + "      log(dt.name);\n"
+            + "      log(dt.publicId);\n"
+            + "      log(dt.systemId);\n"
+            + "      log(dt.nodeName);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"html", "[]", "[]"})
+    public void createDocumentTypeEmptyIds() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var dt = document.implementation.createDocumentType('html', '', '');\n"
+            + "      log(dt.name);\n"
+            + "      log('[' + dt.publicId + ']');\n"
+            + "      log('[' + dt.systemId + ']');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object DocumentType]", "true", "true"})
+    public void createDocumentTypePrototypeChain() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var dt = document.implementation.createDocumentType('html', '', '');\n"
+            + "      log(Object.prototype.toString.call(dt));\n"
+            + "      log(dt instanceof DocumentType);\n"
+            + "      log(dt instanceof Node);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "null", "false", "0"})
+    public void createDocumentTypeOwnerAndParent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var dt = document.implementation.createDocumentType('html', '', '');\n"
+            + "      log(dt.ownerDocument === document);\n"
+            + "      log(dt.parentNode);\n"
+            + "      log(dt.hasChildNodes());\n"
+            + "      log(dt.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The name, the public id and the system id are read only.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"html", "pub", "sys"})
+    public void createDocumentTypeReadOnlyProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var dt = document.implementation.createDocumentType('html', 'pub', 'sys');\n"
+            + "      dt.name = 'other';\n"
+            + "      dt.publicId = 'other';\n"
+            + "      dt.systemId = 'other';\n"
+            + "      log(dt.name);\n"
+            + "      log(dt.publicId);\n"
+            + "      log(dt.systemId);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The name is a qualified name; there is no case folding.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"html", "HTML", "svg:svg", "my-doctype", "_x", "a.b1"})
+    public void createDocumentTypeNames() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var names = ['html', 'HTML', 'svg:svg', 'my-doctype', '_x', 'a.b1'];\n"
+            + "      for (var i = 0; i < names.length; i++) {\n"
+            + "        try {\n"
+            + "          log(document.implementation.createDocumentType(names[i], '', '').name);\n"
+            + "        } catch(e) { logEx(e); }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"no error", "no error", "InvalidCharacterError/DOMException",
+             "InvalidCharacterError/DOMException", "no error"})
+    public void createDocumentTypeInvalidNames() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var names = ['', '1a', 'a b', 'a>b', '-a'];\n"
+            + "      for (var i = 0; i < names.length; i++) {\n"
+            + "        try {\n"
+            + "          document.implementation.createDocumentType(names[i], '', '');\n"
+            + "          log('no error');\n"
+            + "        } catch(e) { logEx(e); }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * All three arguments are required, the values are converted to strings.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError", "null", "undefined"})
+    public void createDocumentTypeArguments() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      try {\n"
+            + "        document.implementation.createDocumentType('html');\n"
+            + "        log('no error');\n"
+            + "      } catch(e) { log(e.name); }\n"
+            + "      try {\n"
+            + "        document.implementation.createDocumentType('html', '');\n"
+            + "        log('no error');\n"
+            + "      } catch(e) { log(e.name); }\n"
+            + "      log(document.implementation.createDocumentType('html', null, null).publicId);\n"
+            + "      log(document.implementation.createDocumentType('html', undefined, undefined).systemId);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"10", "html", "pub", "sys", "true", "true"})
+    public void createDocumentTypeCloneNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var dt = document.implementation.createDocumentType('html', 'pub', 'sys');\n"
+            + "      var clone = dt.cloneNode(false);\n"
+            + "      log(clone.nodeType);\n"
+            + "      log(clone.name);\n"
+            + "      log(clone.publicId);\n"
+            + "      log(clone.systemId);\n"
+            + "      log(clone !== dt);\n"
+            + "      log(dt.isEqualNode(clone));\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The doctype of a document can be replaced.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "foo", "2"})
+    public void createDocumentTypeReplaceDoctype() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var dt = document.implementation.createDocumentType('foo', '', '');\n"
+            + "      document.replaceChild(dt, document.doctype);\n"
+            + "      log(document.doctype === dt);\n"
+            + "      log(document.childNodes[0] === dt);\n"
+            + "      log(document.doctype.name);\n"
+            + "      log(document.childNodes.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The doctype is the first child of a new document; the document adopts it.
+     * (needs the doctype handling in createDocument)
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "2", "true", "root", "true"})
+    public void createDocumentWithDocumentType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var dt = document.implementation.createDocumentType('root', 'pub', 'sys');\n"
+            + "      var doc = document.implementation.createDocument(null, 'root', dt);\n"
+            + "      log(doc.doctype === dt);\n"
+            + "      log(doc.childNodes.length);\n"
+            + "      log(doc.childNodes[0] === dt);\n"
+            + "      log(doc.documentElement.tagName);\n"
+            + "      log(dt.ownerDocument === doc);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Every document has its own implementation and the doctype belongs to the document of the
+     * implementation.
+     * (HtmlUnit creates the doctype for the page of the window)
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false")
+    public void createDocumentTypeOwnerOfOtherDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var doc = document.implementation.createHTMLDocument('x');\n"
+            + "      var dt = doc.implementation.createDocumentType('html', '', '');\n"
+            + "      log(dt.ownerDocument === doc);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

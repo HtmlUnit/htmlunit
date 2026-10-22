@@ -6520,9 +6520,12 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function RTCDataChannel() { [native code] }",
+    @Alerts("function RTCDataChannel() { [native code] }")
+    @HtmlUnitNYI(
+            CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "ReferenceError",
             FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError", FF = "ReferenceError")
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }

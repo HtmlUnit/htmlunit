@@ -74,10 +74,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_SCROLL_UIEVENT,
 
-    /** Supports event type 'MutationEvent'. */
-    @BrowserFeature(FF_ESR)
-    EVENT_TYPE_MUTATIONEVENT,
-
     /** Form elements are able to refer to the for by using the form attribute. */
     @BrowserFeature({CHROME, EDGE})
     FORM_IGNORE_REL_NOREFERRER,
@@ -222,10 +218,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_CLIENTHEIGHT_RUBY_17,
 
-    /** ClientWidth for text/password input is 157. */
-    @BrowserFeature(FF)
-    JS_CLIENTWIDTH_INPUT_TEXT_157,
-
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTWIDTH_INPUT_TEXT_173,
@@ -251,7 +243,7 @@ public enum BrowserVersionFeatures {
     JS_ERROR_STACK_TRACE_LIMIT,
 
     /** Javascript {@code Error.stackTraceLimit}. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     JS_ERROR_STACK_TRACE_LIMIT_128,
 
     /** Javascript InputEvent reads the inputType property from data. */
@@ -284,6 +276,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0,
 
+    /** Indicates that innerHTML returns an empty string for empty elements. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_INNER_HTML_VOID_ELEMENT_EMPTY,
+
     /** Indicates that innerText add a nl when reaching svg element. */
     @BrowserFeature({FF, FF_ESR})
     JS_INNER_TEXT_SELECT_EMPTY,
@@ -308,10 +304,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
 
-    /** For the 'about' protocol the location always returns an empty query. */
-    @BrowserFeature(FF_ESR)
-    JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL,
-
     /** Reload sends a referrer header. */
     @BrowserFeature({CHROME, EDGE})
     JS_LOCATION_RELOAD_REFERRER,
@@ -331,10 +323,6 @@ public enum BrowserVersionFeatures {
     /** Navigator.doNotTrack returns unspecified if not set. */
     @BrowserFeature({FF, FF_ESR})
     JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
-
-    /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    JS_OFFSET_PARENT_NULL_IF_FIXED,
 
     /** Indicates that the {@code Object.getOwnPropertyDescriptor.get} contains name. */
     @BrowserFeature({FF, FF_ESR})
@@ -385,6 +373,10 @@ public enum BrowserVersionFeatures {
     /** Window.getSelection returns null, if the window is not visible. */
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
+
+    /** Take care of the response charset when reading a worker script. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_WORKER_SCRIPT_HONORS_CHARSET_HEADER,
 
     /** {@code XSLTProcessor.transformToDocument} supports output indent attribute. */
     @BrowserFeature({CHROME, EDGE})

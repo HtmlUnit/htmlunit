@@ -88,7 +88,8 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            FF = {"", "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown"})
+            FF = {"", "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown"},
+            FF_ESR = {"", "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown"})
     public void getType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -127,7 +128,8 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "", " TExT/hTMl  ", "unknown", "application/pdf"},
-            FF = {"text/html", "", " TExT/hTMl  ", "unknown", "application/pdf"})
+            FF = {"text/html", "", " TExT/hTMl  ", "unknown", "application/pdf"},
+            FF_ESR = {"text/html", "", " TExT/hTMl  ", "unknown", "application/pdf"})
     public void setType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

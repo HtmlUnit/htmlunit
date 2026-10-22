@@ -664,7 +664,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         }
 
         getRenderingBackend().putImageData(
-                imageData.getData().getBuffer().getBuffer(), imageData.getWidth(), imageData.getHeight(),
+                imageData.getData().getBuffer().getByteBuffer(), imageData.getWidth(), imageData.getHeight(),
                 dx, dy, dirtyXArg, dirtyYArg, dirtyWidthArg, dirtyHeightArg);
     }
 

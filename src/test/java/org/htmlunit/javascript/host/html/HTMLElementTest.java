@@ -223,7 +223,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
             FF = {"text", "i", "i", "[object CSSStyleProperties]", "function", "undefined", "undefined"},
-            FF_ESR = {"text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined"})
+            FF_ESR = {"text", "i", "i", "[object CSSStyleProperties]", "function", "undefined", "undefined"})
     @HtmlUnitNYI(FF = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
             FF_ESR = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
     public void attributesAccess() throws Exception {
@@ -1463,14 +1463,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
              "New = <div><div></div></div>", "Children: 1"})
-    @HtmlUnitNYI(CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                           "New = <div></div><div></div>", "Children: 2"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <div></div><div></div>", "Children: 2"},
-            FF = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                  "New = <div></div><div></div>", "Children: 2"},
-            FF_ESR = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                      "New = <div></div><div></div>", "Children: 2"})
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageVerifyTextArea2(html);
@@ -2442,10 +2434,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"null", "body", "TypeError", "body", "body", "body",
-                       "f1", "body", "h1", "i1", "td", "TypeError", "td", "body", "body"},
-            FF_ESR = {"null", "body", "body", "body", "body", "body",
-                      "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"})
+    @Alerts({"null", "body", "TypeError", "body", "body", "body",
+             "f1", "body", "h1", "i1", "td", "TypeError", "td", "body", "body"})
     public void offsetParent_WithCSS() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -3482,7 +3472,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object DOMRectList]", "1"})
+    @Alerts(DEFAULT = {"[object DOMRectList]", "0"},
+            FF = {"[object DOMRectList]", "1"},
+            FF_ESR = {"[object DOMRectList]", "1"})
     @HtmlUnitNYI(FF = {"[object DOMRectList]", "0"},
             FF_ESR = {"[object DOMRectList]", "0"})
     public void getClientRectsArea() throws Exception {
@@ -3505,6 +3497,93 @@ public class HTMLElementTest extends WebDriverTestCase {
                     + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
             + "  <map id='myMap' name='imgmap'>\n"
             + "    <area id='area1' shape='rect' coords='0,0,1,1'>\n"
+            + "  </map>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts(CHROME = {"img|inline|1|8,17,5,5",
+                      "area-rect|none|0|-",
+                      "area-circle|none|0|-",
+                      "area-poly|none|0|-",
+                      "area-default|none|0|-",
+                      "area-rect-block|block|1|8,26,1240,0"},
+            EDGE = {"img|inline|1|8,17,5,5",
+                    "area-rect|none|0|-",
+                    "area-circle|none|0|-",
+                    "area-poly|none|0|-",
+                    "area-default|none|0|-",
+                    "area-rect-block|block|1|8,26,1243,0"},
+            FF = {"img|inline|1|8,18,5,5",
+                  "area-rect|none|1|8,18,5,5",
+                  "area-circle|none|1|8,18,5,5",
+                  "area-poly|none|1|8,18,5,5",
+                  "area-default|none|1|8,18,5,5",
+                  "area-rect-block|none|1|8,18,5,5"},
+            FF_ESR = {"img|inline|1|8,18,5,5",
+                      "area-rect|none|1|8,18,5,5",
+                      "area-circle|none|1|8,18,5,5",
+                      "area-poly|none|1|8,18,5,5",
+                      "area-default|none|1|8,18,5,5",
+                      "area-rect-block|none|1|8,18,5,5"})
+    @HtmlUnitNYI(
+            CHROME = {"img|inline|1|0,0,1,1",
+                      "area-rect|none|0|-",
+                      "area-circle|none|0|-",
+                      "area-poly|none|0|-",
+                      "area-default|none|0|-",
+                      "area-rect-block|block|1|0,0,1,1"},
+            EDGE = {"img|inline|1|0,0,1,1",
+                    "area-rect|none|0|-",
+                    "area-circle|none|0|-",
+                    "area-poly|none|0|-",
+                    "area-default|none|0|-",
+                    "area-rect-block|block|1|0,0,1,1"},
+            FF = {"img|inline|1|0,0,1,1",
+                  "area-rect|none|0|-",
+                  "area-circle|none|0|-",
+                  "area-poly|none|0|-",
+                  "area-default|none|0|-",
+                  "area-rect-block|block|1|0,0,1,1"},
+            FF_ESR = {"img|inline|1|0,0,1,1",
+                      "area-rect|none|0|-",
+                      "area-circle|none|0|-",
+                      "area-poly|none|0|-",
+                      "area-default|none|0|-",
+                      "area-rect-block|block|1|0,0,1,1"})
+    public void getClientRectsAreaDetails() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function describe(name, elem) {\n"
+            + "    var rects = elem.getClientRects();\n"
+            + "    var first = '-';\n"
+            + "    if (rects.length > 0) {\n"
+            + "      var r = rects[0];\n"
+            + "      first = [r.x, r.y, r.width, r.height].map(Math.round).join(',');\n"
+            + "    }\n"
+            + "    log(name + '|' + getComputedStyle(elem).display + '|' + rects.length + '|' + first);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    describe('img', document.getElementById('myImg'));\n"
+            + "    describe('area-rect', document.getElementById('a1'));\n"
+            + "    describe('area-circle', document.getElementById('a2'));\n"
+            + "    describe('area-poly', document.getElementById('a3'));\n"
+            + "    describe('area-default', document.getElementById('a4'));\n"
+            + "    describe('area-rect-block', document.getElementById('a5'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <img id='myImg' usemap='#imgmap'"
+                    + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                    + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+            + "  <map name='imgmap'>\n"
+            + "    <area id='a1' shape='rect' coords='0,0,1,1'>\n"
+            + "    <area id='a2' shape='circle' coords='2,2,1'>\n"
+            + "    <area id='a3' shape='poly' coords='0,0,2,0,2,2'>\n"
+            + "    <area id='a4' shape='default'>\n"
+            + "    <area id='a5' shape='rect' coords='0,0,1,1' style='display: block'>\n"
             + "  </map>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -7307,8 +7386,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "P", "SPAN"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "DIV", "P", "SPAN"})
     public void moveBefore_basic() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7345,8 +7423,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "P", "DIV", "SPAN"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "P", "DIV", "SPAN"})
     public void moveBefore_moveToFirst() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7383,8 +7460,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "DIV", "SPAN", "P"})
     public void moveBefore_samePosition() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7421,8 +7497,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "DIV", "SPAN", "P"})
     public void moveBefore_samePositionFirst() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7459,8 +7534,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
-            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    @Alerts({"DIV", "SPAN", "P", "DIV", "SPAN", "P"})
     public void moveBefore_itself() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7497,8 +7571,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("HierarchyRequestError/DOMException")
     public void moveBefore_ancestor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7534,8 +7607,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "NotFoundError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("NotFoundError/DOMException")
     public void moveBefore_differentParents() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7570,8 +7642,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "NotFoundError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("NotFoundError/DOMException")
     public void moveBefore_descendant() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7606,8 +7677,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "P", "SPAN", "0"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"2", "P", "SPAN", "0"})
     public void moveBefore_movedNotChild() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7643,8 +7713,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "NotFoundError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("NotFoundError/DOMException")
     public void moveBefore_referenceNotChild() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7679,8 +7748,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"SPAN", "DIV", "P", "3", "A"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"SPAN", "DIV", "P", "3", "A"})
     public void moveBefore_preservesChildren() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7719,8 +7787,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"text1", "myClass"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"text1", "myClass"})
     public void moveBefore_preservesAttributes() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7750,8 +7817,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF_ESR = "no moveBefore()")
+    @Alerts("true")
     public void moveBefore_returnValue() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7780,8 +7846,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DIV", "P", "SPAN", "SECTION"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"DIV", "P", "SPAN", "SECTION"})
     public void moveBefore_multipleOperations() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7820,8 +7885,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF_ESR = "no moveBefore()")
+    @Alerts("true")
     public void moveBefore_staysInDocument() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7850,8 +7914,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "DIV", "SPAN"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"2", "DIV", "SPAN"})
     public void moveBefore_nullReferenceNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7883,8 +7946,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"SPAN", "DIV", "DIV", "0", "1", "A"},
-            FF_ESR = "no moveBefore()")
+    @Alerts({"SPAN", "DIV", "DIV", "0", "1", "A"})
     public void moveBefore_nullLevelUp() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7924,8 +7986,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "NotFoundError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("NotFoundError/DOMException")
     public void moveBefore_detachedReferenceNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7958,8 +8019,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
-            FF_ESR = "no moveBefore()")
+    @Alerts("HierarchyRequestError/DOMException")
     public void moveBefore_detachedMovedNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -7992,8 +8052,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "no moveBefore()")
+    @Alerts("TypeError")
     public void moveBefore_missingArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -8026,8 +8085,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "no moveBefore()")
+    @Alerts("TypeError")
     public void moveBefore_missingReferenceNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -8060,8 +8118,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "no moveBefore()")
+    @Alerts("TypeError")
     public void moveBefore_wrongMovedNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -8094,8 +8151,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "no moveBefore()")
+    @Alerts("TypeError")
     public void moveBefore_wrongReferenceNodeNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

@@ -947,8 +947,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "activeElement BODY",
-            FF_ESR = {"activeElement BODY", "focus #document", "handler: activeElement BODY"})
+    @Alerts("activeElement BODY")
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @HtmlUnitNYI(FF = {"activeElement BODY", "focus undefined", "handler: activeElement BODY"},
             FF_ESR = {"activeElement BODY", "focus undefined", "handler: activeElement BODY"})

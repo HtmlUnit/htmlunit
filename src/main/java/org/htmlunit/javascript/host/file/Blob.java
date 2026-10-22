@@ -19,6 +19,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
@@ -155,9 +157,10 @@ public class Blob extends HtmlUnitScriptable {
          * @param type the type
          * @param lastModified last modified
          * @return the new {@link InMemoryBackend}
+         * @throws IOException in case of error
          */
         protected static InMemoryBackend create(final NativeArray fileBits, final String fileName,
-                final String type, final long lastModified) {
+                final String type, final long lastModified) throws IOException {
             if (fileBits == null) {
                 return new InMemoryBackend(new byte[0], fileName, type, lastModified);
             }
@@ -167,12 +170,14 @@ public class Blob extends HtmlUnitScriptable {
             for (long i = 0; i < length; i++) {
                 final Object fileBit = fileBits.get(i);
                 if (fileBit instanceof NativeArrayBuffer buffer) {
-                    final byte[] bytes = buffer.getBuffer();
-                    out.write(bytes, 0, bytes.length);
+                    final ByteBuffer bb = buffer.getByteBuffer();
+                    Channels.newChannel(out).write(bb);
                 }
                 else if (fileBit instanceof NativeArrayBufferView view) {
-                    final byte[] bytes = view.getBuffer().getBuffer();
-                    out.write(bytes, 0, bytes.length);
+                    final ByteBuffer bb = view.getBuffer().getByteBuffer();
+                    bb.position(view.getByteOffset());
+                    bb.limit(view.getByteOffset() + view.getByteLength());
+                    Channels.newChannel(out).write(bb);
                 }
                 else if (fileBit instanceof Blob blob) {
                     final byte[] bytes = blob.getBackend().getBytes(0, (int) blob.getSize());
@@ -297,9 +302,10 @@ public class Blob extends HtmlUnitScriptable {
      * Creates an instance.
      * @param fileBits the bits
      * @param properties the properties
+     * @throws IOException in case of error
      */
     @JsxConstructor
-    public void jsConstructor(final NativeArray fileBits, final ScriptableObject properties) {
+    public void jsConstructor(final NativeArray fileBits, final ScriptableObject properties) throws IOException {
         NativeArray nativeBits = fileBits;
         if (JavaScriptEngine.isUndefined(fileBits)) {
             nativeBits = null;
@@ -353,7 +359,7 @@ public class Blob extends HtmlUnitScriptable {
         return setupPromise(() -> {
             final byte[] bytes = getBytes();
             final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
-            System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
+            buffer.getByteBuffer().put(bytes);
             buffer.setParentScope(getParentScope());
             buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), buffer.getClassName()));
             return buffer;

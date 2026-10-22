@@ -35,6 +35,8 @@ import org.htmlunit.jetty.util.ssl.SslContextFactory;
 import org.htmlunit.jetty.websocket.api.Callback;
 import org.htmlunit.jetty.websocket.api.Session;
 import org.htmlunit.jetty.websocket.api.Session.Listener.AutoDemanding;
+import org.htmlunit.jetty.websocket.api.UpgradeResponse;
+import org.htmlunit.jetty.websocket.client.ClientUpgradeRequest;
 import org.htmlunit.jetty.websocket.client.WebSocketClient;
 
 /**
@@ -130,7 +132,7 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
     private final WebSocketListener listener_;
 
     private volatile Session incomingSession_;
-    private Session outgoingSession_;
+    private volatile Session outgoingSession_;
 
     /**
      * Ctor.
@@ -183,19 +185,7 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
     @Override
     public void connect(final URI url) throws Exception {
         synchronized (clientLock_) {
-            final CompletableFuture<Session> connectFuture = client_.connect(new JettyWebSocketAdapterImpl(), url);
-            client_.getExecutor().execute(() -> {
-                try {
-                    listener_.onWebSocketConnecting();
-                    incomingSession_ = connectFuture.get();
-                }
-                catch (final Exception e) {
-                    if (!(e instanceof ExecutionException)
-                            || !(e.getCause() instanceof AsynchronousCloseException)) {
-                        listener_.onWebSocketConnectError(e);
-                    }
-                }
-            });
+            listenForConnect(client_.connect(new JettyWebSocketAdapterImpl(), url));
         }
     }
 
@@ -203,12 +193,64 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      * {@inheritDoc}
      */
     @Override
+    public void connect(final URI url, final List<String> protocols) throws Exception {
+        if (protocols.isEmpty()) {
+            connect(url);
+            return;
+        }
+
+        synchronized (clientLock_) {
+            final ClientUpgradeRequest request = new ClientUpgradeRequest(url);
+            request.setSubProtocols(protocols);
+            listenForConnect(client_.connect(new JettyWebSocketAdapterImpl(), request));
+        }
+    }
+
+    private void listenForConnect(final CompletableFuture<Session> connectFuture) {
+        client_.getExecutor().execute(() -> {
+            try {
+                listener_.onWebSocketConnecting();
+                incomingSession_ = connectFuture.get();
+            }
+            catch (final Exception e) {
+                if (!(e instanceof ExecutionException)
+                        || !(e.getCause() instanceof AsynchronousCloseException)) {
+                    listener_.onWebSocketConnectError(e);
+                }
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSelectedProtocol() {
+        final Session session = outgoingSession_;
+        if (session == null) {
+            return "";
+        }
+
+        final UpgradeResponse response = session.getUpgradeResponse();
+        final String protocol = response == null ? null : response.getAcceptedSubProtocol();
+        return protocol == null ? "" : protocol;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void send(final Object content) throws IOException {
+        final Session session = outgoingSession_;
+        if (session == null) {
+            throw new IOException("WebSocket is not connected");
+        }
+
         if (content instanceof String string) {
-            outgoingSession_.sendText(string, Callback.NOOP);
+            session.sendText(string, Callback.NOOP);
         }
         else if (content instanceof ByteBuffer buffer) {
-            outgoingSession_.sendBinary(buffer, Callback.NOOP);
+            session.sendBinary(buffer, Callback.NOOP);
         }
         else {
             throw new IllegalStateException("Not Yet Implemented: WebSocket.send() was used to send non-string value");
@@ -220,8 +262,9 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      */
     @Override
     public void closeIncomingSession() {
-        if (incomingSession_ != null) {
-            incomingSession_.close();
+        final Session session = incomingSession_;
+        if (session != null) {
+            session.close();
         }
     }
 
@@ -230,8 +273,20 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      */
     @Override
     public void closeOutgoingSession() {
-        if (outgoingSession_ != null) {
-            outgoingSession_.close();
+        final Session session = outgoingSession_;
+        if (session != null) {
+            session.close();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void closeOutgoingSession(final int statusCode, final String reason) {
+        final Session session = outgoingSession_;
+        if (session != null) {
+            session.close(statusCode, reason, Callback.NOOP);
         }
     }
 
@@ -240,14 +295,15 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      */
     @Override
     public void closeClient() throws Exception {
+        final WebSocketClient client;
         synchronized (clientLock_) {
-            if (client_ != null) {
-                client_.stop();
-                client_.destroy();
+            client = client_;
+            client_ = null;
+        }
 
-                // TODO finally ?
-                client_ = null;
-            }
+        if (client != null) {
+            client.stop();
+            client.destroy();
         }
     }
 
@@ -272,8 +328,10 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
         @Override
         public void onWebSocketClose(final int statusCode, final String reason, final Callback callback) {
             outgoingSession_ = null;
-            listener_.onWebSocketClose(statusCode, reason);
+
+            // complete the closing handshake first: the listener may release the client
             callback.succeed();
+            listener_.onWebSocketClose(statusCode, reason);
         }
 
         @Override
@@ -283,8 +341,13 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
 
         @Override
         public void onWebSocketBinary(final ByteBuffer payload, final Callback callback) {
-            listener_.onWebSocketBinary(payload);
-            callback.succeed();
+            try {
+                listener_.onWebSocketBinary(payload);
+                callback.succeed();
+            }
+            catch (final Throwable ex) {
+                callback.fail(ex);
+            }
         }
 
         @Override

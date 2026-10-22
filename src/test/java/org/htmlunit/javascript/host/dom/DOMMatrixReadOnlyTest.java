@@ -1839,25 +1839,12 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"[0, 1, -1, 0, 0, 0]",
-                       "1[0, 1, 0, 0]",
-                       "2[-1, 0, 0, 0]",
-                       "3[0, 0, 1, 0]",
-                       "4[0, 0, 0, 1]",
-                       "true"},
-            FF_ESR = {"[0, 1, -1, 0, 0, 0]",
-                      "1[0, 1, 0, 0]",
-                      "2[-1, 0, 0, 0]",
-                      "3[0, 0, 1, 0]",
-                      "4[0, 0, 0, 1]",
-                      "false"})
-    @HtmlUnitNYI(
-            FF_ESR = {"[0, 1, -1, 0, 0, 0]",
-                      "1[0, 1, 0, 0]",
-                      "2[-1, 0, 0, 0]",
-                      "3[0, 0, 1, 0]",
-                      "4[0, 0, 0, 1]",
-                      "true"})
+    @Alerts({"[0, 1, -1, 0, 0, 0]",
+             "1[0, 1, 0, 0]",
+             "2[-1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
     public void rotateAxisAngle_identity_90_z() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body><script>"
@@ -1962,24 +1949,12 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"[5, 4, -7, -6, 3, 2]",
-                       "1[5, 4, 0, 0]",
-                       "2[-7, -6, 0, 0]",
-                       "3[0, 0, 1, 0]",
-                       "4[3, 2, 0, 1]",
-                       "true"},
-            FF_ESR = {"[5, 4, -7, -6, 3, 2]",
-                      "1[5, 4, 0, 0]",
-                      "2[-7, -6, 0, 0]",
-                      "3[0, 0, 1, 0]",
-                      "4[3, 2, 0, 1]",
-                      "false"})
-    @HtmlUnitNYI(FF_ESR = {"[5, 4, -7, -6, 3, 2]",
-                           "1[5, 4, 0, 0]",
-                           "2[-7, -6, 0, 0]",
-                           "3[0, 0, 1, 0]",
-                           "4[3, 2, 0, 1]",
-                           "true"})
+    @Alerts({"[5, 4, -7, -6, 3, 2]",
+             "1[5, 4, 0, 0]",
+             "2[-7, -6, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[3, 2, 0, 1]",
+             "true"})
     public void rotateAxisAngle_6_90_z() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body><script>"
@@ -2156,24 +2131,12 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"[1, 0, 0, 1, 0, 0]",
-                       "1[1, 0, 0, 0]",
-                       "2[0, 1, 0, 0]",
-                       "3[0, 0, 1, 0]",
-                       "4[0, 0, 0, 1]",
-                       "true"},
-            FF_ESR = {"[1, 0, 0, 1, 0, 0]",
-                      "1[1, 0, 0, 0]",
-                      "2[0, 1, 0, 0]",
-                      "3[0, 0, 1, 0]",
-                      "4[0, 0, 0, 1]",
-                      "false"})
-    @HtmlUnitNYI(FF_ESR = {"[1, 0, 0, 1, 0, 0]",
-                           "1[1, 0, 0, 0]",
-                           "2[0, 1, 0, 0]",
-                           "3[0, 0, 1, 0]",
-                           "4[0, 0, 0, 1]",
-                           "true"})
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
     public void rotateAxisAngle_invalid_axis() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body><script>"
@@ -2254,11 +2217,11 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                   "4[0, 0, 0, 1]",
                   "true"},
             FF_ESR = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                      "1[NaN, NaN, NaN, NaN]",
-                      "2[NaN, NaN, NaN, NaN]",
-                      "3[NaN, NaN, NaN, NaN]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
                       "4[0, 0, 0, 1]",
-                      "false"})
+                      "true"})
     @HtmlUnitNYI(
             CHROME = {"[NaN, NaN, NaN, NaN, 0, 0]",
                       "1[NaN, NaN, NaN, NaN]",
@@ -2313,11 +2276,11 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                   "4[0, 0, 0, 1]",
                   "true"},
             FF_ESR = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                      "1[NaN, NaN, NaN, NaN]",
-                      "2[NaN, NaN, NaN, NaN]",
-                      "3[NaN, NaN, NaN, NaN]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
                       "4[0, 0, 0, 1]",
-                      "false"})
+                      "true"})
     @HtmlUnitNYI(
             CHROME = {"[NaN, NaN, NaN, NaN, 0, 0]",
                       "1[NaN, NaN, NaN, NaN]",

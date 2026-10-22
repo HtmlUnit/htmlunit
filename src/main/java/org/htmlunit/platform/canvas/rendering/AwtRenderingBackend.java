@@ -31,6 +31,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -711,7 +712,7 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void putImageData(final byte[] imageDataBytes,
+    public void putImageData(final ByteBuffer imageDataBuffer,
             final int imageDataWidth, final int imageDataHeight,
             final int dx, final int dy, final int dirtyX, final int dirtyY,
             final int dirtyWidth, final int dirtyHeight) {
@@ -719,8 +720,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] putImageData()");
         }
-
-        if (imageDataBytes == null || imageDataWidth <= 0 || imageDataHeight <= 0) {
+        if (imageDataBuffer == null || imageDataWidth <= 0 || imageDataHeight <= 0) {
             return;
         }
 
@@ -757,10 +757,10 @@ public class AwtRenderingBackend implements RenderingBackend {
         for (int row = 0; row < srcHeight; row++) {
             for (int col = 0; col < srcWidth; col++) {
                 final int byteIdx = ((srcStartY + row) * imageDataWidth + (srcStartX + col)) * 4;
-                final int r = imageDataBytes[byteIdx]     & 0xFF;
-                final int g = imageDataBytes[byteIdx + 1] & 0xFF;
-                final int b = imageDataBytes[byteIdx + 2] & 0xFF;
-                final int a = imageDataBytes[byteIdx + 3] & 0xFF;
+                final int r = imageDataBuffer.get(byteIdx)     & 0xFF;
+                final int g = imageDataBuffer.get(byteIdx + 1) & 0xFF;
+                final int b = imageDataBuffer.get(byteIdx + 2) & 0xFF;
+                final int a = imageDataBuffer.get(byteIdx + 3) & 0xFF;
                 srcImage.setRGB(col, row, (a << 24) | (r << 16) | (g << 8) | b);
             }
         }

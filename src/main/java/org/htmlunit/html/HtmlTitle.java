@@ -82,29 +82,35 @@ public class HtmlTitle extends HtmlElement {
     }
 
     /**
-     * Returns the {@code text} attribute.
+     * The child text content: the concatenation of the data of all text node children,
+     * elements and comments are skipped (CDATA sections are text nodes).
+     *
      * @return the {@code text} attribute
      */
     public String getText() {
         final DomNode firstChild = getFirstChild();
-        if (firstChild != null) {
-            return firstChild.getNodeValue();
+        if (firstChild == null) {
+            return "";
         }
-        return "";
+
+        final StringBuilder sb = new StringBuilder();
+        for (final DomNode child : getChildren()) {
+            if (child instanceof DomText text) {
+                sb.append(text.getData());
+            }
+        }
+        return sb.toString();
     }
 
     /**
-     * Sets the {@code text} attribute.
+     * Sets the {@code text} attribute: all children are replaced by a single text node;
+     * an empty string leaves the title without children.
      * @param text the {@code text} attribute
      */
     public void setText(final String text) {
-        DomNode firstChild = getFirstChild();
-        if (firstChild == null) {
-            firstChild = new DomText(getPage(), text);
-            appendChild(firstChild);
-        }
-        else {
-            firstChild.setNodeValue(text);
+        removeAllChildren();
+        if (text != null && !text.isEmpty()) {
+            appendChild(new DomText(getPage(), text));
         }
     }
 }

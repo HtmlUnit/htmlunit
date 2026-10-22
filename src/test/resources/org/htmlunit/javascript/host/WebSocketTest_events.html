@@ -80,7 +80,7 @@
                 log(e.source);
             }
             else {
-                log("Unknown message: ", e.data);
+                log("Unknown message: '" + e.data + "' / '" + ab2str(e.data) + "'");
             }
         },
 
@@ -110,7 +110,7 @@
                 room._send('close');
             }
             else {
-                log("Unknown message: ", e.data);
+                log("Unknown message: '" + e.data + "' / '" + ab2str(e.data) + "'");
             }
         },
 

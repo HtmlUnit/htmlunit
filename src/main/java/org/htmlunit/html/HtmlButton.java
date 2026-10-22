@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.htmlunit.SgmlPage;
 import org.htmlunit.javascript.host.event.Event;
+import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
@@ -73,6 +74,19 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     public void setValueAttribute(final String newValue) {
         setAttribute(VALUE_ATTRIBUTE, newValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final int keyCode, final boolean lastType) throws IOException {
+        if (keyCode == KeyboardEvent.DOM_VK_SPACE) {
+            click();
+            return;
+        }
+
+        super.doType(keyCode, lastType);
     }
 
     /**

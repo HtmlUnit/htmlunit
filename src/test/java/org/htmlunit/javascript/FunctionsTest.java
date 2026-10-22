@@ -16,7 +16,6 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriverException;
 
@@ -125,10 +124,6 @@ public class FunctionsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"foo = undefined", "1"})
-    @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: ReferenceError: \"foo\" is not defined.",
-            EDGE = "org.htmlunit.ScriptException: ReferenceError: \"foo\" is not defined.",
-            FF = "org.htmlunit.ScriptException: ReferenceError: \"foo\" is not defined.",
-            FF_ESR = "org.htmlunit.ScriptException: ReferenceError: \"foo\" is not defined.")
     public void conditionallyCreatedFunction() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"

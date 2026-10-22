@@ -654,8 +654,9 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param keyCode the key code to simulate typing
      * @return the page that occupies this window after typing
+     * @throws IOException in case of problems
      */
-    public Page type(final int keyCode) {
+    public Page type(final int keyCode) throws IOException {
         return type(keyCode, true, true, true, true);
     }
 
@@ -728,7 +729,7 @@ public abstract class HtmlElement extends DomElement {
 
     private Page type(final int keyCode,
                     final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp,
-                    final boolean lastType) {
+                    final boolean lastType) throws IOException {
         if (isDisabledElementAndDisabled()) {
             return getPage();
         }
@@ -809,8 +810,9 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param keyCode the key code wish to simulate typing
      * @param lastType is this the last to type
+     * @throws IOException in case of problems
      */
-    protected void doType(final int keyCode, final boolean lastType) {
+    protected void doType(final int keyCode, final boolean lastType) throws IOException {
         final DomText domText = getDoTypeNode();
         if (domText != null) {
             domText.doType(keyCode, this, lastType);

@@ -17,7 +17,6 @@ package org.htmlunit.html.parser;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -965,18 +964,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Alerts({"<iframe></div></body></html></iframe>", "1",
              "1", "IFRAME", "null", "1",
              "3", "#text", "</div></body></html>"})
-    @HtmlUnitNYI(CHROME = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
-                           "1", "IFRAME", "null", "1",
-                           "3", "#text", "</div></body></html>"},
-            EDGE = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
-                    "1", "IFRAME", "null", "1",
-                    "3", "#text", "</div></body></html>"},
-            FF = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
-                  "1", "IFRAME", "null", "1",
-                  "3", "#text", "</div></body></html>"},
-            FF_ESR = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
-                      "1", "IFRAME", "null", "1",
-                      "3", "#text", "</div></body></html>"})
     public void selfClosingIframe() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

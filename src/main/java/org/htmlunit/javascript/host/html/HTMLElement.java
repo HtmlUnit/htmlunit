@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_VALUE_EMPTY;
@@ -958,8 +957,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(propertyName = "offsetParent")
     public HtmlUnitScriptable getOffsetParent_js() {
-        final boolean feature = getBrowserVersion().hasFeature(JS_OFFSET_PARENT_NULL_IF_FIXED);
-        return getOffestParentElement(feature);
+        return getOffestParentElement(true);
     }
 
     private HTMLElement getOffestParentElement(final boolean returnNullIfFixed) {

@@ -429,8 +429,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31'415.927",
-            FF_ESR = "31\u2019415.927")
+    @Alerts("31'415.927")
     public void format_de_ch() throws Exception {
         test("new Intl.NumberFormat('de-CH').format(number)");
     }
@@ -845,7 +844,8 @@ public class NumberFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "31\u202f415,927",
-            FF = "31'415,927")
+            FF = "31'415,927",
+            FF_ESR = "31'415,927")
     public void format_fr_ch() throws Exception {
         test("new Intl.NumberFormat('fr-CH').format(number)");
     }
@@ -984,8 +984,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31'415.927",
-            FF_ESR = "31\u2019415.927")
+    @Alerts("31'415.927")
     public void format_it_ch() throws Exception {
         test("new Intl.NumberFormat('it-CH').format(number)");
     }

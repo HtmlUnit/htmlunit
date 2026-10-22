@@ -66,8 +66,7 @@ public class NotificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            FF_ESR = "undefined")
+    @Alerts("2")
     public void maxActions() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body><script>\n"

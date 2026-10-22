@@ -41,6 +41,11 @@ public class BrowserVersionClassTemplateInvocationContextProvider implements Cla
     static final String REAL_FIREFOX_ESR = "ff-esr";
     static final String REAL_EDGE = "edge";
 
+    static final String REAL_CHROME_BIDI = "chrome-bidi";
+    static final String REAL_FIREFOX_BIDI = "ff-bidi";
+    static final String REAL_FIREFOX_ESR_BIDI = "ff-esr-bidi";
+    static final String REAL_EDGE_BIDI = "edge-bidi";
+
     static final String HTMLUNIT_CHROME = "hu-chrome";
     static final String HTMLUNIT_FIREFOX = "hu-ff";
     static final String HTMLUNIT_FIREFOX_ESR = "hu-ff-esr";
@@ -59,41 +64,55 @@ public class BrowserVersionClassTemplateInvocationContextProvider implements Cla
 
         final Set<String> browsers = WebDriverTestCase.getBrowsersProperties();
         if (browsers.contains(REAL_CHROME)) {
-            invocationContexts.add(invocationContext(BrowserVersion.CHROME, true));
+            invocationContexts.add(invocationContext(BrowserVersion.CHROME, true, false));
         }
         if (browsers.contains(REAL_FIREFOX_ESR)) {
-            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX_ESR, true));
+            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX_ESR, true, false));
         }
         if (browsers.contains(REAL_FIREFOX)) {
-            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX, true));
+            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX, true, false));
         }
         if (browsers.contains(REAL_EDGE)) {
-            invocationContexts.add(invocationContext(BrowserVersion.EDGE, true));
+            invocationContexts.add(invocationContext(BrowserVersion.EDGE, true, false));
+        }
+
+        // the real browsers started with BiDi enabled; same expectations as the classic ones
+        if (browsers.contains(REAL_CHROME_BIDI)) {
+            invocationContexts.add(invocationContext(BrowserVersion.CHROME, true, true));
+        }
+        if (browsers.contains(REAL_FIREFOX_ESR_BIDI)) {
+            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX_ESR, true, true));
+        }
+        if (browsers.contains(REAL_FIREFOX_BIDI)) {
+            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX, true, true));
+        }
+        if (browsers.contains(REAL_EDGE_BIDI)) {
+            invocationContexts.add(invocationContext(BrowserVersion.EDGE, true, true));
         }
 
         if (browsers.contains(HTMLUNIT_CHROME)) {
-            invocationContexts.add(invocationContext(BrowserVersion.CHROME, false));
+            invocationContexts.add(invocationContext(BrowserVersion.CHROME, false, false));
         }
         if (browsers.contains(HTMLUNIT_FIREFOX_ESR)) {
-            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX_ESR, false));
+            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX_ESR, false, false));
         }
         if (browsers.contains(HTMLUNIT_FIREFOX)) {
-            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX, false));
+            invocationContexts.add(invocationContext(BrowserVersion.FIREFOX, false, false));
         }
         if (browsers.contains(HTMLUNIT_EDGE)) {
-            invocationContexts.add(invocationContext(BrowserVersion.EDGE, false));
+            invocationContexts.add(invocationContext(BrowserVersion.EDGE, false, false));
         }
 
         return invocationContexts.stream();
     }
 
     private static ClassTemplateInvocationContext invocationContext(
-            final BrowserVersion browserVersion, final boolean realBrowser) {
+            final BrowserVersion browserVersion, final boolean realBrowser, final boolean bidi) {
 
         return new ClassTemplateInvocationContext() {
             @Override
             public String getDisplayName(final int invocationIndex) {
-                return (realBrowser ? "Real " : "") + browserVersion.getNickname();
+                return (realBrowser ? "Real " : "") + browserVersion.getNickname() + (bidi ? " (BiDi)" : "");
             }
 
             @Override
@@ -110,6 +129,7 @@ public class BrowserVersionClassTemplateInvocationContextProvider implements Cla
                         final WebDriverTestCase webDriverTestCase = (WebDriverTestCase) testInstance;
 
                         webDriverTestCase.setUseRealBrowser(realBrowser);
+                        webDriverTestCase.setUseBiDi(bidi);
                     }
                 });
 

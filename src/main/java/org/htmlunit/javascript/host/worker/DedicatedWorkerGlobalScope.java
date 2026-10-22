@@ -14,9 +14,13 @@
  */
 package org.htmlunit.javascript.host.worker;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_WORKER_SCRIPT_HONORS_CHARSET_HEADER;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -369,7 +373,14 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
                     "NetworkError: importScripts response is not a javascript response");
         }
 
-        final String scriptCode = response.getContentAsString();
+        Charset scriptCharset = StandardCharsets.UTF_8;
+        if (webClient.getBrowserVersion().hasFeature(JS_WORKER_SCRIPT_HONORS_CHARSET_HEADER)) {
+            final Charset headerCharset = response.getHeaderContentCharset();
+            if (headerCharset != null) {
+                scriptCharset = headerCharset;
+            }
+        }
+        final String scriptCode = response.getContentAsString(scriptCharset);
         final AbstractJavaScriptEngine<?> javaScriptEngine = webClient.getJavaScriptEngine();
 
         final ContextAction<Object> action =

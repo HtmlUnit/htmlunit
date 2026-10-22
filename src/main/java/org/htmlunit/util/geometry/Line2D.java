@@ -18,6 +18,7 @@ package org.htmlunit.util.geometry;
  * Simple 2D line segment shape.
  *
  * @author Ronald Brill
+ * @author Ashutosh Panda
  */
 public class Line2D implements Shape2D {
 
@@ -122,12 +123,8 @@ public class Line2D implements Shape2D {
             }
         }
 
-        if (y < startY_ && y < endY_
-                || (y > startY_ && y > endY_)) {
-            return false;
-        }
-
-        return true;
+        return !(y < startY_ && y < endY_
+                || (y > startY_ && y > endY_));
     }
 
     /**

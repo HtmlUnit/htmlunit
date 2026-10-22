@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -116,7 +112,7 @@ public class DocumentFragment extends Node {
      * @param args the arguments passed into the method
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF})
+    @JsxFunction
     public static void moveBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.moveBefore(context, scope, thisObj, args, function);
@@ -132,7 +128,8 @@ public class DocumentFragment extends Node {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            return NodeList.staticNodeList(getParentScope(), getDomNodeOrDie().querySelectorAll(selectors));
+            final DomNode domNode = getDomNodeOrDie();
+            return NodeList.staticNodeList(getParentScope(), domNode.querySelectorAll(selectors, domNode));
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
@@ -148,7 +145,8 @@ public class DocumentFragment extends Node {
     @JsxFunction
     public Node querySelector(final String selectors) {
         try {
-            final DomNode node = getDomNodeOrDie().querySelector(selectors);
+            final DomNode domNode = getDomNodeOrDie();
+            final DomNode node = domNode.querySelector(selectors, domNode);
             if (node != null) {
                 return node.getScriptableObject();
             }

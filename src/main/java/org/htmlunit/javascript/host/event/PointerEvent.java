@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeObject;
@@ -256,7 +252,7 @@ public class PointerEvent extends MouseEvent {
      *
      * @return the persistent device identifier
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter
     public double getPersistentDeviceId() {
         // dummy but valid regarding the spec
         // https://w3c.github.io/pointerevents/#dom-pointerevent-persistentdeviceid

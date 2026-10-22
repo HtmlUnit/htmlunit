@@ -529,7 +529,13 @@ public class Navigator extends HtmlUnitScriptable {
             blob.fillRequest(request);
         }
         else if (data instanceof NativeArrayBufferView view) {
-            request.setRequestBody(new String(view.getBuffer().getBuffer(), UTF_8));
+            request.setRequestBody(
+                UTF_8.decode(
+                    view.getBuffer()
+                        .getByteBuffer()
+                        .position(view.getByteOffset())
+                        .limit(view.getByteOffset() + view.getByteLength())
+                ).toString());
             request.setEncodingType(null);
         }
         else {

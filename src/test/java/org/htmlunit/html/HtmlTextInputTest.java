@@ -23,6 +23,7 @@ import java.util.Collections;
 import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Assumptions;
@@ -669,6 +670,9 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("2")
+    @BuggyWebDriver(FF = "1",
+            FF_ESR = "1")
     public void submitOnEnter() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -684,10 +688,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys("\n");
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
-        assertEquals(2, getMockWebConnection().getRequestCount());
+        sleepRealBrowser(400);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
     }
 
     /**

@@ -332,12 +332,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"left", "right", "center", "justify", "bottom", "middle",
-                       "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
-            FF_ESR = {"left", "right", "middle", "justify", "bottom", "middle",
-                      "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""})
-    @HtmlUnitNYI(FF_ESR = {"left", "right", "center", "justify", "bottom", "middle",
-                           "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""})
+    @Alerts({"left", "right", "center", "justify", "bottom", "middle",
+             "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""})
     public void getAlign() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -370,12 +366,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "center", "justify",
-                       "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
-            FF_ESR = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
-                      "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"})
-    @HtmlUnitNYI(FF_ESR = {"CenTer", "8", "foo", "left", "right", "center", "justify",
-                           "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"})
+    @Alerts({"CenTer", "8", "foo", "left", "right", "center", "justify",
+             "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"})
     public void setAlign() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

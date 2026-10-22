@@ -158,8 +158,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "about:blank?query", "blank", "", "about:", "?query"},
-            FF_ESR = {"", "about:blank?query", "blank", "", "about:", ""})
+    @Alerts({"", "about:blank?query", "blank", "", "about:", "?query"})
     public void about_blank_query_attributes() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -292,8 +291,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"#hash", "about:blank?query#hash", "blank", "", "about:", "?query"},
-            FF_ESR = {"#hash", "about:blank?query#hash", "blank", "", "about:", ""})
+    @Alerts({"#hash", "about:blank?query#hash", "blank", "", "about:", "?query"})
     public void about_blank_query_hash_attributes() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -979,9 +977,10 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         verifyWindowName2(driver, getExpectedAlerts()[0]);
-        Thread.sleep(100);
+        sleepRealBrowser(100);
 
         driver.findElement(By.id("click")).click();
+        sleepRealBrowser(100);
         verifyWindowName2(driver, getExpectedAlerts());
     }
 
@@ -1611,15 +1610,16 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ancestorOrigins,assign,hash,host,hostname,href,origin,"
+    @Alerts("ancestorOrigins,assign,hash,host,hostname,href,origin,"
+            + "pathname,port,protocol,reload,replace,search,toString")
+    @HtmlUnitNYI(
+            CHROME = "assign,hash,host,hostname,href,origin,"
+                    + "pathname,port,protocol,reload,replace,search,toString",
+            EDGE = "assign,hash,host,hostname,href,origin,"
+                    + "pathname,port,protocol,reload,replace,search,toString",
+            FF = "assign,hash,host,hostname,href,origin,"
                     + "pathname,port,protocol,reload,replace,search,toString",
             FF_ESR = "assign,hash,host,hostname,href,origin,"
-                    + "pathname,port,protocol,reload,replace,search,toString")
-    @HtmlUnitNYI(CHROME = "assign,hash,host,hostname,href,origin,"
-                    + "pathname,port,protocol,reload,replace,search,toString",
-                 EDGE = "assign,hash,host,hostname,href,origin,"
-                    + "pathname,port,protocol,reload,replace,search,toString",
-                 FF = "assign,hash,host,hostname,href,origin,"
                     + "pathname,port,protocol,reload,replace,search,toString")
     public void keys() throws Exception {
         final String html = DOCTYPE_HTML

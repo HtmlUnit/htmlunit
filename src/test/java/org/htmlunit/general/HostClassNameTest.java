@@ -1184,8 +1184,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "function CSS2Properties() { [native code] }")
+    @Alerts("ReferenceError")
     public void css2Properties() throws Exception {
         test("CSS2Properties");
     }
@@ -1372,7 +1371,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "function CSSStyleProperties() { [native code] }")
+            FF = "function CSSStyleProperties() { [native code] }",
+            FF_ESR = "function CSSStyleProperties() { [native code] }")
     public void cssStyleProperties() throws Exception {
         test("CSSStyleProperties");
     }

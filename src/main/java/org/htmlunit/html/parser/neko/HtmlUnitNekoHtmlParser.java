@@ -44,6 +44,7 @@ import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.UnknownElementFactory;
+import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.svg.SvgElementFactory;
@@ -98,6 +99,12 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
         final HtmlUnitNekoDOMBuilder domBuilder =
                 new HtmlUnitNekoDOMBuilder(this, webClient, parent, url, source, createdByJavascript);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
+
+        final boolean xhtml = page instanceof XHtmlPage;
+        domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, xhtml);
+        domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME, xhtml);
+        domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_SCRIPT, xhtml);
+
         // build fragment context stack
         DomNode node = context;
         final List<QName> ancestors = new ArrayList<>();
@@ -115,7 +122,6 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
             ancestors.add(new QName(null, "body", null, null));
         }
 
-        domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
         domBuilder.setProperty(HTMLTagBalancer.FRAGMENT_CONTEXT_STACK, ancestors.toArray(new QName[0]));
 
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, new StringReader(source), null);
@@ -151,6 +157,9 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
             // xml content is different
             if (xhtml) {
                 domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
+                domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME, true);
+                domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_SCRIPT, true);
+
                 domBuilder.setFeature(HTMLScanner.SCRIPT_STRIP_CDATA_DELIMS, true);
                 domBuilder.setFeature(HTMLScanner.STYLE_STRIP_CDATA_DELIMS, true);
                 domBuilder.setFeature(HTMLScanner.CDATA_SECTIONS, true);

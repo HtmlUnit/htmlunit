@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
@@ -252,10 +250,7 @@ public class HtmlArea extends HtmlElement implements HyperlinkElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_BLOCK)) {
-            return DisplayStyle.NONE;
-        }
-        return DisplayStyle.INLINE;
+        return DisplayStyle.NONE;
     }
 
     /**

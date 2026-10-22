@@ -61,7 +61,9 @@ public final class TestCaseTest {
                     generateTestForHtmlElements(file);
                 }
                 else if (file.getName().endsWith(".java")
-                        && !file.getName().endsWith("HtmlTagSupportTest.java")) {
+                        && !file.getName().endsWith("HtmlTagSupportTest.java")
+                        && !file.getName().endsWith("InnerHtmlSerializationTest.java")
+                        && !file.getName().endsWith("OuterHtmlSerializationTest.java")) {
                     final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
                     for (final String line : lines) {
                         if (line.contains("(\"xmp\")")) {
