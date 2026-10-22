@@ -28,7 +28,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
  * @author Lai Quang Duong
  * @author Ronald Brill
  */
-final class HmacKeyAlgorithm {
+final class HmacKeyAlgorithm implements KeyAlgorithm {
 
     static final Set<String> SUPPORTED_HASH_ALGORITHMS = Set.of("SHA-1", "SHA-256", "SHA-384", "SHA-512");
 
@@ -62,12 +62,11 @@ final class HmacKeyAlgorithm {
      * @return the parsed HmacKeyAlgorithm
      */
     static HmacKeyAlgorithm from(final Scriptable keyGenParams, final Integer fallbackLength) {
-        final Object hashProp = ScriptableObject.getProperty(keyGenParams, "hash");
-        final String hash = SubtleCrypto.resolveAlgorithmName(hashProp);
+        final String hash = SubtleCrypto.resolveAlgorithmName(SubtleCrypto.getRequiredMember(keyGenParams, "hash"));
 
         final int length;
         final Object lengthProp = ScriptableObject.getProperty(keyGenParams, "length");
-        if (lengthProp == Scriptable.NOT_FOUND) {
+        if (lengthProp == Scriptable.NOT_FOUND || JavaScriptEngine.isUndefined(lengthProp)) {
             if (fallbackLength != null) {
                 length = fallbackLength;
             }
@@ -81,13 +80,15 @@ final class HmacKeyAlgorithm {
             }
         }
         else {
-            if (!(lengthProp instanceof Number numLength)) {
-                throw new IllegalArgumentException("An invalid or illegal string was specified");
-            }
-            length = numLength.intValue();
+            length = (int) SubtleCrypto.getRequiredNumber(keyGenParams, "length");
         }
 
         return new HmacKeyAlgorithm(hash, length);
+    }
+
+    @Override
+    public String getName() {
+        return "HMAC";
     }
 
     String getHash() {
@@ -114,12 +115,13 @@ final class HmacKeyAlgorithm {
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object
      */
-    Scriptable toScriptableObject(final VarScope scope) {
+    @Override
+    public Scriptable toScriptableObject(final VarScope scope) {
         final Scriptable hashObj = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(hashObj, "name", getHash());
 
         final Scriptable algorithm = JavaScriptEngine.newObject(scope);
-        ScriptableObject.putProperty(algorithm, "name", "HMAC");
+        ScriptableObject.putProperty(algorithm, "name", getName());
         ScriptableObject.putProperty(algorithm, "hash", hashObj);
         ScriptableObject.putProperty(algorithm, "length", getLength());
         return algorithm;

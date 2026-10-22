@@ -34,7 +34,6 @@ import java.security.spec.RSAKeyGenParameterSpec;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -52,11 +51,11 @@ import javax.crypto.spec.OAEPParameterSpec;
 import javax.crypto.spec.PSource;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -124,6 +123,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     "deriveKey", "deriveBits", "wrapKey", "unwrapKey")));
 
     /**
+     * The key formats.
+     * @see <a href="https://w3c.github.io/webcrypto/#dfn-KeyFormat">KeyFormat</a>
+     */
+    private static final Set<String> KEY_FORMATS = Set.of("raw", "spki", "pkcs8", "jwk");
+
+    /**
      * The valid authentication tag lengths for AES-GCM, in bits.
      *
      * @see <a href="https://w3c.github.io/webcrypto/#aes-gcm-operations">AES-GCM encrypt, step 6</a>
@@ -136,14 +141,14 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         }
     }
 
-    private static class OperationException extends RuntimeException {
-        OperationException(final String message) {
+    private static class DataException extends RuntimeException {
+        DataException(final String message) {
             super(message);
         }
     }
 
-    private static class DataException extends RuntimeException {
-        DataException(final String message) {
+    private static class OperationException extends RuntimeException {
+        OperationException(final String message) {
             super(message);
         }
     }
@@ -157,10 +162,13 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     private NativePromise rejectNotACryptoKey(final String operation) {
+        return rejectWithTypeError("Failed to execute '" + operation
+                + "' on 'SubtleCrypto': parameter 2 is not of type 'CryptoKey'.");
+    }
+
+    private NativePromise rejectWithTypeError(final String message) {
         return setupRejectedPromise(() -> JavaScriptEngine.toErrorObject(
-                JavaScriptEngine.typeError("Failed to execute '" + operation
-                        + "' on 'SubtleCrypto': parameter 2 is not of type 'CryptoKey'."),
-                getParentScope()));
+                JavaScriptEngine.typeError(message), getParentScope()));
     }
 
     private NativePromise notImplemented() {
@@ -222,19 +230,11 @@ public class SubtleCrypto extends HtmlUnitScriptable {
 
             final ByteBuffer inputData = asByteBuffer(data);
 
-            // encrypt/decrypt requires algorithm parameters as an object (iv, counter, etc.)
-            if (!(algorithm instanceof Scriptable algorithmObj)) {
-                throw new IllegalArgumentException("An invalid or illegal string was specified");
-            }
 
             switch (algorithmName) {
                 case "AES-CBC": {
                     // https://w3c.github.io/webcrypto/#aes-cbc-operations
-                    final byte[] iv = extractBuffer(algorithmObj, "iv");
-                    if (iv == null) {
-                        throw new IllegalArgumentException(
-                                "Data provided to an operation does not meet requirements");
-                    }
+                    final byte[] iv = getRequiredBuffer(toAlgorithmParams(algorithm, algorithmName), "iv");
                     if (iv.length != 16) {
                         throw new OperationException("The iv must be 16 bytes long");
                     }
@@ -250,14 +250,15 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                 }
                 case "AES-GCM": {
                     // https://w3c.github.io/webcrypto/#aes-gcm-operations
-                    final byte[] iv = extractBuffer(algorithmObj, "iv");
-                    if (iv == null || iv.length == 0) {
+                    final Scriptable params = toAlgorithmParams(algorithm, algorithmName);
+                    final byte[] iv = getRequiredBuffer(params, "iv");
+                    if (iv.length == 0) {
                         throw new IllegalArgumentException(
                                 "Data provided to an operation does not meet requirements");
                     }
 
                     final int tagLength;
-                    final Object tagLengthProp = ScriptableObject.getProperty(algorithmObj, "tagLength");
+                    final Object tagLengthProp = ScriptableObject.getProperty(params, "tagLength");
                     if (tagLengthProp instanceof Number num) {
                         tagLength = num.intValue();
                         if (!VALID_AES_GCM_TAG_LENGTHS.contains(tagLength)) {
@@ -277,7 +278,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     final Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
                     cipher.init(cipherMode, secretKey, new GCMParameterSpec(tagLength, iv));
 
-                    final Object aadProp = ScriptableObject.getProperty(algorithmObj, "additionalData");
+                    final Object aadProp = ScriptableObject.getProperty(params, "additionalData");
                     if (aadProp instanceof Scriptable) {
                         final ByteBuffer aad = asByteBuffer(aadProp);
                         cipher.updateAAD(toByteArray(aad));
@@ -288,21 +289,13 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                 }
                 case "AES-CTR": {
                     // https://w3c.github.io/webcrypto/#aes-ctr-operations
-                    final byte[] counter = extractBuffer(algorithmObj, "counter");
-                    if (counter == null) {
-                        throw new IllegalArgumentException(
-                                "Data provided to an operation does not meet requirements");
-                    }
+                    final Scriptable params = toAlgorithmParams(algorithm, algorithmName);
+                    final byte[] counter = getRequiredBuffer(params, "counter");
                     if (counter.length != 16) {
                         throw new OperationException("The counter must be 16 bytes long");
                     }
 
-                    final Object lengthProp = ScriptableObject.getProperty(algorithmObj, "length");
-                    if (!(lengthProp instanceof Number numLength)) {
-                        throw new IllegalArgumentException(
-                                "Data provided to an operation does not meet requirements");
-                    }
-                    final int counterLength = numLength.intValue();
+                    final int counterLength = (int) getRequiredNumber(params, "length");
                     if (counterLength < 1 || counterLength > 128) {
                         throw new OperationException("The counter length must be between 1 and 128 bits");
                     }
@@ -313,12 +306,13 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                 }
                 case "RSA-OAEP": {
                     // https://w3c.github.io/webcrypto/#rsa-oaep-operations
-                    final Scriptable keyAlgorithm = key.getAlgorithm();
-                    final Object hashObj = ScriptableObject.getProperty(keyAlgorithm, "hash");
-                    final String hash = resolveAlgorithmName(hashObj);
+                    final String hash = ((RsaHashedKeyAlgorithm) key.getKeyAlgorithm()).getHash();
 
+                    // all RsaOaepParams members are optional, the algorithm may be a plain name
                     final byte[] label;
-                    final Object labelProp = ScriptableObject.getProperty(algorithmObj, "label");
+                    final Object labelProp = algorithm instanceof Scriptable params
+                            ? ScriptableObject.getProperty(params, "label")
+                            : Scriptable.NOT_FOUND;
                     if (labelProp instanceof Scriptable) {
                         final ByteBuffer labelBuf = asByteBuffer(labelProp);
                         label = toByteArray(labelBuf);
@@ -551,22 +545,14 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      */
     private static Signature resolveRsaSignature(final String algorithmName, final Object algorithmParams,
             final CryptoKey key) throws GeneralSecurityException {
-        final Object hashObj = ScriptableObject.getProperty(key.getAlgorithm(), "hash");
-        final String hash = resolveAlgorithmName(hashObj);
+        final String hash = ((RsaHashedKeyAlgorithm) key.getKeyAlgorithm()).getHash();
         final String javaHash = hash.replace("-", "");
 
         if ("RSASSA-PKCS1-v1_5".equals(algorithmName)) {
             return Signature.getInstance(javaHash + "withRSA");
         }
 
-        if (!(algorithmParams instanceof Scriptable obj)) {
-            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
-        }
-        final Object saltLengthProp = ScriptableObject.getProperty(obj, "saltLength");
-        if (!(saltLengthProp instanceof Number num)) {
-            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
-        }
-        final int saltLength = num.intValue();
+        final int saltLength = (int) getRequiredNumber(toAlgorithmParams(algorithmParams, algorithmName), "saltLength");
 
         final MGF1ParameterSpec mgf1Spec = new MGF1ParameterSpec(hash);
         final PSSParameterSpec pssSpec = new PSSParameterSpec(hash, "MGF1", mgf1Spec, saltLength, 1);
@@ -580,11 +566,8 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      */
     private static Signature resolveEcdsaSignature(final Object algorithmParams)
             throws GeneralSecurityException {
-        if (!(algorithmParams instanceof Scriptable obj)) {
-            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
-        }
-        final Object hashProp = ScriptableObject.getProperty(obj, "hash");
-        final String hash = resolveAlgorithmName(hashProp);
+        final Scriptable params = toAlgorithmParams(algorithmParams, "ECDSA");
+        final String hash = resolveAlgorithmName(getRequiredMember(params, "hash"));
         final String javaHash = hash.replace("-", "");
         return Signature.getInstance(javaHash + "withECDSAinP1363Format");
     }
@@ -636,50 +619,49 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @return a Promise that fulfills with a CryptoKey or CryptoKeyPair
      */
     @JsxFunction
-    public NativePromise generateKey(final Scriptable keyGenParams, final boolean isExtractable,
-            final Scriptable keyUsages) {
+    public NativePromise generateKey(final Object keyGenParams, final boolean isExtractable,
+            final Object keyUsages) {
         final Object result;
         try {
+            final List<String> requestedUsages = toKeyUsages(keyUsages);
             final String algorithm = resolveAlgorithmName(keyGenParams);
             ensureAlgorithmIsSupported("generateKey", algorithm);
 
-            final VarScope scope = keyGenParams.getParentScope();
+            final Scriptable params = toAlgorithmParams(keyGenParams, algorithm);
 
             switch (algorithm) {
                 case "RSASSA-PKCS1-v1_5":
                 case "RSA-PSS":
                 case "RSA-OAEP": {
-                    final RsaHashedKeyAlgorithm rsaParams = RsaHashedKeyAlgorithm.from(keyGenParams);
-                    final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
+                    final RsaHashedKeyAlgorithm rsaParams = RsaHashedKeyAlgorithm.from(params);
+                    final List<String> usages = resolveKeyUsages(algorithm, requestedUsages);
 
                     final KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
                     keyPairGen.initialize(new RSAKeyGenParameterSpec(
                             rsaParams.getModulusLength(), rsaParams.getPublicExponentAsBigInteger()));
                     final KeyPair keyPair = keyPairGen.generateKeyPair();
 
-                    final Scriptable algoObj = rsaParams.toScriptableObject(scope);
-                    result = createKeyPair(keyPair, algoObj, isExtractable, usages, scope);
+                    result = createKeyPair(keyPair, rsaParams, isExtractable, usages);
                     break;
                 }
                 case "ECDSA":
                 case "ECDH": {
-                    final EcKeyAlgorithm ecParams = EcKeyAlgorithm.from(keyGenParams);
-                    final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
+                    final EcKeyAlgorithm ecParams = EcKeyAlgorithm.from(params);
+                    final List<String> usages = resolveKeyUsages(algorithm, requestedUsages);
 
                     final KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("EC");
                     keyPairGen.initialize(new ECGenParameterSpec(ecParams.getJavaCurveName()));
                     final KeyPair keyPair = keyPairGen.generateKeyPair();
 
-                    final Scriptable algoObj = ecParams.toScriptableObject(scope);
-                    result = createKeyPair(keyPair, algoObj, isExtractable, usages, scope);
+                    result = createKeyPair(keyPair, ecParams, isExtractable, usages);
                     break;
                 }
                 case "AES-CBC":
                 case "AES-CTR":
                 case "AES-GCM":
                 case "AES-KW": {
-                    final AesKeyAlgorithm aesParams = AesKeyAlgorithm.from(keyGenParams);
-                    final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
+                    final AesKeyAlgorithm aesParams = AesKeyAlgorithm.from(params);
+                    final List<String> usages = resolveKeyUsages(algorithm, requestedUsages);
                     if (usages.isEmpty()) {
                         throw new IllegalArgumentException("An invalid or illegal string was specified");
                     }
@@ -691,13 +673,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     keyGen.init(aesParams.getLength());
                     final SecretKey secretKey = keyGen.generateKey();
 
-                    final Scriptable algoObj = aesParams.toScriptableObject(scope);
-                    result = CryptoKey.create(getParentScope(), secretKey, isExtractable, algoObj, usages);
+                    result = CryptoKey.create(getParentScope(), secretKey, isExtractable, aesParams, usages);
                     break;
                 }
                 case "HMAC": {
-                    final HmacKeyAlgorithm hmacParams = HmacKeyAlgorithm.from(keyGenParams);
-                    final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
+                    final HmacKeyAlgorithm hmacParams = HmacKeyAlgorithm.from(params);
+                    final List<String> usages = resolveKeyUsages(algorithm, requestedUsages);
                     if (usages.isEmpty()) {
                         throw new IllegalArgumentException("An invalid or illegal string was specified");
                     }
@@ -709,8 +690,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     keyGen.init(hmacParams.getLength());
                     final SecretKey secretKey = keyGen.generateKey();
 
-                    final Scriptable algoObj = hmacParams.toScriptableObject(scope);
-                    result = CryptoKey.create(getParentScope(), secretKey, isExtractable, algoObj, usages);
+                    result = CryptoKey.create(getParentScope(), secretKey, isExtractable, hmacParams, usages);
                     break;
                 }
                 default:
@@ -734,7 +714,6 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             return setupRejectedPromise(() -> createDOMException("The operation failed: " + e.getMessage(),
                     DOMException.OPERATION_ERR));
         }
-
         return setupPromise(() -> result);
     }
 
@@ -744,8 +723,8 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * Usages are split: public gets {encrypt,verify,wrapKey},
      * private gets {decrypt,sign,unwrapKey,deriveBits,deriveKey}.
      */
-    private Scriptable createKeyPair(final KeyPair keyPair, final Scriptable algoObj,
-            final boolean isExtractable, final List<String> allUsages, final VarScope scope) {
+    private Scriptable createKeyPair(final KeyPair keyPair, final KeyAlgorithm algorithm,
+            final boolean isExtractable, final List<String> allUsages) {
         final Set<String> publicUsageSet = Set.of("encrypt", "verify", "wrapKey");
         final Set<String> privateUsageSet = Set.of("decrypt", "sign", "unwrapKey", "deriveBits", "deriveKey");
 
@@ -767,11 +746,11 @@ public class SubtleCrypto extends HtmlUnitScriptable {
 
         // public key is always extractable
         final CryptoKey publicKey = CryptoKey.create(
-                getParentScope(), keyPair.getPublic(), true, algoObj, publicUsages);
+                getParentScope(), keyPair.getPublic(), true, algorithm, publicUsages);
         final CryptoKey privateKey = CryptoKey.create(
-                getParentScope(), keyPair.getPrivate(), isExtractable, algoObj, privateUsages);
+                getParentScope(), keyPair.getPrivate(), isExtractable, algorithm, privateUsages);
 
-        final Scriptable keyPairObj = JavaScriptEngine.newObject(scope);
+        final Scriptable keyPairObj = JavaScriptEngine.newObject(getParentScope());
         ScriptableObject.putProperty(keyPairObj, "publicKey", publicKey);
         ScriptableObject.putProperty(keyPairObj, "privateKey", privateKey);
         return keyPairObj;
@@ -809,27 +788,25 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      */
     @JsxFunction
     public NativePromise importKey(final String format, final Scriptable keyData,
-            final Object keyImportParams, final boolean isExtractable, final Scriptable keyUsages) {
+            final Object keyImportParams, final boolean isExtractable, final Object keyUsages) {
 
         final CryptoKey key;
         try {
+            ensureKeyFormat(format);
+            final List<String> requestedUsages = toKeyUsages(keyUsages);
             final String algorithm = resolveAlgorithmName(keyImportParams);
             ensureAlgorithmIsSupported("importKey", algorithm);
 
-            switch (format) {
-                case "raw":
-                    key = importRawKey(algorithm, keyData, keyImportParams, isExtractable, keyUsages);
-                    break;
-                case "pkcs8":
-                case "spki":
-                case "jwk":
-                    return notImplemented();
-                default:
-                    throw new IllegalArgumentException("An invalid or illegal string was specified");
+            if (!"raw".equals(format)) {
+                return notImplemented();
             }
+            key = importRawKey(algorithm, keyData, keyImportParams, isExtractable, requestedUsages);
         }
         catch (final EcmaError e) {
             return setupRejectedPromise(() -> JavaScriptEngine.toErrorObject(e, getParentScope()));
+        }
+        catch (final DataException e) {
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.DATA_ERR));
         }
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
@@ -842,7 +819,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     private CryptoKey importRawKey(final String algorithm, final Scriptable keyData,
-            final Object keyImportParams, final boolean isExtractable, final Scriptable keyUsages) {
+            final Object keyImportParams, final boolean isExtractable, final List<String> requestedUsages) {
         // a plain string is only valid for algorithms without import parameters
         if ("HMAC".equals(algorithm) && !(keyImportParams instanceof Scriptable)) {
             throw JavaScriptEngine.typeError("HmacImportParams: hash: Missing or not an AlgorithmIdentifier");
@@ -853,38 +830,39 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         byteBuffer.get(rawBytes);
         final int bitLength = rawBytes.length * 8;
         if (bitLength == 0) {
-            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
+            throw new DataException("The key data must not be empty");
         }
 
-        final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
-        if (usages.isEmpty()) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
-        }
+        final List<String> usages = resolveKeyUsages(algorithm, requestedUsages);
 
+        final KeyAlgorithm keyAlgorithm;
+        final SecretKey internalKey;
         if ("HMAC".equals(algorithm)) {
             final HmacKeyAlgorithm params = HmacKeyAlgorithm.from((Scriptable) keyImportParams, bitLength);
             final int length = params.getLength();
             if (length > bitLength || length <= bitLength - 8) {
-                throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
+                throw new DataException("The length " + length + " does not match the key data");
             }
 
-            final Scriptable scriptableAlgorithm = params.toScriptableObject(getParentScope());
-            final SecretKey internalKey = new SecretKeySpec(rawBytes, params.getJavaName());
-            return CryptoKey.create(getParentScope(), internalKey, isExtractable, scriptableAlgorithm, usages);
+            keyAlgorithm = params;
+            internalKey = new SecretKeySpec(rawBytes, params.getJavaName());
         }
-
-        if (AesKeyAlgorithm.isSupported(algorithm)) {
+        else if (AesKeyAlgorithm.isSupported(algorithm)) {
             if (!AesKeyAlgorithm.SUPPORTED_LENGTHS.contains(bitLength)) {
-                throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
+                throw new DataException("The AES key data must be 128, 192 or 256 bits long");
             }
-
-            final AesKeyAlgorithm aesAlgo = new AesKeyAlgorithm(algorithm, bitLength);
-            final Scriptable scriptableAlgorithm = aesAlgo.toScriptableObject(getParentScope());
-            final SecretKey internalKey = new SecretKeySpec(rawBytes, "AES");
-            return CryptoKey.create(getParentScope(), internalKey, isExtractable, scriptableAlgorithm, usages);
+            keyAlgorithm = new AesKeyAlgorithm(algorithm, bitLength);
+            internalKey = new SecretKeySpec(rawBytes, "AES");
+        }
+        else {
+            throw new UnsupportedOperationException("importKey raw " + algorithm);
         }
 
-        throw new UnsupportedOperationException("importKey raw " + algorithm);
+        // secret keys need a usage; this is checked after the key data
+        if (usages.isEmpty()) {
+            throw new IllegalArgumentException("An invalid or illegal string was specified");
+        }
+        return CryptoKey.create(getParentScope(), internalKey, isExtractable, keyAlgorithm, usages);
     }
 
     /**
@@ -896,8 +874,11 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      */
     @JsxFunction
     public NativePromise exportKey(final String format, final Object key) {
+        if (!KEY_FORMATS.contains(format)) {
+            return rejectWithTypeError("'" + format + "' is not a valid key format");
+        }
         if (!(key instanceof CryptoKey cryptoKey)) {
-            return rejectNotACryptoKey("verify");
+            return rejectNotACryptoKey("exportKey");
         }
 
         final byte[] result;
@@ -908,22 +889,14 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                         DOMException.INVALID_ACCESS_ERR));
             }
 
-            switch (format) {
-                case "raw": {
-                    if (!(cryptoKey.getInternalKey() instanceof SecretKey secretKey)) {
-                        throw new IllegalArgumentException(
-                                "Data provided to an operation does not meet requirements");
-                    }
-                    result = secretKey.getEncoded();
-                    break;
-                }
-                case "pkcs8":
-                case "spki":
-                case "jwk":
-                    return notImplemented();
-                default:
-                    throw new IllegalArgumentException("An invalid or illegal string was specified");
+            if (!"raw".equals(format)) {
+                return notImplemented();
             }
+            if (!(cryptoKey.getInternalKey() instanceof SecretKey secretKey)) {
+                throw new IllegalArgumentException(
+                        "Data provided to an operation does not meet requirements");
+            }
+            result = secretKey.getEncoded();
         }
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
@@ -962,6 +935,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @param algorithm the algorithm name (e.g. "SHA-256", "HMAC")
      * @throws UnsupportedOperationException if the operation does not support the algorithm
      */
+    private static void ensureKeyFormat(final String format) {
+        if (!KEY_FORMATS.contains(format)) {
+            throw JavaScriptEngine.typeError("'" + format + "' is not a valid key format");
+        }
+    }
+
     private static void ensureAlgorithmIsSupported(final String operation, final String algorithm) {
         final Set<String> supportedAlgorithms = OPERATION_TO_SUPPORTED_ALGORITHMS.get(operation);
         if (supportedAlgorithms == null || !supportedAlgorithms.contains(algorithm)) {
@@ -976,7 +955,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @throws InvalidAccessException if the algorithm names don't match
      */
     private static void ensureKeyAlgorithmMatches(final String algorithmName, final CryptoKey key) {
-        final String keyAlgoName = resolveAlgorithmName(key.getAlgorithm());
+        final String keyAlgoName = key.getKeyAlgorithm().getName();
         if (!algorithmName.equals(keyAlgoName)) {
             throw new InvalidAccessException(
                     "A parameter or an operation is not supported by the underlying object");
@@ -1002,21 +981,16 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * spelling (e.g. "aes-gcm" is resolved to "AES-GCM").
      * @see <a href="https://w3c.github.io/webcrypto/#dfn-AlgorithmIdentifier">
      *     AlgorithmIdentifier</a>
+     * Like WebIDL does, values that are not an object are converted to a string.
      * @param algorithm the algorithm identifier (String or Scriptable with name property)
      * @return the resolved algorithm name
-     * @throws IllegalArgumentException if the identifier cannot be resolved
+     * @throws EcmaError (TypeError) if the algorithm object has no name
      */
     static String resolveAlgorithmName(final Object algorithm) {
-        if (algorithm instanceof String str) {
-            return toRegisteredName(str);
-        }
         if (algorithm instanceof Scriptable obj) {
-            final Object name = ScriptableObject.getProperty(obj, "name");
-            if (name instanceof String nameStr) {
-                return toRegisteredName(nameStr);
-            }
+            return toRegisteredName(JavaScriptEngine.toString(getRequiredMember(obj, "name")));
         }
-        throw new IllegalArgumentException("An invalid or illegal string was specified");
+        return toRegisteredName(JavaScriptEngine.toString(algorithm));
     }
 
     private static String toRegisteredName(final String name) {
@@ -1037,16 +1011,9 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * Converts ArrayBuffer or ArrayBufferView to a ByteBuffer.
      * @param data the buffer source object
      * @return the ByteBuffer wrapping the data
-     * @throws IllegalArgumentException if data is not a Scriptable or is NOT_FOUND
-     * @throws EcmaError if data is not an ArrayBuffer or ArrayBufferView
+     * @throws EcmaError (TypeError) if data is not an ArrayBuffer or ArrayBufferView
      */
     static ByteBuffer asByteBuffer(final Object data) {
-        if (!(data instanceof Scriptable)) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
-        }
-        if (data == Scriptable.NOT_FOUND) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
-        }
         if (data instanceof NativeArrayBuffer nativeBuffer) {
             return nativeBuffer.getByteBuffer();
         }
@@ -1064,18 +1031,59 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     /**
-     * Reads a property from a JS object and converts it to a byte array.
-     * @param obj the JS object containing the property
-     * @param property the property name (e.g. "iv", "counter", "label")
-     * @return the byte array, or {@code null} if the property is absent or not convertible
+     * Returns the algorithm parameters; an algorithm that requires parameters
+     * can't be given as a plain name.
+     * @param algorithm the algorithm identifier
+     * @param algorithmName the resolved algorithm name
+     * @return the algorithm parameters
+     * @throws EcmaError (TypeError) if the algorithm is not an object
      */
-    private static byte[] extractBuffer(final Scriptable obj, final String property) {
-        final Object prop = ScriptableObject.getProperty(obj, property);
-        if (prop instanceof Scriptable) {
-            final ByteBuffer buf = asByteBuffer(prop);
-            return toByteArray(buf);
+    static Scriptable toAlgorithmParams(final Object algorithm, final String algorithmName) {
+        if (algorithm instanceof Scriptable params) {
+            return params;
         }
-        return null;
+        throw JavaScriptEngine.typeError(algorithmName + ": the algorithm parameters are missing");
+    }
+
+    /**
+     * Returns a required member of an algorithm dictionary.
+     * @param dictionary the dictionary
+     * @param member the member name
+     * @return the value
+     * @throws EcmaError (TypeError) if the member is missing (like WebIDL does)
+     */
+    static Object getRequiredMember(final Scriptable dictionary, final String member) {
+        final Object value = ScriptableObject.getProperty(dictionary, member);
+        if (value == Scriptable.NOT_FOUND || JavaScriptEngine.isUndefined(value)) {
+            throw JavaScriptEngine.typeError("The required member '" + member + "' is missing");
+        }
+        return value;
+    }
+
+    /**
+     * Returns a required numeric member of an algorithm dictionary.
+     * @param dictionary the dictionary
+     * @param member the member name
+     * @return the value
+     * @throws EcmaError (TypeError) if the member is missing or not a finite number
+     */
+    static double getRequiredNumber(final Scriptable dictionary, final String member) {
+        final double value = JavaScriptEngine.toNumber(getRequiredMember(dictionary, member));
+        if (Double.isNaN(value) || Double.isInfinite(value)) {
+            throw JavaScriptEngine.typeError("The member '" + member + "' is not a finite number");
+        }
+        return value;
+    }
+
+    /**
+     * Returns a required BufferSource member of an algorithm dictionary as byte array.
+     * @param dictionary the dictionary
+     * @param member the member name
+     * @return the bytes
+     * @throws EcmaError (TypeError) if the member is missing or not a BufferSource
+     */
+    static byte[] getRequiredBuffer(final Scriptable dictionary, final String member) {
+        return toByteArray(asByteBuffer(getRequiredMember(dictionary, member)));
     }
 
     /**
@@ -1092,39 +1100,46 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     /**
-     * Resolves and validates key usages from the JS array against the algorithm's supported operations.
-     * @param algorithm the algorithm name
-     * @param keyUsages the JS usages array
-     * @return the validated, ordered list of usages
-     * @throws IllegalArgumentException if usages array is invalid, contains unrecognized values,
-     *                                  or contains usages unsupported by the algorithm
+     * Converts the keyUsages argument like WebIDL converts a {@code sequence<KeyUsage>}.
+     * @param keyUsages the JS usages (any iterable)
+     * @return the usages
+     * @throws EcmaError (TypeError) if keyUsages is not iterable or contains an unknown usage
      */
-    static List<String> resolveKeyUsages(final String algorithm, final Scriptable keyUsages) {
-        if (!JavaScriptEngine.isArrayLike(keyUsages)) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
+    private List<String> toKeyUsages(final Object keyUsages) {
+        final List<String> usages = new ArrayList<>();
+        final boolean isSequence = keyUsages instanceof Scriptable scriptable
+                && JavaScriptEngine.iterate(Context.getCurrentContext(), getParentScope(), scriptable, value -> {
+                    final String usage = JavaScriptEngine.toString(value);
+                    if (!RECOGNIZED_KEY_USAGES.contains(usage)) {
+                        throw JavaScriptEngine.typeError("'" + usage + "' is not a valid key usage");
+                    }
+                    usages.add(usage);
+                });
+        if (!isSequence) {
+            throw JavaScriptEngine.typeError("The key usages are not a sequence");
         }
+        return usages;
+    }
 
-        final Set<String> supportedKeyUsages = new HashSet<>();
-        JavaScriptEngine.iterateArrayLike(null, keyUsages, usage -> {
-            if (!(usage instanceof String usageStr)) {
-                throw new IllegalArgumentException("An invalid or illegal string was specified");
-            }
-            if (!RECOGNIZED_KEY_USAGES.contains(usageStr)) {
-                throw new IllegalArgumentException("An invalid or illegal string was specified");
-            }
-
-            final Set<String> supportedAlgorithms = OPERATION_TO_SUPPORTED_ALGORITHMS.get(usageStr);
+    /**
+     * Validates the key usages against the algorithm's supported operations.
+     * @param algorithm the algorithm name
+     * @param keyUsages the usages (see {@link #toKeyUsages(Object)})
+     * @return the usages without duplicates, in canonical order
+     * @throws IllegalArgumentException if a usage is not supported by the algorithm
+     */
+    static List<String> resolveKeyUsages(final String algorithm, final List<String> keyUsages) {
+        for (final String usage : keyUsages) {
+            final Set<String> supportedAlgorithms = OPERATION_TO_SUPPORTED_ALGORITHMS.get(usage);
             if (supportedAlgorithms == null || !supportedAlgorithms.contains(algorithm)) {
                 throw new IllegalArgumentException("An invalid or illegal string was specified");
             }
-
-            supportedKeyUsages.add(usageStr);
-        });
+        }
 
         // maintain canonical ordering per RECOGNIZED_KEY_USAGES
         final List<String> sortedKeyUsages = new ArrayList<>();
         for (final String keyUsage : RECOGNIZED_KEY_USAGES) {
-            if (supportedKeyUsages.contains(keyUsage)) {
+            if (keyUsages.contains(keyUsage)) {
                 sortedKeyUsages.add(keyUsage);
             }
         }

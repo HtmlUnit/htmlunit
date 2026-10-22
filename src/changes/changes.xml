@@ -8,6 +8,19 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
+           <action type="fix" dev="rbri">
+                SubtleCrypto: importKey() rejects invalid key data (empty data, AES key data that is not 128, 192
+                or 256 bits long, HMAC length not matching the key data) with a DataError.
+            </action>
+            <action type="fix" dev="rbri">
+                SubtleCrypto: invalid arguments are rejected with a TypeError (missing required
+                algorithm members, algorithm objects without name, unknown key usages or formats, data that is not
+                a BufferSource). Key usages can be any iterable (e.g. a Set); RSA-OAEP accepts the algorithm as string.
+            </action>
+            <action type="fix" dev="rbri">
+                CryptoKey: the algorithm and usages properties return the same object on every access, every key has
+                its own objects, and changing these objects no longer changes the behavior of the key.
+            </action>
             <action type="fix" dev="rbri">
                 SubtleCrypto: invalid AES parameters (iv, counter, counter length, tag length), unsupported key lengths
                 for generateKey() and failing operations (e.g. RSA-OAEP data too long, RSA-PSS salt too long, invalid RSA

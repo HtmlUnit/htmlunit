@@ -47,8 +47,12 @@ public class CryptoKey extends HtmlUnitScriptable {
     private Key internalKey_;
     private String type_;
     private boolean isExtractable_;
-    private Scriptable algorithm_;
+    private KeyAlgorithm algorithm_;
     private Set<String> usages_;
+
+    // the JavaScript objects returned by the algorithm and usages properties, created on first access
+    private Scriptable algorithmObject_;
+    private Scriptable usagesObject_;
 
     /**
      * JavaScript constructor.
@@ -64,12 +68,12 @@ public class CryptoKey extends HtmlUnitScriptable {
      * @param scope the JS scope
      * @param internalKey the Java key (SecretKey, PublicKey, or PrivateKey)
      * @param isExtractable whether the key can be exported
-     * @param algorithm the JS algorithm descriptor object
+     * @param algorithm the key algorithm
      * @param usages the permitted key usages
      * @return the new CryptoKey
      */
     static CryptoKey create(final VarScope scope, final Key internalKey, final boolean isExtractable,
-            final Scriptable algorithm, final Collection<String> usages) {
+            final KeyAlgorithm algorithm, final Collection<String> usages) {
         if (internalKey == null) {
             throw new NullPointerException("The provided key can't be null");
         }
@@ -126,21 +130,36 @@ public class CryptoKey extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the algorithm descriptor object.
+     * Returns the algorithm descriptor object. The object is created once for every key; changing it
+     * does not change the key.
      * @return the algorithm descriptor object
      */
     @JsxGetter
     public Scriptable getAlgorithm() {
+        if (algorithmObject_ == null) {
+            algorithmObject_ = algorithm_.toScriptableObject(getParentScope());
+        }
+        return algorithmObject_;
+    }
+
+    /**
+     * Returns the key algorithm for internal use.
+     * @return the key algorithm ({@code [[algorithm]]} internal slot)
+     */
+    KeyAlgorithm getKeyAlgorithm() {
         return algorithm_;
     }
 
     /**
-     * Returns the permitted key usages.
+     * Returns the permitted key usages. The array is created once for every key.
      * @return the permitted key usages as a JS array
      */
     @JsxGetter
     public Scriptable getUsages() {
-        return JavaScriptEngine.newArray(getParentScope(), usages_.toArray());
+        if (usagesObject_ == null) {
+            usagesObject_ = JavaScriptEngine.newArray(getParentScope(), usages_.toArray());
+        }
+        return usagesObject_;
     }
 
     /**

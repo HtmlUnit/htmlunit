@@ -28,7 +28,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
  * @author Lai Quang Duong
  * @author Ronald Brill
  */
-final class AesKeyAlgorithm {
+final class AesKeyAlgorithm implements KeyAlgorithm {
 
     static final Set<String> SUPPORTED_NAMES = Set.of("AES-CBC", "AES-CTR", "AES-GCM", "AES-KW");
     static final Set<Integer> SUPPORTED_LENGTHS = Set.of(128, 192, 256);
@@ -53,19 +53,16 @@ final class AesKeyAlgorithm {
     static AesKeyAlgorithm from(final Scriptable keyGenParams) {
         final String name = SubtleCrypto.resolveAlgorithmName(keyGenParams);
 
-        final Object lengthProp = ScriptableObject.getProperty(keyGenParams, "length");
-        if (!(lengthProp instanceof Number numLength)) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
-        }
-
-        return new AesKeyAlgorithm(name, numLength.intValue());
+        final int length = (int) SubtleCrypto.getRequiredNumber(keyGenParams, "length");
+        return new AesKeyAlgorithm(name, length);
     }
 
     static boolean isSupported(final String name) {
         return SUPPORTED_NAMES.contains(name);
     }
 
-    String getName() {
+    @Override
+    public String getName() {
         return name_;
     }
 
@@ -80,7 +77,8 @@ final class AesKeyAlgorithm {
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object
      */
-    Scriptable toScriptableObject(final VarScope scope) {
+    @Override
+    public Scriptable toScriptableObject(final VarScope scope) {
         final Scriptable algorithm = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(algorithm, "name", getName());
         ScriptableObject.putProperty(algorithm, "length", getLength());

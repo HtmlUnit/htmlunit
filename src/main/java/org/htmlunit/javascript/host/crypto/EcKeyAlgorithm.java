@@ -29,7 +29,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
  * @author Lai Quang Duong
  * @author Ronald Brill
  */
-final class EcKeyAlgorithm {
+final class EcKeyAlgorithm implements KeyAlgorithm {
 
     static final Set<String> SUPPORTED_NAMES = Set.of("ECDSA", "ECDH");
 
@@ -63,11 +63,7 @@ final class EcKeyAlgorithm {
     static EcKeyAlgorithm from(final Scriptable keyGenParams) {
         final String name = SubtleCrypto.resolveAlgorithmName(keyGenParams);
 
-        final Object curveProp = ScriptableObject.getProperty(keyGenParams, "namedCurve");
-        if (!(curveProp instanceof String namedCurve)) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
-        }
-
+        final String namedCurve = JavaScriptEngine.toString(SubtleCrypto.getRequiredMember(keyGenParams, "namedCurve"));
         return new EcKeyAlgorithm(name, namedCurve);
     }
 
@@ -75,7 +71,8 @@ final class EcKeyAlgorithm {
         return SUPPORTED_NAMES.contains(name);
     }
 
-    String getName() {
+    @Override
+    public String getName() {
         return name_;
     }
 
@@ -99,7 +96,8 @@ final class EcKeyAlgorithm {
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object
      */
-    Scriptable toScriptableObject(final VarScope scope) {
+    @Override
+    public Scriptable toScriptableObject(final VarScope scope) {
         final Scriptable algorithm = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(algorithm, "name", getName());
         ScriptableObject.putProperty(algorithm, "namedCurve", getNamedCurve());

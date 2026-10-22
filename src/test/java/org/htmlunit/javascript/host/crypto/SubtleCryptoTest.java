@@ -63,10 +63,6 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("TypeError true")
-    @HtmlUnitNYI(CHROME = "TypeError false",
-            EDGE = "TypeError false",
-            FF = "TypeError false",
-            FF_ESR = "TypeError false")
     public void unsupportedCall() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1487,6 +1483,442 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "    run([\n"
             + "      function() { return subtle.generateKey(params, true, ['sign']); }\n"
             + "    ]);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * importKey() raw AES with key data that is not 128, 192 or 256 bits long. The key data is checked
+     * before the usages.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"DataError/DOMException", "DataError/DOMException",
+             "DataError/DOMException", "SyntaxError/DOMException"})
+    public void importKeyRawAesDataError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    function importAes(name, size, usages) {\n"
+            + "      return function() { return subtle.importKey('raw', new Uint8Array(size), name, true, usages); };\n"
+            + "    }\n"
+            + "    run([\n"
+            + "      importAes('AES-GCM', 20, ['encrypt']),\n"
+            + "      importAes('AES-CBC', 0, ['encrypt']),\n"
+            + "      importAes('AES-GCM', 20, []),\n"
+            + "      importAes('AES-GCM', 16, [])\n"
+            + "    ]);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * importKey() raw HMAC with empty key data or a length that does not fit the key data.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DataError/DOMException", "DataError/DOMException",
+                       "DataError/DOMException", "DataError/DOMException",
+                       "success"},
+            FF = {"DataError/DOMException", "success", "success", "success", "success"},
+            FF_ESR = {"DataError/DOMException", "success", "success", "success", "success"})
+    @HtmlUnitNYI(
+            FF = {"DataError/DOMException", "DataError/DOMException",
+                  "DataError/DOMException", "DataError/DOMException",
+                  "success"},
+            FF_ESR = {"DataError/DOMException", "DataError/DOMException",
+                      "DataError/DOMException", "DataError/DOMException",
+                      "success"})
+    public void importKeyRawHmacDataError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    function importHmac(size, length) {\n"
+            + "      var params = { name: 'HMAC', hash: 'SHA-256' };\n"
+            + "      if (length !== undefined) {\n"
+            + "        params.length = length;\n"
+            + "      }\n"
+            + "      var data = new Uint8Array(size);\n"
+            + "      return function() { return subtle.importKey('raw', data, params, true, ['sign']); };\n"
+            + "    }\n"
+            + "    run([\n"
+            + "      importHmac(0),\n"
+            + "      importHmac(32, 264),\n"
+            + "      importHmac(32, 248),\n"
+            + "      importHmac(32, 0),\n"
+            + "      importHmac(32, 256)\n"
+            + "    ]);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Algorithm parameters without a required member, or a plain name where parameters are required.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"TypeError", "TypeError",
+                       "TypeError", "TypeError",
+                       "TypeError", "TypeError",
+                       "TypeError", "TypeError",
+                       "success"},
+            FF = {"InvalidAccessError/DOMException", "InvalidAccessError/DOMException",
+                  "OperationError/DOMException", "SyntaxError/DOMException",
+                  "SyntaxError/DOMException", "SyntaxError/DOMException",
+                  "SyntaxError/DOMException", "SyntaxError/DOMException",
+                  "success"},
+            FF_ESR = {"InvalidAccessError/DOMException", "InvalidAccessError/DOMException",
+                      "OperationError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "success"})
+    @HtmlUnitNYI(
+            FF = {"TypeError", "TypeError", "TypeError", "TypeError",
+                  "TypeError", "TypeError", "TypeError", "TypeError",
+                  "success"},
+            FF_ESR = {"TypeError", "TypeError", "TypeError", "TypeError",
+                      "TypeError", "TypeError", "TypeError", "TypeError",
+                      "success"})
+    public void missingAlgorithmParamsTypeError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    var exponent = new Uint8Array([1, 0, 1]);\n"
+            + "    function importAes(name) {\n"
+            + "      return subtle.importKey('raw', data, name, false, ['encrypt', 'decrypt']);\n"
+            + "    }\n"
+            + "    function rsa(name) {\n"
+            + "      return { name: name, modulusLength: 2048, publicExponent: exponent, hash: 'SHA-256' };\n"
+            + "    }\n"
+            + "    Promise.all([\n"
+            + "      importAes('AES-CBC'), importAes('AES-GCM'), importAes('AES-CTR'),\n"
+            + "      subtle.generateKey(rsa('RSA-PSS'), false, ['sign', 'verify']),\n"
+            + "      subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign', 'verify']),\n"
+            + "      subtle.generateKey(rsa('RSA-OAEP'), false, ['encrypt', 'decrypt'])\n"
+            + "    ]).then(function(keys) {\n"
+            + "      run([\n"
+            + "        function() { return subtle.encrypt({ name: 'AES-CBC' }, keys[0], data); },\n"
+            + "        function() { return subtle.encrypt('AES-CBC', keys[0], data); },\n"
+            + "        function() { return subtle.encrypt({ name: 'AES-GCM' }, keys[1], data); },\n"
+            + "        function() { return subtle.encrypt({ name: 'AES-CTR', length: 64 }, keys[2], data); },\n"
+            + "        function() { return subtle.encrypt({ name: 'AES-CTR', counter: data }, keys[2], data); },\n"
+            + "        function() { return subtle.sign({ name: 'RSA-PSS' }, keys[3].privateKey, data); },\n"
+            + "        function() { return subtle.sign({ name: 'ECDSA' }, keys[4].privateKey, data); },\n"
+            + "        function() { return subtle.sign('ECDSA', keys[4].privateKey, data); },\n"
+            + "        // RSA-OAEP has no required parameters\n"
+            + "        function() { return subtle.encrypt('RSA-OAEP', keys[5].publicKey, data); }\n"
+            + "      ]);\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Key generation/import parameters without a required member.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"TypeError", "TypeError",
+                       "TypeError", "TypeError",
+                       "TypeError", "TypeError",
+                       "TypeError"},
+            FF = {"TypeError", "TypeError",
+                  "SyntaxError/DOMException", "TypeError",
+                  "TypeError", "TypeError",
+                  "SyntaxError/DOMException"},
+            FF_ESR = {"SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException"})
+    @HtmlUnitNYI(
+            FF = {"TypeError", "TypeError", "TypeError", "TypeError",
+                  "TypeError", "TypeError", "TypeError"},
+            FF_ESR = {"TypeError", "TypeError", "TypeError", "TypeError",
+                      "TypeError", "TypeError", "TypeError"})
+    public void missingKeyParamsTypeError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    var exponent = new Uint8Array([1, 0, 1]);\n"
+            + "    function generate(params) {\n"
+            + "      return function() { return subtle.generateKey(params, true, ['sign']); };\n"
+            + "    }\n"
+            + "    run([\n"
+            + "      function() { return subtle.generateKey({ name: 'AES-GCM' }, true, ['encrypt']); },\n"
+            + "      generate({ name: 'HMAC' }),\n"
+            + "      generate({ name: 'ECDSA' }),\n"
+            + "      generate({ name: 'RSA-PSS', publicExponent: exponent, hash: 'SHA-256' }),\n"
+            + "      generate({ name: 'RSA-PSS', modulusLength: 2048, hash: 'SHA-256' }),\n"
+            + "      generate({ name: 'RSA-PSS', modulusLength: 2048, publicExponent: exponent }),\n"
+            + "      function() { return subtle.importKey('raw', data, { name: 'HMAC' }, true, ['sign']); }\n"
+            + "    ]);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * An algorithm object needs a name; other values are converted to a string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "NotSupportedError/DOMException",
+             "NotSupportedError/DOMException", "NotSupportedError/DOMException",
+             "NotSupportedError/DOMException"})
+    public void algorithmIdentifierConversion() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    run([\n"
+            + "      function() { return subtle.digest({}, data); },\n"
+            + "      function() { return subtle.digest(undefined, data); },\n"
+            + "      function() { return subtle.digest(null, data); },\n"
+            + "      function() { return subtle.digest(42, data); },\n"
+            + "      function() { return subtle.digest({ name: 42 }, data); }\n"
+            + "    ]);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Key usages have to be a sequence of known usages; the format has to be a known format.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"TypeError", "TypeError", "TypeError", "success",
+                       "SyntaxError/DOMException", "TypeError", "TypeError"},
+            FF = {"SyntaxError/DOMException", "TypeError", "TypeError", "success",
+                  "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException"},
+            FF_ESR = {"SyntaxError/DOMException", "TypeError", "TypeError", "success",
+                      "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException"})
+    @HtmlUnitNYI(
+            FF = {"TypeError", "TypeError", "TypeError", "success",
+                  "SyntaxError/DOMException", "TypeError", "TypeError"},
+            FF_ESR = {"TypeError", "TypeError", "TypeError", "success",
+                      "SyntaxError/DOMException", "TypeError", "TypeError"})
+    public void keyUsagesAndFormatConversion() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var params = { name: 'AES-GCM', length: 128 };\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    run([\n"
+            + "      function() { return subtle.generateKey(params, true, ['foo']); },\n"
+            + "      function() { return subtle.generateKey(params, true); },\n"
+            + "      function() { return subtle.generateKey(params, true, 'encrypt'); },\n"
+            + "      function() { return subtle.generateKey(params, true, new Set(['encrypt'])); },\n"
+            + "      function() { return subtle.generateKey(params, true, ['sign']); },\n"
+            + "      function() { return subtle.importKey('foo', data, 'AES-GCM', true, ['encrypt']); },\n"
+            + "      function() {\n"
+            + "        return subtle.generateKey(params, true, ['encrypt']).then(function(key) {\n"
+            + "          return subtle.exportKey('foo', key);\n"
+            + "        });\n"
+            + "      }\n"
+            + "    ]);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Arguments and members that have to be a BufferSource.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"TypeError", "TypeError", "TypeError", "TypeError", "TypeError", "TypeError"},
+            FF= {"TypeError", "TypeError", "TypeError", "InvalidAccessError/DOMException", "TypeError", "TypeError"},
+            FF_ESR= {"TypeError", "TypeError", "TypeError", "InvalidAccessError/DOMException", "TypeError", "TypeError"})
+    @HtmlUnitNYI(FF = {"TypeError", "TypeError", "TypeError", "TypeError", "TypeError", "TypeError"},
+            FF_ESR = {"TypeError", "TypeError", "TypeError", "TypeError", "TypeError", "TypeError"})
+    public void bufferArgumentsTypeError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function run(calls) {\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    calls.forEach(function(call) {\n"
+            + "      chain = chain.then(call).then(function() { log('success'); }, logEx);\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    function importAes(name) {\n"
+            + "      return subtle.importKey('raw', data, name, false, ['encrypt', 'decrypt']);\n"
+            + "    }\n"
+            + "    var gcm = { name: 'AES-GCM', iv: new Uint8Array(12) };\n"
+            + "    var cbc = { name: 'AES-CBC', iv: '0123456789abcdef' };\n"
+            + "    Promise.all([\n"
+            + "      importAes('AES-GCM'), importAes('AES-CBC'),\n"
+            + "      subtle.generateKey({ name: 'HMAC', hash: 'SHA-256' }, false, ['sign'])\n"
+            + "    ]).then(function(keys) {\n"
+            + "      run([\n"
+            + "        function() { return subtle.digest('SHA-256', 'text'); },\n"
+            + "        function() { return subtle.digest('SHA-256'); },\n"
+            + "        function() { return subtle.encrypt(gcm, keys[0], 'text'); },\n"
+            + "        function() { return subtle.encrypt(cbc, keys[1], data); },\n"
+            + "        function() { return subtle.sign('HMAC', keys[2], 42); },\n"
+            + "        function() { return subtle.importKey('raw', 'text', 'AES-GCM', true, ['encrypt']); }\n"
+            + "      ]);\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * The algorithm and usages objects are cached per key.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "false", "false", "P-256", "P-256"},
+            FF= {"true", "true", "false", "P-256", "P-256"},
+            FF_ESR = {"true", "true", "false", "P-256", "P-256"})
+    @HtmlUnitNYI(CHROME = {"true", "true", "false", "P-256", "P-256"},
+            EDGE = {"true", "true", "false", "P-256", "P-256"})
+    public void keyAlgorithmAndUsagesCachedPerKey() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    subtle.generateKey({ name: 'AES-GCM', length: 128 }, true, ['encrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        log(key.algorithm === key.algorithm);\n"
+            + "        log(key.usages === key.usages);\n"
+            + "        return subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify']);\n"
+            + "      })\n"
+            + "      .then(function(pair) {\n"
+            + "        log(pair.publicKey.algorithm === pair.privateKey.algorithm);\n"
+            + "        log(pair.publicKey.algorithm.namedCurve);\n"
+            + "        log(pair.privateKey.algorithm.namedCurve);\n"
+            + "      })\n"
+            + "      .catch(logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Changing the algorithm object of a key does not change the key.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "InvalidAccessError/DOMException", "32"})
+    public void keyAlgorithmModificationIgnored() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array(16);\n"
+            + "    var rsa = { name: 'RSASSA-PKCS1-v1_5', modulusLength: 2048,\n"
+            + "                publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' };\n"
+            + "    subtle.generateKey(rsa, false, ['sign', 'verify'])\n"
+            + "      .then(function(pair) {\n"
+            + "        pair.privateKey.algorithm.name = 'RSA-PSS';\n"
+            + "        pair.privateKey.algorithm.hash = { name: 'SHA-1' };\n"
+            + "        return subtle.sign('RSASSA-PKCS1-v1_5', pair.privateKey, data)\n"
+            + "          .then(function(signature) {\n"
+            + "            return subtle.verify('RSASSA-PKCS1-v1_5', pair.publicKey, signature, data);\n"
+            + "          })\n"
+            + "          .then(log, logEx)\n"
+            + "          .then(function() {\n"
+            + "            return subtle.sign({ name: 'RSA-PSS', saltLength: 32 }, pair.privateKey, data);\n"
+            + "          })\n"
+            + "          .then(function() { log('success'); }, logEx);\n"
+            + "      })\n"
+            + "      .then(function() {\n"
+            + "        return subtle.generateKey({ name: 'AES-GCM', length: 128 }, false, ['encrypt']);\n"
+            + "      })\n"
+            + "      .then(function(key) {\n"
+            + "        key.algorithm.name = 'AES-CBC';\n"
+            + "        return subtle.encrypt({ name: 'AES-GCM', iv: new Uint8Array(12) }, key, data);\n"
+            + "      })\n"
+            + "      .then(function(ciphertext) { log(ciphertext.byteLength); }, logEx);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

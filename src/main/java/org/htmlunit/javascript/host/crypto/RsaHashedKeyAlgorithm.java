@@ -33,7 +33,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
  * @author Lai Quang Duong
  * @author Ronald Brill
  */
-final class RsaHashedKeyAlgorithm {
+final class RsaHashedKeyAlgorithm implements KeyAlgorithm {
 
     static final Set<String> SUPPORTED_NAMES = Set.of("RSASSA-PKCS1-v1_5", "RSA-PSS", "RSA-OAEP");
     static final Set<String> SUPPORTED_HASH_ALGORITHMS = Set.of("SHA-1", "SHA-256", "SHA-384", "SHA-512");
@@ -71,21 +71,16 @@ final class RsaHashedKeyAlgorithm {
     static RsaHashedKeyAlgorithm from(final Scriptable keyGenParams) {
         final String name = SubtleCrypto.resolveAlgorithmName(keyGenParams);
 
-        final Object modulusLengthProp = ScriptableObject.getProperty(keyGenParams, "modulusLength");
-        if (!(modulusLengthProp instanceof Number numModulusLength)) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
-        }
+        final int modulusLength = (int) SubtleCrypto.getRequiredNumber(keyGenParams, "modulusLength");
 
-        final Object publicExponentProp = ScriptableObject.getProperty(keyGenParams, "publicExponent");
-        final byte[] publicExponent = extractBytes(publicExponentProp);
+        final byte[] publicExponent = extractBytes(SubtleCrypto.getRequiredMember(keyGenParams, "publicExponent"));
         if (publicExponent == null) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
+            throw JavaScriptEngine.typeError("The member 'publicExponent' is not a Uint8Array");
         }
 
-        final Object hashProp = ScriptableObject.getProperty(keyGenParams, "hash");
-        final String hash = SubtleCrypto.resolveAlgorithmName(hashProp);
+        final String hash = SubtleCrypto.resolveAlgorithmName(SubtleCrypto.getRequiredMember(keyGenParams, "hash"));
 
-        return new RsaHashedKeyAlgorithm(name, numModulusLength.intValue(), publicExponent, hash);
+        return new RsaHashedKeyAlgorithm(name, modulusLength, publicExponent, hash);
     }
 
     private static byte[] extractBytes(final Object value) {
@@ -112,7 +107,8 @@ final class RsaHashedKeyAlgorithm {
         return SUPPORTED_NAMES.contains(name);
     }
 
-    String getName() {
+    @Override
+    public String getName() {
         return name_;
     }
 
@@ -153,7 +149,8 @@ final class RsaHashedKeyAlgorithm {
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object
      */
-    Scriptable toScriptableObject(final VarScope scope) {
+    @Override
+    public Scriptable toScriptableObject(final VarScope scope) {
         final Scriptable hashObj = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(hashObj, "name", getHash());
 
