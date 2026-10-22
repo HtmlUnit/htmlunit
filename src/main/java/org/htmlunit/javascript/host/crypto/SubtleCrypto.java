@@ -141,6 +141,13 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
 
+    private NativePromise rejectNotACryptoKey(final String operation) {
+        return setupRejectedPromise(() -> JavaScriptEngine.toErrorObject(
+                JavaScriptEngine.typeError("Failed to execute '" + operation
+                        + "' on 'SubtleCrypto': parameter 2 is not of type 'CryptoKey'."),
+                getParentScope()));
+    }
+
     private NativePromise notImplemented() {
         return setupRejectedPromise(() ->
                 createDOMException("Operation is not supported", DOMException.NOT_SUPPORTED_ERR));
@@ -155,8 +162,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @return a Promise that fulfills with an ArrayBuffer containing the ciphertext
      */
     @JsxFunction
-    public NativePromise encrypt(final Object algorithm, final CryptoKey key, final Object data) {
-        return doCipher(algorithm, key, data, Cipher.ENCRYPT_MODE);
+    public NativePromise encrypt(final Object algorithm, final Object key, final Object data) {
+        if (!(key instanceof CryptoKey cryptoKey)) {
+            return rejectNotACryptoKey("encrypt");
+        }
+
+        return doCipher(algorithm, cryptoKey, data, Cipher.ENCRYPT_MODE);
     }
 
     /**
@@ -168,8 +179,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @return a Promise that fulfills with an ArrayBuffer containing the plaintext
      */
     @JsxFunction
-    public NativePromise decrypt(final Object algorithm, final CryptoKey key, final Object data) {
-        return doCipher(algorithm, key, data, Cipher.DECRYPT_MODE);
+    public NativePromise decrypt(final Object algorithm, final Object key, final Object data) {
+        if (!(key instanceof CryptoKey cryptoKey)) {
+            return rejectNotACryptoKey("decrypt");
+        }
+
+        return doCipher(algorithm, cryptoKey, data, Cipher.DECRYPT_MODE);
     }
 
     /**
@@ -338,8 +353,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @return a Promise that fulfills with an ArrayBuffer containing the signature
      */
     @JsxFunction
-    public NativePromise sign(final Object algorithm, final CryptoKey key, final Object data) {
-        return doSignOrVerify(algorithm, key, null, data, true);
+    public NativePromise sign(final Object algorithm, final Object key, final Object data) {
+        if (!(key instanceof CryptoKey cryptoKey)) {
+            return rejectNotACryptoKey("sign");
+        }
+
+        return doSignOrVerify(algorithm, cryptoKey, null, data, true);
     }
 
     /**
@@ -352,9 +371,13 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @return a Promise that fulfills with a boolean indicating whether the signature is valid
      */
     @JsxFunction
-    public NativePromise verify(final Object algorithm, final CryptoKey key,
+    public NativePromise verify(final Object algorithm, final Object key,
             final Object signature, final Object data) {
-        return doSignOrVerify(algorithm, key, signature, data, false);
+        if (!(key instanceof CryptoKey cryptoKey)) {
+            return rejectNotACryptoKey("verify");
+        }
+
+        return doSignOrVerify(algorithm, cryptoKey, signature, data, false);
     }
 
     /**
@@ -775,10 +798,14 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @return a Promise that fulfills with the key data
      */
     @JsxFunction
-    public NativePromise exportKey(final String format, final CryptoKey key) {
+    public NativePromise exportKey(final String format, final Object key) {
+        if (!(key instanceof CryptoKey cryptoKey)) {
+            return rejectNotACryptoKey("verify");
+        }
+
         final byte[] result;
         try {
-            if (!key.getExtractable()) {
+            if (!cryptoKey.getExtractable()) {
                 return setupRejectedPromise(() -> createDOMException(
                         "A parameter or an operation is not supported by the underlying object",
                         DOMException.INVALID_ACCESS_ERR));
@@ -786,7 +813,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
 
             switch (format) {
                 case "raw": {
-                    if (!(key.getInternalKey() instanceof SecretKey secretKey)) {
+                    if (!(cryptoKey.getInternalKey() instanceof SecretKey secretKey)) {
                         throw new IllegalArgumentException(
                                 "Data provided to an operation does not meet requirements");
                     }

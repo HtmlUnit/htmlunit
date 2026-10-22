@@ -9,6 +9,10 @@
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
             <action type="fix" dev="rbri">
+                SubtleCrypto: encrypt(), decrypt(), sign(), verify() and exportKey() reject the promise with a
+                TypeError if the key is not a CryptoKey.
+            </action>
+            <action type="fix" dev="rbri">
                 SubtleCrypto: verify() resolves to false for an RSA signature that does not have the length of
                 the modulus (e.g. a truncated signature).
             </action>

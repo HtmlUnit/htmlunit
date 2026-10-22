@@ -1108,4 +1108,54 @@ public class SubtleCryptoTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * Arguments that are not a CryptoKey reject the promise with a TypeError.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"encrypt TypeError TypeError TypeError TypeError",
+             "decrypt TypeError TypeError TypeError TypeError",
+             "sign TypeError TypeError TypeError TypeError",
+             "verify TypeError TypeError TypeError TypeError",
+             "exportKey TypeError TypeError TypeError TypeError"})
+    public void invalidKeyRejectsWithTypeError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array([1, 2, 3]);\n"
+            + "    var aes = { name: 'AES-GCM', iv: new Uint8Array(12) };\n"
+            + "    var calls = {\n"
+            + "      encrypt: function(key) { return subtle.encrypt(aes, key, data); },\n"
+            + "      decrypt: function(key) { return subtle.decrypt(aes, key, data); },\n"
+            + "      sign: function(key) { return subtle.sign('HMAC', key, data); },\n"
+            + "      verify: function(key) { return subtle.verify('HMAC', key, data, data); },\n"
+            + "      exportKey: function(key) { return subtle.exportKey('raw', key); }\n"
+            + "    };\n"
+            + "    var invalidKeys = [undefined, null, {}, 'key'];\n"
+
+            + "    var chain = Promise.resolve();\n"
+            + "    Object.keys(calls).forEach(function(name) {\n"
+            + "      chain = chain.then(function() {\n"
+            + "        return Promise.all(invalidKeys.map(function(key) {\n"
+            + "          try {\n"
+            + "            return calls[name](key).then(function() { return 'success'; },\n"
+            + "                                         function(e) { return e.name; });\n"
+            + "          } catch (e) {\n"
+            + "            return 'thrown ' + e.name;\n"
+            + "          }\n"
+            + "        }));\n"
+            + "      }).then(function(results) {\n"
+            + "        log(name + ' ' + results.join(' '));\n"
+            + "      });\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }
