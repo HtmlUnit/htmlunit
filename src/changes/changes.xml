@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
+            <action type="add" dev="Vladimir Babin" issue="#91">
+                MockWebConnection is now Serializable.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: More fixes for lexical scoping.
             </action>
@@ -14484,7 +14487,7 @@
             <action type="fix" dev="asashour" issue="470" due-to="Bruce Chapman">
                 HtmlPage.clone() doesn't share idMap_ with original (#1708397).
             </action>
-            <action type="add" dev="asashour" issue="91" system="features">
+            <action type="add" dev="asashour" issue="#91" system="features">
                 ClickableElement: Add dblClick() (#1385295).
             </action>
             <action type="add" dev="asashour" issue="364">

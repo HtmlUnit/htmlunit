@@ -17,6 +17,9 @@ package org.htmlunit;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -42,7 +45,7 @@ import org.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public class MockWebConnection implements WebConnection {
+public class MockWebConnection implements WebConnection, Serializable {
 
     private static final Log LOG = LogFactory.getLog(MockWebConnection.class);
 
@@ -56,13 +59,13 @@ public class MockWebConnection implements WebConnection {
     /**
      * Contains the raw data configured for a response.
      */
-    public static class RawResponseData {
+    public static class RawResponseData implements Serializable {
         private final List<NameValuePair> headers_;
         private final byte[] byteContent_;
         private final String stringContent_;
         private final int statusCode_;
         private final String statusMessage_;
-        private final Charset charset_;
+        private transient Charset charset_;
 
         RawResponseData(final byte[] byteContent, final int statusCode, final String statusMessage,
                 final String contentType, final List<NameValuePair> headers) {
@@ -161,6 +164,19 @@ public class MockWebConnection implements WebConnection {
          */
         public Charset getCharset() {
             return charset_;
+        }
+
+        private void writeObject(final ObjectOutputStream oos) throws IOException {
+            oos.defaultWriteObject();
+            oos.writeObject(charset_ == null ? null : charset_.name());
+        }
+
+        private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
+            ois.defaultReadObject();
+            final String charsetName = (String) ois.readObject();
+            if (charsetName != null) {
+                charset_ = Charset.forName(charsetName);
+            }
         }
     }
 

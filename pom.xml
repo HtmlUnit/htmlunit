@@ -1426,6 +1426,10 @@
         <contributor>
             <name>Ashutosh Panda</name>
         </contributor>
+        <contributor>
+            <name>Vladimir Babin</name>
+            <email>vovababin@gmail.com</email>
+        </contributor>
     </contributors>
 
     <dependencies>
