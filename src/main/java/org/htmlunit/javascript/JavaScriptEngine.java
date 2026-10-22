@@ -1252,6 +1252,19 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Returns the JavaScript error object a script sees when catching the given error
+     * (e.g. a TypeError for an error created by {@link #typeError(String)}).
+     * Use this to reject a promise with the error.
+     *
+     * @param error the error
+     * @param scope the scope to create the error object in
+     * @return the JavaScript error object
+     */
+    public static Scriptable toErrorObject(final EcmaError error, final VarScope scope) {
+        return ScriptRuntime.wrapException(error, scope, Context.getCurrentContext());
+    }
+
+    /**
      * Report a TypeError with the message "Illegal constructor.".
      *
      * @return EcmaError

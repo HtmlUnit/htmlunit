@@ -61,10 +61,7 @@ final class EcKeyAlgorithm {
      * @return the parsed EcKeyAlgorithm
      */
     static EcKeyAlgorithm from(final Scriptable keyGenParams) {
-        final Object nameProp = ScriptableObject.getProperty(keyGenParams, "name");
-        if (!(nameProp instanceof String name)) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
-        }
+        final String name = SubtleCrypto.resolveAlgorithmName(keyGenParams);
 
         final Object curveProp = ScriptableObject.getProperty(keyGenParams, "namedCurve");
         if (!(curveProp instanceof String namedCurve)) {

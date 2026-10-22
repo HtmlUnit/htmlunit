@@ -73,10 +73,7 @@ final class RsaHashedKeyAlgorithm {
      * @return the parsed RsaHashedKeyAlgorithm
      */
     static RsaHashedKeyAlgorithm from(final Scriptable keyGenParams) {
-        final Object nameProp = ScriptableObject.getProperty(keyGenParams, "name");
-        if (!(nameProp instanceof String name)) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
-        }
+        final String name = SubtleCrypto.resolveAlgorithmName(keyGenParams);
 
         final Object modulusLengthProp = ScriptableObject.getProperty(keyGenParams, "modulusLength");
         if (!(modulusLengthProp instanceof Number numModulusLength)) {

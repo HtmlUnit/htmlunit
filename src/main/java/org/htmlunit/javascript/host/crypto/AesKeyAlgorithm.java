@@ -55,10 +55,7 @@ final class AesKeyAlgorithm {
      * @return the parsed AesKeyAlgorithm
      */
     static AesKeyAlgorithm from(final Scriptable keyGenParams) {
-        final Object nameProp = ScriptableObject.getProperty(keyGenParams, "name");
-        if (!(nameProp instanceof String name)) {
-            throw new IllegalArgumentException("An invalid or illegal string was specified");
-        }
+        final String name = SubtleCrypto.resolveAlgorithmName(keyGenParams);
 
         final Object lengthProp = ScriptableObject.getProperty(keyGenParams, "length");
         if (!(lengthProp instanceof Number numLength)) {

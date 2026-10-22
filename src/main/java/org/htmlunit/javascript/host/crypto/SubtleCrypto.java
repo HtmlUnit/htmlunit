@@ -30,6 +30,7 @@ import java.security.spec.PSSParameterSpec;
 import java.security.spec.RSAKeyGenParameterSpec;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -93,6 +94,21 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             Map.entry("deriveBits", Set.of("ECDH", "HKDF", "PBKDF2")),
             Map.entry("deriveKey", Set.of("ECDH", "HKDF", "PBKDF2"))
     );
+
+    /**
+     * The registered algorithm names, keyed by their ASCII lowercase form.
+     * @see <a href="https://w3c.github.io/webcrypto/#algorithm-normalization-normalize-an-algorithm">
+     *     Normalize an algorithm</a>
+     */
+    private static final Map<String, String> REGISTERED_ALGORITHM_NAMES = new HashMap<>();
+
+    static {
+        for (final Set<String> names : OPERATION_TO_SUPPORTED_ALGORITHMS.values()) {
+            for (final String name : names) {
+                REGISTERED_ALGORITHM_NAMES.put(toAsciiLowerCase(name), name);
+            }
+        }
+    }
 
     /**
      * The recognized cryptographic key usages.
@@ -294,7 +310,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             }
         }
         catch (final EcmaError e) {
-            return setupRejectedPromise(() -> e);
+            return setupRejectedPromise(() -> JavaScriptEngine.toErrorObject(e, getParentScope()));
         }
         catch (final InvalidAccessException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.INVALID_ACCESS_ERR));
@@ -398,7 +414,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             }
         }
         catch (final EcmaError e) {
-            return setupRejectedPromise(() -> e);
+            return setupRejectedPromise(() -> JavaScriptEngine.toErrorObject(e, getParentScope()));
         }
         catch (final InvalidAccessException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.INVALID_ACCESS_ERR));
@@ -486,7 +502,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             digest = messageDigest.digest();
         }
         catch (final EcmaError e) {
-            return setupRejectedPromise(() -> e);
+            return setupRejectedPromise(() -> JavaScriptEngine.toErrorObject(e, getParentScope()));
         }
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
@@ -583,7 +599,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             }
         }
         catch (final EcmaError e) {
-            return setupRejectedPromise(() -> e);
+            return setupRejectedPromise(() -> JavaScriptEngine.toErrorObject(e, getParentScope()));
         }
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
@@ -666,7 +682,8 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      */
     @JsxFunction
     public NativePromise importKey(final String format, final Scriptable keyData,
-            final Scriptable keyImportParams, final boolean isExtractable, final Scriptable keyUsages) {
+            final Object keyImportParams, final boolean isExtractable, final Scriptable keyUsages) {
+
         final CryptoKey key;
         try {
             final String algorithm = resolveAlgorithmName(keyImportParams);
@@ -685,7 +702,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             }
         }
         catch (final EcmaError e) {
-            return setupRejectedPromise(() -> e);
+            return setupRejectedPromise(() -> JavaScriptEngine.toErrorObject(e, getParentScope()));
         }
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
@@ -698,7 +715,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     private CryptoKey importRawKey(final String algorithm, final Scriptable keyData,
-            final Scriptable keyImportParams, final boolean isExtractable, final Scriptable keyUsages) {
+            final Object keyImportParams, final boolean isExtractable, final Scriptable keyUsages) {
+        // a plain string is only valid for algorithms without import parameters
+        if ("HMAC".equals(algorithm) && !(keyImportParams instanceof Scriptable)) {
+            throw JavaScriptEngine.typeError("HmacImportParams: hash: Missing or not an AlgorithmIdentifier");
+        }
+
         final ByteBuffer byteBuffer = asByteBuffer(keyData);
         final byte[] rawBytes = new byte[byteBuffer.remaining()];
         byteBuffer.get(rawBytes);
@@ -713,20 +735,20 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         }
 
         if ("HMAC".equals(algorithm)) {
-            final HmacKeyAlgorithm params = HmacKeyAlgorithm.from(keyImportParams, bitLength);
+            final HmacKeyAlgorithm params = HmacKeyAlgorithm.from((Scriptable) keyImportParams, bitLength);
             final int length = params.getLength();
             if (length > bitLength || length <= bitLength - 8) {
                 throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
             }
 
-            final Scriptable scriptableAlgorithm = params.toScriptableObject(keyImportParams.getParentScope());
+            final Scriptable scriptableAlgorithm = params.toScriptableObject(getParentScope());
             final SecretKey internalKey = new SecretKeySpec(rawBytes, params.getJavaName());
             return CryptoKey.create(getParentScope(), internalKey, isExtractable, scriptableAlgorithm, usages);
         }
 
         if (AesKeyAlgorithm.isSupported(algorithm)) {
             final AesKeyAlgorithm aesAlgo = new AesKeyAlgorithm(algorithm, bitLength);
-            final Scriptable scriptableAlgorithm = aesAlgo.toScriptableObject(keyImportParams.getParentScope());
+            final Scriptable scriptableAlgorithm = aesAlgo.toScriptableObject(getParentScope());
             final SecretKey internalKey = new SecretKeySpec(rawBytes, "AES");
             return CryptoKey.create(getParentScope(), internalKey, isExtractable, scriptableAlgorithm, usages);
         }
@@ -841,6 +863,8 @@ public class SubtleCrypto extends HtmlUnitScriptable {
 
     /**
      * Resolves the algorithm name from the given {@code AlgorithmIdentifier}.
+     * Registered names are matched ASCII case-insensitive and returned in their registered
+     * spelling (e.g. "aes-gcm" is resolved to "AES-GCM").
      * @see <a href="https://w3c.github.io/webcrypto/#dfn-AlgorithmIdentifier">
      *     AlgorithmIdentifier</a>
      * @param algorithm the algorithm identifier (String or Scriptable with name property)
@@ -849,15 +873,29 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      */
     static String resolveAlgorithmName(final Object algorithm) {
         if (algorithm instanceof String str) {
-            return str;
+            return toRegisteredName(str);
         }
         if (algorithm instanceof Scriptable obj) {
             final Object name = ScriptableObject.getProperty(obj, "name");
             if (name instanceof String nameStr) {
-                return nameStr;
+                return toRegisteredName(nameStr);
             }
         }
         throw new IllegalArgumentException("An invalid or illegal string was specified");
+    }
+
+    private static String toRegisteredName(final String name) {
+        return REGISTERED_ALGORITHM_NAMES.getOrDefault(toAsciiLowerCase(name), name);
+    }
+
+    private static String toAsciiLowerCase(final String value) {
+        final char[] chars = value.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] >= 'A' && chars[i] <= 'Z') {
+                chars[i] = (char) (chars[i] + ('a' - 'A'));
+            }
+        }
+        return new String(chars);
     }
 
     /**

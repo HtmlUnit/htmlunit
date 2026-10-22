@@ -842,4 +842,223 @@ public class SubtleCryptoTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * importKey() accepts the algorithm as a string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"AES-GCM", "128", "secret", "TypeError"},
+            FF = {"AES-GCM", "128", "secret", "SyntaxError/DOMException"},
+            FF_ESR = {"AES-GCM", "128", "secret", "SyntaxError/DOMException"})
+    public void importKeyRawStringAlgorithm() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var rawKey = new Uint8Array(16);\n"
+            + "    window.crypto.subtle.importKey('raw', rawKey, 'AES-GCM', true, ['encrypt', 'decrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        log(key.algorithm.name);\n"
+            + "        log(key.algorithm.length);\n"
+            + "        log(key.type);\n"
+            + "      })\n"
+            + "      .catch(logEx)\n"
+
+            // HMAC requires the hash member, a plain string is not enough
+            + "      .then(function() {\n"
+            + "        return window.crypto.subtle.importKey('raw', rawKey, 'HMAC', true, ['sign']);\n"
+            + "      })\n"
+            + "      .then(function() { log('success'); }, logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Algorithm names are matched case-insensitive.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"20", "32", "48", "64", "NotSupportedError/DOMException"})
+    public void digestAlgorithmNameCaseInsensitive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array([1, 2, 3]);\n"
+            + "    function logLength(digest) { log(digest.byteLength); }\n"
+            + "    subtle.digest('sha-1', data).then(logLength, logEx)\n"
+            + "      .then(function() { return subtle.digest('sha-256', data); }).then(logLength, logEx)\n"
+            + "      .then(function() { return subtle.digest({ name: 'Sha-384' }, data); }).then(logLength, logEx)\n"
+            + "      .then(function() { return subtle.digest('sHa-512', data); }).then(logLength, logEx)\n"
+            + "      .then(function() { return subtle.digest('SHA-257', data); }).then(logLength, logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Algorithm names are matched case-insensitive; the key uses the registered name.
+     * The curve name is case-sensitive.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"AES-GCM 128", "HMAC SHA-512 1024", "ECDSA P-384", "RSASSA-PKCS1-v1_5 SHA-256",
+                       "NotSupportedError/DOMException"},
+            FF = {"AES-GCM 128", "HMAC SHA-512 1024", "ECDSA P-384", "RSASSA-PKCS1-v1_5 SHA-256", "ECDSA P-256"},
+            FF_ESR = {"AES-GCM 128", "HMAC SHA-512 1024", "ECDSA P-384", "RSASSA-PKCS1-v1_5 SHA-256", "ECDSA P-256"})
+    public void generateKeyAlgorithmNameCaseInsensitive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    function logAlgorithm(result) {\n"
+            + "      var algorithm = (result.publicKey || result).algorithm;\n"
+            + "      var details = algorithm.length || algorithm.namedCurve || '';\n"
+            + "      if (algorithm.hash) {\n"
+            + "        details = algorithm.hash.name + (algorithm.name == 'HMAC' ? ' ' + algorithm.length : '');\n"
+            + "      }\n"
+            + "      log(algorithm.name + ' ' + details);\n"
+            + "    }\n"
+            + "    subtle.generateKey({ name: 'aes-gcm', length: 128 }, true, ['encrypt'])\n"
+            + "      .then(logAlgorithm, logEx)\n"
+            + "      .then(function() {\n"
+            + "        return subtle.generateKey({ name: 'hmac', hash: 'sha-512' }, true, ['sign']);\n"
+            + "      })\n"
+            + "      .then(logAlgorithm, logEx)\n"
+            + "      .then(function() {\n"
+            + "        return subtle.generateKey({ name: 'ecdsa', namedCurve: 'P-384' }, true, ['sign']);\n"
+            + "      })\n"
+            + "      .then(logAlgorithm, logEx)\n"
+            + "      .then(function() {\n"
+            + "        return subtle.generateKey({ name: 'rsassa-pkcs1-v1_5', modulusLength: 2048,\n"
+            + "            publicExponent: new Uint8Array([1, 0, 1]), hash: { name: 'sha-256' } }, true, ['sign']);\n"
+            + "      })\n"
+            + "      .then(logAlgorithm, logEx)\n"
+            + "      .then(function() {\n"
+            + "        return subtle.generateKey({ name: 'ECDSA', namedCurve: 'p-256' }, true, ['sign']);\n"
+            + "      })\n"
+            + "      .then(logAlgorithm, logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Algorithm names are matched case-insensitive; the key uses the registered name.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"AES-CBC", "HMAC SHA-256 128"})
+    public void importKeyAlgorithmNameCaseInsensitive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var rawKey = new Uint8Array(16);\n"
+            + "    subtle.importKey('raw', rawKey, 'aes-cbc', true, ['encrypt'])\n"
+            + "      .then(function(key) { log(key.algorithm.name); }, logEx)\n"
+            + "      .then(function() {\n"
+            + "        return subtle.importKey('raw', rawKey, { name: 'hmac', hash: 'sha-256' }, true, ['sign']);\n"
+            + "      })\n"
+            + "      .then(function(key) {\n"
+            + "        log(key.algorithm.name + ' ' + key.algorithm.hash.name + ' ' + key.algorithm.length);\n"
+            + "      }, logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * The algorithm name of encrypt/decrypt/sign/verify is matched case-insensitive
+     * against the name of the key.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1,2,3", "true", "true"})
+    public void operationAlgorithmNameCaseInsensitive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array([1, 2, 3]);\n"
+            + "    var iv = new Uint8Array(12);\n"
+            + "    subtle.generateKey({ name: 'AES-GCM', length: 128 }, false, ['encrypt', 'decrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        return subtle.encrypt({ name: 'aes-gcm', iv: iv }, key, data).then(function(ciphertext) {\n"
+            + "          return subtle.decrypt({ name: 'Aes-Gcm', iv: iv }, key, ciphertext);\n"
+            + "        });\n"
+            + "      })\n"
+            + "      .then(function(plaintext) { log(new Uint8Array(plaintext).join()); }, logEx)\n"
+
+            + "      .then(function() {\n"
+            + "        return subtle.generateKey({ name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']);\n"
+            + "      })\n"
+            + "      .then(function(key) {\n"
+            + "        return subtle.sign('hmac', key, data).then(function(signature) {\n"
+            + "          return subtle.verify({ name: 'Hmac' }, key, signature, data);\n"
+            + "        });\n"
+            + "      })\n"
+            + "      .then(log, logEx)\n"
+
+            + "      .then(function() {\n"
+            + "        return subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign', 'verify']);\n"
+            + "      })\n"
+            + "      .then(function(pair) {\n"
+            + "        return subtle.sign({ name: 'ecdsa', hash: 'sha-256' }, pair.privateKey, data)\n"
+            + "          .then(function(signature) {\n"
+            + "            return subtle.verify({ name: 'ECDSA', hash: { name: 'Sha-256' } },\n"
+            + "                pair.publicKey, signature, data);\n"
+            + "          });\n"
+            + "      })\n"
+            + "      .then(log, logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * A TypeError has to reject the promise with a real TypeError object.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "TypeError"})
+    public void digestInvalidDataRejectsWithTypeError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    window.crypto.subtle.digest('SHA-256', {})\n"
+            + "      .then(function() { log('success'); })\n"
+            + "      .catch(function(e) {\n"
+            + "        log(e instanceof TypeError);\n"
+            + "        log(e.name);\n"
+            + "      });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }

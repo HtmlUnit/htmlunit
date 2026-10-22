@@ -9,6 +9,16 @@
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
             <action type="fix" dev="rbri">
+                SubtleCrypto: importKey() accepts the algorithm as a string (e.g. importKey("raw", data, "AES-GCM", ...)).
+            </action>
+            <action type="fix" dev="rbri">
+                SubtleCrypto: algorithm names (including hash names) are matched case-insensitive like in real
+                browsers (e.g. "aes-gcm", "sha-256"); keys report the registered name (e.g. "AES-GCM").
+            </action>
+            <action type="fix" dev="rbri">
+                SubtleCrypto: promises are now rejected with a real TypeError object.
+            </action>
+            <action type="fix" dev="rbri">
                 Crypto: getRandomValues() now fills the bytes of the array directly; Uint8ClampedArray got only the
                 values 0 and 255 and BigInt64Array/BigUint64Array only 32 random bits per element. Float16Array,
                 Float32Array, Float64Array and DataView are rejected with a TypeMismatchError, other arguments
