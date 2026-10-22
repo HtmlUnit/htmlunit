@@ -323,4 +323,31 @@ public class CryptoTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * getRandomValues() with a view on a detached buffer.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "true", "0"})
+    public void getRandomValuesDetached() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var array = new Uint8Array(8);\n"
+            + "    array.buffer.transfer();\n"
+            + "    log(array.length);\n"
+            + "    try {\n"
+            + "      var result = window.crypto.getRandomValues(array);\n"
+            + "      log(result === array);\n"
+            + "      log(result.length);\n"
+            + "    } catch (e) { logEx(e); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }

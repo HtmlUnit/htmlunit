@@ -15,7 +15,7 @@
 package org.htmlunit.javascript.host.crypto;
 
 import java.security.SecureRandom;
-import java.util.Locale;
+import java.util.UUID;
 
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.corejs.javascript.typedarrays.NativeBigInt64Array;
@@ -96,6 +96,13 @@ public class Crypto extends HtmlUnitScriptable {
                             + "', which is not an integer array type.",
                     DOMException.TYPE_MISMATCH_ERR);
         }
+
+        // a view on a detached buffer has a byte length of 0; there is nothing to fill
+        // (getByteLength() still reports the original length and getByteBuffer() is null)
+        if (view.getBuffer().isDetached()) {
+            return view;
+        }
+
         if (view.getByteLength() > 65_536) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
@@ -149,43 +156,8 @@ public class Crypto extends HtmlUnitScriptable {
      */
     @JsxFunction
     public String randomUUID() {
-        // Let bytes be a byte sequence of length 16.
-        // Fill bytes with cryptographically secure random bytes.
-        final byte[] bytes = new byte[16];
-        RANDOM.nextBytes(bytes);
-
-        // Set the 4 most significant bits of bytes[6], which represent the UUID version, to 0100.
-        bytes[6] = (byte) (bytes[6] | 0b01000000);
-        bytes[6] = (byte) (bytes[6] & 0b01001111);
-        // Set the 2 most significant bits of bytes[8], which represent the UUID variant, to 10.
-        bytes[8] = (byte) (bytes[8] | 0b10000000);
-        bytes[8] = (byte) (bytes[8] & 0b10111111);
-
-        final StringBuilder result = new StringBuilder()
-                                            .append(toHex(bytes[0]))
-                                            .append(toHex(bytes[1]))
-                                            .append(toHex(bytes[2]))
-                                            .append(toHex(bytes[3]))
-                                            .append('-')
-                                            .append(toHex(bytes[4]))
-                                            .append(toHex(bytes[5]))
-                                            .append('-')
-                                            .append(toHex(bytes[6]))
-                                            .append(toHex(bytes[7]))
-                                            .append('-')
-                                            .append(toHex(bytes[8]))
-                                            .append(toHex(bytes[9]))
-                                            .append('-')
-                                            .append(toHex(bytes[10]))
-                                            .append(toHex(bytes[11]))
-                                            .append(toHex(bytes[12]))
-                                            .append(toHex(bytes[13]))
-                                            .append(toHex(bytes[14]))
-                                            .append(toHex(bytes[15]));
-        return result.toString();
-    }
-
-    private static String toHex(final byte b) {
-        return "%02X ".formatted(b).trim().toLowerCase(Locale.ROOT);
+        // java.util.UUID creates a version 4 (random) UUID using a cryptographically
+        // secure random number generator, formatted with lowercase hex digits
+        return UUID.randomUUID().toString();
     }
 }

@@ -1926,4 +1926,205 @@ public class SubtleCryptoTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * AES-GCM with an empty IV; the spec only defines an upper limit for the iv length.
+     * The last step uses a one byte IV.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"OperationError/DOMException", "OperationError/DOMException", "20"})
+    public void aesGcmEmptyIv() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array([1, 2, 3, 4]);\n"
+            + "    subtle.importKey('raw', new Uint8Array(16), 'AES-GCM', false, ['encrypt', 'decrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        return subtle.encrypt({ name: 'AES-GCM', iv: new Uint8Array(0) }, key, data)\n"
+            + "          .then(function(result) { log(result.byteLength); }, logEx)\n"
+            + "          .then(function() {\n"
+            + "            var params = { name: 'AES-GCM', iv: new Uint8Array(0) };\n"
+            + "            return subtle.decrypt(params, key, new Uint8Array(20));\n"
+            + "          })\n"
+            + "          .then(function(result) { log(result.byteLength); }, logEx)\n"
+            + "          .then(function() {\n"
+            + "            return subtle.encrypt({ name: 'AES-GCM', iv: new Uint8Array(1) }, key, data);\n"
+            + "          })\n"
+            + "          .then(function(result) { log(result.byteLength); }, logEx);\n"
+            + "      })\n"
+            + "      .catch(logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Digest of a detached buffer (and of a view on it) is the digest of an empty byte sequence.
+     * Detaching after the call has no effect because the data is copied when digest() is called.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"e3b0c442", "e3b0c442", "039058c6"})
+    public void digestDetached() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function hex(buf) {\n"
+            + "    var bytes = new Uint8Array(buf);\n"
+            + "    var result = '';\n"
+            + "    for (var i = 0; i < 4; i++) { result += ('0' + bytes[i].toString(16)).slice(-2); }\n"
+            + "    return result;\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var detached = new Uint8Array([1, 2, 3]).buffer;\n"
+            + "    var view = new Uint8Array(detached);\n"
+            + "    detached.transfer();\n"
+            + "    var later = new Uint8Array([1, 2, 3]).buffer;\n"
+            + "    var p = subtle.digest('SHA-256', later);\n"
+            + "    later.transfer();\n"
+            + "    subtle.digest('SHA-256', detached)\n"
+            + "      .then(function(result) { log(hex(result)); }, logEx)\n"
+            + "      .then(function() { return subtle.digest('SHA-256', view); })\n"
+            + "      .then(function(result) { log(hex(result)); }, logEx)\n"
+            + "      .then(function() { return p; })\n"
+            + "      .then(function(result) { log(hex(result)); }, logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Encrypt with detached data / detached iv.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"19", "16", "OperationError/DOMException"})
+    public void encryptDetached() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    function detachedBuffer(size) {\n"
+            + "      var buffer = new ArrayBuffer(size);\n"
+            + "      buffer.transfer();\n"
+            + "      return buffer;\n"
+            + "    }\n"
+            + "    subtle.importKey('raw', new Uint8Array(16), 'AES-GCM', false, ['encrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        var iv = new Uint8Array(12);\n"
+            + "        var data = new Uint8Array(3);\n"
+            + "        var p = subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, data);\n"
+            + "        data.buffer.transfer();\n"
+            + "        iv.buffer.transfer();\n"
+            + "        return p\n"
+            + "          .then(function(result) { log(result.byteLength); }, logEx)\n"
+            + "          .then(function() {\n"
+            + "            var params = { name: 'AES-GCM', iv: new Uint8Array(12) };\n"
+            + "            return subtle.encrypt(params, key, detachedBuffer(3));\n"
+            + "          })\n"
+            + "          .then(function(result) { log(result.byteLength); }, logEx)\n"
+            + "          .then(function() {\n"
+            + "            var params = { name: 'AES-GCM', iv: detachedBuffer(12) };\n"
+            + "            return subtle.encrypt(params, key, new Uint8Array(3));\n"
+            + "          })\n"
+            + "          .then(function(result) { log(result.byteLength); }, logEx);\n"
+            + "      })\n"
+            + "      .catch(logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Import of detached raw key data (empty) and detaching after the call.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"DataError/DOMException", "DataError/DOMException", "128"})
+    public void importKeyDetached() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    function detachedBuffer(size) {\n"
+            + "      var buffer = new ArrayBuffer(size);\n"
+            + "      buffer.transfer();\n"
+            + "      return buffer;\n"
+            + "    }\n"
+            + "    var hmac = { name: 'HMAC', hash: 'SHA-256' };\n"
+            + "    subtle.importKey('raw', detachedBuffer(16), 'AES-GCM', false, ['encrypt'])\n"
+            + "      .then(function(key) { log(key.algorithm.length); }, logEx)\n"
+            + "      .then(function() {\n"
+            + "        return subtle.importKey('raw', detachedBuffer(16), hmac, false, ['sign']);\n"
+            + "      })\n"
+            + "      .then(function(key) { log(key.algorithm.length); }, logEx)\n"
+            + "      .then(function() {\n"
+            + "        var keyData = new Uint8Array(16);\n"
+            + "        var p = subtle.importKey('raw', keyData, 'AES-GCM', false, ['encrypt']);\n"
+            + "        keyData.buffer.transfer();\n"
+            + "        return p;\n"
+            + "      })\n"
+            + "      .then(function(key) { log(key.algorithm.length); }, logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Verify with a signature that is detached after the call / before the call.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"32", "true", "true"},
+            FF = {"32", "true", "false"},
+            FF_ESR = {"32", "true", "false"})
+    @HtmlUnitNYI(CHROME = {"32", "true", "false"},
+            EDGE = {"32", "true", "false"})
+    public void verifyDetached() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array([1, 2, 3]);\n"
+            + "    var hmac = { name: 'HMAC', hash: 'SHA-256' };\n"
+            + "    subtle.importKey('raw', new Uint8Array(32), hmac, false, ['sign', 'verify'])\n"
+            + "      .then(function(key) {\n"
+            + "        return subtle.sign('HMAC', key, data)\n"
+            + "          .then(function(signature) {\n"
+            + "            log(signature.byteLength);\n"
+            + "            var p = subtle.verify('HMAC', key, signature, data);\n"
+            + "            signature.transfer();\n"
+            + "            return p\n"
+            + "              .then(function(result) { log(result); }, logEx)\n"
+            + "              .then(function() { return subtle.verify('HMAC', key, signature, data); });\n"
+            + "          })\n"
+            + "          .then(function(result) { log(result); }, logEx);\n"
+            + "      })\n"
+            + "      .catch(logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }

@@ -8,7 +8,10 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
-           <action type="fix" dev="rbri">
+            <action type="fix" dev="rbri">
+                WebCrypto: AES-GCM encrypt()/decrypt() with an empty iv rejects with an OperationError (was SyntaxError).
+            </action>
+            <action type="fix" dev="rbri">
                 SubtleCrypto: importKey() rejects invalid key data (empty data, AES key data that is not 128, 192
                 or 256 bits long, HMAC length not matching the key data) with a DataError.
             </action>

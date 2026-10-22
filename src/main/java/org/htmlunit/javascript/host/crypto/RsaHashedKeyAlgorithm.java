@@ -84,18 +84,8 @@ final class RsaHashedKeyAlgorithm implements KeyAlgorithm {
     }
 
     private static byte[] extractBytes(final Object value) {
-        if (value instanceof NativeArrayBufferView view) {
-            final NativeArrayBuffer buf = view.getBuffer();
-            if (buf != null) {
-                final byte[] result = new byte[view.getByteLength()];
-                final ByteBuffer bb = buf.getByteBuffer();
-                bb.position(view.getByteOffset());
-                bb.get(result, 0, result.length);
-                return result;
-            }
-        }
-        if (value instanceof NativeArrayBuffer buf) {
-            final ByteBuffer bb = buf.getByteBuffer();
+        if (value instanceof NativeArrayBuffer || value instanceof NativeArrayBufferView) {
+            final ByteBuffer bb = SubtleCrypto.asByteBuffer(value);
             final byte[] result = new byte[bb.remaining()];
             bb.get(result);
             return result;

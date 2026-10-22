@@ -230,7 +230,6 @@ public class SubtleCrypto extends HtmlUnitScriptable {
 
             final ByteBuffer inputData = asByteBuffer(data);
 
-
             switch (algorithmName) {
                 case "AES-CBC": {
                     // https://w3c.github.io/webcrypto/#aes-cbc-operations
@@ -251,10 +250,10 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                 case "AES-GCM": {
                     // https://w3c.github.io/webcrypto/#aes-gcm-operations
                     final Scriptable params = toAlgorithmParams(algorithm, algorithmName);
+                    // the spec only defines an upper limit; browsers reject an empty iv with OperationError
                     final byte[] iv = getRequiredBuffer(params, "iv");
                     if (iv.length == 0) {
-                        throw new IllegalArgumentException(
-                                "Data provided to an operation does not meet requirements");
+                        throw new OperationException("The iv must not be empty");
                     }
 
                     final int tagLength;
@@ -980,8 +979,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * Registered names are matched ASCII case-insensitive and returned in their registered
      * spelling (e.g. "aes-gcm" is resolved to "AES-GCM").
      * @see <a href="https://w3c.github.io/webcrypto/#dfn-AlgorithmIdentifier">
-     *     AlgorithmIdentifier</a>
-     * Like WebIDL does, values that are not an object are converted to a string.
+     *     AlgorithmIdentifier</a>Like WebIDL does, values that are not an object are converted to a string.
      * @param algorithm the algorithm identifier (String or Scriptable with name property)
      * @return the resolved algorithm name
      * @throws EcmaError (TypeError) if the algorithm object has no name
@@ -1015,9 +1013,17 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      */
     static ByteBuffer asByteBuffer(final Object data) {
         if (data instanceof NativeArrayBuffer nativeBuffer) {
+            // get a copy of the bytes held by the buffer source: a detached buffer holds no bytes
+            if (nativeBuffer.isDetached()) {
+                return ByteBuffer.allocate(0);
+            }
             return nativeBuffer.getByteBuffer();
         }
         else if (data instanceof NativeArrayBufferView arrayBufferView) {
+            // getByteLength() still reports the original length for a view on a detached buffer
+            if (arrayBufferView.getBuffer().isDetached()) {
+                return ByteBuffer.allocate(0);
+            }
             return arrayBufferView.getBuffer()
                     .getByteBuffer()
                     .position(arrayBufferView.getByteOffset())
