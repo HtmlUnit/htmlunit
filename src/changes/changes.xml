@@ -9,6 +9,12 @@
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
             <action type="fix" dev="rbri">
+                Crypto: getRandomValues() now fills the bytes of the array directly; Uint8ClampedArray got only the
+                values 0 and 255 and BigInt64Array/BigUint64Array only 32 random bits per element. Float16Array,
+                Float32Array, Float64Array and DataView are rejected with a TypeMismatchError, other arguments
+                with a TypeError, like in real browsers.
+            </action>
+            <action type="fix" dev="rbri">
                 SubtleCrypto: decrypt() no longer fails with an ArrayIndexOutOfBoundsException when the decryption
                 fails (e.g. AES-GCM authentication tag mismatch, invalid AES-CBC padding, RSA-OAEP decryption with
                 the wrong key); the promise is now rejected with an OperationError DOMException.

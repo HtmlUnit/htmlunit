@@ -164,4 +164,163 @@ public class CryptoTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Uint8ClampedArray must get uniformly distributed values,
+     * not only 0 and 255 because of clamping.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void getRandomValuesUint8ClampedArray() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var array = new Uint8ClampedArray(1024);\n"
+            + "  var res = window.crypto.getRandomValues(array);\n"
+            + "  var distinct = new Set(array).size;\n"
+            + "  log(distinct > 128);\n"
+            + "  log(res === array);\n"
+            + "}\n"
+            + "catch(e) { logEx(e); }\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Every bit of a BigInt64Array / BigUint64Array element must be random,
+     * not only the lower 32 bits.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void getRandomValuesBigIntArrays() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function upperBitsVary(array) {\n"
+            + "    window.crypto.getRandomValues(array);\n"
+            + "    for (var i = 0; i < array.length; i++) {\n"
+            + "      var upper = BigInt.asUintN(32, array[i] >> 32n);\n"
+            + "      if (upper !== 0n && upper !== 0xffffffffn) {\n"
+            + "        return true;\n"
+            + "      }\n"
+            + "    }\n"
+            + "    return false;\n"
+            + "  }\n"
+            + "try {\n"
+            + "  log(upperBitsVary(new BigUint64Array(64)));\n"
+            + "  log(upperBitsVary(new BigInt64Array(64)));\n"
+            + "}\n"
+            + "catch(e) { logEx(e); }\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Float arrays are not supported; the array has to stay untouched.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeMismatchError/DOMException", "17", "0",
+             "TypeMismatchError/DOMException", "17", "0",
+             "TypeMismatchError/DOMException", "17", "0"})
+    public void getRandomValuesFloatArrays() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test(array) {\n"
+            + "    try {\n"
+            + "      window.crypto.getRandomValues(array);\n"
+            + "      log('no exception');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "      log(e.code);\n"
+            + "    }\n"
+            + "    log(array[0]);\n"
+            + "  }\n"
+            + "  test(new Float16Array(4));\n"
+            + "  test(new Float32Array(4));\n"
+            + "  test(new Float64Array(4));\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A DataView is an ArrayBufferView but not an integer array.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeMismatchError/DOMException", "17"})
+    public void getRandomValuesDataView() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  window.crypto.getRandomValues(new DataView(new ArrayBuffer(8)));\n"
+            + "  log('no exception');\n"
+            + "}\n"
+            + "catch(e) {\n"
+            + "  logEx(e);\n"
+            + "  log(e.code);\n"
+            + "}\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Arguments that are not an ArrayBufferView.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError", "TypeError", "TypeError", "TypeError"})
+    public void getRandomValuesNoArrayBufferView() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test(value) {\n"
+            + "    try {\n"
+            + "      window.crypto.getRandomValues(value);\n"
+            + "      log('no exception');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  test(new ArrayBuffer(8));\n"
+            + "  test({});\n"
+            + "  test([1, 2, 3]);\n"
+            + "  test(null);\n"
+            + "  test(undefined);\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Only the bytes of the view are filled, the rest of the buffer stays untouched.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "true"})
+    public void getRandomValuesByteOffset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var buffer = new ArrayBuffer(32);\n"
+            + "  var view = new Uint16Array(buffer, 8, 8);\n"
+            + "  window.crypto.getRandomValues(view);\n"
+            + "  var bytes = new Uint8Array(buffer);\n"
+            + "  log(bytes.slice(0, 8).every(function(b) { return b === 0; }));\n"
+            + "  log(bytes.slice(24).every(function(b) { return b === 0; }));\n"
+            + "  log(bytes.slice(8, 24).some(function(b) { return b !== 0; }));\n"
+            + "}\n"
+            + "catch(e) { logEx(e); }\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

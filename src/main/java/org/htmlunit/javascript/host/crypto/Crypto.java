@@ -17,7 +17,16 @@ package org.htmlunit.javascript.host.crypto;
 import java.security.SecureRandom;
 import java.util.Locale;
 
-import org.htmlunit.corejs.javascript.typedarrays.NativeTypedArrayView;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
+import org.htmlunit.corejs.javascript.typedarrays.NativeBigInt64Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeBigUint64Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeInt16Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeInt32Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeInt8Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeUint16Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeUint32Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeUint8ClampedArray;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -74,25 +83,48 @@ public class Crypto extends HtmlUnitScriptable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">MDN Doc</a>
      */
     @JsxFunction
-    public NativeTypedArrayView<?> getRandomValues(final NativeTypedArrayView<?> array) {
-        if (array == null) {
-            throw JavaScriptEngine.typeError("Argument 1 of Crypto.getRandomValues is not an object.");
+    public NativeArrayBufferView getRandomValues(final Object array) {
+        if (!(array instanceof NativeArrayBufferView view)) {
+            throw JavaScriptEngine.typeError(
+                    "Argument 1 of Crypto.getRandomValues does not implement interface ArrayBufferView.");
         }
-        if (array.getByteLength() > 65_536) {
+        if (!isIntegerArray(view)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Failed to execute 'getRandomValues' on 'Crypto': "
+                            + "The provided ArrayBufferView is of type '" + view.getClassName()
+                            + "', which is not an integer array type.",
+                    DOMException.TYPE_MISMATCH_ERR);
+        }
+        if (view.getByteLength() > 65_536) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
                     "Error: Failed to execute 'getRandomValues' on 'Crypto': "
                             + "The ArrayBufferView's byte length "
-                            + "(" + array.getByteLength() + ") exceeds the number of bytes "
+                            + "(" + view.getByteLength() + ") exceeds the number of bytes "
                             + "of entropy available via this API (65536).",
                     DOMException.QUOTA_EXCEEDED_ERR);
         }
 
-        final int length = array.getByteLength() / array.getBytesPerElement();
-        for (int i = 0; i < length; i++) {
-            array.put(i, array, RANDOM.nextInt());
+        // fill the underlying bytes; writing the elements would convert (e.g. clamp) the values
+        final byte[] bytes = new byte[view.getByteLength()];
+        if (bytes.length > 0) {
+            RANDOM.nextBytes(bytes);
+            view.getBuffer().getByteBuffer().put(view.getByteOffset(), bytes);
         }
-        return array;
+        return view;
+    }
+
+    private static boolean isIntegerArray(final NativeArrayBufferView view) {
+        return view instanceof NativeInt8Array
+                || view instanceof NativeUint8Array
+                || view instanceof NativeUint8ClampedArray
+                || view instanceof NativeInt16Array
+                || view instanceof NativeUint16Array
+                || view instanceof NativeInt32Array
+                || view instanceof NativeUint32Array
+                || view instanceof NativeBigInt64Array
+                || view instanceof NativeBigUint64Array;
     }
 
     /**
