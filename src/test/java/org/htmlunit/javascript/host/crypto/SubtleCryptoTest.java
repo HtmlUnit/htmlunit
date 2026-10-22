@@ -1158,4 +1158,105 @@ public class SubtleCryptoTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * Only the rightmost 'length' bits of the counter block are incremented;
+     * they wrap around without changing the other bits.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"e9f1c305e1a6291146f6554e3a3596b50e023906a1869d5fdc89eff1abe537f8fc2dd9027baad0a6cbd00d0c5fa35d5c true",
+                       "e9f1c305e1a6291146f6554e3a3596b53e5fe07a13bee3788efa8952756c6003f4620cf90f0fe037165a3c8554a651f4 true",
+                       "944120ff035655e331f4f46796ad82ed8ae8274c3f6cde957f2810c5b644da8fdd16346f0caf58ff361ed9f64929a3e61ec2698313bdb396681d5dbc165eeff9 true"},
+            FF = {"e9f1c305e1a6291146f6554e3a3596b5a7db27c595c7b5d2880826c22532da3ce62edec5288305b9d768b326324812a2 true",
+                  "e9f1c305e1a6291146f6554e3a3596b5a7db27c595c7b5d2880826c22532da3ce62edec5288305b9d768b326324812a2 true",
+                  "944120ff035655e331f4f46796ad82ed8ae8274c3f6cde957f2810c5b644da8f816132d8b1416f84901fbd102dd75bc75f44e9f45ef14e42ba79b9a77730c844 true"},
+            FF_ESR = {"e9f1c305e1a6291146f6554e3a3596b5a7db27c595c7b5d2880826c22532da3ce62edec5288305b9d768b326324812a2 true",
+                      "e9f1c305e1a6291146f6554e3a3596b5a7db27c595c7b5d2880826c22532da3ce62edec5288305b9d768b326324812a2 true",
+                      "944120ff035655e331f4f46796ad82ed8ae8274c3f6cde957f2810c5b644da8f816132d8b1416f84901fbd102dd75bc75f44e9f45ef14e42ba79b9a77730c844 true"})
+    @HtmlUnitNYI(
+            FF = {"e9f1c305e1a6291146f6554e3a3596b50e023906a1869d5fdc89eff1abe537f8fc2dd9027baad0a6cbd00d0c5fa35d5c true",
+                  "e9f1c305e1a6291146f6554e3a3596b53e5fe07a13bee3788efa8952756c6003f4620cf90f0fe037165a3c8554a651f4 true",
+                  "944120ff035655e331f4f46796ad82ed8ae8274c3f6cde957f2810c5b644da8fdd16346f0caf58ff361ed9f64929a3e61ec2698313bdb396681d5dbc165eeff9 true"},
+            FF_ESR = {"e9f1c305e1a6291146f6554e3a3596b50e023906a1869d5fdc89eff1abe537f8fc2dd9027baad0a6cbd00d0c5fa35d5c true",
+                      "e9f1c305e1a6291146f6554e3a3596b53e5fe07a13bee3788efa8952756c6003f4620cf90f0fe037165a3c8554a651f4 true",
+                      "944120ff035655e331f4f46796ad82ed8ae8274c3f6cde957f2810c5b644da8fdd16346f0caf58ff361ed9f64929a3e61ec2698313bdb396681d5dbc165eeff9 true"})
+    public void aesCtrCounterWrap() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function toHex(buffer) {\n"
+            + "    return Array.from(new Uint8Array(buffer)).map(function(b) {\n"
+            + "      return ('0' + b.toString(16)).slice(-2);\n"
+            + "    }).join('');\n"
+            + "  }\n"
+            + "  function check(key, counter, length, size) {\n"
+            + "    var params = { name: 'AES-CTR', counter: counter, length: length };\n"
+            + "    return window.crypto.subtle.encrypt(params, key, new Uint8Array(size))\n"
+            + "      .then(function(ciphertext) {\n"
+            + "        return window.crypto.subtle.decrypt(params, key, ciphertext).then(function(plaintext) {\n"
+            + "          var zeros = new Uint8Array(plaintext).every(function(b) { return b === 0; });\n"
+            + "          log(toHex(ciphertext) + ' ' + zeros);\n"
+            + "        });\n"
+            + "      });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            // nonce 01..08, the counter part (rightmost 64 bits) is at its maximum
+            + "    var counter64 = new Uint8Array(16);\n"
+            + "    counter64.set([1, 2, 3, 4, 5, 6, 7, 8]);\n"
+            + "    counter64.fill(0xff, 8);\n"
+            + "    var counter8 = new Uint8Array(16).fill(0x11);\n"
+            + "    counter8[15] = 0xfe;\n"
+            + "    window.crypto.subtle.importKey('raw', new Uint8Array(16), 'AES-CTR', false, ['encrypt', 'decrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        return check(key, counter64, 64, 48)\n"
+            + "          .then(function() { return check(key, counter64, 128, 48); })\n"
+            + "          .then(function() { return check(key, counter8, 8, 64); });\n"
+            + "      })\n"
+            + "      .catch(logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * The counter must not repeat: data longer than 2^length blocks is rejected.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"32", "DataError/DOMException", "64", "DataError/DOMException"},
+            FF = {"OperationError/DOMException", "OperationError/DOMException", "OperationError/DOMException", "OperationError/DOMException"},
+            FF_ESR = {"OperationError/DOMException", "OperationError/DOMException", "OperationError/DOMException", "OperationError/DOMException"})
+    @HtmlUnitNYI(FF =  {"32", "DataError/DOMException", "64", "DataError/DOMException"},
+            FF_ESR =  {"32", "DataError/DOMException", "64", "DataError/DOMException"})
+    public void aesCtrTooManyBlocks() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    function encrypt(key, length, size) {\n"
+            + "      var params = { name: 'AES-CTR', counter: new Uint8Array(16), length: length };\n"
+            + "      return subtle.encrypt(params, key, new Uint8Array(size))\n"
+            + "        .then(function(ciphertext) { log(ciphertext.byteLength); }, logEx);\n"
+            + "    }\n"
+            + "    subtle.importKey('raw', new Uint8Array(16), 'AES-CTR', false, ['encrypt'])\n"
+            + "      .then(function(key) {\n"
+            // length 1 allows 2 blocks, length 2 allows 4 blocks
+            + "        return encrypt(key, 1, 32)\n"
+            + "          .then(function() { return encrypt(key, 1, 33); })\n"
+            + "          .then(function() { return encrypt(key, 2, 64); })\n"
+            + "          .then(function() { return encrypt(key, 2, 65); });\n"
+            + "      })\n"
+            + "      .catch(logEx);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }

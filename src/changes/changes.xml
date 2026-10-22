@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
+           <action type="fix" dev="rbri">
+                SubtleCrypto: AES-CTR now increments only the rightmost 'length' bits of the counter block.
+                Data that needs more than 2^length counter blocks is rejected with a DataError.
+            </action>
             <action type="fix" dev="rbri">
                 SubtleCrypto: encrypt(), decrypt(), sign(), verify() and exportKey() reject the promise with a
                 TypeError if the key is not a CryptoKey.

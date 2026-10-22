@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.crypto;
 
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.security.GeneralSecurityException;
 import java.security.Key;
@@ -129,6 +130,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
 
     private static class InvalidAccessException extends RuntimeException {
         InvalidAccessException(final String message) {
+            super(message);
+        }
+    }
+
+    private static class DataException extends RuntimeException {
+        DataException(final String message) {
             super(message);
         }
     }
@@ -280,12 +287,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     }
 
                     final SecretKey secretKey = getInternalKey(key, SecretKey.class);
-                    // Java always increments the full 128-bit counter, ignoring the 'length' partitioning.
-                    // This only becomes an issue when data exceeds 2^length AES blocks (16 bytes each),
-                    // but in real-world usage (length >= 64) it's pretty much unreachable.
-                    final Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
-                    cipher.init(cipherMode, secretKey, new IvParameterSpec(counter));
-                    result = cipher.doFinal(toByteArray(inputData));
+                    result = aesCtr(cipherMode, secretKey, counter, counterLength, toByteArray(inputData));
                     break;
                 }
                 case "RSA-OAEP": {
@@ -331,6 +333,9 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         catch (final InvalidAccessException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.INVALID_ACCESS_ERR));
         }
+        catch (final DataException e) {
+            return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.DATA_ERR));
+        }
         catch (final IllegalArgumentException e) {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
@@ -342,6 +347,48 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     DOMException.NOT_SUPPORTED_ERR));
         }
         return setupPromise(() -> createArrayBuffer(result));
+    }
+
+    /**
+     * AES-CTR encryption/decryption where only the rightmost {@code counterLength} bits of the
+     * counter block are incremented; Java's AES/CTR always increments the whole 128-bit block.
+     * @see <a href="https://w3c.github.io/webcrypto/#aes-ctr-operations">AES-CTR</a>
+     */
+    private static byte[] aesCtr(final int cipherMode, final SecretKey key, final byte[] counter,
+            final int counterLength, final byte[] input) throws GeneralSecurityException {
+        final BigInteger blocks = BigInteger.valueOf((input.length + 15L) / 16);
+        final BigInteger counterValues = BigInteger.ONE.shiftLeft(counterLength);
+        if (blocks.compareTo(counterValues) > 0) {
+            throw new DataException("The counter would repeat");
+        }
+
+        final BigInteger counterBlock = new BigInteger(1, counter);
+        final BigInteger counterPart = counterBlock.mod(counterValues);
+        final BigInteger blocksUntilWrap = counterValues.subtract(counterPart);
+
+        final Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
+        cipher.init(cipherMode, key, new IvParameterSpec(counter));
+        if (blocks.compareTo(blocksUntilWrap) <= 0) {
+            return cipher.doFinal(input);
+        }
+
+        // process up to the wrap with the given counter block, the rest starts with the counter part set to zero
+        final int firstLength = blocksUntilWrap.intValueExact() * 16;
+        final byte[] result = new byte[input.length];
+        cipher.doFinal(input, 0, firstLength, result, 0);
+
+        final Cipher wrapped = Cipher.getInstance("AES/CTR/NoPadding");
+        wrapped.init(cipherMode, key, new IvParameterSpec(toCounterBlock(counterBlock.subtract(counterPart))));
+        wrapped.doFinal(input, firstLength, input.length - firstLength, result, firstLength);
+        return result;
+    }
+
+    private static byte[] toCounterBlock(final BigInteger value) {
+        final byte[] bytes = value.toByteArray();
+        final byte[] block = new byte[16];
+        final int length = Math.min(bytes.length, 16);
+        System.arraycopy(bytes, bytes.length - length, block, 16 - length, length);
+        return block;
     }
 
     /**
