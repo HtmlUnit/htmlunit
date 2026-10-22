@@ -767,4 +767,79 @@ public class SubtleCryptoTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * Decrypting data that fails the integrity or padding check must reject the promise
+     * with an OperationError instead of failing inside HtmlUnit.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"OperationError/DOMException", "0",
+             "OperationError/DOMException", "0",
+             "OperationError/DOMException", "0"})
+    public void decryptFailureRejectsWithOperationError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8]);\n"
+            + "    var gcmParams = { name: 'AES-GCM', iv: new Uint8Array(12) };\n"
+            + "    var cbcParams = { name: 'AES-CBC', iv: new Uint8Array(16) };\n"
+            + "    var rawKey = new Uint8Array(16);\n"
+            + "    var otherRawKey = new Uint8Array(16).fill(1);\n"
+
+            + "    function logFailure(e) {\n"
+            + "      logEx(e);\n"
+            + "      log(e.code);\n"
+            + "    }\n"
+
+            // AES-GCM: the authentication tag no longer matches
+            + "    subtle.importKey('raw', rawKey, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt'])\n"
+            + "      .then(function(key) {\n"
+            + "        return subtle.encrypt(gcmParams, key, data).then(function(ciphertext) {\n"
+            + "          var tampered = new Uint8Array(ciphertext);\n"
+            + "          tampered[0] ^= 1;\n"
+            + "          return subtle.decrypt(gcmParams, key, tampered);\n"
+            + "        });\n"
+            + "      })\n"
+            + "      .then(function() { log('success'); }, logFailure)\n"
+
+            // AES-CBC: decrypting with the wrong key gives invalid padding
+            + "      .then(function() {\n"
+            + "        return Promise.all([\n"
+            + "          subtle.importKey('raw', rawKey, { name: 'AES-CBC' }, false, ['encrypt']),\n"
+            + "          subtle.importKey('raw', otherRawKey, { name: 'AES-CBC' }, false, ['decrypt'])\n"
+            + "        ]);\n"
+            + "      })\n"
+            + "      .then(function(keys) {\n"
+            + "        return subtle.encrypt(cbcParams, keys[0], data).then(function(ciphertext) {\n"
+            + "          return subtle.decrypt(cbcParams, keys[1], ciphertext);\n"
+            + "        });\n"
+            + "      })\n"
+            + "      .then(function() { log('success'); }, logFailure)\n"
+
+            // RSA-OAEP: decrypting with the private key of another key pair
+            + "      .then(function() {\n"
+            + "        var params = { name: 'RSA-OAEP', modulusLength: 2048,\n"
+            + "                       publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' };\n"
+            + "        return Promise.all([\n"
+            + "          subtle.generateKey(params, false, ['encrypt', 'decrypt']),\n"
+            + "          subtle.generateKey(params, false, ['encrypt', 'decrypt'])\n"
+            + "        ]);\n"
+            + "      })\n"
+            + "      .then(function(pairs) {\n"
+            + "        return subtle.encrypt({ name: 'RSA-OAEP' }, pairs[0].publicKey, data)\n"
+            + "          .then(function(ciphertext) {\n"
+            + "            return subtle.decrypt({ name: 'RSA-OAEP' }, pairs[1].privateKey, ciphertext);\n"
+            + "          });\n"
+            + "      })\n"
+            + "      .then(function() { log('success'); }, logFailure);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }

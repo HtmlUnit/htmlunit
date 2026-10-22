@@ -303,7 +303,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             return setupRejectedPromise(() -> createDOMException(e.getMessage(), DOMException.SYNTAX_ERR));
         }
         catch (final BadPaddingException e) {
-            return setupRejectedPromise(() -> createDOMException("Decryption failed", (short) 0)); // OperationError
+            return setupRejectedPromise(() -> createDOMException("Decryption failed", DOMException.OPERATION_ERR));
         }
         catch (final GeneralSecurityException | UnsupportedOperationException e) {
             return setupRejectedPromise(() -> createDOMException("Operation is not supported: " + e.getMessage(),

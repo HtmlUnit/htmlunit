@@ -141,13 +141,49 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxConstant
     public static final int DATA_CLONE_ERR = 25;
 
+    // The following ids are HtmlUnit internal. The names have no legacy code,
+    // so they are not exposed to JavaScript and the code property returns 0.
+
+    /** Encoding error. */
+    public static final int ENCODING_ERR = 26;
+
+    /** Not readable error. */
+    public static final int NOT_READABLE_ERR = 27;
+
+    /** Unknown error. */
+    public static final int UNKNOWN_ERR = 28;
+
+    /** Constraint error. */
+    public static final int CONSTRAINT_ERR = 29;
+
+    /** Data error. */
+    public static final int DATA_ERR = 30;
+
+    /** Transaction inactive error. */
+    public static final int TRANSACTION_INACTIVE_ERR = 31;
+
+    /** Read only error. */
+    public static final int READ_ONLY_ERR = 32;
+
+    /** Version error. */
+    public static final int VERSION_ERR = 33;
+
+    /** Operation error. */
+    public static final int OPERATION_ERR = 34;
+
+    /** Not allowed error. */
+    public static final int NOT_ALLOWED_ERR = 35;
+
+    /** Opt out error. */
+    public static final int OPT_OUT_ERR = 36;
+
     private static final List<String> COMMON_ERROR_NAMES = Arrays.asList(
         "IndexSizeError",
-        null,
+        "DOMStringSizeError",
         "HierarchyRequestError",
         "WrongDocumentError",
         "InvalidCharacterError",
-        null,
+        "NoDataAllowedError",
         "NoModificationAllowedError",
         "NotFoundError",
         "NotSupportedError",
@@ -157,7 +193,7 @@ public class DOMException extends HtmlUnitScriptable {
         "InvalidModificationError",
         "NamespaceError",
         "InvalidAccessError",
-        null,
+        "ValidationError",
         "TypeMismatchError",
         "SecurityError",
         "NetworkError",
@@ -166,7 +202,18 @@ public class DOMException extends HtmlUnitScriptable {
         "QuotaExceededError",
         "TimeoutError",
         "InvalidNodeTypeError",
-        "DataCloneError");
+        "DataCloneError",
+        "EncodingError",
+        "NotReadableError",
+        "UnknownError",
+        "ConstraintError",
+        "DataError",
+        "TransactionInactiveError",
+        "ReadOnlyError",
+        "VersionError",
+        "OperationError",
+        "NotAllowedError",
+        "OptOutError");
 
     private int code_;
     private String name_;
@@ -188,7 +235,7 @@ public class DOMException extends HtmlUnitScriptable {
      */
     public DOMException(final String message, final int error) {
         message_ = message;
-        code_ = error;
+        code_ = toLegacyCode(error);
         name_ = COMMON_ERROR_NAMES.get(error - 1);
     }
 
@@ -220,11 +267,15 @@ public class DOMException extends HtmlUnitScriptable {
 
         final int idx = COMMON_ERROR_NAMES.indexOf(name_);
         if (idx != -1) {
-            code_ = idx + 1;
+            code_ = toLegacyCode(idx + 1);
             return;
         }
 
         code_ = 0;
+    }
+
+    private static int toLegacyCode(final int error) {
+        return error > DATA_CLONE_ERR ? 0 : error;
     }
 
     /**

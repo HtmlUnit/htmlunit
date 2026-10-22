@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
+            <action type="fix" dev="rbri">
+                SubtleCrypto: decrypt() no longer fails with an ArrayIndexOutOfBoundsException when the decryption
+                fails (e.g. AES-GCM authentication tag mismatch, invalid AES-CBC padding, RSA-OAEP decryption with
+                the wrong key); the promise is now rejected with an OperationError DOMException.
+            </action>
+            <action type="add" dev="rbri">
+                DOMException: internal ids (not exposed to JavaScript) for the error names without a legacy code
+                (e.g. OperationError, DataError, NotAllowedError); the code property of these exceptions is 0.
+            </action>
             <action type="add" dev="Vladimir Babin" issue="#91">
                 MockWebConnection is now Serializable.
             </action>
