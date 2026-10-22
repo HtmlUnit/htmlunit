@@ -23,6 +23,7 @@ import java.security.MessageDigest;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
+import java.security.SignatureException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.ECGenParameterSpec;
 import java.security.spec.MGF1ParameterSpec;
@@ -403,9 +404,19 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                         result = sig.sign();
                     }
                     else {
+                        final byte[] signature = toByteArray(asByteBuffer(existingSignature));
                         sig.initVerify(getInternalKey(key, PublicKey.class));
                         sig.update(inputData);
-                        result = sig.verify(toByteArray(asByteBuffer(existingSignature)));
+
+                        boolean valid;
+                        try {
+                            valid = sig.verify(signature);
+                        }
+                        catch (final SignatureException e) {
+                            // e.g. an RSA signature that does not have the length of the modulus
+                            valid = false;
+                        }
+                        result = valid;
                     }
                     break;
                 }

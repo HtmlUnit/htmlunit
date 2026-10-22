@@ -851,6 +851,8 @@ public class SubtleCryptoTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"AES-GCM", "128", "secret", "TypeError"},
             FF = {"AES-GCM", "128", "secret", "SyntaxError/DOMException"},
             FF_ESR = {"AES-GCM", "128", "secret", "SyntaxError/DOMException"})
+    @HtmlUnitNYI(FF = {"AES-GCM", "128", "secret", "TypeError"},
+            FF_ESR = {"AES-GCM", "128", "secret", "TypeError"})
     public void importKeyRawStringAlgorithm() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -915,6 +917,11 @@ public class SubtleCryptoTest extends WebDriverTestCase {
                        "NotSupportedError/DOMException"},
             FF = {"AES-GCM 128", "HMAC SHA-512 1024", "ECDSA P-384", "RSASSA-PKCS1-v1_5 SHA-256", "ECDSA P-256"},
             FF_ESR = {"AES-GCM 128", "HMAC SHA-512 1024", "ECDSA P-384", "RSASSA-PKCS1-v1_5 SHA-256", "ECDSA P-256"})
+    @HtmlUnitNYI(
+            FF = {"AES-GCM 128", "HMAC SHA-512 1024", "ECDSA P-384", "RSASSA-PKCS1-v1_5 SHA-256",
+                  "NotSupportedError/DOMException"},
+            FF_ESR = {"AES-GCM 128", "HMAC SHA-512 1024", "ECDSA P-384", "RSASSA-PKCS1-v1_5 SHA-256",
+                      "NotSupportedError/DOMException"})
     public void generateKeyAlgorithmNameCaseInsensitive() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1054,6 +1061,46 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "        log(e instanceof TypeError);\n"
             + "        log(e.name);\n"
             + "      });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Verifying an invalid signature resolves to false, also when the signature
+     * does not have the length of the modulus.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"RSASSA-PKCS1-v1_5 true false false false false",
+             "RSA-PSS true false false false false"})
+    public void verifyRsaInvalidSignature() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function check(params) {\n"
+            + "    var subtle = window.crypto.subtle;\n"
+            + "    var data = new Uint8Array([1, 2, 3]);\n"
+            + "    var keyParams = { name: params.name, modulusLength: 2048,\n"
+            + "                      publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' };\n"
+            + "    return subtle.generateKey(keyParams, false, ['sign', 'verify']).then(function(pair) {\n"
+            + "      return subtle.sign(params, pair.privateKey, data).then(function(signature) {\n"
+            + "        var signatures = [signature, new Uint8Array(3), new Uint8Array(0),\n"
+            + "                          new Uint8Array(256), new Uint8Array(256).fill(255)];\n"
+            + "        return Promise.all(signatures.map(function(s) {\n"
+            + "          return subtle.verify(params, pair.publicKey, s, data);\n"
+            + "        }));\n"
+            + "      });\n"
+            + "    }).then(function(results) {\n"
+            + "      log(params.name + ' ' + results.join(' '));\n"
+            + "    }, logEx);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    check({ name: 'RSASSA-PKCS1-v1_5' })\n"
+            + "      .then(function() { return check({ name: 'RSA-PSS', saltLength: 32 }); });\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
