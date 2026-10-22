@@ -205,14 +205,14 @@ public class HostParentOfCTest extends HostParentOf {
         test("CSS", "CSS");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            FF_ESR = "true/false")
+    @Alerts("false/false")
     void _CSS2Properties_CSS2Properties() throws Exception {
         test("CSS2Properties", "CSS2Properties");
     }
 
     @Alerts(DEFAULT = "false/false",
-            FF = "true/false")
+            FF = "true/false",
+            FF_ESR = "true/false")
     void _CSSStyleProperties_CSSStyleProperties() throws Exception {
         test("CSSStyleProperties", "CSSStyleProperties");
     }
@@ -393,14 +393,14 @@ public class HostParentOfCTest extends HostParentOf {
         test("CSSRuleList", "CSSRuleList");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            FF_ESR = "true/true")
+    @Alerts("false/false")
     void _CSSStyleDeclaration_CSS2Properties() throws Exception {
         test("CSSStyleDeclaration", "CSS2Properties");
     }
 
     @Alerts(DEFAULT = "false/false",
-            FF = "true/true")
+            FF = "true/true",
+            FF_ESR = "true/true")
     void _CSSStyleDeclaration_CSSStyleProperties() throws Exception {
         test("CSSStyleDeclaration", "CSSStyleProperties");
     }
