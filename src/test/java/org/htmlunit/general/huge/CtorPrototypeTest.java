@@ -229,14 +229,14 @@ public class CtorPrototypeTest extends WebDriverTestCase {
         test("CSS");
     }
 
-    @Alerts(DEFAULT = "exception",
-            FF_ESR = "false")
+    @Alerts("exception")
     void _CSS2Properties() throws Exception {
         test("CSS2Properties");
     }
 
     @Alerts(DEFAULT = "exception",
-            FF = "false")
+            FF = "false",
+            FF_ESR = "false")
     void _CSSStyleProperties() throws Exception {
         test("CSSStyleProperties");
     }
