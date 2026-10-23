@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Object.fromEntries() storing array index keys as named properties fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Several inconsistencies in Math.
+            </action>
             <action type="fix" dev="rbri">
                 WebCrypto: AES-GCM encrypt()/decrypt() with an empty iv rejects with an OperationError (was SyntaxError).
             </action>
@@ -29,7 +35,7 @@
                 for generateKey() and failing operations (e.g. RSA-OAEP data too long, RSA-PSS salt too long, invalid RSA
                 public exponent) now reject with an OperationError. Decrypting an empty AES-CBC ciphertext is rejected now.
             </action>
-           <action type="fix" dev="rbri">
+            <action type="fix" dev="rbri">
                 SubtleCrypto: AES-CTR now increments only the rightmost 'length' bits of the counter block.
                 Data that needs more than 2^length counter blocks is rejected with a DataError.
             </action>

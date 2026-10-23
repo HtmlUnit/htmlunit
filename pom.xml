@@ -71,7 +71,7 @@
         <commons-fileupload.version>2.0.0-M1</commons-fileupload.version>
         <image-comparison.version>4.4.0</image-comparison.version>
         <imageio-batik.version>3.15.3</imageio-batik.version>
-        <batik-transcoder.version>1.19</batik-transcoder.version>
+        <batik-transcoder.version>1.20</batik-transcoder.version>
         <jfreechart.version>1.5.6</jfreechart.version>
         <maven-model.version>3.10.0</maven-model.version>
         <maven-artifact.version>3.10.0</maven-artifact.version>

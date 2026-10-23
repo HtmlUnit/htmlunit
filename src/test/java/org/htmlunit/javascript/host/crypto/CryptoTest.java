@@ -325,7 +325,7 @@ public class CryptoTest extends WebDriverTestCase {
     }
 
     /**
-     * getRandomValues() with a view on a detached buffer.
+     * Calling getRandomValues() with a view on a detached buffer.
      * @throws Exception if the test fails
      */
     @Test

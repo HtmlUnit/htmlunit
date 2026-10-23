@@ -840,7 +840,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
     }
 
     /**
-     * importKey() accepts the algorithm as a string.
+     * Function importKey() accepts the algorithm as a string.
      * @throws Exception if the test fails
      */
     @Test
@@ -1375,7 +1375,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
     }
 
     /**
-     * generateKey() with parameters that can not be used to generate a key.
+     * Calling generateKey() with parameters that can not be used to generate a key.
      * @throws Exception if the test fails
      */
     @Test
@@ -1457,7 +1457,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
     }
 
     /**
-     * generateKey() HMAC with length 0.
+     * Calling generateKey() HMAC with length 0.
      * @throws Exception if the test fails
      */
     @Test
@@ -1492,8 +1492,8 @@ public class SubtleCryptoTest extends WebDriverTestCase {
     }
 
     /**
-     * importKey() raw AES with key data that is not 128, 192 or 256 bits long. The key data is checked
-     * before the usages.
+     * Calling importKey() raw AES with key data that is not 128, 192 or 256 bits long.
+     * The key data is checked before the usages.
      * @throws Exception if the test fails
      */
     @Test
@@ -1529,7 +1529,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
     }
 
     /**
-     * importKey() raw HMAC with empty key data or a length that does not fit the key data.
+     * Calling importKey() raw HMAC with empty key data or a length that does not fit the key data.
      * @throws Exception if the test fails
      */
     @Test
