@@ -7,7 +7,19 @@
     </properties>
 
     <body>
-        <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome 156">
+        <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="fix" dev="RhinoTeam">
+                core-js: converting the smallest subnormal numbers to strings fixed.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: TypedArray.prototype.with read the length before coercing its arguments.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: convenience methods for manipulating Promises from Java added.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: ArrayBuffer transfer methods should not use the species constructor.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Object.fromEntries() storing array index keys as named properties fixed.
             </action>
