@@ -23,9 +23,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,6 +48,7 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.MockWebConnection.RawResponseData;
 import org.htmlunit.WebServerTestCase.SSLVariant;
+import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.junit.TestCaseCorrector;
@@ -260,10 +263,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /**
      * The key of the driver cache for real browsers; the classic and the BiDi variant of a browser
-     * need their own driver.
+     * and the drivers configured for downloads need their own driver.
      */
-    protected record RealBrowserKey(BrowserVersion browserVersion, boolean bidi) {
+    protected record RealBrowserKey(BrowserVersion browserVersion, boolean bidi, boolean downloads) {
     }
+
+    /** The download directories of the real browsers (only used by tests that {@link #needDownloads()}). */
+    private static final Map<RealBrowserKey, File> DOWNLOAD_DIRS_ = new HashMap<>();
 
     /** The driver cache for real browsers. */
     protected static final Map<RealBrowserKey, WebDriver> WEB_DRIVERS_REAL_BROWSERS = new HashMap<>();
@@ -283,6 +289,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private boolean useRealBrowser_;
     private boolean useBiDi_;
+    private final List<String> htmlUnitDownloads_ = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * The HtmlUnitDriver.
@@ -295,6 +302,113 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected boolean needThreeConnections() {
         return false;
+    }
+
+    /**
+     * Override this function in a test class to run the test with a driver that is able to
+     * handle downloads (attachments).
+     * <ul>
+     *   <li>Real browsers are started with a download directory and without any download prompt;
+     *   such a browser is cached separately, so the other tests are not affected.</li>
+     *   <li>HtmlUnit gets an {@link AttachmentHandler} that records the suggested file names.</li>
+     * </ul>
+     * Use {@link #waitForDownloads(int, Duration)} to get the names of the downloaded files.
+     * @return true if the test class needs download support
+     */
+    protected boolean needDownloads() {
+        return false;
+    }
+
+    /**
+     * @return the download directory of the real browser or {@code null} if {@link #needDownloads()}
+     *         is {@code false} or HtmlUnit is used
+     */
+    protected final File getDownloadDirectory() {
+        if (!needDownloads() || !useRealBrowser()) {
+            return null;
+        }
+        synchronized (WEB_DRIVERS_REAL_BROWSERS) {
+            return DOWNLOAD_DIRS_.get(realBrowserKey());
+        }
+    }
+
+    /**
+     * Waits for the downloads of the test and returns their file names (sorted).
+     * Unfinished downloads of the real browsers (like {@code *.crdownload}) are ignored.
+     * Returns what is available after the max wait time if there are fewer than expected downloads;
+     * assert the result.
+     *
+     * @param expectedCount the number of expected downloads
+     * @param maxWaitTime the maximum time to wait
+     * @return the sorted file names
+     * @throws InterruptedException in case of an interrupt
+     */
+    protected final List<String> waitForDownloads(final int expectedCount, final Duration maxWaitTime)
+            throws InterruptedException {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
+
+        List<String> names = currentDownloads();
+        while (names.size() < expectedCount && System.currentTimeMillis() < maxWait) {
+            Thread.sleep(100);
+            names = currentDownloads();
+        }
+        return names;
+    }
+
+    private List<String> currentDownloads() {
+        final List<String> names = new ArrayList<>();
+        if (useRealBrowser()) {
+            final File dir = getDownloadDirectory();
+            final File[] files = dir == null ? null : dir.listFiles();
+            if (files != null) {
+                for (final File file : files) {
+                    final String name = file.getName();
+                    // unfinished downloads
+                    if (file.isFile()
+                            && !name.endsWith(".crdownload") && !name.endsWith(".part")
+                            && !name.endsWith(".tmp") && !name.endsWith(".download")) {
+                        names.add(name);
+                    }
+                }
+            }
+        }
+        else {
+            names.addAll(htmlUnitDownloads_);
+        }
+        Collections.sort(names);
+        return names;
+    }
+
+    private void clearDownloads() {
+        htmlUnitDownloads_.clear();
+        final File dir = getDownloadDirectory();
+        if (dir != null) {
+            final File[] files = dir.listFiles();
+            if (files != null) {
+                for (final File file : files) {
+                    FileUtils.deleteQuietly(file);
+                }
+            }
+        }
+    }
+
+    private File createDownloadDirectory() throws IOException {
+        synchronized (WEB_DRIVERS_REAL_BROWSERS) {
+            File dir = DOWNLOAD_DIRS_.get(realBrowserKey());
+            if (dir == null) {
+                dir = Files.createTempDirectory("htmlunit-downloads-").toFile();
+                DOWNLOAD_DIRS_.put(realBrowserKey(), dir);
+            }
+            return dir;
+        }
+    }
+
+    private void addChromeDownloadPreferences(final Map<String, Object> prefs) throws IOException {
+        if (needDownloads()) {
+            prefs.put("download.default_directory", createDownloadDirectory().getAbsolutePath());
+            prefs.put("download.prompt_for_download", false);
+            prefs.put("download.directory_upgrade", true);
+        }
     }
 
     /**
@@ -421,6 +535,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         shutDownRealBrowsers();
 
+        synchronized (WEB_DRIVERS_REAL_BROWSERS) {
+            for (final File dir : DOWNLOAD_DIRS_.values()) {
+                FileUtils.deleteQuietly(dir);
+            }
+            DOWNLOAD_DIRS_.clear();
+        }
+
         stopWebServers();
     }
 
@@ -530,7 +651,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     private RealBrowserKey realBrowserKey() {
-        return new RealBrowserKey(getBrowserVersion(), useBiDi());
+        return new RealBrowserKey(getBrowserVersion(), useBiDi(), needDownloads());
     }
 
     /**
@@ -571,7 +692,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
                 options.addArguments("--lang=" + locale);
                 // https://stackoverflow.com/questions/11289597/webdriver-how-to-specify-preferred-languages-for-chrome
-                options.setExperimentalOption("prefs", Map.of("intl.accept_languages", locale));
+                final Map<String, Object> prefs = new HashMap<>();
+                prefs.put("intl.accept_languages", locale);
+                addChromeDownloadPreferences(prefs);
+                options.setExperimentalOption("prefs", prefs);
                 options.addArguments("--remote-allow-origins=*");
 
                 // seems to be not required for edge
@@ -610,7 +734,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
                 options.addArguments("--lang=" + locale);
                 // https://stackoverflow.com/questions/11289597/webdriver-how-to-specify-preferred-languages-for-chrome
-                options.setExperimentalOption("prefs", Map.of("intl.accept_languages", locale));
+                final Map<String, Object> prefs = new HashMap<>();
+                prefs.put("intl.accept_languages", locale);
+                addChromeDownloadPreferences(prefs);
+                options.setExperimentalOption("prefs", prefs);
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-search-engine-choice-screen");
                 // see https://www.selenium.dev/blog/2024/chrome-browser-woes/
@@ -651,12 +778,28 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             webDriver_ = new HtmlUnitDriver(driverOptions);
             webDriver_.setExecutor(EXECUTOR_POOL);
+
+            if (needDownloads()) {
+                webDriver_.getWebClient().setAttachmentHandler(new AttachmentHandler() {
+                    @Override
+                    public void handleAttachment(final Page page, final String attachmentFilename) {
+                        htmlUnitDownloads_.add(attachmentFilename == null ? "" : attachmentFilename);
+                    }
+
+                    @Override
+                    public boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
+                        // handled here, no new window is needed
+                        htmlUnitDownloads_.add(attachmentFilename == null ? "" : attachmentFilename);
+                        return true;
+                    }
+                });
+            }
         }
         return webDriver_;
     }
 
     private FirefoxDriver createFirefoxDriver(final String geckodriverBinary, final String binary,
-            final boolean bidi) {
+            final boolean bidi) throws IOException {
         final FirefoxDriverService service = new GeckoDriverService.Builder()
                 .withLogOutput(System.out)
                 .usingDriverExecutable(new File(geckodriverBinary))
@@ -680,6 +823,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final FirefoxProfile profile = new FirefoxProfile();
         profile.setPreference("intl.accept_languages", locale);
+        if (needDownloads()) {
+            profile.setPreference("browser.download.folderList", 2);
+            profile.setPreference("browser.download.dir", createDownloadDirectory().getAbsolutePath());
+            profile.setPreference("browser.download.useDownloadDir", true);
+            profile.setPreference("browser.download.manager.showWhenStarting", false);
+            profile.setPreference("browser.helperApps.neverAsk.saveToDisk",
+                    "application/octet-stream,application/pdf,application/zip,text/plain,text/html,text/csv");
+            profile.setPreference("pdfjs.disabled", true);
+        }
         // no idea so far how to set this
         // final String tz = getBrowserVersion().getSystemTimezone().getID();
         // profile.setPreference("intl.tz", tz);
@@ -1556,6 +1708,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     @BeforeEach
     public void beforeTest() throws InterruptedException {
+        if (needDownloads()) {
+            clearDownloads();
+        }
         if (!isWebClientCached()) {
             if (!getJavaScriptThreads().isEmpty()) {
                 Thread.sleep(200);
