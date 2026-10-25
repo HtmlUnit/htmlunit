@@ -81,7 +81,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion CHROME = new BrowserVersion(156, "Chrome");
 
     /** Latest Edge. */
-    public static final BrowserVersion EDGE = new BrowserVersion(154, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(156, "Edge");
 
     /**
      * Array with all supported browsers.
@@ -249,9 +249,9 @@ public final class BrowserVersion implements Serializable {
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
 
-        EDGE.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
+        EDGE.secClientHintUserAgentHeader_ = "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\""
                 + EDGE.getBrowserVersionNumeric() + "\", \"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Not A(Brand\";v=\"99\"";
+                + EDGE.getBrowserVersionNumeric() + "\"";
 
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
