@@ -18547,7 +18547,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "encapsulateBits(),encapsulateKey(),encrypt(),exportKey(),generateKey(),getPublicKey(),"
                 + "importKey(),sign(),unwrapKey(),verify(),"
                 + "wrapKey()",
-            EDGE = "constructor(),decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),generateKey(),"
+            EDGE = "constructor(),decapsulateBits(),decapsulateKey(),decrypt(),deriveBits(),deriveKey(),digest(),"
+                + "encapsulateBits(),encapsulateKey(),encrypt(),exportKey(),generateKey(),getPublicKey(),"
                 + "importKey(),sign(),unwrapKey(),verify(),"
                 + "wrapKey()",
             FF = "constructor(),decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),generateKey(),"

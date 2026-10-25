@@ -7627,7 +7627,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "isolation,item(),justifyContent,justifyItems,justifySelf,left,length,letterSpacing,lightingColor,"
                 + "lineBreak,lineGapOverride,lineHeight,listStyle,listStyleImage,listStylePosition,listStyleType,"
                 + "margin,marginBlock,marginBlockEnd,marginBlockStart,marginBottom,marginInline,marginInlineEnd,"
-                + "marginInlineStart,marginLeft,marginRight,marginTop,marker,markerEnd,markerMid,markerStart,mask,"
+                + "marginInlineStart,marginLeft,marginRight,marginTop,marginTrim,"
+                + "marker,markerEnd,markerMid,markerStart,mask,"
                 + "maskClip,maskComposite,maskImage,maskMode,maskOrigin,maskPosition,maskRepeat,maskSize,maskType,"
                 + "mathDepth,mathShift,mathStyle,maxBlockSize,maxHeight,maxInlineSize,maxWidth,minBlockSize,"
                 + "minHeight,minInlineSize,minWidth,mixBlendMode,navigation,negative,objectFit,objectPosition,"
@@ -9150,7 +9151,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "isolation,item(),justifyContent,justifyItems,justifySelf,left,length,letterSpacing,lightingColor,"
                 + "lineBreak,lineGapOverride,lineHeight,listStyle,listStyleImage,listStylePosition,listStyleType,"
                 + "margin,marginBlock,marginBlockEnd,marginBlockStart,marginBottom,marginInline,marginInlineEnd,"
-                + "marginInlineStart,marginLeft,marginRight,marginTop,marker,markerEnd,markerMid,markerStart,mask,"
+                + "marginInlineStart,marginLeft,marginRight,marginTop,marginTrim,"
+                + "marker,markerEnd,markerMid,markerStart,mask,"
                 + "maskClip,maskComposite,maskImage,maskMode,maskOrigin,maskPosition,maskRepeat,maskSize,maskType,"
                 + "mathDepth,mathShift,mathStyle,maxBlockSize,maxHeight,maxInlineSize,maxWidth,minBlockSize,"
                 + "minHeight,minInlineSize,minWidth,mixBlendMode,navigation,negative,objectFit,objectPosition,"
@@ -9767,6 +9769,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),"
                 + "generateKey(),importKey(),sign(),unwrapKey(),verify(),wrapKey()",
             CHROME = "decapsulateBits(),decapsulateKey(),decrypt(),deriveBits(),deriveKey(),digest(),encapsulateBits(),"
+                + "encapsulateKey(),encrypt(),exportKey(),generateKey(),getPublicKey(),importKey(),sign(),"
+                + "unwrapKey(),verify(),"
+                + "wrapKey()",
+            EDGE = "decapsulateBits(),decapsulateKey(),decrypt(),deriveBits(),deriveKey(),digest(),encapsulateBits(),"
                 + "encapsulateKey(),encrypt(),exportKey(),generateKey(),getPublicKey(),importKey(),sign(),"
                 + "unwrapKey(),verify(),"
                 + "wrapKey()")
