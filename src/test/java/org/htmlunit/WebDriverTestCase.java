@@ -349,7 +349,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         List<String> names = currentDownloads();
         while (names.size() < expectedCount && System.currentTimeMillis() < maxWait) {
-            Thread.sleep(100);
+            Thread.sleep(10);
             names = currentDownloads();
         }
         return names;
@@ -1801,6 +1801,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         final Set<String> handles = driver.getWindowHandles();
                         // close all windows except the current one
                         handles.remove(currentWindow);
+                        if (needDownloads()) {
+                            // some browsers (edge) open an extra window/tab for a download and
+                            // need 20s to close it (or fail); leave it open, the browser is
+                            // quit at the end anyway
+                            handles.clear();
+                        }
 
                         if (!handles.isEmpty()) {
                             for (final String handle : handles) {
