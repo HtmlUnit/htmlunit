@@ -116,10 +116,10 @@ public class Attachment {
      * </ul>
      *
      * <p>Not all browsers behave exactly the same in some corner cases. If the extended value uses an
-     * unknown charset or an invalid percent encoding, this method behaves like Chrome and Edge:
-     * an unknown charset is ignored and an invalid percent encoding is kept as it is.
-     * Firefox uses the extended value even with an unknown charset, but ignores it if the percent
-     * encoding is invalid.</p>
+     * unknown charset, this method behaves like Chrome and Edge and ignores the extended value;
+     * Firefox decodes the value anyway. For an invalid percent encoding, Chrome and Edge keep the broken
+     * value as it is, while Firefox ignores the extended value; this method behaves like Firefox and
+     * falls back to the plain {@code filename}.</p>
      *
      * @param contentDispositionHeader the value of the {@code Content-Disposition} header, can be {@code null}
      * @return the sanitized file name, or {@code null} if none was suggested

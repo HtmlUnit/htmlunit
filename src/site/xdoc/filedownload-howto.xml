@@ -210,7 +210,8 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 </table>
                 <p>
                     A few corner cases are handled differently by the browsers, for example an extended value with an
-                    invalid percent encoding. In this case HtmlUnit behaves like Chrome and Edge.
+                    invalid percent encoding. In this case HtmlUnit behaves like Firefox and ignores the extended value, a
+                    unknown charset is handled like Chrome and Edge do.
                 </p>
                 <p>
                     The same rules are available for your own code: <code>Attachment.getSuggestedFilename(String)</code> returns the

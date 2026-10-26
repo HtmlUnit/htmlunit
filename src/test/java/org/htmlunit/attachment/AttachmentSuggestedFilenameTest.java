@@ -235,7 +235,7 @@ public class AttachmentSuggestedFilenameTest {
      */
     @Test
     public void extendedInvalidEncoding() throws Exception {
-        assertEquals("abc%zz.txt", Attachment.getSuggestedFilename("attachment; filename*=UTF-8''abc%zz.txt; filename=\"fallback.txt\""));
+        assertEquals("fallback.txt", Attachment.getSuggestedFilename("attachment; filename*=UTF-8''abc%zz.txt; filename=\"fallback.txt\""));
     }
 
     /**

@@ -267,15 +267,17 @@ public class ContentDispositionParserTest {
     }
 
     /**
-     * Extended broken percent encoding is kept.
+     * Extended broken percent encoding is ignored.
      *
      * @throws Exception if the test fails
      */
     @Test
-    public void extendedBrokenPercentEncodingIsKept() throws Exception {
-        assertEquals("abc%zz.txt", ContentDispositionParser.parse("attachment; filename*=UTF-8''abc%zz.txt").getFilename());
-        assertEquals("abc%4", ContentDispositionParser.parse("attachment; filename*=UTF-8''abc%4").getFilename());
-        assertEquals("abc%", ContentDispositionParser.parse("attachment; filename*=UTF-8''abc%").getFilename());
+    public void extendedBrokenPercentEncodingIsIgnored() throws Exception {
+        assertNull(ContentDispositionParser.parse("attachment; filename*=UTF-8''abc%zz.txt").getFilename());
+        assertNull(ContentDispositionParser.parse("attachment; filename*=UTF-8''abc%4").getFilename());
+        assertNull(ContentDispositionParser.parse("attachment; filename*=UTF-8''abc%").getFilename());
+        assertEquals("a.txt", ContentDispositionParser
+                .parse("attachment; filename*=UTF-8''abc%zz.txt; filename=a.txt").getFilename());
     }
 
     /**

@@ -23,19 +23,24 @@ import java.util.Map;
 
 /**
  * Parser for the {@code Content-Disposition} header.
- * - RFC 6266 (HTTP) and RFC 2183 (disposition type and parameters)
- * - RFC 8187 extended parameters ({@code filename*=UTF-8''...}); supported charsets are
- *   UTF-8 and ISO-8859-1
- * <p>
- * The parser is lenient like the browsers are: parameter names are case-insensitive,
+ * <ul>
+ * <li>RFC 6266 (HTTP) and RFC 2183 (disposition type and parameters)</li>
+ * <li>RFC 8187 extended parameters ({@code filename*=UTF-8''...}); supported charsets are
+ * UTF-8 and ISO-8859-1</li>
+ * </ul>
+ *
+ * <p>The parser is lenient like the browsers are: parameter names are case-insensitive,
  * white space around names and values is ignored, an unterminated quoted string
- * ends at the end of the header, a broken percent encoding in an extended value is kept as is.
- * </p>
+ * ends at the end of the header. An extended value with a broken percent encoding is ignored
+ * (like Firefox does), so the plain parameter can be used as fallback.</p>
  *
  * @author Ronald Brill
  */
 public final class ContentDispositionParser {
 
+    /**
+     * Utility class, not intended to be instantiated.
+     */
     private ContentDispositionParser() {
         // Utility class
     }
@@ -132,7 +137,8 @@ public final class ContentDispositionParser {
      * Decodes a RFC 8187 value (charset'language'percent-encoded).
      *
      * @param value the raw value of the extended parameter
-     * @return the decoded value or {@code null} if the format is wrong or the charset is not supported
+     * @return the decoded value or {@code null} if the format is wrong, the charset is not supported
+     *         or the percent encoding is invalid
      */
     private static String decodeExtendedValue(final String value) {
         final int first = value.indexOf('\'');
@@ -163,8 +169,11 @@ public final class ContentDispositionParser {
                         | Character.digit(encoded.charAt(i + 2), 16));
                 i += 2;
             }
+            else if (c == '%') {
+                // invalid percent encoding; ignore the whole value
+                return null;
+            }
             else {
-                // invalid or no percent encoding: keep it
                 final byte[] bytes = String.valueOf(c).getBytes(charset);
                 out.write(bytes, 0, bytes.length);
             }
