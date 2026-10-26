@@ -116,7 +116,7 @@
                         <ul>
                             <li>A new web window is created.</li>
                             <li>An <code>UnexpectedPage</code> is constructed.</li>
-                            <li>The method <code>handleAttachment(Page, String)</code> on your <code>AttachmentHandler</code>is invoked.</li>
+                            <li>The method <code>handleAttachment(Page, String)</code> on your <code>AttachmentHandler</code> is invoked.</li>
                             <li>The <code>UnexpectedPage</code> is placed inside the new window.</li>
                         </ul>
                     </li>
@@ -154,6 +154,75 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                     set bypasses <code>isAttachment()</code> checks and directly forwards the response to the registered
                     <code>AttachmentHandler</code>.
                 </p>
+            </subsection>
+
+            <subsection name="The file name of a download" id="download_filename">
+                <p>
+                    Both <code>handleAttachment</code> methods get the file name as second parameter. HtmlUnit determines
+                    this name the same way as a real browser does when it chooses the name of the file it saves:
+                </p>
+                <ul>
+                    <li>
+                        If the download was triggered by an anchor (or area) with a <code>download</code> attribute,
+                        the value of this attribute is used as it is.
+                    </li>
+                    <li>
+                        Otherwise the name is taken from the <code>filename</code> and <code>filename*</code>
+                        parameters of the <code>Content-Disposition</code> header of the response
+                        (see <a href="https://www.rfc-editor.org/rfc/rfc6266">RFC 6266</a> and
+                        <a href="https://www.rfc-editor.org/rfc/rfc8187">RFC 8187</a>).
+                    </li>
+                    <li>
+                        If there is no usable name, the parameter is <code>null</code>. A real browser uses the last part of
+                        the URL in this case; the <code>DownloadingAttachmentHandler</code> does the same.
+                    </li>
+                </ul>
+                <p>
+                    The name from the header is <strong>not</strong> the plain value sent by the server. Because a server
+                    (or an attacker) can send everything, browsers never trust this value and neither does HtmlUnit.
+                    The following rules are applied:
+                </p>
+                <ul>
+                    <li>Parameter names are case-insensitive, the value can be a token or a quoted string.</li>
+                    <li>
+                        <code>filename*</code> (for example <code>filename*=UTF-8''gr%C3%B6%C3%9Fe.txt</code>) wins over
+                        <code>filename</code>. UTF-8 and ISO-8859-1 are supported.
+                    </li>
+                    <li>
+                        The characters <code>\ / : * ? " &lt; &gt; |</code> and control characters are replaced by an underscore.
+                        This way the name never contains a path, <code>../../evil.txt</code> becomes <code>_.._evil.txt</code>.
+                    </li>
+                    <li>Leading dots and white space and trailing dots and white space are removed.</li>
+                </ul>
+                <p>
+                    The following table shows some examples:
+                </p>
+                <table>
+                    <tr><th>Content-Disposition</th><th>File name</th></tr>
+                    <tr><td><code>attachment; filename="foo.txt"</code></td><td><code>foo.txt</code></td></tr>
+                    <tr><td><code>attachment; FILENAME=foo.txt</code></td><td><code>foo.txt</code></td></tr>
+                    <tr><td><code>attachment; filename="a;b.txt"</code></td><td><code>a;b.txt</code></td></tr>
+                    <tr><td><code>attachment; filename="fallback.txt"; filename*=UTF-8''gr%C3%B6%C3%9Fe.txt</code></td><td><code>gr&#246;&#223;e.txt</code></td></tr>
+                    <tr><td><code>attachment; filename="a:b.txt"</code></td><td><code>a_b.txt</code></td></tr>
+                    <tr><td><code>attachment; filename="/etc/evil.txt"</code></td><td><code>_etc_evil.txt</code></td></tr>
+                    <tr><td><code>attachment; filename=".hidden"</code></td><td><code>hidden</code></td></tr>
+                    <tr><td><code>attachment; filename=""</code></td><td><code>null</code></td></tr>
+                </table>
+                <p>
+                    A few corner cases are handled differently by the browsers, for example an extended value with an
+                    invalid percent encoding. In this case HtmlUnit behaves like Chrome and Edge.
+                </p>
+                <p>
+                    The same rules are available for your own code: <code>Attachment.getSuggestedFilename(String)</code> returns the
+                    name for a given header value, and the <code>ContentDispositionParser</code> (package
+                    <code>org.htmlunit.http</code>) provides the unmodified parameters of the header.
+                </p>
+<source><![CDATA[ContentDisposition cd = ContentDispositionParser.parse(response.getResponseHeaderValue("Content-Disposition"));
+if (cd != null && cd.isAttachment()) {
+    // the file name as sent by the server, not sanitized
+    String rawName = cd.getFilename();
+}
+]]></source>
             </subsection>
         </section>
     </body>

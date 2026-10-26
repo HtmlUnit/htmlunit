@@ -8,6 +8,24 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="add" dev="rbri">
+                New ContentDispositionParser for parsing the Content-Disposition
+                header according to RFC 6266, RFC 2183 and RFC 8187.
+            </action>
+            <action type="fix" dev="rbri">
+                Attachment.getSuggestedFilename() now determines the file name like the browsers do:
+                case-insensitive parameter names, quoted strings (with ';' and escaped characters),
+                filename* (UTF-8, ISO-8859-1) takes precedence over filename, characters that are not
+                allowed in file names (\ / : * ? " &lt; &gt; |) are replaced by '_' and leading and trailing
+                dots and white space are removed.
+            </action>
+            <action type="update" dev="rbri">
+                WebSite: file download documentation updated with more details about download file names.
+            </action>
+            <action type="update" dev="rbri">
+                WebDriverTestCase: support for testing file downloads with real browsers
+                (needDownloads()) and optional WebDriver BiDi runs (chrome-bidi, ff-bidi, ff-esr-bidi, edge-bidi).
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: converting the smallest subnormal numbers to strings fixed.
             </action>
