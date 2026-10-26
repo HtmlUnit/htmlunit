@@ -30,7 +30,7 @@ import org.openqa.selenium.JavascriptExecutor;
  *
  * @author Ronald Brill
  */
-public class ContentDispositionDownloadTest extends WebDriverTestCase {
+public class AttachmentSuggestedFilename2Test extends WebDriverTestCase {
 
     @Override
     protected boolean needDownloads() {
