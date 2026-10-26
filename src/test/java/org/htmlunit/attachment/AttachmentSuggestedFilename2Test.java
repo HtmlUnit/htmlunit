@@ -242,8 +242,12 @@ public class AttachmentSuggestedFilename2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "fallback.txt", FF = "bar.txt", FF_ESR = "bar.txt")
-    @HtmlUnitNYI(FF = "fallback.txt", FF_ESR = "fallback.txt")
+    @Alerts(DEFAULT = "fallback.txt",
+            FF = "bar.txt",
+            FF_ESR = "bar.txt")
+    @HtmlUnitNYI(
+            FF = "fallback.txt",
+            FF_ESR = "fallback.txt")
     public void extendedUnknownCharsetFallsBack() throws Exception {
         download("attachment; filename*=foo''bar.txt; filename=\"fallback.txt\"");
     }
@@ -253,8 +257,12 @@ public class AttachmentSuggestedFilename2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "abc%zz.txt", FF = "fallback.txt", FF_ESR = "fallback.txt")
-    @HtmlUnitNYI(CHROME = "fallback.txt", EDGE = "fallback.txt")
+    @Alerts(DEFAULT = "abc%zz.txt",
+            FF = "fallback.txt",
+            FF_ESR = "fallback.txt")
+    @HtmlUnitNYI(
+            CHROME = "fallback.txt",
+            EDGE = "fallback.txt")
     public void extendedInvalidEncodingFallsBack() throws Exception {
         download("attachment; filename*=UTF-8''abc%zz.txt; filename=\"fallback.txt\"");
     }
