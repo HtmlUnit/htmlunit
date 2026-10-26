@@ -18558,6 +18558,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "importKey(),sign(),unwrapKey(),verify(),"
                 + "wrapKey()")
     @HtmlUnitNYI(CHROME = "constructor(),decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),generateKey(),"
+                + "importKey(),sign(),unwrapKey(),verify(),wrapKey()",
+            EDGE = "constructor(),decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),generateKey(),"
                 + "importKey(),sign(),unwrapKey(),verify(),wrapKey()")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");

@@ -9778,6 +9778,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "wrapKey()")
     @HtmlUnitNYI(
             CHROME = "decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),"
+                + "generateKey(),importKey(),sign(),unwrapKey(),verify(),wrapKey()",
+            EDGE = "decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),"
                 + "generateKey(),importKey(),sign(),unwrapKey(),verify(),wrapKey()")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");
