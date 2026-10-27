@@ -48,7 +48,7 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.MockWebConnection.RawResponseData;
 import org.htmlunit.WebServerTestCase.SSLVariant;
-import org.htmlunit.attachment.AttachmentHandler;
+import org.htmlunit.attachment.DownloadingAttachmentHandler;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.junit.TestCaseCorrector;
@@ -289,7 +289,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private boolean useRealBrowser_;
     private boolean useBiDi_;
-    private final List<String> htmlUnitDownloads_ = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * The HtmlUnitDriver.
@@ -310,7 +309,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * <ul>
      *   <li>Real browsers are started with a download directory and without any download prompt;
      *   such a browser is cached separately, so the other tests are not affected.</li>
-     *   <li>HtmlUnit gets an {@link AttachmentHandler} that records the suggested file names.</li>
+     *   <li>HtmlUnit gets a {@link DownloadingAttachmentHandler} that stores the files in a download
+     *   directory, so HtmlUnit and the real browsers are checked the same way.</li>
      * </ul>
      * Use {@link #waitForDownloads(int, Duration)} to get the names of the downloaded files.
      * @return true if the test class needs download support
@@ -320,11 +320,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * @return the download directory of the real browser or {@code null} if {@link #needDownloads()}
-     *         is {@code false} or HtmlUnit is used
+     * @return the download directory of the browser (HtmlUnit or real browser) or {@code null}
+     *         if {@link #needDownloads()} is {@code false}
      */
     protected final File getDownloadDirectory() {
-        if (!needDownloads() || !useRealBrowser()) {
+        if (!needDownloads()) {
             return null;
         }
         synchronized (WEB_DRIVERS_REAL_BROWSERS) {
@@ -357,30 +357,24 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private List<String> currentDownloads() {
         final List<String> names = new ArrayList<>();
-        if (useRealBrowser()) {
-            final File dir = getDownloadDirectory();
-            final File[] files = dir == null ? null : dir.listFiles();
-            if (files != null) {
-                for (final File file : files) {
-                    final String name = file.getName();
-                    // unfinished downloads
-                    if (file.isFile()
-                            && !name.endsWith(".crdownload") && !name.endsWith(".part")
-                            && !name.endsWith(".tmp") && !name.endsWith(".download")) {
-                        names.add(name);
-                    }
+        final File dir = getDownloadDirectory();
+        final File[] files = dir == null ? null : dir.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                final String name = file.getName();
+                // unfinished downloads
+                if (file.isFile()
+                        && !name.endsWith(".crdownload") && !name.endsWith(".part")
+                        && !name.endsWith(".tmp") && !name.endsWith(".download")) {
+                    names.add(name);
                 }
             }
-        }
-        else {
-            names.addAll(htmlUnitDownloads_);
         }
         Collections.sort(names);
         return names;
     }
 
     private void clearDownloads() {
-        htmlUnitDownloads_.clear();
         final File dir = getDownloadDirectory();
         if (dir != null) {
             final File[] files = dir.listFiles();
@@ -780,19 +774,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
             webDriver_.setExecutor(EXECUTOR_POOL);
 
             if (needDownloads()) {
-                webDriver_.getWebClient().setAttachmentHandler(new AttachmentHandler() {
-                    @Override
-                    public void handleAttachment(final Page page, final String attachmentFilename) {
-                        htmlUnitDownloads_.add(attachmentFilename == null ? "" : attachmentFilename);
-                    }
-
-                    @Override
-                    public boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
-                        // handled here, no new window is needed
-                        htmlUnitDownloads_.add(attachmentFilename == null ? "" : attachmentFilename);
-                        return true;
-                    }
-                });
+                try {
+                    webDriver_.getWebClient().setAttachmentHandler(
+                            new DownloadingAttachmentHandler(createDownloadDirectory().toPath()));
+                }
+                catch (final IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         return webDriver_;

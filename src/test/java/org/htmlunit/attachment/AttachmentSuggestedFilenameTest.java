@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit tests for {@link Attachment#getSuggestedFilename(String)}.
  * The expectations are the file names real browsers (Chrome, Edge) save, see
- * {@code ContentDispositionDownloadTest}.
+ * {@code AttachmentSuggestedFilename2Test}.
  *
  * @author Ronald Brill
  */

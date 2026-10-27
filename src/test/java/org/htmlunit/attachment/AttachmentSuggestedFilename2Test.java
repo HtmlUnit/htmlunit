@@ -28,6 +28,8 @@ import org.openqa.selenium.JavascriptExecutor;
 /**
  * Tests for the file name a browser suggests for a download ({@code Content-Disposition} header).
  *
+ * <p>The expectations are the file names that real browsers save.</p>
+ *
  * @author Ronald Brill
  */
 public class AttachmentSuggestedFilename2Test extends WebDriverTestCase {
@@ -144,7 +146,7 @@ public class AttachmentSuggestedFilename2Test extends WebDriverTestCase {
     }
 
     /**
-     * A directory part is never used.
+     * A directory part is never used; the separators are replaced.
      * @throws Exception if the test fails
      */
     @Test
@@ -171,7 +173,6 @@ public class AttachmentSuggestedFilename2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("file")
-    @HtmlUnitNYI(CHROME = "", EDGE = "", FF = "", FF_ESR = "")
     public void noFilename() throws Exception {
         download("attachment");
     }
@@ -181,7 +182,6 @@ public class AttachmentSuggestedFilename2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("file")
-    @HtmlUnitNYI(CHROME = "", EDGE = "", FF = "", FF_ESR = "")
     public void emptyFilename() throws Exception {
         download("attachment; filename=\"\"");
     }
@@ -191,7 +191,6 @@ public class AttachmentSuggestedFilename2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("file")
-    @HtmlUnitNYI(CHROME = "", EDGE = "", FF = "", FF_ESR = "")
     public void filenameWithoutValue() throws Exception {
         download("attachment; filename=");
     }

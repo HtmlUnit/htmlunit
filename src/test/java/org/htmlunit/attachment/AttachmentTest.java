@@ -494,4 +494,95 @@ public class AttachmentTest extends SimpleWebTestCase {
 
         assertNull(attachmentFilenames.get(0));
     }
+
+    private List<Attachment> clickAndCollect(final String contentDisposition) throws Exception {
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
+            + "<input type='submit' value='ok'>\n"
+            + "</form>\n"
+            + "<a href='#' onclick='document.form.submit()'>click me</a>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClient();
+        final List<Attachment> attachments = new ArrayList<>();
+        client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Content-Disposition", contentDisposition));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, content1);
+        conn.setResponse(URL_SECOND, "download file contents", 200, "OK", MimeType.TEXT_HTML, headers);
+        client.setWebConnection(conn);
+
+        final HtmlPage result = client.getPage(URL_FIRST);
+        result.getAnchors().get(0).click();
+        return attachments;
+    }
+
+    /**
+     * White space in front of the disposition type is ignored.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentDispositionLeadingWhitespace() throws Exception {
+        final List<Attachment> attachments = clickAndCollect("  attachment; filename=\"foo.txt\"");
+        assertEquals(1, attachments.size());
+        assertEquals("foo.txt", attachments.get(0).getSuggestedFilename());
+    }
+
+    /**
+     * An unknown disposition type is handled like attachment.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentDispositionUnknownType() throws Exception {
+        final List<Attachment> attachments = clickAndCollect("attachmentfoo; filename=\"foo.txt\"");
+        assertEquals(1, attachments.size());
+        assertEquals("foo.txt", attachments.get(0).getSuggestedFilename());
+    }
+
+    /**
+     * A header without a disposition type is loaded inline.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentDispositionWithoutType() throws Exception {
+        final List<Attachment> attachments = clickAndCollect("; filename=\"foo.txt\"");
+        assertTrue(attachments.isEmpty());
+    }
+
+    /**
+     * Inline is loaded in the window, even if the header contains a file name.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentDispositionInline() throws Exception {
+        final List<Attachment> attachments = clickAndCollect("inline; filename=\"foo.txt\"");
+        assertTrue(attachments.isEmpty());
+    }
+
+    /**
+     * The file name passed to the handler is sanitized like the browsers do.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void suggestedFilenameIsSanitized() throws Exception {
+        final List<Attachment> attachments = clickAndCollect("attachment; filename=\"../a:b.txt\"");
+        assertEquals(1, attachments.size());
+        assertEquals("_a_b.txt", attachments.get(0).getSuggestedFilename());
+    }
+
+    /**
+     * The extended file name wins over the plain one.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void suggestedFilenameExtended() throws Exception {
+        final List<Attachment> attachments = clickAndCollect(
+                "attachment; filename=\"fallback.txt\"; filename*=UTF-8''gr%C3%B6%C3%9Fe.txt");
+        assertEquals(1, attachments.size());
+        assertEquals("gr\u00f6\u00dfe.txt", attachments.get(0).getSuggestedFilename());
+    }
 }
