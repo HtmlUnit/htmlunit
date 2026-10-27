@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="fix" dev="rbri">
+                AttachmentHandler.isAttachment() detects the disposition type of the Content-Disposition header
+                like the browsers do: white space around the type is ignored, unknown types are handled like
+                attachment and responses with the content type application/octet-stream are always
+                handled as attachment (even for the disposition type inline).
+            </action>
             <action type="add" dev="rbri">
                 New ContentDispositionParser for parsing the Content-Disposition
                 header according to RFC 6266, RFC 2183 and RFC 8187.

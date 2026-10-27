@@ -15,6 +15,7 @@
 package org.htmlunit.attachment;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +47,11 @@ public class AttachmentDownloadTest extends WebDriverTestCase {
         if (contentDisposition != null) {
             headers.add(new NameValuePair("Content-Disposition", contentDisposition));
         }
+        // use bytes; for string content the test server sets the charset on the response and
+        // this changes the content type of everything that is not text (octet-stream becomes text/html)
         getMockWebConnection().setResponse(fileUrl,
-                "<html><head><title>inline</title></head><body>content</body></html>",
+                "<html><head><title>inline</title></head><body>content</body></html>"
+                        .getBytes(StandardCharsets.UTF_8),
                 200, "OK", contentType, headers);
 
         loadPage2("<html><body><a id='dl' href='/file'>download</a></body></html>");
@@ -138,36 +142,33 @@ public class AttachmentDownloadTest extends WebDriverTestCase {
     }
 
     /**
-     * A type that only starts with attachment is an unknown type.
+     * A type that only starts with attachment is an unknown type, handled like attachment.
      *
      * @throws Exception if the test fails
      */
     @Test
-    // the behavior of the browsers is not verified yet; the expectation is the one from RFC 6266
     @Alerts("foo.txt")
     public void typeStartingWithAttachment() throws Exception {
         request("attachmentfoo; filename=\"foo.txt\"", "text/html");
     }
 
     /**
-     * An unknown type; RFC 6266 says it should be handled like attachment.
+     * An unknown type is handled like attachment (RFC 6266).
      *
      * @throws Exception if the test fails
      */
     @Test
-    // the behavior of the browsers is not verified yet; the expectation is the one from RFC 6266
     @Alerts("foo.txt")
     public void unknownType() throws Exception {
         request("foo; filename=\"foo.txt\"", "text/html");
     }
 
     /**
-     * An empty header.
+     * An empty header is shown in the window.
      *
      * @throws Exception if the test fails
      */
     @Test
-    // the behavior of the browsers is not verified yet
     @Alerts("inline")
     public void emptyHeader() throws Exception {
         request("", "text/html");
