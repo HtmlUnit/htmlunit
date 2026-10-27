@@ -8,6 +8,20 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="add" dev="kingthorin">
+                csp: Trusted Types query methods added to CspQueries (Policy and PolicyList):
+                enforcesTrustedTypesForScript(), allowsTrustedTypesPolicyName(String),
+                allowsAnyTrustedTypesPolicyName() and allowsDuplicateTrustedTypesPolicies().
+                TrustedTypesDirective.allowsPolicyName(String) added.
+            </action>
+            <action type="fix" dev="kingthorin">
+                csp: The warning for an empty trusted-types directive now states that the directive
+                blocks all policy names (like 'none'); it wrongly claimed that all names are allowed.
+            </action>
+            <action type="fix" dev="kingthorin">
+                csp: Incorrect warning "'allow-duplicates' is redundant when wildcard (*) is present" removed;
+                the wildcard does not allow duplicate policy names.
+            </action>
             <action type="fix" dev="rbri">
                 AttachmentHandler.isAttachment() detects the disposition type of the Content-Disposition header
                 like the browsers do: white space around the type is ignored, unknown types are handled like

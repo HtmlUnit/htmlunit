@@ -43,7 +43,7 @@
             --add-opens org.htmlunit/org.htmlunit.util.quercus.servlet=ALL-UNNAMED
         </surefire.argLine.modules>
 
-        <htmlunit-csp.version>5.6.0</htmlunit-csp.version>
+        <htmlunit-csp.version>5.7.0-SNAPSHOT</htmlunit-csp.version>
         <htmlunit-cssparser.version>5.6.0</htmlunit-cssparser.version>
         <htmlunit-corejs.version>5.7.0-SNAPSHOT</htmlunit-corejs.version>
         <htmlunit-neko.version>5.7.0-SNAPSHOT</htmlunit-neko.version>
