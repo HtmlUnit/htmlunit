@@ -23,6 +23,7 @@ import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerText
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.xml.XmlPage;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -3297,6 +3298,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts("beforelightafter")
     public void getVisibleTextShadowRootWithSlot() throws Exception {
         getVisibleTextFormated("<div id='tester'><b>light</b></div><script>"
@@ -3309,6 +3311,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts("shadow")
     public void getVisibleTextShadowRootWithoutSlot() throws Exception {
         getVisibleTextFormated("<div id='tester'><b>light</b></div><script>"

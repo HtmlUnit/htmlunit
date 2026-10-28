@@ -1366,10 +1366,6 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
     @Alerts(DEFAULT = "Name:  Choice: \none\n L",
             FF = "Name:  Choice:  L",
             FF_ESR = "Name:  Choice:  L")
-    @HtmlUnitNYI(CHROME = "Name: Choice:\none L",
-            EDGE = "Name: Choice:\none L",
-            FF = "Name: Choice: L",
-            FF_ESR = "Name: Choice: L")
     public void realWorldFormInline() throws Exception {
         getInnerTextFormated("<p id='tester'>Name: <input value='x'> Choice: <select><option>one</option></select> <label>"
                 + "L</label></p>");
@@ -1381,10 +1377,6 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
      */
     @Test
     @Alerts("Look:  done")
-    @HtmlUnitNYI(CHROME = "Look: done",
-            EDGE = "Look: done",
-            FF = "Look: done",
-            FF_ESR = "Look: done")
     public void realWorldImageInText() throws Exception {
         getInnerTextFormated("<p id='tester'>Look: <img alt='a cat'> done</p>");
     }

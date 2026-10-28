@@ -34,11 +34,15 @@ import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlExample;
 import org.htmlunit.html.HtmlHead;
+import org.htmlunit.html.HtmlHiddenInput;
+import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlInlineFrame;
+import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlListItem;
 import org.htmlunit.html.HtmlListing;
 import org.htmlunit.html.HtmlMeter;
 import org.htmlunit.html.HtmlNoFrames;
+import org.htmlunit.html.HtmlNoScript;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlParagraph;
 import org.htmlunit.html.HtmlPlainText;
@@ -56,6 +60,7 @@ import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.HtmlVideo;
 import org.htmlunit.html.ScriptElement;
 import org.htmlunit.html.serializer.HtmlSerializerInnerOuterText.HtmlSerializerTextBuilder.Mode;
+import org.htmlunit.svg.SvgDesc;
 import org.htmlunit.svg.SvgTitle;
 import org.htmlunit.util.StringUtils;
 
@@ -167,7 +172,8 @@ public class HtmlSerializerInnerOuterText {
                 || node instanceof HtmlProgress
                 || node instanceof HtmlInlineFrame
                 || node instanceof HtmlVideo
-                || node instanceof HtmlAudio) {
+                || node instanceof HtmlAudio
+                || (node instanceof HtmlNoScript && isJavaScriptEnabled(node))) {
             // the fallback content is not rendered
         }
         else if (node instanceof HtmlDetails details) {
@@ -197,7 +203,7 @@ public class HtmlSerializerInnerOuterText {
             appendDefinitionTerm(builder, item, mode, insideHead, insideSelect);
         }
         else if (node instanceof HtmlSvg) {
-            if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_NL)) {
+            if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_NL) && hasRenderedSvgText(node)) {
                 builder.appendRequiredLineBreak();
                 appendChildren(builder, node, mode, insideHead, insideSelect);
                 builder.appendRequiredLineBreak();
@@ -206,7 +212,7 @@ public class HtmlSerializerInnerOuterText {
                 appendChildren(builder, node, mode, insideHead, insideSelect);
             }
         }
-        else if (node instanceof SvgTitle) {
+        else if (node instanceof SvgTitle || node instanceof SvgDesc) {
             // nothing to do
         }
         else {
@@ -234,6 +240,15 @@ public class HtmlSerializerInnerOuterText {
 
         final HtmlElement element = (HtmlElement) node;
         if (isNotRendered(element)) {
+            return;
+        }
+
+        if ((element instanceof HtmlInput && !(element instanceof HtmlHiddenInput)
+                    || element instanceof HtmlImage)
+                && !isBlockLevel(element)) {
+            // inline replaced elements (atomic inlines) produce no text, but they
+            // separate the white space before and after
+            builder.appendAtomicInline();
             return;
         }
 
@@ -329,6 +344,41 @@ public class HtmlSerializerInnerOuterText {
     }
 
     /**
+     * Checks if javascript is enabled for the page of the given node.
+     *
+     * @param node the node to check
+     * @return true if javascript is enabled
+     */
+    private static boolean isJavaScriptEnabled(final DomNode node) {
+        final SgmlPage page = node.getPage();
+        return page != null && page.getWebClient().isJavaScriptEnabled();
+    }
+
+    /**
+     * Checks if the given svg element has some text that is rendered
+     * (text inside of title and desc is not rendered).
+     *
+     * @param node the svg element
+     * @return true if there is some rendered text
+     */
+    private static boolean hasRenderedSvgText(final DomNode node) {
+        for (final DomNode child : node.getChildren()) {
+            if (child instanceof SvgTitle || child instanceof SvgDesc) {
+                continue;
+            }
+            if (child instanceof DomText text) {
+                if (!StringUtils.isBlank(text.getData())) {
+                    return true;
+                }
+            }
+            else if (hasRenderedSvgText(child)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Checks if the given element is a table cell (td/th or display 'table-cell').
      *
      * @param element the element to check
@@ -406,8 +456,10 @@ public class HtmlSerializerInnerOuterText {
             return;
         }
 
+        // options are not rendered by css; the display style is ignored
         if (parent == null
                 || parent instanceof HtmlNoFrames
+                || parent instanceof HtmlOption
                 || parent.isDisplayed()) {
             builder.append(domText.getData(), mode);
         }
@@ -561,6 +613,10 @@ public class HtmlSerializerInnerOuterText {
      */
     protected void appendSelect(final HtmlSerializerTextBuilder builder,
             final HtmlSelect htmlSelect, final Mode mode, final boolean insideHead, final boolean insideSelect) {
+        if (isNotRendered(htmlSelect)) {
+            return;
+        }
+
         // a list box (multiple or size > 1) shows the options
         if (browserVersion_.hasFeature(JS_INNER_TEXT_SELECT_EMPTY)
                 && !htmlSelect.isMultipleSelectEnabled()
@@ -621,6 +677,24 @@ public class HtmlSerializerInnerOuterText {
                                         return Mode.WHITE_SPACE_PRE;
                                     }
                                     if ("pre-line".equalsIgnoreCase(value)) {
+                                        return Mode.WHITE_SPACE_PRE_LINE;
+                                    }
+                                    if ("break-spaces".equalsIgnoreCase(value)) {
+                                        return Mode.WHITE_SPACE_PRE;
+                                    }
+                                }
+
+                                final String collapse =
+                                        style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
+                                if (!StringUtils.isEmptyOrNull(collapse)) {
+                                    if ("collapse".equalsIgnoreCase(collapse)) {
+                                        return Mode.WHITE_SPACE_NORMAL;
+                                    }
+                                    if ("preserve".equalsIgnoreCase(collapse)
+                                            || "break-spaces".equalsIgnoreCase(collapse)) {
+                                        return Mode.WHITE_SPACE_PRE;
+                                    }
+                                    if ("preserve-breaks".equalsIgnoreCase(collapse)) {
                                         return Mode.WHITE_SPACE_PRE_LINE;
                                     }
                                 }
@@ -733,6 +807,16 @@ public class HtmlSerializerInnerOuterText {
             builder_.append('\n');
             state_ = State.BREAK_AT_END;
             trimRightPos_ = builder_.length();
+        }
+
+        /**
+         * Marks the position of an atomic inline (like an input or image); this element
+         * has no text, but white space before and after is not collapsed.
+         */
+        public void appendAtomicInline() {
+            flushPendingLineBreaks();
+            trimRightPos_ = builder_.length();
+            state_ = State.DEFAULT;
         }
 
         /**

@@ -763,11 +763,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("before1after1\\nbefore2after2\\nbefore3after3\\nbefore4after4\\nbefore5after5\\nbefore6<>after6")
-    @HtmlUnitNYI(
-            CHROME = "before1after1\\sbefore2after2\\sbefore3after3\\sbefore4after4\\sbefore5after5\\sbefore6<>after6",
-            EDGE = "before1after1\\sbefore2after2\\sbefore3after3\\sbefore4after4\\sbefore5after5\\sbefore6<>after6",
-            FF = "before1after1\\sbefore2after2\\sbefore3after3\\sbefore4after4\\sbefore5after5\\sbefore6<>after6",
-            FF_ESR = "before1after1\\sbefore2after2\\sbefore3after3\\sbefore4after4\\sbefore5after5\\sbefore6<>after6")
     public void specialComments() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
@@ -804,10 +799,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("before1after1\\nbefore2\\nbefore3\\nbefore4after4\\nbefore5after5\\nbefore6<\\s>after6")
-    @HtmlUnitNYI(CHROME = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",
-            EDGE = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",
-            FF = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",
-            FF_ESR = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6")
     public void specialComments2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"

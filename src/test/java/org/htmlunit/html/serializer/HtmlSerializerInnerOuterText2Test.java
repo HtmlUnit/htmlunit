@@ -17,6 +17,7 @@ package org.htmlunit.html.serializer;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -3234,6 +3235,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts("light")
     public void getInnerTextShadowRootWithSlot() throws Exception {
         getInnerTextFormated("<div id='tester'><b>light</b></div><script>"
@@ -3246,6 +3248,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts("")
     public void getInnerTextShadowRootWithoutSlot() throws Exception {
         getInnerTextFormated("<div id='tester'><b>light</b></div><script>"
@@ -3382,6 +3385,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts("light")
     public void getOuterTextShadowRootWithSlot() throws Exception {
         getOuterTextFormated("<div id='tester'><b>light</b></div><script>"

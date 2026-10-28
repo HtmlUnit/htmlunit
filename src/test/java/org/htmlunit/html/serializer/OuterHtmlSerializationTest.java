@@ -19,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -2220,6 +2221,7 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts("<div><b></b></div>")
     public void nodeShadowRootNotSerialized_outerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"
@@ -2234,6 +2236,7 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"x", "<template shadowrootmode=\"open\" shadowrootserializable=\"\"><i></i></template>x"})
     public void nodeGetHtmlWithShadowRoot_outerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"

@@ -211,7 +211,6 @@ public class HtmlSerializerVisibleText {
             block = false;
         }
         else if (domNode instanceof DomElement element) {
-            final WebWindow window = domNode.getPage().getEnclosingWindow();
             block = isBlockLevel(element);
         }
         else {
@@ -225,6 +224,23 @@ public class HtmlSerializerVisibleText {
         if (block) {
             builder.appendBlockSeparator();
         }
+        else if (isCssTableCell(domNode) && isCssTableCell(domNode.getNextElementSibling())) {
+            builder.appendCellSeparator();
+        }
+    }
+
+    /**
+     * Checks if the given node is an element with display 'table-cell'.
+     *
+     * @param node the node to check
+     * @return true if the node is an element with display 'table-cell'
+     */
+    private static boolean isCssTableCell(final DomNode node) {
+        if (node instanceof DomElement element && !(node instanceof HtmlTableCell)) {
+            final WebWindow window = node.getPage().getEnclosingWindow();
+            return "table-cell".equals(window.getComputedStyle(element, null).getDisplay());
+        }
+        return false;
     }
 
     /**
@@ -423,7 +439,45 @@ public class HtmlSerializerVisibleText {
      * @return true or false
      */
     protected boolean isDisplayed(final DomNode domNode) {
-        return domNode.isDisplayed();
+        return domNode.isDisplayed() && !isTransparent(domNode);
+    }
+
+    /**
+     * Checks if the given node or one of its ancestors has an opacity of zero;
+     * like WebDriver we handle this as not visible.
+     *
+     * @param domNode the node to check
+     * @return true if the node is fully transparent
+     */
+    private static boolean isTransparent(final DomNode domNode) {
+        final Page page = domNode.getPage();
+        if (page == null) {
+            return false;
+        }
+        final WebWindow window = page.getEnclosingWindow();
+        if (!window.getWebClient().getOptions().isCssEnabled()) {
+            return false;
+        }
+
+        DomNode node = domNode;
+        while (node != null) {
+            if (node instanceof DomElement element) {
+                final String opacity = window.getComputedStyle(element, null)
+                        .getStyleAttribute(Definition.OPACITY, false);
+                if (!StringUtils.isEmptyOrNull(opacity)) {
+                    try {
+                        if (Double.parseDouble(opacity.trim()) <= 0) {
+                            return true;
+                        }
+                    }
+                    catch (final NumberFormatException e) {
+                        // ignore
+                    }
+                }
+            }
+            node = node.getParentNode();
+        }
+        return false;
     }
 
     /**
@@ -518,6 +572,11 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendSelect(final HtmlSerializerTextBuilder builder,
             final HtmlSelect htmlSelect, final Mode mode) {
+        // an empty select has no text and does not separate
+        if (htmlSelect.getOptions().isEmpty()) {
+            return;
+        }
+
         builder.appendBlockSeparator();
         boolean leadingNlPending = false;
         final Mode selectMode = whiteSpaceStyle(htmlSelect, mode);
@@ -651,11 +710,18 @@ public class HtmlSerializerVisibleText {
             return;
         }
 
+        // options are not rendered by css; the display style is ignored
         if (parent == null
                 || parent instanceof HtmlTitle
                 || parent instanceof HtmlScript
+                || parent instanceof HtmlOption
                 || isDisplayed(parent)) {
-            builder.append(domText.getData(), mode);
+            String data = domText.getData();
+            // zero width space is not part of the visible text
+            if (data.indexOf('\u200B') > -1) {
+                data = data.replace("\u200B", "");
+            }
+            builder.append(data, mode);
         }
     }
 
@@ -734,6 +800,10 @@ public class HtmlSerializerVisibleText {
                                 return Mode.WHITE_SPACE_PRE_LINE;
                             }
                         }
+                        final String collapse = style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
+                        if ("preserve".equalsIgnoreCase(collapse)) {
+                            return Mode.WHITE_SPACE_PRE;
+                        }
                     }
                     node = node.getParentNode();
                 }
@@ -766,6 +836,10 @@ public class HtmlSerializerVisibleText {
                         if ("pre-line".equalsIgnoreCase(value)) {
                             return Mode.WHITE_SPACE_PRE_LINE;
                         }
+                    }
+                    final String collapse = style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
+                    if ("preserve".equalsIgnoreCase(collapse)) {
+                        return Mode.WHITE_SPACE_PRE;
                     }
                 }
             }
