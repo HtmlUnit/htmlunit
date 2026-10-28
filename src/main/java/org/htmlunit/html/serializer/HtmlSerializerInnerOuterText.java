@@ -26,14 +26,22 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlBreak;
+import org.htmlunit.html.HtmlCanvas;
 import org.htmlunit.html.HtmlDefinitionTerm;
 import org.htmlunit.html.HtmlDetails;
+import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlElement.DisplayStyle;
+import org.htmlunit.html.HtmlExample;
 import org.htmlunit.html.HtmlHead;
 import org.htmlunit.html.HtmlListItem;
+import org.htmlunit.html.HtmlListing;
+import org.htmlunit.html.HtmlMeter;
 import org.htmlunit.html.HtmlNoFrames;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlParagraph;
+import org.htmlunit.html.HtmlPlainText;
 import org.htmlunit.html.HtmlPreformattedText;
+import org.htmlunit.html.HtmlProgress;
 import org.htmlunit.html.HtmlScript;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.html.HtmlStyle;
@@ -55,6 +63,7 @@ import org.htmlunit.util.StringUtils;
 public class HtmlSerializerInnerOuterText {
 
     private final BrowserVersion browserVersion_;
+    private DomNode root_;
 
     /**
      * Ctor.
@@ -72,6 +81,7 @@ public class HtmlSerializerInnerOuterText {
      * @return the text representation according to the setting of this serializer
      */
     public String asText(final DomNode node) {
+        root_ = node;
         if (node instanceof HtmlBreak) {
             return "";
         }
@@ -135,8 +145,16 @@ public class HtmlSerializerInnerOuterText {
         else if (node instanceof HtmlListItem item) {
             appendListItem(builder, item, mode, insideHead, insideSelect);
         }
-        else if (node instanceof HtmlPreformattedText pre) {
-            appendPreformattedText(builder, pre, insideHead, insideSelect);
+        else if (node instanceof HtmlPreformattedText
+                || node instanceof HtmlListing
+                || node instanceof HtmlExample
+                || node instanceof HtmlPlainText) {
+            appendPreformattedText(builder, (HtmlElement) node, insideHead, insideSelect);
+        }
+        else if (node instanceof HtmlCanvas
+                || node instanceof HtmlMeter
+                || node instanceof HtmlProgress) {
+            // the fallback content is not rendered
         }
         else if (node instanceof HtmlDetails details) {
             appendDetails(builder, details, mode, insideHead, insideSelect);
@@ -178,8 +196,65 @@ public class HtmlSerializerInnerOuterText {
             // nothing to do
         }
         else {
-            appendChildren(builder, node, mode, insideHead, insideSelect);
+            appendElement(builder, node, mode, insideHead, insideSelect);
         }
+    }
+
+    /**
+     * Process all other nodes; block level elements are surrounded
+     * by a required line break and elements with an own white-space style
+     * switch the mode for their children.
+     *
+     * @param builder the StringBuilder to add to
+     * @param node the node to process
+     * @param mode the {@link Mode} to use for processing
+     * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
+     */
+    protected void appendElement(final HtmlSerializerTextBuilder builder, final DomNode node,
+            final Mode mode, final boolean insideHead, final boolean insideSelect) {
+        if (!(node instanceof HtmlElement) || insideHead || insideSelect) {
+            appendChildren(builder, node, mode, insideHead, insideSelect);
+            return;
+        }
+
+        if (isNotRendered(node)) {
+            return;
+        }
+
+        final Mode childMode = mode == Mode.PLAIN ? mode : whiteSpaceStyle(node, mode);
+        final boolean block = isBlockLevel((HtmlElement) node);
+        if (block) {
+            builder.appendRequiredLineBreak();
+        }
+        appendChildren(builder, node, childMode, insideHead, insideSelect);
+        if (block) {
+            builder.appendRequiredLineBreak();
+        }
+    }
+
+    /**
+     * An element that is not displayed (display none, hidden, visibility hidden) does not contribute
+     * to the text; this is not true for the element the text was requested for.
+     */
+    private boolean isNotRendered(final DomNode node) {
+        return node != root_ && node instanceof HtmlElement && !node.isDisplayed();
+    }
+
+    private static boolean isBlockLevel(final HtmlElement element) {
+        final SgmlPage page = element.getPage();
+        final WebWindow window = page == null ? null : page.getEnclosingWindow();
+        if (window != null && window.getWebClient().getOptions().isCssEnabled()) {
+            final String display = window.getComputedStyle(element, null).getDisplay();
+            return "block".equals(display)
+                    || "flex".equals(display)
+                    || "grid".equals(display)
+                    || "flow-root".equals(display)
+                    || "list-item".equals(display)
+                    || "table".equals(display)
+                    || "table-caption".equals(display);
+        }
+        return DisplayStyle.BLOCK == element.getDefaultStyleDisplay();
     }
 
     /**
@@ -213,7 +288,7 @@ public class HtmlSerializerInnerOuterText {
      */
     protected void appendBreak(final HtmlSerializerTextBuilder builder,
             final HtmlBreak htmlBreak) {
-        builder.appendRequiredLineBreak();
+        builder.appendLineBreak();
     }
 
     /**
@@ -227,9 +302,13 @@ public class HtmlSerializerInnerOuterText {
      */
     protected void appendParagraph(final HtmlSerializerTextBuilder builder,
             final HtmlParagraph htmlParagraph, final Mode mode, final boolean insideHead, final boolean insideSelect) {
-        builder.appendRequiredLineBreak();
-        appendChildren(builder, htmlParagraph, mode, insideHead, insideSelect);
-        builder.appendRequiredLineBreak();
+        if (isNotRendered(htmlParagraph)) {
+            return;
+        }
+        // a paragraph is surrounded by a blank line, independent of the display style
+        builder.appendRequiredLineBreak(2);
+        appendChildren(builder, htmlParagraph, whiteSpaceStyle(htmlParagraph, mode), insideHead, insideSelect);
+        builder.appendRequiredLineBreak(2);
     }
 
     /**
@@ -243,7 +322,10 @@ public class HtmlSerializerInnerOuterText {
      * @param insideSelect true if inside a select
      */
     protected void appendPreformattedText(final HtmlSerializerTextBuilder builder,
-            final HtmlPreformattedText htmlPre, final boolean insideHead, final boolean insideSelect) {
+            final HtmlElement htmlPre, final boolean insideHead, final boolean insideSelect) {
+        if (isNotRendered(htmlPre)) {
+            return;
+        }
         builder.appendRequiredLineBreak();
         appendChildren(builder, htmlPre, whiteSpaceStyle(htmlPre, Mode.WHITE_SPACE_PRE), insideHead, insideSelect);
         builder.appendRequiredLineBreak();
@@ -260,6 +342,9 @@ public class HtmlSerializerInnerOuterText {
      */
     protected void appendListItem(final HtmlSerializerTextBuilder builder,
             final HtmlListItem htmlListItem, final Mode mode, final boolean insideHead, final boolean insideSelect) {
+        if (isNotRendered(htmlListItem)) {
+            return;
+        }
         builder.appendRequiredLineBreak();
         appendChildren(builder, htmlListItem, mode, insideHead, insideSelect);
         builder.appendRequiredLineBreak();
@@ -302,6 +387,9 @@ public class HtmlSerializerInnerOuterText {
     protected void appendDefinitionTerm(final HtmlSerializerTextBuilder builder,
             final HtmlDefinitionTerm htmlDefinitionTerm, final Mode mode,
             final boolean insideHead, final boolean insideSelect) {
+        if (isNotRendered(htmlDefinitionTerm)) {
+            return;
+        }
         builder.appendRequiredLineBreak();
         appendChildren(builder, htmlDefinitionTerm, mode, insideHead, insideSelect);
         builder.appendRequiredLineBreak();
@@ -441,6 +529,7 @@ public class HtmlSerializerInnerOuterText {
         private State state_;
         private final StringBuilder builder_;
         private int trimRightPos_;
+        private int pendingLineBreaks_;
 
         /**
          * Ctor.
@@ -455,6 +544,17 @@ public class HtmlSerializerInnerOuterText {
          * Append a line separator.
          */
         public void appendRequiredLineBreak() {
+            appendRequiredLineBreak(1);
+        }
+
+        /**
+         * Append a required line break count; consecutive required line breaks
+         * are merged to the biggest one. Required line breaks at the start
+         * or the end are dropped.
+         *
+         * @param count the number of line breaks
+         */
+        public void appendRequiredLineBreak(final int count) {
             if (state_ == State.EMPTY) {
                 return;
             }
@@ -463,10 +563,33 @@ public class HtmlSerializerInnerOuterText {
             builder_.setLength(trimRightPos_);
             if (trimRightPos_ == 0) {
                 state_ = State.EMPTY;
+                pendingLineBreaks_ = 0;
+                return;
             }
 
-            builder_.append('\n');
+            pendingLineBreaks_ = Math.max(pendingLineBreaks_, count);
             state_ = State.REQUIRED_LINE_BREAK_AT_END;
+        }
+
+        /**
+         * Append a line break that is part of the content (like the one from a br element).
+         */
+        public void appendLineBreak() {
+            flushPendingLineBreaks();
+            builder_.append('\n');
+            state_ = State.BREAK_AT_END;
+            trimRightPos_ = builder_.length();
+        }
+
+        private void flushPendingLineBreaks() {
+            if (pendingLineBreaks_ > 0) {
+                builder_.setLength(trimRightPos_);
+                for (int i = 0; i < pendingLineBreaks_; i++) {
+                    builder_.append('\n');
+                }
+                pendingLineBreaks_ = 0;
+                trimRightPos_ = builder_.length();
+            }
         }
 
         /**
@@ -486,6 +609,7 @@ public class HtmlSerializerInnerOuterText {
             }
 
             if (mode == Mode.PLAIN) {
+                flushPendingLineBreaks();
                 builder_.append(content);
                 state_ = State.DEFAULT;
                 trimRightPos_ = builder_.length();
@@ -512,6 +636,7 @@ public class HtmlSerializerInnerOuterText {
                             case BLOCK_SEPARATOR_AT_END:
                                 break;
                             default:
+                                flushPendingLineBreaks();
                                 builder_.append('\n');
                                 state_ = State.NEWLINE_AT_END;
                                 trimRightPos_ = builder_.length();
@@ -527,11 +652,13 @@ public class HtmlSerializerInnerOuterText {
                                 break;
                             case BLANK_AT_END:
                                 builder_.setLength(trimRightPos_);
+                                flushPendingLineBreaks();
                                 builder_.append('\n');
                                 state_ = State.NEWLINE_AT_END;
                                 trimRightPos_ = builder_.length();
                                 break;
                             default:
+                                flushPendingLineBreaks();
                                 builder_.append('\n');
                                 state_ = State.NEWLINE_AT_END;
                                 trimRightPos_ = builder_.length();
@@ -559,6 +686,7 @@ public class HtmlSerializerInnerOuterText {
 
                 if (c == ' ' || c == '\t' || c == '\f') {
                     if (mode == Mode.WHITE_SPACE_PRE) {
+                        flushPendingLineBreaks();
                         if (c == '\t') {
                             builder_.append('\t');
                         }
@@ -606,6 +734,7 @@ public class HtmlSerializerInnerOuterText {
                     continue;
                 }
 
+                flushPendingLineBreaks();
                 builder_.append(c);
                 state_ = State.DEFAULT;
                 trimRightPos_ = builder_.length();

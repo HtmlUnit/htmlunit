@@ -17,6 +17,7 @@ package org.htmlunit.html.serializer.paragraph;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -722,6 +723,10 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
      */
     @Test
     @Alerts("null")
+    @HtmlUnitNYI(CHROME = "x",
+            EDGE = "x",
+            FF = "x",
+            FF_ESR = "x")
     public void tagMath() throws Exception {
         getInnerTextFormated("<math id='tester'><mi>x</mi></math>");
     }
@@ -1078,6 +1083,10 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
      */
     @Test
     @Alerts("A B C")
+    @HtmlUnitNYI(CHROME = "a b c",
+            EDGE = "a b c",
+            FF = "a b c",
+            FF_ESR = "a b c")
     public void paragraphTextTransform() throws Exception {
         getInnerTextFormated("<p id='tester' style='text-transform: uppercase'>a <b>b</b> c</p>");
     }
@@ -1290,6 +1299,10 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
      */
     @Test
     @Alerts("a B c")
+    @HtmlUnitNYI(CHROME = "a b c",
+            EDGE = "a b c",
+            FF = "a b c",
+            FF_ESR = "a b c")
     public void inlineTextTransform() throws Exception {
         getInnerTextFormated("<p id='tester'>a <b style='text-transform: uppercase'>b</b> c</p>");
     }
@@ -1300,6 +1313,10 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
      */
     @Test
     @Alerts("a\nb\nc")
+    @HtmlUnitNYI(CHROME = "abc",
+            EDGE = "abc",
+            FF = "abc",
+            FF_ESR = "abc")
     public void inlineFloat() throws Exception {
         getInnerTextFormated("<p id='tester'>a<b style='float: left'>b</b>c</p>");
     }
@@ -1310,6 +1327,10 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
      */
     @Test
     @Alerts("a\nb\nc")
+    @HtmlUnitNYI(CHROME = "abc",
+            EDGE = "abc",
+            FF = "abc",
+            FF_ESR = "abc")
     public void inlinePositionAbsolute() throws Exception {
         getInnerTextFormated("<p id='tester'>a<b style='position: absolute'>b</b>c</p>");
     }
@@ -1353,6 +1374,10 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
     @Alerts(DEFAULT = "Name:  Choice: \none\n L",
             FF = "Name:  Choice:  L",
             FF_ESR = "Name:  Choice:  L")
+    @HtmlUnitNYI(CHROME = "Name: Choice:\none L",
+            EDGE = "Name: Choice:\none L",
+            FF = "Name: Choice: L",
+            FF_ESR = "Name: Choice: L")
     public void realWorldFormInline() throws Exception {
         getInnerTextFormated("<p id='tester'>Name: <input value='x'> Choice: <select><option>one</option></select> <label>"
                 + "L</label></p>");
@@ -1364,6 +1389,10 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
      */
     @Test
     @Alerts("Look:  done")
+    @HtmlUnitNYI(CHROME = "Look: done",
+            EDGE = "Look: done",
+            FF = "Look: done",
+            FF_ESR = "Look: done")
     public void realWorldImageInText() throws Exception {
         getInnerTextFormated("<p id='tester'>Look: <img alt='a cat'> done</p>");
     }

@@ -32,14 +32,18 @@ import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlBreak;
 import org.htmlunit.html.HtmlCheckBoxInput;
 import org.htmlunit.html.HtmlDetails;
+import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlExample;
 import org.htmlunit.html.HtmlHiddenInput;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlInput;
+import org.htmlunit.html.HtmlListing;
 import org.htmlunit.html.HtmlMenu;
 import org.htmlunit.html.HtmlNoFrames;
 import org.htmlunit.html.HtmlNoScript;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlOrderedList;
+import org.htmlunit.html.HtmlPlainText;
 import org.htmlunit.html.HtmlPreformattedText;
 import org.htmlunit.html.HtmlRadioButtonInput;
 import org.htmlunit.html.HtmlResetInput;
@@ -169,8 +173,11 @@ public class HtmlSerializerVisibleText {
         else if (node instanceof HtmlUnorderedList list) {
             appendUnorderedList(builder, list, mode);
         }
-        else if (node instanceof HtmlPreformattedText text) {
-            appendPreformattedText(builder, text, mode);
+        else if (node instanceof HtmlPreformattedText
+                || node instanceof HtmlListing
+                || node instanceof HtmlExample
+                || node instanceof HtmlPlainText) {
+            appendPreformattedText(builder, (HtmlElement) node, mode);
         }
         else if (node instanceof HtmlInlineFrame frame) {
             appendInlineFrame(builder, frame, mode);
@@ -583,7 +590,7 @@ public class HtmlSerializerVisibleText {
      * @param mode the {@link Mode} to use for processing
      */
     protected void appendPreformattedText(final HtmlSerializerTextBuilder builder,
-            final HtmlPreformattedText htmlPreformattedText, final Mode mode) {
+            final HtmlElement htmlPreformattedText, final Mode mode) {
         if (isDisplayed(htmlPreformattedText)) {
             builder.appendBlockSeparator();
             appendChildren(builder, htmlPreformattedText, whiteSpaceStyle(htmlPreformattedText, Mode.PRE));

@@ -642,6 +642,10 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a\nb")
+    @HtmlUnitNYI(CHROME = "ab",
+            EDGE = "ab",
+            FF = "ab",
+            FF_ESR = "ab")
     public void tagRb() throws Exception {
         getVisibleTextFormated("<ruby id='tester'><rb>a</rb><rt>b</rt></ruby>");
     }
@@ -653,7 +657,9 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "a\nb",
             CHROME = "ab",
-            EDGE = "ab")
+            EDGE = "ab",
+            FF = "ab",
+            FF_ESR = "ab")
     public void tagRtc() throws Exception {
         getVisibleTextFormated("<ruby id='tester'>a<rtc><rt>b</rt></rtc></ruby>");
     }
@@ -846,6 +852,10 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a")
+    @HtmlUnitNYI(CHROME = "\na",
+            EDGE = "\na",
+            FF = "\na",
+            FF_ESR = "\na")
     public void paragraphWithBrStart() throws Exception {
         getVisibleTextFormated("<p id='tester'><br>a</p>");
     }
@@ -1078,6 +1088,10 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("A B C")
+    @HtmlUnitNYI(CHROME = "a b c",
+            EDGE = "a b c",
+            FF = "a b c",
+            FF_ESR = "a b c")
     public void paragraphTextTransform() throws Exception {
         getVisibleTextFormated("<p id='tester' style='text-transform: uppercase'>a <b>b</b> c</p>");
     }
@@ -1148,6 +1162,10 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a\n\nb")
+    @HtmlUnitNYI(CHROME = "a\nb",
+            EDGE = "a\nb",
+            FF = "a\nb",
+            FF_ESR = "a\nb")
     public void paragraphBrAfterP() throws Exception {
         getVisibleTextFormated("<div id='tester'><p>a</p><br>b</div>");
     }
@@ -1290,6 +1308,10 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a B c")
+    @HtmlUnitNYI(CHROME = "a b c",
+            EDGE = "a b c",
+            FF = "a b c",
+            FF_ESR = "a b c")
     public void inlineTextTransform() throws Exception {
         getVisibleTextFormated("<p id='tester'>a <b style='text-transform: uppercase'>b</b> c</p>");
     }
@@ -1300,6 +1322,10 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a\nb\nc")
+    @HtmlUnitNYI(CHROME = "abc",
+            EDGE = "abc",
+            FF = "abc",
+            FF_ESR = "abc")
     public void inlineFloat() throws Exception {
         getVisibleTextFormated("<p id='tester'>a<b style='float: left'>b</b>c</p>");
     }
@@ -1310,6 +1336,10 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a\nb\nc")
+    @HtmlUnitNYI(CHROME = "abc",
+            EDGE = "abc",
+            FF = "abc",
+            FF_ESR = "abc")
     public void inlinePositionAbsolute() throws Exception {
         getVisibleTextFormated("<p id='tester'>a<b style='position: absolute'>b</b>c</p>");
     }
