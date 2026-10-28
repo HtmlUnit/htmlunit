@@ -133,8 +133,8 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * reset raw value and for {@code defaultValue}. Renamed from the old
      * {@code readValue()}.
      *
-     * @return the concatenated child text content, with a single leading newline
-     *     stripped per the HTML parsing algorithm
+     * @return the concatenated child text content (a line feed directly after
+     *     the start tag is already removed by the HTML parser)
      */
     private String computeValueFromChildText() {
         final StringBuilder builder = new StringBuilder();
@@ -142,10 +142,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
             if (node instanceof DomText text) {
                 builder.append(text.getData());
             }
-        }
-        // if content starts with new line, it is ignored (=> for the parser?)
-        if (builder.length() != 0 && builder.charAt(0) == '\n') {
-            builder.deleteCharAt(0);
         }
         return builder.toString();
     }

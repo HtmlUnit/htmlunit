@@ -8,6 +8,14 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="fix" dev="rbri">
+                HtmlTextArea: the value and the default value are now the child text content without
+                any further changes; the line feed directly after the start tag is removed by the parser.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLTagBalancer: a line feed directly after the start tag of pre, listing and textarea is no longer
+                part of the content.
+            </action>
             <action type="add" dev="kingthorin">
                 csp: Trusted Types query methods added to CspQueries (Policy and PolicyList):
                 enforcesTrustedTypesForScript(), allowsTrustedTypesPolicyName(String),
