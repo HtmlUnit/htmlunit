@@ -351,7 +351,9 @@ public class HtmlSerializerVisibleText {
 
         for (final DomNode child : htmlDetails.getChildren()) {
             if (child instanceof HtmlSummary) {
+                // only the first summary is the summary of the details
                 appendNode(builder, child, mode);
+                return;
             }
         }
     }
@@ -491,7 +493,8 @@ public class HtmlSerializerVisibleText {
             final HtmlSelect htmlSelect, final Mode mode) {
         builder.appendBlockSeparator();
         boolean leadingNlPending = false;
-        final Mode selectMode = whiteSpaceStyle(htmlSelect, mode);
+        // select is rendered as a form control; the white-space style is ignored by the browsers
+        final Mode selectMode = Mode.WHITE_SPACE_NORMAL;
         for (final DomNode item : htmlSelect.getChildren()) {
             if (leadingNlPending) {
                 builder.appendBlockSeparator();
@@ -499,7 +502,7 @@ public class HtmlSerializerVisibleText {
             }
 
             builder.resetContentAdded();
-            appendNode(builder, item, whiteSpaceStyle(item, selectMode));
+            appendNode(builder, item, selectMode);
             if (!leadingNlPending && builder.contentAdded_) {
                 leadingNlPending = true;
             }

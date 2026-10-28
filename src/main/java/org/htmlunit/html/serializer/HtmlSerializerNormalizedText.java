@@ -309,7 +309,9 @@ public class HtmlSerializerNormalizedText {
 
         for (final DomNode child : htmlDetails.getChildren()) {
             if (child instanceof HtmlSummary) {
+                // only the first summary is the summary of the details
                 appendNode(builder, child);
+                return;
             }
         }
     }

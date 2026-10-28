@@ -33,6 +33,7 @@ import org.htmlunit.html.HtmlListItem;
 import org.htmlunit.html.HtmlNoFrames;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlParagraph;
+import org.htmlunit.html.HtmlPreformattedText;
 import org.htmlunit.html.HtmlScript;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.html.HtmlStyle;
@@ -134,6 +135,9 @@ public class HtmlSerializerInnerOuterText {
         else if (node instanceof HtmlListItem item) {
             appendListItem(builder, item, mode, insideHead, insideSelect);
         }
+        else if (node instanceof HtmlPreformattedText pre) {
+            appendPreformattedText(builder, pre, insideHead, insideSelect);
+        }
         else if (node instanceof HtmlDetails details) {
             appendDetails(builder, details, mode, insideHead, insideSelect);
         }
@@ -229,6 +233,23 @@ public class HtmlSerializerInnerOuterText {
     }
 
     /**
+     * Process {@link HtmlPreformattedText}.
+     * The default white-space handling of a pre element is 'pre', but an explicit
+     * white-space style of the element (or one of its ancestors) wins.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlPre the target to process
+     * @param insideHead true if inside head section
+     * @param insideSelect true if inside a select
+     */
+    protected void appendPreformattedText(final HtmlSerializerTextBuilder builder,
+            final HtmlPreformattedText htmlPre, final boolean insideHead, final boolean insideSelect) {
+        builder.appendRequiredLineBreak();
+        appendChildren(builder, htmlPre, whiteSpaceStyle(htmlPre, Mode.WHITE_SPACE_PRE), insideHead, insideSelect);
+        builder.appendRequiredLineBreak();
+    }
+
+    /**
      * Process {@link HtmlListItem}.
      *
      * @param builder the StringBuilder to add to
@@ -262,7 +283,9 @@ public class HtmlSerializerInnerOuterText {
 
         for (final DomNode child : htmlDetails.getChildren()) {
             if (child instanceof HtmlSummary) {
+                // only the first summary is the summary of the details
                 appendNode(builder, child, mode, insideHead, insideSelect);
+                return;
             }
         }
     }
@@ -555,6 +578,8 @@ public class HtmlSerializerInnerOuterText {
                             case BLANK_AT_END_AFTER_NEWLINE:
                             case BREAK_AT_END:
                             case NEWLINE_AT_END:
+                            case REQUIRED_LINE_BREAK_AT_END:
+                            case BLOCK_SEPARATOR_AT_END:
                                 break;
                             default:
                                 builder_.append(' ');
