@@ -1313,10 +1313,6 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
      */
     @Test
     @Alerts("a\nb\nc")
-    @HtmlUnitNYI(CHROME = "abc",
-            EDGE = "abc",
-            FF = "abc",
-            FF_ESR = "abc")
     public void inlineFloat() throws Exception {
         getInnerTextFormated("<p id='tester'>a<b style='float: left'>b</b>c</p>");
     }
@@ -1327,10 +1323,6 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
      */
     @Test
     @Alerts("a\nb\nc")
-    @HtmlUnitNYI(CHROME = "abc",
-            EDGE = "abc",
-            FF = "abc",
-            FF_ESR = "abc")
     public void inlinePositionAbsolute() throws Exception {
         getInnerTextFormated("<p id='tester'>a<b style='position: absolute'>b</b>c</p>");
     }

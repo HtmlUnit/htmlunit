@@ -25,14 +25,16 @@ import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
+import org.htmlunit.html.HtmlAudio;
 import org.htmlunit.html.HtmlBreak;
 import org.htmlunit.html.HtmlCanvas;
 import org.htmlunit.html.HtmlDefinitionTerm;
 import org.htmlunit.html.HtmlDetails;
+import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.html.HtmlElement;
-import org.htmlunit.html.HtmlElement.DisplayStyle;
 import org.htmlunit.html.HtmlExample;
 import org.htmlunit.html.HtmlHead;
+import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlListItem;
 import org.htmlunit.html.HtmlListing;
 import org.htmlunit.html.HtmlMeter;
@@ -51,6 +53,7 @@ import org.htmlunit.html.HtmlTableCell;
 import org.htmlunit.html.HtmlTableRow;
 import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.HtmlTitle;
+import org.htmlunit.html.HtmlVideo;
 import org.htmlunit.html.ScriptElement;
 import org.htmlunit.html.serializer.HtmlSerializerInnerOuterText.HtmlSerializerTextBuilder.Mode;
 import org.htmlunit.svg.SvgTitle;
@@ -93,6 +96,12 @@ public class HtmlSerializerInnerOuterText {
             final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
             appendChildren(builder, node, Mode.WHITE_SPACE_NORMAL, false, false);
             return builder.getText();
+        }
+
+        // an element that is not rendered (and an option) returns the text content
+        if (node instanceof HtmlOption
+                || (node instanceof HtmlElement && !(node instanceof HtmlTitle) && isDisplayNone(node))) {
+            return node.getTextContent();
         }
 
         // when calling on the title itself we have to output
@@ -155,7 +164,10 @@ public class HtmlSerializerInnerOuterText {
         }
         else if (node instanceof HtmlCanvas
                 || node instanceof HtmlMeter
-                || node instanceof HtmlProgress) {
+                || node instanceof HtmlProgress
+                || node instanceof HtmlInlineFrame
+                || node instanceof HtmlVideo
+                || node instanceof HtmlAudio) {
             // the fallback content is not rendered
         }
         else if (node instanceof HtmlDetails details) {
@@ -220,55 +232,162 @@ public class HtmlSerializerInnerOuterText {
             return;
         }
 
-        if (isNotRendered(node)) {
+        final HtmlElement element = (HtmlElement) node;
+        if (isNotRendered(element)) {
             return;
         }
 
         final Mode childMode = mode == Mode.PLAIN ? mode : whiteSpaceStyle(node, mode);
-        final boolean block = isBlockLevel((HtmlElement) node);
+        final boolean visible = isVisible(element);
+        final boolean block = visible && isBlockLevel(element);
         if (block) {
             builder.appendRequiredLineBreak();
         }
         appendChildren(builder, node, childMode, insideHead, insideSelect);
+        if (!visible) {
+            return;
+        }
         if (block) {
             builder.appendRequiredLineBreak();
         }
-        else if (node instanceof HtmlTableCell cell) {
+        else if (isTableCell(element)) {
             // cells of a row are separated by a tab
-            if (cell.getNextElementSibling() instanceof HtmlTableCell) {
+            final DomElement next = element.getNextElementSibling();
+            if (next instanceof HtmlElement nextElement && isTableCell(nextElement)) {
                 builder.appendTab();
             }
         }
-        else if (node instanceof HtmlTableRow) {
+        else if (node instanceof HtmlTableRow || "table-row".equals(display(element))) {
             builder.appendRequiredLineBreak();
         }
     }
 
     /**
-     * An element that is not displayed (display none, hidden, visibility hidden) does not contribute
+     * An element with display none (or the hidden attribute) does not contribute
      * to the text; this is not true for the element the text was requested for.
+     *
+     * @param element the element to check
+     * @return true if the element (and its children) has to be ignored
      */
-    private boolean isNotRendered(final DomNode node) {
-        return node != root_ && node instanceof HtmlElement && !node.isDisplayed();
+    private boolean isNotRendered(final HtmlElement element) {
+        if (element == root_) {
+            return false;
+        }
+        if (element.isHidden()) {
+            return true;
+        }
+        if (element instanceof HtmlDialog dialog) {
+            return !dialog.isOpen();
+        }
+        return "none".equals(display(element));
     }
 
-    private static boolean isBlockLevel(final HtmlElement element) {
+    /**
+     * Checks if the given node or one of its ancestors is not rendered because
+     * of the hidden attribute or the display style 'none'.
+     *
+     * @param node the node to check
+     * @return true if the node or one of the ancestors has display none
+     */
+    private static boolean isDisplayNone(final DomNode node) {
+        DomNode current = node;
+        while (current != null) {
+            if (current instanceof HtmlElement element) {
+                if (element.isHidden() || "none".equals(display(element))) {
+                    return true;
+                }
+            }
+            current = current.getParentNode();
+        }
+        return false;
+    }
+
+    /**
+     * An element with visibility hidden still contributes the text of visible children,
+     * but no line breaks.
+     *
+     * @param element the element to check
+     * @return true if the element is the root or displayed
+     */
+    private boolean isVisible(final HtmlElement element) {
+        return element == root_ || element.isDisplayed();
+    }
+
+    /**
+     * Determines the display value of the given element.
+     *
+     * @param element the element to check
+     * @return the computed display of the element (or the default display if css is disabled)
+     */
+    private static String display(final HtmlElement element) {
         final SgmlPage page = element.getPage();
         final WebWindow window = page == null ? null : page.getEnclosingWindow();
         if (window != null && window.getWebClient().getOptions().isCssEnabled()) {
-            final String display = window.getComputedStyle(element, null).getDisplay();
-            return "block".equals(display)
-                    || "flex".equals(display)
-                    || "grid".equals(display)
-                    || "flow-root".equals(display)
-                    || "list-item".equals(display)
-                    || "table".equals(display)
-                    || "table-caption".equals(display);
+            return window.getComputedStyle(element, null).getDisplay();
         }
-        final DisplayStyle display = element.getDefaultStyleDisplay();
-        return DisplayStyle.BLOCK == display
-                || DisplayStyle.LIST_ITEM == display
-                || DisplayStyle.TABLE == display;
+        return element.getDefaultStyleDisplay().value();
+    }
+
+    /**
+     * Checks if the given element is a table cell (td/th or display 'table-cell').
+     *
+     * @param element the element to check
+     * @return true if the element is a table cell
+     */
+    private static boolean isTableCell(final HtmlElement element) {
+        return element instanceof HtmlTableCell || "table-cell".equals(display(element));
+    }
+
+    /**
+     * Checks if the given element is block level; this includes elements that are
+     * blockified (open dialog, absolute positioned, floating, children of flex and grid containers).
+     *
+     * @param element the element to check
+     * @return true if the element is block level
+     */
+    private static boolean isBlockLevel(final HtmlElement element) {
+        if (element instanceof HtmlDialog dialog && dialog.isOpen()) {
+            return true;
+        }
+
+        final String display = display(element);
+        if ("block".equals(display)
+                || "flex".equals(display)
+                || "grid".equals(display)
+                || "flow-root".equals(display)
+                || "list-item".equals(display)
+                || "table".equals(display)
+                || "table-caption".equals(display)) {
+            return true;
+        }
+        if ("none".equals(display) || "contents".equals(display)) {
+            return false;
+        }
+
+        final SgmlPage page = element.getPage();
+        final WebWindow window = page == null ? null : page.getEnclosingWindow();
+        if (window == null || !window.getWebClient().getOptions().isCssEnabled()) {
+            return false;
+        }
+
+        // absolute positioned and floating boxes are blockified
+        final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
+        final String position = style.getPosition();
+        if ("absolute".equals(position) || "fixed".equals(position)) {
+            return true;
+        }
+        final String floatValue = style.getStyleAttribute(Definition.FLOAT, false);
+        if ("left".equals(floatValue) || "right".equals(floatValue)) {
+            return true;
+        }
+
+        // children of flex and grid containers are blockified
+        if (element.getParentNode() instanceof HtmlElement parent) {
+            final String parentDisplay = display(parent);
+            return "flex".equals(parentDisplay) || "inline-flex".equals(parentDisplay)
+                    || "grid".equals(parentDisplay) || "inline-grid".equals(parentDisplay);
+        }
+        return false;
     }
 
     /**
@@ -320,9 +439,14 @@ public class HtmlSerializerInnerOuterText {
             return;
         }
         // a paragraph is surrounded by a blank line, independent of the display style
-        builder.appendRequiredLineBreak(2);
+        final boolean visible = isVisible(htmlParagraph);
+        if (visible) {
+            builder.appendRequiredLineBreak(2);
+        }
         appendChildren(builder, htmlParagraph, whiteSpaceStyle(htmlParagraph, mode), insideHead, insideSelect);
-        builder.appendRequiredLineBreak(2);
+        if (visible) {
+            builder.appendRequiredLineBreak(2);
+        }
     }
 
     /**
@@ -360,7 +484,7 @@ public class HtmlSerializerInnerOuterText {
             return;
         }
         // a list item with display inline has no line breaks
-        final boolean block = isBlockLevel(htmlListItem);
+        final boolean block = isVisible(htmlListItem) && isBlockLevel(htmlListItem);
         if (block) {
             builder.appendRequiredLineBreak();
         }
@@ -410,7 +534,7 @@ public class HtmlSerializerInnerOuterText {
         if (isNotRendered(htmlDefinitionTerm)) {
             return;
         }
-        final boolean block = isBlockLevel(htmlDefinitionTerm);
+        final boolean block = isVisible(htmlDefinitionTerm) && isBlockLevel(htmlDefinitionTerm);
         if (block) {
             builder.appendRequiredLineBreak();
         }
@@ -437,7 +561,10 @@ public class HtmlSerializerInnerOuterText {
      */
     protected void appendSelect(final HtmlSerializerTextBuilder builder,
             final HtmlSelect htmlSelect, final Mode mode, final boolean insideHead, final boolean insideSelect) {
-        if (browserVersion_.hasFeature(JS_INNER_TEXT_SELECT_EMPTY)) {
+        // a list box (multiple or size > 1) shows the options
+        if (browserVersion_.hasFeature(JS_INNER_TEXT_SELECT_EMPTY)
+                && !htmlSelect.isMultipleSelectEnabled()
+                && htmlSelect.getSize() <= 1) {
             return;
         }
 
@@ -600,6 +727,8 @@ public class HtmlSerializerInnerOuterText {
          * Append a line break that is part of the content (like the one from a br element).
          */
         public void appendLineBreak() {
+            // collapsible white space at the end of the line is removed
+            builder_.setLength(trimRightPos_);
             flushPendingLineBreaks();
             builder_.append('\n');
             state_ = State.BREAK_AT_END;
@@ -616,6 +745,9 @@ public class HtmlSerializerInnerOuterText {
             trimRightPos_ = builder_.length();
         }
 
+        /**
+         * Writes the pending required line breaks (if any) to the output.
+         */
         private void flushPendingLineBreaks() {
             if (pendingLineBreaks_ > 0) {
                 builder_.setLength(trimRightPos_);
@@ -667,7 +799,6 @@ public class HtmlSerializerInnerOuterText {
                 if (c == '\n') {
                     if (mode == Mode.WHITE_SPACE_PRE) {
                         switch (state_) {
-                            case EMPTY:
                             case BLOCK_SEPARATOR_AT_END:
                                 break;
                             default:
@@ -682,7 +813,6 @@ public class HtmlSerializerInnerOuterText {
 
                     if (mode == Mode.WHITE_SPACE_PRE_LINE) {
                         switch (state_) {
-                            case EMPTY:
                             case BLOCK_SEPARATOR_AT_END:
                                 break;
                             case BLANK_AT_END:

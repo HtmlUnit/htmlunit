@@ -367,4 +367,77 @@ public final class XmlUtils {
 
         return null;
     }
+
+    /**
+     * Escapes an attribute value for the HTML serialization (e.g. innerHTML/outerHTML of an HTML document).
+     * Replaces {@code &amp;}, {@code "}, the no-break space (U+00A0), {@code <} and {@code >}
+     * with the corresponding character references; all other characters are kept.
+     *
+     * @param value the attribute value to escape
+     * @return the escaped value or {@code null} if the value is {@code null}
+     * @see <a href="https://html.spec.whatwg.org/multipage/parsing.html#escapingString">
+     *      HTML Standard - Escaping a string</a>
+     */
+    public static String escapeHtmlAttributeValue(final String value) {
+        return escapeAttributeValue(value, false);
+    }
+
+    /**
+     * Escapes an attribute value for the XML serialization (e.g. innerHTML/outerHTML of an XHTML or XML document).
+     * Replaces {@code &amp;}, {@code "}, {@code <}, {@code >}, tab, line feed and carriage return
+     * with the corresponding character references; all other characters (including the
+     * no-break space) are kept.
+     *
+     * @param value the attribute value to escape
+     * @return the escaped value or {@code null} if the value is {@code null}
+     * @see <a href="https://w3c.github.io/DOM-Parsing/#dfn-serializing-an-attribute-value">
+     *      DOM Parsing and Serialization - Serializing an attribute value</a>
+     */
+    public static String escapeXmlAttributeValue(final String value) {
+        return escapeAttributeValue(value, true);
+    }
+
+    /**
+     * Escapes an attribute value using the HTML or the XML rules.
+     *
+     * @param value the attribute value to escape
+     * @param xml whether to use the XML rules
+     * @return the escaped value or {@code null} if the value is {@code null}
+     */
+    private static String escapeAttributeValue(final String value, final boolean xml) {
+        if (value == null) {
+            return null;
+        }
+
+        final int length = value.length();
+        StringBuilder builder = null;
+        for (int i = 0; i < length; i++) {
+            final char c = value.charAt(i);
+            final String replacement = switch (c) {
+                case '&' -> "&amp;";
+                case '"' -> "&quot;";
+                case '<' -> "&lt;";
+                case '>' -> "&gt;";
+                case '\u00A0' -> xml ? null : "&nbsp;";
+                case '\t' -> xml ? "&#9;" : null;
+                case '\n' -> xml ? "&#10;" : null;
+                case '\r' -> xml ? "&#13;" : null;
+                default -> null;
+            };
+
+            if (replacement == null) {
+                if (builder != null) {
+                    builder.append(c);
+                }
+            }
+            else {
+                if (builder == null) {
+                    builder = new StringBuilder(length + 16);
+                    builder.append(value, 0, i);
+                }
+                builder.append(replacement);
+            }
+        }
+        return builder == null ? value : builder.toString();
+    }
 }

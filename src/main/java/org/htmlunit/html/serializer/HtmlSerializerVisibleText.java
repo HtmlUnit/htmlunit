@@ -32,6 +32,7 @@ import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlBreak;
 import org.htmlunit.html.HtmlCheckBoxInput;
 import org.htmlunit.html.HtmlDetails;
+import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlExample;
 import org.htmlunit.html.HtmlHiddenInput;
@@ -211,8 +212,7 @@ public class HtmlSerializerVisibleText {
         }
         else if (domNode instanceof DomElement element) {
             final WebWindow window = domNode.getPage().getEnclosingWindow();
-            final String display = window.getComputedStyle(element, null).getDisplay();
-            block = BLOCK.equals(display) || "list-item".equals(display);
+            block = isBlockLevel(element);
         }
         else {
             block = false;
@@ -324,16 +324,29 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
-     * Process {@link HtmlMenu}.
-     * @param builder the StringBuilder to add to
-     * @param htmlMenu the target to process
-     * @param mode the {@link Mode} to use for processing
+     * Checks if the given node is block level; this includes elements that are
+     * blockified (open dialog, children of flex and grid containers).
+     *
+     * @param node the node to check
+     * @return true if the node is a block level element
      */
     private static boolean isBlockLevel(final DomNode node) {
         if (node instanceof DomElement element) {
+            if (element instanceof HtmlDialog dialog && dialog.isOpen()) {
+                return true;
+            }
             final WebWindow window = node.getPage().getEnclosingWindow();
             final String display = window.getComputedStyle(element, null).getDisplay();
-            return BLOCK.equals(display) || "list-item".equals(display);
+            if (BLOCK.equals(display) || "list-item".equals(display)
+                    || "flex".equals(display) || "grid".equals(display)) {
+                return true;
+            }
+            // children of flex and grid containers are blockified
+            if (element.getParentNode() instanceof DomElement parent) {
+                final String parentDisplay = window.getComputedStyle(parent, null).getDisplay();
+                return "flex".equals(parentDisplay) || "inline-flex".equals(parentDisplay)
+                        || "grid".equals(parentDisplay) || "inline-grid".equals(parentDisplay);
+            }
         }
         return false;
     }
@@ -367,9 +380,7 @@ public class HtmlSerializerVisibleText {
 
         for (final DomNode child : htmlDetails.getChildren()) {
             if (child instanceof HtmlSummary) {
-                // only the first summary is the summary of the details
                 appendNode(builder, child, mode);
-                return;
             }
         }
     }
@@ -400,7 +411,7 @@ public class HtmlSerializerVisibleText {
                 first = false;
             }
             else {
-                builder.appendBlank();
+                builder.appendCellSeparator();
             }
             appendChildren(builder, cell, mode); // trim?
         }
@@ -509,8 +520,7 @@ public class HtmlSerializerVisibleText {
             final HtmlSelect htmlSelect, final Mode mode) {
         builder.appendBlockSeparator();
         boolean leadingNlPending = false;
-        // select is rendered as a form control; the white-space style is ignored by the browsers
-        final Mode selectMode = Mode.WHITE_SPACE_NORMAL;
+        final Mode selectMode = whiteSpaceStyle(htmlSelect, mode);
         for (final DomNode item : htmlSelect.getChildren()) {
             if (leadingNlPending) {
                 builder.appendBlockSeparator();
@@ -518,7 +528,7 @@ public class HtmlSerializerVisibleText {
             }
 
             builder.resetContentAdded();
-            appendNode(builder, item, selectMode);
+            appendNode(builder, item, whiteSpaceStyle(item, selectMode));
             if (!leadingNlPending && builder.contentAdded_) {
                 leadingNlPending = true;
             }
@@ -1017,12 +1027,28 @@ public class HtmlSerializerVisibleText {
          * Append a blank.
          */
         public void appendBlank() {
-            if (state_ == State.BLOCK_SEPARATOR_AT_END) {
-                return;
-            }
             builder_.append(' ');
             state_ = State.BLANK_AT_END;
             trimRightPos_ = builder_.length();
+        }
+
+        /**
+         * Append the separator between two table cells; the separator is
+         * collapsible (not added twice, removed at the end of a line).
+         */
+        public void appendCellSeparator() {
+            switch (state_) {
+                case EMPTY:
+                case BLANK_AT_END:
+                case BLANK_AT_END_AFTER_NEWLINE:
+                case BLOCK_SEPARATOR_AT_END:
+                case NEWLINE_AT_END:
+                case BREAK_AT_END:
+                    return;
+                default:
+                    builder_.append(' ');
+                    state_ = State.BLANK_AT_END;
+            }
         }
 
         /**

@@ -80,6 +80,8 @@ import org.htmlunit.javascript.host.html.HTMLScriptElement;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
 import org.htmlunit.javascript.host.html.HTMLTemplateElement;
 import org.htmlunit.util.StringUtils;
+import org.htmlunit.util.XmlUtils;
+import org.htmlunit.xml.XmlPage;
 import org.xml.sax.SAXException;
 
 /**
@@ -104,7 +106,6 @@ public class Element extends Node {
 
     private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
     private static final Pattern PRINT_NODE_PATTERN = Pattern.compile(" {2}");
-    private static final Pattern PRINT_NODE_QUOTE_PATTERN = Pattern.compile("\"");
 
     private enum TextEscape { NONE, XML, HTML }
 
@@ -1132,6 +1133,8 @@ public class Element extends Node {
             if (scriptObject instanceof HTMLElement) {
                 htmlElement = scriptObject;
             }
+            final boolean xmlSerialization = node.getPage() instanceof XHtmlPage
+                    || node.getPage() instanceof XmlPage;
             builder.append('<').append(tag);
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 if (!attr.getSpecified()) {
@@ -1139,7 +1142,9 @@ public class Element extends Node {
                 }
 
                 final String name = attr.getName();
-                final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
+                final String value = xmlSerialization
+                        ? XmlUtils.escapeXmlAttributeValue(attr.getValue())
+                        : XmlUtils.escapeHtmlAttributeValue(attr.getValue());
                 builder.append(' ').append(name).append("=\"").append(value).append('\"');
             }
             builder.append('>');

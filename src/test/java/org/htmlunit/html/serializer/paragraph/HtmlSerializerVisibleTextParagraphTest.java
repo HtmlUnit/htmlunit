@@ -655,11 +655,7 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "a\nb",
-            CHROME = "ab",
-            EDGE = "ab",
-            FF = "ab",
-            FF_ESR = "ab")
+    @Alerts("ab")
     public void tagRtc() throws Exception {
         getVisibleTextFormated("<ruby id='tester'>a<rtc><rt>b</rt></rtc></ruby>");
     }

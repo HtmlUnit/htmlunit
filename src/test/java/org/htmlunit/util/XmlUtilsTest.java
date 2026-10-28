@@ -17,6 +17,7 @@ package org.htmlunit.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -343,6 +344,98 @@ public class XmlUtilsTest {
 
         return XmlUtils.buildDocument(
                 new StringWebResponse(xmlContent, StandardCharsets.UTF_8, url));
+    }
+
+    /**
+     * Tests that {@link XmlUtils#escapeHtmlAttributeValue(String)} handles {@code null}.
+     */
+    @Test
+    public void escapeHtmlAttributeValue_null() {
+        assertNull(XmlUtils.escapeHtmlAttributeValue(null));
+    }
+
+    /**
+     * Tests that {@link XmlUtils#escapeHtmlAttributeValue(String)} returns the same
+     * instance if there is nothing to escape.
+     */
+    @Test
+    public void escapeHtmlAttributeValue_nothingToEscape() {
+        assertEquals("", XmlUtils.escapeHtmlAttributeValue(""));
+
+        final String value = "abc 'def' \t\n\r xyz";
+        assertSame(value, XmlUtils.escapeHtmlAttributeValue(value));
+    }
+
+    /**
+     * Tests that {@link XmlUtils#escapeHtmlAttributeValue(String)} escapes all special chars.
+     */
+    @Test
+    public void escapeHtmlAttributeValue() {
+        assertEquals("&amp;", XmlUtils.escapeHtmlAttributeValue("&"));
+        assertEquals("&quot;", XmlUtils.escapeHtmlAttributeValue("\""));
+        assertEquals("&lt;", XmlUtils.escapeHtmlAttributeValue("<"));
+        assertEquals("&gt;", XmlUtils.escapeHtmlAttributeValue(">"));
+        assertEquals("&nbsp;", XmlUtils.escapeHtmlAttributeValue("\u00A0"));
+
+        assertEquals("a&quot;b&amp;c&lt;d&gt;e&nbsp;f\tg\nh'i",
+                XmlUtils.escapeHtmlAttributeValue("a\"b&c<d>e\u00A0f\tg\nh'i"));
+        assertEquals("&lt;b id=&quot;x&quot;&gt;a &amp; b&lt;/b&gt;",
+                XmlUtils.escapeHtmlAttributeValue("<b id=\"x\">a & b</b>"));
+    }
+
+    /**
+     * Tests that {@link XmlUtils#escapeHtmlAttributeValue(String)} does not
+     * touch existing character references (they are escaped again).
+     */
+    @Test
+    public void escapeHtmlAttributeValue_entities() {
+        assertEquals("&amp;amp;&amp;#9;", XmlUtils.escapeHtmlAttributeValue("&amp;&#9;"));
+    }
+
+    /**
+     * Tests that {@link XmlUtils#escapeHtmlAttributeValue(String)} keeps non BMP chars.
+     */
+    @Test
+    public void escapeHtmlAttributeValue_surrogates() {
+        assertEquals("\uD835\uDC65&amp;\uD835\uDC65", XmlUtils.escapeHtmlAttributeValue("\uD835\uDC65&\uD835\uDC65"));
+    }
+
+    /**
+     * Tests that {@link XmlUtils#escapeXmlAttributeValue(String)} handles {@code null}.
+     */
+    @Test
+    public void escapeXmlAttributeValue_null() {
+        assertNull(XmlUtils.escapeXmlAttributeValue(null));
+    }
+
+    /**
+     * Tests that {@link XmlUtils#escapeXmlAttributeValue(String)} returns the same
+     * instance if there is nothing to escape.
+     */
+    @Test
+    public void escapeXmlAttributeValue_nothingToEscape() {
+        assertEquals("", XmlUtils.escapeXmlAttributeValue(""));
+
+        final String value = "abc 'def' \u00A0 xyz";
+        assertSame(value, XmlUtils.escapeXmlAttributeValue(value));
+    }
+
+    /**
+     * Tests that {@link XmlUtils#escapeXmlAttributeValue(String)} escapes all special chars.
+     */
+    @Test
+    public void escapeXmlAttributeValue() {
+        assertEquals("&amp;", XmlUtils.escapeXmlAttributeValue("&"));
+        assertEquals("&quot;", XmlUtils.escapeXmlAttributeValue("\""));
+        assertEquals("&lt;", XmlUtils.escapeXmlAttributeValue("<"));
+        assertEquals("&gt;", XmlUtils.escapeXmlAttributeValue(">"));
+        assertEquals("&#9;", XmlUtils.escapeXmlAttributeValue("\t"));
+        assertEquals("&#10;", XmlUtils.escapeXmlAttributeValue("\n"));
+        assertEquals("&#13;", XmlUtils.escapeXmlAttributeValue("\r"));
+        assertEquals("\u00A0", XmlUtils.escapeXmlAttributeValue("\u00A0"));
+
+        assertEquals("a&quot;b&amp;c&lt;d&gt;e\u00A0f&#9;g&#10;h'i",
+                XmlUtils.escapeXmlAttributeValue("a\"b&c<d>e\u00A0f\tg\nh'i"));
     }
 
     private static XmlPage loadXmlPage(final String xmlContent) throws Exception {

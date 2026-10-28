@@ -2125,9 +2125,7 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<b></b>t", "0"},
-            FF = {"<b></b>t", "0"},
-            FF_ESR = {"<b></b>t", "0"})
+    @Alerts({"<b></b>t", "0"})
     public void nodeDocumentFragment_innerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"
                 + "var f = document.createDocumentFragment();\n"
@@ -2238,9 +2236,7 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<b title=\"a&amp;b\">x&lt;y</b>", "<template><b title=\"a&amp;b\">x&lt;y</b></template>", "0"},
-            FF = {"<b title=\"a&amp;b\">x&lt;y</b>", "<template><b title=\"a&amp;b\">x&lt;y</b></template>", "0"},
-            FF_ESR = {"<b title=\"a&amp;b\">x&lt;y</b>", "<template><b title=\"a&amp;b\">x&lt;y</b></template>", "0"})
+    @Alerts({"<b title=\"a&amp;b\">x&lt;y</b>", "<template><b title=\"a&amp;b\">x&lt;y</b></template>", "0"})
     public void nodeTemplateContent_innerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"
                 + "var t = document.createElement('template');\n"

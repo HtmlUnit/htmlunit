@@ -2378,8 +2378,7 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><span title=\"a&quot;b&amp;c&lt;d&gt;e\u00A0f&#9;g&#"
+    @Alerts(CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><span title=\"a&quot;b&amp;c&lt;d&gt;e\u00A0f&#9;g&#"
                 + "10;h\"></span></div>",
             EDGE = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><span title=\"a&quot;b&amp;c&lt;d&gt;e\u00A0f&#9;g&#"
                 + "10;h\"></span></div>",
@@ -2431,8 +2430,7 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><use xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlin"
+    @Alerts(CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><use xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlin"
                 + "k=\"http://www.w3.org/1999/xlink\" xlink:href=\"#a\" xml:lang=\"en\"/></div>",
             EDGE = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><use xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlin"
                 + "k=\"http://www.w3.org/1999/xlink\" xlink:href=\"#a\" xml:lang=\"en\"/></div>",
@@ -2482,8 +2480,7 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div></div><script></script><textarea></textarea><p>"
+    @Alerts(CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div></div><script></script><textarea></textarea><p>"
                 + "</p></div>",
             EDGE = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div></div><script></script><textarea></textarea><p>"
                 + "</p></div>",
@@ -2579,8 +2576,7 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><foo xmlns=\"urn:x\"><bar/><span xmlns=\"http://www."
+    @Alerts(CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><foo xmlns=\"urn:x\"><bar/><span xmlns=\"http://www."
                 + "w3.org/1999/xhtml\"></span></foo></div>",
             EDGE = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><foo xmlns=\"urn:x\"><bar/><span xmlns=\"http://www."
                 + "w3.org/1999/xhtml\"></span></foo></div>",
@@ -2617,8 +2613,7 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><svg xmlns=\"http://www.w3.org/2000/svg\"><circle/><"
+    @Alerts(CHROME = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><svg xmlns=\"http://www.w3.org/2000/svg\"><circle/><"
                 + "/svg></div>",
             EDGE = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><svg xmlns=\"http://www.w3.org/2000/svg\"><circle/><"
                 + "/svg></div>",

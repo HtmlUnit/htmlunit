@@ -1393,10 +1393,10 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("first item\nA B C D \nEF\nG \n H\nI\nthird item\n4. item\nsome text\nlast item")
-    @HtmlUnitNYI(CHROME = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
-            EDGE = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
-            FF = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
-            FF_ESR = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item")
+    @HtmlUnitNYI(CHROME = "first item\n A B C D \nEF\nG \n H\nI\nthird item\n4. item\n some text \n\nlast item",
+            EDGE = "first item\n A B C D \nEF\nG \n H\nI\nthird item\n4. item\n some text \n\nlast item",
+            FF = "first item\n A B C D \nEF\nG \n H\nI\nthird item\n4. item\n some text \n\nlast item",
+            FF_ESR = "first item\n A B C D \nEF\nG \n H\nI\nthird item\n4. item\n some text \n\nlast item")
     public void getVisibleTextWhiteSpaceOrderedListPreLine() throws Exception {
         getVisibleTextWhiteSpaceOrderedList("pre-line");
     }
@@ -1484,10 +1484,10 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("first item\nA B C D \nEF\nG \n H\nI\nthird item\n4. item\nsome text\nlast item")
-    @HtmlUnitNYI(CHROME = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
-            EDGE = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
-            FF = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
-            FF_ESR = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item")
+    @HtmlUnitNYI(CHROME = "first item\n A B C D \nEF\nG \n H\nI\nthird item\n4. item\n some text \n\nlast item",
+            EDGE = "first item\n A B C D \nEF\nG \n H\nI\nthird item\n4. item\n some text \n\nlast item",
+            FF = "first item\n A B C D \nEF\nG \n H\nI\nthird item\n4. item\n some text \n\nlast item",
+            FF_ESR = "first item\n A B C D \nEF\nG \n H\nI\nthird item\n4. item\n some text \n\nlast item")
     public void getVisibleTextWhiteSpaceUnorderedListPreLine() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList("pre-line");
     }
