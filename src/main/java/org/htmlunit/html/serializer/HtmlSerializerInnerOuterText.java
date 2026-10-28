@@ -47,6 +47,8 @@ import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlSummary;
 import org.htmlunit.html.HtmlSvg;
+import org.htmlunit.html.HtmlTableCell;
+import org.htmlunit.html.HtmlTableRow;
 import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.ScriptElement;
@@ -231,6 +233,15 @@ public class HtmlSerializerInnerOuterText {
         if (block) {
             builder.appendRequiredLineBreak();
         }
+        else if (node instanceof HtmlTableCell cell) {
+            // cells of a row are separated by a tab
+            if (cell.getNextElementSibling() instanceof HtmlTableCell) {
+                builder.appendTab();
+            }
+        }
+        else if (node instanceof HtmlTableRow) {
+            builder.appendRequiredLineBreak();
+        }
     }
 
     /**
@@ -254,7 +265,10 @@ public class HtmlSerializerInnerOuterText {
                     || "table".equals(display)
                     || "table-caption".equals(display);
         }
-        return DisplayStyle.BLOCK == element.getDefaultStyleDisplay();
+        final DisplayStyle display = element.getDefaultStyleDisplay();
+        return DisplayStyle.BLOCK == display
+                || DisplayStyle.LIST_ITEM == display
+                || DisplayStyle.TABLE == display;
     }
 
     /**
@@ -345,9 +359,15 @@ public class HtmlSerializerInnerOuterText {
         if (isNotRendered(htmlListItem)) {
             return;
         }
-        builder.appendRequiredLineBreak();
+        // a list item with display inline has no line breaks
+        final boolean block = isBlockLevel(htmlListItem);
+        if (block) {
+            builder.appendRequiredLineBreak();
+        }
         appendChildren(builder, htmlListItem, mode, insideHead, insideSelect);
-        builder.appendRequiredLineBreak();
+        if (block) {
+            builder.appendRequiredLineBreak();
+        }
     }
 
     /**
@@ -390,9 +410,14 @@ public class HtmlSerializerInnerOuterText {
         if (isNotRendered(htmlDefinitionTerm)) {
             return;
         }
-        builder.appendRequiredLineBreak();
+        final boolean block = isBlockLevel(htmlDefinitionTerm);
+        if (block) {
+            builder.appendRequiredLineBreak();
+        }
         appendChildren(builder, htmlDefinitionTerm, mode, insideHead, insideSelect);
-        builder.appendRequiredLineBreak();
+        if (block) {
+            builder.appendRequiredLineBreak();
+        }
     }
 
     /**
@@ -577,6 +602,16 @@ public class HtmlSerializerInnerOuterText {
         public void appendLineBreak() {
             flushPendingLineBreaks();
             builder_.append('\n');
+            state_ = State.BREAK_AT_END;
+            trimRightPos_ = builder_.length();
+        }
+
+        /**
+         * Append a tab (used to separate table cells).
+         */
+        public void appendTab() {
+            flushPendingLineBreaks();
+            builder_.append('\t');
             state_ = State.BREAK_AT_END;
             trimRightPos_ = builder_.length();
         }

@@ -212,7 +212,7 @@ public class HtmlSerializerVisibleText {
         else if (domNode instanceof DomElement element) {
             final WebWindow window = domNode.getPage().getEnclosingWindow();
             final String display = window.getComputedStyle(element, null).getDisplay();
-            block = BLOCK.equals(display);
+            block = BLOCK.equals(display) || "list-item".equals(display);
         }
         else {
             block = false;
@@ -329,6 +329,15 @@ public class HtmlSerializerVisibleText {
      * @param htmlMenu the target to process
      * @param mode the {@link Mode} to use for processing
      */
+    private static boolean isBlockLevel(final DomNode node) {
+        if (node instanceof DomElement element) {
+            final WebWindow window = node.getPage().getEnclosingWindow();
+            final String display = window.getComputedStyle(element, null).getDisplay();
+            return BLOCK.equals(display) || "list-item".equals(display);
+        }
+        return false;
+    }
+
     protected void appendMenu(final HtmlSerializerTextBuilder builder,
                     final HtmlMenu htmlMenu, final Mode mode) {
         builder.appendBlockSeparator();
@@ -549,7 +558,7 @@ public class HtmlSerializerVisibleText {
 
             builder.resetContentAdded();
             appendNode(builder, item, whiteSpaceStyle(item, olMode));
-            if (!leadingNlPending && builder.contentAdded_) {
+            if (!leadingNlPending && builder.contentAdded_ && isBlockLevel(item)) {
                 leadingNlPending = true;
             }
         }
@@ -575,7 +584,7 @@ public class HtmlSerializerVisibleText {
 
             builder.resetContentAdded();
             appendNode(builder, item, whiteSpaceStyle(item, ulMode));
-            if (!leadingNlPending && builder.contentAdded_) {
+            if (!leadingNlPending && builder.contentAdded_ && isBlockLevel(item)) {
                 leadingNlPending = true;
             }
         }
@@ -1008,6 +1017,9 @@ public class HtmlSerializerVisibleText {
          * Append a blank.
          */
         public void appendBlank() {
+            if (state_ == State.BLOCK_SEPARATOR_AT_END) {
+                return;
+            }
             builder_.append(' ');
             state_ = State.BLANK_AT_END;
             trimRightPos_ = builder_.length();
