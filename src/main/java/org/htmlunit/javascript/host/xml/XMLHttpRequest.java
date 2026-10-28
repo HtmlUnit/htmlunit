@@ -998,6 +998,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                 fireJavascriptEvent(Event.TYPE_ERROR);
                 fireJavascriptEvent(Event.TYPE_LOAD_END);
+                return;
             }
             else {
                 throw JavaScriptEngine.asJavaScriptException(

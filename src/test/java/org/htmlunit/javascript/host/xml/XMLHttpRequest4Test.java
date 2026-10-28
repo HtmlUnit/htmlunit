@@ -217,4 +217,21 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
         assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("readystatechange§1§0§readystatechange§4§0§error§")
+    public void sendLocalFileAsyncNotAllowed() throws Exception {
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/localxmlhttprequest/index_async.html");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage(fileURL);
+
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
+    }
 }
