@@ -445,7 +445,7 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
             + "</body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
-        final String text = (String) ((JavascriptExecutor) driver)
+        final String text = "" + ((JavascriptExecutor) driver)
                 .executeScript("return document.getElementById('tester').innerText");
         assertEquals(getExpectedAlerts()[0], text);
     }
@@ -462,5 +462,961 @@ public class HtmlSerializerInnerOuterTextParagraphTest extends WebDriverTestCase
         final String text = (String) ((JavascriptExecutor) driver)
                 .executeScript("return document.getElementById('tester').outerText");
         assertEquals(getExpectedAlerts()[0], text);
+    }
+
+    // ---------- inline elements that are not covered yet --------------------------
+
+    /**
+     * The a element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("link")
+    public void tagA() throws Exception {
+        getInnerTextFormated("<a id='tester' href='#x'>link</a>");
+    }
+
+    /**
+     * The data element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("one")
+    public void tagData() throws Exception {
+        getInnerTextFormated("<data id='tester' value='1'>one</data>");
+    }
+
+    /**
+     * The label element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("label")
+    public void tagLabel() throws Exception {
+        getInnerTextFormated("<label id='tester'>label</label>");
+    }
+
+    /**
+     * The nobr element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("no break")
+    public void tagNobr() throws Exception {
+        getInnerTextFormated("<nobr id='tester'>no break</nobr>");
+    }
+
+    /**
+     * The font element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("font")
+    public void tagFont() throws Exception {
+        getInnerTextFormated("<font id='tester' color='red'>font</font>");
+    }
+
+    /**
+     * The big element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("big")
+    public void tagBig() throws Exception {
+        getInnerTextFormated("<big id='tester'>big</big>");
+    }
+
+    /**
+     * The tt element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("tt")
+    public void tagTt() throws Exception {
+        getInnerTextFormated("<tt id='tester'>tt</tt>");
+    }
+
+    /**
+     * The strike element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("strike")
+    public void tagStrike() throws Exception {
+        getInnerTextFormated("<strike id='tester'>strike</strike>");
+    }
+
+    /**
+     * The acronym element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("acronym")
+    public void tagAcronym() throws Exception {
+        getInnerTextFormated("<acronym id='tester' title='t'>acronym</acronym>");
+    }
+
+    /**
+     * The blink element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("blink")
+    public void tagBlink() throws Exception {
+        getInnerTextFormated("<blink id='tester'>blink</blink>");
+    }
+
+    /**
+     * The marquee element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("marquee")
+    public void tagMarquee() throws Exception {
+        getInnerTextFormated("<marquee id='tester'>marquee</marquee>");
+    }
+
+    /**
+     * The output element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("output")
+    public void tagOutput() throws Exception {
+        getInnerTextFormated("<output id='tester'>output</output>");
+    }
+
+    /**
+     * The meter element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void tagMeter() throws Exception {
+        getInnerTextFormated("<meter id='tester' value='1'>meter</meter>");
+    }
+
+    /**
+     * The progress element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void tagProgress() throws Exception {
+        getInnerTextFormated("<progress id='tester' value='1'>progress</progress>");
+    }
+
+    /**
+     * The button element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("button")
+    public void tagButton() throws Exception {
+        getInnerTextFormated("<button id='tester'>button</button>");
+    }
+
+    /**
+     * The center element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("center")
+    public void tagCenter() throws Exception {
+        getInnerTextFormated("<center id='tester'>center</center>");
+    }
+
+    /**
+     * The rp element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ab")
+    public void tagRp() throws Exception {
+        getInnerTextFormated("<ruby id='tester'>a<rp>(</rp>b<rp>)</rp></ruby>");
+    }
+
+    /**
+     * The rb element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ab")
+    public void tagRb() throws Exception {
+        getInnerTextFormated("<ruby id='tester'><rb>a</rb><rt>b</rt></ruby>");
+    }
+
+    /**
+     * The rtc element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ab")
+    public void tagRtc() throws Exception {
+        getInnerTextFormated("<ruby id='tester'>a<rtc><rt>b</rt></rtc></ruby>");
+    }
+
+    /**
+     * The slot element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("fallback")
+    public void tagSlot() throws Exception {
+        getInnerTextFormated("<slot id='tester'>fallback</slot>");
+    }
+
+    /**
+     * The picture element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void tagPicture() throws Exception {
+        getInnerTextFormated("<picture id='tester'><source srcset='x.png'><img alt='alt'></picture>");
+    }
+
+    /**
+     * The img element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void tagImg() throws Exception {
+        getInnerTextFormated("<img id='tester' alt='alt'>");
+    }
+
+    /**
+     * The canvas element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void tagCanvas() throws Exception {
+        getInnerTextFormated("<canvas id='tester'>fallback</canvas>");
+    }
+
+    /**
+     * The object element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("fallback")
+    public void tagObject() throws Exception {
+        getInnerTextFormated("<object id='tester' data='x.bin'>fallback</object>");
+    }
+
+    /**
+     * The svg element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void tagSvg() throws Exception {
+        getInnerTextFormated("<svg id='tester' width='50' height='10'><text x='0' y='10'>svg</text></svg>");
+    }
+
+    /**
+     * The math element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void tagMath() throws Exception {
+        getInnerTextFormated("<math id='tester'><mi>x</mi></math>");
+    }
+
+    /**
+     * The input element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void tagInput() throws Exception {
+        getInnerTextFormated("<input id='tester' value='input'>");
+    }
+
+    /**
+     * The select element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            CHROME = "one\ntwo",
+            EDGE = "one\ntwo")
+    public void tagSelect() throws Exception {
+        getInnerTextFormated("<select id='tester'><option>one</option><option>two</option></select>");
+    }
+
+    /**
+     * The textarea element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void tagTextarea() throws Exception {
+        getInnerTextFormated("<textarea id='tester'>textarea</textarea>");
+    }
+
+    /**
+     * The bdoRtl element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abc")
+    public void tagBdoRtl() throws Exception {
+        getInnerTextFormated("<bdo id='tester' dir='rtl'>abc</bdo>");
+    }
+
+    /**
+     * The qNested element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("outer inner")
+    public void tagQNested() throws Exception {
+        getInnerTextFormated("<q id='tester'>outer <q>inner</q></q>");
+    }
+
+    /**
+     * The listing element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a  b")
+    public void tagListing() throws Exception {
+        getInnerTextFormated("<listing id='tester'>a  b</listing>");
+    }
+
+    /**
+     * The xmp element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<b>a</b>")
+    public void tagXmp() throws Exception {
+        getInnerTextFormated("<xmp id='tester'><b>a</b></xmp>");
+    }
+
+    /**
+     * The plaintext element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a<b>b</b></div>\n</body></html>")
+    public void tagPlaintext() throws Exception {
+        getInnerTextFormated("<div id='tester'><plaintext>a<b>b</b></div>");
+    }
+
+    /**
+     * The customElement element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("custom")
+    public void tagCustomElement() throws Exception {
+        getInnerTextFormated("<my-element id='tester'>custom</my-element>");
+    }
+
+    // ---------- paragraph structure -----------------------------------------------
+
+    /**
+     * An empty paragraph.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb")
+    public void emptyParagraph() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<p></p>b</div>");
+    }
+
+    /**
+     * A paragraph that contains only white space.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb")
+    public void whitespaceOnlyParagraph() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<p>   </p>b</div>");
+    }
+
+    /**
+     * A paragraph that starts with a line break.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("\na")
+    public void paragraphWithBrStart() throws Exception {
+        getInnerTextFormated("<p id='tester'><br>a</p>");
+    }
+
+    /**
+     * A paragraph with a line break in the middle.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\nb")
+    public void paragraphWithBrMiddle() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<br>b</p>");
+    }
+
+    /**
+     * A paragraph that ends with a line break.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n")
+    public void paragraphWithBrEnd() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<br></p>");
+    }
+
+    /**
+     * A paragraph with two line breaks.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb")
+    public void paragraphWithTwoBr() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<br><br>b</p>");
+    }
+
+    /**
+     * Consecutive paragraphs.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphsConsecutive() throws Exception {
+        getInnerTextFormated("<div id='tester'><p>a</p><p>b</p><p>c</p></div>");
+    }
+
+    /**
+     * An empty paragraph between paragraphs.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb")
+    public void paragraphsWithEmptyBetween() throws Exception {
+        getInnerTextFormated("<div id='tester'><p>a</p><p></p><p>b</p></div>");
+    }
+
+    /**
+     * Text between paragraphs.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nx\n\nb\n\ny")
+    public void paragraphsWithTextBetween() throws Exception {
+        getInnerTextFormated("<div id='tester'><p>a</p>x<p>b</p>y</div>");
+    }
+
+    /**
+     * Paragraphs that are closed by the next paragraph.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphImplicitlyClosed() throws Exception {
+        getInnerTextFormated("<div id='tester'><p>a<p>b<p>c</div>");
+    }
+
+    /**
+     * A paragraph inside of a div with text.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphInDiv() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<p>b</p>c</div>");
+    }
+
+    /**
+     * A paragraph inside of a list item.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphInListItem() throws Exception {
+        getInnerTextFormated("<ul id='tester'><li>a<p>b</p>c</li></ul>");
+    }
+
+    /**
+     * A paragraph inside of a table cell.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphInTableCell() throws Exception {
+        getInnerTextFormated("<table id='tester'><tr><td>a<p>b</p>c</td></tr></table>");
+    }
+
+    /**
+     * A paragraph inside of a blockquote.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb")
+    public void paragraphInBlockquote() throws Exception {
+        getInnerTextFormated("<blockquote id='tester'><p>a</p><p>b</p></blockquote>");
+    }
+
+    /**
+     * A paragraph inside of an inline element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphInSpan() throws Exception {
+        getInnerTextFormated("<span id='tester'>a<p>b</p>c</span>");
+    }
+
+    /**
+     * A paragraph inside of a pre.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphInPre() throws Exception {
+        getInnerTextFormated("<pre id='tester'>a<p>b</p>c</pre>");
+    }
+
+    // ---------- paragraph and css -------------------------------------------------
+
+    /**
+     * A paragraph with display inline.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphDisplayInline() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<p style='display: inline'>b</p>c</div>");
+    }
+
+    /**
+     * A paragraph with display inline-block.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphDisplayInlineBlock() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<p style='display: inline-block'>b</p>c</div>");
+    }
+
+    /**
+     * A paragraph with display none.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ac")
+    public void paragraphDisplayNone() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<p style='display: none'>b</p>c</div>");
+    }
+
+    /**
+     * A paragraph with visibility hidden.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ac")
+    public void paragraphVisibilityHidden() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<p style='visibility: hidden'>b</p>c</div>");
+    }
+
+    /**
+     * A paragraph with the hidden attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ac")
+    public void paragraphHiddenAttribute() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<p hidden>b</p>c</div>");
+    }
+
+    /**
+     * A paragraph without margin.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphMargin() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<p style='margin: 0'>b</p>c</div>");
+    }
+
+    /**
+     * A paragraph with white-space pre.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a   b\n  c")
+    public void paragraphWhiteSpacePre() throws Exception {
+        getInnerTextFormated("<p id='tester' style='white-space: pre'>a   b\n  c</p>");
+    }
+
+    /**
+     * A paragraph with white-space pre-line.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a b\nc")
+    public void paragraphWhiteSpacePreLine() throws Exception {
+        getInnerTextFormated("<p id='tester' style='white-space: pre-line'>a   b\n  c</p>");
+    }
+
+    /**
+     * A paragraph with white-space nowrap.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a b c")
+    public void paragraphWhiteSpaceNowrap() throws Exception {
+        getInnerTextFormated("<p id='tester' style='white-space: nowrap'>a   b\n  c</p>");
+    }
+
+    /**
+     * A paragraph with text-transform.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A B C")
+    public void paragraphTextTransform() throws Exception {
+        getInnerTextFormated("<p id='tester' style='text-transform: uppercase'>a <b>b</b> c</p>");
+    }
+
+    /**
+     * A paragraph and headings.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphAndHeading() throws Exception {
+        getInnerTextFormated("<div id='tester'><h1>a</h1><p>b</p><h2>c</h2></div>");
+    }
+
+    /**
+     * A paragraph and a horizontal rule.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb")
+    public void paragraphAndHr() throws Exception {
+        getInnerTextFormated("<div id='tester'><p>a</p><hr><p>b</p></div>");
+    }
+
+    /**
+     * A paragraph and a pre.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb  c\n\nd")
+    public void paragraphAndPre() throws Exception {
+        getInnerTextFormated("<div id='tester'><p>a</p><pre>b  c</pre><p>d</p></div>");
+    }
+
+    /**
+     * A paragraph and a table.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphAndTable() throws Exception {
+        getInnerTextFormated("<div id='tester'><p>a</p><table><tr><td>b</td></tr></table><p>c</p></div>");
+    }
+
+    /**
+     * A paragraph and a list.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphAndList() throws Exception {
+        getInnerTextFormated("<div id='tester'><p>a</p><ul><li>b</li></ul><p>c</p></div>");
+    }
+
+    /**
+     * A line break directly before a paragraph.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\n\nb")
+    public void paragraphBrBeforeP() throws Exception {
+        getInnerTextFormated("<div id='tester'>a<br><p>b</p></div>");
+    }
+
+    /**
+     * A line break directly after a paragraph.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\n\nb")
+    public void paragraphBrAfterP() throws Exception {
+        getInnerTextFormated("<div id='tester'><p>a</p><br>b</div>");
+    }
+
+    /**
+     * A paragraph with comments.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ab")
+    public void paragraphWithComment() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<!-- c -->b</p>");
+    }
+
+    /**
+     * A paragraph with entities.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<a> & \u00A9 \u20AC")
+    public void paragraphWithEntities() throws Exception {
+        getInnerTextFormated("<p id='tester'>&lt;a&gt; &amp; &copy; &euro;</p>");
+    }
+
+    /**
+     * A paragraph with non-breaking spaces between inline elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\u00A0b\u00A0\u00A0c")
+    public void paragraphWithNbspRuns() throws Exception {
+        getInnerTextFormated("<p id='tester'><b>a</b>&nbsp;<i>b</i>&nbsp;&nbsp;<u>c</u></p>");
+    }
+
+    // ---------- inline elements and white space -----------------------------------
+
+    /**
+     * Spaces across the boundaries of inline elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a b c d")
+    public void inlineSpacesAcrossBoundaries() throws Exception {
+        getInnerTextFormated("<p id='tester'>a <b> b </b> <i> c </i> d</p>");
+    }
+
+    /**
+     * An empty inline element between spaces.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a b")
+    public void inlineEmptyBetweenSpaces() throws Exception {
+        getInnerTextFormated("<p id='tester'>a <b></b> b</p>");
+    }
+
+    /**
+     * An inline element that contains only a space.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a b")
+    public void inlineSpaceOnlyElement() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<b> </b>b</p>");
+    }
+
+    /**
+     * Inline elements separated by new lines.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a b c")
+    public void inlineWithNewlinesBetween() throws Exception {
+        getInnerTextFormated("<p id='tester'><b>a</b>\n<i>b</i>\n\n<u>c</u></p>");
+    }
+
+    /**
+     * Deeply nested inline elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abcde")
+    public void inlineDeeplyNested() throws Exception {
+        getInnerTextFormated("<p id='tester'><b>a<i>b<u>c<s>d<em>e</em></s></u></i></b></p>");
+    }
+
+    /**
+     * An inline element with display block.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\nb\nc")
+    public void inlineDisplayBlock() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<b style='display: block'>b</b>c</p>");
+    }
+
+    /**
+     * An inline element with display none.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ac")
+    public void inlineDisplayNone() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<b style='display: none'>b</b>c</p>");
+    }
+
+    /**
+     * An inline element with display inline-block.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abc")
+    public void inlineDisplayInlineBlock() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<b style='display: inline-block'>b</b>c</p>");
+    }
+
+    /**
+     * An inline element with visibility hidden.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ac")
+    public void inlineVisibilityHidden() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<b style='visibility: hidden'>b</b>c</p>");
+    }
+
+    /**
+     * An inline element with white-space pre.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a b   c d")
+    public void inlineWhiteSpacePre() throws Exception {
+        getInnerTextFormated("<p id='tester'>a <b style='white-space: pre'>b   c</b> d</p>");
+    }
+
+    /**
+     * An inline element with text-transform.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a B c")
+    public void inlineTextTransform() throws Exception {
+        getInnerTextFormated("<p id='tester'>a <b style='text-transform: uppercase'>b</b> c</p>");
+    }
+
+    /**
+     * A floating inline element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\nb\nc")
+    public void inlineFloat() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<b style='float: left'>b</b>c</p>");
+    }
+
+    /**
+     * An absolutely positioned inline element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\nb\nc")
+    public void inlinePositionAbsolute() throws Exception {
+        getInnerTextFormated("<p id='tester'>a<b style='position: absolute'>b</b>c</p>");
+    }
+
+    /**
+     * A wbr between words.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("longwordhere")
+    public void wbrBetweenWords() throws Exception {
+        getInnerTextFormated("<p id='tester'>long<wbr>word<wbr>here</p>");
+    }
+
+    /**
+     * A paragraph with links and punctuation.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("See the docs, the FAQ and the blog.")
+    public void realWorldLinkList() throws Exception {
+        getInnerTextFormated("<p id='tester'>See <a href='#a'>the docs</a>, <a href='#b'>the FAQ</a> and <a href='#c'>"
+                + "the blog</a>.</p>");
+    }
+
+    /**
+     * A paragraph with a button.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Press OK to continue.")
+    public void realWorldButtonInText() throws Exception {
+        getInnerTextFormated("<p id='tester'>Press <button>OK</button> to continue.</p>");
+    }
+
+    /**
+     * A paragraph with form controls.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Name:  Choice: \none\n L",
+            FF = "Name:  Choice:  L",
+            FF_ESR = "Name:  Choice:  L")
+    public void realWorldFormInline() throws Exception {
+        getInnerTextFormated("<p id='tester'>Name: <input value='x'> Choice: <select><option>one</option></select> <label>"
+                + "L</label></p>");
+    }
+
+    /**
+     * A paragraph with an image.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Look:  done")
+    public void realWorldImageInText() throws Exception {
+        getInnerTextFormated("<p id='tester'>Look: <img alt='a cat'> done</p>");
+    }
+
+    // ---------- outerText ---------------------------------------------------------
+
+    /**
+     * A paragraph inside of a div with text. (outerText)
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphInDivOuterText() throws Exception {
+        getOuterTextFormated("<div id='tester'>a<p>b</p>c</div>");
+    }
+
+    /**
+     * A paragraph with display none. (outerText)
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ac")
+    public void paragraphDisplayNoneOuterText() throws Exception {
+        getOuterTextFormated("<div id='tester'>a<p style='display: none'>b</p>c</div>");
+    }
+
+    /**
+     * Spaces across the boundaries of inline elements. (outerText)
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a b c d")
+    public void inlineSpacesAcrossBoundariesOuterText() throws Exception {
+        getOuterTextFormated("<p id='tester'>a <b> b </b> <i> c </i> d</p>");
+    }
+
+    /**
+     * The a element. (outerText)
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("link")
+    public void tagAOuterText() throws Exception {
+        getOuterTextFormated("<a id='tester' href='#x'>link</a>");
+    }
+
+    /**
+     * Consecutive paragraphs. (outerText)
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a\n\nb\n\nc")
+    public void paragraphsConsecutiveOuterText() throws Exception {
+        getOuterTextFormated("<div id='tester'><p>a</p><p>b</p><p>c</p></div>");
     }
 }

@@ -190,7 +190,13 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
         final int lineLength = 96;
 
         String actual = failure.getActual().getStringRepresentation();
-        actual = actual.substring(0, actual.length() - 1);
+
+        // WebTestCase.assertEquals(String[], List<String>) compares List#toString(), e.g. "[a, b]"
+        // -> drop only the surrounding brackets, never an arbitrary last char
+        if (actual.length() >= 2 && actual.startsWith("[") && actual.endsWith("]")) {
+            actual = actual.substring(1, actual.length() - 1);
+        }
+
         actual = StringEscapeUtils.escapeJava(actual);
         if (actual.length() > lineLength) {
             final StringBuilder builder = new StringBuilder();

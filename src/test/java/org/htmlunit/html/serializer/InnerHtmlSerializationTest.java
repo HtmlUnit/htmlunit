@@ -1621,4 +1621,1108 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    // ---------- attributes --------------------------------------------------------
+
+    /**
+     * A simple attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void attrSimple_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.setAttribute('title', 'x');\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A double quote inside of an attribute value is escaped.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span title=\"a&quot;b\"></span>")
+    public void attrDoubleQuote_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('title', 'a\"b');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A single quote inside of an attribute value is not escaped.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span title=\"a'b\"></span>")
+    public void attrSingleQuote_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('title', \"a'b\");\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Ampersands and entity like text inside of an attribute value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span title=\"a&amp;b &amp;amp; &amp;lt; &amp;#65;\"></span>")
+    public void attrAmpersand_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('title', 'a&b &amp; &lt; &#65;');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Less than and greater than inside of an attribute value (newer browsers escape them).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span title=\"a&lt;b&gt;c\"></span>")
+    public void attrLessAndGreaterThan_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('title', 'a<b>c');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A non-breaking space inside of an attribute value is escaped.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span title=\"a&nbsp;b\"></span>")
+    public void attrNbsp_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('title', 'a\\u00a0b');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Tab, line feed and carriage return inside of an attribute value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span title=\"a b c d\"></span>")
+    public void attrWhitespaceCharacters_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('title', 'a\\tb\\nc\\rd');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * An attribute with an empty value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span title=\"\"></span>")
+    public void attrEmptyValue_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('title', '');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Boolean attributes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<button disabled=\"\" hidden=\"hidden\"></button>", "<button hidden=\"hidden\"></button>"})
+    public void attrBoolean_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var b = document.createElement('button');\n"
+                + "b.setAttribute('disabled', '');\n"
+                + "b.setAttribute('hidden', 'hidden');\n"
+                + "b.disabled = true;\n"
+                + "d.appendChild(b);\n"
+                + "log(d.innerHTML);\n"
+                + "b.disabled = false;\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The case of attribute names in a HTML element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span title=\"x\" data-foo=\"y\"></span>")
+    public void attrNameCaseHtml_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('TITLE', 'x');\n"
+                + "c.setAttribute('Data-Foo', 'y');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The case of attribute names set with setAttributeNS.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span TITLE=\"x\"></span>")
+    public void attrNameCaseNamespaced_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttributeNS(null, 'TITLE', 'x');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The order of the attributes and replacing a value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<span b=\"4\" a=\"2\" c=\"3\"></span>", "<span b=\"4\" c=\"3\" a=\"5\"></span>"})
+    public void attrOrder_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('b', '1');\n"
+                + "c.setAttribute('a', '2');\n"
+                + "c.setAttribute('c', '3');\n"
+                + "c.setAttribute('b', '4');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n"
+                + "c.removeAttribute('a');\n"
+                + "c.setAttribute('a', '5');\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Attributes at void elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<br class=\"x\"><img src=\"a.png?x=1&amp;y=2\">")
+    public void attrOnVoidElement_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var b = document.createElement('br');\n"
+                + "b.setAttribute('class', 'x');\n"
+                + "var i = document.createElement('img');\n"
+                + "i.setAttribute('src', 'a.png?x=1&y=2');\n"
+                + "d.appendChild(b);\n"
+                + "d.appendChild(i);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The xlink:href attribute at an svg element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<use xlink:href=\"#a&amp;b\"></use>")
+    public void attrXlinkHref_innerHtml() throws Exception {
+        htmlScript("var s = document.createElementNS('http://www.w3.org/2000/svg', 'use');\n"
+                + "s.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#a&b');\n"
+                + "var d = document.createElement('div');\n"
+                + "d.appendChild(s);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The xml:lang attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span xml:lang=\"en\"></span>")
+    public void attrXmlLang_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttributeNS('http://www.w3.org/XML/1998/namespace', 'xml:lang', 'en');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A namespace declaration set as attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span xmlns:foo=\"urn:x\"></span>")
+    public void attrXmlnsDeclaration_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:foo', 'urn:x');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The case of svg attribute names.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<svg viewBox=\"0 0 1 1\" preserveAspectRatio=\"none\"></svg>")
+    public void attrSvgViewBox_innerHtml() throws Exception {
+        htmlScript("var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
+                + "s.setAttribute('viewBox', '0 0 1 1');\n"
+                + "s.setAttribute('preserveAspectRatio', 'none');\n"
+                + "var d = document.createElement('div');\n"
+                + "d.appendChild(s);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The style attribute after setting style properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", ""})
+    public void attrStyleProperties_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.style.color = 'red';\n"
+                + "d.style.marginTop = '1px';\n"
+                + "log(d.innerHTML);\n"
+                + "d.style.color = '';\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The style attribute after setting cssText.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "color: red; margin: 0px; background: url(\"x.png\");"})
+    public void attrStyleCssText_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.style.cssText = 'COLOR: Red;margin:0  ;  background : URL(x.png)';\n"
+                + "log(d.innerHTML);\n"
+                + "log(d.getAttribute('style'));\n");
+    }
+
+    /**
+     * The class attribute after changes via className and classList.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "", ""})
+    public void attrClass_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.className = 'a  b';\n"
+                + "log(d.innerHTML);\n"
+                + "d.classList.add('c');\n"
+                + "log(d.innerHTML);\n"
+                + "d.classList.remove('a');\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Non ASCII characters inside of an attribute value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void attrUnicode_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.setAttribute('title', '\\u00e4\\u00f6\\u00fc\\u20ac\\ud83d\\ude00');\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The data attributes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void attrDataset_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.dataset.fooBar = 'x';\n"
+                + "d.dataset.baz = '';\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The srcdoc attribute with markup.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<iframe srcdoc=\"&lt;b id=&quot;x&quot;&gt;a &amp; b&lt;/b&gt;\"></iframe>")
+    public void attrSrcdoc_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var f = document.createElement('iframe');\n"
+                + "f.setAttribute('srcdoc', '<b id=\"x\">a & b</b>');\n"
+                + "d.appendChild(f);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    // ---------- properties that do not change the attributes ----------------------
+
+    /**
+     * The value property of an input does not change the attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<input>", "<input value=\"w\">\u00A7<input value=\"w\">"})
+    public void attrInputValueProperty_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var i = document.createElement('input');\n"
+                + "i.value = 'v';\n"
+                + "d.appendChild(i);\n"
+                + "log(d.innerHTML);\n"
+                + "i.setAttribute('value', 'w');\n"
+                + "log(d.innerHTML);\n"
+                + "i.value = 'z';\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The checked property of an input does not change the attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<input type=\"checkbox\">", "<input type=\"checkbox\" checked=\"\">"})
+    public void attrInputCheckedProperty_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var i = document.createElement('input');\n"
+                + "i.type = 'checkbox';\n"
+                + "i.checked = true;\n"
+                + "d.appendChild(i);\n"
+                + "log(d.innerHTML);\n"
+                + "i.setAttribute('checked', '');\n"
+                + "i.checked = false;\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The selected property of an option does not change the attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<select><option>a</option><option>b</option></select>",
+             "<select><option selected=\"\">a</option><option>b</option></select>"})
+    public void attrOptionSelectedProperty_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var s = document.createElement('select');\n"
+                + "s.innerHTML = '<option>a</option><option>b</option>';\n"
+                + "d.appendChild(s);\n"
+                + "s.selectedIndex = 1;\n"
+                + "log(d.innerHTML);\n"
+                + "s.options[0].setAttribute('selected', '');\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The value property of a textarea does not change the content.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<textarea>a</textarea>")
+    public void attrTextareaValueProperty_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var t = document.createElement('textarea');\n"
+                + "t.textContent = 'a';\n"
+                + "t.value = 'b';\n"
+                + "d.appendChild(t);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    // ---------- other node types and tree structures ------------------------------
+
+    /**
+     * A comment node.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<!-- c -->")
+    public void nodeComment_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createComment(' c '));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A comment node that contains markup like text.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<!--a--b>c<!--d-->")
+    public void nodeCommentSpecialContent_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createComment('a--b>c<!' + '--d'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A processing instruction in a HTML document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<?xml-stylesheet href=\"a&b\"?>",
+            FF = "<?xml-stylesheet href=\"a&b\">",
+            FF_ESR = "<?xml-stylesheet href=\"a&b\">")
+    public void nodeProcessingInstruction_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "try {\n"
+                + "    d.appendChild(document.createProcessingInstruction('xml-stylesheet', 'href=\"a&b\"'));\n"
+                + "    log(d.innerHTML);\n"
+                + "} catch (e) {\n"
+                + "    log(e.name);\n"
+                + "}\n");
+    }
+
+    /**
+     * A CDATA section is not supported in a HTML document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("NotSupportedError")
+    public void nodeCdataSection_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "try {\n"
+                + "    d.appendChild(document.createCDATASection('a<b>c'));\n"
+                + "    log(d.innerHTML);\n"
+                + "} catch (e) {\n"
+                + "    log(e.name);\n"
+                + "}\n");
+    }
+
+    /**
+     * Elements, text and comments mixed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a<b>b<!--c--></b>d")
+    public void nodeMixedChildren_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createTextNode('a'));\n"
+                + "var b = document.createElement('b');\n"
+                + "b.appendChild(document.createTextNode('b'));\n"
+                + "b.appendChild(document.createComment('c'));\n"
+                + "d.appendChild(b);\n"
+                + "d.appendChild(document.createTextNode('d'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Empty text nodes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<b></b>")
+    public void nodeEmptyTextNodes_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createTextNode(''));\n"
+                + "d.appendChild(document.createElement('b'));\n"
+                + "d.appendChild(document.createTextNode(''));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Children moved from a document fragment.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"<b></b>t", "0"},
+            FF = {"<b></b>t", "0"},
+            FF_ESR = {"<b></b>t", "0"})
+    public void nodeDocumentFragment_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var f = document.createDocumentFragment();\n"
+                + "f.appendChild(document.createElement('b'));\n"
+                + "f.appendChild(document.createTextNode('t'));\n"
+                + "d.appendChild(f);\n"
+                + "log(d.innerHTML);\n"
+                + "log(f.childNodes.length);\n");
+    }
+
+    /**
+     * A child appended to a void element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "<br>"},
+            FF = {"x", "<br>"},
+            FF_ESR = {"x", "<br>"})
+    public void nodeVoidElementWithChild_innerHtml() throws Exception {
+        htmlScript("var b = document.createElement('br');\n"
+                + "b.appendChild(document.createTextNode('x'));\n"
+                + "var d = document.createElement('div');\n"
+                + "d.appendChild(b);\n"
+                + "log(b.innerHTML);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Unknown and custom elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<my-element></my-element><foo.bar></foo.bar><x:y></x:y>")
+    public void nodeUnknownAndCustomElements_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createElement('my-element'));\n"
+                + "d.appendChild(document.createElement('foo.bar'));\n"
+                + "d.appendChild(document.createElement('x:y'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The case of element names.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span></span><SPAN></SPAN><foreignObject></foreignObject><FOO></FOO>")
+    public void nodeElementNameCase_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createElement('SPAN'));\n"
+                + "d.appendChild(document.createElementNS('http://www.w3.org/1999/xhtml', 'SPAN'));\n"
+                + "d.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject'));\n"
+                + "d.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'FOO'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    // ---------- pre, textarea, listing --------------------------------------------
+
+    /**
+     * A pre, textarea and listing with a leading line feed in the first text node.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<pre> abc</pre><textarea> abc</textarea><listing> abc</listing>")
+    public void nodePreLeadingNewline_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "['pre', 'textarea', 'listing'].forEach(function(n) {\n"
+                + "    var e = document.createElement(n);\n"
+                + "    e.appendChild(document.createTextNode('\\nabc'));\n"
+                + "    d.appendChild(e);\n"
+                + "});\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A pre with two leading line feeds.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<pre> abc</pre>")
+    public void nodePreLeadingTwoNewlines_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var e = document.createElement('pre');\n"
+                + "e.appendChild(document.createTextNode('\\n\\nabc'));\n"
+                + "d.appendChild(e);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A pre with an empty first text node followed by a line feed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<pre> abc</pre>")
+    public void nodePreEmptyFirstTextNode_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var e = document.createElement('pre');\n"
+                + "e.appendChild(document.createTextNode(''));\n"
+                + "e.appendChild(document.createTextNode('\\nabc'));\n"
+                + "d.appendChild(e);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    // ---------- template, shadow dom, documents -----------------------------------
+
+    /**
+     * The content of a template with elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"<b title=\"a&amp;b\">x&lt;y</b>", "<template><b title=\"a&amp;b\">x&lt;y</b></template>", "0"},
+            FF = {"<b title=\"a&amp;b\">x&lt;y</b>", "<template><b title=\"a&amp;b\">x&lt;y</b></template>", "0"},
+            FF_ESR = {"<b title=\"a&amp;b\">x&lt;y</b>", "<template><b title=\"a&amp;b\">x&lt;y</b></template>", "0"})
+    public void nodeTemplateContent_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var t = document.createElement('template');\n"
+                + "var b = document.createElement('b');\n"
+                + "b.setAttribute('title', 'a&b');\n"
+                + "b.appendChild(document.createTextNode('x<y'));\n"
+                + "t.content.appendChild(b);\n"
+                + "d.appendChild(t);\n"
+                + "log(t.innerHTML);\n"
+                + "log(d.innerHTML);\n"
+                + "log(t.childNodes.length);\n");
+    }
+
+    /**
+     * The shadow root is not part of the serialization.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<b></b>")
+    public void nodeShadowRootNotSerialized_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createElement('b'));\n"
+                + "var s = d.attachShadow({mode: 'open'});\n"
+                + "s.appendChild(document.createElement('i'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * getHTML() with serializable shadow roots.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"x", "<template shadowrootmode=\"open\" shadowrootserializable=\"\"><i></i></template>x"})
+    public void nodeGetHtmlWithShadowRoot_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createTextNode('x'));\n"
+                + "var s = d.attachShadow({mode: 'open', serializable: true});\n"
+                + "s.appendChild(document.createElement('i'));\n"
+                + "try {\n"
+                + "    log(d.getHTML());\n"
+                + "    log(d.getHTML({serializableShadowRoots: true}));\n"
+                + "} catch (e) {\n"
+                + "    log(e.name);\n"
+                + "}\n");
+    }
+
+    /**
+     * Special characters inside of text nodes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a b ]]&gt; \u2028 \uD83D\uDE00 &nbsp; &amp;nbsp;")
+    public void nodeTextEdgeCases_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createTextNode('a\\r\\nb ]]> \\u2028 \\ud83d\\ude00 \\u00a0 &nbsp;'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A lone surrogate and a null character inside of text nodes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("6")
+    public void nodeLoneSurrogateAndNull_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createTextNode('a\\ud800b'));\n"
+                + "d.appendChild(document.createTextNode('c\\u0000d'));\n"
+                + "log(d.innerHTML.length);\n");
+    }
+
+    /**
+     * The document element of a detached HTML document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<head><title>t</title></head><body><b></b></body>", "<title>t</title>"})
+    public void nodeDetachedHtmlDocument_innerHtml() throws Exception {
+        htmlScript("var doc = document.implementation.createHTMLDocument('t');\n"
+                + "doc.body.appendChild(doc.createElement('b'));\n"
+                + "log(doc.documentElement.innerHTML);\n"
+                + "log(doc.head.innerHTML);\n");
+    }
+
+    /**
+     * The root element of a detached XML document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<child a=\"1&amp;2\">x&lt;y</child>")
+    public void nodeXmlDocument_innerHtml() throws Exception {
+        htmlScript("var doc = document.implementation.createDocument(null, 'root');\n"
+                + "var c = doc.createElement('child');\n"
+                + "c.setAttribute('a', '1&2');\n"
+                + "c.appendChild(doc.createTextNode('x<y'));\n"
+                + "doc.documentElement.appendChild(c);\n"
+                + "log(doc.documentElement.innerHTML);\n");
+    }
+
+    /**
+     * Namespaces inside of a detached XML document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<q:child xmlns:q=\"urn:b\" xmlns:r=\"urn:c\" r:attr=\"v\"/>",
+            FF = "<q:child xmlns:q=\"urn:b\" r:attr=\"v\" xmlns:r=\"urn:c\"/>",
+            FF_ESR = "<q:child xmlns:q=\"urn:b\" r:attr=\"v\" xmlns:r=\"urn:c\"/>")
+    public void nodeXmlDocumentNamespaces_innerHtml() throws Exception {
+        htmlScript("var doc = document.implementation.createDocument('urn:a', 'p:root');\n"
+                + "var c = doc.createElementNS('urn:b', 'q:child');\n"
+                + "c.setAttributeNS('urn:c', 'r:attr', 'v');\n"
+                + "doc.documentElement.appendChild(c);\n"
+                + "log(doc.documentElement.innerHTML);\n");
+    }
+
+    /**
+     * Svg and math elements inside of HTML elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<svg><foreignObject><p></p></foreignObject><circle></circle></svg><math></math>")
+    public void nodeForeignContentInHtml_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
+                + "var fo = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');\n"
+                + "fo.appendChild(document.createElement('p'));\n"
+                + "s.appendChild(fo);\n"
+                + "s.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'circle'));\n"
+                + "d.appendChild(s);\n"
+                + "d.appendChild(document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Serializing an element without a parent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("t")
+    public void nodeElementWithoutParent_innerHtml() throws Exception {
+        htmlScript("var b = document.createElement('b');\n"
+                + "b.setAttribute('x', 'y');\n"
+                + "b.appendChild(document.createTextNode('t'));\n"
+                + "log(b.innerHTML);\n");
+    }
+
+    /**
+     * The serialization after removing, replacing and inserting nodes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<i></i><b></b>", "<a></a><i></i>", "x&lt;y"})
+    public void nodeAfterDomChanges_innerHtml() throws Exception {
+        htmlScript("var d = document.createElement('div');\n"
+                + "var a = document.createElement('a');\n"
+                + "var b = document.createElement('b');\n"
+                + "var c = document.createElement('i');\n"
+                + "d.appendChild(a);\n"
+                + "d.appendChild(b);\n"
+                + "d.replaceChild(c, a);\n"
+                + "log(d.innerHTML);\n"
+                + "d.insertBefore(a, c);\n"
+                + "d.removeChild(b);\n"
+                + "log(d.innerHTML);\n"
+                + "d.textContent = 'x<y';\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    // ---------- XHTML document: XML serialization ---------------------------------
+
+    /**
+     * The XML serialization escapes the attribute values.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<span xmlns=\"http://www.w3.org/1999/xhtml\" title=\"a&quot;b&amp;c&lt;d&gt;e f&#9;g&#10;h\"></span>",
+            FF = "<span xmlns=\"http://www.w3.org/1999/xhtml\" title=\"a&quot;b&amp;c&lt;d&gt;e f&#9;g&#xA;h\"></span>",
+            FF_ESR = "<span xmlns=\"http://www.w3.org/1999/xhtml\" title=\"a&quot;b&amp;c&lt;d&gt;e f&#9;g&#xA;h\"></span>")
+    public void attrEscaping_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('title', 'a\"b&c<d>e\\u00a0f\\tg\\nh');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Boolean attributes are written with a value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<button xmlns=\"http://www.w3.org/1999/xhtml\" disabled=\"\"></button>",
+            FF = "<button xmlns=\"http://www.w3.org/1999/xhtml\" disabled=\"disabled\"></button>",
+            FF_ESR = "<button xmlns=\"http://www.w3.org/1999/xhtml\" disabled=\"disabled\"></button>")
+    public void attrBoolean_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var b = document.createElement('button');\n"
+                + "b.setAttribute('disabled', '');\n"
+                + "d.appendChild(b);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The case of attribute names.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span xmlns=\"http://www.w3.org/1999/xhtml\" TITLE=\"x\" Other=\"y\"></span>")
+    public void attrNameCase_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttribute('TITLE', 'x');\n"
+                + "c.setAttributeNS(null, 'Other', 'y');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Namespaced attributes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<use xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#a\" xml:lang=\"en\"/>",
+            FF = "<use xmlns=\"http://www.w3.org/2000/svg\" xlink:href=\"#a\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xml:lang=\"en\"/>",
+            FF_ESR = "<use xmlns=\"http://www.w3.org/2000/svg\" xlink:href=\"#a\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xml:lang=\"en\"/>")
+    public void attrNamespaced_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var s = document.createElementNS('http://www.w3.org/2000/svg', 'use');\n"
+                + "s.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#a');\n"
+                + "s.setAttributeNS('http://www.w3.org/XML/1998/namespace', 'xml:lang', 'en');\n"
+                + "var d = document.createElement('div');\n"
+                + "d.appendChild(s);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Void elements are written as empty elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<br xmlns=\"http://www.w3.org/1999/xhtml\" /><img xmlns=\"http://www.w3.org/1999/xhtml\" /><inpu"
+                + "t xmlns=\"http://www.w3.org/1999/xhtml\" />")
+    public void voidElements_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createElement('br'));\n"
+                + "d.appendChild(document.createElement('img'));\n"
+                + "d.appendChild(document.createElement('input'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A void element with a child.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<br xmlns=\"http://www.w3.org/1999/xhtml\">x</br>")
+    public void voidElementWithChild_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var b = document.createElement('br');\n"
+                + "b.appendChild(document.createTextNode('x'));\n"
+                + "d.appendChild(b);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Empty elements that are not void.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<div xmlns=\"http://www.w3.org/1999/xhtml\"></div><script xmlns=\"http://www.w3.org/1999/xhtml\""
+                + "></script><textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea><p xmlns=\"http://www.w3.o"
+                + "rg/1999/xhtml\"></p>")
+    public void emptyNonVoidElements_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createElement('div'));\n"
+                + "d.appendChild(document.createElement('script'));\n"
+                + "d.appendChild(document.createElement('textarea'));\n"
+                + "d.appendChild(document.createElement('p'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A comment node.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<!-- c -->")
+    public void comment_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createComment(' c '));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A processing instruction.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<?target data=\"1\"?>")
+    public void processingInstruction_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createProcessingInstruction('target', 'data=\"1\"'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A CDATA section.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<![CDATA[a<b>&c]]>")
+    public void cdataSection_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createCDATASection('a<b>&c'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The end marker of a CDATA section inside of a text node.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a]]&gt;b")
+    public void cdataSectionEnd_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createTextNode('a]]' + '>b'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The XML serialization escapes text.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("&lt;a&gt; &amp; \"b\" \u00A0 ")
+    public void textEscaping_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "d.appendChild(document.createTextNode('<a> & \"b\" \\u00a0 \\r\\n'));\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * An element with a prefix.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<p:foo xmlns:p=\"urn:x\"><p:bar/></p:foo>")
+    public void prefixedElement_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElementNS('urn:x', 'p:foo');\n"
+                + "c.appendChild(document.createElementNS('urn:x', 'p:bar'));\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A child with another default namespace.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<foo xmlns=\"urn:x\"><bar/><span xmlns=\"http://www.w3.org/1999/xhtml\"></span></foo>")
+    public void defaultNamespaceChange_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElementNS('urn:x', 'foo');\n"
+                + "c.appendChild(document.createElementNS('urn:x', 'bar'));\n"
+                + "c.appendChild(document.createElementNS('http://www.w3.org/1999/xhtml', 'span'));\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A namespace declaration set as attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<span xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:foo=\"urn:x\" foo:a=\"1\"></span>")
+    public void namespaceDeclarationAttribute_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var c = document.createElement('span');\n"
+                + "c.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:foo', 'urn:x');\n"
+                + "c.setAttributeNS('urn:x', 'foo:a', '1');\n"
+                + "d.appendChild(c);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * An svg element inside of an XHTML element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<svg xmlns=\"http://www.w3.org/2000/svg\"><circle/></svg>")
+    public void svgInXhtml_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
+                + "s.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'circle'));\n"
+                + "d.appendChild(s);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * The content of a template.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<b xmlns=\"http://www.w3.org/1999/xhtml\"></b>", "<template xmlns=\"http://www.w3.org/1999/xhtml\"><b></b></template>"})
+    public void templateContent_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var t = document.createElement('template');\n"
+                + "t.content.appendChild(document.createElement('b'));\n"
+                + "d.appendChild(t);\n"
+                + "log(t.innerHTML);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Nested elements with attributes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<ul xmlns=\"http://www.w3.org/1999/xhtml\" class=\"x\"><li>a</li></ul>")
+    public void nestedElements_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var u = document.createElement('ul');\n"
+                + "u.setAttribute('class', 'x');\n"
+                + "var l = document.createElement('li');\n"
+                + "l.appendChild(document.createTextNode('a'));\n"
+                + "u.appendChild(l);\n"
+                + "d.appendChild(u);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * A pre with a leading line feed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<pre xmlns=\"http://www.w3.org/1999/xhtml\"> abc</pre>")
+    public void preLeadingNewline_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var d = document.createElement('div');\n"
+                + "var e = document.createElement('pre');\n"
+                + "e.appendChild(document.createTextNode('\\nabc'));\n"
+                + "d.appendChild(e);\n"
+                + "log(d.innerHTML);\n");
+    }
+
+    /**
+     * Serializing an element without a parent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void elementWithoutParent_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var b = document.createElement('b');\n"
+                + "b.setAttribute('x', 'y');\n"
+                + "log(b.innerHTML);\n");
+    }
+
+    // ------------------------------------------------------------------ helpers for the scripts above
+
+    private void htmlScript(final String script) throws Exception {
+        final String html = "<html><head><title></title>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + script
+            + "  }\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    private void xhtmlScript(final String script) throws Exception {
+        final String xhtml = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+            + "<head><title></title>\n"
+            + "<script>//<![CDATA[\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + script
+            + "  }\n"
+            + "//]]></script></head>\n"
+            + "<body onload=\"test()\"></body></html>";
+
+        final WebDriver driver = loadPage2(xhtml, URL_FIRST, "application/xhtml+xml", StandardCharsets.UTF_8);
+        verifyTitle2(driver, getExpectedAlerts());
+    }
 }
