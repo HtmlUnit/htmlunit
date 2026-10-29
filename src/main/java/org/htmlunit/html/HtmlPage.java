@@ -143,6 +143,7 @@ import org.w3c.dom.ProcessingInstruction;
  * @author Ronny Shapiro
  * @author Lai Quang Duong
  * @author Sven Strickroth
+ * @author Vidya m
  */
 @SuppressWarnings("PMD.TooManyFields")
 public class HtmlPage extends SgmlPage {
@@ -1105,6 +1106,10 @@ public class HtmlPage extends SgmlPage {
         final WebRequest request = new WebRequest(url);
         // copy all headers from the referring request
         request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
+        if (!UrlUtils.isSameOrigin(referringRequest.getUrl(), url)) {
+            // credentials are not forwarded to another origin
+            request.removeAdditionalHeader("Authorization");
+        }
 
         // at least overwrite this headers
         request.setAdditionalHeader(HttpHeader.ACCEPT, client.getBrowserVersion().getScriptAcceptHeader());

@@ -74,6 +74,7 @@ import org.junit.jupiter.api.Test;
  * @author Ronald Brill
  * @author Carsten Steul
  * @author Joerg Werner
+ * @author Vidya m
  */
 public class WebClientTest extends SimpleWebTestCase {
 
@@ -523,6 +524,39 @@ public class WebClientTest extends SimpleWebTestCase {
         client.getPage(request);
 
         assertEquals(URL_SECOND, conn.getLastWebRequest().getUrl());
+        assertEquals("bar", conn.getLastAdditionalHeaders().get("foo"));
+    }
+
+    /**
+     * Verifies that the "Authorization" header of the original {@link WebRequest} is only
+     * sent to the redirect location if the redirect does not leave the origin.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void redirection_AuthorizationHeaderDroppedForCrossOrigin() throws Exception {
+        for (final int statusCode : new int[] {301, 302, 303, 307, 308}) {
+            redirection_AuthorizationHeader(statusCode, URL_SECOND, "Bearer secret");
+            redirection_AuthorizationHeader(statusCode, URL_THIRD, null);
+        }
+    }
+
+    private void redirection_AuthorizationHeader(final int statusCode, final URL redirectUrl,
+            final String expectedAuthorization) throws Exception {
+        final WebClient client = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        client.setWebConnection(conn);
+
+        final List<NameValuePair> headers = asList(new NameValuePair("Location", redirectUrl.toString()));
+        conn.setResponse(URL_FIRST, "", statusCode, "", MimeType.TEXT_HTML, headers);
+        conn.setResponse(redirectUrl, DOCTYPE_HTML + "<html><body>abc</body></html>");
+
+        final WebRequest request = new WebRequest(URL_FIRST);
+        request.setAdditionalHeader("Authorization", "Bearer secret");
+        request.setAdditionalHeader("foo", "bar");
+        client.getPage(request);
+
+        assertEquals(redirectUrl, conn.getLastWebRequest().getUrl());
+        assertEquals(expectedAuthorization, conn.getLastAdditionalHeaders().get("Authorization"));
         assertEquals("bar", conn.getLastAdditionalHeaders().get("foo"));
     }
 
