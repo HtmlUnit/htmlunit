@@ -2485,6 +2485,10 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("ABC SS")
+    @HtmlUnitNYI(CHROME = "abc ß",
+            EDGE = "abc ß",
+            FF = "abc ß",
+            FF_ESR = "abc ß")
     public void getInnerTextTextTransformUppercase() throws Exception {
         getInnerTextFormated("<div id='tester' style='text-transform: uppercase'>abc ß</div>");
     }
@@ -2495,6 +2499,10 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("abc")
+    @HtmlUnitNYI(CHROME = "ABC",
+            EDGE = "ABC",
+            FF = "ABC",
+            FF_ESR = "ABC")
     public void getInnerTextTextTransformLowercase() throws Exception {
         getInnerTextFormated("<div id='tester' style='text-transform: lowercase'>ABC</div>");
     }
@@ -2505,6 +2513,10 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Abc Def-Ghi")
+    @HtmlUnitNYI(CHROME = "abc def-ghi",
+            EDGE = "abc def-ghi",
+            FF = "abc def-ghi",
+            FF_ESR = "abc def-ghi")
     public void getInnerTextTextTransformCapitalize() throws Exception {
         getInnerTextFormated("<div id='tester' style='text-transform: capitalize'>abc def-ghi</div>");
     }
@@ -3324,6 +3336,10 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("ABC SS")
+    @HtmlUnitNYI(CHROME = "abc ß",
+            EDGE = "abc ß",
+            FF = "abc ß",
+            FF_ESR = "abc ß")
     public void getOuterTextTextTransformUppercase() throws Exception {
         getOuterTextFormated("<div id='tester' style='text-transform: uppercase'>abc ß</div>");
     }

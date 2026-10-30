@@ -2556,6 +2556,10 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("ABC SS")
+    @HtmlUnitNYI(CHROME = "abc ß",
+            EDGE = "abc ß",
+            FF = "abc ß",
+            FF_ESR = "abc ß")
     public void getVisibleTextTextTransformUppercase() throws Exception {
         getVisibleTextFormated("<div id='tester' style='text-transform: uppercase'>abc ß</div>");
     }
@@ -2566,6 +2570,10 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("abc")
+    @HtmlUnitNYI(CHROME = "ABC",
+            EDGE = "ABC",
+            FF = "ABC",
+            FF_ESR = "ABC")
     public void getVisibleTextTextTransformLowercase() throws Exception {
         getVisibleTextFormated("<div id='tester' style='text-transform: lowercase'>ABC</div>");
     }
@@ -2576,6 +2584,10 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Abc Def-Ghi")
+    @HtmlUnitNYI(CHROME = "abc def-ghi",
+            EDGE = "abc def-ghi",
+            FF = "abc def-ghi",
+            FF_ESR = "abc def-ghi")
     public void getVisibleTextTextTransformCapitalize() throws Exception {
         getVisibleTextFormated("<div id='tester' style='text-transform: capitalize'>abc def-ghi</div>");
     }
