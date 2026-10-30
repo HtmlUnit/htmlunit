@@ -93,6 +93,7 @@ import org.htmlunit.html.HtmlTeletype;
 import org.htmlunit.html.HtmlUnderlined;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
+import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.serializer.HtmlSerializerInnerOuterText;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -309,7 +310,11 @@ public class HTMLElement extends Element {
     public void setDisabled(final boolean disabled) {
         final HtmlElement element = getDomNodeOrDie();
         if (disabled) {
-            element.setAttribute(ATTRIBUTE_DISABLED, ATTRIBUTE_DISABLED);
+            // like all boolean attributes an existing value is not changed;
+            // a new attribute gets the empty string as value
+            if (!element.hasAttribute(ATTRIBUTE_DISABLED)) {
+                element.setAttribute(ATTRIBUTE_DISABLED, "");
+            }
         }
         else {
             element.removeAttribute(ATTRIBUTE_DISABLED);
@@ -346,7 +351,12 @@ public class HTMLElement extends Element {
      */
     @Override
     public void setAttribute(String name, final String value) {
-        getDomNodeOrDie().setAttribute(name, value);
+        final HtmlElement element = getDomNodeOrDie();
+        // the attribute name of html elements is lower case in html documents
+        if (!(element.getPage() instanceof XHtmlPage)) {
+            name = StringUtils.toRootLowerCase(name);
+        }
+        element.setAttribute(name, value);
 
         // call corresponding event handler setOnxxx if found
         if (!name.isEmpty()) {

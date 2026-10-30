@@ -769,6 +769,10 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendBreak(final HtmlSerializerTextBuilder builder,
             final HtmlBreak htmlBreak, final Mode mode) {
+        // a leading line break is not part of the visible text
+        if (builder.isEmpty()) {
+            return;
+        }
         builder.appendBreak(mode);
     }
 
@@ -1117,11 +1121,6 @@ public class HtmlSerializerVisibleText {
          * @param mode the {@link Mode}
          */
         public void appendBreak(final Mode mode) {
-            // a leading line break is not part of the visible text
-            if (state_ == State.EMPTY) {
-                return;
-            }
-
             // a break after a block adds an empty line
             if (state_ != State.BLOCK_SEPARATOR_AT_END) {
                 builder_.setLength(trimRightPos_);
@@ -1185,6 +1184,15 @@ public class HtmlSerializerVisibleText {
             if (builder_.length() == 0) {
                 state_ = State.EMPTY;
             }
+        }
+
+        /**
+         * Returns {@code true} if nothing was added so far.
+         *
+         * @return {@code true} if nothing was added so far
+         */
+        public boolean isEmpty() {
+            return state_ == State.EMPTY;
         }
 
         /**

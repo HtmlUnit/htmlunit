@@ -76,6 +76,7 @@ import org.htmlunit.html.HtmlScript;
 import org.htmlunit.html.HtmlSvg;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.UnknownElementFactory;
+import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.http.Cookie;
 import org.htmlunit.http.HttpUtils;
@@ -3599,7 +3600,15 @@ public class Document extends Node {
      */
     @JsxFunction
     public HtmlUnitScriptable createCDATASection(final String data) {
-        final CDATASection node = getPage().createCDATASection(data);
+        final SgmlPage page = getPage();
+        // https://dom.spec.whatwg.org/#dom-document-createcdatasection
+        if (page instanceof HtmlPage && !(page instanceof XHtmlPage)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "createCDATASection: not supported for HTML documents",
+                    org.htmlunit.javascript.host.dom.DOMException.NOT_SUPPORTED_ERR);
+        }
+        final CDATASection node = page.createCDATASection(data);
         return getScriptableFor(node);
     }
 

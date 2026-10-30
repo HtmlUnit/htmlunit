@@ -53,10 +53,12 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomProcessingInstruction;
 import org.htmlunit.html.DomText;
+import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlElement.DisplayStyle;
 import org.htmlunit.html.HtmlTemplate;
 import org.htmlunit.html.XHtmlPage;
+import org.htmlunit.html.serializer.XmlMarkupSerializer;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -105,6 +107,7 @@ public class Element extends Node {
     static final String POSITION_AFTER_END = "afterend";
 
     private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
+    private static final String MATHML_NAMESPACE = "http://www.w3.org/1998/Math/MathML";
     private static final Pattern PRINT_NODE_PATTERN = Pattern.compile(" {2}");
 
     private enum TextEscape { NONE, XML, HTML }
@@ -986,6 +989,10 @@ public class Element extends Node {
      * @return the contents of this node as HTML
      */
     protected String getInnerHTML(final DomNode domNode) {
+        if (isXmlSerialization(domNode)) {
+            return XmlMarkupSerializer.serializeChildren(domNode);
+        }
+
         if (isEndTagForbidden() && getBrowserVersion().hasFeature(JS_INNER_HTML_VOID_ELEMENT_EMPTY)) {
             return "";
         }
@@ -1001,6 +1008,18 @@ public class Element extends Node {
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, domNode, !isPlain, isPlain || rawText ? TextEscape.NONE : mode);
         return buf.toString();
+    }
+
+    /**
+     * Checks if the XML serialization has to be used for the given node
+     * (the node is part of an XHTML or XML document).
+     *
+     * @param domNode the node to check
+     * @return true if the XML serialization has to be used
+     */
+    private static boolean isXmlSerialization(final DomNode domNode) {
+        final SgmlPage page = domNode.getPage();
+        return page instanceof XHtmlPage || page instanceof XmlPage;
     }
 
     /**
@@ -1025,6 +1044,11 @@ public class Element extends Node {
      */
     @JsxGetter
     public String getOuterHTML() {
+        final DomNode domNode = getDomNodeOrDie();
+        if (isXmlSerialization(domNode)) {
+            return XmlMarkupSerializer.serialize(domNode);
+        }
+
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printNode(buf, getDomNodeOrDie(), true, TextEscape.HTML);
@@ -1122,12 +1146,12 @@ public class Element extends Node {
                     .append(pi.getTarget())
                     .append(" ")
                     .append(pi.getData())
-                    .append(">");
+                    .append("?>");
         }
         else if (html) {
             final DomElement element = (DomElement) node;
             final Element scriptObject = node.getScriptableObject();
-            final String tag = element.getTagName();
+            final String tag = serializationTagName(element);
 
             Element htmlElement = null;
             if (scriptObject instanceof HTMLElement) {
@@ -1182,6 +1206,24 @@ public class Element extends Node {
                 }
             }
         }
+    }
+
+    /**
+     * Returns the tag name used by the HTML serialization; this is the local name
+     * for elements in the HTML, SVG and MathML namespace and the qualified name for all others.
+     *
+     * @param element the element
+     * @return the tag name
+     */
+    private static String serializationTagName(final DomElement element) {
+        final String namespace = element.getNamespaceURI();
+        if (Html.XHTML_NAMESPACE.equals(namespace)
+                || Html.SVG_NAMESPACE.equals(namespace)
+                || MATHML_NAMESPACE.equals(namespace)) {
+            return element.getLocalName();
+        }
+        // elements created without namespace (e.g. by the HTML parser or createElement())
+        return element.getQualifiedName();
     }
 
     /**
