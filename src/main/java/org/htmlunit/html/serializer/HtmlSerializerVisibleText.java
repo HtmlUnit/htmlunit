@@ -32,7 +32,6 @@ import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlBreak;
 import org.htmlunit.html.HtmlCheckBoxInput;
 import org.htmlunit.html.HtmlDetails;
-import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlExample;
 import org.htmlunit.html.HtmlHiddenInput;
@@ -54,6 +53,7 @@ import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlSubmitInput;
 import org.htmlunit.html.HtmlSummary;
 import org.htmlunit.html.HtmlTable;
+import org.htmlunit.html.HtmlTableBody;
 import org.htmlunit.html.HtmlTableCell;
 import org.htmlunit.html.HtmlTableFooter;
 import org.htmlunit.html.HtmlTableHeader;
@@ -341,16 +341,13 @@ public class HtmlSerializerVisibleText {
 
     /**
      * Checks if the given node is block level; this includes elements that are
-     * blockified (open dialog, children of flex and grid containers).
+     * blockified (children of flex and grid containers).
      *
      * @param node the node to check
      * @return true if the node is a block level element
      */
     private static boolean isBlockLevel(final DomNode node) {
         if (node instanceof DomElement element) {
-            if (element instanceof HtmlDialog dialog && dialog.isOpen()) {
-                return true;
-            }
             final WebWindow window = node.getPage().getEnclosingWindow();
             final String display = window.getComputedStyle(element, null).getDisplay();
             if (BLOCK.equals(display) || "list-item".equals(display)
@@ -520,10 +517,16 @@ public class HtmlSerializerVisibleText {
         }
         final HtmlTableFooter tableFooter = htmlTable.getFooter();
 
+        // like WebDriver we use the document order if the footer is before the body
+        final boolean footerFirst = tableFooter != null && isFooterBeforeBody(htmlTable);
+        if (footerFirst) {
+            first = appendTableRows(builder, mode, tableFooter.getRows(), first, null, null);
+        }
+
         final List<HtmlTableRow> tableRows = htmlTable.getRows();
         first = appendTableRows(builder, mode, tableRows, first, tableHeader, tableFooter);
 
-        if (tableFooter != null) {
+        if (tableFooter != null && !footerFirst) {
             first = appendTableRows(builder, mode, tableFooter.getRows(), first, null, null);
         }
         else if (tableRows.isEmpty()) {
@@ -564,6 +567,25 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
+     * Checks if the first footer of the table is placed before the first body (or row)
+     * in the document.
+     *
+     * @param htmlTable the table
+     * @return true if the footer is before the body
+     */
+    private static boolean isFooterBeforeBody(final HtmlTable htmlTable) {
+        for (final DomNode child : htmlTable.getChildren()) {
+            if (child instanceof HtmlTableFooter) {
+                return true;
+            }
+            if (child instanceof HtmlTableBody || child instanceof HtmlTableRow) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Process {@link HtmlSelect}.
      *
      * @param builder the StringBuilder to add to
@@ -580,7 +602,8 @@ public class HtmlSerializerVisibleText {
         builder.appendBlockSeparator();
         boolean leadingNlPending = false;
         final Mode selectMode = whiteSpaceStyle(htmlSelect, mode);
-        for (final DomNode item : htmlSelect.getChildren()) {
+        // all options (also the ones inside of an optgroup) are rendered on a separate line
+        for (final HtmlOption item : htmlSelect.getOptions()) {
             if (leadingNlPending) {
                 builder.appendBlockSeparator();
                 leadingNlPending = false;
@@ -948,6 +971,10 @@ public class HtmlSerializerVisibleText {
                     }
 
                     if (mode == Mode.PRE) {
+                        // a leading line break is not part of the visible text
+                        if (state_ == State.EMPTY) {
+                            continue;
+                        }
                         builder_.append('\n');
                         state_ = State.NEWLINE_AT_END;
                         trimRightPos_ = builder_.length();
@@ -1090,7 +1117,15 @@ public class HtmlSerializerVisibleText {
          * @param mode the {@link Mode}
          */
         public void appendBreak(final Mode mode) {
-            builder_.setLength(trimRightPos_);
+            // a leading line break is not part of the visible text
+            if (state_ == State.EMPTY) {
+                return;
+            }
+
+            // a break after a block adds an empty line
+            if (state_ != State.BLOCK_SEPARATOR_AT_END) {
+                builder_.setLength(trimRightPos_);
+            }
 
             builder_.append('\n');
             state_ = State.BREAK_AT_END;

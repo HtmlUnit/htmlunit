@@ -288,12 +288,6 @@ public class HtmlSerializerInnerOuterText {
         if (element == root_) {
             return false;
         }
-        if (element.isHidden()) {
-            return true;
-        }
-        if (element instanceof HtmlDialog dialog) {
-            return !dialog.isOpen();
-        }
         return "none".equals(display(element));
     }
 
@@ -308,7 +302,7 @@ public class HtmlSerializerInnerOuterText {
         DomNode current = node;
         while (current != null) {
             if (current instanceof HtmlElement element) {
-                if (element.isHidden() || "none".equals(display(element))) {
+                if ("none".equals(display(element))) {
                     return true;
                 }
             }
@@ -339,6 +333,12 @@ public class HtmlSerializerInnerOuterText {
         final WebWindow window = page == null ? null : page.getEnclosingWindow();
         if (window != null && window.getWebClient().getOptions().isCssEnabled()) {
             return window.getComputedStyle(element, null).getDisplay();
+        }
+        if (element.isHidden()) {
+            return "none";
+        }
+        if (element instanceof HtmlDialog dialog) {
+            return dialog.isOpen() ? "block" : "none";
         }
         return element.getDefaultStyleDisplay().value();
     }
@@ -390,16 +390,12 @@ public class HtmlSerializerInnerOuterText {
 
     /**
      * Checks if the given element is block level; this includes elements that are
-     * blockified (open dialog, absolute positioned, floating, children of flex and grid containers).
+     * blockified (absolute positioned, floating, children of flex and grid containers).
      *
      * @param element the element to check
      * @return true if the element is block level
      */
     private static boolean isBlockLevel(final HtmlElement element) {
-        if (element instanceof HtmlDialog dialog && dialog.isOpen()) {
-            return true;
-        }
-
         final String display = display(element);
         if ("block".equals(display)
                 || "flex".equals(display)
