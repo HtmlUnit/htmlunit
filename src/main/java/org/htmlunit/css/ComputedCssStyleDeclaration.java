@@ -77,6 +77,7 @@ import org.htmlunit.html.HtmlData;
 import org.htmlunit.html.HtmlDefinition;
 import org.htmlunit.html.HtmlDefinitionDescription;
 import org.htmlunit.html.HtmlDefinitionTerm;
+import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.html.HtmlDivision;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlElement.DisplayStyle;
@@ -810,15 +811,23 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         final HtmlElement htmlElem = (domElem instanceof HtmlElement e) ? e : null;
 
-        if (htmlElem != null && htmlElem.isHidden()) {
-            return DisplayStyle.NONE.value();
-        }
-
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
         final String value = getStyleAttribute(Definition.DISPLAY.getAttributeName());
         if (StringUtils.isEmptyOrNull(value)) {
-            return htmlElem != null ? htmlElem.getDefaultStyleDisplay().value() : "";
+            if (htmlElem == null) {
+                return "";
+            }
+            // the hidden attribute is like a default style 'display: none';
+            // an explicit display style wins
+            if (htmlElem.isHidden()) {
+                return DisplayStyle.NONE.value();
+            }
+            // like the default style 'dialog:not([open]) { display: none; }'
+            if (htmlElem instanceof HtmlDialog dialog) {
+                return dialog.isOpen() ? DisplayStyle.BLOCK.value() : DisplayStyle.NONE.value();
+            }
+            return htmlElem.getDefaultStyleDisplay().value();
         }
 
         return value;

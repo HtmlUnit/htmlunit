@@ -14,9 +14,15 @@
  */
 package org.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Tests for {@link DomNode}.
@@ -236,4 +242,104 @@ public class DomNode2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * The hidden attribute works like a default style 'display: none';
+     * an explicit display style (inline or from a style sheet) overrides it.
+     * The same is true for the open state of a dialog.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"d1:false", "d2:true", "d3:true", "d4:false", "d5c:false", "d6c:true", "d7:false",
+             "d8:false", "d9:true", "d10:true", "d11:false", "d12:true", "d13:true"})
+    public void isDisplayedHiddenAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<style>\n"
+            + "  .inline { display: inline; }\n"
+            + "</style>\n"
+            + "</head><body>\n"
+            + "<div id='d1' hidden>a</div>\n"
+            + "<div id='d2' hidden style='display: block'>b</div>\n"
+            + "<span id='d3' hidden class='inline'>c</span>\n"
+            + "<div id='d4' hidden style='display: none'>d</div>\n"
+            + "<div id='d5' hidden><span id='d5c'>e</span></div>\n"
+            + "<div id='d6' hidden style='display: block'><span id='d6c'>f</span></div>\n"
+            + "<div id='d7' hidden style='display: block; visibility: hidden'>g</div>\n"
+            + "<dialog id='d8' open hidden>h</dialog>\n"
+            + "<dialog id='d9' open hidden style='display: block'>i</dialog>\n"
+            + "<dialog id='d10' hidden style='display: block'>j</dialog>\n"
+            + "<dialog id='d11'>k</dialog>\n"
+            + "<dialog id='d12' open>l</dialog>\n"
+            + "<dialog id='d13' style='display: block'>m</dialog>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts(), isDisplayed(driver,
+                "d1", "d2", "d3", "d4", "d5c", "d6c", "d7", "d8", "d9", "d10", "d11", "d12", "d13"));
+    }
+
+    /**
+     * Changing the hidden attribute or the open state of a dialog changes the display state.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"d1:true", "d2:true", "d3:false", "d3c:false", "dlg:false",
+             "d1:false", "d2:true", "d3:true", "d3c:true", "dlg:true",
+             "d1:true", "dlg:false"})
+    public void isDisplayedHiddenAttributeChanged() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
+            + "<div id='d1'>a</div>\n"
+            + "<div id='d2' style='display: block'>b</div>\n"
+            + "<div id='d3' hidden><span id='d3c'>c</span></div>\n"
+            + "<dialog id='dlg'>d</dialog>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final List<String> result = new ArrayList<>(isDisplayed(driver, "d1", "d2", "d3", "d3c", "dlg"));
+
+        ((JavascriptExecutor) driver).executeScript(
+                "document.getElementById('d1').hidden = true;"
+                + "document.getElementById('d2').hidden = true;"
+                + "document.getElementById('d3').removeAttribute('hidden');"
+                + "document.getElementById('dlg').show();");
+        result.addAll(isDisplayed(driver, "d1", "d2", "d3", "d3c", "dlg"));
+
+        // an explicit display style set later also wins
+        ((JavascriptExecutor) driver).executeScript(
+                "document.getElementById('d1').style.display = 'block';"
+                + "document.getElementById('dlg').close();");
+        result.addAll(isDisplayed(driver, "d1", "dlg"));
+
+        assertEquals(getExpectedAlerts(), result);
+    }
+
+    /**
+     * The text of an element with hidden attribute (or a closed dialog) is only part
+     * of the visible text if there is an explicit display style.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a b d", "a b c d"})
+    public void getTextHiddenAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
+            + "<div id='p1'>a <span hidden>x</span> b <dialog>y</dialog> d</div>\n"
+            + "<div id='p2'>a <span hidden style='display: inline'>b</span> c <span>d</span></div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final List<String> result = new ArrayList<>();
+        result.add(driver.findElement(By.id("p1")).getText());
+        result.add(driver.findElement(By.id("p2")).getText());
+        assertEquals(getExpectedAlerts(), result);
+    }
+
+    private static List<String> isDisplayed(final WebDriver driver, final String... ids) {
+        final List<String> result = new ArrayList<>();
+        for (final String id : ids) {
+            result.add(id + ":" + driver.findElement(By.id(id)).isDisplayed());
+        }
+        return result;
+    }
 }

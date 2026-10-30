@@ -4050,4 +4050,58 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The hidden attribute works like a default style 'display: none';
+     * an explicit display style (inline or from a style sheet) overrides it.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"none", "block", "inline", "none", "inline", "block", "block", "block", "none"})
+    public void displayHiddenAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<style>\n"
+            + "  .inline { display: inline; }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function display(id) {\n"
+            + "    log(window.getComputedStyle(document.getElementById(id), null).display);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    display('d1');\n"
+            + "    display('d2');\n"
+            + "    display('d3');\n"
+            + "    display('d4');\n"
+            + "    display('d5c');\n"
+
+            + "    document.getElementById('d1').hidden = false;\n"
+            + "    display('d1');\n"
+
+            + "    document.getElementById('d6').hidden = true;\n"
+            + "    display('d6');\n"
+
+            + "    document.getElementById('d7').removeAttribute('hidden');\n"
+            + "    display('d7');\n"
+
+            + "    document.getElementById('d8').hidden = true;\n"
+            + "    display('d8');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d1' hidden>a</div>\n"
+            + "  <div id='d2' hidden style='display: block'>b</div>\n"
+            + "  <span id='d3' hidden class='inline'>c</span>\n"
+            + "  <div id='d4' hidden style='display: none'>d</div>\n"
+            + "  <div id='d5' hidden><span id='d5c'>e</span></div>\n"
+            + "  <div id='d6' style='display: block'>f</div>\n"
+            + "  <div id='d7' hidden>g</div>\n"
+            + "  <div id='d8'>h</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

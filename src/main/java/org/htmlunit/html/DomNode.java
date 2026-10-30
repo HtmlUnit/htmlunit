@@ -701,22 +701,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
             for (final Node node : ancestors) {
                 if (node instanceof HtmlElement elem) {
-                    if (elem.isHidden()) {
+                    // the hidden attribute and the open state of a dialog are handled
+                    // by the computed display style (an explicit display style overrides both)
+                    final ComputedCssStyleDeclaration style = window.getComputedStyle(elem, null);
+                    if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
                         return false;
                     }
-
-                    if (elem instanceof HtmlDialog dialog) {
-                        if (!dialog.isOpen()) {
-                            return false;
-                        }
-                    }
-                    else {
-                        final ComputedCssStyleDeclaration style = window.getComputedStyle(elem, null);
-                        if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
-                            return false;
-                        }
-                        styles.add(style);
-                    }
+                    styles.add(style);
                 }
             }
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .shown { display: block; }
+  </style>
+</head>
+<body>
+  <div id='hiddenInlineStyle' hidden style='display: block'>hidden but display block</div>
+  <div id='hiddenStyleSheet' hidden class='shown'>hidden but display block from the style sheet</div>
+  <div id='hiddenDisplayNone' hidden style='display: none'>hidden and display none</div>
+  <div id='overriddenParent' hidden style='display: block'>
+    <span id='overriddenChild'>my parent is hidden but has an explicit display style</span>
+  </div>
+  <div id='toggle'>toggle me</div>
+  <div id='toggleOverridden' style='display: block'>toggle me, i have a display style</div>
+
+  <p id='text'>a <span hidden>x</span> b <span hidden style='display: inline'>c</span> d</p>
+</body>
+</html>

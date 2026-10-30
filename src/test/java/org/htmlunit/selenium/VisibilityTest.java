@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -241,6 +242,63 @@ class VisibilityTest extends SeleniumTest {
 
         WebElement element = driver.findElement(By.id("child"));
         assertThat(element.isDisplayed()).isFalse();
+    }
+
+    /**
+     * An explicit display style overrides the hidden attribute.
+     */
+    @Test
+    void shouldShowElementVisibleWithHiddenAttributeAndDisplayStyle() {
+        final WebDriver driver = getWebDriver("/hidden_overridden.html");
+
+        assertThat(driver.findElement(By.id("hiddenInlineStyle")).isDisplayed()).isTrue();
+        assertThat(driver.findElement(By.id("hiddenStyleSheet")).isDisplayed()).isTrue();
+        assertThat(driver.findElement(By.id("hiddenDisplayNone")).isDisplayed()).isFalse();
+    }
+
+    /**
+     * The child of an element with hidden attribute and an explicit display style is visible.
+     */
+    @Test
+    void shouldShowElementVisibleWhenParentHasHiddenAttributeAndDisplayStyle() {
+        final WebDriver driver = getWebDriver("/hidden_overridden.html");
+
+        assertThat(driver.findElement(By.id("overriddenParent")).isDisplayed()).isTrue();
+        assertThat(driver.findElement(By.id("overriddenChild")).isDisplayed()).isTrue();
+    }
+
+    /**
+     * Setting/removing the hidden attribute changes the visibility; but not
+     * if there is an explicit display style.
+     */
+    @Test
+    void shouldUpdateVisibilityWhenHiddenAttributeChanges() {
+        final WebDriver driver = getWebDriver("/hidden_overridden.html");
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        final WebElement toggle = driver.findElement(By.id("toggle"));
+        final WebElement toggleOverridden = driver.findElement(By.id("toggleOverridden"));
+        assertThat(toggle.isDisplayed()).isTrue();
+        assertThat(toggleOverridden.isDisplayed()).isTrue();
+
+        js.executeScript("document.getElementById('toggle').hidden = true;"
+                + "document.getElementById('toggleOverridden').hidden = true;");
+        assertThat(toggle.isDisplayed()).isFalse();
+        assertThat(toggleOverridden.isDisplayed()).isTrue();
+
+        js.executeScript("document.getElementById('toggle').hidden = false;");
+        assertThat(toggle.isDisplayed()).isTrue();
+    }
+
+    /**
+     * The text of an element with hidden attribute is only part of the
+     * visible text if there is an explicit display style.
+     */
+    @Test
+    void shouldIncludeTextOfHiddenElementWithDisplayStyle() {
+        final WebDriver driver = getWebDriver("/hidden_overridden.html");
+
+        assertThat(driver.findElement(By.id("text")).getText()).isEqualTo("a b c d");
     }
 
     /**

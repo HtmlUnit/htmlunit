@@ -564,9 +564,9 @@ public abstract class HtmlElement extends DomElement {
         }
 
         // make enclosing window the current one
-        getPage().getWebClient().setCurrentWindow(getPage().getEnclosingWindow());
-
         final HtmlPage page = (HtmlPage) getPage();
+        page.getWebClient().setCurrentWindow(page.getEnclosingWindow());
+
         if (page.getFocusedElement() != this) {
             focus();
         }
@@ -1283,7 +1283,8 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public boolean isDisplayed() {
-        if (isHidden()) {
+        // if css is enabled, the hidden attribute is handled by the computed display style
+        if (isHidden() && !getPage().getWebClient().getOptions().isCssEnabled()) {
             return false;
         }
         return super.isDisplayed();
