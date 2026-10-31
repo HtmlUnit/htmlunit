@@ -848,10 +848,6 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a")
-    @HtmlUnitNYI(CHROME = "\na",
-            EDGE = "\na",
-            FF = "\na",
-            FF_ESR = "\na")
     public void paragraphWithBrStart() throws Exception {
         getVisibleTextFormated("<p id='tester'><br>a</p>");
     }
@@ -1158,10 +1154,6 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a\n\nb")
-    @HtmlUnitNYI(CHROME = "a\nb",
-            EDGE = "a\nb",
-            FF = "a\nb",
-            FF_ESR = "a\nb")
     public void paragraphBrAfterP() throws Exception {
         getVisibleTextFormated("<div id='tester'><p>a</p><br>b</div>");
     }
