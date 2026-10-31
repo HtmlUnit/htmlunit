@@ -12,6 +12,101 @@
                 The Authorization header is no longer forwarded to another origin, neither for
                 redirects nor for the requests of external scripts.
             </action>
+            <action type="update" dev="rbri">
+                HtmlSerializerVisibleText (getVisibleText()), HtmlSerializerInnerOuterText (innerText/outerText)
+                and HtmlSerializerNormalizedText (asNormalizedText()): performance improved by caching
+                the visibility, display and white-space style checks for each run; these checks
+                no longer walk up all the ancestors for every node.
+            </action>
+            <action type="update" dev="rbri">
+                XmlMarkupSerializer (innerHTML/outerHTML of XHTML and XML documents): performance improved;
+                the namespace prefix map is copied only if an element declares a prefix.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLElement.innerText/outerText: reworked to follow the innerText algorithm of the HTML spec;
+                required line breaks of block elements are merged and dropped at the start and the end,
+                paragraphs are surrounded by an empty line, br is a line break that is part of the content,
+                table cells are separated by a tab and table rows by a line break.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLElement.innerText/outerText: inputs, images and selects are atomic inlines (the white space
+                before and after is not collapsed); the options of a list box are placed on lines of their own.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLElement.innerText/outerText: elements with display none or content-visibility hidden are skipped,
+                elements with visibility hidden produce no line breaks; for an element that is not rendered
+                the text content is returned.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLElement.innerText/outerText: the white-space and white-space-collapse styles are respected
+                (normal, nowrap, pre, pre-wrap, pre-line, break-spaces).
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLElement.innerText/outerText: absolute positioned and floating elements and the children
+                of flex and grid containers are handled as block elements.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLElement.innerText/outerText: the fallback content of canvas, meter, progress, iframe, video,
+                audio and (if javascript is enabled) noscript is not part of the text; svg title and desc are ignored.
+            </action>
+            <action type="update" dev="rbri">
+                DomNode.getVisibleText() (WebDriver getText()): line breaks around blocks are only added
+                if the current line has some content (like the Selenium atoms do).
+            </action>
+            <action type="update" dev="rbri">
+                DomNode.getVisibleText() (WebDriver getText()): like WebDriver elements with an opacity of zero,
+                with content-visibility hidden, with a zero size and hidden overflow and elements positioned
+                outside the page are not visible.
+            </action>
+            <action type="update" dev="rbri">
+                DomNode.getVisibleText() (WebDriver getText()): white-space handling reworked (pre and pre-wrap
+                preserve the spaces, normal and nowrap collapse them, other values keep only the line breaks);
+                zero width spaces are removed.
+            </action>
+            <action type="fix" dev="rbri">
+                DomNode.getVisibleText() (WebDriver getText()): handling of select, option, lists, tables (including
+                css table cells and footers placed before the body), closed details, svg, iframe and br fixed.
+            </action>
+            <action type="update" dev="rbri">
+                DomNode.isDisplayed(): the hidden attribute and the open state of a dialog are now handled
+                by the computed display style; an explicit display style overrides both.
+            </action>
+            <action type="fix" dev="rbri">
+                ComputedCssStyleDeclaration.getDisplay() returns 'none' for a dialog that is not open
+                and 'block' for an open one.
+            </action>
+            <action type="add" dev="rbri">
+                Element.innerHTML/outerHTML: XHTML and XML documents now use the XML serialization
+                (namespace declarations, empty elements written as &lt;foo/&gt;, void elements as &lt;br /&gt;).
+            </action>
+            <action type="fix" dev="rbri">
+                Element.innerHTML/outerHTML: attribute values are escaped like in real browsers
+                (&amp;amp;, &amp;quot;, &amp;lt;, &amp;gt; and &amp;nbsp; for HTML; tab, line feed and
+                carriage return as character references for XML).
+            </action>
+            <action type="fix" dev="rbri">
+                Element.innerHTML/outerHTML: the tag name keeps the case of the qualified name; processing
+                instructions end with '&gt;' (FF) or '?&gt;' (Chrome/Edge).
+            </action>
+            <action type="add" dev="rbri">
+                XmlUtils.escapeHtmlAttributeValue() and XmlUtils.escapeXmlAttributeValue() added.
+            </action>
+            <action type="fix" dev="rbri">
+                SVG elements created with createElementNS() keep the case of the name (e.g. foreignObject).
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLElement.setAttribute() converts the attribute name to lower case in HTML documents.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLElement.disabled = true sets the attribute value to an empty string
+                (an existing value is not changed).
+            </action>
+            <action type="fix" dev="rbri">
+                Document.createCDATASection() throws a NotSupportedError for HTML documents.
+            </action>
+            <action type="fix" dev="rbri">
+                DOMImplementation.createDocument() handles a null namespace as no namespace (instead of 'null').
+            </action>
             <action type="fix" dev="rbri">
                 HtmlTextArea: the value and the default value are now the child text content without
                 any further changes; the line feed directly after the start tag is removed by the parser.

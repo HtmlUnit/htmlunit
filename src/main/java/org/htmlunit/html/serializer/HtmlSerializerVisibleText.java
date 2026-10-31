@@ -16,7 +16,10 @@ package org.htmlunit.html.serializer;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.htmlunit.Page;
@@ -71,7 +74,7 @@ import org.htmlunit.util.StringUtils;
 /**
  * Special serializer to generate the output we need
  * at least for selenium WebElement#getText().
- * <p>This is also used from estimations by ComputedCSSStyleDeclaration.</p>
+ * <p>This is also used for estimations by ComputedCssStyleDeclaration.</p>
  *
  * @author Ronald Brill
  * @author cd alexndr
@@ -94,6 +97,18 @@ public class HtmlSerializerVisibleText {
             "table-row-group", "table-header-group", "table-footer-group",
             "ruby", "ruby-base", "ruby-text", "ruby-text-container");
 
+    /*
+     * Caches for the current run; the dom and the styles are not changed while serializing
+     * and many checks have to walk up the ancestors for every node.
+     */
+
+    /** The result of {@link #isDisplayed(DomNode)}. */
+    private final Map<DomNode, Boolean> displayedCache_ = new IdentityHashMap<>();
+    /** The result of {@link #isTransparent(DomNode)}. */
+    private final Map<DomNode, Boolean> transparentCache_ = new IdentityHashMap<>();
+    /** The white-space mode defined by the node or the ancestors ({@code null} if not defined). */
+    private final Map<DomNode, Mode> whiteSpaceCache_ = new IdentityHashMap<>();
+
     /**
      * Converts an HTML node to text.
      * @param node a node
@@ -103,26 +118,32 @@ public class HtmlSerializerVisibleText {
         if (node instanceof HtmlBreak) {
             return "";
         }
+
+        displayedCache_.clear();
+        transparentCache_.clear();
+        whiteSpaceCache_.clear();
+
         final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
         appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL));
         return builder.getText();
     }
 
     /**
-     * Iterate over all Children and call appendNode() for every.
+     * Iterates over all children and calls appendNode() for every child.
      *
      * @param builder the StringBuilder to add to
      * @param node the node to process
      * @param mode the {@link Mode} to use for processing
      */
     protected void appendChildren(final HtmlSerializerTextBuilder builder, final DomNode node, final Mode mode) {
+        final Mode childMode = updateWhiteSpaceStyle(node, mode);
         for (final DomNode child : node.getChildren()) {
-            appendNode(builder, child, updateWhiteSpaceStyle(node, mode));
+            appendNode(builder, child, childMode);
         }
     }
 
     /**
-     * The core distribution method call the different appendXXX
+     * The core distribution method; calls the different appendXXX
      * methods depending on the type of the given node.
      *
      * @param builder the StringBuilder to add to
@@ -397,6 +418,13 @@ public class HtmlSerializerVisibleText {
         return false;
     }
 
+    /**
+     * Process {@link HtmlMenu}; every child is placed on a line of its own.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlMenu the target to process
+     * @param mode the {@link Mode} to use for processing
+     */
     protected void appendMenu(final HtmlSerializerTextBuilder builder,
                     final HtmlMenu htmlMenu, final Mode mode) {
         builder.appendBlockSeparator();
@@ -413,6 +441,7 @@ public class HtmlSerializerVisibleText {
 
     /**
      * Process {@link HtmlDetails}.
+     *
      * @param builder the StringBuilder to add to
      * @param htmlDetails the target to process
      * @param mode the {@link Mode} to use for processing
@@ -435,6 +464,7 @@ public class HtmlSerializerVisibleText {
 
     /**
      * Process {@link HtmlTitle}.
+     *
      * @param builder the StringBuilder to add to
      * @param htmlTitle the target to process
      * @param mode the {@link Mode} to use for processing
@@ -461,17 +491,21 @@ public class HtmlSerializerVisibleText {
             else {
                 builder.appendCellSeparator();
             }
-            appendChildren(builder, cell, mode); // trim?
+            appendChildren(builder, cell, mode);
         }
     }
 
     /**
-     * Check domNode visibility.
+     * Checks if the given node is visible for WebDriver; this includes the
+     * checks done by {@link DomNode#isDisplayed()} and the WebDriver specific checks
+     * (opacity, content-visibility, zero size, offscreen).
+     * The result is cached for the current run.
+     *
      * @param domNode the node to check
-     * @return true or false
+     * @return true if the node is visible
      */
     protected boolean isDisplayed(final DomNode domNode) {
-        return domNode.isDisplayed() && !isTransparent(domNode);
+        return displayedCache_.computeIfAbsent(domNode, node -> node.isDisplayed() && !isTransparent(node));
     }
 
     /**
@@ -562,13 +596,14 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
-     * Checks if the given node or one of its ancestors has an opacity of zero;
-     * like WebDriver we handle this as not visible.
+     * Checks if the given node or one of its ancestors is not visible for WebDriver
+     * (opacity of zero, content-visibility hidden, zero size with hidden overflow or offscreen).
+     * The results are cached for the current run; the ancestors share the cached result.
      *
      * @param domNode the node to check
-     * @return true if the node is fully transparent
+     * @return true if the node is not visible
      */
-    private static boolean isTransparent(final DomNode domNode) {
+    private boolean isTransparent(final DomNode domNode) {
         final Page page = domNode.getPage();
         if (page == null) {
             return false;
@@ -578,29 +613,56 @@ public class HtmlSerializerVisibleText {
             return false;
         }
 
+        // walk up until the first transparent element or the first known result;
+        // all the nodes on the way share this result
+        final List<DomNode> path = new ArrayList<>();
+        boolean transparent = false;
         DomNode node = domNode;
         while (node != null) {
-            if (node instanceof DomElement element) {
-                final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
-                if ("hidden".equals(style.getStyleAttribute("content-visibility"))
-                        || isZeroSizeWithOverflowHidden(style)
-                        || isOffscreen(element, style)) {
-                    return true;
-                }
-
-                final String opacity = style.getStyleAttribute(Definition.OPACITY, false);
-                if (!StringUtils.isEmptyOrNull(opacity)) {
-                    try {
-                        if (Double.parseDouble(opacity.trim()) <= 0) {
-                            return true;
-                        }
-                    }
-                    catch (final NumberFormatException e) {
-                        // ignore
-                    }
-                }
+            final Boolean cached = transparentCache_.get(node);
+            if (cached != null) {
+                transparent = cached;
+                break;
+            }
+            path.add(node);
+            if (node instanceof DomElement element
+                    && isTransparentElement(element, window.getComputedStyle(element, null))) {
+                transparent = true;
+                break;
             }
             node = node.getParentNode();
+        }
+
+        for (final DomNode pathNode : path) {
+            transparentCache_.put(pathNode, transparent);
+        }
+        return transparent;
+    }
+
+    /**
+     * Checks if the given element itself (the ancestors are not checked) is not visible
+     * for WebDriver (opacity of zero, content-visibility hidden, zero size with hidden overflow
+     * or offscreen).
+     *
+     * @param element the element to check
+     * @param style the computed style of the element
+     * @return true if the element is not visible
+     */
+    private static boolean isTransparentElement(final DomElement element, final ComputedCssStyleDeclaration style) {
+        if ("hidden".equals(style.getStyleAttribute("content-visibility"))
+                || isZeroSizeWithOverflowHidden(style)
+                || isOffscreen(element, style)) {
+            return true;
+        }
+
+        final String opacity = style.getStyleAttribute(Definition.OPACITY, false);
+        if (!StringUtils.isEmptyOrNull(opacity)) {
+            try {
+                return Double.parseDouble(opacity.trim()) <= 0;
+            }
+            catch (final NumberFormatException e) {
+                // ignore
+            }
         }
         return false;
     }
@@ -668,7 +730,7 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
-     * Process {@link HtmlTableRow}.
+     * Process the given {@link HtmlTableRow}s; rows are separated by a block separator.
      *
      * @param builder the StringBuilder to add to
      * @param mode the {@link Mode} to use for processing
@@ -676,7 +738,7 @@ public class HtmlSerializerVisibleText {
      * @param first if true this is the first one
      * @param skipParent1 skip row if the parent is this
      * @param skipParent2 skip row if the parent is this
-     * @return true if this was the first one
+     * @return true if no row was written so far (the new value of first)
      */
     protected boolean appendTableRows(final HtmlSerializerTextBuilder builder, final Mode mode,
             final List<HtmlTableRow> rows, boolean first, final TableRowGroup skipParent1,
@@ -723,31 +785,29 @@ public class HtmlSerializerVisibleText {
     protected void appendSelect(final HtmlSerializerTextBuilder builder,
             final HtmlSelect htmlSelect, final Mode mode) {
         // an empty select has no text and does not separate
-        if (htmlSelect.getOptions().isEmpty()) {
+        final List<HtmlOption> options = htmlSelect.getOptions();
+        if (options.isEmpty()) {
             return;
         }
 
         builder.appendBlockSeparator();
         boolean leadingNlPending = false;
-        final Mode selectMode = whiteSpaceStyle(htmlSelect, mode);
-        // all options (also the ones inside of an optgroup) are rendered on a separate line
-        for (final HtmlOption item : htmlSelect.getOptions()) {
+        // all options (also the ones inside of an optgroup) are rendered on a separate line;
+        // the white-space style is ignored for the options (see appendOption())
+        for (final HtmlOption item : options) {
             if (leadingNlPending) {
                 builder.appendBlockSeparator();
-                leadingNlPending = false;
             }
 
             builder.resetContentAdded();
-            appendNode(builder, item, whiteSpaceStyle(item, selectMode));
-            if (!leadingNlPending && builder.contentAdded_) {
-                leadingNlPending = true;
-            }
+            appendNode(builder, item, mode);
+            leadingNlPending = builder.wasContentAdded();
         }
         builder.appendBlockSeparator();
     }
 
     /**
-     * Process {@link HtmlSelect}.
+     * Process {@link HtmlOption}.
      *
      * @param builder the StringBuilder to add to
      * @param htmlOption the target to process
@@ -779,46 +839,42 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendOrderedList(final HtmlSerializerTextBuilder builder,
             final HtmlOrderedList htmlOrderedList, final Mode mode) {
-        builder.appendBlockSeparator();
-        boolean leadingNlPending = false;
-        final Mode olMode = whiteSpaceStyle(htmlOrderedList, mode);
-        for (final DomNode item : htmlOrderedList.getChildren()) {
-            if (leadingNlPending) {
-                builder.appendBlockSeparator();
-                leadingNlPending = false;
-            }
-
-            builder.resetContentAdded();
-            appendNode(builder, item, whiteSpaceStyle(item, olMode));
-            if (!leadingNlPending && builder.contentAdded_ && isBlockLevel(item)) {
-                leadingNlPending = true;
-            }
-        }
-        builder.appendBlockSeparator();
+        appendListItems(builder, htmlOrderedList, mode);
     }
 
     /**
      * Process {@link HtmlUnorderedList}.
+     *
      * @param builder the StringBuilder to add to
      * @param htmlUnorderedList the target to process
      * @param mode the {@link Mode} to use for processing
      */
     protected void appendUnorderedList(final HtmlSerializerTextBuilder builder,
                     final HtmlUnorderedList htmlUnorderedList, final Mode mode) {
+        appendListItems(builder, htmlUnorderedList, mode);
+    }
+
+    /**
+     * Process the children of a list (ol, ul); a block level item
+     * with some content is placed on a line of its own.
+     *
+     * @param builder the StringBuilder to add to
+     * @param list the list element
+     * @param mode the {@link Mode} to use for processing
+     */
+    private void appendListItems(final HtmlSerializerTextBuilder builder,
+                    final HtmlElement list, final Mode mode) {
         builder.appendBlockSeparator();
         boolean leadingNlPending = false;
-        final Mode ulMode = whiteSpaceStyle(htmlUnorderedList, mode);
-        for (final DomNode item : htmlUnorderedList.getChildren()) {
+        final Mode listMode = whiteSpaceStyle(list, mode);
+        for (final DomNode item : list.getChildren()) {
             if (leadingNlPending) {
                 builder.appendBlockSeparator();
-                leadingNlPending = false;
             }
 
             builder.resetContentAdded();
-            appendNode(builder, item, whiteSpaceStyle(item, ulMode));
-            if (!leadingNlPending && builder.contentAdded_ && isBlockLevel(item)) {
-                leadingNlPending = true;
-            }
+            appendNode(builder, item, whiteSpaceStyle(item, listMode));
+            leadingNlPending = builder.wasContentAdded() && isBlockLevel(item);
         }
         builder.appendBlockSeparator();
     }
@@ -917,8 +973,6 @@ public class HtmlSerializerVisibleText {
 
         // options are not rendered by css; the display style is ignored
         if (parent == null
-                || parent instanceof HtmlTitle
-                || parent instanceof HtmlScript
                 || parent instanceof HtmlOption
                 || isDisplayed(parent)) {
             String data = domText.getData();
@@ -982,94 +1036,104 @@ public class HtmlSerializerVisibleText {
         // nothing to do
     }
 
+    /**
+     * Determines the white-space mode for the given node; the white-space style of the node
+     * and the ancestors is checked. The result is cached for the current run.
+     *
+     * @param domNode the node
+     * @param defaultMode the mode used if no white-space style is defined
+     * @return the {@link Mode}
+     */
     protected Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Page page = domNode.getPage();
-        if (page != null) {
-            final WebWindow window = page.getEnclosingWindow();
-            if (window.getWebClient().getOptions().isCssEnabled()) {
-                DomNode node = domNode;
-                while (node != null) {
-                    if (node instanceof DomElement element) {
-                        final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
-                        final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
-                        if (!StringUtils.isEmptyOrNull(value)) {
-                            if ("normal".equalsIgnoreCase(value)) {
-                                return Mode.WHITE_SPACE_NORMAL;
-                            }
-                            if ("nowrap".equalsIgnoreCase(value)) {
-                                return Mode.WHITE_SPACE_NORMAL;
-                            }
-                            if ("pre".equalsIgnoreCase(value)) {
-                                return Mode.WHITE_SPACE_PRE;
-                            }
-                            if ("pre-wrap".equalsIgnoreCase(value)) {
-                                return Mode.WHITE_SPACE_PRE;
-                            }
-                            if ("pre-line".equalsIgnoreCase(value)) {
-                                return Mode.WHITE_SPACE_PRE_LINE;
-                            }
-                            // WebDriver collapses the spaces but keeps the line breaks
-                            if ("break-spaces".equalsIgnoreCase(value)) {
-                                return Mode.WHITE_SPACE_PRE_LINE;
-                            }
-                        }
-                        final String collapse = style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
-                        if ("preserve".equalsIgnoreCase(collapse)) {
-                            return Mode.WHITE_SPACE_PRE;
-                        }
-                        if ("preserve-breaks".equalsIgnoreCase(collapse)
-                                || "break-spaces".equalsIgnoreCase(collapse)) {
-                            return Mode.WHITE_SPACE_PRE_LINE;
-                        }
+        if (page == null) {
+            return defaultMode;
+        }
+        final WebWindow window = page.getEnclosingWindow();
+        if (!window.getWebClient().getOptions().isCssEnabled()) {
+            return defaultMode;
+        }
+
+        // walk up until the first node defining a white-space style or the first known result;
+        // all the nodes on the way share this result
+        final List<DomNode> path = new ArrayList<>();
+        Mode mode = null;
+        DomNode node = domNode;
+        while (node != null) {
+            if (whiteSpaceCache_.containsKey(node)) {
+                mode = whiteSpaceCache_.get(node);
+                break;
+            }
+            path.add(node);
+            if (node instanceof DomElement element) {
+                mode = whiteSpaceMode(window.getComputedStyle(element, null));
+                if (mode != null) {
+                    break;
+                }
+            }
+            node = node.getParentNode();
+        }
+
+        for (final DomNode pathNode : path) {
+            whiteSpaceCache_.put(pathNode, mode);
+        }
+        return mode == null ? defaultMode : mode;
+    }
+
+    /**
+     * Determines the white-space mode for the given node; only the white-space style
+     * of the node itself is checked.
+     *
+     * @param domNode the node
+     * @param defaultMode the mode used if the node does not define a white-space style
+     * @return the {@link Mode}
+     */
+    protected Mode updateWhiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+        if (domNode instanceof DomElement element) {
+            final Page page = element.getPage();
+            if (page != null) {
+                final WebWindow window = page.getEnclosingWindow();
+                if (window.getWebClient().getOptions().isCssEnabled()) {
+                    final Mode mode = whiteSpaceMode(window.getComputedStyle(element, null));
+                    if (mode != null) {
+                        return mode;
                     }
-                    node = node.getParentNode();
                 }
             }
         }
         return defaultMode;
     }
 
-    protected Mode updateWhiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
-        final Page page = domNode.getPage();
-        if (page != null) {
-            final WebWindow window = page.getEnclosingWindow();
-            if (window.getWebClient().getOptions().isCssEnabled()) {
-                if (domNode instanceof DomElement element) {
-                    final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
-                    final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
-                    if (!StringUtils.isEmptyOrNull(value)) {
-                        if ("normal".equalsIgnoreCase(value)) {
-                            return Mode.WHITE_SPACE_NORMAL;
-                        }
-                        if ("nowrap".equalsIgnoreCase(value)) {
-                            return Mode.WHITE_SPACE_NORMAL;
-                        }
-                        if ("pre".equalsIgnoreCase(value)) {
-                            return Mode.WHITE_SPACE_PRE;
-                        }
-                        if ("pre-wrap".equalsIgnoreCase(value)) {
-                            return Mode.WHITE_SPACE_PRE;
-                        }
-                        if ("pre-line".equalsIgnoreCase(value)) {
-                            return Mode.WHITE_SPACE_PRE_LINE;
-                        }
-                        // WebDriver collapses the spaces but keeps the line breaks
-                        if ("break-spaces".equalsIgnoreCase(value)) {
-                            return Mode.WHITE_SPACE_PRE_LINE;
-                        }
-                    }
-                    final String collapse = style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
-                    if ("preserve".equalsIgnoreCase(collapse)) {
-                        return Mode.WHITE_SPACE_PRE;
-                    }
-                    if ("preserve-breaks".equalsIgnoreCase(collapse)
-                            || "break-spaces".equalsIgnoreCase(collapse)) {
-                        return Mode.WHITE_SPACE_PRE_LINE;
-                    }
-                }
+    /**
+     * Maps the white-space (and white-space-collapse) style to the {@link Mode}.
+     *
+     * @param style the computed style
+     * @return the {@link Mode} or {@code null} if the style does not define the white-space handling
+     */
+    private static Mode whiteSpaceMode(final ComputedCssStyleDeclaration style) {
+        final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
+        if (!StringUtils.isEmptyOrNull(value)) {
+            if ("normal".equalsIgnoreCase(value) || "nowrap".equalsIgnoreCase(value)) {
+                return Mode.WHITE_SPACE_NORMAL;
+            }
+            if ("pre".equalsIgnoreCase(value) || "pre-wrap".equalsIgnoreCase(value)) {
+                return Mode.WHITE_SPACE_PRE;
+            }
+            // WebDriver collapses the spaces of break-spaces but keeps the line breaks
+            if ("pre-line".equalsIgnoreCase(value) || "break-spaces".equalsIgnoreCase(value)) {
+                return Mode.WHITE_SPACE_PRE_LINE;
             }
         }
-        return defaultMode;
+
+        final String collapse = style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
+        if ("preserve".equalsIgnoreCase(collapse)) {
+            return Mode.WHITE_SPACE_PRE;
+        }
+        if ("preserve-breaks".equalsIgnoreCase(collapse)
+                || "break-spaces".equalsIgnoreCase(collapse)) {
+            return Mode.WHITE_SPACE_PRE_LINE;
+        }
+        return null;
     }
 
     /**
@@ -1092,13 +1156,13 @@ public class HtmlSerializerVisibleText {
 
             /**
              * Sequences of white space are preserved. Lines are only broken
-             * at newline characters in the source and at <br> elements.
+             * at newline characters in the source and at {@code <br>} elements.
              */
             WHITE_SPACE_PRE,
 
             /**
              * Sequences of white space are collapsed. Lines are broken
-             * at newline characters, at <br> and as necessary
+             * at newline characters, at {@code <br>} and as necessary
              * to fill line boxes.
              */
             WHITE_SPACE_PRE_LINE
@@ -1108,7 +1172,6 @@ public class HtmlSerializerVisibleText {
             DEFAULT,
             EMPTY,
             BLANK_AT_END,
-            BLANK_AT_END_AFTER_NEWLINE,
             NEWLINE_AT_END,
             BREAK_AT_END,
             BLOCK_SEPARATOR_AT_END
@@ -1140,19 +1203,18 @@ public class HtmlSerializerVisibleText {
             if (content == null) {
                 return;
             }
-            int length = content.length();
+            final int length = content.length();
             if (length == 0) {
                 return;
             }
 
-            length--;
-            final int contentLength = content.length();
-            for (int i = 0; i < contentLength; i++) {
+            final int lastIndex = length - 1;
+            for (int i = 0; i < length; i++) {
                 char c = content.charAt(i);
 
-                // handle \r
+                // a \r is ignored; only at the end it is handled like a \n
                 if (c == '\r') {
-                    if (length != i) {
+                    if (i != lastIndex) {
                         continue;
                     }
                     c = '\n';
@@ -1202,7 +1264,6 @@ public class HtmlSerializerVisibleText {
                     switch (state_) {
                         case EMPTY:
                         case BLANK_AT_END:
-                        case BLANK_AT_END_AFTER_NEWLINE:
                         case BLOCK_SEPARATOR_AT_END:
                         case NEWLINE_AT_END:
                         case BREAK_AT_END:
@@ -1225,7 +1286,6 @@ public class HtmlSerializerVisibleText {
                         switch (state_) {
                             case EMPTY:
                             case BLANK_AT_END:
-                            case BLANK_AT_END_AFTER_NEWLINE:
                             case BREAK_AT_END:
                                 break;
                             default:
@@ -1239,7 +1299,6 @@ public class HtmlSerializerVisibleText {
                     switch (state_) {
                         case EMPTY:
                         case BLANK_AT_END:
-                        case BLANK_AT_END_AFTER_NEWLINE:
                         case BLOCK_SEPARATOR_AT_END:
                         case NEWLINE_AT_END:
                         case BREAK_AT_END:
@@ -1317,16 +1376,6 @@ public class HtmlSerializerVisibleText {
                         state_ = State.BLOCK_SEPARATOR_AT_END;
                     }
                     break;
-                case BLANK_AT_END_AFTER_NEWLINE:
-                    builder_.setLength(trimRightPos_ - 1);
-                    if (builder_.length() == 0) {
-                        state_ = State.EMPTY;
-                    }
-                    else {
-                        builder_.append('\n');
-                        state_ = State.BLOCK_SEPARATOR_AT_END;
-                    }
-                    break;
                 case BLOCK_SEPARATOR_AT_END:
                     break;
                 case NEWLINE_AT_END:
@@ -1382,7 +1431,6 @@ public class HtmlSerializerVisibleText {
             switch (state_) {
                 case EMPTY:
                 case BLANK_AT_END:
-                case BLANK_AT_END_AFTER_NEWLINE:
                 case BLOCK_SEPARATOR_AT_END:
                 case NEWLINE_AT_END:
                 case BREAK_AT_END:

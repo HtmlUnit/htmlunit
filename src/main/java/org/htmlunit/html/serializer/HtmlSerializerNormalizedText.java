@@ -17,8 +17,10 @@ package org.htmlunit.html.serializer;
 import static org.htmlunit.css.CssStyleSheet.BLOCK;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
@@ -64,8 +66,8 @@ import org.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerT
 /**
  * Utility to handle conversion from HTML code to string.
  * This implements HtmlUnit's way of normalization.
- * <p>Note: There conversation done by selenium WebElement#getText()
- * is different.</p>
+ * <p>Note: The conversion done by selenium WebElement#getText()
+ * is different (see {@link HtmlSerializerVisibleText}).</p>
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -77,18 +79,25 @@ public class HtmlSerializerNormalizedText {
     private boolean ignoreMaskedElements_ = true;
 
     /**
+     * Cache of the visibility of the nodes processed by the current run;
+     * the dom is not changed while serializing.
+     */
+    private final Map<DomNode, Boolean> visibilityCache_ = new IdentityHashMap<>();
+
+    /**
      * Converts an HTML node to text.
      * @param node a node
      * @return the text representation according to the setting of this serializer
      */
     public String asText(final DomNode node) {
+        visibilityCache_.clear();
         final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
         appendNode(builder, node);
         return builder.getText();
     }
 
     /**
-     * Iterate over all Children and call appendNode() for every.
+     * Iterates over all children and calls appendNode() for every child.
      *
      * @param builder the StringBuilder to add to
      * @param node the node to process
@@ -100,7 +109,7 @@ public class HtmlSerializerNormalizedText {
     }
 
     /**
-     * The core distribution method call the different appendXXX
+     * The core distribution method; calls the different appendXXX
      * methods depending on the type of the given node.
      *
      * @param builder the StringBuilder to add to
@@ -185,7 +194,7 @@ public class HtmlSerializerNormalizedText {
     }
 
     /**
-     * Process {@link HtmlHiddenInput}.
+     * Process all other {@link DomNode}s; block elements are surrounded by a block separator.
      *
      * @param builder the StringBuilder to add to
      * @param domNode the target to process
@@ -278,6 +287,7 @@ public class HtmlSerializerNormalizedText {
 
     /**
      * Process {@link HtmlUnorderedList}.
+     *
      * @param builder the StringBuilder to add to
      * @param htmlUnorderedList the target to process
      */
@@ -297,6 +307,7 @@ public class HtmlSerializerNormalizedText {
 
     /**
      * Process {@link HtmlDetails}.
+     *
      * @param builder the StringBuilder to add to
      * @param htmlDetails the target to process
      */
@@ -318,6 +329,7 @@ public class HtmlSerializerNormalizedText {
 
     /**
      * Process {@link HtmlTitle}.
+     *
      * @param builder the StringBuilder to add to
      * @param htmlTitle the target to process
      */
@@ -348,7 +360,7 @@ public class HtmlSerializerNormalizedText {
             else {
                 builder.appendTab();
             }
-            appendChildren(builder, cell); // trim?
+            appendChildren(builder, cell);
         }
     }
 
@@ -404,14 +416,14 @@ public class HtmlSerializerNormalizedText {
     }
 
     /**
-     * Process {@link HtmlTableRow}.
+     * Process the given {@link HtmlTableRow}s; rows are separated by a block separator.
      *
      * @param builder the StringBuilder to add to
      * @param rows the rows
      * @param first if true this is the first one
      * @param skipParent1 skip row if the parent is this
      * @param skipParent2 skip row if the parent is this
-     * @return true if this was the first one
+     * @return true if no row was written so far (the new value of first)
      */
     protected boolean appendTableRows(final HtmlSerializerTextBuilder builder,
             final List<HtmlTableRow> rows, boolean first, final TableRowGroup skipParent1,
@@ -549,12 +561,7 @@ public class HtmlSerializerNormalizedText {
      */
     protected void appendCheckBoxInput(final HtmlSerializerTextBuilder builder,
                                             final HtmlCheckBoxInput htmlCheckBoxInput) {
-        if (htmlCheckBoxInput.isChecked()) {
-            builder.append("checked ", Mode.NORMALIZE);
-        }
-        else {
-            builder.append("unchecked ", Mode.NORMALIZE);
-        }
+        appendCheckedState(builder, htmlCheckBoxInput.isChecked());
     }
 
     /**
@@ -565,16 +572,33 @@ public class HtmlSerializerNormalizedText {
      */
     protected void appendRadioButtonInput(final HtmlSerializerTextBuilder builder,
             final HtmlRadioButtonInput htmlRadioButtonInput) {
-        if (htmlRadioButtonInput.isChecked()) {
-            builder.append("checked ", Mode.NORMALIZE);
-        }
-        else {
-            builder.append("unchecked ", Mode.NORMALIZE);
-        }
+        appendCheckedState(builder, htmlRadioButtonInput.isChecked());
     }
 
+    /**
+     * Appends the state of a checkbox or radio button.
+     *
+     * @param builder the StringBuilder to add to
+     * @param checked the checked state
+     */
+    private static void appendCheckedState(final HtmlSerializerTextBuilder builder, final boolean checked) {
+        builder.append(checked ? "checked " : "unchecked ", Mode.NORMALIZE);
+    }
+
+    /**
+     * Checks if the given node is visible; if masked elements are not ignored
+     * every node is visible. The result is cached for the current run because
+     * {@link DomNode#isDisplayed()} has to check all the ancestors and
+     * this is done for every text node.
+     *
+     * @param node the node to check
+     * @return true if the node is visible
+     */
     private boolean isVisible(final DomNode node) {
-        return !ignoreMaskedElements_ || node.isDisplayed();
+        if (!ignoreMaskedElements_) {
+            return true;
+        }
+        return visibilityCache_.computeIfAbsent(node, DomNode::isDisplayed);
     }
 
     /**
@@ -644,12 +668,11 @@ public class HtmlSerializerNormalizedText {
                 return;
             }
 
-            // Mode.PRESERVE_BLANK_NEWLINE is unused, it only marks
-            // the doNotTouch path for textares
+            // Mode.PRESERVE_BLANK_NEWLINE only differs in the handling of tabs;
+            // it is used for textareas
 
             boolean crFound = false;
-            final int contentLength = content.length();
-            for (int i = 0; i < contentLength; i++) {
+            for (int i = 0; i < length; i++) {
                 final char c = content.charAt(i);
 
                 if (mode == Mode.NORMALIZE) {

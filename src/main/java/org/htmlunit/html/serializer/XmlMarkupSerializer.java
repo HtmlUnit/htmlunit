@@ -18,6 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_XHTML_BOOLEAN_AT
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_XHTML_HEX_LINE_BREAK;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_XHTML_NS_DECLARATION_AFTER_ATTRIBUTE;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -61,6 +62,9 @@ public final class XmlMarkupSerializer {
     private static final Set<String> BOOLEAN_ATTRIBUTES = Set.of(
             "checked", "compact", "declare", "defer", "disabled", "ismap", "multiple",
             "nohref", "noresize", "noshade", "nowrap", "readonly", "selected");
+
+    /** The start of the name of a prefix declaration attribute (xmlns:foo). */
+    private static final String XMLNS_PREFIX = XMLConstants.XMLNS_ATTRIBUTE + ":";
 
     private final boolean booleanAttributeValue_;
     private final boolean hexLineBreak_;
@@ -178,27 +182,35 @@ public final class XmlMarkupSerializer {
             final String contextNamespace, final Map<String, String> contextPrefixMap) {
         final String namespace = namespaceOf(element);
         final String prefix = element.getPrefix();
-        final Map<String, String> prefixMap = new HashMap<>(contextPrefixMap);
+        final Collection<DomAttr> attributes = element.getAttributesMap().values();
+
+        // copy on write: most elements do not declare a prefix, therefore
+        // the map of the context is shared until the first change
+        Map<String, String> prefixMap = contextPrefixMap;
 
         // namespace declarations of the element itself (xmlns and xmlns:foo attributes)
         String localDefaultNamespace = null;
         boolean hasDefaultNamespaceAttribute = false;
-        for (final DomAttr attr : element.getAttributesMap().values()) {
+        for (final DomAttr attr : attributes) {
             final String name = attr.getName();
             if (XMLConstants.XMLNS_ATTRIBUTE.equals(name)) {
                 hasDefaultNamespaceAttribute = true;
                 localDefaultNamespace = StringUtils.isEmptyOrNull(attr.getValue()) ? null : attr.getValue();
             }
-            else if (name.startsWith(XMLConstants.XMLNS_ATTRIBUTE + ":")) {
-                prefixMap.put(name.substring(XMLConstants.XMLNS_ATTRIBUTE.length() + 1), attr.getValue());
+            else if (name.startsWith(XMLNS_PREFIX)) {
+                prefixMap = writablePrefixMap(prefixMap, contextPrefixMap);
+                prefixMap.put(name.substring(XMLNS_PREFIX.length()), attr.getValue());
             }
         }
 
-        final StringBuilder declarations = new StringBuilder();
+        final String qualifiedName = prefix == null ? element.getLocalName() : prefix + ":" + element.getLocalName();
+        builder.append('<').append(qualifiedName);
+
         String childNamespace = contextNamespace;
         if (prefix != null) {
             if (!Objects.equals(prefixMap.get(prefix), namespace)) {
-                appendDeclaration(declarations, prefix, namespace);
+                appendDeclaration(builder, prefix, namespace);
+                prefixMap = writablePrefixMap(prefixMap, contextPrefixMap);
                 prefixMap.put(prefix, namespace);
             }
         }
@@ -207,44 +219,35 @@ public final class XmlMarkupSerializer {
         }
         else {
             if (!Objects.equals(namespace, contextNamespace)) {
-                appendDeclaration(declarations, null, namespace);
+                appendDeclaration(builder, null, namespace);
             }
             childNamespace = namespace;
         }
 
         // prefixes used by the attributes; written in front of all attributes
         // or (Firefox) after the attribute
-        final Map<DomAttr, String> attributeDeclarations = new HashMap<>();
-        for (final DomAttr attr : element.getAttributesMap().values()) {
-            final String attrNamespace = attr.getNamespaceURI();
-            final String attrPrefix = attr.getPrefix();
-            if (attrNamespace != null && attrPrefix != null
-                    && !XMLConstants.XML_NS_URI.equals(attrNamespace)
-                    && !XMLConstants.XMLNS_ATTRIBUTE_NS_URI.equals(attrNamespace)
-                    && !XMLConstants.XMLNS_ATTRIBUTE.equals(attrPrefix)
-                    && !attrNamespace.equals(prefixMap.get(attrPrefix))) {
-                if (declarationAfterAttribute_) {
-                    final StringBuilder declaration = new StringBuilder();
-                    appendDeclaration(declaration, attrPrefix, attrNamespace);
-                    attributeDeclarations.put(attr, declaration.toString());
+        if (!declarationAfterAttribute_) {
+            for (final DomAttr attr : attributes) {
+                if (isUndeclaredAttributePrefix(attr, prefixMap)) {
+                    appendDeclaration(builder, attr.getPrefix(), attr.getNamespaceURI());
+                    prefixMap = writablePrefixMap(prefixMap, contextPrefixMap);
+                    prefixMap.put(attr.getPrefix(), attr.getNamespaceURI());
                 }
-                else {
-                    appendDeclaration(declarations, attrPrefix, attrNamespace);
-                }
-                prefixMap.put(attrPrefix, attrNamespace);
             }
         }
 
-        final String qualifiedName = prefix == null ? element.getLocalName() : prefix + ":" + element.getLocalName();
-        builder.append('<').append(qualifiedName).append(declarations);
-        for (final DomAttr attr : element.getAttributesMap().values()) {
+        for (final DomAttr attr : attributes) {
+            final boolean declare = declarationAfterAttribute_ && isUndeclaredAttributePrefix(attr, prefixMap);
             if (attr.getSpecified()) {
                 builder.append(' ').append(attr.getName()).append("=\"")
                     .append(attributeValue(attr, namespace)).append('"');
-                final String declaration = attributeDeclarations.get(attr);
-                if (declaration != null) {
-                    builder.append(declaration);
+                if (declare) {
+                    appendDeclaration(builder, attr.getPrefix(), attr.getNamespaceURI());
                 }
+            }
+            if (declare) {
+                prefixMap = writablePrefixMap(prefixMap, contextPrefixMap);
+                prefixMap.put(attr.getPrefix(), attr.getNamespaceURI());
             }
         }
 
@@ -265,6 +268,40 @@ public final class XmlMarkupSerializer {
         builder.append('>');
         appendChildren(builder, element, childNamespace, prefixMap);
         builder.append("</").append(qualifiedName).append('>');
+    }
+
+    /**
+     * Returns a prefix map that can be modified; the map of the context
+     * is copied on the first change.
+     *
+     * @param prefixMap the current prefix map of the element
+     * @param contextPrefixMap the prefix map of the context (never modified)
+     * @return a prefix map that can be modified
+     */
+    private static Map<String, String> writablePrefixMap(final Map<String, String> prefixMap,
+            final Map<String, String> contextPrefixMap) {
+        if (prefixMap == contextPrefixMap) {
+            return new HashMap<>(contextPrefixMap);
+        }
+        return prefixMap;
+    }
+
+    /**
+     * Checks if the prefix of the given attribute requires a namespace declaration;
+     * this is the case if the prefix is not (or differently) declared by the context.
+     *
+     * @param attr the attribute
+     * @param prefixMap the prefixes declared so far (prefix to namespace)
+     * @return true if a namespace declaration is required
+     */
+    private static boolean isUndeclaredAttributePrefix(final DomAttr attr, final Map<String, String> prefixMap) {
+        final String attrNamespace = attr.getNamespaceURI();
+        final String attrPrefix = attr.getPrefix();
+        return attrNamespace != null && attrPrefix != null
+                && !XMLConstants.XML_NS_URI.equals(attrNamespace)
+                && !XMLConstants.XMLNS_ATTRIBUTE_NS_URI.equals(attrNamespace)
+                && !XMLConstants.XMLNS_ATTRIBUTE.equals(attrPrefix)
+                && !attrNamespace.equals(prefixMap.get(attrPrefix));
     }
 
     /**

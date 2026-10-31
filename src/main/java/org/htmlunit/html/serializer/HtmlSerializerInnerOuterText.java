@@ -17,6 +17,11 @@ package org.htmlunit.html.serializer;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SELECT_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
@@ -75,13 +80,24 @@ public class HtmlSerializerInnerOuterText {
     private final BrowserVersion browserVersion_;
     private DomNode root_;
 
+    /*
+     * Caches for the current run; the dom and the styles are not changed while serializing
+     * and many checks are done more than once for an element or have to walk up the ancestors.
+     */
+
+    /** The display value of the elements. */
+    private final Map<HtmlElement, String> displayCache_ = new IdentityHashMap<>();
+    /** The result of {@link DomNode#isDisplayed()}. */
+    private final Map<DomNode, Boolean> displayedCache_ = new IdentityHashMap<>();
+    /** The white-space mode defined by the node or the ancestors ({@code null} if not defined). */
+    private final Map<DomNode, Mode> whiteSpaceCache_ = new IdentityHashMap<>();
+
     /**
      * Ctor.
      *
      * @param browserVersion the {@link BrowserVersion}
      */
     public HtmlSerializerInnerOuterText(final BrowserVersion browserVersion) {
-        super();
         browserVersion_ = browserVersion;
     }
 
@@ -92,6 +108,10 @@ public class HtmlSerializerInnerOuterText {
      */
     public String asText(final DomNode node) {
         root_ = node;
+        displayCache_.clear();
+        displayedCache_.clear();
+        whiteSpaceCache_.clear();
+
         if (node instanceof HtmlBreak) {
             return "";
         }
@@ -118,7 +138,7 @@ public class HtmlSerializerInnerOuterText {
     }
 
     /**
-     * Iterate over all Children and call appendNode() for every.
+     * Iterates over all children and calls appendNode() for every child.
      *
      * @param builder the StringBuilder to add to
      * @param node the node to process
@@ -134,7 +154,7 @@ public class HtmlSerializerInnerOuterText {
     }
 
     /**
-     * The core distribution method call the different appendXXX
+     * The core distribution method; calls the different appendXXX
      * methods depending on the type of the given node.
      *
      * @param builder the StringBuilder to add to
@@ -314,7 +334,7 @@ public class HtmlSerializerInnerOuterText {
      * @param node the node to check
      * @return true if the node or one of the ancestors has display none
      */
-    private static boolean isDisplayNone(final DomNode node) {
+    private boolean isDisplayNone(final DomNode node) {
         DomNode current = node;
         while (current != null) {
             if (current instanceof HtmlElement element) {
@@ -335,7 +355,29 @@ public class HtmlSerializerInnerOuterText {
      * @return true if the element is the root or displayed
      */
     private boolean isVisible(final HtmlElement element) {
-        return element == root_ || element.isDisplayed();
+        return element == root_ || isDisplayed(element);
+    }
+
+    /**
+     * Returns the result of {@link DomNode#isDisplayed()}; the result is cached for the current run
+     * because this has to check all the ancestors.
+     *
+     * @param node the node to check
+     * @return true if the node is displayed
+     */
+    private boolean isDisplayed(final DomNode node) {
+        return displayedCache_.computeIfAbsent(node, DomNode::isDisplayed);
+    }
+
+    /**
+     * Determines the display value of the given element; the value is
+     * cached for the current run.
+     *
+     * @param element the element to check
+     * @return the computed display of the element (or the default display if css is disabled)
+     */
+    private String display(final HtmlElement element) {
+        return displayCache_.computeIfAbsent(element, HtmlSerializerInnerOuterText::computeDisplay);
     }
 
     /**
@@ -344,7 +386,7 @@ public class HtmlSerializerInnerOuterText {
      * @param element the element to check
      * @return the computed display of the element (or the default display if css is disabled)
      */
-    private static String display(final HtmlElement element) {
+    private static String computeDisplay(final HtmlElement element) {
         final SgmlPage page = element.getPage();
         final WebWindow window = page == null ? null : page.getEnclosingWindow();
         if (window != null && window.getWebClient().getOptions().isCssEnabled()) {
@@ -400,7 +442,7 @@ public class HtmlSerializerInnerOuterText {
      * @param element the element to check
      * @return true if the element is a table cell
      */
-    private static boolean isTableCell(final HtmlElement element) {
+    private boolean isTableCell(final HtmlElement element) {
         return element instanceof HtmlTableCell || "table-cell".equals(display(element));
     }
 
@@ -411,7 +453,7 @@ public class HtmlSerializerInnerOuterText {
      * @param element the element to check
      * @return true if the element is block level
      */
-    private static boolean isBlockLevel(final HtmlElement element) {
+    private boolean isBlockLevel(final HtmlElement element) {
         final String display = display(element);
         if ("block".equals(display)
                 || "flex".equals(display)
@@ -472,7 +514,7 @@ public class HtmlSerializerInnerOuterText {
         if (parent == null
                 || parent instanceof HtmlNoFrames
                 || parent instanceof HtmlOption
-                || parent.isDisplayed()) {
+                || isDisplayed(parent)) {
             builder.append(domText.getData(), mode);
         }
     }
@@ -560,6 +602,7 @@ public class HtmlSerializerInnerOuterText {
 
     /**
      * Process {@link HtmlDetails}.
+     *
      * @param builder the StringBuilder to add to
      * @param htmlDetails the target to process
      * @param mode the {@link Mode} to use for processing
@@ -684,63 +727,89 @@ public class HtmlSerializerInnerOuterText {
         }
     }
 
-    private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
-        if (domNode instanceof DomElement) {
-            final SgmlPage page = domNode.getPage();
-            if (page != null) {
-                if (page.getWebClient().getOptions().isCssEnabled()) {
-                    DomNode node = domNode;
-                    while (node != null) {
-                        if (node instanceof DomElement domElement) {
-                            final WebWindow window = page.getEnclosingWindow();
-                            if (window != null) {
-                                final ComputedCssStyleDeclaration style =
-                                        window.getComputedStyle(domElement, null);
-                                final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
+    /**
+     * Determines the white-space mode for the given node; the white-space style of the node
+     * and the ancestors is checked. The result is cached for the current run.
+     *
+     * @param domNode the node
+     * @param defaultMode the mode used if no white-space style is defined
+     * @return the {@link Mode}
+     */
+    private Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+        if (!(domNode instanceof DomElement)) {
+            return defaultMode;
+        }
+        final SgmlPage page = domNode.getPage();
+        if (page == null || !page.getWebClient().getOptions().isCssEnabled()) {
+            return defaultMode;
+        }
+        final WebWindow window = page.getEnclosingWindow();
+        if (window == null) {
+            return defaultMode;
+        }
 
-                                if (!StringUtils.isEmptyOrNull(value)) {
-                                    if ("normal".equalsIgnoreCase(value)) {
-                                        return Mode.WHITE_SPACE_NORMAL;
-                                    }
-                                    if ("nowrap".equalsIgnoreCase(value)) {
-                                        return Mode.WHITE_SPACE_NORMAL;
-                                    }
-                                    if ("pre".equalsIgnoreCase(value)) {
-                                        return Mode.WHITE_SPACE_PRE;
-                                    }
-                                    if ("pre-wrap".equalsIgnoreCase(value)) {
-                                        return Mode.WHITE_SPACE_PRE;
-                                    }
-                                    if ("pre-line".equalsIgnoreCase(value)) {
-                                        return Mode.WHITE_SPACE_PRE_LINE;
-                                    }
-                                    if ("break-spaces".equalsIgnoreCase(value)) {
-                                        return Mode.WHITE_SPACE_PRE;
-                                    }
-                                }
-
-                                final String collapse =
-                                        style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
-                                if (!StringUtils.isEmptyOrNull(collapse)) {
-                                    if ("collapse".equalsIgnoreCase(collapse)) {
-                                        return Mode.WHITE_SPACE_NORMAL;
-                                    }
-                                    if ("preserve".equalsIgnoreCase(collapse)
-                                            || "break-spaces".equalsIgnoreCase(collapse)) {
-                                        return Mode.WHITE_SPACE_PRE;
-                                    }
-                                    if ("preserve-breaks".equalsIgnoreCase(collapse)) {
-                                        return Mode.WHITE_SPACE_PRE_LINE;
-                                    }
-                                }
-                            }
-                        }
-                        node = node.getParentNode();
-                    }
+        // walk up until the first element defining a white-space style or the first known result;
+        // all the nodes on the way share this result
+        final List<DomNode> path = new ArrayList<>();
+        Mode mode = null;
+        DomNode node = domNode;
+        while (node != null) {
+            if (whiteSpaceCache_.containsKey(node)) {
+                mode = whiteSpaceCache_.get(node);
+                break;
+            }
+            path.add(node);
+            if (node instanceof DomElement element) {
+                mode = whiteSpaceMode(window.getComputedStyle(element, null));
+                if (mode != null) {
+                    break;
                 }
             }
+            node = node.getParentNode();
         }
-        return defaultMode;
+
+        for (final DomNode pathNode : path) {
+            whiteSpaceCache_.put(pathNode, mode);
+        }
+        return mode == null ? defaultMode : mode;
+    }
+
+    /**
+     * Maps the white-space (and white-space-collapse) style to the {@link Mode}.
+     *
+     * @param style the computed style
+     * @return the {@link Mode} or {@code null} if the style does not define the white-space handling
+     */
+    private static Mode whiteSpaceMode(final ComputedCssStyleDeclaration style) {
+        final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
+        if (!StringUtils.isEmptyOrNull(value)) {
+            if ("normal".equalsIgnoreCase(value) || "nowrap".equalsIgnoreCase(value)) {
+                return Mode.WHITE_SPACE_NORMAL;
+            }
+            if ("pre".equalsIgnoreCase(value)
+                    || "pre-wrap".equalsIgnoreCase(value)
+                    || "break-spaces".equalsIgnoreCase(value)) {
+                return Mode.WHITE_SPACE_PRE;
+            }
+            if ("pre-line".equalsIgnoreCase(value)) {
+                return Mode.WHITE_SPACE_PRE_LINE;
+            }
+        }
+
+        final String collapse = style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
+        if (!StringUtils.isEmptyOrNull(collapse)) {
+            if ("collapse".equalsIgnoreCase(collapse)) {
+                return Mode.WHITE_SPACE_NORMAL;
+            }
+            if ("preserve".equalsIgnoreCase(collapse)
+                    || "break-spaces".equalsIgnoreCase(collapse)) {
+                return Mode.WHITE_SPACE_PRE;
+            }
+            if ("preserve-breaks".equalsIgnoreCase(collapse)) {
+                return Mode.WHITE_SPACE_PRE_LINE;
+            }
+        }
+        return null;
     }
 
     /**
@@ -764,13 +833,13 @@ public class HtmlSerializerInnerOuterText {
 
             /**
              * Sequences of white space are preserved. Lines are only broken
-             * at newline characters in the source and at <br> elements.
+             * at newline characters in the source and at {@code <br>} elements.
              */
             WHITE_SPACE_PRE,
 
             /**
              * Sequences of white space are collapsed. Lines are broken
-             * at newline characters, at <br> and as necessary
+             * at newline characters, at {@code <br>} and as necessary
              * to fill line boxes.
              */
             WHITE_SPACE_PRE_LINE
@@ -780,10 +849,8 @@ public class HtmlSerializerInnerOuterText {
             DEFAULT,
             EMPTY,
             BLANK_AT_END,
-            BLANK_AT_END_AFTER_NEWLINE,
             NEWLINE_AT_END,
             BREAK_AT_END,
-            BLOCK_SEPARATOR_AT_END,
             REQUIRED_LINE_BREAK_AT_END
         }
 
@@ -802,7 +869,7 @@ public class HtmlSerializerInnerOuterText {
         }
 
         /**
-         * Append a line separator.
+         * Append a required line break (count 1).
          */
         public void appendRequiredLineBreak() {
             appendRequiredLineBreak(1);
@@ -889,7 +956,7 @@ public class HtmlSerializerInnerOuterText {
             if (content == null) {
                 return;
             }
-            int length = content.length();
+            final int length = content.length();
             if (length == 0) {
                 return;
             }
@@ -902,60 +969,34 @@ public class HtmlSerializerInnerOuterText {
                 return;
             }
 
-            length--;
-            final int contentLength = content.length();
-            for (int i = 0; i < contentLength; i++) {
+            final int lastIndex = length - 1;
+            for (int i = 0; i < length; i++) {
                 char c = content.charAt(i);
 
-                // handle \r
+                // a \r is ignored; only at the end it is handled like a \n
                 if (c == '\r') {
-                    if (length != i) {
+                    if (i != lastIndex) {
                         continue;
                     }
                     c = '\n';
                 }
 
                 if (c == '\n') {
-                    if (mode == Mode.WHITE_SPACE_PRE) {
-                        switch (state_) {
-                            case BLOCK_SEPARATOR_AT_END:
-                                break;
-                            default:
-                                flushPendingLineBreaks();
-                                builder_.append('\n');
-                                state_ = State.NEWLINE_AT_END;
-                                trimRightPos_ = builder_.length();
-                                break;
+                    if (mode == Mode.WHITE_SPACE_PRE || mode == Mode.WHITE_SPACE_PRE_LINE) {
+                        if (mode == Mode.WHITE_SPACE_PRE_LINE && state_ == State.BLANK_AT_END) {
+                            // collapsible white space at the end of the line is removed
+                            builder_.setLength(trimRightPos_);
                         }
-                        continue;
-                    }
-
-                    if (mode == Mode.WHITE_SPACE_PRE_LINE) {
-                        switch (state_) {
-                            case BLOCK_SEPARATOR_AT_END:
-                                break;
-                            case BLANK_AT_END:
-                                builder_.setLength(trimRightPos_);
-                                flushPendingLineBreaks();
-                                builder_.append('\n');
-                                state_ = State.NEWLINE_AT_END;
-                                trimRightPos_ = builder_.length();
-                                break;
-                            default:
-                                flushPendingLineBreaks();
-                                builder_.append('\n');
-                                state_ = State.NEWLINE_AT_END;
-                                trimRightPos_ = builder_.length();
-                                break;
-                        }
+                        flushPendingLineBreaks();
+                        builder_.append('\n');
+                        state_ = State.NEWLINE_AT_END;
+                        trimRightPos_ = builder_.length();
                         continue;
                     }
 
                     switch (state_) {
                         case EMPTY:
                         case BLANK_AT_END:
-                        case BLANK_AT_END_AFTER_NEWLINE:
-                        case BLOCK_SEPARATOR_AT_END:
                         case NEWLINE_AT_END:
                         case BREAK_AT_END:
                         case REQUIRED_LINE_BREAK_AT_END:
@@ -987,11 +1028,9 @@ public class HtmlSerializerInnerOuterText {
                         switch (state_) {
                             case EMPTY:
                             case BLANK_AT_END:
-                            case BLANK_AT_END_AFTER_NEWLINE:
                             case BREAK_AT_END:
                             case NEWLINE_AT_END:
                             case REQUIRED_LINE_BREAK_AT_END:
-                            case BLOCK_SEPARATOR_AT_END:
                                 break;
                             default:
                                 builder_.append(' ');
@@ -1004,8 +1043,6 @@ public class HtmlSerializerInnerOuterText {
                     switch (state_) {
                         case EMPTY:
                         case BLANK_AT_END:
-                        case BLANK_AT_END_AFTER_NEWLINE:
-                        case BLOCK_SEPARATOR_AT_END:
                         case NEWLINE_AT_END:
                         case BREAK_AT_END:
                         case REQUIRED_LINE_BREAK_AT_END:
