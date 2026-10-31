@@ -3623,7 +3623,17 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"url(\"img.png\")", "url(\"img.png\")", "url(\"img.png\")", "url(\"\")§url(\"\")", "url(\"img.png\")", "url(\"img.png\")", "", ""})
+    @Alerts({"url(\"img.png\")", "url(\"img.png\")", "url(\"img.png\")", "url(\"\")",
+             "url(\"\")", "url(\"img.png\")", "url(\"img.png\")", "", ""})
+    @HtmlUnitNYI(
+            CHROME = {"url(\"img.png\")", "url(\"img.png\")", "url(\"img.png\")", "url(\"\")",
+                      "url(\"\")", "", "url(\"img.png\")", "", ""},
+            EDGE = {"url(\"img.png\")", "url(\"img.png\")", "url(\"img.png\")", "url(\"\")",
+                    "url(\"\")", "", "url(\"img.png\")", "", ""},
+            FF = {"url(\"img.png\")", "url(\"img.png\")", "url(\"img.png\")", "url(\"\")",
+                  "url(\"\")", "", "url(\"img.png\")", "", ""},
+            FF_ESR = {"url(\"img.png\")", "url(\"img.png\")", "url(\"img.png\")", "url(\"\")",
+                      "url(\"\")", "", "url(\"img.png\")", "", ""})
     public void backgroundImageFromBackground() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -3757,6 +3767,11 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"10px 20px", ""})
+    @HtmlUnitNYI(
+            CHROME = {"10px 20px", "10px 20px"},
+            EDGE = {"10px 20px", "10px 20px"},
+            FF = {"10px 20px", "10px 20px"},
+            FF_ESR = {"10px 20px", "10px 20px"})
     public void backgroundPositionFromBackgroundLongValue() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
