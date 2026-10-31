@@ -57,9 +57,9 @@
         <!--brotli.version>0.1.2</brotli.version-->
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.51.0</htmlunitdriver.version>
-        <selenium.version>4.51.0</selenium.version>
-        <selenium.devtools.artifactId>selenium-devtools-v155</selenium.devtools.artifactId>
+        <htmlunitdriver.version>4.52.0-SNAPSHOT</htmlunitdriver.version>
+        <selenium.version>4.52.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v156</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
         <junit.version>6.1.3</junit.version>
