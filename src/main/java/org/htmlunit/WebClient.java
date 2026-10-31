@@ -153,6 +153,7 @@ import org.htmlunit.webstart.WebStartHandler;
  * @author René Schwietzke
  * @author Sven Strickroth
  * @author Ashutosh Panda
+ * @author Vidya m
  */
 @SuppressWarnings("PMD.TooManyFields")
 public class WebClient implements Serializable, AutoCloseable {
@@ -1711,6 +1712,8 @@ public class WebClient implements Serializable, AutoCloseable {
                     + webResponse.getWebRequest().getUrl(), webResponse);
             }
 
+            final boolean crossOriginRedirect = !UrlUtils.isSameOrigin(url, newUrl);
+
             if (status == HttpStatus.MOVED_PERMANENTLY_301
                     || status == HttpStatus.FOUND_302
                     || status == HttpStatus.SEE_OTHER_303) {
@@ -1722,6 +1725,10 @@ public class WebClient implements Serializable, AutoCloseable {
                 }
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
+                }
+                if (crossOriginRedirect) {
+                    // credentials are not forwarded to another origin
+                    wrs.removeAdditionalHeader("Authorization");
                 }
                 wrs.setFetchDestination(webRequest.getFetchDestination());
                 wrs.setFetchModeOverride(webRequest.getFetchModeOverride());
@@ -1750,6 +1757,10 @@ public class WebClient implements Serializable, AutoCloseable {
 
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
+                }
+                if (crossOriginRedirect) {
+                    // credentials are not forwarded to another origin
+                    wrs.removeAdditionalHeader("Authorization");
                 }
 
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
