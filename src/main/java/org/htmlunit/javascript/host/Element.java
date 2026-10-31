@@ -54,7 +54,6 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomProcessingInstruction;
 import org.htmlunit.html.DomText;
-import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlElement.DisplayStyle;
 import org.htmlunit.html.HtmlScript;
@@ -110,7 +109,6 @@ public class Element extends Node {
     static final String POSITION_AFTER_END = "afterend";
 
     private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
-    private static final String MATHML_NAMESPACE = "http://www.w3.org/1998/Math/MathML";
     private static final Pattern PRINT_NODE_PATTERN = Pattern.compile(" {2}");
 
     private enum TextEscape { NONE, XML, HTML }
@@ -1217,26 +1215,22 @@ public class Element extends Node {
 
     /**
      * Returns the tag name used by the HTML serialization.
-     * <p>Elements in the SVG and MathML namespace use the local name (with the original case,
-     * e.g. 'foreignObject'). For all other elements we use the local name together with the prefix,
-     * because createElement('x:y') creates an element with the local name 'x:y' in the browsers
-     * (HtmlUnit splits the name into prefix and local name).</p>
+     * <p>This is the name the element was created with (e.g. 'foreignObject' or 'x:y'
+     * from createElement('x:y')). HtmlUnit maps some names to other elements
+     * (e.g. 'image' to an img element); in this case the qualified name differs and we use
+     * the original local name.</p>
      *
      * @param element the element
      * @return the tag name
      */
     private static String serializationTagName(final DomElement element) {
-        final String namespace = element.getNamespaceURI();
-        if (Html.SVG_NAMESPACE.equals(namespace)
-                || MATHML_NAMESPACE.equals(namespace)) {
-            return element.getLocalName();
-        }
-
         final String prefix = element.getPrefix();
-        if (prefix == null) {
-            return element.getLocalName();
+        final String name = prefix == null ? element.getLocalName() : prefix + ":" + element.getLocalName();
+        final String qualifiedName = element.getQualifiedName();
+        if (qualifiedName != null && qualifiedName.equalsIgnoreCase(name)) {
+            return qualifiedName;
         }
-        return prefix + ":" + element.getLocalName();
+        return name;
     }
 
     /**

@@ -1668,10 +1668,6 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("I have  out of 2 stamps")
-    @HtmlUnitNYI(CHROME = "I have out of 2 stamps",
-            EDGE = "I have out of 2 stamps",
-            FF = "I have out of 2 stamps",
-            FF_ESR = "I have out of 2 stamps")
     public void getInnerTextInputInsideP() throws Exception {
         getInnerTextFormated("<p id='tester'>"
                 + " I have <input type='number' value='2'/> out of 2 stamps</p>");

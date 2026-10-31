@@ -310,8 +310,8 @@ public class HtmlSerializerNormalizedText {
         for (final DomNode child : htmlDetails.getChildren()) {
             if (child instanceof HtmlSummary) {
                 // only the first summary is the summary of the details
+                // but for the moment i like to have it like this for backward compatibility
                 appendNode(builder, child);
-                return;
             }
         }
     }

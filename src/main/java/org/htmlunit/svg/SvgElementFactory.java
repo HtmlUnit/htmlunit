@@ -79,12 +79,13 @@ public class SvgElementFactory implements ElementFactory {
      * {@inheritDoc}
      */
     @Override
-    public DomElement createElementNS(final SgmlPage page, final String namespaceURI, String qualifiedNameLC,
+    public DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
             final Attributes attributes) {
 
         final Map<String, DomAttr> attributeMap = toMap(page, attributes);
-        qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedNameLC);
-        String tagNameLC = qualifiedNameLC;
+        // the lookup is case insensitive, but the element keeps the case of the name
+        // (like the browsers, e.g. 'foreignObject')
+        String tagNameLC = StringUtils.toRootLowerCase(qualifiedName);
         if (tagNameLC.indexOf(':') != -1) {
             tagNameLC = tagNameLC.substring(tagNameLC.indexOf(':') + 1);
         }
@@ -94,14 +95,14 @@ public class SvgElementFactory implements ElementFactory {
         if (klass != null) {
             try {
                 element = (DomElement) klass.getDeclaredConstructors()[0]
-                        .newInstance(namespaceURI, qualifiedNameLC, page, attributeMap);
+                        .newInstance(namespaceURI, qualifiedName, page, attributeMap);
             }
             catch (final Exception e) {
                 throw new IllegalStateException(e);
             }
         }
         if (element == null) {
-            element = new SvgElement(namespaceURI, qualifiedNameLC, page, attributeMap);
+            element = new SvgElement(namespaceURI, qualifiedName, page, attributeMap);
         }
         return element;
     }
