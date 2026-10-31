@@ -1216,26 +1216,27 @@ public class Element extends Node {
     }
 
     /**
-     * Returns the tag name used by the HTML serialization; this is the local name
-     * for elements in the SVG and MathML namespace and the qualified name for all others.
-     * <p>For HTML elements we also use the qualified name, because createElement('x:y')
-     * creates an element with the local name 'x:y' (there is no prefix handling)
-     * but HtmlUnit splits the name into prefix and local name.</p>
+     * Returns the tag name used by the HTML serialization.
+     * <p>Elements in the SVG and MathML namespace use the local name (with the original case,
+     * e.g. 'foreignObject'). For all other elements we use the local name together with the prefix,
+     * because createElement('x:y') creates an element with the local name 'x:y' in the browsers
+     * (HtmlUnit splits the name into prefix and local name).</p>
      *
      * @param element the element
      * @return the tag name
      */
     private static String serializationTagName(final DomElement element) {
-        if (element instanceof HtmlElement) {
-            return element.getQualifiedName();
-        }
-
         final String namespace = element.getNamespaceURI();
         if (Html.SVG_NAMESPACE.equals(namespace)
                 || MATHML_NAMESPACE.equals(namespace)) {
             return element.getLocalName();
         }
-        return element.getQualifiedName();
+
+        final String prefix = element.getPrefix();
+        if (prefix == null) {
+            return element.getLocalName();
+        }
+        return prefix + ":" + element.getLocalName();
     }
 
     /**
