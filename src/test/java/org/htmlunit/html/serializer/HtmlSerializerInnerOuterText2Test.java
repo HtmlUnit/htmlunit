@@ -3214,6 +3214,8 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "a\n𝑥\n+\n1\nb",
             FF = "ax+1b",
             FF_ESR = "ax+1b")
+    @HtmlUnitNYI(CHROME = "ax+1b",
+            EDGE = "ax+1b")
     public void getInnerTextMathMl() throws Exception {
         getInnerTextFormated("<div id='tester'>a<math><mi>x</mi><mo>+</mo><mn>1</mn></math>b</div>");
     }

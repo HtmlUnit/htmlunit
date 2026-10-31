@@ -14,6 +14,10 @@
  */
 package org.htmlunit.html.serializer;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_XHTML_BOOLEAN_ATTRIBUTE_VALUE;
+import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_XHTML_HEX_LINE_BREAK;
+import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_XHTML_NS_DECLARATION_AFTER_ATTRIBUTE;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -21,6 +25,7 @@ import java.util.Set;
 
 import javax.xml.XMLConstants;
 
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomCDataSection;
 import org.htmlunit.html.DomComment;
@@ -52,19 +57,36 @@ public final class XmlMarkupSerializer {
             "area", "base", "basefont", "bgsound", "br", "col", "embed", "frame", "hr",
             "img", "input", "keygen", "link", "menuitem", "meta", "param", "source", "track", "wbr");
 
-    private XmlMarkupSerializer() {
-        // util class
+    /** Boolean attributes written as name="name" if the value is empty (Firefox). */
+    private static final Set<String> BOOLEAN_ATTRIBUTES = Set.of(
+            "checked", "compact", "declare", "defer", "disabled", "ismap", "multiple",
+            "nohref", "noresize", "noshade", "nowrap", "readonly", "selected");
+
+    private final boolean booleanAttributeValue_;
+    private final boolean hexLineBreak_;
+    private final boolean declarationAfterAttribute_;
+
+    /**
+     * Ctor.
+     *
+     * @param browserVersion the browser version used to determine the browser specific details
+     */
+    private XmlMarkupSerializer(final BrowserVersion browserVersion) {
+        booleanAttributeValue_ = browserVersion.hasFeature(JS_INNER_HTML_XHTML_BOOLEAN_ATTRIBUTE_VALUE);
+        hexLineBreak_ = browserVersion.hasFeature(JS_INNER_HTML_XHTML_HEX_LINE_BREAK);
+        declarationAfterAttribute_ = browserVersion.hasFeature(JS_INNER_HTML_XHTML_NS_DECLARATION_AFTER_ATTRIBUTE);
     }
 
     /**
      * Serializes the children of the given node (the innerHTML).
      *
      * @param node the node whose children are serialized
+     * @param browserVersion the browser version used to determine the browser specific details
      * @return the serialized children
      */
-    public static String serializeChildren(final DomNode node) {
+    public static String serializeChildren(final DomNode node, final BrowserVersion browserVersion) {
         final StringBuilder builder = new StringBuilder();
-        appendChildren(builder, node, null, newPrefixMap());
+        new XmlMarkupSerializer(browserVersion).appendChildren(builder, node, null, newPrefixMap());
         return builder.toString();
     }
 
@@ -72,11 +94,12 @@ public final class XmlMarkupSerializer {
      * Serializes the given node including the node itself (the outerHTML).
      *
      * @param node the node to serialize
+     * @param browserVersion the browser version used to determine the browser specific details
      * @return the serialized node
      */
-    public static String serialize(final DomNode node) {
+    public static String serialize(final DomNode node, final BrowserVersion browserVersion) {
         final StringBuilder builder = new StringBuilder();
-        appendNode(builder, node, null, newPrefixMap());
+        new XmlMarkupSerializer(browserVersion).appendNode(builder, node, null, newPrefixMap());
         return builder.toString();
     }
 
@@ -100,7 +123,7 @@ public final class XmlMarkupSerializer {
      * @param contextNamespace the default namespace of the context
      * @param prefixMap the prefixes declared by the context (prefix to namespace)
      */
-    private static void appendChildren(final StringBuilder builder, final DomNode node,
+    private void appendChildren(final StringBuilder builder, final DomNode node,
             final String contextNamespace, final Map<String, String> prefixMap) {
         final DomNode parent = node instanceof HtmlTemplate template ? template.getContent() : node;
         for (final DomNode child : parent.getChildren()) {
@@ -116,7 +139,7 @@ public final class XmlMarkupSerializer {
      * @param contextNamespace the default namespace of the context
      * @param prefixMap the prefixes declared by the context (prefix to namespace)
      */
-    private static void appendNode(final StringBuilder builder, final DomNode node,
+    private void appendNode(final StringBuilder builder, final DomNode node,
             final String contextNamespace, final Map<String, String> prefixMap) {
         if (node instanceof DomElement element) {
             appendElement(builder, element, contextNamespace, prefixMap);
@@ -151,7 +174,7 @@ public final class XmlMarkupSerializer {
      * @param contextNamespace the default namespace of the context
      * @param contextPrefixMap the prefixes declared by the context (prefix to namespace)
      */
-    private static void appendElement(final StringBuilder builder, final DomElement element,
+    private void appendElement(final StringBuilder builder, final DomElement element,
             final String contextNamespace, final Map<String, String> contextPrefixMap) {
         final String namespace = namespaceOf(element);
         final String prefix = element.getPrefix();
@@ -189,7 +212,9 @@ public final class XmlMarkupSerializer {
             childNamespace = namespace;
         }
 
-        // prefixes used by the attributes
+        // prefixes used by the attributes; written in front of all attributes
+        // or (Firefox) after the attribute
+        final Map<DomAttr, String> attributeDeclarations = new HashMap<>();
         for (final DomAttr attr : element.getAttributesMap().values()) {
             final String attrNamespace = attr.getNamespaceURI();
             final String attrPrefix = attr.getPrefix();
@@ -198,7 +223,14 @@ public final class XmlMarkupSerializer {
                     && !XMLConstants.XMLNS_ATTRIBUTE_NS_URI.equals(attrNamespace)
                     && !XMLConstants.XMLNS_ATTRIBUTE.equals(attrPrefix)
                     && !attrNamespace.equals(prefixMap.get(attrPrefix))) {
-                appendDeclaration(declarations, attrPrefix, attrNamespace);
+                if (declarationAfterAttribute_) {
+                    final StringBuilder declaration = new StringBuilder();
+                    appendDeclaration(declaration, attrPrefix, attrNamespace);
+                    attributeDeclarations.put(attr, declaration.toString());
+                }
+                else {
+                    appendDeclaration(declarations, attrPrefix, attrNamespace);
+                }
                 prefixMap.put(attrPrefix, attrNamespace);
             }
         }
@@ -208,7 +240,11 @@ public final class XmlMarkupSerializer {
         for (final DomAttr attr : element.getAttributesMap().values()) {
             if (attr.getSpecified()) {
                 builder.append(' ').append(attr.getName()).append("=\"")
-                    .append(XmlUtils.escapeXmlAttributeValue(attr.getValue())).append('"');
+                    .append(attributeValue(attr, namespace)).append('"');
+                final String declaration = attributeDeclarations.get(attr);
+                if (declaration != null) {
+                    builder.append(declaration);
+                }
             }
         }
 
@@ -229,6 +265,30 @@ public final class XmlMarkupSerializer {
         builder.append('>');
         appendChildren(builder, element, childNamespace, prefixMap);
         builder.append("</").append(qualifiedName).append('>');
+    }
+
+    /**
+     * Returns the escaped value of the attribute.
+     *
+     * @param attr the attribute
+     * @param elementNamespace the namespace of the element
+     * @return the escaped value
+     */
+    private String attributeValue(final DomAttr attr, final String elementNamespace) {
+        String value = attr.getValue();
+        if (booleanAttributeValue_
+                && StringUtils.isEmptyOrNull(value)
+                && attr.getPrefix() == null
+                && Html.XHTML_NAMESPACE.equals(elementNamespace)
+                && BOOLEAN_ATTRIBUTES.contains(attr.getName())) {
+            value = attr.getName();
+        }
+
+        value = XmlUtils.escapeXmlAttributeValue(value);
+        if (hexLineBreak_) {
+            value = value.replace("&#10;", "&#xA;").replace("&#13;", "&#xD;");
+        }
+        return value;
     }
 
     /**

@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
+import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_PROCESSING_INSTRUCTION_NO_QUESTION_MARK;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_VOID_ELEMENT_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_XHTML_RAW_SCRIPT_STYLE;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
@@ -995,7 +996,7 @@ public class Element extends Node {
                     && getBrowserVersion().hasFeature(JS_INNER_HTML_XHTML_RAW_SCRIPT_STYLE)) {
                 return domNode.getTextContent();
             }
-            return XmlMarkupSerializer.serializeChildren(domNode);
+            return XmlMarkupSerializer.serializeChildren(domNode, getBrowserVersion());
         }
 
         if (isEndTagForbidden() && getBrowserVersion().hasFeature(JS_INNER_HTML_VOID_ELEMENT_EMPTY)) {
@@ -1051,7 +1052,7 @@ public class Element extends Node {
     public String getOuterHTML() {
         final DomNode domNode = getDomNodeOrDie();
         if (isXmlSerialization(domNode)) {
-            return XmlMarkupSerializer.serialize(domNode);
+            return XmlMarkupSerializer.serialize(domNode, getBrowserVersion());
         }
 
         final StringBuilder buf = new StringBuilder();
@@ -1151,7 +1152,8 @@ public class Element extends Node {
                     .append(pi.getTarget())
                     .append(" ")
                     .append(pi.getData())
-                    .append("?>");
+                    .append(getBrowserVersion().hasFeature(JS_INNER_HTML_PROCESSING_INSTRUCTION_NO_QUESTION_MARK)
+                            ? ">" : "?>");
         }
         else if (html) {
             final DomElement element = (DomElement) node;

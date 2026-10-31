@@ -276,9 +276,28 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0,
 
+    /** Indicates that the HTML serialization of a processing instruction ends with '&gt;' instead of '?&gt;'. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_INNER_HTML_PROCESSING_INSTRUCTION_NO_QUESTION_MARK,
+
     /** Indicates that innerHTML returns an empty string for empty elements. */
     @BrowserFeature({CHROME, EDGE})
     JS_INNER_HTML_VOID_ELEMENT_EMPTY,
+
+    /**
+     * Indicates that the XML serialization writes boolean attributes of XHTML elements
+     * with an empty value as name="name" (e.g. disabled="disabled").
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_INNER_HTML_XHTML_BOOLEAN_ATTRIBUTE_VALUE,
+
+    /** Indicates that the XML serialization escapes line breaks in attribute values as hex references (&amp;#xA;). */
+    @BrowserFeature({FF, FF_ESR})
+    JS_INNER_HTML_XHTML_HEX_LINE_BREAK,
+
+    /** Indicates that the XML serialization writes the namespace declaration of an attribute after the attribute. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_INNER_HTML_XHTML_NS_DECLARATION_AFTER_ATTRIBUTE,
 
     /** Indicates that innerHTML of a script or style element in an XHTML document returns the text as is. */
     @BrowserFeature({FF, FF_ESR})

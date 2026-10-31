@@ -78,6 +78,12 @@ import org.htmlunit.util.StringUtils;
  */
 public class HtmlSerializerVisibleText {
 
+    /** Rough estimation of the width of a char used to detect offscreen elements. */
+    private static final int ESTIMATED_CHAR_WIDTH = 16;
+
+    /** Rough estimation of the height of a line used to detect offscreen elements. */
+    private static final int ESTIMATED_LINE_HEIGHT = 20;
+
     /**
      * The displays handled as block by WebDriver (everything that is not one of the
      * inline display boxes 'inline', 'inline-block', 'inline-table', 'none', 'table-cell', ...).
@@ -356,12 +362,6 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
-     * Process {@link HtmlMenu}.
-     * @param builder the StringBuilder to add to
-     * @param htmlMenu the target to process
-     * @param mode the {@link Mode} to use for processing
-     */
-    /**
      * Checks if the given node is block level; this includes elements that are
      * blockified (children of flex and grid containers).
      *
@@ -507,22 +507,40 @@ public class HtmlSerializerVisibleText {
 
     /**
      * Checks if the element is positioned outside of the page (e.g. 'left: -9999px').
+     * <p>The calculated width/height can't be used here because the calculation
+     * itself depends on the visible text. Therefore we use the explicit width/height
+     * or a rough estimation based on the text length.</p>
      *
+     * @param element the element
      * @param style the computed style of the element
      * @return true if the element is not visible
      */
-    private static boolean isOffscreen(final ComputedCssStyleDeclaration style) {
+    private static boolean isOffscreen(final DomElement element, final ComputedCssStyleDeclaration style) {
         final String position = style.getPosition();
         if (!"absolute".equals(position) && !"fixed".equals(position)) {
             return false;
         }
 
         final int left = pixelValue(style.getStyleAttribute(Definition.LEFT, false));
-        if (left < 0 && left + style.getCalculatedWidth(true, true) <= 0) {
-            return true;
+        if (left < 0) {
+            int width = pixelValue(style.getStyleAttribute(Definition.WIDTH, false));
+            if (width <= 0) {
+                width = element.getTextContent().length() * ESTIMATED_CHAR_WIDTH;
+            }
+            if (left + width <= 0) {
+                return true;
+            }
         }
+
         final int top = pixelValue(style.getStyleAttribute(Definition.TOP, false));
-        return top < 0 && top + style.getCalculatedHeight(true, true) <= 0;
+        if (top < 0) {
+            int height = pixelValue(style.getStyleAttribute(Definition.HEIGHT, false));
+            if (height <= 0) {
+                height = ESTIMATED_LINE_HEIGHT;
+            }
+            return top + height <= 0;
+        }
+        return false;
     }
 
     /**
@@ -566,7 +584,7 @@ public class HtmlSerializerVisibleText {
                 final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
                 if ("hidden".equals(style.getStyleAttribute("content-visibility"))
                         || isZeroSizeWithOverflowHidden(style)
-                        || isOffscreen(style)) {
+                        || isOffscreen(element, style)) {
                     return true;
                 }
 
