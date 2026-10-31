@@ -2045,6 +2045,59 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * The html parser lowercases the names of svg elements and restores
+     * the case of some names; createElementNS() keeps the case.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"g,g,http://www.w3.org/2000/svg", "foreignObject,foreignObject,http://www.w3.org/2000/svg",
+             "foreignObject,foreignObject,http://www.w3.org/2000/svg", "clipPath,clipPath,http://www.w3.org/2000/svg",
+             "linearGradient,linearGradient,http://www.w3.org/2000/svg", "feDropShadow,feDropShadow,http://www.w3.org/2000/svg",
+             "rect,rect,http://www.w3.org/2000/svg", "my-element,my-element,http://www.w3.org/2000/svg",
+             "G,G,http://www.w3.org/2000/svg", "foreignObject,foreignObject,http://www.w3.org/2000/svg",
+             "FOREIGNOBJECT,FOREIGNOBJECT,http://www.w3.org/2000/svg", "clippath,clippath,http://www.w3.org/2000/svg",
+             "Rect,Rect,http://www.w3.org/2000/svg", "g", "foreignObject", "clipPath"})
+    public void svgTagNameCase() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var svg = document.getElementById('mySvg');\n"
+            + "    for (var i = 0; i < svg.children.length; i++) {\n"
+            + "      var e = svg.children[i];\n"
+            + "      log(e.tagName + ',' + e.localName + ',' + e.namespaceURI);\n"
+            + "    }\n"
+            + "    var ns = 'http://www.w3.org/2000/svg';\n"
+            + "    var names = ['G', 'foreignObject', 'FOREIGNOBJECT', 'clippath', 'Rect'];\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      var e = document.createElementNS(ns, names[i]);\n"
+            + "      log(e.tagName + ',' + e.localName + ',' + e.namespaceURI);\n"
+            + "    }\n"
+            + "    svg.innerHTML = '<G></G><FOREIGNOBJECT></FOREIGNOBJECT><ClipPath></ClipPath>';\n"
+            + "    for (var i = 0; i < svg.children.length; i++) {\n"
+            + "      log(svg.children[i].tagName);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <svg id='mySvg'>\n"
+            + "    <G></G>\n"
+            + "    <foreignObject></foreignObject>\n"
+            + "    <FOREIGNOBJECT></FOREIGNOBJECT>\n"
+            + "    <clippath></clippath>\n"
+            + "    <LinearGradient></LinearGradient>\n"
+            + "    <feDropShadow></feDropShadow>\n"
+            + "    <RECT></RECT>\n"
+            + "    <My-Element></My-Element>\n"
+            + "  </svg>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

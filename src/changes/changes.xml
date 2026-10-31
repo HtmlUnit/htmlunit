@@ -9,6 +9,14 @@
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
             <action type="fix" dev="rbri">
+                The html parser lowercases the names of svg elements and restores the case of the names
+                listed in the html spec (e.g. foreignObject, clipPath) like real browsers;
+                document.createElementNS() keeps the case of the name.
+            </action>
+            <action type="fix" dev="rbri">
+                The content of an svg element set by innerHTML (or a range) is parsed as svg content (svg namespace).
+            </action>
+            <action type="fix" dev="rbri">
                 CSSStyleDeclaration: the detection of the url and the position inside of the background shorthand
                 (used by backgroundImage and backgroundPosition) was vulnerable to regex backtracking (CWE-1333);
                 some long values were able to block the processing for a very long time.

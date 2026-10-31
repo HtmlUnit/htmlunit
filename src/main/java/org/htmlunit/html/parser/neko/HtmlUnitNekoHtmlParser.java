@@ -43,11 +43,13 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlSvg;
 import org.htmlunit.html.UnknownElementFactory;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.svg.SvgElementFactory;
+import org.htmlunit.svg.SvgForeignObject;
 import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -99,6 +101,8 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
         final HtmlUnitNekoDOMBuilder domBuilder =
                 new HtmlUnitNekoDOMBuilder(this, webClient, parent, url, source, createdByJavascript);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
+        // the content of an svg element (e.g. svg.innerHTML) is svg content
+        domBuilder.setInsideSvg(isSvgContext(context));
 
         final boolean xhtml = page instanceof XHtmlPage;
         domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, xhtml);
@@ -237,6 +241,27 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
             return result;
         }
         return UnknownElementFactory.INSTANCE;
+    }
+
+    /**
+     * Checks if the content of the given context node is svg content; this is the case
+     * if the context is an svg element (or inside of one) but not inside of a foreignObject.
+     *
+     * @param context the context node of the fragment
+     * @return true if the content of the context is svg content
+     */
+    private static boolean isSvgContext(final DomNode context) {
+        DomNode node = context;
+        while (node != null) {
+            if (node instanceof SvgForeignObject) {
+                return false;
+            }
+            if (node instanceof HtmlSvg) {
+                return true;
+            }
+            node = node.getParentNode();
+        }
+        return false;
     }
 
     /**

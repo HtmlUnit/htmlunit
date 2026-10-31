@@ -178,11 +178,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "style,b", "1", "0", "", "\\n<style xmlns=\"http://www.w3.org/1999/xhtml\"></style><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "style,b", "1", "0", "", "\\n<style></style><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "style,b", "1", "0", "", "\\n<style></style><b id=\"child\">x</b>\\n"},
-            FF = {"body", "style,b", "1", "0", "", "\\n<style></style><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "style,b", "1", "0", "", "\\n<style></style><b id=\"child\">x</b>\\n"})
     public void style_xhtmlPage() throws Exception {
         xhtmlPage("style", XML_STYLE);
     }
@@ -192,11 +187,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "textarea,b", "1", "0", "", "\\n<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "textarea,b", "1", "0", "", "\\n<textarea></textarea><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "textarea,b", "1", "0", "", "\\n<textarea></textarea><b id=\"child\">x</b>\\n"},
-            FF = {"body", "textarea,b", "1", "0", "", "\\n<textarea></textarea><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "textarea,b", "1", "0", "", "\\n<textarea></textarea><b id=\"child\">x</b>\\n"})
     public void textarea_xhtmlPage() throws Exception {
         xhtmlPage("textarea", XML_TEXTAREA);
     }
@@ -206,11 +196,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "title,b", "2", "0", "", "\\n<title xmlns=\"http://www.w3.org/1999/xhtml\"></title><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "title,b", "2", "0", "", "\\n<title></title><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "title,b", "2", "0", "", "\\n<title></title><b id=\"child\">x</b>\\n"},
-            FF = {"body", "title,b", "2", "0", "", "\\n<title></title><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "title,b", "2", "0", "", "\\n<title></title><b id=\"child\">x</b>\\n"})
     public void title_xhtmlPage() throws Exception {
         xhtmlPage("title", XML_TITLE);
     }
@@ -220,11 +205,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "xmp,b", "1", "0", "", "\\n<xmp xmlns=\"http://www.w3.org/1999/xhtml\"></xmp><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "xmp,b", "1", "0", "", "\\n<xmp></xmp><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "xmp,b", "1", "0", "", "\\n<xmp></xmp><b id=\"child\">x</b>\\n"},
-            FF = {"body", "xmp,b", "1", "0", "", "\\n<xmp></xmp><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "xmp,b", "1", "0", "", "\\n<xmp></xmp><b id=\"child\">x</b>\\n"})
     public void xmp_xhtmlPage() throws Exception {
         xhtmlPage("xmp", XML_XMP);
     }
@@ -234,11 +214,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "noembed,b", "1", "0", "", "\\n<noembed xmlns=\"http://www.w3.org/1999/xhtml\"></noembed><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "noembed,b", "1", "0", "", "\\n<noembed></noembed><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "noembed,b", "1", "0", "", "\\n<noembed></noembed><b id=\"child\">x</b>\\n"},
-            FF = {"body", "noembed,b", "1", "0", "", "\\n<noembed></noembed><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "noembed,b", "1", "0", "", "\\n<noembed></noembed><b id=\"child\">x</b>\\n"})
     public void noembed_xhtmlPage() throws Exception {
         xhtmlPage("noembed", XML_NOEMBED);
     }
@@ -248,11 +223,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "noframes,b", "1", "0", "", "\\n<noframes xmlns=\"http://www.w3.org/1999/xhtml\"></noframes><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "noframes,b", "1", "0", "", "\\n<noframes></noframes><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "noframes,b", "1", "0", "", "\\n<noframes></noframes><b id=\"child\">x</b>\\n"},
-            FF = {"body", "noframes,b", "1", "0", "", "\\n<noframes></noframes><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "noframes,b", "1", "0", "", "\\n<noframes></noframes><b id=\"child\">x</b>\\n"})
     public void noframes_xhtmlPage() throws Exception {
         xhtmlPage("noframes", XML_NOFRAMES);
     }
@@ -262,11 +232,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "noscript,b", "1", "0", "", "\\n<noscript xmlns=\"http://www.w3.org/1999/xhtml\"></noscript><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "noscript,b", "1", "0", "", "\\n<noscript></noscript><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "noscript,b", "1", "0", "", "\\n<noscript></noscript><b id=\"child\">x</b>\\n"},
-            FF = {"body", "noscript,b", "1", "0", "", "\\n<noscript></noscript><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "noscript,b", "1", "0", "", "\\n<noscript></noscript><b id=\"child\">x</b>\\n"})
     public void noscript_xhtmlPage() throws Exception {
         xhtmlPage("noscript", XML_NOSCRIPT);
     }
@@ -276,11 +241,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "plaintext,b", "1", "0", "", "\\n<plaintext xmlns=\"http://www.w3.org/1999/xhtml\"></plaintext><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "plaintext,b", "1", "0", "", "\\n<plaintext></plaintext><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "plaintext,b", "1", "0", "", "\\n<plaintext></plaintext><b id=\"child\">x</b>\\n"},
-            FF = {"body", "plaintext,b", "1", "0", "", "\\n<plaintext></plaintext><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "plaintext,b", "1", "0", "", "\\n<plaintext></plaintext><b id=\"child\">x</b>\\n"})
     public void plaintext_xhtmlPage() throws Exception {
         xhtmlPage("plaintext", XML_PLAINTEXT);
     }
@@ -291,10 +251,10 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
     @Test
     @Alerts({"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/1999/xhtml\"></svg><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
     @HtmlUnitNYI(
-            CHROME = {"body", "svg,b", "1", "0", "", "\\n<svg></svg><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "svg,b", "1", "0", "", "\\n<svg></svg><b id=\"child\">x</b>\\n"},
-            FF = {"body", "svg,b", "1", "0", "", "\\n<svg></svg><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "svg,b", "1", "0", "", "\\n<svg></svg><b id=\"child\">x</b>\\n"})
+            CHROME = {"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"},
+            EDGE = {"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"},
+            FF = {"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"},
+            FF_ESR = {"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
     public void svg_xhtmlPage() throws Exception {
         xhtmlPage("svg", XML_SVG);
     }
@@ -304,11 +264,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "math,b", "1", "0", "", "\\n<math xmlns=\"http://www.w3.org/1999/xhtml\"></math><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "math,b", "1", "0", "", "\\n<math></math><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "math,b", "1", "0", "", "\\n<math></math><b id=\"child\">x</b>\\n"},
-            FF = {"body", "math,b", "1", "0", "", "\\n<math></math><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "math,b", "1", "0", "", "\\n<math></math><b id=\"child\">x</b>\\n"})
     public void math_xhtmlPage() throws Exception {
         xhtmlPage("math", XML_MATH);
     }
@@ -412,11 +367,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "style,b", "1", "0", "", "<style xmlns=\"http://www.w3.org/1999/xhtml\"></style><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "style,b", "1", "0", "", "<style></style><b id=\"child\">x</b>"},
-            EDGE = {"section", "style,b", "1", "0", "", "<style></style><b id=\"child\">x</b>"},
-            FF = {"section", "style,b", "1", "0", "", "<style></style><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "style,b", "1", "0", "", "<style></style><b id=\"child\">x</b>"})
     public void style_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("style", XML_STYLE);
     }
@@ -426,11 +376,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "textarea,b", "1", "0", "", "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "textarea,b", "1", "0", "", "<textarea></textarea><b id=\"child\">x</b>"},
-            EDGE = {"section", "textarea,b", "1", "0", "", "<textarea></textarea><b id=\"child\">x</b>"},
-            FF = {"section", "textarea,b", "1", "0", "", "<textarea></textarea><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "textarea,b", "1", "0", "", "<textarea></textarea><b id=\"child\">x</b>"})
     public void textarea_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("textarea", XML_TEXTAREA);
     }
@@ -440,11 +385,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "title,b", "2", "0", "", "<title xmlns=\"http://www.w3.org/1999/xhtml\"></title><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "title,b", "2", "0", "", "<title></title><b id=\"child\">x</b>"},
-            EDGE = {"section", "title,b", "2", "0", "", "<title></title><b id=\"child\">x</b>"},
-            FF = {"section", "title,b", "2", "0", "", "<title></title><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "title,b", "2", "0", "", "<title></title><b id=\"child\">x</b>"})
     public void title_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("title", XML_TITLE);
     }
@@ -454,11 +394,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "xmp,b", "1", "0", "", "<xmp xmlns=\"http://www.w3.org/1999/xhtml\"></xmp><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "xmp,b", "1", "0", "", "<xmp></xmp><b id=\"child\">x</b>"},
-            EDGE = {"section", "xmp,b", "1", "0", "", "<xmp></xmp><b id=\"child\">x</b>"},
-            FF = {"section", "xmp,b", "1", "0", "", "<xmp></xmp><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "xmp,b", "1", "0", "", "<xmp></xmp><b id=\"child\">x</b>"})
     public void xmp_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("xmp", XML_XMP);
     }
@@ -468,11 +403,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "noembed,b", "1", "0", "", "<noembed xmlns=\"http://www.w3.org/1999/xhtml\"></noembed><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "noembed,b", "1", "0", "", "<noembed></noembed><b id=\"child\">x</b>"},
-            EDGE = {"section", "noembed,b", "1", "0", "", "<noembed></noembed><b id=\"child\">x</b>"},
-            FF = {"section", "noembed,b", "1", "0", "", "<noembed></noembed><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "noembed,b", "1", "0", "", "<noembed></noembed><b id=\"child\">x</b>"})
     public void noembed_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("noembed", XML_NOEMBED);
     }
@@ -482,11 +412,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "noframes,b", "1", "0", "", "<noframes xmlns=\"http://www.w3.org/1999/xhtml\"></noframes><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "noframes,b", "1", "0", "", "<noframes></noframes><b id=\"child\">x</b>"},
-            EDGE = {"section", "noframes,b", "1", "0", "", "<noframes></noframes><b id=\"child\">x</b>"},
-            FF = {"section", "noframes,b", "1", "0", "", "<noframes></noframes><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "noframes,b", "1", "0", "", "<noframes></noframes><b id=\"child\">x</b>"})
     public void noframes_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("noframes", XML_NOFRAMES);
     }
@@ -496,11 +421,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "noscript,b", "1", "0", "", "<noscript xmlns=\"http://www.w3.org/1999/xhtml\"></noscript><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "noscript,b", "1", "0", "", "<noscript></noscript><b id=\"child\">x</b>"},
-            EDGE = {"section", "noscript,b", "1", "0", "", "<noscript></noscript><b id=\"child\">x</b>"},
-            FF = {"section", "noscript,b", "1", "0", "", "<noscript></noscript><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "noscript,b", "1", "0", "", "<noscript></noscript><b id=\"child\">x</b>"})
     public void noscript_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("noscript", XML_NOSCRIPT);
     }
@@ -510,11 +430,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "plaintext,b", "1", "0", "", "<plaintext xmlns=\"http://www.w3.org/1999/xhtml\"></plaintext><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "plaintext,b", "1", "0", "", "<plaintext></plaintext><b id=\"child\">x</b>"},
-            EDGE = {"section", "plaintext,b", "1", "0", "", "<plaintext></plaintext><b id=\"child\">x</b>"},
-            FF = {"section", "plaintext,b", "1", "0", "", "<plaintext></plaintext><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "plaintext,b", "1", "0", "", "<plaintext></plaintext><b id=\"child\">x</b>"})
     public void plaintext_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("plaintext", XML_PLAINTEXT);
     }
@@ -525,10 +440,10 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
     @Test
     @Alerts({"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/1999/xhtml\"></svg><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
     @HtmlUnitNYI(
-            CHROME = {"section", "svg,b", "1", "0", "", "<svg></svg><b id=\"child\">x</b>"},
-            EDGE = {"section", "svg,b", "1", "0", "", "<svg></svg><b id=\"child\">x</b>"},
-            FF = {"section", "svg,b", "1", "0", "", "<svg></svg><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "svg,b", "1", "0", "", "<svg></svg><b id=\"child\">x</b>"})
+            CHROME = {"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"},
+            EDGE = {"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"},
+            FF = {"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"},
+            FF_ESR = {"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
     public void svg_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("svg", XML_SVG);
     }
@@ -538,11 +453,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "math,b", "1", "0", "", "<math xmlns=\"http://www.w3.org/1999/xhtml\"></math><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "math,b", "1", "0", "", "<math></math><b id=\"child\">x</b>"},
-            EDGE = {"section", "math,b", "1", "0", "", "<math></math><b id=\"child\">x</b>"},
-            FF = {"section", "math,b", "1", "0", "", "<math></math><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "math,b", "1", "0", "", "<math></math><b id=\"child\">x</b>"})
     public void math_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("math", XML_MATH);
     }

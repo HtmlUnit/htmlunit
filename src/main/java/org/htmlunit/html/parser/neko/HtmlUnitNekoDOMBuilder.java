@@ -64,6 +64,7 @@ import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
+import org.htmlunit.svg.SvgElementFactory;
 import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
@@ -186,6 +187,16 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     }
 
     /**
+     * Sets the svg state; used for parsing fragments where the context
+     * (e.g. svg.innerHTML) is svg content.
+     *
+     * @param insideSvg true if the parsed content is svg content
+     */
+    void setInsideSvg(final boolean insideSvg) {
+        insideSvg_ = insideSvg;
+    }
+
+    /**
      * Create the configuration depending on the simulated browser.
      * @return the configuration
      */
@@ -274,11 +285,18 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         final ElementFactory factory =
                 htmlParser_.getElementFactory(page_, namespaceURI, qName, insideSvg_, false);
+        String elementName = qName;
         if (factory == HtmlUnitNekoHtmlParser.SVG_FACTORY) {
             namespaceURI = Html.SVG_NAMESPACE;
+
+            // the html parser lowercases the name and restores the case of some svg names
+            // (e.g. 'foreignObject'); xml (xhtml) is case sensitive
+            if (!(page_ instanceof XHtmlPage)) {
+                elementName = SvgElementFactory.adjustTagNameForHtmlParser(qName);
+            }
         }
 
-        final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
+        final DomElement newElement = factory.createElementNS(page_, namespaceURI, elementName, atts);
         newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
         // parse can't replace everything as it does not buffer elements while parsing

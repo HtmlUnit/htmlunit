@@ -14,6 +14,7 @@
  */
 package org.htmlunit.svg;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -54,6 +55,26 @@ public class SvgElementFactory implements ElementFactory {
     };
 
     private static final Map<String, Class<?>> ELEMENTS_ = new ConcurrentHashMap<>();
+
+    /**
+     * The svg element names with upper case chars; the html parser lowercases the names of
+     * the elements and restores the case of these names.
+     * @see <a href="https://html.spec.whatwg.org/multipage/parsing.html#parsing-main-inforeign">
+     *      HTML Living Standard - adjust SVG tag names</a>
+     */
+    private static final Map<String, String> CASE_SENSITIVE_TAG_NAMES_ = new HashMap<>();
+
+    static {
+        for (final String name : new String[] {
+            "altGlyph", "altGlyphDef", "altGlyphItem", "animateColor", "animateMotion", "animateTransform",
+            "clipPath", "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix",
+            "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA",
+            "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology",
+            "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence",
+            "foreignObject", "glyphRef", "linearGradient", "radialGradient", "textPath"}) {
+            CASE_SENSITIVE_TAG_NAMES_.put(StringUtils.toRootLowerCase(name), name);
+        }
+    }
 
     static {
         try {
@@ -125,6 +146,21 @@ public class SvgElementFactory implements ElementFactory {
             }
         }
         return attributeMap;
+    }
+
+    /**
+     * Returns the name of an svg element created by the html parser; the name is lowercased
+     * and the case of some names is restored (e.g. 'foreignobject' becomes 'foreignObject')
+     * like the browsers do it.
+     *
+     * @param tagName the tag name from the html source
+     * @return the adjusted tag name
+     * @see <a href="https://html.spec.whatwg.org/multipage/parsing.html#parsing-main-inforeign">
+     *      HTML Living Standard - adjust SVG tag names</a>
+     */
+    public static String adjustTagNameForHtmlParser(final String tagName) {
+        final String tagNameLC = StringUtils.toRootLowerCase(tagName);
+        return CASE_SENSITIVE_TAG_NAMES_.getOrDefault(tagNameLC, tagNameLC);
     }
 
     /**
