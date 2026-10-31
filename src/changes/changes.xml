@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="add" dev="rbri" issue="#1136">
+                PerformanceObserver: observe(), disconnect(), takeRecords() and
+                PerformanceObserver.supportedEntryTypes added, including the argument validation
+                of real browsers. HtmlUnit does not record performance entries, so the callback is never called.
+            </action>
             <action type="fix" dev="rbri">
                 XHtmlPage: an svg element without the svg namespace (e.g. inheriting the xhtml namespace)
                 is an unknown html element like in real browsers.
