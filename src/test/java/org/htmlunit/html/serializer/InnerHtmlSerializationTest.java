@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -1431,11 +1430,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<div xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</div>"})
-    @HtmlUnitNYI(
-            CHROME = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<div>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</div>"},
-            EDGE = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<div>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</div>"},
-            FF = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<div>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</div>"},
-            FF_ESR = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<div>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</div>"})
     public void div_innerHtmlXhtml() throws Exception {
         xhtmlElement("div");
     }
@@ -1447,11 +1441,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<script xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
             FF = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
             FF_ESR = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"})
-    @HtmlUnitNYI(
-            CHROME = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
-            EDGE = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
-            FF = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"},
-            FF_ESR = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<script>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</script>"})
     public void script_innerHtmlXhtml() throws Exception {
         xhtmlElement("script");
     }
@@ -1463,11 +1452,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<style xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
             FF = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
             FF_ESR = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"})
-    @HtmlUnitNYI(
-            CHROME = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
-            EDGE = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
-            FF = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"},
-            FF_ESR = {"<b id=\"x\">a &amp; b & c \"q\"</b> z", "<style>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</style>"})
     public void style_innerHtmlXhtml() throws Exception {
         xhtmlElement("style");
     }
@@ -1477,11 +1461,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<xmp xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</xmp>"})
-    @HtmlUnitNYI(
-            CHROME = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<xmp>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</xmp>"},
-            EDGE = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<xmp>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</xmp>"},
-            FF = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<xmp>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</xmp>"},
-            FF_ESR = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<xmp>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</xmp>"})
     public void xmp_innerHtmlXhtml() throws Exception {
         xhtmlElement("xmp");
     }
@@ -1491,11 +1470,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<iframe xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</iframe>"})
-    @HtmlUnitNYI(
-            CHROME = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<iframe>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</iframe>"},
-            EDGE = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<iframe>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</iframe>"},
-            FF = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<iframe>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</iframe>"},
-            FF_ESR = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<iframe>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</iframe>"})
     public void iframe_innerHtmlXhtml() throws Exception {
         xhtmlElement("iframe");
     }
@@ -1505,11 +1479,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noembed xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noembed>"})
-    @HtmlUnitNYI(
-            CHROME = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noembed>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noembed>"},
-            EDGE = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noembed>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noembed>"},
-            FF = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noembed>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noembed>"},
-            FF_ESR = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noembed>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noembed>"})
     public void noembed_innerHtmlXhtml() throws Exception {
         xhtmlElement("noembed");
     }
@@ -1519,11 +1488,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noframes xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noframes>"})
-    @HtmlUnitNYI(
-            CHROME = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noframes>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noframes>"},
-            EDGE = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noframes>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noframes>"},
-            FF = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noframes>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noframes>"},
-            FF_ESR = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noframes>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noframes>"})
     public void noframes_innerHtmlXhtml() throws Exception {
         xhtmlElement("noframes");
     }
@@ -1533,11 +1497,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<plaintext xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</plaintext>"})
-    @HtmlUnitNYI(
-            CHROME = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<plaintext>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</plaintext>"},
-            EDGE = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<plaintext>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</plaintext>"},
-            FF = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<plaintext>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</plaintext>"},
-            FF_ESR = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<plaintext>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</plaintext>"})
     public void plaintext_innerHtmlXhtml() throws Exception {
         xhtmlElement("plaintext");
     }
@@ -1547,11 +1506,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noscript xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noscript>"})
-    @HtmlUnitNYI(
-            CHROME = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noscript>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noscript>"},
-            EDGE = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noscript>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noscript>"},
-            FF = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noscript>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noscript>"},
-            FF_ESR = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<noscript>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</noscript>"})
     public void noscript_innerHtmlXhtml() throws Exception {
         xhtmlElement("noscript");
     }
@@ -1561,11 +1515,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<textarea xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</textarea>"})
-    @HtmlUnitNYI(
-            CHROME = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<textarea>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</textarea>"},
-            EDGE = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<textarea>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</textarea>"},
-            FF = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<textarea>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</textarea>"},
-            FF_ESR = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<textarea>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</textarea>"})
     public void textarea_innerHtmlXhtml() throws Exception {
         xhtmlElement("textarea");
     }
@@ -1575,11 +1524,6 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<title xmlns=\"http://www.w3.org/1999/xhtml\">&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</title>"})
-    @HtmlUnitNYI(
-            CHROME = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<title>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</title>"},
-            EDGE = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<title>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</title>"},
-            FF = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<title>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</title>"},
-            FF_ESR = {"&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z", "<title>&lt;b id=\"x\"&gt;a &amp;amp; b &amp; c \"q\"&lt;/b&gt; z</title>"})
     public void title_innerHtmlXhtml() throws Exception {
         xhtmlElement("title");
     }

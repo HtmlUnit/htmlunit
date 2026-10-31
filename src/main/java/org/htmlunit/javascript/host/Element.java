@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_VOID_ELEMENT_EMPTY;
+import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_XHTML_RAW_SCRIPT_STYLE;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -56,6 +57,8 @@ import org.htmlunit.html.DomText;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlElement.DisplayStyle;
+import org.htmlunit.html.HtmlScript;
+import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlTemplate;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.serializer.XmlMarkupSerializer;
@@ -990,6 +993,10 @@ public class Element extends Node {
      */
     protected String getInnerHTML(final DomNode domNode) {
         if (isXmlSerialization(domNode)) {
+            if ((domNode instanceof HtmlScript || domNode instanceof HtmlStyle)
+                    && getBrowserVersion().hasFeature(JS_INNER_HTML_XHTML_RAW_SCRIPT_STYLE)) {
+                return domNode.getTextContent();
+            }
             return XmlMarkupSerializer.serializeChildren(domNode);
         }
 
@@ -1210,19 +1217,24 @@ public class Element extends Node {
 
     /**
      * Returns the tag name used by the HTML serialization; this is the local name
-     * for elements in the HTML, SVG and MathML namespace and the qualified name for all others.
+     * for elements in the SVG and MathML namespace and the qualified name for all others.
+     * <p>For HTML elements we also use the qualified name, because createElement('x:y')
+     * creates an element with the local name 'x:y' (there is no prefix handling)
+     * but HtmlUnit splits the name into prefix and local name.</p>
      *
      * @param element the element
      * @return the tag name
      */
     private static String serializationTagName(final DomElement element) {
+        if (element instanceof HtmlElement) {
+            return element.getQualifiedName();
+        }
+
         final String namespace = element.getNamespaceURI();
-        if (Html.XHTML_NAMESPACE.equals(namespace)
-                || Html.SVG_NAMESPACE.equals(namespace)
+        if (Html.SVG_NAMESPACE.equals(namespace)
                 || MATHML_NAMESPACE.equals(namespace)) {
             return element.getLocalName();
         }
-        // elements created without namespace (e.g. by the HTML parser or createElement())
         return element.getQualifiedName();
     }
 

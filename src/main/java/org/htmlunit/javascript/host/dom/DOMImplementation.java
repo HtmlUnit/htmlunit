@@ -195,8 +195,17 @@ public class DOMImplementation extends HtmlUnitScriptable {
      * @return the newly created {@link XMLDocument}
      */
     @JsxFunction
-    public XMLDocument createDocument(final String namespaceURI, final String qualifiedName,
+    public XMLDocument createDocument(final Object namespaceURI, final String qualifiedName,
             final DocumentType doctype) {
+        // null (and undefined) means no namespace; a String parameter converts null to 'null'
+        final String namespace;
+        if (namespaceURI == null || JavaScriptEngine.isUndefined(namespaceURI)) {
+            namespace = null;
+        }
+        else {
+            namespace = JavaScriptEngine.toString(namespaceURI);
+        }
+
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(document.getClass()));
@@ -210,7 +219,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
         }
         if (qualifiedName != null && !qualifiedName.isEmpty()) {
             page.appendChild(page.createElementNS(
-                    StringUtils.isEmptyString(namespaceURI) ? null : namespaceURI, qualifiedName));
+                    StringUtils.isEmptyString(namespace) ? null : namespace, qualifiedName));
         }
         return document;
     }

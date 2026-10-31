@@ -280,6 +280,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_INNER_HTML_VOID_ELEMENT_EMPTY,
 
+    /** Indicates that innerHTML of a script or style element in an XHTML document returns the text as is. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_INNER_HTML_XHTML_RAW_SCRIPT_STYLE,
+
     /** Indicates that innerText add a nl when reaching svg element. */
     @BrowserFeature({FF, FF_ESR})
     JS_INNER_TEXT_SELECT_EMPTY,
