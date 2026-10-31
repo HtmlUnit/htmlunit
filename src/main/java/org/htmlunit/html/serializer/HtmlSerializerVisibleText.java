@@ -14,12 +14,12 @@
  */
 package org.htmlunit.html.serializer;
 
-import static org.htmlunit.css.CssStyleSheet.BLOCK;
+import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 
 import java.util.List;
+import java.util.Set;
 
 import org.htmlunit.Page;
-import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes.Definition;
@@ -52,6 +52,7 @@ import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlSubmitInput;
 import org.htmlunit.html.HtmlSummary;
+import org.htmlunit.html.HtmlSvg;
 import org.htmlunit.html.HtmlTable;
 import org.htmlunit.html.HtmlTableBody;
 import org.htmlunit.html.HtmlTableCell;
@@ -63,6 +64,8 @@ import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.HtmlUnorderedList;
 import org.htmlunit.html.TableRowGroup;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
+import org.htmlunit.svg.SvgDesc;
+import org.htmlunit.svg.SvgTitle;
 import org.htmlunit.util.StringUtils;
 
 /**
@@ -74,6 +77,16 @@ import org.htmlunit.util.StringUtils;
  * @author cd alexndr
  */
 public class HtmlSerializerVisibleText {
+
+    /**
+     * The displays handled as block by WebDriver (everything that is not one of the
+     * inline display boxes 'inline', 'inline-block', 'inline-table', 'none', 'table-cell', ...).
+     */
+    private static final Set<String> BLOCK_DISPLAYS = Set.of(
+            "block", "list-item", "flex", "grid", "flow-root", "contents",
+            "table", "table-row", "table-caption",
+            "table-row-group", "table-header-group", "table-footer-group",
+            "ruby", "ruby-base", "ruby-text", "ruby-text-container");
 
     /**
      * Converts an HTML node to text.
@@ -188,6 +201,9 @@ public class HtmlSerializerVisibleText {
         }
         else if (node instanceof HtmlDetails details) {
             appendDetails(builder, details, mode);
+        }
+        else if (node instanceof HtmlSvg svg) {
+            appendSvg(builder, svg, mode);
         }
         else if (node instanceof HtmlNoScript script && node.getPage().getWebClient().isJavaScriptEnabled()) {
             appendNoScript(builder, script, mode);
@@ -340,6 +356,12 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
+     * Process {@link HtmlMenu}.
+     * @param builder the StringBuilder to add to
+     * @param htmlMenu the target to process
+     * @param mode the {@link Mode} to use for processing
+     */
+    /**
      * Checks if the given node is block level; this includes elements that are
      * blockified (children of flex and grid containers).
      *
@@ -349,11 +371,22 @@ public class HtmlSerializerVisibleText {
     private static boolean isBlockLevel(final DomNode node) {
         if (node instanceof DomElement element) {
             final WebWindow window = node.getPage().getEnclosingWindow();
-            final String display = window.getComputedStyle(element, null).getDisplay();
-            if (BLOCK.equals(display) || "list-item".equals(display)
-                    || "flex".equals(display) || "grid".equals(display)) {
+            final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
+            final String display = style.getDisplay();
+            if (BLOCK_DISPLAYS.contains(display)) {
                 return true;
             }
+
+            // absolute positioned and floating boxes are blockified
+            final String position = style.getPosition();
+            if ("absolute".equals(position) || "fixed".equals(position)) {
+                return true;
+            }
+            final String floatValue = style.getStyleAttribute(Definition.FLOAT, false);
+            if ("left".equals(floatValue) || "right".equals(floatValue)) {
+                return true;
+            }
+
             // children of flex and grid containers are blockified
             if (element.getParentNode() instanceof DomElement parent) {
                 final String parentDisplay = window.getComputedStyle(parent, null).getDisplay();
@@ -391,8 +424,10 @@ public class HtmlSerializerVisibleText {
             return;
         }
 
+        // like WebDriver: element children of a closed details are hidden (except the summary),
+        // text children are still visible
         for (final DomNode child : htmlDetails.getChildren()) {
-            if (child instanceof HtmlSummary) {
+            if (child instanceof HtmlSummary || child instanceof DomText) {
                 appendNode(builder, child, mode);
             }
         }
@@ -440,6 +475,75 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
+     * Checks if the element has a height or width of zero and hides the overflow.
+     *
+     * @param style the computed style of the element
+     * @return true if the content is not visible
+     */
+    private static boolean isZeroSizeWithOverflowHidden(final ComputedCssStyleDeclaration style) {
+        if (!"hidden".equals(style.getStyleAttribute(Definition.OVERFLOW, false))) {
+            return false;
+        }
+        return isZeroLength(style.getStyleAttribute(Definition.HEIGHT, false))
+                || isZeroLength(style.getStyleAttribute(Definition.WIDTH, false));
+    }
+
+    /**
+     * Checks if the given css length is zero ('0', '0px', '0em', ...).
+     *
+     * @param length the length
+     * @return true if the length is zero
+     */
+    private static boolean isZeroLength(final String length) {
+        if (StringUtils.isEmptyOrNull(length)) {
+            return false;
+        }
+        int i = 0;
+        while (i < length.length() && (length.charAt(i) == '0' || length.charAt(i) == '.')) {
+            i++;
+        }
+        return i > 0 && (i == length.length() || Character.isLetter(length.charAt(i)));
+    }
+
+    /**
+     * Checks if the element is positioned outside of the page (e.g. 'left: -9999px').
+     *
+     * @param style the computed style of the element
+     * @return true if the element is not visible
+     */
+    private static boolean isOffscreen(final ComputedCssStyleDeclaration style) {
+        final String position = style.getPosition();
+        if (!"absolute".equals(position) && !"fixed".equals(position)) {
+            return false;
+        }
+
+        final int left = pixelValue(style.getStyleAttribute(Definition.LEFT, false));
+        if (left < 0 && left + style.getCalculatedWidth(true, true) <= 0) {
+            return true;
+        }
+        final int top = pixelValue(style.getStyleAttribute(Definition.TOP, false));
+        return top < 0 && top + style.getCalculatedHeight(true, true) <= 0;
+    }
+
+    /**
+     * Returns the integer value of a pixel length; 0 for all other values.
+     *
+     * @param length the length
+     * @return the pixel value
+     */
+    private static int pixelValue(final String length) {
+        if (StringUtils.isEmptyOrNull(length) || !length.endsWith("px")) {
+            return 0;
+        }
+        try {
+            return (int) Double.parseDouble(length.substring(0, length.length() - 2).trim());
+        }
+        catch (final NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    /**
      * Checks if the given node or one of its ancestors has an opacity of zero;
      * like WebDriver we handle this as not visible.
      *
@@ -459,8 +563,14 @@ public class HtmlSerializerVisibleText {
         DomNode node = domNode;
         while (node != null) {
             if (node instanceof DomElement element) {
-                final String opacity = window.getComputedStyle(element, null)
-                        .getStyleAttribute(Definition.OPACITY, false);
+                final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
+                if ("hidden".equals(style.getStyleAttribute("content-visibility"))
+                        || isZeroSizeWithOverflowHidden(style)
+                        || isOffscreen(style)) {
+                    return true;
+                }
+
+                final String opacity = style.getStyleAttribute(Definition.OPACITY, false);
                 if (!StringUtils.isEmptyOrNull(opacity)) {
                     try {
                         if (Double.parseDouble(opacity.trim()) <= 0) {
@@ -627,6 +737,13 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendOption(final HtmlSerializerTextBuilder builder,
             final HtmlOption htmlOption, final Mode mode) {
+        // like WebDriver: an option is only shown inside of a select;
+        // but it is still a block
+        if (htmlOption.getEnclosingSelect() == null) {
+            builder.appendBlockSeparator();
+            builder.appendBlockSeparator();
+            return;
+        }
         appendChildren(builder, htmlOption, mode);
     }
 
@@ -700,6 +817,51 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
+     * Process {@link HtmlSvg}.
+     * The svg itself is inline; Chrome/Edge render the svg text elements as blocks.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlSvg the target to process
+     * @param mode the {@link Mode} to use for processing
+     */
+    protected void appendSvg(final HtmlSerializerTextBuilder builder,
+            final HtmlSvg htmlSvg, final Mode mode) {
+        final boolean block = htmlSvg.getPage().getWebClient().getBrowserVersion()
+                    .hasFeature(JS_INNER_TEXT_SVG_NL)
+                && hasSvgText(htmlSvg);
+        if (block) {
+            builder.appendBlockSeparator();
+        }
+        appendChildren(builder, htmlSvg, mode);
+        if (block) {
+            builder.appendBlockSeparator();
+        }
+    }
+
+    /**
+     * Checks if the given svg node has some text that is not part of a title or desc element.
+     *
+     * @param node the node to check
+     * @return true if there is some text
+     */
+    private static boolean hasSvgText(final DomNode node) {
+        for (final DomNode child : node.getChildren()) {
+            if (child instanceof SvgTitle || child instanceof SvgDesc) {
+                continue;
+            }
+            if (child instanceof DomText text) {
+                if (!StringUtils.isBlank(text.getData())) {
+                    return true;
+                }
+            }
+            else if (hasSvgText(child)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Process {@link HtmlInlineFrame}.
      *
      * @param builder the StringBuilder to add to
@@ -708,13 +870,10 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendInlineFrame(final HtmlSerializerTextBuilder builder,
             final HtmlInlineFrame htmlInlineFrame, final Mode mode) {
+        // like WebDriver: the content of the frame is not part of the text,
+        // the iframe is an inline element with the (fallback) text of its children
         if (isDisplayed(htmlInlineFrame)) {
-            builder.appendBlockSeparator();
-            final Page page = htmlInlineFrame.getEnclosedPage();
-            if (page instanceof SgmlPage sgmlPage) {
-                builder.append(sgmlPage.asNormalizedText(), mode);
-            }
-            builder.appendBlockSeparator();
+            appendChildren(builder, htmlInlineFrame, mode);
         }
     }
 
@@ -826,10 +985,18 @@ public class HtmlSerializerVisibleText {
                             if ("pre-line".equalsIgnoreCase(value)) {
                                 return Mode.WHITE_SPACE_PRE_LINE;
                             }
+                            // WebDriver collapses the spaces but keeps the line breaks
+                            if ("break-spaces".equalsIgnoreCase(value)) {
+                                return Mode.WHITE_SPACE_PRE_LINE;
+                            }
                         }
                         final String collapse = style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
                         if ("preserve".equalsIgnoreCase(collapse)) {
                             return Mode.WHITE_SPACE_PRE;
+                        }
+                        if ("preserve-breaks".equalsIgnoreCase(collapse)
+                                || "break-spaces".equalsIgnoreCase(collapse)) {
+                            return Mode.WHITE_SPACE_PRE_LINE;
                         }
                     }
                     node = node.getParentNode();
@@ -863,10 +1030,18 @@ public class HtmlSerializerVisibleText {
                         if ("pre-line".equalsIgnoreCase(value)) {
                             return Mode.WHITE_SPACE_PRE_LINE;
                         }
+                        // WebDriver collapses the spaces but keeps the line breaks
+                        if ("break-spaces".equalsIgnoreCase(value)) {
+                            return Mode.WHITE_SPACE_PRE_LINE;
+                        }
                     }
                     final String collapse = style.getStyleAttribute(Definition.WHITE_SPACE_COLLAPSE, false);
                     if ("preserve".equalsIgnoreCase(collapse)) {
                         return Mode.WHITE_SPACE_PRE;
+                    }
+                    if ("preserve-breaks".equalsIgnoreCase(collapse)
+                            || "break-spaces".equalsIgnoreCase(collapse)) {
+                        return Mode.WHITE_SPACE_PRE_LINE;
                     }
                 }
             }
@@ -920,6 +1095,7 @@ public class HtmlSerializerVisibleText {
         private final StringBuilder builder_;
         private int trimRightPos_;
         private boolean contentAdded_;
+        private int lineStart_;
 
         /**
          * Ctor.
@@ -1071,6 +1247,40 @@ public class HtmlSerializerVisibleText {
          * Append a block separator.
          */
         public void appendBlockSeparator() {
+            // like WebDriver: no line break if the current line contains only (preserved) white space
+            if (state_ == State.BLANK_AT_END
+                    && trimRightPos_ == builder_.length()
+                    && isWhitespaceOnly(lineStart_)) {
+                return;
+            }
+
+            final int length = builder_.length();
+            appendBlockSeparatorWorker();
+            if (builder_.length() != length) {
+                lineStart_ = builder_.length();
+            }
+        }
+
+        /**
+         * Checks if the text starting at the given position contains only white space.
+         *
+         * @param start the start position
+         * @return true if there is only white space
+         */
+        private boolean isWhitespaceOnly(final int start) {
+            for (int i = start; i < builder_.length(); i++) {
+                final char c = builder_.charAt(i);
+                if (c != ' ' && c != '\t' && c != '\n' && c != (char) 160) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /**
+         * Append a block separator.
+         */
+        private void appendBlockSeparatorWorker() {
             switch (state_) {
                 case EMPTY:
                     break;
@@ -1129,6 +1339,7 @@ public class HtmlSerializerVisibleText {
             builder_.append('\n');
             state_ = State.BREAK_AT_END;
             trimRightPos_ = builder_.length();
+            lineStart_ = builder_.length();
         }
 
         /**

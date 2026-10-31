@@ -217,10 +217,6 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
     /** @throws Exception if the test fails */
     @Test
     @Alerts("hello\nruby\nannotation\nworld")
-    @HtmlUnitNYI(CHROME = "hello rubyannotation world",
-            EDGE = "hello rubyannotation world",
-            FF = "hello rubyannotation world",
-            FF_ESR = "hello rubyannotation world")
     public void ruby() throws Exception {
         getVisibleTextFormated("<p id='tester'>hello <ruby>ruby<rt>annotation</rt></ruby> world</p>");
     }
@@ -642,10 +638,6 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a\nb")
-    @HtmlUnitNYI(CHROME = "ab",
-            EDGE = "ab",
-            FF = "ab",
-            FF_ESR = "ab")
     public void tagRb() throws Exception {
         getVisibleTextFormated("<ruby id='tester'><rb>a</rb><rt>b</rt></ruby>");
     }
@@ -1310,10 +1302,6 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a\nb\nc")
-    @HtmlUnitNYI(CHROME = "abc",
-            EDGE = "abc",
-            FF = "abc",
-            FF_ESR = "abc")
     public void inlineFloat() throws Exception {
         getVisibleTextFormated("<p id='tester'>a<b style='float: left'>b</b>c</p>");
     }
@@ -1324,10 +1312,6 @@ public class HtmlSerializerVisibleTextParagraphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("a\nb\nc")
-    @HtmlUnitNYI(CHROME = "abc",
-            EDGE = "abc",
-            FF = "abc",
-            FF_ESR = "abc")
     public void inlinePositionAbsolute() throws Exception {
         getVisibleTextFormated("<p id='tester'>a<b style='position: absolute'>b</b>c</p>");
     }
