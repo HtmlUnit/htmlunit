@@ -19,16 +19,20 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.htmlunit.HttpHeader;
+import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebRequest;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -42,8 +46,13 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Daniel Wagner-Hall
  * @author Frank Danek
+ * @author Vidya m
  */
 public class HtmlScript2Test extends WebDriverTestCase {
+
+    private static final String AUTHORIZATION = "Bearer secret";
+
+    private int uniqueId_;
 
     /**
      * @throws Exception on test failure
@@ -1378,5 +1387,188 @@ public class HtmlScript2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies that the "Authorization" header of the page request is only sent
+     * with the request for an external script if the script has the same origin.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void authorizationHeaderNotSentToCrossOriginScript() throws Exception {
+        final MockWebConnection conn = startHtmlUnitOnly();
+
+        externalScriptAuthorizationHeader(conn, "Authorization", URL_FIRST, AUTHORIZATION);
+        externalScriptAuthorizationHeader(conn, "Authorization", URL_THIRD, null);
+    }
+
+    /**
+     * Header names are case-insensitive; the "Authorization" header has to be dropped
+     * for cross-origin scripts regardless of the spelling used by the caller.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void authorizationHeaderLowercaseNotSentToCrossOriginScript() throws Exception {
+        final MockWebConnection conn = startHtmlUnitOnly();
+
+        externalScriptAuthorizationHeader(conn, "authorization", URL_FIRST, AUTHORIZATION);
+        externalScriptAuthorizationHeader(conn, "authorization", URL_THIRD, null);
+    }
+
+    private void externalScriptAuthorizationHeader(final MockWebConnection conn, final String headerName,
+            final URL scriptBase, final String expectedAuthorization) throws Exception {
+        final String id = nextId();
+        final URL page = new URL(URL_FIRST, "page_" + id + ".html");
+        final URL script = new URL(scriptBase, "script_" + id + ".js");
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script src='" + script + "'></script>\n"
+                + "</head><body></body></html>";
+        conn.setResponse(page, html);
+        conn.setResponse(script, "var i = 7;", MimeType.TEXT_JAVASCRIPT);
+
+        getWebClient().getPage(authorizedRequest(page, headerName));
+
+        verifyLastRequest(conn, script, expectedAuthorization);
+    }
+
+    /**
+     * Dropping the "Authorization" header for a cross-origin script must not
+     * change the headers used for the following same-origin scripts of the page.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void authorizationHeaderSentToSameOriginScriptAfterCrossOriginScript() throws Exception {
+        final MockWebConnection conn = startHtmlUnitOnly();
+
+        final String id = nextId();
+        final URL page = new URL(URL_FIRST, "page_" + id + ".html");
+        final URL crossOriginScript = new URL(URL_THIRD, "script_" + id + "_1.js");
+        final URL sameOriginScript = new URL(URL_FIRST, "script_" + id + "_2.js");
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script src='" + crossOriginScript + "'></script>\n"
+                + "<script src='" + sameOriginScript + "'></script>\n"
+                + "</head><body></body></html>";
+        conn.setResponse(page, html);
+        conn.setResponse(crossOriginScript, "var i = 7;", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(sameOriginScript, "var j = 8;", MimeType.TEXT_JAVASCRIPT);
+
+        getWebClient().getPage(authorizedRequest(page, "Authorization"));
+
+        assertTrue(conn.getRequestedUrls().contains(crossOriginScript));
+        verifyLastRequest(conn, sameOriginScript, AUTHORIZATION);
+    }
+
+    /**
+     * Same as {@link #authorizationHeaderNotSentToCrossOriginScript()} but the
+     * script element is created and added by javascript.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void authorizationHeaderNotSentToCrossOriginDynamicScript() throws Exception {
+        final MockWebConnection conn = startHtmlUnitOnly();
+
+        dynamicScriptAuthorizationHeader(conn, URL_FIRST, AUTHORIZATION);
+        dynamicScriptAuthorizationHeader(conn, URL_THIRD, null);
+    }
+
+    private void dynamicScriptAuthorizationHeader(final MockWebConnection conn,
+            final URL scriptBase, final String expectedAuthorization) throws Exception {
+        final String id = nextId();
+        final URL page = new URL(URL_FIRST, "page_" + id + ".html");
+        final URL script = new URL(scriptBase, "script_" + id + ".js");
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  var s = document.createElement('script');\n"
+                + "  s.src = '" + script + "';\n"
+                + "  document.head.appendChild(s);\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+        conn.setResponse(page, html);
+        conn.setResponse(script, "var i = 7;", MimeType.TEXT_JAVASCRIPT);
+
+        getWebClient().getPage(authorizedRequest(page, "Authorization"));
+
+        verifyLastRequest(conn, script, expectedAuthorization);
+    }
+
+    /**
+     * If the page request was redirected, the scripts are loaded using the headers of
+     * the redirected request; after a cross-origin redirect the "Authorization" header is gone,
+     * even for scripts from the original origin.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void authorizationHeaderNotSentToScriptAfterCrossOriginPageRedirect() throws Exception {
+        final MockWebConnection conn = startHtmlUnitOnly();
+
+        // page stays at the origin
+        redirectedPageScriptAuthorizationHeader(conn, URL_SECOND, URL_FIRST, AUTHORIZATION);
+        redirectedPageScriptAuthorizationHeader(conn, URL_SECOND, URL_THIRD, null);
+
+        // page moved to another origin
+        redirectedPageScriptAuthorizationHeader(conn, URL_THIRD, URL_THIRD, null);
+        redirectedPageScriptAuthorizationHeader(conn, URL_THIRD, URL_FIRST, null);
+    }
+
+    private void redirectedPageScriptAuthorizationHeader(final MockWebConnection conn, final URL pageBase,
+            final URL scriptBase, final String expectedAuthorization) throws Exception {
+        final String id = nextId();
+        final URL start = new URL(URL_FIRST, "redirect_" + id);
+        final URL page = new URL(pageBase, "page_" + id + ".html");
+        final URL script = new URL(scriptBase, "script_" + id + ".js");
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", page.toString()));
+        conn.setResponse(start, "", 302, "Found", MimeType.TEXT_HTML, headers);
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script src='" + script + "'></script>\n"
+                + "</head><body></body></html>";
+        conn.setResponse(page, html);
+        conn.setResponse(script, "var i = 7;", MimeType.TEXT_JAVASCRIPT);
+
+        getWebClient().getPage(authorizedRequest(start, "Authorization"));
+
+        assertTrue(conn.getRequestedUrls().contains(page));
+        verifyLastRequest(conn, script, expectedAuthorization);
+    }
+
+    // Real browsers offer no way to add an "Authorization" header to a navigation,
+    // therefore these tests are using the HtmlUnit api of the driver's WebClient;
+    // the responses are still delivered by the test server.
+    private MockWebConnection startHtmlUnitOnly() throws Exception {
+        Assumptions.assumeFalse(useRealBrowser(),
+                "a real browser can not add an Authorization header to a navigation request");
+
+        getWebDriver();
+        startWebServer(getMockWebConnection(), null);
+        return getMockWebConnection();
+    }
+
+    private static WebRequest authorizedRequest(final URL url, final String headerName) {
+        final WebRequest request = new WebRequest(url);
+        request.setAdditionalHeader(headerName, AUTHORIZATION);
+        request.setAdditionalHeader("foo", "bar");
+        return request;
+    }
+
+    private static void verifyLastRequest(final MockWebConnection conn, final URL expectedUrl,
+            final String expectedAuthorization) {
+        final WebRequest last = conn.getLastWebRequest();
+        assertEquals(expectedUrl, last.getUrl());
+        assertEquals(expectedAuthorization, last.getAdditionalHeader("Authorization"));
+        assertEquals("bar", last.getAdditionalHeader("foo"));
+    }
+
+    private String nextId() {
+        uniqueId_++;
+        return Integer.toString(uniqueId_);
     }
 }

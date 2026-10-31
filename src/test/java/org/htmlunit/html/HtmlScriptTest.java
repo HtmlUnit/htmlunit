@@ -25,7 +25,6 @@ import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.WebRequest;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
@@ -38,7 +37,6 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Ronny Shapiro
- * @author Vidya m
  */
 public class HtmlScriptTest extends SimpleWebTestCase {
 
@@ -83,41 +81,6 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         catch (final FailingHttpStatusCodeException e) {
             fail("Should not throw.");
         }
-    }
-
-    /**
-     * Verifies that the "Authorization" header of the page request is only sent
-     * with the request for an external script if the script has the same origin.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void authorizationHeaderNotSentToCrossOriginScript() throws Exception {
-        externalScriptAuthorizationHeader(new URL(URL_FIRST, "script.js"), "Bearer secret");
-        externalScriptAuthorizationHeader(new URL(URL_THIRD, "script.js"), null);
-    }
-
-    private void externalScriptAuthorizationHeader(final URL scriptUrl,
-            final String expectedAuthorization) throws Exception {
-        final String html = DOCTYPE_HTML
-                + "<html><head><title>foo</title>\n"
-                + "<script src='" + scriptUrl + "'></script>\n"
-                + "</head><body></body></html>";
-
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, html);
-        webConnection.setResponse(scriptUrl, "var i = 7;", MimeType.TEXT_JAVASCRIPT);
-        client.setWebConnection(webConnection);
-
-        final WebRequest request = new WebRequest(URL_FIRST);
-        request.setAdditionalHeader("Authorization", "Bearer secret");
-        request.setAdditionalHeader("foo", "bar");
-        client.getPage(request);
-
-        assertEquals(scriptUrl, webConnection.getLastWebRequest().getUrl());
-        assertEquals(expectedAuthorization, webConnection.getLastAdditionalHeaders().get("Authorization"));
-        assertEquals("bar", webConnection.getLastAdditionalHeaders().get("foo"));
     }
 
     /**

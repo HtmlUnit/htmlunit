@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="fix" dev="rbri" due-to="Vidya m">
+                The Authorization header is no longer forwarded to another origin, neither for
+                redirects nor for the requests of external scripts.
+            </action>
             <action type="fix" dev="rbri">
                 HtmlTextArea: the value and the default value are now the child text content without
                 any further changes; the line feed directly after the start tag is removed by the parser.
