@@ -8,6 +8,21 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="fix" dev="rbri">
+                CSSStyleDeclaration: the detection of the url and the position inside of the background shorthand
+                (used by backgroundImage and backgroundPosition) was vulnerable to regex backtracking (CWE-1333);
+                some long values were able to block the processing for a very long time.
+            </action>
+            <action type="fix" dev="rbri">
+                CSSStyleDeclaration: the url detection inside of the background shorthand (used by backgroundImage)
+                follows the css rules; white space and newline are used in the css sense, a quoted url ends at the
+                closing quote, a url without closing parenthesis ends at the end of the value and a newline
+                makes the url invalid. The computed backgroundImage url is encoded like in real browsers.
+            </action>
+            <action type="update" dev="rbri">
+                cssparser: Limit the nesting depth of functions, calc() blocks and selectors (32 levels);
+                deeper nested input is reported as parse error instead of causing a StackOverflowError.
+            </action>
             <action type="fix" dev="rbri" due-to="Vidya m">
                 The Authorization header is no longer forwarded to another origin, neither for
                 redirects nor for the requests of external scripts.

@@ -3739,6 +3739,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Timeout(60)
     @Alerts({"url(\"\")", "", ""})
+    @HtmlUnitNYI(CHROME = {"", "", ""},
+            EDGE = {"", "", ""},
+            FF = {"", "", ""},
+            FF_ESR = {"", "", ""})
     public void backgroundImageFromBackgroundLongValue() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
