@@ -102,7 +102,7 @@
         <changes-plugin.version>3.0.0-M3</changes-plugin.version>
 
         <bundle-plugin.version>6.2.0</bundle-plugin.version>
-        <jacoco-plugin.version>0.8.15</jacoco-plugin.version>
+        <jacoco-plugin.version>0.8.16</jacoco-plugin.version>
         <cyclonedx-plugin.version>2.9.3</cyclonedx-plugin.version>
     </properties>
 
