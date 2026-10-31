@@ -23,6 +23,7 @@ import static org.htmlunit.css.CssStyleSheet.REPEAT;
 import static org.htmlunit.css.CssStyleSheet.SCROLL;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -33,8 +34,10 @@ import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.impl.Color;
 import org.htmlunit.util.StringUtils;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * A css StyleDeclaration.
@@ -53,12 +56,11 @@ import org.htmlunit.util.StringUtils;
  */
 public abstract class AbstractCssStyleDeclaration implements Serializable {
 
-    private static final Pattern URL_PATTERN =
-            Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
-
+    // the lookbehind and the possessive quantifiers avoid the (quadratic) backtracking
+    // for long sequences of digits; a match never starts inside of a number
     private static final Pattern POSITION_PATTERN =
-            Pattern.compile("(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex))\\s*"
-                    + "(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
+            Pattern.compile("(?<!\\d)(\\d++\\s*+(%|px|cm|mm|in|pt|pc|em|ex))\\s*+"
+                    + "(\\d++\\s*+(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
     private static final Pattern POSITION_PATTERN2 =
             Pattern.compile("(left|right|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
     private static final Pattern POSITION_PATTERN3 =
@@ -339,8 +341,10 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
                     try {
                         value = value.substring(5, value.length() - 2);
                         final DomElement domElement = ((ComputedCssStyleDeclaration) this).getDomElement();
-                        return "url(\"" + domElement.getHtmlPageOrNull()
-                            .getFullyQualifiedUrl(value) + "\")";
+                        final HtmlPage page = domElement.getHtmlPageOrNull();
+                        // like the browsers: the url is resolved and encoded (e.g. 'img .png' -> 'img%20.png')
+                        final URL url = UrlUtils.encodeUrl(page.getFullyQualifiedUrl(value), page.getCharset());
+                        return "url(\"" + url + "\")";
                     }
                     catch (final Exception ignored) {
                         // ignore
@@ -1101,11 +1105,119 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the string of the URL if found, null otherwise
      */
     private static String findImageUrl(final String text) {
-        final Matcher m = URL_PATTERN.matcher(text);
-        if (m.find()) {
-            return "url(\"" + m.group(1) + "\")";
+        // This was done using the regex 'url\(\s*["']?(.*?)["']?\s*\)' but
+        // this is vulnerable to catastrophic backtracking (e.g. 'url(' followed by many spaces).
+        // This implementation works in linear time and follows the css rules
+        // (https://www.w3.org/TR/css-syntax-3/#consume-url-token):
+        // a quoted url ends at the closing quote, a url without the closing parenthesis
+        // ends at the end of the text and a newline makes the url invalid.
+        final int length = text.length();
+
+        // the first ')' after the start of an unquoted url, the end of the url (without the trailing
+        // white space and quote) and the last newline inside the url;
+        // these values are shared by all 'url(' starts in front of the same ')'
+        int closing = -1;
+        int urlEnd = -1;
+        int newline = -1;
+
+        int start = text.indexOf("url(");
+        while (start != -1) {
+            int urlStart = start + 4;
+            while (urlStart < length && isCssWhitespace(text.charAt(urlStart))) {
+                urlStart++;
+            }
+
+            if (urlStart < length && isQuote(text.charAt(urlStart))) {
+                // quoted url (a css string); ends at the closing quote or at the end of the text
+                final char quote = text.charAt(urlStart);
+                urlStart++;
+                int end = urlStart;
+                while (end < length && text.charAt(end) != quote && !isCssNewline(text.charAt(end))) {
+                    if (text.charAt(end) == '\\') {
+                        // escaped char
+                        end++;
+                    }
+                    end++;
+                }
+                if (end >= length) {
+                    return "url(\"" + text.substring(urlStart, length) + "\")";
+                }
+                if (text.charAt(end) == quote) {
+                    int pos = end + 1;
+                    while (pos < length && isCssWhitespace(text.charAt(pos))) {
+                        pos++;
+                    }
+                    if (pos == length || text.charAt(pos) == ')') {
+                        return "url(\"" + text.substring(urlStart, end) + "\")";
+                    }
+                }
+
+                // invalid url (newline inside or something behind the string);
+                // the url can't start inside of the string
+                start = text.indexOf("url(", end);
+                continue;
+            }
+
+            if (closing < urlStart) {
+                closing = text.indexOf(')', urlStart);
+                if (closing == -1) {
+                    // the url ends at the end of the text
+                    closing = length;
+                }
+
+                urlEnd = closing;
+                while (urlEnd > urlStart && isCssWhitespace(text.charAt(urlEnd - 1))) {
+                    urlEnd--;
+                }
+                if (urlEnd > urlStart && isQuote(text.charAt(urlEnd - 1))) {
+                    urlEnd--;
+                }
+
+                newline = urlEnd - 1;
+                while (newline >= urlStart && !isCssNewline(text.charAt(newline))) {
+                    newline--;
+                }
+            }
+
+            // a newline inside of the url makes the url invalid
+            if (newline < urlStart) {
+                return "url(\"" + text.substring(urlStart, Math.max(urlEnd, urlStart)) + "\")";
+            }
+            start = text.indexOf("url(", start + 1);
         }
         return null;
+    }
+
+    /**
+     * Checks if the given char is a css white space (space, tab or newline).
+     *
+     * @param c the char to check
+     * @return true if the char is a css white space
+     * @see <a href="https://www.w3.org/TR/css-syntax-3/#whitespace">CSS Syntax - whitespace</a>
+     */
+    private static boolean isCssWhitespace(final char c) {
+        return c == ' ' || c == '\t' || isCssNewline(c);
+    }
+
+    /**
+     * Checks if the given char is a single or double quote.
+     *
+     * @param c the char to check
+     * @return true if the char is a quote
+     */
+    private static boolean isQuote(final char c) {
+        return c == '"' || c == '\'';
+    }
+
+    /**
+     * Checks if the given char is a css newline (line feed, carriage return or form feed).
+     *
+     * @param c the char to check
+     * @return true if the char is a css newline
+     * @see <a href="https://www.w3.org/TR/css-syntax-3/#newline">CSS Syntax - newline</a>
+     */
+    private static boolean isCssNewline(final char c) {
+        return c == '\n' || c == '\r' || c == '\f';
     }
 
     /**

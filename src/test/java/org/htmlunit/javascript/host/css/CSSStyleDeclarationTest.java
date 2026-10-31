@@ -34,6 +34,7 @@ import org.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -3614,6 +3615,165 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</body></html>";
 
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The background image is taken from the background shorthand.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"url(\"img.png\")", "url(\"img.png\")", "url(\"img.png\")", "url(\"\")§url(\"\")", "url(\"img.png\")", "url(\"img.png\")", "", ""})
+    public void backgroundImageFromBackground() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(value) {\n"
+            + "  var style = document.getElementById('div1').style;\n"
+            + "  style.background = '';\n"
+            + "  style.background = value;\n"
+            + "  log(style.backgroundImage);\n"
+            + "}\n"
+            + "function doTest() {\n"
+            + "  test('url(img.png)');\n"
+            + "  test('url( \"img.png\" ) no-repeat');\n"
+            + "  test(\"red url('img.png') repeat-x\");\n"
+            + "  test('url()');\n"
+            + "  test('url(\"\")');\n"
+            + "  test('url(img.png');\n"
+            + "  test('url(\\t\\n img.png \\f\\r)');\n"
+            + "  test('url(\\u000Bimg.png\\u000B)');\n"
+            + "  test('url(img\\n.png) url(img2.png)');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='div1'>foo</div></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * White space and newlines inside and around the url of the background shorthand.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"url(\"img.png\")", "", "", "", "url(\"img.png\")", "url(\"img .png\")", "url(\"img .png\")",
+             "", "", "url(\" img.png \")"})
+    public void backgroundImageFromBackgroundWhitespace() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(value) {\n"
+            + "  var style = document.getElementById('div1').style;\n"
+            + "  style.background = '';\n"
+            + "  style.background = value;\n"
+            + "  log(style.backgroundImage);\n"
+            + "}\n"
+            + "function doTest() {\n"
+            + "  test('url(\\r\\nimg.png\\r\\n)');\n"
+            + "  test('url(img\\r.png)');\n"
+            + "  test('url(img\\f.png)');\n"
+            + "  test('url(\"img\\n.png\")');\n"
+            + "  test('url(img\\u0085.png)');\n"
+            + "  test('url(img\\u2028.png)');\n"
+            + "  test('url(img\\u2029.png)');\n"
+            + "  test('url(img .png)');\n"
+            + "  test('url(img\\t.png)');\n"
+            + "  test('url(\" img.png \")');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='div1'>foo</div></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * White space and newlines inside and around the url of the background shorthand
+     * defined in a style sheet.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"url(\"img.png\")", "url(\"'img.png'\")", "none", "url(\"img%20.png\")", "url(\"img.png\")", "url(\"a)b.png\")"})
+    public void backgroundImageFromBackgroundWhitespaceStyleSheet() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<style>\n"
+            + "  #d1 { background: url(\n img.png\r\n) }\n"
+            + "  #d2 { background: url(\\'img.png\\') }\n"
+            + "  #d3 { background: url(img .png) }\n"
+            + "  #d4 { background: url('img .png') }\n"
+            + "  #d5 { background: URL(img.png) }\n"
+            + "  #d6 { background: url('a)b.png') }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    var div = document.getElementById('d' + i);\n"
+            + "    var url = window.getComputedStyle(div).backgroundImage;\n"
+            + "    log(url.replace(/^url\\(\"?.*\\//, 'url(\"'));\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='d1'>1</div><div id='d2'>2</div><div id='d3'>3</div>\n"
+            + "<div id='d4'>4</div><div id='d5'>5</div><div id='d6'>6</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Regression test for a regex vulnerable to catastrophic backtracking
+     * used to find the url in the background shorthand.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Timeout(60)
+    @Alerts({"url(\"\")", "", ""})
+    public void backgroundImageFromBackgroundLongValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(value) {\n"
+            + "  var style = document.getElementById('div1').style;\n"
+            + "  style.background = '';\n"
+            + "  style.background = value;\n"
+            + "  log(style.backgroundImage);\n"
+            + "}\n"
+            + "function doTest() {\n"
+            + "  test('url(' + ' '.repeat(50000));\n"
+            + "  test('url('.repeat(20000) + 'img.png)');\n"
+            + "  test('url( '.repeat(20000));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='div1'>foo</div></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Regression test for a regex with quadratic backtracking
+     * used to find the position in the background shorthand.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"10px 20px", ""})
+    public void backgroundPositionFromBackgroundLongValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(value) {\n"
+            + "  var style = document.getElementById('div1').style;\n"
+            + "  style.background = '';\n"
+            + "  style.background = value;\n"
+            + "  log(style.backgroundPosition);\n"
+            + "}\n"
+            + "function doTest() {\n"
+            + "  test('10px 20px');\n"
+            + "  test('1'.repeat(50000) + ' 10px 20px');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='div1'>foo</div></body></html>";
         loadPageVerifyTitle2(html);
     }
 }
