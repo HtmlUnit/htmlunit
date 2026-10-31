@@ -629,14 +629,37 @@ public class HtmlSerializerInnerOuterText {
             return;
         }
 
+        // the select is an inline-block; the white space before and after is not collapsed
+        final boolean inline = htmlSelect != root_;
+
         // a list box (multiple or size > 1) shows the options
         if (browserVersion_.hasFeature(JS_INNER_TEXT_SELECT_EMPTY)
                 && !htmlSelect.isMultipleSelectEnabled()
                 && htmlSelect.getSize() <= 1) {
+            if (inline) {
+                builder.appendAtomicInline();
+            }
             return;
         }
 
-        appendDescendantOptions(builder, htmlSelect, Mode.WHITE_SPACE_NORMAL, insideHead, true);
+        if (!inline) {
+            appendDescendantOptions(builder, htmlSelect, Mode.WHITE_SPACE_NORMAL, insideHead, true);
+            return;
+        }
+
+        // inside of some text every option is placed on a line of its own
+        // and the line breaks are part of the content (e.g. 'Choice: \none\n L')
+        builder.appendAtomicInline();
+        boolean optionFound = false;
+        for (final HtmlOption option : htmlSelect.getOptions()) {
+            builder.appendLineBreak();
+            appendChildren(builder, option, Mode.WHITE_SPACE_NORMAL, insideHead, true);
+            optionFound = true;
+        }
+        if (optionFound) {
+            builder.appendLineBreak();
+        }
+        builder.appendAtomicInline();
     }
 
     /**

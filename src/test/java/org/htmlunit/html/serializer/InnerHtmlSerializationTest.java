@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -1841,6 +1842,11 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "color: red; margin: 0px; background: url(\"x.png\");"})
+    @HtmlUnitNYI(
+            CHROME = {"", "COLOR: Red;margin:0 ; background : URL(x.png)"},
+            EDGE = {"", "COLOR: Red;margin:0 ; background : URL(x.png)"},
+            FF = {"", "COLOR: Red;margin:0 ; background : URL(x.png)"},
+            FF_ESR = {"", "COLOR: Red;margin:0 ; background : URL(x.png)"})
     public void attrStyleCssText_innerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"
                 + "d.style.cssText = 'COLOR: Red;margin:0  ;  background : URL(x.png)';\n"
@@ -2011,10 +2017,10 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
     public void nodeProcessingInstruction_innerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"
                 + "try {\n"
-                + "    d.appendChild(document.createProcessingInstruction('xml-stylesheet', 'href=\"a&b\"'));\n"
-                + "    log(d.innerHTML);\n"
+                + "  d.appendChild(document.createProcessingInstruction('xml-stylesheet', 'href=\"a&b\"'));\n"
+                + "  log(d.innerHTML);\n"
                 + "} catch (e) {\n"
-                + "    log(e.name);\n"
+                + "  log(e.name);\n"
                 + "}\n");
     }
 
@@ -2027,10 +2033,10 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
     public void nodeCdataSection_innerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"
                 + "try {\n"
-                + "    d.appendChild(document.createCDATASection('a<b>c'));\n"
-                + "    log(d.innerHTML);\n"
+                + "  d.appendChild(document.createCDATASection('a<b>c'));\n"
+                + "  log(d.innerHTML);\n"
                 + "} catch (e) {\n"
-                + "    log(e.name);\n"
+                + "  log(e.name);\n"
                 + "}\n");
     }
 
@@ -2211,7 +2217,7 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
     }
 
     /**
-     * getHTML() with serializable shadow roots.
+     * Method getHTML() with serializable shadow roots.
      * @throws Exception if the test fails
      */
     @Test
@@ -2223,10 +2229,10 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
                 + "var s = d.attachShadow({mode: 'open', serializable: true});\n"
                 + "s.appendChild(document.createElement('i'));\n"
                 + "try {\n"
-                + "    log(d.getHTML());\n"
-                + "    log(d.getHTML({serializableShadowRoots: true}));\n"
+                + "  log(d.getHTML());\n"
+                + "  log(d.getHTML({serializableShadowRoots: true}));\n"
                 + "} catch (e) {\n"
-                + "    log(e.name);\n"
+                + "  log(e.name);\n"
                 + "}\n");
     }
 

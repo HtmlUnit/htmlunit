@@ -762,7 +762,12 @@ public class HtmlSerializerVisibleText {
             builder.appendBlockSeparator();
             return;
         }
-        appendChildren(builder, htmlOption, mode);
+
+        // options are rendered by the select (form control); the white-space style
+        // (also the one inherited from the select) is ignored
+        for (final DomNode child : htmlOption.getChildren()) {
+            appendNode(builder, child, Mode.WHITE_SPACE_NORMAL);
+        }
     }
 
     /**

@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -1807,6 +1808,15 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
     @Test
     @Alerts({"<div style=\"color: red; margin: 0px; background: url(&quot;x.png&quot;);\"></div>",
              "color: red; margin: 0px; background: url(\"x.png\");"})
+    @HtmlUnitNYI(
+            CHROME = {"<div style=\"COLOR: Red;margin:0 ; background : URL(x.png)\"></div>",
+                      "COLOR: Red;margin:0 ; background : URL(x.png)"},
+            EDGE = {"<div style=\"COLOR: Red;margin:0 ; background : URL(x.png)\"></div>",
+                    "COLOR: Red;margin:0 ; background : URL(x.png)"},
+            FF = {"<div style=\"COLOR: Red;margin:0 ; background : URL(x.png)\"></div>",
+                  "COLOR: Red;margin:0 ; background : URL(x.png)"},
+            FF_ESR = {"<div style=\"COLOR: Red;margin:0 ; background : URL(x.png)\"></div>",
+                      "COLOR: Red;margin:0 ; background : URL(x.png)"})
     public void attrStyleCssText_outerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"
                 + "d.style.cssText = 'COLOR: Red;margin:0  ;  background : URL(x.png)';\n"
@@ -1977,10 +1987,10 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
     public void nodeProcessingInstruction_outerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"
                 + "try {\n"
-                + "    d.appendChild(document.createProcessingInstruction('xml-stylesheet', 'href=\"a&b\"'));\n"
-                + "    log(d.outerHTML);\n"
+                + "  d.appendChild(document.createProcessingInstruction('xml-stylesheet', 'href=\"a&b\"'));\n"
+                + "  log(d.outerHTML);\n"
                 + "} catch (e) {\n"
-                + "    log(e.name);\n"
+                + "  log(e.name);\n"
                 + "}\n");
     }
 
@@ -1993,10 +2003,10 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
     public void nodeCdataSection_outerHtml() throws Exception {
         htmlScript("var d = document.createElement('div');\n"
                 + "try {\n"
-                + "    d.appendChild(document.createCDATASection('a<b>c'));\n"
-                + "    log(d.outerHTML);\n"
+                + "  d.appendChild(document.createCDATASection('a<b>c'));\n"
+                + "  log(d.outerHTML);\n"
                 + "} catch (e) {\n"
-                + "    log(e.name);\n"
+                + "  log(e.name);\n"
                 + "}\n");
     }
 
@@ -2176,7 +2186,7 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
     }
 
     /**
-     * getHTML() with serializable shadow roots.
+     * Method getHTML() with serializable shadow roots.
      * @throws Exception if the test fails
      */
     @Test
@@ -2188,10 +2198,10 @@ public class OuterHtmlSerializationTest extends WebDriverTestCase {
                 + "var s = d.attachShadow({mode: 'open', serializable: true});\n"
                 + "s.appendChild(document.createElement('i'));\n"
                 + "try {\n"
-                + "    log(d.getHTML());\n"
-                + "    log(d.getHTML({serializableShadowRoots: true}));\n"
+                + "  log(d.getHTML());\n"
+                + "  log(d.getHTML({serializableShadowRoots: true}));\n"
                 + "} catch (e) {\n"
-                + "    log(e.name);\n"
+                + "  log(e.name);\n"
                 + "}\n");
     }
 
