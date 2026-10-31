@@ -278,8 +278,8 @@ public class HtmlSerializerInnerOuterText {
     }
 
     /**
-     * An element with display none (or the hidden attribute) does not contribute
-     * to the text; this is not true for the element the text was requested for.
+     * An element with display none (or the hidden attribute) or with content-visibility hidden
+     * does not contribute to the text; this is not true for the element the text was requested for.
      *
      * @param element the element to check
      * @return true if the element (and its children) has to be ignored
@@ -288,7 +288,23 @@ public class HtmlSerializerInnerOuterText {
         if (element == root_) {
             return false;
         }
-        return "none".equals(display(element));
+        return "none".equals(display(element)) || isContentVisibilityHidden(element);
+    }
+
+    /**
+     * Checks if the element has the style 'content-visibility: hidden'; browsers
+     * skip such an element (including the line breaks) like a 'display: none' element.
+     *
+     * @param element the element to check
+     * @return true if the content visibility is hidden
+     */
+    private static boolean isContentVisibilityHidden(final HtmlElement element) {
+        final SgmlPage page = element.getPage();
+        final WebWindow window = page == null ? null : page.getEnclosingWindow();
+        if (window == null || !window.getWebClient().getOptions().isCssEnabled()) {
+            return false;
+        }
+        return "hidden".equals(window.getComputedStyle(element, null).getStyleAttribute("content-visibility"));
     }
 
     /**
