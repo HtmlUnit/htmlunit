@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -95,11 +94,6 @@ public class SelfClosingTagsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "div,b", "1", "0", "", "\\n<div xmlns=\"http://www.w3.org/1999/xhtml\"></div><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "div,b", "1", "0", "", "\\n<div></div><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "div,b", "1", "0", "", "\\n<div></div><b id=\"child\">x</b>\\n"},
-            FF = {"body", "div,b", "1", "0", "", "\\n<div></div><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "div,b", "1", "0", "", "\\n<div></div><b id=\"child\">x</b>\\n"})
     public void div_xhtmlPage() throws Exception {
         xhtmlPage("div", XML_DIV);
     }
@@ -109,11 +103,6 @@ public class SelfClosingTagsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "iframe,b", "1", "0", "", "\\n<iframe xmlns=\"http://www.w3.org/1999/xhtml\"></iframe><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "iframe,b", "1", "0", "", "\\n<iframe></iframe><b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "iframe,b", "1", "0", "", "\\n<iframe></iframe><b id=\"child\">x</b>\\n"},
-            FF = {"body", "iframe,b", "1", "0", "", "\\n<iframe></iframe><b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "iframe,b", "1", "0", "", "\\n<iframe></iframe><b id=\"child\">x</b>\\n"})
     public void iframe_xhtmlPage() throws Exception {
         xhtmlPage("iframe", XML_IFRAME);
     }
@@ -123,11 +112,6 @@ public class SelfClosingTagsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "script,#text,b", "2", "0", "", "\\n<script xmlns=\"http://www.w3.org/1999/xhtml\"></script>//<b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "script,#text,b", "2", "0", "", "\\n<script></script>//<b id=\"child\">x</b>\\n"},
-            EDGE = {"body", "script,#text,b", "2", "0", "", "\\n<script></script>//<b id=\"child\">x</b>\\n"},
-            FF = {"body", "script,#text,b", "2", "0", "", "\\n<script></script>//<b id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "script,#text,b", "2", "0", "", "\\n<script></script>//<b id=\"child\">x</b>\\n"})
     public void script_xhtmlPage() throws Exception {
         xhtmlPage("script", XML_SCRIPT);
     }
@@ -168,11 +152,6 @@ public class SelfClosingTagsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "div,b", "1", "0", "", "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "div,b", "1", "0", "", "<div></div><b id=\"child\">x</b>"},
-            EDGE = {"section", "div,b", "1", "0", "", "<div></div><b id=\"child\">x</b>"},
-            FF = {"section", "div,b", "1", "0", "", "<div></div><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "div,b", "1", "0", "", "<div></div><b id=\"child\">x</b>"})
     public void div_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("div", XML_DIV);
     }
@@ -182,11 +161,6 @@ public class SelfClosingTagsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "iframe,b", "1", "0", "", "<iframe xmlns=\"http://www.w3.org/1999/xhtml\"></iframe><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "iframe,b", "1", "0", "", "<iframe></iframe><b id=\"child\">x</b>"},
-            EDGE = {"section", "iframe,b", "1", "0", "", "<iframe></iframe><b id=\"child\">x</b>"},
-            FF = {"section", "iframe,b", "1", "0", "", "<iframe></iframe><b id=\"child\">x</b>"},
-            FF_ESR = {"section", "iframe,b", "1", "0", "", "<iframe></iframe><b id=\"child\">x</b>"})
     public void iframe_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("iframe", XML_IFRAME);
     }
@@ -196,11 +170,6 @@ public class SelfClosingTagsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "script,#text,b", "2", "0", "", "<script xmlns=\"http://www.w3.org/1999/xhtml\"></script>//<b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "script,#text,b", "2", "0", "", "<script></script>//<b id=\"child\">x</b>"},
-            EDGE = {"section", "script,#text,b", "2", "0", "", "<script></script>//<b id=\"child\">x</b>"},
-            FF = {"section", "script,#text,b", "2", "0", "", "<script></script>//<b id=\"child\">x</b>"},
-            FF_ESR = {"section", "script,#text,b", "2", "0", "", "<script></script>//<b id=\"child\">x</b>"})
     public void script_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("script", XML_SCRIPT);
     }
