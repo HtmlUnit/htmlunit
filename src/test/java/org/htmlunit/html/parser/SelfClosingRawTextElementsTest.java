@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -250,11 +249,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/1999/xhtml\"></svg><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
-    @HtmlUnitNYI(
-            CHROME = {"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"},
-            EDGE = {"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"},
-            FF = {"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"},
-            FF_ESR = {"body", "svg,b", "1", "0", "", "\\n<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>\\n"})
     public void svg_xhtmlPage() throws Exception {
         xhtmlPage("svg", XML_SVG);
     }
@@ -439,11 +433,6 @@ public class SelfClosingRawTextElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/1999/xhtml\"></svg><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
-    @HtmlUnitNYI(
-            CHROME = {"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"},
-            EDGE = {"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"},
-            FF = {"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"},
-            FF_ESR = {"section", "svg,b", "1", "0", "", "<svg xmlns=\"http://www.w3.org/2000/svg\"/><b xmlns=\"http://www.w3.org/1999/xhtml\" id=\"child\">x</b>"})
     public void svg_innerHtmlXhtml() throws Exception {
         innerHtmlInXhtmlPage("svg", XML_SVG);
     }

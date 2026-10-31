@@ -9,6 +9,10 @@
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
             <action type="fix" dev="rbri">
+                XHtmlPage: an svg element without the svg namespace (e.g. inheriting the xhtml namespace)
+                is an unknown html element like in real browsers.
+            </action>
+            <action type="fix" dev="rbri">
                 The html parser lowercases the names of svg elements and restores the case of the names
                 listed in the html spec (e.g. foreignObject, clipPath) like real browsers;
                 document.createElementNS() keeps the case of the name.

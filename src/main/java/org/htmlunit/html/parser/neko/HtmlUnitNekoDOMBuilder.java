@@ -59,6 +59,7 @@ import org.htmlunit.html.HtmlTableRow;
 import org.htmlunit.html.HtmlTemplate;
 import org.htmlunit.html.ScriptElement;
 import org.htmlunit.html.SubmittableElement;
+import org.htmlunit.html.UnknownElementFactory;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
@@ -283,8 +284,19 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             namespaceURI = null;
         }
 
-        final ElementFactory factory =
+        ElementFactory factory =
                 htmlParser_.getElementFactory(page_, namespaceURI, qName, insideSvg_, false);
+
+        // in xhtml (xml) the namespace decides; an svg element without the svg namespace
+        // (e.g. inheriting the xhtml namespace) is an unknown html element
+        if (page_ instanceof XHtmlPage
+                && !insideSvg_
+                && "svg".equals(tagLower)
+                && !Html.SVG_NAMESPACE.equals(namespaceURI)
+                && !Html.SVG_NAMESPACE.equals(atts.getValue("xmlns"))) {
+            factory = UnknownElementFactory.INSTANCE;
+        }
+
         String elementName = qName;
         if (factory == HtmlUnitNekoHtmlParser.SVG_FACTORY) {
             namespaceURI = Html.SVG_NAMESPACE;
