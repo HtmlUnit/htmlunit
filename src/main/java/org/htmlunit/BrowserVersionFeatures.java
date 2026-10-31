@@ -347,6 +347,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
 
+    /** PerformanceObserver.supportedEntryTypes returns only the entry types supported by Firefox. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_PERFORMANCE_OBSERVER_ENTRY_TYPES_FF,
+
+    /** PerformanceObserver.supportedEntryTypes returns a frozen array. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_PERFORMANCE_OBSERVER_ENTRY_TYPES_FROZEN,
+
     /** Indicates that the {@code Object.getOwnPropertyDescriptor.get} contains name. */
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,

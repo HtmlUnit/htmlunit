@@ -14,9 +14,14 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_PERFORMANCE_OBSERVER_ENTRY_TYPES_FF;
+import static org.htmlunit.BrowserVersionFeatures.JS_PERFORMANCE_OBSERVER_ENTRY_TYPES_FROZEN;
+
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -42,12 +47,21 @@ import org.htmlunit.javascript.host.dom.DOMException;
 @JsxClass
 public class PerformanceObserver extends HtmlUnitScriptable {
 
-    // entry types reported by Chrome/Edge
     // Object[] (not String[]) because the array is handed to Rhino, which may store other values
+
+    /** The entry types supported by Chrome/Edge. */
     private static final Object[] SUPPORTED_ENTRY_TYPES = {
-        "element", "event", "first-input", "largest-contentful-paint", "layout-shift",
-        "long-animation-frame", "longtask", "mark", "measure", "navigation", "paint",
-        "resource", "visibility-state"};
+        "element", "event", "first-input", "interaction-contentful-paint", "largest-contentful-paint",
+        "layout-shift", "long-animation-frame", "longtask", "mark", "measure", "navigation", "paint",
+        "resource", "soft-navigation", "visibility-state"};
+
+    /** The entry types supported by Firefox. */
+    private static final Object[] SUPPORTED_ENTRY_TYPES_FF = {
+        "event", "first-input", "largest-contentful-paint", "mark", "measure", "navigation", "paint",
+        "resource"};
+
+    /** The key of the cached (frozen) supportedEntryTypes array. */
+    private static final String SUPPORTED_ENTRY_TYPES_KEY = "PerformanceObserver.supportedEntryTypes";
 
     private enum ObserverType { UNDEFINED, SINGLE, MULTIPLE }
 
@@ -77,6 +91,16 @@ public class PerformanceObserver extends HtmlUnitScriptable {
         if (options instanceof Scriptable optionsScriptable) {
             entryTypes = getOptionValue(optionsScriptable, "entryTypes");
             type = getOptionValue(optionsScriptable, "type");
+        }
+
+        // WebIDL sequence<DOMString>: only iterable objects (e.g. arrays, sets) can be converted
+        if (entryTypes != null
+                && !(entryTypes instanceof Scriptable entryTypesScriptable
+                        && ScriptableObject.hasProperty(entryTypesScriptable, SymbolKey.ITERATOR))) {
+            throw JavaScriptEngine.typeError(
+                    "Failed to execute 'observe' on 'PerformanceObserver': "
+                    + "Failed to read the 'entryTypes' property from 'PerformanceObserverInit': "
+                    + "The provided value cannot be converted to a sequence.");
         }
 
         if (entryTypes == null && type == null) {
@@ -130,12 +154,56 @@ public class PerformanceObserver extends HtmlUnitScriptable {
      */
     @JsxStaticGetter
     public static Scriptable getSupportedEntryTypes(final Scriptable thisObj) {
-        final VarScope scope = ScriptableObject.getTopLevelScope(thisObj.getParentScope());
-        return JavaScriptEngine.newArray(scope, SUPPORTED_ENTRY_TYPES.clone());
+        final Window window = getWindow(thisObj);
+        final BrowserVersion browserVersion = window.getBrowserVersion();
+
+        if (!browserVersion.hasFeature(JS_PERFORMANCE_OBSERVER_ENTRY_TYPES_FROZEN)) {
+            // a new (modifiable) array for every call
+            return newEntryTypesArray(thisObj, browserVersion);
+        }
+
+        // FrozenArray<DOMString>; the same object is returned for every call,
+        // cached at the PerformanceObserver constructor of the window
+        final ScriptableObject cacheHolder = thisObj instanceof ScriptableObject holder ? holder : null;
+        if (cacheHolder != null
+                && cacheHolder.getAssociatedValue(SUPPORTED_ENTRY_TYPES_KEY) instanceof Scriptable cached) {
+            return cached;
+        }
+
+        final Scriptable result = newEntryTypesArray(thisObj, browserVersion);
+        final Object objectCtor = ScriptableObject.getProperty(window, "Object");
+        if (objectCtor instanceof Scriptable objectCtorScriptable) {
+            ScriptableObject.callMethod(objectCtorScriptable, "freeze", new Object[] {result});
+        }
+        if (cacheHolder != null) {
+            cacheHolder.associateValue(SUPPORTED_ENTRY_TYPES_KEY, result);
+        }
+        return result;
     }
 
     /**
+     * Creates a new array containing the entry types supported by the given browser.
+     *
+     * @param thisObj the scriptable (used to determine the scope)
+     * @param browserVersion the browser version
+     * @return a new array containing the supported entry types
+     */
+    private static Scriptable newEntryTypesArray(final Scriptable thisObj, final BrowserVersion browserVersion) {
+        final Object[] entryTypes = browserVersion.hasFeature(JS_PERFORMANCE_OBSERVER_ENTRY_TYPES_FF)
+                ? SUPPORTED_ENTRY_TYPES_FF
+                : SUPPORTED_ENTRY_TYPES;
+
+        final VarScope scope = ScriptableObject.getTopLevelScope(thisObj.getParentScope());
+        return JavaScriptEngine.newArray(scope, entryTypes.clone());
+    }
+
+    /**
+     * Returns the value of the given member of the options dictionary;
      * WebIDL dictionary semantics: a member set to {@code undefined} counts as absent.
+     *
+     * @param options the options dictionary
+     * @param name the name of the member
+     * @return the value of the member or {@code null} if the member is absent
      */
     private static Object getOptionValue(final Scriptable options, final String name) {
         final Object value = ScriptableObject.getProperty(options, name);

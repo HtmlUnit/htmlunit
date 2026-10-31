@@ -213,10 +213,6 @@ public class PerformanceObserverTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "true", "true", "true"},
             FF = {"true", "false", "true", "true"},
             FF_ESR = {"true", "false", "true", "true"})
-    @HtmlUnitNYI(CHROME = {"true", "false", "true", "true"},
-            EDGE = {"true", "false", "true", "true"},
-            FF = {"true", "false", "true", "true"},
-            FF_ESR = {"true", "false", "true", "true"})
     public void supportedEntryTypes() throws Exception {
         runTest("var types = PerformanceObserver.supportedEntryTypes;\n"
                 + "log(Array.isArray(types));\n"
@@ -233,17 +229,61 @@ public class PerformanceObserverTest extends WebDriverTestCase {
                 + "long-animation-frame,longtask,mark,measure,navigation,paint,resource,soft-navigation,visibility-state",
             FF = "event,first-input,largest-contentful-paint,mark,measure,navigation,paint,resource",
             FF_ESR = "event,first-input,largest-contentful-paint,mark,measure,navigation,paint,resource")
-    @HtmlUnitNYI(
-            CHROME = "element,event,first-input,largest-contentful-paint,layout-shift,"
-                + "long-animation-frame,longtask,mark,measure,navigation,paint,resource,visibility-state",
-            EDGE = "element,event,first-input,largest-contentful-paint,layout-shift,"
-                + "long-animation-frame,longtask,mark,measure,navigation,paint,resource,visibility-state",
-            FF = "element,event,first-input,largest-contentful-paint,layout-shift,"
-                + "long-animation-frame,longtask,mark,measure,navigation,paint,resource,visibility-state",
-            FF_ESR = "element,event,first-input,largest-contentful-paint,layout-shift,"
-                + "long-animation-frame,longtask,mark,measure,navigation,paint,resource,visibility-state")
     public void supportedEntryTypesList() throws Exception {
         runTest("log(PerformanceObserver.supportedEntryTypes.join());");
+    }
+
+    /**
+     * The entryTypes member has to be a sequence (e.g. an array).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError", "TypeError", "TypeError", "done"})
+    public void observeEntryTypesNotASequence() throws Exception {
+        runTest("var observer = new PerformanceObserver(function() {});\n"
+                + "try { observer.observe({ entryTypes: 'mark' }); log('done'); } catch(e) { logEx(e); }\n"
+                + "try { observer.observe({ entryTypes: 7 }); log('done'); } catch(e) { logEx(e); }\n"
+                + "try { observer.observe({ entryTypes: null }); log('done'); } catch(e) { logEx(e); }\n"
+                + "try { observer.observe({ entryTypes: {} }); log('done'); } catch(e) { logEx(e); }\n"
+                + "try { observer.observe({ entryTypes: new Set(['mark']) }); log('done'); } catch(e) { logEx(e); }");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("done")
+    public void observeEntryTypesWithBuffered() throws Exception {
+        runTest("var observer = new PerformanceObserver(function() {});\n"
+                + "try { observer.observe({ entryTypes: ['mark'], buffered: true }); log('done'); }"
+                        + " catch(e) { logEx(e); }");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError"})
+    public void observeOptionsNotAnObject() throws Exception {
+        runTest("var observer = new PerformanceObserver(function() {});\n"
+                + "try { observer.observe('mark'); log('done'); } catch(e) { logEx(e); }\n"
+                + "try { observer.observe(null); log('done'); } catch(e) { logEx(e); }");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "TypeError", "-1"},
+            FF = {"false", "9", "-1"},
+            FF_ESR = {"false", "9", "-1"})
+    @HtmlUnitNYI(CHROME = {"true", "15", "-1"},
+            EDGE = {"true", "15", "-1"})
+    public void supportedEntryTypesSameObject() throws Exception {
+        runTest("var types = PerformanceObserver.supportedEntryTypes;\n"
+                + "log(types === PerformanceObserver.supportedEntryTypes);\n"
+                + "try { types.push('htmlunit'); log(types.length); } catch(e) { logEx(e); }\n"
+                + "log(PerformanceObserver.supportedEntryTypes.indexOf('htmlunit'));");
     }
 
     private void runTest(final String js) throws Exception {
