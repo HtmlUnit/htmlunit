@@ -491,4 +491,92 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The width of an absolute positioned element without width is defined by left and right
+     * (the width of the containing block minus left and right; the counterpart of
+     * ElementOffsetHeight2Test.absolutelyPositionedHeightFromTopAndBottom()).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"400", "350"})
+    @HtmlUnitNYI(CHROME = {"0", "30"},
+            EDGE = {"0", "30"},
+            FF = {"0", "30"},
+            FF_ESR = {"0", "30"})
+    public void absolutelyPositionedWidthFromLeftAndRight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div style='position: relative; width: 400px; height: 100px'>\n"
+            + "    <div id='layer1' style='position: absolute; left: 0; top: 0; right: 0; bottom: 0'></div>\n"
+            + "  </div>\n"
+            + "  <div style='position: relative; width: 400px; height: 100px'>\n"
+            + "    <div id='layer2' style='position: absolute; left: 20px; top: 0; right: 30px; bottom: 0'>abc</div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.getElementById('layer1').offsetWidth);\n"
+            + "  log(document.getElementById('layer2').offsetWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Line breaks make an absolutely positioned (shrink-to-fit) element narrower
+     * (the counterpart of ElementOffsetHeight2Test.offsetHeightManualLineBreaks()).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void offsetWidthManualLineBreaks() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 0; left: 0; font-size: 12px'>\n"
+            + "    Lorem ipsum dolor sit amet</div>\n"
+            + "  <div id='myDivBr' style='position:absolute; top: 50px; left: 0; font-size: 12px'>\n"
+            + "    Lorem<br>ipsum<br>dolor<br>sit<br>amet</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(document.getElementById('myDivBr').offsetWidth < e.offsetWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The width of an absolutely positioned (shrink-to-fit) element grows with the font size
+     * (the counterpart of ElementOffsetHeight2Test.offsetHeightSmallLarge()).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("13, 18, 22, 33, 67")
+    @HtmlUnitNYI(CHROME = {"15, 24, 30, 45, 90"},
+            EDGE = {"15, 24, 30, 45, 90"},
+            FF = {"15, 24, 30, 45, 90"},
+            FF_ESR = {"15, 24, 30, 45, 90"})
+    public void offsetWidthFontSize() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 0; left: 0'>abc</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  var r = [];\n"
+            + "  ['xx-small', 'small', 'medium', 'x-large', 'xxx-large'].forEach(function(s) {\n"
+            + "    e.style.fontSize = s;\n"
+            + "    r.push(e.offsetWidth);\n"
+            + "  });\n"
+            + "  log(r.join(', '));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

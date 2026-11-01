@@ -146,7 +146,7 @@ public class PerformanceObserverTest extends WebDriverTestCase {
                 + "try { observer.observe({}); log('done'); } catch(e) { logEx(e); }\n"
                 + "try { observer.observe({ buffered: true }); log('done'); } catch(e) { logEx(e); }\n"
                 + "try { observer.observe({ type: undefined, entryTypes: undefined }); log('done'); }"
-                        + " catch(e) { logEx(e); }");
+                        + "  catch(e) { logEx(e); }");
     }
 
     /**
@@ -256,7 +256,7 @@ public class PerformanceObserverTest extends WebDriverTestCase {
     public void observeEntryTypesWithBuffered() throws Exception {
         runTest("var observer = new PerformanceObserver(function() {});\n"
                 + "try { observer.observe({ entryTypes: ['mark'], buffered: true }); log('done'); }"
-                        + " catch(e) { logEx(e); }");
+                        + "  catch(e) { logEx(e); }");
     }
 
     /**

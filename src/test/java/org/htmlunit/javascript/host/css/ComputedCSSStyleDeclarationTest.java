@@ -4143,32 +4143,4 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
-
-    /**
-     * The height of an absolute positioned element is defined by top and bottom
-     * (GWT layout panels are using this).
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("")
-    public void heightAbsoluteTopBottom() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "  log(document.getElementById('layer1').offsetHeight);\n"
-            + "  log(document.getElementById('layer2').offsetHeight);\n"
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "<div style='position: relative; height: 200px'>\n"
-            + "  <div id='layer1' style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px'></div>\n"
-            + "</div>\n"
-            + "<div style='position: relative; height: 200px'>\n"
-            + "  <div id='layer2' style='position: absolute; left: 0px; top: 20px; right: 0px; bottom: 30px'>abc</div>\n"
-            + "</div>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
 }

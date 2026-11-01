@@ -400,4 +400,358 @@ public class ElementOffsetHeight2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Basic case: absolutely positioned block with a single fixed-height child.
+     * The outer div has no explicit height, so its offsetHeight should match
+     * the child's height (300px).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"300", "300"})
+    public void absolutelyPositionedShouldUseHeightsOfChildElements() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 100px; left: 100px'>\n"
+            + "    <div style='width:300px; height:300px'>abcd</div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Style position:fixed should behave the same as position:absolute - shrink-wrap
+     * to the child content.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"100", "100"})
+    public void fixedPositionedShouldUseHeightsOfChildElements() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:fixed; top: 10px; left: 10px'>\n"
+            + "    <div style='width:200px; height:100px'>text</div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Absolutely positioned block with two children side by side (inline-block).
+     * The outer offsetHeight should reflect the height of the line (the higher child).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"84", "84"},
+            FF = {"84", "83.5"},
+            FF_ESR = {"84", "83.5"})
+    @HtmlUnitNYI(CHROME = {"130", "130"},
+            EDGE = {"130", "130"},
+            FF = {"130", "130"},
+            FF_ESR = {"130", "130"})
+    public void absolutelyPositionedWithTwoInlineBlockChildren() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 0; left: 0; white-space:nowrap'>\n"
+            + "    <div style='display:inline-block; width:200px; height:50px'></div>\n"
+            + "    <div style='display:inline-block; width:300px; height:80px'></div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Deeply nested structure (3 levels): the outermost absolutely positioned
+     * div has no height; the actual height is defined 3 levels in.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"50", "50"})
+    public void absolutelyPositionedDeepNesting() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 0; left: 0'>\n"
+            + "    <div>\n"
+            + "      <div>\n"
+            + "        <div style='width:150px; height:50px'>deep</div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The heights of stacked block children add up
+     * (the counterpart of absolutelyPositionedWidestChildWins for the width).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"120", "120"})
+    public void absolutelyPositionedStackedChildrenAddUp() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 0; left: 0'>\n"
+            + "    <div style='width:250px; height:30px'></div>\n"
+            + "    <div style='width:400px; height:40px'></div>\n"
+            + "    <div style='width:100px; height:50px'></div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * When the absolutely positioned element itself carries an explicit height,
+     * that explicit height must win over the child-content height.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"500", "500"})
+    public void absolutelyPositionedWithExplicitHeightUsesExplicitHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 0; left: 0; height:500px'>\n"
+            + "    <div style='width:200px; height:50px'>child</div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An absolutely positioned block with no children and no explicit height
+     * should return 0.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void absolutelyPositionedEmptyBlockIsZeroHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 0; left: 0'></div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Nested absolutely positioned elements: the child is itself absolutely
+     * positioned inside the parent; the child does not contribute to the height of the parent.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "80"})
+    @HtmlUnitNYI(CHROME = {"80", "80"},
+            EDGE = {"80", "80"},
+            FF = {"80", "80"},
+            FF_ESR = {"80", "80"})
+    public void nestedAbsolutePositionedElements() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='outer' style='position:absolute; top: 0; left: 0'>\n"
+            + "    <div id='inner' style='position:absolute; top: 0; left: 0; width:350px; height:80px'>\n"
+            + "      content\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.getElementById('outer').offsetHeight);\n"
+            + "  log(document.getElementById('inner').offsetHeight);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An absolutely positioned span (inline display) with a fixed-height child block.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"40", "40"})
+    public void absolutelyPositionedSpanWithBlockChild() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <span id='myDiv' style='position:absolute; top: 50px; left: 50px'>\n"
+            + "    <div style='width:220px; height:40px'>inner block</div>\n"
+            + "  </span>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Absolutely positioned block with border and padding: offsetHeight
+     * must include border + padding on top of the content/child height.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"120", "120"})
+    public void absolutelyPositionedWithBorderAndPadding() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 0; left: 0; padding:5px; border:5px solid black'>\n"
+            + "    <div style='width:300px; height:100px'>child</div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Four levels of nesting with no explicit heights except at the leaf.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"60", "60"})
+    public void absolutelyPositionedFourLevelNesting() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv' style='position:absolute; top: 0; left: 0'>\n"
+            + "    <div>\n"
+            + "      <div>\n"
+            + "        <div>\n"
+            + "          <div style='width:180px; height:60px'>leaf</div>\n"
+            + "        </div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Unlike the width, the height of a static block is not taken from the parent;
+     * the block inside of a parent with height:500px has the height of its content.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"30", "30"})
+    public void blockInsideParentWithExplicitHeightUsesContentHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div style='height:500px'>\n"
+            + "    <div id='myDiv'>\n"
+            + "      <div style='width:300px; height:30px'></div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let e = document.getElementById('myDiv');\n"
+            + "  log(e.offsetHeight);\n"
+            + "  log(e.getBoundingClientRect().height);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The height of an absolute positioned element without height is defined by top and bottom
+     * (the height of the containing block minus top and bottom; GWT layout panels are using this).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"200", "150"})
+    @HtmlUnitNYI(CHROME = {"0", "18"},
+            EDGE = {"0", "18"},
+            FF = {"0", "18"},
+            FF_ESR = {"0", "18"})
+    public void absolutelyPositionedHeightFromTopAndBottom() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div style='position: relative; height: 200px'>\n"
+            + "    <div id='layer1' style='position: absolute; left: 0; top: 0; right: 0; bottom: 0'></div>\n"
+            + "  </div>\n"
+            + "  <div style='position: relative; height: 200px'>\n"
+            + "    <div id='layer2' style='position: absolute; left: 0; top: 20px; right: 0; bottom: 30px'>abc</div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.getElementById('layer1').offsetHeight);\n"
+            + "  log(document.getElementById('layer2').offsetHeight);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
