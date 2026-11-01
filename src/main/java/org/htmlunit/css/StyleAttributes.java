@@ -1812,7 +1812,7 @@ public final class StyleAttributes implements Serializable {
         MARGIN_TOP_("margin-top", "margin-top", ff("0px")),
 
         /** The style property {@code marginTrim}. */
-        MARGIN_TRIM("marginTrim", "margin-trim", chrome("none")),
+        MARGIN_TRIM("marginTrim", "margin-trim", chromeAndEdgeNone()),
 
         /** The style property {@code marker}. */
         MARKER("marker", "marker", chromeAndEdgeNone(), ffNone()),
