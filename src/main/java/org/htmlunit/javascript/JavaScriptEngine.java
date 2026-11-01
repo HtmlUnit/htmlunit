@@ -443,7 +443,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         console.defineFunctionProperties(scope, new String[] {"timeStamp"}, ConsoleCustom.class, ScriptableObject.DONTENUM);
 
         // remove some objects, that Rhino defines in top scope but that we don't want
-        deleteProperties(globalThis, "Continuation", "StopIteration", "uneval", "global", "__GeneratorFunction");
+        deleteProperties(globalThis, "Continuation", "StopIteration", "uneval", "global", "__GeneratorFunction", "SharedArrayBuffer");
 
         // Rhino defines too many methods for us, particularly since implementation of ECMAScript5
         final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, "String");
@@ -1554,6 +1554,29 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static boolean isArrayLike(final Scriptable obj) {
         return ScriptRuntime.isArrayLike(obj);
+    }
+
+    /**
+     * Converts the given length to an {@code int} that can be used as the length
+     * of a Java backed array (or list).
+     * <p>JavaScript allows array lengths up to 2<sup>32</sup> - 1, but Java arrays are limited
+     * to {@link Integer#MAX_VALUE} elements; therefore a negative length or a length larger
+     * than {@link Integer#MAX_VALUE} results in a {@code RangeError}.</p>
+     *
+     * @param length the length to convert
+     * @return the length as {@code int}
+     * @throws org.htmlunit.corejs.javascript.EcmaError a {@code RangeError} if the length
+     *         is negative ("Inappropriate array length.") or larger than
+     *         {@link Integer#MAX_VALUE} ("Array length ... exceeds supported capacity limit.")
+     */
+    public static int toArrayLength(final long length) {
+        if (length < 0) {
+            throw ScriptRuntime.rangeErrorById("msg.arraylength.bad");
+        }
+        if (length > Integer.MAX_VALUE) {
+            throw ScriptRuntime.rangeErrorById("msg.arraylength.too.big", String.valueOf(length));
+        }
+        return (int) length;
     }
 
     /**

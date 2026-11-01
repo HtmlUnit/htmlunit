@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="fix" dev="RhinoTeam">
+                core-js: BigInt.prototype.toLocaleString() treating its argument as a radix fixed.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: JSON.parse() and JSON.stringify() callbacks receiving numeric keys fixed.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: TypedArray.prototype.subarray with infinite and large indexes fixed.
+            </action>
             <action type="add" dev="rbri">
                 BrowserVersion.getTextWidth(String, String) added; estimates the width of a text
                 for a given font size based on the char widths of the default font (Times) of the browsers.

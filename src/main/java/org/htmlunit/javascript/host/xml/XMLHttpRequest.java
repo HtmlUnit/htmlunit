@@ -340,7 +340,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         if (RESPONSE_TYPE_ARRAYBUFFER.equals(responseType_)) {
             long contentLength = webResponse_.getContentLength();
-            NativeArrayBuffer nativeArrayBuffer = new NativeArrayBuffer(contentLength);
+            NativeArrayBuffer nativeArrayBuffer = new NativeArrayBuffer(JavaScriptEngine.toArrayLength(contentLength));
 
             try {
                 final int bufferLength = Math.min(1024, (int) contentLength);
@@ -352,7 +352,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         final long newLength = offset + readLen;
                         // gzip content and the unzipped content is larger
                         if (newLength > contentLength) {
-                            final NativeArrayBuffer expanded = new NativeArrayBuffer(newLength);
+                            final NativeArrayBuffer expanded =
+                                    new NativeArrayBuffer(JavaScriptEngine.toArrayLength(newLength));
                             expanded.getByteBuffer().put(0, nativeArrayBuffer.getByteBuffer(), 0, (int) contentLength);
                             contentLength = newLength;
                             nativeArrayBuffer = expanded;
