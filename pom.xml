@@ -79,7 +79,7 @@
         <!-- quality -->
         <checkstyle.version>12.3.1</checkstyle.version>
         <spotbugs.version>4.10.5</spotbugs.version>
-        <pmd.version>7.28.0</pmd.version>
+        <pmd.version>7.29.0</pmd.version>
         <archunit.version>1.5.1</archunit.version>
         <dependencycheck.version>10.0.4</dependencycheck.version>
 
@@ -90,7 +90,7 @@
         <pmd-plugin.version>3.28.0</pmd-plugin.version>
         <spotbugs-plugin.version>4.10.5.0</spotbugs-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
-        <enforcer-plugin.version>3.6.3</enforcer-plugin.version>
+        <enforcer-plugin.version>3.7.0</enforcer-plugin.version>
         <compiler-plugin.version>3.16.0</compiler-plugin.version>
         <jar-plugin.version>3.5.1</jar-plugin.version>
         <assembly-plugin.version>3.8.0</assembly-plugin.version>
