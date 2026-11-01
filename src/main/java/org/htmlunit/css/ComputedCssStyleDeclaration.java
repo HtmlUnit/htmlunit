@@ -144,6 +144,7 @@ import org.htmlunit.html.HtmlUnderlined;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
+import org.htmlunit.html.serializer.HtmlSerializerVisibleText;
 import org.htmlunit.platform.Platform;
 import org.htmlunit.util.StringUtils;
 
@@ -493,7 +494,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     if (StringUtils.isEmptyOrNull(value)) {
                         final String position = getStyleAttribute(Definition.POSITION, true);
                         if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
-                            final String content = domElem.getVisibleText();
+                            final String content = getLayoutText(domElem);
                             // do this only for small content
                             // at least for empty div's this is more correct
                             if (null != content && content.length() < 13) {
@@ -664,7 +665,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 style -> {
                     final String value = style.getStyleAttribute(Definition.HEIGHT, true);
                     if (StringUtils.isEmptyOrNull(value)) {
-                        final String content = domElem.getVisibleText();
+                        final String content = getLayoutText(domElem);
                         // do this only for small content
                         // at least for empty div's this is more correct
                         if (content == null) {
@@ -1423,7 +1424,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     }
                 }
                 else if (prev instanceof DomText) {
-                    final String content = prev.getVisibleText();
+                    final String content = getLayoutText(prev);
                     if (content != null) {
                         left += content.trim().length()
                                 * getDomElement().getPage().getWebClient().getBrowserVersion().getPixelsPerChar();
@@ -1549,6 +1550,20 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         return 0;
+    }
+
+    /**
+     * Returns the text of the given node used for the layout (size estimations).
+     * <p>This is the visible text without the WebDriver specific visibility checks
+     * (opacity, content-visibility, offscreen); the browsers do the layout also for
+     * elements that are transparent or positioned outside of the page
+     * (e.g. the qunit-fixture used by many test suites is positioned offscreen).</p>
+     *
+     * @param node the node
+     * @return the text used for the layout
+     */
+    private static String getLayoutText(final DomNode node) {
+        return new HtmlSerializerVisibleText(false).asText(node);
     }
 
     /**
@@ -1815,7 +1830,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         // no rendered child content -- approximate from the element's own
         // visible text instead
         final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
-        return element.getVisibleText().length() * browserVersion.getPixelsPerChar();
+        return getLayoutText(element).length() * browserVersion.getPixelsPerChar();
     }
 
     /**
@@ -1981,10 +1996,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) parent, null);
                     final int height = browserVersion.getFontHeight(
                                         style.getStyleAttribute(Definition.FONT_SIZE, true));
-                    inlineWidth += child.getVisibleText().length() * (int) (height / 1.8f);
+                    inlineWidth += getLayoutText(child).length() * (int) (height / 1.8f);
                 }
                 else {
-                    inlineWidth += child.getVisibleText().length() * browserVersion.getPixelsPerChar();
+                    inlineWidth += getLayoutText(child).length() * browserVersion.getPixelsPerChar();
                 }
             }
         }
@@ -2125,7 +2140,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     }
                 }
                 final int pixelWidth = CssPixelValueConverter.pixelValue(width);
-                final String content = element.getVisibleText();
+                final String content = getLayoutText(element);
 
                 if (pixelWidth > 0
                         && !width.isEmpty()

@@ -2239,12 +2239,53 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
 
     /**
      * The content is clipped by a container without height.
+     * HtmlUnit does not check the size because the size of many elements is
+     * calculated by javascript based on the (estimated) sizes of other elements
+     * (see getVisibleTextPanelSizedByScript()).
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
+    @HtmlUnitNYI(CHROME = "abc",
+            EDGE = "abc",
+            FF = "abc",
+            FF_ESR = "abc")
     public void getVisibleTextOverflowHiddenNoHeight() throws Exception {
         getVisibleTextFormated("<div id='tester' style='height: 0; overflow: hidden'>abc</div>");
+    }
+
+    /**
+     * The panel is sized by script based on the height of the absolute positioned parent
+     * (the GWT layout panels are doing this; see GWTTest2x11x0.showcase()).
+     * If the height of the parent is calculated wrong, the panel has no height and the
+     * content is clipped.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Monday")
+    public void getVisibleTextPanelSizedByScript() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var layer = document.getElementById('layer');\n"
+            + "  document.getElementById('panel').style.height = Math.max(0, layer.offsetHeight - 20) + 'px';\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div style='position: relative; height: 200px'>\n"
+            + "  <div id='layer' style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px'>\n"
+            + "    <div style='position: absolute; left: 0px; top: 0px; width: 100%; height: 20px'>header</div>\n"
+            + "    <div id='panel' style='position: absolute; left: 0px; top: 20px; width: 100%;"
+                        + " height: 0px; overflow: hidden'>\n"
+            + "      <label id='tester'>Monday</label>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
     }
 
     /**

@@ -109,6 +109,29 @@ public class HtmlSerializerVisibleText {
     /** The white-space mode defined by the node or the ancestors ({@code null} if not defined). */
     private final Map<DomNode, Mode> whiteSpaceCache_ = new IdentityHashMap<>();
 
+    /** Whether the WebDriver specific visibility checks (opacity, content-visibility, offscreen) are done. */
+    private final boolean webDriverVisibility_;
+
+    /**
+     * Ctor; creates a serializer for the WebDriver visible text.
+     */
+    public HtmlSerializerVisibleText() {
+        this(true);
+    }
+
+    /**
+     * Ctor.
+     * <p>The layout (e.g. the estimation of the size of an element) has to use the text
+     * without the WebDriver specific visibility checks; the browsers do the layout
+     * also for elements that are transparent or positioned outside of the page.</p>
+     *
+     * @param webDriverVisibility whether the WebDriver specific visibility checks
+     *        (opacity, content-visibility, offscreen) are done
+     */
+    public HtmlSerializerVisibleText(final boolean webDriverVisibility) {
+        webDriverVisibility_ = webDriverVisibility;
+    }
+
     /**
      * Converts an HTML node to text.
      * @param node a node
@@ -498,45 +521,18 @@ public class HtmlSerializerVisibleText {
     /**
      * Checks if the given node is visible for WebDriver; this includes the
      * checks done by {@link DomNode#isDisplayed()} and the WebDriver specific checks
-     * (opacity, content-visibility, zero size, offscreen).
+     * (opacity, content-visibility, offscreen).
      * The result is cached for the current run.
+     * <p>WebDriver (and the browsers) also hide the content of an element with a size of zero
+     * and hidden overflow. HtmlUnit does not check this because the size of many elements
+     * is calculated by javascript (e.g. GWT layout panels) based on the estimated sizes
+     * of other elements; a wrong estimation would hide content that is visible in real browsers.</p>
      *
      * @param domNode the node to check
      * @return true if the node is visible
      */
     protected boolean isDisplayed(final DomNode domNode) {
         return displayedCache_.computeIfAbsent(domNode, node -> node.isDisplayed() && !isTransparent(node));
-    }
-
-    /**
-     * Checks if the element has a height or width of zero and hides the overflow.
-     *
-     * @param style the computed style of the element
-     * @return true if the content is not visible
-     */
-    private static boolean isZeroSizeWithOverflowHidden(final ComputedCssStyleDeclaration style) {
-        if (!"hidden".equals(style.getStyleAttribute(Definition.OVERFLOW, false))) {
-            return false;
-        }
-        return isZeroLength(style.getStyleAttribute(Definition.HEIGHT, false))
-                || isZeroLength(style.getStyleAttribute(Definition.WIDTH, false));
-    }
-
-    /**
-     * Checks if the given css length is zero ('0', '0px', '0em', ...).
-     *
-     * @param length the length
-     * @return true if the length is zero
-     */
-    private static boolean isZeroLength(final String length) {
-        if (StringUtils.isEmptyOrNull(length)) {
-            return false;
-        }
-        int i = 0;
-        while (i < length.length() && (length.charAt(i) == '0' || length.charAt(i) == '.')) {
-            i++;
-        }
-        return i > 0 && (i == length.length() || Character.isLetter(length.charAt(i)));
     }
 
     /**
@@ -597,13 +593,17 @@ public class HtmlSerializerVisibleText {
 
     /**
      * Checks if the given node or one of its ancestors is not visible for WebDriver
-     * (opacity of zero, content-visibility hidden, zero size with hidden overflow or offscreen).
+     * (opacity of zero, content-visibility hidden or offscreen).
      * The results are cached for the current run; the ancestors share the cached result.
      *
      * @param domNode the node to check
      * @return true if the node is not visible
      */
     private boolean isTransparent(final DomNode domNode) {
+        if (!webDriverVisibility_) {
+            return false;
+        }
+
         final Page page = domNode.getPage();
         if (page == null) {
             return false;
@@ -641,16 +641,17 @@ public class HtmlSerializerVisibleText {
 
     /**
      * Checks if the given element itself (the ancestors are not checked) is not visible
-     * for WebDriver (opacity of zero, content-visibility hidden, zero size with hidden overflow
-     * or offscreen).
+     * for WebDriver (opacity of zero, content-visibility hidden or offscreen).
      *
      * @param element the element to check
      * @param style the computed style of the element
      * @return true if the element is not visible
      */
     private static boolean isTransparentElement(final DomElement element, final ComputedCssStyleDeclaration style) {
+        // WebDriver also hides the content of elements with a size of zero and hidden overflow;
+        // this is not done here because the size of many elements is calculated by
+        // javascript (e.g. GWT layout panels) based on the (estimated) sizes of other elements
         if ("hidden".equals(style.getStyleAttribute("content-visibility"))
-                || isZeroSizeWithOverflowHidden(style)
                 || isOffscreen(element, style)) {
             return true;
         }

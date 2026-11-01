@@ -53,7 +53,11 @@ public class QuillTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Bold Italic\\nHello World!\\nSome initial bold text")
-    @HtmlUnitNYI
+    @HtmlUnitNYI(
+            CHROME = "Bold Italic\\nHello World!\\nSome initial bold text\\n",
+            EDGE = "Bold Italic\\nHello World!\\nSome initial bold text\\n",
+            FF = "Bold Italic\\nHello World!\\nSome initial bold text\\n",
+            FF_ESR = "Bold Italic\\nHello World!\\nSome initial bold text\\n")
     public void basic() throws Exception {
         // fails because the lib uses classes
         doTest("QuillTest.html");

@@ -4104,4 +4104,71 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The layout (size of the content) does not depend on the visibility checks done by WebDriver;
+     * elements outside of the viewport, transparent elements and elements inside of a
+     * container without height still have the size of their content.
+     * (see JQuery1x11x3Test.effects__CSS_Auto_to_show(), the qunit-fixture is offscreen)
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true", "true", "true"})
+    public void contentSizeOfInvisibleElements() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var ids = ['offscreen', 'transparent', 'zerosize'];\n"
+            + "  for (var i = 0; i < ids.length; i++) {\n"
+            + "    var e = document.getElementById(ids[i] + 'Block');\n"
+            + "    var h = e.offsetHeight;\n"
+            + "    e.innerHTML += '<br>more text<br>and more';\n"
+            + "    log(e.offsetHeight > h);\n"
+            + "    log(document.getElementById(ids[i] + 'Abs').offsetWidth > 0);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div style='position: absolute; left: -10000px; top: -10000px; width: 1000px; height: 1000px'>\n"
+            + "  <div id='offscreenBlock'>abc</div><span id='offscreenAbs' style='position: absolute'>abc</span>\n"
+            + "</div>\n"
+            + "<div style='opacity: 0'>\n"
+            + "  <div id='transparentBlock'>abc</div><span id='transparentAbs' style='position: absolute'>abc</span>\n"
+            + "</div>\n"
+            + "<div style='height: 0; overflow: hidden'>\n"
+            + "  <div id='zerosizeBlock'>abc</div><span id='zerosizeAbs' style='position: absolute'>abc</span>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The height of an absolute positioned element is defined by top and bottom
+     * (GWT layout panels are using this).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void heightAbsoluteTopBottom() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(document.getElementById('layer1').offsetHeight);\n"
+            + "  log(document.getElementById('layer2').offsetHeight);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div style='position: relative; height: 200px'>\n"
+            + "  <div id='layer1' style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px'></div>\n"
+            + "</div>\n"
+            + "<div style='position: relative; height: 200px'>\n"
+            + "  <div id='layer2' style='position: absolute; left: 0px; top: 20px; right: 0px; bottom: 30px'>abc</div>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
