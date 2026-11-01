@@ -1140,8 +1140,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(CHROME = "100",
-            EDGE = "100")
+    @HtmlUnitNYI(CHROME = "70",
+            EDGE = "70")
     public void noscript() throws Exception {
         loadPageVerifyTitle2(test("noscript"));
     }

@@ -291,6 +291,18 @@ public final class BrowserVersion implements Serializable {
     private String secClientHintUserAgentPlatformHeader_;
     private String xmlHttpRequestAcceptHeader_;
     private String[] headerNamesOrdered_;
+    private static final int[] TIMES_CHAR_WIDTHS = {
+        250, 333, 408, 500, 500, 833, 778, 180, 333, 333, 500, 564, 250, 333, 250, 278,
+        500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 278, 278, 564, 564, 564, 444,
+        921, 722, 667, 667, 722, 611, 556, 722, 722, 333, 389, 722, 611, 889, 722, 722,
+        556, 722, 667, 556, 611, 722, 722, 944, 722, 722, 611, 333, 278, 333, 469, 500,
+        333, 444, 500, 444, 500, 444, 333, 500, 500, 278, 278, 500, 278, 778, 500, 500,
+        500, 500, 333, 389, 278, 500, 500, 722, 500, 500, 444, 480, 200, 480, 541
+    };
+
+    /** The width (in 1/1000 em) used for all chars not covered by {@link #TIMES_CHAR_WIDTHS}. */
+    private static final int DEFAULT_CHAR_WIDTH = 500;
+
     private int[] fontHeights_;
     private final Map<String, String> uploadMimeTypes_;
     private final HashSet<MediaResourceType> maybeMediaResource_;
@@ -857,44 +869,77 @@ public final class BrowserVersion implements Serializable {
             return 18;
         }
 
-        if ("xx-small".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[9];
-        }
-        if ("x-small".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[10];
-        }
-        if ("small".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[13];
-        }
-        if ("medium".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[16];
-        }
-        if ("large".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[18];
-        }
-        if ("x-large".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[24];
-        }
-        if ("xx-large".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[32];
-        }
-        if ("xxx-large".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[48];
-        }
-
-        if ("smaller".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[13];
-        }
-        if ("larger".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[19];
-        }
-
-        final int fontSizeInt = CssPixelValueConverter.pixelValue(fontSize);
+        final int fontSizeInt = fontSizeInPixels(fontSize);
         if (fontSizeInt < fontHeights_.length) {
             return fontHeights_[fontSizeInt];
         }
 
         return (int) (fontSizeInt * 1.2);
+    }
+
+    /**
+     * Returns the estimated width of the given text for the specified {@code fontSize};
+     * the estimation is based on the char widths of the default font (Times) of the browsers.
+     *
+     * @param text the text
+     * @param fontSize the font size
+     * @return the estimated width in pixels
+     */
+    public double getTextWidth(final String text, final String fontSize) {
+        if (StringUtils.isEmptyOrNull(text)) {
+            return 0;
+        }
+
+        int width = 0;
+        for (int i = 0; i < text.length(); i++) {
+            final char c = text.charAt(i);
+            if (c >= 32 && c < 32 + TIMES_CHAR_WIDTHS.length) {
+                width += TIMES_CHAR_WIDTHS[c - 32];
+            }
+            else if (c == '\u00A0') {
+                width += TIMES_CHAR_WIDTHS[0];
+            }
+            else {
+                width += DEFAULT_CHAR_WIDTH;
+            }
+        }
+        return width * fontSizeInPixels(fontSize) / 1000d;
+    }
+
+    /**
+     * Returns the font size in pixels; the keywords are mapped to the
+     * default sizes of the browsers.
+     *
+     * @param fontSize the font size (css value)
+     * @return the font size in pixels
+     */
+    private static int fontSizeInPixels(final String fontSize) {
+        if (StringUtils.isEmptyOrNull(fontSize)) {
+            return 16;
+        }
+        switch (StringUtils.toRootLowerCase(fontSize)) {
+            case "xx-small":
+                return 9;
+            case "x-small":
+                return 10;
+            case "small":
+            case "smaller":
+                return 13;
+            case "medium":
+                return 16;
+            case "large":
+                return 18;
+            case "larger":
+                return 19;
+            case "x-large":
+                return 24;
+            case "xx-large":
+                return 32;
+            case "xxx-large":
+                return 48;
+            default:
+                return CssPixelValueConverter.pixelValue(fontSize);
+        }
     }
 
     /**

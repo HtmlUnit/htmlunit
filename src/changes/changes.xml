@@ -8,6 +8,17 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+            <action type="add" dev="rbri">
+                BrowserVersion.getTextWidth(String, String) added; estimates the width of a text
+                for a given font size based on the char widths of the default font (Times) of the browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                Layout: the width of text content (offsetWidth/clientWidth of shrink-to-fit elements,
+                the left position of elements following some text and the rects returned by
+                Range.getClientRects()/getBoundingClientRect()) is now estimated based on the char widths
+                of the default font instead of a fixed width per char; the results are much closer
+                to the real browsers.
+            </action>
             <action type="add" dev="rbri" issue="#1136">
                 PerformanceObserver: observe(), disconnect(), takeRecords() and
                 PerformanceObserver.supportedEntryTypes added, including the argument validation

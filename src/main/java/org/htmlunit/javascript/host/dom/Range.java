@@ -531,12 +531,12 @@ public class Range extends AbstractRange {
         final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) parent, null);
         final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
 
-        final int fontHeight = browserVersion.getFontHeight(style.getStyleAttribute(Definition.FONT_SIZE, true));
-        final float pixelsPerChar = fontHeight / 1.8f;
+        final String fontSize = style.getStyleAttribute(Definition.FONT_SIZE, true);
+        final int fontHeight = browserVersion.getFontHeight(fontSize);
 
         // Estimate the x offset of the text node's start within the parent.
         // Sum the widths of all preceding text/inline siblings to get the base offset.
-        float siblingOffset = 0;
+        double siblingOffset = 0;
         for (final DomNode sibling : parent.getChildren()) {
             if (sibling == node) {
                 break;
@@ -545,7 +545,7 @@ public class Range extends AbstractRange {
                 // skip whitespace-only text nodes — they collapse to nothing in HTML
                 final String visible = sibText.getVisibleText().trim();
                 if (!visible.isEmpty()) {
-                    siblingOffset += visible.length() * pixelsPerChar;
+                    siblingOffset += browserVersion.getTextWidth(visible, fontSize);
                 }
             }
             else if (sibling instanceof HtmlElement siblingElement) {
@@ -558,13 +558,17 @@ public class Range extends AbstractRange {
         final boolean startIsThisNode = getSimpleRange().getStartContainer() == node;
         final boolean endIsThisNode   = getSimpleRange().getEndContainer() == node;
 
-        final int startChar = startIsThisNode ? getSimpleRange().getStartOffset() : 0;
-
         final String visibleText = node.getVisibleText().trim();
-        final int endChar = endIsThisNode ? getSimpleRange().getEndOffset() : visibleText.length();
+        final int length = visibleText.length();
 
-        final double rectLeft  = parentRect.getX() + siblingOffset + startChar * pixelsPerChar;
-        final double rectWidth = (endChar - startChar) * pixelsPerChar;
+        final int startChar = startIsThisNode ? Math.min(getSimpleRange().getStartOffset(), length) : 0;
+        final int endChar = endIsThisNode ? Math.min(getSimpleRange().getEndOffset(), length) : length;
+
+        final double rectLeft  = parentRect.getX() + siblingOffset
+                + browserVersion.getTextWidth(visibleText.substring(0, startChar), fontSize);
+        final double rectWidth = endChar > startChar
+                ? browserVersion.getTextWidth(visibleText.substring(startChar, endChar), fontSize)
+                : 0;
 
         final DOMRect rect = new DOMRect(rectLeft, parentRect.getY(), rectWidth, fontHeight);
         rect.setParentScope(getParentScope());

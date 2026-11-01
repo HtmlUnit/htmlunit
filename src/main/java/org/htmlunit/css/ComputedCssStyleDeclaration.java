@@ -1426,8 +1426,14 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 else if (prev instanceof DomText) {
                     final String content = getLayoutText(prev);
                     if (content != null) {
-                        left += content.trim().length()
-                                * getDomElement().getPage().getWebClient().getBrowserVersion().getPixelsPerChar();
+                        // the text is rendered with the font of the parent
+                        String fontSize = null;
+                        if (prev.getParentNode() instanceof DomElement parent) {
+                            fontSize = parent.getPage().getEnclosingWindow().getComputedStyle(parent, null)
+                                    .getStyleAttribute(Definition.FONT_SIZE, true);
+                        }
+                        left += (int) Math.round(getDomElement().getPage().getWebClient().getBrowserVersion()
+                                .getTextWidth(content.trim(), fontSize));
                     }
                 }
                 prev = prev.getPreviousSibling();
@@ -1994,9 +2000,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 final DomNode parent = child.getParentNode();
                 if (parent instanceof HtmlElement) {
                     final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) parent, null);
-                    final int height = browserVersion.getFontHeight(
-                                        style.getStyleAttribute(Definition.FONT_SIZE, true));
-                    inlineWidth += getLayoutText(child).length() * (int) (height / 1.8f);
+                    inlineWidth += (int) Math.round(browserVersion.getTextWidth(getLayoutText(child),
+                                        style.getStyleAttribute(Definition.FONT_SIZE, true)));
                 }
                 else {
                     inlineWidth += getLayoutText(child).length() * browserVersion.getPixelsPerChar();

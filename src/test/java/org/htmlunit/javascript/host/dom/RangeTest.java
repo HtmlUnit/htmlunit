@@ -423,10 +423,10 @@ public class RangeTest extends WebDriverTestCase {
                       "x=23.100006103515625 y=8.5 w=7.0999908447265625 h=17",
                       "x=23.100006103515625 y=8.5 w=7.0999908447265625 h=17"})
     @HtmlUnitNYI(
-            CHROME = {"4", "x=18 y=8 w=10 h=18", "x=18 y=8 w=10 h=18", "x=28 y=8 w=10 h=18", "x=28 y=8 w=10 h=18"},
-            EDGE = {"4", "x=18 y=8 w=10 h=18", "x=18 y=8 w=10 h=18", "x=28 y=8 w=10 h=18", "x=28 y=8 w=10 h=18"},
-            FF = {"4", "x=18 y=8 w=10 h=18", "x=18 y=8 w=10 h=18", "x=28 y=8 w=10 h=18", "x=28 y=8 w=10 h=18"},
-            FF_ESR = {"4", "x=18 y=8 w=10 h=18", "x=18 y=8 w=10 h=18", "x=28 y=8 w=10 h=18", "x=28 y=8 w=10 h=18"})
+            CHROME = {"4", "x=15 y=8 w=8 h=18", "x=15 y=8 w=8 h=18", "x=23 y=8 w=7 h=18", "x=23 y=8 w=7.104 h=18"},
+            EDGE = {"4", "x=15 y=8 w=8 h=18", "x=15 y=8 w=8 h=18", "x=23 y=8 w=7 h=18", "x=23 y=8 w=7.104 h=18"},
+            FF = {"4", "x=15 y=8 w=8 h=18", "x=15 y=8 w=8 h=18", "x=23 y=8 w=7 h=18", "x=23 y=8 w=7.104 h=18"},
+            FF_ESR = {"4", "x=15 y=8 w=8 h=18", "x=15 y=8 w=8 h=18", "x=23 y=8 w=7 h=18", "x=23 y=8 w=7.104 h=18"})
     public void getClientRectsMany() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"
@@ -463,11 +463,10 @@ public class RangeTest extends WebDriverTestCase {
             DEFAULT = {"1", "x=8 y=8 w=35.546875 h=17"},
             FF = {"1", "x=8 y=8.5 w=35.55000305175781 h=17"},
             FF_ESR = {"1", "x=8 y=8.5 w=35.55000305175781 h=17"})
-    @HtmlUnitNYI(
-            CHROME = {"1", "x=8 y=8 w=50 h=18"},
-            EDGE = {"1", "x=8 y=8 w=50 h=18"},
-            FF = {"1", "x=8 y=8 w=50 h=18"},
-            FF_ESR = {"1", "x=8 y=8 w=50 h=18"})
+    @HtmlUnitNYI(CHROME = {"1", "x=8 y=8 w=35.552 h=18"},
+            EDGE = {"1", "x=8 y=8 w=35.552 h=18"},
+            FF = {"1", "x=8 y=8 w=35.552 h=18"},
+            FF_ESR = {"1", "x=8 y=8 w=35.552 h=18"})
     public void getClientRectsOnTextNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -602,10 +601,10 @@ public class RangeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "x=8 y=8 w=78.859375 h=17",
             FF = "x=8 y=8.5 w=79.14999389648438 h=17",
             FF_ESR = "x=8 y=8.5 w=79.14999389648438 h=17")
-    @HtmlUnitNYI(CHROME = "x=8 y=8 w=110 h=18",
-            EDGE = "x=8 y=8 w=110 h=18",
-            FF = "x=8 y=8 w=110 h=18",
-            FF_ESR = "x=8 y=8 w=110 h=18")
+    @HtmlUnitNYI(CHROME = "x=8 y=8 w=80.432 h=18",
+            EDGE = "x=8 y=8 w=80.432 h=18",
+            FF = "x=8 y=8 w=80.432 h=18",
+            FF_ESR = "x=8 y=8 w=80.432 h=18")
     public void getBoundingClientRect() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body><div id='d'>Hello World</div>\n"
@@ -807,11 +806,10 @@ public class RangeTest extends WebDriverTestCase {
                   "element: x=43.55000305175781 y=8.5 w=39.59999084472656 h=17"},
             FF_ESR = {"text: x=8 y=8.5 w=35.55000305175781 h=17",
                       "element: x=43.55000305175781 y=8.5 w=39.59999084472656 h=17"})
-    @HtmlUnitNYI(
-            CHROME = {"text: x=8 y=8 w=50 h=18", "element: x=58 y=8 w=50 h=18"},
-            EDGE = {"text: x=8 y=8 w=50 h=18", "element: x=58 y=8 w=50 h=18"},
-            FF = {"text: x=8 y=8 w=50 h=18", "element: x=58 y=8 w=50 h=18"},
-            FF_ESR = {"text: x=8 y=8 w=50 h=18", "element: x=58 y=8 w=50 h=18"})
+    @HtmlUnitNYI(CHROME = {"text: x=8 y=8 w=35.552 h=18", "element: x=44 y=8 w=41 h=18"},
+            EDGE = {"text: x=8 y=8 w=35.552 h=18", "element: x=44 y=8 w=41 h=18"},
+            FF = {"text: x=8 y=8 w=35.552 h=18", "element: x=44 y=8 w=41 h=18"},
+            FF_ESR = {"text: x=8 y=8 w=35.552 h=18", "element: x=44 y=8 w=41 h=18"})
     public void getClientRectsCoordinates() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -848,10 +846,10 @@ public class RangeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"x=8 y=8 w=35.546875 h=17"},
             FF = {"x=8 y=8.5 w=35.55000305175781 h=17"},
             FF_ESR = {"x=8 y=8.5 w=35.55000305175781 h=17"})
-    @HtmlUnitNYI(CHROME = "x=8 y=8 w=50 h=18",
-                 EDGE   = "x=8 y=8 w=50 h=18",
-                 FF     = "x=8 y=8 w=50 h=18",
-                 FF_ESR = "x=8 y=8 w=50 h=18")
+    @HtmlUnitNYI(CHROME = "x=8 y=8 w=35.552 h=18",
+            EDGE = "x=8 y=8 w=35.552 h=18",
+            FF = "x=8 y=8 w=35.552 h=18",
+            FF_ESR = "x=8 y=8 w=35.552 h=18")
     public void getBoundingClientRectOnTextNodeCoordinates() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
