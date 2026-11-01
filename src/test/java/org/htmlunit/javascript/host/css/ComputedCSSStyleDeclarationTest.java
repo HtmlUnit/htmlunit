@@ -1953,10 +1953,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"33", "17", "0", "17"})
-    @HtmlUnitNYI(CHROME = {"30", "18", "0", "0"},
-            EDGE = {"30", "18", "0", "0"},
-            FF = {"30", "18", "0", "0"},
-            FF_ESR = {"30", "18", "0", "0"})
+    @HtmlUnitNYI(CHROME = {"33", "18", "0", "0"},
+            EDGE = {"33", "18", "0", "0"},
+            FF = {"33", "18", "0", "0"},
+            FF_ESR = {"33", "18", "0", "0"})
     public void widthAndHeightChildDisplayNone() throws Exception {
         final String content = DOCTYPE_HTML
             + "<html><head><script>\n"

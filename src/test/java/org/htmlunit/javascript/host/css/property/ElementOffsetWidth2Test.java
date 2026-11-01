@@ -501,10 +501,10 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"400", "350"})
-    @HtmlUnitNYI(CHROME = {"0", "30"},
-            EDGE = {"0", "30"},
-            FF = {"0", "30"},
-            FF_ESR = {"0", "30"})
+    @HtmlUnitNYI(CHROME = {"0", "22"},
+            EDGE = {"0", "22"},
+            FF = {"0", "22"},
+            FF_ESR = {"0", "22"})
     public void absolutelyPositionedWidthFromLeftAndRight() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"
@@ -557,10 +557,10 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("13, 18, 22, 33, 67")
-    @HtmlUnitNYI(CHROME = {"15, 24, 30, 45, 90"},
-            EDGE = {"15, 24, 30, 45, 90"},
-            FF = {"15, 24, 30, 45, 90"},
-            FF_ESR = {"15, 24, 30, 45, 90"})
+    @HtmlUnitNYI(CHROME = {"12, 18, 22, 33, 67"},
+            EDGE = {"12, 18, 22, 33, 67"},
+            FF = {"12, 18, 22, 33, 67"},
+            FF_ESR = {"12, 18, 22, 33, 67"})
     public void offsetWidthFontSize() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"
