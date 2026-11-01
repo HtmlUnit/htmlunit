@@ -9,6 +9,12 @@
         <file>
             <source>LICENSE.txt</source>
         </file>
+        <file>
+            <source>target/bom.json</source>
+        </file>
+        <file>
+            <source>target/bom.xml</source>
+        </file>
     </files>
     <fileSets>
         <fileSet>
