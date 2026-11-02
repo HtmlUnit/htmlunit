@@ -20,11 +20,11 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
+import org.htmlunit.util.FileUtils;
 import org.htmlunit.util.StringUtils;
 
 /**
@@ -85,7 +85,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 
         final WebResponse webResponse = page.getWebResponse();
         try (InputStream contentAsStream = webResponse.getContentAsStream()) {
-            FileUtils.copyToFile(contentAsStream, destination.toFile());
+            Files.copy(contentAsStream, destination);
         }
         catch (final Exception e) {
             LOG.error("Failed to write attachment response content to '"
@@ -99,7 +99,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
     private Path determineDestionationFile(final Page page, final String attachmentFilename) {
         // the name can come from the page (download attribute), sanitize it like
         // a name from the Content-Disposition header to stay inside the download folder
-        String fileName = Attachment.sanitizeFilename(attachmentFilename);
+        String fileName = FileUtils.sanitizeFilename(attachmentFilename);
 
         if (StringUtils.isBlank(fileName)) {
             final String file = page.getWebResponse().getWebRequest().getUrl().getFile();

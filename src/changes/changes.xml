@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox, 159, Firefox ESR 153, Chrome/Edge 156">
+            <action type="update" dev="Vidya m">
+                Sanitize download attribute file names in DownloadingAttachmentHandler.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Fix super property increment/decrement operator.
             </action>

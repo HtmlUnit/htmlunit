@@ -19,6 +19,7 @@ import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
 import org.htmlunit.http.ContentDisposition;
 import org.htmlunit.http.ContentDispositionParser;
+import org.htmlunit.util.FileUtils;
 
 /**
  * An attachment represents a page received from the server which contains a
@@ -106,7 +107,8 @@ public class Attachment {
      * wins over {@code filename}, whatever the order in the header is. Supported charsets are UTF-8 and
      * ISO-8859-1; if the extended value is not usable, the plain {@code filename} is used.</li>
      * <li>Characters that are not allowed in file names on at least one platform
-     * ({@code \ / : * ? " < > |} and control characters) are replaced by an underscore. This also
+     * ({@code \ / : * ? " < > |} and control characters) are replaced by an underscore
+     * (see {@link FileUtils#sanitizeFilename(String)}). This also
      * makes sure a path in the header can never be used to leave the download directory:
      * {@code ../../evil.txt} becomes {@code _.._evil.txt}.</li>
      * <li>Leading dots and white space (no hidden files) and trailing dots and white space
@@ -132,44 +134,10 @@ public class Attachment {
         }
 
         // a filename* that is not usable falls back to filename
-        String filename = sanitizeFilename(contentDisposition.getExtendedParameter("filename"));
+        String filename = FileUtils.sanitizeFilename(contentDisposition.getExtendedParameter("filename"));
         if (filename == null) {
-            filename = sanitizeFilename(contentDisposition.getParameter("filename"));
+            filename = FileUtils.sanitizeFilename(contentDisposition.getParameter("filename"));
         }
         return filename;
-    }
-
-    /**
-     * Makes the name usable as file name: characters that are not allowed are replaced by '_',
-     * leading dots and white space and trailing dots and white space are removed.
-     *
-     * @param name the name to sanitize
-     * @return the sanitized name or {@code null} if nothing is left
-     */
-    static String sanitizeFilename(final String name) {
-        if (name == null) {
-            return null;
-        }
-
-        final StringBuilder sb = new StringBuilder(name.length());
-        for (int i = 0; i < name.length(); i++) {
-            final char c = name.charAt(i);
-            if (c < ' ' || c == 127 || "\\/:*?\"<>|".indexOf(c) >= 0) {
-                sb.append('_');
-            }
-            else {
-                sb.append(c);
-            }
-        }
-
-        int start = 0;
-        int end = sb.length();
-        while (start < end && (sb.charAt(start) == '.' || Character.isWhitespace(sb.charAt(start)))) {
-            start++;
-        }
-        while (end > start && (sb.charAt(end - 1) == '.' || Character.isWhitespace(sb.charAt(end - 1)))) {
-            end--;
-        }
-        return start == end ? null : sb.substring(start, end);
     }
 }
