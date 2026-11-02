@@ -39,6 +39,7 @@ import org.htmlunit.util.StringUtils;
  *
  * @author Marek Andreansky
  * @author Ronald Brill
+ * @author Vidya m
  */
 public class DownloadingAttachmentHandler implements AttachmentHandler {
 
@@ -96,7 +97,9 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
     }
 
     private Path determineDestionationFile(final Page page, final String attachmentFilename) {
-        String fileName = attachmentFilename;
+        // the name can come from the page (download attribute), sanitize it like
+        // a name from the Content-Disposition header to stay inside the download folder
+        String fileName = Attachment.sanitizeFilename(attachmentFilename);
 
         if (StringUtils.isBlank(fileName)) {
             final String file = page.getWebResponse().getWebRequest().getUrl().getFile();

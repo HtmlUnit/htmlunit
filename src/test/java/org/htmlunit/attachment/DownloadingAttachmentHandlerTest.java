@@ -36,6 +36,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Marek Andreansky
  * @author Ronald Brill
+ * @author Vidya m
  */
 public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
 
@@ -205,6 +206,62 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
         }
         finally {
             FileUtils.deleteDirectory(downloadFolder);
+        }
+    }
+
+    /**
+     * The file name from the download attribute is sanitized like the one from the
+     * Content-Disposition header; a path can't be used to leave the download folder.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fileNameFromDownloadAttributeIsSanitized() throws Exception {
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<a id='relative' href='" + URL_SECOND + "'>relative</a>\n"
+            + "<a id='absolute' href='" + URL_SECOND + "'>absolute</a>\n"
+            + "</body></html>";
+        final String content2 = "download file contents";
+
+        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File testFolder = new File(tmpFolder, "downloading-attachment-test");
+        final File downloadFolder = new File(testFolder, "downloads");
+        final File absoluteFile = new File(testFolder, "absolute.txt");
+        FileUtils.deleteDirectory(testFolder);
+
+        try {
+            FileUtils.forceMkdir(downloadFolder);
+
+            final WebClient client = getWebClient();
+            client.setAttachmentHandler(new DownloadingAttachmentHandler(downloadFolder.toPath()));
+
+            final MockWebConnection conn = new MockWebConnection();
+            conn.setResponse(URL_FIRST, content1);
+            conn.setResponse(URL_SECOND, content2, MimeType.TEXT_PLAIN);
+            client.setWebConnection(conn);
+
+            final HtmlPage page = client.getPage(URL_FIRST);
+
+            final HtmlAnchor relative = page.getHtmlElementById("relative");
+            relative.setAttribute("download", "../evil.txt");
+            relative.click();
+
+            final HtmlAnchor absolute = page.getHtmlElementById("absolute");
+            absolute.setAttribute("download", absoluteFile.getAbsolutePath());
+            absolute.click();
+
+            assertFalse(absoluteFile.exists());
+
+            final Collection<File> files = FileUtils.listFiles(testFolder, null, true);
+            assertEquals(2, files.size());
+            for (final File file : files) {
+                assertEquals(downloadFolder, file.getParentFile());
+            }
+            assertTrue(files.removeIf(f -> f.getName().equals("_evil.txt")));
+        }
+        finally {
+            FileUtils.deleteDirectory(testFolder);
         }
     }
 }
