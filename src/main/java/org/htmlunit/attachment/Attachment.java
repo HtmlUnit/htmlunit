@@ -29,6 +29,7 @@ import org.htmlunit.http.ContentDispositionParser;
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Lai Quang Duong
+ * @author Vidya m
  */
 public class Attachment {
 
@@ -145,7 +146,7 @@ public class Attachment {
      * @param name the name to sanitize
      * @return the sanitized name or {@code null} if nothing is left
      */
-    private static String sanitizeFilename(final String name) {
+    static String sanitizeFilename(final String name) {
         if (name == null) {
             return null;
         }
