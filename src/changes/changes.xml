@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox 153 ESR, Chrome/Edge 156">
+        <release version="5.7.0" date="xxxx, 2026" description="Bugfixes, Firefox, 159, Firefox ESR 153, Chrome/Edge 156">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix super property increment/decrement operator.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix to exit catch scope correctly when lexical scope introduced / Fix for continue in catch scopes.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: BigInt.prototype.toLocaleString() treating its argument as a radix fixed.
             </action>
