@@ -136,6 +136,10 @@ animationFillMode
 animationIterationCount
 animationName
 animationPlayState
+animationRange
+animationRangeEnd
+animationRangeStart
+animationTimeline
 animationTimingFunction
 appearance
 aspectRatio
@@ -495,6 +499,9 @@ scrollPaddingTop
 scrollSnapAlign
 scrollSnapStop
 scrollSnapType
+scrollTimeline
+scrollTimelineAxis
+scrollTimelineName
 scrollbarColor
 scrollbarGutter
 scrollbarWidth
@@ -545,6 +552,7 @@ textUnderlinePosition
 textWrap
 textWrapMode
 textWrapStyle
+timelineScope
 top
 touchAction
 transform
@@ -562,6 +570,10 @@ unicodeBidi
 userSelect
 vectorEffect
 verticalAlign
+viewTimeline
+viewTimelineAxis
+viewTimelineInset
+viewTimelineName
 viewTransitionClass
 viewTransitionName
 visibility

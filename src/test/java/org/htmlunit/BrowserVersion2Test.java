@@ -151,7 +151,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "Accept: image/jxl,image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
             EDGE = "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
-            FF = "Accept: image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+            FF = "Accept: image/avif,image/jxl,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
             FF_ESR = "Accept: image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5")
     public void acceptHeaderImage() throws Exception {
         final String html = DOCTYPE_HTML

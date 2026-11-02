@@ -602,7 +602,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "\"Gill Sans Extrabold\""})
+    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "\"Gill Sans Extrabold\""},
+            FF = {"normal", "normal", "normal", "14px", "normal", "Gill Sans Extrabold"})
     @HtmlUnitNYI(CHROME = {"", "", "", "", "", ""},
             EDGE = {"", "", "", "", "", ""},
             FF = {"", "", "", "", "", ""},
@@ -615,7 +616,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "\"Gill Sans Extrabold\", serif"})
+    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "\"Gill Sans Extrabold\", serif"},
+            FF = {"normal", "normal", "normal", "14px", "normal", "Gill Sans Extrabold, serif"})
     @HtmlUnitNYI(CHROME = {"", "", "", "", "", ""},
             EDGE = {"", "", "", "", "", ""},
             FF = {"", "", "", "", "", ""},
@@ -903,7 +905,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "\"Gill Sans Extrabold\""})
+    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "\"Gill Sans Extrabold\""},
+            FF = {"normal", "normal", "normal", "14px", "normal", "Gill Sans Extrabold"})
     @HtmlUnitNYI(CHROME = {"", "", "", "", "", ""},
             EDGE = {"", "", "", "", "", ""},
             FF = {"", "", "", "", "", ""},
@@ -916,7 +919,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "\"Gill Sans Extrabold\", serif"})
+    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "\"Gill Sans Extrabold\", serif"},
+            FF = {"normal", "normal", "normal", "14px", "normal", "Gill Sans Extrabold, serif"})
     @HtmlUnitNYI(CHROME = {"", "", "", "", "", ""},
             EDGE = {"", "", "", "", "", ""},
             FF = {"", "", "", "", "", ""},
@@ -1218,7 +1222,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "\"Gill Sans Extrabold\""})
+    @Alerts(DEFAULT = {"normal", "normal", "400", "14px", "normal", "\"Gill Sans Extrabold\""},
+            FF = {"normal", "normal", "400", "14px", "normal", "Gill Sans Extrabold"})
     @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""},
             EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""},
             FF = {"normal", "normal", "400", "16px", "normal", "serif"},
@@ -1231,7 +1236,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "\"Gill Sans Extrabold\", serif"})
+    @Alerts(DEFAULT = {"normal", "normal", "400", "14px", "normal", "\"Gill Sans Extrabold\", serif"},
+            FF = {"normal", "normal", "400", "14px", "normal", "Gill Sans Extrabold, serif"})
     @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""},
             EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""},
             FF = {"normal", "normal", "400", "16px", "normal", "serif"},
@@ -1245,7 +1251,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"normal", "normal", "400", "6px", "normal", "sans-serif"},
-            FF = {"normal", "normal", "400", "2.24px", "normal", "sans-serif"},
+            FF = {"normal", "normal", "400", "2.23333px", "normal", "sans-serif"},
             FF_ESR = {"normal", "normal", "400", "2.24px", "normal", "sans-serif"})
     @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""},
             EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""},

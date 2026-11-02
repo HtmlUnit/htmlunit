@@ -304,6 +304,7 @@ marginInlineStart=:0px
 marginLeft=:0px
 marginRight=:0px
 marginTop=:0px
+marginTrim=:none
 marker=:none
 markerEnd=:none
 markerMid=:none

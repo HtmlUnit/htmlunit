@@ -70,7 +70,7 @@ import org.htmlunit.util.StringUtils;
 public final class BrowserVersion implements Serializable {
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(157, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(159, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 153;
 
@@ -158,7 +158,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         FIREFOX.acceptLanguageHeader_ = "en-US,en;q=0.9";
         FIREFOX.xmlHttpRequestAcceptHeader_ = "*/*";
-        FIREFOX.imgAcceptHeader_ = "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5";
+        FIREFOX.imgAcceptHeader_ = "image/avif,image/jxl,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5";
         FIREFOX.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         FIREFOX.fontHeights_ = new int[] {
             0, 2, 3, 5, 6, 6, 7, 9, 10, 11, 12, 13, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26, 28, 29,

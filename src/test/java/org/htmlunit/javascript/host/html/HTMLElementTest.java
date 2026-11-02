@@ -3510,7 +3510,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "area-circle|none|0|-",
                     "area-poly|none|0|-",
                     "area-default|none|0|-",
-                    "area-rect-block|block|1|8,26,1243,0"},
+                    "area-rect-block|block|1|8,26,1232,0"},
             FF = {"img|inline|1|8,18,5,5",
                   "area-rect|none|1|8,18,5,5",
                   "area-circle|none|1|8,18,5,5",

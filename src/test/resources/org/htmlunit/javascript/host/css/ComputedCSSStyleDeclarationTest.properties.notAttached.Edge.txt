@@ -304,6 +304,7 @@ marginInlineStart=:
 marginLeft=:
 marginRight=:
 marginTop=:
+marginTrim=:
 marker=:
 markerEnd=:
 markerMid=:

@@ -25,6 +25,7 @@ import static org.htmlunit.css.BrowserConfiguration.chromeAndEdgeNotIterable;
 import static org.htmlunit.css.BrowserConfiguration.edge;
 import static org.htmlunit.css.BrowserConfiguration.ff;
 import static org.htmlunit.css.BrowserConfiguration.ffAuto;
+import static org.htmlunit.css.BrowserConfiguration.ffEsr;
 import static org.htmlunit.css.BrowserConfiguration.ffLatest;
 import static org.htmlunit.css.BrowserConfiguration.ffNone;
 import static org.htmlunit.css.BrowserConfiguration.ffNormal;
@@ -207,16 +208,32 @@ public final class StyleAttributes implements Serializable {
         ANIMATION_PLAY_STATE_("animation-play-state", "animation-play-state", ff("running")),
 
         /** The style property {@code animationRange}. */
-        ANIMATION_RANGE("animationRange", "animation-range", chromeAndEdgeNormal()),
+        ANIMATION_RANGE("animationRange", "animation-range", chromeAndEdgeNormal(),
+                ffLatest("normal")),
+
+        /** The style property {@code animation-range}. */
+        ANIMATION_RANGE_("animation-range", "animation-range", ffLatest("normal")),
 
         /** The style property {@code animationRangeEnd}. */
-        ANIMATION_RANGE_END("animationRangeEnd", "animation-range-end", chromeAndEdgeNormal()),
+        ANIMATION_RANGE_END("animationRangeEnd", "animation-range-end", chromeAndEdgeNormal(),
+                ffLatest("normal")),
+
+        /** The style property {@code animation-range-end}. */
+        ANIMATION_RANGE_END_("animation-range-end", "animation-range-end", ffLatest("normal")),
 
         /** The style property {@code animationRangeStart}. */
-        ANIMATION_RANGE_START("animationRangeStart", "animation-range-start", chromeAndEdgeNormal()),
+        ANIMATION_RANGE_START("animationRangeStart", "animation-range-start", chromeAndEdgeNormal(),
+                ffLatest("normal")),
+
+        /** The style property {@code animation-range-start}. */
+        ANIMATION_RANGE_START_("animation-range-start", "animation-range-start", ffLatest("normal")),
 
         /** The style property {@code animationTimeline}. */
-        ANIMATION_TIMELINE("animationTimeline", "animation-timeline", chromeAndEdgeAuto()),
+        ANIMATION_TIMELINE("animationTimeline", "animation-timeline", chromeAndEdgeAuto(),
+                ffLatest("auto")),
+
+        /** The style property {@code animation-timeline}. */
+        ANIMATION_TIMELINE_("animation-timeline", "animation-timeline", ffLatest("auto")),
 
         /** The style property {@code animationTimingFunction}. */
         ANIMATION_TIMING_FUNCTION("animationTimingFunction", "animation-timing-function",
@@ -2623,10 +2640,12 @@ public final class StyleAttributes implements Serializable {
         PLACE_CONTENT_("place-content", "place-content", ffNormal()),
 
         /** The style property {@code placeItems}. */
-        PLACE_ITEMS("placeItems", "place-items", chromeAndEdgeNormal(), ff("normal legacy")),
+        PLACE_ITEMS("placeItems", "place-items", chromeAndEdgeNormal(),
+                ffLatest("normal"), ffEsr("normal legacy")),
 
         /** The style property {@code place-items}. */
-        PLACE_ITEMS_("place-items", "place-items", ff("normal legacy")),
+        PLACE_ITEMS_("place-items", "place-items",
+                ffLatest("normal"), ffEsr("normal legacy")),
 
         /** The style property {@code placeSelf}. */
         PLACE_SELF("placeSelf", "place-self", chromeAndEdgeAuto(), ffAuto()),
@@ -3014,13 +3033,25 @@ public final class StyleAttributes implements Serializable {
         SCROLL_TARGET_GROUP("scrollTargetGroup", "scroll-target-group", chromeAndEdgeNone()),
 
         /** The style property {@code scrollTimeline}. */
-        SCROLL_TIMELINE("scrollTimeline", "scroll-timeline", chromeAndEdgeNone()),
+        SCROLL_TIMELINE("scrollTimeline", "scroll-timeline", chromeAndEdgeNone(),
+                ffLatest("none")),
+
+        /** The style property {@code scroll-timeline}. */
+        SCROLL_TIMELINE_("scroll-timeline", "scroll-timeline", ffLatest("none")),
 
         /** The style property {@code scrollTimelineAxis}. */
-        SCROLL_TIMELINE_AXIS("scrollTimelineAxis", "scroll-timeline-axis", chromeAndEdge("block")),
+        SCROLL_TIMELINE_AXIS("scrollTimelineAxis", "scroll-timeline-axis", chromeAndEdge("block"),
+                ffLatest("block")),
+
+        /** The style property {@code scroll-timeline-axis}. */
+        SCROLL_TIMELINE_AXIS_("scroll-timeline-axis", "scroll-timeline-axis", ffLatest("block")),
 
         /** The style property {@code scrollTimelineName}. */
-        SCROLL_TIMELINE_NAME("scrollTimelineName", "scroll-timeline-name", chromeAndEdgeNone()),
+        SCROLL_TIMELINE_NAME("scrollTimelineName", "scroll-timeline-name", chromeAndEdgeNone(),
+                ffLatest("none")),
+
+        /** The style property {@code scroll-timeline-name}. */
+        SCROLL_TIMELINE_NAME_("scroll-timeline-name", "scroll-timeline-name", ffLatest("none")),
 
         /** The style property {@code scrollbarColor}. */
         SCROLLBAR_COLOR("scrollbarColor", "scrollbar-color", chromeAndEdgeAndFirefox("auto")),
@@ -3373,7 +3404,11 @@ public final class StyleAttributes implements Serializable {
         TEXT_WRAP_STYLE_("text-wrap-style", "text-wrap-style", ffAuto()),
 
         /** The style property {@code timelineScope}. */
-        TIMELINE_SCOPE("timelineScope", "timeline-scope", chromeAndEdgeNone()),
+        TIMELINE_SCOPE("timelineScope", "timeline-scope", chromeAndEdgeNone(),
+                ffLatest("none")),
+
+        /** The style property {@code timeline-scope}. */
+        TIMELINE_SCOPE_("timeline-scope", "timeline-scope", ffLatest("none")),
 
         /** The style property {@code timelineTrigger}. */
         TIMELINE_TRIGGER("timelineTrigger", "timeline-trigger", chromeAndEdgeNone()),
@@ -3514,16 +3549,32 @@ public final class StyleAttributes implements Serializable {
         VERTICAL_ALIGN_("vertical-align", "vertical-align", ff("baseline")),
 
         /** The style property {@code viewTimeline}. */
-        VIEW_TIMELINE("viewTimeline", "view-timeline", chromeAndEdgeNone()),
+        VIEW_TIMELINE("viewTimeline", "view-timeline", chromeAndEdgeNone(),
+                ffLatest("none")),
+
+        /** The style property {@code view-timeline}. */
+        VIEW_TIMELINE_("view-timeline", "view-timeline", ffLatest("none")),
 
         /** The style property {@code viewTimelineAxis}. */
-        VIEW_TIMELINE_AXIS("viewTimelineAxis", "view-timeline-axis", chromeAndEdge("block")),
+        VIEW_TIMELINE_AXIS("viewTimelineAxis", "view-timeline-axis", chromeAndEdge("block"),
+                ffLatest("block")),
+
+        /** The style property {@code view-timeline-axis}. */
+        VIEW_TIMELINE_AXIS_("view-timeline-axis", "view-timeline-axis", ffLatest("block")),
 
         /** The style property {@code viewTimelineInset}. */
-        VIEW_TIMELINE_INSET("viewTimelineInset", "view-timeline-inset", chromeAndEdgeAuto()),
+        VIEW_TIMELINE_INSET("viewTimelineInset", "view-timeline-inset", chromeAndEdgeAuto(),
+                ffLatest("auto")),
+
+        /** The style property {@code view-timeline-inset}. */
+        VIEW_TIMELINE_INSET_("view-timeline-inset", "view-timeline-inset", ffLatest("auto")),
 
         /** The style property {@code viewTimelineName}. */
-        VIEW_TIMELINE_NAME("viewTimelineName", "view-timeline-name", chromeAndEdgeNone()),
+        VIEW_TIMELINE_NAME("viewTimelineName", "view-timeline-name", chromeAndEdgeNone(),
+                ffLatest("none")),
+
+        /** The style property {@code view-timeline-name}. */
+        VIEW_TIMELINE_NAME_("view-timeline-name", "view-timeline-name", ffLatest("none")),
 
         /** The style property {@code viewTransitionClass}. */
         VIEW_TRANSITION_CLASS("viewTransitionClass", "view-transition-class", chromeAndEdgeNone(), ff("none")),
