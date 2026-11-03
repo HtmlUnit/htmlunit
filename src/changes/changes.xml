@@ -7,7 +7,11 @@
     </properties>
 
     <body>
-        <release version="5.7.0" date="November 02, 2026" description="Firefox, 159, Firefox ESR 153, Chrome/Edge 156, Security, Serialization, Bugfixes">
+        <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+        </release>
+
+
+        <release version="5.7.0" date="November 02, 2026" description="Firefox 159, Firefox ESR 153, Chrome/Edge 156, Security, Serialization, Bugfixes">
             <action type="update" dev="Vidya m">
                 Sanitize download attribute file names in DownloadingAttachmentHandler.
             </action>
