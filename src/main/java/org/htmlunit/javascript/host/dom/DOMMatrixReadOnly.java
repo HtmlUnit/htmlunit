@@ -14,20 +14,28 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeFloat32Array;
 import org.htmlunit.corejs.javascript.typedarrays.NativeFloat64Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeTypedArrayView;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxStaticFunction;
+import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code DOMMatrixReadOnly}.
@@ -109,6 +117,20 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         return matrix;
     }
 
+    /**
+     * Initializes this matrix from the constructor arguments.
+     * <ul>
+     * <li>no argument or {@code undefined}: the identity matrix</li>
+     * <li>an iterable object (e.g. an array or a typed array): a sequence of 6 (2D)
+     * or 16 (3D) numbers</li>
+     * <li>everything else is converted to a string and parsed as CSS transform list;
+     * this is only supported in a window, workers throw a TypeError</li>
+     * </ul>
+     *
+     * @param args the constructor arguments
+     * @param scope the scope
+     * @param ctorObj the constructor function
+     */
     protected void init(final Object[] args, final VarScope scope, final Function ctorObj) {
         setParentScope(scope);
         setPrototype(((FunctionObject) ctorObj).getClassPrototype());
@@ -117,54 +139,54 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
             return;
         }
 
-        if (args[0] instanceof NativeArray arrayArgs) {
-            if (arrayArgs.getLength() == 6) {
-                m11_ = JavaScriptEngine.toNumber(arrayArgs.get(0));
-                m12_ = JavaScriptEngine.toNumber(arrayArgs.get(1));
+        final Object init = args[0];
+        if (init instanceof Scriptable initScriptable
+                && ScriptableObject.hasProperty(initScriptable, SymbolKey.ITERATOR)) {
+            final List<Double> values = new ArrayList<>();
+            JavaScriptEngine.iterate(Context.getCurrentContext(), scope, initScriptable,
+                    value -> values.add(JavaScriptEngine.toNumber(value)));
 
-                m21_ = JavaScriptEngine.toNumber(arrayArgs.get(2));
-                m22_ = JavaScriptEngine.toNumber(arrayArgs.get(3));
-
-                m41_ = JavaScriptEngine.toNumber(arrayArgs.get(4));
-                m42_ = JavaScriptEngine.toNumber(arrayArgs.get(5));
-
-                is2D_ = true;
+            if (values.size() == 6) {
+                setValues2D(values.get(0), values.get(1), values.get(2),
+                        values.get(3), values.get(4), values.get(5));
+                return;
+            }
+            if (values.size() == 16) {
+                final double[] matrix = new double[16];
+                for (int i = 0; i < matrix.length; i++) {
+                    matrix[i] = values.get(i);
+                }
+                setValues(matrix, false);
                 return;
             }
 
-            if (arrayArgs.getLength() == 16) {
-                m11_ = JavaScriptEngine.toNumber(arrayArgs.get(0));
-                m12_ = JavaScriptEngine.toNumber(arrayArgs.get(1));
-                m13_ = JavaScriptEngine.toNumber(arrayArgs.get(2));
-                m14_ = JavaScriptEngine.toNumber(arrayArgs.get(3));
-
-                m21_ = JavaScriptEngine.toNumber(arrayArgs.get(4));
-                m22_ = JavaScriptEngine.toNumber(arrayArgs.get(5));
-                m23_ = JavaScriptEngine.toNumber(arrayArgs.get(6));
-                m24_ = JavaScriptEngine.toNumber(arrayArgs.get(7));
-
-                m31_ = JavaScriptEngine.toNumber(arrayArgs.get(8));
-                m32_ = JavaScriptEngine.toNumber(arrayArgs.get(9));
-                m33_ = JavaScriptEngine.toNumber(arrayArgs.get(10));
-                m34_ = JavaScriptEngine.toNumber(arrayArgs.get(11));
-
-                m41_ = JavaScriptEngine.toNumber(arrayArgs.get(12));
-                m42_ = JavaScriptEngine.toNumber(arrayArgs.get(13));
-                m43_ = JavaScriptEngine.toNumber(arrayArgs.get(14));
-                m44_ = JavaScriptEngine.toNumber(arrayArgs.get(15));
-
-                is2D_ = false;
-                return;
-            }
-
-            throw JavaScriptEngine.typeError("DOMMatrixReadOnly constructor: Matrix init sequence must have "
-                    + "a length of 6 or 16 (actual value: " + arrayArgs.getLength() + ")");
+            throw JavaScriptEngine.typeError(getClassName() + " constructor: Matrix init sequence must have "
+                    + "a length of 6 or 16 (actual value: " + values.size() + ")");
         }
 
-        throw JavaScriptEngine.asJavaScriptException(
-                getWindow(),
-                "An invalid or illegal string was specified",
-                DOMException.SYNTAX_ERR);
+        // (DOMString or sequence<unrestricted double>): everything else is a string
+        if (!(getWindowOrWorkerGlobalScope(this) instanceof Window)) {
+            throw JavaScriptEngine.typeError(getClassName()
+                    + " constructor: a transform list can only be parsed in a window context");
+        }
+        setTransformList(JavaScriptEngine.toString(init));
+    }
+
+    /**
+     * Parses the given CSS transform list and replaces the values of this matrix
+     * with the result.
+     *
+     * @param transformList the CSS transform list
+     */
+    protected void setTransformList(final String transformList) {
+        try {
+            DOMMatrixTransformListParser.parse(transformList, this);
+        }
+        catch (final IllegalArgumentException e) {
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "Failed to parse '" + transformList + "': " + e.getMessage(),
+                    DOMException.SYNTAX_ERR);
+        }
     }
 
     /**
@@ -533,31 +555,13 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
      */
     @JsxFunction
     public DOMMatrix flipX() {
-        final DOMMatrix matrix = new DOMMatrix();
-        matrix.setParentScope(getParentScope());
-        matrix.setPrototype(getWindow().getPrototype(DOMMatrix.class));
+        final double[] values = getValues();
+        for (int i = 0; i < 4; i++) {
+            values[i] = -values[i];
+        }
 
-        matrix.setM11(-m11_);
-        matrix.setM12(-m12_);
-        matrix.setM13(-m13_);
-        matrix.setM14(-m14_);
-
-        matrix.setM21(m21_);
-        matrix.setM22(m22_);
-        matrix.setM23(m23_);
-        matrix.setM24(m24_);
-
-        matrix.setM31(m31_);
-        matrix.setM32(m32_);
-        matrix.setM33(m33_);
-        matrix.setM34(m34_);
-
-        matrix.setM41(m41_);
-        matrix.setM42(m42_);
-        matrix.setM43(m43_);
-        matrix.setM44(m44_);
-
-        matrix.setIs2D(is2D_);
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.setValues(values, is2D_);
         return matrix;
     }
 
@@ -569,31 +573,13 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
      */
     @JsxFunction
     public DOMMatrix flipY() {
-        final DOMMatrix matrix = new DOMMatrix();
-        matrix.setParentScope(getParentScope());
-        matrix.setPrototype(getWindow().getPrototype(DOMMatrix.class));
+        final double[] values = getValues();
+        for (int i = 4; i < 8; i++) {
+            values[i] = -values[i];
+        }
 
-        matrix.setM11(m11_);
-        matrix.setM12(m12_);
-        matrix.setM13(m13_);
-        matrix.setM14(m14_);
-
-        matrix.setM21(-m21_);
-        matrix.setM22(-m22_);
-        matrix.setM23(-m23_);
-        matrix.setM24(-m24_);
-
-        matrix.setM31(m31_);
-        matrix.setM32(m32_);
-        matrix.setM33(m33_);
-        matrix.setM34(m34_);
-
-        matrix.setM41(m41_);
-        matrix.setM42(m42_);
-        matrix.setM43(m43_);
-        matrix.setM44(m44_);
-
-        matrix.setIs2D(is2D_);
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.setValues(values, is2D_);
         return matrix;
     }
 
@@ -605,392 +591,851 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
      */
     @JsxFunction
     public DOMMatrix inverse() {
-        final DOMMatrix matrix = new DOMMatrix();
-        matrix.setParentScope(getParentScope());
-        matrix.setPrototype(getWindow().getPrototype(DOMMatrix.class));
-
-        matrix.setM11(m11_);
-        matrix.setM12(m12_);
-        matrix.setM13(m13_);
-        matrix.setM14(m14_);
-
-        matrix.setM21(m21_);
-        matrix.setM22(m22_);
-        matrix.setM23(m23_);
-        matrix.setM24(m24_);
-
-        matrix.setM31(m31_);
-        matrix.setM32(m32_);
-        matrix.setM33(m33_);
-        matrix.setM34(m34_);
-
-        matrix.setM41(m41_);
-        matrix.setM42(m42_);
-        matrix.setM43(m43_);
-        matrix.setM44(m44_);
-
-        matrix.setIs2D(is2D_);
-        return matrix.invertSelf();
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.invertSelfInternal();
+        return matrix;
     }
 
     /**
      * Returns a new matrix which is the dot product of the matrix and the given matrix.
-     * @param other the matrix to multiply with this matrix
-     * @return a new matrix which is the dot product of the matrix and the otherMatrix parameter.
-     *     If otherMatrix is omitted, the matrix is multiplied by a matrix in which every element
-     *     is 0 except the bottom-right corner and the element immediately above
-     *     and to its left: m33 and m34. These have the default value of 1.
+     * @param other the matrix to multiply with this matrix; this can be a matrix or an
+     *     object with matrix properties (DOMMatrixInit); {@code null} and {@code undefined}
+     *     are treated as identity matrix
+     * @return a new matrix which is the dot product of the matrix and the other matrix.
      *     The original matrix is not modified.
      */
     @JsxFunction
     public DOMMatrix multiply(final Object other) {
-        final DOMMatrix result = new DOMMatrix();
-        result.setParentScope(getParentScope());
-        result.setPrototype(getWindow().getPrototype(DOMMatrix.class));
+        final DOMMatrixReadOnly otherMatrix = fromMatrixInitForMultiply(other, "multiply", getClassName());
 
-        // Handle null/undefined by treating as identity matrix
-        if (other == null || JavaScriptEngine.isUndefined(other)) {
-            return result;
-        }
-
-        if (!(other instanceof DOMMatrixReadOnly otherMatrix)) {
-            throw JavaScriptEngine.typeError("Failed to execute 'multiply' on 'DOMMatrixReadOnly': "
-                    + "parameter 1 is not of type 'DOMMatrixReadOnly'.");
-        }
-
-        // Matrix multiplication: result = this * otherMatrix
-        // Standard matrix multiplication formula: C[i][j] = sum(A[i][k] * B[k][j])
-        result.setIs2D(is2D_ && otherMatrix.is2D_);
-
-        result.setM11(m11_ * otherMatrix.m11_
-                + m21_ * otherMatrix.m12_
-                + m31_ * otherMatrix.m13_
-                + m41_ * otherMatrix.m14_);
-        result.setM12(m12_ * otherMatrix.m11_
-                + m22_ * otherMatrix.m12_
-                + m32_ * otherMatrix.m13_
-                + m42_ * otherMatrix.m14_);
-        if (!result.isIs2D()) {
-            result.setM13(m13_ * otherMatrix.m11_
-                    + m23_ * otherMatrix.m12_
-                    + m33_ * otherMatrix.m13_
-                    + m43_ * otherMatrix.m14_);
-            result.setM14(m14_ * otherMatrix.m11_
-                    + m24_ * otherMatrix.m12_
-                    + m34_ * otherMatrix.m13_
-                    + m44_ * otherMatrix.m14_);
-        }
-
-        result.setM21(m11_ * otherMatrix.m21_
-                + m21_ * otherMatrix.m22_
-                + m31_ * otherMatrix.m23_
-                + m41_ * otherMatrix.m24_);
-        result.setM22(m12_ * otherMatrix.m21_
-                + m22_ * otherMatrix.m22_
-                + m32_ * otherMatrix.m23_
-                + m42_ * otherMatrix.m24_);
-        if (!result.isIs2D()) {
-            result.setM23(m13_ * otherMatrix.m21_
-                    + m23_ * otherMatrix.m22_
-                    + m33_ * otherMatrix.m23_
-                    + m43_ * otherMatrix.m24_);
-            result.setM24(m14_ * otherMatrix.m21_
-                    + m24_ * otherMatrix.m22_
-                    + m34_ * otherMatrix.m23_
-                    + m44_ * otherMatrix.m24_);
-        }
-
-        if (!result.isIs2D()) {
-            result.setM31(m11_ * otherMatrix.m31_
-                    + m21_ * otherMatrix.m32_
-                    + m31_ * otherMatrix.m33_
-                    + m41_ * otherMatrix.m34_);
-            result.setM32(m12_ * otherMatrix.m31_
-                    + m22_ * otherMatrix.m32_
-                    + m32_ * otherMatrix.m33_
-                    + m42_ * otherMatrix.m34_);
-            result.setM33(m13_ * otherMatrix.m31_
-                    + m23_ * otherMatrix.m32_
-                    + m33_ * otherMatrix.m33_
-                    + m43_ * otherMatrix.m34_);
-            result.setM34(m14_ * otherMatrix.m31_
-                    + m24_ * otherMatrix.m32_
-                    + m34_ * otherMatrix.m33_
-                    + m44_ * otherMatrix.m34_);
-        }
-
-        result.setM41(m11_ * otherMatrix.m41_
-                + m21_ * otherMatrix.m42_
-                + m31_ * otherMatrix.m43_
-                + m41_ * otherMatrix.m44_);
-        result.setM42(m12_ * otherMatrix.m41_
-                + m22_ * otherMatrix.m42_
-                + m32_ * otherMatrix.m43_
-                + m42_ * otherMatrix.m44_);
-        if (!result.isIs2D()) {
-            result.setM43(m13_ * otherMatrix.m41_
-                    + m23_ * otherMatrix.m42_
-                    + m33_ * otherMatrix.m43_
-                    + m43_ * otherMatrix.m44_);
-            result.setM44(m14_ * otherMatrix.m41_
-                    + m24_ * otherMatrix.m42_
-                    + m34_ * otherMatrix.m43_
-                    + m44_ * otherMatrix.m44_);
-        }
-
-        return result;
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.multiplySelfInternal(otherMatrix);
+        return matrix;
     }
 
     /**
-     * Returns a new matrix rotated about the z-axis by the specified angle.
-     * @param rotZ the rotation angle in degrees. If omitted, defaults to 0.
-     * @return a new matrix which is the result of the original matrix rotated by the specified angle.
-     *     The rotation is applied around the origin (0, 0) in the 2D plane.
+     * Returns a new matrix rotated by the specified angles.
+     * If only one argument is given, this is the rotation angle around the z-axis
+     * (a 2D rotation), otherwise the matrix is rotated around the z-axis, then around
+     * the y-axis and finally around the x-axis.
+     *
+     * @param rotX the rotation angle around the x-axis in degrees (or the rotation angle
+     *     around the z-axis if this is the only argument)
+     * @param rotY the rotation angle around the y-axis in degrees
+     * @param rotZ the rotation angle around the z-axis in degrees
+     * @return a new matrix which is the result of the original matrix rotated
+     *     by the specified angles. The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrix rotate(final Object rotX, final Object rotY, final Object rotZ) {
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.rotateSelfInternal(rotX, rotY, rotZ);
+        return matrix;
+    }
+
+    /**
+     * Returns a new matrix rotated by the angle between the specified vector and (1, 0).
+     *
+     * @param x the x component of the vector
+     * @param y the y component of the vector
+     * @return a new matrix which is the result of the original matrix rotated
+     *     by the angle of the vector. The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrix rotateFromVector(final Object x, final Object y) {
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.rotateFromVectorSelfInternal(toDouble(x, 0), toDouble(y, 0));
+        return matrix;
+    }
+
+    /**
+     * Returns a new matrix rotated by a given angle around the specified axis.
+     *
+     * @param x the x component of the axis
+     * @param y the y component of the axis
+     * @param z the z component of the axis
+     * @param angle the rotation angle in degrees
+     * @return a new matrix which is the result of the original matrix rotated
+     *     around the axis. The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrix rotateAxisAngle(final Object x, final Object y, final Object z, final Object angle) {
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.rotateAxisAngleSelfInternal(toDouble(x, 0), toDouble(y, 0), toDouble(z, 0), toDouble(angle, 0));
+        return matrix;
+    }
+
+    /**
+     * Returns a new matrix scaled by the given factors, centered on the given origin.
+     *
+     * @param scaleX the scale factor for the x-axis (default 1)
+     * @param scaleY the scale factor for the y-axis (default scaleX)
+     * @param scaleZ the scale factor for the z-axis (default 1)
+     * @param originX the x-coordinate of the origin (default 0)
+     * @param originY the y-coordinate of the origin (default 0)
+     * @param originZ the z-coordinate of the origin (default 0)
+     * @return a new matrix which is the result of the original matrix scaled.
      *     The original matrix is not modified.
      */
     @JsxFunction
-    public DOMMatrixReadOnly rotate(final Object rotZ) {
-        final DOMMatrix result = new DOMMatrix();
-        result.setParentScope(getParentScope());
-        result.setPrototype(getWindow().getPrototype(DOMMatrix.class));
-
-        // Handle undefined/null/missing parameter - default to 0
-        double angleInDegrees = 0;
-        if (rotZ != null && !JavaScriptEngine.isUndefined(rotZ)) {
-            angleInDegrees = JavaScriptEngine.toNumber(rotZ);
-        }
-
-        // Convert degrees to radians
-        final double angleInRadians = Math.toRadians(angleInDegrees);
-        final double cos = Math.cos(angleInRadians);
-        final double sin = Math.sin(angleInRadians);
-
-        // Create rotation matrix:
-        // [cos  -sin  0  0]
-        // [sin   cos  0  0]
-        // [ 0     0   1  0]
-        // [ 0     0   0  1]
-
-        // For 2D matrices, only apply to the 2x2 part
-        if (is2D_) {
-            // Matrix multiplication: result = this * rotation
-            result.setM11(m11_ * cos + m21_ * sin);
-            result.setM12(m12_ * cos + m22_ * sin);
-
-            result.setM21(m11_ * (-sin) + m21_ * cos);
-            result.setM22(m12_ * (-sin) + m22_ * cos);
-
-            result.setM41(m41_);
-            result.setM42(m42_);
-
-            result.setIs2D(true);
-        }
-        else {
-            // For 3D matrices, apply rotation to all relevant components
-            result.setM11(m11_ * cos + m21_ * sin);
-            result.setM12(m12_ * cos + m22_ * sin);
-            result.setM13(m13_ * cos + m23_ * sin);
-            result.setM14(m14_ * cos + m24_ * sin);
-
-            result.setM21(m11_ * (-sin) + m21_ * cos);
-            result.setM22(m12_ * (-sin) + m22_ * cos);
-            result.setM23(m13_ * (-sin) + m23_ * cos);
-            result.setM24(m14_ * (-sin) + m24_ * cos);
-
-            result.setM31(m31_);
-            result.setM32(m32_);
-            result.setM33(m33_);
-            result.setM34(m34_);
-
-            result.setM41(m41_);
-            result.setM42(m42_);
-            result.setM43(m43_);
-            result.setM44(m44_);
-
-            result.setIs2D(false);
-        }
-
-        return result;
+    public DOMMatrix scale(final Object scaleX, final Object scaleY, final Object scaleZ,
+                final Object originX, final Object originY, final Object originZ) {
+        final DOMMatrix matrix = copyToDOMMatrix();
+        final double sx = toDouble(scaleX, 1);
+        matrix.scaleSelfInternal(sx, toDouble(scaleY, sx), toDouble(scaleZ, 1),
+                toDouble(originX, 0), toDouble(originY, 0), toDouble(originZ, 0));
+        return matrix;
     }
 
     /**
-     * Rotates the matrix by a given angle around the specified axis.
+     * Returns a new matrix scaled by the given factor for all three axes,
+     * centered on the given origin.
      *
-     * @param xObj the x component of the axis
-     * @param yObj the y component of the axis
-     * @param zObj the z component of the axis
-     * @param alphaObj the rotation angle in degrees
-     * @return a new matrix which is the result of the original matrix rotated by the specified axis and angle.
+     * @param scale the scale factor (default 1)
+     * @param originX the x-coordinate of the origin (default 0)
+     * @param originY the y-coordinate of the origin (default 0)
+     * @param originZ the z-coordinate of the origin (default 0)
+     * @return a new matrix which is the result of the original matrix scaled.
+     *     The original matrix is not modified.
      */
     @JsxFunction
-    public DOMMatrixReadOnly rotateAxisAngle(
-                final Object xObj, final Object yObj, final Object zObj, final Object alphaObj) {
-        // Default values
-        double x = 0;
-        double y = 0;
-        double z = 1;
-        double alpha = 0;
-        if (xObj != null && !JavaScriptEngine.isUndefined(xObj)) {
-            x = JavaScriptEngine.toNumber(xObj);
-        }
-        if (yObj != null && !JavaScriptEngine.isUndefined(yObj)) {
-            y = JavaScriptEngine.toNumber(yObj);
-        }
-        if (zObj != null && !JavaScriptEngine.isUndefined(zObj)) {
-            z = JavaScriptEngine.toNumber(zObj);
-        }
-        if (alphaObj != null && !JavaScriptEngine.isUndefined(alphaObj)) {
-            alpha = JavaScriptEngine.toNumber(alphaObj);
-        }
+    public DOMMatrix scale3d(final Object scale, final Object originX, final Object originY, final Object originZ) {
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.scale3dSelfInternal(toDouble(scale, 1),
+                toDouble(originX, 0), toDouble(originY, 0), toDouble(originZ, 0));
+        return matrix;
+    }
 
-        // If axis is (0,0,0), throw TypeError per spec
-        if (x == 0 && y == 0 && z == 0) {
-            final DOMMatrix result = new DOMMatrix();
-            result.setParentScope(getParentScope());
-            result.setPrototype(getWindow().getPrototype(DOMMatrix.class));
-            return result;
-        }
-
-        // Normalize the axis
-        final double length = Math.sqrt(x * x + y * y + z * z);
-        x /= length;
-        y /= length;
-        z /= length;
-
-        // Convert angle to radians
-        final double angle2 = Math.toRadians(alpha) / 2;
-
-        // Compute rotation matrix
-        final double sc = Math.sin(angle2) * Math.cos(angle2);
-        final double sq = Math.pow(Math.sin(angle2), 2);
-
-        final double x2 = x * x;
-        final double y2 = y * y;
-        final double z2 = z * z;
-
-        final DOMMatrix rot = new DOMMatrix();
-
-        rot.setM11(1 - 2 * (y2 + z2) * sq);
-        rot.setM12(2 * (x * y * sq + z * sc));
-        rot.setM13(2 * (x * z * sq - y * sc));
-        rot.setM14(0);
-
-        rot.setM21(2 * (x * y * sq - z * sc));
-        rot.setM22(1 - 2 * (x2 + z2) * sq);
-        rot.setM23(2 * (y * z * sq + x * sc));
-        rot.setM24(0);
-
-        rot.setM31(2 * (x * z * sq + y * sc));
-        rot.setM32(2 * (y * z * sq - x * sc));
-        rot.setM33(1 - 2 * (x2 + y2) * sq);
-        rot.setM34(0);
-
-        rot.setM41(0);
-        rot.setM42(0);
-        rot.setM43(0);
-        rot.setM44(1);
-
-        rot.setIs2D(false);
-
-        // Multiply this * rot
-        final DOMMatrix multiplied = multiply(rot);
-        multiplied.setIs2D(is2D_ && x == 0 && y == 0);
-        return multiplied;
+    /**
+     * Returns a new matrix scaled by the given factors for the x- and the y-axis.
+     * This method is deprecated; use {@link #scale(Object, Object, Object, Object, Object, Object)}.
+     *
+     * @param scaleX the scale factor for the x-axis (default 1)
+     * @param scaleY the scale factor for the y-axis (default 1)
+     * @return a new matrix which is the result of the original matrix scaled.
+     *     The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrix scaleNonUniform(final Object scaleX, final Object scaleY) {
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.scaleSelfInternal(toDouble(scaleX, 1), toDouble(scaleY, 1), 1, 0, 0, 0);
+        return matrix;
     }
 
     /**
      * Returns a new matrix skewed along the x-axis by the specified angle.
-     * @param alphaObj the angle, in degrees, by which to skew the matrix along the x-axis
+     * @param sx the angle, in degrees, by which to skew the matrix along the x-axis
      * @return returns a new DOMMatrix created by applying the specified skew transformation
      *     to the source matrix along its x-axis. The original matrix is not modified.
      */
     @JsxFunction
-    public DOMMatrixReadOnly skewX(final Object alphaObj) {
-        // Default values
-        double alpha = 0;
-        if (alphaObj != null && !JavaScriptEngine.isUndefined(alphaObj)) {
-            alpha = JavaScriptEngine.toNumber(alphaObj);
-        }
-
-        // Convert angle to radians
-        final double angle = Math.toRadians(alpha);
-
-        // Compute rotation matrix
-        final DOMMatrix rot = new DOMMatrix();
-
-        rot.setM21(Math.tan(angle));
-
-        // Multiply this * rot
-        final DOMMatrix multiplied = multiply(rot);
-        return multiplied;
+    public DOMMatrix skewX(final Object sx) {
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.skewXSelfInternal(toDouble(sx, 0));
+        return matrix;
     }
 
     /**
      * Returns a new matrix skewed along the y-axis by the specified angle.
-     * @param alphaObj the angle, in degrees, by which to skew the matrix along the y-axis
+     * @param sy the angle, in degrees, by which to skew the matrix along the y-axis
      * @return returns a new DOMMatrix created by applying the specified skew transformation
-     *     to the source matrix along its x-axis. The original matrix is not modified.
+     *     to the source matrix along its y-axis. The original matrix is not modified.
      */
     @JsxFunction
-    public DOMMatrixReadOnly skewY(final Object alphaObj) {
-        // Default values
-        double alpha = 0;
-        if (alphaObj != null && !JavaScriptEngine.isUndefined(alphaObj)) {
-            alpha = JavaScriptEngine.toNumber(alphaObj);
-        }
-
-        // Convert angle to radians
-        final double angle = Math.toRadians(alpha);
-
-        // Compute rotation matrix
-        final DOMMatrixReadOnly rot = new DOMMatrixReadOnly();
-
-        rot.m12_ = Math.tan(angle);
-
-        // Multiply this * rot
-        final DOMMatrixReadOnly multiplied = multiply(rot);
-        return multiplied;
+    public DOMMatrix skewY(final Object sy) {
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.skewYSelfInternal(toDouble(sy, 0));
+        return matrix;
     }
 
     /**
      * Creates a new matrix being the result of the original matrix with a translation applied.
      *
-     * @param xObj a number representing the abscissa (x-coordinate) of the translating vector
-     * @param yObj a number representing the ordinate (y-coordinate) of the translating vector
-     * @param zObj A number representing the z component of the translating vector. If not supplied,
-     *        this defaults to 0. If this is anything other than 0, the resulting matrix will be 3D
-     * @return a DOMMatrix containing a new matrix being the result of the matrix being translated
+     * @param tx the x component of the translating vector (default 0)
+     * @param ty the y component of the translating vector (default 0)
+     * @param tz the z component of the translating vector (default 0); if this is anything other
+     *     than 0, the resulting matrix will be 3D
+     * @return a new matrix being the result of the matrix being translated
      *         by the given vector. The original matrix is not modified.
-     *         If a translation is applied about the z-axis, the resulting matrix will be a 4x4 3D matrix.
      */
     @JsxFunction
-    public DOMMatrixReadOnly translate(final Object xObj, final Object yObj, final Object zObj) {
-        // Default values
+    public DOMMatrix translate(final Object tx, final Object ty, final Object tz) {
+        final DOMMatrix matrix = copyToDOMMatrix();
+        matrix.translateSelfInternal(toDouble(tx, 0), toDouble(ty, 0), toDouble(tz, 0));
+        return matrix;
+    }
+
+    /**
+     * Transforms the given point with this matrix.
+     *
+     * @param point the point to transform; this can be a point or an object with point
+     *     properties (DOMPointInit: x, y, z (default 0) and w (default 1));
+     *     {@code null} and {@code undefined} are treated as the point (0, 0, 0, 1)
+     * @return a new {@link DOMPoint} with the transformed coordinates
+     */
+    @JsxFunction
+    public DOMPoint transformPoint(final Object point) {
         double x = 0;
         double y = 0;
         double z = 0;
-        if (xObj != null && !JavaScriptEngine.isUndefined(xObj)) {
-            x = JavaScriptEngine.toNumber(xObj);
+        double w = 1;
+        if (point != null && !JavaScriptEngine.isUndefined(point)) {
+            if (!(point instanceof Scriptable pointScriptable)) {
+                throw JavaScriptEngine.typeError("Failed to execute 'transformPoint' on '" + getClassName()
+                        + "': The provided value is not of type 'DOMPointInit'.");
+            }
+            x = getDictionaryValue(pointScriptable, "x", 0);
+            y = getDictionaryValue(pointScriptable, "y", 0);
+            z = getDictionaryValue(pointScriptable, "z", 0);
+            w = getDictionaryValue(pointScriptable, "w", 1);
         }
-        if (yObj != null && !JavaScriptEngine.isUndefined(yObj)) {
-            y = JavaScriptEngine.toNumber(yObj);
+
+        final DOMPoint result = new DOMPoint(
+                mul(m11_, x) + mul(m21_, y) + mul(m31_, z) + mul(m41_, w),
+                mul(m12_, x) + mul(m22_, y) + mul(m32_, z) + mul(m42_, w),
+                mul(m13_, x) + mul(m23_, y) + mul(m33_, z) + mul(m43_, w),
+                mul(m14_, x) + mul(m24_, y) + mul(m34_, z) + mul(m44_, w));
+        result.setParentScope(getParentScope());
+        result.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), "DOMPoint"));
+        return result;
+    }
+
+    // ---------------------------------------------------------------------------------
+    // the operations; all of them are modifying this matrix (the *Self functions
+    // of DOMMatrix); the functions above are working on a copy
+
+    /**
+     * Post-multiplies this matrix with the given one (this = this * other).
+     * The result is 2D if both matrices are 2D.
+     *
+     * @param other the matrix to multiply with
+     */
+    protected void multiplySelfInternal(final DOMMatrixReadOnly other) {
+        final boolean is2D = is2D_ && other.is2D_;
+        setValues(multiplyMatrices(getValues(), other.getValues(), is2D), is2D);
+    }
+
+    /**
+     * Pre-multiplies this matrix with the given one (this = other * this).
+     * The result is 2D if both matrices are 2D.
+     *
+     * @param other the matrix to multiply with
+     */
+    protected void preMultiplySelfInternal(final DOMMatrixReadOnly other) {
+        final boolean is2D = is2D_ && other.is2D_;
+        setValues(multiplyMatrices(other.getValues(), getValues(), is2D), is2D);
+    }
+
+    /**
+     * Applies a translation to this matrix.
+     *
+     * @param tx the x component of the translating vector
+     * @param ty the y component of the translating vector
+     * @param tz the z component of the translating vector
+     */
+    protected void translateSelfInternal(final double tx, final double ty, final double tz) {
+        final DOMMatrixReadOnly translation = new DOMMatrixReadOnly();
+        translation.m41_ = tx;
+        translation.m42_ = ty;
+        translation.m43_ = tz;
+        translation.is2D_ = tz == 0;
+
+        multiplySelfInternal(translation);
+    }
+
+    /**
+     * Applies a scaling centered on the given origin to this matrix.
+     *
+     * @param scaleX the scale factor for the x-axis
+     * @param scaleY the scale factor for the y-axis
+     * @param scaleZ the scale factor for the z-axis
+     * @param originX the x-coordinate of the origin
+     * @param originY the y-coordinate of the origin
+     * @param originZ the z-coordinate of the origin
+     */
+    protected void scaleSelfInternal(final double scaleX, final double scaleY, final double scaleZ,
+                final double originX, final double originY, final double originZ) {
+        translateSelfInternal(originX, originY, originZ);
+
+        final DOMMatrixReadOnly scale = new DOMMatrixReadOnly();
+        scale.m11_ = scaleX;
+        scale.m22_ = scaleY;
+        scale.m33_ = scaleZ;
+        scale.is2D_ = scaleZ == 1;
+        multiplySelfInternal(scale);
+
+        translateSelfInternal(-originX, -originY, -originZ);
+
+        if (scaleZ != 1 || originZ != 0) {
+            is2D_ = false;
         }
-        if (zObj != null && !JavaScriptEngine.isUndefined(zObj)) {
-            z = JavaScriptEngine.toNumber(zObj);
+    }
+
+    /**
+     * Applies a uniform scaling of all three axes centered on the given origin to this matrix.
+     *
+     * @param scale the scale factor
+     * @param originX the x-coordinate of the origin
+     * @param originY the y-coordinate of the origin
+     * @param originZ the z-coordinate of the origin
+     */
+    protected void scale3dSelfInternal(final double scale,
+                final double originX, final double originY, final double originZ) {
+        scaleSelfInternal(scale, scale, scale, originX, originY, originZ);
+        if (scale != 1) {
+            is2D_ = false;
+        }
+    }
+
+    /**
+     * Applies the rotation of {@link #rotate(Object, Object, Object)} to this matrix.
+     *
+     * @param rotXObj the rotation angle around the x-axis in degrees (or the rotation angle
+     *     around the z-axis if this is the only argument)
+     * @param rotYObj the rotation angle around the y-axis in degrees
+     * @param rotZObj the rotation angle around the z-axis in degrees
+     */
+    protected void rotateSelfInternal(final Object rotXObj, final Object rotYObj, final Object rotZObj) {
+        double rotX = toDouble(rotXObj, 0);
+        double rotY = toDouble(rotYObj, 0);
+        double rotZ = toDouble(rotZObj, 0);
+
+        if (isMissing(rotYObj) && isMissing(rotZObj)) {
+            rotZ = rotX;
+            rotX = 0;
+            rotY = 0;
         }
 
-        final DOMMatrixReadOnly translate = new DOMMatrixReadOnly();
+        rotateSelfInternal(rotX, rotY, rotZ);
+    }
 
-        translate.m41_ = x;
-        translate.m42_ = y;
-        translate.m43_ = z;
+    /**
+     * Rotates this matrix around the z-axis, then around the y-axis and
+     * finally around the x-axis.
+     *
+     * @param rotX the rotation angle around the x-axis in degrees
+     * @param rotY the rotation angle around the y-axis in degrees
+     * @param rotZ the rotation angle around the z-axis in degrees
+     */
+    protected void rotateSelfInternal(final double rotX, final double rotY, final double rotZ) {
+        final boolean is2D = is2D_ && rotX == 0 && rotY == 0;
 
-        translate.is2D_ = false;
+        multiplySelfInternal(createRotation(0, 0, 1, rotZ));
+        if (rotY != 0) {
+            multiplySelfInternal(createRotation(0, 1, 0, rotY));
+        }
+        if (rotX != 0) {
+            multiplySelfInternal(createRotation(1, 0, 0, rotX));
+        }
+        is2D_ = is2D;
+    }
 
-        // Multiply this * rot
-        final DOMMatrix multiplied = multiply(translate);
-        multiplied.setIs2D(is2D_ && (zObj == null || JavaScriptEngine.isUndefined(zObj) || z == 0));
-        return multiplied;
+    /**
+     * Rotates this matrix by the angle between the specified vector and (1, 0).
+     *
+     * @param x the x component of the vector
+     * @param y the y component of the vector
+     */
+    protected void rotateFromVectorSelfInternal(final double x, final double y) {
+        double angle = 0;
+        if (x != 0 || y != 0) {
+            angle = Math.toDegrees(Math.atan2(y, x));
+        }
+        multiplySelfInternal(createRotation(0, 0, 1, angle));
+    }
+
+    /**
+     * Rotates this matrix by the given angle around the specified axis.
+     * An axis of (0, 0, 0) does not change the matrix.
+     *
+     * @param x the x component of the axis
+     * @param y the y component of the axis
+     * @param z the z component of the axis
+     * @param angle the rotation angle in degrees
+     */
+    protected void rotateAxisAngleSelfInternal(final double x, final double y, final double z, final double angle) {
+        final boolean is2D = is2D_ && x == 0 && y == 0;
+        if (x != 0 || y != 0 || z != 0) {
+            multiplySelfInternal(createRotation(x, y, z, angle));
+        }
+        is2D_ = is2D;
+    }
+
+    /**
+     * Skews this matrix along the x-axis.
+     *
+     * @param sx the angle in degrees
+     */
+    protected void skewXSelfInternal(final double sx) {
+        final DOMMatrixReadOnly skew = new DOMMatrixReadOnly();
+        skew.m21_ = Math.tan(Math.toRadians(sx));
+        multiplySelfInternal(skew);
+    }
+
+    /**
+     * Skews this matrix along the y-axis.
+     *
+     * @param sy the angle in degrees
+     */
+    protected void skewYSelfInternal(final double sy) {
+        final DOMMatrixReadOnly skew = new DOMMatrixReadOnly();
+        skew.m12_ = Math.tan(Math.toRadians(sy));
+        multiplySelfInternal(skew);
+    }
+
+    /**
+     * Inverts this matrix. If the matrix cannot be inverted, all values are set
+     * to NaN and the matrix is no longer 2D.
+     */
+    protected void invertSelfInternal() {
+        if (is2D_) {
+            final double det = m11_ * m22_ - m12_ * m21_;
+            if (det == 0) {
+                setAllNaN();
+                return;
+            }
+
+            final double a = m22_ / det;
+            final double b = -m12_ / det;
+            final double c = -m21_ / det;
+            final double d = m11_ / det;
+            final double e = (m21_ * m42_ - m22_ * m41_) / det;
+            final double f = (m12_ * m41_ - m11_ * m42_) / det;
+            setValues2D(a, b, c, d, e, f);
+            return;
+        }
+
+        final double[] m = getValues();
+        final double[] inv = new double[16];
+        inv[0] = m[5] * m[10] * m[15] - m[5] * m[11] * m[14] - m[9] * m[6] * m[15]
+                + m[9] * m[7] * m[14] + m[13] * m[6] * m[11] - m[13] * m[7] * m[10];
+        inv[4] = -m[4] * m[10] * m[15] + m[4] * m[11] * m[14] + m[8] * m[6] * m[15]
+                - m[8] * m[7] * m[14] - m[12] * m[6] * m[11] + m[12] * m[7] * m[10];
+        inv[8] = m[4] * m[9] * m[15] - m[4] * m[11] * m[13] - m[8] * m[5] * m[15]
+                + m[8] * m[7] * m[13] + m[12] * m[5] * m[11] - m[12] * m[7] * m[9];
+        inv[12] = -m[4] * m[9] * m[14] + m[4] * m[10] * m[13] + m[8] * m[5] * m[14]
+                - m[8] * m[6] * m[13] - m[12] * m[5] * m[10] + m[12] * m[6] * m[9];
+        inv[1] = -m[1] * m[10] * m[15] + m[1] * m[11] * m[14] + m[9] * m[2] * m[15]
+                - m[9] * m[3] * m[14] - m[13] * m[2] * m[11] + m[13] * m[3] * m[10];
+        inv[5] = m[0] * m[10] * m[15] - m[0] * m[11] * m[14] - m[8] * m[2] * m[15]
+                + m[8] * m[3] * m[14] + m[12] * m[2] * m[11] - m[12] * m[3] * m[10];
+        inv[9] = -m[0] * m[9] * m[15] + m[0] * m[11] * m[13] + m[8] * m[1] * m[15]
+                - m[8] * m[3] * m[13] - m[12] * m[1] * m[11] + m[12] * m[3] * m[9];
+        inv[13] = m[0] * m[9] * m[14] - m[0] * m[10] * m[13] - m[8] * m[1] * m[14]
+                + m[8] * m[2] * m[13] + m[12] * m[1] * m[10] - m[12] * m[2] * m[9];
+        inv[2] = m[1] * m[6] * m[15] - m[1] * m[7] * m[14] - m[5] * m[2] * m[15]
+                + m[5] * m[3] * m[14] + m[13] * m[2] * m[7] - m[13] * m[3] * m[6];
+        inv[6] = -m[0] * m[6] * m[15] + m[0] * m[7] * m[14] + m[4] * m[2] * m[15]
+                - m[4] * m[3] * m[14] - m[12] * m[2] * m[7] + m[12] * m[3] * m[6];
+        inv[10] = m[0] * m[5] * m[15] - m[0] * m[7] * m[13] - m[4] * m[1] * m[15]
+                + m[4] * m[3] * m[13] + m[12] * m[1] * m[7] - m[12] * m[3] * m[5];
+        inv[14] = -m[0] * m[5] * m[14] + m[0] * m[6] * m[13] + m[4] * m[1] * m[14]
+                - m[4] * m[2] * m[13] - m[12] * m[1] * m[6] + m[12] * m[2] * m[5];
+        inv[3] = -m[1] * m[6] * m[11] + m[1] * m[7] * m[10] + m[5] * m[2] * m[11]
+                - m[5] * m[3] * m[10] - m[9] * m[2] * m[7] + m[9] * m[3] * m[6];
+        inv[7] = m[0] * m[6] * m[11] - m[0] * m[7] * m[10] - m[4] * m[2] * m[11]
+                + m[4] * m[3] * m[10] + m[8] * m[2] * m[7] - m[8] * m[3] * m[6];
+        inv[11] = -m[0] * m[5] * m[11] + m[0] * m[7] * m[9] + m[4] * m[1] * m[11]
+                - m[4] * m[3] * m[9] - m[8] * m[1] * m[7] + m[8] * m[3] * m[5];
+        inv[15] = m[0] * m[5] * m[10] - m[0] * m[6] * m[9] - m[4] * m[1] * m[10]
+                + m[4] * m[2] * m[9] + m[8] * m[1] * m[6] - m[8] * m[2] * m[5];
+
+        final double det = m[0] * inv[0] + m[1] * inv[4] + m[2] * inv[8] + m[3] * inv[12];
+        if (det == 0) {
+            setAllNaN();
+            return;
+        }
+
+        final double invDet = 1.0 / det;
+        for (int i = 0; i < inv.length; i++) {
+            inv[i] = inv[i] * invDet;
+        }
+        setValues(inv, false);
+    }
+
+    private void setAllNaN() {
+        final double[] values = new double[16];
+        Arrays.fill(values, Double.NaN);
+        setValues(values, false);
+    }
+
+    // ---------------------------------------------------------------------------------
+    // helpers
+
+    /**
+     * Creates a new {@link DOMMatrix} with the values of this matrix.
+     * @return the new matrix
+     */
+    protected DOMMatrix copyToDOMMatrix() {
+        final DOMMatrix matrix = new DOMMatrix();
+        matrix.setParentScope(getParentScope());
+        matrix.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), "DOMMatrix"));
+        matrix.setValues(getValues(), is2D_);
+        return matrix;
+    }
+
+    /**
+     * Returns the values of this matrix in column-major order
+     * (m11, m12, m13, m14, m21, ..., m44).
+     * @return a new array with the 16 values
+     */
+    protected double[] getValues() {
+        return new double[] {
+            m11_, m12_, m13_, m14_,
+            m21_, m22_, m23_, m24_,
+            m31_, m32_, m33_, m34_,
+            m41_, m42_, m43_, m44_
+        };
+    }
+
+    /**
+     * Sets all values of this matrix.
+     * @param values the 16 values in column-major order (m11, m12, m13, m14, m21, ..., m44)
+     * @param is2D the new value of the is2D flag
+     */
+    protected void setValues(final double[] values, final boolean is2D) {
+        m11_ = values[0];
+        m12_ = values[1];
+        m13_ = values[2];
+        m14_ = values[3];
+
+        m21_ = values[4];
+        m22_ = values[5];
+        m23_ = values[6];
+        m24_ = values[7];
+
+        m31_ = values[8];
+        m32_ = values[9];
+        m33_ = values[10];
+        m34_ = values[11];
+
+        m41_ = values[12];
+        m42_ = values[13];
+        m43_ = values[14];
+        m44_ = values[15];
+
+        is2D_ = is2D;
+    }
+
+    /**
+     * Sets this to the 2D matrix [a, b, c, d, e, f]; all other values are set to the
+     * values of the identity matrix.
+     *
+     * @param a the a (m11) value
+     * @param b the b (m12) value
+     * @param c the c (m21) value
+     * @param d the d (m22) value
+     * @param e the e (m41) value
+     * @param f the f (m42) value
+     */
+    protected void setValues2D(final double a, final double b, final double c,
+                final double d, final double e, final double f) {
+        setValues(new double[] {a, b, 0, 0, c, d, 0, 0, 0, 0, 1, 0, e, f, 0, 1}, true);
+    }
+
+    /**
+     * Multiplies the two given matrices (left * right); both are in column-major order.
+     *
+     * <p>Like in the browsers, the product of two 2D matrices only calculates the 2D values
+     * (a, b, c, d, e, f); the other values are not touched (and therefore never polluted
+     * by NaN or infinite values).
+     * A value of exactly 0 of the right matrix (the transformation applied) never contributes
+     * to the result, a value of 0 of the left matrix does (0 * NaN is NaN).</p>
+     *
+     * @param left the left matrix
+     * @param right the right matrix
+     * @param only2D whether to calculate only the 2D values
+     * @return the product
+     */
+    private static double[] multiplyMatrices(final double[] left, final double[] right, final boolean only2D) {
+        if (only2D) {
+            final double[] result = left.clone();
+            for (final int col : new int[] {0, 1, 3}) {
+                for (int row = 0; row < 2; row++) {
+                    double sum = term(left[row], right[col * 4]) + term(left[4 + row], right[col * 4 + 1]);
+                    if (col == 3) {
+                        sum += left[12 + row];
+                    }
+                    result[col * 4 + row] = sum;
+                }
+            }
+            return result;
+        }
+
+        final double[] result = new double[16];
+        for (int col = 0; col < 4; col++) {
+            for (int row = 0; row < 4; row++) {
+                double sum = 0;
+                for (int k = 0; k < 4; k++) {
+                    sum += term(left[k * 4 + row], right[col * 4 + k]);
+                }
+                result[col * 4 + row] = sum;
+            }
+        }
+        return result;
+    }
+
+    private static double term(final double left, final double right) {
+        if (right == 0) {
+            return 0;
+        }
+        return left * right;
+    }
+
+    private static double mul(final double x, final double y) {
+        if (x == 0 || y == 0) {
+            return 0;
+        }
+        return x * y;
+    }
+
+    /**
+     * Creates the matrix of a rotation by the given angle around the given axis
+     * (see CSS rotate3d()). A rotation around the z-axis is a 2D matrix. For rotations
+     * around one of the axes, multiples of 90 degrees result in exact values.
+     *
+     * @param x the x component of the axis
+     * @param y the y component of the axis
+     * @param z the z component of the axis
+     * @param angle the angle in degrees
+     * @return the rotation matrix
+     */
+    static DOMMatrixReadOnly createRotation(final double x, final double y, final double z, final double angle) {
+        final DOMMatrixReadOnly rotation = new DOMMatrixReadOnly();
+
+        if (x == 0 && y == 0) {
+            // around the z-axis; this is 2D
+            final double[] sinCos = sinCosDegrees(z < 0 ? -angle : angle);
+            rotation.m11_ = sinCos[1];
+            rotation.m12_ = sinCos[0];
+            rotation.m21_ = -sinCos[0];
+            rotation.m22_ = sinCos[1];
+            return rotation;
+        }
+
+        if (y == 0 && z == 0) {
+            // around the x-axis
+            final double[] sinCos = sinCosDegrees(x < 0 ? -angle : angle);
+            rotation.m22_ = sinCos[1];
+            rotation.m23_ = sinCos[0];
+            rotation.m32_ = -sinCos[0];
+            rotation.m33_ = sinCos[1];
+            rotation.is2D_ = false;
+            return rotation;
+        }
+
+        if (x == 0 && z == 0) {
+            // around the y-axis
+            final double[] sinCos = sinCosDegrees(y < 0 ? -angle : angle);
+            rotation.m11_ = sinCos[1];
+            rotation.m13_ = -sinCos[0];
+            rotation.m31_ = sinCos[0];
+            rotation.m33_ = sinCos[1];
+            rotation.is2D_ = false;
+            return rotation;
+        }
+
+        final double length = Math.sqrt(x * x + y * y + z * z);
+        final double nx = x / length;
+        final double ny = y / length;
+        final double nz = z / length;
+
+        final double halfAngle = Math.toRadians(angle) / 2;
+        final double sc = Math.sin(halfAngle) * Math.cos(halfAngle);
+        final double sq = Math.sin(halfAngle) * Math.sin(halfAngle);
+
+        rotation.m11_ = 1 - 2 * mul(ny * ny + nz * nz, sq);
+        rotation.m12_ = 2 * (mul(nx * ny, sq) + mul(nz, sc));
+        rotation.m13_ = 2 * (mul(nx * nz, sq) - mul(ny, sc));
+
+        rotation.m21_ = 2 * (mul(nx * ny, sq) - mul(nz, sc));
+        rotation.m22_ = 1 - 2 * mul(nx * nx + nz * nz, sq);
+        rotation.m23_ = 2 * (mul(ny * nz, sq) + mul(nx, sc));
+
+        rotation.m31_ = 2 * (mul(nx * nz, sq) + mul(ny, sc));
+        rotation.m32_ = 2 * (mul(ny * nz, sq) - mul(nx, sc));
+        rotation.m33_ = 1 - 2 * mul(nx * nx + ny * ny, sq);
+
+        rotation.is2D_ = false;
+        return rotation;
+    }
+
+    /**
+     * Returns the sine and the cosine of the given angle; multiples of 90 degrees
+     * are returned as exact values.
+     *
+     * @param angle the angle in degrees
+     * @return an array with the sine and the cosine
+     */
+    private static double[] sinCosDegrees(final double angle) {
+        if (Double.isFinite(angle) && angle % 90 == 0) {
+            final int quarter = (int) (((angle / 90) % 4 + 4) % 4);
+            return switch (quarter) {
+                case 1 -> new double[] {1, 0};
+                case 2 -> new double[] {0, -1};
+                case 3 -> new double[] {-1, 0};
+                default -> new double[] {0, 1};
+            };
+        }
+
+        final double radians = Math.toRadians(angle);
+        return new double[] {Math.sin(radians), Math.cos(radians)};
+    }
+
+    /**
+     * Converts the given JavaScript value into a double; {@code undefined}
+     * (or a missing argument) is converted to the given default value.
+     *
+     * @param value the value
+     * @param defaultValue the default value
+     * @return the double value
+     */
+    protected static double toDouble(final Object value, final double defaultValue) {
+        if (isMissing(value)) {
+            return defaultValue;
+        }
+        return JavaScriptEngine.toNumber(value);
+    }
+
+    private static boolean isMissing(final Object value) {
+        return value == null || JavaScriptEngine.isUndefined(value);
+    }
+
+    private static double getDictionaryValue(final Scriptable dictionary, final String name,
+                final double defaultValue) {
+        final Object value = ScriptableObject.getProperty(dictionary, name);
+        if (value == Scriptable.NOT_FOUND || JavaScriptEngine.isUndefined(value)) {
+            return defaultValue;
+        }
+        return JavaScriptEngine.toNumber(value);
+    }
+
+    /**
+     * Converts the given value into a matrix following the rules of the
+     * DOMMatrixInit dictionary (including the 'validate and fixup' steps).
+     *
+     * @param init the value to convert; a matrix, an object with matrix properties,
+     *     {@code null} or {@code undefined} (the identity matrix)
+     * @param methodName the name of the calling method for the error message
+     * @param className the name of the calling class for the error message
+     * @return a new matrix (without scope)
+     */
+    static DOMMatrixReadOnly fromMatrixInit(final Object init, final String methodName, final String className) {
+        final DOMMatrixReadOnly result = new DOMMatrixReadOnly();
+        if (isMissing(init)) {
+            return result;
+        }
+
+        if (init instanceof DOMMatrixReadOnly matrix) {
+            result.setValues(matrix.getValues(), matrix.is2D_);
+            return result;
+        }
+
+        final String errorPrefix = "Failed to execute '" + methodName + "' on '" + className + "': ";
+        if (!(init instanceof Scriptable dict)) {
+            throw JavaScriptEngine.typeError(errorPrefix + "The provided value is not of type 'DOMMatrixInit'.");
+        }
+
+        // validate and fixup (2D)
+        final double m11 = fixup(dict, "a", "m11", 1, errorPrefix);
+        final double m12 = fixup(dict, "b", "m12", 0, errorPrefix);
+        final double m21 = fixup(dict, "c", "m21", 0, errorPrefix);
+        final double m22 = fixup(dict, "d", "m22", 1, errorPrefix);
+        final double m41 = fixup(dict, "e", "m41", 0, errorPrefix);
+        final double m42 = fixup(dict, "f", "m42", 0, errorPrefix);
+
+        // validate and fixup (3D)
+        final double m13 = getDictionaryValue(dict, "m13", 0);
+        final double m14 = getDictionaryValue(dict, "m14", 0);
+        final double m23 = getDictionaryValue(dict, "m23", 0);
+        final double m24 = getDictionaryValue(dict, "m24", 0);
+        final double m31 = getDictionaryValue(dict, "m31", 0);
+        final double m32 = getDictionaryValue(dict, "m32", 0);
+        final double m33 = getDictionaryValue(dict, "m33", 1);
+        final double m34 = getDictionaryValue(dict, "m34", 0);
+        final double m43 = getDictionaryValue(dict, "m43", 0);
+        final double m44 = getDictionaryValue(dict, "m44", 1);
+
+        final boolean only2DValues = m13 == 0 && m14 == 0 && m23 == 0 && m24 == 0
+                && m31 == 0 && m32 == 0 && m34 == 0 && m43 == 0
+                && m33 == 1 && m44 == 1;
+
+        final Object is2DValue = ScriptableObject.getProperty(dict, "is2D");
+        final boolean is2D;
+        if (is2DValue == Scriptable.NOT_FOUND || JavaScriptEngine.isUndefined(is2DValue)) {
+            is2D = only2DValues;
+        }
+        else {
+            is2D = JavaScriptEngine.toBoolean(is2DValue);
+            if (is2D && !only2DValues) {
+                throw JavaScriptEngine.typeError(errorPrefix
+                        + "The 'is2D' property is true, but the matrix contains 3D values.");
+            }
+        }
+
+        result.setValues(new double[] {
+            m11, m12, m13, m14,
+            m21, m22, m23, m24,
+            m31, m32, m33, m34,
+            m41, m42, m43, m44}, is2D);
+        return result;
+    }
+
+    /**
+     * Like {@link #fromMatrixInit(Object, String, String)}, but for the multiply functions;
+     * for an object with matrix properties (not a matrix), the browsers ignore an
+     * {@code is2D} property with the value {@code false}; only the values decide.
+     *
+     * @param init the value to convert
+     * @param methodName the name of the calling method for the error message
+     * @param className the name of the calling class for the error message
+     * @return a new matrix (without scope)
+     */
+    static DOMMatrixReadOnly fromMatrixInitForMultiply(final Object init, final String methodName,
+            final String className) {
+        final DOMMatrixReadOnly result = fromMatrixInit(init, methodName, className);
+        if (!(init instanceof DOMMatrixReadOnly)) {
+            result.is2D_ = result.hasOnly2DValues();
+        }
+        return result;
+    }
+
+    /**
+     * Returns whether this matrix contains only 2D values (m13, m14, m23, m24, m31, m32,
+     * m34 and m43 are 0, m33 and m44 are 1).
+     * @return true if the values are 2D values
+     */
+    boolean hasOnly2DValues() {
+        return m13_ == 0 && m14_ == 0 && m23_ == 0 && m24_ == 0
+                && m31_ == 0 && m32_ == 0 && m34_ == 0 && m43_ == 0
+                && m33_ == 1 && m44_ == 1;
+    }
+
+    private static double fixup(final Scriptable dict, final String shortName, final String longName,
+                final double defaultValue, final String errorPrefix) {
+        final Object shortValue = ScriptableObject.getProperty(dict, shortName);
+        final Object longValue = ScriptableObject.getProperty(dict, longName);
+
+        final boolean hasShort = shortValue != Scriptable.NOT_FOUND && !JavaScriptEngine.isUndefined(shortValue);
+        final boolean hasLong = longValue != Scriptable.NOT_FOUND && !JavaScriptEngine.isUndefined(longValue);
+
+        if (hasLong) {
+            final double value = JavaScriptEngine.toNumber(longValue);
+            if (hasShort) {
+                final double shortNumber = JavaScriptEngine.toNumber(shortValue);
+                // SameValueZero
+                final boolean same = value == shortNumber || (Double.isNaN(value) && Double.isNaN(shortNumber));
+                if (!same) {
+                    throw JavaScriptEngine.typeError(errorPrefix + "The '" + shortName + "' property should equal "
+                            + "the '" + longName + "' property.");
+                }
+            }
+            return value;
+        }
+        if (hasShort) {
+            return JavaScriptEngine.toNumber(shortValue);
+        }
+        return defaultValue;
     }
 
     /**
@@ -1107,6 +1552,19 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         return result.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     * The string representation (also used for the conversion of a matrix into a string,
+     * e.g. when passing a matrix to the constructor) is the CSS transform function.
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class.equals(hint) || hint == null) {
+            return js_toString();
+        }
+        return super.getDefaultValue(hint);
+    }
+
     private static StringBuilder appendDouble(final StringBuilder builder, final double d) {
         if (Double.isNaN(d) || Double.isInfinite(d)) {
             return builder.append(d);
@@ -1157,5 +1615,120 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         json.put("isIdentity", json, getIsIdentity());
 
         return json;
+    }
+
+    /**
+     * Creates a new {@code DOMMatrixReadOnly} from the given matrix or matrix properties.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this object
+     * @param args the arguments; the first one is the matrix or an object with matrix
+     *     properties (DOMMatrixInit)
+     * @param funObj the function object
+     * @return the new matrix
+     */
+    @JsxStaticFunction(functionName = "fromMatrix")
+    public static DOMMatrixReadOnly fromMatrixReadOnly(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        final DOMMatrixReadOnly init = fromMatrixInit(args.length > 0 ? args[0] : null,
+                "fromMatrix", "DOMMatrixReadOnly");
+        return newInstance(new DOMMatrixReadOnly(), scope, "DOMMatrixReadOnly", init);
+    }
+
+    /**
+     * Creates a new {@code DOMMatrixReadOnly} from the given Float32Array with 6 (2D)
+     * or 16 (3D) values.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this object
+     * @param args the arguments; the first one is the Float32Array
+     * @param funObj the function object
+     * @return the new matrix
+     */
+    @JsxStaticFunction(functionName = "fromFloat32Array")
+    public static DOMMatrixReadOnly fromFloat32ArrayReadOnly(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        final DOMMatrixReadOnly init = fromTypedArray(args, NativeFloat32Array.class,
+                "fromFloat32Array", "DOMMatrixReadOnly");
+        return newInstance(new DOMMatrixReadOnly(), scope, "DOMMatrixReadOnly", init);
+    }
+
+    /**
+     * Creates a new {@code DOMMatrixReadOnly} from the given Float64Array with 6 (2D)
+     * or 16 (3D) values.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this object
+     * @param args the arguments; the first one is the Float64Array
+     * @param funObj the function object
+     * @return the new matrix
+     */
+    @JsxStaticFunction(functionName = "fromFloat64Array")
+    public static DOMMatrixReadOnly fromFloat64ArrayReadOnly(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        final DOMMatrixReadOnly init = fromTypedArray(args, NativeFloat64Array.class,
+                "fromFloat64Array", "DOMMatrixReadOnly");
+        return newInstance(new DOMMatrixReadOnly(), scope, "DOMMatrixReadOnly", init);
+    }
+
+    /**
+     * Initializes the given new matrix object with the scope, the prototype and the values.
+     *
+     * @param <T> the matrix type
+     * @param matrix the new matrix object
+     * @param scope the scope
+     * @param className the JavaScript class name used to find the prototype
+     * @param values the matrix to copy the values from
+     * @return the given matrix
+     */
+    protected static <T extends DOMMatrixReadOnly> T newInstance(final T matrix, final VarScope scope,
+            final String className, final DOMMatrixReadOnly values) {
+        matrix.setParentScope(scope);
+        matrix.setPrototype(ScriptableObject.getClassPrototype(scope, className));
+        matrix.setValues(values.getValues(), values.is2D_);
+        return matrix;
+    }
+
+    /**
+     * Converts the first argument (a typed array of the given type with 6 or 16 values)
+     * into a matrix.
+     *
+     * @param args the arguments
+     * @param type the expected typed array type
+     * @param methodName the name of the calling method for the error message
+     * @param className the name of the calling class for the error message
+     * @return a new matrix (without scope)
+     */
+    protected static DOMMatrixReadOnly fromTypedArray(final Object[] args,
+            final Class<? extends NativeTypedArrayView<?>> type,
+            final String methodName, final String className) {
+        final String errorPrefix = "Failed to execute '" + methodName + "' on '" + className + "': ";
+        if (args.length == 0 || !type.isInstance(args[0])) {
+            throw JavaScriptEngine.typeError(errorPrefix + "parameter 1 is not of type '"
+                    + (type == NativeFloat32Array.class ? "Float32Array" : "Float64Array") + "'.");
+        }
+
+        final NativeTypedArrayView<?> array = (NativeTypedArrayView<?>) args[0];
+        final int length = array.getArrayLength();
+        final double[] values = new double[length];
+        for (int i = 0; i < length; i++) {
+            values[i] = JavaScriptEngine.toNumber(array.getArrayElement(i));
+        }
+
+        final DOMMatrixReadOnly result = new DOMMatrixReadOnly();
+        if (length == 6) {
+            result.setValues2D(values[0], values[1], values[2], values[3], values[4], values[5]);
+            return result;
+        }
+        if (length == 16) {
+            result.setValues(values, false);
+            return result;
+        }
+
+        throw JavaScriptEngine.typeError(errorPrefix
+                + "The sequence must contain 6 elements for a 2D matrix or 16 elements for a 3D matrix.");
     }
 }

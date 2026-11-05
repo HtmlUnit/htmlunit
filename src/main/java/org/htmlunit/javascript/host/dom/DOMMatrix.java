@@ -16,13 +16,17 @@ package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.corejs.javascript.typedarrays.NativeFloat32Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeFloat64Array;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.configuration.JsxStaticFunction;
 
 /**
  * A JavaScript object for {@code DOMMatrix}.
@@ -106,6 +110,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM13(final double m13) {
         super.setM13(m13);
+        if (m13 != 0) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -124,6 +131,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM14(final double m14) {
         super.setM14(m14);
+        if (m14 != 0) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -178,6 +188,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM23(final double m23) {
         super.setM23(m23);
+        if (m23 != 0) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -196,6 +209,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM24(final double m24) {
         super.setM24(m24);
+        if (m24 != 0) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -214,6 +230,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM31(final double m31) {
         super.setM31(m31);
+        if (m31 != 0) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -232,6 +251,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM32(final double m32) {
         super.setM32(m32);
+        if (m32 != 0) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -250,6 +272,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM33(final double m33) {
         super.setM33(m33);
+        if (m33 != 1) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -268,6 +293,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM34(final double m34) {
         super.setM34(m34);
+        if (m34 != 0) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -322,6 +350,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM43(final double m43) {
         super.setM43(m43);
+        if (m43 != 0) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -340,6 +371,9 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     @JsxSetter
     public void setM44(final double m44) {
         super.setM44(m44);
+        if (m44 != 1) {
+            setIs2D(false);
+        }
     }
 
     /**
@@ -451,204 +485,230 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     /**
-     * Inverts the original matrix. If the matrix cannot be inverted,
-     * the new matrix's components are all set to NaN and its is2D property is set to false.
+     * Inverts this matrix. If the matrix cannot be inverted,
+     * the components are all set to NaN and its is2D property is set to false.
      * @return this matrix, inverted
      */
     @JsxFunction
     public DOMMatrix invertSelf() {
-        if (isIs2D()) {
-            final double det = getM11() * getM22() - getM12() * getM21();
-            if (det == 0) {
-                // Not invertible: set all to NaN, is2D_ = false
-                initWithNan();
-                return this;
-            }
-
-            final double[] inv = new double[6];
-            inv[0] = getM22() / det;
-            inv[1] = -getM12() / det;
-
-            inv[2] = -getM21() / det;
-            inv[3] = getM11() / det;
-
-            inv[4] = (getM21() * getM42() - getM22() * getM41()) / det;
-            inv[5] = (getM12() * getM41() - getM11() * getM42()) / det;
-
-            setM11(inv[0]);
-            setM12(inv[1]);
-            setM21(inv[2]);
-            setM22(inv[3]);
-            setM41(inv[4]);
-            setM42(inv[5]);
-            setIs2D(true);
-            return this;
-        }
-
-        final double[] inv = new double[16];
-        inv[0] = getM22() * getM33() * getM44()
-                - getM22() * getM34() * getM43()
-                - getM32() * getM23() * getM44()
-                + getM32() * getM24() * getM43()
-                + getM42() * getM23() * getM34()
-                - getM42() * getM24() * getM33();
-
-        inv[4] = -getM21() * getM33() * getM44()
-                + getM21() * getM34() * getM43()
-                + getM31() * getM23() * getM44()
-                - getM31() * getM24() * getM43()
-                - getM41() * getM23() * getM34()
-                + getM41() * getM24() * getM33();
-
-        inv[8] = getM21() * getM32() * getM44()
-                - getM21() * getM34() * getM42()
-                - getM31() * getM22() * getM44()
-                + getM31() * getM24() * getM42()
-                + getM41() * getM22() * getM34()
-                - getM41() * getM24() * getM32();
-
-        inv[12] = -getM21() * getM32() * getM43()
-                + getM21() * getM33() * getM42()
-                + getM31() * getM22() * getM43()
-                - getM31() * getM23() * getM42()
-                - getM41() * getM22() * getM33()
-                + getM41() * getM23() * getM32();
-
-        inv[1] = -getM12() * getM33() * getM44()
-                + getM12() * getM34() * getM43()
-                + getM32() * getM13() * getM44()
-                - getM32() * getM14() * getM43()
-                - getM42() * getM13() * getM34()
-                + getM42() * getM14() * getM33();
-
-        inv[5] = getM11() * getM33() * getM44()
-                - getM11() * getM34() * getM43()
-                - getM31() * getM13() * getM44()
-                + getM31() * getM14() * getM43()
-                + getM41() * getM13() * getM34()
-                - getM41() * getM14() * getM33();
-
-        inv[9] = -getM11() * getM32() * getM44()
-                + getM11() * getM34() * getM42()
-                + getM31() * getM12() * getM44()
-                - getM31() * getM14() * getM42()
-                - getM41() * getM12() * getM34()
-                + getM41() * getM14() * getM32();
-
-        inv[13] = getM11() * getM32() * getM43()
-                - getM11() * getM33() * getM42()
-                - getM31() * getM12() * getM43()
-                + getM31() * getM13() * getM42()
-                + getM41() * getM12() * getM33()
-                - getM41() * getM13() * getM32();
-
-        inv[2] = getM12() * getM23() * getM44()
-                - getM12() * getM24() * getM43()
-                - getM22() * getM13() * getM44()
-                + getM22() * getM14() * getM43()
-                + getM42() * getM13() * getM24()
-                - getM42() * getM14() * getM23();
-
-        inv[6] = -getM11() * getM23() * getM44()
-                + getM11() * getM24() * getM43()
-                + getM21() * getM13() * getM44()
-                - getM21() * getM14() * getM43()
-                - getM41() * getM13() * getM24()
-                + getM41() * getM14() * getM23();
-
-        inv[10] = getM11() * getM22() * getM44()
-                - getM11() * getM24() * getM42()
-                - getM21() * getM12() * getM44()
-                + getM21() * getM14() * getM42()
-                + getM41() * getM12() * getM24()
-                - getM41() * getM14() * getM22();
-
-        inv[14] = -getM11() * getM22() * getM43()
-                + getM11() * getM23() * getM42()
-                + getM21() * getM12() * getM43()
-                - getM21() * getM13() * getM42()
-                - getM41() * getM12() * getM23()
-                + getM41() * getM13() * getM22();
-
-        inv[3] = -getM12() * getM23() * getM34()
-                + getM12() * getM24() * getM33()
-                + getM22() * getM13() * getM34()
-                - getM22() * getM14() * getM33()
-                - getM32() * getM13() * getM24()
-                + getM32() * getM14() * getM23();
-
-        inv[7] = getM11() * getM23() * getM34()
-                - getM11() * getM24() * getM33()
-                - getM21() * getM13() * getM34()
-                + getM21() * getM14() * getM33()
-                + getM31() * getM13() * getM24()
-                - getM31() * getM14() * getM23();
-
-        inv[11] = -getM11() * getM22() * getM34()
-                + getM11() * getM24() * getM32()
-                + getM21() * getM12() * getM34()
-                - getM21() * getM14() * getM32()
-                - getM31() * getM12() * getM24()
-                + getM31() * getM14() * getM22();
-
-        inv[15] = getM11() * getM22() * getM33()
-                - getM11() * getM23() * getM32()
-                - getM21() * getM12() * getM33()
-                + getM21() * getM13() * getM32()
-                + getM31() * getM12() * getM23()
-                - getM31() * getM13() * getM22();
-
-        double det = getM11() * inv[0] + getM12() * inv[4] + getM13() * inv[8] + getM14() * inv[12];
-
-        if (det == 0) {
-            // Not invertible: set all to NaN, is2D_ = false
-            initWithNan();
-            return this;
-        }
-
-        det = 1.0 / det;
-
-        setM11(inv[0] * det);
-        setM12(inv[1] * det);
-        setM13(inv[2] * det);
-        setM14(inv[3] * det);
-
-        setM21(inv[4] * det);
-        setM22(inv[5] * det);
-        setM23(inv[6] * det);
-        setM24(inv[7] * det);
-
-        setM31(inv[8] * det);
-        setM32(inv[9] * det);
-        setM33(inv[10] * det);
-        setM34(inv[11] * det);
-
-        setM41(inv[12] * det);
-        setM42(inv[13] * det);
-        setM43(inv[14] * det);
-        setM44(inv[15] * det);
-
-        setIs2D(false);
+        invertSelfInternal();
         return this;
     }
 
-    private void initWithNan() {
-        setM11(Double.NaN);
-        setM12(Double.NaN);
-        setM13(Double.NaN);
-        setM14(Double.NaN);
-        setM21(Double.NaN);
-        setM22(Double.NaN);
-        setM23(Double.NaN);
-        setM24(Double.NaN);
-        setM31(Double.NaN);
-        setM32(Double.NaN);
-        setM33(Double.NaN);
-        setM34(Double.NaN);
-        setM41(Double.NaN);
-        setM42(Double.NaN);
-        setM43(Double.NaN);
-        setM44(Double.NaN);
-        setIs2D(false);
+    /**
+     * Post-multiplies this matrix with the given one (this = this * other).
+     *
+     * @param other the matrix to multiply with; this can be a matrix or an
+     *     object with matrix properties (DOMMatrixInit); {@code null} and {@code undefined}
+     *     are treated as identity matrix
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix multiplySelf(final Object other) {
+        multiplySelfInternal(fromMatrixInitForMultiply(other, "multiplySelf", getClassName()));
+        return this;
+    }
+
+    /**
+     * Pre-multiplies this matrix with the given one (this = other * this).
+     *
+     * @param other the matrix to multiply with; this can be a matrix or an
+     *     object with matrix properties (DOMMatrixInit); {@code null} and {@code undefined}
+     *     are treated as identity matrix
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix preMultiplySelf(final Object other) {
+        preMultiplySelfInternal(fromMatrixInitForMultiply(other, "preMultiplySelf", getClassName()));
+        return this;
+    }
+
+    /**
+     * Applies a translation to this matrix.
+     *
+     * @param tx the x component of the translating vector (default 0)
+     * @param ty the y component of the translating vector (default 0)
+     * @param tz the z component of the translating vector (default 0); if this is anything other
+     *     than 0, the matrix will be 3D
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix translateSelf(final Object tx, final Object ty, final Object tz) {
+        translateSelfInternal(toDouble(tx, 0), toDouble(ty, 0), toDouble(tz, 0));
+        return this;
+    }
+
+    /**
+     * Scales this matrix by the given factors, centered on the given origin.
+     *
+     * @param scaleX the scale factor for the x-axis (default 1)
+     * @param scaleY the scale factor for the y-axis (default scaleX)
+     * @param scaleZ the scale factor for the z-axis (default 1)
+     * @param originX the x-coordinate of the origin (default 0)
+     * @param originY the y-coordinate of the origin (default 0)
+     * @param originZ the z-coordinate of the origin (default 0)
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix scaleSelf(final Object scaleX, final Object scaleY, final Object scaleZ,
+                final Object originX, final Object originY, final Object originZ) {
+        final double sx = toDouble(scaleX, 1);
+        scaleSelfInternal(sx, toDouble(scaleY, sx), toDouble(scaleZ, 1),
+                toDouble(originX, 0), toDouble(originY, 0), toDouble(originZ, 0));
+        return this;
+    }
+
+    /**
+     * Scales all three axes of this matrix by the given factor, centered on the given origin.
+     *
+     * @param scale the scale factor (default 1)
+     * @param originX the x-coordinate of the origin (default 0)
+     * @param originY the y-coordinate of the origin (default 0)
+     * @param originZ the z-coordinate of the origin (default 0)
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix scale3dSelf(final Object scale, final Object originX, final Object originY,
+                final Object originZ) {
+        scale3dSelfInternal(toDouble(scale, 1), toDouble(originX, 0), toDouble(originY, 0), toDouble(originZ, 0));
+        return this;
+    }
+
+    /**
+     * Rotates this matrix by the specified angles.
+     * If only one argument is given, this is the rotation angle around the z-axis
+     * (a 2D rotation), otherwise the matrix is rotated around the z-axis, then around
+     * the y-axis and finally around the x-axis.
+     *
+     * @param rotX the rotation angle around the x-axis in degrees (or the rotation angle
+     *     around the z-axis if this is the only argument)
+     * @param rotY the rotation angle around the y-axis in degrees
+     * @param rotZ the rotation angle around the z-axis in degrees
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix rotateSelf(final Object rotX, final Object rotY, final Object rotZ) {
+        rotateSelfInternal(rotX, rotY, rotZ);
+        return this;
+    }
+
+    /**
+     * Rotates this matrix by the angle between the specified vector and (1, 0).
+     *
+     * @param x the x component of the vector (default 0)
+     * @param y the y component of the vector (default 0)
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix rotateFromVectorSelf(final Object x, final Object y) {
+        rotateFromVectorSelfInternal(toDouble(x, 0), toDouble(y, 0));
+        return this;
+    }
+
+    /**
+     * Rotates this matrix by the given angle around the specified axis.
+     *
+     * @param x the x component of the axis (default 0)
+     * @param y the y component of the axis (default 0)
+     * @param z the z component of the axis (default 0)
+     * @param angle the rotation angle in degrees (default 0)
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix rotateAxisAngleSelf(final Object x, final Object y, final Object z, final Object angle) {
+        rotateAxisAngleSelfInternal(toDouble(x, 0), toDouble(y, 0), toDouble(z, 0), toDouble(angle, 0));
+        return this;
+    }
+
+    /**
+     * Skews this matrix along the x-axis by the specified angle.
+     *
+     * @param sx the angle in degrees (default 0)
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix skewXSelf(final Object sx) {
+        skewXSelfInternal(toDouble(sx, 0));
+        return this;
+    }
+
+    /**
+     * Skews this matrix along the y-axis by the specified angle.
+     *
+     * @param sy the angle in degrees (default 0)
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix skewYSelf(final Object sy) {
+        skewYSelfInternal(toDouble(sy, 0));
+        return this;
+    }
+
+    /**
+     * Replaces the values of this matrix with the matrix described by the given
+     * CSS transform list (e.g. {@code "translate(10px, 20px) rotate(45deg)"}).
+     *
+     * @param transformList the CSS transform list
+     * @return this matrix
+     */
+    @JsxFunction
+    public DOMMatrix setMatrixValue(final String transformList) {
+        setTransformList(transformList);
+        return this;
+    }
+
+    /**
+     * Creates a new {@code DOMMatrix} from the given matrix or matrix properties.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this object
+     * @param args the arguments; the first one is the matrix or an object with matrix
+     *     properties (DOMMatrixInit)
+     * @param funObj the function object
+     * @return the new matrix
+     */
+    @JsxStaticFunction(functionName = "fromMatrix")
+    public static DOMMatrix fromMatrix(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        final DOMMatrixReadOnly init = fromMatrixInit(args.length > 0 ? args[0] : null,
+                "fromMatrix", "DOMMatrix");
+        return newInstance(new DOMMatrix(), scope, "DOMMatrix", init);
+    }
+
+    /**
+     * Creates a new {@code DOMMatrix} from the given Float32Array with 6 (2D)
+     * or 16 (3D) values.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this object
+     * @param args the arguments; the first one is the Float32Array
+     * @param funObj the function object
+     * @return the new matrix
+     */
+    @JsxStaticFunction(functionName = "fromFloat32Array")
+    public static DOMMatrix fromFloat32Array(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        final DOMMatrixReadOnly init = fromTypedArray(args, NativeFloat32Array.class, "fromFloat32Array", "DOMMatrix");
+        return newInstance(new DOMMatrix(), scope, "DOMMatrix", init);
+    }
+
+    /**
+     * Creates a new {@code DOMMatrix} from the given Float64Array with 6 (2D)
+     * or 16 (3D) values.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this object
+     * @param args the arguments; the first one is the Float64Array
+     * @param funObj the function object
+     * @return the new matrix
+     */
+    @JsxStaticFunction(functionName = "fromFloat64Array")
+    public static DOMMatrix fromFloat64Array(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        final DOMMatrixReadOnly init = fromTypedArray(args, NativeFloat64Array.class, "fromFloat64Array", "DOMMatrix");
+        return newInstance(new DOMMatrix(), scope, "DOMMatrix", init);
     }
 }

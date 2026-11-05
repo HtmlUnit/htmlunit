@@ -98,10 +98,6 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
     @Test
     @Alerts({"[6, 1, 0, NaN, 2, NaN]",
              "true"})
-    @HtmlUnitNYI(CHROME = {"[6, 1, 0, 0, 2, NaN]", "true"},
-            EDGE = {"[6, 1, 0, 0, 2, NaN]", "true"},
-            FF = {"[6, 1, 0, 0, 2, NaN]", "true"},
-            FF_ESR = {"[6, 1, 0, 0, 2, NaN]", "true"})
     public void contructor6Mixed() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -2224,29 +2220,17 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                       "true"})
     @HtmlUnitNYI(
             CHROME = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                      "1[NaN, NaN, NaN, NaN]",
-                      "2[NaN, NaN, NaN, NaN]",
-                      "3[NaN, NaN, NaN, NaN]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
                       "4[0, 0, 0, 1]",
                       "true"},
             EDGE = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                    "1[NaN, NaN, NaN, NaN]",
-                    "2[NaN, NaN, NaN, NaN]",
-                    "3[NaN, NaN, NaN, NaN]",
+                    "1[NaN, NaN, 0, 0]",
+                    "2[NaN, NaN, 0, 0]",
+                    "3[0, 0, 1, 0]",
                     "4[0, 0, 0, 1]",
-                    "true"},
-            FF = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                  "1[NaN, NaN, NaN, NaN]",
-                  "2[NaN, NaN, NaN, NaN]",
-                  "3[NaN, NaN, NaN, NaN]",
-                  "4[0, 0, 0, 1]",
-                  "true"},
-            FF_ESR = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                      "1[NaN, NaN, NaN, NaN]",
-                      "2[NaN, NaN, NaN, NaN]",
-                      "3[NaN, NaN, NaN, NaN]",
-                      "4[0, 0, 0, 1]",
-                      "true"})
+                    "true"})
     public void rotateAxisAngle_NaN_angle() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body><script>"
@@ -2283,29 +2267,17 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                       "true"})
     @HtmlUnitNYI(
             CHROME = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                      "1[NaN, NaN, NaN, NaN]",
-                      "2[NaN, NaN, NaN, NaN]",
-                      "3[NaN, NaN, NaN, NaN]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
                       "4[0, 0, 0, 1]",
                       "true"},
             EDGE = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                    "1[NaN, NaN, NaN, NaN]",
-                    "2[NaN, NaN, NaN, NaN]",
-                    "3[NaN, NaN, NaN, NaN]",
+                    "1[NaN, NaN, 0, 0]",
+                    "2[NaN, NaN, 0, 0]",
+                    "3[0, 0, 1, 0]",
                     "4[0, 0, 0, 1]",
-                    "true"},
-            FF = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                  "1[NaN, NaN, NaN, NaN]",
-                  "2[NaN, NaN, NaN, NaN]",
-                  "3[NaN, NaN, NaN, NaN]",
-                  "4[0, 0, 0, 1]",
-                  "true"},
-            FF_ESR = {"[NaN, NaN, NaN, NaN, 0, 0]",
-                      "1[NaN, NaN, NaN, NaN]",
-                      "2[NaN, NaN, NaN, NaN]",
-                      "3[NaN, NaN, NaN, NaN]",
-                      "4[0, 0, 0, 1]",
-                      "true"})
+                    "true"})
     public void rotateAxisAngle_Infinity_angle() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body><script>"
@@ -2936,31 +2908,6 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
              "3[0, 0, 1, 0]",
              "4[NaN, NaN, 0, 1]",
              "true"})
-    @HtmlUnitNYI(
-            CHROME = {"[1, 0, 0, 1, NaN, NaN]",
-                      "1[1, 0, 0, 0]",
-                      "2[0, 1, 0, 0]",
-                      "3[0, 0, 1, 0]",
-                      "4[NaN, NaN, NaN, NaN]",
-                      "true"},
-            EDGE = {"[1, 0, 0, 1, NaN, NaN]",
-                    "1[1, 0, 0, 0]",
-                    "2[0, 1, 0, 0]",
-                    "3[0, 0, 1, 0]",
-                    "4[NaN, NaN, NaN, NaN]",
-                    "true"},
-            FF = {"[1, 0, 0, 1, NaN, NaN]",
-                  "1[1, 0, 0, 0]",
-                  "2[0, 1, 0, 0]",
-                  "3[0, 0, 1, 0]",
-                  "4[NaN, NaN, NaN, NaN]",
-                  "true"},
-            FF_ESR = {"[1, 0, 0, 1, NaN, NaN]",
-                      "1[1, 0, 0, 0]",
-                      "2[0, 1, 0, 0]",
-                      "3[0, 0, 1, 0]",
-                      "4[NaN, NaN, NaN, NaN]",
-                      "true"})
     public void translate_withNaN() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -3004,26 +2951,14 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                       "1[1, 0, 0, 0]",
                       "2[0, 1, 0, 0]",
                       "3[0, 0, 1, 0]",
-                      "4[NaN, NaN, NaN, NaN]",
+                      "4[NaN, NaN, 0, 1]",
                       "true"},
             EDGE = {"[1, 0, 0, 1, NaN, NaN]",
                     "1[1, 0, 0, 0]",
                     "2[0, 1, 0, 0]",
                     "3[0, 0, 1, 0]",
-                    "4[NaN, NaN, NaN, NaN]",
-                    "true"},
-            FF = {"[1, 0, 0, 1, NaN, NaN]",
-                  "1[1, 0, 0, 0]",
-                  "2[0, 1, 0, 0]",
-                  "3[0, 0, 1, 0]",
-                  "4[NaN, NaN, NaN, NaN]",
-                  "true"},
-            FF_ESR = {"[1, 0, 0, 1, NaN, NaN]",
-                      "1[1, 0, 0, 0]",
-                      "2[0, 1, 0, 0]",
-                      "3[0, 0, 1, 0]",
-                      "4[NaN, NaN, NaN, NaN]",
-                      "true"})
+                    "4[NaN, NaN, 0, 1]",
+                    "true"})
     public void translate_withInfinity() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -3259,6 +3194,3066 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + "log(JSON.stringify(m.toJSON()));\n"
                 + "log(m === m.toJSON());\n"
 
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]", "1[1, 2, 0, 0]", "2[3, 4, 0, 0]", "3[0, 0, 1, 0]", "4[5, 6, 0, 1]", "true"})
+    public void contructorFloat32Array() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly(new Float32Array([1, 2, 3, 4, 5, 6]));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 5, 6, 13, 14]", "1[1, 2, 3, 4]", "2[5, 6, 7, 8]", "3[9, 10, 11, 12]", "4[13, 14, 15, 16]", "false"})
+    public void contructorFloat64Array16() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];\n"
+                + "  let m = new DOMMatrixReadOnly(new Float64Array(values));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]", "1[1, 2, 0, 0]", "2[3, 4, 0, 0]", "3[0, 0, 1, 0]", "4[5, 6, 0, 1]", "true"})
+    public void contructorSet() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly(new Set([1, 2, 3, 4, 5, 6]));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void contructorTypedArrayInvalidLength() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly(new Float32Array([1, 2, 3]));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void contructorObject() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly({});\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]", "1[1, 2, 0, 0]", "2[3, 4, 0, 0]", "3[0, 0, 1, 0]", "4[5, 6, 0, 1]", "true"})
+    public void contructorMatrix() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  let m = new DOMMatrixReadOnly(m1);\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 5, 6, 13, 14]", "1[1, 2, 3, 4]", "2[5, 6, 7, 8]", "3[9, 10, 11, 12]", "4[13, 14, 15, 16]", "false"})
+    public void contructorMatrix3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
+                + "  let m = new DOMMatrixReadOnly(m1);\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]", "1[1, 0, 0, 0]", "2[0, 1, 0, 0]", "3[0, 0, 1, 0]", "4[0, 0, 0, 1]", "true"})
+    public void contructorStringEmpty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]", "1[1, 0, 0, 0]", "2[0, 1, 0, 0]", "3[0, 0, 1, 0]", "4[0, 0, 0, 1]", "true"})
+    public void contructorStringNone() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('none');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]", "1[1, 2, 0, 0]", "2[3, 4, 0, 0]", "3[0, 0, 1, 0]", "4[5, 6, 0, 1]", "true"})
+    public void contructorStringMatrix() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('matrix(1, 2, 3, 4, 5, 6)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 5, 6, 13, 14]", "1[1, 2, 3, 4]", "2[5, 6, 7, 8]", "3[9, 10, 11, 12]", "4[13, 14, 15, 16]", "false"})
+    public void contructorStringMatrix3d() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('matrix3d(1, 2, 3, 4, 5, 6, 7, 8, '\n"
+                + "      + '9, 10, 11, 12, 13, 14, 15, 16)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]", "1[1, 0, 0, 0]", "2[0, 1, 0, 0]", "3[0, 0, 1, 0]", "4[0, 0, 0, 1]", "false"})
+    public void contructorStringMatrix3d2DValues() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 10, 20]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[10, 20, 0, 1]",
+             "true"})
+    public void contructorStringTranslate() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(10px, 20px)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 10, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[10, 0, 0, 1]",
+             "true"})
+    public void contructorStringTranslateOneArg() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(10px)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 192, 133.795]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[192, 133.795, 0, 1]",
+             "true"})
+    public void contructorStringTranslateUnits() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(1in, 2.54cm) translateX(72pt) translateY(10mm)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void contructorStringTranslateZero() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(0, 0)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void contructorStringTranslateNoUnit() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(10, 20)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void contructorStringTranslateRelativeUnit() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(1em, 2px)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void contructorStringTranslatePercent() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(10%, 2px)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 10, 20]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[10, 20, 30, 1]",
+             "false"})
+    public void contructorStringTranslate3d() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate3d(10px, 20px, 30px)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]", "1[1, 0, 0, 0]", "2[0, 1, 0, 0]", "3[0, 0, 1, 0]", "4[0, 0, 0, 1]", "false"})
+    public void contructorStringTranslateZZero() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translateZ(0px)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 3, 0, 0]",
+             "1[2, 0, 0, 0]",
+             "2[0, 3, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void contructorStringScale() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('scale(2, 3)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 2, 0, 0]",
+             "1[2, 0, 0, 0]",
+             "2[0, 2, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void contructorStringScaleOneArg() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('scale(2)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[0.5, 0, 0, 0.5, 0, 0]",
+             "1[0.5, 0, 0, 0]",
+             "2[0, 0.5, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void contructorStringScalePercent() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('scale(50%)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 3, 0, 0]",
+             "1[2, 0, 0, 0]",
+             "2[0, 3, 0, 0]",
+             "3[0, 0, 4, 0]",
+             "4[0, 0, 0, 1]",
+             "false"})
+    public void contructorStringScaleXYZ() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('scaleX(2) scaleY(3) scaleZ(4)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 3, 0, 0]",
+             "1[2, 0, 0, 0]",
+             "2[0, 3, 0, 0]",
+             "3[0, 0, 4, 0]",
+             "4[0, 0, 0, 1]",
+             "false"})
+    public void contructorStringScale3d() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('scale3d(2, 3, 4)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[0, 1, -1, 0, 0, 0]",
+             "1[0, 1, 0, 0]",
+             "2[-1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void contructorStringRotate() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('rotate(90deg)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[0, 1, -1, 0, 0, 0]",
+             "1[0, 1, 0, 0]",
+             "2[-1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true",
+             "[0, 1, -1, 0, 0, 0]",
+             "1[0, 1, 0, 0]",
+             "2[-1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true",
+             "[0, 1, -1, 0, 0, 0]",
+             "1[0, 1, 0, 0]",
+             "2[-1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void contructorStringRotateUnits() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly('rotate(0.25turn)');\n"
+                + "  dump(m1);\n"
+                + "  let m2 = new DOMMatrixReadOnly('rotate(100grad)');\n"
+                + "  dump(m2);\n"
+                + "  let m3 = new DOMMatrixReadOnly('rotate(1.5707963267948966rad)');\n"
+                + "  dump(m3);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void contructorStringRotateNoUnit() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('rotate(90)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void contructorStringRotateZero() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('rotate(0)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[1, 0, 0, 0, 0, 0]",
+                       "1[1, 0, 0, 0]",
+                       "2[0, 0, 1, 0]",
+                       "3[0, -1, 0, 0]",
+                       "4[0, 0, 0, 1]",
+                       "false",
+                       "[0, 0, 0, 1, 0, 0]",
+                       "1[0, 0, -1, 0]",
+                       "2[0, 1, 0, 0]",
+                       "3[1, 0, 0, 0]",
+                       "4[0, 0, 0, 1]",
+                       "false",
+                       "[0, 1, -1, 0, 0, 0]",
+                       "1[0, 1, 0, 0]",
+                       "2[-1, 0, 0, 0]",
+                       "3[0, 0, 1, 0]",
+                       "4[0, 0, 0, 1]",
+                       "true"},
+            FF = {"[1, 0, 0, 0, 0, 0]",
+                  "1[1, 0, 0, 0]",
+                  "2[0, 0, 1, 0]",
+                  "3[0, -1, 0, 0]",
+                  "4[0, 0, 0, 1]",
+                  "false",
+                  "[0, 0, 0, 1, 0, 0]",
+                  "1[0, 0, -1, 0]",
+                  "2[0, 1, 0, 0]",
+                  "3[1, 0, 0, 0]",
+                  "4[0, 0, 0, 1]",
+                  "false",
+                  "[0, 1, -1, 0, 0, 0]",
+                  "1[0, 1, 0, 0]",
+                  "2[-1, 0, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[0, 0, 0, 1]",
+                  "false"},
+            FF_ESR = {"[1, 0, 0, 0, 0, 0]",
+                      "1[1, 0, 0, 0]",
+                      "2[0, 0, 1, 0]",
+                      "3[0, -1, 0, 0]",
+                      "4[0, 0, 0, 1]",
+                      "false",
+                      "[0, 0, 0, 1, 0, 0]",
+                      "1[0, 0, -1, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[1, 0, 0, 0]",
+                      "4[0, 0, 0, 1]",
+                      "false",
+                      "[0, 1, -1, 0, 0, 0]",
+                      "1[0, 1, 0, 0]",
+                      "2[-1, 0, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[0, 0, 0, 1]",
+                      "false"})
+    @HtmlUnitNYI(
+            FF = {"[1, 0, 0, 0, 0, 0]",
+                  "1[1, 0, 0, 0]",
+                  "2[0, 0, 1, 0]",
+                  "3[0, -1, 0, 0]",
+                  "4[0, 0, 0, 1]",
+                  "false",
+                  "[0, 0, 0, 1, 0, 0]",
+                  "1[0, 0, -1, 0]",
+                  "2[0, 1, 0, 0]",
+                  "3[1, 0, 0, 0]",
+                  "4[0, 0, 0, 1]",
+                  "false",
+                  "[0, 1, -1, 0, 0, 0]",
+                  "1[0, 1, 0, 0]",
+                  "2[-1, 0, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[0, 0, 0, 1]",
+                  "true"},
+            FF_ESR = {"[1, 0, 0, 0, 0, 0]",
+                      "1[1, 0, 0, 0]",
+                      "2[0, 0, 1, 0]",
+                      "3[0, -1, 0, 0]",
+                      "4[0, 0, 0, 1]",
+                      "false",
+                      "[0, 0, 0, 1, 0, 0]",
+                      "1[0, 0, -1, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[1, 0, 0, 0]",
+                      "4[0, 0, 0, 1]",
+                      "false",
+                      "[0, 1, -1, 0, 0, 0]",
+                      "1[0, 1, 0, 0]",
+                      "2[-1, 0, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[0, 0, 0, 1]",
+                      "true"})
+    public void contructorStringRotateXYZ() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly('rotateX(90deg)');\n"
+                + "  dump(m1);\n"
+                + "  let m2 = new DOMMatrixReadOnly('rotateY(90deg)');\n"
+                + "  dump(m2);\n"
+                + "  let m3 = new DOMMatrixReadOnly('rotateZ(90deg)');\n"
+                + "  dump(m3);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[0.854, 0.146, 0.146, 0.854, 0, 0]",
+             "1[0.854, 0.146, -0.5, 0]",
+             "2[0.146, 0.854, 0.5, 0]",
+             "3[0.5, -0.5, 0.707, 0]",
+             "4[0, 0, 0, 1]",
+             "false"})
+    public void contructorStringRotate3d() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('rotate3d(1, 1, 0, 45deg)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0.364, 0.577, 1, 0, 0]",
+             "1[1, 0.364, 0, 0]",
+             "2[0.577, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void contructorStringSkew() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('skew(30deg, 20deg)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0.577, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0.577, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true",
+             "[1, 0.577, 0, 1, 0, 0]",
+             "1[1, 0.577, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void contructorStringSkewXY() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly('skewX(30deg)');\n"
+                + "  dump(m1);\n"
+                + "  let m2 = new DOMMatrixReadOnly('skewY(30deg)');\n"
+                + "  dump(m2);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, -0.01]",
+             "4[0, 0, 0, 1]",
+             "false"})
+    public void contructorStringPerspective() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('perspective(100px)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]", "1[1, 0, 0, 0]", "2[0, 1, 0, 0]", "3[0, 0, 1, 0]", "4[0, 0, 0, 1]", "false"})
+    public void contructorStringPerspectiveNone() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('perspective(none)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[0, 2, -2, 0, 10, 20]", "1[0, 2, 0, 0]", "2[-2, 0, 0, 0]", "3[0, 0, 1, 0]", "4[10, 20, 0, 1]", "true"})
+    public void contructorStringList() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(10px, 20px) rotate(90deg) scale(2)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 2, 10, 20]", "1[2, 0, 0, 0]", "2[0, 2, 0, 0]", "3[0, 0, 1, 0]", "4[10, 20, 0, 1]", "true"})
+    public void contructorStringListNoSpace() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(10px,20px)scale(2)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 2, 10, 20]", "1[2, 0, 0, 0]", "2[0, 2, 0, 0]", "3[0, 0, 1, 0]", "4[10, 20, 0, 1]", "true"})
+    public void contructorStringCaseInsensitive() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('TRANSLATE(10PX, 20Px) Scale(2)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 10, 20]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[10, 20, 0, 1]",
+             "true"})
+    public void contructorStringWhitespace() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('  translate( 10px , 20px )  ');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void contructorStringCommaSeparatedList() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(10px), scale(2)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void contructorStringUnknownFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('foo(10px)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void contructorStringWrongArgumentCount() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('matrix(1, 2, 3)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 10, 0]", "1[1, 0, 0, 0]", "2[0, 1, 0, 0]", "3[0, 0, 1, 0]", "4[10, 0, 0, 1]", "true"})
+    public void contructorStringNotClosed() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('translate(10px');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void contructorStringInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('invalid');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, -2, 0.5, 10, 0.15, 0]",
+             "1[1, -2, 0, 0]",
+             "2[0.5, 10, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0.15, 0, 0, 1]",
+             "true"})
+    public void contructorStringNumbers() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('matrix(+1, -2, .5, 1e1, 1.5E-1, 0)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void multiplyNoArgumentNotIdentity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply());\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void multiplyEmptyDictionary() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply({}));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 9, 12, 15, 26]",
+             "1[2, 4, 0, 0]",
+             "2[9, 12, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[15, 26, 0, 1]",
+             "true"})
+    public void multiplyDictionary() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply({a: 2, d: 3, e: 10}));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 9, 12, 15, 26]",
+             "1[2, 4, 0, 0]",
+             "2[9, 12, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[15, 26, 0, 1]",
+             "true"})
+    public void multiplyDictionaryLongNames() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply({m11: 2, m22: 3, m41: 10}));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 3, 4, 5, 6]",
+             "1[2, 4, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void multiplyDictionarySameValue() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply({a: 2, m11: 2}));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void multiplyDictionaryDifferentValue() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply({a: 2, m11: 3}));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[NaN, 0, 0, 1, 0, 0]",
+                       "1[NaN, 0, 0, 0]",
+                       "2[0, 1, 0, 0]",
+                       "3[0, 0, 1, 0]",
+                       "4[0, 0, 0, 1]",
+                       "true"},
+            FF = {"[NaN, NaN, 0, 1, 0, 0]",
+                  "1[NaN, NaN, 0, 0]",
+                  "2[0, 1, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[0, 0, 0, 1]",
+                  "true"},
+            FF_ESR = {"[NaN, NaN, 0, 1, 0, 0]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[0, 0, 0, 1]",
+                      "true"})
+    @HtmlUnitNYI(
+            CHROME = {"[NaN, NaN, 0, 1, 0, 0]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[0, 0, 0, 1]",
+                      "true"},
+              EDGE = {"[NaN, NaN, 0, 1, 0, 0]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[0, 0, 0, 1]",
+                      "true"})
+    public void multiplyDictionaryNaN() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  dump(m.multiply({a: NaN, m11: NaN}));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 2, 0]",
+             "4[5, 6, 5, 1]",
+             "false"})
+    public void multiplyDictionary3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply({m33: 2, m43: 5}));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[1, 2, 3, 4, 5, 6]",
+                       "1[1, 2, 0, 0]",
+                       "2[3, 4, 0, 0]",
+                       "3[0, 0, 1, 0]",
+                       "4[5, 6, 0, 1]",
+                       "false"},
+            FF = {"[1, 2, 3, 4, 5, 6]",
+                  "1[1, 2, 0, 0]",
+                  "2[3, 4, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[5, 6, 0, 1]",
+                  "true"},
+            FF_ESR = {"[1, 2, 3, 4, 5, 6]",
+                      "1[1, 2, 0, 0]",
+                      "2[3, 4, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[5, 6, 0, 1]",
+                      "true"})
+    @HtmlUnitNYI(
+            CHROME = {"[1, 2, 3, 4, 5, 6]",
+                      "1[1, 2, 0, 0]",
+                      "2[3, 4, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[5, 6, 0, 1]",
+                      "true"},
+            EDGE = {"[1, 2, 3, 4, 5, 6]",
+                    "1[1, 2, 0, 0]",
+                    "2[3, 4, 0, 0]",
+                    "3[0, 0, 1, 0]",
+                    "4[5, 6, 0, 1]",
+                    "true"})
+    public void multiplyDictionaryIs2DFalse() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply({is2D: false}));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void multiplyDictionaryIs2DConflict() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply({is2D: true, m33: 2}));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void multiplyArray() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.multiply([2, 0, 0, 2, 0, 0]));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void multiplyResultType() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  let r = m.multiply();\n"
+                + "  log(r instanceof DOMMatrix);\n"
+                + "  log(r === m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[3, 4, -1, -2, 5, 6]",
+             "1[3, 4, 0, 0]",
+             "2[-1, -2, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void rotate_three_arguments_z() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotate(0, 0, 90));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 0, 0, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[0, 0, 1, 0]",
+             "3[-3, -4, 0, 0]",
+             "4[5, 6, 0, 1]",
+             "false"})
+    public void rotate_two_arguments() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotate(90, 0));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 0, 0, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[0, 0, 1, 0]",
+             "3[-3, -4, 0, 0]",
+             "4[5, 6, 0, 1]",
+             "false"})
+    public void rotate_x() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotate(90, 0, 0));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[0, 0, 3, 4, 5, 6]",
+             "1[0, 0, -1, 0]",
+             "2[3, 4, 0, 0]",
+             "3[1, 2, 0, 0]",
+             "4[5, 6, 0, 1]",
+             "false"})
+    public void rotate_y() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotate(0, 90, 0));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2.191, 3.157, 1.644, 1.81, 5, 6]",
+             "1[2.191, 3.157, -0.707, 0]",
+             "2[1.644, 1.81, 0.354, 0]",
+             "3[1.58, 2.6, 0.612, 0]",
+             "4[5, 6, 0, 1]",
+             "false"})
+    public void rotate_xyz() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotate(30, 45, 60));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void rotate_x_zero() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotate(0, 0));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2.828, 4.243, 1.414, 1.414, 5, 6]",
+             "1[2.828, 4.243, 0, 0]",
+             "2[1.414, 1.414, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void rotate_y_undefined() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotate(45, undefined, undefined));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2.828, 4.243, 1.414, 1.414, 5, 6]",
+             "1[2.828, 4.243, 0, 0]",
+             "2[1.414, 1.414, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void rotateFromVector() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotateFromVector(1, 1));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[-1, 0, 0, -1, 0, 0]",
+             "1[-1, 0, 0, 0]",
+             "2[0, -1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotateFromVectorNegative() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  dump(m.rotateFromVector(-1, 0));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void rotateFromVectorZero() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotateFromVector(0, 0));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void rotateFromVectorNoArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotateFromVector());\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[0, 1, -1, 0, 0, 0]",
+             "1[0, 1, 0, 0]",
+             "2[-1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "false"})
+    public void rotateFromVector3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);\n"
+                + "  dump(m.rotateFromVector(0, 1));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void rotateAxisAngle_zero_axis_not_identity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.rotateAxisAngle(0, 0, 0, 90));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[0, -1, 1, 0, 0, 0]",
+             "1[0, -1, 0, 0]",
+             "2[1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotateAxisAngle_negative_z() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  dump(m.rotateAxisAngle(0, 0, -1, 90));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[0, 0, 0, 1, 0, 0]",
+             "1[0, 0, -1, 0]",
+             "2[0, 1, 0, 0]",
+             "3[1, 0, 0, 0]",
+             "4[0, 0, 0, 1]",
+             "false"})
+    public void rotateAxisAngle_y_90() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  dump(m.rotateAxisAngle(0, 1, 0, 90));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void scale_noArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scale());\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 6, 8, 5, 6]",
+             "1[2, 4, 0, 0]",
+             "2[6, 8, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void scale_oneArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scale(2));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 9, 12, 5, 6]",
+             "1[2, 4, 0, 0]",
+             "2[9, 12, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void scale_twoArguments() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scale(2, 3));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 9, 12, 5, 6]",
+             "1[2, 4, 0, 0]",
+             "2[9, 12, 0, 0]",
+             "3[0, 0, 4, 0]",
+             "4[5, 6, 0, 1]",
+             "false"})
+    public void scale_threeArguments() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scale(2, 3, 4));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 9, 12, 5, 6]",
+             "1[2, 4, 0, 0]",
+             "2[9, 12, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void scale_z1() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scale(2, 3, 1));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 2, -10, -20]",
+             "1[2, 0, 0, 0]",
+             "2[0, 2, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[-10, -20, 0, 1]",
+             "true"})
+    public void scale_origin() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  dump(m.scale(2, 2, 1, 10, 20));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 2, -10, -20]",
+             "1[2, 0, 0, 0]",
+             "2[0, 2, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[-10, -20, 0, 1]",
+             "false"})
+    public void scale_originZ() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  dump(m.scale(2, 2, 1, 10, 20, 30));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[NaN, 0, 0, NaN, 0, 0]",
+                       "1[NaN, 0, 0, 0]",
+                       "2[0, NaN, 0, 0]",
+                       "3[0, 0, 1, 0]",
+                       "4[0, 0, 0, 1]",
+                       "true"},
+            FF = {"[NaN, NaN, NaN, NaN, 0, 0]",
+                  "1[NaN, NaN, 0, 0]",
+                  "2[NaN, NaN, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[0, 0, 0, 1]",
+                  "true"},
+            FF_ESR = {"[NaN, NaN, NaN, NaN, 0, 0]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[0, 0, 0, 1]",
+                      "true"})
+    @HtmlUnitNYI(
+            CHROME = {"[NaN, NaN, NaN, NaN, 0, 0]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[0, 0, 0, 1]",
+                      "true"},
+              EDGE = {"[NaN, NaN, NaN, NaN, 0, 0]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[0, 0, 0, 1]",
+                      "true"})
+    public void scale_NaN() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  dump(m.scale(NaN));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void scale3d_noArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scale3d());\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void scale3d_one() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scale3d(1));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 6, 8, 5, 6]",
+             "1[2, 4, 0, 0]",
+             "2[6, 8, 0, 0]",
+             "3[0, 0, 2, 0]",
+             "4[5, 6, 0, 1]",
+             "false"})
+    public void scale3d() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scale3d(2));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 2, -10, -20]",
+             "1[2, 0, 0, 0]",
+             "2[0, 2, 0, 0]",
+             "3[0, 0, 2, 0]",
+             "4[-10, -20, -30, 1]",
+             "false"})
+    public void scale3d_origin() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  dump(m.scale3d(2, 10, 20, 30));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 9, 12, 5, 6]",
+             "1[2, 4, 0, 0]",
+             "2[9, 12, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void scaleNonUniform() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scaleNonUniform(2, 3));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 4, 3, 4, 5, 6]",
+             "1[2, 4, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void scaleNonUniform_oneArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scaleNonUniform(2));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void scaleNonUniform_noArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m.scaleNonUniform());\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("5, 6, 0, 1")
+    public void transformPoint_noArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  let p = m.transformPoint();\n"
+                + "  log(p.x + ', ' + p.y + ', ' + p.z + ', ' + p.w);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("12, 16, 0, 1")
+    public void transformPoint_dictionary() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  let p = m.transformPoint({x: 1, y: 2});\n"
+                + "  log(p.x + ', ' + p.y + ', ' + p.z + ', ' + p.w);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("27, 34, 3, 4")
+    public void transformPoint_point() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  let p = m.transformPoint(new DOMPoint(1, 2, 3, 4));\n"
+                + "  log(p.x + ', ' + p.y + ', ' + p.z + ', ' + p.w);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("90, 100, 110, 120")
+    public void transformPoint_3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
+                + "  let p = m.transformPoint({x: 1, y: 2, z: 3, w: 4});\n"
+                + "  log(p.x + ', ' + p.y + ', ' + p.z + ', ' + p.w);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("10, 20, 50, 0.5")
+    public void transformPoint_perspective() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly('perspective(100px)');\n"
+                + "  let p = m.transformPoint({x: 10, y: 20, z: 50});\n"
+                + "  log(p.x + ', ' + p.y + ', ' + p.z + ', ' + p.w);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true",
+                      "[object DOMPoint]"})
+    public void transformPoint_resultType() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  let p = m.transformPoint({x: 1});\n"
+                + "  log(p instanceof DOMPoint);\n"
+                + "  log(Object.prototype.toString.call(p));\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void transformPoint_number() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  let p = m.transformPoint(42);\n"
+                + "  log(p.x + ', ' + p.y + ', ' + p.z + ', ' + p.w);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true",
+             "false",
+             "true"})
+    public void fromMatrix_noArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromMatrix();\n"
+                + "  dump(m);\n"
+                + "  log(m instanceof DOMMatrix);\n"
+                + "  log(m instanceof DOMMatrixReadOnly);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void fromMatrix_dictionary() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromMatrix({a: 1, b: 2, c: 3, d: 4, e: 5, f: 6});\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 1, 0, 0]",
+             "1[2, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 7, 1]",
+             "false"})
+    public void fromMatrix_dictionary3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromMatrix({m11: 2, m43: 7});\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true",
+             "false",
+             "false"})
+    public void fromMatrix_matrix() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let other = new DOMMatrix([1, 2, 3, 4, 5, 6]);\n"
+                + "  let m = DOMMatrixReadOnly.fromMatrix(other);\n"
+                + "  dump(m);\n"
+                + "  log(m === other);\n"
+                + "  log(m instanceof DOMMatrix);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void fromMatrix_invalid() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromMatrix({a: 1, m11: 2});\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void fromMatrix_string() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromMatrix('matrix(1, 2, 3, 4, 5, 6)');\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true",
+             "false"})
+    public void fromFloat32Array_6() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromFloat32Array(new Float32Array([1, 2, 3, 4, 5, 6]));\n"
+                + "  dump(m);\n"
+                + "  log(m instanceof DOMMatrix);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 5, 6, 13, 14]", "1[1, 2, 3, 4]", "2[5, 6, 7, 8]", "3[9, 10, 11, 12]", "4[13, 14, 15, 16]", "false"})
+    public void fromFloat32Array_16() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];\n"
+                + "  let m = DOMMatrixReadOnly.fromFloat32Array(new Float32Array(values));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void fromFloat32Array_invalidLength() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromFloat32Array(new Float32Array([1, 2, 3, 4, 5]));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void fromFloat32Array_wrongType() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromFloat32Array(new Float64Array([1, 2, 3, 4, 5, 6]));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void fromFloat32Array_array() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromFloat32Array([1, 2, 3, 4, 5, 6]);\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void fromFloat64Array_6() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromFloat64Array(new Float64Array([1, 2, 3, 4, 5, 6]));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[1, 2, 5, 6, 13, 14]",
+             "1[1, 2, 3, 4]",
+             "2[5, 6, 7, 8]",
+             "3[9, 10, 11, 12]",
+             "4[13, 14, 15, 16]",
+             "false"})
+    public void fromFloat64Array_16() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];\n"
+                + "  let m = DOMMatrixReadOnly.fromFloat64Array(new Float64Array(values));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void fromFloat64Array_wrongType() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = DOMMatrixReadOnly.fromFloat64Array(new Float32Array([1, 2, 3, 4, 5, 6]));\n"
+                + "  dump(m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"matrix(1, 2, 3, 4, 5, 6)",
+             "matrix(1, 2, 3, 4, 5, 6)",
+             "matrix(1, 2, 3, 4, 5, 6)"})
+    public void stringConversion() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "  log('' + m);\n"
+                + "  log(String(m));\n"
+                + "  log(`${m}`);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("matrix3d(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)")
+    public void stringConversion3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
+                + "  log('' + m);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true",
+             "true",
+             "true",
+             "true",
+             "true",
+             "true",
+             "true",
+             "true",
+             "true",
+             "true",
+             "true"})
+    public void resultTypes() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  log(m.translate(1) instanceof DOMMatrix);\n"
+                + "  log(m.scale(2) instanceof DOMMatrix);\n"
+                + "  log(m.scale3d(2) instanceof DOMMatrix);\n"
+                + "  log(m.scaleNonUniform(2) instanceof DOMMatrix);\n"
+                + "  log(m.rotate(2) instanceof DOMMatrix);\n"
+                + "  log(m.rotateFromVector(1, 1) instanceof DOMMatrix);\n"
+                + "  log(m.rotateAxisAngle(1, 0, 0, 2) instanceof DOMMatrix);\n"
+                + "  log(m.skewX(2) instanceof DOMMatrix);\n"
+                + "  log(m.skewY(2) instanceof DOMMatrix);\n"
+                + "  log(m.flipX() instanceof DOMMatrix);\n"
+                + "  log(m.inverse() instanceof DOMMatrix);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined",
+             "undefined",
+             "undefined"})
+    public void noSelfFunctions() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m = new DOMMatrixReadOnly();\n"
+                + "  log(typeof m.translateSelf);\n"
+                + "  log(typeof m.multiplySelf);\n"
+                + "  log(typeof m.setMatrixValue);\n"
+                + "} catch(e) { logEx(e); }\n"
                 + "</script>\n"
                 + "</body></html>";
 

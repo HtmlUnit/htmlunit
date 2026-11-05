@@ -10904,26 +10904,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "rotateAxisAngle(),rotateFromVector(),scale(),scale3d(),scaleNonUniform(),"
                 + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
                 + "transformPoint(),translate()")
-    @HtmlUnitNYI(CHROME = "a,b,c,d,e,f,flipX(),flipY(),inverse(),is2D,isIdentity,m11,m12,m13,m14,"
-                + "m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),rotate(),"
-                + "rotateAxisAngle(),"
-                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
-                + "translate()",
-            EDGE = "a,b,c,d,e,f,flipX(),flipY(),inverse(),is2D,isIdentity,m11,m12,m13,m14,"
-                + "m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),rotate(),"
-                + "rotateAxisAngle(),"
-                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
-                + "translate()",
-            FF = "a,b,c,d,e,f,flipX(),flipY(),inverse(),is2D,isIdentity,m11,m12,m13,m14,"
-                + "m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),rotate(),"
-                + "rotateAxisAngle(),"
-                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
-                + "translate()",
-            FF_ESR = "a,b,c,d,e,f,flipX(),flipY(),inverse(),is2D,isIdentity,m11,m12,m13,m14,"
-                + "m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),rotate(),"
-                + "rotateAxisAngle(),"
-                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
-                + "translate()")
     public void domMatrixReadOnly() throws Exception {
         testString("", "new DOMMatrixReadOnly()");
     }
@@ -10958,26 +10938,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scale(),scale3d(),scale3dSelf(),scaleNonUniform(),scaleSelf(),setMatrixValue(),skewX(),"
                 + "skewXSelf(),skewY(),skewYSelf(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
                 + "transformPoint(),translate(),translateSelf()")
-    @HtmlUnitNYI(CHROME = "a,b,c,d,e,f,flipX(),flipY(),inverse(),invertSelf(),is2D,isIdentity,"
-                + "m11,m12,m13,m14,m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),"
-                + "rotate(),rotateAxisAngle(),"
-                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
-                + "translate()",
-            EDGE = "a,b,c,d,e,f,flipX(),flipY(),inverse(),invertSelf(),is2D,isIdentity,"
-                + "m11,m12,m13,m14,m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),"
-                + "rotate(),rotateAxisAngle(),"
-                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
-                + "translate()",
-            FF = "a,b,c,d,e,f,flipX(),flipY(),inverse(),invertSelf(),is2D,isIdentity,"
-                + "m11,m12,m13,m14,m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),"
-                + "rotate(),rotateAxisAngle(),"
-                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
-                + "translate()",
-            FF_ESR = "a,b,c,d,e,f,flipX(),flipY(),inverse(),invertSelf(),is2D,isIdentity,"
-                + "m11,m12,m13,m14,m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),"
-                + "rotate(),rotateAxisAngle(),"
-                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
-                + "translate()")
     public void domMatrix() throws Exception {
         testString("", "new DOMMatrix()");
     }

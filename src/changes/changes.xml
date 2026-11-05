@@ -8,6 +8,37 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri">
+                DOMMatrixReadOnly: scale(), scale3d(), scaleNonUniform(), rotateFromVector() and transformPoint()
+                added; rotate() supports the rotation around all three axes (rotX, rotY, rotZ).
+            </action>
+            <action type="add" dev="rbri">
+                DOMMatrix: multiplySelf(), preMultiplySelf(), translateSelf(), scaleSelf(), scale3dSelf(), rotateSelf(),
+                rotateFromVectorSelf(), rotateAxisAngleSelf(), skewXSelf(), skewYSelf() and setMatrixValue() added.
+            </action>
+            <action type="add" dev="rbri">
+                DOMMatrixReadOnly/DOMMatrix: the static functions fromMatrix(), fromFloat32Array() and fromFloat64Array() added.
+            </action>
+            <action type="add" dev="rbri">
+                DOMMatrixReadOnly/DOMMatrix constructor: support for CSS transform lists
+                (e.g. new DOMMatrix('translate(10px, 20px) rotate(45deg)')) and for all iterables (e.g. typed arrays).
+            </action>
+            <action type="fix" dev="rbri">
+                DOMMatrixReadOnly/DOMMatrix: multiply() and rotateAxisAngle() with a (0, 0, 0) axis are no longer
+                returning the identity matrix but a copy of the matrix; multiply() supports objects with
+                matrix properties (DOMMatrixInit).
+            </action>
+            <action type="fix" dev="rbri">
+                DOMMatrixReadOnly/DOMMatrix: the conversion to a string returns the matrix (e.g. 'matrix(1, 0, 0, 1, 0, 0)').
+            </action>
+            <action type="fix" dev="rbri">
+                DOMMatrix: setting one of the 3D values (m13, m14, m23, m24, m31, m32, m33, m34, m43, m44)
+                to a non default value makes the matrix 3D (is2D is false).
+            </action>
+            <action type="fix" dev="rbri">
+                DOMMatrixReadOnly/DOMMatrix: some NaN and Infinity handling fixed
+                (e.g. translate(NaN, NaN) or a constructor array containing undefined).
+            </action>
             <action type="fix" dev="rbri">
                 CanvasRenderingContext2D.fill() now fills all sub paths of the current path as one shape;
                 the 'evenodd' fill rule and holes made of sub paths drawn in the opposite direction work.
