@@ -196,6 +196,7 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
      * CHROME = {"first",
      *           "second"}
      * </pre>
+     * <p>No alerts at all result in an empty array ({@code CHROME = {}}).</p>
      *
      * @param browserString the browser (e.g. {@code CHROME}) the expectation is for
      * @param failure the failure
@@ -210,7 +211,12 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
             actual = actual.substring(1, actual.length() - 1);
         }
 
-        if (!actual.isEmpty() && actual.charAt(actual.length() - 1) == '\u00A7') {
+        // no alerts at all
+        if (actual.isEmpty()) {
+            return "{}";
+        }
+
+        if (actual.charAt(actual.length() - 1) == '\u00A7') {
             final String[] alerts = actual.substring(0, actual.length() - 1).split("\u00A7", -1);
             if (alerts.length > 1) {
                 // align the following lines with the first alert after the '{'

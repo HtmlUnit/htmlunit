@@ -743,71 +743,43 @@ public class CodeStyleTest {
      * Converts the given alerts definition to an array of expressions.
      */
     private static List<String> alertsToList(final String string) {
+        // split at the commas outside of strings and braces; every following
+        // entry starts with its separating comma (see preserveCommas)
         final List<String> list = new ArrayList<>();
-        if ("\"\"".equals(string)) {
-            list.add(string);
+        final StringBuilder current = new StringBuilder();
+        boolean insideString = false;
+        int depth = 0;
+        for (int i = 0; i < string.length(); i++) {
+            final char c = string.charAt(i);
+            if (insideString) {
+                current.append(c);
+                if (c == '\\' && i + 1 < string.length()) {
+                    i++;
+                    current.append(string.charAt(i));
+                }
+                else if (c == '"') {
+                    insideString = false;
+                }
+                continue;
+            }
+
+            if (c == ',' && depth == 0) {
+                list.add(current.toString());
+                current.setLength(0);
+            }
+            else if (c == '"') {
+                insideString = true;
+            }
+            else if (c == '{') {
+                depth++;
+            }
+            else if (c == '}') {
+                depth--;
+            }
+            current.append(c);
         }
-        else {
-            final StringBuilder currentToken = new StringBuilder();
-
-            boolean insideString = true;
-            boolean startsWithBraces = false;
-            for (final String token : string.split("(?<!\\\\)\"")) {
-                insideString = !insideString;
-                if (!currentToken.isEmpty()) {
-                    currentToken.append('"');
-                }
-                else {
-                    startsWithBraces = token.contains("{");
-                }
-
-                if (!insideString && token.startsWith(",") && !startsWithBraces) {
-                    list.add(currentToken.toString());
-                    currentToken.setLength(0);
-                    startsWithBraces = token.contains("{");
-                }
-
-                if (!insideString && token.contains("}")) {
-                    final int curlyIndex = token.indexOf('}') + 1;
-                    currentToken.append(token, 0, curlyIndex);
-                    list.add(currentToken.toString());
-                    currentToken.setLength(0);
-                    currentToken.append(token, curlyIndex, token.length());
-                }
-                else {
-                    if (!insideString && token.contains(",") && !startsWithBraces) {
-                        final String[] expressions = token.split(",");
-                        currentToken.append(expressions[0]);
-                        if (!currentToken.isEmpty()) {
-                            list.add(currentToken.toString());
-                        }
-                        for (int i = 1; i < expressions.length - 1; i++) {
-                            list.add(',' + expressions[i]);
-                        }
-                        currentToken.setLength(0);
-                        currentToken.append(',').append(expressions[expressions.length - 1]);
-                    }
-                    else {
-                        currentToken.append(token);
-                    }
-                }
-            }
-            if (!currentToken.isEmpty()) {
-                if (!currentToken.toString().contains("\"")) {
-                    currentToken.insert(0, '"');
-                }
-                int totalQuotes = 0;
-                for (int i = 0; i < currentToken.length(); i++) {
-                    if (currentToken.charAt(i) == '"' && (i == 0 || currentToken.charAt(i - 1) != '\\')) {
-                        totalQuotes++;
-                    }
-                }
-                if (totalQuotes % 2 != 0) {
-                    currentToken.append('"');
-                }
-
-                list.add(currentToken.toString());
-            }
+        if (!current.isEmpty()) {
+            list.add(current.toString());
         }
         return list;
     }
