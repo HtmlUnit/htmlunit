@@ -413,9 +413,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_XSLT_TRANSFORM_INDENT,
 
-    /** With special keys [in .type(int)], should we trigger onkeypress event or not. */
-    @BrowserFeature({FF, FF_ESR})
-    KEYBOARD_EVENT_SPECIAL_KEYPRESS,
+    /** The key codes of the ';', '=' and '-' keys are 186, 187 and 189 (instead of 59, 61 and 173). */
+    @BrowserFeature({CHROME, EDGE})
+    KEYBOARD_EVENT_OEM_KEY_CODES,
 
     /**
      * Indicates that the Browser handles async and sync network errors the same way.

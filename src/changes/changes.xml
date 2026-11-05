@@ -8,6 +8,16 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="722">
+                KeyboardEvent: key, code and location are now correct for special keys (arrows, navigation,
+                function keys, numpad, modifiers, ...) and the code is correct for digits, space and punctuation.
+                The keypress event is only fired for keys producing a character (now also for the numpad keys),
+                the meta key reports keyCode 91 and Chrome/Edge use the keyCodes 186, 187 and 189 for ';', '=' and '-'.
+                The input event is only fired if typing has changed the text.
+            </action>
+            <action type="fix" dev="rbri">
+                HtmlTextArea: typing '\r' or '\r\n' inserts a single line feed, like in real browsers.
+            </action>
             <action type="add" dev="rbri">
                 DOMMatrixReadOnly: scale(), scale3d(), scaleNonUniform(), rotateFromVector() and transformPoint()
                 added; rotate() supports the rotation around all three axes (rotX, rotY, rotZ).

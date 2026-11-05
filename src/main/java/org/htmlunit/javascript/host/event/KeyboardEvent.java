@@ -15,12 +15,14 @@
 package org.htmlunit.javascript.host.event;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_KEYBOARD_CTOR_WHICH;
+import static org.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_OEM_KEY_CODES;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.htmlunit.Page;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -803,6 +805,15 @@ public class KeyboardEvent extends UIEvent {
     @JsxConstant({FF, FF_ESR})
     public static final int DOM_VK_WIN_OEM_CLEAR = 254;
 
+    /** The key code of the ';' key used by Chrome and Edge (Windows VK_OEM_1). */
+    private static final int OEM_KEY_CODE_SEMICOLON = 186;
+
+    /** The key code of the '=' key used by Chrome and Edge (Windows VK_OEM_PLUS). */
+    private static final int OEM_KEY_CODE_EQUALS = 187;
+
+    /** The key code of the '-' key used by Chrome and Edge (Windows VK_OEM_MINUS). */
+    private static final int OEM_KEY_CODE_HYPHEN_MINUS = 189;
+
     /**
      * Maps characters to key codes for {@link #TYPE_KEY_DOWN} and {@link #TYPE_KEY_UP} events
      * where the key code differs from the character code.
@@ -844,6 +855,139 @@ public class KeyboardEvent extends UIEvent {
         KEX_CODE_MAP.put('?', DOM_VK_SLASH);
         KEX_CODE_MAP.put('\\', DOM_VK_BACK_SLASH);
         KEX_CODE_MAP.put('|', DOM_VK_BACK_SLASH);
+    }
+
+    /**
+     * The values of the {@code key}, {@code code} and {@code location} properties
+     * of the events for a key code.
+     *
+     * @param key the key value
+     * @param shiftedKey the key value if the shift key is pressed
+     * @param code the code value (the physical key on a US keyboard)
+     * @param location the location (see DOM_KEY_LOCATION_* constants)
+     */
+    private record KeyInfo(String key, String shiftedKey, String code, int location) {
+    }
+
+    /**
+     * Maps the key codes of the special keys (the keys not typed as character) to the
+     * values of the {@code key}, {@code code} and {@code location} properties.
+     *
+     * @see <a href="https://www.w3.org/TR/uievents-key/">UI Events KeyboardEvent key Values</a>
+     * @see <a href="https://www.w3.org/TR/uievents-code/">UI Events KeyboardEvent code Values</a>
+     */
+    private static final Map<Integer, KeyInfo> KEY_CODE_INFO_MAP = new HashMap<>();
+
+    /**
+     * Maps the characters to the value of the {@code code} property
+     * (the physical key on a US keyboard); letters and digits are calculated.
+     */
+    private static final Map<Character, String> CHAR_CODE_MAP = new HashMap<>();
+
+    static {
+        addKey(DOM_VK_CANCEL, "Cancel", "");
+        addKey(DOM_VK_HELP, "Help", "Help");
+        addKey(DOM_VK_BACK_SPACE, "Backspace", "Backspace");
+        addKey(DOM_VK_TAB, "Tab", "Tab");
+        addKey(DOM_VK_CLEAR, "Clear", "NumpadClear");
+        addKey(DOM_VK_RETURN, "Enter", "Enter");
+        addKey(DOM_VK_SHIFT, "Shift", "ShiftLeft", DOM_KEY_LOCATION_LEFT);
+        addKey(DOM_VK_CONTROL, "Control", "ControlLeft", DOM_KEY_LOCATION_LEFT);
+        addKey(DOM_VK_ALT, "Alt", "AltLeft", DOM_KEY_LOCATION_LEFT);
+        addKey(DOM_VK_PAUSE, "Pause", "Pause");
+        addKey(DOM_VK_CAPS_LOCK, "CapsLock", "CapsLock");
+        addKey(DOM_VK_ESCAPE, "Escape", "Escape");
+        addKey(DOM_VK_CONVERT, "Convert", "Convert");
+        addKey(DOM_VK_NONCONVERT, "NonConvert", "NonConvert");
+        addKey(DOM_VK_SPACE, " ", "Space");
+        addKey(DOM_VK_PAGE_UP, "PageUp", "PageUp");
+        addKey(DOM_VK_PAGE_DOWN, "PageDown", "PageDown");
+        addKey(DOM_VK_END, "End", "End");
+        addKey(DOM_VK_HOME, "Home", "Home");
+        addKey(DOM_VK_LEFT, "ArrowLeft", "ArrowLeft");
+        addKey(DOM_VK_UP, "ArrowUp", "ArrowUp");
+        addKey(DOM_VK_RIGHT, "ArrowRight", "ArrowRight");
+        addKey(DOM_VK_DOWN, "ArrowDown", "ArrowDown");
+        addKey(DOM_VK_SELECT, "Select", "Select");
+        addKey(DOM_VK_PRINT, "Print", "");
+        addKey(DOM_VK_EXECUTE, "Execute", "");
+        addKey(DOM_VK_PRINTSCREEN, "PrintScreen", "PrintScreen");
+        addKey(DOM_VK_INSERT, "Insert", "Insert");
+        addKey(DOM_VK_DELETE, "Delete", "Delete");
+        addKey(DOM_VK_WIN, "Meta", "MetaLeft", DOM_KEY_LOCATION_LEFT);
+        addKey(DOM_VK_CONTEXT_MENU, "ContextMenu", "ContextMenu");
+        addKey(DOM_VK_SLEEP, "Standby", "Sleep");
+
+        for (int i = 0; i <= 9; i++) {
+            addKey(DOM_VK_NUMPAD0 + i, Integer.toString(i), "Numpad" + i, DOM_KEY_LOCATION_NUMPAD);
+        }
+        addKey(DOM_VK_MULTIPLY, "*", "NumpadMultiply", DOM_KEY_LOCATION_NUMPAD);
+        addKey(DOM_VK_ADD, "+", "NumpadAdd", DOM_KEY_LOCATION_NUMPAD);
+        addKey(DOM_VK_SEPARATOR, ",", "NumpadComma", DOM_KEY_LOCATION_NUMPAD);
+        addKey(DOM_VK_SUBTRACT, "-", "NumpadSubtract", DOM_KEY_LOCATION_NUMPAD);
+        addKey(DOM_VK_DECIMAL, ".", "NumpadDecimal", DOM_KEY_LOCATION_NUMPAD);
+        addKey(DOM_VK_DIVIDE, "/", "NumpadDivide", DOM_KEY_LOCATION_NUMPAD);
+
+        for (int i = 1; i <= 24; i++) {
+            addKey(DOM_VK_F1 + i - 1, "F" + i, "F" + i);
+        }
+
+        addKey(DOM_VK_NUM_LOCK, "NumLock", "NumLock");
+        addKey(DOM_VK_SCROLL_LOCK, "ScrollLock", "ScrollLock");
+        addKey(DOM_VK_VOLUME_MUTE, "AudioVolumeMute", "AudioVolumeMute");
+        addKey(DOM_VK_VOLUME_DOWN, "AudioVolumeDown", "AudioVolumeDown");
+        addKey(DOM_VK_VOLUME_UP, "AudioVolumeUp", "AudioVolumeUp");
+        addKey(DOM_VK_META, "Meta", "MetaLeft", DOM_KEY_LOCATION_LEFT);
+        addKey(DOM_VK_ALTGR, "AltGraph", "AltRight", DOM_KEY_LOCATION_RIGHT);
+        addKey(DOM_VK_PROCESSKEY, "Process", "");
+        addKey(DOM_VK_ATTN, "Attn", "");
+        addKey(DOM_VK_CRSEL, "CrSel", "");
+        addKey(DOM_VK_EXSEL, "ExSel", "");
+        addKey(DOM_VK_EREOF, "EraseEof", "");
+        addKey(DOM_VK_PLAY, "Play", "");
+        addKey(DOM_VK_ZOOM, "ZoomToggle", "");
+
+        // the punctuation keys
+        addPunctuation(DOM_VK_SEMICOLON, ';', ':', "Semicolon");
+        addPunctuation(DOM_VK_EQUALS, '=', '+', "Equal");
+        addPunctuation(DOM_VK_HYPHEN_MINUS, '-', '_', "Minus");
+        addPunctuation(OEM_KEY_CODE_SEMICOLON, ';', ':', "Semicolon");
+        addPunctuation(OEM_KEY_CODE_EQUALS, '=', '+', "Equal");
+        addPunctuation(OEM_KEY_CODE_HYPHEN_MINUS, '-', '_', "Minus");
+        addPunctuation(DOM_VK_COMMA, ',', '<', "Comma");
+        addPunctuation(DOM_VK_PERIOD, '.', '>', "Period");
+        addPunctuation(DOM_VK_SLASH, '/', '?', "Slash");
+        addPunctuation(DOM_VK_BACK_QUOTE, '`', '~', "Backquote");
+        addPunctuation(DOM_VK_OPEN_BRACKET, '[', '{', "BracketLeft");
+        addPunctuation(DOM_VK_BACK_SLASH, '\\', '|', "Backslash");
+        addPunctuation(DOM_VK_CLOSE_BRACKET, ']', '}', "BracketRight");
+        addPunctuation(DOM_VK_QUOTE, '\'', '"', "Quote");
+
+        final String shiftedDigits = ")!@#$%^&*(";
+        for (int i = 0; i <= 9; i++) {
+            CHAR_CODE_MAP.put((char) ('0' + i), "Digit" + i);
+            CHAR_CODE_MAP.put(shiftedDigits.charAt(i), "Digit" + i);
+        }
+        CHAR_CODE_MAP.put(' ', "Space");
+        CHAR_CODE_MAP.put('\n', "Enter");
+        CHAR_CODE_MAP.put('\r', "Enter");
+        CHAR_CODE_MAP.put('\t', "Tab");
+        CHAR_CODE_MAP.put('\b', "Backspace");
+    }
+
+    private static void addKey(final int keyCode, final String key, final String code) {
+        addKey(keyCode, key, code, DOM_KEY_LOCATION_STANDARD);
+    }
+
+    private static void addKey(final int keyCode, final String key, final String code, final int location) {
+        KEY_CODE_INFO_MAP.put(keyCode, new KeyInfo(key, key, code, location));
+    }
+
+    private static void addPunctuation(final int keyCode, final char key, final char shiftedKey, final String code) {
+        KEY_CODE_INFO_MAP.put(keyCode,
+                new KeyInfo(String.valueOf(key), String.valueOf(shiftedKey), code, DOM_KEY_LOCATION_STANDARD));
+        CHAR_CODE_MAP.put(key, code);
+        CHAR_CODE_MAP.put(shiftedKey, code);
     }
 
     /*
@@ -907,6 +1051,8 @@ public class KeyboardEvent extends UIEvent {
             setKeyCode(DOM_VK_RETURN);
             charCode_ = DOM_VK_RETURN;
             which_ = DOM_VK_RETURN;
+            key_ = "Enter";
+            code_ = "Enter";
             return;
         }
 
@@ -915,7 +1061,7 @@ public class KeyboardEvent extends UIEvent {
             keyCode = Integer.valueOf(character);
         }
         else {
-            keyCode = Integer.valueOf(charToKeyCode(character));
+            keyCode = Integer.valueOf(charToKeyCode(character, hasOemKeyCodes(domNode)));
         }
         setKeyCode(keyCode);
         if (Event.TYPE_KEY_PRESS.equals(getType())) {
@@ -923,8 +1069,8 @@ public class KeyboardEvent extends UIEvent {
         }
         which_ = charCode_ == 0 ? keyCode : Integer.valueOf(charCode_);
 
-        key_ = determineKey();
-        code_ = determineCode();
+        key_ = determineKey(character, shiftKey);
+        code_ = determineCode(character);
     }
 
     /**
@@ -944,19 +1090,34 @@ public class KeyboardEvent extends UIEvent {
         if (isAmbiguousKeyCode(keyCode)) {
             throw new IllegalArgumentException("Please use the 'char' constructor instead of int");
         }
-        setKeyCode(keyCode);
+
+        // all supported browsers report the windows key code for the meta key
+        final int browserKeyCode = keyCode == DOM_VK_META ? DOM_VK_WIN : keyCode;
+        final int charCode = getCharCode(keyCode);
         if (Event.TYPE_KEY_PRESS.equals(getType())) {
-            which_ = 0;
+            // the keypress event of a character key reports the character code
+            setKeyCode(charCode == 0 ? browserKeyCode : charCode);
+            charCode_ = charCode;
+            which_ = charCode;
         }
         else {
-            which_ = keyCode;
+            setKeyCode(browserKeyCode);
+            which_ = browserKeyCode;
         }
         setShiftKey(shiftKey);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
 
-        key_ = determineKey();
-        code_ = determineCode();
+        final KeyInfo info = KEY_CODE_INFO_MAP.get(keyCode);
+        if (info == null) {
+            key_ = "Unidentified";
+            code_ = "";
+        }
+        else {
+            key_ = shiftKey ? info.shiftedKey() : info.key();
+            code_ = info.code();
+            location_ = info.location();
+        }
     }
 
     /**
@@ -984,12 +1145,25 @@ public class KeyboardEvent extends UIEvent {
      * Converts a Java character to its corresponding key code.
      *
      * @param c the character to convert
+     * @param oemKeyCodes whether to use the key codes of Chrome/Edge for the ';', '=' and '-' keys
      * @return the corresponding key code
      * @see <a href="https://www.w3.org/TR/DOM-Level-3-Events/#dom-keyboard-event-key-algorithm">DOM 3 Events</a>
      */
-    private static int charToKeyCode(final char c) {
+    private static int charToKeyCode(final char c, final boolean oemKeyCodes) {
         if (c >= 'a' && c <= 'z') {
             return 'A' + c - 'a';
+        }
+
+        if (oemKeyCodes) {
+            final int oemKeyCode = switch (c) {
+                case ';', ':' -> OEM_KEY_CODE_SEMICOLON;
+                case '=', '+' -> OEM_KEY_CODE_EQUALS;
+                case '-', '_' -> OEM_KEY_CODE_HYPHEN_MINUS;
+                default -> 0;
+            };
+            if (oemKeyCode != 0) {
+                return oemKeyCode;
+            }
         }
 
         final Integer i = KEX_CODE_MAP.get(c);
@@ -1000,39 +1174,92 @@ public class KeyboardEvent extends UIEvent {
     }
 
     /**
-     * Determines the value of the {@code key} property from the current key code, char code, or {@code which}.
+     * Returns whether the browser of the page of the given node uses the key codes
+     * 186, 187 and 189 for the ';', '=' and '-' keys.
      *
+     * @param domNode the node the event is fired for
+     * @return whether to use these key codes
+     */
+    private static boolean hasOemKeyCodes(final DomNode domNode) {
+        if (domNode == null) {
+            return false;
+        }
+        final Page page = domNode.getPage();
+        return page != null
+                && page.getEnclosingWindow().getWebClient().getBrowserVersion()
+                        .hasFeature(KEYBOARD_EVENT_OEM_KEY_CODES);
+    }
+
+    /**
+     * Returns the code of the character produced by the key with the given key code
+     * (e.g. the numpad keys); this is the {@code charCode} of the keypress event.
+     *
+     * @param keyCode the key code
+     * @return the character code or {@code 0} if the key does not produce a character
+     */
+    private static int getCharCode(final int keyCode) {
+        if (keyCode == DOM_VK_RETURN) {
+            return DOM_VK_RETURN;
+        }
+        final KeyInfo info = KEY_CODE_INFO_MAP.get(keyCode);
+        if (info != null && info.key().length() == 1) {
+            return info.key().charAt(0);
+        }
+        return 0;
+    }
+
+    /**
+     * Returns whether the key with the given key code produces a character; only
+     * these keys fire a {@code keypress} event.
+     *
+     * @param keyCode the key code
+     * @return {@code true} if the key produces a character
+     */
+    public static boolean isCharacterKey(final int keyCode) {
+        return getCharCode(keyCode) != 0;
+    }
+
+    /**
+     * Determines the value of the {@code key} property for a typed character.
+     *
+     * @param character the typed character
+     * @param shiftKey whether the shift key is pressed
      * @return the key value
      */
-    private String determineKey() {
-        int code = getKeyCode();
-        if (code == 0) {
-            code = getCharCode();
-        }
-        return switch (code) {
-            case DOM_VK_SHIFT -> "Shift";
-            case DOM_VK_PERIOD -> ".";
-            case DOM_VK_RETURN -> "Enter";
-            default -> String.valueOf(isShiftKey() ? (char) which_ : Character.toLowerCase((char) which_));
+    private static String determineKey(final char character, final boolean shiftKey) {
+        return switch (character) {
+            case '\n', '\r' -> "Enter";
+            case '\t' -> "Tab";
+            case '\b' -> "Backspace";
+            default -> {
+                if (shiftKey && character >= 'a' && character <= 'z') {
+                    yield String.valueOf(Character.toUpperCase(character));
+                }
+                yield String.valueOf(character);
+            }
         };
     }
 
     /**
-     * Determines the value of the {@code code} property from the current key code, char code, or {@code which}.
+     * Determines the value of the {@code code} property (the physical key on a US keyboard)
+     * for a typed character.
      *
-     * @return the code value
+     * @param character the typed character
+     * @return the code value or an empty string if there is no key for this character
      */
-    private String determineCode() {
-        int code = getKeyCode();
-        if (code == 0) {
-            code = getCharCode();
+    private static String determineCode(final char character) {
+        if (character >= 'a' && character <= 'z') {
+            return "Key" + Character.toUpperCase(character);
         }
-        return switch (code) {
-            case DOM_VK_SHIFT -> "ShiftLeft";
-            case DOM_VK_PERIOD, '.' -> "Period";
-            case DOM_VK_RETURN -> "Enter";
-            default -> "Key" + Character.toUpperCase((char) which_);
-        };
+        if (character >= 'A' && character <= 'Z') {
+            return "Key" + character;
+        }
+
+        final String code = CHAR_CODE_MAP.get(character);
+        if (code == null) {
+            return "";
+        }
+        return code;
     }
 
     /**

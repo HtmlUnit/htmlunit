@@ -768,4 +768,780 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         verifyTextArea2(driver, getExpectedAlerts());
     }
+
+    /**
+     * Logs the key events for the arrow keys.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:ArrowUp,ArrowUp,38,0,38,0", "keyup:ArrowUp,ArrowUp,38,0,38,0",
+             "keydown:ArrowDown,ArrowDown,40,0,40,0", "keyup:ArrowDown,ArrowDown,40,0,40,0",
+             "keydown:ArrowLeft,ArrowLeft,37,0,37,0", "keyup:ArrowLeft,ArrowLeft,37,0,37,0",
+             "keydown:ArrowRight,ArrowRight,39,0,39,0", "keyup:ArrowRight,ArrowRight,39,0,39,0"})
+    public void specialKeysArrows() throws Exception {
+        keyEvents("input", "abc", false, Keys.ARROW_UP, Keys.ARROW_DOWN, Keys.ARROW_LEFT, Keys.ARROW_RIGHT);
+    }
+
+    /**
+     * Logs the key events for the navigation keys.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:Home,Home,36,0,36,0", "keyup:Home,Home,36,0,36,0", "keydown:End,End,35,0,35,0",
+             "keyup:End,End,35,0,35,0", "keydown:PageUp,PageUp,33,0,33,0", "keyup:PageUp,PageUp,33,0,33,0",
+             "keydown:PageDown,PageDown,34,0,34,0", "keyup:PageDown,PageDown,34,0,34,0"})
+    public void specialKeysNavigation() throws Exception {
+        keyEvents("input", "abc", false, Keys.HOME, Keys.END, Keys.PAGE_UP, Keys.PAGE_DOWN);
+    }
+
+    /**
+     * Logs the key events for backspace at the end of the text.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:Backspace,Backspace,8,0,8,0", "input:ab", "keyup:Backspace,Backspace,8,0,8,0"})
+    public void specialKeysBackspace() throws Exception {
+        keyEvents("input", "abc", false, Keys.BACK_SPACE);
+    }
+
+    /**
+     * Logs the key events for backspace in an empty field.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:Backspace,Backspace,8,0,8,0", "keyup:Backspace,Backspace,8,0,8,0"})
+    public void specialKeysBackspaceEmpty() throws Exception {
+        keyEvents("input", "", false, Keys.BACK_SPACE);
+    }
+
+    /**
+     * Logs the key events for backspace if the keydown event is canceled.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:Backspace,Backspace,8,0,8,0", "keyup:Backspace,Backspace,8,0,8,0"})
+    public void specialKeysBackspacePrevented() throws Exception {
+        keyEvents("input", "abc", true, Keys.BACK_SPACE);
+    }
+
+    /**
+     * Logs the key events for delete at the end of the text.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:Delete,Delete,46,0,46,0", "keyup:Delete,Delete,46,0,46,0"})
+    public void specialKeysDeleteAtEnd() throws Exception {
+        keyEvents("input", "abc", false, Keys.DELETE);
+    }
+
+    /**
+     * Logs the key events for delete at the start of the text.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:Home,Home,36,0,36,0", "keyup:Home,Home,36,0,36,0", "keydown:Delete,Delete,46,0,46,0", "input:bc",
+             "keyup:Delete,Delete,46,0,46,0"})
+    public void specialKeysDeleteAtStart() throws Exception {
+        keyEvents("input", "abc", false, Keys.HOME, Keys.DELETE);
+    }
+
+    /**
+     * Logs the key events for the insert and the escape key.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:Insert,Insert,45,0,45,0", "keyup:Insert,Insert,45,0,45,0", "keydown:Escape,Escape,27,0,27,0",
+             "keyup:Escape,Escape,27,0,27,0"})
+    public void specialKeysInsertEscape() throws Exception {
+        keyEvents("input", "abc", false, Keys.INSERT, Keys.ESCAPE);
+    }
+
+    /**
+     * Logs the key events for some function keys.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:F1,F1,112,0,112,0", "keyup:F1,F1,112,0,112,0", "keydown:F2,F2,113,0,113,0",
+             "keyup:F2,F2,113,0,113,0", "keydown:F12,F12,123,0,123,0", "keyup:F12,F12,123,0,123,0"})
+    public void specialKeysFunction() throws Exception {
+        keyEvents("input", "abc", false, Keys.F1, Keys.F2, Keys.F12);
+    }
+
+    /**
+     * Logs the key events for the tab key.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("keydown:Tab,Tab,9,0,9,0")
+    // in real browsers the keyup event is fired at the newly focused element
+    @HtmlUnitNYI(CHROME = {"keydown:Tab,Tab,9,0,9,0", "keyup:Tab,Tab,9,0,9,0"},
+            EDGE = {"keydown:Tab,Tab,9,0,9,0", "keyup:Tab,Tab,9,0,9,0"},
+            FF = {"keydown:Tab,Tab,9,0,9,0", "keyup:Tab,Tab,9,0,9,0"},
+            FF_ESR = {"keydown:Tab,Tab,9,0,9,0", "keyup:Tab,Tab,9,0,9,0"})
+    public void specialKeysTab() throws Exception {
+        keyEvents("input", "abc", false, Keys.TAB);
+    }
+
+    /**
+     * Logs the key events for enter in an input field.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"keydown:Enter,Enter,13,0,13,0", "keypress:Enter,Enter,13,13,13,0",
+                       "keyup:Enter,Enter,13,0,13,0"},
+            FF = {"keydown:Enter,NumpadEnter,13,0,13,1", "keypress:Enter,NumpadEnter,13,13,13,1",
+                  "keyup:Enter,NumpadEnter,13,0,13,1"},
+            FF_ESR = {"keydown:Enter,NumpadEnter,13,0,13,1", "keypress:Enter,NumpadEnter,13,13,13,1",
+                      "keyup:Enter,NumpadEnter,13,0,13,1"})
+    // geckodriver sends the enter key as numpad enter
+    @HtmlUnitNYI(FF = {"keydown:Enter,Enter,13,0,13,0", "keypress:Enter,Enter,13,13,13,0",
+                       "keyup:Enter,Enter,13,0,13,0"},
+            FF_ESR = {"keydown:Enter,Enter,13,0,13,0", "keypress:Enter,Enter,13,13,13,0",
+                      "keyup:Enter,Enter,13,0,13,0"})
+    public void specialKeysEnterInput() throws Exception {
+        keyEvents("input", "abc", false, Keys.ENTER);
+    }
+
+    /**
+     * Logs the key events for enter in a textarea.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"keydown:Enter,Enter,13,0,13,0", "keypress:Enter,Enter,13,13,13,0", "input:abc\\n",
+                       "keyup:Enter,Enter,13,0,13,0"},
+            FF = {"keydown:Enter,NumpadEnter,13,0,13,1", "keypress:Enter,NumpadEnter,13,13,13,1", "input:abc\\n",
+                  "keyup:Enter,NumpadEnter,13,0,13,1"},
+            FF_ESR = {"keydown:Enter,NumpadEnter,13,0,13,1", "keypress:Enter,NumpadEnter,13,13,13,1", "input:abc\\n",
+                      "keyup:Enter,NumpadEnter,13,0,13,1"})
+    // geckodriver sends the enter key as numpad enter
+    @HtmlUnitNYI(FF = {"keydown:Enter,Enter,13,0,13,0", "keypress:Enter,Enter,13,13,13,0", "input:abc\\n",
+                       "keyup:Enter,Enter,13,0,13,0"},
+            FF_ESR = {"keydown:Enter,Enter,13,0,13,0", "keypress:Enter,Enter,13,13,13,0", "input:abc\\n",
+                      "keyup:Enter,Enter,13,0,13,0"})
+    public void specialKeysEnterTextArea() throws Exception {
+        keyEvents("textarea", "abc", false, Keys.ENTER);
+    }
+
+    /**
+     * Logs the key events for the numpad keys.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"keydown:0,Numpad0,96,0,96,0", "keypress:0,Numpad0,48,48,48,0", "input:0",
+                       "keyup:0,Numpad0,96,0,96,0", "keydown:5,Numpad5,101,0,101,0", "keypress:5,Numpad5,53,53,53,0",
+                       "input:05", "keyup:5,Numpad5,101,0,101,0", "keydown:9,Numpad9,105,0,105,0",
+                       "keypress:9,Numpad9,57,57,57,0", "input:059", "keyup:9,Numpad9,105,0,105,0",
+                       "keydown:*,NumpadMultiply,106,0,106,0", "keypress:*,NumpadMultiply,42,42,42,0", "input:059*",
+                       "keyup:*,NumpadMultiply,106,0,106,0", "keydown:+,NumpadAdd,107,0,107,0",
+                       "keypress:+,NumpadAdd,43,43,43,0", "input:059*+", "keyup:+,NumpadAdd,107,0,107,0",
+                       "keydown:-,NumpadSubtract,109,0,109,0", "keypress:-,NumpadSubtract,45,45,45,0", "input:059*+-",
+                       "keyup:-,NumpadSubtract,109,0,109,0", "keydown:.,NumpadDecimal,110,0,110,0",
+                       "keypress:.,NumpadDecimal,46,46,46,0", "input:059*+-.", "keyup:.,NumpadDecimal,110,0,110,0",
+                       "keydown:/,NumpadDivide,111,0,111,0", "keypress:/,NumpadDivide,47,47,47,0", "input:059*+-./",
+                       "keyup:/,NumpadDivide,111,0,111,0"},
+            FF = {"keydown:0,Numpad0,96,0,96,3", "keypress:0,Numpad0,48,48,48,3", "input:0",
+                  "keyup:0,Numpad0,96,0,96,3", "keydown:5,Numpad5,101,0,101,3", "keypress:5,Numpad5,53,53,53,3",
+                  "input:05", "keyup:5,Numpad5,101,0,101,3", "keydown:9,Numpad9,105,0,105,3",
+                  "keypress:9,Numpad9,57,57,57,3", "input:059", "keyup:9,Numpad9,105,0,105,3",
+                  "keydown:*,NumpadMultiply,106,0,106,3", "keypress:*,NumpadMultiply,42,42,42,3", "input:059*",
+                  "keyup:*,NumpadMultiply,106,0,106,3", "keydown:+,NumpadAdd,107,0,107,3",
+                  "keypress:+,NumpadAdd,43,43,43,3", "input:059*+", "keyup:+,NumpadAdd,107,0,107,3",
+                  "keydown:-,NumpadSubtract,109,0,109,3", "keypress:-,NumpadSubtract,45,45,45,3", "input:059*+-",
+                  "keyup:-,NumpadSubtract,109,0,109,3", "keydown:.,NumpadDecimal,110,0,110,3",
+                  "keypress:.,NumpadDecimal,46,46,46,3", "input:059*+-.", "keyup:.,NumpadDecimal,110,0,110,3",
+                  "keydown:/,NumpadDivide,111,0,111,3", "keypress:/,NumpadDivide,47,47,47,3", "input:059*+-./",
+                  "keyup:/,NumpadDivide,111,0,111,3"},
+            FF_ESR = {"keydown:0,Numpad0,96,0,96,3", "keypress:0,Numpad0,48,48,48,3", "input:0",
+                      "keyup:0,Numpad0,96,0,96,3", "keydown:5,Numpad5,101,0,101,3", "keypress:5,Numpad5,53,53,53,3",
+                      "input:05", "keyup:5,Numpad5,101,0,101,3", "keydown:9,Numpad9,105,0,105,3",
+                      "keypress:9,Numpad9,57,57,57,3", "input:059", "keyup:9,Numpad9,105,0,105,3",
+                      "keydown:*,NumpadMultiply,106,0,106,3", "keypress:*,NumpadMultiply,42,42,42,3", "input:059*",
+                      "keyup:*,NumpadMultiply,106,0,106,3", "keydown:+,NumpadAdd,107,0,107,3",
+                      "keypress:+,NumpadAdd,43,43,43,3", "input:059*+", "keyup:+,NumpadAdd,107,0,107,3",
+                      "keydown:-,NumpadSubtract,109,0,109,3", "keypress:-,NumpadSubtract,45,45,45,3", "input:059*+-",
+                      "keyup:-,NumpadSubtract,109,0,109,3", "keydown:.,NumpadDecimal,110,0,110,3",
+                      "keypress:.,NumpadDecimal,46,46,46,3", "input:059*+-.", "keyup:.,NumpadDecimal,110,0,110,3",
+                      "keydown:/,NumpadDivide,111,0,111,3", "keypress:/,NumpadDivide,47,47,47,3", "input:059*+-./",
+                      "keyup:/,NumpadDivide,111,0,111,3"})
+    // chromedriver does not set the location of the key events
+    @HtmlUnitNYI(CHROME = {"keydown:0,Numpad0,96,0,96,3", "keypress:0,Numpad0,48,48,48,3", "input:0",
+                           "keyup:0,Numpad0,96,0,96,3", "keydown:5,Numpad5,101,0,101,3",
+                           "keypress:5,Numpad5,53,53,53,3", "input:05", "keyup:5,Numpad5,101,0,101,3",
+                           "keydown:9,Numpad9,105,0,105,3", "keypress:9,Numpad9,57,57,57,3", "input:059",
+                           "keyup:9,Numpad9,105,0,105,3", "keydown:*,NumpadMultiply,106,0,106,3",
+                           "keypress:*,NumpadMultiply,42,42,42,3", "input:059*", "keyup:*,NumpadMultiply,106,0,106,3",
+                           "keydown:+,NumpadAdd,107,0,107,3", "keypress:+,NumpadAdd,43,43,43,3", "input:059*+",
+                           "keyup:+,NumpadAdd,107,0,107,3", "keydown:-,NumpadSubtract,109,0,109,3",
+                           "keypress:-,NumpadSubtract,45,45,45,3", "input:059*+-",
+                           "keyup:-,NumpadSubtract,109,0,109,3", "keydown:.,NumpadDecimal,110,0,110,3",
+                           "keypress:.,NumpadDecimal,46,46,46,3", "input:059*+-.", "keyup:.,NumpadDecimal,110,0,110,3",
+                           "keydown:/,NumpadDivide,111,0,111,3", "keypress:/,NumpadDivide,47,47,47,3",
+                           "input:059*+-./", "keyup:/,NumpadDivide,111,0,111,3"},
+            EDGE = {"keydown:0,Numpad0,96,0,96,3", "keypress:0,Numpad0,48,48,48,3", "input:0",
+                    "keyup:0,Numpad0,96,0,96,3", "keydown:5,Numpad5,101,0,101,3", "keypress:5,Numpad5,53,53,53,3",
+                    "input:05", "keyup:5,Numpad5,101,0,101,3", "keydown:9,Numpad9,105,0,105,3",
+                    "keypress:9,Numpad9,57,57,57,3", "input:059", "keyup:9,Numpad9,105,0,105,3",
+                    "keydown:*,NumpadMultiply,106,0,106,3", "keypress:*,NumpadMultiply,42,42,42,3", "input:059*",
+                    "keyup:*,NumpadMultiply,106,0,106,3", "keydown:+,NumpadAdd,107,0,107,3",
+                    "keypress:+,NumpadAdd,43,43,43,3", "input:059*+", "keyup:+,NumpadAdd,107,0,107,3",
+                    "keydown:-,NumpadSubtract,109,0,109,3", "keypress:-,NumpadSubtract,45,45,45,3", "input:059*+-",
+                    "keyup:-,NumpadSubtract,109,0,109,3", "keydown:.,NumpadDecimal,110,0,110,3",
+                    "keypress:.,NumpadDecimal,46,46,46,3", "input:059*+-.", "keyup:.,NumpadDecimal,110,0,110,3",
+                    "keydown:/,NumpadDivide,111,0,111,3", "keypress:/,NumpadDivide,47,47,47,3", "input:059*+-./",
+                    "keyup:/,NumpadDivide,111,0,111,3"})
+    public void specialKeysNumpad() throws Exception {
+        keyEvents("input", "", false, Keys.NUMPAD0, Keys.NUMPAD5, Keys.NUMPAD9, Keys.MULTIPLY, Keys.ADD,
+                Keys.SUBTRACT, Keys.DECIMAL, Keys.DIVIDE);
+    }
+
+    /**
+     * Logs the key events for the modifier keys.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"keydown:Shift,ShiftLeft,16,0,16,0", "keydown:Control,ControlLeft,17,0,17,0",
+                       "keydown:Alt,AltLeft,18,0,18,0", "keydown:Meta,MetaLeft,91,0,91,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keyup:Control,ControlLeft,17,0,17,0",
+                       "keyup:Alt,AltLeft,18,0,18,0", "keyup:Meta,MetaLeft,91,0,91,0"},
+            FF = {"keydown:Shift,ShiftLeft,16,0,16,1", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Control,ControlLeft,17,0,17,1", "keyup:Control,ControlLeft,17,0,17,1",
+                  "keydown:Alt,AltLeft,18,0,18,1", "keyup:Alt,AltLeft,18,0,18,1", "keydown:Meta,MetaLeft,91,0,91,1",
+                  "keyup:Meta,MetaLeft,91,0,91,1"},
+            FF_ESR = {"keydown:Shift,ShiftLeft,16,0,16,1", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Control,ControlLeft,17,0,17,1", "keyup:Control,ControlLeft,17,0,17,1",
+                      "keydown:Alt,AltLeft,18,0,18,1", "keyup:Alt,AltLeft,18,0,18,1",
+                      "keydown:Meta,MetaLeft,91,0,91,1", "keyup:Meta,MetaLeft,91,0,91,1"})
+    // chromedriver does not set the location of the key events
+    // the modifiers are released at the end of sendKeys in a different order
+    @HtmlUnitNYI(CHROME = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:Control,ControlLeft,17,0,17,1",
+                           "keydown:Alt,AltLeft,18,0,18,1", "keydown:Meta,MetaLeft,91,0,91,1",
+                           "keyup:Meta,MetaLeft,91,0,91,1", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keyup:Alt,AltLeft,18,0,18,1", "keyup:Control,ControlLeft,17,0,17,1"},
+            EDGE = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:Control,ControlLeft,17,0,17,1",
+                    "keydown:Alt,AltLeft,18,0,18,1", "keydown:Meta,MetaLeft,91,0,91,1",
+                    "keyup:Meta,MetaLeft,91,0,91,1", "keyup:Shift,ShiftLeft,16,0,16,1", "keyup:Alt,AltLeft,18,0,18,1",
+                    "keyup:Control,ControlLeft,17,0,17,1"},
+            FF = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:Control,ControlLeft,17,0,17,1",
+                  "keydown:Alt,AltLeft,18,0,18,1", "keydown:Meta,MetaLeft,91,0,91,1", "keyup:Meta,MetaLeft,91,0,91,1",
+                  "keyup:Shift,ShiftLeft,16,0,16,1", "keyup:Alt,AltLeft,18,0,18,1",
+                  "keyup:Control,ControlLeft,17,0,17,1"},
+            FF_ESR = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:Control,ControlLeft,17,0,17,1",
+                      "keydown:Alt,AltLeft,18,0,18,1", "keydown:Meta,MetaLeft,91,0,91,1",
+                      "keyup:Meta,MetaLeft,91,0,91,1", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keyup:Alt,AltLeft,18,0,18,1", "keyup:Control,ControlLeft,17,0,17,1"})
+    public void specialKeysModifiers() throws Exception {
+        keyEvents("input", "", false, Keys.SHIFT, Keys.CONTROL, Keys.ALT, Keys.META);
+    }
+
+    /**
+     * Logs the key events for an arrow key pressed together with shift.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"keydown:Shift,ShiftLeft,16,0,16,0", "keydown:ArrowLeft,ArrowLeft,37,0,37,0",
+                       "keyup:ArrowLeft,ArrowLeft,37,0,37,0", "keyup:Shift,ShiftLeft,16,0,16,0"},
+            FF = {"keydown:Shift,ShiftLeft,16,0,16,1", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:ArrowLeft,ArrowLeft,37,0,37,0", "keyup:ArrowLeft,ArrowLeft,37,0,37,0",
+                  "keydown:Unidentified,,0,0,0,0", "keyup:Unidentified,,0,0,0,0"},
+            FF_ESR = {"keydown:Shift,ShiftLeft,16,0,16,1", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:ArrowLeft,ArrowLeft,37,0,37,0", "keyup:ArrowLeft,ArrowLeft,37,0,37,0",
+                      "keydown:Unidentified,,0,0,0,0", "keyup:Unidentified,,0,0,0,0"})
+    // chromedriver does not set the location of the key events
+    // geckodriver releases the shift key first and sends an additional unidentified key
+    @HtmlUnitNYI(CHROME = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:ArrowLeft,ArrowLeft,37,0,37,0",
+                           "keyup:ArrowLeft,ArrowLeft,37,0,37,0", "keyup:Shift,ShiftLeft,16,0,16,1"},
+            EDGE = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:ArrowLeft,ArrowLeft,37,0,37,0",
+                    "keyup:ArrowLeft,ArrowLeft,37,0,37,0", "keyup:Shift,ShiftLeft,16,0,16,1"},
+            FF = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:ArrowLeft,ArrowLeft,37,0,37,0",
+                  "keyup:ArrowLeft,ArrowLeft,37,0,37,0", "keyup:Shift,ShiftLeft,16,0,16,1"},
+            FF_ESR = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:ArrowLeft,ArrowLeft,37,0,37,0",
+                      "keyup:ArrowLeft,ArrowLeft,37,0,37,0", "keyup:Shift,ShiftLeft,16,0,16,1"})
+    public void specialKeysShiftArrow() throws Exception {
+        keyEvents("input", "abc", false, Keys.chord(Keys.SHIFT, Keys.ARROW_LEFT));
+    }
+
+    /**
+     * Logs the key events for digits and space.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"keydown:0,Digit0,48,0,48,0", "keypress:0,Digit0,48,48,48,0", "input:0", "keyup:0,Digit0,48,0,48,0",
+             "keydown: ,Space,32,0,32,0", "keypress: ,Space,32,32,32,0", "input:0 ", "keyup: ,Space,32,0,32,0",
+             "keydown:9,Digit9,57,0,57,0", "keypress:9,Digit9,57,57,57,0", "input:0 9", "keyup:9,Digit9,57,0,57,0"})
+    public void keysDigitsAndSpace() throws Exception {
+        keyEvents("input", "", false, "0 9");
+    }
+
+    /**
+     * Logs the key events for punctuation chars.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"keydown:,,Comma,188,0,188,0", "keypress:,,Comma,44,44,44,0", "input:,",
+                       "keyup:,,Comma,188,0,188,0", "keydown:.,Period,190,0,190,0", "keypress:.,Period,46,46,46,0",
+                       "input:,.", "keyup:.,Period,190,0,190,0", "keydown:-,Minus,189,0,189,0",
+                       "keypress:-,Minus,45,45,45,0", "input:,.-", "keyup:-,Minus,189,0,189,0",
+                       "keydown:/,Slash,191,0,191,0", "keypress:/,Slash,47,47,47,0", "input:,.-/",
+                       "keyup:/,Slash,191,0,191,0", "keydown:;,Semicolon,186,0,186,0",
+                       "keypress:;,Semicolon,59,59,59,0", "input:,.-/;", "keyup:;,Semicolon,186,0,186,0",
+                       "keydown:=,Equal,187,0,187,0", "keypress:=,Equal,61,61,61,0", "input:,.-/;=",
+                       "keyup:=,Equal,187,0,187,0", "keydown:[,BracketLeft,219,0,219,0",
+                       "keypress:[,BracketLeft,91,91,91,0", "input:,.-/;=[", "keyup:[,BracketLeft,219,0,219,0",
+                       "keydown:],BracketRight,221,0,221,0", "keypress:],BracketRight,93,93,93,0", "input:,.-/;=[]",
+                       "keyup:],BracketRight,221,0,221,0", "keydown:\\,Backslash,220,0,220,0",
+                       "keypress:\\,Backslash,92,92,92,0", "input:,.-/;=[]\\", "keyup:\\,Backslash,220,0,220,0",
+                       "keydown:',Quote,222,0,222,0", "keypress:',Quote,39,39,39,0", "input:,.-/;=[]\\'",
+                       "keyup:',Quote,222,0,222,0", "keydown:`,Backquote,192,0,192,0",
+                       "keypress:`,Backquote,96,96,96,0", "input:,.-/;=[]\\'`", "keyup:`,Backquote,192,0,192,0"},
+            FF = {"keydown:,,Comma,188,0,188,0", "keypress:,,Comma,44,44,44,0", "input:,", "keyup:,,Comma,188,0,188,0",
+                  "keydown:.,Period,190,0,190,0", "keypress:.,Period,46,46,46,0", "input:,.",
+                  "keyup:.,Period,190,0,190,0", "keydown:-,Minus,173,0,173,0", "keypress:-,Minus,45,45,45,0",
+                  "input:,.-", "keyup:-,Minus,173,0,173,0", "keydown:/,Slash,191,0,191,0",
+                  "keypress:/,Slash,47,47,47,0", "input:,.-/", "keyup:/,Slash,191,0,191,0",
+                  "keydown:;,Semicolon,59,0,59,0", "keypress:;,Semicolon,59,59,59,0", "input:,.-/;",
+                  "keyup:;,Semicolon,59,0,59,0", "keydown:=,Equal,61,0,61,0", "keypress:=,Equal,61,61,61,0",
+                  "input:,.-/;=", "keyup:=,Equal,61,0,61,0", "keydown:[,BracketLeft,219,0,219,0",
+                  "keypress:[,BracketLeft,91,91,91,0", "input:,.-/;=[", "keyup:[,BracketLeft,219,0,219,0",
+                  "keydown:],BracketRight,221,0,221,0", "keypress:],BracketRight,93,93,93,0", "input:,.-/;=[]",
+                  "keyup:],BracketRight,221,0,221,0", "keydown:\\,Backslash,220,0,220,0",
+                  "keypress:\\,Backslash,92,92,92,0", "input:,.-/;=[]\\", "keyup:\\,Backslash,220,0,220,0",
+                  "keydown:',Quote,222,0,222,0", "keypress:',Quote,39,39,39,0", "input:,.-/;=[]\\'",
+                  "keyup:',Quote,222,0,222,0", "keydown:`,Backquote,192,0,192,0", "keypress:`,Backquote,96,96,96,0",
+                  "input:,.-/;=[]\\'`", "keyup:`,Backquote,192,0,192,0"},
+            FF_ESR = {"keydown:,,Comma,188,0,188,0", "keypress:,,Comma,44,44,44,0", "input:,",
+                      "keyup:,,Comma,188,0,188,0", "keydown:.,Period,190,0,190,0", "keypress:.,Period,46,46,46,0",
+                      "input:,.", "keyup:.,Period,190,0,190,0", "keydown:-,Minus,173,0,173,0",
+                      "keypress:-,Minus,45,45,45,0", "input:,.-", "keyup:-,Minus,173,0,173,0",
+                      "keydown:/,Slash,191,0,191,0", "keypress:/,Slash,47,47,47,0", "input:,.-/",
+                      "keyup:/,Slash,191,0,191,0", "keydown:;,Semicolon,59,0,59,0", "keypress:;,Semicolon,59,59,59,0",
+                      "input:,.-/;", "keyup:;,Semicolon,59,0,59,0", "keydown:=,Equal,61,0,61,0",
+                      "keypress:=,Equal,61,61,61,0", "input:,.-/;=", "keyup:=,Equal,61,0,61,0",
+                      "keydown:[,BracketLeft,219,0,219,0", "keypress:[,BracketLeft,91,91,91,0", "input:,.-/;=[",
+                      "keyup:[,BracketLeft,219,0,219,0", "keydown:],BracketRight,221,0,221,0",
+                      "keypress:],BracketRight,93,93,93,0", "input:,.-/;=[]", "keyup:],BracketRight,221,0,221,0",
+                      "keydown:\\,Backslash,220,0,220,0", "keypress:\\,Backslash,92,92,92,0", "input:,.-/;=[]\\",
+                      "keyup:\\,Backslash,220,0,220,0", "keydown:',Quote,222,0,222,0", "keypress:',Quote,39,39,39,0",
+                      "input:,.-/;=[]\\'", "keyup:',Quote,222,0,222,0", "keydown:`,Backquote,192,0,192,0",
+                      "keypress:`,Backquote,96,96,96,0", "input:,.-/;=[]\\'`", "keyup:`,Backquote,192,0,192,0"})
+    public void keysPunctuation() throws Exception {
+        keyEvents("input", "", false, ",.-/;=[]\\'`");
+    }
+
+    /**
+     * Logs the key events for shifted punctuation chars.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"keydown:Shift,ShiftLeft,16,0,16,0", "keydown:!,Digit1,49,0,49,0",
+                       "keypress:!,Digit1,33,33,33,0", "input:!", "keyup:!,Digit1,49,0,49,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keydown:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:@,Digit2,50,0,50,0", "keypress:@,Digit2,64,64,64,0", "input:!@",
+                       "keyup:@,Digit2,50,0,50,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:#,Digit3,51,0,51,0",
+                       "keypress:#,Digit3,35,35,35,0", "input:!@#", "keyup:#,Digit3,51,0,51,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keydown:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:$,Digit4,52,0,52,0", "keypress:$,Digit4,36,36,36,0", "input:!@#$",
+                       "keyup:$,Digit4,52,0,52,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:%,Digit5,53,0,53,0",
+                       "keypress:%,Digit5,37,37,37,0", "input:!@#$%", "keyup:%,Digit5,53,0,53,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keydown:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:^,Digit6,54,0,54,0", "keypress:^,Digit6,94,94,94,0", "input:!@#$%^",
+                       "keyup:^,Digit6,54,0,54,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:&,Digit7,55,0,55,0",
+                       "keypress:&,Digit7,38,38,38,0", "input:!@#$%^&", "keyup:&,Digit7,55,0,55,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keydown:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:*,Digit8,56,0,56,0", "keypress:*,Digit8,42,42,42,0", "input:!@#$%^&*",
+                       "keyup:*,Digit8,56,0,56,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:(,Digit9,57,0,57,0",
+                       "keypress:(,Digit9,40,40,40,0", "input:!@#$%^&*(", "keyup:(,Digit9,57,0,57,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keydown:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:),Digit0,48,0,48,0", "keypress:),Digit0,41,41,41,0", "input:!@#$%^&*()",
+                       "keyup:),Digit0,48,0,48,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:_,Minus,189,0,189,0",
+                       "keypress:_,Minus,95,95,95,0", "input:!@#$%^&*()_", "keyup:_,Minus,189,0,189,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keydown:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:+,Equal,187,0,187,0", "keypress:+,Equal,43,43,43,0", "input:!@#$%^&*()_+",
+                       "keyup:+,Equal,187,0,187,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:{,BracketLeft,219,0,219,0",
+                       "keypress:{,BracketLeft,123,123,123,0", "input:!@#$%^&*()_+{",
+                       "keyup:{,BracketLeft,219,0,219,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:},BracketRight,221,0,221,0",
+                       "keypress:},BracketRight,125,125,125,0", "input:!@#$%^&*()_+{}",
+                       "keyup:},BracketRight,221,0,221,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:|,Backslash,220,0,220,0",
+                       "keypress:|,Backslash,124,124,124,0", "input:!@#$%^&*()_+{}|", "keyup:|,Backslash,220,0,220,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keydown:Shift,ShiftLeft,16,0,16,0",
+                       "keydown::,Semicolon,186,0,186,0", "keypress::,Semicolon,58,58,58,0", "input:!@#$%^&*()_+{}|:",
+                       "keyup::,Semicolon,186,0,186,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:\",Quote,222,0,222,0",
+                       "keypress:\",Quote,34,34,34,0", "input:!@#$%^&*()_+{}|:\"", "keyup:\",Quote,222,0,222,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keydown:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:<,Comma,188,0,188,0", "keypress:<,Comma,60,60,60,0", "input:!@#$%^&*()_+{}|:\"<",
+                       "keyup:<,Comma,188,0,188,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:>,Period,190,0,190,0",
+                       "keypress:>,Period,62,62,62,0", "input:!@#$%^&*()_+{}|:\"<>", "keyup:>,Period,190,0,190,0",
+                       "keyup:Shift,ShiftLeft,16,0,16,0", "keydown:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:?,Slash,191,0,191,0", "keypress:?,Slash,63,63,63,0", "input:!@#$%^&*()_+{}|:\"<>?",
+                       "keyup:?,Slash,191,0,191,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:Shift,ShiftLeft,16,0,16,0", "keydown:~,Backquote,192,0,192,0",
+                       "keypress:~,Backquote,126,126,126,0", "input:!@#$%^&*()_+{}|:\"<>?~",
+                       "keyup:~,Backquote,192,0,192,0", "keyup:Shift,ShiftLeft,16,0,16,0"},
+            FF = {"keydown:!,Digit1,49,0,49,0", "keypress:!,Digit1,33,33,33,0", "input:!", "keyup:!,Digit1,49,0,49,0",
+                  "keydown:@,Digit2,50,0,50,0", "keypress:@,Digit2,64,64,64,0", "input:!@", "keyup:@,Digit2,50,0,50,0",
+                  "keydown:#,Digit3,51,0,51,0", "keypress:#,Digit3,35,35,35,0", "input:!@#",
+                  "keyup:#,Digit3,51,0,51,0", "keydown:$,Digit4,52,0,52,0", "keypress:$,Digit4,36,36,36,0",
+                  "input:!@#$", "keyup:$,Digit4,52,0,52,0", "keydown:%,Digit5,53,0,53,0",
+                  "keypress:%,Digit5,37,37,37,0", "input:!@#$%", "keyup:%,Digit5,53,0,53,0",
+                  "keydown:^,Digit6,54,0,54,0", "keypress:^,Digit6,94,94,94,0", "input:!@#$%^",
+                  "keyup:^,Digit6,54,0,54,0", "keydown:&,Digit7,55,0,55,0", "keypress:&,Digit7,38,38,38,0",
+                  "input:!@#$%^&", "keyup:&,Digit7,55,0,55,0", "keydown:*,Digit8,56,0,56,0",
+                  "keypress:*,Digit8,42,42,42,0", "input:!@#$%^&*", "keyup:*,Digit8,56,0,56,0",
+                  "keydown:(,Digit9,57,0,57,0", "keypress:(,Digit9,40,40,40,0", "input:!@#$%^&*(",
+                  "keyup:(,Digit9,57,0,57,0", "keydown:),Digit0,48,0,48,0", "keypress:),Digit0,41,41,41,0",
+                  "input:!@#$%^&*()", "keyup:),Digit0,48,0,48,0", "keydown:_,Minus,173,0,173,0",
+                  "keypress:_,Minus,95,95,95,0", "input:!@#$%^&*()_", "keyup:_,Minus,173,0,173,0",
+                  "keydown:+,Equal,61,0,61,0", "keypress:+,Equal,43,43,43,0", "input:!@#$%^&*()_+",
+                  "keyup:+,Equal,61,0,61,0", "keydown:{,BracketLeft,219,0,219,0",
+                  "keypress:{,BracketLeft,123,123,123,0", "input:!@#$%^&*()_+{", "keyup:{,BracketLeft,219,0,219,0",
+                  "keydown:},BracketRight,221,0,221,0", "keypress:},BracketRight,125,125,125,0",
+                  "input:!@#$%^&*()_+{}", "keyup:},BracketRight,221,0,221,0", "keydown:|,Backslash,220,0,220,0",
+                  "keypress:|,Backslash,124,124,124,0", "input:!@#$%^&*()_+{}|", "keyup:|,Backslash,220,0,220,0",
+                  "keydown::,Semicolon,59,0,59,0", "keypress::,Semicolon,58,58,58,0", "input:!@#$%^&*()_+{}|:",
+                  "keyup::,Semicolon,59,0,59,0", "keydown:\",Quote,222,0,222,0", "keypress:\",Quote,34,34,34,0",
+                  "input:!@#$%^&*()_+{}|:\"", "keyup:\",Quote,222,0,222,0", "keydown:<,Comma,188,0,188,0",
+                  "keypress:<,Comma,60,60,60,0", "input:!@#$%^&*()_+{}|:\"<", "keyup:<,Comma,188,0,188,0",
+                  "keydown:>,Period,190,0,190,0", "keypress:>,Period,62,62,62,0", "input:!@#$%^&*()_+{}|:\"<>",
+                  "keyup:>,Period,190,0,190,0", "keydown:?,Slash,191,0,191,0", "keypress:?,Slash,63,63,63,0",
+                  "input:!@#$%^&*()_+{}|:\"<>?", "keyup:?,Slash,191,0,191,0", "keydown:~,Backquote,192,0,192,0",
+                  "keypress:~,Backquote,126,126,126,0", "input:!@#$%^&*()_+{}|:\"<>?~",
+                  "keyup:~,Backquote,192,0,192,0"},
+            FF_ESR = {"keydown:!,Digit1,49,0,49,0", "keypress:!,Digit1,33,33,33,0", "input:!",
+                      "keyup:!,Digit1,49,0,49,0", "keydown:@,Digit2,50,0,50,0", "keypress:@,Digit2,64,64,64,0",
+                      "input:!@", "keyup:@,Digit2,50,0,50,0", "keydown:#,Digit3,51,0,51,0",
+                      "keypress:#,Digit3,35,35,35,0", "input:!@#", "keyup:#,Digit3,51,0,51,0",
+                      "keydown:$,Digit4,52,0,52,0", "keypress:$,Digit4,36,36,36,0", "input:!@#$",
+                      "keyup:$,Digit4,52,0,52,0", "keydown:%,Digit5,53,0,53,0", "keypress:%,Digit5,37,37,37,0",
+                      "input:!@#$%", "keyup:%,Digit5,53,0,53,0", "keydown:^,Digit6,54,0,54,0",
+                      "keypress:^,Digit6,94,94,94,0", "input:!@#$%^", "keyup:^,Digit6,54,0,54,0",
+                      "keydown:&,Digit7,55,0,55,0", "keypress:&,Digit7,38,38,38,0", "input:!@#$%^&",
+                      "keyup:&,Digit7,55,0,55,0", "keydown:*,Digit8,56,0,56,0", "keypress:*,Digit8,42,42,42,0",
+                      "input:!@#$%^&*", "keyup:*,Digit8,56,0,56,0", "keydown:(,Digit9,57,0,57,0",
+                      "keypress:(,Digit9,40,40,40,0", "input:!@#$%^&*(", "keyup:(,Digit9,57,0,57,0",
+                      "keydown:),Digit0,48,0,48,0", "keypress:),Digit0,41,41,41,0", "input:!@#$%^&*()",
+                      "keyup:),Digit0,48,0,48,0", "keydown:_,Minus,173,0,173,0", "keypress:_,Minus,95,95,95,0",
+                      "input:!@#$%^&*()_", "keyup:_,Minus,173,0,173,0", "keydown:+,Equal,61,0,61,0",
+                      "keypress:+,Equal,43,43,43,0", "input:!@#$%^&*()_+", "keyup:+,Equal,61,0,61,0",
+                      "keydown:{,BracketLeft,219,0,219,0", "keypress:{,BracketLeft,123,123,123,0",
+                      "input:!@#$%^&*()_+{", "keyup:{,BracketLeft,219,0,219,0", "keydown:},BracketRight,221,0,221,0",
+                      "keypress:},BracketRight,125,125,125,0", "input:!@#$%^&*()_+{}",
+                      "keyup:},BracketRight,221,0,221,0", "keydown:|,Backslash,220,0,220,0",
+                      "keypress:|,Backslash,124,124,124,0", "input:!@#$%^&*()_+{}|", "keyup:|,Backslash,220,0,220,0",
+                      "keydown::,Semicolon,59,0,59,0", "keypress::,Semicolon,58,58,58,0", "input:!@#$%^&*()_+{}|:",
+                      "keyup::,Semicolon,59,0,59,0", "keydown:\",Quote,222,0,222,0", "keypress:\",Quote,34,34,34,0",
+                      "input:!@#$%^&*()_+{}|:\"", "keyup:\",Quote,222,0,222,0", "keydown:<,Comma,188,0,188,0",
+                      "keypress:<,Comma,60,60,60,0", "input:!@#$%^&*()_+{}|:\"<", "keyup:<,Comma,188,0,188,0",
+                      "keydown:>,Period,190,0,190,0", "keypress:>,Period,62,62,62,0", "input:!@#$%^&*()_+{}|:\"<>",
+                      "keyup:>,Period,190,0,190,0", "keydown:?,Slash,191,0,191,0", "keypress:?,Slash,63,63,63,0",
+                      "input:!@#$%^&*()_+{}|:\"<>?", "keyup:?,Slash,191,0,191,0", "keydown:~,Backquote,192,0,192,0",
+                      "keypress:~,Backquote,126,126,126,0", "input:!@#$%^&*()_+{}|:\"<>?~",
+                      "keyup:~,Backquote,192,0,192,0"})
+    // chromedriver does not set the location of the key events
+    // geckodriver does not send the shift key for shifted chars
+    @HtmlUnitNYI(CHROME = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:!,Digit1,49,0,49,0",
+                           "keypress:!,Digit1,33,33,33,0", "input:!", "keyup:!,Digit1,49,0,49,0",
+                           "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:@,Digit2,50,0,50,0", "keypress:@,Digit2,64,64,64,0", "input:!@",
+                           "keyup:@,Digit2,50,0,50,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:#,Digit3,51,0,51,0",
+                           "keypress:#,Digit3,35,35,35,0", "input:!@#", "keyup:#,Digit3,51,0,51,0",
+                           "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:$,Digit4,52,0,52,0", "keypress:$,Digit4,36,36,36,0", "input:!@#$",
+                           "keyup:$,Digit4,52,0,52,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:%,Digit5,53,0,53,0",
+                           "keypress:%,Digit5,37,37,37,0", "input:!@#$%", "keyup:%,Digit5,53,0,53,0",
+                           "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:^,Digit6,54,0,54,0", "keypress:^,Digit6,94,94,94,0", "input:!@#$%^",
+                           "keyup:^,Digit6,54,0,54,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:&,Digit7,55,0,55,0",
+                           "keypress:&,Digit7,38,38,38,0", "input:!@#$%^&", "keyup:&,Digit7,55,0,55,0",
+                           "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:*,Digit8,56,0,56,0", "keypress:*,Digit8,42,42,42,0", "input:!@#$%^&*",
+                           "keyup:*,Digit8,56,0,56,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:(,Digit9,57,0,57,0",
+                           "keypress:(,Digit9,40,40,40,0", "input:!@#$%^&*(", "keyup:(,Digit9,57,0,57,0",
+                           "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:),Digit0,48,0,48,0", "keypress:),Digit0,41,41,41,0", "input:!@#$%^&*()",
+                           "keyup:),Digit0,48,0,48,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:_,Minus,189,0,189,0",
+                           "keypress:_,Minus,95,95,95,0", "input:!@#$%^&*()_", "keyup:_,Minus,189,0,189,0",
+                           "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:+,Equal,187,0,187,0", "keypress:+,Equal,43,43,43,0", "input:!@#$%^&*()_+",
+                           "keyup:+,Equal,187,0,187,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:{,BracketLeft,219,0,219,0",
+                           "keypress:{,BracketLeft,123,123,123,0", "input:!@#$%^&*()_+{",
+                           "keyup:{,BracketLeft,219,0,219,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:},BracketRight,221,0,221,0",
+                           "keypress:},BracketRight,125,125,125,0", "input:!@#$%^&*()_+{}",
+                           "keyup:},BracketRight,221,0,221,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:|,Backslash,220,0,220,0",
+                           "keypress:|,Backslash,124,124,124,0", "input:!@#$%^&*()_+{}|",
+                           "keyup:|,Backslash,220,0,220,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown::,Semicolon,186,0,186,0",
+                           "keypress::,Semicolon,58,58,58,0", "input:!@#$%^&*()_+{}|:",
+                           "keyup::,Semicolon,186,0,186,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:\",Quote,222,0,222,0",
+                           "keypress:\",Quote,34,34,34,0", "input:!@#$%^&*()_+{}|:\"", "keyup:\",Quote,222,0,222,0",
+                           "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:<,Comma,188,0,188,0", "keypress:<,Comma,60,60,60,0", "input:!@#$%^&*()_+{}|:\"<",
+                           "keyup:<,Comma,188,0,188,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:>,Period,190,0,190,0",
+                           "keypress:>,Period,62,62,62,0", "input:!@#$%^&*()_+{}|:\"<>", "keyup:>,Period,190,0,190,0",
+                           "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:?,Slash,191,0,191,0", "keypress:?,Slash,63,63,63,0", "input:!@#$%^&*()_+{}|:\"<>?",
+                           "keyup:?,Slash,191,0,191,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                           "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:~,Backquote,192,0,192,0",
+                           "keypress:~,Backquote,126,126,126,0", "input:!@#$%^&*()_+{}|:\"<>?~",
+                           "keyup:~,Backquote,192,0,192,0", "keyup:Shift,ShiftLeft,16,0,16,1"},
+            EDGE = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:!,Digit1,49,0,49,0", "keypress:!,Digit1,33,33,33,0",
+                    "input:!", "keyup:!,Digit1,49,0,49,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:@,Digit2,50,0,50,0", "keypress:@,Digit2,64,64,64,0",
+                    "input:!@", "keyup:@,Digit2,50,0,50,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:#,Digit3,51,0,51,0", "keypress:#,Digit3,35,35,35,0",
+                    "input:!@#", "keyup:#,Digit3,51,0,51,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:$,Digit4,52,0,52,0", "keypress:$,Digit4,36,36,36,0",
+                    "input:!@#$", "keyup:$,Digit4,52,0,52,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:%,Digit5,53,0,53,0", "keypress:%,Digit5,37,37,37,0",
+                    "input:!@#$%", "keyup:%,Digit5,53,0,53,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:^,Digit6,54,0,54,0", "keypress:^,Digit6,94,94,94,0",
+                    "input:!@#$%^", "keyup:^,Digit6,54,0,54,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:&,Digit7,55,0,55,0", "keypress:&,Digit7,38,38,38,0",
+                    "input:!@#$%^&", "keyup:&,Digit7,55,0,55,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:*,Digit8,56,0,56,0", "keypress:*,Digit8,42,42,42,0",
+                    "input:!@#$%^&*", "keyup:*,Digit8,56,0,56,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:(,Digit9,57,0,57,0", "keypress:(,Digit9,40,40,40,0",
+                    "input:!@#$%^&*(", "keyup:(,Digit9,57,0,57,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:),Digit0,48,0,48,0", "keypress:),Digit0,41,41,41,0",
+                    "input:!@#$%^&*()", "keyup:),Digit0,48,0,48,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:_,Minus,189,0,189,0", "keypress:_,Minus,95,95,95,0",
+                    "input:!@#$%^&*()_", "keyup:_,Minus,189,0,189,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:+,Equal,187,0,187,0", "keypress:+,Equal,43,43,43,0",
+                    "input:!@#$%^&*()_+", "keyup:+,Equal,187,0,187,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:{,BracketLeft,219,0,219,0",
+                    "keypress:{,BracketLeft,123,123,123,0", "input:!@#$%^&*()_+{", "keyup:{,BracketLeft,219,0,219,0",
+                    "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:},BracketRight,221,0,221,0", "keypress:},BracketRight,125,125,125,0",
+                    "input:!@#$%^&*()_+{}", "keyup:},BracketRight,221,0,221,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:|,Backslash,220,0,220,0",
+                    "keypress:|,Backslash,124,124,124,0", "input:!@#$%^&*()_+{}|", "keyup:|,Backslash,220,0,220,0",
+                    "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                    "keydown::,Semicolon,186,0,186,0", "keypress::,Semicolon,58,58,58,0", "input:!@#$%^&*()_+{}|:",
+                    "keyup::,Semicolon,186,0,186,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:\",Quote,222,0,222,0",
+                    "keypress:\",Quote,34,34,34,0", "input:!@#$%^&*()_+{}|:\"", "keyup:\",Quote,222,0,222,0",
+                    "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:<,Comma,188,0,188,0", "keypress:<,Comma,60,60,60,0", "input:!@#$%^&*()_+{}|:\"<",
+                    "keyup:<,Comma,188,0,188,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:>,Period,190,0,190,0",
+                    "keypress:>,Period,62,62,62,0", "input:!@#$%^&*()_+{}|:\"<>", "keyup:>,Period,190,0,190,0",
+                    "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:?,Slash,191,0,191,0", "keypress:?,Slash,63,63,63,0", "input:!@#$%^&*()_+{}|:\"<>?",
+                    "keyup:?,Slash,191,0,191,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                    "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:~,Backquote,192,0,192,0",
+                    "keypress:~,Backquote,126,126,126,0", "input:!@#$%^&*()_+{}|:\"<>?~",
+                    "keyup:~,Backquote,192,0,192,0", "keyup:Shift,ShiftLeft,16,0,16,1"},
+            FF = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:!,Digit1,49,0,49,0", "keypress:!,Digit1,33,33,33,0",
+                  "input:!", "keyup:!,Digit1,49,0,49,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:@,Digit2,50,0,50,0", "keypress:@,Digit2,64,64,64,0",
+                  "input:!@", "keyup:@,Digit2,50,0,50,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:#,Digit3,51,0,51,0", "keypress:#,Digit3,35,35,35,0",
+                  "input:!@#", "keyup:#,Digit3,51,0,51,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:$,Digit4,52,0,52,0", "keypress:$,Digit4,36,36,36,0",
+                  "input:!@#$", "keyup:$,Digit4,52,0,52,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:%,Digit5,53,0,53,0", "keypress:%,Digit5,37,37,37,0",
+                  "input:!@#$%", "keyup:%,Digit5,53,0,53,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:^,Digit6,54,0,54,0", "keypress:^,Digit6,94,94,94,0",
+                  "input:!@#$%^", "keyup:^,Digit6,54,0,54,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:&,Digit7,55,0,55,0", "keypress:&,Digit7,38,38,38,0",
+                  "input:!@#$%^&", "keyup:&,Digit7,55,0,55,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:*,Digit8,56,0,56,0", "keypress:*,Digit8,42,42,42,0",
+                  "input:!@#$%^&*", "keyup:*,Digit8,56,0,56,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:(,Digit9,57,0,57,0", "keypress:(,Digit9,40,40,40,0",
+                  "input:!@#$%^&*(", "keyup:(,Digit9,57,0,57,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:),Digit0,48,0,48,0", "keypress:),Digit0,41,41,41,0",
+                  "input:!@#$%^&*()", "keyup:),Digit0,48,0,48,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:_,Minus,173,0,173,0", "keypress:_,Minus,95,95,95,0",
+                  "input:!@#$%^&*()_", "keyup:_,Minus,173,0,173,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:+,Equal,61,0,61,0", "keypress:+,Equal,43,43,43,0",
+                  "input:!@#$%^&*()_+", "keyup:+,Equal,61,0,61,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:{,BracketLeft,219,0,219,0",
+                  "keypress:{,BracketLeft,123,123,123,0", "input:!@#$%^&*()_+{", "keyup:{,BracketLeft,219,0,219,0",
+                  "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:},BracketRight,221,0,221,0", "keypress:},BracketRight,125,125,125,0",
+                  "input:!@#$%^&*()_+{}", "keyup:},BracketRight,221,0,221,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:|,Backslash,220,0,220,0",
+                  "keypress:|,Backslash,124,124,124,0", "input:!@#$%^&*()_+{}|", "keyup:|,Backslash,220,0,220,0",
+                  "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                  "keydown::,Semicolon,59,0,59,0", "keypress::,Semicolon,58,58,58,0", "input:!@#$%^&*()_+{}|:",
+                  "keyup::,Semicolon,59,0,59,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:\",Quote,222,0,222,0", "keypress:\",Quote,34,34,34,0",
+                  "input:!@#$%^&*()_+{}|:\"", "keyup:\",Quote,222,0,222,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:<,Comma,188,0,188,0", "keypress:<,Comma,60,60,60,0",
+                  "input:!@#$%^&*()_+{}|:\"<", "keyup:<,Comma,188,0,188,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:>,Period,190,0,190,0", "keypress:>,Period,62,62,62,0",
+                  "input:!@#$%^&*()_+{}|:\"<>", "keyup:>,Period,190,0,190,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:?,Slash,191,0,191,0", "keypress:?,Slash,63,63,63,0",
+                  "input:!@#$%^&*()_+{}|:\"<>?", "keyup:?,Slash,191,0,191,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                  "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:~,Backquote,192,0,192,0",
+                  "keypress:~,Backquote,126,126,126,0", "input:!@#$%^&*()_+{}|:\"<>?~",
+                  "keyup:~,Backquote,192,0,192,0", "keyup:Shift,ShiftLeft,16,0,16,1"},
+            FF_ESR = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:!,Digit1,49,0,49,0",
+                      "keypress:!,Digit1,33,33,33,0", "input:!", "keyup:!,Digit1,49,0,49,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:@,Digit2,50,0,50,0", "keypress:@,Digit2,64,64,64,0", "input:!@",
+                      "keyup:@,Digit2,50,0,50,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:#,Digit3,51,0,51,0",
+                      "keypress:#,Digit3,35,35,35,0", "input:!@#", "keyup:#,Digit3,51,0,51,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:$,Digit4,52,0,52,0", "keypress:$,Digit4,36,36,36,0", "input:!@#$",
+                      "keyup:$,Digit4,52,0,52,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:%,Digit5,53,0,53,0",
+                      "keypress:%,Digit5,37,37,37,0", "input:!@#$%", "keyup:%,Digit5,53,0,53,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:^,Digit6,54,0,54,0", "keypress:^,Digit6,94,94,94,0", "input:!@#$%^",
+                      "keyup:^,Digit6,54,0,54,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:&,Digit7,55,0,55,0",
+                      "keypress:&,Digit7,38,38,38,0", "input:!@#$%^&", "keyup:&,Digit7,55,0,55,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:*,Digit8,56,0,56,0", "keypress:*,Digit8,42,42,42,0", "input:!@#$%^&*",
+                      "keyup:*,Digit8,56,0,56,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:(,Digit9,57,0,57,0",
+                      "keypress:(,Digit9,40,40,40,0", "input:!@#$%^&*(", "keyup:(,Digit9,57,0,57,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:),Digit0,48,0,48,0", "keypress:),Digit0,41,41,41,0", "input:!@#$%^&*()",
+                      "keyup:),Digit0,48,0,48,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:_,Minus,173,0,173,0",
+                      "keypress:_,Minus,95,95,95,0", "input:!@#$%^&*()_", "keyup:_,Minus,173,0,173,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:+,Equal,61,0,61,0", "keypress:+,Equal,43,43,43,0", "input:!@#$%^&*()_+",
+                      "keyup:+,Equal,61,0,61,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:{,BracketLeft,219,0,219,0",
+                      "keypress:{,BracketLeft,123,123,123,0", "input:!@#$%^&*()_+{", "keyup:{,BracketLeft,219,0,219,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:},BracketRight,221,0,221,0", "keypress:},BracketRight,125,125,125,0",
+                      "input:!@#$%^&*()_+{}", "keyup:},BracketRight,221,0,221,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:|,Backslash,220,0,220,0",
+                      "keypress:|,Backslash,124,124,124,0", "input:!@#$%^&*()_+{}|", "keyup:|,Backslash,220,0,220,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown::,Semicolon,59,0,59,0", "keypress::,Semicolon,58,58,58,0", "input:!@#$%^&*()_+{}|:",
+                      "keyup::,Semicolon,59,0,59,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:\",Quote,222,0,222,0",
+                      "keypress:\",Quote,34,34,34,0", "input:!@#$%^&*()_+{}|:\"", "keyup:\",Quote,222,0,222,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:<,Comma,188,0,188,0", "keypress:<,Comma,60,60,60,0", "input:!@#$%^&*()_+{}|:\"<",
+                      "keyup:<,Comma,188,0,188,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:>,Period,190,0,190,0",
+                      "keypress:>,Period,62,62,62,0", "input:!@#$%^&*()_+{}|:\"<>", "keyup:>,Period,190,0,190,0",
+                      "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:?,Slash,191,0,191,0", "keypress:?,Slash,63,63,63,0", "input:!@#$%^&*()_+{}|:\"<>?",
+                      "keyup:?,Slash,191,0,191,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:Shift,ShiftLeft,16,0,16,1", "keydown:~,Backquote,192,0,192,0",
+                      "keypress:~,Backquote,126,126,126,0", "input:!@#$%^&*()_+{}|:\"<>?~",
+                      "keyup:~,Backquote,192,0,192,0", "keyup:Shift,ShiftLeft,16,0,16,1"})
+    public void keysShiftedPunctuation() throws Exception {
+        keyEvents("input", "", false, "!@#$%^&*()_+{}|:\"<>?~");
+    }
+
+    /**
+     * Logs the key events for upper case chars.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"keydown:Shift,ShiftLeft,16,0,16,0", "keydown:A,KeyA,65,0,65,0", "keypress:A,KeyA,65,65,65,0",
+                       "input:A", "keyup:A,KeyA,65,0,65,0", "keyup:Shift,ShiftLeft,16,0,16,0",
+                       "keydown:b,KeyB,66,0,66,0", "keypress:b,KeyB,98,98,98,0", "input:Ab", "keyup:b,KeyB,66,0,66,0"},
+            FF = {"keydown:A,KeyA,65,0,65,0", "keypress:A,KeyA,65,65,65,0", "input:A", "keyup:A,KeyA,65,0,65,0",
+                  "keydown:b,KeyB,66,0,66,0", "keypress:b,KeyB,98,98,98,0", "input:Ab", "keyup:b,KeyB,66,0,66,0"},
+            FF_ESR = {"keydown:A,KeyA,65,0,65,0", "keypress:A,KeyA,65,65,65,0", "input:A", "keyup:A,KeyA,65,0,65,0",
+                      "keydown:b,KeyB,66,0,66,0", "keypress:b,KeyB,98,98,98,0", "input:Ab", "keyup:b,KeyB,66,0,66,0"})
+    // chromedriver does not set the location of the key events
+    // geckodriver does not send the shift key for upper case chars
+    @HtmlUnitNYI(CHROME = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:A,KeyA,65,0,65,0",
+                           "keypress:A,KeyA,65,65,65,0", "input:A", "keyup:A,KeyA,65,0,65,0",
+                           "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:b,KeyB,66,0,66,0", "keypress:b,KeyB,98,98,98,0",
+                           "input:Ab", "keyup:b,KeyB,66,0,66,0"},
+            EDGE = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:A,KeyA,65,0,65,0", "keypress:A,KeyA,65,65,65,0",
+                    "input:A", "keyup:A,KeyA,65,0,65,0", "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:b,KeyB,66,0,66,0",
+                    "keypress:b,KeyB,98,98,98,0", "input:Ab", "keyup:b,KeyB,66,0,66,0"},
+            FF = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:A,KeyA,65,0,65,0", "keypress:A,KeyA,65,65,65,0",
+                  "input:A", "keyup:A,KeyA,65,0,65,0", "keyup:Shift,ShiftLeft,16,0,16,1", "keydown:b,KeyB,66,0,66,0",
+                  "keypress:b,KeyB,98,98,98,0", "input:Ab", "keyup:b,KeyB,66,0,66,0"},
+            FF_ESR = {"keydown:Shift,ShiftLeft,16,0,16,1", "keydown:A,KeyA,65,0,65,0", "keypress:A,KeyA,65,65,65,0",
+                      "input:A", "keyup:A,KeyA,65,0,65,0", "keyup:Shift,ShiftLeft,16,0,16,1",
+                      "keydown:b,KeyB,66,0,66,0", "keypress:b,KeyB,98,98,98,0", "input:Ab", "keyup:b,KeyB,66,0,66,0"})
+    public void keysUppercase() throws Exception {
+        keyEvents("input", "", false, "Ab");
+    }
+
+    private void keyEvents(final String tagName, final String initialValue, final boolean preventKeyDown,
+            final CharSequence... keys) throws Exception {
+        final String field;
+        if ("textarea".equals(tagName)) {
+            field = "<textarea id='t'>" + initialValue + "</textarea>\n";
+        }
+        else {
+            field = "<input type='text' id='t' value='" + initialValue + "'>\n";
+        }
+
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
+            + field
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "function handler(e) {\n"
+            + "  var msg = e.type + ':' + e.key + ',' + e.code + ',' + e.keyCode + ',' "
+                            + "+ e.charCode + ',' + e.which + ',' + e.location;\n"
+            + "  if (e.type == 'input') {\n"
+            + "    msg = e.type + ':' + e.target.value;\n"
+            + "  }\n"
+            + "  msg = msg.replace(/\\r/g, '\\\\r');\n"
+            + "  msg = msg.replace(/\\n/g, '\\\\n');\n"
+            + "  log(msg);\n"
+            + "  if (" + preventKeyDown + " && e.type == 'keydown') {\n"
+            + "    e.preventDefault();\n"
+            + "  }\n"
+            + "}\n"
+            + "var t = document.getElementById('t');\n"
+            + "t.addEventListener('keydown', handler);\n"
+            + "t.addEventListener('keypress', handler);\n"
+            + "t.addEventListener('input', handler);\n"
+            + "t.addEventListener('keyup', handler);\n"
+            + "</script>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement elem = driver.findElement(By.id("t"));
+        elem.sendKeys(keys);
+
+        verifyTextArea2(driver, getExpectedAlerts());
+    }
 }

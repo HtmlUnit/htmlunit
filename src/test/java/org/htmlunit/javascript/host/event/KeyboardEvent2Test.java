@@ -88,9 +88,7 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "keydown:113,0,113 keyup:113,0,113",
-            FF = "keydown:113,0,113 keypress:113,0,0 keyup:113,0,113",
-            FF_ESR = "keydown:113,0,113 keypress:113,0,0 keyup:113,0,113")
+    @Alerts("keydown:113,0,113 keyup:113,0,113")
     public void dom_vk_f2() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type(KeyboardEvent.DOM_VK_F2);
@@ -103,9 +101,7 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "keydown:39,0,39 keyup:39,0,39",
-            FF = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39",
-            FF_ESR = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39")
+    @Alerts("keydown:39,0,39 keyup:39,0,39")
     public void dom_vk_right() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type(KeyboardEvent.DOM_VK_RIGHT);

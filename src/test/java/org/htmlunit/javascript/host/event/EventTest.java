@@ -516,8 +516,6 @@ public class EventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"124", "124124"},
             FF = {"1234", "12341234"},
             FF_ESR = {"1234", "12341234"})
-    @HtmlUnitNYI(CHROME = {"1234", "12341234"},
-            EDGE = {"1234", "12341234"})
     public void typing_input_number() throws Exception {
         testTyping("<input type='number'", "");
     }

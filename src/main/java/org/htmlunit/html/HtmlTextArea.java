@@ -67,6 +67,9 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     private String valueAtFocus_;
     private String customValidity_;
 
+    /** Whether the last typed char was a '\r' (to type a '\r\n' sequence as a single line feed). */
+    private boolean lastTypedCarriageReturn_;
+
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
@@ -493,7 +496,14 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     protected void doType(final char c, final boolean lastType) {
-        doTypeProcessor_.doType(getText(), selectionDelegate_, c, this, lastType);
+        // like in the browsers, the value uses line feeds only; a typed '\r' (the enter key)
+        // inserts a line feed and a '\r\n' sequence inserts a single one
+        if (c == '\n' && lastTypedCarriageReturn_) {
+            lastTypedCarriageReturn_ = false;
+            return;
+        }
+        lastTypedCarriageReturn_ = c == '\r';
+        doTypeProcessor_.doType(getText(), selectionDelegate_, lastTypedCarriageReturn_ ? '\n' : c, this, lastType);
     }
 
     /**
@@ -501,6 +511,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     protected void doType(final int keyCode, final boolean lastType) {
+        lastTypedCarriageReturn_ = false;
         doTypeProcessor_.doType(getText(), selectionDelegate_, keyCode, this, lastType);
     }
 

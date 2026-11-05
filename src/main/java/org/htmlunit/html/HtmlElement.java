@@ -15,7 +15,6 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
-import static org.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
 import static org.htmlunit.css.CssStyleSheet.STATIC;
@@ -26,7 +25,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.Page;
 import org.htmlunit.ScriptResult;
@@ -584,6 +582,8 @@ public abstract class HtmlElement extends DomElement {
             shiftDownResult = null;
         }
 
+        final String textBefore = getTextForInputEvent();
+
         final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c,
                                                 shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_);
         final ScriptResult keyDownResult = fireEvent(keyDown);
@@ -600,8 +600,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final WebClient webClient = page.getWebClient();
-        if (this instanceof HtmlSelectableTextInput
-                || this instanceof HtmlTextArea) {
+        if (isTextChanged(textBefore)) {
             fireEvent(new KeyboardEvent(this, Event.TYPE_INPUT, c,
                                         shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_));
         }
@@ -739,6 +738,8 @@ public abstract class HtmlElement extends DomElement {
             focus();
         }
 
+        final String textBefore = getTextForInputEvent();
+
         final Event keyDown;
         final ScriptResult keyDownResult;
         if (fireKeyDown) {
@@ -750,11 +751,9 @@ public abstract class HtmlElement extends DomElement {
             keyDownResult = null;
         }
 
-        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-
         final Event keyPress;
         final ScriptResult keyPressResult;
-        if (fireKeyPress && browserVersion.hasFeature(KEYBOARD_EVENT_SPECIAL_KEYPRESS)) {
+        if (fireKeyPress && KeyboardEvent.isCharacterKey(keyCode)) {
             keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode,
                     shiftPressed_, ctrlPressed_, altPressed_);
 
@@ -770,12 +769,7 @@ public abstract class HtmlElement extends DomElement {
             doType(keyCode, lastType);
         }
 
-        if (this instanceof HtmlTextInput
-            || this instanceof HtmlTextArea
-            || this instanceof HtmlTelInput
-            || this instanceof HtmlNumberInput
-            || this instanceof HtmlSearchInput
-            || this instanceof HtmlPasswordInput) {
+        if (isTextChanged(textBefore)) {
             final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, keyCode,
                     shiftPressed_, ctrlPressed_, altPressed_);
             fireEvent(input);
@@ -788,6 +782,31 @@ public abstract class HtmlElement extends DomElement {
         }
 
         return page.getWebClient().getCurrentWindow().getEnclosedPage();
+    }
+
+    /**
+     * Returns the current text of this element if this is a text control that fires
+     * input events while typing ({@code input} elements with text and {@code textarea}).
+     *
+     * @return the text or {@code null} if this is not such a control
+     */
+    private String getTextForInputEvent() {
+        if (this instanceof SelectableTextInput textInput) {
+            return textInput.getText();
+        }
+        return null;
+    }
+
+    /**
+     * Returns whether the text of this text control was changed by typing; like in the browsers,
+     * the input event is only fired if the text has changed (e.g. not for the arrow keys, if
+     * the event was canceled or if the maximum length was already reached).
+     *
+     * @param textBefore the text before typing (see {@link #getTextForInputEvent()})
+     * @return whether the text has changed
+     */
+    private boolean isTextChanged(final String textBefore) {
+        return textBefore != null && !textBefore.equals(getTextForInputEvent());
     }
 
     /**

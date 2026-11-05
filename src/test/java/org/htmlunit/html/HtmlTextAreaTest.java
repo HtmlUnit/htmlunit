@@ -232,7 +232,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         t.type("ab\ncd");
         assertEquals("ab\ncd", t.getText());
         t.type("\r\nef");
-        assertEquals("ab\ncd\r\nef", t.getText());
+        assertEquals("ab\ncd\nef", t.getText());
     }
 
     /**
