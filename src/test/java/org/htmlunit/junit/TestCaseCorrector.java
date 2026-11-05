@@ -144,7 +144,7 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
         }
         final List<String> alerts = CodeStyleTest.alertsToList(lines, i);
         alerts.removeIf(s -> s.startsWith(browserString + " = "));
-        alerts.add(browserString + " = " + getActualString(comparisonFailure));
+        alerts.add(browserString + " = " + getActualString(browserString, comparisonFailure));
         lines.remove(i);
         while (lines.get(i).startsWith("        ")) {
             lines.remove(i);
@@ -186,9 +186,22 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
         return i;
     }
 
-    private static String getActualString(final AssertionFailedError failure) {
-        final int lineLength = 96;
-
+    /**
+     * Returns the actual value of the given failure formatted as expectation for the given browser.
+     *
+     * <p>The verify methods of {@link WebDriverTestCase} (e.g. {@code loadPageVerifyTitle2()}) compare
+     * all alerts joined by the section sign (every alert is followed by one). In this case the value is split
+     * into the single alerts again; more than one alert results in an array with one alert per line:</p>
+     * <pre>
+     * CHROME = {"first",
+     *           "second"}
+     * </pre>
+     *
+     * @param browserString the browser (e.g. {@code CHROME}) the expectation is for
+     * @param failure the failure
+     * @return the expectation
+     */
+    private static String getActualString(final String browserString, final AssertionFailedError failure) {
         String actual = failure.getActual().getStringRepresentation();
 
         // WebTestCase.assertEquals(String[], List<String>) compares List#toString(), e.g. "[a, b]"
@@ -197,16 +210,51 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
             actual = actual.substring(1, actual.length() - 1);
         }
 
-        actual = StringEscapeUtils.escapeJava(actual);
+        if (!actual.isEmpty() && actual.charAt(actual.length() - 1) == '\u00A7') {
+            final String[] alerts = actual.substring(0, actual.length() - 1).split("\u00A7", -1);
+            if (alerts.length > 1) {
+                // align the following lines with the first alert after the '{'
+                final String indent = " ".repeat(("            " + browserString + " = {").length());
+
+                final StringBuilder builder = new StringBuilder("{");
+                for (int i = 0; i < alerts.length; i++) {
+                    if (i > 0) {
+                        builder.append(',').append(System.lineSeparator()).append(indent);
+                    }
+                    builder.append(toJavaString(alerts[i], indent));
+                }
+                return builder.append('}').toString();
+            }
+            actual = alerts[0];
+        }
+
+        return toJavaString(actual, "            ");
+    }
+
+    /**
+     * Converts the given value into a (quoted and escaped) Java string; long values
+     * are split into several lines.
+     *
+     * @param value the value
+     * @param indent the indentation of the current line
+     * @return the Java string
+     */
+    private static String toJavaString(final String value, final String indent) {
+        final int lineLength = 96;
+
+        String actual = StringEscapeUtils.escapeJava(value);
         if (actual.length() > lineLength) {
             final StringBuilder builder = new StringBuilder();
             while (!actual.isEmpty()) {
-                int length = actual.lastIndexOf(',', lineLength) + 1;
-                if (length == 0 && !actual.isEmpty()) {
-                    length = Math.min(lineLength, actual.length());
+                int length = actual.length();
+                if (length > lineLength) {
+                    length = actual.lastIndexOf(',', lineLength) + 1;
+                    if (length == 0) {
+                        length = lineLength;
+                    }
                 }
                 if (!builder.isEmpty()) {
-                    builder.append(System.lineSeparator()).append("                + ");
+                    builder.append(System.lineSeparator()).append(indent).append("    + ");
                 }
                 builder.append('"').append(actual, 0, length).append('"');
                 actual = actual.substring(length);
@@ -316,7 +364,8 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
         lines.add(i++, "     */");
         lines.add(i++, "    @Test");
         lines.add(i++, "    @Alerts(DEFAULT = \"" + defaultExpectations + "\",");
-        lines.add(i++, "            " + browserString + " = " + getActualString(comparisonFailure) + ")");
+        lines.add(i++, "            " + browserString + " = "
+                + getActualString(browserString, comparisonFailure) + ")");
         if (index != -1) {
             lines.add(i++, "    public void _" + parent + "_" + child + "() throws Exception {");
             lines.add(i++, "        test(\"" + parent + "\", \"" + child + "\");");
