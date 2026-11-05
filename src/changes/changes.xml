@@ -9,6 +9,14 @@
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                CanvasRenderingContext2D.fill() now fills all sub paths of the current path as one shape;
+                the 'evenodd' fill rule and holes made of sub paths drawn in the opposite direction work.
+            </action>
+            <action type="add" dev="rbri">
+                CanvasRenderingContext2D textAlign and textBaseline properties added; both are used by
+                fillText() and are part of the state saved by save() and restored by restore().
+            </action>
+            <action type="fix" dev="rbri">
                 neko: HTMLWriterFilter; the ampersand in attribute values is now written as '&amp;amp;'. The parser decodes
                 character references in attribute values, so a parse-serialize-parse round trip decoded them twice and
                 could turn an inert value into e.g. a javascript: URL.

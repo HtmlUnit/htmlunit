@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host.canvas;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -37,6 +38,8 @@ import org.htmlunit.platform.Platform;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend.LineCap;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend.LineJoin;
+import org.htmlunit.platform.canvas.rendering.RenderingBackend.TextAlign;
+import org.htmlunit.platform.canvas.rendering.RenderingBackend.TextBaseline;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend.WindingRule;
 import org.htmlunit.protocol.data.DataURLConnection;
 import org.htmlunit.util.MimeType;
@@ -891,6 +894,86 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                 break;
             case "square":
                 getRenderingBackend().setLineCap(LineCap.SQUARE);
+                break;
+            default:
+                // ignore invalid values per spec
+        }
+    }
+
+    /**
+     * Returns the text alignment used when drawing text. The possible values are
+     * "start", "end", "left", "right" and "center". The default is "start".
+     *
+     * @return the text alignment
+     */
+    @JsxGetter
+    public String getTextAlign() {
+        return getRenderingBackend().getTextAlign().name().toLowerCase(Locale.ROOT);
+    }
+
+    /**
+     * Sets the {@code textAlign} property; invalid values are ignored.
+     * @param textAlign the {@code textAlign} property value
+     */
+    @JsxSetter
+    public void setTextAlign(final String textAlign) {
+        switch (textAlign) {
+            case "start":
+                getRenderingBackend().setTextAlign(TextAlign.START);
+                break;
+            case "end":
+                getRenderingBackend().setTextAlign(TextAlign.END);
+                break;
+            case "left":
+                getRenderingBackend().setTextAlign(TextAlign.LEFT);
+                break;
+            case "right":
+                getRenderingBackend().setTextAlign(TextAlign.RIGHT);
+                break;
+            case "center":
+                getRenderingBackend().setTextAlign(TextAlign.CENTER);
+                break;
+            default:
+                // ignore invalid values per spec
+        }
+    }
+
+    /**
+     * Returns the text baseline used when drawing text. The possible values are
+     * "top", "hanging", "middle", "alphabetic", "ideographic" and "bottom".
+     * The default is "alphabetic".
+     *
+     * @return the text baseline
+     */
+    @JsxGetter
+    public String getTextBaseline() {
+        return getRenderingBackend().getTextBaseline().name().toLowerCase(Locale.ROOT);
+    }
+
+    /**
+     * Sets the {@code textBaseline} property; invalid values are ignored.
+     * @param textBaseline the {@code textBaseline} property value
+     */
+    @JsxSetter
+    public void setTextBaseline(final String textBaseline) {
+        switch (textBaseline) {
+            case "top":
+                getRenderingBackend().setTextBaseline(TextBaseline.TOP);
+                break;
+            case "hanging":
+                getRenderingBackend().setTextBaseline(TextBaseline.HANGING);
+                break;
+            case "middle":
+                getRenderingBackend().setTextBaseline(TextBaseline.MIDDLE);
+                break;
+            case "alphabetic":
+                getRenderingBackend().setTextBaseline(TextBaseline.ALPHABETIC);
+                break;
+            case "ideographic":
+                getRenderingBackend().setTextBaseline(TextBaseline.IDEOGRAPHIC);
+                break;
+            case "bottom":
+                getRenderingBackend().setTextBaseline(TextBaseline.BOTTOM);
                 break;
             default:
                 // ignore invalid values per spec

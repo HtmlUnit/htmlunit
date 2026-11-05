@@ -419,4 +419,46 @@ public class NoOpRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] setLineCap(" + lineCap + ")");
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TextAlign getTextAlign() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] getTextAlign()");
+        }
+        return TextAlign.START;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTextAlign(final TextAlign textAlign) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setTextAlign(" + textAlign + ")");
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TextBaseline getTextBaseline() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] getTextBaseline()");
+        }
+        return TextBaseline.ALPHABETIC;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTextBaseline(final TextBaseline textBaseline) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setTextBaseline(" + textBaseline + ")");
+        }
+    }
 }

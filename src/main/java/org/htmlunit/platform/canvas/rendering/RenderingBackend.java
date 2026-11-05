@@ -50,6 +50,40 @@ public interface RenderingBackend {
     }
 
     /**
+     * The text alignment used when drawing text.
+     */
+    enum TextAlign {
+        /** TextAlign.START (same as LEFT for left-to-right text). */
+        START,
+        /** TextAlign.END (same as RIGHT for left-to-right text). */
+        END,
+        /** TextAlign.LEFT. */
+        LEFT,
+        /** TextAlign.RIGHT. */
+        RIGHT,
+        /** TextAlign.CENTER. */
+        CENTER
+    }
+
+    /**
+     * The text baseline used when drawing text.
+     */
+    enum TextBaseline {
+        /** TextBaseline.TOP. */
+        TOP,
+        /** TextBaseline.HANGING. */
+        HANGING,
+        /** TextBaseline.MIDDLE. */
+        MIDDLE,
+        /** TextBaseline.ALPHABETIC. */
+        ALPHABETIC,
+        /** TextBaseline.IDEOGRAPHIC. */
+        IDEOGRAPHIC,
+        /** TextBaseline.BOTTOM. */
+        BOTTOM
+    }
+
+    /**
      * LineCap to be used while rendering.
      */
     enum LineCap {
@@ -389,4 +423,30 @@ public interface RenderingBackend {
      * @param lineCap the {@code lineCap} property value
      */
     void setLineCap(LineCap lineCap);
+
+    /**
+     * Returns the text alignment used when drawing text.
+     *
+     * @return the text alignment
+     */
+    TextAlign getTextAlign();
+
+    /**
+     * Sets the text alignment used when drawing text.
+     * @param textAlign the text alignment
+     */
+    void setTextAlign(TextAlign textAlign);
+
+    /**
+     * Returns the text baseline used when drawing text.
+     *
+     * @return the text baseline
+     */
+    TextBaseline getTextBaseline();
+
+    /**
+     * Sets the text baseline used when drawing text.
+     * @param textBaseline the text baseline
+     */
+    void setTextBaseline(TextBaseline textBaseline);
 }

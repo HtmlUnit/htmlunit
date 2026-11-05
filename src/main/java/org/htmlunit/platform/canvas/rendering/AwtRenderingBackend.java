@@ -19,6 +19,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -75,6 +76,9 @@ public class AwtRenderingBackend implements RenderingBackend {
     private LineCap lineCap_;
     private LineJoin lineJoin_;
     private float miterLimit_;
+
+    private TextAlign textAlign_;
+    private TextBaseline textBaseline_;
 
     private final List<Path2D> subPaths_;
     private final Deque<SaveState> savedStates_;
@@ -283,6 +287,9 @@ public class AwtRenderingBackend implements RenderingBackend {
         lineCap_ = LineCap.BUTT;
         lineJoin_ = LineJoin.MITER;
         miterLimit_ = 10.0f;
+
+        textAlign_ = TextAlign.START;
+        textBaseline_ = TextBaseline.ALPHABETIC;
 
         subPaths_ = new ArrayList<>();
         savedStates_ = new ArrayDeque<>();
@@ -590,11 +597,15 @@ public class AwtRenderingBackend implements RenderingBackend {
                 ? Path2D.WIND_EVEN_ODD
                 : Path2D.WIND_NON_ZERO;
 
-        graphics2D_.setColor(fillColor_);
+        // all sub paths together form one shape; filling them one by one
+        // would ignore the winding rule (e.g. a hole made of a second rect)
+        final Path2D shape = new Path2D.Double(awtRule);
         for (final Path2D path2d : subPaths_) {
-            path2d.setWindingRule(awtRule);
-            graphics2D_.fill(path2d);
+            shape.append(path2d, false);
         }
+
+        graphics2D_.setColor(fillColor_);
+        graphics2D_.fill(shape);
     }
 
     /**
@@ -623,7 +634,11 @@ public class AwtRenderingBackend implements RenderingBackend {
         try {
             graphics2D_.setTransform(transformation_);
             graphics2D_.setColor(fillColor_);
-            graphics2D_.drawString(text, (float) x, (float) y);
+
+            final FontMetrics metrics = graphics2D_.getFontMetrics();
+            final double drawX = x - textAlignOffset(metrics.getStringBounds(text, graphics2D_).getWidth());
+            final double drawY = y + textBaselineOffset(metrics);
+            graphics2D_.drawString(text, (float) drawX, (float) drawY);
         }
         finally {
             graphics2D_.setTransform(savedTransform);
@@ -1113,6 +1128,50 @@ public class AwtRenderingBackend implements RenderingBackend {
         lineCap_ = lineCap;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TextAlign getTextAlign() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] getTextAlign()");
+        }
+        return textAlign_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTextAlign(final TextAlign textAlign) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setTextAlign(" + textAlign + ")");
+        }
+        textAlign_ = textAlign;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TextBaseline getTextBaseline() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] getTextBaseline()");
+        }
+        return textBaseline_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTextBaseline(final TextBaseline textBaseline) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setTextBaseline(" + textBaseline + ")");
+        }
+        textBaseline_ = textBaseline;
+    }
+
     private Path2D getCurrentSubPath() {
         if (subPaths_.isEmpty()) {
             final Path2D subPath = new Path2D.Double();
@@ -1189,6 +1248,40 @@ public class AwtRenderingBackend implements RenderingBackend {
         };
     }
 
+    /**
+     * Returns the horizontal offset from the x position given to fillText() to the left
+     * side of the text (as AWT draws the text starting at the left side).
+     * Only left-to-right text is supported; start is left and end is right.
+     *
+     * @param textWidth the width of the text
+     * @return the offset to subtract from x
+     */
+    private double textAlignOffset(final double textWidth) {
+        return switch (textAlign_) {
+            case CENTER -> textWidth / 2;
+            case RIGHT, END -> textWidth;
+            case LEFT, START -> 0;
+        };
+    }
+
+    /**
+     * Returns the vertical offset from the y position given to fillText() to the alphabetic
+     * baseline (as AWT draws the text at the alphabetic baseline).
+     *
+     * @param metrics the metrics of the current font
+     * @return the offset to add to y
+     */
+    private double textBaselineOffset(final FontMetrics metrics) {
+        final int ascent = metrics.getAscent();
+        final int descent = metrics.getDescent();
+        return switch (textBaseline_) {
+            case TOP, HANGING -> ascent;
+            case MIDDLE -> (ascent - descent) / 2.0;
+            case IDEOGRAPHIC, BOTTOM -> -descent;
+            case ALPHABETIC -> 0;
+        };
+    }
+
     private static final class SaveState {
         private final AffineTransform transformation_;
         private final float globalAlpha_;
@@ -1202,6 +1295,8 @@ public class AwtRenderingBackend implements RenderingBackend {
         private final float miterLimit_;
 
         private final Font font_;
+        private final TextAlign textAlign_;
+        private final TextBaseline textBaseline_;
 
         SaveState(final AwtRenderingBackend backend) {
             transformation_ = new AffineTransform(backend.transformation_);
@@ -1221,6 +1316,8 @@ public class AwtRenderingBackend implements RenderingBackend {
 
             // Font is immutable so no copy needed
             font_ = backend.graphics2D_.getFont();
+            textAlign_ = backend.textAlign_;
+            textBaseline_ = backend.textBaseline_;
         }
 
         void applyOn(final AwtRenderingBackend backend) {
@@ -1240,6 +1337,8 @@ public class AwtRenderingBackend implements RenderingBackend {
             backend.graphics2D_.setClip((clip_ == null) ? null : new Path2D.Double(clip_));
 
             backend.graphics2D_.setFont(font_);
+            backend.textAlign_ = textAlign_;
+            backend.textBaseline_ = textBaseline_;
         }
     }
 }

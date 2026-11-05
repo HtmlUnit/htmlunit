@@ -37,6 +37,25 @@ import org.junit.jupiter.api.condition.OS;
 public class CanvasRenderingContext2DTest extends WebDriverTestCase {
 
     /**
+     * JavaScript function returning the bounds (minX, maxX, minY, maxY) of all
+     * non-transparent pixels of the canvas.
+     */
+    private static final String BOUNDS_FUNCTION =
+            "function bounds(ctx, w, h) {\n"
+            + "  var data = ctx.getImageData(0, 0, w, h).data;\n"
+            + "  var b = {minX: w, maxX: -1, minY: h, maxY: -1};\n"
+            + "  for (var y = 0; y < h; y++) {\n"
+            + "    for (var x = 0; x < w; x++) {\n"
+            + "      if (data[(y * w + x) * 4 + 3] > 127) {\n"
+            + "        b.minX = Math.min(b.minX, x); b.maxX = Math.max(b.maxX, x);\n"
+            + "        b.minY = Math.min(b.minY, y); b.maxY = Math.max(b.maxY, y);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  }\n"
+            + "  return b;\n"
+            + "}\n";
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -3004,6 +3023,457 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "    context.moveTo(6, 5);\n"
                 + "    context.lineTo(6, 15);\n"
                 + "    context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("start")
+    public void textAlignDefault() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+               "log(context.textAlign);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"start", "end", "left", "right", "center", "start", "start", "start", "start"})
+    public void textAlignGetSet() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "log(context.textAlign);\n"
+                + "context.textAlign = 'end'\n"
+                + "log(context.textAlign);\n"
+                + "context.textAlign = 'left'\n"
+                + "log(context.textAlign);\n"
+                + "context.textAlign = 'right'\n"
+                + "log(context.textAlign);\n"
+                + "context.textAlign = 'center'\n"
+                + "log(context.textAlign);\n"
+                + "context.textAlign = 'start'\n"
+                + "log(context.textAlign);\n"
+                + "context.textAlign = 'CENTER'\n"
+                + "log(context.textAlign);\n"
+                + "context.textAlign = ' center '\n"
+                + "log(context.textAlign);\n"
+                + "context.textAlign = 'unknown'\n"
+                + "log(context.textAlign);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"right", "center"})
+    public void textAlignSaveRestore() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "context.textAlign = 'center'\n"
+                + "context.save();\n"
+                + "context.textAlign = 'right'\n"
+                + "log(context.textAlign);\n"
+                + "context.restore();\n"
+                + "log(context.textAlign);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("alphabetic")
+    public void textBaselineDefault() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+               "log(context.textBaseline);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"alphabetic", "top", "hanging", "middle", "ideographic", "bottom",
+             "alphabetic", "alphabetic", "alphabetic"})
+    public void textBaselineGetSet() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "log(context.textBaseline);\n"
+                + "context.textBaseline = 'top'\n"
+                + "log(context.textBaseline);\n"
+                + "context.textBaseline = 'hanging'\n"
+                + "log(context.textBaseline);\n"
+                + "context.textBaseline = 'middle'\n"
+                + "log(context.textBaseline);\n"
+                + "context.textBaseline = 'ideographic'\n"
+                + "log(context.textBaseline);\n"
+                + "context.textBaseline = 'bottom'\n"
+                + "log(context.textBaseline);\n"
+                + "context.textBaseline = 'alphabetic'\n"
+                + "log(context.textBaseline);\n"
+                + "context.textBaseline = 'TOP'\n"
+                + "log(context.textBaseline);\n"
+                + "context.textBaseline = 'unknown'\n"
+                + "log(context.textBaseline);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"bottom", "top"})
+    public void textBaselineSaveRestore() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "context.textBaseline = 'top'\n"
+                + "context.save();\n"
+                + "context.textBaseline = 'bottom'\n"
+                + "log(context.textBaseline);\n"
+                + "context.restore();\n"
+                + "log(context.textBaseline);\n");
+    }
+
+    /**
+     * The position of the text relative to the x coordinate; font independent
+     * because only the bounds of the drawn pixels are checked.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"start left:true right:false center:false", "left left:true right:false center:false",
+             "center left:false right:false center:true", "end left:false right:true center:false",
+             "right left:false right:true center:false"})
+    public void fillTextAlign() throws Exception {
+        verify("<canvas id='myCanvas' width='100' height='40'></canvas>\n",
+                BOUNDS_FUNCTION
+                + "var aligns = ['start', 'left', 'center', 'end', 'right'];\n"
+                + "for (var i = 0; i < aligns.length; i++) {\n"
+                + "  context.clearRect(0, 0, 100, 40);\n"
+                + "  context.textAlign = aligns[i];\n"
+                + "  context.fillText('MMM', 50, 30);\n"
+                + "  var b = bounds(context, 100, 40);\n"
+                + "  log(aligns[i] + ' left:' + (b.minX >= 49) + ' right:' + (b.maxX <= 50)"
+                + " + ' center:' + (Math.abs((b.minX + b.maxX) / 2 - 50) <= 2));\n"
+                + "}\n");
+    }
+
+    /**
+     * The position of the text relative to the y coordinate; font independent
+     * because only the bounds of the drawn pixels are checked.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"top below:true above:false across:false", "hanging below:true above:false across:false",
+             "middle below:false above:false across:true", "alphabetic below:false above:true across:false",
+             "ideographic below:false above:true across:false", "bottom below:false above:true across:false"})
+    public void fillTextBaseline() throws Exception {
+        verify("<canvas id='myCanvas' width='100' height='100'></canvas>\n",
+                BOUNDS_FUNCTION
+                + "var baselines = ['top', 'hanging', 'middle', 'alphabetic', 'ideographic', 'bottom'];\n"
+                + "for (var i = 0; i < baselines.length; i++) {\n"
+                + "  context.clearRect(0, 0, 100, 100);\n"
+                + "  context.textBaseline = baselines[i];\n"
+                + "  context.fillText('MMM', 10, 50);\n"
+                + "  var b = bounds(context, 100, 100);\n"
+                + "  log(baselines[i] + ' below:' + (b.minY >= 49) + ' above:' + (b.maxY <= 50)"
+                + " + ' across:' + (b.minY < 49 && b.maxY > 50));\n"
+                + "}\n");
+    }
+
+    /**
+     * Two rects in one path; with the evenodd rule the inner rect is a hole.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"255", "0"})
+    public void fillEvenOddTwoRects() throws Exception {
+        verify("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.beginPath();\n"
+                + "context.rect(0, 0, 20, 20);\n"
+                + "context.rect(5, 5, 10, 10);\n"
+                + "context.fill('evenodd');\n"
+                + "log(context.getImageData(2, 2, 1, 1).data[3]);\n"
+                + "log(context.getImageData(10, 10, 1, 1).data[3]);\n");
+    }
+
+    /**
+     * Two rects in one path with the same direction; with the nonzero rule
+     * the inner rect is filled.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"255", "255"})
+    public void fillNonZeroTwoRects() throws Exception {
+        verify("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.beginPath();\n"
+                + "context.rect(0, 0, 20, 20);\n"
+                + "context.rect(5, 5, 10, 10);\n"
+                + "context.fill();\n"
+                + "log(context.getImageData(2, 2, 1, 1).data[3]);\n"
+                + "log(context.getImageData(10, 10, 1, 1).data[3]);\n");
+    }
+
+    /**
+     * Two sub paths in opposite directions; with the nonzero rule
+     * the inner one is a hole.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"255", "0"})
+    public void fillNonZeroOppositeDirection() throws Exception {
+        verify("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.beginPath();\n"
+                + "context.moveTo(0, 0);\n"
+                + "context.lineTo(20, 0);\n"
+                + "context.lineTo(20, 20);\n"
+                + "context.lineTo(0, 20);\n"
+                + "context.closePath();\n"
+                + "context.moveTo(5, 5);\n"
+                + "context.lineTo(5, 15);\n"
+                + "context.lineTo(15, 15);\n"
+                + "context.lineTo(15, 5);\n"
+                + "context.closePath();\n"
+                + "context.fill();\n"
+                + "log(context.getImageData(2, 2, 1, 1).data[3]);\n"
+                + "log(context.getImageData(10, 10, 1, 1).data[3]);\n");
+    }
+
+    /**
+     * The way Chart.js 2.x draws the border of a bar: a translucent fillRect and
+     * a clipped evenodd fill of the outer and the inner rect with the border color.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0,0,255,255", "255,0,0,51"})
+    public void fillEvenOddChartJsBar() throws Exception {
+        verify("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.fillStyle = 'rgba(255, 0, 0, 0.2)';\n"
+                + "context.fillRect(0, 0, 20, 20);\n"
+                + "context.save();\n"
+                + "context.beginPath();\n"
+                + "context.rect(0, 0, 20, 20);\n"
+                + "context.clip();\n"
+                + "context.fillStyle = 'rgba(0, 0, 255, 1)';\n"
+                + "context.rect(2, 2, 16, 16);\n"
+                + "context.fill('evenodd');\n"
+                + "context.restore();\n"
+                + "log(Array.from(context.getImageData(1, 1, 1, 1).data).join(','));\n"
+                + "log(Array.from(context.getImageData(10, 10, 1, 1).data).join(','));\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAV0lEQVR4AezTQQoAIAgEQOv/f66lq6KCuqeiOmTlILileYx+eICtLDwX"
+            + "GRW+DNWNKlzQegthPalCnT5x8oWJIgVXqDWM+tq0UoWmIDocFXp9m4k9fLvwAgAA///Kg+nSAAAABklEQVQDALRyGCmzrg6oAAAAAElF"
+            + "TkSuQmCC")
+    public void drawFillEvenOdd() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.beginPath();\n"
+                + "      context.rect(2, 2, 16, 16);\n"
+                + "      context.rect(6, 6, 8, 8);\n"
+                + "      context.fill('evenodd');\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAP0lEQVR4AeyUwQkAMAgD0+6/cxtc4RR8RIi/aDjBq+YaHfgclsh2aTRh"
+            + "baAtCSnBXJkTDMP1DI8TEtmu/n/4AQAA///Vu27DAAAABklEQVQDAL9gECmz1HS/AAAAAElFTkSuQmCC")
+    public void drawFillNonZero() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.beginPath();\n"
+                + "      context.rect(2, 2, 16, 16);\n"
+                + "      context.rect(6, 6, 8, 8);\n"
+                + "      context.fill('nonzero');\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAV0lEQVR4AezTQQoAIAgEQOv/f66lq6KCuqeiOmTlILileYx+eICtLDwX"
+            + "GRW+DNWNKlzQegthPalCnT5x8oWJIgVXqDWM+tq0UoWmIDocFXp9m4k9fLvwAgAA///Kg+nSAAAABklEQVQDALRyGCmzrg6oAAAAAElF"
+            + "TkSuQmCC")
+    public void drawFillNonZeroOppositeDirection() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.beginPath();\n"
+                + "      context.moveTo(2, 2);\n"
+                + "      context.lineTo(18, 2);\n"
+                + "      context.lineTo(18, 18);\n"
+                + "      context.lineTo(2, 18);\n"
+                + "      context.closePath();\n"
+                + "      context.moveTo(6, 6);\n"
+                + "      context.lineTo(6, 14);\n"
+                + "      context.lineTo(14, 14);\n"
+                + "      context.lineTo(14, 6);\n"
+                + "      context.closePath();\n"
+                + "      context.fill();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABcklEQVR4AayUPy9EQRTFN76GKISvQEKlopIotRoFJaUEhQoliU6n9qeh"
+            + "0KEQjRaJKHwKEr/fmBnzZvftbmFzzrx7zz337O7blx3p/POrX+A877UJz+BHpLWaM6RutAUeYb2G+3AZjkVaqznTg9xEr8BXLGtwEPTo"
+            + "bfjqwHumE3BY6HUn+8vADdQZWOKRZgWOR1qr0Wa4424QUqA3+SAof8cu5TQ8he+R1mrOkDLcNaOTAqfy6Le45LID2+BMTzkPGW2BV6Wz"
+            + "pa49fQNvW0JKufY0Ar9LJ/UXHITaEzLSV76rtueqvldbe0JGCnyqNnxoK6mrrT0hIwU+V3bvh79kJefWmZ4sUISMFHiDcAxLbNNcwFU4"
+            + "GWmt5gwpw10z8nPoZJ3jDZZYpDmBL5HWarQZ7rgbhPQJQ8PhJ3ngOiz0upP9daCDWQ7/87j0hR69DVOvQA2HHAtwC57Dz0hrNWd6kJto"
+            + "C9TlTd6jWIKjkdZqzpC68QMAAP//imYEiQAAAAZJREFUAwCGp0IpIpp8hwAAAABJRU5ErkJggg==")
+    public void drawFillEvenOddRing() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.beginPath();\n"
+                + "      context.arc(10, 10, 9, 0, 2 * Math.PI);\n"
+                + "      context.arc(10, 10, 5, 0, 2 * Math.PI);\n"
+                + "      context.fill('evenodd');\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAW0lEQVR4AeyQsQ0AIAgEwZncyDUsXcONnEksDBR2olBB8oQGuP8En8vu"
+            + "IJVGL2KjdoT8AXDmK8niHhwI9yN1D0J1dLIYGUoU6sEhQ0oDbnR4sSPEXvFFDPqdcAEAAP//BGDG7QAAAAZJREFUAwDk8WQpGFqSKQAA"
+            + "AABJRU5ErkJggg==")
+    public void drawFillEvenOddTranslucentAndClip() throws Exception {
+        // this is how Chart.js 2.x draws a bar with a border
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.fillStyle = 'rgba(255, 99, 132, 0.2)';\n"
+                + "      context.fillRect(2, 2, 16, 16);\n"
+                + "      context.save();\n"
+                + "      context.beginPath();\n"
+                + "      context.rect(2, 2, 16, 16);\n"
+                + "      context.clip();\n"
+                + "      context.fillStyle = 'rgba(255, 99, 132, 1)';\n"
+                + "      context.rect(4, 4, 12, 12);\n"
+                + "      context.fill('evenodd');\n"
+                + "      context.restore();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAACUElEQVR4AeyZvy9EQRDHh9bPQnOXIAoKhZPwb0g0aqLXOpUo0YpWqDX+"
+            + "AL2GRkmluYtEIULN95u8TV4u5+7s7e68XfsyY96+XzufmZHs3I6KwvEtckRVmFpUgDVAzZwZ2EQiVZsznGpmDVfOsIlEqlYtw9ciNQT1"
+            + "DFqWJgZUGD+iBuwHp/9XqwrM7F/B/XEohZWwxpNhVRt4FwBYZYrRY4y9ijbwBehGSnqAc6+iDdwLbh43J6As61lYJ1JV4DboXqAt6Ct0"
+            + "AepE1IC3RAi110FxgjEVRrbxh+U+BtuAPkCHFjXgoT23+0Duhy3jFs9ruaTjyZWdpznDdnGL560QGe5c+NcWRXYeRbiCCh6pEMDBoXpN"
+            + "qA3MZn+jcJDtH6uhGPoxIYAn4fo91LSArTeRaVE6QgB/gG0dynUxtT4j8i5KRwjgfmjLxQN1WFYDjD/RBr4F2iGU5X4Oy2qA8SchgNkC"
+            + "llu79rPI5YrIJ7B4ne0fS30OYz4L409CAPvz3uLLGdgiaBG9IvkHgKiyZeNs/h+2iVpM77jKMFs97gVxT8jwsxm4wYD3YKohroCrQTOA"
+            + "FyGAuZIqZ795KrI0gG9eHnEJzL0gbo1wXUxlS6jWBv4WLZfA3AtixzOCyahsCdXaQPjQVVwCd52guDgFy2DAiGkHeR5cQwB/geoOyhJn"
+            + "qa/iXE1cAbPV424fdwQNDFu/TQx4jzuCLHNqY1/kCddVxBWwivM2k2Zgm6jF9E7OcEzZ+rOveCFnGEFIWnKGk04v4HKGEYSkJWc46fQC"
+            + "7t9l+AcAAP//QTy0+QAAAAZJREFUAwAC/T13Bf7vRwAAAABJRU5ErkJggg==")
+    @DisabledOnOs(OS.LINUX)
+    public void drawFillTextAlign() throws Exception {
+        draw("<canvas id='myCanvas' width='60' height='60' style='border: 1px solid red;'></canvas>\n",
+                "      context.strokeStyle = 'red';\n"
+                + "      context.beginPath();\n"
+                + "      context.moveTo(30, 0);\n"
+                + "      context.lineTo(30, 60);\n"
+                + "      context.stroke();\n"
+                + "      context.textAlign = 'left';\n"
+                + "      context.fillText('Hu', 30, 15);\n"
+                + "      context.textAlign = 'center';\n"
+                + "      context.fillText('Hu', 30, 30);\n"
+                + "      context.textAlign = 'right';\n"
+                + "      context.fillText('Hu', 30, 45);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAABmUlEQVR4AexWu07DQBCcROILqPgOJBoaCkDiA6CDIgVU1FDaXajpKCig"
+            + "g5ICCdLSICE+g0+gDDOWLzpsgx8XW/blop3c3tyub+fWumSMFfsEwb43PHQ4dNizE+jzK73Js74mbLvgRODQzPosuJmikqwuBbfSsRJ9"
+            + "ueUuBec2r0BMGDO3MKXvZH0XfEt1IwuX9J3MRXCTV3TpHaur3kVw3b0Uv/SO6aF10LXgOrV9MPicsO2KE4FDMxvzRoia4AE4XQPOuC3T"
+            + "YTA9BnY5yT1T8XvAlr2mWMHm2vadOrwDfLLA2IDFz3gAhXYIfL0Az+kiU4A74E1IOQ3iBfk2xAk2Z/yEfwQ29oEDQ3KcnwDbgnwisTGv"
+            + "wCjFE8d1wsw1fnMuyP+FI+DmFXjn+oK/B2aCzf3hx//wRWvihMVeVn7CF9QTqxaBsUnMCIicOpwc2cC+XAS3cqk4nt+E+XrFDXJ/VLKC"
+            + "SxP4wD5b6c9eVnBpQp/VVqktK7hKzqBjfBJc6U6xBVdKGHR7WbwtmFP/LQj2vcehw6HDnp3ADwAAAP//B8fMrQAAAAZJREFUAwBagLA9"
+            + "T0p9gQAAAABJRU5ErkJggg==")
+    @HtmlUnitNYI(
+            CHROME = "data:image/png;base64,"
+                    + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAArElEQVR4Xu3SQQrDMAxE0dy8R0/rTRdPUEPahrHRBy0+o5AR"
+                    + "yXE0TdM0P+Oc+HZ4oL4dHqjHY2FdRu4shYV1MdfjsbAu5no8/p6zA8z127GALuZ6PBbWxVz/P683Pq7OePyTO+b6HfP1wY47"
+                    + "afP+0hc5J74dHqhvhwfq8VhYT8e+esEFPR376gUX9HTsqxfGgrMSdp/2d0FPx756wQU9HfvqBRf0dOyrN02zOE/fKfpOfbUq"
+                    + "NQAAAABJRU5ErkJggg==",
+            EDGE = "data:image/png;base64,"
+                    + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAArElEQVR4Xu3SQQrDMAxE0dy8R0/rTRdPUEPahrHRBy0+o5AR"
+                    + "yXE0TdM0P+Oc+HZ4oL4dHqjHY2FdRu4shYV1MdfjsbAu5no8/p6zA8z127GALuZ6PBbWxVz/P683Pq7OePyTO+b6HfP1wY47"
+                    + "afP+0hc5J74dHqhvhwfq8VhYT8e+esEFPR376gUX9HTsqxfGgrMSdp/2d0FPx756wQU9HfvqBRf0dOyrN02zOE/fKfpOfbUq"
+                    + "NQAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                    + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAArElEQVR4Xu3SQQrDMAxE0dy8R0/rTRdPUEPahrHRBy0+o5AR"
+                    + "yXE0TdM0P+Oc+HZ4oL4dHqjHY2FdRu4shYV1MdfjsbAu5no8/p6zA8z127GALuZ6PBbWxVz/P683Pq7OePyTO+b6HfP1wY47"
+                    + "afP+0hc5J74dHqhvhwfq8VhYT8e+esEFPR376gUX9HTsqxfGgrMSdp/2d0FPx756wQU9HfvqBRf0dOyrN02zOE/fKfpOfbUq"
+                    + "NQAAAABJRU5ErkJggg==",
+            FF_ESR = "data:image/png;base64,"
+                    + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAArElEQVR4Xu3SQQrDMAxE0dy8R0/rTRdPUEPahrHRBy0+o5AR"
+                    + "yXE0TdM0P+Oc+HZ4oL4dHqjHY2FdRu4shYV1MdfjsbAu5no8/p6zA8z127GALuZ6PBbWxVz/P683Pq7OePyTO+b6HfP1wY47"
+                    + "afP+0hc5J74dHqhvhwfq8VhYT8e+esEFPR376gUX9HTsqxfGgrMSdp/2d0FPx756wQU9HfvqBRf0dOyrN02zOE/fKfpOfbUq"
+                    + "NQAAAABJRU5ErkJggg==")
+    @DisabledOnOs(OS.LINUX)
+    public void drawFillTextBaseline() throws Exception {
+        draw("<canvas id='myCanvas' width='60' height='30' style='border: 1px solid red;'></canvas>\n",
+                "      context.strokeStyle = 'red';\n"
+                + "      context.beginPath();\n"
+                + "      context.moveTo(0, 15);\n"
+                + "      context.lineTo(60, 15);\n"
+                + "      context.stroke();\n"
+                + "      context.textBaseline = 'top';\n"
+                + "      context.fillText('H', 2, 15);\n"
+                + "      context.textBaseline = 'middle';\n"
+                + "      context.fillText('H', 14, 15);\n"
+                + "      context.textBaseline = 'alphabetic';\n"
+                + "      context.fillText('H', 26, 15);\n"
+                + "      context.textBaseline = 'bottom';\n"
+                + "      context.fillText('H', 38, 15);\n"
+                + "      context.textBaseline = 'hanging';\n"
+                + "      context.fillText('H', 50, 15);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAABWUlEQVR4AeyWsWoCQRCGL2mTkLQJhJA2TQLxNQTfQLC31kfQ2l7wDQQf"
+            + "wkYfwkaxs9Bav18QtlLZ23VWXfn/m1n3bm//neFmHos7+2XBtx7wHOEc4Rs7AcuU/ucse9BFi4GIiQNLwXEUnVg1VcHv7HsAn6GgTFBG"
+            + "yC9Fa8ENdr912MGPCmvBfdQ9OGzjR4W14GPivph8gUrrT2wQpCp4gboZnMMl/IZBYCl4ioImdNFlIGKKOhel+xP2F+p+TDlYCi63c8+n"
+            + "s2DPg9OHRXVT9fOwhOrmkIHmMEmgyBGOEAd9dNzoq1euRnjPWUuGjLDqpsrIoXOasIM3mBRCClbd/ECdSolYwV/BpBBS8DFhr0zqMDDF"
+            + "jy5WvITgDeLGUCmudP/DN0MowWsUqDNSS4i7hzqjGp7m1D0pzUV1TSP+N0EowSab93lpFuxzatf0TI7wNUXLZ693F+EdAAAA//8MnwzH"
+            + "AAAABklEQVQDAEw5Iz2q22mEAAAAAElFTkSuQmCC")
+    @HtmlUnitNYI(
+            CHROME = "data:image/png;base64,"
+                    + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAAgklEQVR4Xu3XMQqAQAxEUfGGeitPLNjoChbhG9HCJst/EMis"
+                    + "NlPpDoMk6bP9JXeHBZm7w4IxP+2lnUU48Vm2l8YiWckR56WxSMxbm+kavlcWi8Q8t1nbLDiXJEl3/FYyd4cFmbvDgtl/MffS"
+                    + "ziKc+CzbS2ORrKQ3n8pYJGZvPpJ+cQA6ojiv6b0GOwAAAABJRU5ErkJggg==",
+            EDGE = "data:image/png;base64,"
+                    + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAAgklEQVR4Xu3XMQqAQAxEUfGGeitPLNjoChbhG9HCJst/EMis"
+                    + "NlPpDoMk6bP9JXeHBZm7w4IxP+2lnUU48Vm2l8YiWckR56WxSMxbm+kavlcWi8Q8t1nbLDiXJEl3/FYyd4cFmbvDgtl/MffS"
+                    + "ziKc+CzbS2ORrKQ3n8pYJGZvPpJ+cQA6ojiv6b0GOwAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                    + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAAgklEQVR4Xu3XMQqAQAxEUfGGeitPLNjoChbhG9HCJst/EMis"
+                    + "NlPpDoMk6bP9JXeHBZm7w4IxP+2lnUU48Vm2l8YiWckR56WxSMxbm+kavlcWi8Q8t1nbLDiXJEl3/FYyd4cFmbvDgtl/MffS"
+                    + "ziKc+CzbS2ORrKQ3n8pYJGZvPpJ+cQA6ojiv6b0GOwAAAABJRU5ErkJggg==",
+            FF_ESR = "data:image/png;base64,"
+                    + "iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAAgklEQVR4Xu3XMQqAQAxEUfGGeitPLNjoChbhG9HCJst/EMis"
+                    + "NlPpDoMk6bP9JXeHBZm7w4IxP+2lnUU48Vm2l8YiWckR56WxSMxbm+kavlcWi8Q8t1nbLDiXJEl3/FYyd4cFmbvDgtl/MffS"
+                    + "ziKc+CzbS2ORrKQ3n8pYJGZvPpJ+cQA6ojiv6b0GOwAAAABJRU5ErkJggg==")
+    @DisabledOnOs(OS.LINUX)
+    public void drawFillTextAlignSaveRestore() throws Exception {
+        draw("<canvas id='myCanvas' width='60' height='30' style='border: 1px solid red;'></canvas>\n",
+                "      context.textAlign = 'right';\n"
+                + "      context.textBaseline = 'top';\n"
+                + "      context.save();\n"
+                + "      context.textAlign = 'left';\n"
+                + "      context.textBaseline = 'bottom';\n"
+                + "      context.fillText('Hu', 30, 15);\n"
+                + "      context.restore();\n"
+                + "      context.fillText('Hu', 30, 15);\n");
     }
 
     private void draw(final String canvasSetup, final String drawJS) throws Exception {

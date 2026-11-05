@@ -49,7 +49,7 @@ public class ChartJs4x4x6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled("Fails because of the missing spread support")
+    @Disabled("Fails because of the missing class support")
     public void simpleBarChart() throws Exception {
         doTest("simple_bar_chart");
     }
