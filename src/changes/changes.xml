@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                neko: HTMLWriterFilter; the ampersand in attribute values is now written as '&amp;amp;'. The parser decodes
+                character references in attribute values, so a parse-serialize-parse round trip decoded them twice and
+                could turn an inert value into e.g. a javascript: URL.
+            </action>
         </release>
 
 
