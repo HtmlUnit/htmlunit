@@ -15762,15 +15762,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "relatedTarget[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE],x[GCE],"
                 + "y[GCE]")
     @HtmlUnitNYI(CHROME = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "getModifierState(),"
                 + "initMouseEvent(),metaKey[GCE],pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
             EDGE = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "getModifierState(),"
                 + "initMouseEvent(),metaKey[GCE],pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
             FF_ESR = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "getModifierState(),"
                 + "initMouseEvent(),metaKey[GCE],MOZ_SOURCE_CURSOR[E],"
                 + "MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],"
                 + "MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
                 + "pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
             FF = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "getModifierState(),"
                 + "initMouseEvent(),metaKey[GCE],MOZ_SOURCE_CURSOR[E],"
                 + "MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],"
                 + "MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"

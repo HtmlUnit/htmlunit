@@ -20,7 +20,10 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.util.ArrayList;
 
 import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -480,5 +483,27 @@ public class MouseEvent extends UIEvent {
      */
     protected void setMetaKey(final boolean metaKey) {
         metaKey_ = metaKey;
+    }
+
+    /**
+     * Returns the current state of the specified modifier key.
+     *
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method; the key value of the modifier
+     *        (e.g. {@code Shift} or {@code Control})
+     * @param function the function
+     * @return {@code true} if the modifier is active
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState">MDN</a>
+     */
+    @JsxFunction
+    public static boolean getModifierState(final Context context, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (!(thisObj instanceof MouseEvent event)) {
+            throw JavaScriptEngine.typeError("Illegal invocation");
+        }
+        return getModifierState("MouseEvent", args,
+                event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), event.isMetaKey());
     }
 }

@@ -19,8 +19,10 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Tests for mouse events support.
@@ -458,5 +460,61 @@ public class MouseEventTest extends WebDriverTestCase {
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Logs the modifier state of constructed mouse events.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"function", "false,false,false,false,false,false", "true,false,true,false,false,false",
+             "false,true,false,true,false,false", "TypeError"})
+    public void getModifierState() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function states(e) {\n"
+            + "    return ['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'unknown']"
+                                + ".map(function(m) { return e.getModifierState(m); }).join(',');\n"
+            + "  }\n"
+            + "  log(typeof MouseEvent.prototype.getModifierState);\n"
+            + "  log(states(new MouseEvent('click')));\n"
+            + "  log(states(new MouseEvent('click', { shiftKey: true, altKey: true })));\n"
+            + "  log(states(new MouseEvent('click', { ctrlKey: true, metaKey: true })));\n"
+            + "  try {\n"
+            + "    new MouseEvent('click').getModifierState();\n"
+            + "    log('no exception');\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Logs the modifier state of a click with the shift key pressed.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click:false,false,false,false,false", "click:true,true,false,false,false"})
+    public void getModifierStateClick() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d' onclick='handler(event)'>click me</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function handler(e) {\n"
+            + "    log(e.type + ':' + e.shiftKey + ',' + ['Shift', 'Control', 'Alt', 'Meta']"
+                                + ".map(function(m) { return e.getModifierState(m); }).join(','));\n"
+            + "  }\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement div = driver.findElement(By.id("d"));
+        div.click();
+        new Actions(driver).keyDown(Keys.SHIFT).click(div).keyUp(Keys.SHIFT).perform();
+
+        verifyTitle2(driver, getExpectedAlerts());
     }
 }

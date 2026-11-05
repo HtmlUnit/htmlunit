@@ -171,4 +171,30 @@ public class UIEvent extends Event {
     public int getWhich() {
         return 0;
     }
+
+    /**
+     * Implements {@code getModifierState()} of {@link KeyboardEvent} and {@link MouseEvent}.
+     *
+     * @param event the event the function is called for
+     * @param args the arguments of the call
+     * @param shiftKey whether the shift key is pressed
+     * @param ctrlKey whether the control key is pressed
+     * @param altKey whether the alt key is pressed
+     * @param metaKey whether the meta key is pressed
+     * @return {@code true} if the requested modifier is active
+     */
+    static boolean getModifierState(final String event, final Object[] args,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final boolean metaKey) {
+        if (args.length < 1) {
+            throw JavaScriptEngine.typeError("Failed to execute 'getModifierState' on '" + event
+                    + "': 1 argument required, but only 0 present.");
+        }
+        return switch (JavaScriptEngine.toString(args[0])) {
+            case "Shift" -> shiftKey;
+            case "Control" -> ctrlKey;
+            case "Alt" -> altKey;
+            case "Meta" -> metaKey;
+            default -> false;
+        };
+    }
 }

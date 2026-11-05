@@ -23,7 +23,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.htmlunit.Page;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -1511,19 +1515,23 @@ public class KeyboardEvent extends UIEvent {
     /**
      * Returns the current state of the specified modifier key.
      *
-     * @param keyArg the key value of the modifier (e.g. {@code Shift} or {@code Control})
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method; the key value of the modifier
+     *        (e.g. {@code Shift} or {@code Control})
+     * @param function the function
      * @return {@code true} if the modifier is active
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState">MDN</a>
      */
     @JsxFunction
-    public boolean getModifierState(final String keyArg) {
-        return switch (keyArg) {
-            case "Shift" -> isShiftKey();
-            case "Control" -> isCtrlKey();
-            case "Alt" -> isAltKey();
-            case "Meta" -> isMetaKey();
-            default -> false;
-        };
+    public static boolean getModifierState(final Context context, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (!(thisObj instanceof KeyboardEvent event)) {
+            throw JavaScriptEngine.typeError("Illegal invocation");
+        }
+        return getModifierState("KeyboardEvent", args,
+                event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), event.isMetaKey());
     }
 
     /**

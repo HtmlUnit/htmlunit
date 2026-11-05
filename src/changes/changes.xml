@@ -9,19 +9,18 @@
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri" issue="#722">
-                Typing now fires the input event as InputEvent with the correct inputType (insertText, insertLineBreak,
-                deleteContentBackward, deleteContentForward, deleteWordBackward, deleteWordForward, deleteByCut,
-                insertFromPaste) and data.
-            </action>
-            <action type="add" dev="rbri" issue="#722">
-                KeyboardEvent.getModifierState() added.
-            </action>
-            <action type="fix" dev="rbri" issue="#722">
                 KeyboardEvent: key, code and location are now correct for special keys (arrows, navigation,
                 function keys, numpad, modifiers, ...) and the code is correct for digits, space and punctuation.
                 The keypress event is only fired for keys producing a character (now also for the numpad keys),
                 the meta key reports keyCode 91 and Chrome/Edge use the keyCodes 186, 187 and 189 for ';', '=' and '-'.
-                The input event is only fired if typing has changed the text.
+            </action>
+            <action type="fix" dev="rbri" issue="#722">
+                Typing fires the input event only if the text has changed. The event is now an InputEvent
+                with the correct inputType (insertText, insertLineBreak, deleteContentBackward, deleteContentForward,
+                deleteWordBackward, deleteWordForward, deleteByCut, insertFromPaste) and data.
+            </action>
+            <action type="add" dev="rbri" issue="#722">
+                KeyboardEvent.getModifierState() and MouseEvent.getModifierState() added.
             </action>
             <action type="fix" dev="rbri">
                 HtmlTextArea: typing '\r' or '\r\n' inserts a single line feed, like in real browsers.

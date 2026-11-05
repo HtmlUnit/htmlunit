@@ -1591,6 +1591,41 @@ public class KeyboardEventTest extends WebDriverTestCase {
         verifyTextArea2(driver, getExpectedAlerts());
     }
 
+    /**
+     * Logs the modifier state of constructed keyboard events.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false,false,false,false,false,false",
+             "true,false,true,false,false,false",
+             "false,true,false,true,false,false",
+             "false", "TypeError", "TypeError"})
+    public void getModifierStateConstructed() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function states(e) {\n"
+            + "    return ['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'unknown']"
+                                + ".map(function(m) { return e.getModifierState(m); }).join(',');\n"
+            + "  }\n"
+            + "  log(states(new KeyboardEvent('keydown')));\n"
+            + "  log(states(new KeyboardEvent('keydown', { shiftKey: true, altKey: true })));\n"
+            + "  log(states(new KeyboardEvent('keydown', { ctrlKey: true, metaKey: true })));\n"
+            + "  log(new KeyboardEvent('keydown', { shiftKey: true }).getModifierState(undefined));\n"
+            + "  try {\n"
+            + "    new KeyboardEvent('keydown').getModifierState();\n"
+            + "    log('no exception');\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "  try {\n"
+            + "    KeyboardEvent.prototype.getModifierState.call({}, 'Shift');\n"
+            + "    log('no exception');\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     private void keyEvents(final String tagName, final String initialValue, final boolean preventKeyDown,
             final CharSequence... keys) throws Exception {
         final String field;
