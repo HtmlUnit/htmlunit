@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.text.StringEscapeUtils;
@@ -46,6 +47,9 @@ import org.opentest4j.AssertionFailedError;
  * @author Ronald Brill
  */
 public final class TestCaseCorrector implements TestExecutionExceptionHandler {
+
+    /** Matches an expectation that starts with the name of the browser (or DEFAULT). */
+    private static final Pattern BROWSER_EXPECTATION = Pattern.compile("^(DEFAULT|CHROME|EDGE|FF|FF_ESR) = ");
 
     /**
      * {@inheritDoc}
@@ -143,6 +147,12 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
             i--;
         }
         final List<String> alerts = CodeStyleTest.alertsToList(lines, i);
+        // an expectation without a browser (e.g. @Alerts({"a", "b"})) is the default one;
+        // name it before sorting, otherwise it ends up behind the browser specific ones
+        // (the following lines of the value are moved to the right by the length of the prefix)
+        alerts.replaceAll(alert -> BROWSER_EXPECTATION.matcher(alert).lookingAt()
+                ? alert
+                : "DEFAULT = " + alert.replace("\n", "\n" + " ".repeat("DEFAULT = ".length())));
         alerts.removeIf(s -> s.startsWith(browserString + " = "));
         alerts.add(browserString + " = " + getActualString(browserString, comparisonFailure));
         lines.remove(i);
@@ -167,9 +177,6 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
         for (int x = 0; x < alerts.size(); x++) {
             String line = alerts.get(x);
             if (x == 0) {
-                if (!line.contains(" = ")) {
-                    line = "DEFAULT = " + line;
-                }
                 line = "    @Alerts(" + line;
             }
             else {
