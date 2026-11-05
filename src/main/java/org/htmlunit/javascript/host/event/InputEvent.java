@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.event;
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_INPUT_CTOR_INPUTTYPE;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -44,6 +45,22 @@ public class InputEvent extends UIEvent {
         super();
         data_ = "";
         inputType_ = "";
+    }
+
+    /**
+     * Creates a new input event for the given DOM node; used when typing changes the text
+     * of a text control. Like in the browsers, the event bubbles but can't be canceled.
+     *
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
+     * @param inputType the input type (e.g. {@code insertText} or {@code deleteContentBackward})
+     * @param data the inserted text or {@code null} if no text was inserted
+     */
+    public InputEvent(final DomNode domNode, final String type, final String inputType, final String data) {
+        super(domNode, type);
+        inputType_ = inputType;
+        data_ = data;
+        setCancelable(false);
     }
 
     /**

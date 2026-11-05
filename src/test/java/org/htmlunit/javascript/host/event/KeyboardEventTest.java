@@ -1501,6 +1501,96 @@ public class KeyboardEventTest extends WebDriverTestCase {
         keyEvents("input", "", false, "Ab");
     }
 
+    /**
+     * Logs the modifier state for some key events.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function", "keydown:a,false,false,false,false,false,false,false",
+                       "keyup:a,false,false,false,false,false,false,false",
+                       "keydown:Shift,true,false,false,false,false,false,false",
+                       "keydown:B,true,false,false,false,false,false,false",
+                       "keyup:B,true,false,false,false,false,false,false",
+                       "keyup:Shift,false,false,false,false,false,false,false",
+                       "keydown:Control,false,true,false,false,false,false,false",
+                       "keydown:Home,false,true,false,false,false,false,false",
+                       "keyup:Home,false,true,false,false,false,false,false",
+                       "keyup:Control,false,false,false,false,false,false,false"},
+            FF = {"function", "keydown:a,false,false,false,false,false,false,false",
+                  "keyup:a,false,false,false,false,false,false,false",
+                  "keydown:Shift,true,false,false,false,false,false,false",
+                  "keyup:Shift,false,false,false,false,false,false,false",
+                  "keydown:B,true,false,false,false,false,false,false",
+                  "keyup:B,true,false,false,false,false,false,false",
+                  "keydown:Unidentified,true,false,false,false,false,false,false",
+                  "keyup:Unidentified,true,false,false,false,false,false,false",
+                  "keydown:Control,true,true,false,false,false,false,false",
+                  "keyup:Control,true,false,false,false,false,false,false",
+                  "keydown:Home,true,true,false,false,false,false,false",
+                  "keyup:Home,true,true,false,false,false,false,false",
+                  "keydown:Unidentified,true,true,false,false,false,false,false",
+                  "keyup:Unidentified,true,true,false,false,false,false,false"},
+            FF_ESR = {"function", "keydown:a,false,false,false,false,false,false,false",
+                      "keyup:a,false,false,false,false,false,false,false",
+                      "keydown:Shift,true,false,false,false,false,false,false",
+                      "keyup:Shift,false,false,false,false,false,false,false",
+                      "keydown:B,true,false,false,false,false,false,false",
+                      "keyup:B,true,false,false,false,false,false,false",
+                      "keydown:Unidentified,true,false,false,false,false,false,false",
+                      "keyup:Unidentified,true,false,false,false,false,false,false",
+                      "keydown:Control,true,true,false,false,false,false,false",
+                      "keyup:Control,true,false,false,false,false,false,false",
+                      "keydown:Home,true,true,false,false,false,false,false",
+                      "keyup:Home,true,true,false,false,false,false,false",
+                      "keydown:Unidentified,true,true,false,false,false,false,false",
+                      "keyup:Unidentified,true,true,false,false,false,false,false"})
+    // geckodriver keeps the shift key pressed and sends additional unidentified keys
+    @HtmlUnitNYI(FF = {"function", "keydown:a,false,false,false,false,false,false,false",
+                       "keyup:a,false,false,false,false,false,false,false",
+                       "keydown:Shift,true,false,false,false,false,false,false",
+                       "keydown:B,true,false,false,false,false,false,false",
+                       "keyup:B,true,false,false,false,false,false,false",
+                       "keyup:Shift,false,false,false,false,false,false,false",
+                       "keydown:Control,false,true,false,false,false,false,false",
+                       "keydown:Home,false,true,false,false,false,false,false",
+                       "keyup:Home,false,true,false,false,false,false,false",
+                       "keyup:Control,false,false,false,false,false,false,false"},
+            FF_ESR = {"function", "keydown:a,false,false,false,false,false,false,false",
+                      "keyup:a,false,false,false,false,false,false,false",
+                      "keydown:Shift,true,false,false,false,false,false,false",
+                      "keydown:B,true,false,false,false,false,false,false",
+                      "keyup:B,true,false,false,false,false,false,false",
+                      "keyup:Shift,false,false,false,false,false,false,false",
+                      "keydown:Control,false,true,false,false,false,false,false",
+                      "keydown:Home,false,true,false,false,false,false,false",
+                      "keyup:Home,false,true,false,false,false,false,false",
+                      "keyup:Control,false,false,false,false,false,false,false"})
+    public void getModifierState() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
+            + "<input type='text' id='t'>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "function handler(e) {\n"
+            + "  var states = ['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'NumLock', 'unknown']"
+                                + ".map(function(m) { return e.getModifierState(m); });\n"
+            + "  log(e.type + ':' + e.key + ',' + states.join(','));\n"
+            + "}\n"
+            + "log(typeof KeyboardEvent.prototype.getModifierState);\n"
+            + "var t = document.getElementById('t');\n"
+            + "t.addEventListener('keydown', handler);\n"
+            + "t.addEventListener('keyup', handler);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("t")).sendKeys("a", Keys.chord(Keys.SHIFT, "b"), Keys.chord(Keys.CONTROL, Keys.HOME));
+
+        verifyTextArea2(driver, getExpectedAlerts());
+    }
+
     private void keyEvents(final String tagName, final String initialValue, final boolean preventKeyDown,
             final CharSequence... keys) throws Exception {
         final String field;

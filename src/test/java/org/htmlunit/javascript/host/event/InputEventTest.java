@@ -18,6 +18,9 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Tests for {@link InputEvent}.
@@ -365,4 +368,149 @@ public class InputEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * Logs the input events for typing some chars.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object InputEvent],insertText,a,true,false,false,a",
+             "[object InputEvent],insertText,B,true,false,false,aB",
+             "[object InputEvent],insertText,1,true,false,false,aB1"})
+    public void typingText() throws Exception {
+        typing("input", "", "aB1");
+    }
+
+    /**
+     * Logs the input events for typing the space key.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object InputEvent],insertText, ,true,false,false,ab ")
+    public void typingSpace() throws Exception {
+        typing("input", "ab", Keys.SPACE);
+    }
+
+    /**
+     * Logs the input events for backspace.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object InputEvent],deleteContentBackward,null,true,false,false,ab")
+    public void typingBackspace() throws Exception {
+        typing("input", "abc", Keys.BACK_SPACE);
+    }
+
+    /**
+     * Logs the input events for backspace together with control.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object InputEvent],deleteWordBackward,null,true,false,false,abc ")
+    public void typingCtrlBackspace() throws Exception {
+        typing("input", "abc def", Keys.chord(Keys.CONTROL, Keys.BACK_SPACE));
+    }
+
+    /**
+     * Logs the input events for delete.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object InputEvent],deleteContentForward,null,true,false,false,bc")
+    public void typingDelete() throws Exception {
+        typing("input", "abc", Keys.HOME, Keys.DELETE);
+    }
+
+    /**
+     * Logs the input events for delete together with control.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object InputEvent],deleteWordForward,null,true,false,false,def")
+    public void typingCtrlDelete() throws Exception {
+        typing("input", "abc def", Keys.HOME, Keys.chord(Keys.CONTROL, Keys.DELETE));
+    }
+
+    /**
+     * Logs the input events for enter in an input field.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({})
+    public void typingEnterInput() throws Exception {
+        typing("input", "abc", Keys.ENTER);
+    }
+
+    /**
+     * Logs the input events for enter in a textarea.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object InputEvent],insertLineBreak,null,true,false,false,abc\\n")
+    public void typingEnterTextArea() throws Exception {
+        typing("textarea", "abc", Keys.ENTER);
+    }
+
+    /**
+     * Logs the input events for the numpad keys.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object InputEvent],insertText,1,true,false,false,1",
+             "[object InputEvent],insertText,+,true,false,false,1+"})
+    public void typingNumpad() throws Exception {
+        typing("input", "", Keys.NUMPAD1, Keys.ADD);
+    }
+
+    /**
+     * Logs the input events for the arrow keys (no input events).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({})
+    public void typingArrows() throws Exception {
+        typing("input", "abc", Keys.ARROW_LEFT, Keys.ARROW_RIGHT);
+    }
+
+    private void typing(final String tagName, final String initialValue, final CharSequence... keys)
+            throws Exception {
+        final String field;
+        if ("textarea".equals(tagName)) {
+            field = "<textarea id='t'>" + initialValue + "</textarea>\n";
+        }
+        else {
+            field = "<input type='text' id='t' value='" + initialValue + "'>\n";
+        }
+
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
+            + field
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "function handler(e) {\n"
+            + "  var msg = e + ',' + e.inputType + ',' + e.data + ',' + e.bubbles + ',' "
+                            + "+ e.cancelable + ',' + e.isComposing + ',' + e.target.value;\n"
+            + "  msg = msg.replace(/\\r/g, '\\\\r');\n"
+            + "  msg = msg.replace(/\\n/g, '\\\\n');\n"
+            + "  log(msg);\n"
+            + "}\n"
+            + "document.getElementById('t').addEventListener('input', handler);\n"
+            + "</script>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("t")).sendKeys(keys);
+
+        verifyTextArea2(driver, getExpectedAlerts());
+    }
 }

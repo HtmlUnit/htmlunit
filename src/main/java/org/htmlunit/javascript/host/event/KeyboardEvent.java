@@ -1197,7 +1197,7 @@ public class KeyboardEvent extends UIEvent {
      * @param keyCode the key code
      * @return the character code or {@code 0} if the key does not produce a character
      */
-    private static int getCharCode(final int keyCode) {
+    public static int getCharCode(final int keyCode) {
         if (keyCode == DOM_VK_RETURN) {
             return DOM_VK_RETURN;
         }
@@ -1506,6 +1506,24 @@ public class KeyboardEvent extends UIEvent {
      */
     protected void setMetaKey(final boolean metaKey) {
         metaKey_ = metaKey;
+    }
+
+    /**
+     * Returns the current state of the specified modifier key.
+     *
+     * @param keyArg the key value of the modifier (e.g. {@code Shift} or {@code Control})
+     * @return {@code true} if the modifier is active
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState">MDN</a>
+     */
+    @JsxFunction
+    public boolean getModifierState(final String keyArg) {
+        return switch (keyArg) {
+            case "Shift" -> isShiftKey();
+            case "Control" -> isCtrlKey();
+            case "Alt" -> isAltKey();
+            case "Meta" -> isMetaKey();
+            default -> false;
+        };
     }
 
     /**

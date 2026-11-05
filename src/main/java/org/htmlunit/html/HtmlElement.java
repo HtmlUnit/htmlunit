@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.htmlunit.ClipboardHandler;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.Page;
 import org.htmlunit.ScriptResult;
@@ -39,6 +40,7 @@ import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.dom.MutationObserver;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
+import org.htmlunit.javascript.host.event.InputEvent;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.html.HTMLElement;
@@ -601,8 +603,7 @@ public abstract class HtmlElement extends DomElement {
 
         final WebClient webClient = page.getWebClient();
         if (isTextChanged(textBefore)) {
-            fireEvent(new KeyboardEvent(this, Event.TYPE_INPUT, c,
-                                        shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_));
+            fireEvent(createInputEvent(c));
         }
 
         HtmlElement eventSource = this;
@@ -770,9 +771,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         if (isTextChanged(textBefore)) {
-            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, keyCode,
-                    shiftPressed_, ctrlPressed_, altPressed_);
-            fireEvent(input);
+            fireEvent(createInputEvent(keyCode));
         }
 
         if (fireKeyUp) {
@@ -782,6 +781,66 @@ public abstract class HtmlElement extends DomElement {
         }
 
         return page.getWebClient().getCurrentWindow().getEnclosedPage();
+    }
+
+    /**
+     * Creates the input event for a typed char that has changed the text.
+     *
+     * @param c the typed char
+     * @return the input event with the {@code inputType} and {@code data} like in the browsers
+     */
+    private InputEvent createInputEvent(final char c) {
+        final String inputType;
+        String data = null;
+        if (c == '\b') {
+            inputType = "deleteContentBackward";
+        }
+        else if (c == '\r' || c == '\n') {
+            inputType = "insertLineBreak";
+        }
+        else if (ctrlPressed_ && (c == 'x' || c == 'X')) {
+            inputType = "deleteByCut";
+        }
+        else if (ctrlPressed_ && (c == 'v' || c == 'V')) {
+            inputType = "insertFromPaste";
+            final ClipboardHandler clipboardHandler = getPage().getWebClient().getClipboardHandler();
+            if (clipboardHandler != null) {
+                data = clipboardHandler.getClipboardContent();
+            }
+        }
+        else {
+            inputType = "insertText";
+            data = String.valueOf(c);
+        }
+        return new InputEvent(this, Event.TYPE_INPUT, inputType, data);
+    }
+
+    /**
+     * Creates the input event for a typed key that has changed the text.
+     *
+     * @param keyCode the key code of the typed key
+     * @return the input event with the {@code inputType} and {@code data} like in the browsers
+     */
+    private InputEvent createInputEvent(final int keyCode) {
+        final String inputType;
+        String data = null;
+        if (keyCode == KeyboardEvent.DOM_VK_BACK_SPACE) {
+            inputType = ctrlPressed_ ? "deleteWordBackward" : "deleteContentBackward";
+        }
+        else if (keyCode == KeyboardEvent.DOM_VK_DELETE) {
+            inputType = ctrlPressed_ ? "deleteWordForward" : "deleteContentForward";
+        }
+        else if (keyCode == KeyboardEvent.DOM_VK_RETURN) {
+            inputType = "insertLineBreak";
+        }
+        else {
+            inputType = "insertText";
+            final int charCode = KeyboardEvent.getCharCode(keyCode);
+            if (charCode != 0) {
+                data = String.valueOf((char) charCode);
+            }
+        }
+        return new InputEvent(this, Event.TYPE_INPUT, inputType, data);
     }
 
     /**
