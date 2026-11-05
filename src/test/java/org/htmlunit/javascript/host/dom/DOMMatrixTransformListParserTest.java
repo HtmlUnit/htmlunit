@@ -89,7 +89,7 @@ public class DOMMatrixTransformListParserTest {
     }
 
     /**
-     * matrix() and matrix3d().
+     * Tests the matrix() and matrix3d() functions.
      */
     @Test
     public void matrix() {
@@ -109,7 +109,7 @@ public class DOMMatrixTransformListParserTest {
     }
 
     /**
-     * translate() and friends.
+     * Tests the translate() functions.
      */
     @Test
     public void translate() {
@@ -140,7 +140,7 @@ public class DOMMatrixTransformListParserTest {
     }
 
     /**
-     * scale() and friends.
+     * Tests the scale() functions.
      */
     @Test
     public void scale() {
@@ -156,7 +156,7 @@ public class DOMMatrixTransformListParserTest {
     }
 
     /**
-     * rotate() and friends.
+     * Tests the rotate() functions.
      */
     @Test
     public void rotate() {
@@ -190,7 +190,7 @@ public class DOMMatrixTransformListParserTest {
     }
 
     /**
-     * skew() and friends.
+     * Tests the skew() functions.
      */
     @Test
     public void skew() {
@@ -203,7 +203,7 @@ public class DOMMatrixTransformListParserTest {
     }
 
     /**
-     * perspective().
+     * Tests the perspective() function.
      */
     @Test
     public void perspective() {
