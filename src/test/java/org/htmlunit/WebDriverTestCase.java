@@ -692,6 +692,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 options.setExperimentalOption("prefs", prefs);
                 options.addArguments("--remote-allow-origins=*");
 
+                // no 'make Edge your default browser' prompt and no first run dialogs
+                options.addArguments("--no-default-browser-check");
+                options.addArguments("--no-first-run");
+
                 // seems to be not required for edge
                 // options.addArguments("--disable-search-engine-choice-screen");
                 // see https://www.selenium.dev/blog/2024/chrome-browser-woes/
@@ -733,7 +737,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 addChromeDownloadPreferences(prefs);
                 options.setExperimentalOption("prefs", prefs);
                 options.addArguments("--remote-allow-origins=*");
+
+                // no 'make Chrome your default browser' prompt and no first run dialogs
+                options.addArguments("--no-default-browser-check");
+                options.addArguments("--no-first-run");
                 options.addArguments("--disable-search-engine-choice-screen");
+
                 // see https://www.selenium.dev/blog/2024/chrome-browser-woes/
                 options.addArguments("--disable-features=OptimizationGuideModelDownloading,"
                         + "OptimizationHintsFetching,OptimizationTargetPrediction,OptimizationHints");
@@ -795,10 +804,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final FirefoxOptions options = new FirefoxOptions();
         options.addPreference("browser.shell.checkDefaultBrowser", false);
+        options.addPreference("browser.shell.skipDefaultBrowserCheckOnFirstRun", true);
         options.addPreference("browser.startup.homepage_welcomeurl", "about:blank");
         options.addPreference("startup.homepage_welcome_url", "about:blank");
         options.addPreference("startup.homepage_override_url", "about:blank");
         options.addPreference("browser.aboutwelcome.enabled", false);
+
+        // newer versions show the 'make default' question also as upgrade dialog
+        // and as message of the messaging system (infobar/spotlight)
+        options.addPreference("browser.startup.upgradeDialog.enabled", false);
+        options.addPreference("browser.messaging-system.whatsNewPanel.enabled", false);
+        options.addPreference("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
+        options.addPreference("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+        // no remote experiments/studies (they can deliver such messages too)
+        options.addPreference("messaging-system.rsexperimentloader.enabled", false);
+        options.addPreference("app.normandy.enabled", false);
+        options.addPreference("app.shield.optoutstudies.enabled", false);
 
         if (bidi) {
             options.setCapability("webSocketUrl", true);
