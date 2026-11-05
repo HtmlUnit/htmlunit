@@ -219,11 +219,16 @@ public class OrderedFastHashMapTest {
     @Test
     public void growBig() {
         final List<String> keys = new ArrayList<>();
+        final Set<String> uniqueKeys = new HashSet<>();
         final Random r = new Random();
 
-        for (int i = 0; i < 200; i++) {
+        // the keys have to be unique; putting a key twice does not add a new entry
+        // and all following entries would have a different index
+        while (keys.size() < 200) {
             final String key = RandomUtils.randomString(r, 3, 10);
-            keys.add(key);
+            if (uniqueKeys.add(key)) {
+                keys.add(key);
+            }
         }
 
         // ok, we got random keys, our values will be V + its key
