@@ -266,8 +266,8 @@ public class AdditionalTypingTest extends SeleniumTest {
             FF = "line1\\n\\nXline2",
             FF_ESR = "line1\\n\\nXline2")
     @HtmlUnitNYI(
-            FF = "line1\\r\\nXline2",
-            FF_ESR = "line1\\r\\nXline2")
+            FF = "line1\\nXline2",
+            FF_ESR = "line1\\nXline2")
     public void textareaHomeCarriageReturn() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

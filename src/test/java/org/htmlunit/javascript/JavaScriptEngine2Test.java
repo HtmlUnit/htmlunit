@@ -26,6 +26,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Same scope as {@link JavaScriptEngineTest} but extending {@link WebDriverTestCase}.
@@ -1475,6 +1476,421 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
                 + "</script>\n"
                 + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Two scripts declaring the same const; the second one fails.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first one", "onerror", "string", "one"})
+    public void constRedeclarationTwoScripts() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  window.onerror = function() { log('onerror'); return true; };\n"
+                + "</script>\n"
+                + "<script>const ABC = 'one'; log('first ' + ABC);</script>\n"
+                + "<script>const ABC = 'two'; log('second ' + ABC);</script>\n"
+                + "<script>log(typeof ABC); log(ABC);</script>\n"
+                + "</head><body></body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Two external scripts declaring the same const; the second one fails.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first one", "onerror", "string", "one"})
+    public void constRedeclarationTwoExternalScripts() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  window.onerror = function() { log('onerror'); return true; };\n"
+                + "</script>\n"
+                + "<script src='script1.js'></script>\n"
+                + "<script src='script2.js'></script>\n"
+                + "<script>log(typeof ABC); log(ABC);</script>\n"
+                + "</head><body></body></html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"),
+                "const ABC = 'one'; log('first ' + ABC);", MimeType.TEXT_JAVASCRIPT);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"),
+                "const ABC = 'two'; log('second ' + ABC);", MimeType.TEXT_JAVASCRIPT);
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Issue #244: a const declared by code evaluated with an indirect eval
+     * (like jQuery 1.x globalEval does) is local to the evaluated code.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first one", "second two", "undefined"})
+    @HtmlUnitNYI(CHROME = {"first one", "TypeError", "string"},
+            EDGE = {"first one", "TypeError", "string"},
+            FF = {"first one", "TypeError", "string"},
+            FF_ESR = {"first one", "TypeError", "string"})
+    public void constIndirectEvalTwice() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    window['eval'].call(window, \"const ABC = 'one'; log('first ' + ABC);\");\n"
+                + "  } catch(e) { log(e.name); }\n"
+                + "  try {\n"
+                + "    window['eval'].call(window, \"const ABC = 'two'; log('second ' + ABC);\");\n"
+                + "  } catch(e) { log(e.name); }\n"
+                + "  log(typeof ABC);\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A const declared by code evaluated with a direct eval is local to the evaluated code.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first one", "second two", "undefined"})
+    @HtmlUnitNYI(CHROME = {"first one", "TypeError", "string"},
+            EDGE = {"first one", "TypeError", "string"},
+            FF = {"first one", "TypeError", "string"},
+            FF_ESR = {"first one", "TypeError", "string"})
+    public void constDirectEvalTwice() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    eval(\"const ABC = 'one'; log('first ' + ABC);\");\n"
+                + "  } catch(e) { log(e.name); }\n"
+                + "  try {\n"
+                + "    eval(\"const ABC = 'two'; log('second ' + ABC);\");\n"
+                + "  } catch(e) { log(e.name); }\n"
+                + "  log(typeof ABC);\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A const declared by a script and the same const declared by code evaluated
+     * with an indirect eval.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first one", "second two", "one"})
+    @HtmlUnitNYI(CHROME = {"first one", "TypeError", "one"},
+            EDGE = {"first one", "TypeError", "one"},
+            FF = {"first one", "TypeError", "one"},
+            FF_ESR = {"first one", "TypeError", "one"})
+    public void constScriptAndIndirectEval() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "<script>const ABC = 'one'; log('first ' + ABC);</script>\n"
+                + "<script>\n"
+                + "  try {\n"
+                + "    window['eval'].call(window, \"const ABC = 'two'; log('second ' + ABC);\");\n"
+                + "  } catch(e) { log(e.name); }\n"
+                + "  log(ABC);\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A global const is not a property of the window.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"one", "undefined", "false", "false", "false", "undefined"})
+    public void globalConstNotWindowProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "<script>const ABC = 'one';</script>\n"
+                + "<script>\n"
+                + "  log(ABC);\n"
+                + "  log(window.ABC);\n"
+                + "  log('ABC' in window);\n"
+                + "  log(window.hasOwnProperty('ABC'));\n"
+                + "  log(Object.getOwnPropertyNames(window).indexOf('ABC') >= 0);\n"
+                + "  log(this.ABC);\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A global let is not a property of the window.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"one", "undefined", "false", "false"})
+    @HtmlUnitNYI(CHROME = {"one", "one", "true", "true"},
+            EDGE = {"one", "one", "true", "true"},
+            FF = {"one", "one", "true", "true"},
+            FF_ESR = {"one", "one", "true", "true"})
+    public void globalLetNotWindowProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "<script>let ABC = 'one';</script>\n"
+                + "<script>\n"
+                + "  log(ABC);\n"
+                + "  log(window.ABC);\n"
+                + "  log('ABC' in window);\n"
+                + "  log(window.hasOwnProperty('ABC'));\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A global class is not a property of the window.
+     * HtmlUnit does not support class declarations at the moment.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "undefined", "false"})
+    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "false"},
+            EDGE = {"undefined", "undefined", "false"},
+            FF = {"undefined", "undefined", "false"},
+            FF_ESR = {"undefined", "undefined", "false"})
+    public void globalClassNotWindowProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "<script>class ABC { };</script>\n"
+                + "<script>\n"
+                + "  log(typeof ABC);\n"
+                + "  log(typeof window.ABC);\n"
+                + "  log('ABC' in window);\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A global var is a property of the window.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"one", "one", "true", "true"})
+    public void globalVarIsWindowProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "<script>var ABC = 'one';</script>\n"
+                + "<script>\n"
+                + "  log(ABC);\n"
+                + "  log(window.ABC);\n"
+                + "  log('ABC' in window);\n"
+                + "  log(window.hasOwnProperty('ABC'));\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Deleting the window property does not remove a global const.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "one"})
+    public void globalConstDeleteWindowProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "<script>const ABC = 'one';</script>\n"
+                + "<script>\n"
+                + "  log(delete window.ABC);\n"
+                + "  log(ABC);\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A global const shadows a configurable window property with the same name.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"lex", "win", "lex", "win"})
+    @HtmlUnitNYI(CHROME = {"onerror", "win", "win"},
+            EDGE = {"onerror", "win", "win"},
+            FF = {"onerror", "win", "win"},
+            FF_ESR = {"onerror", "win", "win"})
+    public void globalConstShadowsWindowProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  window.onerror = function() { log('onerror'); return true; };\n"
+                + "</script>\n"
+                + "<script>window.ABC = 'win';</script>\n"
+                + "<script>const ABC = 'lex'; log(ABC); log(window.ABC);</script>\n"
+                + "<script>log(ABC); log(window.ABC);</script>\n"
+                + "</head><body></body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Assigning a window property with the name of a global let.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"lex", "win"})
+    @HtmlUnitNYI(CHROME = {"win", "win"},
+            EDGE = {"win", "win"},
+            FF = {"win", "win"},
+            FF_ESR = {"win", "win"})
+    public void globalLetAssignWindowProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "<script>let ABC = 'lex';</script>\n"
+                + "<script>\n"
+                + "  window.ABC = 'win';\n"
+                + "  log(ABC);\n"
+                + "  log(window.ABC);\n"
+                + "</script>\n"
+                + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A global let with the name of a global var declared by another script.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onerror", "var", "var"})
+    @HtmlUnitNYI(CHROME = {"let let", "let", "let"},
+            EDGE = {"let let", "let", "let"},
+            FF = {"let let", "let", "let"},
+            FF_ESR = {"let let", "let", "let"})
+    public void globalLetAfterVar() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  window.onerror = function() { log('onerror'); return true; };\n"
+                + "</script>\n"
+                + "<script>var ABC = 'var';</script>\n"
+                + "<script>let ABC = 'let'; log('let ' + ABC);</script>\n"
+                + "<script>log(ABC); log(window.ABC);</script>\n"
+                + "</head><body></body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A global var with the name of a global let declared by another script.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onerror", "let", "undefined"})
+    @HtmlUnitNYI(CHROME = {"var var", "var", "var"},
+            EDGE = {"var var", "var", "var"},
+            FF = {"var var", "var", "var"},
+            FF_ESR = {"var var", "var", "var"})
+    public void globalVarAfterLet() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  window.onerror = function() { log('onerror'); return true; };\n"
+                + "</script>\n"
+                + "<script>let ABC = 'let';</script>\n"
+                + "<script>var ABC = 'var'; log('var ' + ABC);</script>\n"
+                + "<script>log(ABC); log(window.ABC);</script>\n"
+                + "</head><body></body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A function declared by one script uses a global const declared later by another script.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("one")
+    public void globalConstUsedByFunctionOfOtherScript() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "<script>function f() { return ABC; }</script>\n"
+                + "<script>const ABC = 'one'; log(f());</script>\n"
+                + "</head><body></body></html>";
 
         loadPageVerifyTitle2(html);
     }

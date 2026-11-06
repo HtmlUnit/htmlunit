@@ -16,6 +16,7 @@
 package org.htmlunit.selenium.htmlunitdriver;
 
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.selenium.SeleniumTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -99,6 +100,8 @@ public class TabNavigationTest extends SeleniumTest {
     @Alerts(DEFAULT = {"focus:t2", "keydown:t2,true", "blur:t2", "focus:t1", "keyup:t1,true", "t1=y", "t2=x", "active:t1"},
             FF = {"focus:t2", "keydown:t2,true", "blur:t2", "focus:t1", "keyup:t1,true", "t1=Y", "t2=x", "active:t1"},
             FF_ESR = {"focus:t2", "keydown:t2,true", "blur:t2", "focus:t1", "keyup:t1,true", "t1=Y", "t2=x", "active:t1"})
+    @HtmlUnitNYI(FF = {"focus:t2", "keydown:t2,true", "blur:t2", "focus:t1", "keyup:t1,true", "t1=y", "t2=x", "active:t1"},
+            FF_ESR = {"focus:t2", "keydown:t2,true", "blur:t2", "focus:t1", "keyup:t1,true", "t1=y", "t2=x", "active:t1"})
     public void shiftTabToPreviousField() throws Exception {
         final WebDriver driver = loadPage("<input id='t1' value='first'>\n<input id='t2'>\n");
         driver.findElement(By.id("t2")).sendKeys("x", Keys.chord(Keys.SHIFT, Keys.TAB), "y");

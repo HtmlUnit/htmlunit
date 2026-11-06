@@ -81,7 +81,6 @@ public class AutofocusTest extends WebDriverTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test
