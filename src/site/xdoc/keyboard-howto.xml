@@ -44,6 +44,15 @@ page.setFocusedElement(userName);]]></source>
                 You can query all tabbable elements in order using <code>HtmlPage.getTabbableElements()</code>.
             </p>
             <p>
+                Typing the Tab key (e.g. <code>htmlElement.type(KeyboardEvent.DOM_VK_TAB)</code> or as part of a
+                <code>Keyboard</code>) does the same, like in real browsers: the <code>keydown</code> event is fired
+                at the element having the focus, the focus moves to the next element in the tab order (to the previous one
+                if the shift key is pressed) and the <code>keyup</code> event is fired at the newly focused element.
+                The text of a text input getting the focus this way is selected. All following keys of the same
+                <code>Keyboard</code> are typed into the newly focused element.
+                If the <code>keydown</code> event is canceled, the focus does not move.
+            </p>
+            <p>
                 To assert that every tabbable element on a page has an explicit <code>tabindex</code> attribute set,
                 use <code>WebAssert.assertAllTabIndexAttributesSet(page)</code>.
             </p>

@@ -8,6 +8,18 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                HtmlPage.getTabbableElements(): hidden inputs are not tabbable.
+            </action>
+            <action type="fix" dev="rbri">
+                Typing the tab key on the last (shift+tab on the first) element moves the focus out of the page
+                like in real browsers; the following keys are not typed into any element.
+            </action>
+            <action type="fix" dev="rbri">
+                Typing the tab key moves the focus to the next (with shift to the previous) element, like in real browsers;
+                the keyup event is fired at the newly focused element, the text of a focused text input is selected
+                and the following keys are typed into the newly focused element.
+            </action>
             <action type="fix" dev="Vidya m">
                 XMLHttpRequest: asynchronous requests to file: urls no longer load the file if
                 WebClientOptions.isFileProtocolForXMLHttpRequestsAllowed() is false.

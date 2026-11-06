@@ -700,8 +700,6 @@ public abstract class HtmlElement extends DomElement {
      * @throws IOException if an IO error occurs
      */
     public Page type(final Keyboard keyboard) throws IOException {
-        Page page = null;
-
         final List<Keyboard.KeyAction> keys = keyboard.getKeys();
 
         if (keyboard.isStartAtEnd()) {
@@ -723,6 +721,21 @@ public abstract class HtmlElement extends DomElement {
             altPressed_ = pressedModifiers[2];
             metaPressed_ = pressedModifiers[3];
         }
+
+        return type(keys);
+    }
+
+    /**
+     * Simulates typing the specified key actions while this element has focus.
+     * If the tab key moves the focus to another element, the remaining actions are
+     * typed into that element (like in the browsers).
+     *
+     * @param keys the key actions
+     * @return the page that occupies this window after typing
+     * @throws IOException if an IO error occurs
+     */
+    private Page type(final List<Keyboard.KeyAction> keys) throws IOException {
+        Page page = null;
 
         final int size = keys.size();
         int i = 0;
@@ -756,9 +769,60 @@ public abstract class HtmlElement extends DomElement {
                     page = type(key, Keyboard.DEFAULT_LOCATION, false, false, true, lastType);
                 }
             }
+
+            // the tab key has moved the focus; the remaining keys are typed into the focused element
+            if (i < size && isTabKeyDown(keyAction) && getPage() instanceof HtmlPage htmlPage) {
+                final DomElement focusedElement = htmlPage.getFocusedElement();
+                if (focusedElement == null) {
+                    // the focus has left the page (moved to the browser ui); the remaining keys are lost
+                    return page;
+                }
+                if (focusedElement instanceof HtmlElement focused && focused != this) {
+                    focused.shiftPressed_ = shiftPressed_;
+                    focused.ctrlPressed_ = ctrlPressed_;
+                    focused.altPressed_ = altPressed_;
+                    focused.metaPressed_ = metaPressed_;
+                    return focused.type(keys.subList(i, size));
+                }
+            }
         }
 
         return page;
+    }
+
+    private static boolean isTabKeyDown(final Keyboard.KeyAction keyAction) {
+        if (keyAction instanceof Keyboard.KeyCodeAction keyCodeAction) {
+            return keyCodeAction.keyCode() == KeyboardEvent.DOM_VK_TAB && keyCodeAction.pressed();
+        }
+        if (keyAction instanceof Keyboard.KeyCodeKeyAction keyCodeKeyAction) {
+            return keyCodeKeyAction.keyCode() == KeyboardEvent.DOM_VK_TAB && keyCodeKeyAction.down();
+        }
+        return false;
+    }
+
+    /**
+     * Moves the focus to the next (or with shift to the previous) element in the tab order,
+     * like the tab key does in the browsers. The whole text of a text input getting the focus is selected.
+     * Tab from the last (shift+tab from the first) element moves the focus out of the page
+     * (in the browsers to the browser ui); no element has the focus afterwards.
+     *
+     * @param page the page
+     * @return the element that has the focus now or {@code null}
+     */
+    private HtmlElement moveFocusByTab(final HtmlPage page) {
+        final List<HtmlElement> tabbableElements = page.getTabbableElements();
+        final int index = tabbableElements.indexOf(this);
+        if (index != -1 && index == (shiftPressed_ ? 0 : tabbableElements.size() - 1)) {
+            page.setFocusedElement(null);
+            return null;
+        }
+
+        final HtmlElement focused = shiftPressed_ ? page.tabToPreviousElement() : page.tabToNextElement();
+        if (focused instanceof HtmlInput && focused instanceof SelectableTextInput textInput) {
+            textInput.setSelectionStart(0);
+            textInput.setSelectionEnd(textInput.getText().length());
+        }
+        return focused;
     }
 
     /**
@@ -832,9 +896,22 @@ public abstract class HtmlElement extends DomElement {
             keyPressResult = null;
         }
 
+        // the element getting the keyup event; the tab key moves the focus before
+        HtmlElement keyUpTarget = this;
         if (keyDown != null && !keyDown.isAborted(keyDownResult)
                 && (keyPress == null || !keyPress.isAborted(keyPressResult))) {
-            doType(keyCode, lastType);
+            if (keyCode == KeyboardEvent.DOM_VK_TAB) {
+                final HtmlElement focused = moveFocusByTab(page);
+                if (focused != null) {
+                    keyUpTarget = focused;
+                }
+                else if (page.getBody() != null) {
+                    keyUpTarget = page.getBody();
+                }
+            }
+            else {
+                doType(keyCode, lastType);
+            }
         }
 
         if (isTextChanged(textBefore)) {
@@ -842,9 +919,9 @@ public abstract class HtmlElement extends DomElement {
         }
 
         if (fireKeyUp) {
-            final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, keyCode, location,
+            final Event keyUp = new KeyboardEvent(keyUpTarget, Event.TYPE_KEY_UP, keyCode, location,
                     shiftPressed_, ctrlPressed_, altPressed_, metaPressed_);
-            fireEvent(keyUp);
+            keyUpTarget.fireEvent(keyUp);
         }
 
         return page.getWebClient().getCurrentWindow().getEnclosedPage();

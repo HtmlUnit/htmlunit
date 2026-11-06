@@ -819,6 +819,7 @@ public class HtmlPage extends SgmlPage {
      *   stream.</li>
      *   <li>Elements that are disabled do not participate in the tabbing
      *   order.</li>
+     *   <li>Hidden inputs do not participate in the tabbing order.</li>
      * </ol>
      * <p>
      * Additionally, the value of tabindex must be within 0 and 32767. Any
@@ -835,7 +836,8 @@ public class HtmlPage extends SgmlPage {
         final List<HtmlElement> tabbableElements = new ArrayList<>();
         for (final HtmlElement element : getHtmlElementDescendants()) {
             final String tagName = element.getTagName();
-            if (TABBABLE_TAGS.contains(tagName)) {
+            // hidden inputs are never tabbable
+            if (TABBABLE_TAGS.contains(tagName) && !(element instanceof HtmlHiddenInput)) {
                 final boolean disabled = element.isDisabledElementAndDisabled();
                 if (!disabled && !HtmlElement.TAB_INDEX_OUT_OF_BOUNDS.equals(element.getTabIndex())) {
                     tabbableElements.add(element);

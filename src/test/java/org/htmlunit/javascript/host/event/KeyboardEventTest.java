@@ -886,11 +886,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("keydown:Tab,Tab,9,0,9,0")
-    // in real browsers the keyup event is fired at the newly focused element
-    @HtmlUnitNYI(CHROME = {"keydown:Tab,Tab,9,0,9,0", "keyup:Tab,Tab,9,0,9,0"},
-            EDGE = {"keydown:Tab,Tab,9,0,9,0", "keyup:Tab,Tab,9,0,9,0"},
-            FF = {"keydown:Tab,Tab,9,0,9,0", "keyup:Tab,Tab,9,0,9,0"},
-            FF_ESR = {"keydown:Tab,Tab,9,0,9,0", "keyup:Tab,Tab,9,0,9,0"})
     public void specialKeysTab() throws Exception {
         keyEvents("input", "abc", false, Keys.TAB);
     }
