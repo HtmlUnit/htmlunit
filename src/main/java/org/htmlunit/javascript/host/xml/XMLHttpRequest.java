@@ -998,13 +998,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                 fireJavascriptEvent(Event.TYPE_ERROR);
                 fireJavascriptEvent(Event.TYPE_LOAD_END);
+                return;
             }
-            else {
-                throw JavaScriptEngine.asJavaScriptException(
-                        window,
-                        "Not allowed to load local resource: " + webRequest_.getUrl(),
-                        DOMException.NETWORK_ERR);
-            }
+
+            throw JavaScriptEngine.asJavaScriptException(
+                    window,
+                    "Not allowed to load local resource: " + webRequest_.getUrl(),
+                    DOMException.NETWORK_ERR);
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
