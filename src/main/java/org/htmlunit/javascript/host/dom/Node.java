@@ -265,37 +265,52 @@ public class Node extends EventTarget {
      */
     @JsxFunction
     public Node appendChild(final Object childObject) {
-        if (childObject instanceof Node childNode) {
+        final Node childNode = toNode(childObject, "appendChild", 1);
 
-            // is the node allowed here?
-            if (!isNodeInsertable(childNode)) {
-                throw JavaScriptEngine.asJavaScriptException(
-                        getWindow(),
-                        "Node cannot be inserted at the specified point in the hierarchy",
-                        DOMException.HIERARCHY_REQUEST_ERR);
-            }
-
-            // Get XML node for the DOM node passed in
-            final DomNode childDomNode = childNode.getDomNodeOrDie();
-
-            // Get the parent XML node that the child should be added to.
-            final DomNode parentNode = getDomNodeOrDie();
-
-            // Append the child to the parent node
-            try {
-                parentNode.appendChild(childDomNode);
-            }
-            catch (final org.w3c.dom.DOMException e) {
-                throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code);
-            }
-
-            initInlineFrameIfNeeded(childDomNode);
-            for (final HtmlElement htmlElement : childDomNode.getHtmlElementDescendants()) {
-                initInlineFrameIfNeeded(htmlElement);
-            }
-            return childNode;
+        // is the node allowed here?
+        if (!isNodeInsertable(childNode)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Node cannot be inserted at the specified point in the hierarchy",
+                    DOMException.HIERARCHY_REQUEST_ERR);
         }
-        return null;
+
+        // Get XML node for the DOM node passed in
+        final DomNode childDomNode = childNode.getDomNodeOrDie();
+
+        // Get the parent XML node that the child should be added to.
+        final DomNode parentNode = getDomNodeOrDie();
+
+        // Append the child to the parent node
+        try {
+            parentNode.appendChild(childDomNode);
+        }
+        catch (final org.w3c.dom.DOMException e) {
+            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code);
+        }
+
+        initInlineFrameIfNeeded(childDomNode);
+        for (final HtmlElement htmlElement : childDomNode.getHtmlElementDescendants()) {
+            initInlineFrameIfNeeded(htmlElement);
+        }
+        return childNode;
+    }
+
+    /**
+     * Checks that the given argument of a DOM function is a node; like in the browsers,
+     * a {@code TypeError} is thrown otherwise.
+     *
+     * @param arg the argument
+     * @param functionName the name of the function (for the error message)
+     * @param index the (1-based) index of the argument (for the error message)
+     * @return the node
+     */
+    private static Node toNode(final Object arg, final String functionName, final int index) {
+        if (arg instanceof Node node) {
+            return node;
+        }
+        throw JavaScriptEngine.typeError("Failed to execute '" + functionName + "' on 'Node': parameter "
+                + index + " is not of type 'Node'.");
     }
 
     /**
@@ -348,57 +363,55 @@ public class Node extends EventTarget {
             refChildObject = JavaScriptEngine.UNDEFINED;
         }
 
-        if (newChildObject instanceof Node newChild) {
+        final Node newChild = toNode(newChildObject, "insertBefore", 1);
 
-            // is the node allowed here?
-            if (!isNodeInsertable(newChild)) {
-                throw JavaScriptEngine.asJavaScriptException(
-                        getWindow(),
-                        "Node cannot be inserted at the specified point in the hierarchy",
-                        DOMException.HIERARCHY_REQUEST_ERR);
-            }
+        // is the node allowed here?
+        if (!isNodeInsertable(newChild)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Node cannot be inserted at the specified point in the hierarchy",
+                    DOMException.HIERARCHY_REQUEST_ERR);
+        }
 
-            final DomNode newChildNode = newChild.getDomNodeOrDie();
-            if (newChildNode instanceof DomDocumentFragment fragment) {
-                for (final DomNode child : fragment.getChildren()) {
-                    if (!isNodeInsertable(child.getScriptableObject())) {
-                        throw JavaScriptEngine.asJavaScriptException(
-                                getWindow(),
-                                "Node cannot be inserted at the specified point in the hierarchy",
-                                DOMException.HIERARCHY_REQUEST_ERR);
-                    }
+        final DomNode newChildNode = newChild.getDomNodeOrDie();
+        if (newChildNode instanceof DomDocumentFragment fragment) {
+            for (final DomNode child : fragment.getChildren()) {
+                if (!isNodeInsertable(child.getScriptableObject())) {
+                    throw JavaScriptEngine.asJavaScriptException(
+                            getWindow(),
+                            "Node cannot be inserted at the specified point in the hierarchy",
+                            DOMException.HIERARCHY_REQUEST_ERR);
                 }
             }
+        }
 
-            // extract refChild
-            final DomNode refChildNode;
-            if (JavaScriptEngine.isUndefined(refChildObject)) {
-                if (args.length == 2) {
-                    refChildNode = null;
-                }
-                else {
-                    throw JavaScriptEngine.typeError(
-                            "Failed to execute 'insertBefore' on 'Node': 2 arguments required, but only 1 present.");
-                }
-            }
-            else if (refChildObject == null) {
+        // extract refChild
+        final DomNode refChildNode;
+        if (JavaScriptEngine.isUndefined(refChildObject)) {
+            if (args.length == 2) {
                 refChildNode = null;
             }
             else {
-                refChildNode = ((Node) refChildObject).getDomNodeOrDie();
+                throw JavaScriptEngine.typeError(
+                        "Failed to execute 'insertBefore' on 'Node': 2 arguments required, but only 1 present.");
             }
-
-            final DomNode domNode = getDomNodeOrDie();
-
-            try {
-                domNode.insertBefore(newChildNode, refChildNode);
-            }
-            catch (final org.w3c.dom.DOMException e) {
-                throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), DOMException.NOT_FOUND_ERR);
-            }
-            return newChild;
         }
-        return null;
+        else if (refChildObject == null) {
+            refChildNode = null;
+        }
+        else {
+            refChildNode = toNode(refChildObject, "insertBefore", 2).getDomNodeOrDie();
+        }
+
+        final DomNode domNode = getDomNodeOrDie();
+
+        try {
+            domNode.insertBefore(newChildNode, refChildNode);
+        }
+        catch (final org.w3c.dom.DOMException e) {
+            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), DOMException.NOT_FOUND_ERR);
+        }
+        return newChild;
     }
 
     /**
@@ -429,9 +442,7 @@ public class Node extends EventTarget {
      */
     @JsxFunction
     public Node removeChild(final Object childObject) {
-        if (!(childObject instanceof Node childObjectNode)) {
-            return null;
-        }
+        final Node childObjectNode = toNode(childObject, "removeChild", 1);
 
         // Get XML node for the DOM node passed in
         final DomNode childDomNode = childObjectNode.getDomNodeOrDie();
@@ -456,6 +467,15 @@ public class Node extends EventTarget {
      */
     @JsxFunction
     public Node replaceChild(final Object newChildObject, final Object oldChildObject) {
+        toNode(newChildObject, "replaceChild", 1);
+        final Node oldChild = toNode(oldChildObject, "replaceChild", 2);
+        if (oldChild.getDomNodeOrDie().getParentNode() != getDomNodeOrDie()) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Failed to execute 'replaceChild' on 'Node': The node to be replaced is not a child of this node.",
+                    DOMException.NOT_FOUND_ERR);
+        }
+
         if (newChildObject instanceof DocumentFragment fragment) {
             Node firstNode = null;
 

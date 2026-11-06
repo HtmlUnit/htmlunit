@@ -1882,4 +1882,119 @@ public class NodeTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * Calls appendChild() with arguments that are not nodes.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string:TypeError,true", "object:TypeError,true",
+             "null:TypeError,true", "undefined:TypeError,true",
+             "number:TypeError,true", "array:TypeError,true",
+             "window:TypeError,true", "document:HierarchyRequestError,false",
+             "noArg:TypeError,true§1"})
+    public void appendChild_invalidArguments() throws Exception {
+        invalidArguments(
+                "check('string', function() { return d.appendChild('abc'); });\n"
+                + "check('object', function() { return d.appendChild({}); });\n"
+                + "check('null', function() { return d.appendChild(null); });\n"
+                + "check('undefined', function() { return d.appendChild(undefined); });\n"
+                + "check('number', function() { return d.appendChild(42); });\n"
+                + "check('array', function() { return d.appendChild([document.createElement('p')]); });\n"
+                + "check('window', function() { return d.appendChild(window); });\n"
+                + "check('document', function() { return d.appendChild(document); });\n"
+                + "check('noArg', function() { return d.appendChild(); });\n");
+    }
+
+    /**
+     * Calls insertBefore() with arguments that are not nodes.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string:TypeError,true", "object:TypeError,true",
+             "null:TypeError,true", "undefined:TypeError,true",
+             "number:TypeError,true", "refString:TypeError,true",
+             "refObject:TypeError,true", "refNotChild:NotFoundError,false", "1"})
+    public void insertBefore_invalidArguments() throws Exception {
+        invalidArguments(
+                "check('string', function() { return d.insertBefore('abc', null); });\n"
+                + "check('object', function() { return d.insertBefore({}, null); });\n"
+                + "check('null', function() { return d.insertBefore(null, null); });\n"
+                + "check('undefined', function() { return d.insertBefore(undefined, c); });\n"
+                + "check('number', function() { return d.insertBefore(42, c); });\n"
+                + "check('refString', function() { return d.insertBefore(document.createElement('p'), 'abc'); });\n"
+                + "check('refObject', function() { return d.insertBefore(document.createElement('p'), {}); });\n"
+                + "check('refNotChild', function() { "
+                        + "return d.insertBefore(document.createElement('p'), document.body); });\n");
+    }
+
+    /**
+     * Calls replaceChild() with arguments that are not nodes.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string:TypeError,true", "object:TypeError,true", "null:TypeError,true",
+             "oldString:TypeError,true", "oldNull:TypeError,true", "oldNotChild:NotFoundError,false",
+             "oneArg:TypeError,true", "noArg:TypeError,true", "1"})
+    public void replaceChild_invalidArguments() throws Exception {
+        invalidArguments(
+                "check('string', function() { return d.replaceChild('abc', c); });\n"
+                + "check('object', function() { return d.replaceChild({}, c); });\n"
+                + "check('null', function() { return d.replaceChild(null, c); });\n"
+                + "check('oldString', function() { return d.replaceChild(document.createElement('p'), 'abc'); });\n"
+                + "check('oldNull', function() { return d.replaceChild(document.createElement('p'), null); });\n"
+                + "check('oldNotChild', function() { "
+                        + "return d.replaceChild(document.createElement('p'), document.body); });\n"
+                + "check('oneArg', function() { return d.replaceChild(document.createElement('p')); });\n"
+                + "check('noArg', function() { return d.replaceChild(); });\n");
+    }
+
+    /**
+     * Calls removeChild() with arguments that are not nodes.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string:TypeError,true", "object:TypeError,true", "null:TypeError,true",
+             "undefined:TypeError,true", "notChild:NotFoundError,false", "noArg:TypeError,true", "1"})
+    public void removeChild_invalidArguments() throws Exception {
+        invalidArguments(
+                "check('string', function() { return d.removeChild('abc'); });\n"
+                + "check('object', function() { return d.removeChild({}); });\n"
+                + "check('null', function() { return d.removeChild(null); });\n"
+                + "check('undefined', function() { return d.removeChild(undefined); });\n"
+                + "check('notChild', function() { return d.removeChild(document.body); });\n"
+                + "check('noArg', function() { return d.removeChild(); });\n");
+    }
+
+    /**
+     * Runs the given checks for a div (id 'd') with one child (id 'c'); every check
+     * logs the result or the name of the exception (and whether it is a TypeError),
+     * at the end the number of children of the div is logged.
+     */
+    private void invalidArguments(final String checks) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
+            + "<div id='d'><span id='c'></span></div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var d = document.getElementById('d');\n"
+            + "var c = document.getElementById('c');\n"
+            + "function check(label, f) {\n"
+            + "  try {\n"
+            + "    log(label + ':' + f());\n"
+            + "  } catch(e) {\n"
+            + "    log(label + ':' + e.name + ',' + (e instanceof TypeError));\n"
+            + "  }\n"
+            + "}\n"
+            + checks
+            + "log(d.childNodes.length);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -9,6 +9,10 @@
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Node.appendChild(), insertBefore(), replaceChild() and removeChild() throw a TypeError if an argument is not a node;
+                replaceChild() throws a NotFoundError if the node to be replaced is not a child.
+            </action>
+            <action type="fix" dev="rbri">
                 HtmlPage.getTabbableElements(): hidden inputs are not tabbable.
             </action>
             <action type="fix" dev="rbri">
