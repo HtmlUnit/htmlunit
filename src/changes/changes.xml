@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="Vidya m">
+                XMLHttpRequest: asynchronous requests to file: urls no longer load the file if
+                WebClientOptions.isFileProtocolForXMLHttpRequestsAllowed() is false.
+            </action>
             <action type="fix" dev="rbri" issue="#722">
                 KeyboardEvent: key, code and location are now correct for special keys (arrows, navigation,
                 function keys, numpad, modifiers, ...) and the code is correct for digits, space and punctuation.
