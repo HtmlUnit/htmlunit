@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri" issue="#607">
+                Support for the autofocus attribute; after the page is loaded the first focusable element
+                with the autofocus attribute gets the focus.
+            </action>
             <action type="fix" dev="rbri">
                 Node.appendChild(), insertBefore(), replaceChild() and removeChild() throw a TypeError if an argument is not a node;
                 replaceChild() throws a NotFoundError if the node to be replaced is not a child.

@@ -78,6 +78,8 @@ import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
+import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
+import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import org.htmlunit.javascript.host.event.Event;
@@ -176,6 +178,14 @@ public class HtmlPage extends SgmlPage {
     private ElementFromPointHandler elementFromPointHandler_;
     private DomElement elementWithFocus_;
     private List<SimpleRange> selectionRanges_ = new ArrayList<>(3);
+
+    // the elements with an autofocus attribute inserted into this page (in insertion order)
+    private List<HtmlElement> autofocusCandidates_;
+    // true if the autofocus was already processed; the autofocus is only used once per page
+    private boolean autofocusProcessed_;
+    // true if the page is loaded; candidates inserted later are processed by a job
+    private boolean autofocusAfterLoad_;
+    private boolean autofocusJobScheduled_;
 
     private transient ComputedStylesCache computedStylesCache_;
 
@@ -328,6 +338,10 @@ public class HtmlPage extends SgmlPage {
                 }
             }
         }
+
+        // like in the browsers the autofocus is processed after the load event
+        autofocusAfterLoad_ = true;
+        processAutofocusCandidates();
 
         try {
             while (!afterLoadActions_.isEmpty()) {
@@ -1911,7 +1925,100 @@ public class HtmlPage extends SgmlPage {
         if (node instanceof DomDocumentType doctype && node.getParentNode() == this) {
             setDocumentType(doctype);
         }
+
+        if (!autofocusProcessed_ && node instanceof HtmlElement element) {
+            addAutofocusCandidates(element);
+        }
+
         node.onAddedToPage();
+    }
+
+    /**
+     * Adds the given element and all its descendants having an {@code autofocus} attribute
+     * to the list of autofocus candidates.
+     *
+     * @param element the element inserted into this page
+     */
+    private void addAutofocusCandidates(final HtmlElement element) {
+        boolean added = addAutofocusCandidate(element);
+        if (element.getFirstChild() != null) {
+            for (final HtmlElement descendant : element.getHtmlElementDescendants()) {
+                added = addAutofocusCandidate(descendant) || added;
+            }
+        }
+
+        if (added && autofocusAfterLoad_) {
+            scheduleAutofocusProcessing();
+        }
+    }
+
+    private boolean addAutofocusCandidate(final HtmlElement element) {
+        if (!element.hasAttribute("autofocus")) {
+            return false;
+        }
+
+        if (autofocusCandidates_ == null) {
+            autofocusCandidates_ = new ArrayList<>();
+        }
+        else if (autofocusCandidates_.contains(element)) {
+            return false;
+        }
+        autofocusCandidates_.add(element);
+        return true;
+    }
+
+    /**
+     * Like in the browsers, the candidates inserted after the page was loaded are not
+     * processed immediately but a bit later.
+     */
+    private void scheduleAutofocusProcessing() {
+        if (autofocusJobScheduled_) {
+            return;
+        }
+
+        final WebWindow window = getEnclosingWindow();
+        if (window == null || !getWebClient().isJavaScriptEnabled()) {
+            processAutofocusCandidates();
+            return;
+        }
+
+        autofocusJobScheduled_ = true;
+        final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().createJavaScriptJob(0, null,
+                () -> {
+                    autofocusJobScheduled_ = false;
+                    processAutofocusCandidates();
+                });
+        window.getJobManager().addJob(job, this);
+    }
+
+    /**
+     * Focuses the first focusable autofocus candidate, if no other element has the focus.
+     * After this, the autofocus is never used again for this page.
+     */
+    private void processAutofocusCandidates() {
+        if (autofocusProcessed_ || autofocusCandidates_ == null) {
+            return;
+        }
+
+        // an element focused already (e.g. by a script) wins
+        if (elementWithFocus_ != null) {
+            autofocusCandidates_ = null;
+            autofocusProcessed_ = true;
+            return;
+        }
+
+        while (autofocusCandidates_ != null && !autofocusCandidates_.isEmpty()) {
+            final HtmlElement candidate = autofocusCandidates_.remove(0);
+            if (candidate.getPage() != this || !candidate.isAttachedToPage()) {
+                continue;
+            }
+
+            candidate.focus();
+            if (elementWithFocus_ == candidate) {
+                autofocusCandidates_ = null;
+                autofocusProcessed_ = true;
+            }
+        }
     }
 
     /**
@@ -2148,6 +2255,9 @@ public class HtmlPage extends SgmlPage {
     protected HtmlPage clone() {
         final HtmlPage result = (HtmlPage) super.clone();
         result.elementWithFocus_ = null;
+        result.autofocusCandidates_ = null;
+        result.autofocusProcessed_ = true;
+        result.autofocusJobScheduled_ = false;
 
         result.idMap_ = new ConcurrentHashMap<>();
         result.nameMap_ = new ConcurrentHashMap<>();

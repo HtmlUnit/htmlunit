@@ -238,4 +238,39 @@ public class HtmlPage5Test extends SimpleWebTestCase {
         page.pressAccessKey('1');
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
+
+    /**
+     * Issue #607: the element with the autofocus attribute is the focused element.
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void autofocusFocusedElement() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "  <input id='i1'>\n"
+                + "  <input id='i2' autofocus='autofocus'>\n"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("i2", page.getFocusedElement().getId());
+    }
+
+    /**
+     * The autofocus attribute works also if JavaScript is disabled.
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void autofocusFocusedElementJavaScriptDisabled() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "  <input id='i1'>\n"
+                + "  <input id='i2' autofocus='autofocus'>\n"
+                + "</body></html>";
+
+        getWebClient().getOptions().setJavaScriptEnabled(false);
+        final HtmlPage page = loadPage(html);
+        assertEquals("i2", page.getFocusedElement().getId());
+    }
 }
