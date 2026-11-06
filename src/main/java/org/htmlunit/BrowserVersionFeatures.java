@@ -413,6 +413,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_XSLT_TRANSFORM_INDENT,
 
+    /** Typing a char while the meta key is pressed fires no keypress event and does not insert the char. */
+    @BrowserFeature({FF, FF_ESR})
+    KEYBOARD_EVENT_META_NO_KEYPRESS,
+
     /** The key codes of the ';', '=' and '-' keys are 186, 187 and 189 (instead of 59, 61 and 173). */
     @BrowserFeature({CHROME, EDGE})
     KEYBOARD_EVENT_OEM_KEY_CODES,

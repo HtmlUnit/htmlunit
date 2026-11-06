@@ -1045,11 +1045,28 @@ public class KeyboardEvent extends UIEvent {
      */
     public KeyboardEvent(final DomNode domNode, final String type, final char character,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        this(domNode, type, character, shiftKey, ctrlKey, altKey, false);
+    }
+
+    /**
+     * Creates a new keyboard event instance for a character key.
+     *
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
+     * @param character the character associated with the event
+     * @param shiftKey {@code true} if SHIFT is pressed
+     * @param ctrlKey {@code true} if CTRL is pressed
+     * @param altKey {@code true} if ALT is pressed
+     * @param metaKey {@code true} if META is pressed
+     */
+    public KeyboardEvent(final DomNode domNode, final String type, final char character,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final boolean metaKey) {
         super(domNode, type);
 
         setShiftKey(shiftKey);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
+        setMetaKey(metaKey);
 
         if ('\n' == character) {
             setKeyCode(DOM_VK_RETURN);
@@ -1089,6 +1106,24 @@ public class KeyboardEvent extends UIEvent {
      */
     public KeyboardEvent(final DomNode domNode, final String type, final int keyCode,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        this(domNode, type, keyCode, -1, shiftKey, ctrlKey, altKey, false);
+    }
+
+    /**
+     * Creates a new keyboard event instance for a key code.
+     *
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
+     * @param keyCode the key code associated with the event
+     * @param location the location of the key (e.g. {@link #DOM_KEY_LOCATION_RIGHT} for the right
+     *        shift key) or a negative value for the default location of the key code
+     * @param shiftKey {@code true} if SHIFT is pressed
+     * @param ctrlKey {@code true} if CTRL is pressed
+     * @param altKey {@code true} if ALT is pressed
+     * @param metaKey {@code true} if META is pressed
+     */
+    public KeyboardEvent(final DomNode domNode, final String type, final int keyCode, final int location,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final boolean metaKey) {
         super(domNode, type);
 
         if (isAmbiguousKeyCode(keyCode)) {
@@ -1121,6 +1156,18 @@ public class KeyboardEvent extends UIEvent {
             key_ = shiftKey ? info.shiftedKey() : info.key();
             code_ = info.code();
             location_ = info.location();
+        }
+        setMetaKey(metaKey);
+
+        if (location >= 0 && location != location_) {
+            location_ = location;
+            // e.g. ShiftLeft -> ShiftRight
+            if (location == DOM_KEY_LOCATION_RIGHT && code_.endsWith("Left")) {
+                code_ = code_.substring(0, code_.length() - "Left".length()) + "Right";
+            }
+            else if (location == DOM_KEY_LOCATION_LEFT && code_.endsWith("Right")) {
+                code_ = code_.substring(0, code_.length() - "Right".length()) + "Left";
+            }
         }
     }
 

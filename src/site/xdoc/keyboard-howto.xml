@@ -61,7 +61,7 @@ page.setFocusedElement(userName);]]></source>
                 To send special keys, use <code>htmlElement.type(int)</code> with constants such as <code>KeyboardEvent.DOM_VK_PAGE_DOWN</code>.
             </p>
             <p>
-                To simulate typing while holding modifier keys (Shift/Ctrl/Alt), use the <code>Keyboard</code> class.
+                To simulate typing while holding modifier keys (Shift/Ctrl/Alt/Meta), use the <code>Keyboard</code> class.
                 For example, to simulate Ctrl+C to copy content to the clipboard:
             </p>
             <source><![CDATA[final HtmlInput input = (HtmlInput) page.getElementById("i1");
@@ -71,6 +71,105 @@ kb.press(KeyboardEvent.DOM_VK_CONTROL);
 kb.type('c');
 kb.release(KeyboardEvent.DOM_VK_CONTROL);
 input.type(kb);]]></source>
+
+            <subsection name="Modifier Keys" id="modifier_keys">
+                <p>
+                    The modifier keys are <code>KeyboardEvent.DOM_VK_SHIFT</code>, <code>DOM_VK_CONTROL</code>,
+                    <code>DOM_VK_ALT</code> and <code>DOM_VK_META</code>.
+                    <code>Keyboard.press(int)</code> presses a modifier until it is released by
+                    <code>Keyboard.release(int)</code>; all key events fired in between have the corresponding
+                    <code>shiftKey</code>, <code>ctrlKey</code>, <code>altKey</code> or <code>metaKey</code>
+                    property set.
+                </p>
+                <p>
+                    Like in real browsers, a character typed while the control key is pressed fires no
+                    <code>keypress</code> event and is not inserted into the text; only the shortcuts
+                    Ctrl+A (select all), Ctrl+C (copy), Ctrl+X (cut) and Ctrl+V (paste) are processed.
+                    When simulating Firefox, the same is true for the meta key.
+                </p>
+            </subsection>
+
+            <subsection name="Pressing and Releasing Single Keys" id="key_down_up">
+                <p>
+                    <code>Keyboard.type(char)</code> and <code>Keyboard.press(int)</code> for a key that is not a modifier
+                    simulate a complete keystroke (<code>keydown</code>, <code>keypress</code> if the key produces a character,
+                    <code>input</code> if the text was changed, <code>keyup</code>).
+                </p>
+                <p>
+                    To hold a key down while other keys are typed, use <code>keyDown()</code> and <code>keyUp()</code>.
+                    <code>keyDown()</code> fires the <code>keydown</code> event (and for a character also <code>keypress</code>,
+                    types the character and fires the <code>input</code> event); <code>keyUp()</code> fires only the
+                    <code>keyup</code> event:
+                </p>
+                <source><![CDATA[final Keyboard kb = new Keyboard();
+
+// press 'a' and 'b' and release them in the same order:
+// keydown a, keypress a, input, keydown b, keypress b, input, keyup a, keyup b
+kb.keyDown('a');
+kb.keyDown('b');
+kb.keyUp('a');
+kb.keyUp('b');
+
+// hold the arrow left key while typing 'x'
+kb.keyDown(KeyboardEvent.DOM_VK_LEFT);
+kb.type('x');
+kb.keyUp(KeyboardEvent.DOM_VK_LEFT);
+
+input.type(kb);]]></source>
+            </subsection>
+
+            <subsection name="Left and Right Keys" id="key_location">
+                <p>
+                    Some keys are available on both sides of the keyboard. By default, HtmlUnit uses the left one
+                    (e.g. <code>code</code> is <code>ShiftLeft</code> and <code>location</code> is
+                    <code>KeyboardEvent.DOM_KEY_LOCATION_LEFT</code>). To simulate the right one, pass the location
+                    to <code>keyDown(int, int)</code> and <code>keyUp(int, int)</code>:
+                </p>
+                <source><![CDATA[final Keyboard kb = new Keyboard();
+
+// the right shift key: code is 'ShiftRight', location is 2
+kb.keyDown(KeyboardEvent.DOM_VK_SHIFT, KeyboardEvent.DOM_KEY_LOCATION_RIGHT);
+kb.type('A');
+kb.keyUp(KeyboardEvent.DOM_VK_SHIFT, KeyboardEvent.DOM_KEY_LOCATION_RIGHT);
+
+input.type(kb);]]></source>
+                <p>
+                    <code>Keyboard.DEFAULT_LOCATION</code> selects the default location of the key code.
+                </p>
+            </subsection>
+
+            <subsection name="Already Pressed Modifiers" id="pressed_modifiers">
+                <p>
+                    If a <code>Keyboard</code> continues a key sequence started by another one (e.g. the shift key
+                    was pressed by a previous <code>Keyboard</code> and is still held), use
+                    <code>setPressedModifiers(shift, ctrl, alt, meta)</code>. These modifiers are treated as pressed
+                    without firing <code>keydown</code> events for them again:
+                </p>
+                <source><![CDATA[final Keyboard kb = new Keyboard();
+
+// shift is still pressed
+kb.setPressedModifiers(true, false, false, false);
+kb.type('B');
+kb.release(KeyboardEvent.DOM_VK_SHIFT);
+
+input.type(kb);]]></source>
+            </subsection>
+
+            <subsection name="Key and Input Events" id="key_events">
+                <p>
+                    The keyboard events fired by HtmlUnit provide the properties
+                    <code>key</code> (e.g. <code>ArrowUp</code>, <code>Enter</code> or <code>a</code>),
+                    <code>code</code> (e.g. <code>ArrowUp</code>, <code>Enter</code> or <code>KeyA</code>),
+                    <code>keyCode</code>, <code>which</code> and <code>location</code>.
+                    The current state of the modifiers is also available using <code>getModifierState()</code>.
+                </p>
+                <p>
+                    The <code>input</code> event is only fired if typing has changed the text. It is an
+                    <code>InputEvent</code> providing <code>inputType</code> (e.g. <code>insertText</code>,
+                    <code>insertLineBreak</code>, <code>deleteContentBackward</code> or <code>insertFromPaste</code>)
+                    and <code>data</code> (the inserted text).
+                </p>
+            </subsection>
         </section>
 
         <section name="Clipboard" id="clipboard">

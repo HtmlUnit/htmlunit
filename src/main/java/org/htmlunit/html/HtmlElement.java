@@ -15,6 +15,7 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
+import static org.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_META_NO_KEYPRESS;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
 import static org.htmlunit.css.CssStyleSheet.STATIC;
@@ -162,6 +163,7 @@ public abstract class HtmlElement extends DomElement {
     private boolean shiftPressed_;
     private boolean ctrlPressed_;
     private boolean altPressed_;
+    private boolean metaPressed_;
 
     /**
      * Creates an instance.
@@ -559,6 +561,21 @@ public abstract class HtmlElement extends DomElement {
      */
     private Page type(final char c, final boolean lastType)
         throws IOException {
+        return typeChar(c, lastType, true, true);
+    }
+
+    /**
+     * Simulates typing (or only pressing or only releasing the key of) the specified character.
+     *
+     * @param c the character
+     * @param lastType is this the last character to type
+     * @param fireDown whether to press the key (keydown, keypress, typing the char and the input event)
+     * @param fireUp whether to release the key (keyup)
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
+     * @throws IOException if an IO error occurs
+     */
+    private Page typeChar(final char c, final boolean lastType, final boolean fireDown, final boolean fireUp)
+        throws IOException {
         if (isDisabledElementAndDisabled()) {
             return getPage();
         }
@@ -570,7 +587,11 @@ public abstract class HtmlElement extends DomElement {
         if (page.getFocusedElement() != this) {
             focus();
         }
-        final boolean isShiftNeeded = KeyboardEvent.isShiftNeeded(c, shiftPressed_);
+        final WebClient webClient = page.getWebClient();
+
+        // the implicit shift key is only used if the char is typed completely
+        final boolean isShiftNeeded = fireDown && fireUp && KeyboardEvent.isShiftNeeded(c, shiftPressed_);
+        final boolean shift = shiftPressed_ || isShiftNeeded;
 
         final Event shiftDown;
         final ScriptResult shiftDownResult;
@@ -584,26 +605,33 @@ public abstract class HtmlElement extends DomElement {
             shiftDownResult = null;
         }
 
-        final String textBefore = getTextForInputEvent();
+        if (fireDown) {
+            final String textBefore = getTextForInputEvent();
 
-        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c,
-                                                shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_);
-        final ScriptResult keyDownResult = fireEvent(keyDown);
+            final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c,
+                                                    shift, ctrlPressed_, altPressed_, metaPressed_);
+            final ScriptResult keyDownResult = fireEvent(keyDown);
 
-        if (!keyDown.isAborted(keyDownResult)) {
-            final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c,
-                    shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_);
-            final ScriptResult keyPressResult = fireEvent(keyPress);
+            if (!keyDown.isAborted(keyDownResult)) {
+                // like in the browsers, there is no keypress if the control key
+                // (or for some browsers the meta key) is pressed
+                boolean keyPressAborted = false;
+                if (!isTypingSuppressedByModifiers()) {
+                    final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c,
+                            shift, ctrlPressed_, altPressed_, metaPressed_);
+                    final ScriptResult keyPressResult = fireEvent(keyPress);
+                    keyPressAborted = keyPress.isAborted(keyPressResult);
+                }
 
-            if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
-                    && !keyPress.isAborted(keyPressResult)) {
-                doType(c, lastType);
+                if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
+                        && !keyPressAborted) {
+                    doType(c, lastType);
+                }
             }
-        }
 
-        final WebClient webClient = page.getWebClient();
-        if (isTextChanged(textBefore)) {
-            fireEvent(createInputEvent(c));
+            if (isTextChanged(textBefore)) {
+                fireEvent(createInputEvent(c));
+            }
         }
 
         HtmlElement eventSource = this;
@@ -611,9 +639,9 @@ public abstract class HtmlElement extends DomElement {
             eventSource = page.getBody();
         }
 
-        if (eventSource != null) {
+        if (fireUp && eventSource != null) {
             final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, c,
-                                                    shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_);
+                                                    shift, ctrlPressed_, altPressed_, metaPressed_);
             eventSource.fireEvent(keyUp);
 
             if (isShiftNeeded) {
@@ -625,7 +653,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final HtmlForm form = getEnclosingForm();
-        if (form != null && c == '\n' && isSubmittableByEnter()) {
+        if (fireDown && form != null && c == '\n' && isSubmittableByEnter()) {
             for (final DomElement descendant : form.getDomElementDescendants()) {
                 if (descendant instanceof HtmlSubmitInput) {
                     return descendant.click();
@@ -657,7 +685,7 @@ public abstract class HtmlElement extends DomElement {
      * @throws IOException in case of problems
      */
     public Page type(final int keyCode) throws IOException {
-        return type(keyCode, true, true, true, true);
+        return type(keyCode, Keyboard.DEFAULT_LOCATION, true, true, true, true);
     }
 
     /**
@@ -688,6 +716,14 @@ public abstract class HtmlElement extends DomElement {
             }
         }
 
+        final boolean[] pressedModifiers = keyboard.getPressedModifiers();
+        if (pressedModifiers != null) {
+            shiftPressed_ = pressedModifiers[0];
+            ctrlPressed_ = pressedModifiers[1];
+            altPressed_ = pressedModifiers[2];
+            metaPressed_ = pressedModifiers[3];
+        }
+
         final int size = keys.size();
         int i = 0;
         for (final Keyboard.KeyAction keyAction : keys) {
@@ -695,31 +731,29 @@ public abstract class HtmlElement extends DomElement {
             final boolean lastType = i == size;
 
             if (keyAction instanceof Keyboard.TypedChar typedChar) {
-                type(typedChar.ch(), lastType);
+                page = type(typedChar.ch(), lastType);
+            }
+            else if (keyAction instanceof Keyboard.CharKeyAction charKeyAction) {
+                page = typeChar(charKeyAction.ch(), lastType, charKeyAction.down(), !charKeyAction.down());
+            }
+            else if (keyAction instanceof Keyboard.KeyCodeKeyAction keyCodeKeyAction) {
+                final int key = keyCodeKeyAction.keyCode();
+                final boolean down = keyCodeKeyAction.down();
+                updateModifiers(key, down);
+                page = type(key, keyCodeKeyAction.location(), down, down, !down, lastType);
             }
             else if (keyAction instanceof Keyboard.KeyCodeAction keyCodeAction) {
                 final int key = keyCodeAction.keyCode();
                 final boolean pressed = keyCodeAction.pressed();
 
-                switch (key) {
-                    case KeyboardEvent.DOM_VK_SHIFT -> shiftPressed_ = pressed;
-                    case KeyboardEvent.DOM_VK_CONTROL -> ctrlPressed_ = pressed;
-                    case KeyboardEvent.DOM_VK_ALT -> altPressed_ = pressed;
-                    default -> { }
+                if (updateModifiers(key, pressed)) {
+                    page = type(key, Keyboard.DEFAULT_LOCATION, pressed, false, !pressed, lastType);
                 }
-
-                if (pressed) {
-                    if (key == KeyboardEvent.DOM_VK_SHIFT
-                            || key == KeyboardEvent.DOM_VK_CONTROL
-                            || key == KeyboardEvent.DOM_VK_ALT) {
-                        page = type(key, true, false, false, lastType);
-                    }
-                    else {
-                        page = type(key, true, true, true, lastType);
-                    }
+                else if (pressed) {
+                    page = type(key, Keyboard.DEFAULT_LOCATION, true, true, true, lastType);
                 }
                 else {
-                    page = type(key, false, false, true, lastType);
+                    page = type(key, Keyboard.DEFAULT_LOCATION, false, false, true, lastType);
                 }
             }
         }
@@ -727,7 +761,39 @@ public abstract class HtmlElement extends DomElement {
         return page;
     }
 
-    private Page type(final int keyCode,
+    /**
+     * Returns whether the pressed modifier keys suppress the keypress event and the typing of chars;
+     * this is the case if the control key (or for some browsers the meta key) is pressed.
+     *
+     * @return {@code true} if chars are not typed
+     */
+    boolean isTypingSuppressedByModifiers() {
+        return ctrlPressed_
+                || (metaPressed_ && getPage().getWebClient().getBrowserVersion()
+                                    .hasFeature(KEYBOARD_EVENT_META_NO_KEYPRESS));
+    }
+
+    /**
+     * Updates the state of the modifier keys.
+     *
+     * @param keyCode the key code of the pressed or released key
+     * @param pressed whether the key is pressed or released
+     * @return {@code true} if the key is a modifier key
+     */
+    private boolean updateModifiers(final int keyCode, final boolean pressed) {
+        switch (keyCode) {
+            case KeyboardEvent.DOM_VK_SHIFT -> shiftPressed_ = pressed;
+            case KeyboardEvent.DOM_VK_CONTROL -> ctrlPressed_ = pressed;
+            case KeyboardEvent.DOM_VK_ALT -> altPressed_ = pressed;
+            case KeyboardEvent.DOM_VK_META, KeyboardEvent.DOM_VK_WIN -> metaPressed_ = pressed;
+            default -> {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Page type(final int keyCode, final int location,
                     final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp,
                     final boolean lastType) throws IOException {
         if (isDisabledElementAndDisabled()) {
@@ -744,7 +810,8 @@ public abstract class HtmlElement extends DomElement {
         final Event keyDown;
         final ScriptResult keyDownResult;
         if (fireKeyDown) {
-            keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, shiftPressed_, ctrlPressed_, altPressed_);
+            keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, location,
+                    shiftPressed_, ctrlPressed_, altPressed_, metaPressed_);
             keyDownResult = fireEvent(keyDown);
         }
         else {
@@ -754,9 +821,9 @@ public abstract class HtmlElement extends DomElement {
 
         final Event keyPress;
         final ScriptResult keyPressResult;
-        if (fireKeyPress && KeyboardEvent.isCharacterKey(keyCode)) {
-            keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode,
-                    shiftPressed_, ctrlPressed_, altPressed_);
+        if (fireKeyPress && KeyboardEvent.isCharacterKey(keyCode) && !isTypingSuppressedByModifiers()) {
+            keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode, location,
+                    shiftPressed_, ctrlPressed_, altPressed_, metaPressed_);
 
             keyPressResult = fireEvent(keyPress);
         }
@@ -775,8 +842,8 @@ public abstract class HtmlElement extends DomElement {
         }
 
         if (fireKeyUp) {
-            final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, keyCode,
-                    shiftPressed_, ctrlPressed_, altPressed_);
+            final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, keyCode, location,
+                    shiftPressed_, ctrlPressed_, altPressed_, metaPressed_);
             fireEvent(keyUp);
         }
 
@@ -1476,6 +1543,14 @@ public abstract class HtmlElement extends DomElement {
      */
     public boolean isAltPressed() {
         return altPressed_;
+    }
+
+    /**
+     * Returns whether the {@code META} is currently pressed.
+     * @return whether the {@code META} is currently pressed
+     */
+    public boolean isMetaPressed() {
+        return metaPressed_;
     }
 
     /**

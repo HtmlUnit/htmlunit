@@ -238,10 +238,6 @@ public class TypingTest extends SeleniumTest {
 
     @Test
     @Alerts({"down: 40 up: 40", "down: 38 up: 38", "down: 37 up: 37", "down: 39 up: 39"})
-    @HtmlUnitNYI(FF = {"down: 40 press: 40 up: 40", "down: 38 press: 38 up: 38",
-                       "down: 37 press: 37 up: 37", "down: 39 press: 39 up: 39"},
-            FF_ESR = {"down: 40 press: 40 up: 40", "down: 38 press: 38 up: 38",
-                      "down: 37 press: 37 up: 37", "down: 39 press: 39 up: 39"})
     void testShouldReportKeyCodeOfArrowKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -474,8 +470,9 @@ public class TypingTest extends SeleniumTest {
     @Alerts(DEFAULT = "down: 36 up: 36 up: 16",
             FF = "down: 36 up: 36",
             FF_ESR = "down: 36 up: 36")
-    @HtmlUnitNYI(FF = "down: 36 press: 36 up: 36 up: 16",
-            FF_ESR = "down: 36 press: 36 up: 36 up: 16")
+    // geckodriver releases the modifiers immediately
+    @HtmlUnitNYI(FF = "down: 36 up: 36 up: 16",
+            FF_ESR = "down: 36 up: 36 up: 16")
     public void testChordReverseShiftHomeSelectionDeletes() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 

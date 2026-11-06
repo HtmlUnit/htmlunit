@@ -126,7 +126,8 @@ class DoTypeProcessor implements Serializable {
                 selectionStart = 0;
                 selectionEnd = newValue.length();
             }
-            else {
+            else if (!element.isTypingSuppressedByModifiers()) {
+                // like in the browsers, control (or for some browsers meta) together with a char does not type it
                 add(newValue, c, selectionStart, selectionEnd);
                 selectionStart++;
                 selectionEnd = selectionStart;
