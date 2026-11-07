@@ -153,11 +153,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            CHROME = "1",
-            EDGE = "1")
-    @HtmlUnitNYI(CHROME = "2",
-            EDGE = "2")
+    @Alerts("2")
     public void loadImageWrongType2() throws Exception {
         loadImageImportNodeHtml("src='" + URL_FIRST + "'");
     }

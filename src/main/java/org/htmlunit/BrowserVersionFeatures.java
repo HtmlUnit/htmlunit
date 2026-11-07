@@ -220,7 +220,7 @@ public enum BrowserVersionFeatures {
 
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
-    JS_CLIENTWIDTH_INPUT_TEXT_173,
+    JS_CLIENTWIDTH_INPUT_TEXT_169,
 
     /** ClientWidth for radio button and checkbox is 14. */
     @BrowserFeature({FF, FF_ESR})

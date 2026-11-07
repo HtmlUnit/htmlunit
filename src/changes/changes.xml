@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+        <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
             <action type="fix" dev="Vidya m">
                 XMLHttpRequest: the CORS preflight response is checked like in real browsers; requests with
                 credentials need the exact origin and Access-Control-Allow-Credentials, the wildcard '*' is not

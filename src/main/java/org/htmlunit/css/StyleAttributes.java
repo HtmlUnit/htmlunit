@@ -2696,7 +2696,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code positionVisibility}. */
         POSITION_VISIBILITY("positionVisibility", "position-visibility",
-                chromeAndEdge("anchors-visible"), ff("anchors-visible")),
+                chromeAndEdge("anchor-visible"), ff("anchors-visible")),
 
         /** The style property {@code position-visibility}. */
         POSITION_VISIBILITY_("position-visibility", "position-visibility",
@@ -3255,7 +3255,7 @@ public final class StyleAttributes implements Serializable {
         TEXT_DECORATION_COLOR_("text-decoration-color", "text-decoration-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code textDecorationInset}. */
-        TEXT_DECORATION_INSET("textDecorationInset", "text-decoration-inset", ff("0px")),
+        TEXT_DECORATION_INSET("textDecorationInset", "text-decoration-inset", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code text-decoration-inset}. */
         TEXT_DECORATION_INSET_("text-decoration-inset", "text-decoration-inset", ff("0px")),
@@ -3272,10 +3272,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code text-decoration-skip-ink}. */
         TEXT_DECORATION_SKIP_INK_("text-decoration-skip-ink", "text-decoration-skip-ink", ffAuto()),
-
-        /** The style property {@code textDecorationSkipSpaces}. */
-        TEXT_DECORATION_SKIP_SPACES("textDecorationSkipSpaces", "text-decoration-spaces-ink",
-                chrome("start end")),
 
         /** The style property {@code textDecorationStyle}. */
         TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", chromeAndEdge("solid"), ff("solid")),

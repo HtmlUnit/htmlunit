@@ -1751,7 +1751,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "173",
+    @Alerts(DEFAULT = "169",
             FF = "157",
             FF_ESR = "157")
     public void input() throws Exception {
@@ -1822,7 +1822,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "173",
+    @Alerts(DEFAULT = "169",
             FF = "157",
             FF_ESR = "157")
     public void inputPassword() throws Exception {
@@ -1865,8 +1865,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "173",
-            EDGE = "173",
+    @Alerts(DEFAULT = "169",
             FF = "157",
             FF_ESR = "157")
     public void inputSelect() throws Exception {
@@ -1896,7 +1895,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "173",
+    @Alerts(DEFAULT = "169",
             FF = "157",
             FF_ESR = "157")
     public void inputText() throws Exception {

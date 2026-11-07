@@ -1845,11 +1845,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "false", "P-256", "P-256"},
-            FF= {"true", "true", "false", "P-256", "P-256"},
-            FF_ESR = {"true", "true", "false", "P-256", "P-256"})
-    @HtmlUnitNYI(CHROME = {"true", "true", "false", "P-256", "P-256"},
-            EDGE = {"true", "true", "false", "P-256", "P-256"})
+    @Alerts({"true", "true", "false", "P-256", "P-256"})
     public void keyAlgorithmAndUsagesCachedPerKey() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -2087,11 +2083,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"32", "true", "true"},
-            FF = {"32", "true", "false"},
-            FF_ESR = {"32", "true", "false"})
-    @HtmlUnitNYI(CHROME = {"32", "true", "false"},
-            EDGE = {"32", "true", "false"})
+    @Alerts({"32", "true", "false"})
     public void verifyDetached() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
