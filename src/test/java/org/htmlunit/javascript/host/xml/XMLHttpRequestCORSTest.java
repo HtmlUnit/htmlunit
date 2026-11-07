@@ -49,6 +49,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Lai Quang Duong
+ * @author Vidya m
  */
 public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
@@ -719,6 +720,201 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         loadPage2(html, new URL(URL_FIRST, "/preflight1"), new HashMap<>(), servlets2);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "PUT null"})
+    public void preflight_put() throws Exception {
+        doPreflightTestReceived(false, "PUT", "http://localhost:" + PORT, null, "PUT", "X-PING");
+    }
+
+    /**
+     * A method that is not CORS-safelisted has to be listed in Access-Control-Allow-Methods.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_put_methodNotAllowed() throws Exception {
+        doPreflightTestReceived(false, "PUT", "http://localhost:" + PORT, null, "POST, GET, OPTIONS", "X-PING");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "PUT null"})
+    public void preflight_put_wildcardMethods() throws Exception {
+        doPreflightTestReceived(false, "PUT", "http://localhost:" + PORT, null, "*", "X-PING");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "PUT cookie=sweet"})
+    public void preflight_put_withCredentials() throws Exception {
+        doPreflightTestReceived(true, "PUT", "http://localhost:" + PORT, "true", "PUT", "X-PING");
+    }
+
+    /**
+     * The wildcard origin is not allowed for requests with credentials, the request must not be sent.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_put_withCredentials_wildcardOrigin() throws Exception {
+        doPreflightTestReceived(true, "PUT", "*", "true", "PUT", "X-PING");
+    }
+
+    /**
+     * A request with credentials needs Access-Control-Allow-Credentials in the preflight response.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_put_withCredentials_noAllowCredentials() throws Exception {
+        doPreflightTestReceived(true, "PUT", "http://localhost:" + PORT, null, "PUT", "X-PING");
+    }
+
+    /**
+     * The wildcard methods are not allowed for requests with credentials.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_put_withCredentials_wildcardMethods() throws Exception {
+        doPreflightTestReceived(true, "PUT", "http://localhost:" + PORT, "true", "*", "X-PING");
+    }
+
+    /**
+     * The wildcard headers are not allowed for requests with credentials.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_withCredentials_wildcardHeaders() throws Exception {
+        doPreflightTestReceived(true, "GET", "http://localhost:" + PORT, "true", null, "*");
+    }
+
+    /**
+     * Sends a request that needs a preflight and logs afterwards the request that
+     * reached the server ('nothing' if the request was not sent).
+     */
+    private void doPreflightTestReceived(final boolean withCredentials, final String method,
+            final String allowOrigin, final String allowCredentials,
+            final String allowMethods, final String allowHeaders) throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  try {\n"
+                + "    xhr.open('" + method + "', url, false);\n"
+                + "    xhr.withCredentials = " + withCredentials + ";\n"
+                + "    xhr.setRequestHeader('X-PING', 'ping');\n"
+                + "    xhr.send();\n"
+                + "  } catch(e) { logEx(e) }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
+
+                + "  var received = new XMLHttpRequest();\n"
+                + "  received.open('GET', url + '?received', false);\n"
+                + "  received.send();\n"
+                + "  log(received.responseText);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = allowOrigin;
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_CREDENTIALS_ = allowCredentials;
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_METHODS_ = allowMethods;
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = allowHeaders;
+        PreflightReceivedServlet.RECEIVED_ = null;
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/preflight2", PreflightReceivedServlet.class);
+        startWebServer2(".", servlets2);
+
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
+
+        final URL url = new URL(URL_FIRST, "/preflight1");
+        getMockWebConnection().setResponse(url, html,
+                200, "OK", "text/html;charset=ISO-8859-1", ISO_8859_1, responseHeader);
+
+        loadPage2(url, null);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Preflight CORS scenario Servlet; remembers the method and the cookie of the request
+     * that was sent after the preflight and answers the 'received' GET request with them.
+     */
+    public static class PreflightReceivedServlet extends HttpServlet {
+        private static String ACCESS_CONTROL_ALLOW_ORIGIN_;
+        private static String ACCESS_CONTROL_ALLOW_CREDENTIALS_;
+        private static String ACCESS_CONTROL_ALLOW_METHODS_;
+        private static String ACCESS_CONTROL_ALLOW_HEADERS_;
+        private static String RECEIVED_;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            setCorsHeaders(response);
+            if (ACCESS_CONTROL_ALLOW_METHODS_ != null) {
+                response.setHeader("Access-Control-Allow-Methods", ACCESS_CONTROL_ALLOW_METHODS_);
+            }
+            if (ACCESS_CONTROL_ALLOW_HEADERS_ != null) {
+                response.setHeader("Access-Control-Allow-Headers", ACCESS_CONTROL_ALLOW_HEADERS_);
+            }
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            if ("received".equals(request.getQueryString())) {
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setContentType(MimeType.TEXT_PLAIN);
+                response.getWriter().write(RECEIVED_ == null ? "nothing" : RECEIVED_);
+                return;
+            }
+            received(request, response);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPut(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            received(request, response);
+        }
+
+        private static void received(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            RECEIVED_ = request.getMethod() + " " + request.getHeader(HttpHeader.COOKIE);
+            setCorsHeaders(response);
+            response.setContentType(MimeType.TEXT_PLAIN);
+            response.getWriter().write("ok");
+        }
+
+        private static void setCorsHeaders(final HttpServletResponse response) {
+            if (ACCESS_CONTROL_ALLOW_ORIGIN_ != null) {
+                response.setHeader("Access-Control-Allow-Origin", ACCESS_CONTROL_ALLOW_ORIGIN_);
+            }
+            if (ACCESS_CONTROL_ALLOW_CREDENTIALS_ != null) {
+                response.setHeader("Access-Control-Allow-Credentials", ACCESS_CONTROL_ALLOW_CREDENTIALS_);
+            }
+        }
     }
 
     /**

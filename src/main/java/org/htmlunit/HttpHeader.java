@@ -142,6 +142,8 @@ public final class HttpHeader {
     public static final String ACCESS_CONTROL_ALLOW_CREDENTIALS = "Access-Control-Allow-Credentials";
     /** Access-Control-Allow-Headers. */
     public static final String ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
+    /** Access-Control-Allow-Methods. */
+    public static final String ACCESS_CONTROL_ALLOW_METHODS = "Access-Control-Allow-Methods";
 
     /** Ping-From. */
     public static final String PING_FROM = "Ping-From";

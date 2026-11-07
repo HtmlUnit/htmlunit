@@ -117,6 +117,7 @@ import org.w3c.dom.DocumentType;
  * @author Lai Quang Duong
  * @author Sven Strickroth
  * @author Ashutosh Panda
+ * @author Vidya m
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">MDN Documentation</a>
  */
@@ -1395,10 +1396,19 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         return false;
     }
 
-    private static boolean isPreflightAuthorized(final WebRequest request, final WebResponse preflightResponse) {
-        final String originHeader = preflightResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
-        if (!ALLOW_ORIGIN_ALL.equals(originHeader)
-                && !request.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(originHeader)) {
+    private boolean isPreflightAuthorized(final WebRequest request, final WebResponse preflightResponse) {
+        // the preflight response has to pass the CORS check too; for a request with credentials
+        // this requires the exact origin and Access-Control-Allow-Credentials
+        if (!isCorsAllowed(preflightResponse, request.getAdditionalHeaders().get(HttpHeader.ORIGIN))) {
+            return false;
+        }
+
+        // the wildcard is not supported for requests with credentials
+        final boolean wildcard = !isWithCredentials();
+
+        final HttpMethod method = request.getHttpMethod();
+        if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST
+                && !isPreflightMethodAllowed(method.name(), preflightResponse, wildcard)) {
             return false;
         }
 
@@ -1409,7 +1419,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS.equalsIgnoreCase(pair.getName())) {
                 String value = pair.getValue();
                 if (value != null) {
-                    if (ALLOW_ORIGIN_ALL.equals(value)) {
+                    if (wildcard && ALLOW_ORIGIN_ALL.equals(value)) {
                         // all headers are allowed
                         return true;
                     }
@@ -1433,6 +1443,31 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
         }
         return true;
+    }
+
+    /**
+     * Checks whether the given method is listed in the Access-Control-Allow-Methods header
+     * of the preflight response (the method names are case-sensitive).
+     *
+     * @param method the method name
+     * @param preflightResponse the preflight response
+     * @param wildcard whether the wildcard '*' allows all methods
+     * @return {@code true} if the method is allowed
+     */
+    private static boolean isPreflightMethodAllowed(final String method, final WebResponse preflightResponse,
+            final boolean wildcard) {
+        for (final NameValuePair pair : preflightResponse.getResponseHeaders()) {
+            if (HttpHeader.ACCESS_CONTROL_ALLOW_METHODS.equalsIgnoreCase(pair.getName())
+                    && pair.getValue() != null) {
+                for (final String part : StringUtils.splitAtComma(pair.getValue())) {
+                    final String allowed = part.trim();
+                    if (method.equals(allowed) || (wildcard && ALLOW_ORIGIN_ALL.equals(allowed))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
