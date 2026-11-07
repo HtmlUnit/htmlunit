@@ -464,7 +464,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             + "var xhr = new XMLHttpRequest();\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
+
+            // a unique url for every test; browsers cache the preflight result per url
+            + "    var url = 'http://' + window.location.hostname + ':" + PORT2
+                        + "/preflight2?id=" + System.currentTimeMillis() + "';\n"
+
             + "    xhr.open('GET', url, false);\n"
             + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
             + "    xhr.setRequestHeader('Content-Type' , '" + contentType + "');\n"
@@ -814,7 +818,10 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "  var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
                 + "  var xhr = new XMLHttpRequest();\n"
                 + "  try {\n"
-                + "    xhr.open('" + method + "', url, false);\n"
+
+                // a unique url for every test; browsers cache the preflight result per url
+                + "    xhr.open('" + method + "', url + '?id=" + System.currentTimeMillis() + "', false);\n"
+
                 + "    xhr.withCredentials = " + withCredentials + ";\n"
                 + "    xhr.setRequestHeader('X-PING', 'ping');\n"
                 + "    xhr.send();\n"
