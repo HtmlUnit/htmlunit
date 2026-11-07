@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="Vidya m">
+                XMLHttpRequest: the CORS preflight response is checked like in real browsers; requests with
+                credentials need the exact origin and Access-Control-Allow-Credentials, the wildcard '*' is not
+                supported for them and methods other than GET, HEAD and POST have to be listed
+                in Access-Control-Allow-Methods.
+            </action>
             <action type="fix" dev="rbri">
                 Content-Security-Policy frame-ancestors: no NullPointerException if the url of the parent frame
                 is not a network url (e.g. data:); about:blank frames inherit the origin of their parent.
