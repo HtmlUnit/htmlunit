@@ -14,6 +14,21 @@
                 supported for them and methods other than GET, HEAD and POST have to be listed
                 in Access-Control-Allow-Methods.
             </action>
+            <action type="fix" dev="rbri">
+                Content-Security-Policy frame-ancestors: no NullPointerException if the url of the parent frame
+                is not a network url (e.g. data:); about:blank frames inherit the origin of their parent.
+            </action>
+            <action type="fix" dev="rbri" issue="#363">
+                The css math functions calc(), min(), max() and clamp() are evaluated when calculating
+                the width and height of elements (instead of 0px).
+            </action>
+            <action type="fix" dev="rbri">
+                cssparser: calc() the + and - operators have to be surrounded by whitespace.
+            </action>
+            <action type="add" dev="rbri">
+                cssparser: min(), max() and clamp() are parsed as math functions (new LexicalUnitTypes FUNCTION_MIN,
+                FUNCTION_MAX and FUNCTION_CLAMP).
+            </action>
             <action type="add" dev="rbri" issue="#607">
                 Support for the autofocus attribute; after the page is loaded the first focusable element
                 with the autofocus attribute gets the focus.

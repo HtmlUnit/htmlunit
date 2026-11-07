@@ -488,7 +488,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final int windowWidth = domElem.getPage().getEnclosingWindow().getInnerWidth();
-        return CssPixelValueConverter.pixelString(domElem,
+        final String width = CssPixelValueConverter.pixelString(domElem,
                 style -> {
                     final String value = style.getStyleAttribute(Definition.WIDTH, true);
                     if (StringUtils.isEmptyOrNull(value)) {
@@ -520,6 +520,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 },
                 () -> 0,
                 () -> windowWidth);
+        // e.g. calc() may result in a negative value; the width is never negative
+        return width.startsWith("-") ? "0px" : width;
     }
 
     /**
@@ -887,7 +889,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final ComputedCssStyleDeclaration style = elem.getPage().getEnclosingWindow().getComputedStyle(elem, null);
         final String styleValue = style.getStyleAttribute(Definition.HEIGHT, true);
 
-        if (styleValue == null || styleValue.isEmpty() || AUTO.equals(styleValue) || styleValue.endsWith("%")) {
+        if (styleValue == null || styleValue.isEmpty() || AUTO.equals(styleValue) || styleValue.endsWith("%")
+                || CssMathFunctionEvaluator.isMathFunction(styleValue)) {
             return style.getCalculatedHeight(false, false) + "px";
         }
 
@@ -1623,11 +1626,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         if (!isInline
                 && !StringUtils.isEmptyOrNull(styleHeight)
                 && !AUTO.equals(styleHeight)) {
-            return updateCachedHeight(
+            // e.g. calc() may result in a negative value; the height is never negative
+            return updateCachedHeight(Math.max(0,
                     CssPixelValueConverter.pixelValue(element,
                             style -> style.getStyleAttribute(Definition.HEIGHT, true),
                             () -> 0,
-                            () -> element.getPage().getEnclosingWindow().getInnerHeight()));
+                            () -> element.getPage().getEnclosingWindow().getInnerHeight())));
         }
 
         // height is ignored for inline elements, and AUTO/unset falls back to
@@ -1723,10 +1727,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         // "200px", "50%") -- resolve it via the normal CSS pixel-value converter,
         // which knows how to handle relative units against the window as a
         // percentage base
-        return updateCachedWidth(CssPixelValueConverter.pixelValue(element,
+        // e.g. calc() may result in a negative value; the width is never negative
+        return updateCachedWidth(Math.max(0, CssPixelValueConverter.pixelValue(element,
                 style -> style.getStyleAttribute(Definition.WIDTH, true),
                 () -> 0,
-                () -> element.getPage().getEnclosingWindow().getInnerWidth()));
+                () -> element.getPage().getEnclosingWindow().getInnerWidth())));
     }
 
     /**
@@ -2201,6 +2206,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 },
                 () -> defaultHght,
                 () -> defaultWindowHeight);
+        // e.g. calc() may result in a negative value; the height is never negative
+        height = Math.max(0, height);
 
         if (height == 0 && (isInline || super.getHeight().isEmpty())) {
             height = defaultHeight;

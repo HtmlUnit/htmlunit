@@ -46,7 +46,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Executor;
@@ -672,13 +671,13 @@ public class WebClient implements Serializable, AutoCloseable {
                         webResponse.getResponseHeaderValue(HttpHeader.CONTENT_SECURIRY_POLICY);
                 if (StringUtils.isNotBlank(contentSecurityPolicy)) {
                     final URL origin = UrlUtils.getUrlWithoutPathRefQuery(
-                            window.getEnclosingPage().getUrl());
+                            getFrameAncestorUrl(window.getEnclosingPage()));
                     final URL source = UrlUtils.getUrlWithoutPathRefQuery(webResponse.getWebRequest().getUrl());
                     final Policy policy = Policy.parseSerializedCSP(contentSecurityPolicy,
                                                     Policy.PolicyErrorConsumer.ignored);
                     if (!policy.allowsFrameAncestor(
-                            Optional.of(URI.parseURI(source.toExternalForm()).orElse(null)),
-                            Optional.of(URI.parseURI(origin.toExternalForm()).orElse(null)))) {
+                            URI.parseURI(source.toExternalForm()),
+                            URI.parseURI(origin.toExternalForm()))) {
                         pageDenied = PageDenied.BY_CONTENT_SECURIRY_POLICY;
 
                         if (LOG.isWarnEnabled()) {
@@ -740,6 +739,25 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
         return newPage;
+    }
+
+    /**
+     * Returns the url of the given page used as origin when checking the frame-ancestors
+     * directive of a content security policy. Like in the browsers, an about:blank frame
+     * inherits the origin of its parent.
+     *
+     * @param page the page containing the frame
+     * @return the url
+     */
+    private static URL getFrameAncestorUrl(final Page page) {
+        Page current = page;
+        URL url = current.getUrl();
+        while (UrlUtils.ABOUT_BLANK.equals(url.toExternalForm())
+                && current.getEnclosingWindow() instanceof FrameWindow frameWindow) {
+            current = frameWindow.getEnclosingPage();
+            url = current.getUrl();
+        }
+        return url;
     }
 
     /**
