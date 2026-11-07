@@ -1872,8 +1872,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "177",
             FF = "165",
             FF_ESR = "165")
-    @HtmlUnitNYI(CHROME = "173",
-            EDGE = "173",
+    @HtmlUnitNYI(CHROME = "169",
+            EDGE = "169",
             FF = "157",
             FF_ESR = "157")
     public void input() throws Exception {
@@ -1948,8 +1948,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "177",
             FF = "165",
             FF_ESR = "165")
-    @HtmlUnitNYI(CHROME = "173",
-            EDGE = "173",
+    @HtmlUnitNYI(CHROME = "169",
+            EDGE = "169",
             FF = "157",
             FF_ESR = "157")
     public void inputPassword() throws Exception {
@@ -1995,8 +1995,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "177",
             FF = "165",
             FF_ESR = "165")
-    @HtmlUnitNYI(CHROME = "173",
-            EDGE = "173",
+    @HtmlUnitNYI(CHROME = "169",
+            EDGE = "169",
             FF = "157",
             FF_ESR = "157")
     public void inputSelect() throws Exception {
@@ -2029,8 +2029,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "177",
             FF = "165",
             FF_ESR = "165")
-    @HtmlUnitNYI(CHROME = "173",
-            EDGE = "173",
+    @HtmlUnitNYI(CHROME = "169",
+            EDGE = "169",
             FF = "157",
             FF_ESR = "157")
     public void inputText() throws Exception {
