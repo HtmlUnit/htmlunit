@@ -147,6 +147,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public static final String KEY_STARTING_PAGE = "startingPage";
 
     /**
+     * Key used to place the {@link HtmlPage} of the currently running script
+     * as thread local attribute in current context.
+     */
+    static final String KEY_RUNNING_PAGE = "runningPage";
+
+    /**
      * Creates an instance for the specified {@link WebClient}.
      *
      * @param webClient the client that will own this engine
@@ -958,6 +964,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Boolean javaScriptAlreadyRunning = javaScriptRunning_.get();
             javaScriptRunning_.set(Boolean.TRUE);
 
+            // remember the page; the script gets stopped if the page is replaced
+            // by another one (see HtmlUnitContextFactory.observeInstructionCount())
+            final Object runningPage = cx.getThreadLocal(KEY_RUNNING_PAGE);
+            cx.putThreadLocal(KEY_RUNNING_PAGE, page_);
+
             try {
                 final Object response;
                 synchronized (page_) { // 2 scripts can't be executed in parallel for one page
@@ -985,7 +996,19 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 handleJavaScriptTimeoutError(page_, e);
                 return null;
             }
+            catch (final PageUnloadedError e) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Script stopped because the page '" + page_.getUrl() + "' has been unloaded");
+                }
+                return null;
+            }
             finally {
+                if (runningPage == null) {
+                    cx.removeThreadLocal(KEY_RUNNING_PAGE);
+                }
+                else {
+                    cx.putThreadLocal(KEY_RUNNING_PAGE, runningPage);
+                }
                 javaScriptRunning_.set(javaScriptAlreadyRunning);
             }
         }

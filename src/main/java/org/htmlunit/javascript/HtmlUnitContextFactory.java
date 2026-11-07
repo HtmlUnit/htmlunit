@@ -283,6 +283,15 @@ public class HtmlUnitContextFactory extends ContextFactory {
     protected void observeInstructionCount(final Context cx, final int instructionCount) {
         final TimeoutContext tcx = (TimeoutContext) cx;
         tcx.terminateScriptIfNecessary();
+
+        // stop scripts of pages that are no longer the enclosed page
+        // of their window (e.g. a setTimeout function still running
+        // while the window navigates to a new page)
+        final Object runningPage = cx.getThreadLocal(JavaScriptEngine.KEY_RUNNING_PAGE);
+        if (runningPage instanceof HtmlPage page
+                && page != page.getEnclosingWindow().getEnclosedPage()) {
+            throw new PageUnloadedError();
+        }
     }
 
     /**

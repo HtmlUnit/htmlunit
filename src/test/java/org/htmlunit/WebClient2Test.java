@@ -295,10 +295,6 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts({"loadExtraContent started at Page 1", " loadExtraContent finished at Page 1"})
-    @HtmlUnitNYI(CHROME = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
-            EDGE = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
-            FF = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
-            FF_ESR = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"})
     public void makeSureTheCurrentJobHasEndedBeforeReplaceWindowPage() throws Exception {
         final String htmlContent1 = DOCTYPE_HTML
             + "<html>\n"

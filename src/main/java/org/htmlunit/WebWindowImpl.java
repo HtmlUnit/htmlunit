@@ -32,6 +32,7 @@ import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
@@ -54,6 +55,12 @@ import org.w3c.dom.Document;
 public abstract class WebWindowImpl implements WebWindow {
 
     private static final Log LOG = LogFactory.getLog(WebWindowImpl.class);
+
+    /**
+     * The maximum time to wait for a running job of the current page
+     * before the page gets replaced.
+     */
+    private static final long MAX_WAIT_FOR_RUNNING_JOB_MILLIS = 10_000;
 
     private final WebClient webClient_;
     private final Screen screen_;
@@ -144,6 +151,7 @@ public abstract class WebWindowImpl implements WebWindow {
         if (page == enclosedPage_) {
             return;
         }
+        waitForRunningJob();
         destroyChildren();
 
         if (isJavaScriptInitializationNeeded(page)) {
@@ -158,6 +166,32 @@ public abstract class WebWindowImpl implements WebWindow {
         // the enclosedPage has a scriptable object
         enclosedPage_ = page;
         history_.addPage(page);
+    }
+
+    /**
+     * Browsers do not interrupt a running script when navigating to a new page;
+     * the new page replaces the current one after the script has finished.
+     * Therefore we wait (with a limit) for the job currently running for this window.
+     * If the job is still running afterwards, it will be stopped
+     * by the JavaScript engine as soon as the page is replaced.
+     * There is no wait if this is called from a JavaScript thread, because the running
+     * job might be the caller itself.
+     */
+    private void waitForRunningJob() {
+        final JavaScriptJobManager jobManager = getJobManager();
+        if (enclosedPage_ == null || jobManager == null) {
+            return;
+        }
+
+        final AbstractJavaScriptEngine<?> engine = webClient_.getJavaScriptEngine();
+        if (engine == null || engine.isScriptRunning()) {
+            return;
+        }
+
+        // no new jobs from the queue, only the running one;
+        // jobs scheduled by the running job are removed by destroyChildren()
+        jobManager.removeAllJobs();
+        jobManager.waitForJobsStartingBefore(0, MAX_WAIT_FOR_RUNNING_JOB_MILLIS);
     }
 
     /**
