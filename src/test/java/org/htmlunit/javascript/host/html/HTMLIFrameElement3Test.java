@@ -819,6 +819,170 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
                 new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
     }
 
+    /**
+     * The parent of the restricted frame is an about:blank frame; about:blank documents
+     * inherit the origin of the document that created them.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"content", "loaded", "[object HTMLDocument]"})
+    public void csp_SelfAboutBlankParent() throws Exception {
+        retrictByHeaderAboutBlankParent(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "null"})
+    public void csp_NoneAboutBlankParent() throws Exception {
+        retrictByHeaderAboutBlankParent(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'none';"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"content", "loaded", "[object HTMLDocument]"})
+    public void csp_UrlAboutBlankParent() throws Exception {
+        retrictByHeaderAboutBlankParent(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY,
+                        "frame-ancestors http://localhost:" + PORT + ";"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "null"})
+    public void csp_SelfAboutBlankParentDifferentPort() throws Exception {
+        retrictByHeaderAboutBlankParent(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
+    }
+
+    /**
+     * The parent of the restricted frame is a data: url frame (opaque origin).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("done")
+    public void csp_SelfDataUrlParent() throws Exception {
+        retrictByHeaderDataUrlParent(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "done",
+            FF = {"content", "done"},
+            FF_ESR = {"content", "done"})
+    @HtmlUnitNYI(CHROME = {"content", "done"},
+            EDGE = {"content", "done"})
+    public void csp_StarDataUrlParent() throws Exception {
+        retrictByHeaderDataUrlParent(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors *;"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"content", "done"})
+    public void csp_NoFrameAncestorsDataUrlParent() throws Exception {
+        retrictByHeaderDataUrlParent(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "img-src 'self';"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    private void retrictByHeaderAboutBlankParent(final NameValuePair header, final URL contentUrl)
+            throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "    function test() {\n"
+            + "      var doc = document.getElementById('outer').contentDocument;\n"
+            + "      var inner = doc.createElement('iframe');\n"
+            + "      inner.id = 'inner';\n"
+            + "      inner.onload = function() { log('loaded'); };\n"
+            + "      inner.src = '" + contentUrl + "';\n"
+            + "      doc.body.appendChild(inner);\n"
+            + "      setTimeout(check, 500);\n"
+            + "    }\n"
+            + "    function check() {\n"
+            + "      try {\n"
+            + "        var doc = document.getElementById('outer').contentDocument;\n"
+            + "        log(doc.getElementById('inner').contentDocument);\n"
+            + "      } catch(e) { log('error'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe id='outer'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        restrictedContent(header, contentUrl);
+
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "path"));
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    private void retrictByHeaderDataUrlParent(final NameValuePair header, final URL contentUrl)
+            throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "    function test() {\n"
+            + "      setTimeout(function() { log('done'); }, 500);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe id='outer' src=\"data:text/html,<iframe src='" + contentUrl + "'></iframe>\"></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        restrictedContent(header, contentUrl);
+
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "path"));
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Registers the restricted content; the content logs 'content' (using the log function of
+     * the top window) if it is loaded.
+     */
+    private void restrictedContent(final NameValuePair header, final URL contentUrl) {
+        final String content = DOCTYPE_HTML
+                + "<html><head><title>IFrame Title</title></head>\n"
+                + "<body>IFrame Content\n"
+                + "<script>try { top.log('content'); } catch(e) { }</script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(header);
+
+        getMockWebConnection().setResponse(contentUrl, content,
+                200, "OK", MimeType.TEXT_HTML, headers);
+    }
+
     private void retrictByHeader(final NameValuePair header, final URL contentUrl) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
