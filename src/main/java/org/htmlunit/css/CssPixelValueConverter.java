@@ -99,55 +99,70 @@ public final class CssPixelValueConverter {
      * @see #pixelString(DomElement, Function, IntSupplier, IntSupplier)
      */
     public static int pixelValue(final String value) {
-        float i = StringUtils.toFloat(TO_FLOAT_PATTERN.matcher(value).replaceAll("$1"), 0);
+        if (CssMathFunctionEvaluator.isMathFunction(value)) {
+            // like for simple percentages, 100% is 16px here
+            final Double result = CssMathFunctionEvaluator.evaluate(value, null, () -> 16);
+            return result == null ? 0 : (int) Math.round(result);
+        }
+
+        final float i = StringUtils.toFloat(TO_FLOAT_PATTERN.matcher(value).replaceAll("$1"), 0);
         if (value.length() < 2) {
             return Math.round(i);
         }
-        if (value.endsWith("px")) {
-            return Math.round(i);
-        }
+        return (int) Math.round(toPixels(i, value));
+    }
 
-        if (value.endsWith("em")) {
-            i = i * 16;
+    /**
+     * Converts the given number with the given unit into pixels.
+     * @param number the number
+     * @param unit the unit (e.g. {@code em}); percentages are based on 16px
+     * @return the number of pixels
+     */
+    static double toPixels(final double number, final String unit) {
+        if (unit.endsWith("px")) {
+            return number;
         }
-        else if (value.endsWith("%")) {
-            i = i * 16 / 100;
+        if (unit.endsWith("em")) {
+            return number * 16;
         }
-        else if (value.endsWith("ex")) {
-            i = i * 8;
+        if (unit.endsWith("%")) {
+            return number * 16 / 100;
         }
-        else if (value.endsWith("cm")) {
-            i = i * 38;
+        if (unit.endsWith("ex")) {
+            return number * 8;
         }
-        else if (value.endsWith("mm")) {
-            i = i * 4;
+        if (unit.endsWith("cm")) {
+            return number * 38;
         }
-        else if (value.endsWith("pt")) {
-            i = i * 2;
+        if (unit.endsWith("mm")) {
+            return number * 4;
         }
-        else if (value.endsWith("pc")) {
-            i = i * 24;
+        if (unit.endsWith("pt")) {
+            return number * 2;
         }
-        else if (value.endsWith("ch")) {
-            i = i * 8;
+        if (unit.endsWith("pc")) {
+            return number * 24;
         }
-        else if (value.endsWith("vh")
-                || value.endsWith("vmin")) {
+        if (unit.endsWith("ch")) {
+            return number * 8;
+        }
+        if (unit.endsWith("vh")
+                || unit.endsWith("vmin")) {
             // this matches also
             // "dvh" "dvmin" "lvh" "lvmin" "svh" "svmin"
-            i = i * 6;
+            return number * 6;
         }
-        else if (value.endsWith("vw")
-                || value.endsWith("vmax")) {
+        if (unit.endsWith("vw")
+                || unit.endsWith("vmax")) {
             // this matches also
             // "dvw" "dvmax" "lvw" "lvmax" "svw" "svmax"
-            i = i * 12;
+            return number * 12;
         }
         // placed at the end to handle min before
-        else if (value.endsWith("in")) {
-            i = i * 150;
+        if (unit.endsWith("in")) {
+            return number * 150;
         }
-        return Math.round(i);
+        return number;
     }
 
     private static int pixelValue(final DomElement element,
@@ -156,21 +171,15 @@ public final class CssPixelValueConverter {
             final IntSupplier defaultValue,
             final IntSupplier windowDefaultValue,
             final boolean percentMode) {
+        if (CssMathFunctionEvaluator.isMathFunction(styleValue)) {
+            final Double result = CssMathFunctionEvaluator.evaluate(styleValue, element.getPage().getWebClient(),
+                    () -> percentBase(element, styleGetter, defaultValue, windowDefaultValue));
+            return result == null ? 0 : (int) Math.round(result);
+        }
+
         if (styleValue.endsWith("%") || (styleValue.isEmpty() && element instanceof HtmlHtml)) {
             final float i = StringUtils.toFloat(TO_FLOAT_PATTERN.matcher(styleValue).replaceAll("$1"), 100);
-
-            final DomNode parent = element.getParentNode();
-            final int absoluteValue;
-            if (parent instanceof DomElement parentElem) {
-                final ComputedCssStyleDeclaration style =
-                        parentElem.getPage().getEnclosingWindow().getComputedStyle(parentElem, null);
-                final String parentStyleValue = styleGetter.apply(style);
-                absoluteValue = pixelValue(parentElem, parentStyleValue, styleGetter,
-                                            defaultValue, windowDefaultValue, true);
-            }
-            else {
-                absoluteValue = windowDefaultValue.getAsInt();
-            }
+            final int absoluteValue = percentBase(element, styleGetter, defaultValue, windowDefaultValue);
             return Math.round((i / 100f) * absoluteValue);
         }
         if (AUTO.equals(styleValue)) {
@@ -198,5 +207,24 @@ public final class CssPixelValueConverter {
             return 0;
         }
         return pixelValue(styleValue);
+    }
+
+    /**
+     * Returns the value (in pixels) a percentage of the given element is based on;
+     * this is the value of the parent or the window default value for the root.
+     */
+    private static int percentBase(final DomElement element,
+            final Function<ComputedCssStyleDeclaration, String> styleGetter,
+            final IntSupplier defaultValue,
+            final IntSupplier windowDefaultValue) {
+        final DomNode parent = element.getParentNode();
+        if (parent instanceof DomElement parentElem) {
+            final ComputedCssStyleDeclaration style =
+                    parentElem.getPage().getEnclosingWindow().getComputedStyle(parentElem, null);
+            final String parentStyleValue = styleGetter.apply(style);
+            return pixelValue(parentElem, parentStyleValue, styleGetter,
+                                        defaultValue, windowDefaultValue, true);
+        }
+        return windowDefaultValue.getAsInt();
     }
 }

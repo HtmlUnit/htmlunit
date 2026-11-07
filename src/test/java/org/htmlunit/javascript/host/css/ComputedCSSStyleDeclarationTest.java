@@ -4214,6 +4214,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"calc(150px),calc(150px)", "150,150", "150px,150px"})
+    @HtmlUnitNYI(CHROME = {"calc(100px + 50px),calc(200px - 50px)", "150,150", "150px,150px"},
+            EDGE = {"calc(100px + 50px),calc(200px - 50px)", "150,150", "150px,150px"},
+            FF = {"calc(100px + 50px),calc(200px - 50px)", "150,150", "150px,150px"},
+            FF_ESR = {"calc(100px + 50px),calc(200px - 50px)", "150,150", "150px,150px"})
     public void calcPxOnly() throws Exception {
         calc("calc(100px + 50px)", "calc(200px - 50px)");
     }
@@ -4223,6 +4227,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"calc(100px),calc(100px)", "100,100", "100px,100px"})
+    @HtmlUnitNYI(CHROME = {"calc(2 * 50px),calc(300px / 3)", "100,100", "100px,100px"},
+            EDGE = {"calc(2 * 50px),calc(300px / 3)", "100,100", "100px,100px"},
+            FF = {"calc(2 * 50px),calc(300px / 3)", "100,100", "100px,100px"},
+            FF_ESR = {"calc(2 * 50px),calc(300px / 3)", "100,100", "100px,100px"})
     public void calcMultiplyDivide() throws Exception {
         calc("calc(2 * 50px)", "calc(300px / 3)");
     }
@@ -4232,6 +4240,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"calc(75%),calc(25%)", "375,100", "375px,100px"})
+    @HtmlUnitNYI(CHROME = {"calc(50% * 1.5),calc(100% / 4)", "375,100", "375px,100px"},
+            EDGE = {"calc(50% * 1.5),calc(100% / 4)", "375,100", "375px,100px"},
+            FF = {"calc(50% * 1.5),calc(100% / 4)", "375,100", "375px,100px"},
+            FF_ESR = {"calc(50% * 1.5),calc(100% / 4)", "375,100", "375px,100px"})
     public void calcPercentMultiply() throws Exception {
         calc("calc(50% * 1.5)", "calc(100% / 4)");
     }
@@ -4241,6 +4253,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"calc(100% - 40px),calc(50% - 50px)", "460,150", "460px,150px"})
+    @HtmlUnitNYI(CHROME = {"calc(100% - (20px * 2)),calc((100% - 100px) / 2)", "460,150", "460px,150px"},
+            EDGE = {"calc(100% - (20px * 2)),calc((100% - 100px) / 2)", "460,150", "460px,150px"},
+            FF = {"calc(100% - (20px * 2)),calc((100% - 100px) / 2)", "460,150", "460px,150px"},
+            FF_ESR = {"calc(100% - (20px * 2)),calc((100% - 100px) / 2)", "460,150", "460px,150px"})
     public void calcNested() throws Exception {
         calc("calc(100% - calc(20px * 2))", "calc((100% - 100px) / 2)");
     }
@@ -4250,6 +4266,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"calc(10em - 10px),calc(10% + 5em)", "150,120", "150px,120px"})
+    @HtmlUnitNYI(CHROME = {"calc(10em - 10px),calc(5em + 10%)", "150,120", "150px,120px"},
+            EDGE = {"calc(10em - 10px),calc(5em + 10%)", "150,120", "150px,120px"},
+            FF = {"calc(10em - 10px),calc(5em + 10%)", "150,120", "150px,120px"},
+            FF_ESR = {"calc(10em - 10px),calc(5em + 10%)", "150,120", "150px,120px"})
     public void calcEm() throws Exception {
         calc("calc(10em - 10px)", "calc(5em + 10%)");
     }
@@ -4259,6 +4279,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"calc(-100px),calc(10% - 100px)", "0,0", "0px,0px"})
+    @HtmlUnitNYI(CHROME = {"calc(100px - 200px),calc(10% - 100px)", "0,0", "0px,0px"},
+            EDGE = {"calc(100px - 200px),calc(10% - 100px)", "0,0", "0px,0px"},
+            FF = {"calc(100px - 200px),calc(10% - 100px)", "0,0", "0px,0px"},
+            FF_ESR = {"calc(100px - 200px),calc(10% - 100px)", "0,0", "0px,0px"})
     public void calcNegativeResult() throws Exception {
         calc("calc(100px - 200px)", "calc(10% - 100px)");
     }
@@ -4274,11 +4298,16 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
     /**
      * The operators + and - have to be surrounded by whitespace.
+     * HtmlUnit uses the window width as computed width of elements with width auto.
      *
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts({",", "500,0", "500px,0px"})
+    @HtmlUnitNYI(CHROME = {",", "500,0", "1256px,0px"},
+            EDGE = {",", "500,0", "1256px,0px"},
+            FF = {",", "500,0", "1256px,0px"},
+            FF_ESR = {",", "500,0", "1256px,0px"})
     public void calcInvalid() throws Exception {
         calc("calc(100%-200px)", "calc(100px +)");
     }

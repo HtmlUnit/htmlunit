@@ -8,11 +8,15 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#363">
+                The css math functions calc(), min(), max() and clamp() are evaluated when calculating
+                the width and height of elements (instead of 0px).
+            </action>
             <action type="fix" dev="rbri">
-                calc(): the + and - operators have to be surrounded by whitespace.
+                cssparser: calc() the + and - operators have to be surrounded by whitespace.
             </action>
             <action type="add" dev="rbri">
-                min(), max() and clamp() are parsed as math functions (new LexicalUnitTypes FUNCTION_MIN,
+                cssparser: min(), max() and clamp() are parsed as math functions (new LexicalUnitTypes FUNCTION_MIN,
                 FUNCTION_MAX and FUNCTION_CLAMP).
             </action>
             <action type="add" dev="rbri" issue="#607">
