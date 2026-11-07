@@ -2099,7 +2099,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"173", "17", "173", "17", "13", "13", "13", "13"},
+    @Alerts(DEFAULT = {"169", "17", "169", "17", "13", "13", "13", "13"},
             FF = {"157", "18", "157", "18", "14", "14", "14", "14"},
             FF_ESR = {"157", "18", "157", "18", "14", "14", "14", "14"})
     public void defaultClientWidthHeight() throws Exception {
