@@ -8,6 +8,13 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                calc(): the + and - operators have to be surrounded by whitespace.
+            </action>
+            <action type="add" dev="rbri">
+                min(), max() and clamp() are parsed as math functions (new LexicalUnitTypes FUNCTION_MIN,
+                FUNCTION_MAX and FUNCTION_CLAMP).
+            </action>
             <action type="add" dev="rbri" issue="#607">
                 Support for the autofocus attribute; after the page is loaded the first focusable element
                 with the autofocus attribute gets the focus.
