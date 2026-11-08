@@ -614,7 +614,7 @@ public abstract class WebTestCase {
 
         T actual = func.get();
         while (!Objects.equals(expected, actual) && System.currentTimeMillis() < maxWait) {
-            Thread.sleep(50);
+            Thread.sleep(42);
             actual = func.get();
         }
         return actual;

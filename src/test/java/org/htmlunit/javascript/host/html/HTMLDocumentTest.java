@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -2728,12 +2728,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
 
-        final List<String> actual = new LinkedList<>();
-        actual.add(driver.findElement(By.id("myTextarea")).getDomProperty("value"));
-
-        assertEquals(getExpectedAlerts(), actual);
+        assertEquals(getExpectedAlerts()[0],
+                () -> driver.findElement(By.id("myTextarea")).getDomProperty("value"),
+                Duration.ofMillis(200));
     }
 
     /**

@@ -1861,14 +1861,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
-        assertEquals(0, getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().size());
+        assertEquals(0, getMockWebConnection().getLastWebRequest().getRequestParameters().size());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1890,14 +1888,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getRequestParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1919,14 +1915,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getRequestParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1948,14 +1942,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getRequestParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1977,14 +1969,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getRequestParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -2006,14 +1996,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-16", UTF_16, null);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getRequestParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -2077,11 +2065,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertNull(body);
@@ -2105,11 +2092,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
@@ -2133,11 +2119,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
@@ -2161,11 +2146,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
@@ -2189,11 +2173,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=ISO-8859-1", ISO_8859_1, null);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
@@ -2219,11 +2202,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=ISO-8859-1", ISO_8859_1, null);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
@@ -2248,11 +2230,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
@@ -2277,11 +2258,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-16", UTF_16, null);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
@@ -2306,11 +2286,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-16", UTF_16, null);
-        Thread.sleep(100);
 
-        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-                .get(HttpHeader.CONTENT_TYPE);
-        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[0],
+                () -> getMockWebConnection().getLastWebRequest().getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE),
+                Duration.ofMillis(100));
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
