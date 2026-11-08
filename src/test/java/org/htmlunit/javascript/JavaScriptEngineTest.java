@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -1248,12 +1249,10 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
             loadPage(html);
-            Thread.sleep(100);
-            assertEquals(getExpectedAlerts(), collectedAlerts);
+            assertEquals(getExpectedAlerts(), () -> collectedAlerts, Duration.ofMillis(100));
 
         }
-        Thread.sleep(400);
-        assertTrue(getJavaScriptThreads().isEmpty());
+        assertEquals(0, () -> getJavaScriptThreads().size(), Duration.ofMillis(400));
     }
 
     /**

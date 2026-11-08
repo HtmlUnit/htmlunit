@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import java.time.Duration;
+
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -65,9 +67,9 @@ public class AutofocusTest extends WebDriverTestCase {
                 + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
         assertEquals(String.join(",", getExpectedAlerts()),
-                driver.switchTo().activeElement().getAttribute("id"));
+                () -> driver.switchTo().activeElement().getAttribute("id"),
+                Duration.ofMillis(200));
     }
 
     /**

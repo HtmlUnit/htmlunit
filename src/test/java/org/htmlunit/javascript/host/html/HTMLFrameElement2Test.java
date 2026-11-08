@@ -543,7 +543,6 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         verifyWindowName2(driver, "Body alert.", "Onload alert.");
 
         driver.switchTo().defaultContent();
-        Thread.sleep(1000);
 
         driver.switchTo().frame("header");
         assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
@@ -629,8 +628,6 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         verifyWindowName2(driver, "Body alert.", "Onload alert.");
 
         driver.switchTo().defaultContent();
-        Thread.sleep(1000);
-
         driver.switchTo().frame("header");
         assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
 

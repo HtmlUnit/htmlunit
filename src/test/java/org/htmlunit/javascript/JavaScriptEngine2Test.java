@@ -1201,8 +1201,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "</script></body></html>";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        verifyTitle2(driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**

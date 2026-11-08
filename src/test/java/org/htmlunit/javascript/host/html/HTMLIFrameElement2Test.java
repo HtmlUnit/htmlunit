@@ -1027,7 +1027,6 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
-        Thread.sleep(200);
 
         expandExpectedAlertsVariables(URL_SECOND);
         verifyTextArea2(driver, getExpectedAlerts());
