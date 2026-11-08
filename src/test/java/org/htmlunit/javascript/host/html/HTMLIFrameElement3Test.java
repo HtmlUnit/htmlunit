@@ -1101,6 +1101,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * (contentUrl); if middleUrl is null, the top window contains the restricted frame directly.
      * The frames may have a different origin than the top window, therefore all
      * information is sent to the top window using postMessage().
+     * The load event of the restricted frame is fired also if the frame is blocked;
+     * 'done' is posted after that to be logged after all other messages.
      */
     private void retrictByHeaderNested(final NameValuePair header, final URL middleUrl, final URL contentUrl)
             throws Exception {
@@ -1109,15 +1111,18 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<head>\n"
             + "  <script>\n"
             + LOG_WINDOW_NAME_FUNCTION
-            + "    window.addEventListener('message', function(e) { log(e.data); });\n"
-            + "    function test() {\n"
-            + "      setTimeout(function() { log('done'); }, 1000);\n"
+            + "    window.addEventListener('message', function(e) {\n"
+            + "      log(e.data);\n"
+            + "      if (e.data == 'loaded') { finished(); }\n"
+            + "    });\n"
+            + "    function finished() {\n"
+            + "      window.postMessage('done', '*');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>\n"
+            + "<body>\n"
             + "  <iframe id='middle' src='" + (middleUrl == null ? contentUrl : middleUrl) + "' "
-                    + (middleUrl == null ? "onload='log(\"loaded\")'" : "") + "></iframe>\n"
+                    + (middleUrl == null ? "onload='log(\"loaded\"); finished();'" : "") + "></iframe>\n"
             + "</body>\n"
             + "</html>";
 
@@ -1145,7 +1150,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
                 200, "OK", MimeType.TEXT_HTML, headers);
 
         final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "path"));
-        verifyWindowName2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     private void retrictByHeaderAboutBlankParent(final NameValuePair header, final URL contentUrl)
@@ -1159,10 +1164,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "      var doc = document.getElementById('outer').contentDocument;\n"
             + "      var inner = doc.createElement('iframe');\n"
             + "      inner.id = 'inner';\n"
-            + "      inner.onload = function() { log('loaded'); };\n"
+            + "      inner.onload = function() { log('loaded'); check(); };\n"
             + "      inner.src = '" + contentUrl + "';\n"
             + "      doc.body.appendChild(inner);\n"
-            + "      setTimeout(check, 500);\n"
             + "    }\n"
             + "    function check() {\n"
             + "      try {\n"
@@ -1190,13 +1194,11 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<head>\n"
             + "  <script>\n"
             + LOG_WINDOW_NAME_FUNCTION
-            + "    function test() {\n"
-            + "      setTimeout(function() { log('done'); }, 500);\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <iframe id='outer' src=\"data:text/html,<iframe src='" + contentUrl + "'></iframe>\"></iframe>\n"
+            + "<body>\n"
+            + "  <iframe id='outer' src=\"data:text/html,<iframe src='" + contentUrl + "'></iframe>\" "
+                    + "onload='log(\"done\")'></iframe>\n"
             + "</body>\n"
             + "</html>";
 
