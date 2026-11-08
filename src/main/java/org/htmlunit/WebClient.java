@@ -62,6 +62,7 @@ import org.apache.http.cookie.MalformedCookieException;
 import org.htmlunit.attachment.Attachment;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.csp.Policy;
+import org.htmlunit.csp.PolicyList;
 import org.htmlunit.csp.url.URI;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.cssparser.parser.CSSErrorHandler;
@@ -667,37 +668,7 @@ public class WebClient implements Serializable, AutoCloseable {
         FrameWindow.PageDenied pageDenied = PageDenied.NONE;
         if (windows_.contains(webWindow)) {
             if (webWindow instanceof FrameWindow window) {
-                final String contentSecurityPolicy =
-                        webResponse.getResponseHeaderValue(HttpHeader.CONTENT_SECURIRY_POLICY);
-                if (StringUtils.isNotBlank(contentSecurityPolicy)) {
-                    final URL origin = UrlUtils.getUrlWithoutPathRefQuery(
-                            getFrameAncestorUrl(window.getEnclosingPage()));
-                    final URL source = UrlUtils.getUrlWithoutPathRefQuery(webResponse.getWebRequest().getUrl());
-                    final Policy policy = Policy.parseSerializedCSP(contentSecurityPolicy,
-                                                    Policy.PolicyErrorConsumer.ignored);
-                    if (!policy.allowsFrameAncestor(
-                            URI.parseURI(source.toExternalForm()),
-                            URI.parseURI(origin.toExternalForm()))) {
-                        pageDenied = PageDenied.BY_CONTENT_SECURIRY_POLICY;
-
-                        if (LOG.isWarnEnabled()) {
-                            LOG.warn("Load denied by Content-Security-Policy: '" + contentSecurityPolicy + "' - "
-                                    + webResponse.getWebRequest().getUrl() + "' does not permit framing.");
-                        }
-                    }
-                }
-
-                if (pageDenied == PageDenied.NONE) {
-                    final String xFrameOptions = webResponse.getResponseHeaderValue(HttpHeader.X_FRAME_OPTIONS);
-                    if ("DENY".equalsIgnoreCase(xFrameOptions)) {
-                        pageDenied = PageDenied.BY_X_FRAME_OPTIONS;
-
-                        if (LOG.isWarnEnabled()) {
-                            LOG.warn("Load denied by X-Frame-Options: DENY; - '"
-                                    + webResponse.getWebRequest().getUrl() + "' does not permit framing.");
-                        }
-                    }
-                }
+                pageDenied = getPageDenied(webResponse, window);
             }
 
             if (pageDenied == PageDenied.NONE) {
@@ -739,6 +710,133 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
         return newPage;
+    }
+
+    /**
+     * Checks if the given response is allowed to be shown in the given frame window.
+     * Like in the browsers
+     * <ul>
+     *   <li>the frame-ancestors directives of all Content-Security-Policy headers
+     *       (each header may contain a comma separated list of policies) have to allow
+     *       all ancestors of the frame (up to the top window)</li>
+     *   <li>the X-Frame-Options header is ignored if one of the policies contains
+     *       a frame-ancestors directive</li>
+     *   <li>X-Frame-Options SAMEORIGIN requires all ancestors to be same origin
+     *       with the response; unknown values (e.g. ALLOW-FROM) are ignored</li>
+     * </ul>
+     *
+     * @param webResponse the response to check
+     * @param window the frame window the response should be loaded into
+     * @return the reason the page is denied or {@link PageDenied#NONE}
+     * @throws MalformedURLException if an URL is invalid
+     */
+    private static PageDenied getPageDenied(final WebResponse webResponse, final FrameWindow window)
+            throws MalformedURLException {
+        final URL url = webResponse.getWebRequest().getUrl();
+
+        final List<Policy> policies = new ArrayList<>();
+        final Set<String> xFrameOptions = new LinkedHashSet<>();
+        for (final NameValuePair header : webResponse.getResponseHeaders()) {
+            final String value = header.getValue();
+            if (StringUtils.isBlank(value)) {
+                continue;
+            }
+
+            if (HttpHeader.CONTENT_SECURIRY_POLICY.equalsIgnoreCase(header.getName())) {
+                policies.addAll(Policy.parseSerializedCSPList(value,
+                        Policy.PolicyListErrorConsumer.ignored).getPolicies());
+            }
+            else if (HttpHeader.X_FRAME_OPTIONS.equalsIgnoreCase(header.getName())) {
+                for (final String option : value.split(",")) {
+                    final String trimmed = option.trim().toLowerCase(Locale.ROOT);
+                    if (!trimmed.isEmpty()) {
+                        xFrameOptions.add(trimmed);
+                    }
+                }
+            }
+        }
+
+        final List<URL> ancestors = getFrameAncestorUrls(window);
+
+        boolean hasFrameAncestors = false;
+        for (final Policy policy : policies) {
+            if (policy.frameAncestors().isPresent()) {
+                hasFrameAncestors = true;
+                break;
+            }
+        }
+
+        if (hasFrameAncestors) {
+            final String origin = UrlUtils.getUrlWithoutPathRefQuery(url).toExternalForm();
+            final PolicyList policyList = new PolicyList(policies);
+            for (final URL ancestor : ancestors) {
+                final String ancestorOrigin = UrlUtils.getUrlWithoutPathRefQuery(ancestor).toExternalForm();
+                if (!policyList.allowsFrameAncestor(URI.parseURI(ancestorOrigin), URI.parseURI(origin))) {
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("Load denied by Content-Security-Policy: '" + policyList + "' - '"
+                                + url + "' does not permit framing by '" + ancestorOrigin + "'.");
+                    }
+                    return PageDenied.BY_CONTENT_SECURIRY_POLICY;
+                }
+            }
+
+            // X-Frame-Options is ignored if there is a frame-ancestors directive
+            return PageDenied.NONE;
+        }
+
+        if (xFrameOptions.isEmpty()) {
+            return PageDenied.NONE;
+        }
+
+        if (xFrameOptions.size() > 1) {
+            // conflicting values
+            if (xFrameOptions.contains("deny")
+                    || xFrameOptions.contains("sameorigin")
+                    || xFrameOptions.contains("allowall")) {
+                return logXFrameOptionsDenied(url, xFrameOptions);
+            }
+            return PageDenied.NONE;
+        }
+
+        final String xFrameOption = xFrameOptions.iterator().next();
+        if ("deny".equals(xFrameOption)) {
+            return logXFrameOptionsDenied(url, xFrameOptions);
+        }
+        if ("sameorigin".equals(xFrameOption)) {
+            for (final URL ancestor : ancestors) {
+                if (!UrlUtils.isSameOrigin(ancestor, url)) {
+                    return logXFrameOptionsDenied(url, xFrameOptions);
+                }
+            }
+        }
+        return PageDenied.NONE;
+    }
+
+    private static PageDenied logXFrameOptionsDenied(final URL url, final Set<String> xFrameOptions) {
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("Load denied by X-Frame-Options: " + xFrameOptions + " - '"
+                    + url + "' does not permit framing.");
+        }
+        return PageDenied.BY_X_FRAME_OPTIONS;
+    }
+
+    /**
+     * Returns the urls of all ancestors of the given frame window (starting with the
+     * page containing the frame up to the page of the top window) used as origin when
+     * checking the frame-ancestors directive or the X-Frame-Options header.
+     *
+     * @param window the frame window
+     * @return the urls
+     */
+    private static List<URL> getFrameAncestorUrls(final FrameWindow window) {
+        final List<URL> urls = new ArrayList<>();
+        WebWindow current = window;
+        while (current instanceof FrameWindow frameWindow) {
+            final Page page = frameWindow.getEnclosingPage();
+            urls.add(getFrameAncestorUrl(page));
+            current = page.getEnclosingWindow();
+        }
+        return urls;
     }
 
     /**

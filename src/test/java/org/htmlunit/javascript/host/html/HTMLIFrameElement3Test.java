@@ -887,8 +887,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "done",
             FF = {"content", "done"},
             FF_ESR = {"content", "done"})
-    @HtmlUnitNYI(CHROME = {"content", "done"},
-            EDGE = {"content", "done"})
+    @HtmlUnitNYI(FF = "done",
+            FF_ESR = "done")
     public void csp_StarDataUrlParent() throws Exception {
         retrictByHeaderDataUrlParent(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors *;"),
@@ -904,6 +904,248 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         retrictByHeaderDataUrlParent(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "img-src 'self';"),
                 new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * The top window, the parent frame and the restricted frame have the same origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"content", "loaded", "done"})
+    public void csp_SelfNestedSameOrigin() throws Exception {
+        retrictByHeaderNested(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new URL(URL_FIRST, "middle.html"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * The parent frame has the origin of the restricted frame, but the top window has a
+     * different origin; 'self' has to match all ancestors.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "done"})
+    public void csp_SelfNestedCrossOriginTop() throws Exception {
+        retrictByHeaderNested(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "middle.html"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
+    }
+
+    /**
+     * All ancestors are listed in frame-ancestors.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"content", "loaded", "done"})
+    public void csp_UrlNestedAllAncestorsListed() throws Exception {
+        retrictByHeaderNested(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY,
+                        "frame-ancestors http://localhost:" + PORT + " http://localhost:" + PORT2 + ";"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "middle.html"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
+    }
+
+    /**
+     * Only the parent frame is listed in frame-ancestors, the top window is not.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "done"})
+    public void csp_UrlNestedTopNotListed() throws Exception {
+        retrictByHeaderNested(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY,
+                        "frame-ancestors http://localhost:" + PORT2 + ";"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "middle.html"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
+    }
+
+    /**
+     * X-Frame-Options SAMEORIGIN, same origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "[object HTMLDocument]"})
+    public void xFrameOptions_SameOrigin() throws Exception {
+        retrictByHeader(
+                new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "SAMEORIGIN"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * X-Frame-Options SAMEORIGIN, different origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "done"})
+    public void xFrameOptions_SameOriginCrossOrigin() throws Exception {
+        retrictByHeaderNested(
+                new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "SAMEORIGIN"),
+                null,
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
+    }
+
+    /**
+     * X-Frame-Options SAMEORIGIN; the parent frame has the origin of the restricted frame,
+     * but the top window has a different origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "done"})
+    public void xFrameOptions_SameOriginNestedCrossOriginTop() throws Exception {
+        retrictByHeaderNested(
+                new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "SAMEORIGIN"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "middle.html"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
+    }
+
+    /**
+     * X-Frame-Options ALLOW-FROM is not supported by browsers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "content", "done"})
+    @HtmlUnitNYI(CHROME = {"content", "loaded", "done"},
+            EDGE = {"content", "loaded", "done"},
+            FF = {"content", "loaded", "done"},
+            FF_ESR = {"content", "loaded", "done"})
+    public void xFrameOptions_AllowFrom() throws Exception {
+        retrictByHeaderNested(
+                new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "ALLOW-FROM http://localhost:" + PORT2 + "/"),
+                null,
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
+    }
+
+    /**
+     * X-Frame-Options DENY is ignored if the Content-Security-Policy contains frame-ancestors.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "[object HTMLDocument]"})
+    public void xFrameOptions_DenyCspFrameAncestorsSelf() throws Exception {
+        retrictByHeaders(
+                new URL(URL_FIRST, "content.html"),
+                new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "DENY"),
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"));
+    }
+
+    /**
+     * X-Frame-Options DENY is used if the Content-Security-Policy has no frame-ancestors.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "null"})
+    public void xFrameOptions_DenyCspWithoutFrameAncestors() throws Exception {
+        retrictByHeaders(
+                new URL(URL_FIRST, "content.html"),
+                new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "DENY"),
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "img-src 'self';"));
+    }
+
+    /**
+     * Two Content-Security-Policy headers; all policies have to allow the framing.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "null"})
+    public void csp_TwoHeadersSecondDenies() throws Exception {
+        retrictByHeaders(
+                new URL(URL_FIRST, "content.html"),
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'none';"));
+    }
+
+    /**
+     * Two Content-Security-Policy headers; all policies have to allow the framing.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "null"})
+    public void csp_TwoHeadersFirstDenies() throws Exception {
+        retrictByHeaders(
+                new URL(URL_FIRST, "content.html"),
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'none';"),
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"));
+    }
+
+    /**
+     * One Content-Security-Policy header with two comma separated policies;
+     * all policies have to allow the framing.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "null"})
+    public void csp_CommaSeparatedPolicies() throws Exception {
+        retrictByHeader(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY,
+                        "frame-ancestors 'self', frame-ancestors 'none'"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * The top window (URL_FIRST) contains a frame (middleUrl) that contains the restricted frame
+     * (contentUrl); if middleUrl is null, the top window contains the restricted frame directly.
+     * The frames may have a different origin than the top window, therefore all
+     * information is sent to the top window using postMessage().
+     */
+    private void retrictByHeaderNested(final NameValuePair header, final URL middleUrl, final URL contentUrl)
+            throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "    window.addEventListener('message', function(e) { log(e.data); });\n"
+            + "    function test() {\n"
+            + "      setTimeout(function() { log('done'); }, 1000);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe id='middle' src='" + (middleUrl == null ? contentUrl : middleUrl) + "' "
+                    + (middleUrl == null ? "onload='log(\"loaded\")'" : "") + "></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        if (middleUrl != null) {
+            final String middle = DOCTYPE_HTML
+                + "<html><head><title>Middle</title></head>\n"
+                + "<body>\n"
+                + "  <iframe id='inner' src='" + contentUrl + "' "
+                        + "onload='top.postMessage(\"loaded\", \"*\")'></iframe>\n"
+                + "</body>\n"
+                + "</html>";
+            getMockWebConnection().setResponse(middleUrl, middle);
+        }
+
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>IFrame Title</title></head>\n"
+            + "<body>IFrame Content\n"
+            + "<script>top.postMessage('content', '*');</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(header);
+        getMockWebConnection().setResponse(contentUrl, content,
+                200, "OK", MimeType.TEXT_HTML, headers);
+
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "path"));
+        verifyWindowName2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
     }
 
     private void retrictByHeaderAboutBlankParent(final NameValuePair header, final URL contentUrl)
@@ -984,6 +1226,10 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     }
 
     private void retrictByHeader(final NameValuePair header, final URL contentUrl) throws Exception {
+        retrictByHeaders(contentUrl, header);
+    }
+
+    private void retrictByHeaders(final URL contentUrl, final NameValuePair... headers) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
@@ -1008,11 +1254,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
                 + "<body>IFrame Content</body>\n"
                 + "</html>";
 
-        final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(header);
-
         getMockWebConnection().setResponse(contentUrl, content,
-                200, "OK", MimeType.TEXT_HTML, headers);
+                200, "OK", MimeType.TEXT_HTML, Arrays.asList(headers));
 
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "path"));

@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="rbri">
+                Content-Security-Policy frame-ancestors is now checked against all ancestors of a frame
+                (not only the parent), all Content-Security-Policy headers (including comma separated policies)
+                are used, and X-Frame-Options supports SAMEORIGIN and is ignored if a policy contains frame-ancestors.
+            </action>
             <action type="update" dev="rbri">
                 Unit tests: replaced verify(...) by assertEquals(expected, supplier, maxWaitTime), which retries until the
                 expected value is returned or the time is up; helps to get rid of fixed waits.
