@@ -261,8 +261,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             final WebDriver driver = getWebDriver();
 
             driver.get(url);
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+
+            assertEquals(getExpectedAlerts()[0], () -> driver.getCurrentUrl(), DEFAULT_WAIT_TIME);
             assertEquals(2, primitiveWebServer.getRequests().size());
             assertTrue(driver.getPageSource(), driver.getPageSource().contains("Hi"));
         }
@@ -487,9 +487,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 
-            if (useRealBrowser()) {
-                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 4);
-            }
+            sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis() / 4);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1503,9 +1502,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 
-            if (useRealBrowser()) {
-                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 4);
-            }
+            sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis() / 4);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -1689,9 +1687,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 
-            if (useRealBrowser()) {
-                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 4);
-            }
+            sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis() / 4);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -2014,9 +2011,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 
-            if (useRealBrowser()) {
-                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 4);
-            }
+            sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis() / 4);
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
@@ -5147,9 +5143,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             final WebDriver driver = getWebDriver();
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
-            if (useRealBrowser()) {
-                Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
-            }
+            sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis() / 100);
 
             final String[] expectedHeaders = getExpectedAlertsWithHtmlReplacement(primitiveWebServer);
 

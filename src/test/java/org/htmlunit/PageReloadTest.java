@@ -1679,9 +1679,7 @@ public class PageReloadTest extends WebDriverTestCase {
 
         // click
         driver.findElement(By.id(id)).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
         assertEquals(counterChange, getMockWebConnection().getRequestCount() - 1);
 
         // check location visible to javascript

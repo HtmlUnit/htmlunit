@@ -221,9 +221,8 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstContent);
         driver.findElement(By.id("testAnchor")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+
+        sleepRealBrowser(400);
 
         verifyAlerts(driver, getExpectedAlerts());
     }
@@ -271,9 +270,8 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstContent);
         driver.findElement(By.id("testSubmit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+
+        sleepRealBrowser(400);
 
         verifyAlerts(driver, getExpectedAlerts());
     }

@@ -27,7 +27,6 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.platform.image.ImageData;
 import org.htmlunit.platform.image.ImageIOImageData;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -149,16 +148,6 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(url);
         return (HtmlImage) page.getElementById(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @AfterEach
-    public void tearDown() throws Exception {
-        Thread.sleep(100);
-        super.tearDown();
     }
 
     /**

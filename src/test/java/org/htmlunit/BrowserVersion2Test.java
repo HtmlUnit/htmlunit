@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import java.time.Duration;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -138,9 +139,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
         driver.findElement(By.id("clickme")).click();
 
         // we have to be a bit patient
-        Thread.sleep(100);
-
-        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(2, () ->getMockWebConnection().getRequestCount(), Duration.ofMillis(100));
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
     }
 
@@ -415,9 +414,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
         loadPage2(html);
 
         // we have to be a bit patient
-        Thread.sleep(100);
-
-        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(2, () -> getMockWebConnection().getRequestCount(), Duration.ofMillis(100));
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
     }
 
