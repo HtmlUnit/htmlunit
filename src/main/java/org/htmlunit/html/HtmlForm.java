@@ -166,7 +166,9 @@ public class HtmlForm extends HtmlElement {
 
             final String action = getActionAttribute().trim();
             if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-                htmlPage.executeJavaScript(action, "Form action", getStartLineNumber());
+                if (ContentSecurityPolicy.allowsJavaScriptUrl(htmlPage, this, action)) {
+                    htmlPage.executeJavaScript(action, "Form action", getStartLineNumber());
+                }
                 return;
             }
         }

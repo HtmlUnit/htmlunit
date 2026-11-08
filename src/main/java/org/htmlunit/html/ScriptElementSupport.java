@@ -16,6 +16,8 @@ package org.htmlunit.html;
 
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 
 import org.apache.commons.logging.Log;
@@ -156,6 +158,22 @@ public final class ScriptElementSupport {
      */
     public static void executeScriptIfNeeded(final ScriptElement script, final boolean ignoreAttachedToPage,
             final boolean ignorePageIsAncestor) {
+        try {
+            doExecuteScriptIfNeeded(script, ignoreAttachedToPage, ignorePageIsAncestor);
+        }
+        finally {
+            // fire the securitypolicyviolation events after the script was processed;
+            // if a script is running, this is done at the end of the script execution
+            final AbstractJavaScriptEngine<?> engine =
+                    ((DomElement) script).getPage().getWebClient().getJavaScriptEngine();
+            if (engine == null || !engine.isScriptRunning()) {
+                ContentSecurityPolicy.firePendingViolations();
+            }
+        }
+    }
+
+    private static void doExecuteScriptIfNeeded(final ScriptElement script, final boolean ignoreAttachedToPage,
+            final boolean ignorePageIsAncestor) {
         if (!isExecutionNeeded(script, ignoreAttachedToPage, ignorePageIsAncestor)) {
             return;
         }
@@ -176,6 +194,22 @@ public final class ScriptElementSupport {
                 }
                 try {
                     script.setExecuted(true);
+
+                    if (page.getContentSecurityPolicy() != null) {
+                        URL scriptUrl = null;
+                        try {
+                            scriptUrl = page.getFullyQualifiedUrl(src);
+                        }
+                        catch (final MalformedURLException e) {
+                            // handled by loadExternalJavaScriptFile()
+                        }
+                        if (scriptUrl != null
+                                && !ContentSecurityPolicy.allowsExternalScript(page, element, scriptUrl)) {
+                            executeEvent(element, Event.TYPE_ERROR);
+                            return;
+                        }
+                    }
+
                     Charset charset = EncodingSniffer.toCharset(script.getScriptCharset());
                     if (charset == null) {
                         charset = page.getCharset();
@@ -330,6 +364,12 @@ public final class ScriptElementSupport {
 
         final String scriptCode = getScriptCode(element);
         if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
+            final HtmlPage page = (HtmlPage) element.getPage();
+            if (!ContentSecurityPolicy.allowsInlineScript(page, element, scriptCode)) {
+                script.setExecuted(true);
+                return;
+            }
+
             final String url = element.getPage().getUrl().toExternalForm();
             final int line1 = element.getStartLineNumber();
             final int line2 = element.getEndLineNumber();
@@ -339,7 +379,7 @@ public final class ScriptElementSupport {
                 + ") to (" + line2 + ", " + col2 + ")";
 
             script.setExecuted(true);
-            ((HtmlPage) element.getPage()).executeJavaScript(scriptCode, desc, line1);
+            page.executeJavaScript(scriptCode, desc, line1);
         }
     }
 

@@ -66,6 +66,7 @@ import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
+import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
@@ -1003,6 +1004,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 return null;
             }
             finally {
+                if (javaScriptAlreadyRunning == null) {
+                    // the outermost script has finished
+                    ContentSecurityPolicy.firePendingViolations();
+                }
+
                 if (runningPage == null) {
                     cx.removeThreadLocal(KEY_RUNNING_PAGE);
                 }

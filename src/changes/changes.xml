@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="add" dev="rbri" issue="#638">
+                Content-Security-Policy support for scripts (script-src, script-src-elem, script-src-attr, default-src;
+                nonces, hashes, 'unsafe-inline', 'unsafe-eval', 'unsafe-hashes', 'strict-dynamic'), including
+                policies from meta elements, Content-Security-Policy-Report-Only and the securitypolicyviolation event
+                (with all properties).
+            </action>
             <action type="fix" dev="rbri">
                 Content-Security-Policy frame-ancestors is now checked against all ancestors of a frame
                 (not only the parent), all Content-Security-Policy headers (including comma separated policies)

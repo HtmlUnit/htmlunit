@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.background;
 
 import org.htmlunit.WebWindow;
+import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.HtmlPage;
 
 /**
@@ -48,7 +49,9 @@ class JavaScriptStringJob extends JavaScriptExecutionJob {
         if (script_ == null) {
             return;
         }
-        page.executeJavaScript(script_, "JavaScriptStringJob", 1);
+        if (ContentSecurityPolicy.allowsEval(page, script_, 0)) {
+            page.executeJavaScript(script_, "JavaScriptStringJob", 1);
+        }
     }
 
 }

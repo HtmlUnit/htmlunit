@@ -17,6 +17,7 @@ package org.htmlunit.html;
 import java.net.URL;
 import java.util.Map;
 
+import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 
@@ -33,6 +34,8 @@ public class HtmlMeta extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "meta";
+
+    private boolean contentSecurityPolicyProcessed_;
 
     /**
      * Creates an instance of HtmlMeta.
@@ -51,6 +54,24 @@ public class HtmlMeta extends HtmlElement {
             final WebClient client = page.getWebClient();
             final URL url = page.getUrl();
             client.addCookie(getContentAttribute(), url, this);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * Applies a Content-Security-Policy defined by this element; like in browsers this
+     * is only done if the element is a child of the head element.
+     */
+    @Override
+    public void onAllChildrenAddedToPage(final boolean postponed) {
+        super.onAllChildrenAddedToPage(postponed);
+
+        if (!contentSecurityPolicyProcessed_
+                && HttpHeader.CONTENT_SECURIRY_POLICY.equalsIgnoreCase(getHttpEquivAttribute().trim())
+                && getParentNode() instanceof HtmlHead
+                && getPage() instanceof HtmlPage htmlPage) {
+            contentSecurityPolicyProcessed_ = true;
+            ContentSecurityPolicy.addMetaPolicy(htmlPage, getContentAttribute());
         }
     }
 

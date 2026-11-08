@@ -32,6 +32,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -325,7 +326,9 @@ public class Location extends HtmlUnitScriptable {
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
             final HtmlPage page = (HtmlPage) window_.getWebWindow().getEnclosedPage();
-            page.executeJavaScript(script, "new location value", 1);
+            if (ContentSecurityPolicy.allowsJavaScriptUrl(page, null, newLocation)) {
+                page.executeJavaScript(script, "new location value", 1);
+            }
             return;
         }
 

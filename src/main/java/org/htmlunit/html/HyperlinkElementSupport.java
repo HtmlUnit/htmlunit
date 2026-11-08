@@ -83,6 +83,10 @@ public final class HyperlinkElementSupport {
         final String downloadAttribute = element.getDownloadAttribute();
         HtmlPage page = (HtmlPage) htmlElement.getPage();
         if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (!ContentSecurityPolicy.allowsJavaScriptUrl(page, htmlElement, href)) {
+                return;
+            }
+
             final StringBuilder builder = new StringBuilder(href.length());
             builder.append(JavaScriptURLConnection.JAVASCRIPT_PREFIX);
             for (int i = JavaScriptURLConnection.JAVASCRIPT_PREFIX.length(); i < href.length(); i++) {

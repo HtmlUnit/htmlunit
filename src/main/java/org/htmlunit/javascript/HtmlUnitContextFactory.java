@@ -34,8 +34,11 @@ import org.htmlunit.corejs.javascript.Evaluator;
 import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.ScriptStackElement;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.debug.Debugger;
+import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 
@@ -163,6 +166,10 @@ public class HtmlUnitContextFactory extends ContextFactory {
             // which is used for window.eval. We have to take care in which case we are.
             final boolean isWindowEval = compiler != null;
 
+            if (isWindowEval) {
+                ensureEvalAllowed(source);
+            }
+
             // Remove HTML comments around the source if needed
             if (!isWindowEval) {
 
@@ -201,6 +208,11 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 final Evaluator compiler, final ErrorReporter compilationErrorReporter,
                 final String sourceName, final int lineno, final Object securityDomain) {
 
+            // the compiler is only given for new Function(...)
+            if (compiler != null) {
+                ensureEvalAllowed(source);
+            }
+
             if (deminifyFunctionCode_) {
                 final Function f = super.compileFunction(scope, source, compiler,
                         compilationErrorReporter, sourceName, lineno, securityDomain);
@@ -208,6 +220,37 @@ public class HtmlUnitContextFactory extends ContextFactory {
             }
             return super.compileFunction(scope, source, compiler,
                     compilationErrorReporter, sourceName, lineno, securityDomain);
+        }
+    }
+
+    /**
+     * Throws an EvalError if the Content-Security-Policy of the page of the
+     * running script does not allow the evaluation of strings as code.
+     *
+     * @param source the source to evaluate
+     */
+    private static void ensureEvalAllowed(final String source) {
+        final Context cx = Context.getCurrentContext();
+        if (cx == null) {
+            return;
+        }
+
+        Object page = cx.getThreadLocal(JavaScriptEngine.KEY_RUNNING_PAGE);
+        if (!(page instanceof HtmlPage)) {
+            page = cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
+        }
+        if (page instanceof HtmlPage htmlPage) {
+            // the line of the code calling eval (the first script frame)
+            int lineNumber = 0;
+            final ScriptStackElement[] stack = new EvaluatorException("eval").getScriptStack();
+            if (stack.length > 0) {
+                lineNumber = Math.max(0, stack[0].lineNumber);
+            }
+            if (!ContentSecurityPolicy.allowsEval(htmlPage, source, lineNumber)) {
+                throw ScriptRuntime.constructError("EvalError",
+                        "Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed "
+                        + "source of script in the Content Security Policy of the page.");
+            }
         }
     }
 

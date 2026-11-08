@@ -183,6 +183,8 @@ public class HtmlPage extends SgmlPage {
     private List<HtmlElement> autofocusCandidates_;
     // true if the autofocus was already processed; the autofocus is only used once per page
     private boolean autofocusProcessed_;
+
+    private ContentSecurityPolicy contentSecurityPolicy_;
     // true if the page is loaded; candidates inserted later are processed by a job
     private boolean autofocusAfterLoad_;
     private boolean autofocusJobScheduled_;
@@ -229,6 +231,7 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
+        contentSecurityPolicy_ = ContentSecurityPolicy.fromResponse(webResponse);
     }
 
     /**
@@ -237,6 +240,28 @@ public class HtmlPage extends SgmlPage {
     @Override
     public HtmlPage getPage() {
         return this;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the Content-Security-Policy of this page.
+     *
+     * @return the policy or {@code null} if this page has no policy
+     */
+    public ContentSecurityPolicy getContentSecurityPolicy() {
+        return contentSecurityPolicy_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets the Content-Security-Policy of this page.
+     *
+     * @param contentSecurityPolicy the policy
+     */
+    void setContentSecurityPolicy(final ContentSecurityPolicy contentSecurityPolicy) {
+        contentSecurityPolicy_ = contentSecurityPolicy;
     }
 
     /**

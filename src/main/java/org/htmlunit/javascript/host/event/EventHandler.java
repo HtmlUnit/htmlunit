@@ -20,7 +20,11 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.html.ContentSecurityPolicy;
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Wraps event handler code as a {@link Function} object.
@@ -33,6 +37,7 @@ public class EventHandler extends BaseFunction {
     private final String eventName_;
     private final String jsSnippet_;
     private Function realFunction_;
+    private boolean blockedByContentSecurityPolicy_;
 
     /**
      * Builds a function that will execute the given JavaScript code.
@@ -65,6 +70,16 @@ public class EventHandler extends BaseFunction {
 
         // compile "just in time"
         if (realFunction_ == null) {
+            if (blockedByContentSecurityPolicy_) {
+                return JavaScriptEngine.UNDEFINED;
+            }
+            if (node_ instanceof DomElement element
+                    && element.getPage() instanceof HtmlPage page
+                    && !ContentSecurityPolicy.allowsScriptAsAttribute(page, element, jsSnippet_)) {
+                blockedByContentSecurityPolicy_ = true;
+                return JavaScriptEngine.UNDEFINED;
+            }
+
             final String js = "function on" + eventName_ + "(event) { " + jsSnippet_ + " \n}";
             realFunction_ = cx.compileFunction(scope, js, eventName_ + " event for " + node_
                                     + " in " + node_.getPage().getUrl(), 0, null);
