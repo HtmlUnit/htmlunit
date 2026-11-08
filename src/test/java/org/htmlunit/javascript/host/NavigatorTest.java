@@ -598,9 +598,7 @@ public class NavigatorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
-        }
+        sleepRealBrowser(100);
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
 
         final String contentType = getMockWebConnection().getLastWebRequest()
@@ -631,9 +629,7 @@ public class NavigatorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
-        }
+        sleepRealBrowser(100);
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
 
         final String contentType = getMockWebConnection().getLastWebRequest()
@@ -665,9 +661,7 @@ public class NavigatorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
-        }
+        sleepRealBrowser(100);
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
 
         final String contentType = getMockWebConnection().getLastWebRequest()
@@ -700,9 +694,7 @@ public class NavigatorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
-        }
+        sleepRealBrowser(100);
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
 
         final String contentType = getMockWebConnection().getLastWebRequest()
@@ -739,9 +731,7 @@ public class NavigatorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html, getExpectedAlerts()[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
-        }
+        sleepRealBrowser(100);
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
 
         final String contentType = getMockWebConnection().getLastWebRequest()

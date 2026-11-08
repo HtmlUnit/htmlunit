@@ -189,9 +189,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ByTagName("input")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         final URL requestedUrl = getMockWebConnection().getLastWebRequest().getUrl();
@@ -216,9 +214,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ByTagName("input")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         final URL requestedUrl = getMockWebConnection().getLastWebRequest().getUrl();
@@ -332,9 +328,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             driver.get(url.toExternalForm());
 
             driver.findElement(new ById("mySubmit")).click();
-            if (useRealBrowser()) {
-                Thread.sleep(400);
-            }
+            sleepRealBrowser(400);
 
             assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
             assertEquals(2, primitiveWebServer.getRequests().size());
@@ -368,9 +362,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(firstHtml, requestUrl);
 
         driver.findElement(new ById("mySubmit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
@@ -406,9 +398,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(firstHtml, requestUrl);
 
         driver.findElement(new ById("mySubmit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
@@ -520,9 +510,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html, URL_FIRST);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
@@ -555,9 +543,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html, URL_FIRST);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
@@ -597,9 +583,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
         assertTrue(driver.getPageSource().contains(getExpectedAlerts()[1]));
@@ -638,9 +622,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
         assertTrue(driver.getPageSource().contains(getExpectedAlerts()[1]));
@@ -691,9 +673,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
         assertTrue(getMockWebConnection().getLastWebRequest()
@@ -722,9 +702,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertTrue("Incorrect conent of new window", driver.getPageSource().contains(getExpectedAlerts()[0]));
@@ -751,9 +729,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
@@ -780,9 +756,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
@@ -810,9 +784,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND.toString(),
@@ -843,9 +815,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
@@ -875,9 +845,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
@@ -906,9 +874,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html, URL_FIRST);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
@@ -1089,9 +1055,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
@@ -1121,9 +1085,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
@@ -1153,9 +1115,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
@@ -1185,9 +1145,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
@@ -1231,9 +1189,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -1289,9 +1245,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -1332,9 +1286,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -1374,9 +1326,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -1558,9 +1508,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -1599,9 +1547,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST + "index.html?test#ref"));
         driver.findElement(By.id("button")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -1634,9 +1580,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST + "index.html?test#ref"));
         driver.findElement(By.id("button")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -1669,9 +1613,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST + "index.html?test#ref"));
         driver.findElement(By.id("button")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -1704,9 +1646,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST + "index.html?test#ref"));
         driver.findElement(By.id("button")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -1865,9 +1805,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 
@@ -2056,9 +1994,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(URL_FIRST, null);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertSame(expectedRequestCharset, getMockWebConnection().getLastWebRequest().getCharset());
 

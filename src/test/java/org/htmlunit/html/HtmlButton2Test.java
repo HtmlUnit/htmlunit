@@ -350,9 +350,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], button.getAttribute("type"));
 
         button.click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         final List<NameValuePair> params = getMockWebConnection().getLastParameters();
         assertEquals(getExpectedAlerts()[1], "" + params.size());
@@ -385,9 +383,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
@@ -418,9 +414,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND + "?text=", getMockWebConnection().getLastWebRequest().getUrl());
@@ -523,9 +517,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
@@ -556,9 +548,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
@@ -589,9 +579,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
@@ -652,9 +640,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
@@ -722,9 +708,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
@@ -760,9 +744,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());

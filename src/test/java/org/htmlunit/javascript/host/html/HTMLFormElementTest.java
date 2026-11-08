@@ -545,9 +545,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0], getExpectedAlerts()[1]);
 
         driver.findElement(By.name("submit1")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertTitle(driver, "Response");
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -590,9 +589,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0], getExpectedAlerts()[1]);
 
         driver.findElement(By.name("submit1")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertTitle(driver, "Response");
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -1441,9 +1439,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPageWithAlerts2(html);
         driver.findElement(By.id("x")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(URL_FIRST + expectedFile, driver.getCurrentUrl().replaceAll("\\?", ""));
     }
 
@@ -1616,9 +1613,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver wd = loadPageWithAlerts2(html);
         wd.findElement(By.id(id)).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(URL_FIRST + expectedUrlSuffix, wd.getCurrentUrl());
     }
 
@@ -2047,9 +2043,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             final String path = tmpFile.getAbsolutePath();
             driver.findElement(By.id("f")).sendKeys(path);
             driver.findElement(By.id("clickMe")).click();
-            if (useRealBrowser()) {
-                Thread.sleep(400);
-            }
+            sleepRealBrowser(400);
         }
         finally {
             assertTrue(tmpFile.delete());
@@ -2349,9 +2343,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             final String path = tmpFile.getAbsolutePath();
             driver.findElement(By.id("f")).sendKeys(path);
             driver.findElement(By.id("clickMe")).click();
-            if (useRealBrowser()) {
-                Thread.sleep(400);
-            }
+            sleepRealBrowser(400);
         }
         finally {
             assertTrue(tmpFile.delete());
@@ -2396,9 +2388,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
         driver.findElement(By.id("clickMe")).click(); // a second time to be sure to have same resulting Url
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(3, getMockWebConnection().getRequestCount());
     }
@@ -3203,9 +3193,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
@@ -3306,9 +3294,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
 
         loadPage2(html);
@@ -3316,9 +3303,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String absolutePath = new File("pom.xml").getAbsolutePath();
         e.sendKeys(absolutePath);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
     }
 
@@ -3417,9 +3403,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
@@ -3678,9 +3662,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
@@ -3714,9 +3696,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("submit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }

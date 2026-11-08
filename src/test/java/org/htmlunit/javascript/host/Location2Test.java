@@ -1036,9 +1036,7 @@ public class Location2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
 
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         verifySessionStorage2(driver, getExpectedAlerts()[0], getExpectedAlerts()[1], getExpectedAlerts()[2]);
         assertEquals(getExpectedAlerts()[3], driver.getCurrentUrl());
@@ -1125,9 +1123,8 @@ public class Location2Test extends WebDriverTestCase {
         // click an anchor with href and target
         driver.switchTo().frame(0);
         driver.findElement(By.id("link")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(4, conn.getRequestCount());
         assertEquals(getExpectedAlerts()[0], conn.getLastWebRequest().getUrl());
         Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
@@ -1135,9 +1132,8 @@ public class Location2Test extends WebDriverTestCase {
 
         // click an anchor with onclick which sets frame.location
         driver.findElement(By.id("jsLink")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(5, conn.getRequestCount());
         assertEquals(getExpectedAlerts()[0], conn.getLastWebRequest().getUrl());
         lastAdditionalHeaders = conn.getLastAdditionalHeaders();
@@ -1183,9 +1179,8 @@ public class Location2Test extends WebDriverTestCase {
         // click an anchor with href and target
         driver.switchTo().frame(0);
         driver.findElement(By.id("link")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(4, conn.getRequestCount());
         assertEquals(getExpectedAlerts()[0], conn.getLastWebRequest().getUrl());
         Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
@@ -1193,9 +1188,8 @@ public class Location2Test extends WebDriverTestCase {
 
         // click an anchor with onclick which sets frame.location
         driver.findElement(By.id("jsLink")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(5, conn.getRequestCount());
         assertEquals(getExpectedAlerts()[0], conn.getLastWebRequest().getUrl());
         lastAdditionalHeaders = conn.getLastAdditionalHeaders();
@@ -1261,9 +1255,8 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(1, getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("link")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(200);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
@@ -1517,15 +1510,13 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("enter")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(200);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("link")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(200);
-        }
+        sleepRealBrowser(400);
+
         assertEquals(Integer.parseInt(getExpectedAlerts()[2]), getMockWebConnection().getRequestCount());
 
         assertEquals(HttpMethod.POST, getMockWebConnection().getLastWebRequest().getHttpMethod());

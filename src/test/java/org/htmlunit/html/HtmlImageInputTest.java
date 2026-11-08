@@ -58,9 +58,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.name("button")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
@@ -83,9 +81,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.name("button")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
@@ -111,9 +107,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         final WebElement elem = webDriver.findElement(By.name("button"));
         final Actions actions = new Actions(webDriver);
         actions.moveToElement(elem).moveByOffset(1, 4).click().perform();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+        sleepRealBrowser(400);
 
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
@@ -358,9 +352,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("submit")).click();
 
-        if (useRealBrowser()) {
-            Thread.sleep(200);
-        }
+        sleepRealBrowser(200);
+
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
     }
