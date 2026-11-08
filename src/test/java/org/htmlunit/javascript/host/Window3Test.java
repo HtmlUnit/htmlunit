@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -1862,9 +1863,9 @@ public class Window3Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        assertEquals(String.join("\n", getExpectedAlerts()),
+                () -> driver.getTitle().trim().replaceAll(";", "\n").trim(),
+                Duration.ofMillis(200));
     }
 
     /**
@@ -1947,9 +1948,9 @@ public class Window3Test extends WebDriverTestCase {
                 org.htmlunit.util.MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        assertEquals(String.join("\n", getExpectedAlerts()),
+                () -> driver.getTitle().trim().replaceAll(";", "\n").trim(),
+                Duration.ofMillis(200));
     }
 
     /**
@@ -2035,11 +2036,14 @@ public class Window3Test extends WebDriverTestCase {
         final Comparator<String> sorter = Comparator.comparing(s -> StringUtils.substringBefore(s, ":"));
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = Pattern.compile(";").splitAsStream(driver.getTitle())
-                .map(String::trim).sorted(sorter).collect(Collectors.joining("\n"));
         final String expected = Arrays.stream(getExpectedAlerts()).sorted(sorter).collect(Collectors.joining("\n"));
-        assertEquals(expected, text);
+        assertEquals(expected,
+                () -> Pattern.compile(";")
+                        .splitAsStream(driver.getTitle())
+                        .map(String::trim)
+                        .sorted(sorter)
+                        .collect(Collectors.joining("\n")),
+                Duration.ofMillis(200));
     }
 
     /**
@@ -2146,9 +2150,9 @@ public class Window3Test extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        assertEquals(String.join("\n", getExpectedAlerts()),
+                () -> driver.getTitle().trim().replaceAll(";", "\n").trim(),
+                Duration.ofMillis(200));
     }
 
     /**

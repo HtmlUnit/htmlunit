@@ -482,38 +482,142 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Verifies the captured alerts.
-     * @param func actual string producer
-     * @param expected the expected string
-     * @throws Exception in case of failure
+     * Asserts that the value returned by the given supplier is equal to the expected value.
+     *
+     * @param expected the expected value
+     * @param func the supplier of the actual value (e.g. the window name or the page title)
+     * @param maxWaitTime the maximum time to wait for the expected value
+     * @throws Exception if the waiting is interrupted
+     * @see #assertEquals(String, Supplier, Duration)
      */
-    protected void verify(final Supplier<String> func, final String expected) throws Exception {
-        verify(func, expected, DEFAULT_WAIT_TIME);
+    protected void verify(final String expected, final Supplier<String> func,
+            final Duration maxWaitTime) throws Exception {
+        assertEquals(expected, func, maxWaitTime);
     }
 
     /**
-     * Verifies the captured alerts.
-     * @param func actual string producer
-     * @param expected the expected string
-     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
-     * @throws Exception in case of failure
+     * Asserts that the value returned by the given supplier is equal to the expected value.
+     * The supplier is called repeatedly (every 50ms) until it returns the expected value
+     * or the given time has passed. Use this instead of fixed waits in tests
+     * that depend on background processing (e.g. timeouts or asynchronous requests).
+     *
+     * @param expected the expected value
+     * @param func the supplier of the actual value (e.g. the window name or the page title)
+     * @param maxWaitTime the maximum time to wait for the expected value
+     * @throws InterruptedException if the waiting is interrupted
      */
-    protected void verify(final Supplier<String> func, final String expected,
-            final Duration maxWaitTime) throws Exception {
+    protected static void assertEquals(final String expected, final Supplier<String> func,
+            final Duration maxWaitTime) throws InterruptedException {
+        Assertions.assertEquals(expected, waitFor(expected, func, maxWaitTime));
+    }
+
+    /**
+     * Asserts that the value returned by the given supplier is equal to the expected value.
+     * The supplier is called repeatedly (every 50ms) until it returns the expected value
+     * or the given time has passed. Use this instead of fixed waits in tests
+     * that depend on background processing (e.g. timeouts or asynchronous requests).
+     *
+     * @param message the message to display if the assertion fails
+     * @param expected the expected value
+     * @param func the supplier of the actual value (e.g. the window name or the page title)
+     * @param maxWaitTime the maximum time to wait for the expected value
+     * @throws InterruptedException if the waiting is interrupted
+     */
+    protected static void assertEquals(final String message, final String expected,
+            final Supplier<String> func, final Duration maxWaitTime) throws InterruptedException {
+        Assertions.assertEquals(expected, waitFor(expected, func, maxWaitTime), message);
+    }
+
+    /**
+     * Asserts that the value returned by the given supplier is equal to the expected value.
+     * The supplier is called repeatedly (every 50ms) until it returns the expected value
+     * or the given time has passed. Use this instead of fixed waits in tests
+     * that depend on background processing (e.g. timeouts or asynchronous requests).
+     *
+     * @param expected the expected value
+     * @param func the supplier of the actual value (e.g. the number of elements)
+     * @param maxWaitTime the maximum time to wait for the expected value
+     * @throws InterruptedException if the waiting is interrupted
+     */
+    protected static void assertEquals(final int expected, final Supplier<Integer> func,
+            final Duration maxWaitTime) throws InterruptedException {
+        Assertions.assertEquals(Integer.valueOf(expected), waitFor(expected, func, maxWaitTime));
+    }
+
+    /**
+     * Asserts that the value returned by the given supplier is equal to the expected value.
+     * The supplier is called repeatedly (every 50ms) until it returns the expected value
+     * or the given time has passed. Use this instead of fixed waits in tests
+     * that depend on background processing (e.g. timeouts or asynchronous requests).
+     *
+     * @param message the message to display if the assertion fails
+     * @param expected the expected value
+     * @param func the supplier of the actual value (e.g. the number of elements)
+     * @param maxWaitTime the maximum time to wait for the expected value
+     * @throws InterruptedException if the waiting is interrupted
+     */
+    protected static void assertEquals(final String message, final int expected,
+            final Supplier<Integer> func, final Duration maxWaitTime) throws InterruptedException {
+        Assertions.assertEquals(Integer.valueOf(expected), waitFor(expected, func, maxWaitTime), message);
+    }
+
+    /**
+     * Asserts that the list returned by the given supplier contains the expected strings.
+     * The supplier is called repeatedly (every 50ms) until the list contains the expected
+     * strings or the given time has passed. Use this instead of fixed waits in tests
+     * that depend on background processing (e.g. alerts collected from timeouts).
+     *
+     * @param expected the expected strings
+     * @param func the supplier of the actual list (e.g. the collected alerts)
+     * @param maxWaitTime the maximum time to wait for the expected strings
+     * @throws InterruptedException if the waiting is interrupted
+     */
+    protected static void assertEquals(final String[] expected, final Supplier<List<String>> func,
+            final Duration maxWaitTime) throws InterruptedException {
+        assertEquals(null, expected, func, maxWaitTime);
+    }
+
+    /**
+     * Asserts that the list returned by the given supplier contains the expected strings.
+     * The supplier is called repeatedly (every 50ms) until the list contains the expected
+     * strings or the given time has passed. Use this instead of fixed waits in tests
+     * that depend on background processing (e.g. alerts collected from timeouts).
+     *
+     * @param message the message to display if the assertion fails
+     * @param expected the expected strings
+     * @param func the supplier of the actual list (e.g. the collected alerts)
+     * @param maxWaitTime the maximum time to wait for the expected strings
+     * @throws InterruptedException if the waiting is interrupted
+     */
+    protected static void assertEquals(final String message, final String[] expected,
+            final Supplier<List<String>> func, final Duration maxWaitTime) throws InterruptedException {
+        final String expectedString = Arrays.asList(expected).toString();
+        final String actual = waitFor(expectedString, () -> String.valueOf(func.get()), maxWaitTime);
+        Assertions.assertEquals(expectedString, actual, message);
+    }
+
+    /**
+     * Calls the supplier (every 50ms) until it returns the expected value
+     * or the given time has passed. The supplier is called at least once
+     * and once more after the last wait.
+     *
+     * @param <T> the type of the value
+     * @param expected the expected value
+     * @param func the supplier of the actual value
+     * @param maxWaitTime the maximum time to wait for the expected value
+     * @return the last value returned by the supplier
+     * @throws InterruptedException if the waiting is interrupted
+     */
+    private static <T> T waitFor(final T expected, final Supplier<T> func,
+            final Duration maxWaitTime) throws InterruptedException {
         final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
-        String actual = null;
-        while (System.currentTimeMillis() < maxWait) {
-            actual = func.get();
-
-            if (Objects.equals(expected, actual)) {
-                break;
-            }
-
+        T actual = func.get();
+        while (!Objects.equals(expected, actual) && System.currentTimeMillis() < maxWait) {
             Thread.sleep(50);
+            actual = func.get();
         }
-
-        assertEquals(expected, actual);
+        return actual;
     }
 
     /**
@@ -586,7 +690,7 @@ public abstract class WebTestCase {
             final BufferedImage expectedImage = ImageIO.read(expectedBis);
 
             if (expectedImage == null) {
-                assertEquals(expected, current, "Could not decode expected image from base64 data");
+                assertEquals("Could not decode expected image from base64 data", expected, current);
                 return;
             }
 
@@ -616,7 +720,7 @@ public abstract class WebTestCase {
                 }
 
                 // fail(fail);
-                assertEquals(expected, current, fail);
+                assertEquals(fail, expected, current);
             }
             else if (ImageComparisonState.MISMATCH == imageComparisonState) {
                 final List<String> result = debugOutput(expectedImage, currentImage, imageComparisonResult.getResult());
@@ -629,7 +733,7 @@ public abstract class WebTestCase {
                 }
 
                 // fail(fail);
-                assertEquals(expected, current, fail);
+                assertEquals(fail, expected, current);
             }
         }
     }

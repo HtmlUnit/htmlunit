@@ -49,6 +49,6 @@ public class PolymerWebComponentsTest extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(url);
 
-        verify(() -> driver.findElement(By.tagName("body")).getText(), getExpectedAlerts()[0]);
+        assertEquals(getExpectedAlerts()[0], () -> driver.findElement(By.tagName("body")).getText(), DEFAULT_WAIT_TIME);
     }
 }

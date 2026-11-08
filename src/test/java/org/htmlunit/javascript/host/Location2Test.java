@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import java.net.URL;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -1068,8 +1069,9 @@ public class Location2Test extends WebDriverTestCase {
 
         // click an anchor with href and target
         driver.findElement(By.id("link")).click();
+
         // because real browsers are doing the open async, we have to be a bit patient
-        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis());
 
         assertEquals(2, conn.getRequestCount());
         Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
@@ -1370,8 +1372,7 @@ public class Location2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("reload")).click();
         // real ff seems to process the reload a bit async
-        Thread.sleep(100);
-        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), () -> getMockWebConnection().getRequestCount(), Duration.ofMillis(100));
 
         assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
 

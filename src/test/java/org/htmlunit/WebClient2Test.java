@@ -344,12 +344,12 @@ public class WebClient2Test extends SimpleWebTestCase {
 
         // Load page 1. Has a setTimeout(...) function
         final HtmlPage page1 = client.getPage(URL_FIRST);
-        verify(() -> page1.getEnclosingWindow().getName(), getExpectedAlerts()[0]);
+        assertEquals(getExpectedAlerts()[0], () -> page1.getEnclosingWindow().getName(), DEFAULT_WAIT_TIME);
 
         // Immediately load page 2. Timeout function was triggered already
         final HtmlPage page2 = client.getPage(URL_SECOND);
-        verify(() -> page1.getEnclosingWindow().getName(),
-                getExpectedAlerts()[0] + getExpectedAlerts()[1], DEFAULT_WAIT_TIME.multipliedBy(4));
+        assertEquals(getExpectedAlerts()[0] + getExpectedAlerts()[1],
+                () -> page1.getEnclosingWindow().getName(), DEFAULT_WAIT_TIME.multipliedBy(4));
 
         // Fails: return 98 (about) instead of 1
         // assertEquals(1, page.querySelectorAll("p").size());

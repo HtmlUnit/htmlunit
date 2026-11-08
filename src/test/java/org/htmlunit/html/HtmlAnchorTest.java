@@ -373,7 +373,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement tester = driver.findElement(By.id("a"));
         tester.click();
 
-        Thread.sleep(100);
+        sleepRealBrowser(100);
         assertEquals(2, driver.getWindowHandles().size());
     }
 
@@ -712,7 +712,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             .keyUp(Keys.SHIFT)
             .perform();
 
-        Thread.sleep(100);
+        sleepRealBrowser(100);
+
         assertEquals("Should have opened a new window",
                 windowsSize + Integer.parseInt(getExpectedAlerts()[0]), driver.getWindowHandles().size());
         assertEquals("Should not have navigated away", getExpectedAlerts()[1], driver.getTitle());
@@ -743,9 +744,10 @@ public class HtmlAnchorTest extends WebDriverTestCase {
                 .keyUp(Keys.CONTROL)
                 .perform();
 
-        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
         assertEquals("Should have opened a new window",
-                windowsSize + Integer.parseInt(getExpectedAlerts()[0]), driver.getWindowHandles().size());
+                windowsSize + Integer.parseInt(getExpectedAlerts()[0]),
+                () -> driver.getWindowHandles().size(),
+                DEFAULT_WAIT_TIME);
         assertEquals("Should not have navigated away", getExpectedAlerts()[1], driver.getTitle());
     }
 
@@ -870,9 +872,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
                 .keyUp(Keys.CONTROL)
                 .build().perform();
 
-        Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 10);
-
-        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(2, () ->getMockWebConnection().getRequestCount(), DEFAULT_WAIT_TIME);
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));

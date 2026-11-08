@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -217,7 +218,6 @@ public class Console2Test extends SimpleWebTestCase {
                 + "</script></body></html>\n";
 
         loadPage(html);
-        Thread.sleep(100);
-        assertEquals(getExpectedAlerts(), messages);
+        assertEquals(getExpectedAlerts(), () -> messages, Duration.ofMillis(100));
     }
 }

@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.html;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.time.Duration;
 import java.util.Collections;
 
 import org.apache.commons.io.IOUtils;
@@ -1112,9 +1113,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         textinput.sendKeys("foo");
         final WebElement button = driver.findElement(By.name("myButton"));
         button.click();
+
         assertTitle(driver, getExpectedAlerts()[0]);
-        Thread.sleep(100);
-        assertEquals(getExpectedAlerts()[1], textinput.getDomProperty("value"));
+        assertEquals(getExpectedAlerts()[1], () -> textinput.getDomProperty("value"), Duration.ofMillis(100));
     }
 
     /**
@@ -1142,10 +1143,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         textinput.sendKeys("foo");
         final WebElement button = driver.findElement(By.name("myButton"));
         button.click();
-        assertTitle(driver, getExpectedAlerts()[0]);
 
-        Thread.sleep(100);
-        assertEquals(getExpectedAlerts()[1], textinput.getDomProperty("value"));
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(getExpectedAlerts()[1], () -> textinput.getDomProperty("value"), Duration.ofMillis(100));
     }
 
     /**

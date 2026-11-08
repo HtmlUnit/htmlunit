@@ -1345,7 +1345,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
 
-        verify(() -> textArea.getDomProperty("value"), expected.toString());
+        assertEquals(expected.toString(), () -> textArea.getDomProperty("value"), DEFAULT_WAIT_TIME);
         return driver;
     }
 

@@ -566,9 +566,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("it")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
-        }
+
+        sleepRealBrowser(400);
 
         verifyTitle2(driver, getExpectedAlerts());
     }

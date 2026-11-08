@@ -8,6 +8,14 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="update" dev="rbri">
+                Unit tests: replaced verify(...) by assertEquals(expected, supplier, maxWaitTime), which retries until the
+                expected value is returned or the time is up; helps to get rid of fixed waits.
+            </action>
+            <action type="update" dev="rbri">
+                Unit tests: new assertEquals(..., maxWaitTime) variants for String, int and String[]/List results;
+                they retry until the expected value is returned or the time is up, replacing fixed waits and verify(...).
+            </action>
             <action type="fix" dev="rbri" issue="#8">
                 Replacing the page of a window now waits for the currently running JavaScript job (max 10s);
                 a job still running afterwards is stopped and no longer modifies the new page.

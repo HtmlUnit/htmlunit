@@ -77,10 +77,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
                 + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickme")).click();
-        // because real browsers are doing the open async, we have to be a bit patient
-        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
 
-        assertEquals(getExpectedAlerts()[0], Integer.toString(getMockWebConnection().getRequestCount()));
+        // because real browsers are doing the open async, we have to be a bit patient
+        assertEquals(getExpectedAlerts()[0], () -> Integer.toString(getMockWebConnection().getRequestCount()), DEFAULT_WAIT_TIME);
         assertEquals(getExpectedAlerts()[1], acceptHeaderString());
     }
 

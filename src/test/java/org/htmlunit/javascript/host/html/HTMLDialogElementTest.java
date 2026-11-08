@@ -911,8 +911,9 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(secondContent);
 
         loadPage2(html);
-        Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 20); // FF
-        verifyWindowName2(getWebDriver(), getExpectedAlerts());
+
+        // FF
+        verifyWindowName2(DEFAULT_WAIT_TIME.dividedBy(20), getWebDriver(), getExpectedAlerts());
     }
 
     /**

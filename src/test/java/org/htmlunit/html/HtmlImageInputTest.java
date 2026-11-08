@@ -701,7 +701,9 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         driver.findElement(By.id("myUpdate")).click();
         verifyTitle2(driver, getExpectedAlerts()[0], getExpectedAlerts()[1]);
 
-        Thread.sleep(400); // CHROME processes the image async
+        // CHROME processes the image async
+        sleepRealBrowser(400);
+
         assertEquals(expectedRequestCount2, getMockWebConnection().getRequestCount() - startCount);
     }
 

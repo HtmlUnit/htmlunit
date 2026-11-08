@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.net.URL;
+import java.time.Duration;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.FormEncodingType;
@@ -1642,9 +1643,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(100);
 
-        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), () -> getMockWebConnection().getRequestCount(), Duration.ofMillis(100));
     }
 
     /**

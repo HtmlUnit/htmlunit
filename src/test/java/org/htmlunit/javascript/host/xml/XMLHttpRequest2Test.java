@@ -107,9 +107,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html, getExpectedAlerts()[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis());
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[1], request.getUrl());
@@ -214,9 +212,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html, new String[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis());
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());

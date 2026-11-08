@@ -29,6 +29,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -709,8 +710,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
         final HtmlPage page = loadPage(html);
         ((HtmlFileInput) page.getElementById("f")).setFiles(pom, license);
-        Thread.sleep(100);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
+        assertEquals(getExpectedAlerts(), () -> getCollectedAlerts(page), Duration.ofMillis(100));
     }
 
     /**

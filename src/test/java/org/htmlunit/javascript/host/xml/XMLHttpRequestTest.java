@@ -1719,9 +1719,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
         loadPage2(html);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(400);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());
@@ -1755,9 +1753,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
         loadPageVerifyTitle2(html, new String[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(400);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());
@@ -1791,9 +1787,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
         loadPageVerifyTitle2(html, new String[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(400);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());
@@ -1827,9 +1821,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
         loadPageVerifyTitle2(html, new String[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(400);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());
@@ -1863,9 +1855,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
         loadPageVerifyTitle2(html, new String[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(400);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());
@@ -1899,9 +1889,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html, getExpectedAlerts()[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(400);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[1], request.getUrl());
@@ -1933,9 +1921,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
         loadPageVerifyTitle2(html, new String[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(400);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());
@@ -1969,9 +1955,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
         loadPageVerifyTitle2(html, new String[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(400);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());
@@ -2005,9 +1989,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html, new String[0]);
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+        sleepRealBrowser(400);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());

@@ -710,9 +710,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("btn")).click();
 
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 100);
-        }
+        sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis() / 100);
+
         expandExpectedAlertsVariables(URL_SECOND);
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
     }

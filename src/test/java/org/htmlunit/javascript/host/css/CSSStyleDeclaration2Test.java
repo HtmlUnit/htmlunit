@@ -318,7 +318,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties", ".txt");
 
         final WebDriver driver = loadPage2(html);
-        verify(() -> driver.findElement(By.id("myLog")).getDomProperty("value"), expected);
+        assertEquals(expected, () -> driver.findElement(By.id("myLog")).getDomProperty("value"), DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -351,7 +351,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
 
         final WebDriver driver = loadPage2(html);
-        verify(() -> driver.findElement(By.id("myLog")).getDomProperty("value"), expected);
+        assertEquals(expected, () -> driver.findElement(By.id("myLog")).getDomProperty("value"), DEFAULT_WAIT_TIME);
     }
 
     /**

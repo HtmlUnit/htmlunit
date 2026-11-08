@@ -875,8 +875,7 @@ public class Window2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(windowContent);
         final WebDriver driver = loadPage2(html);
 
-        Thread.sleep(400);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertEquals(getExpectedAlerts()[0], () -> driver.getTitle(), Duration.ofMillis(400));
 
         // for unknown reason, the selenium driven browser is in an invalid state after this test
         releaseResources();

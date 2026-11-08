@@ -1176,7 +1176,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         driver.findElement(By.id("myButton")).click();
 
         driver.switchTo().frame("tester");
-        verify(() -> driver.findElement(By.tagName("body")).getText(), getExpectedAlerts()[0]);
+        assertEquals(getExpectedAlerts()[0], () -> driver.findElement(By.tagName("body")).getText(), DEFAULT_WAIT_TIME);
 
         if (driver instanceof HtmlUnitDriver) {
             final WebClient webClient = ((HtmlUnitDriver) driver).getWebClient();

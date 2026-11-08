@@ -19,6 +19,8 @@ import static org.htmlunit.javascript.host.xml.XMLDocumentTest.SERIALIZE_XML_DOC
 import static org.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
 import static org.htmlunit.javascript.host.xml.XMLDocumentTest.callSerializeXMLDocumentToString;
 
+import java.time.Duration;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
@@ -1457,8 +1459,7 @@ public class NodeTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
         final WebDriver driver = loadPage2(firstHtml);
-        Thread.sleep(200);
-        verifyWindowName2(driver, getExpectedAlerts());
+        verifyWindowName2(Duration.ofMillis(200), driver, getExpectedAlerts());
 
         driver.findElement(By.id("myInput")).click();
     }
@@ -1670,8 +1671,8 @@ public class NodeTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
         verifyWindowName2(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
-        Thread.sleep(200);
-        assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
+
+        assertEquals(getExpectedAlerts()[2], () -> driver.getCurrentUrl(), Duration.ofMillis(200));
     }
 
     /**
@@ -1707,8 +1708,8 @@ public class NodeTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
         verifyWindowName2(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
-        Thread.sleep(200);
-        assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
+
+        assertEquals(getExpectedAlerts()[2], () -> driver.getCurrentUrl(), Duration.ofMillis(200));
     }
 
     /**
@@ -1745,8 +1746,8 @@ public class NodeTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
         verifyWindowName2(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
-        Thread.sleep(200);
-        assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
+
+        assertEquals(getExpectedAlerts()[2], () -> driver.getCurrentUrl(), Duration.ofMillis(200));
     }
 
     /**

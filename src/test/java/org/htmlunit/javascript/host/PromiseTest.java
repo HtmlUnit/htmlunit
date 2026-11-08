@@ -1815,7 +1815,6 @@ public class PromiseTest extends WebDriverTestCase {
               + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(100);
         assertTitle(driver, getExpectedAlerts()[0]);
     }
 

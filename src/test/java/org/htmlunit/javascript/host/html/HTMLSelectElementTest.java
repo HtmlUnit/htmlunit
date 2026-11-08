@@ -188,9 +188,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         final WebDriver webdriver = loadPageVerifyTitle2(html);
         webdriver.findElement(By.id("clickMe")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-        }
+
+        sleepRealBrowser(DEFAULT_WAIT_TIME.toMillis());
 
         assertEquals(URL_FIRST + "foo?submit=button", webdriver.getCurrentUrl());
         assertSame("method", HttpMethod.GET, getMockWebConnection().getLastMethod());
@@ -2646,7 +2645,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         final Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.id("select1")));
         actions.perform();
-        Thread.sleep(400);
 
         assertTitle(driver, getExpectedAlerts()[0]);
     }
@@ -2681,7 +2679,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         final Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.id("select1")));
         actions.perform();
-        Thread.sleep(400);
 
         assertTitle(driver, getExpectedAlerts()[0]);
     }

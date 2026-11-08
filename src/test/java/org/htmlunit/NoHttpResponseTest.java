@@ -92,9 +92,8 @@ public class NoHttpResponseTest {
 
                 driver.get(URL_FIRST.toString());
                 driver.findElement(By.id("inputSubmit")).click();
-                if (useRealBrowser()) {
-                    Thread.sleep(400);
-                }
+
+                sleepRealBrowser(400);
                 assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
             }
             catch (final WebDriverException e) {
