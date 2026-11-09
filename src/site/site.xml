@@ -42,6 +42,7 @@
             <item name="Keyboard Simulation" href="/keyboard-howto.html"/>
             <item name="Windows &amp; Frames" href="/window-frame.html"/>
             <item name="JavaScript Support" href="/javascript.html"/>
+            <item name="Content Security Policy" href="/csp.html"/>
             <item name="Image Formats" href="/images-howto.html"/>
             <item name="Logging" href="/logging.html"/>
             <item name="Security" href="/security.html"/>
@@ -69,4 +70,3 @@
 
     </body>
 </site>
-

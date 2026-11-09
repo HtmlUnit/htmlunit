@@ -26,6 +26,8 @@ import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.ContentSecurityPolicyViolation;
+import org.htmlunit.ContentSecurityPolicyViolationListener;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
@@ -343,12 +345,6 @@ public final class ContentSecurityPolicy implements Serializable {
                     + "' blocked '" + blockedUri + "' in '" + page.getUrl() + "' (policy '" + policy + "').");
         }
 
-        final WebWindow window = page.getEnclosingWindow();
-        if (window == null || !page.getWebClient().isJavaScriptEnabled()
-                || window.getScriptableObject() == null) {
-            return;
-        }
-
         String sample = "";
         if (source != null) {
             final SourceExpressionDirective governing =
@@ -366,6 +362,20 @@ public final class ContentSecurityPolicy implements Serializable {
         final String originalPolicy = policy.toString();
         final int statusCode = page.getWebResponse() == null ? 0 : page.getWebResponse().getStatusCode();
         final String finalSample = sample;
+
+        final ContentSecurityPolicyViolationListener listener =
+                page.getWebClient().getContentSecurityPolicyViolationListener();
+        if (listener != null) {
+            listener.violation(page, new ContentSecurityPolicyViolation(documentUrl, blockedUri,
+                    effectiveDirective, originalPolicy, sourceFile, finalSample, lineNumber, columnNumber,
+                    statusCode, SecurityPolicyViolationEvent.DISPOSITION_REPORT.equals(disposition)));
+        }
+
+        final WebWindow window = page.getEnclosingWindow();
+        if (window == null || !page.getWebClient().isJavaScriptEnabled()
+                || window.getScriptableObject() == null) {
+            return;
+        }
 
         final Runnable fireEvent = () -> {
             final SecurityPolicyViolationEvent event = new SecurityPolicyViolationEvent(target);

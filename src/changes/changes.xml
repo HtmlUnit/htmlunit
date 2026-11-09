@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="add" dev="rbri" issue="#638">
+                Content-Security-Policy: WebSocket and navigator.sendBeacon() support the connect-src directive
+                (with default-src as fallback); like in browsers ws: and wss: urls are matched without mapping
+                them to http: and https:. A blocked WebSocket fails (error and close event 1006), a blocked beacon is not sent.
+            </action>
+            <action type="update" dev="rbri">
+                csp: new Policy.allowsConnection(source, origin, mapWebSocketScheme) to match ws: and wss: urls
+                like browsers (without mapping them to http: and https:); the existing method keeps the spec behavior.
+            </action>
             <action type="fix" dev="rbri" issue="#1188" due-to="Vladimir Babin">
                 DOMTokenList.toggle() now honors the optional force argument: a true value only adds the token
                 and a false value only removes it, matching the DOM standard.

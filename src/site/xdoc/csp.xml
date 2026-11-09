@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Content Security Policy (CSP)</title>
+        <author>RBRi</author>
+    </properties>
+
+    <body>
+        <macro name="toc"/>
+
+        <section name="Overview" id="sec_overview">
+            <p>
+                A <a href="https://w3c.github.io/webappsec-csp/">Content Security Policy</a> (CSP) tells the
+                browser which scripts, connections and frames a page is allowed to use.
+                HtmlUnit enforces the policies of a page like real browsers do; violations block the
+                action, fire the <code>securitypolicyviolation</code> event and are reported to your
+                Java code.
+            </p>
+            <p>
+                This makes HtmlUnit useful to test your policies: a test page that works in HtmlUnit
+                but violates its own policy is detected in your unit tests, without a real browser.
+            </p>
+            <p>
+                The matching of urls and source expressions is done by
+                <a href="https://github.com/HtmlUnit/htmlunit-csp">htmlunit-csp</a>; HtmlUnit
+                applies the result to the different places scripts, connections and frames are used.
+            </p>
+            <p>
+                <strong>Note:</strong> CSP support is still growing. The supported directives are
+                listed below; all other directives are parsed but not enforced
+                (see <a href="#sec_not_supported">Not supported (yet)</a>).
+            </p>
+        </section>
+
+        <section name="Delivering a Policy" id="sec_delivery">
+            <p>
+                HtmlUnit reads the policies of a page from
+            </p>
+            <ul>
+                <li>
+                    the <code>Content-Security-Policy</code> response header; a response may contain
+                    several of these headers and every header may contain a comma separated list of
+                    policies. All policies are enforced; an action is only allowed if all policies
+                    allow it.
+                </li>
+                <li>
+                    the <code>Content-Security-Policy-Report-Only</code> response header; these policies
+                    never block anything, violations are only reported
+                    (event, log, <a href="#sec_listener">listener</a>).
+                </li>
+                <li>
+                    <code>&lt;meta http-equiv="Content-Security-Policy" content="..."&gt;</code> elements.
+                    Like in browsers, only meta elements inside the <code>head</code> are used,
+                    the policy only applies to the content following the meta element and
+                    <code>Content-Security-Policy-Report-Only</code> is not supported in meta elements.
+                </li>
+            </ul>
+            <p>
+                The <code>frame-ancestors</code> directive is only supported in the response header
+                (like in browsers).
+            </p>
+        </section>
+
+        <section name="Supported Directives" id="sec_directives">
+            <table>
+                <tr>
+                    <th>Directive</th>
+                    <th>Checked for</th>
+                </tr>
+                <tr>
+                    <td><code>script-src-elem</code></td>
+                    <td>
+                        inline and external <code>&lt;script&gt;</code> elements (parser inserted and
+                        created by JavaScript), <code>javascript:</code> urls
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>script-src-attr</code></td>
+                    <td>event handler attributes (e.g. <code>onclick="..."</code>)</td>
+                </tr>
+                <tr>
+                    <td><code>script-src</code></td>
+                    <td>
+                        <code>eval()</code>, <code>new Function()</code>, <code>setTimeout()</code> and
+                        <code>setInterval()</code> with a string; fallback for
+                        <code>script-src-elem</code> and <code>script-src-attr</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>connect-src</code></td>
+                    <td>
+                        <code>XMLHttpRequest</code> (including all redirect targets), <code>fetch()</code>
+                        (HtmlUnit uses a polyfill based on <code>XMLHttpRequest</code>),
+                        <code>WebSocket</code>, <code>navigator.sendBeacon()</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>default-src</code></td>
+                    <td>fallback for all the directives above (except <code>frame-ancestors</code>)</td>
+                </tr>
+                <tr>
+                    <td><code>frame-ancestors</code></td>
+                    <td>
+                        loading a page into a frame or iframe; all ancestors up to the top window
+                        have to be allowed. A frame showing <code>about:blank</code> uses the origin
+                        of its parent.
+                    </td>
+                </tr>
+            </table>
+            <p>
+                The <code>X-Frame-Options</code> header (<code>DENY</code>, <code>SAMEORIGIN</code>)
+                is supported as well; like in browsers it is ignored if the page has a policy
+                with a <code>frame-ancestors</code> directive.
+            </p>
+
+            <subsection name="Source Expressions" id="sec_source_expressions">
+                <p>
+                    All source expressions of CSP Level 3 are supported:
+                    <code>'self'</code>, <code>'none'</code>, <code>*</code>, schemes (e.g. <code>data:</code>),
+                    hosts with optional scheme, port and path (e.g. <code>https://*.example.com:8443/api/</code>),
+                    nonces (<code>'nonce-...'</code>), hashes (<code>'sha256-...'</code>,
+                    <code>'sha384-...'</code>, <code>'sha512-...'</code>), <code>'unsafe-inline'</code>,
+                    <code>'unsafe-eval'</code>, <code>'unsafe-hashes'</code>, <code>'strict-dynamic'</code>
+                    and <code>'report-sample'</code>.
+                </p>
+                <p>
+                    Some details following the browsers:
+                </p>
+                <ul>
+                    <li><code>'unsafe-inline'</code> is ignored if the directive contains a nonce or a hash.</li>
+                    <li>
+                        With <code>'strict-dynamic'</code> scripts created by a trusted script are allowed;
+                        host sources and parser inserted scripts without nonce or hash are blocked.
+                    </li>
+                    <li>
+                        <code>ws:</code> and <code>wss:</code> urls are matched without mapping them to
+                        <code>http:</code> and <code>https:</code>; therefore the source <code>http://example.com</code>
+                        does not allow a WebSocket connection to <code>ws://example.com</code>, but
+                        <code>'self'</code> allows <code>ws:</code> and <code>wss:</code> urls of the
+                        page's host.
+                    </li>
+                    <li>
+                        <code>*</code> and <code>'self'</code> do not match urls without host
+                        (e.g. <code>data:</code> or <code>blob:</code>); list the scheme instead.
+                    </li>
+                </ul>
+            </subsection>
+        </section>
+
+        <section name="Blocked Actions" id="sec_blocked">
+            <p>
+                A blocked action behaves like in the browsers:
+            </p>
+            <ul>
+                <li>Blocked scripts and event handlers are not executed; a blocked external script fires the <code>error</code> event.</li>
+                <li>
+                    <code>eval()</code> and <code>new Function()</code> throw an <code>EvalError</code>;
+                    timers with a string are not executed.
+                </li>
+                <li>
+                    A blocked <code>XMLHttpRequest</code> fails with a network error (the request is not sent):
+                    asynchronous requests fire <code>error</code> and <code>loadend</code>,
+                    synchronous requests throw a <code>NetworkError</code>.
+                </li>
+                <li>A blocked <code>WebSocket</code> fires <code>error</code> and <code>close</code> (code 1006).</li>
+                <li><code>navigator.sendBeacon()</code> returns <code>true</code> but the beacon is not sent (like Chrome).</li>
+                <li>A frame blocked by <code>frame-ancestors</code> or <code>X-Frame-Options</code> shows <code>about:blank</code>.</li>
+            </ul>
+        </section>
+
+        <section name="Reporting Violations" id="sec_reporting">
+            <p>
+                Every violation (of an enforced or a report only policy) is reported in three ways.
+            </p>
+
+            <subsection name="Log" id="sec_log">
+                <p>
+                    Violations are logged with level <code>WARN</code>
+                    (logger <code>org.htmlunit.html.ContentSecurityPolicy</code>; frame-ancestors violations:
+                    <code>org.htmlunit.WebClient</code>), see <a href="logging.html">Logging</a>.
+                </p>
+            </subsection>
+
+            <subsection name="securitypolicyviolation Event" id="sec_event">
+                <p>
+                    The <code>securitypolicyviolation</code> event is fired at the element causing the violation
+                    (if connected to the document) or at the document. It provides the properties
+                    <code>documentURI</code>, <code>blockedURI</code>, <code>effectiveDirective</code>,
+                    <code>violatedDirective</code>, <code>originalPolicy</code>, <code>sourceFile</code>,
+                    <code>sample</code>, <code>disposition</code>, <code>statusCode</code>,
+                    <code>lineNumber</code> and <code>columnNumber</code>.
+                </p>
+                <p>
+                    Browsers fire the event asynchronously; HtmlUnit fires it after the current script has finished
+                    to provide a deterministic order.
+                </p>
+            </subsection>
+
+            <subsection name="Java Listener" id="sec_listener">
+                <p>
+                    To check violations in your Java code, register a
+                    <code>ContentSecurityPolicyViolationListener</code> at the <code>WebClient</code>.
+                    The listener is called for every violation, also if JavaScript is disabled
+                    (e.g. for frame-ancestors). The <code>ContentSecurityPolicyViolation</code>
+                    passed to the listener provides the same information as the event;
+                    <code>isReportOnly()</code> tells you if the action was blocked or only reported.
+                </p>
+                <p>
+                    The <code>CollectingContentSecurityPolicyViolationListener</code> collects all
+                    violations; use it to make your tests fail if a page violates its policy:
+                </p>
+                <source><![CDATA[
+@Test
+public void noCspViolations() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final CollectingContentSecurityPolicyViolationListener cspListener =
+                new CollectingContentSecurityPolicyViolationListener();
+        webClient.setContentSecurityPolicyViolationListener(cspListener);
+
+        final HtmlPage page = webClient.getPage("https://www.example.com/");
+        // interact with the page
+        ...
+
+        assertEquals("[]", cspListener.getViolations().toString());
+    }
+}]]></source>
+                <p>
+                    Or implement the listener yourself, e.g. to log the violations of your application:
+                </p>
+                <source><![CDATA[
+webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
+    System.out.println(page.getUrl() + ": " + violation);
+});]]></source>
+                <p>
+                    The listener is called while HtmlUnit processes the page (e.g. while parsing or while a
+                    script is executed); it should not throw exceptions or modify the page.
+                </p>
+            </subsection>
+        </section>
+
+        <section name="Not supported (yet)" id="sec_not_supported">
+            <p>
+                The following parts of CSP are not enforced by HtmlUnit; the directives are parsed
+                but ignored:
+            </p>
+            <ul>
+                <li>
+                    <code>style-src</code> (<code>style-src-elem</code>, <code>style-src-attr</code>),
+                    <code>img-src</code>, <code>font-src</code>, <code>media-src</code>,
+                    <code>object-src</code>, <code>manifest-src</code>
+                </li>
+                <li><code>frame-src</code>, <code>child-src</code>, <code>worker-src</code></li>
+                <li><code>form-action</code>, <code>base-uri</code>, <code>sandbox</code></li>
+                <li><code>upgrade-insecure-requests</code>, <code>require-trusted-types-for</code>, <code>trusted-types</code></li>
+                <li>
+                    <code>report-uri</code> and <code>report-to</code>: no reports are sent to the server;
+                    use the <a href="#sec_listener">listener</a> instead.
+                </li>
+            </ul>
+            <p>
+                Known limitations:
+            </p>
+            <ul>
+                <li>
+                    <code>about:blank</code> and <code>srcdoc</code> documents do not inherit the policy
+                    of the document creating them.
+                </li>
+                <li>
+                    <code>javascript:</code> urls used as <code>src</code> of a frame or with
+                    <code>window.open()</code> are not checked.
+                </li>
+                <li>Workers do not use the policy of the page.</li>
+                <li>
+                    The violation event for <code>eval()</code> has no column number
+                    (the JavaScript engine does not provide it).
+                </li>
+                <li>
+                    Where browsers differ, HtmlUnit follows Chrome (e.g. Firefox throws an exception
+                    for a blocked WebSocket and <code>sendBeacon()</code> returns <code>false</code>).
+                </li>
+            </ul>
+            <p>
+                Scripts executed by your Java code (e.g. <code>HtmlPage.executeJavaScript()</code> or
+                Selenium's <code>executeScript()</code>) are not subject to the policy of the page,
+                like scripts executed by browser extensions or the developer tools.
+            </p>
+        </section>
+    </body>
+</document>

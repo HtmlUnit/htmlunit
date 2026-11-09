@@ -211,6 +211,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private transient ExecutorService executor_;
 
     private AlertHandler alertHandler_;
+    private ContentSecurityPolicyViolationListener contentSecurityPolicyViolationListener_;
     private ConfirmHandler confirmHandler_;
     private PromptHandler promptHandler_;
     private StatusHandler statusHandler_;
@@ -776,6 +777,15 @@ public class WebClient implements Serializable, AutoCloseable {
                         LOG.warn("Load denied by Content-Security-Policy: '" + policyList + "' - '"
                                 + url + "' does not permit framing by '" + ancestorOrigin + "'.");
                     }
+
+                    final ContentSecurityPolicyViolationListener listener =
+                            window.getWebClient().getContentSecurityPolicyViolationListener();
+                    if (listener != null) {
+                        final ContentSecurityPolicyViolation violation = new ContentSecurityPolicyViolation(
+                                url.toExternalForm(), ancestorOrigin, "frame-ancestors", policyList.toString(),
+                                "", "", 0, 0, webResponse.getStatusCode(), false);
+                        listener.violation(window.getEnclosingPage(), violation);
+                    }
                     return PageDenied.BY_CONTENT_SECURIRY_POLICY;
                 }
             }
@@ -991,6 +1001,23 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public AlertHandler getAlertHandler() {
         return alertHandler_;
+    }
+
+    /**
+     * Sets the listener informed about violations of the Content-Security-Policy of the pages.
+     * @param listener the new listener or null if none is specified
+     * @see ContentSecurityPolicyViolationListener
+     */
+    public void setContentSecurityPolicyViolationListener(final ContentSecurityPolicyViolationListener listener) {
+        contentSecurityPolicyViolationListener_ = listener;
+    }
+
+    /**
+     * Returns the listener informed about violations of the Content-Security-Policy of the pages.
+     * @return the listener or null if one hasn't been set
+     */
+    public ContentSecurityPolicyViolationListener getContentSecurityPolicyViolationListener() {
+        return contentSecurityPolicyViolationListener_;
     }
 
     /**
