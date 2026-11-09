@@ -1760,6 +1760,85 @@ public class DOMTokenListTest extends WebDriverTestCase {
         toggle(null, "a");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a", "1", "true", "2", "a\\sb",
+             "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>",
+             "class\\schanged\\sold:\\sa"})
+    public void toggleForceTrueAdds() throws Exception {
+        toggle("a", "b", "true");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb", "2", "true", "2", "a\\sb",
+             "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
+    public void toggleForceTrueKeeps() throws Exception {
+        toggle("a b", "b", "true");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb", "2", "false", "1", "a",
+             "<div\\sid=\"d1\"\\sclass=\"a\"></div>",
+             "class\\schanged\\sold:\\sa\\sb"})
+    public void toggleForceFalseRemoves() throws Exception {
+        toggle("a b", "b", "false");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a", "1", "false", "1", "a",
+             "<div\\sid=\"d1\"\\sclass=\"a\"></div>"})
+    public void toggleForceFalseKeeps() throws Exception {
+        toggle("a", "b", "false");
+    }
+
+    private void toggle(final String in, final String token, final String force) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('d1');\n"
+
+            + "    var config = { attributes: true, attributeOldValue: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.attributeName + ' changed old: ' + mutation.oldValue);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(elem, config);"
+
+            + "    var list = elem.classList;\n"
+            + "    if (!list) { log('no list'); return; }\n"
+
+            + "    log(elem.className);\n"
+            + "    log(list.length);\n"
+            + "    try {\n"
+            + "      var res = list.toggle('" + token + "', " + force + ");\n"
+            + "      log(res);\n"
+            + "    } catch(e) { logEx(e);}\n"
+            + "    log(list.length);\n"
+            + "    log(elem.className);\n"
+            + "    log(elem.outerHTML);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d1' class='" + in + "'></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     private void toggle(final String in, final String token) throws Exception {
         String html = DOCTYPE_HTML
             + "<html><head>\n"

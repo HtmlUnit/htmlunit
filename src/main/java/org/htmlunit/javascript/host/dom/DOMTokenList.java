@@ -277,10 +277,12 @@ public class DOMTokenList extends HtmlUnitScriptable {
     /**
      * Toggles the token, adding or removing it.
      * @param token the token to add or remove
+     * @param force if {@code true}, only adds the token; if {@code false}, only removes it;
+     *        if not specified, the token is toggled
      * @return whether the string now contains the token or not
      */
     @JsxFunction
-    public boolean toggle(final String token) {
+    public boolean toggle(final String token, final Object force) {
         if (org.htmlunit.util.StringUtils.isEmptyOrNull(token)) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
@@ -295,15 +297,18 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         final List<String> parts = split(getValue());
-        if (parts.contains(token)) {
+        final boolean present = parts.contains(token);
+        final boolean add = JavaScriptEngine.isUndefined(force) ? !present : JavaScriptEngine.toBoolean(force);
+
+        if (add && !present) {
+            parts.add(token);
+            updateAttribute(String.join(" ", parts));
+        }
+        else if (!add && present) {
             parts.remove(token);
             updateAttribute(String.join(" ", parts));
-            return false;
         }
-
-        parts.add(token);
-        updateAttribute(String.join(" ", parts));
-        return true;
+        return add;
     }
 
     /**
