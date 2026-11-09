@@ -70,6 +70,7 @@ import org.htmlunit.corejs.javascript.json.JsonParser;
 import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
+import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
@@ -1010,6 +1011,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         final BrowserVersion browserVersion = getBrowserVersion();
         try {
+            ensureConnectionAllowed(webWindow, webRequest_.getUrl());
+
             if (!isSameOrigin_ && isPreflight(webRequest_)) {
                 final WebResponse preflightResponse = sendPreflight(wc, webRequest_);
                 if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
@@ -1129,6 +1132,22 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
+     * Checks the connect-src directive of the Content-Security-Policy of the page.
+     *
+     * @param webWindow the window
+     * @param url the url to connect to (the request url or a redirect target)
+     * @throws IOException if the connection is not allowed
+     */
+    private void ensureConnectionAllowed(final WebWindow webWindow, final URL url) throws IOException {
+        if (webWindow != null
+                && webWindow.getEnclosedPage() instanceof HtmlPage page
+                && !ContentSecurityPolicy.allowsConnection(page, url, webRequest_.getUrl())) {
+            throw new IOException("Refused to connect to '" + url
+                    + "' because it violates the Content Security Policy of the page.");
+        }
+    }
+
+    /**
      * Loads the response of the request and follows the redirects the way the
      * <a href="https://fetch.spec.whatwg.org/#http-redirect-fetch">fetch standard</a> describes it for a
      * request in cors mode:.
@@ -1187,6 +1206,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (redirects >= MAX_REDIRECTS) {
                 throw new RedirectException("Too many redirects for " + webRequest_.getUrl());
             }
+
+            ensureConnectionAllowed(getWindow().getWebWindow(), nextUrl);
 
             final boolean crossOriginRedirect = !UrlUtils.isSameOrigin(currentUrl, nextUrl);
             final boolean foreignTarget = !UrlUtils.isSameOrigin(pageUrl, nextUrl);

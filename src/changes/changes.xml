@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="add" dev="rbri" issue="#638">
+                Content-Security-Policy: XMLHttpRequest supports the connect-src directive (with default-src as fallback);
+                the request url and all redirect targets are checked, blocked requests fail with a network error.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Fix String.prototype.indexOf() with an empty search and negative position.
             </action>

@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -31,7 +32,9 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.csp.FetchDirectiveKind;
 import org.htmlunit.csp.Policy;
 import org.htmlunit.csp.directive.SourceExpressionDirective;
+import org.htmlunit.csp.url.GUID;
 import org.htmlunit.csp.url.URI;
+import org.htmlunit.csp.url.URLWithScheme;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.EventTarget;
@@ -233,6 +236,30 @@ public final class ContentSecurityPolicy implements Serializable {
     }
 
     /**
+     * Checks if a connection (XMLHttpRequest, fetch(), ...) to the given url is allowed (connect-src).
+     *
+     * @param page the page
+     * @param url the url to connect to
+     * @param reportedUrl the url reported in case of a violation; for redirects this is the
+     *        url of the initial request
+     * @return {@code true} if the connection is allowed
+     */
+    public static boolean allowsConnection(final HtmlPage page, final URL url, final URL reportedUrl) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return true;
+        }
+
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URI> origin = origin(page);
+        final Violation violation = new Violation(FetchDirectiveKind.ConnectSrc, blockedUri(reportedUrl), null,
+                null, "", 0, 0);
+        final boolean allowed = csp.check(page, violation, policy -> policy.allowsConnection(target, origin));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
      * Checks if the evaluation of strings as code (eval(), new Function(), setTimeout(string)) is allowed.
      *
      * @param page the page
@@ -419,6 +446,53 @@ public final class ContentSecurityPolicy implements Serializable {
             return externalForm;
         }
         return externalForm.substring(0, hashPos);
+    }
+
+    /**
+     * Converts the given url into the url representation used by the csp library
+     * (htmlunit-csp) to match the url against the source expressions of a policy.
+     * <ul>
+     *   <li>Urls with a host (e.g. http, https, ws, wss) are converted into a
+     *       {@link URI} made of the scheme and the host (both lower case), the port
+     *       (the default port of the scheme if the url has no explicit port) and the path; the query
+     *       and the fragment are not part of the result. Host sources (e.g. {@code https://example.com/api/})
+     *       and 'self' are matched against these parts.</li>
+     *   <li>Urls without a host (e.g. data:, blob:, about:, file:///) are converted into a
+     *       {@link GUID} made of the scheme (lower case) and the remaining part
+     *       of the url; such urls are only matched by a scheme source (e.g. {@code data:}),
+     *       never by 'self', a host source or {@code *}.</li>
+     * </ul>
+     * The result is the same as the one of {@link URI#parseURI(String)} or
+     * {@link GUID#parseGUID(String)}, but without parsing the url again.
+     *
+     * @param url the url to convert
+     * @return the converted url
+     */
+    static URLWithScheme toUrlWithScheme(final URL url) {
+        final String scheme = url.getProtocol().toLowerCase(Locale.ROOT);
+        final String host = url.getHost();
+        if (host == null || host.isEmpty()) {
+            final String externalForm = url.toExternalForm();
+            return new GUID(scheme, externalForm.substring(externalForm.indexOf(':') + 1));
+        }
+
+        int port = url.getPort();
+        if (port == -1) {
+            port = URI.defaultPortForProtocol(scheme);
+        }
+        return new URI(scheme, host.toLowerCase(Locale.ROOT), port, url.getPath());
+    }
+
+    /**
+     * Returns the blockedURI reported for the given url; like in browsers only the scheme
+     * is reported for urls without host (e.g. data:).
+     */
+    private static String blockedUri(final URL url) {
+        final String host = url.getHost();
+        if (host == null || host.isEmpty()) {
+            return url.getProtocol();
+        }
+        return withoutRef(url);
     }
 
     private static Optional<URI> origin(final HtmlPage page) {
