@@ -44,6 +44,7 @@ import org.htmlunit.javascript.configuration.JsxSymbol;
  * @author Ronald Brill
  * @author Marek Gawlicki
  * @author Markus Winter
+ * @author Vladimir Babin
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList">MDN Documentation</a>
  */
@@ -298,6 +299,8 @@ public class DOMTokenList extends HtmlUnitScriptable {
 
         final List<String> parts = split(getValue());
         final boolean present = parts.contains(token);
+
+        // looks strange but it's what the spec says
         final boolean add = JavaScriptEngine.isUndefined(force) ? !present : JavaScriptEngine.toBoolean(force);
 
         if (add && !present) {

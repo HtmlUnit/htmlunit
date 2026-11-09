@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
  * @author Frank Danek
  * @author Marek Gawlicki
  * @author Markus Winter
+ * @author Vladimir Babin
  */
 public class DOMTokenListTest extends WebDriverTestCase {
 
