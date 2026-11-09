@@ -166,7 +166,10 @@ public class HtmlForm extends HtmlElement {
 
             final String action = getActionAttribute().trim();
             if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-                if (ContentSecurityPolicy.allowsJavaScriptUrl(htmlPage, this, action)) {
+                // form-action is checked before the script-src check of the javascript url
+                final URL actionUrl = UrlUtils.toUrlSafe(action);
+                if (ContentSecurityPolicy.allowsFormAction(htmlPage, actionUrl, actionUrl)
+                        && ContentSecurityPolicy.allowsJavaScriptUrl(htmlPage, this, action)) {
                     htmlPage.executeJavaScript(action, "Form action", getStartLineNumber());
                 }
                 return;
@@ -196,6 +199,13 @@ public class HtmlForm extends HtmlElement {
         }
 
         final WebRequest request = getWebRequest(submitElement);
+        final URL url = request.getUrl();
+        if (!ContentSecurityPolicy.allowsFormAction(htmlPage, url, url)) {
+            return;
+        }
+        // like Chrome, redirects are checked also; the url of the form submission is reported
+        request.setRedirectFilter(
+                redirectUrl -> ContentSecurityPolicy.allowsFormAction(htmlPage, redirectUrl, url));
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();

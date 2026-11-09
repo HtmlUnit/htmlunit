@@ -8,6 +8,18 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="add" dev="rbri">
+                CSP: support for the form-action directive; form submissions (including formaction,
+                javascript: urls and redirects) are checked against the policy.
+            </action>
+            <action type="add" dev="rbri">
+                CSP: new ContentSecurityPolicyViolationListener (WebClient.setContentSecurityPolicyViolationListener())
+                to get informed about all violations (enforced and report only) from Java code;
+                CollectingContentSecurityPolicyViolationListener collects them, e.g. to make your tests fail.
+            </action>
+            <action type="add" dev="rbri">
+                Documentation: new page 'Content Security Policy' describing the CSP support in detail.
+            </action>
             <action type="add" dev="rbri" issue="#638">
                 Content-Security-Policy: WebSocket and navigator.sendBeacon() support the connect-src directive
                 (with default-src as fallback); like in browsers ws: and wss: urls are matched without mapping

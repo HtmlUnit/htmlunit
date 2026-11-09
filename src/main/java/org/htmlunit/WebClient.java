@@ -53,6 +53,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1855,6 +1856,14 @@ public class WebClient implements Serializable, AutoCloseable {
                     + webResponse.getWebRequest().getUrl(), webResponse);
             }
 
+            final Predicate<URL> redirectFilter = webRequest.getRedirectFilter();
+            if (redirectFilter != null && !redirectFilter.test(newUrl)) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Redirect to [" + newUrl + "] blocked by the redirect filter");
+                }
+                return null;
+            }
+
             final boolean crossOriginRedirect = !UrlUtils.isSameOrigin(url, newUrl);
 
             if (status == HttpStatus.MOVED_PERMANENTLY_301
@@ -1876,6 +1885,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 wrs.setFetchDestination(webRequest.getFetchDestination());
                 wrs.setFetchModeOverride(webRequest.getFetchModeOverride());
                 wrs.setRequestingUrl(webRequest.getRequestingUrl());
+                wrs.setRedirectFilter(redirectFilter);
 
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
@@ -1905,6 +1915,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     // credentials are not forwarded to another origin
                     wrs.removeAdditionalHeader("Authorization");
                 }
+                wrs.setRedirectFilter(redirectFilter);
 
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
@@ -2936,6 +2947,10 @@ public class WebClient implements Serializable, AutoCloseable {
             WebResponse response;
             try {
                 response = loadWebResponse(request);
+                if (response == null) {
+                    // blocked by the redirect filter of the request
+                    return;
+                }
             }
             catch (final NoHttpResponseException e) {
                 LOG.error("NoHttpResponseException while downloading; generating a NoHttpResponse", e);

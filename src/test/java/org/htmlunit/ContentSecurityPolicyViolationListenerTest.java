@@ -159,6 +159,45 @@ public class ContentSecurityPolicyViolationListenerTest extends SimpleWebTestCas
     }
 
     /**
+     * Form submission blocked by form-action; also checked if JavaScript is disabled.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void formAction() throws Exception {
+        formAction(true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void formActionJavaScriptDisabled() throws Exception {
+        formAction(false);
+    }
+
+    private void formAction(final boolean javaScriptEnabled) throws Exception {
+        final CollectingContentSecurityPolicyViolationListener listener = setListener();
+        getWebClient().getOptions().setJavaScriptEnabled(javaScriptEnabled);
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN_BASE, "action.html"),
+                "<html><head><title>submitted</title></head></html>");
+        final HtmlPage page = loadPageWithPolicy(HttpHeader.CONTENT_SECURIRY_POLICY, "form-action 'self'",
+                "<form action='" + URL_CROSS_ORIGIN_BASE + "action.html' method='post'>\n"
+                + "  <input type='submit' id='submitButton'>\n"
+                + "</form>\n");
+
+        final HtmlPage result = page.getHtmlElementById("submitButton").click();
+        assertSame(page, result);
+
+        final List<ContentSecurityPolicyViolation> violations = listener.getViolations();
+        assertEquals(1, violations.size());
+        assertEquals(URL_CROSS_ORIGIN_BASE + "action.html", violations.get(0).getBlockedUri());
+        assertEquals("form-action", violations.get(0).getEffectiveDirective());
+        assertEquals("", violations.get(0).getSample());
+        assertFalse(violations.get(0).isReportOnly());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

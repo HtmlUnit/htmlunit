@@ -70,6 +70,7 @@ public final class ContentSecurityPolicy implements Serializable {
 
     private static final String BLOCKED_INLINE = "inline";
     private static final String BLOCKED_EVAL = "eval";
+    private static final String FORM_ACTION = "form-action";
 
     /** The violation events to be fired after the current script has finished. */
     private static final ThreadLocal<List<Runnable>> PENDING_VIOLATIONS = new ThreadLocal<>();
@@ -263,6 +264,31 @@ public final class ContentSecurityPolicy implements Serializable {
     }
 
     /**
+     * Checks if the submission of a form to the given url is allowed (form-action).
+     * There is no fallback to default-src for this directive.
+     *
+     * @param page the page containing the form
+     * @param url the url the form is submitted to (for javascript: urls the whole url)
+     * @param reportedUrl the url reported in case of a violation; for redirects this is the
+     *        url of the form submission
+     * @return {@code true} if the submission is allowed
+     */
+    public static boolean allowsFormAction(final HtmlPage page, final URL url, final URL reportedUrl) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return true;
+        }
+
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URI> origin = origin(page);
+        final Violation violation = new Violation(FORM_ACTION, blockedUri(reportedUrl), null, null, "", 0, 0);
+        final boolean allowed = csp.check(page, violation,
+                policy -> policy.allowsFormAction(target, Optional.of(false), Optional.empty(), origin));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
      * Checks if the evaluation of strings as code (eval(), new Function(), setTimeout(string)) is allowed.
      *
      * @param page the page
@@ -335,10 +361,10 @@ public final class ContentSecurityPolicy implements Serializable {
     private static void report(final HtmlPage page, final Policy policy, final Violation violation,
             final String disposition) {
         final FetchDirectiveKind directive = violation.directive_;
+        final String effectiveDirective = violation.effectiveDirective_;
         final String blockedUri = violation.blockedUri_;
         final String source = violation.source_;
         final DomElement element = violation.target_;
-        final String effectiveDirective = directive.getRepr();
         if (LOG.isWarnEnabled()) {
             LOG.warn((SecurityPolicyViolationEvent.DISPOSITION_REPORT.equals(disposition) ? "[Report Only] " : "")
                     + "Content-Security-Policy violation: '" + effectiveDirective
@@ -346,7 +372,7 @@ public final class ContentSecurityPolicy implements Serializable {
         }
 
         String sample = "";
-        if (source != null) {
+        if (source != null && directive != null) {
             final SourceExpressionDirective governing =
                     policy.getGoverningDirectiveForEffectiveDirective(directive).orElse(null);
             if (governing != null && governing.reportSample()) {
@@ -515,6 +541,7 @@ public final class ContentSecurityPolicy implements Serializable {
      */
     private static final class Violation {
         private final FetchDirectiveKind directive_;
+        private final String effectiveDirective_;
         private final String blockedUri_;
         private final String source_;
         private final DomElement target_;
@@ -525,6 +552,22 @@ public final class ContentSecurityPolicy implements Serializable {
         Violation(final FetchDirectiveKind directive, final String blockedUri, final String source,
                 final DomElement target, final String sourceFile, final int lineNumber, final int columnNumber) {
             directive_ = directive;
+            effectiveDirective_ = directive.getRepr();
+            blockedUri_ = blockedUri;
+            source_ = source;
+            target_ = target;
+            sourceFile_ = sourceFile;
+            lineNumber_ = lineNumber;
+            columnNumber_ = columnNumber;
+        }
+
+        /**
+         * Ctor for violations of directives that are no fetch directives (e.g. form-action).
+         */
+        Violation(final String effectiveDirective, final String blockedUri, final String source,
+                final DomElement target, final String sourceFile, final int lineNumber, final int columnNumber) {
+            directive_ = null;
+            effectiveDirective_ = effectiveDirective;
             blockedUri_ = blockedUri;
             source_ = source;
             target_ = target;

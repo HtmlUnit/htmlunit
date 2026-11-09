@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import org.apache.http.auth.Credentials;
 import org.htmlunit.http.HttpUtils;
@@ -214,6 +215,9 @@ public class WebRequest implements Serializable {
     // null means "no initiator" (e.g. a browser-chrome-initiated navigation), which
     // maps to Sec-Fetch-Site: none.
     private String requestingUrl_;
+
+    // e.g. the CSP form-action check
+    private transient Predicate<URL> redirectFilter_;
 
     /**
      * Instantiates a {@link WebRequest} for the specified URL,
@@ -761,6 +765,34 @@ public class WebRequest implements Serializable {
      */
     public void setFetchModeOverride(final FetchMode fetchMode) {
         fetchModeOverride_ = fetchMode;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the filter called before a redirect is followed.
+     *
+     * @return the filter or {@code null}
+     * @see #setRedirectFilter(Predicate)
+     */
+    public Predicate<URL> getRedirectFilter() {
+        return redirectFilter_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets a filter that is called with the target url before a redirect is followed
+     * (e.g. to check the redirect against the form-action directive of the
+     * Content-Security-Policy). The filter is passed on to the requests of all following
+     * redirects. If the filter returns {@code false}, the redirect is blocked and
+     * {@link WebClient#loadWebResponse(WebRequest)} returns {@code null}.
+     * The filter is not serialized.
+     *
+     * @param redirectFilter the filter or {@code null}
+     */
+    public void setRedirectFilter(final Predicate<URL> redirectFilter) {
+        redirectFilter_ = redirectFilter;
     }
 
     /**
