@@ -363,6 +363,115 @@ public class ContentSecurityPolicyConnectTest extends WebDriverTestCase {
     }
 
     /**
+     * WebSocket connection to an origin not allowed by connect-src.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
+            FF = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"},
+            FF_ESR = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"})
+    @HtmlUnitNYI(FF = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
+            FF_ESR = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"})
+    public void webSocket_blocked() throws Exception {
+        expandExpectedAlertsVariables("ws://localhost:" + PORT2);
+        loadPageVerify("connect-src 'self'", webSocket("ws://localhost:" + PORT2 + "/ws"));
+    }
+
+    /**
+     * The source 'self' also matches ws: urls of the same host and port.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error 3", "close 1006 false"})
+    public void webSocket_selfMatchesWs() throws Exception {
+        loadPageVerify("connect-src 'self'", webSocket("ws://localhost:" + PORT + "/ws"));
+    }
+
+    /**
+     * WebSocket connection to an origin listed in connect-src.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error 3", "close 1006 false"})
+    public void webSocket_hostSource() throws Exception {
+        loadPageVerify("connect-src 'self' ws://localhost:" + PORT2, webSocket("ws://localhost:" + PORT2 + "/ws"));
+    }
+
+    /**
+     * A http: host source does not match the ws: url of the same host.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
+            FF = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"},
+            FF_ESR = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"})
+    @HtmlUnitNYI(FF = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
+            FF_ESR = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"})
+    public void webSocket_httpHostSourceDoesNotMatchWs() throws Exception {
+        expandExpectedAlertsVariables("ws://localhost:" + PORT2);
+        loadPageVerify("connect-src 'self' http://localhost:" + PORT2,
+                webSocket("ws://localhost:" + PORT2 + "/ws"));
+    }
+
+    /**
+     * Request using navigator.sendBeacon(), same origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("sendBeacon true")
+    public void sendBeacon_sameOrigin() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "beacon"), "", MimeType.TEXT_PLAIN);
+        loadPageVerify("connect-src 'self'", sendBeacon("beacon"));
+        // the page, harness.js, test.js and the beacon
+        assertEquals(4, () -> getMockWebConnection().getRequestCount(), DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * Request using navigator.sendBeacon(), blocked by connect-src.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"sendBeacon true", "violation connect-src §§URL§§/beacon"},
+            FF = {"sendBeacon false", "violation connect-src §§URL§§/beacon"},
+            FF_ESR = {"sendBeacon false", "violation connect-src §§URL§§/beacon"})
+    @HtmlUnitNYI(FF = {"sendBeacon true", "violation connect-src §§URL§§/beacon"},
+            FF_ESR = {"sendBeacon true", "violation connect-src §§URL§§/beacon"})
+    public void sendBeacon_blocked() throws Exception {
+        expandExpectedAlertsVariables("http://localhost:" + PORT2);
+        setCrossOriginResponse("beacon");
+        loadPageVerify("connect-src 'self'", sendBeacon(URL_CROSS_ORIGIN_BASE + "beacon"));
+        // the page, harness.js and test.js
+        assertEquals(3, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * Returns the code opening a WebSocket; logs the events.
+     */
+    private static String webSocket(final String url) {
+        return "try {\n"
+            + "  var ws = new WebSocket('" + url + "');\n"
+            + "  ws.onopen = function() { log('open'); };\n"
+            + "  ws.onerror = function() { log('error ' + ws.readyState); };\n"
+            + "  ws.onclose = function(e) { log('close ' + e.code + ' ' + e.wasClean); };\n"
+            + "} catch(e) { logEx(e); }\n";
+    }
+
+    /**
+     * Returns the code sending a beacon; logs the result.
+     */
+    private static String sendBeacon(final String url) {
+        return "try {\n"
+            + "  log('sendBeacon ' + navigator.sendBeacon('" + url + "', 'data'));\n"
+            + "} catch(e) { logEx(e); }\n";
+    }
+
+    /**
      * Returns the code for an async request; logs the load or error event.
      */
     private static String xhrAsync(final String url) {

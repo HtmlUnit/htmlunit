@@ -37,6 +37,7 @@ import org.htmlunit.WebRequest.HttpHint;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
+import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -465,6 +466,12 @@ public class Navigator extends HtmlUnitScriptable {
                 LOG.info("sendBeacon(): invalid url '" + url + "'", e);
             }
             return false;
+        }
+
+        // like Chrome: a beacon blocked by the Content-Security-Policy is reported
+        // as queued (Firefox returns false)
+        if (!ContentSecurityPolicy.allowsConnection(page, targetUrl, targetUrl)) {
+            return true;
         }
 
         final WebRequest request = new WebRequest(targetUrl, HttpMethod.POST);

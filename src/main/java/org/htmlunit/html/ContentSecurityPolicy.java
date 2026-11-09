@@ -254,7 +254,8 @@ public final class ContentSecurityPolicy implements Serializable {
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.ConnectSrc, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
-        final boolean allowed = csp.check(page, violation, policy -> policy.allowsConnection(target, origin));
+        // like browsers, ws: and wss: urls are not mapped to http: and https: before matching
+        final boolean allowed = csp.check(page, violation, policy -> policy.allowsConnection(target, origin, false));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }

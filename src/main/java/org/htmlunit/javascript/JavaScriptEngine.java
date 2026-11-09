@@ -981,6 +981,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                 cx.processMicrotasks();
 
+                if (javaScriptAlreadyRunning == null) {
+                    // the outermost script has finished; fire the securitypolicyviolation
+                    // events before the postponed actions are processed
+                    ContentSecurityPolicy.firePendingViolations();
+                }
+
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
                 if (!holdPostponedActions_) {
@@ -1005,7 +1011,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
             finally {
                 if (javaScriptAlreadyRunning == null) {
-                    // the outermost script has finished
+                    // the outermost script has finished (e.g. with an exception)
                     ContentSecurityPolicy.firePendingViolations();
                 }
 

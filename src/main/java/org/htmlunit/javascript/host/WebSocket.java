@@ -38,9 +38,11 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
+import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.background.BasicJavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -178,6 +180,24 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         setParentScope(scope);
         setDomNode(page.getDocumentElement(), false);
 
+        if (!isConnectionAllowed(page, url)) {
+            // like a failed connection (error event, close event 1006), but after the running script
+            // and after the securitypolicyviolation event
+            final AbstractJavaScriptEngine<?> engine = page.getWebClient().getJavaScriptEngine();
+            if (engine != null && engine.isScriptRunning()) {
+                engine.addPostponedAction(new PostponedAction(page, "WebSocket blocked by CSP") {
+                    @Override
+                    public void execute() {
+                        connectionEnded(CLOSE_ABNORMAL, "", true);
+                    }
+                });
+            }
+            else {
+                queueTask(() -> connectionEnded(CLOSE_ABNORMAL, "", true));
+            }
+            return;
+        }
+
         final WebClient webClient = window.getWebWindow().getWebClient();
         webSocketImpl_ = webClient.buildWebSocketAdapter(new AdapterListener(scope));
 
@@ -197,6 +217,25 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         page.addAutoCloseable(this);
+    }
+
+    /**
+     * Checks the connect-src directive of the Content-Security-Policy of the page.
+     *
+     * @param page the page
+     * @param url the url to connect to
+     * @return {@code true} if the connection is allowed
+     */
+    private static boolean isConnectionAllowed(final HtmlPage page, final URI url) {
+        final URL connectionUrl;
+        try {
+            connectionUrl = UrlUtils.toUrlUnsafe(url.toString());
+        }
+        catch (final MalformedURLException e) {
+            // reported by the connection attempt
+            return true;
+        }
+        return ContentSecurityPolicy.allowsConnection(page, connectionUrl, connectionUrl);
     }
 
     /**
