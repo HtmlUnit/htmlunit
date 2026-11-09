@@ -693,6 +693,7 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomElement")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.util.DebuggingWebConnection")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.ContentSecurityPolicy")
 
         .should().dependOnClassesThat().haveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine");
 

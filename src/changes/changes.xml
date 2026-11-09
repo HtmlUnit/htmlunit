@@ -8,6 +8,30 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix String.prototype.indexOf() with an empty search and negative position.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Proxy constructor capability no longer lost on revocation.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix String.prototype.indexOf() with an empty search and negative position.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix for multiplication of a '0'' by a negative integer.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Give generator methods a prototype property.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Use ToNumeric for ++ and -- on super properties to support BigInteger also.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: ArrowFunctions should not have prototype property in compiled mode.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix NullPointerException when reading "stack" of an error with a null prototype.
+            </action>
             <action type="add" dev="rbri" issue="#638">
                 Content-Security-Policy support for scripts (script-src, script-src-elem, script-src-attr, default-src;
                 nonces, hashes, 'unsafe-inline', 'unsafe-eval', 'unsafe-hashes', 'strict-dynamic'), including
