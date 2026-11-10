@@ -618,6 +618,7 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlInput")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.util.WebClientUtils")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.ContentSecurityPolicy")
 
             .and().resideOutsideOfPackage("org.htmlunit.javascript..")
 
