@@ -140,6 +140,18 @@ public class ContentSecurityPolicyScriptTest extends WebDriverTestCase {
     }
 
     /**
+     * Inline script with an invalid nonce (not base64); the source expression is ignored.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("violation script-src-elem inline")
+    public void inline_nonceInvalid() throws Exception {
+        loadPageVerify("script-src 'self' 'nonce-abc!d'", "",
+                "<script nonce='abc!d'>log('inline');</script>\n");
+    }
+
+    /**
      * Inline script with wrong nonce.
      *
      * @throws Exception if the test fails
@@ -502,6 +514,77 @@ public class ContentSecurityPolicyScriptTest extends WebDriverTestCase {
     public void metaReportOnly() throws Exception {
         loadPageVerify(null,
                 "<meta http-equiv='Content-Security-Policy-Report-Only' content=\"script-src 'self'\">\n",
+                INLINE_SCRIPT);
+    }
+
+    /**
+     * The sandbox directive is ignored when delivered via a meta element.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("inline")
+    public void metaSandbox() throws Exception {
+        loadPageVerify(null,
+                "<meta http-equiv='Content-Security-Policy' content=\"sandbox\">\n",
+                INLINE_SCRIPT);
+    }
+
+    /**
+     * The sandbox directive is ignored when delivered via a meta element,
+     * the other directives are still enforced.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("violation script-src-elem inline")
+    public void metaSandboxAndScriptSrc() throws Exception {
+        loadPageVerify(null,
+                "<meta http-equiv='Content-Security-Policy' content=\"sandbox; script-src 'self'\">\n",
+                INLINE_SCRIPT);
+    }
+
+    /**
+     * Commas in the content of a meta element; Chrome splits the content into
+     * two policies, Firefox parses one policy.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "violation script-src-elem inline",
+            FF = "inline",
+            FF_ESR = "inline")
+    public void metaComma() throws Exception {
+        loadPageVerify(null,
+                "<meta http-equiv='Content-Security-Policy' "
+                        + "content=\"script-src 'self' 'unsafe-inline' ,script-src 'self'\">\n",
+                INLINE_SCRIPT);
+    }
+
+    /**
+     * Commas in the content of a meta element (without whitespace).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("violation script-src-elem inline")
+    public void metaCommaNoWhitespace() throws Exception {
+        loadPageVerify(null,
+                "<meta http-equiv='Content-Security-Policy' "
+                        + "content=\"script-src 'self' 'unsafe-inline',script-src 'self'\">\n",
+                INLINE_SCRIPT);
+    }
+
+    /**
+     * Commas in the content of a meta element; the second part is no policy.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("violation script-src-elem inline")
+    public void metaCommaTrailing() throws Exception {
+        loadPageVerify(null,
+                "<meta http-equiv='Content-Security-Policy' content=\"script-src 'self',\">\n",
                 INLINE_SCRIPT);
     }
 

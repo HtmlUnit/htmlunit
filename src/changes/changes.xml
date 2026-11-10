@@ -8,6 +8,14 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="rbri">
+                CSP: policies from meta elements ignore the directives frame-ancestors, sandbox and report-uri
+                (e.g. a meta element with 'sandbox' was blocking all scripts); commas in the content are
+                handled like the browsers do (Chrome splits into several policies, Firefox parses one policy).
+            </action>
+            <action type="update" dev="rbri">
+                htmlunit-csp: meta-aware CSP list parsing, invalid nonces and hashes are rejected.
+            </action>
             <action type="add" dev="rbri">
                 CSP: support for the form-action directive; form submissions (including formaction,
                 javascript: urls and redirects) are checked against the policy.

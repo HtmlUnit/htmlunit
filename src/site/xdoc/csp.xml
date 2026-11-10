@@ -55,6 +55,11 @@
                     Like in browsers, only meta elements inside the <code>head</code> are used,
                     the policy only applies to the content following the meta element and
                     <code>Content-Security-Policy-Report-Only</code> is not supported in meta elements.
+                    The directives <code>frame-ancestors</code>, <code>sandbox</code> and <code>report-uri</code>
+                    are ignored in meta elements. Browsers differ in the handling of commas in the content
+                    of a meta element; like Chrome HtmlUnit splits the content into several policies when
+                    simulating Chrome/Edge, and like Firefox parses the content as one policy when
+                    simulating Firefox.
                 </li>
             </ul>
             <p>

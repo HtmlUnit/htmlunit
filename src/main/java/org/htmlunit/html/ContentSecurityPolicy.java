@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.CSP_META_SINGLE_POLICY;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.io.Serializable;
@@ -77,6 +78,8 @@ public final class ContentSecurityPolicy implements Serializable {
 
     private final List<String> enforced_ = new ArrayList<>();
     private final List<String> reportOnly_ = new ArrayList<>();
+    private final List<String> meta_ = new ArrayList<>();
+    private boolean metaSinglePolicy_;
 
     private transient List<Policy> enforcedPolicies_;
     private transient List<Policy> reportOnlyPolicies_;
@@ -124,6 +127,9 @@ public final class ContentSecurityPolicy implements Serializable {
 
     /**
      * Adds a policy defined by a meta element to the given page.
+     * The policy is parsed with the meta restrictions (frame-ancestors, sandbox and
+     * report-uri are ignored). Depending on the browser, commas split the content into
+     * several policies (Chrome) or are part of the single policy (Firefox).
      *
      * @param page the page
      * @param serializedPolicy the policy
@@ -138,7 +144,8 @@ public final class ContentSecurityPolicy implements Serializable {
             csp = new ContentSecurityPolicy();
             page.setContentSecurityPolicy(csp);
         }
-        csp.enforced_.add(serializedPolicy);
+        csp.meta_.add(serializedPolicy);
+        csp.metaSinglePolicy_ = page.getWebClient().getBrowserVersion().hasFeature(CSP_META_SINGLE_POLICY);
         csp.enforcedPolicies_ = null;
     }
 
@@ -435,7 +442,14 @@ public final class ContentSecurityPolicy implements Serializable {
 
     private List<Policy> getEnforcedPolicies() {
         if (enforcedPolicies_ == null) {
-            enforcedPolicies_ = parse(enforced_);
+            final List<Policy> policies = parse(enforced_);
+            final Policy.MetaCommaHandling commaHandling = metaSinglePolicy_
+                    ? Policy.MetaCommaHandling.SINGLE_POLICY : Policy.MetaCommaHandling.SPLIT;
+            for (final String serialized : meta_) {
+                policies.addAll(Policy.parseSerializedCSPList(serialized,
+                        Policy.PolicyListErrorConsumer.ignored, commaHandling).getPolicies());
+            }
+            enforcedPolicies_ = policies;
         }
         return enforcedPolicies_;
     }

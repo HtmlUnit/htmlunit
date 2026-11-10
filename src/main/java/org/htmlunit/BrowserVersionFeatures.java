@@ -38,6 +38,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     ANCHOR_SEND_PING_REQUEST,
 
+    /**
+     * The content of a Content-Security-Policy meta element is parsed as one policy
+     * (commas are not splitting the content into several policies).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    CSP_META_SINGLE_POLICY,
+
     /** Background image is 'initial'. */
     @BrowserFeature({CHROME, EDGE})
     CSS_BACKGROUND_INITIAL,
