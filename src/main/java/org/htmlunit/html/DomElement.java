@@ -110,6 +110,10 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /** Cache for the styles. */
     private String styleString_;
+    // the value of the style attribute blocked by the Content-Security-Policy (style-src-attr)
+    private String blockedStyleAttribute_;
+    // true while the CSSOM writes the style attribute (not checked by the Content-Security-Policy)
+    private boolean writingCssomStyle_;
     private LinkedHashMap<String, StyleElement> styleMap_;
 
     private static final Comparator<StyleElement> STYLE_ELEMENT_COMPARATOR =
@@ -151,6 +155,28 @@ public class DomElement extends DomNamespaceNode implements Element {
                     namespaces_.put(attrNamespaceURI, prefix);
                 }
             }
+
+            final DomAttr styleAttr = attributes.get("style");
+            if (styleAttr != null) {
+                checkStyleAttribute(styleAttr.getValue());
+            }
+        }
+    }
+
+    /**
+     * Checks the value of the style attribute against the Content-Security-Policy (style-src-attr);
+     * a blocked value is not applied.
+     *
+     * @param value the value of the style attribute
+     */
+    private void checkStyleAttribute(final String value) {
+        blockedStyleAttribute_ = null;
+        if (writingCssomStyle_ || value == null || value.isEmpty()
+                || !(getPage() instanceof HtmlPage htmlPage)) {
+            return;
+        }
+        if (!ContentSecurityPolicy.allowsStyleAttribute(htmlPage, this, value)) {
+            blockedStyleAttribute_ = value;
         }
     }
 
@@ -299,7 +325,8 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final LinkedHashMap<String, StyleElement> styleMap = new LinkedHashMap<>();
-        if (ATTRIBUTE_NOT_DEFINED == styleAttribute || ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
+        if (ATTRIBUTE_NOT_DEFINED == styleAttribute || ATTRIBUTE_VALUE_EMPTY == styleAttribute
+                || styleAttribute.equals(blockedStyleAttribute_)) {
             styleMap_ = styleMap;
             styleString_ = styleAttribute;
             return styleMap_;
@@ -556,6 +583,10 @@ public class DomElement extends DomNamespaceNode implements Element {
         newAttr.setParentNode(this);
         attributes_.put(qualifiedName, newAttr);
 
+        if (namespaceURI == null && "style".equals(qualifiedName)) {
+            checkStyleAttribute(attributeValue);
+        }
+
         if (namespaceURI != null) {
             if (namespaces_ == null) {
                 namespaces_ = new FastHashMap<>(1, 0.5f);
@@ -618,7 +649,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public void writeStyleToElement(final Map<String, StyleElement> styleMap) {
         if (styleMap.isEmpty()) {
-            setAttribute("style", "");
+            setCssomStyleAttribute("");
             return;
         }
 
@@ -640,7 +671,26 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
             builder.append(';');
         }
-        setAttribute("style", builder.toString());
+        setCssomStyleAttribute(builder.toString());
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets the style attribute as result of a CSSOM change (e.g. element.style.color = 'red'
+     * or element.style.cssText = '...'). Like the browsers, these changes are not checked
+     * against the Content-Security-Policy (style-src-attr).
+     *
+     * @param value the new value of the style attribute
+     */
+    public void setCssomStyleAttribute(final String value) {
+        writingCssomStyle_ = true;
+        try {
+            setAttribute("style", value);
+        }
+        finally {
+            writingCssomStyle_ = false;
+        }
     }
 
     /**

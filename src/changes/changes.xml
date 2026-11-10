@@ -12,6 +12,15 @@
                 websocket-client: jetty updated to 12.1.15.
             </action>
             <action type="add" dev="rbri">
+                CSP: support for the style-src, style-src-elem and style-src-attr directives; style elements,
+                style attributes, stylesheet links and @import rules are checked against the policy,
+                blocked styles are not applied. Like the browsers, CSSOM changes are not checked.
+            </action>
+            <action type="fix" dev="rbri">
+                HtmlLink: the load/error event of a stylesheet link is fired after the stylesheet is stored;
+                accessing the styles from the event handler was loading the stylesheet again.
+            </action>
+            <action type="add" dev="rbri">
                 CSP: documents with a local scheme url (about:blank, data:, blob:) inherit a copy of the policy
                 of the parent document or the opener; documents written by document.open()/write()/close()
                 and the results of javascript: urls keep the policy of the replaced document.

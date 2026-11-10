@@ -62,6 +62,8 @@ public class HtmlLink extends HtmlElement {
      * <code>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</code>).
      */
     private CssStyleSheet sheet_;
+    // the load/error event of a stylesheet is fired after the stylesheet is stored
+    private String pendingStylesheetEvent_;
 
     /**
      * Creates an instance of HtmlLink.
@@ -207,6 +209,12 @@ public class HtmlLink extends HtmlElement {
         }
 
         if (downloadIfNeeded) {
+            if (isStylesheetRequest && getPage() instanceof HtmlPage htmlPage
+                    && !ContentSecurityPolicy.allowsExternalStyle(htmlPage, this, request.getUrl())) {
+                fireEvent(webClient, Event.TYPE_ERROR, isStylesheetRequest);
+                return null;
+            }
+
             try {
                 final WebResponse response = webClient.loadWebResponse(request);
                 if (response.isSuccess()) {
@@ -222,18 +230,18 @@ public class HtmlLink extends HtmlElement {
                         final String respType = response.getContentType();
                         if (StringUtils.isNotBlank(respType)
                                 && !MimeType.TEXT_CSS.equals(respType)) {
-                            executeEvent(webClient, Event.TYPE_ERROR);
+                            fireEvent(webClient, Event.TYPE_ERROR, isStylesheetRequest);
                             return response;
                         }
                     }
-                    executeEvent(webClient, Event.TYPE_LOAD);
+                    fireEvent(webClient, Event.TYPE_LOAD, isStylesheetRequest);
                     return response;
                 }
-                executeEvent(webClient, Event.TYPE_ERROR);
+                fireEvent(webClient, Event.TYPE_ERROR, isStylesheetRequest);
                 return response;
             }
             catch (final IOException e) {
-                executeEvent(webClient, Event.TYPE_ERROR);
+                fireEvent(webClient, Event.TYPE_ERROR, isStylesheetRequest);
                 throw e;
             }
         }
@@ -278,6 +286,18 @@ public class HtmlLink extends HtmlElement {
     @Override
     public boolean mayBeDisplayed() {
         return false;
+    }
+
+    /**
+     * Fires the event; for stylesheet requests the event is fired later by {@link #getSheet()}
+     * when the stylesheet is stored.
+     */
+    private void fireEvent(final WebClient webClient, final String type, final boolean isStylesheetRequest) {
+        if (isStylesheetRequest) {
+            pendingStylesheetEvent_ = type;
+            return;
+        }
+        executeEvent(webClient, type);
     }
 
     private void executeEvent(final WebClient webClient, final String type) {
@@ -361,6 +381,14 @@ public class HtmlLink extends HtmlElement {
     public CssStyleSheet getSheet() {
         if (sheet_ == null) {
             sheet_ = CssStyleSheet.loadStylesheet(this, this, null);
+
+            // fire the load/error event after the stylesheet is stored; otherwise
+            // an event handler accessing the styles would load the stylesheet again
+            final String event = pendingStylesheetEvent_;
+            pendingStylesheetEvent_ = null;
+            if (event != null) {
+                executeEvent(getPage().getWebClient(), event);
+            }
         }
         return sheet_;
     }

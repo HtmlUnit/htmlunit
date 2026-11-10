@@ -44,6 +44,9 @@ public class HtmlStyle extends HtmlElement {
     public static final String TAG_NAME = "style";
 
     private CssStyleSheet sheet_;
+    // the content checked against the Content-Security-Policy (style-src-elem) and the result
+    private String cspCheckedContent_;
+    private boolean cspAllowed_ = true;
 
     /**
      * Creates an instance of HtmlStyle.
@@ -101,6 +104,35 @@ public class HtmlStyle extends HtmlElement {
 
     /**
      * {@inheritDoc}
+     * Like the browsers, the content is checked against the Content-Security-Policy when the
+     * style element is added to the page.
+     */
+    @Override
+    public void onAllChildrenAddedToPage(final boolean postponed) {
+        super.onAllChildrenAddedToPage(postponed);
+        isAllowedByContentSecurityPolicy();
+    }
+
+    /**
+     * Checks the content against the Content-Security-Policy (style-src-elem); the content
+     * is only checked once.
+     *
+     * @return {@code true} if the content of this style element is allowed
+     */
+    private boolean isAllowedByContentSecurityPolicy() {
+        final String content = getTextContent();
+        if (content.equals(cspCheckedContent_)) {
+            return cspAllowed_;
+        }
+
+        cspCheckedContent_ = content;
+        cspAllowed_ = !(getPage() instanceof HtmlPage htmlPage)
+                || ContentSecurityPolicy.allowsInlineStyle(htmlPage, this, content);
+        return cspAllowed_;
+    }
+
+    /**
+     * {@inheritDoc}
      * @return {@code true} to make generated XML readable as HTML on Firefox 3 for instance.
      */
     @Override
@@ -134,9 +166,14 @@ public class HtmlStyle extends HtmlElement {
             return sheet_;
         }
 
+        final String uri = getPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
+        if (!isAllowedByContentSecurityPolicy()) {
+            sheet_ = new CssStyleSheet(this, "", uri);
+            return sheet_;
+        }
+
         final Cache cache = getPage().getWebClient().getCache();
         final CSSStyleSheetImpl cached = cache.getCachedStyleSheet(getTextContent());
-        final String uri = getPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
 
         if (cached != null) {
             sheet_ = new CssStyleSheet(this, cached, uri);

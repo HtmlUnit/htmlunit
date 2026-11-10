@@ -108,7 +108,7 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public void setCssText(final String value) {
-        domElement_.setAttribute("style", value);
+        domElement_.setCssomStyleAttribute(value);
     }
 
     /**

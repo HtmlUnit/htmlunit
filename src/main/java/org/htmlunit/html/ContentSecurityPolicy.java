@@ -33,6 +33,9 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.TopLevelWindow;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.EvaluatorException;
+import org.htmlunit.corejs.javascript.ScriptStackElement;
 import org.htmlunit.csp.FetchDirectiveKind;
 import org.htmlunit.csp.Policy;
 import org.htmlunit.csp.directive.SourceExpressionDirective;
@@ -322,6 +325,77 @@ public final class ContentSecurityPolicy implements Serializable {
     }
 
     /**
+     * Checks if the inline style element (style-src-elem) is allowed.
+     *
+     * @param page the page
+     * @param element the style element
+     * @param source the content of the style element
+     * @return {@code true} if the style is allowed
+     */
+    public static boolean allowsInlineStyle(final HtmlPage page, final DomElement element, final String source) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return true;
+        }
+
+        final Optional<String> nonce = nonce(element);
+        final Violation violation = inlineViolation(page, FetchDirectiveKind.StyleSrcElem, source, element);
+        final boolean allowed = csp.check(page, violation,
+                policy -> policy.allowsInlineStyle(nonce, Optional.of(source)));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
+     * Checks if the style attribute (style-src-attr) is allowed.
+     * Like the browsers, style changes done by the CSSOM (e.g. element.style.color = 'red')
+     * are not checked.
+     *
+     * @param page the page
+     * @param element the element with the style attribute
+     * @param source the value of the style attribute
+     * @return {@code true} if the style attribute is allowed
+     */
+    public static boolean allowsStyleAttribute(final HtmlPage page, final DomElement element,
+            final String source) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return true;
+        }
+
+        final Violation violation = inlineViolation(page, FetchDirectiveKind.StyleSrcAttr, source, element);
+        final boolean allowed = csp.check(page, violation,
+                policy -> policy.allowsStyleAsAttribute(Optional.of(source)));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
+     * Checks if loading the external stylesheet (link element or @import) is allowed (style-src-elem).
+     *
+     * @param page the page
+     * @param element the link element (the nonce is taken from this element) or {@code null} for @import
+     * @param url the url of the stylesheet
+     * @return {@code true} if the stylesheet is allowed
+     */
+    public static boolean allowsExternalStyle(final HtmlPage page, final DomElement element, final URL url) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return true;
+        }
+
+        final Optional<String> nonce = element == null ? Optional.empty() : nonce(element);
+        final Optional<URI> styleUrl = URI.parseURI(url.toExternalForm());
+        final Optional<URI> origin = origin(page);
+        final Violation violation = new Violation(FetchDirectiveKind.StyleSrcElem, withoutRef(url), null,
+                null, "", 0, 0);
+        final boolean allowed = csp.check(page, violation,
+                policy -> policy.allowsExternalStyle(nonce, styleUrl, origin));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
      * Checks if loading the given url into a frame or iframe is allowed
      * (frame-src, with fallback to child-src and default-src).
      * Like the browsers, the violation is reported for the document and the blocked url
@@ -544,6 +618,24 @@ public final class ContentSecurityPolicy implements Serializable {
                     Policy.PolicyListErrorConsumer.ignored).getPolicies());
         }
         return policies;
+    }
+
+    /**
+     * Creates the violation for inline content (style element or style attribute). Like the browsers,
+     * the location is the location of the running script, if the element was created or changed
+     * by a script; otherwise the location of the element in the document.
+     */
+    private static Violation inlineViolation(final HtmlPage page, final FetchDirectiveKind directive,
+            final String source, final DomElement element) {
+        if (Context.getCurrentContext() != null) {
+            final ScriptStackElement[] stack = new EvaluatorException("csp").getScriptStack();
+            if (stack.length > 0) {
+                return new Violation(directive, BLOCKED_INLINE, source, element,
+                        stack[0].fileName, Math.max(0, stack[0].lineNumber), 0);
+            }
+        }
+        return new Violation(directive, BLOCKED_INLINE, source, element,
+                documentUrl(page), element.getStartLineNumber(), element.getStartColumnNumber());
     }
 
     private static Optional<String> nonce(final DomElement element) {

@@ -85,6 +85,7 @@ import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.Selector.SelectorType;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.parser.selector.SimpleSelector;
+import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.DisabledElement;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -1266,7 +1267,13 @@ public class CssStyleSheet implements Serializable {
         if (sheet == null) {
             final String href = importRule.getHref();
             final String url = UrlUtils.resolveUrl(getUri(), href);
-            sheet = loadStylesheet(owner_, null, url);
+            if (owner_ != null && owner_.getPage() instanceof HtmlPage htmlPage
+                    && !ContentSecurityPolicy.allowsExternalStyle(htmlPage, null, UrlUtils.toUrlSafe(url))) {
+                sheet = new CssStyleSheet(owner_, "", url);
+            }
+            else {
+                sheet = loadStylesheet(owner_, null, url);
+            }
             imports_.put(importRule, sheet);
         }
         return sheet;

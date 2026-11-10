@@ -14,9 +14,13 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import java.net.URL;
+
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Unit tests for {@link HTMLLinkElement}.
@@ -254,5 +258,40 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The stylesheet is available in the load event handler.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"load", "rgb(255, 0, 0)"})
+    public void onloadGetComputedStyle() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var link = document.createElement('link');\n"
+            + "    link.rel = 'stylesheet';\n"
+            + "    link.onload = function() {\n"
+            + "      log('load');\n"
+            + "      log(getComputedStyle(document.getElementById('d')).color);\n"
+            + "    };\n"
+            + "    link.onerror = function() { log('error'); };\n"
+            + "    link.href = 'style.css';\n"
+            + "    document.head.appendChild(link);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d'>text</div>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "style.css"),
+                "#d { color: rgb(255, 0, 0); }", MimeType.TEXT_CSS);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 }

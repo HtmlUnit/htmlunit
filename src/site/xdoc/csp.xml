@@ -94,6 +94,28 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><code>style-src-elem</code></td>
+                    <td>
+                        inline <code>&lt;style&gt;</code> elements (parser inserted and created by JavaScript),
+                        stylesheets loaded by <code>&lt;link rel="stylesheet"&gt;</code> (the <code>error</code>
+                        event is fired for blocked stylesheets) and <code>@import</code> rules; blocked
+                        styles are not applied
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>style-src-attr</code></td>
+                    <td>
+                        <code>style</code> attributes (from the html source, <code>innerHTML</code> and
+                        <code>setAttribute()</code>); a blocked attribute stays part of the DOM but is not applied.
+                        Like the browsers, changes done by the CSSOM (e.g. <code>element.style.color = 'red'</code>
+                        or <code>element.style.cssText</code>) are not checked.
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>style-src</code></td>
+                    <td>fallback for <code>style-src-elem</code> and <code>style-src-attr</code></td>
+                </tr>
+                <tr>
                     <td><code>connect-src</code></td>
                     <td>
                         <code>XMLHttpRequest</code> (including all redirect targets), <code>fetch()</code>
@@ -302,7 +324,6 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
             </p>
             <ul>
                 <li>
-                    <code>style-src</code> (<code>style-src-elem</code>, <code>style-src-attr</code>),
                     <code>img-src</code>, <code>font-src</code>, <code>media-src</code>,
                     <code>object-src</code>, <code>manifest-src</code>
                 </li>
@@ -324,6 +345,11 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                     <code>window.open()</code> are not checked.
                 </li>
                 <li>Workers do not use the policy of the page.</li>
+                <li>
+                    The <code>nonce</code> property of elements is not supported; use the <code>nonce</code>
+                    attribute (e.g. <code>link.setAttribute('nonce', '...')</code>).
+                </li>
+                <li>Redirects of stylesheets are not checked against <code>style-src-elem</code>.</li>
                 <li>
                     <code>frame-src</code> is only checked for the <code>src</code> of the frame; navigations
                     inside the frame (e.g. links or <code>location</code> changes) are not checked.
