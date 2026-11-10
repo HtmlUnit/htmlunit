@@ -14,10 +14,14 @@
  */
 package org.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.CSP_META_SINGLE_POLICY;
+import static org.htmlunit.BrowserVersionFeatures.CSP_REPORT_FIREFOX_FORMAT;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +34,10 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.ContentSecurityPolicyViolation;
 import org.htmlunit.ContentSecurityPolicyViolationListener;
 import org.htmlunit.HttpHeader;
+import org.htmlunit.HttpMethod;
 import org.htmlunit.TopLevelWindow;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
@@ -38,6 +45,7 @@ import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.ScriptStackElement;
 import org.htmlunit.csp.FetchDirectiveKind;
 import org.htmlunit.csp.Policy;
+import org.htmlunit.csp.directive.ReportUriDirective;
 import org.htmlunit.csp.directive.SourceExpressionDirective;
 import org.htmlunit.csp.url.GUID;
 import org.htmlunit.csp.url.URI;
@@ -78,6 +86,7 @@ public final class ContentSecurityPolicy implements Serializable {
     private static final String BLOCKED_EVAL = "eval";
     private static final String FORM_ACTION = "form-action";
     private static final String BASE_URI = "base-uri";
+    private static final String REPORT_CONTENT_TYPE = "application/csp-report";
 
     /** The violation events to be fired after the current script has finished. */
     private static final ThreadLocal<List<Runnable>> PENDING_VIOLATIONS = new ThreadLocal<>();
@@ -625,6 +634,48 @@ public final class ContentSecurityPolicy implements Serializable {
                     statusCode, SecurityPolicyViolationEvent.DISPOSITION_REPORT.equals(disposition)));
         }
 
+        // like the browsers, report-uri is ignored if the policy is delivered by a meta element
+        // or if the policy contains a report-to directive
+        final ReportUriDirective reportUri = policy.deliveredViaMeta() || policy.reportTo().isPresent()
+                ? null : policy.reportUri().orElse(null);
+        if (reportUri != null && !reportUri.getUris().isEmpty()) {
+            final String report;
+            if (page.getWebClient().getBrowserVersion().hasFeature(CSP_REPORT_FIREFOX_FORMAT)) {
+                report = "{\"csp-report\":{"
+                        + jsonMember("blocked-uri", blockedUri) + ","
+                        + "\"column-number\":" + Math.max(1, columnNumber) + ","
+                        + jsonMember("disposition", disposition) + ","
+                        + jsonMember("document-uri", documentUrl) + ","
+                        + jsonMember("effective-directive", effectiveDirective) + ","
+                        + (lineNumber > 0 ? "\"line-number\":" + lineNumber + "," : "")
+                        + jsonMember("original-policy", absoluteReportUris(page, originalPolicy, reportUri)) + ","
+                        + jsonMember("referrer", "") + ","
+                        + (StringUtils.isEmptyOrNull(finalSample) ? "" : jsonMember("script-sample", finalSample) + ",")
+                        + (StringUtils.isEmptyOrNull(sourceFile) ? "" : jsonMember("source-file", sourceFile) + ",")
+                        + "\"status-code\":" + statusCode + ","
+                        + jsonMember("violated-directive", effectiveDirective)
+                        + "}}";
+            }
+            else {
+                report = "{\"csp-report\":{"
+                        + jsonMember("document-uri", documentUrl) + ","
+                        + jsonMember("referrer", "") + ","
+                        + jsonMember("violated-directive", effectiveDirective) + ","
+                        + jsonMember("effective-directive", effectiveDirective) + ","
+                        + jsonMember("original-policy", originalPolicy) + ","
+                        + jsonMember("disposition", disposition) + ","
+                        + jsonMember("blocked-uri", blockedUri) + ","
+                        + (lineNumber > 0 ? "\"line-number\":" + lineNumber + "," : "")
+                        + (columnNumber > 0 ? "\"column-number\":" + columnNumber + "," : "")
+                        + (StringUtils.isEmptyOrNull(sourceFile) ? "" : jsonMember("source-file", sourceFile) + ",")
+                        + "\"status-code\":" + statusCode + ","
+                        + jsonMember("script-sample", finalSample)
+                        + "}}";
+            }
+            final List<String> uris = new ArrayList<>(reportUri.getUris());
+            addPending(() -> sendReports(page, uris, report));
+        }
+
         final WebWindow window = page.getEnclosingWindow();
         if (window == null || !page.getWebClient().isJavaScriptEnabled()
                 || window.getScriptableObject() == null) {
@@ -653,12 +704,106 @@ public final class ContentSecurityPolicy implements Serializable {
         // browsers queue a task to fire the event; to get a deterministic order
         // we fire the event after the current script has finished
         // (see firePendingViolations())
+        addPending(fireEvent);
+    }
+
+    private static void addPending(final Runnable runnable) {
         List<Runnable> pending = PENDING_VIOLATIONS.get();
         if (pending == null) {
             pending = new ArrayList<>();
             PENDING_VIOLATIONS.set(pending);
         }
-        pending.add(fireEvent);
+        pending.add(runnable);
+    }
+
+    /**
+     * Sends the violation report (report-uri) as POST request with content type
+     * application/csp-report to all the given uris (relative uris are resolved against the
+     * url of the document). Errors are only logged.
+     */
+    private static void sendReports(final HtmlPage page, final List<String> uris, final String report) {
+        final WebClient webClient = page.getWebClient();
+        for (final String uri : uris) {
+            try {
+                final URL url = page.getFullyQualifiedUrl(uri);
+                final WebRequest request = new WebRequest(url, HttpMethod.POST);
+                request.setAdditionalHeader(HttpHeader.CONTENT_TYPE, REPORT_CONTENT_TYPE);
+                request.setCharset(UTF_8);
+                request.setRequestBody(report);
+                request.setFetchDestination(WebRequest.FetchDestination.REPORT);
+                request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
+                request.setRequestingUrl(page.getUrl());
+                webClient.loadWebResponse(request);
+            }
+            catch (final IOException | RuntimeException e) {
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Sending the Content-Security-Policy violation report to '" + uri + "' failed", e);
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns the policy with absolute report uris (like Firefox).
+     */
+    private static String absoluteReportUris(final HtmlPage page, final String policy,
+            final ReportUriDirective reportUri) {
+        final StringBuilder uris = new StringBuilder("report-uri");
+        for (final String uri : reportUri.getUris()) {
+            String absolute = uri;
+            try {
+                absolute = page.getFullyQualifiedUrl(uri).toExternalForm();
+            }
+            catch (final MalformedURLException e) {
+                // keep the uri as it is
+            }
+            uris.append(' ').append(absolute);
+        }
+
+        final String[] parts = policy.split(";", -1);
+        for (int i = 0; i < parts.length; i++) {
+            final String trimmed = parts[i].trim();
+            if (trimmed.toLowerCase(Locale.ROOT).startsWith("report-uri")) {
+                final String leading = parts[i].substring(0, parts[i].indexOf(trimmed));
+                parts[i] = leading + uris;
+            }
+        }
+        return String.join(";", parts);
+    }
+
+    private static String jsonMember(final String name, final String value) {
+        final StringBuilder json = new StringBuilder();
+        json.append('"').append(name).append("\":\"");
+        if (value != null) {
+            for (int i = 0; i < value.length(); i++) {
+                final char c = value.charAt(i);
+                switch (c) {
+                    case '"':
+                        json.append("\\\"");
+                        break;
+                    case '\\':
+                        json.append("\\\\");
+                        break;
+                    case '\n':
+                        json.append("\\n");
+                        break;
+                    case '\r':
+                        json.append("\\r");
+                        break;
+                    case '\t':
+                        json.append("\\t");
+                        break;
+                    default:
+                        if (c < 0x20) {
+                            json.append(String.format("\\u%04x", (int) c));
+                        }
+                        else {
+                            json.append(c);
+                        }
+                }
+            }
+        }
+        return json.append('"').toString();
     }
 
     private List<Policy> getEnforcedPolicies() {

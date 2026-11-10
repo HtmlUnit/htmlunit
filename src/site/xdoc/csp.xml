@@ -274,7 +274,7 @@
 
         <section name="Reporting Violations" id="sec_reporting">
             <p>
-                Every violation (of an enforced or a report only policy) is reported in three ways.
+                Every violation (of an enforced or a report only policy) is reported in these ways.
             </p>
 
             <subsection name="Log" id="sec_log">
@@ -297,6 +297,19 @@
                 <p>
                     Browsers fire the event asynchronously; HtmlUnit fires it after the current script has finished
                     to provide a deterministic order.
+                </p>
+            </subsection>
+
+            <subsection name="report-uri" id="sec_report_uri">
+                <p>
+                    If the policy contains a <code>report-uri</code> directive, HtmlUnit sends the report as
+                    POST request with content type <code>application/csp-report</code> and the JSON body
+                    (<code>{"csp-report": {"document-uri": ..., "blocked-uri": ..., ...}}</code>) to every
+                    uri of the directive. Like the browsers, the reports are sent async (after the
+                    current script); <code>report-uri</code> is ignored in meta elements and if the policy
+                    also contains a <code>report-to</code> directive. When simulating Firefox the report uses
+                    the Firefox format (sorted keys, absolute report uris in <code>original-policy</code>).
+                    Violations of <code>frame-ancestors</code> are not reported this way.
                 </p>
             </subsection>
 
@@ -355,8 +368,8 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                 <li><code>sandbox</code></li>
                 <li><code>upgrade-insecure-requests</code>, <code>require-trusted-types-for</code>, <code>trusted-types</code></li>
                 <li>
-                    <code>report-uri</code> and <code>report-to</code>: no reports are sent to the server;
-                    use the <a href="#sec_listener">listener</a> instead.
+                    <code>report-to</code> (Reporting API); no reports are sent for this directive,
+                    use <code>report-uri</code> or the <a href="#sec_listener">listener</a> instead.
                 </li>
             </ul>
             <p>

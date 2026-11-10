@@ -39,6 +39,14 @@ public enum BrowserVersionFeatures {
     ANCHOR_SEND_PING_REQUEST,
 
     /**
+     * The Content-Security-Policy violation report (report-uri) uses the Firefox format:
+     * the keys are sorted, the report uris of the original policy are absolute, the script-sample
+     * is only included if not empty and the column-number is always included.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    CSP_REPORT_FIREFOX_FORMAT,
+
+    /**
      * The content of a Content-Security-Policy meta element is parsed as one policy
      * (commas are not splitting the content into several policies).
      */
