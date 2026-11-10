@@ -336,10 +336,10 @@ public class ContentSecurityPolicyFrameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({})
+    @Alerts("load doc")
     public void javascriptUrl() throws Exception {
         loadPageVerify("frame-src 'none'; script-src 'self' 'unsafe-inline'",
-                addFrameJs("javascript:'<p>js</p>'"));
+                "addFrame(\"javascript:'<p>js</p>'\");\n");
     }
 
     /**
