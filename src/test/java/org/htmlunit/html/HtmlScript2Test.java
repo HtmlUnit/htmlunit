@@ -313,14 +313,14 @@ public class HtmlScript2Test extends WebDriverTestCase {
                       "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"},
             EDGE = {"dcl listener added", "head-end", "end",
                     "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"})
-    @HtmlUnitNYI(CHROME = {"dcl listener added", "head-end", "end",
-                           "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
-            EDGE = {"dcl listener added", "head-end", "end",
-                    "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
-            FF = {"dcl listener added", "head-end", "end",
-                  "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
-            FF_ESR = {"dcl listener added", "head-end", "end",
-                      "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"})
+    @HtmlUnitNYI(CHROME = {"dcl listener added", "deferred-2", "head-end", "end",
+                           "deferred-1", "deferred-3", "dcLoaded", "onload"},
+            EDGE = {"dcl listener added", "deferred-2", "head-end", "end",
+                    "deferred-1", "deferred-3", "dcLoaded", "onload"},
+            FF = {"dcl listener added", "deferred-2", "head-end", "end",
+                  "deferred-1", "deferred-3", "dcLoaded", "onload"},
+            FF_ESR = {"dcl listener added", "deferred-2", "head-end", "end",
+                      "deferred-1", "deferred-3", "dcLoaded", "onload"})
     public void deferDynamicExternal() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -353,6 +353,99 @@ public class HtmlScript2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "log('deferred-3');");
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The defer attribute has no effect for scripts inserted by javascript after the page was loaded.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"end", "onload", "script1", "script2"})
+    public void deferDynamicAfterLoad() throws Exception {
+        deferDynamic("window.addEventListener('load', function() {\n"
+                + "  log('onload');\n"
+                + "  addScript('script1.js', true);\n"
+                + "  addScript('script2.js', false);\n"
+                + "});\n");
+    }
+
+    /**
+     * The defer attribute has no effect for scripts inserted by javascript from a timer.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"end", "onload", "timeout", "script1"})
+    public void deferDynamicFromTimeout() throws Exception {
+        deferDynamic("window.addEventListener('load', function() {\n"
+                + "  log('onload');\n"
+                + "  setTimeout(function() {\n"
+                + "    log('timeout');\n"
+                + "    addScript('script1.js', true);\n"
+                + "  }, 10);\n"
+                + "});\n");
+    }
+
+    /**
+     * Scripts from createContextualFragment() are not parser-inserted; the defer
+     * attribute has no effect.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"end", "onload", "script1"})
+    public void deferDynamicContextualFragment() throws Exception {
+        deferDynamic("window.addEventListener('load', function() {\n"
+                + "  log('onload');\n"
+                + "  var range = document.createRange();\n"
+                + "  range.selectNode(document.body);\n"
+                + "  var frag = range.createContextualFragment("
+                + "\"<script defer src='script1.js'><\\/script>\");\n"
+                + "  document.body.appendChild(frag);\n"
+                + "});\n");
+    }
+
+    /**
+     * Scripts written by document.write() during parsing are parser-inserted; the defer
+     * attribute is respected.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"written", "end", "script1", "dcLoaded", "onload"})
+    public void deferDocumentWrite() throws Exception {
+        deferDynamic("document.addEventListener('DOMContentLoaded', function() { log('dcLoaded'); });\n"
+                + "window.addEventListener('load', function() { log('onload'); });\n"
+                + "document.write(\"<script defer src='script1.js'><\\/script>\");\n"
+                + "log('written');\n");
+    }
+
+    private void deferDynamic(final String js) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "    function addScript(src, defer) {\n"
+            + "      var script = document.createElement('script');\n"
+            + "      if (defer) script.defer = true;\n"
+            + "      script.src = src;\n"
+            + "      document.head.appendChild(script);\n"
+            + "    }\n"
+            + js
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <script>log('end')</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "log('script1');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "log('script2');");
+
+        final WebDriver driver = loadPage2(html);
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**

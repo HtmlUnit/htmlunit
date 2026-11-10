@@ -354,6 +354,14 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             script.markAsCreatedByDomParser();
         }
 
+        // scripts created while parsing the document (or by document.write()) are parser-inserted;
+        // scripts from innerHTML, insertAdjacentHTML(), createContextualFragment()... are not
+        if (!createdByJavascript_
+                && !page_.isParsingHtmlSnippet()
+                && newElement instanceof ScriptElement script) {
+            script.markAsParserInserted();
+        }
+
         currentNode_ = newElement;
         stack_.push(currentNode_);
     }

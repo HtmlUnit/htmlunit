@@ -53,6 +53,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
 
     private boolean executed_;
     private boolean createdByDomParser_;
+    private boolean parserInserted_;
 
     /**
      * Creates an instance of HtmlScript.
@@ -331,6 +332,22 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     @Override
     public boolean wasCreatedByDomParser() {
         return createdByDomParser_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void markAsParserInserted() {
+        parserInserted_ = true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean wasParserInserted() {
+        return parserInserted_;
     }
 
     /**

@@ -34,6 +34,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
     public static final String TAG_NAME = "script";
     private boolean executed_;
     private boolean createdByDomParser_;
+    private boolean parserInserted_;
 
     /**
      * Creates a new instance.
@@ -170,5 +171,21 @@ public class SvgScript extends SvgElement implements ScriptElement {
     @Override
     public boolean wasCreatedByDomParser() {
         return createdByDomParser_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void markAsParserInserted() {
+        parserInserted_ = true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean wasParserInserted() {
+        return parserInserted_;
     }
 }

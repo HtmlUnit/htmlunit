@@ -78,4 +78,20 @@ public interface ScriptElement {
      * @return true or false
      */
     boolean wasCreatedByDomParser();
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Marks this script as parser-inserted (inserted by the parser of the document, including document.write()).
+     * Spec: the defer attribute has only an effect for parser-inserted scripts.
+     */
+    void markAsParserInserted();
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns true if this script was inserted by the parser of the document.
+     * @return true or false
+     */
+    boolean wasParserInserted();
 }

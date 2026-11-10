@@ -1693,7 +1693,8 @@ public class HtmlPage extends SgmlPage {
         // don't call getElementsByTagName() here because it creates a live collection
         for (final HtmlElement elem : doc.getHtmlElementDescendants()) {
             if ("script".equals(elem.getLocalName()) && (elem instanceof HtmlScript script)) {
-                if (script.isDeferred() && ATTRIBUTE_NOT_DEFINED != script.getSrcAttribute()) {
+                if (script.isDeferred() && script.wasParserInserted()
+                        && ATTRIBUTE_NOT_DEFINED != script.getSrcAttribute()) {
                     scripts.add(script);
                 }
             }
