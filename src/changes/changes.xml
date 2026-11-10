@@ -12,6 +12,9 @@
                 websocket-client: jetty updated to 12.1.15.
             </action>
             <action type="add" dev="rbri">
+                CSP: support for the base-uri directive; a blocked base url is ignored.
+            </action>
+            <action type="add" dev="rbri">
                 CSP: support for the style-src, style-src-elem and style-src-attr directives; style elements,
                 style attributes, stylesheet links and @import rules are checked against the policy,
                 blocked styles are not applied. Like the browsers, CSSOM changes are not checked.

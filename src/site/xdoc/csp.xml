@@ -135,7 +135,7 @@
                 </tr>
                 <tr>
                     <td><code>default-src</code></td>
-                    <td>fallback for the fetch directives above (not for <code>form-action</code> and <code>frame-ancestors</code>)</td>
+                    <td>fallback for the fetch directives above (not for <code>form-action</code>, <code>base-uri</code> and <code>frame-ancestors</code>)</td>
                 </tr>
                 <tr>
                     <td><code>form-action</code></td>
@@ -146,6 +146,14 @@
                         like Chrome, redirects are checked also (the url of the form submission
                         is reported). There is no fallback to <code>default-src</code>. Forms with
                         method <code>dialog</code> are not checked.
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>base-uri</code></td>
+                    <td>
+                        the url of the <code>&lt;base&gt;</code> element (also if created or changed by
+                        JavaScript); a blocked base url is ignored and urls are resolved against the url
+                        of the document. There is no fallback to <code>default-src</code>.
                     </td>
                 </tr>
                 <tr>
@@ -328,7 +336,7 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                     <code>object-src</code>, <code>manifest-src</code>
                 </li>
                 <li><code>worker-src</code> (and <code>child-src</code> for workers)</li>
-                <li><code>base-uri</code>, <code>sandbox</code></li>
+                <li><code>sandbox</code></li>
                 <li><code>upgrade-insecure-requests</code>, <code>require-trusted-types-for</code>, <code>trusted-types</code></li>
                 <li>
                     <code>report-uri</code> and <code>report-to</code>: no reports are sent to the server;

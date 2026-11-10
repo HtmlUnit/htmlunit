@@ -77,6 +77,7 @@ public final class ContentSecurityPolicy implements Serializable {
     private static final String BLOCKED_INLINE = "inline";
     private static final String BLOCKED_EVAL = "eval";
     private static final String FORM_ACTION = "form-action";
+    private static final String BASE_URI = "base-uri";
 
     /** The violation events to be fired after the current script has finished. */
     private static final ThreadLocal<List<Runnable>> PENDING_VIOLATIONS = new ThreadLocal<>();
@@ -416,6 +417,31 @@ public final class ContentSecurityPolicy implements Serializable {
         final Violation violation = new Violation(FetchDirectiveKind.FrameSrc, navigationBlockedUri(page, url),
                 null, null, "", 0, 0);
         final boolean allowed = csp.check(page, violation, policy -> policy.allowsFrame(target, origin));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
+     * Checks if the given url is allowed as base url of the document (base-uri).
+     * There is no fallback to default-src for this directive.
+     *
+     * @param page the page containing the base element
+     * @param url the resolved url of the base element
+     * @return {@code true} if the base url is allowed
+     */
+    public static boolean allowsBaseUri(final HtmlPage page, final URL url) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return true;
+        }
+
+        final URLWithScheme target = toUrlWithScheme(url);
+        final Optional<URI> origin = origin(page);
+        final Violation violation = new Violation(BASE_URI, withoutRef(url), null, null, "", 0, 0);
+        final boolean allowed = csp.check(page, violation,
+                policy -> policy.baseUri()
+                            .map(directive -> Policy.doesUrlMatchSourceListInOrigin(target, directive, origin))
+                            .orElse(true));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }

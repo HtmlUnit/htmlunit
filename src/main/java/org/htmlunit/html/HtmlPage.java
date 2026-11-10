@@ -175,6 +175,9 @@ public class HtmlPage extends SgmlPage {
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
+    // the href of the base element checked against the Content-Security-Policy (base-uri) and the result
+    private String cspCheckedBaseHref_;
+    private boolean cspBaseAllowed_ = true;
     private List<AutoCloseable> autoCloseableList_;
     private ElementFromPointHandler elementFromPointHandler_;
     private DomElement elementWithFocus_;
@@ -1987,6 +1990,8 @@ public class HtmlPage extends SgmlPage {
             }
 
             if ("base".equals(node.getNodeName())) {
+                // like Chrome, adding a base element checks the base url again
+                cspCheckedBaseHref_ = null;
                 calculateBase();
             }
         }
@@ -2260,6 +2265,12 @@ public class HtmlPage extends SgmlPage {
                 }
                 base_ = base;
             }
+        }
+
+        if (base_ != null) {
+            // like the browsers, the base url is checked against the Content-Security-Policy
+            // when the base element is added
+            getBaseURL();
         }
     }
 
@@ -2676,56 +2687,85 @@ public class HtmlPage extends SgmlPage {
      * @return the base URL
      */
     public URL getBaseURL() {
-        URL baseUrl;
         if (base_ == null) {
-            baseUrl = getUrl();
-            final WebWindow window = getEnclosingWindow();
-            final boolean frame = window != null && window != window.getTopWindow();
-            if (frame) {
-                final boolean frameSrcIsNotSet = baseUrl == UrlUtils.URL_ABOUT_BLANK;
-                final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
-                if (frameSrcIsNotSet || frameSrcIsJs) {
-                    baseUrl = window.getTopWindow().getEnclosedPage().getWebResponse()
-                        .getWebRequest().getUrl();
-                }
-            }
-            else if (baseUrl_ != null) {
-                baseUrl = baseUrl_;
-            }
-        }
-        else {
-            final String href = base_.getHrefAttribute().trim();
-            if (org.htmlunit.util.StringUtils.isEmptyOrNull(href)) {
-                baseUrl = getUrl();
-            }
-            else {
-                final URL url = getUrl();
-                try {
-                    if (href.startsWith("http://") || href.startsWith("https://")) {
-                        baseUrl = new URL(href);
-                    }
-                    else if (href.startsWith("//")) {
-                        baseUrl = new URL("%s:%s".formatted(url.getProtocol(), href));
-                    }
-                    else if (href.length() > 0 && href.charAt(0) == '/') {
-                        final int port = Window.getPort(url);
-                        baseUrl = new URL("%s://%s:%d%s".formatted(url.getProtocol(), url.getHost(), port, href));
-                    }
-                    else if (url.toString().endsWith("/")) {
-                        baseUrl = new URL("%s%s".formatted(url, href));
-                    }
-                    else {
-                        baseUrl = new URL(UrlUtils.resolveUrl(url, href));
-                    }
-                }
-                catch (final MalformedURLException e) {
-                    notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
-                    baseUrl = url;
-                }
-            }
+            return getFallbackBaseURL();
         }
 
+        final String href = base_.getHrefAttribute().trim();
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(href)) {
+            return getUrl();
+        }
+
+        final URL baseUrl = resolveBaseHref(href);
+        if (baseUrl == null) {
+            return getUrl();
+        }
+        if (!isBaseAllowedByContentSecurityPolicy(href, baseUrl)) {
+            return getFallbackBaseURL();
+        }
         return baseUrl;
+    }
+
+    /**
+     * Checks the url of the base element against the Content-Security-Policy (base-uri);
+     * the check is done only once for every href value.
+     */
+    private boolean isBaseAllowedByContentSecurityPolicy(final String href, final URL baseUrl) {
+        if (!href.equals(cspCheckedBaseHref_)) {
+            cspCheckedBaseHref_ = href;
+            cspBaseAllowed_ = ContentSecurityPolicy.allowsBaseUri(this, baseUrl);
+        }
+        return cspBaseAllowed_;
+    }
+
+    /**
+     * Returns the base url used if there is no (allowed) base element.
+     */
+    private URL getFallbackBaseURL() {
+        URL baseUrl = getUrl();
+        final WebWindow window = getEnclosingWindow();
+        final boolean frame = window != null && window != window.getTopWindow();
+        if (frame) {
+            final boolean frameSrcIsNotSet = baseUrl == UrlUtils.URL_ABOUT_BLANK;
+            final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
+            if (frameSrcIsNotSet || frameSrcIsJs) {
+                baseUrl = window.getTopWindow().getEnclosedPage().getWebResponse()
+                    .getWebRequest().getUrl();
+            }
+        }
+        else if (baseUrl_ != null) {
+            baseUrl = baseUrl_;
+        }
+        return baseUrl;
+    }
+
+    /**
+     * Resolves the href of the base element.
+     *
+     * @return the resolved url or {@code null} if the href is invalid
+     */
+    private URL resolveBaseHref(final String href) {
+        final URL url = getUrl();
+        try {
+            if (href.startsWith("http://") || href.startsWith("https://")) {
+                return new URL(href);
+            }
+            if (href.startsWith("//")) {
+                return new URL("%s:%s".formatted(url.getProtocol(), href));
+            }
+            if (href.length() > 0 && href.charAt(0) == '/') {
+                final int port = Window.getPort(url);
+                return new URL("%s://%s:%d%s".formatted(url.getProtocol(), url.getHost(), port, href));
+            }
+            if (url.toString().endsWith("/")) {
+                return new URL("%s%s".formatted(url, href));
+            }
+            return new URL(UrlUtils.resolveUrl(url, href));
+        }
+        catch (final MalformedURLException e) {
+            notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
+            return null;
+        }
     }
 
     /**
