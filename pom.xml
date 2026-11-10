@@ -47,7 +47,7 @@
         <htmlunit-cssparser.version>5.8.0-SNAPSHOT</htmlunit-cssparser.version>
         <htmlunit-corejs.version>5.8.0-SNAPSHOT</htmlunit-corejs.version>
         <htmlunit-neko.version>5.8.0-SNAPSHOT</htmlunit-neko.version>
-        <htmlunit-websocketclient.version>5.7.0</htmlunit-websocketclient.version>
+        <htmlunit-websocketclient.version>5.8.0-SNAPSHOT</htmlunit-websocketclient.version>
         <htmlunit-xpath.version>5.7.0</htmlunit-xpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
@@ -64,7 +64,7 @@
         <!-- test dependencies -->
         <junit.version>6.1.3</junit.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <jetty.version>12.1.14</jetty.version>
+        <jetty.version>12.1.15</jetty.version>
         <quercus.version>4.0.66</quercus.version>
         <logback-classic.version>1.6.6</logback-classic.version>
         <commons-text.version>1.15.0</commons-text.version>

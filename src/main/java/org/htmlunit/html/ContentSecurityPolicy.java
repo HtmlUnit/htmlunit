@@ -30,6 +30,7 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.ContentSecurityPolicyViolation;
 import org.htmlunit.ContentSecurityPolicyViolationListener;
 import org.htmlunit.HttpHeader;
+import org.htmlunit.TopLevelWindow;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.csp.FetchDirectiveKind;
@@ -81,6 +82,8 @@ public final class ContentSecurityPolicy implements Serializable {
     private final List<String> reportOnly_ = new ArrayList<>();
     private final List<String> meta_ = new ArrayList<>();
     private boolean metaSinglePolicy_;
+    // for inherited policies the url of the creator document ('self')
+    private URL selfUrl_;
 
     private transient List<Policy> enforcedPolicies_;
     private transient List<Policy> reportOnlyPolicies_;
@@ -123,6 +126,53 @@ public final class ContentSecurityPolicy implements Serializable {
                 result.reportOnly_.add(value);
             }
         }
+        return result;
+    }
+
+    /**
+     * Returns a copy of the policy of the creator for documents with a local scheme url
+     * (about:, data:, blob:). Like the browsers, these documents inherit the policy of the
+     * document creating them; for frames this is the parent document, for windows opened
+     * by window.open() the opener. The copy is independent from the policy of the creator
+     * (policies added later by meta elements are not shared) and 'self' refers to the
+     * origin of the creator.
+     *
+     * @param url the url of the new document
+     * @param window the window the new document is loaded into
+     * @return the inherited policy or {@code null}
+     */
+    public static ContentSecurityPolicy inherit(final URL url, final WebWindow window) {
+        if (url == null || window == null) {
+            return null;
+        }
+        final String protocol = url.getProtocol();
+        if (!"about".equals(protocol) && !"data".equals(protocol) && !"blob".equals(protocol)) {
+            return null;
+        }
+
+        WebWindow creator = null;
+        if (window instanceof FrameWindow) {
+            creator = window.getParentWindow();
+        }
+        else if (window instanceof TopLevelWindow topLevelWindow) {
+            creator = topLevelWindow.getOpener();
+        }
+        if (creator == null || creator == window
+                || !(creator.getEnclosedPage() instanceof HtmlPage creatorPage)) {
+            return null;
+        }
+
+        final ContentSecurityPolicy creatorCsp = creatorPage.getContentSecurityPolicy();
+        if (creatorCsp == null) {
+            return null;
+        }
+
+        final ContentSecurityPolicy result = new ContentSecurityPolicy();
+        result.enforced_.addAll(creatorCsp.enforced_);
+        result.reportOnly_.addAll(creatorCsp.reportOnly_);
+        result.meta_.addAll(creatorCsp.meta_);
+        result.metaSinglePolicy_ = creatorCsp.metaSinglePolicy_;
+        result.selfUrl_ = selfUrl(creatorPage);
         return result;
     }
 
@@ -585,7 +635,7 @@ public final class ContentSecurityPolicy implements Serializable {
         if (host == null || host.isEmpty()) {
             return "";
         }
-        if (UrlUtils.isSameOrigin(page.getUrl(), url)) {
+        if (UrlUtils.isSameOrigin(selfUrl(page), url)) {
             return withoutRef(url);
         }
 
@@ -598,7 +648,18 @@ public final class ContentSecurityPolicy implements Serializable {
     }
 
     private static Optional<URI> origin(final HtmlPage page) {
-        return URI.parseURI(page.getUrl().toExternalForm());
+        return URI.parseURI(selfUrl(page).toExternalForm());
+    }
+
+    /**
+     * Returns the url used for 'self'; for inherited policies the url of the creator.
+     */
+    private static URL selfUrl(final HtmlPage page) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp != null && csp.selfUrl_ != null) {
+            return csp.selfUrl_;
+        }
+        return page.getUrl();
     }
 
     /**

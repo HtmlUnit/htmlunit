@@ -57,6 +57,7 @@ import org.htmlunit.OnbeforeunloadHandler;
 import org.htmlunit.Page;
 import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.StringWebResponse;
 import org.htmlunit.TopLevelWindow;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
@@ -232,6 +233,20 @@ public class HtmlPage extends SgmlPage {
     public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
         contentSecurityPolicy_ = ContentSecurityPolicy.fromResponse(webResponse);
+        if (contentSecurityPolicy_ == null && webResponse != null) {
+            // the content written by document.open()/write()/close() and the result of a
+            // javascript: url replace the current document; the policy is kept
+            if (webResponse instanceof StringWebResponse stringWebResponse
+                    && stringWebResponse.isFromJavascript()
+                    && webWindow != null
+                    && webWindow.getEnclosedPage() instanceof HtmlPage currentPage) {
+                contentSecurityPolicy_ = currentPage.getContentSecurityPolicy();
+            }
+            else {
+                contentSecurityPolicy_ = ContentSecurityPolicy.inherit(webResponse.getWebRequest().getUrl(),
+                                            webWindow);
+            }
+        }
     }
 
     /**
@@ -251,6 +266,35 @@ public class HtmlPage extends SgmlPage {
      */
     public ContentSecurityPolicy getContentSecurityPolicy() {
         return contentSecurityPolicy_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the url used to determine the origin of this page. Like in the browsers, an about:blank
+     * document has the origin of its creator; for frames this is the parent document, for windows
+     * opened by window.open() the opener. For all other pages this is the url of the page.
+     *
+     * @return the url of the origin
+     */
+    public URL getOriginUrl() {
+        final URL url = getUrl();
+        if (!UrlUtils.ABOUT_BLANK.equals(url.toExternalForm())) {
+            return url;
+        }
+
+        final WebWindow window = getEnclosingWindow();
+        WebWindow creator = null;
+        if (window instanceof FrameWindow) {
+            creator = window.getParentWindow();
+        }
+        else if (window instanceof TopLevelWindow topLevelWindow) {
+            creator = topLevelWindow.getOpener();
+        }
+        if (creator != null && creator != window && creator.getEnclosedPage() instanceof HtmlPage creatorPage) {
+            return creatorPage.getOriginUrl();
+        }
+        return url;
     }
 
     /**

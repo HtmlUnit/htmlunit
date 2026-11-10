@@ -730,6 +730,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         try {
             final URL pageUrl = containingPage.getUrl();
+            // about:blank documents have the origin of their creator
+            final URL originUrl = containingPage.getOriginUrl();
             final URL fullUrl = containingPage.getFullyQualifiedUrl(url);
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader(),
                                                                 getBrowserVersion().getAcceptEncodingHeader());
@@ -740,7 +742,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             request.setFetchDestination(WebRequest.FetchDestination.EMPTY);
             request.setFetchModeOverride(FetchMode.CORS);
-            request.setRequestingUrl(pageUrl);
+            request.setRequestingUrl(originUrl);
 
             try {
                 HttpMethod.validateHttpMethodName(method);
@@ -777,7 +779,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 boolean sameOrigin = false;
                 try {
                     final URL blobOrigin = UrlUtils.toUrlUnsafe(fullUrl.toExternalForm().substring("blob:".length()));
-                    sameOrigin = UrlUtils.isSameOrigin(pageUrl, blobOrigin);
+                    sameOrigin = UrlUtils.isSameOrigin(originUrl, blobOrigin);
                 }
                 catch (final MalformedURLException ignored) {
                     // keep sameOrigin = false
@@ -785,14 +787,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 isSameOrigin_ = sameOrigin;
             }
             else {
-                isSameOrigin_ = UrlUtils.isSameOrigin(pageUrl, fullUrl);
+                isSameOrigin_ = UrlUtils.isSameOrigin(originUrl, fullUrl);
                 final boolean alwaysAddOrigin = HttpMethod.GET != request.getHttpMethod()
                                                 && HttpMethod.HEAD != request.getHttpMethod();
                 if (alwaysAddOrigin || !isSameOrigin_) {
-                    final StringBuilder origin = new StringBuilder().append(pageUrl.getProtocol()).append("://")
-                            .append(pageUrl.getHost());
-                    if (pageUrl.getPort() != -1) {
-                        origin.append(':').append(pageUrl.getPort());
+                    final StringBuilder origin = new StringBuilder().append(originUrl.getProtocol()).append("://")
+                            .append(originUrl.getHost());
+                    if (originUrl.getPort() != -1) {
+                        origin.append(':').append(originUrl.getPort());
                     }
                     request.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
                 }

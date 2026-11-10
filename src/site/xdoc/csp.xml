@@ -175,6 +175,34 @@
             </subsection>
         </section>
 
+        <section name="Policy Inheritance" id="sec_inheritance">
+            <p>
+                Like the browsers, documents with a local scheme url (<code>about:blank</code>, <code>data:</code>,
+                <code>blob:</code>) inherit a copy of the policy of the document creating them:
+            </p>
+            <ul>
+                <li>frames and iframes inherit the policy of the parent document</li>
+                <li>windows opened by <code>window.open()</code> inherit the policy of the opener</li>
+                <li>
+                    <code>'self'</code> refers to the origin of the creator; policies added later
+                    (e.g. by meta elements) are not shared between the documents
+                </li>
+                <li>
+                    like the browsers, <code>eval()</code> and <code>new Function()</code> use the policy of the
+                    window they belong to (e.g. <code>frame.contentWindow.eval()</code> is checked against the
+                    policy of the frame)
+                </li>
+                <li>
+                    the content written by <code>document.open()</code>/<code>write()</code>/<code>close()</code>
+                    and the result of a <code>javascript:</code> url keep the policy of the replaced document
+                </li>
+            </ul>
+            <p>
+                Documents loaded from http(s) urls never inherit the policy; they only use the policies
+                delivered with their own response.
+            </p>
+        </section>
+
         <section name="Blocked Actions" id="sec_blocked">
             <p>
                 A blocked action behaves like in the browsers:
@@ -290,10 +318,7 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                 Known limitations:
             </p>
             <ul>
-                <li>
-                    <code>about:blank</code> and <code>srcdoc</code> documents do not inherit the policy
-                    of the document creating them.
-                </li>
+                <li>HtmlUnit does not support <code>srcdoc</code> iframes.</li>
                 <li>
                     <code>javascript:</code> urls used as <code>src</code> of a frame or with
                     <code>window.open()</code> are not checked.

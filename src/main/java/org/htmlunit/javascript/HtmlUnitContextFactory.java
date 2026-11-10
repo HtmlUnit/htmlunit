@@ -36,11 +36,13 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptStackElement;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.debug.Debugger;
 import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.host.Window;
 
 /**
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from
@@ -166,10 +168,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
             // which is used for window.eval. We have to take care in which case we are.
             final boolean isWindowEval = compiler != null;
 
-            if (isWindowEval) {
-                ensureEvalAllowed(source);
-            }
-
             // Remove HTML comments around the source if needed
             if (!isWindowEval) {
 
@@ -203,15 +201,19 @@ public class HtmlUnitContextFactory extends ContextFactory {
                     sourceName, lineno, securityDomain, compilerEnvironsProcessor);
         }
 
+        /**
+         * Like the browsers, checks the Content-Security-Policy of the realm (page) the
+         * string is compiled for (eval, new Function()).
+         */
+        @Override
+        protected void ensureCanCompileStrings(final VarScope scope, final String source) {
+            ensureEvalAllowed(source, scope);
+        }
+
         @Override
         protected Function compileFunction(final VarScope scope, String source,
                 final Evaluator compiler, final ErrorReporter compilationErrorReporter,
                 final String sourceName, final int lineno, final Object securityDomain) {
-
-            // the compiler is only given for new Function(...)
-            if (compiler != null) {
-                ensureEvalAllowed(source);
-            }
 
             if (deminifyFunctionCode_) {
                 final Function f = super.compileFunction(scope, source, compiler,
@@ -224,18 +226,29 @@ public class HtmlUnitContextFactory extends ContextFactory {
     }
 
     /**
-     * Throws an EvalError if the Content-Security-Policy of the page of the
-     * running script does not allow the evaluation of strings as code.
+     * Throws an EvalError if the Content-Security-Policy of the page
+     * does not allow the evaluation of strings as code.
+     * Like the browsers, the policy of the realm of the called function is used (e.g. for
+     * {@code frame.contentWindow.eval(...)} or {@code new frame.contentWindow.Function(...)} the
+     * policy of the frame); if the realm has no page the page of the running script is used.
      *
      * @param source the source to evaluate
+     * @param scope the scope of the realm
      */
-    private static void ensureEvalAllowed(final String source) {
+    private static void ensureEvalAllowed(final String source, final VarScope scope) {
         final Context cx = Context.getCurrentContext();
         if (cx == null) {
             return;
         }
 
-        Object page = cx.getThreadLocal(JavaScriptEngine.KEY_RUNNING_PAGE);
+        Object page = null;
+        if (scope != null
+                && ScriptableObject.getTopLevelScope(scope).getGlobalThis() instanceof Window window) {
+            page = window.getWebWindow().getEnclosedPage();
+        }
+        if (!(page instanceof HtmlPage)) {
+            page = cx.getThreadLocal(JavaScriptEngine.KEY_RUNNING_PAGE);
+        }
         if (!(page instanceof HtmlPage)) {
             page = cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
         }

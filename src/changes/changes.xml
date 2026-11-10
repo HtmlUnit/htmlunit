@@ -8,6 +8,24 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="update" dev="rbri">
+                websocket-client: jetty updated to 12.1.15.
+            </action>
+            <action type="add" dev="rbri">
+                CSP: documents with a local scheme url (about:blank, data:, blob:) inherit a copy of the policy
+                of the parent document or the opener; documents written by document.open()/write()/close()
+                and the results of javascript: urls keep the policy of the replaced document.
+            </action>
+            <action type="fix" dev="rbri">
+                CSP: eval() and new Function() are checked against the policy of the window they belong to
+                (e.g. frame.contentWindow.eval()).
+            </action>
+            <action type="fix" dev="rbri">
+                XMLHttpRequest: requests from about:blank documents use the origin of the creator (parent or opener).
+            </action>
+            <action type="update" dev="rbri">
+                core-js: new hook Context.ensureCanCompileStrings() called by eval and the Function constructors.
+            </action>
             <action type="add" dev="rbri">
                 CSP: support for the frame-src directive (with fallback to child-src and default-src);
                 frames and iframes (including redirects) are checked against the policy, blocked frames show about:blank.
