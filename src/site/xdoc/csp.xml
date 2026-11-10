@@ -134,6 +134,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><code>img-src</code></td>
+                    <td>
+                        images (<code>&lt;img&gt;</code>, <code>new Image()</code>, also if the <code>src</code>
+                        is changed later); the violation is reported also if HtmlUnit does not download the
+                        image. A blocked image is not downloaded, the <code>error</code> event is fired.
+                    </td>
+                </tr>
+                <tr>
                     <td><code>worker-src</code></td>
                     <td>
                         creating a dedicated worker (<code>new Worker(url)</code>, including <code>data:</code>
@@ -341,7 +349,7 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
             </p>
             <ul>
                 <li>
-                    <code>img-src</code>, <code>font-src</code>, <code>media-src</code>,
+                    <code>font-src</code>, <code>media-src</code>,
                     <code>object-src</code>, <code>manifest-src</code>
                 </li>
                 <li><code>sandbox</code></li>

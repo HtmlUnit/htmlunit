@@ -422,6 +422,28 @@ public final class ContentSecurityPolicy implements Serializable {
     }
 
     /**
+     * Checks if loading the given image url is allowed (img-src, with fallback to default-src).
+     *
+     * @param page the page containing the image
+     * @param url the url of the image
+     * @return {@code true} if the image is allowed
+     */
+    public static boolean allowsImage(final HtmlPage page, final URL url) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return true;
+        }
+
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URI> origin = origin(page);
+        final Violation violation = new Violation(FetchDirectiveKind.ImgSrc, blockedUri(url), null,
+                null, "", 0, 0);
+        final boolean allowed = csp.check(page, violation, policy -> policy.allowsImage(target, origin));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
      * Checks if creating a worker with the given script url is allowed
      * (worker-src, with fallback to child-src, script-src and default-src).
      *

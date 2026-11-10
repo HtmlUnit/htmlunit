@@ -85,6 +85,9 @@ public class HtmlImage extends HtmlElement {
     private int width_ = -1;
     private int height_ = -1;
     private boolean downloaded_;
+    // the url checked against the Content-Security-Policy (img-src) and the result
+    private String cspCheckedUrl_;
+    private boolean cspAllowed_ = true;
     private boolean isComplete_;
     private boolean onloadProcessed_;
     private boolean createdByJavascript_;
@@ -261,6 +264,10 @@ public class HtmlImage extends HtmlElement {
             return; // nothing to do if embedded in XML code
         }
 
+        // like the browsers, the image url is checked against the Content-Security-Policy
+        // also if HtmlUnit does not download the image
+        isAllowedByContentSecurityPolicy(htmlPage);
+
         final WebClient client = htmlPage.getWebClient();
 
         final boolean hasEventHandler = hasEventHandlers("onload") || hasEventHandlers("onerror");
@@ -279,7 +286,7 @@ public class HtmlImage extends HtmlElement {
                 try {
                     downloadImageIfNeeded();
                     // if the download was a success
-                    if (imageWebResponse_.isSuccess()) {
+                    if (imageWebResponse_ != null && imageWebResponse_.isSuccess()) {
                         if (imageWebResponse_.getStatusCode() != HttpStatus.NO_CONTENT_204) {
                             loadSuccessful = true; // Trigger the onload handler
                         }
@@ -682,8 +689,12 @@ public class HtmlImage extends HtmlElement {
                 final WebClient webClient = page.getWebClient();
                 final BrowserVersion browser = webClient.getBrowserVersion();
 
-                if (!(browser.hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY)
-                        && StringUtils.isBlank(src))) {
+                final boolean blank = browser.hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src);
+                if (!blank && !isAllowedByContentSecurityPolicy(page)) {
+                    // blocked by the Content-Security-Policy; forget the response of a previous src
+                    imageWebResponse_ = null;
+                }
+                else if (!blank) {
                     final URL url = page.getFullyQualifiedUrl(src);
                     final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
                                                                     browser.getAcceptEncodingHeader());
@@ -719,6 +730,35 @@ public class HtmlImage extends HtmlElement {
             width_ = -1;
             height_ = -1;
         }
+    }
+
+    /**
+     * Checks the url of the image against the Content-Security-Policy (img-src);
+     * the check is done only once for every url.
+     *
+     * @param page the page
+     * @return {@code true} if the image is allowed (or the src is empty or invalid)
+     */
+    private boolean isAllowedByContentSecurityPolicy(final HtmlPage page) {
+        final String src = getSrcAttribute();
+        if (StringUtils.isBlank(src)) {
+            return true;
+        }
+
+        final URL url;
+        try {
+            url = page.getFullyQualifiedUrl(src);
+        }
+        catch (final MalformedURLException e) {
+            return true;
+        }
+
+        final String urlString = url.toExternalForm();
+        if (!urlString.equals(cspCheckedUrl_)) {
+            cspCheckedUrl_ = urlString;
+            cspAllowed_ = ContentSecurityPolicy.allowsImage(page, url);
+        }
+        return cspAllowed_;
     }
 
     private void readImageIfNeeded() throws IOException {
