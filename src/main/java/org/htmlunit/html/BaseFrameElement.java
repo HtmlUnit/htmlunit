@@ -218,6 +218,31 @@ public abstract class BaseFrameElement extends HtmlElement {
                     : WebRequest.FetchDestination.FRAME;
             webRequest.markAsNavigation(fetchDestination, pageUrl, false);
 
+            // about:blank is not fetched and javascript: urls are checked against script-src;
+            // both are not checked against frame-src
+            final boolean[] redirectBlocked = {false};
+            final String protocol = url.getProtocol();
+            if (!"about".equals(protocol) && !"javascript".equals(protocol)) {
+                final HtmlPage htmlPage = (HtmlPage) page;
+                final boolean allowed = ContentSecurityPolicy.allowsFrame(htmlPage, url);
+                // like the browsers, the violation event (also for report only policies)
+                // is fired before the frame is loaded
+                ContentSecurityPolicy.firePendingViolations();
+                if (!allowed) {
+                    loadDeniedPage(webClient);
+                    return;
+                }
+
+                // like the browsers, redirects are checked also
+                webRequest.setRedirectFilter(redirectUrl -> {
+                    if (ContentSecurityPolicy.allowsFrame(htmlPage, redirectUrl)) {
+                        return true;
+                    }
+                    redirectBlocked[0] = true;
+                    return false;
+                });
+            }
+
             try {
                 webClient.getPage(enclosedWindow_, webRequest);
             }
@@ -225,6 +250,30 @@ public abstract class BaseFrameElement extends HtmlElement {
                 if (LOG.isErrorEnabled()) {
                     LOG.error("IOException when getting content for " + getTagName() + ": url=[" + url + "]", e);
                 }
+            }
+
+            if (redirectBlocked[0]) {
+                loadDeniedPage(webClient);
+            }
+        }
+    }
+
+    /**
+     * Loads about:blank into the frame and marks the frame as denied by the
+     * Content-Security-Policy (like the error page shown by the browsers, the content
+     * of the frame is not accessible).
+     *
+     * @param webClient the web client
+     */
+    private void loadDeniedPage(final WebClient webClient) {
+        // like the browsers, the violation event is fired before the load event of the frame
+        ContentSecurityPolicy.firePendingViolations();
+        try {
+            webClient.loadDeniedPageInto(enclosedWindow_, FrameWindow.PageDenied.BY_CONTENT_SECURIRY_POLICY);
+        }
+        catch (final IOException e) {
+            if (LOG.isErrorEnabled()) {
+                LOG.error("IOException when loading about:blank into " + getTagName(), e);
             }
         }
     }

@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="add" dev="rbri">
+                CSP: support for the frame-src directive (with fallback to child-src and default-src);
+                frames and iframes (including redirects) are checked against the policy, blocked frames show about:blank.
+            </action>
             <action type="fix" dev="rbri">
                 CSP: policies from meta elements ignore the directives frame-ancestors, sandbox and report-uri
                 (e.g. a meta element with 'sandbox' was blocking all scripts); commas in the content are

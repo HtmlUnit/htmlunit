@@ -511,6 +511,11 @@ public class WebClient implements Serializable, AutoCloseable {
             catch (final NoHttpResponseException e) {
                 webResponse = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, webRequest, 0);
             }
+
+            if (webResponse == null) {
+                // blocked by the redirect filter of the request; the window content is not changed
+                return (P) webWindow.getEnclosedPage();
+            }
         }
 
         printContentIfNecessary(webResponse);
@@ -622,7 +627,34 @@ public class WebClient implements Serializable, AutoCloseable {
      * @see #setAttachmentHandler(AttachmentHandler)
      */
     public Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow,
-            String forceAttachmentWithFilename)
+            final String forceAttachmentWithFilename)
+            throws IOException, FailingHttpStatusCodeException {
+        return loadWebResponseInto(webResponse, webWindow, forceAttachmentWithFilename, null);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Loads about:blank into the given frame window and marks the content as denied
+     * (e.g. if the url of the frame is blocked by the frame-src directive of the
+     * Content-Security-Policy). Like for a page denied by frame-ancestors or X-Frame-Options,
+     * the content of the frame is not accessible and the load event is fired.
+     *
+     * @param frameWindow the frame window
+     * @param pageDenied the reason the page is denied
+     * @throws IOException if an IO error occurs
+     */
+    public void loadDeniedPageInto(final FrameWindow frameWindow, final PageDenied pageDenied)
+            throws IOException {
+        final WebResponse aboutBlank = loadWebResponse(WebRequest.newAboutBlankRequest());
+        loadWebResponseInto(aboutBlank, frameWindow, null, pageDenied);
+        if (scriptEngine_ != null) {
+            scriptEngine_.registerWindowAndMaybeStartEventLoop(frameWindow);
+        }
+    }
+
+    private Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow,
+            String forceAttachmentWithFilename, final PageDenied forcedPageDenied)
             throws IOException, FailingHttpStatusCodeException {
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
@@ -669,7 +701,10 @@ public class WebClient implements Serializable, AutoCloseable {
         Page newPage = null;
         FrameWindow.PageDenied pageDenied = PageDenied.NONE;
         if (windows_.contains(webWindow)) {
-            if (webWindow instanceof FrameWindow window) {
+            if (forcedPageDenied != null) {
+                pageDenied = forcedPageDenied;
+            }
+            else if (webWindow instanceof FrameWindow window) {
                 pageDenied = getPageDenied(webResponse, window);
             }
 

@@ -102,6 +102,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><code>frame-src</code></td>
+                    <td>
+                        loading a page into a frame or iframe (<code>src</code> attribute, also if changed
+                        later), including all redirect targets; fallback is <code>child-src</code>.
+                        <code>about:blank</code> and <code>javascript:</code> urls are not checked.
+                        A blocked frame shows <code>about:blank</code>; like the error page of the browsers
+                        its content is not accessible (<code>contentDocument</code> is <code>null</code>).
+                    </td>
+                </tr>
+                <tr>
                     <td><code>default-src</code></td>
                     <td>fallback for the fetch directives above (not for <code>form-action</code> and <code>frame-ancestors</code>)</td>
                 </tr>
@@ -268,7 +278,7 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                     <code>img-src</code>, <code>font-src</code>, <code>media-src</code>,
                     <code>object-src</code>, <code>manifest-src</code>
                 </li>
-                <li><code>frame-src</code>, <code>child-src</code>, <code>worker-src</code></li>
+                <li><code>worker-src</code> (and <code>child-src</code> for workers)</li>
                 <li><code>base-uri</code>, <code>sandbox</code></li>
                 <li><code>upgrade-insecure-requests</code>, <code>require-trusted-types-for</code>, <code>trusted-types</code></li>
                 <li>
@@ -289,6 +299,10 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                     <code>window.open()</code> are not checked.
                 </li>
                 <li>Workers do not use the policy of the page.</li>
+                <li>
+                    <code>frame-src</code> is only checked for the <code>src</code> of the frame; navigations
+                    inside the frame (e.g. links or <code>location</code> changes) are not checked.
+                </li>
                 <li>
                     The violation event for <code>eval()</code> has no column number
                     (the JavaScript engine does not provide it).

@@ -44,6 +44,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -266,6 +267,31 @@ public final class ContentSecurityPolicy implements Serializable {
                 null, "", 0, 0);
         // like browsers, ws: and wss: urls are not mapped to http: and https: before matching
         final boolean allowed = csp.check(page, violation, policy -> policy.allowsConnection(target, origin, false));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
+     * Checks if loading the given url into a frame or iframe is allowed
+     * (frame-src, with fallback to child-src and default-src).
+     * Like the browsers, the violation is reported for the document and the blocked url
+     * is reported without path if it is cross origin (navigations may leak information).
+     *
+     * @param page the page containing the frame
+     * @param url the url to load into the frame (for redirects the target of the redirect)
+     * @return {@code true} if loading is allowed
+     */
+    public static boolean allowsFrame(final HtmlPage page, final URL url) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return true;
+        }
+
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URI> origin = origin(page);
+        final Violation violation = new Violation(FetchDirectiveKind.FrameSrc, navigationBlockedUri(page, url),
+                null, null, "", 0, 0);
+        final boolean allowed = csp.check(page, violation, policy -> policy.allowsFrame(target, origin));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }
@@ -544,6 +570,31 @@ public final class ContentSecurityPolicy implements Serializable {
             return url.getProtocol();
         }
         return withoutRef(url);
+    }
+
+    /**
+     * The blocked uri reported for navigations (e.g. frames); like Chrome
+     * <ul>
+     *   <li>urls without host (e.g. data:) are reported as empty string</li>
+     *   <li>cross origin urls are reported as origin (without path)</li>
+     *   <li>same origin urls are reported without the fragment</li>
+     * </ul>
+     */
+    private static String navigationBlockedUri(final HtmlPage page, final URL url) {
+        final String host = url.getHost();
+        if (host == null || host.isEmpty()) {
+            return "";
+        }
+        if (UrlUtils.isSameOrigin(page.getUrl(), url)) {
+            return withoutRef(url);
+        }
+
+        final String protocol = url.getProtocol();
+        final int port = url.getPort();
+        if (port == -1 || port == url.getDefaultPort()) {
+            return protocol + "://" + host;
+        }
+        return protocol + "://" + host + ":" + port;
     }
 
     private static Optional<URI> origin(final HtmlPage page) {
