@@ -95,9 +95,7 @@ public class ContentSecurityPolicyBaseUriTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"§§URL§§/",
-                       "§§URL§§/page.html",
-                       "violation base-uri http://localhost:§§PORT§§/base/ enforce"})
+    @Alerts({"§§URL§§/", "§§URL§§/page.html", "violation base-uri http://localhost:§§PORT§§/base/ enforce"})
     public void self_crossOrigin() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify("base-uri 'self'", baseElement(URL_CROSS_ORIGIN_BASE + "base/"), "base();\n");

@@ -422,6 +422,29 @@ public final class ContentSecurityPolicy implements Serializable {
     }
 
     /**
+     * Checks if creating a worker with the given script url is allowed
+     * (worker-src, with fallback to child-src, script-src and default-src).
+     *
+     * @param page the page creating the worker
+     * @param url the url of the worker script
+     * @return {@code true} if the worker is allowed
+     */
+    public static boolean allowsWorker(final HtmlPage page, final URL url) {
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return true;
+        }
+
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URI> origin = origin(page);
+        final Violation violation = new Violation(FetchDirectiveKind.WorkerSrc, blockedUri(url), null,
+                null, "", 0, 0);
+        final boolean allowed = csp.check(page, violation, policy -> policy.allowsWorker(target, origin));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
      * Checks if the given url is allowed as base url of the document (base-uri).
      * There is no fallback to default-src for this directive.
      *

@@ -12,6 +12,13 @@
                 websocket-client: jetty updated to 12.1.15.
             </action>
             <action type="add" dev="rbri">
+                CSP: support for the worker-src directive (with fallback to child-src, script-src and default-src);
+                blocked workers are not started, the error event is fired.
+            </action>
+            <action type="fix" dev="rbri">
+                Worker: a worker created inside a function was not working (no messages delivered); Worker.onerror added.
+            </action>
+            <action type="add" dev="rbri">
                 CSP: support for the base-uri directive; a blocked base url is ignored.
             </action>
             <action type="add" dev="rbri">

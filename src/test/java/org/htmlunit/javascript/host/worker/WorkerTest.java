@@ -66,6 +66,38 @@ public class WorkerTest extends WebDriverTestCase {
     }
 
     /**
+     * The worker is created inside a function; HtmlUnit was using the scope of the function call
+     * as parent scope of the worker and the messages were never delivered.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Received:worker loaded")
+    public void postMessageFromWorkerCreatedInFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script async>\n"
+            + LOG_TITLE_FUNCTION
+            + "function startWorker() {\n"
+            + "  var myWorker = new Worker('worker.js');\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    log('Received:' + e.data);\n"
+            + "  };\n"
+            + "}\n"
+            + "try {\n"
+            + "  startWorker();\n"
+            + "} catch(e) { logEx(e); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "postMessage('worker loaded');\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

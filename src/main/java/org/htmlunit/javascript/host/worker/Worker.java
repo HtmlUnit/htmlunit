@@ -14,11 +14,17 @@
  */
 package org.htmlunit.javascript.host.worker;
 
+import java.net.URL;
+
 import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.html.ContentSecurityPolicy;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -56,7 +62,7 @@ public class Worker extends EventTarget {
                     final Window owningWindow, final String url,
                     final Scriptable options) throws Exception {
         super();
-        setParentScope(scope);
+        setParentScope(getTopLevelScope(scope));
         setPrototype(getPrototype(getClass()));
 
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
@@ -65,6 +71,20 @@ public class Worker extends EventTarget {
             name = JavaScriptEngine.toString(options.get("name", options));
         }
         workerScope_ = new DedicatedWorkerGlobalScope(owningWindow, cx, webClient, name, this);
+
+        final HtmlPage page = (HtmlPage) owningWindow.getDocument().getPage();
+        final URL fullUrl = page.getFullyQualifiedUrl(url);
+        if (!ContentSecurityPolicy.allowsWorker(page, fullUrl)) {
+            // like the browsers, the worker is not started and the error event is fired (async)
+            final ContextAction<Object> action = c -> {
+                dispatchEvent(new Event(this, Event.TYPE_ERROR));
+                return null;
+            };
+            final HtmlUnitContextFactory cf = webClient.getJavaScriptEngine().getContextFactory();
+            owningWindow.getWebWindow().getJobManager()
+                    .addJob(new WorkerJob(cf, action, "worker blocked by the Content-Security-Policy"), page);
+            return;
+        }
 
         workerScope_.loadAndExecute(webClient, url, null, false);
     }
@@ -133,5 +153,25 @@ public class Worker extends EventTarget {
     @JsxGetter
     public Function getOnmessage() {
         return getEventListenersContainer().getEventHandler(Event.TYPE_MESSAGE);
+    }
+
+    /**
+     * Sets the {@code onerror} event handler.
+     *
+     * @param onerror the new {@code onerror} event handler
+     */
+    @JsxSetter
+    public void setOnerror(final Object onerror) {
+        getEventListenersContainer().setEventHandler(Event.TYPE_ERROR, onerror);
+    }
+
+    /**
+     * Returns the {@code onerror} event handler.
+     *
+     * @return the {@code onerror} event handler
+     */
+    @JsxGetter
+    public Function getOnerror() {
+        return getEventListenersContainer().getEventHandler(Event.TYPE_ERROR);
     }
 }
