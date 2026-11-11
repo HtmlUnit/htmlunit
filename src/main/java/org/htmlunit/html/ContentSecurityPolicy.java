@@ -990,7 +990,7 @@ public final class ContentSecurityPolicy implements Serializable {
     }
 
     /**
-     * The blocked uri reported for objects (object-src); like the browsers
+     * The blocked uri reported for objects (object-src); like the browsers.
      * <ul>
      *   <li>urls without host (e.g. data:) are reported as scheme</li>
      *   <li>cross origin urls are reported as origin (without path)</li>

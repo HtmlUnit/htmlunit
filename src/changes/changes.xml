@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Only put XML constructor properties on the XML constructor.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Number.prototype.toString(radix) dropping the sign between -1 and 0 fixed.
+            </action>
             <action type="update" dev="rbri">
                 websocket-client: jetty updated to 12.1.15.
             </action>
