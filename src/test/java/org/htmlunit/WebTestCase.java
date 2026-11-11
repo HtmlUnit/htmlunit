@@ -24,8 +24,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
@@ -119,6 +121,46 @@ public abstract class WebTestCase {
     /** The SOCKS proxy host to use for SOCKS proxy tests. */
     public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
 
+    /**
+     * The domain for tests requiring more host names than localhost (e.g. cookie domains,
+     * same site checks or hosts that are not a loopback host).
+     * <p>
+     * These host names have to be resolved to 127.0.0.1; this requires a special setup of the
+     * name resolution (e.g. in {@code etc/hosts}), see the
+     * <a href="https://www.htmlunit.org/development.html#hosts_setup">development guide</a>:
+     * </p>
+     * <pre>
+     * 127.0.0.1       host1.htmlunit-dev.org
+     * 127.0.0.1       host2.htmlunit-dev.org
+     * 127.0.0.1       htmlunit-dev.org
+     * 127.0.0.1       htmlunit-dev
+     * </pre>
+     *
+     * @see #assertHostsConfigured()
+     */
+    public static final String HOSTS_DOMAIN = "htmlunit-dev.org";
+
+    /** "host1.htmlunit-dev.org" (see {@link #HOSTS_DOMAIN}). */
+    public static final String HOST1 = "host1." + HOSTS_DOMAIN;
+
+    /** "host2.htmlunit-dev.org" (see {@link #HOSTS_DOMAIN}). */
+    public static final String HOST2 = "host2." + HOSTS_DOMAIN;
+
+    /** "htmlunit-dev", a host name without domain (see {@link #HOSTS_DOMAIN}). */
+    public static final String HOST_WITHOUT_DOMAIN = "htmlunit-dev";
+
+    /** "http://host1.htmlunit-dev.org:" + PORT + '/'. */
+    public static final String URL_HOST1 = "http://" + HOST1 + ":" + PORT + '/';
+
+    /** "http://host2.htmlunit-dev.org:" + PORT + '/'. */
+    public static final String URL_HOST2 = "http://" + HOST2 + ":" + PORT + '/';
+
+    /** "http://htmlunit-dev.org:" + PORT + '/'. */
+    public static final String URL_HOST3 = "http://" + HOSTS_DOMAIN + ":" + PORT + '/';
+
+    /** "http://htmlunit-dev:" + PORT + '/'. */
+    public static final String URL_HOST4 = "http://" + HOST_WITHOUT_DOMAIN + ":" + PORT + '/';
+
     /** The default time used to wait for the expected alerts. */
     protected static final Duration DEFAULT_WAIT_TIME = Duration.ofSeconds(1);
 
@@ -166,6 +208,22 @@ public abstract class WebTestCase {
         catch (final MalformedURLException e) {
             // This is theoretically impossible.
             throw new IllegalStateException("Unable to create URL constants");
+        }
+    }
+
+    /**
+     * Fails if the host names of {@link #HOSTS_DOMAIN} can't be resolved (the special
+     * setup of the name resolution is missing).
+     */
+    protected static void assertHostsConfigured() {
+        for (final String host : new String[] {HOST1, HOST2, HOSTS_DOMAIN, HOST_WITHOUT_DOMAIN}) {
+            try {
+                InetAddress.getByName(host);
+            }
+            catch (final UnknownHostException e) {
+                Assertions.fail("Host '" + host + "' can't be resolved; the host names have to be configured, see "
+                        + "https://www.htmlunit.org/development.html#hosts_setup");
+            }
         }
     }
 

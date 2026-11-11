@@ -3502,7 +3502,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     + "<html><head><script>\n"
                     + "  function doXhr() {\n"
                     + "    var x = new XMLHttpRequest();\n"
-                    + "    x.open('GET', 'http://host1.htmlunit-dev.org:" + crossServer.getPort()
+                    + "    x.open('GET', 'http://" + HOST1 + ":" + crossServer.getPort()
                             + "/ajax.json', true);\n"
                     + "    x.send();\n"
                     + "  }\n"
@@ -3674,7 +3674,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     + "<html><head><script>\n"
                     + "  function doXhr() {\n"
                     + "    var x = new XMLHttpRequest();\n"
-                    + "    x.open('PUT', 'http://host1.htmlunit-dev.org:" + crossServer.getPort() + "/target', true);\n"
+                    + "    x.open('PUT', 'http://" + HOST1 + ":" + crossServer.getPort() + "/target', true);\n"
                     + "    x.setRequestHeader('X-Custom', 'value');\n"
                     + "    x.send('body');\n"
                     + "  }\n"
@@ -4297,7 +4297,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     + index;
             final String redirectResponse = "HTTP/1.1 302 Found\r\n"
                     + "Content-Length: 0\r\n"
-                    + "Location: http://host1.htmlunit-dev.org:" + crossServer.getPort() + "/target.html\r\n"
+                    + "Location: http://" + HOST1 + ":" + crossServer.getPort() + "/target.html\r\n"
                     + "Connection: close\r\n"
                     + "\r\n";
 
@@ -4477,7 +4477,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     + index;
             final String redirectToCrossResponse = "HTTP/1.1 302 Found\r\n"
                     + "Content-Length: 0\r\n"
-                    + "Location: http://host1.htmlunit-dev.org:" + crossServer.getPort() + "/hop2\r\n"
+                    + "Location: http://" + HOST1 + ":" + crossServer.getPort() + "/hop2\r\n"
                     + "Connection: close\r\n"
                     + "\r\n";
             final String finalResponse = "HTTP/1.1 200 OK\r\n"

@@ -40,7 +40,7 @@ import org.openqa.selenium.WebDriver;
  * are logged at the end (200ms after the load event) because the browsers fire them async.
  * The test code is placed in the external script 'test.js'. All policies allow these scripts.
  * The upgrade tests are using host1.htmlunit-dev.org, this requires a special setup in
- * {@code etc/hosts} (see CookieManager4Test).
+ * the name resolution (see WebTestCase#HOSTS_DOMAIN).
  * </p>
  *
  * @author Ronald Brill
@@ -48,7 +48,7 @@ import org.openqa.selenium.WebDriver;
 public class ContentSecurityPolicyRedirectTest extends WebDriverTestCase {
 
     private static final String HEADER_REPORT_ONLY = "Content-Security-Policy-Report-Only";
-    private static final String HOST1 = "http://host1.htmlunit-dev.org";
+    private static final String HTTP_HOST1 = "http://" + HOST1;
     private static final String RED_CSS = "#d { color: rgb(255, 0, 0); }";
 
     private static final String HARNESS_JS = LOG_WINDOW_NAME_FUNCTION
@@ -229,8 +229,8 @@ public class ContentSecurityPolicyRedirectTest extends WebDriverTestCase {
              "done"})
     public void upgrade_noPolicy() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
-        setRedirect("redirect.jpg", new URL(HOST1 + ":" + PORT2 + "/img.jpg"));
-        setImage(new URL(HOST1 + ":" + PORT2 + "/img.jpg"));
+        setRedirect("redirect.jpg", new URL(HTTP_HOST1 + ":" + PORT2 + "/img.jpg"));
+        setImage(new URL(HTTP_HOST1 + ":" + PORT2 + "/img.jpg"));
         loadPageVerify(null, "addImage('redirect.jpg');\n");
     }
 
@@ -246,9 +246,9 @@ public class ContentSecurityPolicyRedirectTest extends WebDriverTestCase {
              "done"})
     public void upgrade_image() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
-        setRedirect("redirect.jpg", new URL(HOST1 + ":" + PORT2 + "/img.jpg"));
-        setImage(new URL(HOST1 + ":" + PORT2 + "/img.jpg"));
-        getMockWebConnection().setThrowable(new URL("https://host1.htmlunit-dev.org:" + PORT2 + "/img.jpg"),
+        setRedirect("redirect.jpg", new URL(HTTP_HOST1 + ":" + PORT2 + "/img.jpg"));
+        setImage(new URL(HTTP_HOST1 + ":" + PORT2 + "/img.jpg"));
+        getMockWebConnection().setThrowable(new URL("https://" + HOST1 + ":" + PORT2 + "/img.jpg"),
                 new IOException("https is not supported by the test server"));
         loadPageVerify("upgrade-insecure-requests", "addImage('redirect.jpg');\n");
     }

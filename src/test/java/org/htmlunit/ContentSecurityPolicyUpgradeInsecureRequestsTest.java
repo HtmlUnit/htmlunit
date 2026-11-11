@@ -35,7 +35,7 @@ import org.openqa.selenium.WebDriver;
  * <p>
  * The browsers do not upgrade requests to loopback hosts (localhost); the host_xxx tests
  * are loading the resources from host1.htmlunit-dev.org, this requires a special setup in
- * {@code etc/hosts} (see CookieManager4Test). The test server does not support https;
+ * the name resolution (see WebTestCase#HOSTS_DOMAIN). The test server does not support https;
  * therefore upgraded requests are failing.
  * More tests (navigations, frames, forms) are part of ContentSecurityPolicyUpgradeInsecureRequests2Test.
  * </p>
@@ -51,7 +51,7 @@ import org.openqa.selenium.WebDriver;
 public class ContentSecurityPolicyUpgradeInsecureRequestsTest extends WebDriverTestCase {
 
     private static final String HEADER_REPORT_ONLY = "Content-Security-Policy-Report-Only";
-    private static final String HOST1 = "http://host1.htmlunit-dev.org";
+    private static final String HTTP_HOST1 = "http://" + HOST1;
     private static final String UIR = "upgrade-insecure-requests";
 
     private static final String HARNESS_JS = LOG_WINDOW_NAME_FUNCTION
@@ -188,8 +188,8 @@ public class ContentSecurityPolicyUpgradeInsecureRequestsTest extends WebDriverT
              "xhr 200 §§URL§§/data.txt",
              "done"})
     public void host_noPolicy() throws Exception {
-        expandExpectedAlertsVariables(HOST1 + ":" + PORT, PORT2);
-        loadPageVerify(HttpHeader.CONTENT_SECURIRY_POLICY, null, "", HOST1);
+        expandExpectedAlertsVariables(HTTP_HOST1 + ":" + PORT, PORT2);
+        loadPageVerify(HttpHeader.CONTENT_SECURIRY_POLICY, null, "", HTTP_HOST1);
     }
 
     /**
@@ -204,8 +204,8 @@ public class ContentSecurityPolicyUpgradeInsecureRequestsTest extends WebDriverT
              "xhr error",
              "done"})
     public void host_upgraded() throws Exception {
-        expandExpectedAlertsVariables(HOST1 + ":" + PORT, PORT2);
-        loadPageVerify(HttpHeader.CONTENT_SECURIRY_POLICY, UIR, "", HOST1);
+        expandExpectedAlertsVariables(HTTP_HOST1 + ":" + PORT, PORT2);
+        loadPageVerify(HttpHeader.CONTENT_SECURIRY_POLICY, UIR, "", HTTP_HOST1);
     }
 
     /**
@@ -219,8 +219,8 @@ public class ContentSecurityPolicyUpgradeInsecureRequestsTest extends WebDriverT
              "xhr error",
              "done"})
     public void host_imgSrcHttps() throws Exception {
-        expandExpectedAlertsVariables(HOST1 + ":" + PORT, PORT2);
-        loadPageVerify(HttpHeader.CONTENT_SECURIRY_POLICY, "img-src https:; " + UIR, "", HOST1);
+        expandExpectedAlertsVariables(HTTP_HOST1 + ":" + PORT, PORT2);
+        loadPageVerify(HttpHeader.CONTENT_SECURIRY_POLICY, "img-src https:; " + UIR, "", HTTP_HOST1);
     }
 
     /**
@@ -234,8 +234,8 @@ public class ContentSecurityPolicyUpgradeInsecureRequestsTest extends WebDriverT
              "xhr 200 §§URL§§/data.txt",
              "done"})
     public void host_reportOnly() throws Exception {
-        expandExpectedAlertsVariables(HOST1 + ":" + PORT, PORT2);
-        loadPageVerify(HEADER_REPORT_ONLY, UIR, "", HOST1);
+        expandExpectedAlertsVariables(HTTP_HOST1 + ":" + PORT, PORT2);
+        loadPageVerify(HEADER_REPORT_ONLY, UIR, "", HTTP_HOST1);
     }
 
     /**
@@ -249,9 +249,9 @@ public class ContentSecurityPolicyUpgradeInsecureRequestsTest extends WebDriverT
              "xhr error",
              "done"})
     public void host_meta() throws Exception {
-        expandExpectedAlertsVariables(HOST1 + ":" + PORT, PORT2);
+        expandExpectedAlertsVariables(HTTP_HOST1 + ":" + PORT, PORT2);
         loadPageVerify(HttpHeader.CONTENT_SECURIRY_POLICY, null,
-                "<meta http-equiv='Content-Security-Policy' content='" + UIR + "'>\n", HOST1);
+                "<meta http-equiv='Content-Security-Policy' content='" + UIR + "'>\n", HTTP_HOST1);
     }
 
     private void loadPageVerify(final String header, final String policy, final String head) throws Exception {

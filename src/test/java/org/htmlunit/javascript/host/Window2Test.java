@@ -22,7 +22,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
 import org.apache.commons.io.FileUtils;
-import org.htmlunit.CookieManager4Test;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -2918,7 +2917,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  log(window.hasOwnProperty('isSecureContext') ? isSecureContext : 'not available');\n"
             + "</script></body></html>";
 
-        final WebDriver driver = loadPage2(html, new URL(CookieManager4Test.URL_HOST1));
+        final WebDriver driver = loadPage2(html, new URL(URL_HOST1));
         verifyTitle2(driver, getExpectedAlerts());
     }
 

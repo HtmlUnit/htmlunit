@@ -83,6 +83,25 @@ cd htmlunit]]></source>
                 <source><![CDATA[mvn test ... -Dhtmlunit.test.port=10101]]></source>
             </subsection>
 
+            <subsection name="Host Name Setup" id="hosts_setup">
+                <p>
+                    Some tests require more host names than <code>localhost</code> (e.g. cookie domain tests,
+                    same site checks or hosts that are not loopback hosts). These names have to be resolved
+                    to <code>127.0.0.1</code>; add the following lines to the hosts file of your machine
+                    (Linux/macOS: <code>/etc/hosts</code>,
+                    Windows: <code>C:\Windows\System32\drivers\etc\hosts</code>):
+                </p>
+<source><![CDATA[127.0.0.1       host1.htmlunit-dev.org
+127.0.0.1       host2.htmlunit-dev.org
+127.0.0.1       htmlunit-dev.org
+127.0.0.1       htmlunit-dev]]></source>
+                <p>
+                    The tests are using the constants <code>HOSTS_DOMAIN</code>, <code>HOST1</code>,
+                    <code>URL_HOST1</code>... of <code>org.htmlunit.WebTestCase</code>;
+                    <code>WebTestCase.assertHostsConfigured()</code> checks the setup.
+                </p>
+            </subsection>
+
             <subsection name="Running Tests with Real Browsers" id="real_browser_tests">
                 <p>
                     The primary goal of HtmlUnit is providing accurate browser simulation. 

@@ -15,11 +15,8 @@
 package org.htmlunit;
 
 import static org.htmlunit.CookieManagerTest.HTML_ALERT_COOKIE;
-import static org.junit.jupiter.api.Assertions.fail;
 
-import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +36,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 /**
  * Unit tests for {@link CookieManager}.
  * <p>
- * These tests require a special setup in {@code etc/hosts}:
- * <pre>
- * 127.0.0.1       host1.htmlunit-dev.org
- * 127.0.0.1       host2.htmlunit-dev.org
- * 127.0.0.1       htmlunit-dev.org
- * 127.0.0.1       htmlunit-dev
- * </pre>
+ * These tests require a special setup of the name resolution, see {@link WebTestCase#HOSTS_DOMAIN}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
@@ -53,50 +44,12 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 public class CookieManager4Test extends WebDriverTestCase {
 
-    /** "htmlunit-dev.org". */
-    public static final String DOMAIN = "htmlunit-dev.org";
-    /** "http://host1." + DOMAIN + ":" + PORT + '/'. */
-    public static final String URL_HOST1 = "http://host1." + DOMAIN + ":" + PORT + '/';
-    private static final String URL_HOST2 = "http://host2." + DOMAIN + ":" + PORT + '/';
-    /** "http://" + DOMAIN + ":" + PORT + '/'. */
-    public static final String URL_HOST3 = "http://" + DOMAIN + ":" + PORT + '/';
-    /** "http://" + "htmlunit" + ":" + PORT + '/'. */
-    public static final String URL_HOST4 = "http://" + "htmlunit-dev" + ":" + PORT + '/';
-
     /**
      * Assumes, the host configurations are present.
-     *
-     * @throws Exception if the test fails
      */
     @BeforeAll
-    public static void checkSettings() throws Exception {
-        try {
-            InetAddress.getByName(new URL(URL_HOST1).getHost());
-        }
-        catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST1 + "' is not present");
-        }
-
-        try {
-            InetAddress.getByName(new URL(URL_HOST2).getHost());
-        }
-        catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST2 + "' is not present");
-        }
-
-        try {
-            InetAddress.getByName(new URL(URL_HOST3).getHost());
-        }
-        catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST3 + "' is not present");
-        }
-
-        try {
-            InetAddress.getByName(new URL(URL_HOST4).getHost());
-        }
-        catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST4 + "' is not present");
-        }
+    public static void checkSettings() {
+        assertHostsConfigured();
     }
 
     /**
@@ -129,9 +82,9 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Alerts("c1=1; c2=2")
     public void domain() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=." + DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=." + HOSTS_DOMAIN + ":" + PORT + "; Path=/"));
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 MimeType.TEXT_HTML, responseHeader);
 
@@ -181,14 +134,14 @@ public class CookieManager4Test extends WebDriverTestCase {
                       "c4=4; path=/; domain=.host1.htmlunit-dev.org"})
     public void storedDomain1() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=.host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c4=4; Domain=host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=." + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=5; Domain=." + HOSTS_DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c6=6; Domain=" + HOSTS_DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=." + HOST1 + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=" + HOST1 + ":" + PORT + "; Path=/"));
 
         responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
@@ -227,14 +180,14 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF_ESR = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"})
     public void storedDomain2() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=.host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c4=4; Domain=host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=." + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=5; Domain=." + HOSTS_DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c6=6; Domain=" + HOSTS_DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=." + HOST1 + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=" + HOST1 + ":" + PORT + "; Path=/"));
 
         responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
@@ -271,14 +224,14 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF_ESR = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"})
     public void storedDomain3() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=.host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c4=4; Domain=host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=." + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=5; Domain=." + HOSTS_DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c6=6; Domain=" + HOSTS_DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=." + HOST1 + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=" + HOST1 + ":" + PORT + "; Path=/"));
 
         responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
@@ -314,14 +267,14 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF_ESR = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"})
     public void storedDomain4() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=.host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c4=4; Domain=host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=." + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=5; Domain=." + HOSTS_DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c6=6; Domain=" + HOSTS_DOMAIN + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=." + HOST1 + ":" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=" + HOST1 + ":" + PORT + "; Path=/"));
 
         responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
@@ -373,14 +326,14 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "<p>Cookie Domain Test</p>\n"
                 + "<script>\n"
-                + "  document.cookie = 'c1=1; Domain=." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c2=2; Domain=" + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c3=3; Domain=.host1." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c4=4; Domain=host1." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/';\n"
+                + "  document.cookie = 'c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/';\n"
+                + "  document.cookie = 'c3=3; Domain=." + HOST1 + "; Path=/';\n"
+                + "  document.cookie = 'c4=4; Domain=" + HOST1 + "; Path=/';\n"
+                + "  document.cookie = 'c5=5; Domain=." + HOSTS_DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c6=6; Domain=" + HOSTS_DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c7=7; Domain=." + HOST1 + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c8=8; Domain=" + HOST1 + ":" + PORT + "; Path=/';\n"
                 + "  document.cookie = 'c9=9; Domain=.org; Path=/';\n"
                 + "  document.cookie = 'c10=10; Domain=org; Path=/';\n"
                 + "  document.cookie = 'c11=11; Domain=.htmlunit; Path=/';\n"
@@ -421,14 +374,14 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "<p>Cookie Domain Test</p>\n"
                 + "<script>\n"
-                + "  document.cookie = 'c1=1; Domain=." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c2=2; Domain=" + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c3=3; Domain=.host1." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c4=4; Domain=host1." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/';\n"
+                + "  document.cookie = 'c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/';\n"
+                + "  document.cookie = 'c3=3; Domain=." + HOST1 + "; Path=/';\n"
+                + "  document.cookie = 'c4=4; Domain=" + HOST1 + "; Path=/';\n"
+                + "  document.cookie = 'c5=5; Domain=." + HOSTS_DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c6=6; Domain=" + HOSTS_DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c7=7; Domain=." + HOST1 + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c8=8; Domain=" + HOST1 + ":" + PORT + "; Path=/';\n"
                 + "  document.cookie = 'c9=9; Domain=.org; Path=/';\n"
                 + "  document.cookie = 'c10=10; Domain=org; Path=/';\n"
                 + "  document.cookie = 'c11=11; Domain=.htmlunit; Path=/';\n"
@@ -467,14 +420,14 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "<p>Cookie Domain Test</p>\n"
                 + "<script>\n"
-                + "  document.cookie = 'c1=1; Domain=." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c2=2; Domain=" + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c3=3; Domain=.host1." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c4=4; Domain=host1." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/';\n"
+                + "  document.cookie = 'c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/';\n"
+                + "  document.cookie = 'c3=3; Domain=." + HOST1 + "; Path=/';\n"
+                + "  document.cookie = 'c4=4; Domain=" + HOST1 + "; Path=/';\n"
+                + "  document.cookie = 'c5=5; Domain=." + HOSTS_DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c6=6; Domain=" + HOSTS_DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c7=7; Domain=." + HOST1 + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c8=8; Domain=" + HOST1 + ":" + PORT + "; Path=/';\n"
                 + "  document.cookie = 'c9=9; Domain=.org; Path=/';\n"
                 + "  document.cookie = 'c10=10; Domain=org; Path=/';\n"
                 + "  document.cookie = 'c11=11; Domain=.htmlunit; Path=/';\n"
@@ -516,14 +469,14 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "<p>Cookie Domain Test</p>\n"
                 + "<script>\n"
-                + "  document.cookie = 'c1=1; Domain=." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c2=2; Domain=" + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c3=3; Domain=.host1." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c4=4; Domain=host1." + DOMAIN + "; Path=/';\n"
-                + "  document.cookie = 'c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
-                + "  document.cookie = 'c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/';\n"
+                + "  document.cookie = 'c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/';\n"
+                + "  document.cookie = 'c3=3; Domain=." + HOST1 + "; Path=/';\n"
+                + "  document.cookie = 'c4=4; Domain=" + HOST1 + "; Path=/';\n"
+                + "  document.cookie = 'c5=5; Domain=." + HOSTS_DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c6=6; Domain=" + HOSTS_DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c7=7; Domain=." + HOST1 + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie = 'c8=8; Domain=" + HOST1 + ":" + PORT + "; Path=/';\n"
                 + "  document.cookie = 'c9=9; Domain=.org; Path=/';\n"
                 + "  document.cookie = 'c10=10; Domain=org; Path=/';\n"
                 + "  document.cookie = 'c11=11; Domain=.htmlunit-dev; Path=/';\n"
@@ -550,8 +503,8 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Alerts("c1=1; c2=2")
     public void domainDuplicate() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=" + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=" + HOSTS_DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + HOSTS_DOMAIN + "; Path=/"));
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 MimeType.TEXT_HTML, responseHeader);
 
@@ -568,8 +521,8 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Alerts("c1=1; c2=2")
     public void domainDuplicateLeadingDot() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=" + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=." + HOST1 + "; Path=/"));
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 MimeType.TEXT_HTML, responseHeader);
 
@@ -590,8 +543,8 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "</body></html>";
 
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=host1." + DOMAIN + "; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=" + HOST1 + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=." + HOST1 + "; Path=/"));
 
         getMockWebConnection().setDefaultResponse(html, 200, "Ok", MimeType.TEXT_HTML, responseHeader);
 
@@ -618,9 +571,9 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "</body></html>";
 
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=host1." + DOMAIN
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=host1." + HOSTS_DOMAIN
                                                 + "; path=/; expires=Fri, 04-Feb-2099 09:00:32 GMT"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + DOMAIN
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + HOSTS_DOMAIN
                                                 + "; path=/; expires=Fri, 04-Feb-2099 09:00:32 GMT"));
 
         getMockWebConnection().setDefaultResponse(html, 200, "Ok", MimeType.TEXT_HTML, responseHeader);
@@ -647,9 +600,9 @@ public class CookieManager4Test extends WebDriverTestCase {
     public void domain2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "c1=1; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=host1." + DOMAIN + "; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=host2." + DOMAIN + "; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + DOMAIN + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + HOST1 + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=" + HOST2 + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + HOSTS_DOMAIN + "; Path=/"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "c5=5; Domain=.org; Path=/"));
 
         final String html = DOCTYPE_HTML
@@ -679,9 +632,9 @@ public class CookieManager4Test extends WebDriverTestCase {
     public void domain3() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "c1=1; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=host1." + DOMAIN + "; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=host2." + DOMAIN + "; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + DOMAIN + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + HOST1 + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=" + HOST2 + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + HOSTS_DOMAIN + "; Path=/"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "c5=5; Domain=.org; Path=/"));
 
         final String html = DOCTYPE_HTML
@@ -710,7 +663,7 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Alerts("cross-domain=1")
     public void differentHostsSameDomain() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        responseHeader1.add(new NameValuePair("Set-Cookie", "cross-domain=1; Domain=." + DOMAIN + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cross-domain=1; Domain=." + HOSTS_DOMAIN + "; Path=/"));
 
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -744,7 +697,7 @@ public class CookieManager4Test extends WebDriverTestCase {
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
             + "<script>\n"
-            + "  document.cookie='cross-domain=1; Domain=." + DOMAIN + "; Path=/';\n"
+            + "  document.cookie='cross-domain=1; Domain=." + HOSTS_DOMAIN + "; Path=/';\n"
             + "  location.replace('" + URL_HOST2 + "');\n"
             + "</script>\n"
             + "</body>\n"
@@ -767,7 +720,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
-            + "  <meta http-equiv='Set-Cookie', content='cross-domain=1; Domain=." + DOMAIN + "; Path=/'>\n"
+            + "  <meta http-equiv='Set-Cookie', content='cross-domain=1; Domain=." + HOSTS_DOMAIN + "; Path=/'>\n"
             + "</head>\n"
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
