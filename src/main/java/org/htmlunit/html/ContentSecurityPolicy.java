@@ -467,6 +467,40 @@ public final class ContentSecurityPolicy implements Serializable {
     }
 
     /**
+     * Checks if the url of a media element (audio, video), a source element or a track element
+     * is allowed (media-src, with fallback to default-src). HtmlUnit does not load media; like the
+     * browsers, the url is checked anyway to report the violation.
+     *
+     * @param element the element
+     * @param src the value of the src attribute
+     * @return {@code true} if the url is allowed (or the attribute is empty or invalid)
+     */
+    public static boolean allowsMedia(final DomElement element, final String src) {
+        final HtmlPage page = element.getHtmlPageOrNull();
+        if (page == null || page.getContentSecurityPolicy() == null
+                || ATTRIBUTE_NOT_DEFINED == src || StringUtils.isBlank(src)) {
+            return true;
+        }
+
+        final URL url;
+        try {
+            url = upgradeInsecureRequest(page, page.getFullyQualifiedUrl(src));
+        }
+        catch (final MalformedURLException e) {
+            return true;
+        }
+
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
+        final Optional<URI> origin = origin(page);
+        final Violation violation = new Violation(FetchDirectiveKind.MediaSrc, blockedUri(url), null,
+                null, "", 0, 0);
+        final boolean allowed = page.getContentSecurityPolicy()
+                .check(page, violation, policy -> policy.allowsMedia(target, origin));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
      * Checks if loading the given image url is allowed (img-src, with fallback to default-src).
      *
      * @param page the page containing the image

@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
+import org.htmlunit.javascript.PostponedAction;
+import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.StringUtils;
 
 /**
@@ -36,9 +38,127 @@ public abstract class HtmlMedia extends HtmlElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
+    private boolean childrenChecked_;
+    private String checkedSrc_;
+
     HtmlMedia(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Checks the url against the Content-Security-Policy (media-src); the source and track
+     * children are checked after they are added.
+     */
+    @Override
+    protected void onAddedToPage() {
+        super.onAddedToPage();
+        childrenChecked_ = false;
+        final String src = getAttributeDirect(SRC_ATTRIBUTE);
+        // the src may be checked already (set by script before the element was added)
+        if (ATTRIBUTE_NOT_DEFINED != src && !src.equals(checkedSrc_)) {
+            checkSrc(src);
+        }
+        if (getFirstElementChild() != null) {
+            checkChildrenContentSecurityPolicy();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onAllChildrenAddedToPage(final boolean postponed) {
+        super.onAllChildrenAddedToPage(postponed);
+        if (!childrenChecked_) {
+            checkChildrenContentSecurityPolicy();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * Checks the new src url against the Content-Security-Policy (media-src); like the browsers,
+     * also if the element is not attached to the page.
+     */
+    @Override
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value,
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
+        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
+        final boolean changed = SRC_ATTRIBUTE.equals(qualifiedNameLC)
+                && !getAttributeNS(namespaceURI, qualifiedNameLC).equals(value);
+
+        super.setAttributeNS(namespaceURI, qualifiedName, value,
+                notifyAttributeChangeListeners, notifyMutationObservers);
+
+        if (changed) {
+            checkSrc(value);
+        }
+    }
+
+    private void checkSrc(final String src) {
+        checkedSrc_ = src;
+        if (!ContentSecurityPolicy.allowsMedia(this, src)) {
+            fireErrorEvent(this);
+        }
+    }
+
+    /**
+     * Fires the error event (async) at the element blocked by the Content-Security-Policy.
+     */
+    private static void fireErrorEvent(final HtmlElement element) {
+        final HtmlPage page = element.getHtmlPageOrNull();
+        if (page == null || !page.getWebClient().isJavaScriptEngineEnabled()) {
+            return;
+        }
+
+        final PostponedAction action = new PostponedAction(page, "HtmlMedia.blocked") {
+            @Override
+            public void execute() {
+                element.fireEvent(Event.TYPE_ERROR);
+            }
+        };
+        if (READY_STATE_LOADING.equals(page.getReadyState())) {
+            page.addAfterLoadAction(action);
+        }
+        else {
+            page.getWebClient().getJavaScriptEngine().addPostponedAction(action);
+        }
+    }
+
+    /**
+     * Checks the urls of the children against the Content-Security-Policy (media-src): without
+     * a src attribute the source children (in order, until the first allowed one) and the default track.
+     */
+    private void checkChildrenContentSecurityPolicy() {
+        childrenChecked_ = true;
+        final HtmlPage page = getHtmlPageOrNull();
+        if (page == null || page.getContentSecurityPolicy() == null) {
+            return;
+        }
+
+        if (!hasAttribute(SRC_ATTRIBUTE)) {
+            for (final DomNode child : getChildren()) {
+                if (child instanceof HtmlSource source) {
+                    final String sourceSrc = source.getAttributeDirect(SRC_ATTRIBUTE);
+                    if (!StringUtils.isBlank(sourceSrc)) {
+                        if (ContentSecurityPolicy.allowsMedia(source, sourceSrc)) {
+                            break;
+                        }
+                        fireErrorEvent(source);
+                    }
+                }
+            }
+        }
+
+        for (final DomNode child : getChildren()) {
+            if (child instanceof HtmlTrack track && track.hasAttribute("default")) {
+                if (!ContentSecurityPolicy.allowsMedia(track, track.getAttributeDirect(SRC_ATTRIBUTE))) {
+                    fireErrorEvent(track);
+                }
+                break;
+            }
+        }
     }
 
     /**

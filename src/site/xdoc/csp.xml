@@ -154,6 +154,17 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><code>media-src</code></td>
+                    <td>
+                        the <code>src</code> url of <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> elements,
+                        the <code>&lt;source&gt;</code> children (in order, until the first allowed one) and the
+                        default <code>&lt;track&gt;</code> (also if added by script or if the <code>src</code> is
+                        changed later, also for elements not attached to the page). HtmlUnit does not load media;
+                        the url is checked anyway to report the violation and the <code>error</code> event is fired
+                        at the blocked element.
+                    </td>
+                </tr>
+                <tr>
                     <td><code>worker-src</code></td>
                     <td>
                         creating a dedicated worker (<code>new Worker(url)</code>, including <code>data:</code>
@@ -402,7 +413,8 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
             </p>
             <ul>
                 <li>
-                    <code>font-src</code>, <code>media-src</code>, <code>manifest-src</code>
+                    <code>font-src</code>, <code>manifest-src</code>; HtmlUnit does not load fonts and
+                    manifests (the browsers are loading them only on demand)
                 </li>
                 <li><code>sandbox</code></li>
                 <li><code>require-trusted-types-for</code>, <code>trusted-types</code></li>
