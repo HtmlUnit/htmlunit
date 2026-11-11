@@ -1193,7 +1193,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final String originHeader = request.getAdditionalHeaders().get(HttpHeader.ORIGIN);
             final URL currentUrl = request.getUrl();
 
-            final URL nextUrl = wc.getOptions().isRedirectEnabled() ? getRedirectUrl(response, currentUrl) : null;
+            URL nextUrl = wc.getOptions().isRedirectEnabled() ? getRedirectUrl(response, currentUrl) : null;
+            // upgrade-insecure-requests of the Content-Security-Policy
+            if (nextUrl != null && getWindow().getWebWindow().getEnclosedPage() instanceof HtmlPage page) {
+                nextUrl = ContentSecurityPolicy.upgradeInsecureRequest(page, nextUrl);
+            }
 
             // each response of a cors request has to pass the check, also the one that redirects
             if (corsTainting && !isCorsAllowed(response, originHeader)) {

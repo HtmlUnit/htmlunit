@@ -720,6 +720,13 @@ public class HtmlImage extends HtmlElement {
                         }
                     }
 
+                    if (page.getContentSecurityPolicy() != null) {
+                        // like the browsers, redirects are checked (and upgraded) also
+                        ContentSecurityPolicy.upgradeInsecureRedirects(page, request);
+                        request.setRedirectFilter(
+                            redirectUrl -> ContentSecurityPolicy.allowsImage(page, redirectUrl, url));
+                    }
+
                     imageWebResponse_ = webClient.loadWebResponse(request);
                 }
             }

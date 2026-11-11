@@ -246,6 +246,20 @@ public final class ContentSecurityPolicy implements Serializable {
      * @return {@code true} if the script is allowed
      */
     public static boolean allowsExternalScript(final HtmlPage page, final DomElement element, final URL url) {
+        return allowsExternalScript(page, element, url, url);
+    }
+
+    /**
+     * Checks if the given external script is allowed.
+     *
+     * @param page the page
+     * @param element the script element
+     * @param url the url of the script (or the target of a redirect)
+     * @param reportedUrl the url reported as blocked uri (for redirects the url of the script)
+     * @return {@code true} if the script is allowed
+     */
+    public static boolean allowsExternalScript(final HtmlPage page, final DomElement element, final URL url,
+            final URL reportedUrl) {
         final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
         if (csp == null) {
             return true;
@@ -258,7 +272,7 @@ public final class ContentSecurityPolicy implements Serializable {
         final Optional<URI> scriptUrl = URI.parseURI(matchingUrl(page, url).toExternalForm());
         final Optional<Boolean> parserInserted = Optional.of(isParserInserted(element));
         final Optional<URI> origin = origin(page);
-        final Violation violation = new Violation(FetchDirectiveKind.ScriptSrcElem, withoutRef(url), null,
+        final Violation violation = new Violation(FetchDirectiveKind.ScriptSrcElem, withoutRef(reportedUrl), null,
                 null, "", 0, 0);
         return csp.check(page, violation,
                 policy -> policy.allowsExternalScript(nonce, integrity, scriptUrl, parserInserted, origin));
@@ -391,6 +405,20 @@ public final class ContentSecurityPolicy implements Serializable {
      * @return {@code true} if the stylesheet is allowed
      */
     public static boolean allowsExternalStyle(final HtmlPage page, final DomElement element, final URL url) {
+        return allowsExternalStyle(page, element, url, url);
+    }
+
+    /**
+     * Checks if loading the external stylesheet (link element or @import) is allowed (style-src-elem).
+     *
+     * @param page the page
+     * @param element the link element (the nonce is taken from this element) or {@code null} for @import
+     * @param url the url of the stylesheet (or the target of a redirect)
+     * @param reportedUrl the url reported as blocked uri (for redirects the url of the stylesheet)
+     * @return {@code true} if the stylesheet is allowed
+     */
+    public static boolean allowsExternalStyle(final HtmlPage page, final DomElement element, final URL url,
+            final URL reportedUrl) {
         final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
         if (csp == null) {
             return true;
@@ -399,7 +427,7 @@ public final class ContentSecurityPolicy implements Serializable {
         final Optional<String> nonce = element == null ? Optional.empty() : nonce(element);
         final Optional<URI> styleUrl = URI.parseURI(matchingUrl(page, url).toExternalForm());
         final Optional<URI> origin = origin(page);
-        final Violation violation = new Violation(FetchDirectiveKind.StyleSrcElem, withoutRef(url), null,
+        final Violation violation = new Violation(FetchDirectiveKind.StyleSrcElem, withoutRef(reportedUrl), null,
                 null, "", 0, 0);
         final boolean allowed = csp.check(page, violation,
                 policy -> policy.allowsExternalStyle(nonce, styleUrl, origin));
@@ -508,6 +536,18 @@ public final class ContentSecurityPolicy implements Serializable {
      * @return {@code true} if the image is allowed
      */
     public static boolean allowsImage(final HtmlPage page, final URL url) {
+        return allowsImage(page, url, url);
+    }
+
+    /**
+     * Checks if loading the given image url is allowed (img-src, with fallback to default-src).
+     *
+     * @param page the page containing the image
+     * @param url the url of the image (or the target of a redirect)
+     * @param reportedUrl the url reported as blocked uri (for redirects the url of the image)
+     * @return {@code true} if the image is allowed
+     */
+    public static boolean allowsImage(final HtmlPage page, final URL url, final URL reportedUrl) {
         final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
         if (csp == null) {
             return true;
@@ -515,7 +555,7 @@ public final class ContentSecurityPolicy implements Serializable {
 
         final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
-        final Violation violation = new Violation(FetchDirectiveKind.ImgSrc, blockedUri(url), null,
+        final Violation violation = new Violation(FetchDirectiveKind.ImgSrc, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
         final boolean allowed = csp.check(page, violation, policy -> policy.allowsImage(target, origin));
         firePendingViolationsIfNoScriptRunning(page);
@@ -590,6 +630,31 @@ public final class ContentSecurityPolicy implements Serializable {
             }
         }
         return url;
+    }
+
+    /**
+     * Upgrade Insecure Requests for the redirects of a request (subresources, nested navigations
+     * and form submissions): the redirect targets are upgraded like the request itself.
+     *
+     * @param page the page doing the request
+     * @param request the request
+     */
+    public static void upgradeInsecureRedirects(final HtmlPage page, final WebRequest request) {
+        if (upgradesInsecureRequests(page)) {
+            request.setRedirectUrlMapper(url -> upgradeInsecureRequest(page, url));
+        }
+    }
+
+    /**
+     * Upgrade Insecure Requests for the redirects of a top level navigation.
+     *
+     * @param page the page doing the navigation
+     * @param request the request
+     */
+    public static void upgradeInsecureNavigationRedirects(final HtmlPage page, final WebRequest request) {
+        if (upgradesInsecureRequests(page)) {
+            request.setRedirectUrlMapper(url -> upgradeInsecureNavigation(page, url));
+        }
     }
 
     private static boolean upgradesInsecureRequests(final HtmlPage page) {

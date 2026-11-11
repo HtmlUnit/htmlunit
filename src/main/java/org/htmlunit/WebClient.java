@@ -54,6 +54,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1864,7 +1865,7 @@ public class WebClient implements Serializable, AutoCloseable {
             && getOptions().isRedirectEnabled()
             && !webRequest.hasHint(WebRequest.HttpHint.DoNotFollowRedirects)) {
 
-            final URL newUrl;
+            URL newUrl;
             String locationString = null;
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
@@ -1889,6 +1890,11 @@ public class WebClient implements Serializable, AutoCloseable {
             if (allowedRedirects == 0) {
                 throw new FailingHttpStatusCodeException("Too many redirects for "
                     + webResponse.getWebRequest().getUrl(), webResponse);
+            }
+
+            final UnaryOperator<URL> redirectUrlMapper = webRequest.getRedirectUrlMapper();
+            if (redirectUrlMapper != null) {
+                newUrl = redirectUrlMapper.apply(newUrl);
             }
 
             final Predicate<URL> redirectFilter = webRequest.getRedirectFilter();
@@ -1921,6 +1927,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 wrs.setFetchModeOverride(webRequest.getFetchModeOverride());
                 wrs.setRequestingUrl(webRequest.getRequestingUrl());
                 wrs.setRedirectFilter(redirectFilter);
+                wrs.setRedirectUrlMapper(redirectUrlMapper);
 
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
@@ -1951,6 +1958,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     wrs.removeAdditionalHeader("Authorization");
                 }
                 wrs.setRedirectFilter(redirectFilter);
+                wrs.setRedirectUrlMapper(redirectUrlMapper);
 
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }

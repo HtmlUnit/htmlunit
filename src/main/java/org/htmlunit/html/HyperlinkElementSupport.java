@@ -170,6 +170,7 @@ public final class HyperlinkElementSupport {
         final WebRequest webRequest = new WebRequest(ContentSecurityPolicy.upgradeInsecureNavigation(page, url),
                                                             browser.getHtmlAcceptHeader(),
                                                             browser.getAcceptEncodingHeader());
+        ContentSecurityPolicy.upgradeInsecureNavigationRedirects(page, webRequest);
         // use the page encoding even if this is a GET requests
         webRequest.setCharset(page.getCharset());
 

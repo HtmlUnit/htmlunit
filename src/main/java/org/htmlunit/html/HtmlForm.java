@@ -205,7 +205,8 @@ public class HtmlForm extends HtmlElement {
         if (!ContentSecurityPolicy.allowsFormAction(htmlPage, url, url)) {
             return;
         }
-        // like Chrome, redirects are checked also; the url of the form submission is reported
+        // like Chrome, redirects are checked (and upgraded) also; the url of the form submission is reported
+        ContentSecurityPolicy.upgradeInsecureRedirects(htmlPage, request);
         request.setRedirectFilter(
                 redirectUrl -> ContentSecurityPolicy.allowsFormAction(htmlPage, redirectUrl, url));
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());

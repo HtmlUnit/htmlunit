@@ -210,13 +210,26 @@ public class HtmlLink extends HtmlElement {
 
         if (downloadIfNeeded) {
             if (isStylesheetRequest && getPage() instanceof HtmlPage htmlPage
-                    && !ContentSecurityPolicy.allowsExternalStyle(htmlPage, this, request.getUrl())) {
-                fireEvent(webClient, Event.TYPE_ERROR, isStylesheetRequest);
-                return null;
+                    && htmlPage.getContentSecurityPolicy() != null) {
+                final URL styleUrl = request.getUrl();
+                if (!ContentSecurityPolicy.allowsExternalStyle(htmlPage, this, styleUrl)) {
+                    fireEvent(webClient, Event.TYPE_ERROR, isStylesheetRequest);
+                    return null;
+                }
+
+                // like the browsers, redirects are checked (and upgraded) also
+                ContentSecurityPolicy.upgradeInsecureRedirects(htmlPage, request);
+                request.setRedirectFilter(redirectUrl
+                        -> ContentSecurityPolicy.allowsExternalStyle(htmlPage, this, redirectUrl, styleUrl));
             }
 
             try {
                 final WebResponse response = webClient.loadWebResponse(request);
+                if (response == null) {
+                    // redirect blocked by the Content-Security-Policy
+                    fireEvent(webClient, Event.TYPE_ERROR, isStylesheetRequest);
+                    return null;
+                }
                 if (response.isSuccess()) {
                     if (isStylesheetRequest
                             && webClient.getBrowserVersion()

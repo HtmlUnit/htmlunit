@@ -228,7 +228,7 @@ public final class ScriptElementSupport {
                     final Document doc = win.getDocument();
                     try {
                         doc.setCurrentScript(element.getScriptableObject());
-                        result = page.loadExternalJavaScriptFile(scriptSrc, charset, script.isCrossorigin());
+                        result = page.loadExternalJavaScriptFile(scriptSrc, charset, script.isCrossorigin(), element);
                     }
                     finally {
                         doc.setCurrentScript(null);

@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 import org.apache.http.auth.Credentials;
 import org.htmlunit.http.HttpUtils;
@@ -218,6 +219,7 @@ public class WebRequest implements Serializable {
 
     // e.g. the CSP form-action check
     private transient Predicate<URL> redirectFilter_;
+    private transient UnaryOperator<URL> redirectUrlMapper_;
 
     /**
      * Instantiates a {@link WebRequest} for the specified URL,
@@ -793,6 +795,32 @@ public class WebRequest implements Serializable {
      */
     public void setRedirectFilter(final Predicate<URL> redirectFilter) {
         redirectFilter_ = redirectFilter;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the mapper applied to the target url of a redirect.
+     *
+     * @return the mapper or {@code null}
+     * @see #setRedirectUrlMapper(UnaryOperator)
+     */
+    public UnaryOperator<URL> getRedirectUrlMapper() {
+        return redirectUrlMapper_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets a mapper that is applied to the target url of a redirect before the redirect filter
+     * is called and the redirect is followed (e.g. to upgrade the url because of the
+     * upgrade-insecure-requests directive of the Content-Security-Policy). The mapper is passed
+     * on to the requests of all following redirects. The mapper is not serialized.
+     *
+     * @param redirectUrlMapper the mapper or {@code null}
+     */
+    public void setRedirectUrlMapper(final UnaryOperator<URL> redirectUrlMapper) {
+        redirectUrlMapper_ = redirectUrlMapper;
     }
 
     /**

@@ -217,7 +217,7 @@
                         (<code>localhost</code>, <code>127.0.0.0/8</code>, <code>[::1]</code>) are not upgraded
                         and the directive is ignored for report only policies; like Firefox, http urls are
                         matching https source expressions (e.g. <code>img-src https:</code>) also if not upgraded
-                        when simulating Firefox. Redirects are not upgraded.
+                        when simulating Firefox. Redirects are upgraded also.
                     </td>
                 </tr>
             </table>
@@ -227,6 +227,12 @@
                 with a <code>frame-ancestors</code> directive.
             </p>
 
+            <p>
+                Redirects are checked also: the targets of redirects of stylesheets (including
+                <code>@import</code>), scripts, images, frames, form submissions and
+                <code>XMLHttpRequest</code>/<code>fetch()</code> have to be allowed by the policy;
+                for stylesheets, scripts and images the url of the original request is reported.
+            </p>
             <subsection name="Source Expressions" id="sec_source_expressions">
                 <p>
                     All source expressions of CSP Level 3 are supported:
@@ -438,7 +444,6 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                     and <code>eval()</code> inside a worker is checked against the policy of the page.
                     Shared and service workers are not supported by HtmlUnit.
                 </li>
-                <li>Redirects of stylesheets are not checked against <code>style-src-elem</code>.</li>
                 <li>
                     <code>frame-src</code> is only checked for the <code>src</code> of the frame; navigations
                     inside the frame (e.g. links or <code>location</code> changes) are not checked.

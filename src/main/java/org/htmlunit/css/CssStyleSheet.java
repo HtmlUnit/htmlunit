@@ -309,10 +309,24 @@ public class CssStyleSheet implements Serializable {
                 // https://www.w3.org/TR/css-syntax-3/#input-byte-stream
                 request.setDefaultResponseContentCharset(UTF_8);
 
+                if (page.getContentSecurityPolicy() != null) {
+                    // like the browsers, redirects are checked (and upgraded) also
+                    final URL importUrl = request.getUrl();
+                    ContentSecurityPolicy.upgradeInsecureRedirects(page, request);
+                    request.setRedirectFilter(
+                        redirectUrl -> ContentSecurityPolicy.allowsExternalStyle(page, null, redirectUrl, importUrl));
+                }
+
                 // our cache is a bit strange;
                 // loadWebResponse check the cache for the web response
                 // AND also fixes the request url for the following cache lookups
                 response = client.loadWebResponse(request);
+                if (response == null) {
+                    // redirect blocked by the Content-Security-Policy
+                    final CssStyleSheet blocked = new CssStyleSheet(element, "", url);
+                    blocked.blockedByContentSecurityPolicy_ = true;
+                    return blocked;
+                }
             }
             else {
                 // Use link.

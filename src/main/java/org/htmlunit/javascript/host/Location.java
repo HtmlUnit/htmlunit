@@ -353,6 +353,7 @@ public class Location extends HtmlUnitScriptable {
 
             webRequest.markAsNavigation(getUrl(), false);
             webRequest.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
+            upgradeInsecureRedirects(callingPage, window_.getWebWindow(), webRequest);
 
             webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", webRequest, true, null, "JS set location");
@@ -625,6 +626,16 @@ public class Location extends HtmlUnitScriptable {
         return ContentSecurityPolicy.upgradeInsecureNavigation(page, url);
     }
 
+    private static void upgradeInsecureRedirects(final HtmlPage page, final WebWindow targetWindow,
+            final WebRequest webRequest) {
+        if (targetWindow instanceof FrameWindow) {
+            ContentSecurityPolicy.upgradeInsecureRedirects(page, webRequest);
+        }
+        else {
+            ContentSecurityPolicy.upgradeInsecureNavigationRedirects(page, webRequest);
+        }
+    }
+
     /**
      * Sets this location's URL, triggering a server request and loading the resulting document
      * into this location's window.
@@ -647,6 +658,10 @@ public class Location extends HtmlUnitScriptable {
         webRequest.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
 
         webRequest.setRefererHeader(getUrl());
+
+        if (webWindow.getEnclosedPage() instanceof HtmlPage page) {
+            upgradeInsecureRedirects(page, webWindow, webRequest);
+        }
 
         webWindow.getWebClient().getPage(webWindow, webRequest);
     }

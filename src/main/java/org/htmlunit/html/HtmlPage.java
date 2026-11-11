@@ -1107,13 +1107,16 @@ public class HtmlPage extends SgmlPage {
      *
      * @param srcAttribute the source attribute from the script tag
      * @param scriptCharset the charset from the script tag
+     * @param crossorigin the crossorigin attribute of the script tag is set
+     * @param element the script element (used to check redirects against the Content-Security-Policy)
+     *        or {@code null}
      * @return the result of loading the specified external JavaScript file
      * @throws FailingHttpStatusCodeException if the request's status code indicates a request
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
     JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute,
-                            final Charset scriptCharset, final boolean crossorigin)
+                            final Charset scriptCharset, final boolean crossorigin, final DomElement element)
         throws FailingHttpStatusCodeException {
 
         final WebClient client = getWebClient();
@@ -1145,7 +1148,7 @@ public class HtmlPage extends SgmlPage {
 
         final Object script;
         try {
-            script = loadJavaScriptFromUrl(scriptURL, scriptCharset, crossorigin);
+            script = loadJavaScriptFromUrl(scriptURL, scriptCharset, crossorigin, element);
         }
         catch (final IOException e) {
             client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
@@ -1178,6 +1181,9 @@ public class HtmlPage extends SgmlPage {
      *
      * @param url the URL of the script
      * @param scriptCharset the charset from the script tag
+     * @param crossorigin the crossorigin attribute of the script tag is set
+     * @param element the script element (used to check redirects against the Content-Security-Policy)
+     *        or {@code null}
      * @return the content of the file, or {@code null} if we ran into a compile error
      * @throws IOException if there is a problem downloading the JavaScript file
      * @throws FailingHttpStatusCodeException if the request's status code indicates a request
@@ -1185,7 +1191,7 @@ public class HtmlPage extends SgmlPage {
      *         HTTP status codes
      */
     private Object loadJavaScriptFromUrl(final URL url, final Charset scriptCharset,
-                    final boolean crossorigin) throws IOException,
+                    final boolean crossorigin, final DomElement element) throws IOException,
         FailingHttpStatusCodeException {
 
         final WebRequest referringRequest = getWebResponse().getWebRequest();
@@ -1227,10 +1233,21 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
+        if (element != null && getContentSecurityPolicy() != null) {
+            // like the browsers, redirects are checked (and upgraded) also
+            ContentSecurityPolicy.upgradeInsecureRedirects(this, request);
+            request.setRedirectFilter(
+                redirectUrl -> ContentSecurityPolicy.allowsExternalScript(this, element, redirectUrl, url));
+        }
+
         // our cache is a bit strange;
         // loadWebResponse check the cache for the web response
         // AND also fixes the request url for the following cache lookups
         final WebResponse response = client.loadWebResponse(request);
+        if (response == null) {
+            throw new IOException("Redirect of the script '" + url
+                    + "' blocked by the Content-Security-Policy.");
+        }
 
         // now we can look into the cache with the fixed request for
         // a cached script

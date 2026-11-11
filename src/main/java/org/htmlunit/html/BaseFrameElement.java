@@ -235,7 +235,8 @@ public abstract class BaseFrameElement extends HtmlElement {
                     return;
                 }
 
-                // like the browsers, redirects are checked also
+                // like the browsers, redirects are checked (and upgraded) also
+                ContentSecurityPolicy.upgradeInsecureRedirects(htmlPage, webRequest);
                 webRequest.setRedirectFilter(redirectUrl -> {
                     if (ContentSecurityPolicy.allowsFrame(htmlPage, redirectUrl)) {
                         return true;
