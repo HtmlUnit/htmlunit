@@ -25,6 +25,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.htmlunit.cssparser.parser.InputSource;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 
 /**
  * Wrapper for the HTML element "style".

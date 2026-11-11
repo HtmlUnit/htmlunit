@@ -47,6 +47,7 @@ import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.SubmitEvent;

@@ -24,8 +24,8 @@ import org.htmlunit.ScriptException;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.http.Cookie;
+import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

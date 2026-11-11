@@ -27,6 +27,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.util.StringUtils;
 
 /**

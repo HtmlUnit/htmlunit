@@ -78,6 +78,8 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
+import org.htmlunit.html.csp.ContentSecurityPolicyViolation;
+import org.htmlunit.html.csp.ContentSecurityPolicyViolationListener;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.http.Cookie;

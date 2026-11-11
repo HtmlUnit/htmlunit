@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.event;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.events.MutationEvent;
 
 /**
  * Tests for {@link MutationEvent}.

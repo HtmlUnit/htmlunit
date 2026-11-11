@@ -20,6 +20,7 @@ import java.util.Map;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 
 /**
  * Wrapper for the HTML element "meta".

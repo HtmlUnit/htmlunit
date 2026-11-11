@@ -18,6 +18,7 @@ import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.StringUtils;

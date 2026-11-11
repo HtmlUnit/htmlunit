@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.html;
+package org.htmlunit.html.csp;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.CSP_META_SINGLE_POLICY;
@@ -33,8 +33,6 @@ import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.ContentSecurityPolicyViolation;
-import org.htmlunit.ContentSecurityPolicyViolationListener;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
 import org.htmlunit.TopLevelWindow;
@@ -52,6 +50,11 @@ import org.htmlunit.csp.directive.SourceExpressionDirective;
 import org.htmlunit.csp.url.GUID;
 import org.htmlunit.csp.url.URI;
 import org.htmlunit.csp.url.URLWithScheme;
+import org.htmlunit.html.DomAttr;
+import org.htmlunit.html.DomElement;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.FrameWindow;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.EventTarget;

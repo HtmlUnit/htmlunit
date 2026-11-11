@@ -14,14 +14,14 @@
  */
 package org.htmlunit.util;
 
-import org.htmlunit.http.Cookie;
-import org.junit.jupiter.api.Test;
-
-import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.Date;
+
+import org.htmlunit.http.Cookie;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Cookie}.

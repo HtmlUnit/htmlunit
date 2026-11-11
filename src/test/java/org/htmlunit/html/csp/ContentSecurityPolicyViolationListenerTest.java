@@ -12,12 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.html.csp;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.htmlunit.HttpHeader;
+import org.htmlunit.Page;
+import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;

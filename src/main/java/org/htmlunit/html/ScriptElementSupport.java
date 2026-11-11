@@ -27,6 +27,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.html.HtmlPage.JavaScriptLoadResult;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.Window;

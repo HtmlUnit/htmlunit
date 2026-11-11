@@ -618,7 +618,7 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlInput")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.util.WebClientUtils")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.ContentSecurityPolicy")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.csp.ContentSecurityPolicy")
 
             .and().resideOutsideOfPackage("org.htmlunit.javascript..")
 
@@ -694,7 +694,7 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomElement")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.util.DebuggingWebConnection")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.ContentSecurityPolicy")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.csp.ContentSecurityPolicy")
 
         .should().dependOnClassesThat().haveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine");
 

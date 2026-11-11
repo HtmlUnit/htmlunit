@@ -50,6 +50,7 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 import org.htmlunit.cyberneko.util.FastHashMap;
 import org.htmlunit.html.DefaultElementFactory.OrderedFastHashMapWithLowercaseKeys;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;

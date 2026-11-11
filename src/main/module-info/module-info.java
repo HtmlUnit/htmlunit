@@ -40,6 +40,7 @@ module org.htmlunit {
     exports org.htmlunit.attachment;
     exports org.htmlunit.css;
     exports org.htmlunit.html;
+    exports org.htmlunit.html.csp;
     exports org.htmlunit.html.impl;
     exports org.htmlunit.html.parser;
     exports org.htmlunit.html.parser.neko;

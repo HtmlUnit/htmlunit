@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.html.csp;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import org.htmlunit.HttpHeader;
+import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;

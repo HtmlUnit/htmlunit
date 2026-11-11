@@ -33,6 +33,7 @@ import org.htmlunit.Page;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.StringUtils;

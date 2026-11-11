@@ -14,6 +14,10 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+
+import java.util.List;
+
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlRadioButtonInput;
@@ -23,10 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
-
-import java.util.List;
-
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 /**
  * A JavaScript object for {@code RadioNodeList}.

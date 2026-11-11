@@ -15,8 +15,8 @@
 package org.htmlunit.javascript.background;
 
 import org.htmlunit.WebWindow;
-import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 
 /**
  * A {@link JavaScriptJob} created from a string of code.

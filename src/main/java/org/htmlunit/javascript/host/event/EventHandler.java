@@ -20,10 +20,10 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
-import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.javascript.JavaScriptEngine;
 
 /**

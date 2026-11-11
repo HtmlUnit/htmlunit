@@ -72,6 +72,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.http.HttpStatus;
@@ -307,7 +308,7 @@ public class HtmlPage extends SgmlPage {
      *
      * @param contentSecurityPolicy the policy
      */
-    void setContentSecurityPolicy(final ContentSecurityPolicy contentSecurityPolicy) {
+    public void setContentSecurityPolicy(final ContentSecurityPolicy contentSecurityPolicy) {
         contentSecurityPolicy_ = contentSecurityPolicy;
     }
 

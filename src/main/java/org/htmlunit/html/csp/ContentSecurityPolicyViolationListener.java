@@ -12,7 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.html.csp;
+
+import org.htmlunit.Page;
+import org.htmlunit.WebClient;
 
 /**
  * A listener for violations of the Content-Security-Policy of a page.

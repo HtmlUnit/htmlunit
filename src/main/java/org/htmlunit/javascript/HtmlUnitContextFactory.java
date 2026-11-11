@@ -39,9 +39,9 @@ import org.htmlunit.corejs.javascript.ScriptStackElement;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.debug.Debugger;
-import org.htmlunit.html.ContentSecurityPolicy;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.javascript.host.Window;
 
 /**
