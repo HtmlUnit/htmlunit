@@ -31,6 +31,9 @@ import org.htmlunit.util.StringUtils;
  */
 public abstract class HtmlMedia extends HtmlElement {
 
+    private boolean childrenChecked_;
+    private String checkedSrc_;
+
     /**
      * Creates an instance.
      *
@@ -38,9 +41,6 @@ public abstract class HtmlMedia extends HtmlElement {
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    private boolean childrenChecked_;
-    private String checkedSrc_;
-
     HtmlMedia(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
