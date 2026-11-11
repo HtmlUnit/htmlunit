@@ -292,6 +292,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                         DOMException.SYNTAX_ERR);
             }
 
+            // upgrade-insecure-requests of the Content-Security-Policy
+            url = ContentSecurityPolicy.upgradeInsecureRequest(htmlPage, url);
             urlString = url.toExternalForm();
         }
         catch (final MalformedURLException e) {

@@ -73,7 +73,9 @@ public class Worker extends EventTarget {
         workerScope_ = new DedicatedWorkerGlobalScope(owningWindow, cx, webClient, name, this);
 
         final HtmlPage page = (HtmlPage) owningWindow.getDocument().getPage();
-        final URL fullUrl = page.getFullyQualifiedUrl(url);
+        // upgrade-insecure-requests of the Content-Security-Policy
+        final URL resolvedUrl = page.getFullyQualifiedUrl(url);
+        final URL fullUrl = ContentSecurityPolicy.upgradeInsecureRequest(page, resolvedUrl);
         if (!ContentSecurityPolicy.allowsWorker(page, fullUrl)) {
             // like the browsers, the worker is not started and the error event is fired (async)
             final ContextAction<Object> action = c -> {
@@ -86,7 +88,7 @@ public class Worker extends EventTarget {
             return;
         }
 
-        workerScope_.loadAndExecute(webClient, url, null, false);
+        workerScope_.loadAndExecute(webClient, fullUrl == resolvedUrl ? url : fullUrl.toExternalForm(), null, false);
     }
 
     /**

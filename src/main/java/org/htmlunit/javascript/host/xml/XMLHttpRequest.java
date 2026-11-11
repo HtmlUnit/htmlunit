@@ -732,7 +732,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final URL pageUrl = containingPage.getUrl();
             // about:blank documents have the origin of their creator
             final URL originUrl = containingPage.getOriginUrl();
-            final URL fullUrl = containingPage.getFullyQualifiedUrl(url);
+            // upgrade-insecure-requests of the Content-Security-Policy
+            final URL fullUrl = ContentSecurityPolicy.upgradeInsecureRequest(containingPage,
+                                    containingPage.getFullyQualifiedUrl(url));
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader(),
                                                                 getBrowserVersion().getAcceptEncodingHeader());
             request.setCharset(UTF_8);

@@ -459,7 +459,8 @@ public class Navigator extends HtmlUnitScriptable {
 
         final URL targetUrl;
         try {
-            targetUrl = page.getFullyQualifiedUrl(url);
+            // upgrade-insecure-requests of the Content-Security-Policy
+            targetUrl = ContentSecurityPolicy.upgradeInsecureRequest(page, page.getFullyQualifiedUrl(url));
         }
         catch (final MalformedURLException e) {
             if (LOG.isInfoEnabled()) {

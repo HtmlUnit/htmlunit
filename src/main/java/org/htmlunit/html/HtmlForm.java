@@ -199,6 +199,8 @@ public class HtmlForm extends HtmlElement {
         }
 
         final WebRequest request = getWebRequest(submitElement);
+        // upgrade-insecure-requests of the Content-Security-Policy
+        request.setUrl(ContentSecurityPolicy.upgradeInsecureRequest(htmlPage, request.getUrl()));
         final URL url = request.getUrl();
         if (!ContentSecurityPolicy.allowsFormAction(htmlPage, url, url)) {
             return;

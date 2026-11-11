@@ -193,6 +193,22 @@
                         of its parent.
                     </td>
                 </tr>
+                <tr>
+                    <td><code>upgrade-insecure-requests</code></td>
+                    <td>
+                        <code>http:</code> urls are upgraded to <code>https:</code> and <code>ws:</code> urls to
+                        <code>wss:</code> (port 80 is replaced by the default port) for images, scripts,
+                        stylesheets and <code>@import</code>, <code>XMLHttpRequest</code>/<code>fetch()</code>,
+                        WebSockets, <code>navigator.sendBeacon()</code>, workers, frames and form submissions.
+                        Top level navigations (links, <code>location</code>) are only upgraded for the host and
+                        port of the page. The other content security policy directives are checked against
+                        the upgraded url. Frames inherit the directive. Like the browsers, loopback hosts
+                        (<code>localhost</code>, <code>127.0.0.0/8</code>, <code>[::1]</code>) are not upgraded
+                        and the directive is ignored for report only policies; like Firefox, http urls are
+                        matching https source expressions (e.g. <code>img-src https:</code>) also if not upgraded
+                        when simulating Firefox. Redirects are not upgraded.
+                    </td>
+                </tr>
             </table>
             <p>
                 The <code>X-Frame-Options</code> header (<code>DENY</code>, <code>SAMEORIGIN</code>)
@@ -389,7 +405,7 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                     <code>font-src</code>, <code>media-src</code>, <code>manifest-src</code>
                 </li>
                 <li><code>sandbox</code></li>
-                <li><code>upgrade-insecure-requests</code>, <code>require-trusted-types-for</code>, <code>trusted-types</code></li>
+                <li><code>require-trusted-types-for</code>, <code>trusted-types</code></li>
                 <li>
                     <code>report-to</code> (Reporting API); no reports are sent for this directive,
                     use <code>report-uri</code> or the <a href="#sec_listener">listener</a> instead.

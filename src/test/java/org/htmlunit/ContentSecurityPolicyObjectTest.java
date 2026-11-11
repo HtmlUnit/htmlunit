@@ -233,7 +233,7 @@ public class ContentSecurityPolicyObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"done"})
+    @Alerts("done")
     public void detached() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify("object-src 'self'", "",

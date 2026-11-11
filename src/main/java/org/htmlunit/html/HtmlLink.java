@@ -257,7 +257,9 @@ public class HtmlLink extends HtmlElement {
      */
     public WebRequest getWebRequest() throws MalformedURLException {
         final HtmlPage page = (HtmlPage) getPage();
-        final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
+        // upgrade-insecure-requests of the Content-Security-Policy
+        final URL url = ContentSecurityPolicy.upgradeInsecureRequest(page,
+                                page.getFullyQualifiedUrl(getHrefAttribute()));
 
         final BrowserVersion browser = page.getWebClient().getBrowserVersion();
         final WebRequest request = new WebRequest(url, browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());

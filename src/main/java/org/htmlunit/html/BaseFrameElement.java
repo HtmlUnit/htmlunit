@@ -175,7 +175,9 @@ public abstract class BaseFrameElement extends HtmlElement {
         if (!source.isEmpty()) {
             final URL url;
             try {
-                url = ((HtmlPage) page).getFullyQualifiedUrl(source);
+                // upgrade-insecure-requests of the Content-Security-Policy (nested navigation)
+                url = ContentSecurityPolicy.upgradeInsecureRequest((HtmlPage) page,
+                        ((HtmlPage) page).getFullyQualifiedUrl(source));
             }
             catch (final MalformedURLException e) {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");

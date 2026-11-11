@@ -244,7 +244,9 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
                 final WebClient webClient = page.getWebClient();
 
                 final BrowserVersion browser = webClient.getBrowserVersion();
-                final WebRequest request = new WebRequest(new URL(src), browser.getImgAcceptHeader(),
+                // upgrade-insecure-requests of the Content-Security-Policy
+                final URL url = ContentSecurityPolicy.upgradeInsecureRequest(page, new URL(src));
+                final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
                                                                 browser.getAcceptEncodingHeader());
                 request.setCharset(page.getCharset());
                 request.setRefererHeader(page.getUrl());

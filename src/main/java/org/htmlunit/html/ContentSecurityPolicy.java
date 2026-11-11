@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.CSP_META_SINGLE_POLICY;
 import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_HIDING_ENFORCED_ONLY;
 import static org.htmlunit.BrowserVersionFeatures.CSP_REPORT_FIREFOX_FORMAT;
+import static org.htmlunit.BrowserVersionFeatures.CSP_UPGRADE_INSECURE_REQUESTS_MATCHES_HTTPS;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.io.IOException;
@@ -254,7 +255,7 @@ public final class ContentSecurityPolicy implements Serializable {
         final String integrityAttrib = element.getAttributeDirect("integrity");
         final Optional<String> integrity = ATTRIBUTE_NOT_DEFINED == integrityAttrib
                 ? Optional.empty() : Optional.of(integrityAttrib);
-        final Optional<URI> scriptUrl = URI.parseURI(url.toExternalForm());
+        final Optional<URI> scriptUrl = URI.parseURI(matchingUrl(page, url).toExternalForm());
         final Optional<Boolean> parserInserted = Optional.of(isParserInserted(element));
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.ScriptSrcElem, withoutRef(url), null,
@@ -325,7 +326,7 @@ public final class ContentSecurityPolicy implements Serializable {
             return true;
         }
 
-        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.ConnectSrc, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
@@ -396,7 +397,7 @@ public final class ContentSecurityPolicy implements Serializable {
         }
 
         final Optional<String> nonce = element == null ? Optional.empty() : nonce(element);
-        final Optional<URI> styleUrl = URI.parseURI(url.toExternalForm());
+        final Optional<URI> styleUrl = URI.parseURI(matchingUrl(page, url).toExternalForm());
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.StyleSrcElem, withoutRef(url), null,
                 null, "", 0, 0);
@@ -422,7 +423,7 @@ public final class ContentSecurityPolicy implements Serializable {
             return true;
         }
 
-        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.FrameSrc, navigationBlockedUri(page, url),
                 null, null, "", 0, 0);
@@ -455,7 +456,7 @@ public final class ContentSecurityPolicy implements Serializable {
             return true;
         }
 
-        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.ObjectSrc, objectBlockedUri(page, url), null,
                 null, "", 0, 0);
@@ -478,13 +479,151 @@ public final class ContentSecurityPolicy implements Serializable {
             return true;
         }
 
-        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.ImgSrc, blockedUri(url), null,
                 null, "", 0, 0);
         final boolean allowed = csp.check(page, violation, policy -> policy.allowsImage(target, origin));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
+    }
+
+    /**
+     * Upgrade Insecure Requests (upgrade-insecure-requests directive): returns the url to be used for
+     * a request of the page; used for subresources, nested navigations (frames) and form submissions.
+     * <p>
+     * If the page (or one of its ancestors) has an enforced policy containing
+     * upgrade-insecure-requests, http urls are upgraded to https and ws urls to wss (port 80 is
+     * replaced by the default port). Like the browsers, loopback hosts (localhost, 127.0.0.0/8, ::1)
+     * are not upgraded.
+     * </p>
+     *
+     * @param page the page doing the request
+     * @param url the url of the request
+     * @return the upgraded url or the url itself
+     */
+    public static URL upgradeInsecureRequest(final HtmlPage page, final URL url) {
+        if (url == null || !isUpgradable(url) || !upgradesInsecureRequests(page)) {
+            return url;
+        }
+        return upgrade(url);
+    }
+
+    /**
+     * Upgrade Insecure Requests for top level navigations: the url is upgraded only if the host and port
+     * are the same as the host and port of the page (or of one of its ancestors) having the
+     * upgrade-insecure-requests directive.
+     *
+     * @param page the page doing the navigation
+     * @param url the url of the navigation
+     * @return the upgraded url or the url itself
+     */
+    public static URL upgradeInsecureNavigation(final HtmlPage page, final URL url) {
+        if (url == null || !isUpgradable(url)) {
+            return url;
+        }
+
+        HtmlPage current = page;
+        while (current != null) {
+            final ContentSecurityPolicy csp = current.getContentSecurityPolicy();
+            if (csp != null && csp.hasUpgradeInsecureRequests()) {
+                final URL pageUrl = current.getUrl();
+                if (pageUrl != null && pageUrl.getHost().equalsIgnoreCase(url.getHost())
+                        && effectivePort(pageUrl) == effectivePort(url)) {
+                    return upgrade(url);
+                }
+            }
+            current = parentPage(current);
+        }
+        return url;
+    }
+
+    /**
+     * Returns the url used for matching the source expressions. Firefox treats http (ws) urls
+     * like https (wss) urls if the page upgrades insecure requests; this is relevant for
+     * urls that are not upgraded (loopback hosts).
+     */
+    private static URL matchingUrl(final HtmlPage page, final URL url) {
+        if (page.getWebClient().getBrowserVersion().hasFeature(CSP_UPGRADE_INSECURE_REQUESTS_MATCHES_HTTPS)) {
+            final String protocol = url.getProtocol();
+            if (("http".equals(protocol) || "ws".equals(protocol)) && upgradesInsecureRequests(page)) {
+                try {
+                    return UrlUtils.getUrlWithNewProtocol(url, "http".equals(protocol) ? "https" : "wss");
+                }
+                catch (final MalformedURLException e) {
+                    return url;
+                }
+            }
+        }
+        return url;
+    }
+
+    private static boolean upgradesInsecureRequests(final HtmlPage page) {
+        HtmlPage current = page;
+        while (current != null) {
+            final ContentSecurityPolicy csp = current.getContentSecurityPolicy();
+            if (csp != null && csp.hasUpgradeInsecureRequests()) {
+                return true;
+            }
+            current = parentPage(current);
+        }
+        return false;
+    }
+
+    /**
+     * The directive is ignored for report only policies.
+     */
+    private boolean hasUpgradeInsecureRequests() {
+        for (final Policy policy : getEnforcedPolicies()) {
+            if (policy.upgradeInsecureRequests()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static HtmlPage parentPage(final HtmlPage page) {
+        final WebWindow window = page.getEnclosingWindow();
+        if (window instanceof FrameWindow frameWindow) {
+            return frameWindow.getEnclosingPage();
+        }
+        return null;
+    }
+
+    private static boolean isUpgradable(final URL url) {
+        final String protocol = url.getProtocol();
+        if (!"http".equals(protocol) && !"ws".equals(protocol)) {
+            return false;
+        }
+        return !isLoopback(url.getHost());
+    }
+
+    private static boolean isLoopback(final String host) {
+        final String lower = host.toLowerCase(Locale.ROOT);
+        return "localhost".equals(lower)
+                || lower.endsWith(".localhost")
+                || lower.startsWith("127.")
+                || "[::1]".equals(lower)
+                || "::1".equals(lower);
+    }
+
+    private static int effectivePort(final URL url) {
+        final int port = url.getPort();
+        return port == -1 ? url.getDefaultPort() : port;
+    }
+
+    private static URL upgrade(final URL url) {
+        final String protocol = "ws".equals(url.getProtocol()) ? "wss" : "https";
+        try {
+            URL upgraded = UrlUtils.getUrlWithNewProtocol(url, protocol);
+            if (url.getPort() == 80) {
+                upgraded = UrlUtils.getUrlWithNewPort(upgraded, -1);
+            }
+            return upgraded;
+        }
+        catch (final MalformedURLException e) {
+            return url;
+        }
     }
 
     /**
@@ -501,7 +640,7 @@ public final class ContentSecurityPolicy implements Serializable {
             return true;
         }
 
-        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.WorkerSrc, blockedUri(url), null,
                 null, "", 0, 0);
@@ -551,7 +690,7 @@ public final class ContentSecurityPolicy implements Serializable {
             return true;
         }
 
-        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FORM_ACTION, blockedUri(reportedUrl), null, null, "", 0, 0);
         final boolean allowed = csp.check(page, violation,

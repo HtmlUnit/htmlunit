@@ -64,6 +64,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     CSP_REPORT_FIREFOX_FORMAT,
 
+    /**
+     * If the page upgrades insecure requests (upgrade-insecure-requests), http urls are matching
+     * https source expressions also if the url is not upgraded (loopback hosts).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    CSP_UPGRADE_INSECURE_REQUESTS_MATCHES_HTTPS,
+
     /** Background image is 'initial'. */
     @BrowserFeature({CHROME, EDGE})
     CSS_BACKGROUND_INITIAL,

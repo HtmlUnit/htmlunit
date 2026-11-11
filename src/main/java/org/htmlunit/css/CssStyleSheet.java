@@ -1269,7 +1269,15 @@ public class CssStyleSheet implements Serializable {
         CssStyleSheet sheet = imports_.get(importRule);
         if (sheet == null) {
             final String href = importRule.getHref();
-            final String url = UrlUtils.resolveUrl(getUri(), href);
+            String url = UrlUtils.resolveUrl(getUri(), href);
+            if (owner_ != null && owner_.getPage() instanceof HtmlPage page) {
+                // upgrade-insecure-requests of the Content-Security-Policy
+                final URL resolvedUrl = UrlUtils.toUrlSafe(url);
+                final URL upgradedUrl = ContentSecurityPolicy.upgradeInsecureRequest(page, resolvedUrl);
+                if (upgradedUrl != resolvedUrl) {
+                    url = upgradedUrl.toExternalForm();
+                }
+            }
             if (owner_ != null && owner_.getPage() instanceof HtmlPage htmlPage
                     && !ContentSecurityPolicy.allowsExternalStyle(htmlPage, null, UrlUtils.toUrlSafe(url))) {
                 sheet = new CssStyleSheet(owner_, "", url);

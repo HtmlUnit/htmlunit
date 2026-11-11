@@ -9,6 +9,11 @@
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
             <action type="add" dev="rbri">
+                Content-Security-Policy: support for the upgrade-insecure-requests directive; http/ws urls of
+                subresources, frames, form submissions and same host navigations are upgraded to https/wss
+                (like the browsers, not for loopback hosts and not for report only policies).
+            </action>
+            <action type="add" dev="rbri">
                 HTMLObjectElement.data implemented.
             </action>
             <action type="fix" dev="rbri">

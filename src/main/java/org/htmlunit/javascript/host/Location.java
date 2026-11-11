@@ -33,6 +33,7 @@ import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.ContentSecurityPolicy;
+import org.htmlunit.html.FrameWindow;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -344,6 +345,7 @@ public class Location extends HtmlUnitScriptable {
             if (StringUtils.isEmptyOrNull(newLocation)) {
                 url = UrlUtils.getUrlWithNewRef(url, null);
             }
+            url = upgradeInsecureRequest(callingPage, window_.getWebWindow(), url);
 
             final WebRequest webRequest = new WebRequest(url,
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
@@ -613,6 +615,17 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
+     * Upgrade-insecure-requests of the Content-Security-Policy; navigations of frames
+     * are always upgraded, top level navigations only for the host of the page.
+     */
+    private static URL upgradeInsecureRequest(final HtmlPage page, final WebWindow targetWindow, final URL url) {
+        if (targetWindow instanceof FrameWindow) {
+            return ContentSecurityPolicy.upgradeInsecureRequest(page, url);
+        }
+        return ContentSecurityPolicy.upgradeInsecureNavigation(page, url);
+    }
+
+    /**
      * Sets this location's URL, triggering a server request and loading the resulting document
      * into this location's window.
      *
@@ -623,7 +636,11 @@ public class Location extends HtmlUnitScriptable {
         final WebWindow webWindow = window_.getWebWindow();
         final BrowserVersion browserVersion = webWindow.getWebClient().getBrowserVersion();
 
-        final WebRequest webRequest = new WebRequest(url,
+        URL requestUrl = url;
+        if (webWindow.getEnclosedPage() instanceof HtmlPage page) {
+            requestUrl = upgradeInsecureRequest(page, webWindow, url);
+        }
+        final WebRequest webRequest = new WebRequest(requestUrl,
                 browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
 
         webRequest.markAsNavigation(getUrl(), false);

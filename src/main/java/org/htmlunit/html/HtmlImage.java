@@ -695,7 +695,9 @@ public class HtmlImage extends HtmlElement {
                     imageWebResponse_ = null;
                 }
                 else if (!blank) {
-                    final URL url = page.getFullyQualifiedUrl(src);
+                    // upgrade-insecure-requests of the Content-Security-Policy
+                    final URL url = ContentSecurityPolicy.upgradeInsecureRequest(page,
+                                            page.getFullyQualifiedUrl(src));
                     final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
                                                                     browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
@@ -747,7 +749,8 @@ public class HtmlImage extends HtmlElement {
 
         final URL url;
         try {
-            url = page.getFullyQualifiedUrl(src);
+            // upgrade-insecure-requests of the Content-Security-Policy
+            url = ContentSecurityPolicy.upgradeInsecureRequest(page, page.getFullyQualifiedUrl(src));
         }
         catch (final MalformedURLException e) {
             return true;

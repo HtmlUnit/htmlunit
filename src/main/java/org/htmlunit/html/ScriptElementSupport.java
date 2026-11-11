@@ -197,10 +197,16 @@ public final class ScriptElementSupport {
                 try {
                     script.setExecuted(true);
 
+                    String scriptSrc = src;
                     if (page.getContentSecurityPolicy() != null) {
                         URL scriptUrl = null;
                         try {
-                            scriptUrl = page.getFullyQualifiedUrl(src);
+                            // upgrade-insecure-requests of the Content-Security-Policy
+                            final URL resolvedUrl = page.getFullyQualifiedUrl(src);
+                            scriptUrl = ContentSecurityPolicy.upgradeInsecureRequest(page, resolvedUrl);
+                            if (scriptUrl != resolvedUrl) {
+                                scriptSrc = scriptUrl.toExternalForm();
+                            }
                         }
                         catch (final MalformedURLException e) {
                             // handled by loadExternalJavaScriptFile()
@@ -222,7 +228,7 @@ public final class ScriptElementSupport {
                     final Document doc = win.getDocument();
                     try {
                         doc.setCurrentScript(element.getScriptableObject());
-                        result = page.loadExternalJavaScriptFile(src, charset, script.isCrossorigin());
+                        result = page.loadExternalJavaScriptFile(scriptSrc, charset, script.isCrossorigin());
                     }
                     finally {
                         doc.setCurrentScript(null);
