@@ -259,6 +259,35 @@ public class HtmlObject extends HtmlElement implements ValidatableHtmlElement {
     }
 
     /**
+     * {@inheritDoc}
+     * Checks the data url against the Content-Security-Policy (object-src).
+     */
+    @Override
+    protected void onAddedToPage() {
+        super.onAddedToPage();
+        ContentSecurityPolicy.allowsObject(this, getAttributeDirect("data"));
+    }
+
+    /**
+     * {@inheritDoc}
+     * Checks the new data url against the Content-Security-Policy (object-src).
+     */
+    @Override
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value,
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
+        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
+        final boolean changed = "data".equals(qualifiedNameLC)
+                && !getAttributeNS(namespaceURI, qualifiedNameLC).equals(value);
+
+        super.setAttributeNS(namespaceURI, qualifiedName, value,
+                notifyAttributeChangeListeners, notifyMutationObservers);
+
+        if (changed && isAttachedToPage()) {
+            ContentSecurityPolicy.allowsObject(this, value);
+        }
+    }
+
+    /**
      * Initialize the clsid.
      * {@inheritDoc}
      */

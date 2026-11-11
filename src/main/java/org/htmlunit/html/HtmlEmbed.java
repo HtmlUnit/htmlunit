@@ -27,6 +27,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "embed".
@@ -50,6 +51,35 @@ public class HtmlEmbed extends HtmlElement {
     HtmlEmbed(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Checks the src url against the Content-Security-Policy (object-src).
+     */
+    @Override
+    protected void onAddedToPage() {
+        super.onAddedToPage();
+        ContentSecurityPolicy.allowsObject(this, getAttributeDirect("src"));
+    }
+
+    /**
+     * {@inheritDoc}
+     * Checks the new src url against the Content-Security-Policy (object-src).
+     */
+    @Override
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value,
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
+        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
+        final boolean changed = "src".equals(qualifiedNameLC)
+                && !getAttributeNS(namespaceURI, qualifiedNameLC).equals(value);
+
+        super.setAttributeNS(namespaceURI, qualifiedName, value,
+                notifyAttributeChangeListeners, notifyMutationObservers);
+
+        if (changed && isAttachedToPage()) {
+            ContentSecurityPolicy.allowsObject(this, value);
+        }
     }
 
     /**

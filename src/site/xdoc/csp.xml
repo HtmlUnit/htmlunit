@@ -142,6 +142,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><code>object-src</code></td>
+                    <td>
+                        the <code>data</code> url of <code>&lt;object&gt;</code> and the <code>src</code> url of
+                        <code>&lt;embed&gt;</code> elements (also if added by script or if the attribute is
+                        changed later). HtmlUnit does not load the content of these elements; the url is
+                        checked anyway to report the violation (cross origin urls are reported as origin).
+                        There are no <code>load</code> and <code>error</code> events.
+                    </td>
+                </tr>
+                <tr>
                     <td><code>worker-src</code></td>
                     <td>
                         creating a dedicated worker (<code>new Worker(url)</code>, including <code>data:</code>
@@ -362,8 +372,7 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
             </p>
             <ul>
                 <li>
-                    <code>font-src</code>, <code>media-src</code>,
-                    <code>object-src</code>, <code>manifest-src</code>
+                    <code>font-src</code>, <code>media-src</code>, <code>manifest-src</code>
                 </li>
                 <li><code>sandbox</code></li>
                 <li><code>upgrade-insecure-requests</code>, <code>require-trusted-types-for</code>, <code>trusted-types</code></li>

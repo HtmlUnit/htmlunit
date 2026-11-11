@@ -12,6 +12,10 @@
                 websocket-client: jetty updated to 12.1.15.
             </action>
             <action type="add" dev="rbri">
+                Content-Security-Policy: support for the object-src directive; the urls of object and embed
+                elements are checked (the violation is reported, HtmlUnit does not load the content).
+            </action>
+            <action type="add" dev="rbri">
                 CSP: violation reports are sent to the uris of the report-uri directive
                 (POST, application/csp-report). Like the browsers, report-uri is ignored if the policy is delivered
                 by a meta element or contains a report-to directive; when simulating Firefox the Firefox report format is used.

@@ -431,6 +431,40 @@ public final class ContentSecurityPolicy implements Serializable {
     }
 
     /**
+     * Checks if the url of an object or embed element is allowed (object-src, with fallback
+     * to default-src). HtmlUnit does not load the content of these elements; like the browsers,
+     * the url is checked anyway to report the violation.
+     *
+     * @param element the object or embed element
+     * @param src the value of the data (object) or src (embed) attribute
+     * @return {@code true} if the url is allowed (or the attribute is empty or invalid)
+     */
+    public static boolean allowsObject(final DomElement element, final String src) {
+        final HtmlPage page = element.getHtmlPageOrNull();
+        if (page == null || page.getContentSecurityPolicy() == null
+                || ATTRIBUTE_NOT_DEFINED == src || StringUtils.isBlank(src)) {
+            return true;
+        }
+
+        final URL url;
+        try {
+            url = page.getFullyQualifiedUrl(src);
+        }
+        catch (final MalformedURLException e) {
+            return true;
+        }
+
+        final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(url));
+        final Optional<URI> origin = origin(page);
+        final Violation violation = new Violation(FetchDirectiveKind.ObjectSrc, objectBlockedUri(page, url), null,
+                null, "", 0, 0);
+        final boolean allowed = page.getContentSecurityPolicy()
+                .check(page, violation, policy -> policy.allowsObject(target, origin));
+        firePendingViolationsIfNoScriptRunning(page);
+        return allowed;
+    }
+
+    /**
      * Checks if loading the given image url is allowed (img-src, with fallback to default-src).
      *
      * @param page the page containing the image
@@ -953,6 +987,22 @@ public final class ContentSecurityPolicy implements Serializable {
             return protocol + "://" + host;
         }
         return protocol + "://" + host + ":" + port;
+    }
+
+    /**
+     * The blocked uri reported for objects (object-src); like the browsers
+     * <ul>
+     *   <li>urls without host (e.g. data:) are reported as scheme</li>
+     *   <li>cross origin urls are reported as origin (without path)</li>
+     *   <li>same origin urls are reported without the fragment</li>
+     * </ul>
+     */
+    private static String objectBlockedUri(final HtmlPage page, final URL url) {
+        final String host = url.getHost();
+        if (host == null || host.isEmpty()) {
+            return url.getProtocol();
+        }
+        return navigationBlockedUri(page, url);
     }
 
     private static Optional<URI> origin(final HtmlPage page) {
