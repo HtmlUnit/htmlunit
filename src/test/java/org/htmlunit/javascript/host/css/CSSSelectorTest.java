@@ -4343,4 +4343,369 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * :nth-child(An+B of S) counts only the siblings matching S.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"li1", "li3", "li1,li4,li7", "li3,li6", "li1,li4,li7", "li1,li3", "li2", "li1", "li4", "",
+                       "li7", "", "SyntaxError/DOMException"},
+            FF = {"li1", "li3", "li1,li4,li7", "li3,li6", "li1,li4,li7", "li1,li3", "li2", "li1", "li4", "",
+                  "li7", "", "li1"},
+            FF_ESR = {"li1", "li3", "li1,li4,li7", "li3,li6", "li1,li4,li7", "li1,li3", "li2", "li1", "li4", "",
+                      "li7", "", "li1"})
+    @HtmlUnitNYI(
+            CHROME = {"li1", "li3", "li1,li4,li7", "li3,li6", "li1,li4,li7", "li1,li3", "li2", "li1", "li4", "",
+                      "li7", "", "li1"},
+            EDGE = {"li1", "li3", "li1,li4,li7", "li3,li6", "li1,li4,li7", "li1,li3", "li2", "li1", "li4", "",
+                    "li7", "", "li1"})
+    public void nth_child_of() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function q(selector) {\n"
+            + "  try { log(ids(document.querySelectorAll(selector))); } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  q(\'li:nth-child(1 of .x)\');\n"
+            + "  q(\'li:nth-child(2 of .x)\');\n"
+            + "  q(\'li:nth-child(odd of .x)\');\n"
+            + "  q(\'li:nth-child(even of .x)\');\n"
+            + "  q(\'li:nth-child(2n+1 of .x)\');\n"
+            + "  q(\'li:nth-child(-n+2 of .x)\');\n"
+            + "  q(\'li:nth-child(1 of .y, li:not(.x))\');\n"
+            + "  q(\'li:nth-child(1 of li)\');\n"
+            + "  q(\':nth-child(3 of .x)\');\n"
+            + "  q(\'li:nth-child(2 of .x):not(#li3)\');\n"
+            + "  q(\'li.y:nth-child(5 of .x)\');\n"
+            + "  q(\'li:nth-child(1 of .unknown)\');\n"
+            + "  q(\'li:NTH-CHILD(1 OF .x)\');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1' class='x'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3' class='x'></li>\n"
+            + "  <li id='li4' class='x'></li>\n"
+            + "  <li id='li5'></li>\n"
+            + "  <li id='li6' class='x'></li>\n"
+            + "  <li id='li7' class='x y'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * :nth-last-child(An+B of S) counts only the siblings matching S.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"li7", "li6", "li1,li4,li7", "li6,li7", "li5"})
+    public void nth_last_child_of() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function q(selector) {\n"
+            + "  try { log(ids(document.querySelectorAll(selector))); } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  q(\'li:nth-last-child(1 of .x)\');\n"
+            + "  q(\'li:nth-last-child(2 of .x)\');\n"
+            + "  q(\'li:nth-last-child(odd of .x)\');\n"
+            + "  q(\'li:nth-last-child(-n+2 of .x)\');\n"
+            + "  q(\'li:nth-last-child(1 of :not(.x))\');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1' class='x'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3' class='x'></li>\n"
+            + "  <li id='li4' class='x'></li>\n"
+            + "  <li id='li5'></li>\n"
+            + "  <li id='li6' class='x'></li>\n"
+            + "  <li id='li7' class='x y'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Whitespace inside of :nth-child(An+B of S).
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"li1,li4,li7", "li1,li3,li6", "li1,li4,li7"})
+    public void nth_child_of_spaces() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function q(selector) {\n"
+            + "  try { log(ids(document.querySelectorAll(selector))); } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  q(\'li:nth-child( 2n + 1 of .x )\');\n"
+            + "  q(\'li:nth-child(2n+1   of   .x,   #li2)\');\n"
+            + "  q(\'li:nth-child(  odd  of  .x  )\');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1' class='x'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3' class='x'></li>\n"
+            + "  <li id='li4' class='x'></li>\n"
+            + "  <li id='li5'></li>\n"
+            + "  <li id='li6' class='x'></li>\n"
+            + "  <li id='li7' class='x y'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Invalid usages of the 'of S' syntax.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                       "SyntaxError/DOMException", "SyntaxError/DOMException", "",
+                       "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException"},
+            FF = {"SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                  "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                  "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException"},
+            FF_ESR = {"SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException"})
+    @HtmlUnitNYI(
+            FF = {"SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                  "SyntaxError/DOMException", "SyntaxError/DOMException", "",
+                  "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException"},
+            FF_ESR = {"SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException", "SyntaxError/DOMException", "",
+                      "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException"})
+    public void nth_child_of_invalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function q(selector) {\n"
+            + "  try { log(ids(document.querySelectorAll(selector))); } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  q(\'li:nth-of-type(1 of .x)\');\n"
+            + "  q(\'li:nth-last-of-type(1 of .x)\');\n"
+            + "  q(\'li:nth-child(of .x)\');\n"
+            + "  q(\'li:nth-child(1 of)\');\n"
+            + "  q(\'li:nth-child(1 of .x,)\');\n"
+            + "  q(\'li:nth-child(1 of ::before)\');\n"
+            + "  q(\'li:nth-child(1 of :unknown)\');\n"
+            + "  q(\'li:nth-child(1 .x)\');\n"
+            + "  q(\'li:nth-child(1of .x)\');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1' class='x'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3' class='x'></li>\n"
+            + "  <li id='li4' class='x'></li>\n"
+            + "  <li id='li5'></li>\n"
+            + "  <li id='li6' class='x'></li>\n"
+            + "  <li id='li7' class='x y'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The whitespace rules of the An+B microsyntax.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"li1,li3,li5,li7", "li1,li3,li5,li7", "li1,li3,li5,li7", "li1,li2,li3", "li6,li7", "li5", "", "li2",
+             "SyntaxError/DOMException", "SyntaxError/DOMException", "SyntaxError/DOMException",
+             "SyntaxError/DOMException", "li6,li7", "li2,li5"})
+    public void nth_child_anb() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function q(selector) {\n"
+            + "  try { log(ids(document.querySelectorAll(selector))); } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  q(\'li:nth-child(2n + 1)\');\n"
+            + "  q(\'li:nth-child(2n- 1)\');\n"
+            + "  q(\'li:nth-child(2n -1)\');\n"
+            + "  q(\'li:nth-child(-n + 3)\');\n"
+            + "  q(\'li:nth-child(+n+6)\');\n"
+            + "  q(\'li:nth-child(+5)\');\n"
+            + "  q(\'li:nth-child(-1)\');\n"
+            + "  q(\'li:nth-child(0n+2)\');\n"
+            + "  q(\'li:nth-child(+ 2n)\');\n"
+            + "  q(\'li:nth-child(2 n)\');\n"
+            + "  q(\'li:nth-child(2n + + 1)\');\n"
+            + "  q(\'li:nth-child(2n+ -1)\');\n"
+            + "  q(\'li:nth-last-child( -n + 2 )\');\n"
+            + "  q(\'li:nth-of-type( 3n - 1 )\');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1' class='x'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3' class='x'></li>\n"
+            + "  <li id='li4' class='x'></li>\n"
+            + "  <li id='li5'></li>\n"
+            + "  <li id='li6' class='x'></li>\n"
+            + "  <li id='li7' class='x y'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * :nth-child(An+B of S) and matches() / closest().
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "UL"})
+    public void nth_child_of_matchesClosest() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function q(selector) {\n"
+            + "  try { log(ids(document.querySelectorAll(selector))); } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var li4 = document.getElementById('li4');\n"
+            + "  log(li4.matches(':nth-child(3 of .x)'));\n"
+            + "  log(li4.matches(':nth-child(2 of .x)'));\n"
+            + "  log(li4.matches(':nth-last-child(3 of .x)'));\n"
+            + "  log(li4.closest(':nth-child(1 of ul)').tagName);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1' class='x'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3' class='x'></li>\n"
+            + "  <li id='li4' class='x'></li>\n"
+            + "  <li id='li5'></li>\n"
+            + "  <li id='li6' class='x'></li>\n"
+            + "  <li id='li7' class='x y'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The specificity of :nth-child(An+B of S) is the one of the pseudo-class plus S.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"rgb(255, 0, 0)", "rgb(0, 128, 0)", "rgb(255, 0, 0)", "rgb(0, 0, 255)"})
+    public void nth_child_of_style() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function ids(list) {\n"
+            + "  var result = [];\n"
+            + "  for (var i = 0; i < list.length; i++) {\n"
+            + "    result.push(list[i].id);\n"
+            + "  }\n"
+            + "  return result.join(',');\n"
+            + "}\n"
+            + "function q(selector) {\n"
+            + "  try { log(ids(document.querySelectorAll(selector))); } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  log(getComputedStyle(document.getElementById('li1')).color);\n"
+            + "  log(getComputedStyle(document.getElementById('li3')).color);\n"
+            + "  log(getComputedStyle(document.getElementById('li4')).color);\n"
+            + "  log(getComputedStyle(document.getElementById('li7')).color);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1' class='x'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3' class='x'></li>\n"
+            + "  <li id='li4' class='x'></li>\n"
+            + "  <li id='li5'></li>\n"
+            + "  <li id='li6' class='x'></li>\n"
+            + "  <li id='li7' class='x y'></li>\n"
+            + "</ul>\n"
+            + "<style>\n"
+            + "  li:nth-child(odd of .x) { color: rgb(255, 0, 0); }\n"
+            + "  li.x { color: rgb(0, 128, 0); }\n"
+            + "  li:nth-last-child(1 of .x) { color: rgb(0, 0, 255); }\n"
+            + "</style>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

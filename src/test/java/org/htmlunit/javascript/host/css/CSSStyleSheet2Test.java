@@ -25,10 +25,7 @@ import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.CSSOMParser;
 import org.htmlunit.cssparser.parser.CSSParseException;
-import org.htmlunit.cssparser.parser.Locator;
-import org.htmlunit.cssparser.parser.condition.Condition;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
-import org.htmlunit.cssparser.parser.selector.ElementSelector;
 import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.parser.selector.SelectorListImpl;
@@ -459,17 +456,13 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void validateSelectors_invalidNthPseudoClass() throws Exception {
-        final String html = DOCTYPE_HTML + "<html><body></body></html>";
-        final HtmlPage page = loadPage(html);
-
-        final SelectorList selectors = parseSelectors(":nth-last-child(invalid)");
-        assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectors, page));
-
-        final SelectorList selectors2 = parseSelectors(":nth-of-type(invalid)");
-        assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectors2, page));
-
-        final SelectorList selectors3 = parseSelectors(":nth-last-of-type(invalid)");
-        assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectors3, page));
+        // the An+B argument is checked by the parser already
+        assertThrows(CSSException.class, () -> parseSelectors(":nth-child(invalid)"));
+        assertThrows(CSSException.class, () -> parseSelectors(":nth-last-child(invalid)"));
+        assertThrows(CSSException.class, () -> parseSelectors(":nth-of-type(invalid)"));
+        assertThrows(CSSException.class, () -> parseSelectors(":nth-last-of-type(invalid)"));
+        assertThrows(CSSException.class, () -> parseSelectors(":nth-child(2 n)"));
+        assertThrows(CSSException.class, () -> parseSelectors(":nth-of-type(1 of p)"));
     }
 
     /**
@@ -479,38 +472,11 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
     public void validateSelectors_nthPseudoClassValidation() throws Exception {
         final HtmlPage page = loadPage(DOCTYPE_HTML + "<html><body></body></html>");
 
-        final Condition invalidCondition = new Condition() {
-            @Override
-            public ConditionType getConditionType() {
-                return ConditionType.PSEUDO_CLASS_CONDITION;
-            }
-            @Override
-            public String getValue() {
-                return "nth-last-child(invalid)";
-            }
-            @Override
-            public String getLocalName() {
-                return null;
-            }
-            @Override
-            public Locator getLocator() {
-                return null;
-            }
-            @Override
-            public void setLocator(Locator locator) {
-                //
-            }
-        };
+        CssStyleSheet.validateSelectors(parseSelectors(":nth-child(2n + 1 of p, .x)"), page);
 
-        final ElementSelector selector = new ElementSelector(null, null);
-        selector.addCondition(invalidCondition);
-
-        final SelectorListImpl selectorList = new SelectorListImpl();
-        selectorList.add(selector);
-
-        // Before fix: returned normally (isValidCondition returned true for nth-last-child(invalid))
-        // After fix: throws CSSException because "invalid" formula fails NTH validation
-        assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectorList, page));
+        // the selectors of 'of S' are validated also
+        final SelectorList selectors = parseSelectors(":nth-child(1 of :unknown)");
+        assertThrows(CSSException.class, () -> CssStyleSheet.validateSelectors(selectors, page));
     }
 
     /**

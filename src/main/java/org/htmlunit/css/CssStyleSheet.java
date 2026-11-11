@@ -72,6 +72,8 @@ import org.htmlunit.cssparser.parser.condition.Condition.ConditionType;
 import org.htmlunit.cssparser.parser.condition.HasPseudoClassCondition;
 import org.htmlunit.cssparser.parser.condition.IsPseudoClassCondition;
 import org.htmlunit.cssparser.parser.condition.NotPseudoClassCondition;
+import org.htmlunit.cssparser.parser.condition.NthPseudoClassCondition;
+import org.htmlunit.cssparser.parser.condition.NthPseudoClassCondition.NthType;
 import org.htmlunit.cssparser.parser.condition.WherePseudoClassCondition;
 import org.htmlunit.cssparser.parser.media.MediaQuery;
 import org.htmlunit.cssparser.parser.selector.ChildSelector;
@@ -148,8 +150,6 @@ public class CssStyleSheet implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(CssStyleSheet.class);
 
-    private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
-    private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n(?:[+-]\\d+)?", Pattern.CASE_INSENSITIVE);
     private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\].:])");
 
     /** The parsed stylesheet which this host object wraps. */
@@ -701,42 +701,25 @@ public class CssStyleSheet implements Serializable {
                 return false;
 
             case NOT_PSEUDO_CLASS_CONDITION:
-                final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
-                final SelectorList notSelectorList = notPseudoCondition.getSelectors();
-                for (final Selector selector : notSelectorList) {
-                    if (selects(browserVersion, element, selector, null, scope, fromQuerySelectorAll, throwOnSyntax)) {
-                        return false;
-                    }
-                }
-                return true;
+                return !selectsAny(browserVersion, element, ((NotPseudoClassCondition) condition).getSelectors(),
+                                    scope, fromQuerySelectorAll, throwOnSyntax);
 
             case IS_PSEUDO_CLASS_CONDITION:
-                final IsPseudoClassCondition conditionIsPseudo = (IsPseudoClassCondition) condition;
-                for (final Selector selector : conditionIsPseudo.getSelectors()) {
-                    if (selects(browserVersion, element, selector, null, scope, fromQuerySelectorAll, throwOnSyntax)) {
-                        return true;
-                    }
-                }
-                return false;
+                return selectsAny(browserVersion, element, ((IsPseudoClassCondition) condition).getSelectors(),
+                                    scope, fromQuerySelectorAll, throwOnSyntax);
 
             case WHERE_PSEUDO_CLASS_CONDITION:
                 // same as is
-                final WherePseudoClassCondition conditionWherePseudo = (WherePseudoClassCondition) condition;
-                for (final Selector selector : conditionWherePseudo.getSelectors()) {
-                    if (selects(browserVersion, element, selector, null, scope, fromQuerySelectorAll, throwOnSyntax)) {
-                        return true;
-                    }
-                }
-                return false;
+                return selectsAny(browserVersion, element, ((WherePseudoClassCondition) condition).getSelectors(),
+                                    scope, fromQuerySelectorAll, throwOnSyntax);
 
             case HAS_PSEUDO_CLASS_CONDITION:
-                final HasPseudoClassCondition conditionHasPseudo = (HasPseudoClassCondition) condition;
-                for (final Selector selector : conditionHasPseudo.getSelectors()) {
-                    if (selects(browserVersion, element, selector, null, scope, fromQuerySelectorAll, throwOnSyntax)) {
-                        return true;
-                    }
-                }
-                return false;
+                return selectsAny(browserVersion, element, ((HasPseudoClassCondition) condition).getSelectors(),
+                                    scope, fromQuerySelectorAll, throwOnSyntax);
+
+            case NTH_PSEUDO_CLASS_CONDITION:
+                return selectsNth(browserVersion, element, (NthPseudoClassCondition) condition,
+                                    scope, fromQuerySelectorAll, throwOnSyntax);
 
             case PSEUDO_CLASS_CONDITION:
                 return selectsPseudoClass(browserVersion, element, condition, scope);
@@ -747,6 +730,67 @@ public class CssStyleSheet implements Serializable {
                 }
                 return false;
         }
+    }
+
+    /**
+     * Checks one of the nth-xxx() pseudo-classes; the position of the element is determined
+     * by counting the siblings (of the same type and/or matching the optional 'of S' selectors).
+     *
+     * @param browserVersion the browser version
+     * @param element the element to test
+     * @param condition the nth condition
+     * @param scope the context scope node used for evaluating relative selectors like :scope
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
+     * @param throwOnSyntax throw exception if the selector syntax is incorrect
+     * @return {@code true} if the condition applies
+     */
+    private static boolean selectsNth(final BrowserVersion browserVersion,
+            final DomElement element,
+            final NthPseudoClassCondition condition,
+            final DomNode scope,
+            final boolean fromQuerySelectorAll, final boolean throwOnSyntax) {
+        final SelectorList ofSelectors = condition.getSelectors();
+        if (ofSelectors != null
+                && !selectsAny(browserVersion, element, ofSelectors, scope, fromQuerySelectorAll, throwOnSyntax)) {
+            return false;
+        }
+
+        final NthType type = condition.getType();
+        final String nodeName = element.getNodeName();
+        int position = 0;
+        for (DomNode n = element; n != null; n = type.isFromEnd() ? n.getNextSibling() : n.getPreviousSibling()) {
+            if (n instanceof DomElement sibling
+                    && (!type.isOfType() || nodeName.equals(sibling.getNodeName()))
+                    && (ofSelectors == null || selectsAny(browserVersion, sibling, ofSelectors,
+                                                    scope, fromQuerySelectorAll, throwOnSyntax))) {
+                position++;
+            }
+        }
+        return condition.matches(position);
+    }
+
+    /**
+     * Returns true if the element is matched by at least one of the selectors.
+     *
+     * @param browserVersion the browser version
+     * @param element the element to test
+     * @param selectors the selectors
+     * @param scope the context scope node used for evaluating relative selectors like :scope
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
+     * @param throwOnSyntax throw exception if the selector syntax is incorrect
+     * @return {@code true} if at least one selector applies
+     */
+    private static boolean selectsAny(final BrowserVersion browserVersion,
+            final DomElement element,
+            final SelectorList selectors,
+            final DomNode scope,
+            final boolean fromQuerySelectorAll, final boolean throwOnSyntax) {
+        for (final Selector selector : selectors) {
+            if (selects(browserVersion, element, selector, null, scope, fromQuerySelectorAll, throwOnSyntax)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean matchesHyphenSeparated(final String condition, final String attribute) {
@@ -952,48 +996,6 @@ public class CssStyleSheet implements Serializable {
                         && !StringUtils.isEmptyOrNull(hi.getPlaceholder());
 
             default:
-                if (value.startsWith("nth-child(")) {
-                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    int index = 0;
-                    for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
-                        if (n instanceof DomElement) {
-                            index++;
-                        }
-                    }
-                    return getNthElement(nth, index);
-                }
-                else if (value.startsWith("nth-last-child(")) {
-                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    int index = 0;
-                    for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                        if (n instanceof DomElement) {
-                            index++;
-                        }
-                    }
-                    return getNthElement(nth, index);
-                }
-                else if (value.startsWith("nth-of-type(")) {
-                    final String nthType = element.getNodeName();
-                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    int index = 0;
-                    for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
-                        if (n instanceof DomElement && n.getNodeName().equals(nthType)) {
-                            index++;
-                        }
-                    }
-                    return getNthElement(nth, index);
-                }
-                else if (value.startsWith("nth-last-of-type(")) {
-                    final String nthLastType = element.getNodeName();
-                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    int index = 0;
-                    for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                        if (n instanceof DomElement && n.getNodeName().equals(nthLastType)) {
-                            index++;
-                        }
-                    }
-                    return getNthElement(nth, index);
-                }
                 return false;
         }
     }
@@ -1005,49 +1007,6 @@ public class CssStyleSheet implements Serializable {
             }
         }
         return true;
-    }
-
-    private static boolean getNthElement(final String nth, final int index) {
-        // nth is already lowercase
-        if ("odd".equals(nth)) {
-            return index % 2 != 0;
-        }
-
-        if ("even".equals(nth)) {
-            return index % 2 == 0;
-        }
-
-        // (numerator) * n + (denominator)
-        final int nIndex = nth.indexOf('n');
-        int denominator = 0;
-        if (nIndex != -1) {
-            String value = nth.substring(0, nIndex).trim();
-            if (StringUtils.equalsChar('-', value)) {
-                denominator = -1;
-            }
-            else {
-                if (value.length() > 0 && value.charAt(0) == '+') {
-                    value = value.substring(1);
-                }
-                denominator = StringUtils.toInt(value, 1);
-            }
-        }
-
-        String value = nth.substring(nIndex + 1).trim();
-        if (value.length() > 0 && value.charAt(0) == '+') {
-            value = value.substring(1);
-        }
-        final int numerator = StringUtils.toInt(value, 0);
-        if (denominator == 0) {
-            return index == numerator && numerator > 0;
-        }
-
-        final int diff = index - numerator;
-        if (denominator > 0) {
-            return diff >= 0 && diff % denominator == 0;
-        }
-        // denominator < 0
-        return diff <= 0 && diff % denominator == 0;
     }
 
     /**
@@ -1192,6 +1151,15 @@ public class CssStyleSheet implements Serializable {
         }
     }
 
+    private static boolean isValidSelectors(final SelectorList selectors, final DomNode domNode) {
+        for (final Selector selector : selectors) {
+            if (!isValidSelector(selector, domNode)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static boolean isValidCondition(final Condition condition, final DomNode domNode) {
         switch (condition.getConditionType()) {
             case ATTRIBUTE_CONDITION:
@@ -1205,38 +1173,17 @@ public class CssStyleSheet implements Serializable {
             case SUFFIX_ATTRIBUTE_CONDITION:
                 return true;
             case NOT_PSEUDO_CLASS_CONDITION:
-                final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
-                final SelectorList notSelectorList = notPseudoCondition.getSelectors();
-                for (final Selector selector : notSelectorList) {
-                    if (!isValidSelector(selector, domNode)) {
-                        return false;
-                    }
-                }
-                return true;
+                return isValidSelectors(((NotPseudoClassCondition) condition).getSelectors(), domNode);
             case IS_PSEUDO_CLASS_CONDITION:
-                final IsPseudoClassCondition conditionIsPseudo = (IsPseudoClassCondition) condition;
-                for (final Selector selector : conditionIsPseudo.getSelectors()) {
-                    if (!isValidSelector(selector, domNode)) {
-                        return false;
-                    }
-                }
-                return true;
+                return isValidSelectors(((IsPseudoClassCondition) condition).getSelectors(), domNode);
             case WHERE_PSEUDO_CLASS_CONDITION:
-                final WherePseudoClassCondition conditionWherePseudo = (WherePseudoClassCondition) condition;
-                for (final Selector selector : conditionWherePseudo.getSelectors()) {
-                    if (!isValidSelector(selector, domNode)) {
-                        return false;
-                    }
-                }
-                return true;
+                return isValidSelectors(((WherePseudoClassCondition) condition).getSelectors(), domNode);
             case HAS_PSEUDO_CLASS_CONDITION:
-                final HasPseudoClassCondition conditionHasPseudo = (HasPseudoClassCondition) condition;
-                for (final Selector selector : conditionHasPseudo.getSelectors()) {
-                    if (!isValidSelector(selector, domNode)) {
-                        return false;
-                    }
-                }
-                return true;
+                return isValidSelectors(((HasPseudoClassCondition) condition).getSelectors(), domNode);
+            case NTH_PSEUDO_CLASS_CONDITION:
+                // the An+B argument is already checked by the parser; only the optional 'of S' list is left
+                final SelectorList nthSelectors = ((NthPseudoClassCondition) condition).getSelectors();
+                return nthSelectors == null || isValidSelectors(nthSelectors, domNode);
             case PSEUDO_CLASS_CONDITION:
                 String value = condition.getValue();
                 if (value.endsWith(")")) {
@@ -1247,18 +1194,6 @@ public class CssStyleSheet implements Serializable {
                 }
 
                 value = StringUtils.toRootLowerCase(value);
-                if ("nth-child()".equals(value)
-                        || "nth-last-child()".equals(value)
-                        || "nth-of-type()".equals(value)
-                        || "nth-last-of-type()".equals(value)) {
-                    final String arg = org.apache.commons.lang3.StringUtils
-                                        .substringBetween(condition.getValue(), "(", ")").trim();
-                    return "even".equalsIgnoreCase(arg)
-                            || "odd".equalsIgnoreCase(arg)
-                            || NTH_NUMERIC.matcher(arg).matches()
-                            || NTH_COMPLEX.matcher(arg).matches();
-                }
-
                 if ("placeholder-shown".equals(value)) {
                     return true;
                 }

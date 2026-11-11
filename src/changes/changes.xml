@@ -8,6 +8,23 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="add" dev="rbri">
+                Support for :nth-child(An+B of S) and :nth-last-child(An+B of S).
+            </action>
+            <action type="fix" dev="rbri">
+                The arguments of the nth-xxx() pseudo-classes now follow the An+B syntax; whitespace around the
+                sign (e.g. ':nth-child(2n + 1)') and signed numbers like '+5' or '-1' are now accepted.
+            </action>
+            <action type="update" dev="rbri">
+                cssparser: the nth-xxx() pseudo-classes are parsed into a NthPseudoClassCondition; the An+B argument
+                is evaluated by the parser, matching no longer parses the argument string for every element.
+            </action>
+            <action type="fix" dev="rbri">
+                cssparser: lch() and oklch() accept a plain number as hue (e.g. 'oklch(70% 0.1 200)').
+            </action>
+            <action type="fix" dev="rbri">
+                cssparser: Selectors with comments between the simple selectors (e.g. 'div /* c */ p') are no longer dropped.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: String.prototype.trimLeft and trimRight are now aliases of trimStart and trimEnd.
             </action>
