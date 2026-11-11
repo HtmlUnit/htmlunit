@@ -37,8 +37,9 @@ import org.openqa.selenium.WebDriver;
  * The test code is placed in the external script 'test.js'. All policies allow these scripts.
  * </p>
  * <p>
- * HtmlUnit does not load the content of object elements; therefore there are no load and
- * error events (HtmlUnitNYI).
+ * HtmlUnit does not load the content of object elements; therefore there are no load
+ * events (HtmlUnitNYI). Like Firefox, HtmlUnit fires the error event if the object is blocked
+ * when simulating Firefox.
  * </p>
  *
  * @author Ronald Brill
@@ -96,8 +97,6 @@ public class ContentSecurityPolicyObjectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"violation object-src §§URL§§/obj.html enforce", "done"},
             FF = {"error o", "violation object-src §§URL§§/obj.html enforce", "done"},
             FF_ESR = {"error o", "violation object-src §§URL§§/obj.html enforce", "done"})
-    @HtmlUnitNYI(FF = {"violation object-src §§URL§§/obj.html enforce", "done"},
-            FF_ESR = {"violation object-src §§URL§§/obj.html enforce", "done"})
     public void none() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify("object-src 'none'", object("o", "obj.html"), "track('o');\n");
@@ -128,8 +127,6 @@ public class ContentSecurityPolicyObjectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
             FF = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"},
             FF_ESR = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"})
-    @HtmlUnitNYI(FF = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
-            FF_ESR = {"violation object-src http://localhost:§§PORT§§ enforce", "done"})
     public void self_crossOrigin() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify("object-src 'self'", object("o", URL_CROSS_ORIGIN_BASE + "obj.html"), "track('o');\n");
@@ -161,8 +158,6 @@ public class ContentSecurityPolicyObjectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
             FF = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"},
             FF_ESR = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"})
-    @HtmlUnitNYI(FF = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
-            FF_ESR = {"violation object-src http://localhost:§§PORT§§ enforce", "done"})
     public void defaultSrcFallback() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify("default-src 'self'", object("o", URL_CROSS_ORIGIN_BASE + "obj.html"), "track('o');\n");
@@ -206,8 +201,6 @@ public class ContentSecurityPolicyObjectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
             FF = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"},
             FF_ESR = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"})
-    @HtmlUnitNYI(FF = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
-            FF_ESR = {"violation object-src http://localhost:§§PORT§§ enforce", "done"})
     public void meta() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify(HttpHeader.CONTENT_SECURIRY_POLICY, null,
@@ -224,8 +217,6 @@ public class ContentSecurityPolicyObjectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
             FF = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"},
             FF_ESR = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"})
-    @HtmlUnitNYI(FF = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
-            FF_ESR = {"violation object-src http://localhost:§§PORT§§ enforce", "done"})
     public void dynamic() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify("object-src 'self'", "",
@@ -260,9 +251,7 @@ public class ContentSecurityPolicyObjectTest extends WebDriverTestCase {
             FF = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"},
             FF_ESR = {"error o", "violation object-src http://localhost:§§PORT§§ enforce", "done"})
     @HtmlUnitNYI(CHROME = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
-            EDGE = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
-            FF = {"violation object-src http://localhost:§§PORT§§ enforce", "done"},
-            FF_ESR = {"violation object-src http://localhost:§§PORT§§ enforce", "done"})
+            EDGE = {"violation object-src http://localhost:§§PORT§§ enforce", "done"})
     public void dataChanged() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify("object-src 'self'", object("o", "obj.html"),
@@ -298,8 +287,6 @@ public class ContentSecurityPolicyObjectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"violation object-src data enforce", "done"},
             FF = {"error o", "violation object-src data enforce", "done"},
             FF_ESR = {"error o", "violation object-src data enforce", "done"})
-    @HtmlUnitNYI(FF = {"violation object-src data enforce", "done"},
-            FF_ESR = {"violation object-src data enforce", "done"})
     public void dataUrl() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify("object-src 'self'", object("o", "data:text/html,<p>data</p>"), "track('o');\n");

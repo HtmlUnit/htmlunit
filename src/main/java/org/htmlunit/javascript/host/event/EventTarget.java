@@ -83,6 +83,15 @@ public class EventTarget extends HtmlUnitScriptable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * Removes all event listeners and event handlers of this event target
+     * (e.g. done by document.open()).
+     */
+    public void removeAllEventListeners() {
+        eventListenersContainer_ = null;
+    }
+
+    /**
      * Executes the event on this object only (needed for instance for {@code onload} on {@code (i)frame} tags).
      *
      * @param event the event to execute

@@ -14,9 +14,12 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import java.net.MalformedURLException;
+
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlObject;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -42,6 +45,39 @@ public class HTMLObjectElement extends HTMLElement {
     @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
+    }
+
+    /**
+     * Returns the {@code data} property; the url of the data attribute resolved against the
+     * base url of the page (an empty attribute is resolved to the base url, a missing attribute
+     * returns an empty string).
+     * @return the {@code data} property
+     */
+    @JsxGetter
+    public String getData() {
+        final DomElement element = getDomNodeOrDie();
+        final String data = element.getAttributeDirect("data");
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == data) {
+            return "";
+        }
+        if (element.getPage() instanceof HtmlPage page) {
+            try {
+                return page.getFullyQualifiedUrl(data).toExternalForm();
+            }
+            catch (final MalformedURLException e) {
+                return data;
+            }
+        }
+        return data;
+    }
+
+    /**
+     * Sets the {@code data} attribute.
+     * @param data the {@code data} attribute value
+     */
+    @JsxSetter
+    public void setData(final String data) {
+        getDomNodeOrDie().setAttribute("data", data);
     }
 
     /**

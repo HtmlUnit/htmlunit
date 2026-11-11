@@ -875,6 +875,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * Returns the JavaScript object that corresponds to this node if already created; in contrast to
+     * {@link #getScriptableObject()} no new object is created.
+     *
+     * @return the JavaScript object or {@code null}
+     */
+    public HtmlUnitScriptable getScriptableObjectIfCreated() {
+        return scriptObject_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * <p>Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.</p>
      *

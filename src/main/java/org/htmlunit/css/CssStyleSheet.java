@@ -161,6 +161,9 @@ public class CssStyleSheet implements Serializable {
     /** The CSS import rules and their corresponding stylesheets. */
     private final Map<CSSImportRuleImpl, CssStyleSheet> imports_ = new HashMap<>();
 
+    /** True if this (imported) style sheet was not loaded because of the Content-Security-Policy. */
+    private boolean blockedByContentSecurityPolicy_;
+
     /** cache parsed media strings. */
     private static final Map<String, MediaListImpl> MEDIA = Collections.synchronizedMap(new HashMap<>(100));
 
@@ -1270,6 +1273,7 @@ public class CssStyleSheet implements Serializable {
             if (owner_ != null && owner_.getPage() instanceof HtmlPage htmlPage
                     && !ContentSecurityPolicy.allowsExternalStyle(htmlPage, null, UrlUtils.toUrlSafe(url))) {
                 sheet = new CssStyleSheet(owner_, "", url);
+                sheet.blockedByContentSecurityPolicy_ = true;
             }
             else {
                 sheet = loadStylesheet(owner_, null, url);
@@ -1277,6 +1281,32 @@ public class CssStyleSheet implements Serializable {
             imports_.put(importRule, sheet);
         }
         return sheet;
+    }
+
+    /**
+     * Loads all imported style sheets (including nested imports) like the browsers do before
+     * the load event of the link element is fired.
+     *
+     * @return {@code false} if at least one import was blocked by the Content-Security-Policy
+     */
+    public boolean loadImports() {
+        return loadImports(new HashSet<>());
+    }
+
+    private boolean loadImports(final Set<String> alreadyProcessing) {
+        boolean allowed = true;
+        for (final AbstractCSSRuleImpl rule : wrapped_.getCssRules().getRules()) {
+            if (rule instanceof CSSImportRuleImpl importRule) {
+                final CssStyleSheet sheet = getImportedStyleSheet(importRule);
+                if (sheet.blockedByContentSecurityPolicy_) {
+                    allowed = false;
+                }
+                else if (alreadyProcessing.add(sheet.getUri()) && !sheet.loadImports(alreadyProcessing)) {
+                    allowed = false;
+                }
+            }
+        }
+        return allowed;
     }
 
     /**

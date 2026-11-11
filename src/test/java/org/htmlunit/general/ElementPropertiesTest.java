@@ -2571,13 +2571,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
                 + "declare,form,getSVGDocument(),height,hspace,name,reportValidity(),setCustomValidity(),standby,"
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate")
-    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,reportValidity(),setCustomValidity(),"
+    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),data,form,height,name,reportValidity(),setCustomValidity(),"
                     + "validationMessage,validity,width,willValidate",
-            EDGE = "align,border,checkValidity(),form,height,name,reportValidity(),setCustomValidity(),"
+            EDGE = "align,border,checkValidity(),data,form,height,name,reportValidity(),setCustomValidity(),"
                     + "validationMessage,validity,width,willValidate",
-            FF_ESR = "align,border,checkValidity(),form,height,name,reportValidity(),setCustomValidity(),"
+            FF_ESR = "align,border,checkValidity(),data,form,height,name,reportValidity(),setCustomValidity(),"
                     + "validationMessage,validity,width,willValidate",
-            FF = "align,border,checkValidity(),form,height,name,reportValidity(),setCustomValidity(),"
+            FF = "align,border,checkValidity(),data,form,height,name,reportValidity(),setCustomValidity(),"
                     + "validationMessage,validity,width,willValidate")
     public void object() throws Exception {
         test("object");

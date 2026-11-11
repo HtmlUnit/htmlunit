@@ -63,6 +63,7 @@ import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.dom.Selection;
 import org.htmlunit.javascript.host.event.Event;
+import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -470,6 +471,17 @@ public class HTMLDocument extends Document {
             LOG.warn("Function open() called when document is already open.");
         }
         writeInCurrentDocument_ = false;
+
+        // like the browsers, document.open() removes all event listeners and handlers
+        // of the document, all its nodes and the window
+        for (final DomNode node : page.getDescendants()) {
+            if (node.getScriptableObjectIfCreated() instanceof EventTarget target) {
+                target.removeAllEventListeners();
+            }
+        }
+        removeAllEventListeners();
+        getWindow().removeAllEventListeners();
+
         final WebWindow ww = getWindow().getWebWindow();
         if (ww instanceof FrameWindow window
                 && UrlUtils.ABOUT_BLANK.equals(getPage().getUrl().toExternalForm())) {

@@ -384,8 +384,17 @@ public class HtmlLink extends HtmlElement {
 
             // fire the load/error event after the stylesheet is stored; otherwise
             // an event handler accessing the styles would load the stylesheet again
-            final String event = pendingStylesheetEvent_;
+            String event = pendingStylesheetEvent_;
             pendingStylesheetEvent_ = null;
+
+            // like the browsers, the error event is fired if an @import is blocked by the
+            // Content-Security-Policy (the imports are loaded before the load event)
+            if (Event.TYPE_LOAD.equals(event) && sheet_ != null
+                    && getPage() instanceof HtmlPage htmlPage && htmlPage.getContentSecurityPolicy() != null
+                    && !sheet_.loadImports()) {
+                event = Event.TYPE_ERROR;
+            }
+
             if (event != null) {
                 executeEvent(getPage().getWebClient(), event);
             }

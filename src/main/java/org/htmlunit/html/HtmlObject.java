@@ -14,11 +14,16 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.CSP_OBJECT_BLOCKED_FIRES_ERROR;
+
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.WebClient;
+import org.htmlunit.javascript.PostponedAction;
+import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLObjectElement;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
@@ -265,7 +270,7 @@ public class HtmlObject extends HtmlElement implements ValidatableHtmlElement {
     @Override
     protected void onAddedToPage() {
         super.onAddedToPage();
-        ContentSecurityPolicy.allowsObject(this, getAttributeDirect("data"));
+        checkContentSecurityPolicy(getAttributeDirect("data"));
     }
 
     /**
@@ -283,7 +288,40 @@ public class HtmlObject extends HtmlElement implements ValidatableHtmlElement {
                 notifyAttributeChangeListeners, notifyMutationObservers);
 
         if (changed && isAttachedToPage()) {
-            ContentSecurityPolicy.allowsObject(this, value);
+            checkContentSecurityPolicy(value);
+        }
+    }
+
+    /**
+     * Checks the url against the Content-Security-Policy (object-src); if the url is blocked,
+     * Firefox fires the error event (async).
+     */
+    private void checkContentSecurityPolicy(final String data) {
+        if (ContentSecurityPolicy.allowsObject(this, data)) {
+            return;
+        }
+
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+        if (htmlPage == null || !hasFeature(CSP_OBJECT_BLOCKED_FIRES_ERROR)) {
+            return;
+        }
+
+        final WebClient client = htmlPage.getWebClient();
+        if (!client.isJavaScriptEngineEnabled()) {
+            return;
+        }
+
+        final PostponedAction action = new PostponedAction(htmlPage, "HtmlObject.blocked") {
+            @Override
+            public void execute() {
+                HtmlObject.this.fireEvent(Event.TYPE_ERROR);
+            }
+        };
+        if (READY_STATE_LOADING.equals(htmlPage.getReadyState())) {
+            htmlPage.addAfterLoadAction(action);
+        }
+        else {
+            client.getJavaScriptEngine().addPostponedAction(action);
         }
     }
 

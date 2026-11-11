@@ -52,6 +52,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     CSP_NONCE_HIDING_ENFORCED_ONLY,
 
+    /** The error event is fired at an object element if the data url is blocked by the object-src directive. */
+    @BrowserFeature({FF, FF_ESR})
+    CSP_OBJECT_BLOCKED_FIRES_ERROR,
+
     /**
      * The Content-Security-Policy violation report (report-uri) uses the Firefox format:
      * the keys are sorted, the report uris of the original policy are absolute, the script-sample

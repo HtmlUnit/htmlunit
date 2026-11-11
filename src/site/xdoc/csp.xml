@@ -98,7 +98,8 @@
                     <td>
                         inline <code>&lt;style&gt;</code> elements (parser inserted and created by JavaScript),
                         stylesheets loaded by <code>&lt;link rel="stylesheet"&gt;</code> (the <code>error</code>
-                        event is fired for blocked stylesheets) and <code>@import</code> rules; blocked
+                        event is fired for blocked stylesheets) and <code>@import</code> rules (the
+                        <code>error</code> event is fired at the link if an import is blocked); blocked
                         styles are not applied
                     </td>
                 </tr>
@@ -148,7 +149,8 @@
                         <code>&lt;embed&gt;</code> elements (also if added by script or if the attribute is
                         changed later). HtmlUnit does not load the content of these elements; the url is
                         checked anyway to report the violation (cross origin urls are reported as origin).
-                        There are no <code>load</code> and <code>error</code> events.
+                        There is no <code>load</code> event; when simulating Firefox the <code>error</code>
+                        event is fired at blocked <code>&lt;object&gt;</code> elements.
                     </td>
                 </tr>
                 <tr>

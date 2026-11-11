@@ -515,16 +515,12 @@ public class ContentSecurityPolicyStyleTest extends WebDriverTestCase {
 
     /**
      * @import inside an external stylesheet; the browsers fire the error event at the link if
-     * the import is blocked. HtmlUnit fires the load event before the stylesheet is parsed.
+     * the import is blocked.
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"error", "rgb(0, 0, 0)", "violation style-src-elem §§URL§§/imported.css enforce"})
-    @HtmlUnitNYI(CHROME = {"load", "rgb(0, 0, 0)", "violation style-src-elem §§URL§§/imported.css enforce"},
-            EDGE = {"load", "rgb(0, 0, 0)", "violation style-src-elem §§URL§§/imported.css enforce"},
-            FF = {"load", "rgb(0, 0, 0)", "violation style-src-elem §§URL§§/imported.css enforce"},
-            FF_ESR = {"load", "rgb(0, 0, 0)", "violation style-src-elem §§URL§§/imported.css enforce"})
     public void import_fromLink() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT2);
         setCss(URL_FIRST, "style.css", "@import url('" + URL_CROSS_ORIGIN_BASE + "imported.css');");

@@ -1189,4 +1189,68 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         loadPage2(html);
         verifyWindowName2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * Document.open() removes the event listeners of the document and the window.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "done"})
+    public void openRemovesListenersFrame() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var frame = document.createElement('iframe');\n"
+            + "  document.body.appendChild(frame);\n"
+            + "  var doc = frame.contentDocument;\n"
+            + "  var win = frame.contentWindow;\n"
+            + "  doc.addEventListener('custom', function() { log('doc listener'); });\n"
+            + "  win.addEventListener('custom', function() { log('win listener'); });\n"
+            + "  doc.open();\n"
+            + "  doc.write('<html><body><p>written</p></body></html>');\n"
+            + "  doc.close();\n"
+            + "  log(doc === frame.contentDocument);\n"
+            + "  log(win === frame.contentWindow);\n"
+            + "  doc.dispatchEvent(new Event('custom'));\n"
+            + "  frame.contentWindow.dispatchEvent(new Event('custom'));\n"
+            + "  log('done');\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Document.open() removes the event listeners of the document, the window
+     * and all nodes of the document.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "done"})
+    public void openRemovesListeners() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var doc = document;\n"
+            + "  window.name = '';\n"
+            + "  doc.addEventListener('custom', function() { window.name += 'doc listener\u00a7'; });\n"
+            + "  window.addEventListener('custom', function() { window.name += 'win listener\u00a7'; });\n"
+            + "  var div = document.getElementById('d');\n"
+            + "  div.addEventListener('custom', function() { window.name += 'div listener\u00a7'; });\n"
+            + "  doc.open();\n"
+            + "  doc.write('<html><body><p>written</p></body></html>');\n"
+            + "  doc.close();\n"
+            + "  window.name += (doc === document) + '\u00a7';\n"
+            + "  doc.dispatchEvent(new Event('custom'));\n"
+            + "  window.dispatchEvent(new Event('custom'));\n"
+            + "  div.dispatchEvent(new Event('custom'));\n"
+            + "  window.name += 'done\u00a7';\n"
+            + "}\n"
+            + "</script></head><body onload='setTimeout(test, 10)'><div id='d'></div></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
 }

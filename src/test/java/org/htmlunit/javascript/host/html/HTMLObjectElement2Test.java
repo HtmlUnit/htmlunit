@@ -301,4 +301,42 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The data property returns the resolved url of the data attribute.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§page.html", "", "null", "§§URL§§sub/page.html", "sub/page.html", "§§URL§§", "", ""})
+    public void data() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var o1 = document.getElementById('o1');\n"
+            + "    log(o1.data);\n"
+            + "    var o2 = document.getElementById('o2');\n"
+            + "    log(o2.data);\n"
+            + "    log(o2.getAttribute('data'));\n"
+            + "    o2.data = 'sub/page.html';\n"
+            + "    log(o2.data);\n"
+            + "    log(o2.getAttribute('data'));\n"
+            + "    o2.data = '';\n"
+            + "    log(o2.data);\n"
+            + "    log(o2.getAttribute('data'));\n"
+            + "    log(document.createElement('object').data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <object id='o1' data='page.html'></object>\n"
+            + "  <object id='o2'></object>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        getMockWebConnection().setDefaultResponse("<p>object</p>", MimeType.TEXT_HTML);
+        loadPageVerifyTitle2(html);
+    }
 }

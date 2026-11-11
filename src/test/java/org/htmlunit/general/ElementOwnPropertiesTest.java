@@ -9806,16 +9806,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "standby[GSCE],type[GSCE],useMap[GSCE],validationMessage[GCE],validity[GCE],vspace[GSCE],"
                 + "width[GSCE],"
                 + "willValidate[GCE]")
-    @HtmlUnitNYI(CHROME = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
+    @HtmlUnitNYI(CHROME = "align[GSCE],border[GSCE],checkValidity(),constructor(),data[GSCE],form[GCE],height[GSCE],"
                 + "name[GSCE],reportValidity(),setCustomValidity(),validationMessage[GCE],"
                 + "validity[GCE],width[GSCE],willValidate[GCE]",
-            EDGE = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
+            EDGE = "align[GSCE],border[GSCE],checkValidity(),constructor(),data[GSCE],form[GCE],height[GSCE],"
                 + "name[GSCE],reportValidity(),setCustomValidity(),validationMessage[GCE],"
                 + "validity[GCE],width[GSCE],willValidate[GCE]",
-            FF_ESR = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
+            FF_ESR = "align[GSCE],border[GSCE],checkValidity(),constructor(),data[GSCE],form[GCE],height[GSCE],"
                 + "name[GSCE],reportValidity(),setCustomValidity(),validationMessage[GCE],"
                 + "validity[GCE],width[GSCE],willValidate[GCE]",
-            FF = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
+            FF = "align[GSCE],border[GSCE],checkValidity(),constructor(),data[GSCE],form[GCE],height[GSCE],"
                 + "name[GSCE],reportValidity(),setCustomValidity(),validationMessage[GCE],"
                 + "validity[GCE],width[GSCE],willValidate[GCE]")
     public void object() throws Exception {
