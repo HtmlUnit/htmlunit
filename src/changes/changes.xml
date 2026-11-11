@@ -8,18 +8,24 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
-            <action type="add" dev="rbri">
-                Content-Security-Policy: the redirect targets of stylesheets (including @import), scripts and images are
-                checked against the policy; upgrade-insecure-requests upgrades the redirect targets also.
+            <action type="fix" dev="RhinoTeam">
+                core-js: String.prototype.trimLeft and trimRight are now aliases of trimStart and trimEnd.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: increment/decrement of super properties with non-constant element expressions fixed.
             </action>
             <action type="add" dev="rbri">
-                Content-Security-Policy: support for the media-src directive; the urls of audio, video, source and
+                csp: the redirect targets of stylesheets (including @import), scripts and images are
+                checked against the policy; upgrade-insecure-requests also upgrades the redirect targets.
+            </action>
+            <action type="add" dev="rbri">
+                csp: support for the media-src directive; the urls of audio, video, source and
                 track elements are checked (the violation is reported, HtmlUnit does not load media).
             </action>
             <action type="add" dev="rbri">
-                Content-Security-Policy: support for the upgrade-insecure-requests directive; http/ws urls of
-                subresources, frames, form submissions and same host navigations are upgraded to https/wss
-                (like the browsers, not for loopback hosts and not for report only policies).
+                csp: support for the upgrade-insecure-requests directive; http/ws urls of
+                subresources, frames, form submissions and same-host navigations are upgraded to https/wss
+                (like the browsers, not for loopback hosts and not for report-only policies).
             </action>
             <action type="add" dev="rbri">
                 HTMLObjectElement.data implemented.
@@ -28,16 +34,16 @@
                 document.open() removes all event listeners and handlers of the document, its nodes and the window.
             </action>
             <action type="fix" dev="rbri">
-                Content-Security-Policy: the error event is fired at a link if an @import of the stylesheet is blocked;
+                csp: the error event is fired at a link if an @import of the stylesheet is blocked;
                 when simulating Firefox, the error event is fired at blocked object elements.
             </action>
             <action type="add" dev="rbri">
-                Content-Security-Policy: the nonce property of html and svg elements is supported; like the browsers,
-                the nonce attribute is hidden if the page has a policy delivered by a header and elements
+                csp: the nonce property of HTML and SVG elements is supported; like the browsers,
+                the nonce attribute is hidden if the page has a policy delivered by a header, and elements
                 with attributes containing '&lt;script' or '&lt;style' are not nonceable.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: Only put XML constructor properties on the XML constructor.
+                core-js: only put XML constructor properties on the XML constructor.
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Number.prototype.toString(radix) dropping the sign between -1 and 0 fixed.
@@ -46,82 +52,82 @@
                 websocket-client: jetty updated to 12.1.15.
             </action>
             <action type="add" dev="rbri">
-                Content-Security-Policy: support for the object-src directive; the urls of object and embed
+                csp: support for the object-src directive; the urls of object and embed
                 elements are checked (the violation is reported, HtmlUnit does not load the content).
             </action>
             <action type="add" dev="rbri">
-                CSP: violation reports are sent to the uris of the report-uri directive
+                csp: violation reports are sent to the URIs of the report-uri directive
                 (POST, application/csp-report). Like the browsers, report-uri is ignored if the policy is delivered
-                by a meta element or contains a report-to directive; when simulating Firefox the Firefox report format is used.
+                by a meta element or contains a report-to directive; when simulating Firefox, the Firefox report format is used.
             </action>
             <action type="add" dev="rbri">
-                CSP: support for the img-src directive; blocked images are not downloaded, the error event is fired.
+                csp: support for the img-src directive; blocked images are not downloaded and the error event is fired.
             </action>
             <action type="add" dev="rbri">
-                CSP: support for the worker-src directive (with fallback to child-src, script-src and default-src);
-                blocked workers are not started, the error event is fired.
+                csp: support for the worker-src directive (with fallback to child-src, script-src and default-src);
+                blocked workers are not started and the error event is fired.
             </action>
             <action type="fix" dev="rbri">
                 Worker: a worker created inside a function was not working (no messages delivered); Worker.onerror added.
             </action>
             <action type="add" dev="rbri">
-                CSP: support for the base-uri directive; a blocked base url is ignored.
+                csp: support for the base-uri directive; a blocked base url is ignored.
             </action>
             <action type="add" dev="rbri">
-                CSP: support for the style-src, style-src-elem and style-src-attr directives; style elements,
-                style attributes, stylesheet links and @import rules are checked against the policy,
+                csp: support for the style-src, style-src-elem and style-src-attr directives; style elements,
+                style attributes, stylesheet links and @import rules are checked against the policy and
                 blocked styles are not applied. Like the browsers, CSSOM changes are not checked.
             </action>
             <action type="fix" dev="rbri">
                 HtmlLink: the load/error event of a stylesheet link is fired after the stylesheet is stored;
-                accessing the styles from the event handler was loading the stylesheet again.
+                accessing the styles from the event handler loaded the stylesheet again.
             </action>
             <action type="add" dev="rbri">
-                CSP: documents with a local scheme url (about:blank, data:, blob:) inherit a copy of the policy
+                csp: documents with a local scheme url (about:blank, data:, blob:) inherit a copy of the policy
                 of the parent document or the opener; documents written by document.open()/write()/close()
                 and the results of javascript: urls keep the policy of the replaced document.
             </action>
             <action type="fix" dev="rbri">
-                CSP: eval() and new Function() are checked against the policy of the window they belong to
+                csp: eval() and new Function() are checked against the policy of the window they belong to
                 (e.g. frame.contentWindow.eval()).
             </action>
             <action type="fix" dev="rbri">
                 XMLHttpRequest: requests from about:blank documents use the origin of the creator (parent or opener).
             </action>
             <action type="update" dev="rbri">
-                core-js: new hook Context.ensureCanCompileStrings() called by eval and the Function constructors.
+                core-js: new hook Context.ensureCanCompileStrings(), called by eval and the Function constructors.
             </action>
             <action type="add" dev="rbri">
-                CSP: support for the frame-src directive (with fallback to child-src and default-src);
-                frames and iframes (including redirects) are checked against the policy, blocked frames show about:blank.
+                csp: support for the frame-src directive (with fallback to child-src and default-src);
+                frames and iframes (including redirects) are checked against the policy; blocked frames show about:blank.
             </action>
             <action type="fix" dev="rbri">
-                CSP: policies from meta elements ignore the directives frame-ancestors, sandbox and report-uri
+                csp: policies from meta elements ignore the directives frame-ancestors, sandbox and report-uri
                 (e.g. a meta element with 'sandbox' was blocking all scripts); commas in the content are
                 handled like the browsers do (Chrome splits into several policies, Firefox parses one policy).
             </action>
             <action type="update" dev="rbri">
-                htmlunit-csp: meta-aware CSP list parsing, invalid nonces and hashes are rejected.
+                htmlunit-csp: meta-aware parsing of CSP lists; invalid nonces and hashes are rejected.
             </action>
             <action type="add" dev="rbri">
-                CSP: support for the form-action directive; form submissions (including formaction,
+                csp: support for the form-action directive; form submissions (including formaction,
                 javascript: urls and redirects) are checked against the policy.
             </action>
             <action type="add" dev="rbri">
-                CSP: new ContentSecurityPolicyViolationListener (WebClient.setContentSecurityPolicyViolationListener())
-                to get informed about all violations (enforced and report only) from Java code;
+                csp: new ContentSecurityPolicyViolationListener (WebClient.setContentSecurityPolicyViolationListener())
+                to be informed about all violations (enforced and report-only) from Java code;
                 CollectingContentSecurityPolicyViolationListener collects them, e.g. to make your tests fail.
             </action>
             <action type="add" dev="rbri">
                 Documentation: new page 'Content Security Policy' describing the CSP support in detail.
             </action>
             <action type="add" dev="rbri" issue="#638">
-                Content-Security-Policy: WebSocket and navigator.sendBeacon() support the connect-src directive
-                (with default-src as fallback); like in browsers ws: and wss: urls are matched without mapping
+                csp: WebSocket and navigator.sendBeacon() support the connect-src directive
+                (with default-src as fallback); like in browsers, ws: and wss: urls are matched without mapping
                 them to http: and https:. A blocked WebSocket fails (error and close event 1006), a blocked beacon is not sent.
             </action>
             <action type="update" dev="rbri">
-                csp: new Policy.allowsConnection(source, origin, mapWebSocketScheme) to match ws: and wss: urls
+                htmlunit-csp: new Policy.allowsConnection(source, origin, mapWebSocketScheme) to match ws: and wss: urls
                 like browsers (without mapping them to http: and https:); the existing method keeps the spec behavior.
             </action>
             <action type="fix" dev="rbri" issue="#1188" due-to="Vladimir Babin">
@@ -129,51 +135,45 @@
                 and a false value only removes it, matching the DOM standard.
             </action>
             <action type="add" dev="rbri" issue="#638">
-                Content-Security-Policy: XMLHttpRequest supports the connect-src directive (with default-src as fallback);
+                csp: XMLHttpRequest supports the connect-src directive (with default-src as fallback);
                 the request url and all redirect targets are checked, blocked requests fail with a network error.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: Fix String.prototype.indexOf() with an empty search and negative position.
+                core-js: fix String.prototype.indexOf() with an empty search and negative position.
             </action>
             <action type="fix" dev="rbri">
-                core-js: Proxy constructor capability no longer lost on revocation.
+                core-js: the Proxy constructor capability is no longer lost on revocation.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: Fix String.prototype.indexOf() with an empty search and negative position.
+                core-js: fix the multiplication of '0' by a negative integer.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: Fix for multiplication of a '0'' by a negative integer.
+                core-js: give generator methods a prototype property.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: Give generator methods a prototype property.
+                core-js: use ToNumeric for ++ and -- on super properties to also support BigInt.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: Use ToNumeric for ++ and -- on super properties to support BigInteger also.
+                core-js: arrow functions no longer have a prototype property in compiled mode.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: ArrowFunctions should not have prototype property in compiled mode.
-            </action>
-            <action type="fix" dev="RhinoTeam">
-                core-js: Fix NullPointerException when reading "stack" of an error with a null prototype.
+                core-js: fix NullPointerException when reading "stack" of an error with a null prototype.
             </action>
             <action type="add" dev="rbri" issue="#638">
-                Content-Security-Policy support for scripts (script-src, script-src-elem, script-src-attr, default-src;
+                csp: support for scripts (script-src, script-src-elem, script-src-attr, default-src;
                 nonces, hashes, 'unsafe-inline', 'unsafe-eval', 'unsafe-hashes', 'strict-dynamic'), including
                 policies from meta elements, Content-Security-Policy-Report-Only and the securitypolicyviolation event
                 (with all properties).
             </action>
             <action type="fix" dev="rbri">
-                Content-Security-Policy frame-ancestors is now checked against all ancestors of a frame
-                (not only the parent), all Content-Security-Policy headers (including comma separated policies)
+                csp: frame-ancestors is now checked against all ancestors of a frame
+                (not only the parent), all Content-Security-Policy headers (including comma-separated policies)
                 are used, and X-Frame-Options supports SAMEORIGIN and is ignored if a policy contains frame-ancestors.
             </action>
             <action type="update" dev="rbri">
-                Unit tests: replaced verify(...) by assertEquals(expected, supplier, maxWaitTime), which retries until the
-                expected value is returned or the time is up; helps to get rid of fixed waits.
-            </action>
-            <action type="update" dev="rbri">
-                Unit tests: new assertEquals(..., maxWaitTime) variants for String, int and String[]/List results;
-                they retry until the expected value is returned or the time is up, replacing fixed waits and verify(...).
+                Unit tests: verify(...) replaced by new assertEquals(..., maxWaitTime) variants (String, int,
+                String[]/List and supplier based); they retry until the expected value is returned or the time
+                is up, which helps to get rid of fixed waits.
             </action>
             <action type="fix" dev="rbri" issue="#8">
                 Replacing the page of a window now waits for the currently running JavaScript job (max 10s);
@@ -182,26 +182,26 @@
             <action type="fix" dev="Vidya m">
                 XMLHttpRequest: the CORS preflight response is checked like in real browsers; requests with
                 credentials need the exact origin and Access-Control-Allow-Credentials, the wildcard '*' is not
-                supported for them and methods other than GET, HEAD and POST have to be listed
+                supported for them, and methods other than GET, HEAD and POST have to be listed
                 in Access-Control-Allow-Methods.
             </action>
             <action type="fix" dev="rbri">
-                Content-Security-Policy frame-ancestors: no NullPointerException if the url of the parent frame
+                csp: frame-ancestors: no NullPointerException if the url of the parent frame
                 is not a network url (e.g. data:); about:blank frames inherit the origin of their parent.
             </action>
             <action type="fix" dev="rbri" issue="#363">
-                The css math functions calc(), min(), max() and clamp() are evaluated when calculating
+                The CSS math functions calc(), min(), max() and clamp() are evaluated when calculating
                 the width and height of elements (instead of 0px).
             </action>
             <action type="fix" dev="rbri">
-                cssparser: calc() the + and - operators have to be surrounded by whitespace.
+                cssparser: in calc(), the + and - operators have to be surrounded by whitespace.
             </action>
             <action type="add" dev="rbri">
                 cssparser: min(), max() and clamp() are parsed as math functions (new LexicalUnitTypes FUNCTION_MIN,
                 FUNCTION_MAX and FUNCTION_CLAMP).
             </action>
             <action type="add" dev="rbri" issue="#607">
-                Support for the autofocus attribute; after the page is loaded the first focusable element
+                Support for the autofocus attribute; after the page is loaded, the first focusable element
                 with the autofocus attribute gets the focus.
             </action>
             <action type="fix" dev="rbri">
@@ -243,7 +243,7 @@
             </action>
             <action type="add" dev="rbri">
                 DOMMatrixReadOnly: scale(), scale3d(), scaleNonUniform(), rotateFromVector() and transformPoint()
-                added; rotate() supports the rotation around all three axes (rotX, rotY, rotZ).
+                added; rotate() supports rotation around all three axes (rotX, rotY, rotZ).
             </action>
             <action type="add" dev="rbri">
                 DOMMatrix: multiplySelf(), preMultiplySelf(), translateSelf(), scaleSelf(), scale3dSelf(), rotateSelf(),
@@ -257,8 +257,8 @@
                 (e.g. new DOMMatrix('translate(10px, 20px) rotate(45deg)')) and for all iterables (e.g. typed arrays).
             </action>
             <action type="fix" dev="rbri">
-                DOMMatrixReadOnly/DOMMatrix: multiply() and rotateAxisAngle() with a (0, 0, 0) axis are no longer
-                returning the identity matrix but a copy of the matrix; multiply() supports objects with
+                DOMMatrixReadOnly/DOMMatrix: multiply() and rotateAxisAngle() with a (0, 0, 0) axis no longer
+                return the identity matrix but a copy of the matrix; multiply() supports objects with
                 matrix properties (DOMMatrixInit).
             </action>
             <action type="fix" dev="rbri">
@@ -266,27 +266,26 @@
             </action>
             <action type="fix" dev="rbri">
                 DOMMatrix: setting one of the 3D values (m13, m14, m23, m24, m31, m32, m33, m34, m43, m44)
-                to a non default value makes the matrix 3D (is2D is false).
+                to a non-default value makes the matrix 3D (is2D is false).
             </action>
             <action type="fix" dev="rbri">
                 DOMMatrixReadOnly/DOMMatrix: some NaN and Infinity handling fixed
                 (e.g. translate(NaN, NaN) or a constructor array containing undefined).
             </action>
             <action type="fix" dev="rbri">
-                CanvasRenderingContext2D.fill() now fills all sub paths of the current path as one shape;
-                the 'evenodd' fill rule and holes made of sub paths drawn in the opposite direction work.
+                CanvasRenderingContext2D.fill() now fills all subpaths of the current path as one shape;
+                the 'evenodd' fill rule and holes made of subpaths drawn in the opposite direction work.
             </action>
             <action type="add" dev="rbri">
-                CanvasRenderingContext2D textAlign and textBaseline properties added; both are used by
+                CanvasRenderingContext2D: textAlign and textBaseline properties added; both are used by
                 fillText() and are part of the state saved by save() and restored by restore().
             </action>
             <action type="fix" dev="rbri">
-                neko: HTMLWriterFilter; the ampersand in attribute values is now written as '&amp;amp;'. The parser decodes
+                neko: HTMLWriterFilter: the ampersand in attribute values is now written as '&amp;amp;'. The parser decodes
                 character references in attribute values, so a parse-serialize-parse round trip decoded them twice and
                 could turn an inert value into e.g. a javascript: URL.
             </action>
         </release>
-
 
         <release version="5.7.0" date="November 02, 2026" description="Firefox 159, Firefox ESR 153, Chrome/Edge 156, Security, Serialization, Bugfixes">
             <action type="update" dev="Vidya m">
