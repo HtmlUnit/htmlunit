@@ -16,6 +16,7 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.CSP_META_SINGLE_POLICY;
+import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_HIDING_ENFORCED_ONLY;
 import static org.htmlunit.BrowserVersionFeatures.CSP_REPORT_FIREFOX_FORMAT;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
@@ -888,12 +889,63 @@ public final class ContentSecurityPolicy implements Serializable {
                 documentUrl(page), element.getStartLineNumber(), element.getStartColumnNumber());
     }
 
+    /**
+     * Returns the nonce of the element (the nonce slot, not the maybe hidden attribute);
+     * empty if the element has no nonce or is not nonceable.
+     */
     private static Optional<String> nonce(final DomElement element) {
-        final String nonce = element.getAttributeDirect("nonce");
-        if (ATTRIBUTE_NOT_DEFINED == nonce) {
+        final String nonce = element.getNonce();
+        if (nonce.isEmpty() || !isNonceable(element)) {
             return Optional.empty();
         }
         return Optional.of(nonce);
+    }
+
+    /**
+     * Spec 'is element nonceable': elements with an attribute name or value containing
+     * '&lt;script' or '&lt;style' are not nonceable (protection against dangling markup).
+     */
+    private static boolean isNonceable(final DomElement element) {
+        for (final DomAttr attr : element.getAttributesMap().values()) {
+            if (containsScriptOrStyle(attr.getName()) || containsScriptOrStyle(attr.getValue())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean containsScriptOrStyle(final String value) {
+        final String lower = value.toLowerCase(Locale.ROOT);
+        return lower.contains("<script") || lower.contains("<style");
+    }
+
+    /**
+     * Nonce hiding: if the page has a policy delivered by a header, the nonce attribute of
+     * an element added to the page is replaced by an empty string (the nonce IDL attribute
+     * still returns the nonce). Firefox does this only for enforced policies.
+     *
+     * @param element the element added to the page
+     */
+    public static void hideNonceIfNeeded(final DomElement element) {
+        final HtmlPage page = element.getHtmlPageOrNull();
+        if (page == null) {
+            return;
+        }
+        final ContentSecurityPolicy csp = page.getContentSecurityPolicy();
+        if (csp == null) {
+            return;
+        }
+        if (csp.enforced_.isEmpty()
+                && (csp.reportOnly_.isEmpty()
+                        || page.getWebClient().getBrowserVersion().hasFeature(CSP_NONCE_HIDING_ENFORCED_ONLY))) {
+            return;
+        }
+
+        final String nonce = element.getAttributeDirect(DomElement.NONCE_ATTRIBUTE);
+        if (ATTRIBUTE_NOT_DEFINED == nonce || nonce.isEmpty()) {
+            return;
+        }
+        element.hideNonce();
     }
 
     /**

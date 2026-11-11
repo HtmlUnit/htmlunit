@@ -724,6 +724,24 @@ public class HTMLElement extends Element {
     }
 
     /**
+     * Returns the {@code nonce} property.
+     * @return the {@code nonce} property
+     */
+    @JsxGetter
+    public String getNonce() {
+        return getDomNodeOrDie().getNonce();
+    }
+
+    /**
+     * Sets the {@code nonce} property; the nonce attribute is not changed.
+     * @param nonce the {@code nonce} property
+     */
+    @JsxSetter
+    public void setNonce(final String nonce) {
+        getDomNodeOrDie().setNonce(nonce);
+    }
+
+    /**
      * Returns the {@code dir} property.
      * @return the {@code dir} property
      */

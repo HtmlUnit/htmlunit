@@ -90,6 +90,9 @@ public class DomElement extends DomNamespaceNode implements Element {
     /** src. */
     public static final String SRC_ATTRIBUTE = "src";
 
+    /** The "nonce" attribute. */
+    public static final String NONCE_ATTRIBUTE = "nonce";
+
     /** value. */
     public static final String VALUE_ATTRIBUTE = "value";
 
@@ -123,6 +126,9 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Whether the Mouse is currently over this element or not.
      */
     private boolean mouseOver_;
+
+    /** The internal nonce slot; null if the slot follows the nonce attribute. */
+    private String nonce_;
 
     /**
      * Creates an instance of a DOM element that can have a namespace.
@@ -486,6 +492,9 @@ public class DomElement extends DomNamespaceNode implements Element {
     @Override
     public void removeAttribute(final String attributeName) {
         attributes_.remove(attributeName);
+        if (NONCE_ATTRIBUTE.equals(attributeName)) {
+            nonce_ = null;
+        }
     }
 
     /**
@@ -583,6 +592,11 @@ public class DomElement extends DomNamespaceNode implements Element {
         newAttr.setParentNode(this);
         attributes_.put(qualifiedName, newAttr);
 
+        if (namespaceURI == null && NONCE_ATTRIBUTE.equals(qualifiedName)) {
+            // the nonce slot follows the attribute again
+            nonce_ = null;
+        }
+
         if (namespaceURI == null && "style".equals(qualifiedName)) {
             checkStyleAttribute(attributeValue);
         }
@@ -593,6 +607,60 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
             namespaces_.put(namespaceURI, newAttr.getPrefix());
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     * Hides the nonce attribute if required by the Content-Security-Policy.
+     */
+    @Override
+    protected void onAddedToPage() {
+        ContentSecurityPolicy.hideNonceIfNeeded(this);
+        super.onAddedToPage();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the value of the internal nonce slot (the {@code nonce} IDL attribute); this is
+     * the value of the nonce attribute or the value set by script. The nonce slot keeps the
+     * value also if the nonce attribute is hidden (Content-Security-Policy).
+     *
+     * @return the nonce or an empty string
+     */
+    public String getNonce() {
+        if (nonce_ != null) {
+            return nonce_;
+        }
+        final String nonce = getAttributeDirect(NONCE_ATTRIBUTE);
+        if (ATTRIBUTE_NOT_DEFINED == nonce) {
+            return "";
+        }
+        return nonce;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets the value of the internal nonce slot (the {@code nonce} IDL attribute); the
+     * nonce attribute is not changed.
+     *
+     * @param nonce the new nonce
+     */
+    public void setNonce(final String nonce) {
+        nonce_ = nonce;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Nonce hiding: the value of the nonce attribute is replaced by an empty string,
+     * the nonce slot keeps the value.
+     */
+    public void hideNonce() {
+        final String nonce = getNonce();
+        setAttribute(NONCE_ATTRIBUTE, "");
+        nonce_ = nonce;
     }
 
     /**

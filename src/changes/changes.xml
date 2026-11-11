@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="add" dev="rbri">
+                Content-Security-Policy: the nonce property of html and svg elements is supported; like the browsers,
+                the nonce attribute is hidden if the page has a policy delivered by a header and elements
+                with attributes containing '&lt;script' or '&lt;style' are not nonceable.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Only put XML constructor properties on the XML constructor.
             </action>

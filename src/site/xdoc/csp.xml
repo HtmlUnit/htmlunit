@@ -214,6 +214,18 @@
                 <ul>
                     <li><code>'unsafe-inline'</code> is ignored if the directive contains a nonce or a hash.</li>
                     <li>
+                        The nonce is taken from the <code>nonce</code> property of the element (it can be set by
+                        script without changing the attribute). If the page has a policy delivered by a header,
+                        the <code>nonce</code> attribute is hidden when the element is added to the page
+                        (<code>getAttribute('nonce')</code> returns an empty string, the property still
+                        returns the nonce); like Firefox, report only policies do not hide the nonce when
+                        simulating Firefox.
+                    </li>
+                    <li>
+                        Elements having an attribute name or value containing <code>&lt;script</code> or
+                        <code>&lt;style</code> are not nonceable (the nonce is ignored).
+                    </li>
+                    <li>
                         With <code>'strict-dynamic'</code> scripts created by a trusted script are allowed;
                         host sources and parser inserted scripts without nonce or hash are blocked.
                     </li>
@@ -395,10 +407,6 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                     <code>data:</code>/<code>blob:</code> workers); <code>importScripts()</code> is not checked
                     and <code>eval()</code> inside a worker is checked against the policy of the page.
                     Shared and service workers are not supported by HtmlUnit.
-                </li>
-                <li>
-                    The <code>nonce</code> property of elements is not supported; use the <code>nonce</code>
-                    attribute (e.g. <code>link.setAttribute('nonce', '...')</code>).
                 </li>
                 <li>Redirects of stylesheets are not checked against <code>style-src-elem</code>.</li>
                 <li>

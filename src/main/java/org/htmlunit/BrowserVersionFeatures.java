@@ -46,6 +46,13 @@ public enum BrowserVersionFeatures {
     CSP_META_SINGLE_POLICY,
 
     /**
+     * The nonce attribute is only hidden if the page has an enforced policy delivered by a header
+     * (not for report only policies).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    CSP_NONCE_HIDING_ENFORCED_ONLY,
+
+    /**
      * The Content-Security-Policy violation report (report-uri) uses the Firefox format:
      * the keys are sorted, the report uris of the original policy are absolute, the script-sample
      * is only included if not empty and the column-number is always included.
