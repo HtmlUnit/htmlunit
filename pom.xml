@@ -51,7 +51,7 @@
         <htmlunit-xpath.version>5.7.0</htmlunit-xpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
-        <commons-lang3.version>3.21.0</commons-lang3.version>
+        <commons-lang3.version>3.22.0</commons-lang3.version>
         <commons-io.version>2.22.0</commons-io.version>
         <commons-logging.version>1.4.0</commons-logging.version>
         <!--brotli.version>0.1.2</brotli.version-->
