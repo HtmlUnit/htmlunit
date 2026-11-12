@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -59,7 +60,7 @@ import org.htmlunit.util.StringUtils;
 public class AwtRenderingBackend implements RenderingBackend {
 
     private static final Log LOG = LogFactory.getLog(AwtRenderingBackend.class);
-    private static int ID_GENERATOR_;
+    private static final AtomicInteger ID_GENERATOR = new AtomicInteger();
 
     private static final Map<String, Color> KNOWN_COLORS = new HashMap<>();
 
@@ -242,17 +243,13 @@ public class AwtRenderingBackend implements RenderingBackend {
         KNOWN_COLORS.put("rebeccapurple", Color.decode("#663399"));
     }
 
-    private static synchronized int nextId() {
-        return ID_GENERATOR_++;
-    }
-
     /**
      * Constructor.
      * @param imageWidth the width
      * @param imageHeight the height
      */
     public AwtRenderingBackend(final int imageWidth, final int imageHeight) {
-        id_ = nextId();
+        id_ = ID_GENERATOR.getAndIncrement();
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] AwtRenderingBackend(" + imageWidth + ", " + imageHeight + ")");
         }

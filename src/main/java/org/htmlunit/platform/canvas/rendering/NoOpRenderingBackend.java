@@ -16,6 +16,7 @@ package org.htmlunit.platform.canvas.rendering;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,12 +30,8 @@ public class NoOpRenderingBackend implements RenderingBackend {
 
     private static final Log LOG = LogFactory.getLog(NoOpRenderingBackend.class);
 
-    private static int ID_GENERATOR_;
+    private static final AtomicInteger ID_GENERATOR = new AtomicInteger();
     private final int id_;
-
-    private static synchronized int nextId() {
-        return ID_GENERATOR_++;
-    }
 
     /**
      * Constructor.
@@ -42,7 +39,7 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * @param imageHeight the height
      */
     public NoOpRenderingBackend(final int imageWidth, final int imageHeight) {
-        id_ = nextId();
+        id_ = ID_GENERATOR.getAndIncrement();
     }
 
     /**
