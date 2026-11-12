@@ -3233,7 +3233,10 @@ public class HtmlPage extends SgmlPage {
      * Cache computed styles when possible, because their calculation is very expensive.
      * We use a weak hash map because we don't want this cache to be the only reason
      * nodes are kept around in the JVM, if all other references to them are gone.
+     * The class is private; no one else can lock on an instance, therefore method level
+     * synchronization is fine here.
      */
+    @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
     private static final class ComputedStylesCache implements Serializable {
         private transient WeakHashMap<DomElement, Map<String, ComputedCssStyleDeclaration>>
                     computedStyles_ = new WeakHashMap<>();

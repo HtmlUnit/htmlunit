@@ -54,6 +54,8 @@ public class ImageIOImageData implements ImageData {
     private final ImageIOImageDataCleaningAction cleaningAction_;
     private final Cleaner.Cleanable cleanable_;
 
+    // private class; no one else can lock on an instance, therefore method level synchronization is fine here
+    @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
     private static final class ImageIOImageDataCleaningAction implements Runnable {
         private ImageReader imageReader_;
         private InputStream inputStream_;

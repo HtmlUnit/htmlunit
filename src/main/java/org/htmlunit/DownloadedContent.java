@@ -77,19 +77,17 @@ public interface DownloadedContent extends Serializable {
         private final File file_;
         private final Cleaner.Cleanable cleanable_;
 
+        // no synchronization required, a Cleanable runs the action at most once
         private static final class OnFileCleaningAction implements Runnable {
-            private File file_;
+            private final File file_;
 
             OnFileCleaningAction(final File file) {
                 file_ = file;
             }
 
             @Override
-            public synchronized void run() {
-                if (file_ != null) {
-                    FileUtils.deleteQuietly(file_);
-                    file_ = null;
-                }
+            public void run() {
+                FileUtils.deleteQuietly(file_);
             }
         }
 

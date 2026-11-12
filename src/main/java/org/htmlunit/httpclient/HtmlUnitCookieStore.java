@@ -31,6 +31,7 @@ import org.htmlunit.CookieManager;
  * @author Ronald Brill
  */
 public final class HtmlUnitCookieStore implements CookieStore, Serializable {
+    // no synchronization required here, the CookieManager is thread-safe
     private final CookieManager manager_;
 
     /**
@@ -46,7 +47,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public synchronized void addCookie(final Cookie cookie) {
+    public void addCookie(final Cookie cookie) {
         manager_.addCookie(new HttpClientCookie((ClientCookie) cookie));
     }
 
@@ -54,7 +55,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public synchronized List<Cookie> getCookies() {
+    public List<Cookie> getCookies() {
         return HttpClientConverter.toHttpClient(manager_.getCookies());
     }
 
@@ -62,7 +63,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public synchronized boolean clearExpired(final Date date) {
+    public boolean clearExpired(final Date date) {
         return manager_.clearExpired(date);
     }
 
@@ -70,7 +71,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public synchronized void clear() {
+    public void clear() {
         manager_.clearCookies();
     }
 }
