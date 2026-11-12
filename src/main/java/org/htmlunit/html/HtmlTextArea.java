@@ -231,14 +231,12 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @see SubmittableElement#setDefaultValue(String)
      */
     @Override
-    public void setDefaultValue(String defaultValue) {
+    public void setDefaultValue(final String defaultValue) {
         initDefaultValue();
-        if (defaultValue == null) {
-            defaultValue = "";
-        }
+        final String value = defaultValue == null ? "" : defaultValue;
 
-        replaceChildTextContent(defaultValue);
-        defaultValue_ = defaultValue;
+        replaceChildTextContent(value);
+        defaultValue_ = value;
     }
 
     /**

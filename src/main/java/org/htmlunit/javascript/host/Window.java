@@ -329,7 +329,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the value typed in or {@code null} if the user pressed {@code cancel}
      */
     @JsxFunction
-    public String prompt(final String message, Object defaultValue) {
+    public String prompt(final String message, final Object defaultValue) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if (handler == null) {
             if (LOG.isWarnEnabled()) {
@@ -337,13 +337,10 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
             return null;
         }
-        if (JavaScriptEngine.isUndefined(defaultValue)) {
-            defaultValue = null;
-        }
-        else {
-            defaultValue = JavaScriptEngine.toString(defaultValue);
-        }
-        return handler.handlePrompt(document_.getPage(), message, (String) defaultValue);
+        final String defaultText = JavaScriptEngine.isUndefined(defaultValue)
+                                        ? null
+                                        : JavaScriptEngine.toString(defaultValue);
+        return handler.handlePrompt(document_.getPage(), message, defaultText);
     }
 
     /**

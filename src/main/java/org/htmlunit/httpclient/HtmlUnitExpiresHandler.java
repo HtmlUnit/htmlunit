@@ -18,6 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATT
 import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2;
 
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.MalformedCookieException;
@@ -41,6 +42,8 @@ import org.htmlunit.BrowserVersion;
 final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
 
     // simplified patterns from BrowserCompatSpec, with yy patterns before similar yyyy patterns
+    private static final Pattern DATE_SEPARATORS = Pattern.compile("[ ,:-]+");
+
     private static final String[] DEFAULT_DATE_PATTERNS = {
         "EEE MMM dd yyyy HH mm ss 'GMT'Z",
         "EEE dd MMM yy HH mm ss zzz",
@@ -85,11 +88,11 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
     }
 
     @Override
-    public void parse(final SetCookie cookie, String value) throws MalformedCookieException {
-        if (value.startsWith("\"") && value.endsWith("\"")) {
-            value = value.substring(1, value.length() - 1);
-        }
-        value = value.replaceAll("[ ,:-]+", " ");
+    public void parse(final SetCookie cookie, final String value) throws MalformedCookieException {
+        final String unquoted = value.startsWith("\"") && value.endsWith("\"")
+                                    ? value.substring(1, value.length() - 1)
+                                    : value;
+        final String date = DATE_SEPARATORS.matcher(unquoted).replaceAll(" ");
 
         Date startDate = null;
         String[] datePatterns = DEFAULT_DATE_PATTERNS;
@@ -106,7 +109,7 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
             }
         }
 
-        final Date expiry = DateUtils.parseDate(value, datePatterns, startDate);
+        final Date expiry = DateUtils.parseDate(date, datePatterns, startDate);
         cookie.setExpiryDate(expiry);
     }
 }

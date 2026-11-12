@@ -159,7 +159,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         }
 
         @Override
-        protected Script compileString(String source, final Evaluator compiler,
+        protected Script compileString(final String source, final Evaluator compiler,
                 final ErrorReporter compilationErrorReporter, final String sourceName,
                 final int lineno, final Object securityDomain,
                 final Consumer<CompilerEnvirons> compilerEnvironsProcessor) {
@@ -169,6 +169,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             final boolean isWindowEval = compiler != null;
 
             // Remove HTML comments around the source if needed
+            String code = source;
             if (!isWindowEval) {
 
                 // **** Memory Optimization ****
@@ -188,16 +189,16 @@ public class HtmlUnitContextFactory extends ContextFactory {
                         && source.charAt(start++) == '!'
                         && source.charAt(start++) == '-'
                         && source.charAt(start++) == '-') {
-                    source = source.replaceFirst("<!--", "// <!--");
+                    code = source.replaceFirst("<!--", "// <!--");
                 }
             }
 
             // Pre process the source code
             final HtmlPage page = (HtmlPage) Context.getCurrentContext()
                 .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
-            source = preProcess(page, source, sourceName, lineno, null);
+            code = preProcess(page, code, sourceName, lineno, null);
 
-            return super.compileString(source, compiler, compilationErrorReporter,
+            return super.compileString(code, compiler, compilationErrorReporter,
                     sourceName, lineno, securityDomain, compilerEnvironsProcessor);
         }
 
@@ -211,16 +212,17 @@ public class HtmlUnitContextFactory extends ContextFactory {
         }
 
         @Override
-        protected Function compileFunction(final VarScope scope, String source,
+        protected Function compileFunction(final VarScope scope, final String source,
                 final Evaluator compiler, final ErrorReporter compilationErrorReporter,
                 final String sourceName, final int lineno, final Object securityDomain) {
 
+            String code = source;
             if (deminifyFunctionCode_) {
                 final Function f = super.compileFunction(scope, source, compiler,
                         compilationErrorReporter, sourceName, lineno, securityDomain);
-                source = decompileFunction(f, 4).trim().replace("\n    ", "\n");
+                code = decompileFunction(f, 4).trim().replace("\n    ", "\n");
             }
-            return super.compileFunction(scope, source, compiler,
+            return super.compileFunction(scope, code, compiler,
                     compilationErrorReporter, sourceName, lineno, securityDomain);
         }
     }

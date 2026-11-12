@@ -336,11 +336,10 @@ public final class ScriptElementSupport {
      * @param languageAttribute the language attribute specified in the script tag
      * @return true if the script is JavaScript
      */
-    public static boolean isJavaScript(String typeAttribute, final String languageAttribute) {
-        typeAttribute = typeAttribute.trim();
-
-        if (!StringUtils.isEmptyOrNull(typeAttribute)) {
-            return MimeType.isJavascriptMimeType(typeAttribute);
+    public static boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
+        final String type = typeAttribute.trim();
+        if (!StringUtils.isEmptyOrNull(type)) {
+            return MimeType.isJavascriptMimeType(type);
         }
 
         if (!StringUtils.isEmptyOrNull(languageAttribute)) {

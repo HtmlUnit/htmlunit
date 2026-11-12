@@ -237,7 +237,8 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * {@inheritDoc}
      */
     @Override
-    public void startElement(String namespaceURI, final String localName, final String qName, final Attributes atts)
+    public void startElement(final String namespaceURI, final String localName, final String qName,
+            final Attributes atts)
         throws SAXException {
 
         if (snippetStartNodeOverwritten_) {
@@ -276,30 +277,28 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             }
         }
 
-        if (namespaceURI != null) {
-            namespaceURI = namespaceURI.trim();
-        }
+        String namespace = namespaceURI == null ? null : namespaceURI.trim();
         // Add the new node.
-        if (!(page_ instanceof XHtmlPage) && Html.XHTML_NAMESPACE.equals(namespaceURI)) {
-            namespaceURI = null;
+        if (!(page_ instanceof XHtmlPage) && Html.XHTML_NAMESPACE.equals(namespace)) {
+            namespace = null;
         }
 
         ElementFactory factory =
-                htmlParser_.getElementFactory(page_, namespaceURI, qName, insideSvg_, false);
+                htmlParser_.getElementFactory(page_, namespace, qName, insideSvg_, false);
 
         // in xhtml (xml) the namespace decides; an svg element without the svg namespace
         // (e.g. inheriting the xhtml namespace) is an unknown html element
         if (page_ instanceof XHtmlPage
                 && !insideSvg_
                 && "svg".equals(tagLower)
-                && !Html.SVG_NAMESPACE.equals(namespaceURI)
+                && !Html.SVG_NAMESPACE.equals(namespace)
                 && !Html.SVG_NAMESPACE.equals(atts.getValue("xmlns"))) {
             factory = UnknownElementFactory.INSTANCE;
         }
 
         String elementName = qName;
         if (factory == HtmlUnitNekoHtmlParser.SVG_FACTORY) {
-            namespaceURI = Html.SVG_NAMESPACE;
+            namespace = Html.SVG_NAMESPACE;
 
             // the html parser lowercases the name and restores the case of some svg names
             // (e.g. 'foreignObject'); xml (xhtml) is case sensitive
@@ -308,7 +307,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             }
         }
 
-        final DomElement newElement = factory.createElementNS(page_, namespaceURI, elementName, atts);
+        final DomElement newElement = factory.createElementNS(page_, namespace, elementName, atts);
         newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
         // parse can't replace everything as it does not buffer elements while parsing

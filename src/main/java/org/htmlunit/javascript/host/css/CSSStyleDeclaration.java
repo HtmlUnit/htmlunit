@@ -203,12 +203,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param newValue the attribute value
      * @param important the priority (e.g. empty string, or "important")
      */
-    protected void setStyleAttribute(final String name, String newValue, final String important) {
-        if (newValue == null || "null".equals(newValue)) {
-            newValue = "";
-        }
-
-        styleDeclaration_.setStyleAttribute(name, newValue, important);
+    protected void setStyleAttribute(final String name, final String newValue, final String important) {
+        final String value = newValue == null || "null".equals(newValue) ? "" : newValue;
+        styleDeclaration_.setStyleAttribute(name, value, important);
     }
 
     /**
@@ -1907,19 +1904,14 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param token the token to check
      * @return whether the token is a length or not
      */
-    static boolean isLength(String token) {
+    static boolean isLength(final String token) {
         if (token.endsWith("em") || token.endsWith("ex") || token.endsWith("px") || token.endsWith("in")
             || token.endsWith("cm") || token.endsWith("mm") || token.endsWith("pt") || token.endsWith("pc")
             || token.endsWith("%")) {
 
-            if (token.endsWith("%")) {
-                token = token.substring(0, token.length() - 1);
-            }
-            else {
-                token = token.substring(0, token.length() - 2);
-            }
+            final int unitLength = token.endsWith("%") ? 1 : 2;
             try {
-                Double.parseDouble(token);
+                Double.parseDouble(token.substring(0, token.length() - unitLength));
                 return true;
             }
             catch (final NumberFormatException ignored) {

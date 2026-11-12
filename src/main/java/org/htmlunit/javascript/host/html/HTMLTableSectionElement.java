@@ -154,15 +154,13 @@ public class HTMLTableSectionElement extends HTMLElement {
      * @param rowIndex the zero-based index of the row to delete
      */
     @JsxFunction
-    public void deleteRow(int rowIndex) {
+    public void deleteRow(final int rowIndex) {
         final HTMLCollection rows = getRows();
         final int rowCount = rows.getLength();
-        if (rowIndex == -1) {
-            rowIndex = rowCount - 1;
-        }
-        final boolean rowIndexValid = rowIndex >= 0 && rowIndex < rowCount;
+        final int index = rowIndex == -1 ? rowCount - 1 : rowIndex;
+        final boolean rowIndexValid = index >= 0 && index < rowCount;
         if (rowIndexValid) {
-            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(rowIndex));
+            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index));
             row.getDomNodeOrDie().remove();
         }
     }

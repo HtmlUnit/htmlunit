@@ -229,23 +229,25 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         formatter_ = new DateTimeFormatHelper(locale, chronology, pattern);
     }
 
-    private static String getPattern(final Map<String, String> formats, String locale) {
+    private static String getPattern(final Map<String, String> formats, final String locale) {
         if ("no-NO-NY".equals(locale)) {
             throw JavaScriptEngine.rangeError("Invalid language tag: " + locale);
         }
-        String pattern = formats.get(locale);
-        while (pattern == null && locale.indexOf('-') != -1) {
-            locale = locale.substring(0, locale.lastIndexOf('-'));
-            pattern = formats.get(locale);
+        String tag = locale;
+        String pattern = formats.get(tag);
+        while (pattern == null && tag.indexOf('-') != -1) {
+            tag = tag.substring(0, tag.lastIndexOf('-'));
+            pattern = formats.get(tag);
         }
         return pattern;
     }
 
-    private static Chronology getChronology(final Map<String, Chronology> chronologies, String locale) {
-        Chronology chronology = chronologies.get(locale);
-        while (chronology == null && locale.indexOf('-') != -1) {
-            locale = locale.substring(0, locale.lastIndexOf('-'));
-            chronology = chronologies.get(locale);
+    private static Chronology getChronology(final Map<String, Chronology> chronologies, final String locale) {
+        String tag = locale;
+        Chronology chronology = chronologies.get(tag);
+        while (chronology == null && tag.indexOf('-') != -1) {
+            tag = tag.substring(0, tag.lastIndexOf('-'));
+            chronology = chronologies.get(tag);
         }
         return chronology;
     }

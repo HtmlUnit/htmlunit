@@ -253,15 +253,15 @@ public class URLSearchParams extends HtmlUnitScriptable {
         return splitQuery(url_.getSearch());
     }
 
-    private static List<NameValuePair> splitQuery(String params) {
+    private static List<NameValuePair> splitQuery(final String params) {
         final List<NameValuePair> splitted = new ArrayList<>();
 
-        params = StringUtils.stripStart(params, "?");
-        if (org.htmlunit.util.StringUtils.isEmptyOrNull(params)) {
+        final String query = StringUtils.stripStart(params, "?");
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(query)) {
             return splitted;
         }
 
-        final String[] parts = StringUtils.split(params, '&');
+        final String[] parts = StringUtils.split(query, '&');
         for (final String part : parts) {
             final NameValuePair pair = splitQueryParameter(part);
             splitted.add(new NameValuePair(UrlUtils.decode(pair.getName()), UrlUtils.decode(pair.getValue())));

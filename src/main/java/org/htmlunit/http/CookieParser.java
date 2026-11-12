@@ -97,8 +97,8 @@ public final class CookieParser {
     /**
      * Normalizes the cookie string by handling empty names and whitespace.
      */
-    private static String normalizeCookieString(String cookieString) {
-        cookieString = cookieString.trim();
+    private static String normalizeCookieString(final String rawCookieString) {
+        final String cookieString = rawCookieString.trim();
 
         if (cookieString.isEmpty()) {
             return EMPTY_COOKIE_NAME + "=";
@@ -390,18 +390,17 @@ public final class CookieParser {
     /**
      * Replaces file:// URLs with a bogus host for cookie handling.
      */
-    private static URL replaceForCookieIfNecessary(URL url) {
-        final String protocol = url.getProtocol();
-        final boolean file = "file".equals(protocol);
-        if (file) {
-            try {
-                url = UrlUtils.getUrlWithNewHostAndPort(url, LOCAL_FILESYSTEM_DOMAIN, 0);
-            }
-            catch (final MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
+    private static URL replaceForCookieIfNecessary(final URL url) {
+        if (!"file".equals(url.getProtocol())) {
+            return url;
         }
-        return url;
+
+        try {
+            return UrlUtils.getUrlWithNewHostAndPort(url, LOCAL_FILESYSTEM_DOMAIN, 0);
+        }
+        catch (final MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

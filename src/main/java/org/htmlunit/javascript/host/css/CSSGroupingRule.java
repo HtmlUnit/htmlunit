@@ -149,14 +149,15 @@ public class CSSGroupingRule extends CSSRule {
         }
     }
 
-    private int fixIndex(int index) {
+    private int fixIndex(final int index) {
+        int fixed = index;
         for (final int fix : cssRulesIndexFix_) {
-            if (fix > index) {
-                return index;
+            if (fix > fixed) {
+                return fixed;
             }
-            index++;
+            fixed++;
         }
-        return index;
+        return fixed;
     }
 
     private void refreshCssRules() {

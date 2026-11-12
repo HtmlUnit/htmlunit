@@ -392,13 +392,11 @@ public class MockWebConnection implements WebConnection, Serializable {
         return new RawResponseData(content, statusCode, statusMessage, contentType, headers);
     }
 
-    private static RawResponseData buildRawResponseData(final String content, Charset charset, final int statusCode,
-            final String statusMessage, final String contentType, final List<NameValuePair> headers) {
-
-        if (charset == null) {
-            charset = ISO_8859_1;
-        }
-        return new RawResponseData(content, charset, statusCode, statusMessage, contentType, headers);
+    private static RawResponseData buildRawResponseData(final String content, final Charset charset,
+            final int statusCode, final String statusMessage, final String contentType,
+            final List<NameValuePair> headers) {
+        return new RawResponseData(content, charset == null ? ISO_8859_1 : charset,
+                statusCode, statusMessage, contentType, headers);
     }
 
     /**

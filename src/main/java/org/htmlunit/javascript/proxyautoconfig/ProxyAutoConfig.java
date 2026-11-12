@@ -175,20 +175,19 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
      * @return if today is in range
      */
     @JsxFunction
-    public static boolean weekdayRange(final String wd1, Object wd2, final Object gmt) {
+    public static boolean weekdayRange(final String wd1, final Object wd2, final Object gmt) {
         TimeZone timezone = TimeZone.getDefault();
         if (TIMEZONE_GMT.equals(JavaScriptEngine.toString(gmt))
                 || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))) {
             timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
         }
-        if (JavaScriptEngine.isUndefined(wd2) || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))) {
-            wd2 = wd1;
-        }
+        final Object lastDay = JavaScriptEngine.isUndefined(wd2) || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))
+                                    ? wd1 : wd2;
         final Calendar calendar = Calendar.getInstance(timezone);
         for (int i = 0; i < 7; i++) {
             final String day = new SimpleDateFormat("EEE", Locale.ROOT)
                     .format(calendar.getTime()).toUpperCase(Locale.ROOT);
-            if (day.equals(wd2)) {
+            if (day.equals(lastDay)) {
                 return true;
             }
             if (day.equals(wd1)) {

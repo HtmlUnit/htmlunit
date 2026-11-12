@@ -189,24 +189,22 @@ public final class WindowOrWorkerGlobalScopeMixin {
     }
 
     private static int setTimeoutIntervalImpl(final Window window, final Object code,
-            int timeout, final boolean isTimeout, final Object[] params) {
-        if (timeout < MIN_TIMER_DELAY) {
-            timeout = MIN_TIMER_DELAY;
-        }
+            final int timeout, final boolean isTimeout, final Object[] params) {
+        final int delay = Math.max(timeout, MIN_TIMER_DELAY);
 
         final WebWindow webWindow = window.getWebWindow();
         final Page page = (Page) window.getDomNodeOrNull();
         Integer period = null;
         if (!isTimeout) {
-            period = timeout;
+            period = delay;
         }
 
         if (code instanceof String s) {
             final String description = "window.set"
                                         + (isTimeout ? "Timeout" : "Interval")
-                                        + "(" + s + ", " + timeout + ")";
+                                        + "(" + s + ", " + delay + ")";
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                    createJavaScriptJob(timeout, period, description, webWindow, s);
+                    createJavaScriptJob(delay, period, description, webWindow, s);
             return webWindow.getJobManager().addJob(job, page);
         }
 
@@ -221,9 +219,9 @@ public final class WindowOrWorkerGlobalScopeMixin {
 
             final String description = "window.set"
                                         + (isTimeout ? "Timeout" : "Interval")
-                                        + "(" + functionName + ", " + timeout + ")";
+                                        + "(" + functionName + ", " + delay + ")";
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                    createJavaScriptJob(timeout, period, description, webWindow, f, params);
+                    createJavaScriptJob(delay, period, description, webWindow, f, params);
             return webWindow.getJobManager().addJob(job, page);
         }
 

@@ -1389,26 +1389,26 @@ public class Document extends Node {
      * @param newDomain the new domain to set
      */
     @JsxSetter
-    public void setDomain(String newDomain) {
-        newDomain = newDomain.toLowerCase(Locale.ROOT);
+    public void setDomain(final String newDomain) {
+        final String domain = newDomain.toLowerCase(Locale.ROOT);
 
         final String currentDomain = getDomain();
-        if (currentDomain.equalsIgnoreCase(newDomain)) {
+        if (currentDomain.equalsIgnoreCase(domain)) {
             return;
         }
 
-        if (newDomain.indexOf('.') == -1) {
+        if (domain.indexOf('.') == -1) {
             throw JavaScriptEngine.reportRuntimeError("Illegal domain value, cannot set domain from: \""
-                    + currentDomain + "\" to: \"" + newDomain + "\" (new domain has to contain a dot).");
+                    + currentDomain + "\" to: \"" + domain + "\" (new domain has to contain a dot).");
         }
 
         if (currentDomain.indexOf('.') > -1
-                && !currentDomain.toLowerCase(Locale.ROOT).endsWith("." + newDomain.toLowerCase(Locale.ROOT))) {
+                && !currentDomain.toLowerCase(Locale.ROOT).endsWith("." + domain)) {
             throw JavaScriptEngine.reportRuntimeError("Illegal domain value, cannot set domain from: \""
-                    + currentDomain + "\" to: \"" + newDomain + "\"");
+                    + currentDomain + "\" to: \"" + domain + "\"");
         }
 
-        domain_ = newDomain;
+        domain_ = domain;
     }
 
     /**

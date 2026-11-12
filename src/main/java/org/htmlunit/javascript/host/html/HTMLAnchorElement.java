@@ -342,24 +342,19 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/hostname">MDN Documentation</a>
      */
     @JsxSetter
-    public void setHostname(String hostname) throws Exception {
-        if (hostname != null) {
-            if (hostname.indexOf(' ') > -1) {
-                return;
-            }
-
-            final int idx = hostname.indexOf('#');
-            if (idx > -1) {
-                hostname = hostname.substring(0, idx);
-            }
+    public void setHostname(final String hostname) throws Exception {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(hostname) || hostname.indexOf(' ') > -1) {
+            return;
         }
 
-        if (org.htmlunit.util.StringUtils.isEmptyOrNull(hostname)) {
+        final int idx = hostname.indexOf('#');
+        final String host = idx > -1 ? hostname.substring(0, idx) : hostname;
+        if (host.isEmpty()) {
             return;
         }
 
         try {
-            setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+            setUrl(UrlUtils.getUrlWithNewHost(getUrl(), host));
         }
         catch (final MalformedURLException  e) {
             // do nothing

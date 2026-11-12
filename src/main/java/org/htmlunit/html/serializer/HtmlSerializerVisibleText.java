@@ -742,19 +742,20 @@ public class HtmlSerializerVisibleText {
      * @return true if no row was written so far (the new value of first)
      */
     protected boolean appendTableRows(final HtmlSerializerTextBuilder builder, final Mode mode,
-            final List<HtmlTableRow> rows, boolean first, final TableRowGroup skipParent1,
+            final List<HtmlTableRow> rows, final boolean first, final TableRowGroup skipParent1,
             final TableRowGroup skipParent2) {
+        boolean isFirst = first;
         for (final HtmlTableRow row : rows) {
             if (row.getParentNode() == skipParent1 || row.getParentNode() == skipParent2) {
                 continue;
             }
-            if (!first) {
+            if (!isFirst) {
                 builder.appendBlockSeparator();
             }
-            first = false;
+            isFirst = false;
             appendTableRow(builder, row, mode);
         }
-        return first;
+        return isFirst;
     }
 
     /**

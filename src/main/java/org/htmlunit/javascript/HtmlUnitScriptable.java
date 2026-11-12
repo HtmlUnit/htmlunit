@@ -373,9 +373,9 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      * {@inheritDoc}
      */
     @Override
-    protected Object equivalentValues(Object value) {
+    protected Object equivalentValues(final Object value) {
         if (value instanceof HtmlUnitScriptableProxy<?> proxy) {
-            value = proxy.getDelegee();
+            return super.equivalentValues(proxy.getDelegee());
         }
         return super.equivalentValues(value);
     }

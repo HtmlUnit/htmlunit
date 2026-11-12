@@ -451,14 +451,14 @@ public class Location extends HtmlUnitScriptable {
      * @param hash the new hash portion of the location URL
      * @param triggerHashChanged option to disable event triggering
      */
-    public void setHash(final String oldURL, String hash, final boolean triggerHashChanged) {
+    public void setHash(final String oldURL, final String hash, final boolean triggerHashChanged) {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
-        if (hash != null && !hash.isEmpty() && hash.charAt(0) == '#') {
-            hash = hash.substring(1);
-        }
-        final boolean hasChanged = hash != null && !hash.equals(hash_);
-        hash_ = hash;
+        final String newHash = hash != null && !hash.isEmpty() && hash.charAt(0) == '#'
+                                    ? hash.substring(1)
+                                    : hash;
+        final boolean hasChanged = newHash != null && !newHash.equals(hash_);
+        hash_ = newHash;
 
         if (hasChanged) {
             final Window w = getWindow();

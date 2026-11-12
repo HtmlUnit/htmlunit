@@ -699,6 +699,61 @@ public final class UrlUtils {
     }
 
     /**
+     * Removes the characters the URL parser ignores
+     * (see https://url.spec.whatwg.org/#concept-basic-url-parser).
+     * <ul>
+     *   <li>If input contains any leading or trailing C0 control or space, validation error.
+     *     Remove any leading and trailing C0 control or space from input.</li>
+     *   <li>If input contains any ASCII tab or newline, validation error.
+     *     Remove all ASCII tab or newline from input.</li>
+     * </ul>
+     *
+     * @param input the URL string
+     * @return the cleaned URL string; the input itself if there is nothing to remove
+     */
+    private static String removeIgnoredCharacters(final String input) {
+        final int length = input.length();
+        StringBuilder sb = null;
+        boolean before = true;
+        int trailing = 0;
+
+        for (int i = 0; i < length; i++) {
+            final char c = input.charAt(i);
+            boolean remove = false;
+
+            if (c == '\t' || c == '\r' || c == '\n') {
+                remove = true;
+            }
+            else if ('\u0000' <= c && c <= '\u0020') {
+                if (before) {
+                    remove = true;
+                }
+                else {
+                    trailing++;
+                }
+            }
+            else {
+                before = false;
+                trailing = 0;
+            }
+
+            if (remove) {
+                if (sb == null) {
+                    sb = new StringBuilder(input.substring(0, i));
+                }
+            }
+            else if (sb != null) {
+                sb.append(c);
+            }
+        }
+
+        if (sb == null) {
+            return trailing > 0 ? input.substring(0, length - trailing) : input;
+        }
+        return trailing > 0 ? sb.substring(0, sb.length() - trailing) : sb.toString();
+    }
+
+    /**
      * Parses a given specification using the algorithm depicted in
      * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>.
      * <p>
@@ -714,71 +769,14 @@ public final class UrlUtils {
      *   surrounding text and copied to a "parse string". The rules are
      *   listed in the order in which they would be applied by the parser.
      * </p>
-     * @param spec The specification to parse.
+     * @param input The specification to parse.
      * @return the parsed specification.
      */
-    private static Url parseUrl(String spec) {
+    private static Url parseUrl(final String input) {
+        final String spec = removeIgnoredCharacters(input);
         final Url url = new Url();
         int startIndex = 0;
         int endIndex = spec.length();
-
-        // see https://url.spec.whatwg.org/#concept-basic-url-parser
-        //   * If input contains any leading or trailing C0 control or space, validation error.
-        //     Remove any leading and trailing C0 control or space from input.
-        //   * If input contains any ASCII tab or newline, validation error.
-        //     Remove all ASCII tab or newline from input.
-
-        if (endIndex > startIndex) {
-            StringBuilder sb = null;
-            boolean before = true;
-            int trailing = 0;
-
-            for (int i = 0; i < endIndex; i++) {
-                final char c = spec.charAt(i);
-                boolean remove = false;
-
-                if (c == '\t' || c == '\r' || c == '\n') {
-                    remove = true;
-                }
-                else if ('\u0000' <= c && c <= '\u0020') {
-                    if (before) {
-                        remove = true;
-                    }
-                    else {
-                        trailing++;
-                    }
-                }
-                else {
-                    before = false;
-                    trailing = 0;
-                }
-
-                if (remove) {
-                    if (sb == null) {
-                        sb = new StringBuilder(spec.substring(0, i));
-                    }
-                }
-                else if (sb != null) {
-                    sb.append(c);
-                }
-            }
-
-            if (sb == null) {
-                if (trailing > 0) {
-                    endIndex = spec.length() - trailing;
-                    spec = spec.substring(0, endIndex);
-                }
-            }
-            else {
-                if (trailing > 0) {
-                    spec = sb.substring(0, sb.length() - trailing);
-                }
-                else {
-                    spec = sb.toString();
-                }
-                endIndex = spec.length();
-            }
-        }
 
         // Section 2.4.1: Parsing the Fragment Identifier
         //
@@ -1097,11 +1095,13 @@ public final class UrlUtils {
      * path reference needs the same normalization a merged path gets, it just
      * isn't merged with anything first.
      *
-     * @param path the path to normalize; must already be the final path to
+     * @param mergedPath the path to normalize; must already be the final path to
      *     clean up (already merged with the base path, if applicable)
      * @return the normalized path
      */
-    private static String normalizeDotSegments(String path) {
+    private static String normalizeDotSegments(final String mergedPath) {
+        String path = mergedPath;
+
         // a) All occurrences of "./", where "." is a complete path
         //    segment, are removed.
         int pathSegmentIndex;

@@ -1133,18 +1133,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param setThroughAttribute set type value through setAttribute()
      * @return the new or the old HtmlInput element
      */
-    public HtmlInput changeType(String newType, final boolean setThroughAttribute) {
+    public HtmlInput changeType(final String newType, final boolean setThroughAttribute) {
         final String currentType = getAttributeDirect(TYPE_ATTRIBUTE);
 
         final SgmlPage page = getPage();
         final WebClient webClient = page.getWebClient();
         final BrowserVersion browser = webClient.getBrowserVersion();
         if (!currentType.equalsIgnoreCase(newType)) {
-            if (!isSupported(StringUtils.toRootLowerCase(newType), browser)) {
-                if (setThroughAttribute) {
-                    newType = "text";
-                }
-            }
+            final String type = setThroughAttribute && !isSupported(StringUtils.toRootLowerCase(newType), browser)
+                                    ? "text" : newType;
 
             final AttributesImpl attributes = new AttributesImpl();
             boolean typeFound = false;
@@ -1153,7 +1150,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 final String value = entry.getValue();
 
                 if (TYPE_ATTRIBUTE.equals(name)) {
-                    attributes.addAttribute(null, name, name, null, newType);
+                    attributes.addAttribute(null, name, name, null, type);
                     typeFound = true;
                 }
                 else {
@@ -1162,11 +1159,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             }
 
             if (!typeFound) {
-                attributes.addAttribute(null, TYPE_ATTRIBUTE, TYPE_ATTRIBUTE, null, newType);
+                attributes.addAttribute(null, TYPE_ATTRIBUTE, TYPE_ATTRIBUTE, null, type);
             }
 
             // create a new one only if we have a new type
-            if (ATTRIBUTE_NOT_DEFINED != currentType || !"text".equalsIgnoreCase(newType)) {
+            if (ATTRIBUTE_NOT_DEFINED != currentType || !"text".equalsIgnoreCase(type)) {
                 final HtmlInput newInput = (HtmlInput) webClient.getPageCreator().getHtmlParser()
                         .getFactory(TAG_NAME)
                         .createElement(page, TAG_NAME, attributes);
@@ -1189,7 +1186,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
                 return newInput;
             }
-            super.setAttributeNS(null, TYPE_ATTRIBUTE, newType, true, true);
+            super.setAttributeNS(null, TYPE_ATTRIBUTE, type, true, true);
         }
         return this;
     }

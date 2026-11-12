@@ -196,7 +196,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
      * @return the serialized XML string
      */
     @JsxFunction
-    public String serializeToString(Node root) {
+    public String serializeToString(final Node root) {
         if (root == null) {
             return "";
         }
@@ -216,13 +216,11 @@ public class XMLSerializer extends HtmlUnitScriptable {
         }
 
         final boolean rootIsDocument = root instanceof Document;
-        if (rootIsDocument) {
-            root = ((Document) root).getDocumentElement();
-        }
+        final Node serializedRoot = rootIsDocument ? ((Document) root).getDocumentElement() : root;
 
-        if (root instanceof Element) {
+        if (serializedRoot instanceof Element) {
             final StringBuilder builder = new StringBuilder();
-            final DomNode node = root.getDomNodeOrDie();
+            final DomNode node = serializedRoot.getDomNodeOrDie();
             final SgmlPage page = node.getPage();
             final boolean isHtmlPage = page != null && page.isHtmlPage();
 
@@ -235,7 +233,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
             return builder.toString();
         }
 
-        return root.getDomNodeOrDie().asXml();
+        return serializedRoot.getDomNodeOrDie().asXml();
     }
 
     private void toXml(final int indent,

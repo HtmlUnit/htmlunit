@@ -195,19 +195,17 @@ public class HtmlLink extends HtmlElement {
      * for later use.<br>
      *
      * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
-     * @param request the request; if null getWebRequest() is called to create one
+     * @param webRequest the request; if null getWebRequest() is called to create one
      * @param isStylesheetRequest true if this should return a stylesheet
      * @param type the type definined for the stylesheet link
      * @return {@code null} if no download should be performed and when this wasn't already done; the response
      *         received when performing a request for the content referenced by this tag otherwise
      * @throws IOException if an error occurs while downloading the content
      */
-    public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request,
+    public WebResponse getWebResponse(final boolean downloadIfNeeded, final WebRequest webRequest,
             final boolean isStylesheetRequest, final String type) throws IOException {
         final WebClient webClient = getPage().getWebClient();
-        if (request == null) {
-            request = getWebRequest();
-        }
+        final WebRequest request = webRequest == null ? getWebRequest() : webRequest;
 
         if (downloadIfNeeded) {
             if (isStylesheetRequest && getPage() instanceof HtmlPage htmlPage

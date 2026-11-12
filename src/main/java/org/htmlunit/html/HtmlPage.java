@@ -678,12 +678,12 @@ public class HtmlPage extends SgmlPage {
      * @param tagName the tag name, preferably in lowercase
      */
     @Override
-    public DomElement createElement(String tagName) {
-        if (tagName.indexOf(':') == -1) {
-            tagName = org.htmlunit.util.StringUtils.toRootLowerCase(tagName);
-        }
-        return getWebClient().getPageCreator().getHtmlParser().getFactory(tagName)
-                    .createElementNS(this, null, tagName, null);
+    public DomElement createElement(final String tagName) {
+        final String name = tagName.indexOf(':') == -1
+                                ? org.htmlunit.util.StringUtils.toRootLowerCase(tagName)
+                                : tagName;
+        return getWebClient().getPageCreator().getHtmlParser().getFactory(name)
+                    .createElementNS(this, null, name, null);
     }
 
     /**
@@ -837,18 +837,19 @@ public class HtmlPage extends SgmlPage {
      * @return the fully-qualified URL for the specified relative URL
      * @throws MalformedURLException if an error occurred when creating a URL object
      */
-    public URL getFullyQualifiedUrl(String relativeUrl) throws MalformedURLException {
+    public URL getFullyQualifiedUrl(final String relativeUrl) throws MalformedURLException {
         // to handle http: and http:/ in FF (Bug #474)
+        String url = relativeUrl;
         boolean incorrectnessNotified = false;
-        while (relativeUrl.startsWith("http:") && !relativeUrl.startsWith("http://")) {
+        while (url.startsWith("http:") && !url.startsWith("http://")) {
             if (!incorrectnessNotified) {
-                notifyIncorrectness("Incorrect URL \"" + relativeUrl + "\" has been corrected");
+                notifyIncorrectness("Incorrect URL \"" + url + "\" has been corrected");
                 incorrectnessNotified = true;
             }
-            relativeUrl = "http:/" + relativeUrl.substring(5);
+            url = "http:/" + url.substring(5);
         }
 
-        return WebClient.expandUrl(getBaseURL(), relativeUrl);
+        return WebClient.expandUrl(getBaseURL(), url);
     }
 
     /**
@@ -1068,16 +1069,17 @@ public class HtmlPage extends SgmlPage {
      * @return a ScriptResult which will contain both the current page (which may be different from
      *         the previous page) and a JavaScript result object.
      */
-    public ScriptResult executeJavaScript(String sourceCode, final String sourceName, final int startLine) {
+    public ScriptResult executeJavaScript(final String sourceCode, final String sourceName, final int startLine) {
         if (!getWebClient().isJavaScriptEnabled()) {
             return new ScriptResult(JavaScriptEngine.UNDEFINED);
         }
 
-        if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(sourceCode,
+        String code = sourceCode;
+        if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(code,
                                                 JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-            sourceCode = sourceCode.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length()).trim();
-            if (sourceCode.startsWith("return ")) {
-                sourceCode = sourceCode.substring("return ".length());
+            code = code.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length()).trim();
+            if (code.startsWith("return ")) {
+                code = code.substring("return ".length());
             }
         }
 
@@ -1085,7 +1087,7 @@ public class HtmlPage extends SgmlPage {
         final VarScope scope = ScriptableObject.getTopLevelScope(window.getParentScope());
 
         final Object result = getWebClient().getJavaScriptEngine()
-                .execute(this, scope, sourceCode, sourceName, startLine);
+                .execute(this, scope, code, sourceName, startLine);
         return new ScriptResult(result);
     }
 

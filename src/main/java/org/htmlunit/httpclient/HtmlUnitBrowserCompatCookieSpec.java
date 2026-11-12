@@ -113,11 +113,12 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
     }
 
     /**
-     * {@inheritDoc}
+     * A hack to support cookies without a name; such cookies get the name {@link #EMPTY_COOKIE_NAME}.
+     *
+     * @param header the cookie header
+     * @return the given header or a new header with the cookie name added
      */
-    @Override
-    public List<Cookie> parse(Header header, final CookieOrigin origin) throws MalformedCookieException {
-        // first a hack to support empty headers
+    private static Header supportEmptyCookieName(final Header header) {
         final String text = header.getValue();
         int endPos = text.indexOf(';');
         if (endPos < 0) {
@@ -133,11 +134,20 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             }
         }
         if (endPos < 0) {
-            header = new BasicHeader(header.getName(), EMPTY_COOKIE_NAME + "=" + header.getValue());
+            return new BasicHeader(header.getName(), EMPTY_COOKIE_NAME + "=" + header.getValue());
         }
-        else if (endPos == 0 || StringUtils.isBlank(text.substring(0, endPos))) {
-            header = new BasicHeader(header.getName(), EMPTY_COOKIE_NAME + header.getValue());
+        if (endPos == 0 || StringUtils.isBlank(text.substring(0, endPos))) {
+            return new BasicHeader(header.getName(), EMPTY_COOKIE_NAME + header.getValue());
         }
+        return header;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Cookie> parse(final Header rawHeader, final CookieOrigin origin) throws MalformedCookieException {
+        final Header header = supportEmptyCookieName(rawHeader);
 
         final String headername = header.getName();
         if (!SM.SET_COOKIE.equalsIgnoreCase(headername)) {

@@ -304,42 +304,43 @@ public class WebRequest implements Serializable {
      *
      * @param url the target URL
      */
-    public void setUrl(URL url) {
+    public void setUrl(final URL url) {
         if (url == null) {
             url_ = null;
             return;
         }
 
-        final String path = url.getPath();
+        URL normalizedUrl = url;
+        final String path = normalizedUrl.getPath();
         if (path.isEmpty()) {
-            if (!url.getFile().isEmpty() || url.getProtocol().startsWith("http")) {
-                url = buildUrlWithNewPath(url, "/");
+            if (!normalizedUrl.getFile().isEmpty() || normalizedUrl.getProtocol().startsWith("http")) {
+                normalizedUrl = buildUrlWithNewPath(normalizedUrl, "/");
             }
         }
         else if (path.contains("/.")) {
-            url = buildUrlWithNewPath(url, StringUtils.removeDots(path));
+            normalizedUrl = buildUrlWithNewPath(normalizedUrl, StringUtils.removeDots(path));
         }
 
         try {
-            final String idn = IDN.toASCII(url.getHost());
-            if (!idn.equals(url.getHost())) {
-                url = UrlUtils.getUrlWithNewHost(url, idn);
+            final String idn = IDN.toASCII(normalizedUrl.getHost());
+            if (!idn.equals(normalizedUrl.getHost())) {
+                normalizedUrl = UrlUtils.getUrlWithNewHost(normalizedUrl, idn);
             }
         }
         catch (final Exception e) {
             throw new IllegalArgumentException(
-                    "Cannot convert the hostname of URL: '" + url.toExternalForm() + "' to ASCII.", e);
+                    "Cannot convert the hostname of URL: '" + normalizedUrl.toExternalForm() + "' to ASCII.", e);
         }
 
         try {
-            url_ = UrlUtils.removeRedundantPort(url).toExternalForm();
+            url_ = UrlUtils.removeRedundantPort(normalizedUrl).toExternalForm();
         }
         catch (final MalformedURLException e) {
-            throw new RuntimeException("Cannot strip default port of URL: " + url.toExternalForm(), e);
+            throw new RuntimeException("Cannot strip default port of URL: " + normalizedUrl.toExternalForm(), e);
         }
 
         // http://john.smith:secret@localhost
-        final String userInfo = url.getUserInfo();
+        final String userInfo = normalizedUrl.getUserInfo();
         if (userInfo != null) {
             final int splitPos = userInfo.indexOf(':');
             if (splitPos == -1) {
@@ -353,14 +354,13 @@ public class WebRequest implements Serializable {
         }
     }
 
-    private static URL buildUrlWithNewPath(URL url, final String newPath) {
+    private static URL buildUrlWithNewPath(final URL url, final String newPath) {
         try {
-            url = UrlUtils.getUrlWithNewPath(url, newPath);
+            return UrlUtils.getUrlWithNewPath(url, newPath);
         }
         catch (final Exception e) {
             throw new RuntimeException("Cannot change path of URL: " + url.toExternalForm(), e);
         }
-        return url;
     }
 
     /**

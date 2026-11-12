@@ -74,16 +74,16 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
      * {@inheritDoc}
      */
     @Override
-    public void setSelectionStart(int selectionStart) {
+    public void setSelectionStart(final int selectionStart) {
         if (selectionStart < 0) {
             return;
         }
 
         final int length = element_.getText().length();
-        selectionStart = Math.max(0, Math.min(selectionStart, length));
-        selection_.setStart((DomNode) element_, selectionStart);
-        if (selection_.getEndOffset() < selectionStart) {
-            selection_.setEnd((DomNode) element_, selectionStart);
+        final int start = Math.min(selectionStart, length);
+        selection_.setStart((DomNode) element_, start);
+        if (selection_.getEndOffset() < start) {
+            selection_.setEnd((DomNode) element_, start);
         }
     }
 
@@ -99,12 +99,12 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
      * {@inheritDoc}
      */
     @Override
-    public void setSelectionEnd(int selectionEnd) {
+    public void setSelectionEnd(final int selectionEnd) {
         final int length = element_.getText().length();
-        selectionEnd = Math.min(length, Math.max(selectionEnd, 0));
-        selection_.setEnd((DomNode) element_, selectionEnd);
-        if (selection_.getStartOffset() > selectionEnd) {
-            selection_.setStart((DomNode) element_, selectionEnd);
+        final int end = Math.min(length, Math.max(selectionEnd, 0));
+        selection_.setEnd((DomNode) element_, end);
+        if (selection_.getStartOffset() > end) {
+            selection_.setStart((DomNode) element_, end);
         }
     }
 }

@@ -447,12 +447,11 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @param type an optional type
      * @return the dataURL
      */
-    public String toDataURL(String type) {
+    public String toDataURL(final String type) {
         try {
-            if (type == null) {
-                type = MimeType.IMAGE_PNG;
-            }
-            return DataURLConnection.DATA_PREFIX + type + ";base64," + getRenderingBackend().encodeToString(type);
+            final String mimeType = type == null ? MimeType.IMAGE_PNG : type;
+            return DataURLConnection.DATA_PREFIX + mimeType + ";base64,"
+                    + getRenderingBackend().encodeToString(mimeType);
         }
         catch (final IOException ex) {
             throw JavaScriptEngine.throwAsScriptRuntimeEx(ex);

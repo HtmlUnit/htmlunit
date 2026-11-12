@@ -34,77 +34,56 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      * {@inheritDoc}
      */
     @Override
-    public Object get(final int index, Scriptable start) {
-        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
-            start = proxy.getDelegee();
-        }
-        return getDelegee().get(index, start);
+    public Object get(final int index, final Scriptable start) {
+        return getDelegee().get(index, unwrap(start));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Object get(final String name, Scriptable start) {
-        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
-            start = proxy.getDelegee();
-        }
-        return getDelegee().get(name, start);
+    public Object get(final String name, final Scriptable start) {
+        return getDelegee().get(name, unwrap(start));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean has(final int index, Scriptable start) {
-        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
-            start = proxy.getDelegee();
-        }
-        return getDelegee().has(index, start);
+    public boolean has(final int index, final Scriptable start) {
+        return getDelegee().has(index, unwrap(start));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean has(final String name, Scriptable start) {
-        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
-            start = proxy.getDelegee();
-        }
-        return getDelegee().has(name, start);
+    public boolean has(final String name, final Scriptable start) {
+        return getDelegee().has(name, unwrap(start));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean hasInstance(Scriptable instance) {
-        if (instance instanceof HtmlUnitScriptableProxy<?> proxy) {
-            instance = proxy.getDelegee();
-        }
-        return getDelegee().hasInstance(instance);
+    public boolean hasInstance(final Scriptable instance) {
+        return getDelegee().hasInstance(unwrap(instance));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void put(final int index, Scriptable start, final Object value) {
-        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
-            start = proxy.getDelegee();
-        }
-        getDelegee().put(index, start, value);
+    public void put(final int index, final Scriptable start, final Object value) {
+        getDelegee().put(index, unwrap(start), value);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void put(final String name, Scriptable start, final Object value) {
-        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
-            start = proxy.getDelegee();
-        }
-        getDelegee().put(name, start, value);
+    public void put(final String name, final Scriptable start, final Object value) {
+        getDelegee().put(name, unwrap(start), value);
     }
 
     /**
@@ -117,5 +96,18 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         return getDelegee().getDefaultValue(hint);
+    }
+
+    /**
+     * Unwraps the given scriptable if it is a proxy.
+     *
+     * @param scriptable the scriptable to unwrap
+     * @return the delegee if the given scriptable is a proxy; the scriptable itself otherwise
+     */
+    private static Scriptable unwrap(final Scriptable scriptable) {
+        if (scriptable instanceof HtmlUnitScriptableProxy<?> proxy) {
+            return proxy.getDelegee();
+        }
+        return scriptable;
     }
 }

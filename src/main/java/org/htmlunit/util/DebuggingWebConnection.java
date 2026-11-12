@@ -154,13 +154,11 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * @param mark the text of the mark
      * @throws IOException if a problem occurs writing the file
      */
-    public void addMark(String mark) throws IOException {
-        if (mark != null) {
-            mark = mark.replace("\"", "\\\"");
-        }
-        appendToJSFile("tab[tab.length] = \"" + mark + "\";\n");
+    public void addMark(final String mark) throws IOException {
+        final String escapedMark = mark == null ? null : mark.replace("\"", "\\\"");
+        appendToJSFile("tab[tab.length] = \"" + escapedMark + "\";\n");
         if (LOG.isInfoEnabled()) {
-            LOG.info("--- " + mark + " ---");
+            LOG.info("--- " + escapedMark + " ---");
         }
     }
 

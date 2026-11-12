@@ -654,7 +654,8 @@ public final class StringUtils {
         return new Color(to255(r), to255(g), to255(b));
     }
 
-    private static float hueToRgb(final float p, final float q, float t) {
+    private static float hueToRgb(final float p, final float q, final float hue) {
+        float t = hue;
         if (t < 0f) {
             t += 1f;
         }

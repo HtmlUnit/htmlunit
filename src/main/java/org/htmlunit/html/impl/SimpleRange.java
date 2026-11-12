@@ -628,7 +628,7 @@ public class SimpleRange implements Serializable {
         }
     }
 
-    private static void deleteBefore(final DomNode node, int offset) {
+    private static void deleteBefore(final DomNode node, final int offset) {
         if (isOffsetChars(node)) {
             String text = getText(node);
             if (offset > -1 && offset < text.length()) {
@@ -640,16 +640,10 @@ public class SimpleRange implements Serializable {
             setText(node, text);
         }
         else {
+            // removes the first 'offset' children; the live list shifts left after every removal
             final DomNodeList<DomNode> children = node.getChildNodes();
-            for (int i = 0; i < offset && i < children.getLength(); i++) {
-                final DomNode child = children.get(i);
-
-                child.remove();
-                // Removing item at index i shifts the live list left; decrement both
-                // i and offset so the loop re-examines the new item at this position
-                // rather than skipping it.
-                i--;
-                offset--;
+            for (int i = 0; i < offset && children.getLength() > 0; i++) {
+                children.get(0).remove();
             }
         }
     }

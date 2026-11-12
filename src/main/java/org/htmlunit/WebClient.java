@@ -657,7 +657,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     private Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow,
-            String forceAttachmentWithFilename, final PageDenied forcedPageDenied)
+            final String forceAttachmentWithFilename, final PageDenied forcedPageDenied)
             throws IOException, FailingHttpStatusCodeException {
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
@@ -675,13 +675,16 @@ public class WebClient implements Serializable, AutoCloseable {
                 && (forceAttachmentWithFilename != null || attachmentHandler_.isAttachment(webResponse))) {
 
             // check content disposition header for nothing provided
-            if (StringUtils.isEmptyOrNull(forceAttachmentWithFilename)) {
+            String filename = forceAttachmentWithFilename;
+            if (StringUtils.isEmptyOrNull(filename)) {
                 final String disp = webResponse.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
-                forceAttachmentWithFilename = Attachment.getSuggestedFilename(disp);
+                filename = Attachment.getSuggestedFilename(disp);
+            }
+            if (StringUtils.isEmptyOrNull(filename)) {
+                filename = null;
             }
 
-            if (attachmentHandler_.handleAttachment(webResponse,
-                        StringUtils.isEmptyOrNull(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename)) {
+            if (attachmentHandler_.handleAttachment(webResponse, filename)) {
                 // the handling is done by the attachment handler;
                 // do not open a new window
                 return webWindow.getEnclosedPage();
@@ -689,9 +692,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
             final WebWindow w = openWindow(null, null, webWindow);
             final Page page = pageCreator_.createPage(webResponse, w);
-            attachmentHandler_.handleAttachment(page,
-                                StringUtils.isEmptyOrNull(forceAttachmentWithFilename)
-                                        ? null : forceAttachmentWithFilename);
+            attachmentHandler_.handleAttachment(page, filename);
             return page;
         }
 

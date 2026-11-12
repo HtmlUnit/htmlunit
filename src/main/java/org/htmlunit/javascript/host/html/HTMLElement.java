@@ -350,32 +350,29 @@ public class HTMLElement extends Element {
      * @param value Value to set the attribute to
      */
     @Override
-    public void setAttribute(String name, final String value) {
+    public void setAttribute(final String name, final String value) {
         final HtmlElement element = getDomNodeOrDie();
         // the attribute name of html elements is lower case in html documents
-        if (!(element.getPage() instanceof XHtmlPage)) {
-            name = StringUtils.toRootLowerCase(name);
-        }
-        element.setAttribute(name, value);
+        final String attributeName = element.getPage() instanceof XHtmlPage
+                                        ? name
+                                        : StringUtils.toRootLowerCase(name);
+        element.setAttribute(attributeName, value);
 
         // call corresponding event handler setOnxxx if found
-        if (!name.isEmpty()) {
-            name = name.toLowerCase(Locale.ROOT);
-            if (name.startsWith("on")) {
-                try {
-                    name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
-                    final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
-                    final EventHandler eventHandler =
-                            new EventHandler(getParentScope(), getDomNodeOrDie(), name.substring(2), value);
-                    eventHandler.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), "Function"));
-                    method.invoke(this, eventHandler);
-                }
-                catch (final NoSuchMethodException | IllegalAccessException ignored) {
-                    // silently ignore
-                }
-                catch (final InvocationTargetException e) {
-                    throw new RuntimeException(e.getCause());
-                }
+        final String lcName = attributeName.toLowerCase(Locale.ROOT);
+        if (lcName.startsWith("on")) {
+            try {
+                final Method method = getClass().getMethod("setOn" + lcName.substring(2), METHOD_PARAMS_OBJECT);
+                final EventHandler eventHandler =
+                        new EventHandler(getParentScope(), getDomNodeOrDie(), lcName.substring(2), value);
+                eventHandler.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), "Function"));
+                method.invoke(this, eventHandler);
+            }
+            catch (final NoSuchMethodException | IllegalAccessException ignored) {
+                // silently ignore
+            }
+            catch (final InvocationTargetException e) {
+                throw new RuntimeException(e.getCause());
             }
         }
     }
@@ -910,21 +907,22 @@ public class HTMLElement extends Element {
      * Sets the value of the {@code chOff} property.
      * @param chOff the value of the {@code chOff} property
      */
-    protected void setChOff(String chOff) {
+    protected void setChOff(final String chOff) {
+        String value = chOff;
         try {
             final float f = Float.parseFloat(chOff);
             final int i = (int) f;
             if (i == f) {
-                chOff = Integer.toString(i);
+                value = Integer.toString(i);
             }
             else {
-                chOff = Float.toString(f);
+                value = Float.toString(f);
             }
         }
         catch (final NumberFormatException ignored) {
             // ignore
         }
-        getDomNodeOrDie().setAttribute("charOff", chOff);
+        getDomNodeOrDie().setAttribute("charOff", value);
     }
 
     /**

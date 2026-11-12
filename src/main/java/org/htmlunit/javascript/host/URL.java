@@ -256,24 +256,19 @@ public class URL extends HtmlUnitScriptable {
      * @param hostname the new hostname value
      */
     @JsxSetter
-    public void setHostname(String hostname) {
-        if (hostname != null) {
-            if (hostname.indexOf(' ') > -1) {
-                return;
-            }
-
-            final int idx = hostname.indexOf('#');
-            if (idx > -1) {
-                hostname = hostname.substring(0, idx);
-            }
+    public void setHostname(final String hostname) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(hostname) || hostname.indexOf(' ') > -1) {
+            return;
         }
 
-        if (org.htmlunit.util.StringUtils.isEmptyOrNull(hostname)) {
+        final int idx = hostname.indexOf('#');
+        final String host = idx > -1 ? hostname.substring(0, idx) : hostname;
+        if (host.isEmpty()) {
             return;
         }
 
         try {
-            url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
+            url_ = UrlUtils.getUrlWithNewHost(url_, host);
         }
         catch (final MalformedURLException  e) {
             // do nothing

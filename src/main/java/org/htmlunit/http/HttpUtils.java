@@ -195,13 +195,9 @@ public final class HttpUtils {
         return list;
     }
 
-    private static String decodeFormFields(final String content, Charset charset) {
+    private static String decodeFormFields(final String content, final Charset charset) {
         if (content == null) {
             return null;
-        }
-
-        if (charset == null) {
-            charset = StandardCharsets.UTF_8;
         }
 
         final ByteBuffer bb = ByteBuffer.allocate(content.length());
@@ -230,7 +226,7 @@ public final class HttpUtils {
             }
         }
         bb.flip();
-        return charset.decode(bb).toString();
+        return (charset == null ? StandardCharsets.UTF_8 : charset).decode(bb).toString();
     }
 
     /**
@@ -256,16 +252,13 @@ public final class HttpUtils {
         return result.toString();
     }
 
-    private static String encodeFormFields(final String content, Charset charset) {
+    private static String encodeFormFields(final String content, final Charset charset) {
         if (content == null) {
             return null;
         }
-        if (charset == null) {
-            charset = StandardCharsets.UTF_8;
-        }
 
         final StringBuilder buf = new StringBuilder();
-        final ByteBuffer bb = charset.encode(content);
+        final ByteBuffer bb = (charset == null ? StandardCharsets.UTF_8 : charset).encode(content);
         while (bb.hasRemaining()) {
             final int b = bb.get() & 0xff;
             if (URLENCODER.get(b)) {

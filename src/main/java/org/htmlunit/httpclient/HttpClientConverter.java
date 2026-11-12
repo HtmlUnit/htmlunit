@@ -105,19 +105,18 @@ public final class HttpClientConverter {
      * @param url the URL to replace if necessary
      * @return the replacement URL, or the original URL if no replacement was necessary
      */
-    public static URL replaceForCookieIfNecessary(URL url) {
-        final String protocol = url.getProtocol();
-        final boolean file = "file".equals(protocol);
-        if (file) {
-            try {
-                url = UrlUtils.getUrlWithNewHostAndPort(url,
-                        HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN, 0);
-            }
-            catch (final MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
+    public static URL replaceForCookieIfNecessary(final URL url) {
+        if (!"file".equals(url.getProtocol())) {
+            return url;
         }
-        return url;
+
+        try {
+            return UrlUtils.getUrlWithNewHostAndPort(url,
+                    HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN, 0);
+        }
+        catch (final MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
