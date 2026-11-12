@@ -15,7 +15,7 @@
 package org.htmlunit.javascript.configuration;
 
 import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -674,10 +674,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     };
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
-    private static final Map<String, JavaScriptConfiguration> CONFIGURATION_MAP_ = new WeakHashMap<>();
+    private static final Map<String, JavaScriptConfiguration> CONFIGURATION_MAP_ = new ConcurrentHashMap<>();
 
     /**
-     * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
+     * Constructor is only called from {@link #getInstance(BrowserVersion)}.
      * @param browser the browser version to use
      */
     private JavaScriptConfiguration(final BrowserVersion browser) {
@@ -686,22 +686,16 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
 
     /**
      * Returns the instance that represents the configuration for the specified {@link BrowserVersion}.
-     * This method is synchronized to allow multi-threaded access to the JavaScript configuration.
+     * This method is thread-safe; the configuration is created only once per browser version.
      * @param browserVersion the {@link BrowserVersion}
      * @return the instance for the specified {@link BrowserVersion}
      */
-    @SuppressWarnings("PMD.SingletonClassReturningNewInstance")
-    public static synchronized JavaScriptConfiguration getInstance(final BrowserVersion browserVersion) {
+    public static JavaScriptConfiguration getInstance(final BrowserVersion browserVersion) {
         if (browserVersion == null) {
             throw new IllegalArgumentException("BrowserVersion must be provided");
         }
-        JavaScriptConfiguration configuration = CONFIGURATION_MAP_.get(browserVersion.getNickname());
-
-        if (configuration == null) {
-            configuration = new JavaScriptConfiguration(browserVersion);
-            CONFIGURATION_MAP_.put(browserVersion.getNickname(), configuration);
-        }
-        return configuration;
+        return CONFIGURATION_MAP_.computeIfAbsent(browserVersion.getNickname(),
+                    nickname -> new JavaScriptConfiguration(browserVersion));
     }
 
     @Override

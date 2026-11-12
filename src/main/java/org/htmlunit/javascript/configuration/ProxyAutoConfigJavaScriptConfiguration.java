@@ -15,7 +15,7 @@
 package org.htmlunit.javascript.configuration;
 
 import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -33,10 +33,11 @@ public final class ProxyAutoConfigJavaScriptConfiguration extends AbstractJavaSc
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {ProxyAutoConfig.class};
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
-    private static final Map<String, ProxyAutoConfigJavaScriptConfiguration> CONFIGURATION_MAP_ = new WeakHashMap<>();
+    private static final Map<String, ProxyAutoConfigJavaScriptConfiguration> CONFIGURATION_MAP_ =
+            new ConcurrentHashMap<>();
 
     /**
-     * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
+     * Constructor is only called from {@link #getInstance(BrowserVersion)}.
      * @param browser the browser version to use
      */
     private ProxyAutoConfigJavaScriptConfiguration(final BrowserVersion browser) {
@@ -45,22 +46,16 @@ public final class ProxyAutoConfigJavaScriptConfiguration extends AbstractJavaSc
 
     /**
      * Returns the instance that represents the configuration for the specified {@link BrowserVersion}.
-     * This method is synchronized to allow multi-threaded access to the JavaScript configuration.
+     * This method is thread-safe; the configuration is created only once per browser version.
      * @param browserVersion the {@link BrowserVersion}
      * @return the instance for the specified {@link BrowserVersion}
      */
-    @SuppressWarnings("PMD.SingletonClassReturningNewInstance")
-    public static synchronized ProxyAutoConfigJavaScriptConfiguration getInstance(final BrowserVersion browserVersion) {
+    public static ProxyAutoConfigJavaScriptConfiguration getInstance(final BrowserVersion browserVersion) {
         if (browserVersion == null) {
             throw new IllegalArgumentException("BrowserVersion must be provided");
         }
-        ProxyAutoConfigJavaScriptConfiguration configuration = CONFIGURATION_MAP_.get(browserVersion.getNickname());
-
-        if (configuration == null) {
-            configuration = new ProxyAutoConfigJavaScriptConfiguration(browserVersion);
-            CONFIGURATION_MAP_.put(browserVersion.getNickname(), configuration);
-        }
-        return configuration;
+        return CONFIGURATION_MAP_.computeIfAbsent(browserVersion.getNickname(),
+                    nickname -> new ProxyAutoConfigJavaScriptConfiguration(browserVersion));
     }
 
     @Override
