@@ -92,6 +92,7 @@ import org.htmlunit.javascript.host.intl.Intl;
 import org.htmlunit.javascript.host.worker.WorkerGlobalScope;
 import org.htmlunit.javascript.host.xml.FormData;
 import org.htmlunit.javascript.polyfill.Polyfill;
+import org.htmlunit.util.SerializableLock;
 import org.htmlunit.util.StringUtils;
 
 /**
@@ -136,10 +137,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private transient ThreadLocal<Boolean> javaScriptRunning_;
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
     private transient boolean holdPostponedActions_;
-    private transient boolean shutdownPending_;
+    // volatile: set by prepareShutdown() while other threads (e.g. the event loop) are still running
+    private transient volatile boolean shutdownPending_;
 
     /** The JavaScriptExecutor corresponding to all windows of this Web client. */
-    private transient JavaScriptExecutor javaScriptExecutor_;
+    private transient volatile JavaScriptExecutor javaScriptExecutor_;
+    /** Guards the creation and the shutdown of the {@link #javaScriptExecutor_}. */
+    private final SerializableLock javaScriptExecutorLock_ = new SerializableLock();
 
     /**
      * Key used to place the {@link HtmlPage} for which the JavaScript code is executed
@@ -706,17 +710,19 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param webWindow the WebWindow to be registered.
      */
     @Override
-    public synchronized void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
+    public void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
         if (shutdownPending_) {
             return;
         }
 
         final WebClient webClient = getWebClient();
         if (webClient != null) {
-            if (javaScriptExecutor_ == null) {
-                javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient);
+            synchronized (javaScriptExecutorLock_) {
+                if (javaScriptExecutor_ == null) {
+                    javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient);
+                }
+                javaScriptExecutor_.addWindow(webWindow);
             }
-            javaScriptExecutor_.addWindow(webWindow);
         }
     }
 
@@ -737,9 +743,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         contextFactory_ = null;
         jsConfig_ = null;
 
-        if (javaScriptExecutor_ != null) {
-            javaScriptExecutor_.shutdown();
-            javaScriptExecutor_ = null;
+        synchronized (javaScriptExecutorLock_) {
+            if (javaScriptExecutor_ != null) {
+                javaScriptExecutor_.shutdown();
+                javaScriptExecutor_ = null;
+            }
         }
         if (postponedActions_ != null) {
             postponedActions_.remove();
