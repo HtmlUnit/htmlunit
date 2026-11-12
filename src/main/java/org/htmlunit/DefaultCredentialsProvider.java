@@ -29,6 +29,7 @@ import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
+import org.htmlunit.util.SerializableLock;
 
 /**
  * Default HtmlUnit implementation of the {@code CredentialsProvider} interface. Provides
@@ -56,9 +57,13 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /** The {@code null} value represents any authentication scheme. */
     public static final String ANY_SCHEME = null;
 
-    // volatile: written only inside the synchronized initSocksAuthenticatorIfNeeded,
+    // volatile: written only inside initSocksAuthenticatorIfNeeded (guarded by SOCKS_AUTHENTICATOR_LOCK),
     // but declared volatile to guard against unsynchronized reads in future refactors.
     private static volatile SocksProxyAuthenticator SocksAuthenticator_;
+    private static final Object SOCKS_AUTHENTICATOR_LOCK = new Object();
+
+    /** Guards the {@link #credentialsMap_}. */
+    private final SerializableLock lock_ = new SerializableLock();
     private final Map<AuthScopeProxy, Credentials> credentialsMap_ = new HashMap<>();
 
     // Because this is used for the whole JVM I try to make it as less invasive as possible.
@@ -167,12 +172,14 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         initSocksAuthenticatorIfNeeded(this);
     }
 
-    private static synchronized void initSocksAuthenticatorIfNeeded(final CredentialsProvider provider) {
-        if (SocksAuthenticator_ == null) {
-            SocksAuthenticator_ = new SocksProxyAuthenticator();
-            SocksAuthenticator_.credentialsProvider_ = provider;
+    private static void initSocksAuthenticatorIfNeeded(final CredentialsProvider provider) {
+        synchronized (SOCKS_AUTHENTICATOR_LOCK) {
+            if (SocksAuthenticator_ == null) {
+                SocksAuthenticator_ = new SocksProxyAuthenticator();
+                SocksAuthenticator_.credentialsProvider_ = provider;
 
-            Authenticator.setDefault(SocksAuthenticator_);
+                Authenticator.setDefault(SocksAuthenticator_);
+            }
         }
     }
 
@@ -185,7 +192,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      *         or {@link NTCredentials}
      */
     @Override
-    public synchronized void setCredentials(final AuthScope authscope, final Credentials credentials) {
+    public void setCredentials(final AuthScope authscope, final Credentials credentials) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
@@ -196,14 +203,16 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         if (credentials instanceof UsernamePasswordCredentials
                 || credentials instanceof HtmlUnitUsernamePasswordCredentials
                 || credentials instanceof NTCredentials) {
-            credentialsMap_.put(new AuthScopeProxy(authscope), credentials);
+            synchronized (lock_) {
+                credentialsMap_.put(new AuthScopeProxy(authscope), credentials);
+            }
             return;
         }
 
         throw new IllegalArgumentException("Unsupported Credential type: " + credentials.getClass().getName());
     }
 
-    // Callers must hold the monitor on the enclosing DefaultCredentialsProvider instance.
+    // Callers must hold the lock_ of the enclosing DefaultCredentialsProvider instance.
     private static Credentials matchCredentials(final Map<AuthScopeProxy, Credentials> map, final AuthScope authscope) {
         Credentials creds = map.get(new AuthScopeProxy(authscope));
         if (creds == null) {
@@ -228,11 +237,13 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * {@inheritDoc}
      */
     @Override
-    public synchronized Credentials getCredentials(final AuthScope authscope) {
+    public Credentials getCredentials(final AuthScope authscope) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
-        return matchCredentials(credentialsMap_, authscope);
+        synchronized (lock_) {
+            return matchCredentials(credentialsMap_, authscope);
+        }
     }
 
     /**
@@ -244,29 +255,31 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      *        must not be {@code null}
      * @return {@code true} if credentials were removed; {@code false} if no match was found
      */
-    public synchronized boolean removeCredentials(final AuthScope authscope) {
+    public boolean removeCredentials(final AuthScope authscope) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
 
-        // try exact match first, consistent with matchCredentials
-        final AuthScopeProxy exactKey = new AuthScopeProxy(authscope);
-        if (credentialsMap_.remove(exactKey) != null) {
-            return true;
-        }
-
-        // fall back to best-match scoring
-        int bestMatchFactor = -1;
-        AuthScopeProxy bestMatch = null;
-        for (final AuthScopeProxy proxy : credentialsMap_.keySet()) {
-            final AuthScope current = proxy.getAuthScope();
-            final int factor = authscope.match(current);
-            if (factor > bestMatchFactor) {
-                bestMatchFactor = factor;
-                bestMatch = proxy;
+        synchronized (lock_) {
+            // try exact match first, consistent with matchCredentials
+            final AuthScopeProxy exactKey = new AuthScopeProxy(authscope);
+            if (credentialsMap_.remove(exactKey) != null) {
+                return true;
             }
+
+            // fall back to best-match scoring
+            int bestMatchFactor = -1;
+            AuthScopeProxy bestMatch = null;
+            for (final AuthScopeProxy proxy : credentialsMap_.keySet()) {
+                final AuthScope current = proxy.getAuthScope();
+                final int factor = authscope.match(current);
+                if (factor > bestMatchFactor) {
+                    bestMatchFactor = factor;
+                    bestMatch = proxy;
+                }
+            }
+            return credentialsMap_.remove(bestMatch) != null;
         }
-        return credentialsMap_.remove(bestMatch) != null;
     }
 
     /**
@@ -274,15 +287,19 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     @Override
     public String toString() {
-        return credentialsMap_.toString();
+        synchronized (lock_) {
+            return credentialsMap_.toString();
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public synchronized void clear() {
-        credentialsMap_.clear();
+    public void clear() {
+        synchronized (lock_) {
+            credentialsMap_.clear();
+        }
     }
 
     /**
