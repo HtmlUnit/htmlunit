@@ -75,7 +75,7 @@ public class CryptoKey extends HtmlUnitScriptable {
     static CryptoKey create(final VarScope scope, final Key internalKey, final boolean isExtractable,
             final KeyAlgorithm algorithm, final Collection<String> usages) {
         if (internalKey == null) {
-            throw new NullPointerException("The provided key can't be null");
+            throw new IllegalArgumentException("The provided key can't be null");
         }
 
         final CryptoKey key = new CryptoKey();

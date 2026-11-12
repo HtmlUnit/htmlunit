@@ -147,7 +147,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     public void setEffectOnCacheFunction(
             final Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction) {
         if (effectOnCacheFunction == null) {
-            throw new NullPointerException("EffectOnCacheFunction can't be null");
+            throw new IllegalArgumentException("EffectOnCacheFunction can't be null");
         }
         effectOnCacheFunction_ = effectOnCacheFunction;
     }
@@ -167,7 +167,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      */
     public void setElementsSupplier(final Supplier<List<DomNode>> elementsSupplier) {
         if (elementsSupplier == null) {
-            throw new NullPointerException("ElementsSupplier can't be null");
+            throw new IllegalArgumentException("ElementsSupplier can't be null");
         }
         elementsSupplier_ = elementsSupplier;
     }
@@ -187,7 +187,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      */
     public void setIsMatchingPredicate(final Predicate<DomNode> isMatchingPredicate) {
         if (isMatchingPredicate == null) {
-            throw new NullPointerException("IsMatchingPredicate can't be null");
+            throw new IllegalArgumentException("IsMatchingPredicate can't be null");
         }
         isMatchingPredicate_ = isMatchingPredicate;
     }
