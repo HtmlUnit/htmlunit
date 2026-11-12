@@ -103,6 +103,7 @@ import org.htmlunit.protocol.data.DataURLConnection;
 import org.htmlunit.util.HeaderUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.SerializableLock;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.websocket.JettyWebSocketAdapter.JettyWebSocketAdapterFactory;
@@ -213,6 +214,8 @@ public class WebClient implements Serializable, AutoCloseable {
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
     private transient ExecutorService executor_;
+    /** Guards the lazy creation and the shutdown of the {@link #executor_}. */
+    private final SerializableLock executorLock_ = new SerializableLock();
 
     private AlertHandler alertHandler_;
     private ContentSecurityPolicyViolationListener contentSecurityPolicyViolationListener_;
@@ -1112,15 +1115,17 @@ public class WebClient implements Serializable, AutoCloseable {
      * Returns the executor for this {@link WebClient}.
      * @return the executor
      */
-    public synchronized Executor getExecutor() {
-        if (executor_ == null) {
-            final ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-            threadPoolExecutor.setThreadFactory(new ThreadNamingFactory(threadPoolExecutor.getThreadFactory()));
-            // threadPoolExecutor.prestartAllCoreThreads();
-            executor_ = threadPoolExecutor;
-        }
+    public Executor getExecutor() {
+        synchronized (executorLock_) {
+            if (executor_ == null) {
+                final ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+                threadPoolExecutor.setThreadFactory(new ThreadNamingFactory(threadPoolExecutor.getThreadFactory()));
+                // threadPoolExecutor.prestartAllCoreThreads();
+                executor_ = threadPoolExecutor;
+            }
 
-        return executor_;
+            return executor_;
+        }
     }
 
     /**
@@ -1129,12 +1134,14 @@ public class WebClient implements Serializable, AutoCloseable {
      * an IllegalStateExceptions is thrown.
      * @param executor the new Executor.
      */
-    public synchronized void setExecutor(final ExecutorService executor) {
-        if (executor_ != null) {
-            throw new IllegalStateException("Can't change the executor after first use.");
-        }
+    public void setExecutor(final ExecutorService executor) {
+        synchronized (executorLock_) {
+            if (executor_ != null) {
+                throw new IllegalStateException("Can't change the executor after first use.");
+            }
 
-        executor_ = executor;
+            executor_ = executor;
+        }
     }
 
     /**
@@ -2578,7 +2585,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         webConnection_ = null;
 
-        synchronized (this) {
+        synchronized (executorLock_) {
             if (executor_ != null) {
                 try {
                     executor_.shutdownNow();
@@ -2587,8 +2594,8 @@ public class WebClient implements Serializable, AutoCloseable {
                     LOG.error("Exception while shutdown the executor service", e);
                 }
             }
+            executor_ = null;
         }
-        executor_ = null;
 
         cache_.clear();
         if (toThrow != null) {
@@ -3118,7 +3125,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param url the URL on which to filter the returned cookies
      * @return the currently configured cookies applicable to the specified URL, in an unmodifiable set
      */
-    public synchronized Set<Cookie> getCookies(final URL url) {
+    public Set<Cookie> getCookies(final URL url) {
         final CookieManager cookieManager = getCookieManager();
 
         if (!cookieManager.isCookiesEnabled()) {
