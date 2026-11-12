@@ -56,7 +56,6 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScheme;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.client.AuthCache;
@@ -151,7 +150,8 @@ public class HttpWebConnection implements WebConnection {
     private PoolingHttpClientConnectionManager connectionManager_;
 
     /** Authentication cache shared among all threads of a web client. */
-    private final AuthCache sharedAuthCache_ = new SynchronizedAuthCache();
+    // BasicAuthCache is thread-safe (ConcurrentHashMap based)
+    private final AuthCache sharedAuthCache_ = new BasicAuthCache();
 
     /** Maintains a separate {@link HttpClientContext} object per HttpWebConnection and thread. */
     private final Map<Thread, HttpClientContext> httpClientContextByThread_ = new WeakHashMap<>();
@@ -240,17 +240,19 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Returns the {@link HttpClientContext} for the current thread. Creates a new one if necessary.
      */
-    private synchronized HttpContext getHttpContext() {
-        HttpClientContext httpClientContext = httpClientContextByThread_.get(Thread.currentThread());
-        if (httpClientContext == null) {
-            httpClientContext = new HttpClientContext();
+    private HttpContext getHttpContext() {
+        synchronized (httpClientContextByThread_) {
+            HttpClientContext httpClientContext = httpClientContextByThread_.get(Thread.currentThread());
+            if (httpClientContext == null) {
+                httpClientContext = new HttpClientContext();
 
-            // set the shared authentication cache
-            httpClientContext.setAttribute(HttpClientContext.AUTH_CACHE, sharedAuthCache_);
+                // set the shared authentication cache
+                httpClientContext.setAttribute(HttpClientContext.AUTH_CACHE, sharedAuthCache_);
 
-            httpClientContextByThread_.put(Thread.currentThread(), httpClientContext);
+                httpClientContextByThread_.put(Thread.currentThread(), httpClientContext);
+            }
+            return httpClientContext;
         }
-        return httpClientContext;
     }
 
     private void setProxy(final HttpRequestBase httpRequest, final WebRequest webRequest) {
@@ -1423,59 +1425,6 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * An authentication cache that is synchronized.
-     */
-    private static final class SynchronizedAuthCache extends BasicAuthCache {
-
-        /**
-         * Ctor.
-         */
-        SynchronizedAuthCache() {
-            super();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public synchronized void put(final HttpHost host, final AuthScheme authScheme) {
-            super.put(host, authScheme);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public synchronized AuthScheme get(final HttpHost host) {
-            return super.get(host);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public synchronized void remove(final HttpHost host) {
-            super.remove(host);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public synchronized void clear() {
-            super.clear();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public synchronized String toString() {
-            return super.toString();
-        }
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -1484,7 +1433,9 @@ public class HttpWebConnection implements WebConnection {
             httpClientBuilder_.clear();
         }
         sharedAuthCache_.clear();
-        httpClientContextByThread_.clear();
+        synchronized (httpClientContextByThread_) {
+            httpClientContextByThread_.clear();
+        }
 
         if (connectionManager_ != null) {
             connectionManager_.shutdown();
