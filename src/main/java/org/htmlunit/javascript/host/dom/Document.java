@@ -1233,15 +1233,19 @@ public class Document extends Node {
      * Returns a new NodeIterator object.
      *
      * @param root The root node at which to begin the NodeIterator's traversal.
-     * @param whatToShow an optional long representing a bitmask created by combining
-     *        the constant properties of {@link NodeFilter}
+     * @param whatToShow an optional unsigned long representing a bitmask created by combining
+     *        the constant properties of {@link NodeFilter}; defaults to {@link NodeFilter#SHOW_ALL}
      * @param filter an object implementing the {@link NodeFilter} interface
      * @return a new NodeIterator object
      */
     @JsxFunction
-    public NodeIterator createNodeIterator(final Node root, final int whatToShow, final Scriptable filter) {
+    public NodeIterator createNodeIterator(final Node root, final Object whatToShow, final Scriptable filter) {
+        // the dom iterator uses the int based constants of org.w3c.dom.traversal.NodeFilter (SHOW_ALL is -1)
+        final int whatToShowI = JavaScriptEngine.isUndefined(whatToShow)
+                ? org.w3c.dom.traversal.NodeFilter.SHOW_ALL
+                : JavaScriptEngine.toInt32(whatToShow);
         final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, false);
-        final NodeIterator iterator = new NodeIterator(root, whatToShow, filterWrapper);
+        final NodeIterator iterator = new NodeIterator(root, whatToShowI, filterWrapper);
         iterator.setParentScope(getParentScope());
         iterator.setPrototype(getPrototype(iterator.getClass()));
         return iterator;

@@ -84,11 +84,10 @@ public class NodeIterator extends HtmlUnitScriptable {
      * Returns the types of nodes being presented.
      * @return combined bitmask of {@link NodeFilter}
      */
+    @JsxGetter
     public long getWhatToShow() {
-        if (iterator_.getWhatToShow() == NodeFilter.SHOW_ALL) {
-            return 0xFFFFFFFFL;
-        }
-        return iterator_.getWhatToShow();
+        // the dom iterator uses the int based constants of org.w3c.dom.traversal.NodeFilter (SHOW_ALL is -1)
+        return Integer.toUnsignedLong(iterator_.getWhatToShow());
     }
 
     /**

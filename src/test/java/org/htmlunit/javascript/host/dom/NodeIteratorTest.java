@@ -179,4 +179,34 @@ public class NodeIteratorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4294967295", "4294967295", "1", "5","0", "4294967295", "2147483648", "true"})
+    public void whatToShow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      log(document.createNodeIterator(document.body).whatToShow);\n"
+            + "      log(document.createNodeIterator(document.body, NodeFilter.SHOW_ALL).whatToShow);\n"
+            + "      log(document.createNodeIterator(document.body, NodeFilter.SHOW_ELEMENT).whatToShow);\n"
+            + "      log(document.createNodeIterator(document.body,\n"
+            + "            NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT).whatToShow);\n"
+            + "      log(document.createNodeIterator(document.body, 0).whatToShow);\n"
+            + "      log(document.createNodeIterator(document.body, -1).whatToShow);\n"
+            + "      log(document.createNodeIterator(document.body, 0x80000000).whatToShow);\n"
+            + "      log(document.createNodeIterator(document.body).nextNode() === document.body);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
