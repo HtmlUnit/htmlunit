@@ -9,6 +9,10 @@
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
             <action type="fix" dev="rbri">
+                After deserializing a WebClient, new background jobs (setTimeout/setInterval) failed with a
+                NullPointerException or were never executed.
+            </action>
+            <action type="fix" dev="rbri">
                 NodeIterator.whatToShow is now available from JavaScript. document.createNodeIterator() now
                 uses NodeFilter.SHOW_ALL if whatToShow is not given.
             </action>

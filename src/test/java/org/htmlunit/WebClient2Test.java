@@ -132,6 +132,43 @@ public class WebClient2Test extends SimpleWebTestCase {
     }
 
     /**
+     * Timers registered after the deserialization have to work.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_setTimeoutAfterwards() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function later() {\n"
+            + "    setTimeout(function() { document.getElementById('mybox').innerHTML += 'timeout'; }, 10);\n"
+            + "    var count = 0;\n"
+            + "    var id = setInterval(function() {\n"
+            + "      if (++count == 3) {\n"
+            + "        clearInterval(id);\n"
+            + "        document.getElementById('mybox').innerHTML += ' interval';\n"
+            + "      }\n"
+            + "    }, 10);\n"
+            + "    return false;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body><div id='mybox'></div>\n"
+            + "<a href='#' onclick='later()' id='clicklink'>start</a>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+
+        // the copy runs its own event loop; close it to stop the thread
+        try (WebClient clientCopy = clone(page.getWebClient())) {
+            final HtmlPage pageCopy = (HtmlPage) clientCopy.getCurrentWindow().getTopWindow().getEnclosedPage();
+            assertEquals(0, pageCopy.getEnclosingWindow().getJobManager().getJobCount());
+
+            pageCopy.getHtmlElementById("clicklink").click();
+            assertEquals(0, clientCopy.waitForBackgroundJavaScript(2_000));
+            assertEquals("timeout interval", pageCopy.getElementById("mybox").getTextContent());
+        }
+    }
+
+    /**
      * Background tasks that have been registered before the serialization should
      * wake up and run normally after the deserialization.
      * Until now (2.7-SNAPSHOT 17.09.09) HtmlUnit has probably never supported it.

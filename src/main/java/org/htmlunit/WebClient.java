@@ -2892,6 +2892,12 @@ public class WebClient implements Serializable, AutoCloseable {
         css3ParserPool_ = new CSS3ParserPool();
         broadcastChannel_ = new HashSet<>();
         blobUrlStore_ = new BlobUrlStore();
+
+        // the job managers are not part of the serialized state; register them again
+        // (the event loop is started by the job manager as soon as a new job is added)
+        for (final WebWindow window : new ArrayList<>(windows_)) {
+            jobManagers_.add(new WeakReference<>(window.getJobManager()));
+        }
     }
 
     private static class LoadJob {

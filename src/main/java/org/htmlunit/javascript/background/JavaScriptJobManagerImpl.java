@@ -16,6 +16,7 @@ package org.htmlunit.javascript.background;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.ref.WeakReference;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -42,9 +43,15 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /**
      * The window to which this job manager belongs (weakly referenced, so as not
-     * to leak memory).
+     * to leak memory). Not final because it has to be restored by {@link #readObject(ObjectInputStream)}.
      */
-    private final transient WeakReference<WebWindow> window_;
+    private transient WeakReference<WebWindow> window_;
+
+    /**
+     * True after deserialization; the event loop is not running and has
+     * to be started with the first job added.
+     */
+    private transient volatile boolean startEventLoop_;
 
     /**
      * Queue of jobs that are scheduled to run. This is a priority queue, sorted
@@ -114,6 +121,12 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
         final int id = NEXT_JOB_ID_.getAndIncrement();
         job.setId(Integer.valueOf(id));
+
+        if (startEventLoop_) {
+            // registering the window more than once does no harm
+            startEventLoop_ = false;
+            w.getWebClient().getJavaScriptEngine().registerWindowAndMaybeStartEventLoop(w);
+        }
 
         synchronized (this) {
             scheduledJobsQ_.add(job);
@@ -463,6 +476,19 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /**
      * Our own serialization (to handle the weak reference).
+     * The window is part of the serialized object graph anyway (it holds this job manager),
+     * therefore only a back reference is written here.
+     *
+     * @param out the stream to write to
+     * @throws IOException in case of error
+     */
+    private void writeObject(final ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        out.writeObject(getWindow());
+    }
+
+    /**
+     * Our own serialization (to handle the weak reference).
      *
      * @param in the stream to read from
      * @throws IOException in case of error
@@ -470,6 +496,8 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+        window_ = new WeakReference<>((WebWindow) in.readObject());
+        startEventLoop_ = true;
 
         // we do not store the jobs (at the moment)
         scheduledJobsQ_ = new PriorityQueue<>();
