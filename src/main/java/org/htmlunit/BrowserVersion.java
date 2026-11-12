@@ -1414,6 +1414,7 @@ public final class BrowserVersion implements Serializable {
          * @return the parsed {@code MediaResourceType}, or {@code null} if the
          *         input is blank (indicating an immediate {@code ""} result)
          */
+        @SuppressWarnings("PMD.AvoidBranchingStatementAsLastInLoop") // the first codecs param wins
         public static MediaResourceType parse(final String mediaResourceType) {
             if (StringUtils.isBlank(mediaResourceType)) {
                 return null;

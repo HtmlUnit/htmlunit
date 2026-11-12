@@ -1217,23 +1217,26 @@ public class CssStyleSheet implements Serializable {
     public CssStyleSheet getImportedStyleSheet(final CSSImportRuleImpl importRule) {
         CssStyleSheet sheet = imports_.get(importRule);
         if (sheet == null) {
-            final String href = importRule.getHref();
-            String url = UrlUtils.resolveUrl(getUri(), href);
-            if (owner_ != null && owner_.getPage() instanceof HtmlPage page) {
+            String url = UrlUtils.resolveUrl(getUri(), importRule.getHref());
+            if (owner_ == null || !(owner_.getPage() instanceof HtmlPage page)) {
+                // nothing to load from; e.g. a constructed stylesheet
+                sheet = new CssStyleSheet(owner_, new CSSStyleSheetImpl(), url);
+            }
+            else {
                 // upgrade-insecure-requests of the Content-Security-Policy
                 final URL resolvedUrl = UrlUtils.toUrlSafe(url);
                 final URL upgradedUrl = ContentSecurityPolicy.upgradeInsecureRequest(page, resolvedUrl);
                 if (upgradedUrl != resolvedUrl) {
                     url = upgradedUrl.toExternalForm();
                 }
-            }
-            if (owner_ != null && owner_.getPage() instanceof HtmlPage htmlPage
-                    && !ContentSecurityPolicy.allowsExternalStyle(htmlPage, null, UrlUtils.toUrlSafe(url))) {
-                sheet = new CssStyleSheet(owner_, "", url);
-                sheet.blockedByContentSecurityPolicy_ = true;
-            }
-            else {
-                sheet = loadStylesheet(owner_, null, url);
+
+                if (ContentSecurityPolicy.allowsExternalStyle(page, null, upgradedUrl)) {
+                    sheet = loadStylesheet(owner_, null, url);
+                }
+                else {
+                    sheet = new CssStyleSheet(owner_, new CSSStyleSheetImpl(), url);
+                    sheet.blockedByContentSecurityPolicy_ = true;
+                }
             }
             imports_.put(importRule, sheet);
         }

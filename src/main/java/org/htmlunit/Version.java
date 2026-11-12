@@ -36,6 +36,7 @@ public final class Version {
      * @param args the arguments passed on the command line
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("PMD.SystemPrintln")
     public static void main(final String[] args) throws Exception {
         if (args.length == 1 && "-SanityCheck".equals(args[0])) {
             runSanityCheck();
@@ -50,6 +51,7 @@ public final class Version {
      * Runs the sanity check.
      * @throws Exception if anything goes wrong
      */
+    @SuppressWarnings("PMD.SystemPrintln")
     private static void runSanityCheck() throws Exception {
         try (WebClient webClient = new WebClient()) {
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/index.html");
