@@ -115,7 +115,7 @@ public class DocumentFragment extends Node {
     @JsxFunction
     public static void moveBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
-        Node.moveBefore(context, scope, thisObj, args, function);
+        moveBeforeImpl(thisObj, args, "DocumentFragment");
     }
 
     /**

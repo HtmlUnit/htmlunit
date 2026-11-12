@@ -521,47 +521,43 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Moves a given Node inside the invoking node as a direct child, before a given reference node.
+     * Implementation of moveBefore() of the ParentNode mixin
+     * (available for Element, Document and DocumentFragment, but not for Node).
+     * Moves a given node inside the invoking node as a direct child, before a given reference node.
      *
-     * @param context the JavaScript context
-     * @param scope the scope
-     * @param thisObj the scriptable
-     * @param args the arguments passed into the method
-     * @param function the function
+     * @param thisObj the parent node
+     * @param args the arguments passed into the JavaScript function
+     * @param interfaceName the name of the interface used for the error messages (e.g. 'Element')
      */
-    public static void moveBefore(final Context context, final VarScope scope,
-            final Scriptable thisObj, final Object[] args, final Function function) {
+    protected static void moveBeforeImpl(final Scriptable thisObj, final Object[] args,
+            final String interfaceName) {
         if (args.length < 2) {
             throw JavaScriptEngine.typeError(
-                    "Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 0 present.");
+                    "Failed to execute 'moveBefore' on '" + interfaceName + "': 2 arguments required, but only "
+                    + args.length + " present.");
         }
 
-        final Object movedNodeObject = args[0];
-        if (!(movedNodeObject instanceof Node movedNode)) {
+        if (!(args[0] instanceof Node movedNode)) {
             throw JavaScriptEngine.typeError(
-                    "Failed to execute 'moveBefore' on 'Element': parameter 1 is not of type 'Node'.");
+                    "Failed to execute 'moveBefore' on '" + interfaceName + "': parameter 1 is not of type 'Node'.");
         }
 
-        final Object referenceNodeObject = args[1];
+        // the reference node is nullable; undefined is converted to null
+        final Object referenceNodeObject = JavaScriptEngine.isUndefined(args[1]) ? null : args[1];
         if (referenceNodeObject != null && !(referenceNodeObject instanceof Node)) {
             throw JavaScriptEngine.typeError(
-                    "Failed to execute 'moveBefore' on 'Element': parameter 2 is not of type 'Node'.");
+                    "Failed to execute 'moveBefore' on '" + interfaceName + "': parameter 2 is not of type 'Node'.");
         }
 
         final Node node = (Node) thisObj;
         try {
-            if (referenceNodeObject == null) {
-                node.getDomNodeOrDie().moveBefore(movedNode.getDomNodeOrDie(), null);
-                return;
-            }
-
-            node.getDomNodeOrDie().moveBefore(
-                    ((Node) movedNodeObject).getDomNodeOrDie(), ((Node) referenceNodeObject).getDomNodeOrDie());
+            node.getDomNodeOrDie().moveBefore(movedNode.getDomNodeOrDie(),
+                    referenceNodeObject == null ? null : ((Node) referenceNodeObject).getDomNodeOrDie());
         }
         catch (final org.w3c.dom.DOMException e) {
             throw JavaScriptEngine.asJavaScriptException(
                     node.getWindow(),
-                    "Failed to execute 'moveChild' on '" + node + ": " + e.getMessage(),
+                    "Failed to execute 'moveBefore' on '" + interfaceName + "': " + e.getMessage(),
                     e.code);
         }
     }

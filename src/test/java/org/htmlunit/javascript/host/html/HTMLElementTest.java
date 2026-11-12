@@ -8094,7 +8094,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
 
             + "    try {\n"
-            + "      parent.moveBefore();\n"
+            + "      parent.moveBefore(div);\n"
             + "      log('success');\n"
             + "    } catch(e) {\n"
             + "      logEx(e);\n"
@@ -8171,6 +8171,135 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='parent'>\n"
             + "    <span id='span1'>1</span>\n"
             + "    <div id='div'>x</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The reference node is nullable; undefined is converted to null.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "DIV", "SPAN"})
+    public void moveBefore_undefinedReferenceNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var span = document.getElementById('span1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      parent.moveBefore(span, undefined);\n"
+            + "      log(parent.children.length);\n"
+            + "      log(parent.children[0].tagName);\n"
+            + "      log(parent.children[1].tagName);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div1'>2</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The error messages name the interface (Element, Document, DocumentFragment)
+     * and the number of arguments.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 0 present.",
+                       "TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 1 present.",
+                       "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 1 is not of type 'Node'.",
+                       "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 2 is not of type 'Node'.",
+                       "HierarchyRequestError: Failed to execute 'moveBefore' on 'Element': State-preserving atomic move cannot be performed on nodes participating in an invalid hierarchy.",
+                       "TypeError: Failed to execute 'moveBefore' on 'Document': 2 arguments required, but only 1 present.",
+                       "TypeError: Failed to execute 'moveBefore' on 'DocumentFragment': 2 arguments required, but only 1 present."},
+            FF = {"TypeError: Element.moveBefore: At least 2 arguments required, but only 0 passed",
+                  "TypeError: Element.moveBefore: At least 2 arguments required, but only 1 passed",
+                  "TypeError: Element.moveBefore: Argument 1 is not an object.",
+                  "TypeError: Element.moveBefore: Argument 2 is not an object.",
+                  "HierarchyRequestError: Element.moveBefore: Different root node.",
+                  "TypeError: Document.moveBefore: At least 2 arguments required, but only 1 passed",
+                  "TypeError: DocumentFragment.moveBefore: At least 2 arguments required, but only 1 passed§"},
+            FF_ESR = {"TypeError: Element.moveBefore: At least 2 arguments required, but only 0 passed",
+                      "TypeError: Element.moveBefore: At least 2 arguments required, but only 1 passed",
+                      "TypeError: Element.moveBefore: Argument 1 is not an object.",
+                      "TypeError: Element.moveBefore: Argument 2 is not an object.",
+                      "HierarchyRequestError: Element.moveBefore: Different root node.",
+                      "TypeError: Document.moveBefore: At least 2 arguments required, but only 1 passed",
+                      "TypeError: DocumentFragment.moveBefore: At least 2 arguments required, but only 1 passed"})
+    @HtmlUnitNYI(CHROME = {"TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 0 present.",
+                           "TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 1 present.",
+                           "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 1 is not of type 'Node'.",
+                           "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 2 is not of type 'Node'.",
+                           "NotFoundError: Failed to execute 'moveBefore' on 'Element': The node before which the new node is to be inserted is not a child of this node.",
+                           "TypeError: Failed to execute 'moveBefore' on 'Document': 2 arguments required, but only 1 present.",
+                           "TypeError: Failed to execute 'moveBefore' on 'DocumentFragment': 2 arguments required, but only 1 present."},
+            EDGE = {"TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 0 present.",
+                    "TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 1 present.",
+                    "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 1 is not of type 'Node'.",
+                    "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 2 is not of type 'Node'.",
+                    "NotFoundError: Failed to execute 'moveBefore' on 'Element': The node before which the new node is to be inserted is not a child of this node.",
+                    "TypeError: Failed to execute 'moveBefore' on 'Document': 2 arguments required, but only 1 present.",
+                    "TypeError: Failed to execute 'moveBefore' on 'DocumentFragment': 2 arguments required, but only 1 present."},
+            FF = {"TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 0 present.",
+                  "TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 1 present.",
+                  "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 1 is not of type 'Node'.",
+                  "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 2 is not of type 'Node'.",
+                  "NotFoundError: Failed to execute 'moveBefore' on 'Element': The node before which the new node is to be inserted is not a child of this node.",
+                  "TypeError: Failed to execute 'moveBefore' on 'Document': 2 arguments required, but only 1 present.",
+                  "TypeError: Failed to execute 'moveBefore' on 'DocumentFragment': 2 arguments required, but only 1 present."},
+            FF_ESR = {"TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 0 present.",
+                      "TypeError: Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 1 present.",
+                      "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 1 is not of type 'Node'.",
+                      "TypeError: Failed to execute 'moveBefore' on 'Element': parameter 2 is not of type 'Node'.",
+                      "NotFoundError: Failed to execute 'moveBefore' on 'Element': The node before which the new node is to be inserted is not a child of this node.",
+                      "TypeError: Failed to execute 'moveBefore' on 'Document': 2 arguments required, but only 1 present.",
+                      "TypeError: Failed to execute 'moveBefore' on 'DocumentFragment': 2 arguments required, but only 1 present."})
+    public void moveBefore_errorMessages() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function check(parent, args) {\n"
+            + "    try {\n"
+            + "      parent.moveBefore.apply(parent, args);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      log(e.name + ': ' + e.message);\n"
+            + "    }\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    check(parent, []);\n"
+            + "    check(parent, [div]);\n"
+            + "    check(parent, ['HtmlUnit', null]);\n"
+            + "    check(parent, [div, 'HtmlUnit']);\n"
+            + "    check(parent, [document.createElement('p'), document.createElement('i')]);\n"
+
+            + "    check(document, [div]);\n"
+            + "    check(document.createDocumentFragment(), [div]);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div1'>2</div>\n"
             + "  </div>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);

@@ -15,6 +15,11 @@
             <property name="reportStaticFields" value="false" />
         </properties>
     </rule>
+    <rule ref="category/java/codestyle.xml/EmptyControlStatement">
+        <properties>
+            <property name="allowCommentedBlocks" value="true" />
+        </properties>
+    </rule>
 
     <!-- i think there is no need to guard error log statements -->
     <rule ref="category/java/bestpractices.xml/GuardLogStatement">

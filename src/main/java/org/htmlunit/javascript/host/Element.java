@@ -901,7 +901,7 @@ public class Element extends Node {
     @JsxFunction
     public static void moveBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
-        Node.moveBefore(context, scope, thisObj, args, function);
+        moveBeforeImpl(thisObj, args, "Element");
     }
 
     /**
@@ -1150,7 +1150,7 @@ public class Element extends Node {
         else if (node instanceof DomProcessingInstruction pi) {
             builder.append("<?")
                     .append(pi.getTarget())
-                    .append(" ")
+                    .append(' ')
                     .append(pi.getData())
                     .append(getBrowserVersion().hasFeature(JS_INNER_HTML_PROCESSING_INSTRUCTION_NO_QUESTION_MARK)
                             ? ">" : "?>");
