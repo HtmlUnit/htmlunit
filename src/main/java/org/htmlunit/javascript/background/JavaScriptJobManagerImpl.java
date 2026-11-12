@@ -33,12 +33,16 @@ import org.htmlunit.WebWindow;
  *
  * <p>This job manager is serializable, but any running jobs are transient and are not serialized.</p>
  *
+ * <p>The instance itself is the monitor (synchronized methods, wait / notifyAll); the class is
+ * package private and only exposed through the {@link JavaScriptJobManager} interface.</p>
+ *
  * @author Daniel Gredler
  * @author Katharina Probst
  * @author Amit Manjhi
  * @author Ronald Brill
  * @author Carsten Steul
  */
+@SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
 class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /**
@@ -139,7 +143,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 printQueue();
             }
 
-            notify();
+            notifyAll();
         }
 
         return id;
@@ -152,7 +156,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             final int jobId = job.getId().intValue();
             if (jobId == id) {
                 scheduledJobsQ_.remove(job);
-                notify();
+                notifyAll();
                 break;
             }
         }
@@ -170,7 +174,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     @Override
     public synchronized void removeAllJobs() {
         scheduledJobsQ_.clear();
-        notify();
+        notifyAll();
     }
 
     /** {@inheritDoc} */
@@ -298,7 +302,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     @Override
     public synchronized void shutdown() {
         scheduledJobsQ_.clear();
-        notify();
+        notifyAll();
     }
 
     /**
@@ -385,7 +389,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * {@inheritDoc}
      */
     @Override
-    public JavaScriptJob getEarliestJob() {
+    public synchronized JavaScriptJob getEarliestJob() {
         return scheduledJobsQ_.peek();
     }
 
@@ -445,7 +449,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                     LOG.debug("Rescheduling periodic job " + job);
                 }
                 scheduledJobsQ_.add(job);
-                notify();
+                notifyAll();
             }
         }
 
@@ -464,7 +468,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 if (job == currentlyRunningJob_) {
                     currentlyRunningJob_ = null;
                 }
-                notify();
+                notifyAll();
             }
         }
         if (debug) {
