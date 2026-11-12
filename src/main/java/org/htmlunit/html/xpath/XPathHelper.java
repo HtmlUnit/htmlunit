@@ -40,7 +40,12 @@ import org.w3c.dom.NodeList;
  */
 public final class XPathHelper {
 
-    private static final ThreadLocal<Boolean> PROCESS_XPATH_ = ThreadLocal.withInitial(() -> Boolean.FALSE);
+    private static final ThreadLocal<Boolean> PROCESS_XPATH_ = new ThreadLocal<>() {
+        @Override
+        protected synchronized Boolean initialValue() {
+            return Boolean.FALSE;
+        }
+    };
 
     /**
      * Private to avoid instantiation.
