@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="Vidya m">
+                History.pushState() and History.replaceState() throw a SecurityError if the url is not same origin
+                with the document; a page was able to change its url (and by this its origin for cookies,
+                XMLHttpRequest and local files) to any other url.
+            </action>
             <action type="fix" dev="rbri">
                 DomNode.querySelector(String) and DomNode.querySelectorAll(String) are available again (removed
                 in 5.7.0 by mistake); like element.querySelector() in the browsers, the node itself is the scope

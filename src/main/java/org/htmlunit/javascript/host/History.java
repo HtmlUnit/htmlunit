@@ -27,7 +27,9 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.util.StringUtils;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * JavaScript host object for the client's browsing history.
@@ -156,13 +158,24 @@ public class History extends HtmlUnitScriptable {
         }
     }
 
-    private static URL buildNewStateUrl(final WebWindow webWindow, final Object url) throws MalformedURLException {
+    private URL buildNewStateUrl(final WebWindow webWindow, final Object url) throws MalformedURLException {
         URL newStateUrl = null;
         if (url != null && !JavaScriptEngine.isUndefined(url)) {
             final String urlString = JavaScriptEngine.toString(url);
             if (StringUtils.isNotBlank(urlString)) {
                 final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
                 newStateUrl = page.getFullyQualifiedUrl(urlString);
+
+                // the document url can only be changed inside the origin of the document
+                // https://html.spec.whatwg.org/multipage/nav-history-apis.html#can-have-its-url-rewritten
+                if (!UrlUtils.isSameOrigin(page.getUrl(), newStateUrl)) {
+                    throw JavaScriptEngine.asJavaScriptException(
+                            getWindow(),
+                            "A history state object with URL '" + newStateUrl.toExternalForm()
+                                + "' cannot be created in a document with URL '"
+                                + page.getUrl().toExternalForm() + "'.",
+                            DOMException.SECURITY_ERR);
+                }
             }
         }
         return newStateUrl;

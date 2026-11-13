@@ -967,6 +967,87 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"href=§§URL§§", "SecurityError", "href=§§URL§§"})
+    public void pushStateCrossOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    try {\n"
+                + "      window.history.pushState(null, '', '" + URL_CROSS_ORIGIN_BASE + "');\n"
+                + "    } catch(e) { log(e.name); }\n"
+                + "    log('href=' + location.href);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"href=§§URL§§", "SecurityError", "href=§§URL§§"})
+    public void replaceStateCrossOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    try {\n"
+                + "      window.history.replaceState(null, '', '" + URL_CROSS_ORIGIN_BASE + "');\n"
+                + "    } catch(e) { log(e.name); }\n"
+                + "    log('href=' + location.href);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"href=§§URL§§", "SecurityError", "href=§§URL§§"})
+    public void replaceStateFileUrl() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    try {\n"
+                + "      window.history.replaceState(null, '', 'file:///');\n"
+                + "    } catch(e) { log(e.name); }\n"
+                + "    log('href=' + location.href);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void length() throws Exception {
         final String second = DOCTYPE_HTML
                 + "<html>\n"
