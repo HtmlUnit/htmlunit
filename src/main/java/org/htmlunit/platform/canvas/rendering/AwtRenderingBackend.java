@@ -29,7 +29,6 @@ import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -514,44 +513,9 @@ public class AwtRenderingBackend implements RenderingBackend {
                         }
                     }
 
-                    final Object done = new Object();
-                    final ImageObserver imageObserver = (img1, flags, x, y, width, height) -> {
-
-                        if ((flags & ImageObserver.ALLBITS) == ImageObserver.ALLBITS) {
-                            return true;
-                        }
-
-                        if ((flags & ImageObserver.ABORT) == ImageObserver.ABORT
-                                || (flags & ImageObserver.ERROR) == ImageObserver.ERROR) {
-                            return true;
-                        }
-
-                        synchronized (done) {
-                            done.notify();
-                        }
-
-                        return false;
-                    };
-
-                    synchronized (done) {
-                        final boolean completelyLoaded =
-                                graphics2D_.drawImage(img, dx1, dy1, dx2, dy2, sx, sy, sx2, sy2, imageObserver);
-                        if (!completelyLoaded) {
-                            while (true) {
-                                try {
-                                    done.wait(4 * 1000); // max 4s
-                                    break;
-                                }
-                                catch (final InterruptedException e) {
-                                    LOG.error("[" + id_ + "] AwtRenderingBackend interrupted "
-                                            + "while waiting for drawImage to finish.", e);
-
-                                    // restore interrupted status
-                                    Thread.currentThread().interrupt();
-                                }
-                            }
-                        }
-                    }
+                    // the image is already completely decoded (BufferedImage), therefore the drawing is done
+                    // synchronously; no ImageObserver is needed
+                    graphics2D_.drawImage(img, dx1, dy1, dx2, dy2, sx, sy, sx2, sy2, null);
                 }
                 finally {
                     graphics2D_.setTransform(savedTransform);
