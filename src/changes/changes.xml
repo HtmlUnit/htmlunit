@@ -8,6 +8,14 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="rbri">
+                After the serialization, attributes with an empty value (e.g. contenteditable="") were no longer
+                detected as empty attribute values (contentEditable was '' instead of 'true').
+            </action>
+            <action type="update" dev="rbri">
+                DomElement.ATTRIBUTE_VALUE_EMPTY is deprecated; an empty attribute value is an empty string that
+                is not DomElement.ATTRIBUTE_NOT_DEFINED, check this with value.isEmpty().
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang3 to 3.22.0.
             </action>

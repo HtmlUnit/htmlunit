@@ -103,7 +103,14 @@ public class DomElement extends DomNamespaceNode implements Element {
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 
-    /** Constant meaning that the specified attribute was found but its value was empty. */
+    /**
+     * Constant meaning that the specified attribute was found but its value was empty.
+     *
+     * @deprecated as of version 5.8.0; an empty attribute value is an empty string that is not
+     *             {@link #ATTRIBUTE_NOT_DEFINED}, check this with {@code value.isEmpty()} after
+     *             the check for {@link #ATTRIBUTE_NOT_DEFINED}
+     */
+    @Deprecated
     public static final String ATTRIBUTE_VALUE_EMPTY = new String();
 
     /** The map holding the attributes, keyed by name. */
@@ -332,7 +339,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final LinkedHashMap<String, StyleElement> styleMap = new LinkedHashMap<>();
-        if (ATTRIBUTE_NOT_DEFINED == styleAttribute || ATTRIBUTE_VALUE_EMPTY == styleAttribute
+        if (ATTRIBUTE_NOT_DEFINED == styleAttribute || styleAttribute.isEmpty()
                 || styleAttribute.equals(blockedStyleAttribute_)) {
             styleMap_ = styleMap;
             styleString_ = styleAttribute;
@@ -456,12 +463,11 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /**
      * Returns the value of the attribute specified by name or an empty string. If the
-     * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
-     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
-     * attribute was specified, but it was empty.
+     * attribute wasn't specified, the result is {@link #ATTRIBUTE_NOT_DEFINED} (check with {@code ==});
+     * any other empty string means the attribute was specified, but it was empty.
      *
      * @param attributeName the name of the attribute
-     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      */
     @Override
     public String getAttribute(final String attributeName) {
@@ -476,7 +482,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @param attributeName the name of the attribute
-     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      */
     public String getAttributeDirect(final String attributeName) {
         final DomAttr attr = attributes_.getDirect(attributeName);
@@ -674,13 +680,12 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /**
      * Returns the value of the attribute specified by namespace and local name or an empty
-     * string. If the result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
-     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
-     * attribute was specified, but it was empty.
+     * string. If the attribute wasn't specified, the result is {@link #ATTRIBUTE_NOT_DEFINED}
+     * (check with {@code ==}); any other empty string means the attribute was specified, but it was empty.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param localName the name within the namespace
-     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      */
     @Override
     public final String getAttributeNS(final String namespaceURI, final String localName) {

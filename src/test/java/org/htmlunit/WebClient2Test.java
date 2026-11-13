@@ -106,6 +106,33 @@ public class WebClient2Test extends SimpleWebTestCase {
     }
 
     /**
+     * An empty attribute value has still to be detected as empty value (and not as missing attribute)
+     * after the serialization.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_emptyAttributeValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d' contenteditable=''>hello</div>\n"
+            + "</body></html>";
+
+        try (WebClient client = getWebClient()) {
+            final HtmlPage page = loadPage(client, html, null, URL_FIRST);
+            assertEquals("true", page.executeJavaScript(
+                    "document.getElementById('d').contentEditable").getJavaScriptResult());
+
+            try (WebClient copy = clone(client)) {
+                final HtmlPage copyPage = (HtmlPage) copy.getCurrentWindow().getEnclosedPage();
+                assertEquals("true", copyPage.executeJavaScript(
+                        "document.getElementById('d').contentEditable").getJavaScriptResult());
+                assertEquals(Boolean.TRUE, copyPage.executeJavaScript(
+                        "document.getElementById('d').isContentEditable").getJavaScriptResult());
+            }
+        }
+    }
+
+    /**
      * Regression test for bug 2836355.
      * @throws Exception if an error occurs
      */

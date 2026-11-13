@@ -14,6 +14,9 @@
  */
 package org.htmlunit.html;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import org.htmlunit.SgmlPage;
 import org.w3c.dom.Attr;
 import org.w3c.dom.TypeInfo;
@@ -49,11 +52,19 @@ public class DomAttr extends DomNamespaceNode implements Attr {
         specified_ = specified;
     }
 
+    // still done for backward compatibility, see DomElement.ATTRIBUTE_VALUE_EMPTY
+    @SuppressWarnings("deprecation")
     private static String normalizeValue(final String value) {
         if (value != null && value.isEmpty()) {
             return DomElement.ATTRIBUTE_VALUE_EMPTY;
         }
         return value;
+    }
+
+    private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+        // the deserialized empty string is a new instance
+        value_ = normalizeValue(value_);
     }
 
     /**

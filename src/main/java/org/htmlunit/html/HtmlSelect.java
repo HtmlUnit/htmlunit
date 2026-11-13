@@ -562,7 +562,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     public final int getSize() {
         final String sizeAttribute = getSizeAttribute();
-        if (ATTRIBUTE_NOT_DEFINED != sizeAttribute && ATTRIBUTE_VALUE_EMPTY != sizeAttribute) {
+        if (ATTRIBUTE_NOT_DEFINED != sizeAttribute && !sizeAttribute.isEmpty()) {
             try {
                 final int size = Integer.parseInt(getSizeAttribute());
                 if (size < 0) {

@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_VALUE_EMPTY;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -1113,7 +1112,7 @@ public class HTMLElement extends Element {
         if (ATTRIBUTE_NOT_DEFINED == attribute) {
             return "inherit";
         }
-        if (attribute == ATTRIBUTE_VALUE_EMPTY) {
+        if (attribute.isEmpty()) {
             return "true";
         }
         return attribute;
@@ -2581,7 +2580,7 @@ public class HTMLElement extends Element {
     @JsxGetter
     public String getEnterKeyHint() {
         String value = getDomNodeOrDie().getAttributeDirect("enterkeyhint");
-        if (ATTRIBUTE_NOT_DEFINED == value || ATTRIBUTE_VALUE_EMPTY == value) {
+        if (value.isEmpty()) {
             return "";
         }
 
