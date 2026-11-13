@@ -2102,7 +2102,7 @@ public class HtmlPage extends SgmlPage {
             return;
         }
 
-        while (autofocusCandidates_ != null && !autofocusCandidates_.isEmpty()) {
+        while (!autofocusCandidates_.isEmpty()) {
             final HtmlElement candidate = autofocusCandidates_.remove(0);
             if (candidate.getPage() != this || !candidate.isAttachedToPage()) {
                 continue;
@@ -2112,6 +2112,7 @@ public class HtmlPage extends SgmlPage {
             if (elementWithFocus_ == candidate) {
                 autofocusCandidates_ = null;
                 autofocusProcessed_ = true;
+                return;
             }
         }
     }
