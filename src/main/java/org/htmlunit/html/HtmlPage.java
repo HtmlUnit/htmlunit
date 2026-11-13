@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.xml.XMLConstants;
 
@@ -168,9 +169,12 @@ public class HtmlPage extends SgmlPage {
     private boolean mappedElementsBuilt_;
 
     private List<BaseFrameElement> frameElements_ = new ArrayList<>();
-    private int parserCount_;
-    private int snippetParserCount_;
-    private int inlineSnippetParserCount_;
+    // a parser may run on the loading thread and on the JavaScript thread (e.g. innerHTML in a timer)
+    private AtomicInteger parserCount_ = new AtomicInteger();
+    // the snippet parsing (innerHTML, document.write()...) is done by the thread of the script, therefore
+    // the state is per thread; otherwise the loading thread parses the page as snippet (e.g. without running
+    // the scripts) while the JavaScript thread runs a timer that sets innerHTML
+    private transient ThreadLocal<SnippetParserCount> snippetParserCount_ = new ThreadLocal<>();
     private Collection<HtmlAttributeChangeListener> attributeListeners_;
     private List<PostponedAction> afterLoadActions_ = Collections.synchronizedList(new ArrayList<>());
     private boolean cleaning_;
@@ -2365,6 +2369,9 @@ public class HtmlPage extends SgmlPage {
         result.nameMap_ = new ConcurrentHashMap<>();
         result.mappedElementsBuilt_ = false;
 
+        result.parserCount_ = new AtomicInteger();
+        result.snippetParserCount_ = new ThreadLocal<>();
+
         return result;
     }
 
@@ -2509,7 +2516,7 @@ public class HtmlPage extends SgmlPage {
      * @return {@code true} if an HTML parser is operating on this page, adding content to it
      */
     public boolean isBeingParsed() {
-        return parserCount_ > 0;
+        return parserCount_.get() > 0;
     }
 
     /**
@@ -2518,7 +2525,7 @@ public class HtmlPage extends SgmlPage {
      * Called by the HTML parser to let the page know that it has started parsing some content for this page.
      */
     public void registerParsingStart() {
-        parserCount_++;
+        parserCount_.incrementAndGet();
     }
 
     /**
@@ -2527,23 +2534,24 @@ public class HtmlPage extends SgmlPage {
      * Called by the HTML parser to let the page know that it has finished parsing some content for this page.
      */
     public void registerParsingEnd() {
-        parserCount_--;
+        parserCount_.decrementAndGet();
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Returns {@code true} if an HTML parser is parsing a non-inline HTML snippet to add content
-     * to this page. Non-inline content is content that is parsed for the page, but not in the
+     * Returns {@code true} if an HTML parser of the current thread is parsing a non-inline HTML snippet
+     * to add content to this page. Non-inline content is content that is parsed for the page, but not in the
      * same stream as the page itself -- basically anything other than <code>document.write()</code>
      * or <code>document.writeln()</code>: <code>innerHTML</code>, <code>outerHTML</code>,
      * <code>document.createElement()</code>, etc.
      *
-     * @return {@code true} if an HTML parser is parsing a non-inline HTML snippet to add content
-     *         to this page
+     * @return {@code true} if an HTML parser of the current thread is parsing a non-inline HTML snippet
+     *         to add content to this page
      */
     public boolean isParsingHtmlSnippet() {
-        return snippetParserCount_ > 0;
+        final SnippetParserCount count = snippetParserCount_.get();
+        return count != null && count.snippet_ > 0;
     }
 
     /**
@@ -2552,7 +2560,7 @@ public class HtmlPage extends SgmlPage {
      * Called by the HTML parser to let the page know that it has started parsing a non-inline HTML snippet.
      */
     public void registerSnippetParsingStart() {
-        snippetParserCount_++;
+        updateSnippetParserCount(1, 0);
     }
 
     /**
@@ -2561,21 +2569,22 @@ public class HtmlPage extends SgmlPage {
      * Called by the HTML parser to let the page know that it has finished parsing a non-inline HTML snippet.
      */
     public void registerSnippetParsingEnd() {
-        snippetParserCount_--;
+        updateSnippetParserCount(-1, 0);
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Returns {@code true} if an HTML parser is parsing an inline HTML snippet to add content
-     * to this page. Inline content is content inserted into the parser stream dynamically
+     * Returns {@code true} if an HTML parser of the current thread is parsing an inline HTML snippet
+     * to add content to this page. Inline content is content inserted into the parser stream dynamically
      * while the page is being parsed (i.e. <code>document.write()</code> or <code>document.writeln()</code>).
      *
-     * @return {@code true} if an HTML parser is parsing an inline HTML snippet to add content
-     *         to this page
+     * @return {@code true} if an HTML parser of the current thread is parsing an inline HTML snippet
+     *         to add content to this page
      */
     public boolean isParsingInlineHtmlSnippet() {
-        return inlineSnippetParserCount_ > 0;
+        final SnippetParserCount count = snippetParserCount_.get();
+        return count != null && count.inline_ > 0;
     }
 
     /**
@@ -2584,7 +2593,7 @@ public class HtmlPage extends SgmlPage {
      * Called by the HTML parser to let the page know that it has started parsing an inline HTML snippet.
      */
     public void registerInlineSnippetParsingStart() {
-        inlineSnippetParserCount_++;
+        updateSnippetParserCount(0, 1);
     }
 
     /**
@@ -2593,7 +2602,22 @@ public class HtmlPage extends SgmlPage {
      * Called by the HTML parser to let the page know that it has finished parsing an inline HTML snippet.
      */
     public void registerInlineSnippetParsingEnd() {
-        inlineSnippetParserCount_--;
+        updateSnippetParserCount(0, -1);
+    }
+
+    private void updateSnippetParserCount(final int snippetDelta, final int inlineDelta) {
+        SnippetParserCount count = snippetParserCount_.get();
+        if (count == null) {
+            count = new SnippetParserCount();
+            snippetParserCount_.set(count);
+        }
+        count.snippet_ += snippetDelta;
+        count.inline_ += inlineDelta;
+
+        // no leftovers in the thread
+        if (count.snippet_ <= 0 && count.inline_ <= 0) {
+            snippetParserCount_.remove();
+        }
     }
 
     /**
@@ -3004,6 +3028,7 @@ public class HtmlPage extends SgmlPage {
         if (charsetName != null) {
             originalCharset_ = Charset.forName(charsetName);
         }
+        snippetParserCount_ = new ThreadLocal<>();
     }
 
     /**
@@ -3228,6 +3253,14 @@ public class HtmlPage extends SgmlPage {
                 computedStylesCache_.nodeChanged(changedNode, clearParents);
             }
         }
+    }
+
+    /**
+     * The nesting depth of the snippet parsers of one thread for this page.
+     */
+    private static final class SnippetParserCount {
+        private int snippet_;
+        private int inline_;
     }
 
     /**

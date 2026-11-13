@@ -25,6 +25,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -480,5 +482,60 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         finally {
             assertTrue(file.delete());
         }
+    }
+
+    /**
+     * The snippet parsing (innerHTML, document.write()...) of one thread (e.g. a timer running
+     * on the JavaScript thread) must not change the parsing of another thread (e.g. the thread
+     * loading the page); the scripts of the page have still to be executed.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void snippetParsingIsPerThread() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body></body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final CountDownLatch started = new CountDownLatch(1);
+        final CountDownLatch done = new CountDownLatch(1);
+        final Thread snippetParser = new Thread(() -> {
+            page.registerParsingStart();
+            page.registerSnippetParsingStart();
+            page.registerInlineSnippetParsingStart();
+            started.countDown();
+            try {
+                done.await();
+            }
+            catch (final InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            finally {
+                page.registerParsingEnd();
+                page.registerSnippetParsingEnd();
+                page.registerInlineSnippetParsingEnd();
+            }
+        });
+        snippetParser.start();
+        try {
+            assertTrue(started.await(10, TimeUnit.SECONDS));
+
+            // a parser is active for the page, but not one of this thread
+            assertTrue(page.isBeingParsed());
+            assertFalse(page.isParsingHtmlSnippet());
+            assertFalse(page.isParsingInlineHtmlSnippet());
+
+            page.executeJavaScript("var s = document.createElement('script');\n"
+                    + "s.text = 'var executed = true;';\n"
+                    + "document.body.appendChild(s);");
+            assertEquals(Boolean.TRUE, page.executeJavaScript("window.executed").getJavaScriptResult());
+        }
+        finally {
+            done.countDown();
+            snippetParser.join();
+        }
+
+        assertFalse(page.isBeingParsed());
     }
 }

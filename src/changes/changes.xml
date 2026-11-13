@@ -9,6 +9,11 @@
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
             <action type="fix" dev="rbri">
+                Scripts and frames of a page were sometimes ignored if a timer (e.g. setTimeout()) used innerHTML,
+                document.write() and the like while the page was still being parsed. The snippet parsing state
+                is now kept per thread.
+            </action>
+            <action type="fix" dev="rbri">
                 Requests to a host that is a public suffix (e.g. 'https://com/' or 'https://co.uk/') failed with a
                 NullPointerException while computing the Sec-Fetch-Site header.
             </action>
