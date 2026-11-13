@@ -52,6 +52,13 @@ public class HttpClientConverterTest {
     }
 
     @Test
+    public void publicSuffixFallsBackToItself() {
+        assertEquals("com", HttpClientConverter.registrableDomain("com"));
+        assertEquals("co.uk", HttpClientConverter.registrableDomain("co.uk"));
+        assertEquals("github.io", HttpClientConverter.registrableDomain("github.io"));
+    }
+
+    @Test
     public void singleLabelHostFallsBackToItself() {
         assertEquals("localhost", HttpClientConverter.registrableDomain("localhost"));
     }

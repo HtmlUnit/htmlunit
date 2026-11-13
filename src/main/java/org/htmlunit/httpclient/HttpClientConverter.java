@@ -73,8 +73,9 @@ public final class HttpClientConverter {
         if (InetAddressUtils.isIPv4Address(host) || InetAddressUtils.isIPv6Address(host)) {
             return host;
         }
-        final String domainRoot = IDN.toASCII(PUBLIC_SUFFIX_MATCHER.getDomainRoot(host));
-        return domainRoot == null ? host : domainRoot;
+        // getDomainRoot() returns null for a bare public suffix (e.g. 'com' or 'co.uk')
+        final String domainRoot = PUBLIC_SUFFIX_MATCHER.getDomainRoot(host);
+        return domainRoot == null ? host : IDN.toASCII(domainRoot);
     }
 
     /**
