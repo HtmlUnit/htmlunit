@@ -136,7 +136,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
-    private transient boolean holdPostponedActions_;
+    // per thread like the postponed actions; otherwise e.g. a click() on the main thread holds back the
+    // postponed actions (form submit, navigation...) of a timer running on the JavaScript thread
+    private transient ThreadLocal<Boolean> holdPostponedActions_;
     // volatile: set by prepareShutdown() while other threads (e.g. the event loop) are still running
     private transient volatile boolean shutdownPending_;
 
@@ -755,7 +757,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (javaScriptRunning_ != null) {
             javaScriptRunning_.remove();
         }
-        holdPostponedActions_ = false;
+        if (holdPostponedActions_ != null) {
+            holdPostponedActions_.remove();
+        }
     }
 
     /**
@@ -997,7 +1001,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
-                if (!holdPostponedActions_) {
+                if (!Boolean.TRUE.equals(holdPostponedActions_.get())) {
                     doProcessPostponedActions();
                 }
 
@@ -1039,7 +1043,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     private void doProcessPostponedActions() {
-        holdPostponedActions_ = false;
+        holdPostponedActions_.remove();
 
         final WebClient webClient = getWebClient();
         if (webClient == null) {
@@ -1161,7 +1165,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public void holdPosponedActions() {
-        holdPostponedActions_ = true;
+        holdPostponedActions_.set(Boolean.TRUE);
     }
 
     /**
@@ -1184,7 +1188,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private void initTransientFields() {
         javaScriptRunning_ = new ThreadLocal<>();
         postponedActions_ = new ThreadLocal<>();
-        holdPostponedActions_ = false;
+        holdPostponedActions_ = new ThreadLocal<>();
         shutdownPending_ = false;
     }
 

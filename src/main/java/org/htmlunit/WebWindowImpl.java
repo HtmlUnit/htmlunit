@@ -70,12 +70,13 @@ public abstract class WebWindowImpl implements WebWindow {
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
     private String name_ = "";
     private final History history_ = new History(this);
-    private boolean closed_;
+    // volatile: e.g. the window is closed by the main thread while the JavaScript thread checks this
+    private volatile boolean closed_;
 
-    private int innerHeight_;
-    private int outerHeight_;
-    private int innerWidth_;
-    private int outerWidth_;
+    private volatile int innerHeight_;
+    private volatile int outerHeight_;
+    private volatile int innerWidth_;
+    private volatile int outerWidth_;
 
     /**
      * Creates a window and associates it with the client.

@@ -8,6 +8,60 @@
 
     <Bug pattern="CT_CONSTRUCTOR_THROW"/>
 
+    <!--
+        The DOM is not thread-safe by design; the scripts of a page are executed synchronized on the page.
+        The fields are listed one by one, new fields of these classes are still reported.
+    -->
+    <Match>
+        <Bug pattern="AT_STALE_THREAD_WRITE_OF_PRIMITIVE"/>
+        <Or>
+            <And>
+                <Class name="org.htmlunit.html.DomNode"/>
+                <Or>
+                    <Field name="startLineNumber_"/>
+                    <Field name="startColumnNumber_"/>
+                    <Field name="endLineNumber_"/>
+                    <Field name="endColumnNumber_"/>
+                    <Field name="attachedToPage_"/>
+                </Or>
+            </And>
+            <And>
+                <Class name="org.htmlunit.html.DomElement"/>
+                <Or>
+                    <Field name="mouseOver_"/>
+                    <Field name="writingCssomStyle_"/>
+                </Or>
+            </And>
+            <And>
+                <Class name="org.htmlunit.html.HtmlElement"/>
+                <Or>
+                    <Field name="shiftPressed_"/>
+                    <Field name="ctrlPressed_"/>
+                    <Field name="altPressed_"/>
+                    <Field name="metaPressed_"/>
+                </Or>
+            </And>
+            <And>
+                <Class name="org.htmlunit.html.HtmlPage"/>
+                <Or>
+                    <Field name="autofocusAfterLoad_"/>
+                    <Field name="autofocusProcessed_"/>
+                </Or>
+            </And>
+            <And>
+                <Class name="org.htmlunit.css.CssStyleSheet"/>
+                <Field name="enabled_"/>
+            </And>
+            <And>
+                <Class name="org.htmlunit.platform.canvas.rendering.AwtRenderingBackend"/>
+                <Or>
+                    <Field name="globalAlpha_"/>
+                    <Field name="lineWidth_"/>
+                </Or>
+            </And>
+        </Or>
+    </Match>
+
     <!-- Exclude org.htmlunit.util.brotli package -->
     <Match>
         <Package name="org.htmlunit.util.brotli"/>

@@ -166,7 +166,8 @@ public class HtmlPage extends SgmlPage {
     // The id/name lookup index is built lazily on first use. Until then,
     // notifyNodeAdded / fireAttributeChange skip the per-element index updates.
     // Reads must call ensureMappedElementsBuilt() before consulting idMap_/nameMap_.
-    private boolean mappedElementsBuilt_;
+    // volatile: other threads have to see the flag not before the populated maps
+    private volatile boolean mappedElementsBuilt_;
 
     private List<BaseFrameElement> frameElements_ = new ArrayList<>();
     // a parser may run on the loading thread and on the JavaScript thread (e.g. innerHTML in a timer)

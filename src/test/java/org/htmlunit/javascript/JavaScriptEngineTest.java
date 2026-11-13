@@ -1366,4 +1366,30 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         engine.registerWindowAndMaybeStartEventLoop(window);
         assertTrue(getJavaScriptThreads().isEmpty());
     }
+
+    /**
+     * Holding back the postponed actions (e.g. by click()) affects only the current thread;
+     * a script running on another thread (e.g. a timer) still processes its postponed actions.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void holdPostponedActionsIsPerThread() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<form action='" + URL_SECOND + "' method='get'></form>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, DOCTYPE_HTML
+                + "<html><head><title>second</title></head><body></body></html>");
+
+        final HtmlPage page = loadPage(html);
+        final WebClient webClient = getWebClient();
+
+        final Thread holder = new Thread(() -> webClient.getJavaScriptEngine().holdPosponedActions());
+        holder.start();
+        holder.join();
+
+        page.executeJavaScript("document.forms[0].submit();");
+        assertEquals("second", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
+    }
 }

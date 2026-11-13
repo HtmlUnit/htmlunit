@@ -42,8 +42,8 @@ import org.htmlunit.util.UrlUtils;
  */
 public class Cache implements Serializable {
 
-    /** The maximum size of the cache. */
-    private int maxSize_ = 40;
+    /** The maximum size of the cache (volatile, the cache is shared by all threads of the client). */
+    private volatile int maxSize_ = 40;
 
     private static final Pattern DATE_HEADER_PATTERN = Pattern.compile("-?\\d+");
     static final long DELAY = 10 * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_MINUTE;
