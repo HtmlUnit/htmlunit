@@ -180,6 +180,44 @@ public class MutationObserverTest extends WebDriverTestCase {
     }
 
     /**
+     * Changes of a clone of the observed node are not reported.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"old", "new"})
+    public void characterDataClone() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var observer = new MutationObserver(function(mutations) {\n"
+            + "    mutations.forEach(function(mutation) {\n"
+            + "      log(mutation.oldValue);\n"
+            + "      log(mutation.target.textContent);\n"
+            + "    });\n"
+            + "  });\n"
+            + "\n"
+            + "  observer.observe(div, {\n"
+            + "    characterData: true,\n"
+            + "    characterDataOldValue: true,\n"
+            + "    subtree: true\n"
+            + "  });\n"
+            + "\n"
+            + "  var clone = div.cloneNode(true);\n"
+            + "  clone.firstChild.textContent = 'clone';\n"
+            + "  div.firstChild.textContent = 'new';\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>old</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.IncorrectnessListener;
@@ -152,9 +153,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     private boolean attachedToPage_;
 
+    // The listener lists are created lazily (inside a synchronized block). Listeners are added/removed rarely
+    // but the lists are read for every change of the dom tree; CopyOnWriteArrayList allows to iterate
+    // without a lock and without a copy.
     /** The listeners which are to be notified of characterData change. */
-    private List<CharacterDataChangeListener> characterDataListeners_;
-    private List<DomChangeListener> domListeners_;
+    private volatile List<CharacterDataChangeListener> characterDataListeners_;
+    /** The listeners which are to be notified of dom changes. */
+    private volatile List<DomChangeListener> domListeners_;
 
     private Map<String, Object> userData_;
 
@@ -858,6 +863,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newnode.scriptObject_ = null;
         newnode.firstChild_ = null;
         newnode.attachedToPage_ = false;
+
+        // listeners are not cloned; without this the clone would share the lists of the original
+        newnode.domListeners_ = null;
+        newnode.characterDataListeners_ = null;
 
         // make sure isBodyParsed() returns true
         newnode.startLineNumber_ = -1;
@@ -1815,7 +1824,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         synchronized (this) {
             if (domListeners_ == null) {
-                domListeners_ = new ArrayList<>();
+                domListeners_ = new CopyOnWriteArrayList<>();
             }
             domListeners_.add(listener);
 
@@ -1836,10 +1845,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public void removeDomChangeListener(final DomChangeListener listener) {
         WebAssert.notNull("listener", listener);
 
-        synchronized (this) {
-            if (domListeners_ != null) {
-                domListeners_.remove(listener);
-            }
+        final List<DomChangeListener> listeners = domListeners_;
+        if (listeners != null) {
+            listeners.remove(listener);
         }
     }
 
@@ -1857,12 +1865,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         DomNode toInform = this;
         while (toInform != null) {
-            if (toInform.domListeners_ != null) {
-                final List<DomChangeListener> listeners;
-                synchronized (toInform) {
-                    listeners = new ArrayList<>(toInform.domListeners_);
-                }
-
+            final List<DomChangeListener> listeners = toInform.domListeners_;
+            if (listeners != null && !listeners.isEmpty()) {
                 if (event == null) {
                     event = new DomChangeEvent(parentNode, addedNode);
                 }
@@ -1887,7 +1891,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         synchronized (this) {
             if (characterDataListeners_ == null) {
-                characterDataListeners_ = new ArrayList<>();
+                characterDataListeners_ = new CopyOnWriteArrayList<>();
             }
             characterDataListeners_.add(listener);
 
@@ -1908,10 +1912,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public void removeCharacterDataChangeListener(final CharacterDataChangeListener listener) {
         WebAssert.notNull("listener", listener);
 
-        synchronized (this) {
-            if (characterDataListeners_ != null) {
-                characterDataListeners_.remove(listener);
-            }
+        final List<CharacterDataChangeListener> listeners = characterDataListeners_;
+        if (listeners != null) {
+            listeners.remove(listener);
         }
     }
 
@@ -1928,12 +1931,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         DomNode toInform = this;
         while (toInform != null) {
-            if (toInform.characterDataListeners_ != null) {
-                final List<CharacterDataChangeListener> listeners;
-                synchronized (toInform) {
-                    listeners = new ArrayList<>(toInform.characterDataListeners_);
-                }
-
+            final List<CharacterDataChangeListener> listeners = toInform.characterDataListeners_;
+            if (listeners != null && !listeners.isEmpty()) {
                 if (event == null) {
                     event = new CharacterDataChangeEvent(characterData, oldValue);
                 }
@@ -1960,12 +1959,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         DomNode toInform = this;
         while (toInform != null) {
-            if (toInform.domListeners_ != null) {
-                final List<DomChangeListener> listeners;
-                synchronized (toInform) {
-                    listeners = new ArrayList<>(toInform.domListeners_);
-                }
-
+            final List<DomChangeListener> listeners = toInform.domListeners_;
+            if (listeners != null && !listeners.isEmpty()) {
                 if (event == null) {
                     event = new DomChangeEvent(parentNode, deletedNode);
                 }
