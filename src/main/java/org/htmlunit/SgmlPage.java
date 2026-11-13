@@ -460,11 +460,13 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
 
     /**
      * Returns the first element within the document that matches the specified group of selectors.
-     * This uses null as scope.
+     * Like {@code document.querySelector()} in the browsers, the document element is the scope
+     * ({@code :scope}).
      * @param selectors one or more CSS selectors separated by commas
      * @param <N> the node type
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
+    @Override
     public <N extends DomNode> N querySelector(final String selectors) {
         return querySelector(selectors, null);
     }
@@ -472,9 +474,12 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     /**
      * Retrieves all element nodes from descendants of the starting element node that match any selector
      * within the supplied selector strings.
+     * Like {@code document.querySelectorAll()} in the browsers, the document element is the scope
+     * ({@code :scope}).
      * @param selectors one or more CSS selectors separated by commas
      * @return list of all found nodes
      */
+    @Override
     public DomNodeList<DomNode> querySelectorAll(final String selectors) {
         return querySelectorAll(selectors, null);
     }

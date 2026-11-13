@@ -1976,6 +1976,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Retrieves all element nodes from descendants of the starting element node that match any selector
      * within the supplied selector strings.
+     * Like {@code element.querySelectorAll()} in the browsers, this node is the scope ({@code :scope}).
+     * @param selectors one or more CSS selectors separated by commas
+     * @return list of all found nodes
+     */
+    public DomNodeList<DomNode> querySelectorAll(final String selectors) {
+        return querySelectorAll(selectors, this);
+    }
+
+    /**
+     * Retrieves all element nodes from descendants of the starting element node that match any selector
+     * within the supplied selector strings.
      * @param selectors one or more CSS selectors separated by commas
      * @param scope the context scope node used for evaluating relative selectors like :scope
      * @return list of all found nodes
@@ -2032,6 +2043,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             return selectorList;
         }
+    }
+
+    /**
+     * Returns the first element within the document that matches the specified group of selectors.
+     * Like {@code element.querySelector()} in the browsers, this node is the scope ({@code :scope}).
+     * @param selectors one or more CSS selectors separated by commas
+     * @param <N> the node type
+     * @return null if no matches are found; otherwise, it returns the first matching element
+     */
+    public <N extends DomNode> N querySelector(final String selectors) {
+        return querySelector(selectors, this);
     }
 
     /**

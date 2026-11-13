@@ -21,6 +21,7 @@ import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.DomNode.DescendantHtmlElementsIterator;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.xml.XmlPage;
@@ -931,5 +932,103 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         assertEquals(1, outer.getChildNodes().getLength());
         assertEquals("ab", outer.getFirstChild().getTextContent());
+    }
+
+    /**
+     * The one argument versions of querySelector/querySelectorAll use the node itself
+     * as scope (like element.querySelector() in the browsers).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void querySelectorScope() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d1'><p id='p1'>a</p><div id='d2'><p id='p2'>b</p></div></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlDivision d1 = page.getHtmlElementById("d1");
+        final HtmlDivision d2 = page.getHtmlElementById("d2");
+
+        // without :scope nothing has changed
+        assertEquals(2, d1.querySelectorAll("p").size());
+        assertEquals("p2", d2.<HtmlParagraph>querySelector("p").getId());
+
+        // :scope is the node itself
+        final DomNodeList<DomNode> children = d1.querySelectorAll(":scope > p");
+        assertEquals(1, children.size());
+        assertEquals("p1", ((HtmlParagraph) children.get(0)).getId());
+        assertEquals("p2", d1.<HtmlParagraph>querySelector(":scope > div > p").getId());
+        assertNull(d2.querySelector(":scope > div"));
+
+        // only the descendants are checked, not the node itself
+        assertNull(d1.querySelector(":scope"));
+
+        // for the page the document element is the scope (like document.querySelector())
+        assertEquals(1, page.querySelectorAll(":scope > body").size());
+        assertNull(page.querySelector(":scope > div"));
+    }
+
+    /**
+     * For the page, the document element is the scope if no scope is given
+     * (like document.querySelector() in the browsers, see CSSSelectorTest.scopeDocumentQuery()).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void querySelectorScopePage() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>t</title></head><body>\n"
+            + "<div id='d1'><p id='p1'>a</p></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomElement htmlElement = page.getDocumentElement();
+
+        assertSame(htmlElement, page.querySelector(":scope"));
+        final DomNodeList<DomNode> scopes = page.querySelectorAll(":scope");
+        assertEquals(1, scopes.size());
+        assertSame(htmlElement, scopes.get(0));
+
+        assertEquals(page.querySelectorAll("*").size() - 1, page.querySelectorAll(":not(:scope)").size());
+        assertEquals(0, page.querySelectorAll("html:not(:scope)").size());
+
+        assertSame(page.getBody(), page.querySelector(":scope > body"));
+        assertEquals("p1", page.<HtmlParagraph>querySelector(":scope p").getId());
+        assertNull(page.querySelector(":scope > div"));
+
+        // the same as document.querySelector() / document.querySelectorAll()
+        for (final String selector : new String[] {":scope", ":scope > body", ":scope p", ":not(:scope)"}) {
+            assertEquals(page.querySelectorAll(selector).size(),
+                    ((Number) page.executeJavaScript("document.querySelectorAll('" + selector + "').length")
+                            .getJavaScriptResult()).intValue());
+            assertSame(page.<DomNode>querySelector(selector),
+                    ((HtmlUnitScriptable) page.executeJavaScript("document.querySelector('" + selector + "')")
+                            .getJavaScriptResult()).getDomNodeOrDie());
+        }
+
+        // an explicit scope overrides the default
+        final HtmlDivision d1 = page.getHtmlElementById("d1");
+        assertEquals("p1", page.<HtmlParagraph>querySelector(":scope > p", d1).getId());
+        assertNull(page.querySelector(":scope > body", d1));
+    }
+
+    /**
+     * For an XmlPage, the document element is the scope if no scope is given.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void querySelectorScopeXmlPage() throws Exception {
+        final String xml = "<root><a id='a1'/><b><a id='a2'/></b></root>";
+        getMockWebConnection().setResponse(URL_FIRST, xml, MimeType.TEXT_XML);
+        final WebClient client = getWebClientWithMockWebConnection();
+        final XmlPage page = client.getPage(URL_FIRST);
+        final DomElement root = page.getDocumentElement();
+
+        assertSame(root, page.querySelector(":scope"));
+        assertEquals(1, page.querySelectorAll(":scope > a").size());
+        assertEquals(2, page.querySelectorAll(":scope a").size());
+
+        // and for an element of the XmlPage the element itself
+        final DomElement b = (DomElement) page.querySelector("b");
+        assertEquals(1, b.querySelectorAll(":scope > a").size());
+        assertNull(b.querySelector(":scope > b"));
     }
 }
