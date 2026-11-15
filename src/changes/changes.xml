@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="rbri" due-to="Vidya m">
+                document.cookie (and meta http-equiv set-cookie) no longer creates HttpOnly cookies and no longer
+                replaces or deletes an existing HttpOnly cookie (RFC 6265 section 5.3).
+            </action>
             <action type="fix" dev="rbri">
                 DomNode.querySelector(String) and DomNode.querySelectorAll(String) are available again (removed
                 in 5.7.0 by mistake); like element.querySelector() in the browsers, the node itself is the scope
