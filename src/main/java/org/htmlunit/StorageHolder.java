@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -65,7 +66,12 @@ public class StorageHolder implements Serializable {
      */
     public Map<String, String> getLocalStorage(final URL url) {
         synchronized (localStorage_) {
-            final String key = url.getProtocol() + "://" + url.getHost();
+            // the storage is per origin (scheme, host and port)
+            int port = url.getPort();
+            if (port == -1) {
+                port = url.getDefaultPort();
+            }
+            final String key = url.getProtocol() + "://" + url.getHost().toLowerCase(Locale.ROOT) + ":" + port;
             return localStorage_.computeIfAbsent(key, k -> new LinkedHashMap<>());
         }
     }

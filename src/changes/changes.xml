@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="Vidya m">
+                localStorage is separated by origin; pages from the same host but a different port
+                no longer share the same storage.
+            </action>
             <action type="fix" dev="rbri">
                 DomNode.querySelector(String) and DomNode.querySelectorAll(String) are available again (removed
                 in 5.7.0 by mistake); like element.querySelector() in the browsers, the node itself is the scope
