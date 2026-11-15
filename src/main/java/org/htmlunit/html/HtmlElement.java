@@ -1276,13 +1276,13 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * {@inheritDoc}
-     * An HTML parser does not close a non-void element at "/&gt;", so only the void elements
-     * are written as empty-element tag.
-     * @return {@code true} to make generated XML readable as HTML
+     * An HTML parser does not close a non-void element at "/&gt;".
+     * @return {@code true} for non-void elements in the HTML namespace
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {
-        return !VOID_ELEMENTS.contains(getLocalName());
+        return Html.XHTML_NAMESPACE.equals(getNamespaceURI())
+                && !VOID_ELEMENTS.contains(getLowercaseName());
     }
 
     /**
