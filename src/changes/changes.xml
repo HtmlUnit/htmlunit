@@ -9,6 +9,10 @@
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
             <action type="fix" dev="Vidya m">
+                document.cookie (and meta http-equiv set-cookie) no longer creates HttpOnly cookies and no longer
+                replaces or deletes an existing HttpOnly cookie (RFC 6265 section 5.3).
+            </action>
+            <action type="fix" dev="Vidya m">
                 History.pushState() and History.replaceState() throw a SecurityError if the url is not same origin
                 with the document; a page was able to change its url (and by this its origin for cookies,
                 XMLHttpRequest and local files) to any other url.
