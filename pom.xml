@@ -74,7 +74,7 @@
         <batik-transcoder.version>1.20</batik-transcoder.version>
         <jfreechart.version>1.5.6</jfreechart.version>
         <maven-model.version>3.10.0</maven-model.version>
-        <maven-artifact.version>3.10.0</maven-artifact.version>
+        <maven-artifact.version>3.10.1</maven-artifact.version>
 
         <!-- quality -->
         <checkstyle.version>12.3.1</checkstyle.version>
