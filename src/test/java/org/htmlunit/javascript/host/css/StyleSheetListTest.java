@@ -391,4 +391,99 @@ public class StyleSheetListTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The indexed properties are own properties (Object.keys(), Object.getOwnPropertyNames(),
+     * property descriptor, hasOwnProperty(), for...in).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0", "false,true,true", "true", "0"})
+    public void ownProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<style>p { color: red; }</style>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = document.styleSheets;\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).join());\n"
+            + "    var d = Object.getOwnPropertyDescriptor(o, '0');\n"
+            + "    log(d ? d.writable + ',' + d.enumerable + ',' + d.configurable : d);\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    var names = [];\n"
+            + "    for (var n in o) { if (o.hasOwnProperty(n)) { names.push(n); } }\n"
+            + "    log(names.join());\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The indexed properties reflect the current style sheets (live list).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0,1", "0,1", "true", "0", "false", "undefined"})
+    public void ownPropertiesLive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<style>p { color: red; }</style>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = document.styleSheets;\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    var style = document.createElement('style');\n"
+            + "    document.body.appendChild(style);\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).join());\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    document.body.removeChild(style);\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '1'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The prototype has no indexed properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"item,length", "false", "undefined", "-1"})
+    public void ownPropertiesPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<style>p { color: red; }</style>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = StyleSheetList.prototype;\n"
+            + "    log(Object.keys(o).sort().join());\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '0'));\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('0'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

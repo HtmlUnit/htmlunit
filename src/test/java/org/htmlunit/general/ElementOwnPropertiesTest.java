@@ -16024,10 +16024,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("constructor(),initStorageEvent(),key[GCE],newValue[GCE],oldValue[GCE],storageArea[GCE],url[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF = "constructor()",
-            FF_ESR = "constructor()")
     public void storageEvent() throws Exception {
         testString("", "new StorageEvent('event')");
     }

@@ -1426,4 +1426,140 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The indexed properties are own properties (Object.keys(), Object.getOwnPropertyNames(),
+     * property descriptor, hasOwnProperty(), for...in).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0,1,o2", "0,1,o2", "true,true,true", "true", "0,1,o2"},
+            FF = {"0,1", "0,1,o2", "true,true,true", "true", "0,1"},
+            FF_ESR = {"0,1", "0,1,o2", "true,true,true", "true", "0,1"})
+    public void ownProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<select id='s'><option>a</option><option id='o2'>b</option></select>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = document.getElementById('s').options;\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).join());\n"
+            + "    var d = Object.getOwnPropertyDescriptor(o, '0');\n"
+            + "    log(d ? d.writable + ',' + d.enumerable + ',' + d.configurable : d);\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    var names = [];\n"
+            + "    for (var n in o) { if (o.hasOwnProperty(n)) { names.push(n); } }\n"
+            + "    log(names.join());\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The indexed properties reflect the current options (live list).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0,1", "1", "true", "0", "false", "undefined"})
+    public void ownPropertiesLive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<select id='s'><option>a</option></select>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = document.getElementById('s').options;\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    o.add(new Option('b'));\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('1'));\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    o.remove(1);\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '1'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The prototype has no indexed properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-1", "-1", "false", "false", "undefined"})
+    public void ownPropertiesPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = HTMLOptionsCollection.prototype;\n"
+            + "    log(Object.keys(o).indexOf('0'));\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('0'));\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    log('0' in o);\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '0'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The ids and names of the options are named properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"a", "a", "3", "true", "true", "false", "true", "0,1,2,o1,n1,length", "false,true,true"},
+            FF = {"a", "a", "3", "true", "true", "false", "true", "0,1,2,o1,n1", "false,false,true"},
+            FF_ESR = {"a", "a", "3", "true", "true", "false", "true", "0,1,2,o1,n1", "false,false,true"})
+    public void namedProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<select id='s'>\n"
+            + "  <option id='o1' name='n1'>a</option>\n"
+            + "  <option name='o1'>b</option>\n"
+            + "  <option id='length'>c</option>\n"
+            + "</select>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = document.getElementById('s').options;\n"
+            + "    log(o.o1 ? o.o1.text : o.o1);\n"
+            + "    log(o.n1 ? o.n1.text : o.n1);\n"
+            + "    log(o['length']);\n"
+            + "    log('o1' in o);\n"
+            + "    log('length' in o);\n"
+            + "    log('unknown' in o);\n"
+            + "    log(o.hasOwnProperty('n1'));\n"
+            + "    log(Object.getOwnPropertyNames(o).join());\n"
+            + "    var d = Object.getOwnPropertyDescriptor(o, 'o1');\n"
+            + "    log(d ? d.writable + ',' + d.enumerable + ',' + d.configurable : d);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

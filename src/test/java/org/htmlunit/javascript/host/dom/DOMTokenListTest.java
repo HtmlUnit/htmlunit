@@ -2201,4 +2201,96 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The indexed properties are own properties (Object.keys(), Object.getOwnPropertyNames(),
+     * property descriptor, hasOwnProperty(), for...in).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0,1", "0,1", "false,true,true", "true", "0,1"})
+    public void ownProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body class='a b'>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = document.body.classList;\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).join());\n"
+            + "    var d = Object.getOwnPropertyDescriptor(o, '0');\n"
+            + "    log(d ? d.writable + ',' + d.enumerable + ',' + d.configurable : d);\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    var names = [];\n"
+            + "    for (var n in o) { if (o.hasOwnProperty(n)) { names.push(n); } }\n"
+            + "    log(names.join());\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The indexed properties reflect the current tokens (live list).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0,1", "1", "true", "0", "false", "undefined"})
+    public void ownPropertiesLive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body class='a'>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = document.body.classList;\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    o.add('b');\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('1'));\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    o.remove('b');\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '1'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The prototype has no indexed properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-1", "-1", "false", "false", "undefined"})
+    public void ownPropertiesPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = DOMTokenList.prototype;\n"
+            + "    log(Object.keys(o).indexOf('0'));\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('0'));\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    log('0' in o);\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '0'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

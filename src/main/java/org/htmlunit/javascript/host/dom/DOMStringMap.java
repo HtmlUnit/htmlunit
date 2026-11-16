@@ -16,7 +16,14 @@ package org.htmlunit.javascript.host.dom;
 
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.htmlunit.corejs.javascript.CompoundOperationMap;
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -78,6 +85,70 @@ public final class DOMStringMap extends HtmlUnitScriptable {
     }
 
     /**
+     * Overridden to make the data attributes visible as own properties ('in' operator).
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final String name, final Scriptable start) {
+        final HtmlElement e = (HtmlElement) getDomNodeOrNull();
+        if (e != null && e.hasAttribute(DATA_PREFIX + deCamelize(name))) {
+            return true;
+        }
+        return super.has(name, start);
+    }
+
+    /**
+     * Overridden to enumerate the data attributes as own properties
+     * (Object.keys(), Object.getOwnPropertyNames(), for...in, ...).
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object[] getIds(final CompoundOperationMap<Scriptable> map,
+            final boolean getNonEnumerable, final boolean getSymbols) {
+        final Object[] ids = super.getIds(map, getNonEnumerable, getSymbols);
+
+        final HtmlElement e = (HtmlElement) getDomNodeOrNull();
+        if (e == null) {
+            return ids;
+        }
+
+        final List<Object> result = new ArrayList<>();
+        for (final DomAttr attr : e.getAttributesMap().values()) {
+            final String name = camelize(attr.getName());
+            if (name != null && !result.contains(name)) {
+                result.add(name);
+            }
+        }
+        for (final Object id : ids) {
+            if (!result.contains(id)) {
+                result.add(id);
+            }
+        }
+        return result.toArray();
+    }
+
+    /**
+     * Overridden to provide property descriptors for the data attributes.
+     * {@inheritDoc}
+     */
+    @Override
+    protected DescriptorInfo getOwnPropertyDescriptor(final Context cx, final Object id) {
+        final DescriptorInfo descInfo = super.getOwnPropertyDescriptor(cx, id);
+        if (descInfo != null) {
+            return descInfo;
+        }
+
+        final HtmlElement e = (HtmlElement) getDomNodeOrNull();
+        if (e != null && id instanceof CharSequence) {
+            final String value = e.getAttribute(DATA_PREFIX + deCamelize(id.toString()));
+            if (ATTRIBUTE_NOT_DEFINED != value) {
+                return ScriptableObject.buildDataDescriptor(value, ScriptableObject.EMPTY);
+            }
+        }
+        return null;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -103,6 +174,40 @@ public final class DOMStringMap extends HtmlUnitScriptable {
         else {
             e.removeAttribute("data-" + deCamelize(name));
         }
+    }
+
+    /**
+     * Transforms the specified attribute name into the name of the dataset property.
+     *
+     * @param attributeName the attribute name
+     * @return the property name or {@code null} if the attribute is not a data attribute
+     * @see <a href="https://html.spec.whatwg.org/multipage/dom.html#dom-domstringmap-interface">
+     *      HTML Living Standard - The DOMStringMap interface</a>
+     */
+    private static String camelize(final String attributeName) {
+        if (!attributeName.startsWith(DATA_PREFIX)) {
+            return null;
+        }
+        final String name = attributeName.substring(DATA_PREFIX.length());
+        final StringBuilder builder = new StringBuilder();
+        boolean dash = false;
+        for (int i = 0; i < name.length(); i++) {
+            final char ch = name.charAt(i);
+            if (ch >= 'A' && ch <= 'Z') {
+                return null;
+            }
+            if (dash && ch >= 'a' && ch <= 'z') {
+                // a dash followed by a lower case letter is replaced by the upper case letter
+                builder.setLength(builder.length() - 1);
+                builder.append(Character.toUpperCase(ch));
+                dash = false;
+            }
+            else {
+                builder.append(ch);
+                dash = ch == '-';
+            }
+        }
+        return builder.toString();
     }
 
     /**

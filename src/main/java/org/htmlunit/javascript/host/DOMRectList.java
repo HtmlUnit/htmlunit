@@ -64,6 +64,17 @@ public class DOMRectList extends HtmlUnitScriptable {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected int getIndexedPropertyCount() {
+        if (domRects_ == null) {
+            return 0;
+        }
+        return getLength();
+    }
+
+    /**
      * Returns the element at the specified index, or {@link #NOT_FOUND} if the index is invalid.
      * {@inheritDoc}
      */

@@ -14,10 +14,13 @@
  */
 package org.htmlunit.javascript.host.event;
 
+import java.net.URL;
+
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Tests for {@link StorageEvent}.
@@ -227,10 +230,6 @@ public class StorageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("TypeError")
-    @HtmlUnitNYI(CHROME = {"[object StorageEvent]", "storage", "false", "false", "false"},
-                EDGE = {"[object StorageEvent]", "storage", "false", "false", "false"},
-                FF = {"[object StorageEvent]", "storage", "false", "false", "false"},
-                FF_ESR = {"[object StorageEvent]", "storage", "false", "false", "false"})
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -297,5 +296,189 @@ public class StorageEventTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The storage event is fired in the other windows of the same origin, not in the own one.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"storage,k,null,v1,§§URL§§,true,true,false,false",
+             "storage,k,v1,v2,§§URL§§,true,true,false,false"})
+    public void storageEventSetItem() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  localStorage.clear();\n"
+            + "</script></head><body>\n"
+            + "<iframe id='f' src='frame.html'></iframe>\n"
+            + "<script>\n"
+            + "  window.addEventListener('storage', function(e) { log('own window ' + e.key); });\n"
+            + "  window.onload = function() {\n"
+            + "    localStorage.setItem('k', 'v1');\n"
+            + "    localStorage.setItem('k', 'v2');\n"
+            + "  };\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  window.addEventListener('storage', function(e) {\n"
+            + "    parent.log(e.type + ',' + e.key + ',' + e.oldValue + ',' + e.newValue + ',' + e.url\n"
+            + "        + ',' + (e.storageArea === localStorage) + ',' + (e instanceof StorageEvent)\n"
+            + "        + ',' + e.bubbles + ',' + e.cancelable);\n"
+            + "  });\n"
+            + "</script></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frameHtml);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Setting the same value again does not fire an event.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("storage,k,null,v1,§§URL§§,true,true,false,false")
+    public void storageEventSameValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  localStorage.clear();\n"
+            + "</script></head><body>\n"
+            + "<iframe id='f' src='frame.html'></iframe>\n"
+            + "<script>\n"
+            + "  window.addEventListener('storage', function(e) { log('own window ' + e.key); });\n"
+            + "  window.onload = function() {\n"
+            + "    localStorage.setItem('k', 'v1');\n"
+            + "    localStorage.setItem('k', 'v1');\n"
+            + "  };\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  window.addEventListener('storage', function(e) {\n"
+            + "    parent.log(e.type + ',' + e.key + ',' + e.oldValue + ',' + e.newValue + ',' + e.url\n"
+            + "        + ',' + (e.storageArea === localStorage) + ',' + (e instanceof StorageEvent)\n"
+            + "        + ',' + e.bubbles + ',' + e.cancelable);\n"
+            + "  });\n"
+            + "</script></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frameHtml);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Removing an item fires an event, removing a missing one does not.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"storage,k,null,v1,§§URL§§,true,true,false,false",
+             "storage,k,v1,null,§§URL§§,true,true,false,false"})
+    public void storageEventRemoveItem() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  localStorage.clear();\n"
+            + "</script></head><body>\n"
+            + "<iframe id='f' src='frame.html'></iframe>\n"
+            + "<script>\n"
+            + "  window.addEventListener('storage', function(e) { log('own window ' + e.key); });\n"
+            + "  window.onload = function() {\n"
+            + "    localStorage.setItem('k', 'v1');\n"
+            + "    localStorage.removeItem('k');\n"
+            + "    localStorage.removeItem('missing');\n"
+            + "  };\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  window.addEventListener('storage', function(e) {\n"
+            + "    parent.log(e.type + ',' + e.key + ',' + e.oldValue + ',' + e.newValue + ',' + e.url\n"
+            + "        + ',' + (e.storageArea === localStorage) + ',' + (e instanceof StorageEvent)\n"
+            + "        + ',' + e.bubbles + ',' + e.cancelable);\n"
+            + "  });\n"
+            + "</script></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frameHtml);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Clearing fires an event with the key null (only if there was something to clear).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"storage,k,null,v1,§§URL§§,true,true,false,false",
+             "storage,null,null,null,§§URL§§,true,true,false,false"})
+    public void storageEventClear() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  localStorage.clear();\n"
+            + "</script></head><body>\n"
+            + "<iframe id='f' src='frame.html'></iframe>\n"
+            + "<script>\n"
+            + "  window.addEventListener('storage', function(e) { log('own window ' + e.key); });\n"
+            + "  window.onload = function() {\n"
+            + "    localStorage.setItem('k', 'v1');\n"
+            + "    localStorage.clear();\n"
+            + "    localStorage.clear();\n"
+            + "  };\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  window.addEventListener('storage', function(e) {\n"
+            + "    parent.log(e.type + ',' + e.key + ',' + e.oldValue + ',' + e.newValue + ',' + e.url\n"
+            + "        + ',' + (e.storageArea === localStorage) + ',' + (e instanceof StorageEvent)\n"
+            + "        + ',' + e.bubbles + ',' + e.cancelable);\n"
+            + "  });\n"
+            + "</script></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frameHtml);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * The session storage fires the event in the same origin iframes of the tab.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("storage,k,null,v1,§§URL§§,true,true,false,false")
+    public void storageEventSessionStorage() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  sessionStorage.clear();\n"
+            + "</script></head><body>\n"
+            + "<iframe id='f' src='frame.html'></iframe>\n"
+            + "<script>\n"
+            + "  window.addEventListener('storage', function(e) { log('own window ' + e.key); });\n"
+            + "  window.onload = function() {\n"
+            + "    sessionStorage.setItem('k', 'v1');\n"
+            + "  };\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  window.addEventListener('storage', function(e) {\n"
+            + "    parent.log(e.type + ',' + e.key + ',' + e.oldValue + ',' + e.newValue + ',' + e.url\n"
+            + "        + ',' + (e.storageArea === sessionStorage) + ',' + (e instanceof StorageEvent)\n"
+            + "        + ',' + e.bubbles + ',' + e.cancelable);\n"
+            + "  });\n"
+            + "</script></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frameHtml);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 }

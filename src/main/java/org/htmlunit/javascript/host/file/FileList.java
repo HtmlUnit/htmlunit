@@ -94,6 +94,9 @@ public class FileList extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
+        if (files_ == null) {
+            return 0; // prototype
+        }
         return files_.size();
     }
 
@@ -104,7 +107,7 @@ public class FileList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public File item(final int index) {
-        if (index >= 0 && index < files_.size()) {
+        if (index >= 0 && index < getIndexedPropertyCount()) {
             return files_.get(index);
         }
         return null;
@@ -114,9 +117,21 @@ public class FileList extends HtmlUnitScriptable {
      * {@inheritDoc}
      */
     @Override
+    protected int getIndexedPropertyCount() {
+        if (files_ == null) {
+            return 0;
+        }
+        return getLength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Object get(final int index, final Scriptable start) {
         if (this == start) {
-            if (index >= 0 && index < files_.size()) {
+            // the prototype has no files_
+            if (index >= 0 && index < getIndexedPropertyCount()) {
                 return files_.get(index);
             }
         }

@@ -2185,6 +2185,35 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         setPropertyBackgroundColor("'background-color', 'blue', 'important '", expected[2]);
     }
 
+    /**
+     * The priority parameter of setProperty() is optional.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1px 2", "2px 3", "3px 4", " 4"})
+    public void setPropertyWithoutPriority() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d' style='color: red'></div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    var style = document.getElementById('d').style;\n"
+            + "    style.setProperty('width', '1px');\n"
+            + "    log(style.width + ' ' + style.getPropertyPriority('width') + ' ' + style.length);\n"
+            + "    style.setProperty('height', '2px', undefined);\n"
+            + "    log(style.height + ' ' + style.getPropertyPriority('height') + ' ' + style.length);\n"
+            + "    style.setProperty('top', '3px', null);\n"
+            + "    log(style.top + ' ' + style.getPropertyPriority('top') + ' ' + style.length);\n"
+            + "    style.setProperty('left', '4px', 'undefined');\n"
+            + "    log(style.left + ' ' + style.getPropertyPriority('left') + ' ' + style.length);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     private void setPropertyBackgroundColor(final String params, final String... expected) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='test()'>\n"
@@ -3793,6 +3822,101 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The indexed properties are own properties (Object.getOwnPropertyNames(),
+     * property descriptor, hasOwnProperty()).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0,1", "false,true,true", "true"})
+    public void ownProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<div id='d' style='color: red; width: 1px'></div>\n"
+            + "<script>\n"
+            + "  function indexes(o) {\n"
+            + "    return Object.getOwnPropertyNames(o).filter(function(n) { return /^\\d+$/.test(n); }).join();\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var o = document.getElementById('d').style;\n"
+            + "    log(indexes(o));\n"
+            + "    var d = Object.getOwnPropertyDescriptor(o, '0');\n"
+            + "    log(d ? d.writable + ',' + d.enumerable + ',' + d.configurable : d);\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The indexed properties reflect the current declarations (live list).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0,1", "true", "0", "false", "undefined"})
+    public void ownPropertiesLive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<div id='d' style='color: red'></div>\n"
+            + "<script>\n"
+            + "  function indexes(o) {\n"
+            + "    return Object.getOwnPropertyNames(o).filter(function(n) { return /^\\d+$/.test(n); }).join();\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var o = document.getElementById('d').style;\n"
+            + "    log(indexes(o));\n"
+            + "    o.setProperty('width', '1px');\n"
+            + "    log(indexes(o));\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    o.removeProperty('width');\n"
+            + "    log(indexes(o));\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '1'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The prototype has no indexed properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-1", "-1", "false", "false", "undefined"})
+    public void ownPropertiesPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = CSSStyleDeclaration.prototype;\n"
+            + "    log(Object.keys(o).indexOf('0'));\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('0'));\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    log('0' in o);\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '0'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 }

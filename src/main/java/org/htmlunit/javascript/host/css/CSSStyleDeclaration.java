@@ -911,6 +911,14 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected int getIndexedPropertyCount() {
+        return getLength();
+    }
+
+    /**
      * Returns the {@code length} property.
      * @return the {@code length} property
      */
@@ -1848,16 +1856,20 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      *
      * @param name the name of the attribute
      * @param value the value to assign to the attribute
-     * @param important may be null
+     * @param important the priority; may be null or undefined (no priority)
      */
     @JsxFunction
-    public void setProperty(final String name, final Object value, final String important) {
+    public void setProperty(final String name, final Object value, final Object important) {
         String imp = "";
-        if (!StringUtils.isEmptyOrNull(important) && !"null".equals(important)) {
-            if (!StyleElement.PRIORITY_IMPORTANT.equalsIgnoreCase(important)) {
-                return;
+        // the priority is optional (undefined) and null is converted to an empty string
+        if (important != null && !JavaScriptEngine.isUndefined(important)) {
+            final String priority = JavaScriptEngine.toString(important);
+            if (!priority.isEmpty()) {
+                if (!StyleElement.PRIORITY_IMPORTANT.equalsIgnoreCase(priority)) {
+                    return;
+                }
+                imp = StyleElement.PRIORITY_IMPORTANT;
             }
-            imp = StyleElement.PRIORITY_IMPORTANT;
         }
 
         if (LENGTH_PROPERTIES_FFFF.contains(name)) {

@@ -41,6 +41,7 @@ import org.htmlunit.http.Cookie;
  * @author Ahmed Ashour
  * @author Nicolas Belisle
  * @author Ronald Brill
+ * @author Vidya m
  */
 public class CookieManager implements Serializable {
 

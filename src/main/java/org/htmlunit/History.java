@@ -36,6 +36,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Adam Afeltowicz
  * @author Ronald Brill
  * @author Madis Pärn
+ * @author Vidya m
  */
 public class History implements Serializable {
 

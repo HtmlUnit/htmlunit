@@ -14,9 +14,20 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_NAMED_PROPERTIES_OWN_PROPERTY_NAMES_INCLUDE_HIDDEN;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+
+import org.htmlunit.corejs.javascript.CompoundOperationMap;
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -79,6 +90,17 @@ public class NamedNodeMap extends HtmlUnitScriptable {
      * {@inheritDoc}
      */
     @Override
+    protected int getIndexedPropertyCount() {
+        if (attributes_ == null) {
+            return 0;
+        }
+        return getLength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public final Object get(final int index, final Scriptable start) {
         final NamedNodeMap startMap = (NamedNodeMap) start;
         final Object response = startMap.item(index);
@@ -98,12 +120,130 @@ public class NamedNodeMap extends HtmlUnitScriptable {
             return response;
         }
 
-        response = getNamedItem(name);
+        response = getNamedProperty(name);
         if (response != null) {
             return response;
         }
 
         return NOT_FOUND;
+    }
+
+    /**
+     * Overridden to support the named properties (the attribute names).
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final String name, final Scriptable start) {
+        if (super.has(name, start)) {
+            return true;
+        }
+        return getNamedProperty(name) != null;
+    }
+
+    /**
+     * Overridden to list the named properties (the attribute names) after the indexed properties;
+     * the named properties are not enumerable.
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object[] getIds(final CompoundOperationMap<Scriptable> map,
+            final boolean getNonEnumerable, final boolean getSymbols) {
+        final Object[] ids = super.getIds(map, getNonEnumerable, getSymbols);
+        if (attributes_ == null || !getNonEnumerable) {
+            return ids;
+        }
+
+        final boolean includeHidden =
+                getBrowserVersion().hasFeature(JS_NAMED_PROPERTIES_OWN_PROPERTY_NAMES_INCLUDE_HIDDEN);
+        final List<Object> result = new ArrayList<>(Arrays.asList(ids));
+        for (final String name : getSupportedPropertyNames()) {
+            if (!result.contains(name) && (includeHidden || !isPrototypeProperty(name))) {
+                result.add(name);
+            }
+        }
+        return result.toArray();
+    }
+
+    /**
+     * Overridden to provide property descriptors for the named properties.
+     * {@inheritDoc}
+     */
+    @Override
+    protected DescriptorInfo getOwnPropertyDescriptor(final Context cx, final Object id) {
+        final DescriptorInfo descInfo = super.getOwnPropertyDescriptor(cx, id);
+        if (descInfo != null) {
+            return descInfo;
+        }
+
+        if (id instanceof CharSequence) {
+            final HtmlUnitScriptable attr = getNamedProperty(id.toString());
+            if (attr != null) {
+                return ScriptableObject.buildDataDescriptor(attr,
+                        ScriptableObject.READONLY | ScriptableObject.DONTENUM);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the supported property names (the qualified names of the attributes).
+     * For html elements in a html document names containing upper case letters are excluded.
+     *
+     * @return the names
+     * @see <a href="https://dom.spec.whatwg.org/#ref-for-dfn-supported-property-names%E2%91%A0">
+     *     DOM Standard - NamedNodeMap supported property names</a>
+     */
+    private List<String> getSupportedPropertyNames() {
+        final boolean skipUpperCase = isHtmlElementInHtmlDocument();
+
+        final List<String> names = new ArrayList<>();
+        for (int i = 0; i < attributes_.getLength(); i++) {
+            final String name = attributes_.item(i).getNodeName();
+            if (names.contains(name)) {
+                continue;
+            }
+            if (skipUpperCase && !name.equals(name.toLowerCase(Locale.ROOT))) {
+                continue;
+            }
+            names.add(name);
+        }
+        return names;
+    }
+
+    /**
+     * Returns the attribute for the given named property (the named property getter).
+     * For html elements in a html document the name is converted to lower case first;
+     * the attribute name has to match exactly. The named property is not visible
+     * if the prototype chain has a property with this name.
+     *
+     * @param name the property name
+     * @return the attribute or {@code null}
+     * @see <a href="https://dom.spec.whatwg.org/#concept-element-attributes-get-by-name">
+     *     DOM Standard - get an attribute by name</a>
+     */
+    private HtmlUnitScriptable getNamedProperty(final String name) {
+        if (attributes_ == null || isPrototypeProperty(name)) {
+            return null;
+        }
+
+        final String qualifiedName = isHtmlElementInHtmlDocument() ? name.toLowerCase(Locale.ROOT) : name;
+        for (int i = 0; i < attributes_.getLength(); i++) {
+            final DomNode attr = (DomNode) attributes_.item(i);
+            if (qualifiedName.equals(attr.getNodeName())) {
+                return attr.getScriptableObject();
+            }
+        }
+        return null;
+    }
+
+    private boolean isHtmlElementInHtmlDocument() {
+        final DomNode domNode = getDomNodeOrNull();
+        return domNode instanceof HtmlElement && !domNode.getPage().hasCaseSensitiveTagNames();
+    }
+
+    private boolean isPrototypeProperty(final String name) {
+        final Scriptable prototype = getPrototype();
+        return prototype != null && ScriptableObject.hasProperty(prototype, name);
     }
 
     /**
@@ -206,6 +346,9 @@ public class NamedNodeMap extends HtmlUnitScriptable {
      */
     @JsxFunction
     public HtmlUnitScriptable item(final int index) {
+        if (attributes_ == null) {
+            return null;
+        }
         final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
             return attr.getScriptableObject();
@@ -228,7 +371,8 @@ public class NamedNodeMap extends HtmlUnitScriptable {
      */
     @Override
     public boolean has(final int index, final Scriptable start) {
-        return index >= 0 && index < getLength();
+        // the prototype has no attributes
+        return index >= 0 && index < getIndexedPropertyCount();
     }
 
     /**

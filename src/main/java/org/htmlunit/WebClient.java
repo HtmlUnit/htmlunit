@@ -1310,6 +1310,8 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
         final WebWindow window = openTargetWindow(opener, windowName, TARGET_BLANK);
+        // a new auxiliary browsing context gets a copy of the opener's session storage
+        getStorageHolder().copySessionStorage(opener, window);
         if (url == null) {
             initializeEmptyWindow(window, window.getEnclosedPage());
         }
@@ -3152,6 +3154,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Parses the given cookie and adds this to our cookie store.
+     * The cookie is treated as set by a non-HTTP API (e.g. document.cookie);
+     * HttpOnly cookies are ignored and existing HttpOnly cookies are not replaced.
      * @param cookieString the string to parse
      * @param pageUrl the url of the page that likes to set the cookie
      * @param origin the requester
@@ -3171,6 +3175,22 @@ public class WebClient implements Serializable, AutoCloseable {
             // final List<Cookie> cookies = CookieParser.parseCookie(cookieString, pageUrl, getBrowserVersion());
 
             for (final Cookie cookie : cookies) {
+                // RFC 6265 5.3 steps 10 and 11: a non-HTTP API must neither
+                // create an HttpOnly cookie nor replace an existing one
+                if (cookie.isHttpOnly()) {
+                    continue;
+                }
+                boolean replacesHttpOnly = false;
+                for (final Cookie existing : cookieManager.getCookies()) {
+                    if (existing.isHttpOnly() && existing.equals(cookie)) {
+                        replacesHttpOnly = true;
+                        break;
+                    }
+                }
+                if (replacesHttpOnly) {
+                    continue;
+                }
+
                 cookieManager.addCookie(cookie);
 
                 if (LOG.isDebugEnabled()) {

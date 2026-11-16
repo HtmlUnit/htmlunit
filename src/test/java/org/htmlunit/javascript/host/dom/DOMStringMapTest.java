@@ -143,4 +143,69 @@ public class DOMStringMapTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The data attributes are own properties (Object.keys(), Object.getOwnPropertyNames(),
+     * property descriptor, 'in', hasOwnProperty(), for...in, delete).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"foo,barBaz,a-1,x-Y", "foo,barBaz,a-1,x-Y", "2,true,true,true", "true", "false", "true", "foo,barBaz,a-1,x-Y", "true", "barBaz,a-1,x-Y", "false"})
+    public void ownProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body id='bd' data-foo='1' data-bar-baz='2' data-a-1='3' data-x--y='4'>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = document.body.dataset;\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).join());\n"
+            + "    var d = Object.getOwnPropertyDescriptor(o, 'barBaz');\n"
+            + "    log(d ? d.value + ',' + d.writable + ',' + d.enumerable + ',' + d.configurable : d);\n"
+            + "    log('foo' in o);\n"
+            + "    log('unknown' in o);\n"
+            + "    log(o.hasOwnProperty('barBaz'));\n"
+            + "    var names = [];\n"
+            + "    for (var n in o) { if (o.hasOwnProperty(n)) { names.push(n); } }\n"
+            + "    log(names.join());\n"
+            + "    log(delete o.foo);\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(document.body.hasAttribute('data-foo'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The prototype has no indexed properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-1", "-1", "false", "false", "undefined"})
+    public void ownPropertiesPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = DOMStringMap.prototype;\n"
+            + "    log(Object.keys(o).indexOf('0'));\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('0'));\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    log('0' in o);\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '0'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

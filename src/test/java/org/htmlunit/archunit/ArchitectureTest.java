@@ -359,7 +359,7 @@ public class ArchitectureTest {
             .that()
                 .areAnnotatedWith(JsxFunction.class)
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.External.isSearchProviderInstalled()")
-                .and().doNotHaveFullName("org.htmlunit.javascript.host.Storage.getItem(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Storage.jsGetItem(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.VarScope, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.queueMicrotask(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.VarScope, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.setInterval(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.VarScope, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.setTimeout(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.VarScope, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")

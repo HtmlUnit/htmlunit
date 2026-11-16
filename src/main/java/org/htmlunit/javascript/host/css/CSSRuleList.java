@@ -17,8 +17,10 @@ package org.htmlunit.javascript.host.css;
 import static org.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_ENUM_ITEM_LENGTH;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.htmlunit.corejs.javascript.CompoundOperationMap;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -114,29 +116,6 @@ public class CSSRuleList extends HtmlUnitScriptable {
     }
 
     /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public Object[] getIds() {
-        final List<String> idList = new ArrayList<>();
-
-        final int length = getLength();
-        for (int i = 0; i < length; i++) {
-            idList.add(Integer.toString(i));
-        }
-
-        if (getBrowserVersion().hasFeature(JS_CSSRULELIST_ENUM_ITEM_LENGTH)) {
-            idList.add("item");
-            idList.add("length");
-        }
-        else {
-            idList.add("length");
-            idList.add("item");
-        }
-        return idList.toArray();
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -149,16 +128,43 @@ public class CSSRuleList extends HtmlUnitScriptable {
      */
     @Override
     public boolean has(final String name, final Scriptable start) {
-        if ("length".equals(name) || "item".equals(name)) {
-            return true;
-        }
         try {
             return has(Integer.parseInt(name), start);
         }
         catch (final Exception ignored) {
             // ignore
         }
-        return false;
+        return super.has(name, start);
+    }
+
+    /**
+     * Overridden to enumerate {@code item} before {@code length} (the properties
+     * of the prototype) if required by the browser.
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object[] getIds(final CompoundOperationMap<Scriptable> map,
+            final boolean getNonEnumerable, final boolean getSymbols) {
+        final Object[] ids = super.getIds(map, getNonEnumerable, getSymbols);
+        if (getBrowserVersion().hasFeature(JS_CSSRULELIST_ENUM_ITEM_LENGTH)) {
+            final List<Object> idList = new ArrayList<>(Arrays.asList(ids));
+            final int lengthPos = idList.indexOf("length");
+            final int itemPos = idList.indexOf("item");
+            if (lengthPos > -1 && itemPos > lengthPos) {
+                idList.set(lengthPos, "item");
+                idList.set(itemPos, "length");
+                return idList.toArray();
+            }
+        }
+        return ids;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected int getIndexedPropertyCount() {
+        return getLength();
     }
 
     /**

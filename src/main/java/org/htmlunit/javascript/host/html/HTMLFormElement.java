@@ -505,6 +505,17 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected int getIndexedPropertyCount() {
+        if (getDomNodeOrNull() == null) {
+            return 0;
+        }
+        return getLength();
+    }
+
+    /**
      * Returns the specified indexed property.
      * @param index the index of the property
      * @param start the scriptable object that was originally queried for this property
