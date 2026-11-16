@@ -9,6 +9,10 @@
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
             <action type="fix" dev="rbri">
+                AttachmentHandler.isAttachment(): the content type application/octet-stream is detected also if
+                the content type header has parameters (e.g. application/octet-stream; charset=binary).
+            </action>
+            <action type="fix" dev="rbri">
                 innerHTML/outerHTML of xhtml documents: menuitem is no longer written as empty-element tag.
             </action>
             <action type="fix" dev="Ronny Shapiro">

@@ -217,4 +217,37 @@ public class AttachmentDownloadTest extends WebDriverTestCase {
     public void octetStreamAttachment() throws Exception {
         request("attachment; filename=\"foo.txt\"", "application/octet-stream");
     }
+
+    /**
+     * The parameters of the content type octet-stream are ignored.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("file")
+    public void octetStreamWithCharset() throws Exception {
+        request(null, "application/octet-stream; charset=binary");
+    }
+
+    /**
+     * The parameters of the content type octet-stream are ignored, even if the type is inline.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("file")
+    public void octetStreamWithCharsetInline() throws Exception {
+        request("inline", "application/octet-stream; charset=binary");
+    }
+
+    /**
+     * The content type is case-insensitive.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("file")
+    public void octetStreamUpperCase() throws Exception {
+        request(null, "Application/Octet-Stream");
+    }
 }

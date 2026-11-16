@@ -193,4 +193,37 @@ public class AttachmentHandlerTest {
         Assertions.assertTrue(isAttachment("foo", "application/octet-stream"));
         Assertions.assertTrue(isAttachment("", "application/octet-stream"));
     }
+
+    /**
+     * The parameters of the content type octet-stream are ignored.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void octetStreamWithParameters() throws Exception {
+        Assertions.assertTrue(isAttachment(null, "application/octet-stream; charset=binary"));
+        Assertions.assertTrue(isAttachment(null, "application/octet-stream;charset=UTF-8"));
+        Assertions.assertTrue(isAttachment(null, "Application/Octet-Stream; name=foo.bin"));
+        Assertions.assertTrue(isAttachment("inline", "application/octet-stream; charset=binary"));
+    }
+
+    /**
+     * White space around the content type octet-stream is ignored.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void octetStreamWhitespace() throws Exception {
+        Assertions.assertTrue(isAttachment(null, " application/octet-stream"));
+        Assertions.assertTrue(isAttachment(null, "application/octet-stream "));
+        Assertions.assertTrue(isAttachment(null, "application/octet-stream ; charset=binary"));
+    }
+
+    /**
+     * Content types starting with octet-stream are no attachment.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void octetStreamPrefix() throws Exception {
+        Assertions.assertFalse(isAttachment(null, "application/octet-streamx"));
+        Assertions.assertFalse(isAttachment(null, "application/octet"));
+    }
 }

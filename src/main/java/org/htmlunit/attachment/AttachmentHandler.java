@@ -85,8 +85,9 @@ public interface AttachmentHandler extends Serializable {
      * (case-insensitive, white space around the type is ignored; see {@link ContentDispositionParser}),</li>
      * <li>or the disposition type is unknown, e.g. {@code foo} or {@code attachmentfoo}; RFC 6266 says
      * that unknown types have to be handled like {@code attachment},</li>
-     * <li>or the content type is {@code application/octet-stream}. The browsers can not display this content
-     * type, so they offer it for download whatever the {@code Content-Disposition} header is.</li>
+     * <li>or the content type is {@code application/octet-stream} (case-insensitive, parameters like
+     * {@code charset} are ignored). The browsers can not display this content type, so they offer it
+     * for download whatever the {@code Content-Disposition} header is.</li>
      * </ul>
      * <p>A response is displayed in the window, if the disposition type is {@code inline} or if the header
      * has no type at all (e.g. {@code ; filename=foo.txt}), and the content type is not octet-stream.</p>
@@ -109,7 +110,8 @@ public interface AttachmentHandler extends Serializable {
         // also true if the content disposition is 'inline' or has no type
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#applicationoctet-stream
         // They treat it as if the Content-Disposition header was set to attachment, and propose a "Save As" dialog.
-        final String contentType = response.getResponseHeaderValue(HttpHeader.CONTENT_TYPE);
-        return MimeType.APPLICATION_OCTET_STREAM.equalsIgnoreCase(contentType);
+        // the parameters (e.g. charset) of the content type are ignored
+        final String contentType = response.getContentType();
+        return MimeType.APPLICATION_OCTET_STREAM.equalsIgnoreCase(contentType.trim());
     }
 }
