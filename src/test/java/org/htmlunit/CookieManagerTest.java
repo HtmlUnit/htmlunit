@@ -42,6 +42,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Frank Danek
  * @author Ronald Brill
  * @author Lai Quang Duong
+ * @author Vidya m
  */
 public class CookieManagerTest extends WebDriverTestCase {
 
@@ -774,6 +775,58 @@ public class CookieManagerTest extends WebDriverTestCase {
             assertEquals(2, mgr.getCookies().size());
             assertTrue(mgr.getCookie("first").isHttpOnly());
             assertFalse(mgr.getCookie("second").isHttpOnly());
+        }
+    }
+
+    /**
+     * Scripts must not be able to overwrite, delete or create HttpOnly cookies
+     * (RFC 6265 section 5.3, steps 10 and 11).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second=2; third=3")
+    public void httpOnlyNotWritableFromJs() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "first=1; path=/; HttpOnly"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "second=2; path=/;"));
+
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    document.cookie = 'first=evil; path=/';\n"
+            + "    document.cookie = 'third=3; path=/';\n"
+            + "    document.cookie = 'fourth=4; path=/; HttpOnly';\n"
+            + "    var c = document.cookie;\n"
+            + "    c = c.split('; ').sort().join('; ');\n"
+            + "    log(c);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        final WebDriver driver = loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
+        driver.get(URL_FIRST + "foo");
+
+        final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        final String lastCookies = lastHeaders.get(HttpHeader.COOKIE);
+        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("first=1"));
+        assertFalse("lastCookies: " + lastCookies, lastCookies.contains("first=evil"));
+        assertFalse("lastCookies: " + lastCookies, lastCookies.contains("fourth=4"));
+
+        if (driver instanceof HtmlUnitDriver) {
+            final CookieManager mgr = getWebClient().getCookieManager();
+            assertEquals(3, mgr.getCookies().size());
+            assertEquals("1", mgr.getCookie("first").getValue());
+            assertTrue(mgr.getCookie("first").isHttpOnly());
+            assertNull(mgr.getCookie("fourth"));
         }
     }
 
