@@ -58,7 +58,7 @@ public class StorageHolder2Test extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
 
         final Map<String, String> sessionStorage =
-                    webClient.getStorageHolder().getSessionStorage(webClient.getCurrentWindow());
+                    webClient.getStorageHolder().getSessionStorage(webClient.getCurrentWindow(), URL_FIRST);
         assertEquals(0, sessionStorage.size());
 
         sessionStorage.put("myCat", "Tom");

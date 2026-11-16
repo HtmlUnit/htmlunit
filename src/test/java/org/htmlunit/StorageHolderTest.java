@@ -179,4 +179,329 @@ public class StorageHolderTest extends WebDriverTestCase {
             assertEquals(0, webClient.getStorageHolder().getSessionStorage(webClient.getCurrentWindow()).size());
         }
     }
+
+    /**
+     * The session storage is per origin; another origin in the same tab must not see the data,
+     * but the data is still there when coming back.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"one", "null", "one"})
+    public void sessionStorageOtherOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  sessionStorage.clear();\n"
+            + "  sessionStorage.setItem('s', 'one');\n"
+            + "  log(sessionStorage.getItem('s'));\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String html2 = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  log('' + sessionStorage.getItem('s'));\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String html3 = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  log(sessionStorage.getItem('s'));\n"
+            + "</script>\n"
+            + "</body></html>";
+        final URL otherOrigin = new URL(URL_THIRD, "storage.html");
+        getMockWebConnection().setResponse(otherOrigin, html2);
+        final URL back = new URL(URL_FIRST, "back.html");
+        getMockWebConnection().setResponse(back, html3);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
+
+        driver.get(otherOrigin.toExternalForm());
+        verifyTitle2(driver, getExpectedAlerts()[1]);
+
+        driver.get(back.toExternalForm());
+        verifyTitle2(driver, getExpectedAlerts()[2]);
+    }
+
+    /**
+     * The session storage is per origin; the same host with another port is another origin.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"one", "null"})
+    public void sessionStorageOtherPort() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  sessionStorage.clear();\n"
+            + "  sessionStorage.setItem('s', 'one');\n"
+            + "  log(sessionStorage.getItem('s'));\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String html2 = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  log('' + sessionStorage.getItem('s'));\n"
+            + "</script>\n"
+            + "</body></html>";
+        final URL otherPortUrl = new URL(URL_CROSS_ORIGIN_BASE, "storage.html");
+        getMockWebConnection().setResponse(otherPortUrl, html2);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
+
+        driver.get(otherPortUrl.toExternalForm());
+        verifyTitle2(driver, getExpectedAlerts()[1]);
+    }
+
+    /**
+     * An about:blank iframe has the origin of the parent and shares the storage.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"parent",
+                      "child"})
+    public void localStorageIframeAboutBlank() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<iframe id='f'></iframe>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('b', 'parent');\n"
+            + "  var win = document.getElementById('f').contentWindow;\n"
+            + "  log(win.localStorage.getItem('b'));\n"
+            + "  win.localStorage.setItem('c', 'child');\n"
+            + "  log(localStorage.getItem('c'));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A same origin iframe shares the storage with the parent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"parent",
+                      "child"})
+    public void localStorageIframeSameOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('b', 'parent');\n"
+            + "</script>\n"
+            + "<iframe src='frame.html'></iframe>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  parent.log(localStorage.getItem('b'));\n"
+            + "  localStorage.setItem('c', 'child');\n"
+            + "  parent.log(parent.localStorage.getItem('c'));\n"
+            + "</script>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frameHtml);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * A cross origin iframe must not see the storage of the parent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void localStorageIframeCrossOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('b', 'parent');\n"
+            + "  window.addEventListener('message', function(e) { log(e.data); });\n"
+            + "</script>\n"
+            + "<iframe src='" + URL_CROSS_ORIGIN_BASE + "frame.html'></iframe>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  parent.postMessage('' + localStorage.getItem('b'), '*');\n"
+            + "</script></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN_BASE, "frame.html"), frameHtml);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * An about:blank iframe has the origin of the parent and shares the storage.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"parent",
+                      "child"})
+    public void sessionStorageIframeAboutBlank() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<iframe id='f'></iframe>\n"
+            + "<script>\n"
+            + "  sessionStorage.clear();\n"
+            + "  sessionStorage.setItem('b', 'parent');\n"
+            + "  var win = document.getElementById('f').contentWindow;\n"
+            + "  log(win.sessionStorage.getItem('b'));\n"
+            + "  win.sessionStorage.setItem('c', 'child');\n"
+            + "  log(sessionStorage.getItem('c'));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A same origin iframe shares the storage with the parent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"parent",
+                      "child"})
+    public void sessionStorageIframeSameOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  sessionStorage.clear();\n"
+            + "  sessionStorage.setItem('b', 'parent');\n"
+            + "</script>\n"
+            + "<iframe src='frame.html'></iframe>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  parent.log(sessionStorage.getItem('b'));\n"
+            + "  sessionStorage.setItem('c', 'child');\n"
+            + "  parent.log(parent.sessionStorage.getItem('c'));\n"
+            + "</script>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frameHtml);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * A cross origin iframe must not see the storage of the parent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void sessionStorageIframeCrossOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  sessionStorage.clear();\n"
+            + "  sessionStorage.setItem('b', 'parent');\n"
+            + "  window.addEventListener('message', function(e) { log(e.data); });\n"
+            + "</script>\n"
+            + "<iframe src='" + URL_CROSS_ORIGIN_BASE + "frame.html'></iframe>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  parent.postMessage('' + sessionStorage.getItem('b'), '*');\n"
+            + "</script></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN_BASE, "frame.html"), frameHtml);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * A window opened by window.open() starts with a copy of the session storage of the opener;
+     * changes are not shared.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"one",
+                      "null"})
+    public void sessionStorageWindowOpen() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  sessionStorage.clear();\n"
+            + "  sessionStorage.setItem('a', 'one');\n"
+            + "  function check() { log('' + sessionStorage.getItem('b')); }\n"
+            + "  window.open('popup.html');\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String popupHtml = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  opener.log('' + sessionStorage.getItem('a'));\n"
+            + "  sessionStorage.setItem('b', 'two');\n"
+            + "  opener.check();\n"
+            + "  window.close();\n"
+            + "</script></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "popup.html"), popupHtml);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * All windows of the same origin share the local storage.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"one",
+                      "two"})
+    public void localStorageWindowOpen() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('a', 'one');\n"
+            + "  function check() { log('' + localStorage.getItem('b')); }\n"
+            + "  window.open('popup.html');\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String popupHtml = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  opener.log('' + localStorage.getItem('a'));\n"
+            + "  localStorage.setItem('b', 'two');\n"
+            + "  opener.check();\n"
+            + "  window.close();\n"
+            + "</script></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "popup.html"), popupHtml);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
 }

@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.WeakHashMap;
+
+import org.htmlunit.html.HtmlPage;
 
 /**
  * Holder for different types of storages.
@@ -45,18 +48,24 @@ public class StorageHolder implements Serializable {
     }
 
     private final Map<String, Map<String, String>> localStorage_ = new HashMap<>();
-    private transient Map<String, Map<String, String>> sessionStorage_ = new HashMap<>();
+    private transient Map<WebWindow, Map<String, Map<String, String>>> sessionStorage_ = new WeakHashMap<>();
 
     /**
      * Gets the store of the give type for the page.
+     * The local storage is shared by all pages of the same origin; the session storage
+     * is shared by all pages of the same origin inside the same top level window.
+     * Pages without an origin of their own (e.g. about:blank iframes) are using
+     * the origin of their creator.
+     *
      * @param storageType the type
      * @param page the page
      * @return the store
      */
     public Map<String, String> getStore(final Type storageType, final Page page) {
+        final URL originUrl = getOriginUrl(page);
         return switch (storageType) {
-            case LOCAL_STORAGE -> getLocalStorage(page.getUrl());
-            case SESSION_STORAGE -> getSessionStorage(page.getEnclosingWindow());
+            case LOCAL_STORAGE -> getLocalStorage(originUrl);
+            case SESSION_STORAGE -> getSessionStorage(page.getEnclosingWindow(), originUrl);
         };
     }
 
@@ -67,32 +76,96 @@ public class StorageHolder implements Serializable {
      */
     public Map<String, String> getLocalStorage(final URL url) {
         synchronized (localStorage_) {
-            // the storage is per origin (scheme, host and port)
-            int port = url.getPort();
-            if (port == -1) {
-                port = url.getDefaultPort();
-            }
-            final String key = url.getProtocol() + "://" + url.getHost().toLowerCase(Locale.ROOT) + ":" + port;
-            return localStorage_.computeIfAbsent(key, k -> new LinkedHashMap<>());
+            return localStorage_.computeIfAbsent(getOriginKey(url), k -> new LinkedHashMap<>());
         }
     }
 
     /**
-     * Gets the local storage (map).
+     * Gets the session storage (map) of the window for the origin of the page
+     * currently loaded into the window.
      * @param webWindow the window
      * @return the store
      */
     public Map<String, String> getSessionStorage(final WebWindow webWindow) {
+        return getSessionStorage(webWindow, getOriginUrl(webWindow.getEnclosedPage()));
+    }
+
+    /**
+     * Gets the session storage (map) of the window for the given origin.
+     * The session storage is shared by all windows (including frames) of the
+     * same top level window.
+     * @param webWindow the window
+     * @param url the origin
+     * @return the store
+     */
+    public Map<String, String> getSessionStorage(final WebWindow webWindow, final URL url) {
         synchronized (sessionStorage_) {
             final WebWindow topWindow = webWindow.getTopWindow();
-            final String key = Integer.toHexString(topWindow.hashCode());
-            return sessionStorage_.computeIfAbsent(key, k -> new LinkedHashMap<>());
+            return sessionStorage_
+                    .computeIfAbsent(topWindow, k -> new HashMap<>())
+                    .computeIfAbsent(getOriginKey(url), k -> new LinkedHashMap<>());
         }
+    }
+
+    /**
+     * Copies the session storage of the opener's origin into the session storage
+     * of a newly opened top level window (e.g. by window.open()).
+     * Nothing is copied if the target window already has session storage for this origin.
+     * @param opener the window that opened the new one
+     * @param newWindow the new window
+     */
+    public void copySessionStorage(final WebWindow opener, final WebWindow newWindow) {
+        final Page openerPage = opener.getEnclosedPage();
+        if (openerPage == null || openerPage.getUrl() == null) {
+            return;
+        }
+        final String key = getOriginKey(getOriginUrl(openerPage));
+
+        synchronized (sessionStorage_) {
+            final WebWindow openerTop = opener.getTopWindow();
+            final WebWindow newTop = newWindow.getTopWindow();
+            if (openerTop == newTop) {
+                return;
+            }
+
+            final Map<String, Map<String, String>> openerStores = sessionStorage_.get(openerTop);
+            if (openerStores == null) {
+                return;
+            }
+            final Map<String, String> openerStore = openerStores.get(key);
+            if (openerStore == null || openerStore.isEmpty()) {
+                return;
+            }
+
+            final Map<String, Map<String, String>> newStores =
+                    sessionStorage_.computeIfAbsent(newTop, k -> new HashMap<>());
+            if (!newStores.containsKey(key)) {
+                synchronized (openerStore) {
+                    newStores.put(key, new LinkedHashMap<>(openerStore));
+                }
+            }
+        }
+    }
+
+    private static URL getOriginUrl(final Page page) {
+        if (page instanceof HtmlPage htmlPage) {
+            return htmlPage.getOriginUrl();
+        }
+        return page.getUrl();
+    }
+
+    private static String getOriginKey(final URL url) {
+        // the storage is per origin (scheme, host and port)
+        int port = url.getPort();
+        if (port == -1) {
+            port = url.getDefaultPort();
+        }
+        return url.getProtocol() + "://" + url.getHost().toLowerCase(Locale.ROOT) + ":" + port;
     }
 
     private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
         ois.defaultReadObject();
 
-        sessionStorage_ = new HashMap<>();
+        sessionStorage_ = new WeakHashMap<>();
     }
 }

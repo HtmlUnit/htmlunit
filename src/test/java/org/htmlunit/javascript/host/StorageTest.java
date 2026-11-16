@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host;
 
+import java.net.URL;
+
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -372,5 +374,351 @@ public class StorageTest extends WebDriverTestCase {
             + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The stored items are properties of the storage ('in' operator).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false", "true"})
+    public void namedPropertyIn() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('k1', 'v1');\n"
+            + "  log('k1' in localStorage);\n"
+            + "  log('k2' in localStorage);\n"
+            + "  log('getItem' in localStorage);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The stored items are own enumerable properties of the storage.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"k1,k2", "k1,k2"})
+    public void namedPropertyKeys() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('k2', 'v2');\n"
+            + "  localStorage.setItem('k1', 'v1');\n"
+            + "  log(Object.keys(localStorage).sort().join());\n"
+            + "  log(Object.getOwnPropertyNames(localStorage).sort().join());\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The stored items are own properties of the storage.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false", "false"})
+    public void namedPropertyHasOwnProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('k1', 'v1');\n"
+            + "  log(localStorage.hasOwnProperty('k1'));\n"
+            + "  log(localStorage.hasOwnProperty('k2'));\n"
+            + "  log(localStorage.hasOwnProperty('getItem'));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Statement for...in iterates over the stored items.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("k1,k2")
+    public void namedPropertyForIn() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('k1', 'v1');\n"
+            + "  localStorage.setItem('k2', 'v2');\n"
+            + "  var names = [];\n"
+            + "  for (var name in localStorage) {\n"
+            + "    if (localStorage.hasOwnProperty(name)) { names.push(name); }\n"
+            + "  }\n"
+            + "  log(names.sort().join());\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The delete operator removes the item.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "null", "0"})
+    public void namedPropertyDelete() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('k1', 'v1');\n"
+            + "  log(delete localStorage.k1);\n"
+            + "  log(localStorage.getItem('k1'));\n"
+            + "  log(localStorage.length);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Setting a property stores the value as string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"v1", "string", "2"})
+    public void namedPropertySet() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.k1 = 'v1';\n"
+            + "  localStorage.k2 = 42;\n"
+            + "  log(localStorage.getItem('k1'));\n"
+            + "  log(typeof localStorage.getItem('k2'));\n"
+            + "  log(localStorage.length);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Calling with too few arguments throws.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void getItemMissingArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  try {\n"
+            + "    localStorage.getItem();\n"
+            + "    log('no error ' + localStorage.length);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Calling with too few arguments throws.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void setItemMissingArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  try {\n"
+            + "    localStorage.setItem('k1');\n"
+            + "    log('no error ' + localStorage.length);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Calling with too few arguments throws.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void setItemNoArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  try {\n"
+            + "    localStorage.setItem();\n"
+            + "    log('no error ' + localStorage.length);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Calling with too few arguments throws.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void removeItemMissingArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  try {\n"
+            + "    localStorage.removeItem();\n"
+            + "    log('no error ' + localStorage.length);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Calling with too few arguments throws.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void keyMissingArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  try {\n"
+            + "    localStorage.key();\n"
+            + "    log('no error ' + localStorage.length);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The error thrown if the quota is exceeded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"QuotaExceededError", "true", "22"})
+    public void quotaErrorType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  var big = new Array(5300001).join('x');\n"
+            + "  try {\n"
+            + "    localStorage.setItem('k1', big);\n"
+            + "    log('no error');\n"
+            + "  } catch(e) {\n"
+            + "    log(e.name);\n"
+            + "    log(e instanceof DOMException);\n"
+            + "    log(e.code);\n"
+            + "  }\n"
+            + "  localStorage.clear();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The keys count for the quota also.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"QuotaExceededError", "0"})
+    public void quotaKeysCounted() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<script>\n"
+            + "  localStorage.clear();\n"
+            + "  var big = new Array(3000001).join('x');\n"
+            + "  try {\n"
+            + "    localStorage.setItem(big, big);\n"
+            + "    log('no error');\n"
+            + "  } catch(e) { log(e.name); }\n"
+            + "  log(localStorage.length);\n"
+            + "  localStorage.clear();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The quota is per origin, not per window.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"QuotaExceededError", "1"})
+    public void quotaSharedWithIframe() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head><body>\n"
+            + "<iframe id='f' src='frame.html'></iframe>\n"
+            + "<script>\n"
+            + "  window.onload = function() {\n"
+            + "    localStorage.clear();\n"
+            + "    var big = new Array(3000001).join('x');\n"
+            + "    localStorage.setItem('a', big);\n"
+            + "    try {\n"
+            + "      document.getElementById('f').contentWindow.localStorage.setItem('b', big);\n"
+            + "      log('no error');\n"
+            + "    } catch(e) { log(e.name); }\n"
+            + "    log(localStorage.length);\n"
+            + "    localStorage.clear();\n"
+            + "  };\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><body></body></html>\n";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frameHtml);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 }

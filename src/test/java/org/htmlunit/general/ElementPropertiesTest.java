@@ -5321,17 +5321,21 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "url")
     @HtmlUnitNYI(
             CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,currentTarget,"
-                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+                + "defaultPrevented,eventPhase,initEvent(),initStorageEvent(),key,newValue,NONE,oldValue,"
+                + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),storageArea,"
+                + "target,timeStamp,type,url",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,currentTarget,"
-                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,CONTROL_MASK,"
-                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),returnValue,"
-                + "SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,CONTROL_MASK,"
-                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),returnValue,"
-                + "SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+                + "defaultPrevented,eventPhase,initEvent(),initStorageEvent(),key,newValue,NONE,oldValue,"
+                + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),storageArea,"
+                + "target,timeStamp,type,url",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),initStorageEvent(),key,META_MASK,"
+                + "newValue,NONE,oldValue,preventDefault(),returnValue,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),storageArea,target,timeStamp,type,url",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),initStorageEvent(),key,META_MASK,"
+                + "newValue,NONE,oldValue,preventDefault(),returnValue,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),storageArea,target,timeStamp,type,url")
     public void storageEvent() throws Exception {
         testString("", "new StorageEvent('event')");
     }

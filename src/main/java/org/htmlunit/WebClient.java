@@ -1310,6 +1310,8 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
         final WebWindow window = openTargetWindow(opener, windowName, TARGET_BLANK);
+        // a new auxiliary browsing context gets a copy of the opener's session storage
+        getStorageHolder().copySessionStorage(opener, window);
         if (url == null) {
             initializeEmptyWindow(window, window.getEnclosedPage());
         }

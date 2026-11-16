@@ -1542,6 +1542,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Converts the specified value to a long.
+     *
+     * @param o the value to convert
+     * @return the converted long value
+     */
+    public static long toUint32(final Object o) {
+        return ScriptRuntime.toUint32(o);
+    }
+
+    /**
      * Converts the specified value to an integer.
      *
      * @param o the value to convert

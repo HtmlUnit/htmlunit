@@ -663,7 +663,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                 final WebWindow webWindow = getWebWindow();
                 final Map<String, String> store = webWindow.getWebClient().getStorageHolder().
                         getStore(storageType, webWindow.getEnclosedPage());
-                return new Storage(this, store);
+                return new Storage(this, store, storageType);
             }
         );
     }

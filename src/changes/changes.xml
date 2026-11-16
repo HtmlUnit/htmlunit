@@ -8,6 +8,23 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="rbri">
+                The sessionStorage is separated by origin (it was shared by all pages of a window). The
+                local- and sessionStorage of an about:blank iframe is the one of the parent page. A window opened
+                by window.open() starts with a copy of the opener's sessionStorage.
+                StorageHolder.getSessionStorage(WebWindow) returns the store for the origin of the current page,
+                use StorageHolder.getSessionStorage(WebWindow, URL) to get the store for a specific origin.
+            </action>
+            <action type="fix" dev="rbri">
+                Storage: the 5 MiB quota is shared by all Storage objects of the same storage area and counts keys
+                and values; exceeding the quota throws a DOMException (QuotaExceededError). Stored items are visible
+                as properties ('in', Object.keys(), hasOwnProperty(), for...in, delete). Missing arguments throw
+                a TypeError.
+            </action>
+            <action type="add" dev="rbri">
+                The storage event is fired at other windows and frames sharing the same storage area;
+                StorageEvent supports key, oldValue, newValue, url, storageArea and initStorageEvent().
+            </action>
             <action type="fix" dev="Vidya m">
                 The localStorage is separated by origin; pages from the same host but a different port no longer
                 share the same storage. Method document.cookie (and meta http-equiv set-cookie) no longer creates
