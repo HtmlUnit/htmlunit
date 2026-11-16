@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="fix" dev="Ronny Shapiro">
+                asXml(): an empty non-void html element (e.g. h3, b, label, section) is written with an end tag
+                instead of as empty-element tag; the html parser does not close it at '/&gt;', so parsing the
+                output again moved the following siblings into the empty element.
             <action type="add" dev="rbri">
                 NamedNodeMap supports named properties (the attribute names) for 'in', hasOwnProperty() and
                 Object.getOwnPropertyNames(); prototype properties (e.g. length) are no longer hidden by attributes

@@ -18,6 +18,7 @@ import java.net.URL;
 
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNodeList;
+import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlCheckBoxInput;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
@@ -105,6 +106,73 @@ public class WebClient8Test extends SimpleWebTestCase {
                     + "  <body><div><span>a</span>\r\n      <span>b</span></div></body>\r\n"
                     + "</html>",
                     page.asXml());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void asXmlEmptyElementWritesEndTag() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>"
+                + "<body><div id='d'><h3></h3><br><p>x</p></div></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            assertEquals("<div id=\"d\"><h3></h3><br/><p>x</p></div>", page.getElementById("d").asXml());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void asXmlEmptyElementsRoundTrip() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>"
+                + "<body><div id='source'><h3></h3><b></b><label></label><section></section>"
+                + "<p>x</p><br><img src='a.png'></div>"
+                + "<div id='copy'></div></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            final DomElement source = page.getElementById("source");
+            final DomElement copy = page.getElementById("copy");
+            copy.setInnerHtml(source.asXml());
+            assertEquals(source.asXml(), copy.getFirstElementChild().asXml());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void asXmlMixedCaseVoidElement() throws Exception {
+        final String html = DOCTYPE_HTML + "<html><body><div id='copy'></div></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            final DomElement br = page.createElementNS(Html.XHTML_NAMESPACE, "Br");
+            assertEquals("<br/>", br.asXml());
+
+            final DomElement copy = page.getElementById("copy");
+            copy.setInnerHtml(br.asXml());
+            assertEquals(1, copy.getChildElementCount());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void asXmlEmptySvgElements() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body><div id='d'><svg></svg><svg><circle></circle></svg></div></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            assertEquals("<div id=\"d\"><svg/><svg><circle/></svg></div>", page.getElementById("d").asXml());
         }
     }
 

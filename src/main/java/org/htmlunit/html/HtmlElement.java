@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import org.htmlunit.ClipboardHandler;
 import org.htmlunit.ElementNotFoundException;
@@ -153,6 +154,10 @@ public abstract class HtmlElement extends DomElement {
     protected static final String ATTRIBUTE_HIDDEN = "hidden";
     /** Constant 'readonly'. */
     protected static final String ATTRIBUTE_READONLY = "readonly";
+
+    /** The elements the HTML serialization writes without an end tag. */
+    private static final Set<String> VOID_ELEMENTS = Set.of("area", "base", "basefont", "bgsound", "br", "col",
+            "embed", "frame", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr");
 
     /** The listeners which are to be notified of attribute changes. */
     private final List<HtmlAttributeChangeListener> attributeListeners_ = new ArrayList<>();
@@ -1267,6 +1272,17 @@ public abstract class HtmlElement extends DomElement {
     @Override
     protected boolean isAttributeCaseSensitive() {
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     * An HTML parser does not close a non-void element at "/&gt;".
+     * @return {@code true} for non-void elements in the HTML namespace
+     */
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return Html.XHTML_NAMESPACE.equals(getNamespaceURI())
+                && !VOID_ELEMENTS.contains(getLowercaseName());
     }
 
     /**
