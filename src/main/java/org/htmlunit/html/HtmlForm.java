@@ -1013,14 +1013,6 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * Browsers have problems with self closing form tags.
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
-
-    /**
      * Returns whether form validation is disabled.
      *
      * @return {@code true} if the {@code novalidate} attribute is present

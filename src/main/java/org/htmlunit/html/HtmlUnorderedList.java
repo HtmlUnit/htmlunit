@@ -68,12 +68,4 @@ public class HtmlUnorderedList extends HtmlElement {
     public final String getCompactAttribute() {
         return getAttributeDirect("compact");
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
 }

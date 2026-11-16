@@ -53,11 +53,6 @@ import org.htmlunit.util.XmlUtils;
  */
 public final class XmlMarkupSerializer {
 
-    /** The HTML void elements (written as {@code <br />} in the XHTML namespace). */
-    private static final Set<String> VOID_ELEMENTS = Set.of(
-            "area", "base", "basefont", "bgsound", "br", "col", "embed", "frame", "hr",
-            "img", "input", "keygen", "link", "menuitem", "meta", "param", "source", "track", "wbr");
-
     /** Boolean attributes written as name="name" if the value is empty (Firefox). */
     private static final Set<String> BOOLEAN_ATTRIBUTES = Set.of(
             "checked", "compact", "declare", "defer", "disabled", "ismap", "multiple",
@@ -254,7 +249,7 @@ public final class XmlMarkupSerializer {
         final DomNode contentParent = element instanceof HtmlTemplate template ? template.getContent() : element;
         if (contentParent.getFirstChild() == null) {
             if (Html.XHTML_NAMESPACE.equals(namespace)) {
-                if (VOID_ELEMENTS.contains(element.getLocalName())) {
+                if (HtmlElement.isVoidElement(element.getLocalName())) {
                     builder.append(" />");
                     return;
                 }

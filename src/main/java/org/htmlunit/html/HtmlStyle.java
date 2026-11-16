@@ -134,15 +134,6 @@ public class HtmlStyle extends HtmlElement {
 
     /**
      * {@inheritDoc}
-     * @return {@code true} to make generated XML readable as HTML on Firefox 3 for instance.
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {

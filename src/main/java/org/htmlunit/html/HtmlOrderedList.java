@@ -80,12 +80,4 @@ public class HtmlOrderedList extends HtmlElement {
     public final String getStartAttribute() {
         return getAttributeDirect("start");
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
 }

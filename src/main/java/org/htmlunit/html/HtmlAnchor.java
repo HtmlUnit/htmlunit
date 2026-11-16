@@ -290,11 +290,6 @@ public class HtmlAnchor extends HtmlElement implements HyperlinkElement {
         return newWindow.getEnclosedPage();
     }
 
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
-
     /**
      * {@inheritDoc}
      */

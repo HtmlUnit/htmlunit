@@ -240,16 +240,6 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * Indicates if a node without children should be written in expanded form as XML
-     * (i.e. with closing tag rather than with "/&gt;")
-     * @return {@code true} to make generated XML readable as HTML
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

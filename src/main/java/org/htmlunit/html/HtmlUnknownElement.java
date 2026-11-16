@@ -108,13 +108,4 @@ public class HtmlUnknownElement extends HtmlElement {
         }
         return DisplayStyle.INLINE;
     }
-
-    /**
-     * {@inheritDoc}
-     * @return {@code true} to make generated XML readable as HTML.
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
 }

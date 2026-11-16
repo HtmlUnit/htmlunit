@@ -441,17 +441,6 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * {@inheritDoc}
-     *
-     * @return {@code true} so that generated XML uses explicit opening and closing
-     *         {@code <table>} tags
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {

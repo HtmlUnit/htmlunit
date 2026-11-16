@@ -317,16 +317,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * {@inheritDoc}
-     *
-     * @return {@code true} to make generated XML readable as HTML.
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
      */
     @Override
     public boolean isValid() {

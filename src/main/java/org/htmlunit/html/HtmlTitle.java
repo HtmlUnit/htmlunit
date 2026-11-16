@@ -69,14 +69,6 @@ public class HtmlTitle extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.NONE;
     }

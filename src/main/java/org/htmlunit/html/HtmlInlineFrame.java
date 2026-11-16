@@ -46,16 +46,6 @@ public class HtmlInlineFrame extends BaseFrameElement {
     }
 
     /**
-     * Indicates if a node without children should be written in expanded form as XML
-     * (ie with closing tag rather than with "/&gt;).
-     * @return {@code true} to make generated XML readable as HTML
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

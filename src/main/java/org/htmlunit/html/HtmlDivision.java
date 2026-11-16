@@ -57,13 +57,4 @@ public class HtmlDivision extends HtmlElement {
     public final String getAlignAttribute() {
         return getAttributeDirect("align");
     }
-
-    /**
-     * {@inheritDoc}
-     * @return {@code true} to make generated XML readable as HTML
-     */
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
 }

@@ -155,9 +155,10 @@ public abstract class HtmlElement extends DomElement {
     /** Constant 'readonly'. */
     protected static final String ATTRIBUTE_READONLY = "readonly";
 
-    /** The elements the HTML serialization writes without an end tag. */
-    private static final Set<String> VOID_ELEMENTS = Set.of("area", "base", "basefont", "bgsound", "br", "col",
-            "embed", "frame", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr");
+    /** The HTML void elements (written as {@code <br />} in the XHTML namespace). */
+    private static final Set<String> VOID_ELEMENTS = Set.of(
+            "area", "base", "basefont", "bgsound", "br", "col", "embed", "frame", "hr",
+            "img", "input", "keygen", "link", "menuitem", "meta", "param", "source", "track", "wbr");
 
     /** The listeners which are to be notified of attribute changes. */
     private final List<HtmlAttributeChangeListener> attributeListeners_ = new ArrayList<>();
@@ -1282,7 +1283,19 @@ public abstract class HtmlElement extends DomElement {
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return Html.XHTML_NAMESPACE.equals(getNamespaceURI())
-                && !VOID_ELEMENTS.contains(getLowercaseName());
+                && !isVoidElement(getLowercaseName());
+    }
+
+    /**
+     * Returns whether the given local name is the name of one of the HTML void elements
+     * (the elements written without an end tag, e.g. {@code br} or {@code img}).
+     * The check is case-sensitive; the void element names are lower case.
+     *
+     * @param localName the local name of the element
+     * @return {@code true} if the name is the name of a void element
+     */
+    public static boolean isVoidElement(final String localName) {
+        return VOID_ELEMENTS.contains(localName);
     }
 
     /**

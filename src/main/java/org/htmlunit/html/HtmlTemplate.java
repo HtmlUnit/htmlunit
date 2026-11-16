@@ -64,13 +64,6 @@ public class HtmlTemplate extends HtmlElement {
         return domDocumentFragment_;
     }
 
-    @Override
-    protected boolean isEmptyXmlTagExpanded() {
-        // Always print expanded tag to force printing of
-        // children if available
-        return true;
-    }
-
     /**
      * {@inheritDoc}
      */
