@@ -20,10 +20,13 @@ import java.util.Collections;
 import java.util.List;
 
 import org.htmlunit.HttpMethod;
+import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
+import org.htmlunit.http.ContentDisposition;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.WebResponseWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -36,6 +39,15 @@ public class AttachmentHandlerTest {
 
     private static boolean isAttachment(final String contentDisposition, final String contentType)
             throws Exception {
+        final AttachmentHandler attachmentHandler = (page, attachmentFilename) -> {
+            // mock
+        };
+
+        return attachmentHandler.isAttachment(response(contentDisposition, contentType));
+    }
+
+    private static WebResponse response(final String contentDisposition, final String contentType)
+            throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
         if (contentDisposition != null) {
             headers.add(new NameValuePair("Content-Disposition", contentDisposition));
@@ -46,12 +58,7 @@ public class AttachmentHandlerTest {
 
         final WebResponseData data = new WebResponseData("HtmlUnit".getBytes(),
                 HttpStatus.OK_200, HttpStatus.OK_200_MSG, headers);
-        final WebResponse response = new WebResponse(data, new URL("http://test.com"), HttpMethod.GET, 1000);
-        final AttachmentHandler attachmentHandler = (page, attachmentFilename) -> {
-            // mock
-        };
-
-        return attachmentHandler.isAttachment(response);
+        return new WebResponse(data, new URL("http://test.com"), HttpMethod.GET, 1000);
     }
 
     /**
@@ -225,5 +232,102 @@ public class AttachmentHandlerTest {
     public void octetStreamPrefix() throws Exception {
         Assertions.assertFalse(isAttachment(null, "application/octet-streamx"));
         Assertions.assertFalse(isAttachment(null, "application/octet"));
+    }
+
+    /**
+     * A response without header has no content disposition.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentDispositionWithoutHeader() throws Exception {
+        Assertions.assertNull(response(null, "text/html").getContentDisposition());
+    }
+
+    /**
+     * The content disposition of the response is the parsed header.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentDisposition() throws Exception {
+        final ContentDisposition contentDisposition =
+                response("Attachment; filename=\"foo.txt\"", "text/html").getContentDisposition();
+        Assertions.assertEquals("attachment", contentDisposition.getType());
+        Assertions.assertTrue(contentDisposition.isAttachment());
+        Assertions.assertEquals("foo.txt", contentDisposition.getFilename());
+    }
+
+    /**
+     * The header is parsed only once.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentDispositionParsedOnce() throws Exception {
+        final WebResponse response = response("inline; filename=foo.txt", "text/html");
+        Assertions.assertSame(response.getContentDisposition(), response.getContentDisposition());
+    }
+
+    /**
+     * The wrapper returns the content disposition of the wrapped response.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentDispositionWrapper() throws Exception {
+        final WebResponse response = response("inline; filename=foo.txt", "text/html");
+        final WebResponse wrapper = new WebResponseWrapper(response);
+        Assertions.assertSame(response.getContentDisposition(), wrapper.getContentDisposition());
+    }
+
+    /**
+     * The first example from the javadoc of {@link AttachmentHandler#isAttachment(WebResponse)}:
+     * a handler that handles all PDF files as attachment.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isAttachmentOverwritten() throws Exception {
+        final AttachmentHandler attachmentHandler = new AttachmentHandler() {
+            @Override
+            public void handleAttachment(final Page page, final String attachmentFilename) {
+                // mock
+            }
+
+            @Override
+            public boolean isAttachment(final WebResponse response) {
+                return AttachmentHandler.super.isAttachment(response)
+                        || "application/pdf".equals(response.getContentType());
+            }
+        };
+
+        Assertions.assertTrue(attachmentHandler.isAttachment(response(null, "application/pdf")));
+        Assertions.assertTrue(attachmentHandler.isAttachment(response("inline", "application/pdf")));
+        Assertions.assertTrue(attachmentHandler.isAttachment(response("attachment", "text/html")));
+        Assertions.assertFalse(attachmentHandler.isAttachment(response(null, "text/html")));
+    }
+
+    /**
+     * The second example from the javadoc of {@link AttachmentHandler#isAttachment(WebResponse)}:
+     * a handler that handles also inline responses with a file name as attachment.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isAttachmentOverwrittenContentDisposition() throws Exception {
+        final AttachmentHandler attachmentHandler = new AttachmentHandler() {
+            @Override
+            public void handleAttachment(final Page page, final String attachmentFilename) {
+                // mock
+            }
+
+            @Override
+            public boolean isAttachment(final WebResponse response) {
+                final ContentDisposition contentDisposition = response.getContentDisposition();
+                return AttachmentHandler.super.isAttachment(response)
+                        || (contentDisposition != null && contentDisposition.getFilename() != null);
+            }
+        };
+
+        Assertions.assertTrue(attachmentHandler.isAttachment(response("inline; filename=foo.txt", "text/html")));
+        Assertions.assertTrue(attachmentHandler.isAttachment(response("; filename=foo.txt", "text/html")));
+        Assertions.assertTrue(attachmentHandler.isAttachment(response("attachment", "text/html")));
+        Assertions.assertFalse(attachmentHandler.isAttachment(response("inline", "text/html")));
+        Assertions.assertFalse(attachmentHandler.isAttachment(response(null, "text/html")));
     }
 }

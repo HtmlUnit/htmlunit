@@ -680,8 +680,7 @@ public class WebClient implements Serializable, AutoCloseable {
             // check content disposition header for nothing provided
             String filename = forceAttachmentWithFilename;
             if (StringUtils.isEmptyOrNull(filename)) {
-                final String disp = webResponse.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
-                filename = Attachment.getSuggestedFilename(disp);
+                filename = Attachment.getSuggestedFilenameFrom(webResponse.getContentDisposition());
             }
             if (StringUtils.isEmptyOrNull(filename)) {
                 filename = null;

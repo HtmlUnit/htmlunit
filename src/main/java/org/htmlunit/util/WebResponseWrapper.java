@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
+import org.htmlunit.http.ContentDisposition;
 
 /**
  * Provides a convenient implementation of the {@link WebResponse} interface that can be subclassed
@@ -112,6 +113,15 @@ public class WebResponseWrapper extends WebResponse {
     @Override
     public Charset getContentCharset() {
         return wrappedWebResponse_.getContentCharset();
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to return getContentDisposition() on the wrapped webResponse object.
+     */
+    @Override
+    public ContentDisposition getContentDisposition() {
+        return wrappedWebResponse_.getContentDisposition();
     }
 
     /**

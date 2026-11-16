@@ -14,7 +14,6 @@
  */
 package org.htmlunit.attachment;
 
-import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
 import org.htmlunit.http.ContentDisposition;
@@ -88,8 +87,7 @@ public class Attachment {
         }
 
         final WebResponse response = page_.getWebResponse();
-        final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
-        return getSuggestedFilename(disp);
+        return getSuggestedFilenameFrom(response.getContentDisposition());
     }
 
     /**
@@ -128,7 +126,19 @@ public class Attachment {
      * @return the sanitized file name, or {@code null} if none was suggested
      */
     public static String getSuggestedFilename(final String contentDispositionHeader) {
-        final ContentDisposition contentDisposition = ContentDispositionParser.parse(contentDispositionHeader);
+        return getSuggestedFilenameFrom(ContentDispositionParser.parse(contentDispositionHeader));
+    }
+
+    /**
+     * Returns the file name suggested by the given parsed {@code Content-Disposition} header, or
+     * {@code null} if the header does not contain a usable file name.
+     * See {@link #getSuggestedFilename(String)} for the details.
+     *
+     * @param contentDisposition the parsed {@code Content-Disposition} header, can be {@code null}
+     * @return the sanitized file name, or {@code null} if none was suggested
+     * @see WebResponse#getContentDisposition()
+     */
+    public static String getSuggestedFilenameFrom(final ContentDisposition contentDisposition) {
         if (contentDisposition == null) {
             return null;
         }

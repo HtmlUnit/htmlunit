@@ -92,8 +92,9 @@
                     If your custom <code>AttachmentHandler</code> declines a response, HtmlUnit falls back to the default behavior
                     and assigns an <code>UnexpectedPage</code> to the window. You can override the <code>isAttachment()</code> method
                     in your handler to target specific responses. By default, <code>isAttachment()</code> detects responses
-                    with a <code>Content-Disposition</code> header of type <code>attachment</code>, or responses without
-                    a <code>Content-Disposition</code> header that have a <code>Content-Type</code> of <code>application/octet-stream</code>.
+                    with a <code>Content-Disposition</code> header of type <code>attachment</code> (or of an unknown type),
+                    and all responses with a <code>Content-Type</code> of <code>application/octet-stream</code>
+                    (whatever the <code>Content-Disposition</code> header is; parameters like <code>charset</code> are ignored).
                 </p>
                 <p>
                     The <code>handleAttachment(WebResponse, String)</code> method is triggered when a response is identified as
@@ -145,6 +146,44 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
     // start browsing
     HtmlPage page = webClient.getPage(uri);
 }
+]]></source>
+                <p>
+                    To handle more responses as attachment, override <code>isAttachment()</code> and combine
+                    your checks with the default implementation. The following example handles all PDF files as
+                    attachment, even if the server sends them inline:
+                </p>
+<source><![CDATA[webClient.setAttachmentHandler(new AttachmentHandler() {
+    @Override
+    public boolean isAttachment(final WebResponse response) {
+        return AttachmentHandler.super.isAttachment(response)
+                || "application/pdf".equals(response.getContentType());
+    }
+
+    @Override
+    public void handleAttachment(final Page page, final String attachmentFilename) {
+        // process the attachment
+    }
+});
+]]></source>
+                <p>
+                    The parsed <code>Content-Disposition</code> header of the response is available from
+                    <code>WebResponse.getContentDisposition()</code> (<code>null</code> if the response has no such header);
+                    the header is parsed only once, there is no need to parse it again in your handler.
+                    The following example handles also inline responses with a file name as attachment:
+                </p>
+<source><![CDATA[webClient.setAttachmentHandler(new AttachmentHandler() {
+    @Override
+    public boolean isAttachment(final WebResponse response) {
+        final ContentDisposition contentDisposition = response.getContentDisposition();
+        return AttachmentHandler.super.isAttachment(response)
+                || (contentDisposition != null && contentDisposition.getFilename() != null);
+    }
+
+    @Override
+    public void handleAttachment(final Page page, final String attachmentFilename) {
+        // process the attachment
+    }
+});
 ]]></source>
                 <p>
                     For additional details, refer to the <code>AttachmentHandler</code> JavaDoc API documentation.
@@ -215,13 +254,18 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 </p>
                 <p>
                     The same rules are available for your own code: <code>Attachment.getSuggestedFilename(String)</code> returns the
-                    name for a given header value, and the <code>ContentDispositionParser</code> (package
-                    <code>org.htmlunit.http</code>) provides the unmodified parameters of the header.
+                    name for a given header value, <code>Attachment.getSuggestedFilenameFrom(ContentDisposition)</code>
+                    the name for an already parsed header. <code>WebResponse.getContentDisposition()</code> provides the parsed
+                    header of a response with the unmodified parameters; to parse a header value on your own use the
+                    <code>ContentDispositionParser</code> (package <code>org.htmlunit.http</code>).
                 </p>
-<source><![CDATA[ContentDisposition cd = ContentDispositionParser.parse(response.getResponseHeaderValue("Content-Disposition"));
+<source><![CDATA[ContentDisposition cd = response.getContentDisposition();
 if (cd != null && cd.isAttachment()) {
     // the file name as sent by the server, not sanitized
     String rawName = cd.getFilename();
+
+    // the file name a browser would use for saving the file
+    String fileName = Attachment.getSuggestedFilenameFrom(cd);
 }
 ]]></source>
             </subsection>

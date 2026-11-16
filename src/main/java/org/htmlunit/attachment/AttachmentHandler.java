@@ -16,7 +16,6 @@ package org.htmlunit.attachment;
 
 import java.io.Serializable;
 
-import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
 import org.htmlunit.http.ContentDisposition;
@@ -92,18 +91,37 @@ public interface AttachmentHandler extends Serializable {
      * <p>A response is displayed in the window, if the disposition type is {@code inline} or if the header
      * has no type at all (e.g. {@code ; filename=foo.txt}), and the content type is not octet-stream.</p>
      *
+     * <p>Overwrite this method to handle more responses as attachment, e.g. all PDF files:</p>
+     * <pre>
+     * &#64;Override
+     * public boolean isAttachment(final WebResponse response) {
+     *     return AttachmentHandler.super.isAttachment(response)
+     *             || "application/pdf".equals(response.getContentType());
+     * }
+     * </pre>
+     *
+     * <p>The parsed {@code Content-Disposition} header is available from
+     * {@link WebResponse#getContentDisposition()}; e.g. to handle also inline responses
+     * with a file name as attachment:</p>
+     * <pre>
+     * &#64;Override
+     * public boolean isAttachment(final WebResponse response) {
+     *     final ContentDisposition contentDisposition = response.getContentDisposition();
+     *     return AttachmentHandler.super.isAttachment(response)
+     *             || (contentDisposition != null &amp;&amp; contentDisposition.getFilename() != null);
+     * }
+     * </pre>
+     *
      * @param response the response to check
      * @return {@code true} if the specified response represents an attachment, {@code false} otherwise
      * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
      */
     default boolean isAttachment(final WebResponse response) {
-        final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
-        if (disp != null) {
-            final ContentDisposition contentDisposition = ContentDispositionParser.parse(disp);
-            // unknown types are handled like 'attachment', 'inline' and an empty type are not
-            if (!contentDisposition.getType().isEmpty() && !contentDisposition.isInline()) {
-                return true;
-            }
+        final ContentDisposition contentDisposition = response.getContentDisposition();
+        // unknown types are handled like 'attachment', 'inline' and an empty type are not
+        if (contentDisposition != null
+                && !contentDisposition.getType().isEmpty() && !contentDisposition.isInline()) {
+            return true;
         }
 
         // content type 'application/octet-stream' is handled like an attachment by the browsers; this is

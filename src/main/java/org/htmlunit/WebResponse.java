@@ -30,6 +30,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.http.ContentDisposition;
+import org.htmlunit.http.ContentDispositionParser;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
@@ -61,6 +63,8 @@ public class WebResponse implements Serializable {
     private boolean wasContentCharsetTentative_;
     private boolean wasBlocked_;
     private String blockReason_;
+    private transient ContentDisposition contentDisposition_;
+    private transient boolean contentDispositionParsed_;
 
     /**
      * Constructs a web response.
@@ -152,6 +156,21 @@ public class WebResponse implements Serializable {
             return contentTypeHeader;
         }
         return contentTypeHeader.substring(0, index);
+    }
+
+    /**
+     * Returns the parsed {@code Content-Disposition} header of this response
+     * (see {@link ContentDispositionParser}). The header is parsed only once.
+     *
+     * @return the parsed header or {@code null} if the response has no {@code Content-Disposition} header
+     */
+    public ContentDisposition getContentDisposition() {
+        if (!contentDispositionParsed_) {
+            contentDisposition_ = ContentDispositionParser.parse(
+                    getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION));
+            contentDispositionParsed_ = true;
+        }
+        return contentDisposition_;
     }
 
     /**

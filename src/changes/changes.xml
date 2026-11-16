@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="add" dev="rbri">
+                New method WebResponse.getContentDisposition() returns the parsed Content-Disposition header
+                (parsed only once); new method Attachment.getSuggestedFilenameFrom(ContentDisposition).
+                AttachmentHandler implementations can use them instead of parsing the header again.
+            </action>
             <action type="fix" dev="rbri">
                 AttachmentHandler.isAttachment(): the content type application/octet-stream is detected also if
                 the content type header has parameters (e.g. application/octet-stream; charset=binary).

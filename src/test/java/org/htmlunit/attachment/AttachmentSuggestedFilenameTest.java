@@ -17,6 +17,7 @@ package org.htmlunit.attachment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import org.htmlunit.http.ContentDispositionParser;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -366,5 +367,20 @@ public class AttachmentSuggestedFilenameTest {
     @Test
     public void noHeader() throws Exception {
         assertNull(Attachment.getSuggestedFilename(null));
+    }
+
+    /**
+     * The file name from an already parsed header.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void fromParsedHeader() throws Exception {
+        assertEquals("_.._evil.txt", Attachment.getSuggestedFilenameFrom(
+                ContentDispositionParser.parse("attachment; filename=\"../../evil.txt\"")));
+        assertEquals("gr\u00f6\u00dfe.txt", Attachment.getSuggestedFilenameFrom(
+                ContentDispositionParser.parse("attachment; filename=foo.txt; filename*=UTF-8''gr%C3%B6%C3%9Fe.txt")));
+        assertNull(Attachment.getSuggestedFilenameFrom(ContentDispositionParser.parse("attachment")));
+        assertNull(Attachment.getSuggestedFilenameFrom(null));
     }
 }
