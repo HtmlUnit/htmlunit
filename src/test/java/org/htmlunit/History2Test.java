@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Madis Pärn
  * @author Ronald Brill
+ * @author Vidya m
  */
 public class History2Test extends SimpleWebTestCase {
 
