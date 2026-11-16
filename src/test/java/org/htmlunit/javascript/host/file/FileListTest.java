@@ -311,4 +311,32 @@ public class FileListTest extends WebDriverTestCase {
             FileUtils.deleteQuietly(tstFile);
         }
     }
+
+    /**
+     * The prototype has no indexed properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-1", "-1", "false", "false", "undefined"})
+    public void ownPropertiesPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = FileList.prototype;\n"
+            + "    log(Object.keys(o).indexOf('0'));\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('0'));\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    log('0' in o);\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '0'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

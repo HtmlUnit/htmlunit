@@ -14,12 +14,22 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_HTMLOPTIONSCOLLECTION_NAMED_PROPERTIES_ENUMERABLE;
+import static org.htmlunit.BrowserVersionFeatures.JS_NAMED_PROPERTIES_OWN_PROPERTY_NAMES_INCLUDE_HIDDEN;
+import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
+import org.htmlunit.corejs.javascript.CompoundOperationMap;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
@@ -86,6 +96,150 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected int getIndexedPropertyCount() {
+        if (htmlSelect_ == null) {
+            return 0;
+        }
+        return getLength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isIndexedPropertyWritable() {
+        return true;
+    }
+
+    /**
+     * Overridden to support the named properties (the ids and names of the options).
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        final Object response = super.get(name, start);
+        if (response != NOT_FOUND) {
+            return response;
+        }
+
+        final HtmlOption option = getNamedOption(name);
+        if (option != null) {
+            return getScriptableFor(option);
+        }
+        return NOT_FOUND;
+    }
+
+    /**
+     * Overridden to support the named properties (the ids and names of the options).
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final String name, final Scriptable start) {
+        return super.has(name, start) || getNamedOption(name) != null;
+    }
+
+    /**
+     * Overridden to list the named properties (the ids and names of the options)
+     * after the indexed properties.
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object[] getIds(final CompoundOperationMap<Scriptable> map,
+            final boolean getNonEnumerable, final boolean getSymbols) {
+        final Object[] ids = super.getIds(map, getNonEnumerable, getSymbols);
+        if (htmlSelect_ == null
+                || !(getNonEnumerable
+                        || getBrowserVersion().hasFeature(JS_HTMLOPTIONSCOLLECTION_NAMED_PROPERTIES_ENUMERABLE))) {
+            return ids;
+        }
+
+        // Object.getOwnPropertyNames() (but not Object.keys()) may list the hidden names also
+        final boolean includeHidden = getNonEnumerable
+                && getBrowserVersion().hasFeature(JS_NAMED_PROPERTIES_OWN_PROPERTY_NAMES_INCLUDE_HIDDEN);
+        final List<Object> result = new ArrayList<>(Arrays.asList(ids));
+        for (final String name : getSupportedPropertyNames()) {
+            if (!result.contains(name) && (includeHidden || getNamedOption(name) != null)) {
+                result.add(name);
+            }
+        }
+        return result.toArray();
+    }
+
+    /**
+     * Overridden to provide property descriptors for the named properties.
+     * {@inheritDoc}
+     */
+    @Override
+    protected DescriptorInfo getOwnPropertyDescriptor(final Context cx, final Object id) {
+        final DescriptorInfo descInfo = super.getOwnPropertyDescriptor(cx, id);
+        if (descInfo != null) {
+            return descInfo;
+        }
+
+        if (id instanceof CharSequence) {
+            final HtmlOption option = getNamedOption(id.toString());
+            if (option != null) {
+                int attributes = ScriptableObject.READONLY;
+                if (!getBrowserVersion().hasFeature(JS_HTMLOPTIONSCOLLECTION_NAMED_PROPERTIES_ENUMERABLE)) {
+                    attributes |= ScriptableObject.DONTENUM;
+                }
+                return ScriptableObject.buildDataDescriptor(getScriptableFor(option), attributes);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the supported property names (the ids and names of the options in tree order).
+     *
+     * @return the names
+     * @see <a href="https://dom.spec.whatwg.org/#ref-for-dfn-supported-property-names">
+     *     DOM Standard - HTMLCollection supported property names</a>
+     */
+    private List<String> getSupportedPropertyNames() {
+        final List<String> names = new ArrayList<>();
+        for (final HtmlOption option : htmlSelect_.getOptions()) {
+            final String id = option.getId();
+            if (!id.isEmpty() && !names.contains(id)) {
+                names.add(id);
+            }
+            final String name = option.getAttributeDirect(DomElement.NAME_ATTRIBUTE);
+            if (ATTRIBUTE_NOT_DEFINED != name && !name.isEmpty() && !names.contains(name)) {
+                names.add(name);
+            }
+        }
+        return names;
+    }
+
+    /**
+     * Returns the option for the given named property; the named property is not visible
+     * if the prototype chain has a property with this name.
+     *
+     * @param name the property name
+     * @return the option or {@code null}
+     */
+    private HtmlOption getNamedOption(final String name) {
+        if (htmlSelect_ == null || name == null || name.isEmpty()) {
+            return null;
+        }
+        final Scriptable prototype = getPrototype();
+        if (prototype != null && ScriptableObject.hasProperty(prototype, name)) {
+            return null;
+        }
+
+        for (final HtmlOption option : htmlSelect_.getOptions()) {
+            if (name.equals(option.getId())
+                    || name.equals(option.getAttributeDirect(DomElement.NAME_ATTRIBUTE))) {
+                return option;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns the object at the specified index.
      *
      * @param index the index
@@ -119,7 +273,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
 
         final HTMLSelectElement parent = htmlSelect_.getScriptableObject();
 
-        if (!has(name, start) && ScriptableObject.hasProperty(parent, name)) {
+        if (!super.has(name, start) && ScriptableObject.hasProperty(parent, name)) {
             ScriptableObject.putProperty(parent, name, value);
         }
         else {

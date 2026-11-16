@@ -151,6 +151,17 @@ public class StyleSheetList extends HtmlUnitScriptable {
      * {@inheritDoc}
      */
     @Override
+    protected int getIndexedPropertyCount() {
+        if (nodes_ == null) {
+            return 0;
+        }
+        return getLength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Object get(final int index, final Scriptable start) {
         if (this == start) {
             if (nodes_ == null || index < 0 || index >= nodes_.getLength()) {

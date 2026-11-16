@@ -18,6 +18,8 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.function.FailableSupplier;
@@ -26,6 +28,7 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.CompoundOperationMap;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.JSFunction;
 import org.htmlunit.corejs.javascript.NativePromise;
@@ -134,6 +137,109 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     protected Object getWithPreemption(final String name) {
         return NOT_FOUND;
+    }
+
+    /**
+     * Returns the number of indexed properties ({@code 0} to {@code count - 1}) this object
+     * exposes as own properties. Host objects supporting indexed properties (e.g. DOMTokenList)
+     * override this; the indexed properties are then listed by Object.keys(),
+     * Object.getOwnPropertyNames(), for...in and have a property descriptor.
+     * The default implementation returns {@code 0}.
+     *
+     * @return the number of indexed own properties
+     */
+    protected int getIndexedPropertyCount() {
+        return 0;
+    }
+
+    /**
+     * Returns whether the indexed own properties are writable (the object has an indexed setter).
+     * The default implementation returns {@code false}.
+     *
+     * @return true if the indexed properties are writable
+     */
+    protected boolean isIndexedPropertyWritable() {
+        return false;
+    }
+
+    /**
+     * Overridden to list the indexed properties (see {@link #getIndexedPropertyCount()}) in front
+     * of the other own properties.
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object[] getIds(final CompoundOperationMap<Scriptable> map,
+            final boolean getNonEnumerable, final boolean getSymbols) {
+        final Object[] ids = super.getIds(map, getNonEnumerable, getSymbols);
+        final int count = getIndexedPropertyCount();
+        if (count <= 0) {
+            return ids;
+        }
+
+        final List<Object> result = new ArrayList<>(count + ids.length);
+        for (int i = 0; i < count; i++) {
+            result.add(Integer.valueOf(i));
+        }
+        for (final Object id : ids) {
+            if (!(id instanceof Integer index && index >= 0 && index < count)) {
+                result.add(id);
+            }
+        }
+        return result.toArray();
+    }
+
+    /**
+     * Overridden to provide property descriptors for the indexed properties
+     * (see {@link #getIndexedPropertyCount()}).
+     * {@inheritDoc}
+     */
+    @Override
+    protected DescriptorInfo getOwnPropertyDescriptor(final Context cx, final Object id) {
+        final DescriptorInfo descInfo = super.getOwnPropertyDescriptor(cx, id);
+        if (descInfo != null) {
+            return descInfo;
+        }
+
+        final int index = toArrayIndex(id);
+        if (index >= 0 && index < getIndexedPropertyCount()) {
+            final Object value = get(index, this);
+            if (value != NOT_FOUND && !JavaScriptEngine.isUndefined(value)) {
+                return buildDataDescriptor(value, isIndexedPropertyWritable() ? EMPTY : READONLY);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Converts the given property id into an array index.
+     *
+     * @param id the property id
+     * @return the index or {@code -1} if the id is not an array index
+     */
+    private static int toArrayIndex(final Object id) {
+        if (id instanceof Integer index) {
+            return index;
+        }
+        if (id instanceof CharSequence seq) {
+            final String str = seq.toString();
+            final int length = str.length();
+            if (length == 0 || length > 9) {
+                return -1;
+            }
+            if (length > 1 && str.charAt(0) == '0') {
+                return -1;
+            }
+            int index = 0;
+            for (int i = 0; i < length; i++) {
+                final char c = str.charAt(i);
+                if (c < '0' || c > '9') {
+                    return -1;
+                }
+                index = index * 10 + (c - '0');
+            }
+            return index;
+        }
+        return -1;
     }
 
     @Override

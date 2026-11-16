@@ -151,9 +151,18 @@ public class DataTransferItemList extends HtmlUnitScriptable {
      * {@inheritDoc}
      */
     @Override
+    protected int getIndexedPropertyCount() {
+        return getLength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Object get(final int index, final Scriptable start) {
         if (this == start) {
-            if (index >= 0 && index < items_.size()) {
+            // the prototype has no items_
+            if (index >= 0 && index < getIndexedPropertyCount()) {
                 return items_.get(index);
             }
         }

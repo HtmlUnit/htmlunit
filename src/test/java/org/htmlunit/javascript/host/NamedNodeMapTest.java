@@ -384,4 +384,138 @@ public class NamedNodeMapTest extends WebDriverTestCase {
               + "</html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The indexed properties are own properties (Object.keys(), Object.getOwnPropertyNames(),
+     * property descriptor, hasOwnProperty(), for...in).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0,1", "0,1,id,class", "false,true,true", "true", "0,1"})
+    public void ownProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body id='bd' class='a'>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = document.body.attributes;\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).join());\n"
+            + "    var d = Object.getOwnPropertyDescriptor(o, '0');\n"
+            + "    log(d ? d.writable + ',' + d.enumerable + ',' + d.configurable : d);\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    var names = [];\n"
+            + "    for (var n in o) { if (o.hasOwnProperty(n)) { names.push(n); } }\n"
+            + "    log(names.join());\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The indexed properties reflect the current attributes (live map).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0,1", "1", "true", "0", "false", "undefined"})
+    public void ownPropertiesLive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<div id='d'></div>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var div = document.getElementById('d');\n"
+            + "    var o = div.attributes;\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    div.setAttribute('title', 'x');\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('1'));\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    div.removeAttribute('title');\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(o.hasOwnProperty('1'));\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '1'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The prototype has no indexed properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"getNamedItem,getNamedItemNS,item,length,removeNamedItem,removeNamedItemNS,setNamedItem,setNamedItemNS", "false", "undefined", "-1"})
+    public void ownPropertiesPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var o = NamedNodeMap.prototype;\n"
+            + "    log(Object.keys(o).sort().join());\n"
+            + "    log(o.hasOwnProperty('0'));\n"
+            + "    log(Object.getOwnPropertyDescriptor(o, '0'));\n"
+            + "    log(Object.getOwnPropertyNames(o).indexOf('0'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The attribute names are named properties (not enumerable, hidden by prototype properties).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"t", "4", "undefined", "true", "false", "true", "0,1,2,3", "0,1,2,3,id,title,length",
+                       "t,false,false,true"},
+            FF = {"t", "4", "undefined", "true", "false", "true", "0,1,2,3", "0,1,2,3,id,title",
+                  "t,false,false,true"},
+            FF_ESR = {"t", "4", "undefined", "true", "false", "true", "0,1,2,3", "0,1,2,3,id,title",
+                      "t,false,false,true"})
+    public void namedProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<div id='d' title='t' length='7'></div>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var div = document.getElementById('d');\n"
+            + "    div.setAttributeNS(null, 'myAttr', 'x');\n"
+            + "    var o = div.attributes;\n"
+            + "    log(o.title ? o.title.value : o.title);\n"
+            + "    log(o.length);\n"
+            + "    log(o.myAttr ? o.myAttr.value : o.myAttr);\n"
+            + "    log('title' in o);\n"
+            + "    log('unknown' in o);\n"
+            + "    log(o.hasOwnProperty('title'));\n"
+            + "    log(Object.keys(o).join());\n"
+            + "    log(Object.getOwnPropertyNames(o).join());\n"
+            + "    var d = Object.getOwnPropertyDescriptor(o, 'title');\n"
+            + "    log(d ? d.value.value + ',' + d.writable + ',' + d.enumerable + ',' + d.configurable : d);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

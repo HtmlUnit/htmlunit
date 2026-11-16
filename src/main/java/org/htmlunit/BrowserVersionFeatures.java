@@ -291,6 +291,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,
 
+    /** The named properties (ids and names of the options) of HTMLOptionsCollection are enumerable. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_HTMLOPTIONSCOLLECTION_NAMED_PROPERTIES_ENUMERABLE,
+
     /** Executes the {@code onload} handler, regardless of the element was already attached to the page. */
     @BrowserFeature({FF, FF_ESR})
     JS_IFRAME_ALWAYS_EXECUTE_ONLOAD,
@@ -367,6 +371,13 @@ public enum BrowserVersionFeatures {
     /** Type property of menu returns the current (maybe invalid) value. */
     @BrowserFeature({FF, FF_ESR})
     JS_MENU_TYPE_PASS,
+
+    /**
+     * Object.getOwnPropertyNames() of objects with named properties (e.g. NamedNodeMap, HTMLOptionsCollection)
+     * also lists the named properties hidden by prototype properties.
+     */
+    @BrowserFeature({CHROME, EDGE})
+    JS_NAMED_PROPERTIES_OWN_PROPERTY_NAMES_INCLUDE_HIDDEN,
 
     /** Indicates if the String representation of a native function is without newline. */
     @BrowserFeature({CHROME, EDGE})

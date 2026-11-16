@@ -8,12 +8,42 @@
 
     <body>
         <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+            <action type="add" dev="rbri">
+                NamedNodeMap supports named properties (the attribute names) for 'in', hasOwnProperty() and
+                Object.getOwnPropertyNames(); prototype properties (e.g. length) are no longer hidden by attributes
+                and attributes with upper case letters (set by setAttributeNS()) are no longer accessible
+                as properties of html elements.
+            </action>
+            <action type="fix" dev="rbri">
+                CSSRuleList: length and item are no longer reported as own properties.
+            </action>
+            <action type="add" dev="rbri">
+                HTMLOptionsCollection supports named properties (the ids and names of the options).
+            </action>
+            <action type="fix" dev="rbri">
+                CSSStyleDeclaration.setProperty(name, value) without a priority (or with priority undefined)
+                was ignored.
+            </action>
+            <action type="fix" dev="rbri">
+                Accessing an index (e.g. hasOwnProperty('0')) of the prototype of NamedNodeMap, FileList and
+                DataTransferItemList failed with a NullPointerException.
+            </action>
+            <action type="fix" dev="rbri">
+                The indexed properties of DOMTokenList, NamedNodeMap, StyleSheetList, CSSRuleList,
+                CSSStyleDeclaration, HTMLOptionsCollection, HTMLSelectElement, HTMLFormElement, DOMRectList,
+                FileList and DataTransferItemList are own properties now (Object.keys(),
+                Object.getOwnPropertyNames(), Object.getOwnPropertyDescriptor(), for...in).
+                The properties of the dataset (DOMStringMap) are visible to the 'in' operator, Object.keys(),
+                Object.getOwnPropertyNames() and for...in.
+            </action>
             <action type="fix" dev="rbri">
                 The sessionStorage is separated by origin (it was shared by all pages of a window). The
                 local- and sessionStorage of an about:blank iframe is the one of the parent page. A window opened
                 by window.open() starts with a copy of the opener's sessionStorage.
-                StorageHolder.getSessionStorage(WebWindow) returns the store for the origin of the current page,
-                use StorageHolder.getSessionStorage(WebWindow, URL) to get the store for a specific origin.
+                StorageHolder.getSessionStorage(WebWindow) returns the store for the origin of the current page;
+                if the window has no page yet, the returned store is used by the first page loaded (to pre-populate
+                the session storage). Use StorageHolder.getSessionStorage(WebWindow, URL) to get the store for
+                a specific origin.
             </action>
             <action type="fix" dev="rbri">
                 Storage: the 5 MiB quota is shared by all Storage objects of the same storage area and counts keys

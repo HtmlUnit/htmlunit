@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * Holder for different types of storages.
@@ -46,6 +47,9 @@ public class StorageHolder implements Serializable {
         /** The type for window.sessionStorage. */
         SESSION_STORAGE
     }
+
+    /** Key of the session storage not (yet) bound to an origin. */
+    private static final String UNBOUND_KEY = "";
 
     private final Map<String, Map<String, String>> localStorage_ = new HashMap<>();
     private transient Map<WebWindow, Map<String, Map<String, String>>> sessionStorage_ = new WeakHashMap<>();
@@ -83,11 +87,27 @@ public class StorageHolder implements Serializable {
     /**
      * Gets the session storage (map) of the window for the origin of the page
      * currently loaded into the window.
+     *
+     * <p>If the window has no page with an origin yet (no page or about:blank), a store
+     * not bound to an origin is returned; this store is used as session storage
+     * for the origin of the first page loaded into this window that accesses the
+     * session storage. This allows to pre-populate the session storage before loading
+     * the page; {@link #getSessionStorage(WebWindow, URL)} is the preferred way to do this.</p>
+     *
      * @param webWindow the window
      * @return the store
      */
     public Map<String, String> getSessionStorage(final WebWindow webWindow) {
-        return getSessionStorage(webWindow, getOriginUrl(webWindow.getEnclosedPage()));
+        final Page page = webWindow.getEnclosedPage();
+        if (page == null || page.getUrl() == null) {
+            return getUnboundSessionStorage(webWindow);
+        }
+
+        final URL originUrl = getOriginUrl(page);
+        if (UrlUtils.ABOUT.equals(originUrl.getProtocol())) {
+            return getUnboundSessionStorage(webWindow);
+        }
+        return getSessionStorage(webWindow, originUrl);
     }
 
     /**
@@ -100,10 +120,29 @@ public class StorageHolder implements Serializable {
      */
     public Map<String, String> getSessionStorage(final WebWindow webWindow, final URL url) {
         synchronized (sessionStorage_) {
-            final WebWindow topWindow = webWindow.getTopWindow();
+            final Map<String, Map<String, String>> stores =
+                    sessionStorage_.computeIfAbsent(webWindow.getTopWindow(), k -> new HashMap<>());
+            final String key = getOriginKey(url);
+            Map<String, String> store = stores.get(key);
+            if (store == null) {
+                // adopt the store pre-populated via getSessionStorage(WebWindow) if there is one
+                if (!UrlUtils.ABOUT.equals(url.getProtocol())) {
+                    store = stores.remove(UNBOUND_KEY);
+                }
+                if (store == null) {
+                    store = new LinkedHashMap<>();
+                }
+                stores.put(key, store);
+            }
+            return store;
+        }
+    }
+
+    private Map<String, String> getUnboundSessionStorage(final WebWindow webWindow) {
+        synchronized (sessionStorage_) {
             return sessionStorage_
-                    .computeIfAbsent(topWindow, k -> new HashMap<>())
-                    .computeIfAbsent(getOriginKey(url), k -> new LinkedHashMap<>());
+                    .computeIfAbsent(webWindow.getTopWindow(), k -> new HashMap<>())
+                    .computeIfAbsent(UNBOUND_KEY, k -> new LinkedHashMap<>());
         }
     }
 

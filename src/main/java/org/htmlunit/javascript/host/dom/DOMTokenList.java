@@ -371,29 +371,6 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public Object[] getIds() {
-        final Object[] normalIds = super.getIds();
-
-        final String value = getValue();
-        if (org.htmlunit.util.StringUtils.isEmptyOrNull(value)) {
-            return normalIds;
-        }
-
-        final List<String> parts = split(getValue());
-        final Object[] ids = new Object[parts.size() + normalIds.length];
-        final int size = parts.size();
-        for (int i = 0; i < size; i++) {
-            ids[i] = i;
-        }
-        System.arraycopy(normalIds, 0, ids, parts.size(), normalIds.length);
-
-        return ids;
-    }
-
-    /**
      * Returns an Iterator allowing to go through all keys contained in this object.
      * @return a NativeArrayIterator
      */
@@ -447,6 +424,14 @@ public class DOMTokenList extends HtmlUnitScriptable {
             return null;
         };
         cf.call(contextAction);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected int getIndexedPropertyCount() {
+        return getLength();
     }
 
     /**

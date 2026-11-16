@@ -118,6 +118,7 @@
 -webkit-transition-timing-function=:ease
 -webkit-transition=:all
 -webkit-user-select=:auto
+0=display:display
 MozAnimation=:none
 MozAnimationDelay=:0s
 MozAnimationDirection=:normal
