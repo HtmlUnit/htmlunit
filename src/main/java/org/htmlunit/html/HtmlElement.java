@@ -155,10 +155,13 @@ public abstract class HtmlElement extends DomElement {
     /** Constant 'readonly'. */
     protected static final String ATTRIBUTE_READONLY = "readonly";
 
-    /** The HTML void elements (written as {@code <br />} in the XHTML namespace). */
-    private static final Set<String> VOID_ELEMENTS = Set.of(
-            "area", "base", "basefont", "bgsound", "br", "col", "embed", "frame", "hr",
-            "img", "input", "keygen", "link", "menuitem", "meta", "param", "source", "track", "wbr");
+    /**
+     * The HTML void elements (the elements the HTML serialization writes without an end tag).
+     * @see <a href="https://html.spec.whatwg.org/multipage/parsing.html#serialising-html-fragments">
+     *     HTML Living Standard - Serializing HTML fragments</a>
+     */
+    private static final Set<String> VOID_ELEMENTS = Set.of("area", "base", "basefont", "bgsound", "br", "col",
+            "embed", "frame", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr");
 
     /** The listeners which are to be notified of attribute changes. */
     private final List<HtmlAttributeChangeListener> attributeListeners_ = new ArrayList<>();

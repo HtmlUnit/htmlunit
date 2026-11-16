@@ -249,6 +249,7 @@ public final class XmlMarkupSerializer {
         final DomNode contentParent = element instanceof HtmlTemplate template ? template.getContent() : element;
         if (contentParent.getFirstChild() == null) {
             if (Html.XHTML_NAMESPACE.equals(namespace)) {
+                // the void elements are written as <br /> in the XHTML namespace
                 if (HtmlElement.isVoidElement(element.getLocalName())) {
                     builder.append(" />");
                     return;

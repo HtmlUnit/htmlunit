@@ -2440,6 +2440,40 @@ public class InnerHtmlSerializationTest extends WebDriverTestCase {
     }
 
     /**
+     * All (legacy) void elements and menuitem; used to verify the void element list.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<area />",
+             "<base />",
+             "<basefont />",
+             "<bgsound />",
+             "<br />",
+             "<col />",
+             "<embed />",
+             "<frame />",
+             "<hr />",
+             "<img />",
+             "<input />",
+             "<keygen />",
+             "<link />",
+             "<menuitem></menuitem>",
+             "<meta />",
+             "<param />",
+             "<source />",
+             "<track />",
+             "<wbr />"})
+    public void allVoidElements_innerHtmlXhtml() throws Exception {
+        xhtmlScript("var tags = ['area', 'base', 'basefont', 'bgsound', 'br', 'col', 'embed', 'frame', 'hr', 'img',\n"
+                + "  'input', 'keygen', 'link', 'menuitem', 'meta', 'param', 'source', 'track', 'wbr'];\n"
+                + "for (var i = 0; i < tags.length; i++) {\n"
+                + "  var d = document.createElement('div');\n"
+                + "  d.appendChild(document.createElement(tags[i]));\n"
+                + "  log(d.innerHTML.replace(' xmlns=\"http://www.w3.org/1999/xhtml\"', ''));\n"
+                + "}\n");
+    }
+
+    /**
      * A void element with a child.
      * @throws Exception if the test fails
      */

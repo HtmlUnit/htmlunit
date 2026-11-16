@@ -203,8 +203,6 @@ public class HTMLElement extends Element {
         ENTER_KEY_HINT_VALUES.add("send");
     }
 
-    private boolean endTagForbidden_;
-
     /**
      * JavaScript constructor.
      */
@@ -223,12 +221,6 @@ public class HTMLElement extends Element {
         super.setDomNode(domNode);
 
         final String name = domNode.getLocalName();
-        if ("wbr".equalsIgnoreCase(name)
-                || "basefont".equalsIgnoreCase(name)
-                || "track".equalsIgnoreCase(name)) {
-            endTagForbidden_ = true;
-        }
-
         if ("input".equalsIgnoreCase(name)
                 || "button".equalsIgnoreCase(name)
                 || "textarea".equalsIgnoreCase(name)
@@ -1031,11 +1023,15 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns whether the end tag is forbidden for this element (the element is one of the
+     * HTML void elements, see {@link HtmlElement#isVoidElement(String)}).
+     *
+     * @return whether the end tag is forbidden
      */
     @Override
     protected boolean isEndTagForbidden() {
-        return endTagForbidden_;
+        final DomNode domNode = getDomNodeOrNull();
+        return domNode != null && HtmlElement.isVoidElement(StringUtils.toRootLowerCase(domNode.getLocalName()));
     }
 
     /**
