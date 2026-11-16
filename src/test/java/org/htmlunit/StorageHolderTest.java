@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import java.net.URL;
 import java.util.Map;
 
 import org.htmlunit.html.HtmlPage;
@@ -80,6 +81,38 @@ public class StorageHolderTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         assertEquals(1, localStorage.size());
         assertEquals("Tom", page.getTitleText());
+    }
+
+    /**
+     * The local storage is per origin, pages from the same host but another port
+     * must not see the data.
+     * @throws Exception in case of error
+     */
+    @Test
+    public void localStorageOtherPort() throws Exception {
+        final URL otherPortUrl = new URL("http://localhost:" + PORT2 + "/");
+
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + "  localStorage.setItem('token', 'secret');"
+            + "</script>\n"
+            + "</body></html>";
+        loadPage(html);
+
+        final String html2 = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + "  document.title = '' + localStorage.getItem('token');"
+            + "</script>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(otherPortUrl, html2);
+        final HtmlPage page = getWebClient().getPage(otherPortUrl);
+        assertEquals("null", page.getTitleText());
+
+        final WebClient webClient = getWebClient();
+        assertEquals("secret", webClient.getStorageHolder().getLocalStorage(URL_FIRST).get("token"));
+        assertEquals(0, webClient.getStorageHolder().getLocalStorage(otherPortUrl).size());
     }
 
     /**
