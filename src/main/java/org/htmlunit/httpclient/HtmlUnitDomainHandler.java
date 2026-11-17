@@ -20,8 +20,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Locale;
 
+import org.apache.http.conn.util.PublicSuffixMatcher;
+import org.apache.http.conn.util.PublicSuffixMatcherLoader;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookieRestrictionViolationException;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.SetCookie;
 import org.apache.http.impl.cookie.BasicDomainHandler;
@@ -37,6 +40,8 @@ import org.htmlunit.HttpHeader;
  * @author Ahmed Ashour
  */
 final class HtmlUnitDomainHandler extends BasicDomainHandler {
+    private static final PublicSuffixMatcher PUBLIC_SUFFIX_MATCHER = PublicSuffixMatcherLoader.getDefault();
+
     private final BrowserVersion browserVersion_;
 
     HtmlUnitDomainHandler(final BrowserVersion browserVersion) {
@@ -67,6 +72,25 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
         }
 
         cookie.setDomain(domain);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Like the browsers, cookies for a public suffix (e.g. 'co.uk')
+     * are rejected unless the domain is the host itself (RFC 6265 section 5.3, step 5).
+     */
+    @Override
+    public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
+        super.validate(cookie, origin);
+
+        final String domain = cookie.getDomain();
+        final String normalizedDomain = domain.startsWith(".") ? domain.substring(1) : domain;
+        if (normalizedDomain.indexOf('.') > 0
+                && !normalizedDomain.equalsIgnoreCase(origin.getHost())
+                && PUBLIC_SUFFIX_MATCHER.matches(normalizedDomain)) {
+            throw new CookieRestrictionViolationException("Illegal 'domain' attribute \"" + domain
+                    + "\"; cookies for a public suffix are not allowed");
+        }
     }
 
     /**

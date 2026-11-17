@@ -16,6 +16,12 @@ package org.htmlunit.httpclient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.net.URL;
+
+import org.apache.http.cookie.MalformedCookieException;
+import org.htmlunit.BrowserVersion;
 
 import org.junit.jupiter.api.Test;
 
@@ -131,5 +137,24 @@ public class HttpClientConverterTest {
     @Test
     public void ipv6AddressIsNeverRunThroughPublicSuffixList() {
         assertEquals("::1", HttpClientConverter.registrableDomain("::1"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void parseCookieDomain() throws Exception {
+        final URL url = new URL("https://www.example.co.uk/");
+        final BrowserVersion browserVersion = BrowserVersion.BEST_SUPPORTED;
+
+        assertEquals(".example.co.uk",
+                HttpClientConverter.parseCookie("a=1; domain=example.co.uk", url, browserVersion).get(0).getDomain());
+        assertEquals("www.example.co.uk",
+                HttpClientConverter.parseCookie("a=1", url, browserVersion).get(0).getDomain());
+
+        assertThrows(MalformedCookieException.class,
+                () -> HttpClientConverter.parseCookie("a=1; domain=other.co.uk", url, browserVersion));
+        assertThrows(MalformedCookieException.class,
+                () -> HttpClientConverter.parseCookie("a=1; domain=co.uk", url, browserVersion));
     }
 }
