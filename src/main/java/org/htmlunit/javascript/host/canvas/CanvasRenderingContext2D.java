@@ -32,6 +32,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.html.HTMLCanvasElement;
 import org.htmlunit.javascript.host.html.HTMLImageElement;
 import org.htmlunit.platform.Platform;
@@ -84,6 +85,15 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     public CanvasRenderingContext2D(final HTMLCanvasElement canvas) {
         super();
         canvas_ = canvas;
+        renderingBackend_ = null;
+    }
+
+    /**
+     * Discards the current bitmap (and the drawing state); the next drawing operation
+     * creates a new, empty bitmap using the current size of the canvas.
+     * Called if the size of the canvas changes.
+     */
+    public void resetBitmap() {
         renderingBackend_ = null;
     }
 
@@ -398,10 +408,20 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     public void drawImage(final Object image, final int sx, final int sy, final Object sWidth, final Object sHeight,
             final Object dx, final Object dy, final Object dWidth, final Object dHeight) {
 
+        if (image instanceof HTMLCanvasElement canvasElem && !canvasElem.isOriginClean()) {
+            // drawing a tainted canvas taints this canvas
+            canvas_.setOriginCleanFalse();
+        }
+
         if (image instanceof HTMLImageElement imageElem) {
             try {
-                final org.htmlunit.platform.image.ImageData imageData
-                            = ((HtmlImage) imageElem.getDomNodeOrDie()).getImageData();
+                final HtmlImage htmlImage = (HtmlImage) imageElem.getDomNodeOrDie();
+                final org.htmlunit.platform.image.ImageData imageData = htmlImage.getImageData();
+
+                // image data of another origin taints the canvas
+                if (htmlImage.isCorsCrossOrigin()) {
+                    canvas_.setOriginCleanFalse();
+                }
 
                 // 3 arguments
                 //   void ctx.drawImage(image, dx, dy);
@@ -556,6 +576,13 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      */
     @JsxFunction
     public ImageData getImageData(final int sx, final int sy, final int sw, final int sh) {
+        if (!canvas_.isOriginClean()) {
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "Failed to execute 'getImageData' on 'CanvasRenderingContext2D': "
+                            + "The canvas has been tainted by cross-origin data.",
+                    DOMException.SECURITY_ERR);
+        }
+
         final ImageData imageData = new ImageData(getRenderingBackend(), sx, sy, sw, sh);
         imageData.setParentScope(getParentScope());
         imageData.setPrototype(getPrototype(imageData.getClass()));

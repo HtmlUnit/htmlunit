@@ -17,6 +17,8 @@ package org.htmlunit.html;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
+import org.htmlunit.javascript.host.html.HTMLCanvasElement;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "canvas".
@@ -48,5 +50,26 @@ public class HtmlCanvas extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Setting the width or height attribute (also to the current value) resets the bitmap
+     * of the canvas.
+     */
+    @Override
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName,
+            final String attributeValue, final boolean notifyAttributeChangeListeners,
+            final boolean notifyMutationObservers) {
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                notifyMutationObservers);
+
+        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
+        if ("width".equals(qualifiedNameLC) || "height".equals(qualifiedNameLC)) {
+            // without a script object there is no context and nothing was drawn
+            if (getScriptableObjectIfCreated() instanceof HTMLCanvasElement canvas) {
+                canvas.resetBitmap();
+            }
+        }
     }
 }

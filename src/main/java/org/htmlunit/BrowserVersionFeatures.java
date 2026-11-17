@@ -227,6 +227,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_CANVAS_DATA_URL_CHROME_PNG,
 
+    /** Setting the size of a canvas (clearing the bitmap) resets the origin-clean flag. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_CANVAS_RESIZE_RESETS_ORIGIN_CLEAN,
+
     /** ClientHeight for input is 17. */
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTHEIGHT_INPUT_17,

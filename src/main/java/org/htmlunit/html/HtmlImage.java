@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
@@ -89,6 +90,12 @@ public class HtmlImage extends HtmlElement {
     // the url checked against the Content-Security-Policy (img-src) and the result
     private String cspCheckedUrl_;
     private boolean cspAllowed_ = true;
+    // Whether the image data of the current response is CORS-cross-origin (see isCorsCrossOrigin()).
+    // A canvas the image is drawn to loses its origin-clean flag, so script can't read back the pixels.
+    // The value has to be determined while downloading the image: the redirect targets are only known
+    // during the download (redirect filter); afterwards only the request url and the final url are left.
+    // It is reset with every download (a new src means a new response).
+    private boolean corsCrossOrigin_;
     private boolean isComplete_;
     private boolean onloadProcessed_;
     private boolean createdByJavascript_;
@@ -685,6 +692,7 @@ public class HtmlImage extends HtmlElement {
             // HTMLIMAGE_BLANK_SRC_AS_EMPTY
             final String src = getSrcAttribute();
 
+            corsCrossOrigin_ = false;
             if (!StringUtils.isEmptyString(src)) {
                 final HtmlPage page = (HtmlPage) getPage();
                 final WebClient webClient = page.getWebClient();
@@ -721,14 +729,34 @@ public class HtmlImage extends HtmlElement {
                         }
                     }
 
+                    // Canvas tainting: in no-cors mode the response is opaque (CORS-cross-origin) as soon as
+                    // one url of the redirect chain has another origin than the page - also if the chain
+                    // returns to the origin of the page (same -> other -> same). The request url and the
+                    // final url are known afterwards, the redirect targets in between are only visible
+                    // here; therefore this filter records them. It never blocks a redirect.
+                    // The origin of the page is the origin of the creator for about:blank documents.
+                    final URL originUrl = page.getOriginUrl();
+                    final boolean[] crossOriginRedirect = {false};
+                    final Predicate<URL> trackingFilter = redirectUrl -> {
+                        if (!isSameOriginImageUrl(originUrl, redirectUrl)) {
+                            crossOriginRedirect[0] = true;
+                        }
+                        return true;
+                    };
+
                     if (page.getContentSecurityPolicy() != null) {
-                        // like the browsers, redirects are checked (and upgraded) also
+                        // like the browsers, redirects are checked (and upgraded) also;
+                        // the request has only one filter, both checks are combined
                         ContentSecurityPolicy.upgradeInsecureRedirects(page, request);
-                        request.setRedirectFilter(
-                            redirectUrl -> ContentSecurityPolicy.allowsImage(page, redirectUrl, url));
+                        request.setRedirectFilter(trackingFilter.and(
+                            redirectUrl -> ContentSecurityPolicy.allowsImage(page, redirectUrl, url)));
+                    }
+                    else {
+                        request.setRedirectFilter(trackingFilter);
                     }
 
                     imageWebResponse_ = webClient.loadWebResponse(request);
+                    corsCrossOrigin_ = isCorsCrossOrigin(originUrl, url, crossOriginRedirect[0]);
                 }
             }
 
@@ -740,6 +768,102 @@ public class HtmlImage extends HtmlElement {
             width_ = -1;
             height_ = -1;
         }
+    }
+
+    /**
+     * Returns whether the image data of this image is CORS-cross-origin; a canvas the image
+     * is drawn to loses its origin-clean flag (the image data can't be read back by script).
+     * The image data is CORS-cross-origin if the image (or one of the redirects) was loaded from
+     * another origin than the page and the response did not pass the CORS check
+     * (only done if the image has a crossorigin attribute).
+     *
+     * @return {@code true} if the image data is CORS-cross-origin
+     * @see <a href="https://html.spec.whatwg.org/multipage/canvas.html#the-image-argument-is-not-origin-clean">
+     *     HTML Living Standard - the image argument is not origin-clean</a>
+     */
+    public boolean isCorsCrossOrigin() {
+        return corsCrossOrigin_;
+    }
+
+    /**
+     * Determines whether the image data of the current response is CORS-cross-origin.
+     * This is the case if the request url, one of the redirect targets or the final url
+     * has another origin than the page and the response did not pass the CORS check
+     * (the CORS check is only done if the image has a crossorigin attribute).
+     *
+     * @param originUrl the url of the origin of the page
+     * @param requestUrl the url of the image request
+     * @param crossOriginRedirect whether one of the redirect targets has another origin than the page
+     * @return {@code true} if the image data is CORS-cross-origin
+     */
+    private boolean isCorsCrossOrigin(final URL originUrl, final URL requestUrl, final boolean crossOriginRedirect) {
+        if (imageWebResponse_ == null) {
+            return false;
+        }
+
+        // the final url is the last redirect target and therefore already covered by the filter;
+        // it is checked again as safety net (e.g. if the redirect filter was not called for a hop)
+        final boolean crossOrigin = crossOriginRedirect
+                || !isSameOriginImageUrl(originUrl, requestUrl)
+                || !isSameOriginImageUrl(originUrl, imageWebResponse_.getWebRequest().getUrl());
+        if (!crossOrigin) {
+            return false;
+        }
+
+        // cors mode: the response is CORS-same-origin if it passes the CORS check
+        return !hasAttribute("crossorigin") || !isCorsAllowed(originUrl);
+    }
+
+    /**
+     * The CORS check of the fetch standard for the current image response.
+     * For crossorigin='use-credentials' the Access-Control-Allow-Origin header has to be
+     * the origin of the page and Access-Control-Allow-Credentials has to be 'true'; otherwise
+     * the Access-Control-Allow-Origin header has to be the origin of the page or '*'.
+     *
+     * @param originUrl the url of the origin of the page
+     * @return {@code true} if the response passes the CORS check
+     * @see <a href="https://fetch.spec.whatwg.org/#cors-check">Fetch Standard - CORS check</a>
+     */
+    private boolean isCorsAllowed(final URL originUrl) {
+        // the serialized origin of the page
+        String origin = originUrl.getProtocol() + "://" + originUrl.getHost();
+        final int port = originUrl.getPort();
+        if (port != -1 && port != originUrl.getDefaultPort()) {
+            origin += ":" + port;
+        }
+
+        final String allowOrigin = imageWebResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
+        if ("use-credentials".equalsIgnoreCase(getAttributeDirect("crossorigin"))) {
+            final String allowCredentials =
+                    imageWebResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
+            return origin.equals(allowOrigin) && "true".equals(allowCredentials);
+        }
+        return "*".equals(allowOrigin) || origin.equals(allowOrigin);
+    }
+
+    /**
+     * Returns whether the url of an image (or of a redirect target) has the same origin as the page.
+     * Data urls are always same-origin (the fetch of a data url is a basic response),
+     * blob urls have the origin of the url they were created for.
+     *
+     * @param originUrl the url of the origin of the page
+     * @param url the url to check
+     * @return {@code true} if the url has the same origin as the page
+     */
+    private static boolean isSameOriginImageUrl(final URL originUrl, final URL url) {
+        final String protocol = url.getProtocol();
+        if ("data".equalsIgnoreCase(protocol)) {
+            return true;
+        }
+        if ("blob".equalsIgnoreCase(protocol)) {
+            try {
+                return UrlUtils.isSameOrigin(originUrl, new URL(url.toExternalForm().substring(5)));
+            }
+            catch (final MalformedURLException e) {
+                return false;
+            }
+        }
+        return UrlUtils.isSameOrigin(originUrl, url);
     }
 
     /**

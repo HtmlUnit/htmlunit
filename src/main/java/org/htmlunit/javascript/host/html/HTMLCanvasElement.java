@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_CANVAS_DATA_URL_CHROME_PNG;
+import static org.htmlunit.BrowserVersionFeatures.JS_CANVAS_RESIZE_RESETS_ORIGIN_CLEAN;
 
 import org.htmlunit.html.HtmlCanvas;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -25,6 +26,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
+import org.htmlunit.javascript.host.dom.DOMException;
 
 /**
  * The JavaScript object {@code HTMLCanvasElement}.
@@ -39,6 +41,8 @@ import org.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 public class HTMLCanvasElement extends HTMLElement {
 
     private CanvasRenderingContext2D context2d_;
+    // false as soon as cross-origin data was drawn into the canvas; see resetBitmap()
+    private boolean originClean_ = true;
 
     /**
      * JavaScript constructor.
@@ -107,6 +111,22 @@ public class HTMLCanvasElement extends HTMLElement {
     }
 
     /**
+     * Resets the bitmap after the width or height attribute was set (also to the current value).
+     * Like the browsers, the bitmap is cleared and the drawing state of the context is reset.
+     * <p>Chrome and Edge reset the origin-clean flag also; there is no cross-origin content
+     * left. Firefox keeps the flag. Resetting the flag without clearing the bitmap would make
+     * the old (cross-origin) content readable again, therefore both are done here.</p>
+     */
+    public void resetBitmap() {
+        if (context2d_ != null) {
+            context2d_.resetBitmap();
+        }
+        if (getBrowserVersion().hasFeature(JS_CANVAS_RESIZE_RESETS_ORIGIN_CLEAN)) {
+            originClean_ = true;
+        }
+    }
+
+    /**
      * Gets the context.
      * @param contextId the context id
      * @return an object that exposes an API for drawing on the canvas,
@@ -127,6 +147,28 @@ public class HTMLCanvasElement extends HTMLElement {
     }
 
     /**
+     * Returns the origin-clean flag of the canvas. The flag is set to false if cross-origin
+     * data (e.g. an image of another origin) is drawn into the canvas; the content of such
+     * a canvas can't be read back by script.
+     *
+     * @return the origin-clean flag
+     * @see <a href="https://html.spec.whatwg.org/multipage/canvas.html#security-with-canvas-elements">
+     *     HTML Living Standard - Security with canvas elements</a>
+     */
+    public boolean isOriginClean() {
+        return originClean_;
+    }
+
+    /**
+     * Sets the origin-clean flag of the canvas to false (cross-origin data was drawn into
+     * the canvas). Depending on the browser, setting the size of the canvas resets the
+     * flag (see {@link #resetBitmap()}).
+     */
+    public void setOriginCleanFalse() {
+        originClean_ = false;
+    }
+
+    /**
      * Gets the data: URL representation of the canvas element.
      * Here we return an empty image.
      * @param type the type (optional)
@@ -134,6 +176,12 @@ public class HTMLCanvasElement extends HTMLElement {
      */
     @JsxFunction
     public String toDataURL(final Object type) {
+        if (!originClean_) {
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "Failed to execute 'toDataURL' on 'HTMLCanvasElement': Tainted canvases may not be exported.",
+                    DOMException.SECURITY_ERR);
+        }
+
         if (context2d_ != null) {
             final String typeInUse;
             if (JavaScriptEngine.isUndefined(type)) {
