@@ -12,12 +12,17 @@
                 Security: drawing an image of another origin (also via redirect) into a canvas sets the
                 origin-clean flag of the canvas to false; getImageData() and toDataURL() of such a canvas
                 throw a SecurityError (like the browsers do). Images with a crossorigin attribute and
-                a matching Access-Control-Allow-Origin header do not taint the canvas.
+                a matching Access-Control-Allow-Origin header do not taint the canvas; if the CORS check
+                fails, the image is broken (error event).
             </action>
             <action type="fix" dev="rbri">
                 Setting the width or height of a canvas (property or attribute, also to the current value)
                 clears the canvas bitmap and resets the drawing state of the 2d context; for Chrome/Edge
                 the origin-clean flag is reset also (like the browsers do).
+            </action>
+            <action type="add" dev="rbri">
+                New method HtmlImage.isBroken(); CanvasRenderingContext2D.drawImage() throws an InvalidStateError
+                if the image is broken (failed download, blocked by the Content-Security-Policy, failed CORS check).
             </action>
             <action type="add" dev="rbri">
                 New method WebResponse.getContentDisposition() returns the parsed Content-Disposition header

@@ -756,7 +756,18 @@ public class HtmlImage extends HtmlElement {
                     }
 
                     imageWebResponse_ = webClient.loadWebResponse(request);
-                    corsCrossOrigin_ = isCorsCrossOrigin(originUrl, url, crossOriginRedirect[0]);
+                    if (isCrossOriginResponse(originUrl, url, crossOriginRedirect[0])) {
+                        if (!hasAttribute("crossorigin")) {
+                            // no-cors mode: the response is opaque
+                            corsCrossOrigin_ = true;
+                        }
+                        else if (!isCorsAllowed(originUrl)) {
+                            // cors mode: a response failing the CORS check is a network error;
+                            // like the browsers, the image is broken (error event, drawImage() throws).
+                            // A response passing the check is CORS-same-origin.
+                            imageWebResponse_ = null;
+                        }
+                    }
                 }
             }
 
@@ -774,8 +785,9 @@ public class HtmlImage extends HtmlElement {
      * Returns whether the image data of this image is CORS-cross-origin; a canvas the image
      * is drawn to loses its origin-clean flag (the image data can't be read back by script).
      * The image data is CORS-cross-origin if the image (or one of the redirects) was loaded from
-     * another origin than the page and the response did not pass the CORS check
-     * (only done if the image has a crossorigin attribute).
+     * another origin than the page without a crossorigin attribute (no-cors mode). With a
+     * crossorigin attribute a cross-origin response has to pass the CORS check; otherwise the
+     * image is broken (see {@link #isBroken()}).
      *
      * @return {@code true} if the image data is CORS-cross-origin
      * @see <a href="https://html.spec.whatwg.org/multipage/canvas.html#the-image-argument-is-not-origin-clean">
@@ -786,32 +798,49 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * Determines whether the image data of the current response is CORS-cross-origin.
-     * This is the case if the request url, one of the redirect targets or the final url
-     * has another origin than the page and the response did not pass the CORS check
-     * (the CORS check is only done if the image has a crossorigin attribute).
+     * Returns whether the image is broken: the image has a src but there is no usable response
+     * (e.g. the download failed, was blocked by the Content-Security-Policy or did not pass the
+     * CORS check). Like the browsers, drawing a broken image into a canvas fails.
+     * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
+     *
+     * @return {@code true} if the image is broken
+     * @throws IOException if an error occurs while downloading the image
+     * @see <a href="https://html.spec.whatwg.org/multipage/images.html#img-error">
+     *     HTML Living Standard - broken</a>
+     */
+    public boolean isBroken() throws IOException {
+        final String src = getSrcAttribute();
+        if (StringUtils.isEmptyString(src)
+                || (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))) {
+            // no image (unavailable), nothing to draw but not broken
+            return false;
+        }
+        downloadImageIfNeeded();
+        return imageWebResponse_ == null
+                || !imageWebResponse_.isSuccess()
+                || imageWebResponse_.getStatusCode() == HttpStatus.NO_CONTENT_204;
+    }
+
+    /**
+     * Determines whether the current response is cross-origin; this is the case if the
+     * request url, one of the redirect targets or the final url has another origin than the page.
      *
      * @param originUrl the url of the origin of the page
      * @param requestUrl the url of the image request
      * @param crossOriginRedirect whether one of the redirect targets has another origin than the page
-     * @return {@code true} if the image data is CORS-cross-origin
+     * @return {@code true} if the response is cross-origin
      */
-    private boolean isCorsCrossOrigin(final URL originUrl, final URL requestUrl, final boolean crossOriginRedirect) {
+    private boolean isCrossOriginResponse(final URL originUrl, final URL requestUrl,
+            final boolean crossOriginRedirect) {
         if (imageWebResponse_ == null) {
             return false;
         }
 
         // the final url is the last redirect target and therefore already covered by the filter;
         // it is checked again as safety net (e.g. if the redirect filter was not called for a hop)
-        final boolean crossOrigin = crossOriginRedirect
+        return crossOriginRedirect
                 || !isSameOriginImageUrl(originUrl, requestUrl)
                 || !isSameOriginImageUrl(originUrl, imageWebResponse_.getWebRequest().getUrl());
-        if (!crossOrigin) {
-            return false;
-        }
-
-        // cors mode: the response is CORS-same-origin if it passes the CORS check
-        return !hasAttribute("crossorigin") || !isCorsAllowed(originUrl);
     }
 
     /**

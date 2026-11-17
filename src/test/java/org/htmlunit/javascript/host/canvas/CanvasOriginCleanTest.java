@@ -24,7 +24,6 @@ import org.apache.commons.io.IOUtils;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
@@ -214,17 +213,12 @@ public class CanvasOriginCleanTest extends WebDriverTestCase {
 
     /**
      * A crossorigin image without Access-Control-Allow-Origin header fails to load.
-     * <p>The browsers fail the CORS check and treat the image as broken (error event,
-     * drawImage() throws). HtmlUnit loads the image but taints the canvas.</p>
+     * <p>The CORS check fails; the image is broken (error event, drawImage() throws).</p>
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"error", "drawImage InvalidStateError"})
-    @HtmlUnitNYI(CHROME = {"load", "getImageData SecurityError", "toDataURL SecurityError"},
-            EDGE = {"load", "getImageData SecurityError", "toDataURL SecurityError"},
-            FF = {"load", "getImageData SecurityError", "toDataURL SecurityError"},
-            FF_ESR = {"load", "getImageData SecurityError", "toDataURL SecurityError"})
     public void crossOriginAttributeWithoutCorsHeader() throws Exception {
         setImage(URL_CROSS_ORIGIN_BASE, "img.png");
         loadPageVerify("crossorigin='anonymous'", URL_CROSS_ORIGIN_BASE + "img.png",
@@ -262,22 +256,96 @@ public class CanvasOriginCleanTest extends WebDriverTestCase {
 
     /**
      * crossorigin='use-credentials' does not accept the wildcard.
-     * <p>The browsers fail the CORS check and treat the image as broken (error event,
-     * drawImage() throws). HtmlUnit loads the image but taints the canvas.</p>
+     * <p>The CORS check fails; the image is broken (error event, drawImage() throws).</p>
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"error", "drawImage InvalidStateError"})
-    @HtmlUnitNYI(CHROME = {"load", "getImageData SecurityError", "toDataURL SecurityError"},
-            EDGE = {"load", "getImageData SecurityError", "toDataURL SecurityError"},
-            FF = {"load", "getImageData SecurityError", "toDataURL SecurityError"},
-            FF_ESR = {"load", "getImageData SecurityError", "toDataURL SecurityError"})
     public void useCredentialsWithWildcard() throws Exception {
         setImage(URL_CROSS_ORIGIN_BASE, "img.png",
                 new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, "*"));
         loadPageVerify("crossorigin='use-credentials'", URL_CROSS_ORIGIN_BASE + "img.png",
                 "try { draw(img); } catch(e) { log('drawImage ' + e.name); }\n");
+    }
+
+    /**
+     * A crossorigin image of the same origin needs no CORS headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"load", "getImageData ok", "toDataURL ok"})
+    public void crossOriginAttributeSameOrigin() throws Exception {
+        setImage(URL_FIRST, "img.png");
+        loadPageVerify("crossorigin='anonymous'", "img.png",
+                "try { draw(img); } catch(e) { log('drawImage ' + e.name); }\n");
+    }
+
+    /**
+     * A crossorigin image redirecting to another origin without CORS headers is broken.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error", "drawImage InvalidStateError"})
+    public void crossOriginAttributeRedirectToCrossOriginWithoutCorsHeader() throws Exception {
+        setImage(URL_CROSS_ORIGIN_BASE, "img.png");
+        setRedirect(new URL(URL_FIRST, "redirect"), new URL(URL_CROSS_ORIGIN_BASE, "img.png"));
+        loadPageVerify("crossorigin='anonymous'", "redirect",
+                "try { draw(img); } catch(e) { log('drawImage ' + e.name); }\n");
+    }
+
+    /**
+     * Drawing an image that failed to load (404).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error", "drawImage InvalidStateError"})
+    public void drawBrokenImageNotFound() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "img.png"), "", 404, "Not Found",
+                MimeType.TEXT_HTML, new ArrayList<>());
+        loadPageVerify("", "img.png",
+                "try { draw(img); } catch(e) { log('drawImage ' + e.name); }\n");
+    }
+
+    /**
+     * Drawing an image blocked by the Content-Security-Policy.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error", "drawImage InvalidStateError"})
+    public void drawBrokenImageBlockedByPolicy() throws Exception {
+        setImage(URL_CROSS_ORIGIN_BASE, "img.png");
+        loadPageVerify("<meta http-equiv='Content-Security-Policy' content=\"img-src 'self'\">\n",
+                "", URL_CROSS_ORIGIN_BASE + "img.png",
+                "try { draw(img); } catch(e) { log('drawImage ' + e.name); }\n");
+    }
+
+    /**
+     * Drawing an image without src does nothing (the image is not broken).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"getImageData ok", "toDataURL ok"})
+    public void drawImageWithoutSrc() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + DRAW_JS
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<canvas id='c' width='10' height='10'></canvas>\n"
+            + "<script>\n"
+            + "  try { draw(new Image()); } catch(e) { log('drawImage ' + e.name); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     /**

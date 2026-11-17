@@ -416,6 +416,12 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         if (image instanceof HTMLImageElement imageElem) {
             try {
                 final HtmlImage htmlImage = (HtmlImage) imageElem.getDomNodeOrDie();
+                if (htmlImage.isBroken()) {
+                    throw JavaScriptEngine.asJavaScriptException(this,
+                            "Failed to execute 'drawImage' on 'CanvasRenderingContext2D': "
+                                    + "The HTMLImageElement provided is in the 'broken' state.",
+                            DOMException.INVALID_STATE_ERR);
+                }
                 final org.htmlunit.platform.image.ImageData imageData = htmlImage.getImageData();
 
                 // image data of another origin taints the canvas

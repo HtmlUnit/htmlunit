@@ -17,14 +17,19 @@ package org.htmlunit.html;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -308,5 +313,332 @@ public class HtmlImageTest extends SimpleWebTestCase {
 
         img.click(2, 7);
         assertEquals(getExpectedAlerts()[0] + getExpectedAlerts()[1], page.getTitleText());
+    }
+
+    /**
+     * An image of the same origin is not CORS-cross-origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginSameOrigin() throws Exception {
+        setImage(new URL(URL_FIRST, "img.png"));
+        final HtmlImage img = loadImage("", "img.png");
+
+        assertFalse(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * An image of another origin is CORS-cross-origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginCrossOrigin() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"));
+        final HtmlImage img = loadImage("", URL_CROSS_ORIGIN_BASE + "img.png");
+
+        assertFalse(img.isBroken());
+        assertTrue(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * A redirect to another origin makes the image CORS-cross-origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginRedirectToCrossOrigin() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"));
+        setRedirect(new URL(URL_FIRST, "redirect"), new URL(URL_CROSS_ORIGIN_BASE, "img.png"));
+        final HtmlImage img = loadImage("", "redirect");
+
+        assertFalse(img.isBroken());
+        assertTrue(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * A redirect chain over another origin back to the origin of the page;
+     * only the redirect filter sees the url in the middle.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginRedirectOverCrossOriginBackToSameOrigin() throws Exception {
+        setImage(new URL(URL_FIRST, "img.png"));
+        setRedirect(new URL(URL_FIRST, "redirect"), new URL(URL_CROSS_ORIGIN_BASE, "redirect"));
+        setRedirect(new URL(URL_CROSS_ORIGIN_BASE, "redirect"), new URL(URL_FIRST, "img.png"));
+        final HtmlImage img = loadImage("", "redirect");
+
+        assertFalse(img.isBroken());
+        assertTrue(img.isCorsCrossOrigin());
+        assertEquals(URL_FIRST + "img.png", img.getWebResponse(false).getWebRequest().getUrl().toExternalForm());
+    }
+
+    /**
+     * A redirect inside the origin of the page.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginRedirectSameOrigin() throws Exception {
+        setImage(new URL(URL_FIRST, "img.png"));
+        setRedirect(new URL(URL_FIRST, "redirect"), new URL(URL_FIRST, "img.png"));
+        final HtmlImage img = loadImage("", "redirect");
+
+        assertFalse(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * A data url is not CORS-cross-origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginDataUrl() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-png.img")) {
+            final String dataUrl = "data:image/png;base64,"
+                    + Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));
+            final HtmlImage img = loadImage("", dataUrl);
+
+            assertFalse(img.isBroken());
+            assertFalse(img.isCorsCrossOrigin());
+        }
+    }
+
+    /**
+     * A crossorigin image passing the CORS check is not CORS-cross-origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginCrossOriginAttributeWithCorsHeader() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"),
+                new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, "*"));
+        final HtmlImage img = loadImage("crossorigin='anonymous'", URL_CROSS_ORIGIN_BASE + "img.png");
+
+        assertFalse(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * A crossorigin image failing the CORS check is broken (network error).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginCrossOriginAttributeWithoutCorsHeader() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"));
+        final HtmlImage img = loadImage("crossorigin='anonymous'", URL_CROSS_ORIGIN_BASE + "img.png");
+
+        assertTrue(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+        assertNull(img.getWebResponse(false));
+    }
+
+    /**
+     * The CORS check for crossorigin='anonymous' accepts the origin of the page.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginCrossOriginAttributeWithOrigin() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"),
+                new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:" + PORT));
+        final HtmlImage img = loadImage("crossorigin='anonymous'", URL_CROSS_ORIGIN_BASE + "img.png");
+
+        assertFalse(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * The CORS check fails if the Access-Control-Allow-Origin header names another origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginCrossOriginAttributeWithOtherOrigin() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"),
+                new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:" + PORT2));
+        final HtmlImage img = loadImage("crossorigin='anonymous'", URL_CROSS_ORIGIN_BASE + "img.png");
+
+        assertTrue(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * crossorigin='use-credentials' needs the origin and Access-Control-Allow-Credentials.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginUseCredentialsWithCorsHeaders() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"),
+                new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:" + PORT),
+                new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true"));
+        final HtmlImage img = loadImage("crossorigin='use-credentials'", URL_CROSS_ORIGIN_BASE + "img.png");
+
+        assertFalse(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * crossorigin='use-credentials' does not accept the wildcard.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginUseCredentialsWithWildcard() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"),
+                new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, "*"),
+                new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true"));
+        final HtmlImage img = loadImage("crossorigin='use-credentials'", URL_CROSS_ORIGIN_BASE + "img.png");
+
+        assertTrue(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * crossorigin='use-credentials' needs Access-Control-Allow-Credentials.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginUseCredentialsWithoutAllowCredentials() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"),
+                new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:" + PORT));
+        final HtmlImage img = loadImage("crossorigin='use-credentials'", URL_CROSS_ORIGIN_BASE + "img.png");
+
+        assertTrue(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * A new src resets the state of the previous image.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginNewSrc() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"));
+        setImage(new URL(URL_FIRST, "img.png"));
+        final HtmlImage img = loadImage("", URL_CROSS_ORIGIN_BASE + "img.png");
+
+        assertFalse(img.isBroken());
+        assertTrue(img.isCorsCrossOrigin());
+
+        img.setAttribute("src", "img.png");
+        assertFalse(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+
+        img.setAttribute("src", URL_CROSS_ORIGIN_BASE + "img.png");
+        assertFalse(img.isBroken());
+        assertTrue(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * The origin of an about:blank document is the origin of the creator.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void corsCrossOriginAboutBlank() throws Exception {
+        setImage(new URL(URL_FIRST, "img.png"));
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"));
+
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <iframe id='f'></iframe>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlPage framePage = (HtmlPage) ((HtmlInlineFrame) page.getHtmlElementById("f")).getEnclosedPage();
+
+        final HtmlImage sameOrigin = (HtmlImage) framePage.createElement("img");
+        framePage.getBody().appendChild(sameOrigin);
+        sameOrigin.setAttribute("src", URL_FIRST + "img.png");
+        assertFalse(sameOrigin.isBroken());
+        assertFalse(sameOrigin.isCorsCrossOrigin());
+
+        final HtmlImage crossOrigin = (HtmlImage) framePage.createElement("img");
+        framePage.getBody().appendChild(crossOrigin);
+        crossOrigin.setAttribute("src", URL_CROSS_ORIGIN_BASE + "img.png");
+        assertFalse(crossOrigin.isBroken());
+        assertTrue(crossOrigin.isCorsCrossOrigin());
+    }
+
+    /**
+     * An image that failed to load (404) is broken.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isBrokenNotFound() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "img.png"), "", 404, "Not Found",
+                MimeType.TEXT_HTML, new ArrayList<>());
+        final HtmlImage img = loadImage("", "img.png");
+
+        assertTrue(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * An image blocked by the Content-Security-Policy is broken.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isBrokenBlockedByPolicy() throws Exception {
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "img.png"));
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<meta http-equiv='Content-Security-Policy' content=\"img-src 'self'\">\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <img id='myImage' src='" + URL_CROSS_ORIGIN_BASE + "img.png'>\n"
+            + "</body></html>";
+        final HtmlImage img = loadPage(html).getHtmlElementById("myImage");
+
+        assertTrue(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    /**
+     * An image without src is not broken.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isBrokenWithoutSrc() throws Exception {
+        final HtmlImage img = loadImage("", null);
+
+        assertFalse(img.isBroken());
+        assertFalse(img.isCorsCrossOrigin());
+    }
+
+    private void setImage(final URL url, final NameValuePair... headers) throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-png.img")) {
+            final byte[] bytes = IOUtils.toByteArray(is);
+            getMockWebConnection().setResponse(url, bytes, 200, "OK", MimeType.IMAGE_PNG, List.of(headers));
+        }
+    }
+
+    private void setRedirect(final URL from, final URL to) {
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", to.toExternalForm()));
+        getMockWebConnection().setResponse(from, "", 302, "Found", MimeType.TEXT_HTML, headers);
+    }
+
+    private HtmlImage loadImage(final String attributes, final String src) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <img id='myImage' " + attributes
+            + (src == null ? "" : " src='" + src + "'") + ">\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        return page.getHtmlElementById("myImage");
     }
 }
