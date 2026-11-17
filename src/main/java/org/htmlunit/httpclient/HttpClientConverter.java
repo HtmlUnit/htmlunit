@@ -137,10 +137,14 @@ public final class HttpClientConverter {
         buffer.append(cookieString);
 
         final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
-        final List<Cookie> cookies = cookieSpec.parse(new BufferedHeader(buffer), buildCookieOrigin(pageUrl));
+        final CookieOrigin cookieOrigin = buildCookieOrigin(pageUrl);
+        final List<Cookie> cookies = cookieSpec.parse(new BufferedHeader(buffer), cookieOrigin);
 
         final List<org.htmlunit.http.Cookie> htmlUnitCookies = new ArrayList<>(cookies.size());
         for (final Cookie cookie : cookies) {
+            // the same checks HttpClient does for Set-Cookie headers (e.g. the domain has to match the page)
+            cookieSpec.validate(cookie, cookieOrigin);
+
             final org.htmlunit.http.Cookie htmlUnitCookie = new HttpClientCookie((ClientCookie) cookie);
             htmlUnitCookies.add(htmlUnitCookie);
         }

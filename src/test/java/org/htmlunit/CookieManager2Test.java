@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -163,5 +164,33 @@ public class CookieManager2Test extends SimpleWebTestCase {
         iterator.next(); // ConcurrentModificationException was here
         assertEquals(1, initialCookies.size());
         assertEquals(2, webClient.getCookieManager().getCookies().size());
+    }
+
+    /**
+     * Method document.cookie must not set cookies for another domain or for
+     * a public suffix (RFC 6265 section 5.3, steps 5 and 6).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void documentCookieForeignDomain() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  document.cookie = 'own=1; domain=attacker.co.uk; path=/';\n"
+            + "  document.cookie = 'foreign=1; domain=victim.example; path=/';\n"
+            + "  document.cookie = 'suffix=1; domain=co.uk; path=/';\n"
+            + "</script></head><body></body></html>";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(new URL("https://www.attacker.co.uk/"), html);
+        webClient.setWebConnection(webConnection);
+
+        webClient.getPage("https://www.attacker.co.uk/");
+
+        assertEquals("[own=1;domain=.attacker.co.uk;path=/]",
+                webClient.getCookieManager().getCookies().toString());
+        assertTrue(webClient.getCookies(new URL("https://victim.example/")).isEmpty());
+        assertTrue(webClient.getCookies(new URL("https://victim.co.uk/")).isEmpty());
     }
 }
