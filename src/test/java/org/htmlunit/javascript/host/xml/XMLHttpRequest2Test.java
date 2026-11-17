@@ -1342,6 +1342,47 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     }
 
     /**
+     * Set-Cookie and Set-Cookie2 are forbidden response header names; scripts must not see them
+     * (otherwise the value of HttpOnly cookies is readable).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null", "null", "false", "false", "abc"})
+    public void getResponseHeaderSetCookie() throws Exception {
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
+                        + "  <head>\n"
+                        + "    <script>\n"
+                        + LOG_TITLE_FUNCTION
+                        + "      function test() {\n"
+                        + "        var request = new XMLHttpRequest();\n"
+                        + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+                        + "        request.send();\n"
+                        + "        log(request.getResponseHeader('Set-Cookie'));\n"
+                        + "        log(request.getResponseHeader('set-cookie'));\n"
+                        + "        log(request.getResponseHeader('Set-Cookie2'));\n"
+                        + "        var headers = request.getAllResponseHeaders().toLowerCase();\n"
+                        + "        log(headers.indexOf('set-cookie') != -1);\n"
+                        + "        log(headers.indexOf('secret') != -1);\n"
+                        + "        log(request.getResponseHeader('X-Custom'));\n"
+                        + "      }\n"
+                        + "    </script>\n"
+                        + "  </head>\n"
+                        + "  <body onload='test()'>\n"
+                        + "  </body>\n"
+                        + "</html>";
+
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Set-Cookie", "session=secret; HttpOnly"));
+        responseHeaders.add(new NameValuePair("Set-Cookie2", "legacy=secret"));
+        responseHeaders.add(new NameValuePair("X-Custom", "abc"));
+        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", 200, "OK", MimeType.TEXT_XML,
+                responseHeaders);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

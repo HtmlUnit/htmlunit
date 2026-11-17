@@ -663,6 +663,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (webResponse_ != null) {
             final StringBuilder builder = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
+                if (isForbiddenResponseHeader(header.getName())) {
+                    continue;
+                }
                 builder
                     .append(header.getName())
                     .append(": ")
@@ -694,6 +697,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return null;
         }
         if (webResponse_ != null) {
+            if (isForbiddenResponseHeader(headerName)) {
+                return null;
+            }
             return webResponse_.getResponseHeaderValue(headerName);
         }
 
@@ -702,6 +708,17 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 + state_ + ").");
         }
         return null;
+    }
+
+    /**
+     * Set-Cookie and Set-Cookie2 are never exposed to scripts, otherwise HttpOnly cookies are readable.
+     *
+     * @see <a href="https://fetch.spec.whatwg.org/#forbidden-response-header-name">Fetch Standard</a>
+     * @param name the header name
+     * @return {@code true} if the header is a forbidden response header
+     */
+    private static boolean isForbiddenResponseHeader(final String name) {
+        return "set-cookie".equalsIgnoreCase(name) || "set-cookie2".equalsIgnoreCase(name);
     }
 
     /**

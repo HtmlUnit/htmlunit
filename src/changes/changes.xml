@@ -73,6 +73,11 @@
                 the HTML spec says user agents must ignore this pragma.
             </action>
             <action type="fix" dev="Vidya m">
+                XMLHttpRequest.getResponseHeader() and XMLHttpRequest.getAllResponseHeaders() (and by this the
+                headers of fetch() responses) no longer expose the Set-Cookie and Set-Cookie2 headers; the value
+                of HttpOnly cookies was readable from JavaScript.
+            </action>
+            <action type="fix" dev="Vidya m">
                 Method document.cookie (and meta http-equiv set-cookie) no longer sets cookies for another domain;
                 the domain attribute has to match the page (RFC 6265 section 5.3). Cookies for a public suffix
                 (e.g. co.uk) are ignored also for Set-Cookie headers.
