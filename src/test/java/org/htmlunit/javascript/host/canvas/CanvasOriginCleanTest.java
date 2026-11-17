@@ -240,7 +240,7 @@ public class CanvasOriginCleanTest extends WebDriverTestCase {
     }
 
     /**
-     * crossorigin='use-credentials' needs the origin and Access-Control-Allow-Credentials.
+     * The rule crossorigin='use-credentials' needs the origin and Access-Control-Allow-Credentials.
      *
      * @throws Exception if the test fails
      */
@@ -255,7 +255,7 @@ public class CanvasOriginCleanTest extends WebDriverTestCase {
     }
 
     /**
-     * crossorigin='use-credentials' does not accept the wildcard.
+     * The rule crossorigin='use-credentials' does not accept the wildcard.
      * <p>The CORS check fails; the image is broken (error event, drawImage() throws).</p>
      *
      * @throws Exception if the test fails
@@ -464,7 +464,7 @@ public class CanvasOriginCleanTest extends WebDriverTestCase {
     }
 
     /**
-     * getImageData() with a size of zero on a tainted canvas; the order of the checks.
+     * Method getImageData() with a size of zero on a tainted canvas; the order of the checks.
      *
      * @throws Exception if the test fails
      */

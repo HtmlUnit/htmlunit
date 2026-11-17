@@ -469,7 +469,7 @@ public class HtmlImageTest extends SimpleWebTestCase {
     }
 
     /**
-     * crossorigin='use-credentials' needs the origin and Access-Control-Allow-Credentials.
+     * The rule crossorigin='use-credentials' needs the origin and Access-Control-Allow-Credentials.
      *
      * @throws Exception if the test fails
      */
@@ -485,7 +485,7 @@ public class HtmlImageTest extends SimpleWebTestCase {
     }
 
     /**
-     * crossorigin='use-credentials' does not accept the wildcard.
+     * The rule crossorigin='use-credentials' does not accept the wildcard.
      *
      * @throws Exception if the test fails
      */
@@ -501,7 +501,7 @@ public class HtmlImageTest extends SimpleWebTestCase {
     }
 
     /**
-     * crossorigin='use-credentials' needs Access-Control-Allow-Credentials.
+     * The rule crossorigin='use-credentials' needs Access-Control-Allow-Credentials.
      *
      * @throws Exception if the test fails
      */
