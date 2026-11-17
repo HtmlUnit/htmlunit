@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.8.0" date="xxxx xx, 2026" description="Chrome/Edge 157, Bugfixes">
+        <release version="5.8.0" date="November 17, 2026" description="Chrome/Edge 157, Security, CSP, Bugfixes">
             <action type="fix" dev="rbri">
                 Security: drawing an image of another origin (also via redirect) into a canvas sets the
                 origin-clean flag of the canvas to false; getImageData() and toDataURL() of such a canvas
