@@ -1170,6 +1170,144 @@ public class CookieManager4Test extends WebDriverTestCase {
         assertEquals(String.join("\n", getExpectedAlerts()), String.join("\n", result));
     }
 
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict and an invalid value are set by host1 (top-
+     * level). The top-level page is from htmlunit-dev (another site). The iframe from host1 logs document.cookie,
+     * sets cookies (default, Lax, Strict) by document.cookie and logs document.cookie again; the top-level page gets
+     * the values (postMessage) and navigates to host1, this page logs the values and its own cookies.
+     *
+     * <p>FF uses a partitioned cookie jar for the iframe (Total Cookie Protection); the cookie set by
+     * the iframe is visible inside the iframe only. HtmlUnit ignores it like Chrome.</p>
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "", "default=1; invalid=1; lax=1; strict=1"},
+            FF = {"", "jsDefault=1", "default=1; invalid=1; lax=1; strict=1"},
+            FF_ESR = {"", "jsDefault=1", "default=1; invalid=1; lax=1; strict=1"})
+    @HtmlUnitNYI(FF = {"", "", "default=1; invalid=1; lax=1; strict=1"},
+            FF_ESR = {"", "", "default=1; invalid=1; lax=1; strict=1"})
+    public void documentCookieCrossSiteIFrame() throws Exception {
+        documentCookieInFrame(new URL(URL_HOST4 + "start"), null);
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict and an invalid value are set by host1 (top-
+     * level). The top-level page is from host2 (same site). The iframe from host1 logs document.cookie, sets cookies
+     * (default, Lax, Strict) by document.cookie and logs document.cookie again; the top-level page gets the values
+     * (postMessage) and navigates to host1, this page logs the values and its own cookies.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"default=1; invalid=1; lax=1; strict=1",
+             "default=1; invalid=1; jsDefault=1; jsLax=1; jsStrict=1; lax=1; strict=1",
+             "default=1; invalid=1; jsDefault=1; jsLax=1; jsStrict=1; lax=1; strict=1"})
+    public void documentCookieSameSiteIFrame() throws Exception {
+        documentCookieInFrame(new URL(URL_HOST2 + "start"), null);
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict and an invalid value are set by host1 (top-
+     * level). The top-level page is from htmlunit-dev (another site); it includes an iframe from host2 and this
+     * includes the iframe from host1 (same site as its parent, but not as the top-level page). The iframe from host1
+     * logs document.cookie, sets cookies (default, Lax, Strict) by document.cookie and logs document.cookie again;
+     * the top-level page gets the values (postMessage) and navigates to host1, this page logs the values and its own
+     * cookies.
+     *
+     * <p>FF uses a partitioned cookie jar for the iframe (Total Cookie Protection); the cookie set by
+     * the iframe is visible inside the iframe only. HtmlUnit ignores it like Chrome.</p>
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "", "default=1; invalid=1; lax=1; strict=1"},
+            FF = {"", "jsDefault=1", "default=1; invalid=1; lax=1; strict=1"},
+            FF_ESR = {"", "jsDefault=1", "default=1; invalid=1; lax=1; strict=1"})
+    @HtmlUnitNYI(FF = {"", "", "default=1; invalid=1; lax=1; strict=1"},
+            FF_ESR = {"", "", "default=1; invalid=1; lax=1; strict=1"})
+    public void documentCookieNestedCrossSiteIFrame() throws Exception {
+        documentCookieInFrame(new URL(URL_HOST4 + "start"), new URL(URL_HOST2 + "middle"));
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict and an invalid value are set by host1 (top-
+     * level). The top-level page is from htmlunit-dev (another site); it includes an iframe from host2 and this
+     * includes the iframe from host1 (same site as its parent, but not as the top-level page); records the cookies
+     * sent with the request for the iframe from host1.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void sameSiteNestedCrossSiteIFrameRequest() throws Exception {
+        final URL middleUrl = new URL(URL_HOST2 + "middle");
+        getMockWebConnection().setResponse(middleUrl, DOCTYPE_HTML
+                + "<html><body><iframe src='" + URL_HOST1 + "target'></iframe></body></html>");
+        crossSite("<iframe src='" + middleUrl + "'></iframe>\n", null);
+    }
+
+    /**
+     * Sets the cookies (host1), loads the top-level page (including the iframe from host1, optional
+     * wrapped by a middle iframe) and verifies the values reported by the iframe and the cookies of host1.
+     */
+    private void documentCookieInFrame(final URL startUrl, final URL middleUrl) throws Exception {
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(new URL(URL_HOST1), "", 200, "OK", MimeType.TEXT_HTML, sameSiteCookies());
+
+        final URL frameUrl = new URL(URL_HOST1 + "frame");
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function cookies() { return document.cookie.split('; ').sort().join('; '); }\n"
+            + "  var r = [cookies()];\n"
+            + "  document.cookie = 'jsDefault=1; path=/';\n"
+            + "  document.cookie = 'jsLax=1; SameSite=Lax; path=/';\n"
+            + "  document.cookie = 'jsStrict=1; SameSite=Strict; path=/';\n"
+            + "  r.push(cookies());\n"
+            + "  top.postMessage(r.join('|'), '*');\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+        getMockWebConnection().setResponse(frameUrl, frameHtml);
+
+        String content = "<iframe src='" + frameUrl + "'></iframe>\n";
+        if (middleUrl != null) {
+            getMockWebConnection().setResponse(middleUrl, DOCTYPE_HTML
+                    + "<html><body>" + content + "</body></html>");
+            content = "<iframe src='" + middleUrl + "'></iframe>\n";
+        }
+
+        final String startHtml = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  window.addEventListener('message', function(e) {\n"
+            + "    location.replace('" + URL_HOST1 + "check?' + encodeURIComponent(e.data));\n"
+            + "  });\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + content
+            + "</body></html>";
+        getMockWebConnection().setResponse(startUrl, startHtml);
+
+        final String checkHtml = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var r = decodeURIComponent(location.search.substring(1)).split('|');\n"
+            + "  log(r[0]);\n"
+            + "  log(r[1]);\n"
+            + "  log(document.cookie.split('; ').sort().join('; '));\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+        getMockWebConnection().setResponse(new URL(URL_HOST1 + "check"), checkHtml);
+
+        // set the cookies
+        final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
+
+        driver.get(startUrl.toExternalForm());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
     private static List<NameValuePair> sameSiteCookies() {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Set-Cookie", "default=1; Path=/"));

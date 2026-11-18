@@ -56,6 +56,10 @@ public final class UrlUtils {
     public static final String ABOUT_BLANK = ABOUT_SCHEME + "blank";
     /** URL for "about:blank". */
     public static final URL URL_ABOUT_BLANK;
+    /** "about:srcdoc"; the url of the document of an iframe with srcdoc attribute. */
+    public static final String ABOUT_SRCDOC = ABOUT_SCHEME + "srcdoc";
+    /** URL for "about:srcdoc". */
+    public static final URL URL_ABOUT_SRCDOC;
 
     private static final URLStreamHandler JS_HANDLER;
     private static final URLStreamHandler ABOUT_HANDLER;
@@ -77,6 +81,7 @@ public final class UrlUtils {
 
         try {
             URL_ABOUT_BLANK = new URL(null, ABOUT_BLANK, ABOUT_HANDLER);
+            URL_ABOUT_SRCDOC = new URL(null, ABOUT_SRCDOC, ABOUT_HANDLER);
         }
         catch (final MalformedURLException e) {
             // should never happen

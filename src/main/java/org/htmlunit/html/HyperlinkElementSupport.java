@@ -158,6 +158,7 @@ public final class HyperlinkElementSupport {
             pingRequest.setFetchDestination(WebRequest.FetchDestination.EMPTY);
             pingRequest.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
             pingRequest.setRequestingUrl(pageUrl);
+            pingRequest.setSiteForCookies(page.getSiteForCookiesUrl());
 
             try {
                 webClient.loadWebResponse(pingRequest);

@@ -216,6 +216,7 @@ public class WebRequest implements Serializable {
     // null means "no initiator" (e.g. a browser-chrome-initiated navigation), which
     // maps to Sec-Fetch-Site: none.
     private String requestingUrl_;
+    private String siteForCookies_;
 
     // e.g. the CSP form-action check
     private transient Predicate<URL> redirectFilter_;
@@ -879,6 +880,30 @@ public class WebRequest implements Serializable {
      */
     public void setRequestingUrl(final URL requestingUrl) {
         requestingUrl_ = requestingUrl == null ? null : requestingUrl.toExternalForm();
+    }
+
+    /**
+     * Returns the url of the 'site for cookies' of the document that initiated this
+     * (non top-level) request; this is the url of the top-level document if all
+     * ancestors of the document are same-site with it, otherwise 'about:blank'
+     * (no site, never same-site). Used for the SameSite handling of the cookies.
+     *
+     * @return the url of the site for cookies or {@code null} if not set
+     *         (the {@link #getRequestingUrl() requesting url} is used)
+     * @see <a href="https://html.spec.whatwg.org/multipage/browsers.html#site-for-cookies">site for cookies</a>
+     */
+    public URL getSiteForCookies() {
+        return siteForCookies_ == null ? null : UrlUtils.toUrlSafe(siteForCookies_);
+    }
+
+    /**
+     * Sets the url of the 'site for cookies' of the document that initiated this request.
+     *
+     * @param siteForCookies the url or {@code null}
+     * @see #getSiteForCookies()
+     */
+    public void setSiteForCookies(final URL siteForCookies) {
+        siteForCookies_ = siteForCookies == null ? null : siteForCookies.toExternalForm();
     }
 
     /**

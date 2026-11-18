@@ -38,6 +38,7 @@ import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.cookie.MalformedCookieException;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
@@ -81,6 +82,7 @@ import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.http.Cookie;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -1135,10 +1137,17 @@ public class Document extends Node {
         final SgmlPage sgmlPage = getPage();
 
         final StringBuilder builder = new StringBuilder();
-        final Set<Cookie> cookies = sgmlPage.getWebClient().getCookies(getCookieUrl(sgmlPage));
+        final URL cookieUrl = getCookieUrl(sgmlPage);
+        final boolean crossSite = isCrossSiteContext(sgmlPage, cookieUrl);
+        final Set<Cookie> cookies = sgmlPage.getWebClient().getCookies(cookieUrl);
         final List<Cookie> visibleCookies = new ArrayList<>();
         for (final Cookie cookie : cookies) {
             if (cookie.isHttpOnly()) {
+                continue;
+            }
+            // a document in a cross-site context (e.g. a cross-site iframe)
+            // sees only the 'SameSite=None' cookies
+            if (crossSite && !"none".equalsIgnoreCase(cookie.getSameSite())) {
                 continue;
             }
             visibleCookies.add(cookie);
@@ -1179,7 +1188,38 @@ public class Document extends Node {
         }
 
         final SgmlPage sgmlPage = getPage();
-        sgmlPage.getWebClient().addCookie(newCookie, getCookieUrl(sgmlPage), this);
+        final URL cookieUrl = getCookieUrl(sgmlPage);
+        if (isCrossSiteContext(sgmlPage, cookieUrl)) {
+            // a document in a cross-site context (e.g. a cross-site iframe)
+            // can set only 'SameSite=None' cookies
+            try {
+                for (final Cookie cookie : HttpClientConverter.parseCookie(newCookie, cookieUrl,
+                        sgmlPage.getWebClient().getBrowserVersion())) {
+                    if (!"none".equalsIgnoreCase(cookie.getSameSite())) {
+                        return;
+                    }
+                }
+            }
+            catch (final MalformedCookieException e) {
+                return;
+            }
+        }
+        sgmlPage.getWebClient().addCookie(newCookie, cookieUrl, this);
+    }
+
+    /**
+     * Returns whether the document is in a cross-site context: its 'site for cookies' (the top-level
+     * document, if all ancestors are same-site) is not same-site with the url used for the cookies.
+     * Like the browsers, such a document (e.g. a cross-site iframe) has access to the 'SameSite=None'
+     * cookies only.
+     *
+     * @param sgmlPage the page of this document
+     * @param cookieUrl the url used for the cookies
+     * @return whether the document is in a cross-site context
+     */
+    private static boolean isCrossSiteContext(final SgmlPage sgmlPage, final URL cookieUrl) {
+        return sgmlPage instanceof HtmlPage htmlPage
+                && !HttpClientConverter.isSameSite(htmlPage.getSiteForCookiesUrl(), cookieUrl);
     }
 
     /**
@@ -1358,7 +1398,7 @@ public class Document extends Node {
     public String getDomain() {
         if (domain_ == null && getPage().getWebResponse() != null) {
             URL url = getPage().getUrl();
-            if (url == UrlUtils.URL_ABOUT_BLANK) {
+            if (url == UrlUtils.URL_ABOUT_BLANK || UrlUtils.ABOUT_SRCDOC.equals(url.toExternalForm())) {
                 final WebWindow w = getWindow().getWebWindow();
                 if (w instanceof FrameWindow window) {
                     url = window.getEnclosingPage().getUrl();

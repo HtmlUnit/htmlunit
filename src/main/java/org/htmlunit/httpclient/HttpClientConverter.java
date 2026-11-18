@@ -24,6 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -116,6 +117,112 @@ public final class HttpClientConverter {
         // getDomainRoot() returns null for a bare public suffix (e.g. 'com' or 'co.uk')
         final String domainRoot = PUBLIC_SUFFIX_MATCHER.getDomainRoot(host);
         return domainRoot == null ? host : IDN.toASCII(domainRoot);
+    }
+
+    /**
+     * Same-site comparison per the HTML "same site" algorithm: same scheme and same
+     * registrable domain (eTLD+1), ignoring port and subdomain.
+     *
+     * @param a first URL
+     * @param b second URL
+     * @return whether both URLs are considered "same-site"
+     */
+    public static boolean isSameSite(final URL a, final URL b) {
+        if (!a.getProtocol().equals(b.getProtocol())) {
+            return false;
+        }
+
+        // both are normalized and in lower case
+        return registrableDomain(a.getHost()).equals(registrableDomain(b.getHost()));
+    }
+
+    /**
+     * Returns whether the origin is handled as secure for cookies: https and, like the browsers,
+     * localhost and the loopback addresses (potentially trustworthy origins).
+     *
+     * @param origin the origin
+     * @return true if the origin is handled as secure
+     * @see <a href="https://w3c.github.io/webappsec-secure-contexts/#is-origin-trustworthy">
+     *     Secure Contexts - Is origin potentially trustworthy?</a>
+     */
+    public static boolean isSecureCookieOrigin(final CookieOrigin origin) {
+        if (origin.isSecure()) {
+            return true;
+        }
+
+        final String host = origin.getHost().toLowerCase(Locale.ROOT);
+        return "localhost".equals(host)
+                || host.endsWith(".localhost")
+                || (InetAddressUtils.isIPv4Address(host) && host.startsWith("127."))
+                || "::1".equals(host)
+                || "[::1]".equals(host);
+    }
+
+    /**
+     * Returns whether a (non-secure) cookie from an insecure origin would overwrite or shadow
+     * one of the given secure cookies; such a cookie is ignored (RFC 6265bis section 5.7, step 16):
+     * a secure cookie with the same name, a domain that domain-matches the domain of the new cookie
+     * (or the other way round) and a path that is path-matched by the path of the new cookie.
+     *
+     * @param cookie the new cookie
+     * @param existingCookies the stored cookies
+     * @return true if the cookie has to be ignored
+     */
+    public static boolean shadowsSecureCookie(final org.htmlunit.http.Cookie cookie,
+            final Collection<org.htmlunit.http.Cookie> existingCookies) {
+        for (final org.htmlunit.http.Cookie existing : existingCookies) {
+            if (existing.isSecure()
+                    && shadows(cookie.getName(), cookie.getDomain(), cookie.getPath(),
+                            existing.getName(), existing.getDomain(), existing.getPath())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Same as {@link #shadowsSecureCookie(org.htmlunit.http.Cookie, Collection)} for HttpClient cookies.
+     *
+     * @param cookie the new cookie
+     * @param existingCookies the stored cookies
+     * @return true if the cookie has to be ignored
+     */
+    static boolean shadowsSecureCookie(final Cookie cookie, final Collection<Cookie> existingCookies) {
+        for (final Cookie existing : existingCookies) {
+            if (existing.isSecure()
+                    && shadows(cookie.getName(), cookie.getDomain(), cookie.getPath(),
+                            existing.getName(), existing.getDomain(), existing.getPath())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean shadows(final String name, final String domain, final String path,
+            final String existingName, final String existingDomain, final String existingPath) {
+        if (name == null || !name.equals(existingName)) {
+            return false;
+        }
+
+        final String d = normalizeCookieDomain(domain);
+        final String e = normalizeCookieDomain(existingDomain);
+        if (!(d.equals(e) || d.endsWith("." + e) || e.endsWith("." + d))) {
+            return false;
+        }
+
+        // the path of the new cookie path-matches the path of the existing one
+        final String p = path == null || path.isEmpty() ? "/" : path;
+        final String ep = existingPath == null || existingPath.isEmpty() ? "/" : existingPath;
+        return p.equals(ep)
+                || (p.startsWith(ep) && (ep.endsWith("/") || p.charAt(ep.length()) == '/'));
+    }
+
+    private static String normalizeCookieDomain(final String domain) {
+        if (domain == null) {
+            return "";
+        }
+        final String d = domain.toLowerCase(Locale.ROOT);
+        return d.startsWith(".") ? d.substring(1) : d;
     }
 
     /**

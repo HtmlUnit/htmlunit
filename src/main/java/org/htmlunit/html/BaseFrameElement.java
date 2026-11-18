@@ -55,6 +55,9 @@ import org.w3c.dom.Attr;
  */
 public abstract class BaseFrameElement extends HtmlElement {
 
+    /** The 'srcdoc' attribute (iframe only); the content of the document of the frame. */
+    public static final String SRCDOC_ATTRIBUTE = "srcdoc";
+
     private static final Log LOG = LogFactory.getLog(BaseFrameElement.class);
     private FrameWindow enclosedWindow_;
     private boolean contentLoaded_;
@@ -80,7 +83,8 @@ public abstract class BaseFrameElement extends HtmlElement {
 
             // src-less IFrame or src='about:blank'
             // these are loaded sync
-            if (ATTRIBUTE_NOT_DEFINED != src && !UrlUtils.ABOUT_BLANK.equals(src.trim())) {
+            if (hasSrcdocAttribute()
+                    || (ATTRIBUTE_NOT_DEFINED != src && !UrlUtils.ABOUT_BLANK.equals(src.trim()))) {
                 loadSrcWhenAddedToPage_ = true;
             }
         }
@@ -172,6 +176,11 @@ public abstract class BaseFrameElement extends HtmlElement {
         if (null != handler && !handler.loadFrameDocument(this)) {
             source = UrlUtils.ABOUT_BLANK;
         }
+        else if (hasSrcdocAttribute()) {
+            // the srcdoc attribute has precedence over the src attribute; the content
+            // of the attribute is loaded as about:srcdoc (see WebClient)
+            source = UrlUtils.ABOUT_SRCDOC;
+        }
 
         if (!source.isEmpty()) {
             final URL url;
@@ -195,7 +204,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
             final Charset pageCharset = page.getCharset();
 
-            if (isAlreadyLoadedByAncestor(url, pageCharset)) {
+            if (!UrlUtils.ABOUT_SRCDOC.equals(source) && isAlreadyLoadedByAncestor(url, pageCharset)) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
                 return;
             }
@@ -220,6 +229,8 @@ public abstract class BaseFrameElement extends HtmlElement {
                     ? WebRequest.FetchDestination.IFRAME
                     : WebRequest.FetchDestination.FRAME;
             webRequest.markAsNavigation(fetchDestination, pageUrl, false);
+            // the site for cookies of a frame is the one of its container document
+            webRequest.setSiteForCookies(((HtmlPage) page).getSiteForCookiesUrl());
 
             // about:blank is not fetched and javascript: urls are checked against script-src;
             // both are not checked against frame-src
@@ -455,6 +466,20 @@ public abstract class BaseFrameElement extends HtmlElement {
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObserver) {
         final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
 
+        if (null != attributeValue && SRCDOC_ATTRIBUTE.equals(qualifiedNameLC) && this instanceof HtmlInlineFrame) {
+            super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
+                    notifyMutationObserver);
+
+            // setting the srcdoc attribute (also to the same value) loads the content
+            if (isAttachedToPage()) {
+                loadSrcdoc();
+            }
+            else {
+                loadSrcWhenAddedToPage_ = true;
+            }
+            return;
+        }
+
         if (null != attributeValue && SRC_ATTRIBUTE.equals(qualifiedNameLC)) {
             final String attributeValueTrimmed = attributeValue.trim();
 
@@ -542,6 +567,52 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
+     * Loads the content of the srcdoc attribute into the frame; like loadSrc(), the loading is
+     * postponed if a script is running.
+     */
+    private void loadSrcdoc() {
+        loadSrcWhenAddedToPage_ = false;
+
+        // recreate a window if the old one was closed
+        if (enclosedWindow_.isClosed()) {
+            init();
+        }
+
+        final AbstractJavaScriptEngine<?> jsEngine = getPage().getWebClient().getJavaScriptEngine();
+        if (jsEngine == null || !jsEngine.isScriptRunning()) {
+            loadInnerPage();
+        }
+        else {
+            final Page pageInFrame = getEnclosedPage();
+            final PostponedAction action = new PostponedAction(getPage(), "BaseFrame.loadSrcdoc") {
+                @Override
+                public void execute() throws Exception {
+                    if (hasSrcdocAttribute()) {
+                        loadInnerPage();
+                    }
+                }
+
+                @Override
+                public boolean isStillAlive() {
+                    // skip if page in frame has already been changed
+                    return super.isStillAlive() && pageInFrame == getEnclosedPage();
+                }
+            };
+            jsEngine.addPostponedAction(action);
+        }
+    }
+
+    /**
+     * Returns whether this is an iframe with srcdoc attribute; the srcdoc attribute
+     * has precedence over the src attribute.
+     *
+     * @return true if the srcdoc attribute is defined
+     */
+    public boolean hasSrcdocAttribute() {
+        return this instanceof HtmlInlineFrame && ATTRIBUTE_NOT_DEFINED != getAttributeDirect(SRCDOC_ATTRIBUTE);
+    }
+
+    /**
      * Creates a new {@link WebWindow} for the new clone.
      * {@inheritDoc}
      */
@@ -557,7 +628,12 @@ public abstract class BaseFrameElement extends HtmlElement {
         super.onAddedToPage();
 
         if (loadSrcWhenAddedToPage_) {
-            loadSrc();
+            if (hasSrcdocAttribute()) {
+                loadSrcdoc();
+            }
+            else {
+                loadSrc();
+            }
         }
     }
 

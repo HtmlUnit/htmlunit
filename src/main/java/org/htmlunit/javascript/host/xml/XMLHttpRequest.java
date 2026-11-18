@@ -745,6 +745,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             request.setFetchDestination(WebRequest.FetchDestination.EMPTY);
             request.setFetchModeOverride(FetchMode.CORS);
             request.setRequestingUrl(originUrl);
+            request.setSiteForCookies(containingPage.getSiteForCookiesUrl());
 
             try {
                 HttpMethod.validateHttpMethodName(method);
@@ -1291,6 +1292,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         next.setFetchDestination(request.getFetchDestination());
         next.setFetchModeOverride(request.getFetchModeOverride());
         next.setRequestingUrl(request.getRequestingUrl());
+        next.setSiteForCookies(request.getSiteForCookies());
         next.setTimeout(request.getTimeout());
         if (request.hasHint(HttpHint.IncludeCharsetInContentTypeHeader)) {
             next.addHint(HttpHint.IncludeCharsetInContentTypeHeader);

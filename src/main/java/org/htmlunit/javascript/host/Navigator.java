@@ -495,6 +495,7 @@ public class Navigator extends HtmlUnitScriptable {
         request.setFetchDestination(WebRequest.FetchDestination.EMPTY);
         request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
         request.setRequestingUrl(pageUrl);
+        request.setSiteForCookies(page.getSiteForCookiesUrl());
 
         fillRequestBody(request, data);
 

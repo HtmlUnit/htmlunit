@@ -14,6 +14,20 @@
                 tag (e.g. &lt;h3/&gt;) like up to version 5.5.0. This allows applications to read back markup written by
                 asXml() before 5.8.0. The option is disabled by default (like the browsers).
             </action>
+            <action type="add" dev="rbri">
+                Support for the srcdoc attribute of iframes (and the HTMLIFrameElement.srcdoc property); the
+                document has the url about:srcdoc, the origin and the base url of the parent document.
+            </action>
+            <action type="fix" dev="rbri">
+                A page (document.cookie) or response (Set-Cookie) from an insecure origin can no longer overwrite
+                or shadow a secure cookie (RFC 6265bis section 5.7) like in the browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                SameSite: the site for cookies of a document is the top-level document (if all ancestors are
+                same-site); requests of a document in a cross-site context (e.g. a nested frame) are cross-site.
+                Method document.cookie of such a document returns and sets only 'SameSite=None' cookies
+                (like Chrome; Firefox uses a partitioned cookie jar).
+            </action>
             <action type="fix" dev="rbri">
                 The private suffixes of the public suffix list (e.g. 'github.io') are handled as public suffixes
                 like in the browsers: cookies for these domains are ignored and the hosts below are different

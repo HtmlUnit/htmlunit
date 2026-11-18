@@ -511,8 +511,12 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
         else {
+            // the document of an iframe with srcdoc attribute is not fetched (the content is the attribute)
+            webResponse = makeWebResponseForSrcdoc(webWindow, webRequest);
             try {
-                webResponse = loadWebResponse(webRequest);
+                if (webResponse == null) {
+                    webResponse = loadWebResponse(webRequest);
+                }
             }
             catch (final NoHttpResponseException e) {
                 webResponse = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, webRequest, 0);
@@ -893,8 +897,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Returns the url of the given page used as origin when checking the frame-ancestors
-     * directive of a content security policy. Like in the browsers, an about:blank frame
-     * inherits the origin of its parent.
+     * directive of a content security policy. Like in the browsers, an about:blank (or about:srcdoc)
+     * frame inherits the origin of its parent.
      *
      * @param page the page containing the frame
      * @return the url
@@ -902,7 +906,8 @@ public class WebClient implements Serializable, AutoCloseable {
     private static URL getFrameAncestorUrl(final Page page) {
         Page current = page;
         URL url = current.getUrl();
-        while (UrlUtils.ABOUT_BLANK.equals(url.toExternalForm())
+        while ((UrlUtils.ABOUT_BLANK.equals(url.toExternalForm())
+                    || UrlUtils.ABOUT_SRCDOC.equals(url.toExternalForm()))
                 && current.getEnclosingWindow() instanceof FrameWindow frameWindow) {
             current = frameWindow.getEnclosingPage();
             url = current.getUrl();
@@ -1612,6 +1617,25 @@ public class WebClient implements Serializable, AutoCloseable {
         }
     }
 
+    /**
+     * Builds the response for the document of an iframe with srcdoc attribute (about:srcdoc);
+     * the content is the value of the srcdoc attribute.
+     *
+     * @param webWindow the window the response is loaded into
+     * @param webRequest the request
+     * @return the response or {@code null} if the request is not for the srcdoc of a frame
+     */
+    private static WebResponse makeWebResponseForSrcdoc(final WebWindow webWindow, final WebRequest webRequest) {
+        if (webWindow instanceof FrameWindow frameWindow
+                && UrlUtils.ABOUT_SRCDOC.equals(webRequest.getUrl().toExternalForm())) {
+            final String srcdoc = frameWindow.getFrameElement().getAttributeDirect(BaseFrameElement.SRCDOC_ATTRIBUTE);
+            if (DomElement.ATTRIBUTE_NOT_DEFINED != srcdoc) {
+                return new StringWebResponse(srcdoc, UrlUtils.URL_ABOUT_SRCDOC);
+            }
+        }
+        return null;
+    }
+
     private static WebResponse makeWebResponseForAboutUrl(final WebRequest webRequest) throws MalformedURLException {
         final URL url = webRequest.getUrl();
         if (UrlUtils.ABOUT.equals(url.getProtocol())) {
@@ -1937,6 +1961,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 wrs.setFetchDestination(webRequest.getFetchDestination());
                 wrs.setFetchModeOverride(webRequest.getFetchModeOverride());
                 wrs.setRequestingUrl(webRequest.getRequestingUrl());
+                wrs.setSiteForCookies(webRequest.getSiteForCookies());
                 wrs.setRedirectFilter(redirectFilter);
                 wrs.setRedirectUrlMapper(redirectUrlMapper);
 
@@ -3004,9 +3029,11 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final LoadJob loadJob;
         try {
-            WebResponse response;
+            WebResponse response = makeWebResponseForSrcdoc(targetWindow, request);
             try {
-                response = loadWebResponse(request);
+                if (response == null) {
+                    response = loadWebResponse(request);
+                }
                 if (response == null) {
                     // blocked by the redirect filter of the request
                     return;
@@ -3171,6 +3198,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
         try {
             final List<Cookie> cookies = HttpClientConverter.parseCookie(cookieString, pageUrl, getBrowserVersion());
+            final boolean secureOrigin = HttpClientConverter.isSecureCookieOrigin(
+                                            HttpClientConverter.buildCookieOrigin(pageUrl));
             // final List<Cookie> cookies = CookieParser.parseCookie(cookieString, pageUrl, getBrowserVersion());
 
             for (final Cookie cookie : cookies) {
@@ -3187,6 +3216,12 @@ public class WebClient implements Serializable, AutoCloseable {
                     }
                 }
                 if (replacesHttpOnly) {
+                    continue;
+                }
+
+                // RFC 6265bis 5.7 step 16: an insecure origin must not overwrite (or shadow) a secure cookie
+                if (!secureOrigin && !cookie.isSecure()
+                        && HttpClientConverter.shadowsSecureCookie(cookie, cookieManager.getCookies())) {
                     continue;
                 }
 

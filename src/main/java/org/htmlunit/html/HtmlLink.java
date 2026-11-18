@@ -282,6 +282,7 @@ public class HtmlLink extends HtmlElement {
         request.setFetchDestination(WebRequest.FetchDestination.STYLE);
         request.setFetchModeOverride(FetchMode.NO_CORS);
         request.setRequestingUrl(page.getUrl());
+        request.setSiteForCookies(page.getSiteForCookiesUrl());
 
         return request;
     }

@@ -719,6 +719,7 @@ public class HtmlImage extends HtmlElement {
                     request.setFetchDestination(WebRequest.FetchDestination.IMAGE);
                     request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
                     request.setRequestingUrl(page.getUrl());
+                    request.setSiteForCookies(page.getSiteForCookiesUrl());
 
                     if (hasAttribute("crossorigin")) {
                         request.setFetchModeOverride(WebRequest.FetchMode.CORS);

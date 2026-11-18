@@ -16,6 +16,7 @@ package org.htmlunit;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -226,5 +227,83 @@ public class CookieManager2Test extends SimpleWebTestCase {
         final HtmlPage page = webClient.getPage(url);
         assertEquals("own=1", page.getTitleText());
         assertTrue(webClient.getCookies(new URL("https://victim.github.io/")).isEmpty());
+    }
+
+    /**
+     * A page from an insecure origin must not overwrite (or shadow) a secure cookie
+     * (RFC 6265bis section 5.7, step 16).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void secureCookieNotOverwrittenFromInsecureOrigin() throws Exception {
+        final String secureHtml = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  document.cookie = 'sec=1; Secure; path=/';\n"
+            + "  document.cookie = 'secPath=1; Secure; path=/app';\n"
+            + "  document.cookie = 'plain=1; path=/';\n"
+            + "</script></head><body></body></html>";
+
+        final String insecureHtml = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            // same name, domain and path
+            + "  document.cookie = 'sec=2; path=/';\n"
+            // the path /sub path-matches /
+            + "  document.cookie = 'sec=3; path=/sub';\n"
+            // the domain example.com domain-matches www.example.com
+            + "  document.cookie = 'sec=4; domain=example.com; path=/';\n"
+            // the path / does not path-match /app
+            + "  document.cookie = 'secPath=2; path=/';\n"
+            + "  document.cookie = 'plain=2; path=/';\n"
+            + "  document.cookie = 'other=1; path=/';\n"
+            + "  document.title = document.cookie.split('; ').sort().join('; ');\n"
+            + "</script></head><body></body></html>";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(new URL("https://www.example.com/"), secureHtml);
+        webConnection.setResponse(new URL("http://www.example.com/"), insecureHtml);
+        webClient.setWebConnection(webConnection);
+
+        webClient.getPage("https://www.example.com/");
+        final HtmlPage page = webClient.getPage("http://www.example.com/");
+        assertEquals("other=1; plain=2; secPath=2", page.getTitleText());
+
+        final CookieManager mgr = webClient.getCookieManager();
+        final List<String> cookies = new ArrayList<>();
+        for (final Cookie cookie : mgr.getCookies()) {
+            cookies.add(cookie.getName() + "=" + cookie.getValue() + " " + cookie.getPath()
+                    + (cookie.isSecure() ? " secure" : ""));
+        }
+        Collections.sort(cookies);
+        assertEquals("[other=1 /, plain=2 /, sec=1 / secure, secPath=1 /app secure, secPath=2 /]",
+                cookies.toString());
+    }
+
+    /**
+     * A page from a secure origin can overwrite a secure cookie with a non-secure one.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void secureCookieOverwrittenFromSecureOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  document.cookie = 'sec=1; Secure; path=/';\n"
+            + "  document.cookie = 'sec=2; path=/';\n"
+            + "  document.title = document.cookie;\n"
+            + "</script></head><body></body></html>";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(new URL("https://www.example.com/"), html);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage("https://www.example.com/");
+        assertEquals("sec=2", page.getTitleText());
+        assertFalse(webClient.getCookieManager().getCookie("sec").isSecure());
     }
 }
