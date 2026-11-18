@@ -6991,13 +6991,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scrolling[GSCE],src[GSCE],srcdoc[GSCE],"
                 + "width[GSCE]")
     @HtmlUnitNYI(CHROME = "align[GSCE],constructor(),contentDocument[GCE],contentWindow[GCE],"
-                + "height[GSCE],name[GSCE],src[GSCE],width[GSCE]",
+                + "height[GSCE],name[GSCE],sandbox[GSCE],src[GSCE],srcdoc[GSCE],width[GSCE]",
             EDGE = "align[GSCE],constructor(),contentDocument[GCE],contentWindow[GCE],"
-                + "height[GSCE],name[GSCE],src[GSCE],width[GSCE]",
+                + "height[GSCE],name[GSCE],sandbox[GSCE],src[GSCE],srcdoc[GSCE],width[GSCE]",
             FF_ESR = "align[GSCE],constructor(),contentDocument[GCE],contentWindow[GCE],"
-                + "height[GSCE],name[GSCE],src[GSCE],width[GSCE]",
+                + "height[GSCE],name[GSCE],sandbox[GSCE],src[GSCE],srcdoc[GSCE],width[GSCE]",
             FF = "align[GSCE],constructor(),contentDocument[GCE],contentWindow[GCE],"
-                + "height[GSCE],name[GSCE],src[GSCE],width[GSCE]")
+                + "height[GSCE],name[GSCE],sandbox[GSCE],src[GSCE],srcdoc[GSCE],width[GSCE]")
     public void iframe() throws Exception {
         test("iframe");
     }
@@ -18996,13 +18996,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],remove(),replace(),"
                 + "supports(),toggle(),toString(),value[GSCE],values()")
     @HtmlUnitNYI(CHROME = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),replace(),toggle(),value[GSCE],values()",
+                + "remove(),replace(),supports(),toggle(),value[GSCE],values()",
             EDGE = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),replace(),toggle(),value[GSCE],values()",
+                + "remove(),replace(),supports(),toggle(),value[GSCE],values()",
             FF = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),replace(),toggle(),value[GSCE],values()",
+                + "remove(),replace(),supports(),toggle(),value[GSCE],values()",
             FF_ESR = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),replace(),toggle(),value[GSCE],values()")
+                + "remove(),replace(),supports(),toggle(),value[GSCE],values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
     }

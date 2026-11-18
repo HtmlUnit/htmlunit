@@ -1135,6 +1135,7 @@ public class Document extends Node {
     @JsxGetter
     public String getCookie() {
         final SgmlPage sgmlPage = getPage();
+        checkCookieAccess(sgmlPage);
 
         final StringBuilder builder = new StringBuilder();
         final URL cookieUrl = getCookieUrl(sgmlPage);
@@ -1183,6 +1184,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setCookie(final String newCookie) {
+        checkCookieAccess(getPage());
         if (StringUtils.isBlank(newCookie)) {
             return;
         }
@@ -1205,6 +1207,20 @@ public class Document extends Node {
             }
         }
         sgmlPage.getWebClient().addCookie(newCookie, cookieUrl, this);
+    }
+
+    /**
+     * Like the browsers, a document with an opaque origin (a sandboxed document without
+     * 'allow-same-origin') has no access to the cookies.
+     *
+     * @param sgmlPage the page of this document
+     */
+    private void checkCookieAccess(final SgmlPage sgmlPage) {
+        if (sgmlPage instanceof HtmlPage htmlPage && htmlPage.isOpaqueOrigin()) {
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "The document is sandboxed and lacks the 'allow-same-origin' flag.",
+                    org.htmlunit.javascript.host.dom.DOMException.SECURITY_ERR);
+        }
     }
 
     /**
@@ -1396,6 +1412,10 @@ public class Document extends Node {
      */
     @JsxGetter
     public String getDomain() {
+        // a document with an opaque origin (sandboxed) has no domain
+        if (getPage() instanceof HtmlPage htmlPage && htmlPage.isOpaqueOrigin()) {
+            return "";
+        }
         if (domain_ == null && getPage().getWebResponse() != null) {
             URL url = getPage().getUrl();
             if (url == UrlUtils.URL_ABOUT_BLANK || UrlUtils.ABOUT_SRCDOC.equals(url.toExternalForm())) {

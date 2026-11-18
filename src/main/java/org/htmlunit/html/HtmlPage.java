@@ -196,6 +196,8 @@ public class HtmlPage extends SgmlPage {
     private boolean autofocusProcessed_;
 
     private ContentSecurityPolicy contentSecurityPolicy_;
+    // the sandbox tokens (allowed features) of this document; null if not sandboxed
+    private Set<String> sandboxTokens_;
     // true if the page is loaded; candidates inserted later are processed by a job
     private boolean autofocusAfterLoad_;
     private boolean autofocusJobScheduled_;
@@ -242,6 +244,9 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
+        if (webWindow instanceof FrameWindow frameWindow) {
+            sandboxTokens_ = frameWindow.getSandboxTokens();
+        }
         contentSecurityPolicy_ = ContentSecurityPolicy.fromResponse(webResponse);
         if (contentSecurityPolicy_ == null && webResponse != null) {
             // the content written by document.open()/write()/close() and the result of a
@@ -307,6 +312,45 @@ public class HtmlPage extends SgmlPage {
             return creatorPage.getOriginUrl();
         }
         return url;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the sandbox tokens (the allowed features, e.g. 'allow-scripts') of this document;
+     * the document of an iframe with sandbox attribute is sandboxed.
+     *
+     * @return the tokens or {@code null} if this document is not sandboxed
+     */
+    public Set<String> getSandboxTokens() {
+        return sandboxTokens_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns whether the feature is allowed for this document; all features are allowed if this
+     * document is not sandboxed.
+     *
+     * @param token the token of the feature (e.g. 'allow-scripts')
+     * @return true if the feature is allowed
+     * @see <a href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-sandbox">
+     *     HTML Living Standard - sandbox</a>
+     */
+    public boolean isSandboxAllowed(final String token) {
+        return sandboxTokens_ == null || sandboxTokens_.contains(token);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns whether this document has an opaque origin: a sandboxed document without 'allow-same-origin'.
+     * Such a document has no access to the cookies and the storage.
+     *
+     * @return true if the origin is opaque
+     */
+    public boolean isOpaqueOrigin() {
+        return sandboxTokens_ != null && !sandboxTokens_.contains("allow-same-origin");
     }
 
     /**

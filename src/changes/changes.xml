@@ -9,6 +9,13 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="add" dev="rbri">
+                Support for the sandbox attribute of iframes (and the HTMLIFrameElement.sandbox property): no scripts
+                without 'allow-scripts', no form submission without 'allow-forms', no popups without 'allow-popups',
+                no navigation of the top window without 'allow-top-navigation'; without 'allow-same-origin' the
+                document has an opaque origin (no cookies, no storage, contentDocument is null, message origin 'null').
+                DOMTokenList.supports() is available for the sandbox tokens.
+            </action>
+            <action type="add" dev="rbri">
                 Support for the srcdoc attribute of iframes (and the HTMLIFrameElement.srcdoc property); the
                 document has the url about:srcdoc, the origin and the base url of the parent document.
             </action>

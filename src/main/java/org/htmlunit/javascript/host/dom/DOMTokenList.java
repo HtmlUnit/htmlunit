@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.dom;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebClient;
@@ -24,6 +25,7 @@ import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -50,6 +52,14 @@ import org.htmlunit.javascript.configuration.JsxSymbol;
  */
 @JsxClass
 public class DOMTokenList extends HtmlUnitScriptable {
+
+    // the supported tokens of the sandbox attribute
+    private static final Set<String> SANDBOX_SUPPORTED_TOKENS = Set.of(
+            "allow-downloads", "allow-forms", "allow-modals", "allow-orientation-lock",
+            "allow-pointer-lock", "allow-popups", "allow-popups-to-escape-sandbox", "allow-presentation",
+            "allow-same-origin", "allow-scripts", "allow-storage-access-by-user-activation",
+            "allow-top-navigation", "allow-top-navigation-by-user-activation",
+            "allow-top-navigation-to-custom-protocols");
 
     private static final String WHITESPACE_CHARS = " \t\r\n\u000C";
 
@@ -335,6 +345,22 @@ public class DOMTokenList extends HtmlUnitScriptable {
 
         final List<String> parts = split(getValue());
         return parts.contains(token);
+    }
+
+    /**
+     * Returns whether the token is one of the supported tokens of the underlying attribute.
+     * Only the {@code sandbox} attribute has supported tokens in HtmlUnit; for all other
+     * attributes a TypeError is thrown.
+     *
+     * @param token the token to check
+     * @return true if the token is supported
+     */
+    @JsxFunction
+    public boolean supports(final String token) {
+        if (!BaseFrameElement.SANDBOX_ATTRIBUTE.equals(attributeName_)) {
+            throw JavaScriptEngine.typeError("DOMTokenList has no supported tokens.");
+        }
+        return SANDBOX_SUPPORTED_TOKENS.contains(org.htmlunit.util.StringUtils.toRootLowerCase(token));
     }
 
     /**

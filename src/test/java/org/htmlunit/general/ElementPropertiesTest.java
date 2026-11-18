@@ -2164,10 +2164,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "align,allow,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
                 + "loading,longDesc,marginHeight,marginWidth,name,referrerPolicy,sandbox,scrolling,src,srcdoc,"
                 + "width")
-    @HtmlUnitNYI(CHROME = "align,contentDocument,contentWindow,height,name,src,width",
-            EDGE = "align,contentDocument,contentWindow,height,name,src,width",
-            FF_ESR = "align,contentDocument,contentWindow,height,name,src,width",
-            FF = "align,contentDocument,contentWindow,height,name,src,width")
+    @HtmlUnitNYI(CHROME = "align,contentDocument,contentWindow,height,name,sandbox,src,srcdoc,width",
+            EDGE = "align,contentDocument,contentWindow,height,name,sandbox,src,srcdoc,width",
+            FF_ESR = "align,contentDocument,contentWindow,height,name,sandbox,src,srcdoc,width",
+            FF = "align,contentDocument,contentWindow,height,name,sandbox,src,srcdoc,width")
     public void iframe() throws Exception {
         test("iframe");
     }
@@ -10609,13 +10609,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),replace(),supports(),toggle(),"
                 + "toString(),value,values()")
     @HtmlUnitNYI(CHROME = "add(),contains(),entries(),forEach(),item(),keys(),length,"
-                + "remove(),replace(),toggle(),value,values()",
+                + "remove(),replace(),supports(),toggle(),value,values()",
             EDGE = "add(),contains(),entries(),forEach(),item(),keys(),length,"
-                + "remove(),replace(),toggle(),value,values()",
+                + "remove(),replace(),supports(),toggle(),value,values()",
             FF = "add(),contains(),entries(),forEach(),item(),keys(),length,"
-                + "remove(),replace(),toggle(),value,values()",
-            FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),"
-                + "replace(),toggle(),value,values()")
+                + "remove(),replace(),supports(),toggle(),value,values()",
+            FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,"
+                + "remove(),replace(),supports(),toggle(),value,values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
     }

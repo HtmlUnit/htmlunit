@@ -124,6 +124,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
+    private static final String SANDBOX_ALLOW_SCRIPTS = "allow-scripts";
+
     /** ScriptRuntime.emptyArgs. */
     public static final Object[] EMPTY_ARGS = ScriptRuntime.emptyArgs;
 
@@ -822,6 +824,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             // shutdown was already called
             return null;
         }
+        if (page != null && !page.isSandboxAllowed(SANDBOX_ALLOW_SCRIPTS)) {
+            // a sandboxed document without 'allow-scripts' does not execute scripts
+            return null;
+        }
 
         final HtmlUnitContextAction action = new HtmlUnitContextAction(page) {
             @Override
@@ -886,6 +892,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final VarScope scope, final Scriptable thisObject, final Object[] args) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
+            return null;
+        }
+        if (page != null && !page.isSandboxAllowed(SANDBOX_ALLOW_SCRIPTS)) {
+            // a sandboxed document without 'allow-scripts' does not execute scripts (e.g. event handlers)
             return null;
         }
 

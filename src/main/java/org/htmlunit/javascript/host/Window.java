@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
+import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OPEN_SANDBOXED_THROWS;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -415,6 +416,17 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         if (!JavaScriptEngine.isUndefined(features)) {
             featuresString = JavaScriptEngine.toString(features);
         }
+        // a sandboxed document without 'allow-popups' can't open windows
+        if (getWebWindow().getEnclosedPage() instanceof HtmlPage openerPage
+                && !openerPage.isSandboxAllowed("allow-popups")) {
+            if (getBrowserVersion().hasFeature(JS_WINDOW_OPEN_SANDBOXED_THROWS)) {
+                throw JavaScriptEngine.asJavaScriptException(this,
+                        "The document is sandboxed and lacks the 'allow-popups' flag.",
+                        DOMException.INVALID_ACCESS_ERR);
+            }
+            return null;
+        }
+
         final WebClient webClient = getWebWindow().getWebClient();
 
         if (webClient.getOptions().isPopupBlockerEnabled()) {
@@ -640,6 +652,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Storage getLocalStorage() {
+        checkStorageAccess();
         return getStorage(Type.LOCAL_STORAGE);
     }
 
@@ -649,7 +662,20 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Storage getSessionStorage() {
+        checkStorageAccess();
         return getStorage(Type.SESSION_STORAGE);
+    }
+
+    /**
+     * Like the browsers, a document with an opaque origin (a sandboxed document without
+     * 'allow-same-origin') has no access to the storage.
+     */
+    private void checkStorageAccess() {
+        if (getWebWindow().getEnclosedPage() instanceof HtmlPage htmlPage && htmlPage.isOpaqueOrigin()) {
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "The document is sandboxed and lacks the 'allow-same-origin' flag.",
+                    DOMException.SECURITY_ERR);
+        }
     }
 
     /**
@@ -2060,12 +2086,18 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         }
 
         final String origin;
-        try {
-            final URL originUrl = UrlUtils.getUrlWithoutPathRefQuery(senderURL);
-            origin = UrlUtils.removeRedundantPort(originUrl).toExternalForm();
+        if (page instanceof HtmlPage senderPage && senderPage.isOpaqueOrigin()) {
+            // the origin of a sandboxed document without 'allow-same-origin'
+            origin = "null";
         }
-        catch (final MalformedURLException e) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+        else {
+            try {
+                final URL originUrl = UrlUtils.getUrlWithoutPathRefQuery(senderURL);
+                origin = UrlUtils.removeRedundantPort(originUrl).toExternalForm();
+            }
+            catch (final MalformedURLException e) {
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+            }
         }
 
         final MessageEvent event = new MessageEvent();

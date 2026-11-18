@@ -18,8 +18,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,6 +59,9 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /** The 'srcdoc' attribute (iframe only); the content of the document of the frame. */
     public static final String SRCDOC_ATTRIBUTE = "srcdoc";
+
+    /** The 'sandbox' attribute (iframe only); the restrictions of the document of the frame. */
+    public static final String SANDBOX_ATTRIBUTE = "sandbox";
 
     private static final Log LOG = LogFactory.getLog(BaseFrameElement.class);
     private FrameWindow enclosedWindow_;
@@ -257,6 +262,9 @@ public abstract class BaseFrameElement extends HtmlElement {
                     return false;
                 });
             }
+
+            // the sandbox flags are determined when the frame starts loading
+            enclosedWindow_.setSandboxTokens(getEffectiveSandboxTokens((HtmlPage) page));
 
             try {
                 webClient.getPage(enclosedWindow_, webRequest);
@@ -600,6 +608,40 @@ public abstract class BaseFrameElement extends HtmlElement {
             };
             jsEngine.addPostponedAction(action);
         }
+    }
+
+    /**
+     * Returns the sandbox tokens for the document of this frame: the tokens of the sandbox attribute
+     * (iframe only) restricted by the sandbox of the containing document.
+     *
+     * @param containingPage the page containing this frame
+     * @return the allowed tokens or {@code null} if the document is not sandboxed
+     */
+    private Set<String> getEffectiveSandboxTokens(final HtmlPage containingPage) {
+        Set<String> tokens = null;
+        if (this instanceof HtmlInlineFrame) {
+            final String sandbox = getAttributeDirect(SANDBOX_ATTRIBUTE);
+            if (ATTRIBUTE_NOT_DEFINED != sandbox) {
+                tokens = new HashSet<>();
+                for (final String token : org.htmlunit.util.StringUtils.splitAtJavaWhitespace(sandbox)) {
+                    if (!token.isEmpty()) {
+                        tokens.add(org.htmlunit.util.StringUtils.toRootLowerCase(token));
+                    }
+                }
+            }
+        }
+
+        // a frame of a sandboxed document is sandboxed also
+        final Set<String> containingTokens = containingPage.getSandboxTokens();
+        if (containingTokens != null) {
+            if (tokens == null) {
+                tokens = new HashSet<>(containingTokens);
+            }
+            else {
+                tokens.retainAll(containingTokens);
+            }
+        }
+        return tokens;
     }
 
     /**

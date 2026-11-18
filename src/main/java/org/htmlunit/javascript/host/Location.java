@@ -39,6 +39,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.HashChangeEvent;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
@@ -338,6 +339,7 @@ public class Location extends HtmlUnitScriptable {
             // we need to get the caller window to get the calling page
             WebWindow webWindow = ((Window) JavaScriptEngine.getTopCallScope().getGlobalThis()).getWebWindow();
             final HtmlPage callingPage = (HtmlPage) webWindow.getEnclosedPage();
+            checkSandboxedNavigation(callingPage, webWindow, window_.getWebWindow());
 
             final BrowserVersion browserVersion = webWindow.getWebClient().getBrowserVersion();
 
@@ -365,6 +367,43 @@ public class Location extends HtmlUnitScriptable {
             }
             throw e;
         }
+    }
+
+    /**
+     * A sandboxed document is only allowed to navigate its own window and the windows of its
+     * descendants; the top window only with 'allow-top-navigation'.
+     *
+     * @param callingPage the page navigating
+     * @param callingWindow the window of the calling page
+     * @param targetWindow the window to be navigated
+     */
+    private void checkSandboxedNavigation(final HtmlPage callingPage, final WebWindow callingWindow,
+            final WebWindow targetWindow) {
+        if (callingPage.getSandboxTokens() == null) {
+            return;
+        }
+
+        // the window itself or a descendant
+        WebWindow window = targetWindow;
+        while (true) {
+            if (window == callingWindow) {
+                return;
+            }
+            final WebWindow parent = window.getParentWindow();
+            if (parent == null || parent == window) {
+                break;
+            }
+            window = parent;
+        }
+
+        if (targetWindow == callingWindow.getTopWindow()
+                && callingPage.isSandboxAllowed("allow-top-navigation")) {
+            return;
+        }
+
+        throw JavaScriptEngine.asJavaScriptException(window_,
+                "The document is sandboxed and lacks the 'allow-top-navigation' flag.",
+                DOMException.SECURITY_ERR);
     }
 
     /**

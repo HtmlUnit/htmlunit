@@ -128,6 +128,13 @@ public class HtmlForm extends HtmlElement {
      */
     public void submit(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
+        if (!htmlPage.isSandboxAllowed("allow-forms")) {
+            // a sandboxed document without 'allow-forms' does not submit forms
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Form submission blocked because the document is sandboxed.");
+            }
+            return;
+        }
         final WebClient webClient = htmlPage.getWebClient();
 
         if (webClient.isJavaScriptEnabled()) {

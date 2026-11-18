@@ -435,6 +435,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_INSTALL_TRIGGER_NULL,
 
+    /** window.open() of a sandboxed document without 'allow-popups' throws an InvalidAccessError. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WINDOW_OPEN_SANDBOXED_THROWS,
+
     /**
      * Difference of window.outer/inner height is 138.
      */

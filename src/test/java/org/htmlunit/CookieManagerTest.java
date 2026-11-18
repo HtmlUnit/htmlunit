@@ -1313,16 +1313,11 @@ public class CookieManagerTest extends WebDriverTestCase {
 
     /**
      * A sandboxed srcdoc iframe (opaque origin) has no access to the cookies.
-     * <p>HtmlUnit does not support sandbox; the srcdoc document has the origin of the parent.</p>
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"read SecurityError", "write SecurityError"})
-    @HtmlUnitNYI(CHROME = {"cookie: parent=1", "write ok"},
-            EDGE = {"cookie: parent=1", "write ok"},
-            FF = {"cookie: parent=1", "write ok"},
-            FF_ESR = {"cookie: parent=1", "write ok"})
     public void srcdocIframeSandboxed() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
