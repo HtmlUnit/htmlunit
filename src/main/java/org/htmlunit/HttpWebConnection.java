@@ -56,6 +56,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.client.AuthCache;
@@ -109,6 +110,7 @@ import org.htmlunit.WebRequest.HttpHint;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import org.htmlunit.httpclient.HtmlUnitCookieStore;
+import org.htmlunit.httpclient.HtmlUnitInsecureOriginCookieStore;
 import org.htmlunit.httpclient.HtmlUnitSameSiteCookieStore;
 import org.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
@@ -672,7 +674,12 @@ public class HttpWebConnection implements WebConnection {
         b.add(new RequestAuthCache());
 
         if (!webRequest.hasHint(HttpHint.BlockCookies)) {
-            b.add(new ResponseProcessCookies());
+            if (HttpClientConverter.isSecureCookieOrigin(HttpClientConverter.buildCookieOrigin(webRequest.getUrl()))) {
+                b.add(new ResponseProcessCookies());
+            }
+            else {
+                b.add(new InsecureOriginResponseProcessCookies());
+            }
         }
         builder.setHttpProcessor(b.build());
     }
@@ -1264,6 +1271,33 @@ public class HttpWebConnection implements WebConnection {
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_FETCH_MODE, value_);
+        }
+    }
+
+    /**
+     * Processes the cookies of a response from an insecure origin; cookies that would overwrite
+     * or shadow a secure cookie are ignored (see {@link HtmlUnitInsecureOriginCookieStore}).
+     */
+    private static final class InsecureOriginResponseProcessCookies implements HttpResponseInterceptor {
+        private final ResponseProcessCookies delegate_ = new ResponseProcessCookies();
+
+        @Override
+        public void process(final HttpResponse response, final HttpContext context)
+                throws HttpException, IOException {
+            final HttpClientContext clientContext = HttpClientContext.adapt(context);
+            final CookieStore cookieStore = clientContext.getCookieStore();
+            if (cookieStore == null) {
+                delegate_.process(response, context);
+                return;
+            }
+
+            clientContext.setCookieStore(new HtmlUnitInsecureOriginCookieStore(cookieStore));
+            try {
+                delegate_.process(response, context);
+            }
+            finally {
+                clientContext.setCookieStore(cookieStore);
+            }
         }
     }
 

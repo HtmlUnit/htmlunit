@@ -3172,6 +3172,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
         try {
             final List<Cookie> cookies = HttpClientConverter.parseCookie(cookieString, pageUrl, getBrowserVersion());
+            final boolean secureOrigin = HttpClientConverter.isSecureCookieOrigin(
+                                            HttpClientConverter.buildCookieOrigin(pageUrl));
             // final List<Cookie> cookies = CookieParser.parseCookie(cookieString, pageUrl, getBrowserVersion());
 
             for (final Cookie cookie : cookies) {
@@ -3188,6 +3190,12 @@ public class WebClient implements Serializable, AutoCloseable {
                     }
                 }
                 if (replacesHttpOnly) {
+                    continue;
+                }
+
+                // RFC 6265bis 5.7 step 16: an insecure origin must not overwrite (or shadow) a secure cookie
+                if (!secureOrigin && !cookie.isSecure()
+                        && HttpClientConverter.shadowsSecureCookie(cookie, cookieManager.getCookies())) {
                     continue;
                 }
 

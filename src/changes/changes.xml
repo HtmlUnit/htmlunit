@@ -9,6 +9,10 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                A page (document.cookie) or response (Set-Cookie) from an insecure origin can no longer overwrite
+                or shadow a secure cookie (RFC 6265bis section 5.7) like in the browsers.
+            </action>
+            <action type="fix" dev="rbri">
                 SameSite: the site for cookies of a document is the top-level document (if all ancestors are
                 same-site); requests of a document in a cross-site context (e.g. a nested frame) are cross-site.
                 Method document.cookie of such a document returns and sets only 'SameSite=None' cookies
