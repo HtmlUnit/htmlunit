@@ -33,6 +33,7 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -68,6 +69,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/echo", EchoServlet.class);
         servlets2.put("/redirect", RedirectServlet.class);
+        servlets2.put("/expose", ExposeServlet.class);
         startWebServer2(".", servlets2);
     }
 
@@ -1574,6 +1576,43 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     /**
+     * Responds with some CORS-safelisted and some other headers. The response headers
+     * Access-Control-Allow-Origin, Access-Control-Allow-Credentials and Access-Control-Expose-Headers
+     * are taken from the parameters 'acao', 'acac' and 'aceh' (none if missing).
+     */
+    public static class ExposeServlet extends HttpServlet {
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            final String acao = request.getParameter("acao");
+            if (acao != null) {
+                response.setHeader("Access-Control-Allow-Origin", acao);
+            }
+            if ("true".equals(request.getParameter("acac"))) {
+                response.setHeader("Access-Control-Allow-Credentials", "true");
+            }
+            final String aceh = request.getParameter("aceh");
+            if (aceh != null) {
+                response.setHeader("Access-Control-Expose-Headers", aceh);
+            }
+
+            response.setHeader("X-Custom", "abc");
+            response.setHeader("X-Other", "def");
+            response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Content-Language", "de");
+            response.setHeader("Expires", "Thu, 01 Jan 1970 00:00:00 GMT");
+            response.setHeader("Last-Modified", "Thu, 01 Jan 1970 00:00:00 GMT");
+            response.setHeader("Pragma", "no-cache");
+
+            final byte[] content = "exposed".getBytes(UTF_8);
+            response.setCharacterEncoding(UTF_8.name());
+            response.setContentType(MimeType.TEXT_PLAIN);
+            response.setContentLength(content.length);
+            response.getOutputStream().write(content);
+        }
+    }
+
+    /**
      * Redirects to the url of the parameter 'to' using the status of the parameter 'status' (default 302).
      * The response header Access-Control-Allow-Origin is taken from the parameter 'acao' (none if missing).
      */
@@ -1973,5 +2012,150 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         loadAndVerify(html);
     }
-}
 
+    // ---------------------------------------------------------------------------
+    // the response headers of a cross-origin response: only the CORS-safelisted
+    // and the exposed (Access-Control-Expose-Headers) headers are visible
+    // ---------------------------------------------------------------------------
+
+    /**
+     * Without Access-Control-Expose-Headers only the CORS-safelisted response headers are visible.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma",
+            "null", "null", "no-cache", "de", "7", "null"})
+    public void exposeHeadersNone() throws Exception {
+        startSecondServer();
+        loadAndVerify(headersPage("", originB() + "/expose?acao=*"));
+    }
+
+    /**
+     * The headers listed in Access-Control-Expose-Headers are visible (case-insensitive).
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma,x-custom",
+            "abc", "null", "no-cache", "de", "7", "null"})
+    public void exposeHeadersList() throws Exception {
+        startSecondServer();
+        loadAndVerify(headersPage("", originB() + "/expose?acao=*&aceh=" + enc("x-CUSTOM, Pragma")));
+    }
+
+    /**
+     * The wildcard exposes all headers (but not Set-Cookie) for a request without credentials.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"access-control-allow-origin,access-control-expose-headers,cache-control,content-language,"
+                + "content-length,content-type,date,expires,last-modified,pragma,server,x-custom,x-other",
+            "abc", "def", "no-cache", "de", "7", "*"})
+    public void exposeHeadersWildcard() throws Exception {
+        startSecondServer();
+        loadAndVerify(headersPage("", originB() + "/expose?acao=*&aceh=*"));
+    }
+
+    /**
+     * For a request with credentials the wildcard is a header name only.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma",
+            "null", "null", "no-cache", "de", "7", "null"})
+    public void exposeHeadersWildcardWithCredentials() throws Exception {
+        startSecondServer();
+        loadAndVerify(headersPage("    xhr.withCredentials = true;\n",
+                originB() + "/expose?acac=true&acao=" + enc(originA()) + "&aceh=*"));
+    }
+
+    /**
+     * For a request with credentials the header names besides the wildcard are exposed.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma,x-custom",
+            "abc", "null", "no-cache", "de", "7", "null"})
+    public void exposeHeadersWildcardAndNameWithCredentials() throws Exception {
+        startSecondServer();
+        loadAndVerify(headersPage("    xhr.withCredentials = true;\n",
+                originB() + "/expose?acac=true&acao=" + enc(originA()) + "&aceh=" + enc("*, X-Custom")));
+    }
+
+    /**
+     * A request that starts inside of the origin and is redirected to another origin
+     * gets a CORS filtered response also.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma,x-custom",
+            "abc", "null", "no-cache", "de", "7", "null"})
+    public void exposeHeadersAfterCrossOriginRedirect() throws Exception {
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/expose?acao=*&aceh=X-Custom");
+        loadAndVerify(headersPage("", originA() + "/pivot"));
+    }
+
+    /**
+     * The headers of a fetch() response are filtered the same way.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Disabled
+    @Alerts({"abc", "null", "de"})
+    public void exposeHeadersFetch() throws Exception {
+        startSecondServer();
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  fetch('" + originB() + "/expose?acao=*&aceh=X-Custom')\n"
+                + "    .then(function(response) {\n"
+                + "      log(response.headers.get('X-Custom'));\n"
+                + "      log(response.headers.get('X-Other'));\n"
+                + "      log(response.headers.get('Content-Language'));\n"
+                + "    })\n"
+                + "    .catch(function(e) { logEx(e); });\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadAndVerify(html);
+    }
+
+    /**
+     * Synchronous request; logs the (sorted, lower case) names of getAllResponseHeaders()
+     * and the values of some headers using getResponseHeader().
+     */
+    private static String headersPage(final String afterOpen, final String url) {
+        return DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  try {\n"
+                + "    xhr.open('GET', '" + url + "', false);\n"
+                + afterOpen
+                + "    xhr.send();\n"
+                + "  } catch(e) { logEx(e); return; }\n"
+                + "  var names = [];\n"
+                + "  var lines = xhr.getAllResponseHeaders().split('\\r\\n');\n"
+                + "  for (var i = 0; i < lines.length; i++) {\n"
+                + "    if (lines[i]) { names.push(lines[i].substring(0, lines[i].indexOf(':')).toLowerCase()); }\n"
+                + "  }\n"
+                + "  log(names.sort().join());\n"
+                + "  log(xhr.getResponseHeader('X-Custom'));\n"
+                + "  log(xhr.getResponseHeader('x-other'));\n"
+                + "  log(xhr.getResponseHeader('Pragma'));\n"
+                + "  log(xhr.getResponseHeader('Content-Language'));\n"
+                + "  log(xhr.getResponseHeader('Content-Length'));\n"
+                + "  log(xhr.getResponseHeader('Access-Control-Expose-Headers'));\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+    }
+}

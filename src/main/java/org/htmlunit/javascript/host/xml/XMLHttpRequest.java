@@ -39,6 +39,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import javax.xml.transform.OutputKeys;
@@ -127,6 +128,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
 
+    // https://fetch.spec.whatwg.org/#cors-safelisted-response-header-name
+    private static final Set<String> CORS_SAFELISTED_RESPONSE_HEADERS = Set.of(
+            "cache-control", "content-language", "content-length", "content-type",
+            "expires", "last-modified", "pragma");
+
     /** The object has been created, but not initialized (the {@code open()} method has not been called). */
     @JsxConstant
     public static final int UNSENT = 0;
@@ -173,6 +179,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private String overriddenMimeType_;
     private boolean withCredentials_;
     private boolean isSameOrigin_;
+    // true if the response has the response tainting 'cors' (only the CORS-safelisted
+    // and the exposed headers are visible)
+    private boolean corsResponseTainting_;
     private int timeout_;
     private boolean aborted_;
     private String responseType_;
@@ -663,7 +672,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (webResponse_ != null) {
             final StringBuilder builder = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
-                if (isForbiddenResponseHeader(header.getName())) {
+                if (!isExposedResponseHeader(header.getName())) {
                     continue;
                 }
                 builder
@@ -697,7 +706,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return null;
         }
         if (webResponse_ != null) {
-            if (isForbiddenResponseHeader(headerName)) {
+            if (!isExposedResponseHeader(headerName)) {
                 return null;
             }
             return webResponse_.getResponseHeaderValue(headerName);
@@ -719,6 +728,46 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     private static boolean isForbiddenResponseHeader(final String name) {
         return "set-cookie".equalsIgnoreCase(name) || "set-cookie2".equalsIgnoreCase(name);
+    }
+
+    /**
+     * Returns whether the response header is visible for scripts. Forbidden response headers are never
+     * visible; for a response of a cross-origin request (response tainting 'cors') only the CORS-safelisted
+     * response headers and the headers listed in Access-Control-Expose-Headers are visible.
+     *
+     * @param name the header name
+     * @return {@code true} if the header is visible
+     * @see <a href="https://fetch.spec.whatwg.org/#concept-filtered-response-cors">Fetch Standard - CORS filtered
+     *     response</a>
+     */
+    private boolean isExposedResponseHeader(final String name) {
+        if (isForbiddenResponseHeader(name)) {
+            return false;
+        }
+        if (!corsResponseTainting_) {
+            return true;
+        }
+
+        if (name == null) {
+            return false;
+        }
+        final String nameLC = name.toLowerCase(Locale.ROOT);
+        if (CORS_SAFELISTED_RESPONSE_HEADERS.contains(nameLC)) {
+            return true;
+        }
+
+        for (final NameValuePair header : webResponse_.getResponseHeaders()) {
+            if (HttpHeader.ACCESS_CONTROL_EXPOSE_HEADERS.equalsIgnoreCase(header.getName())) {
+                for (final String token : StringUtils.splitAtComma(header.getValue())) {
+                    final String exposed = token.trim();
+                    // the wildcard is a header name for requests with credentials
+                    if (exposed.equalsIgnoreCase(name) || ("*".equals(exposed) && !isWithCredentials())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -1196,6 +1245,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         WebRequest request = webRequest_;
         // the response tainting 'cors' of the fetch standard: as soon as an url of another origin is involved
         boolean corsTainting = !isSameOrigin_;
+        corsResponseTainting_ = false;
         // the origin of the request is 'null' after a redirect from one foreign origin to another one
         boolean taintedOrigin = false;
 
@@ -1226,6 +1276,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             if (nextUrl == null) {
+                corsResponseTainting_ = corsTainting;
                 return response;
             }
 

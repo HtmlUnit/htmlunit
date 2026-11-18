@@ -8,6 +8,17 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                XMLHttpRequest.getResponseHeader() and XMLHttpRequest.getAllResponseHeaders() (and by this the
+                headers of fetch() responses) of a cross-origin response expose only the CORS-safelisted response
+                headers and the headers listed in Access-Control-Expose-Headers (the wildcard '*' only for requests
+                without credentials).
+            </action>
+            <action type="fix" dev="Vidya m">
+                XMLHttpRequest.getResponseHeader() and XMLHttpRequest.getAllResponseHeaders() (and by this the
+                headers of fetch() responses) no longer expose the Set-Cookie and Set-Cookie2 headers; the value
+                of HttpOnly cookies was readable from JavaScript.
+            </action>
             <action type="add" dev="rbri">
                 Support for the sandbox attribute of iframes (and the HTMLIFrameElement.sandbox property): no scripts
                 without 'allow-scripts', no form submission without 'allow-forms', no popups without 'allow-popups',
@@ -71,11 +82,6 @@
             <action type="fix" dev="rbri">
                 The set-cookie pragma (meta http-equiv='set-cookie') is ignored like in the browsers;
                 the HTML spec says user agents must ignore this pragma.
-            </action>
-            <action type="fix" dev="Vidya m">
-                XMLHttpRequest.getResponseHeader() and XMLHttpRequest.getAllResponseHeaders() (and by this the
-                headers of fetch() responses) no longer expose the Set-Cookie and Set-Cookie2 headers; the value
-                of HttpOnly cookies was readable from JavaScript.
             </action>
             <action type="fix" dev="Vidya m">
                 Method document.cookie (and meta http-equiv set-cookie) no longer sets cookies for another domain;

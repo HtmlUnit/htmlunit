@@ -144,6 +144,8 @@ public final class HttpHeader {
     public static final String ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
     /** Access-Control-Allow-Methods. */
     public static final String ACCESS_CONTROL_ALLOW_METHODS = "Access-Control-Allow-Methods";
+    /** Access-Control-Expose-Headers. */
+    public static final String ACCESS_CONTROL_EXPOSE_HEADERS = "Access-Control-Expose-Headers";
 
     /** Ping-From. */
     public static final String PING_FROM = "Ping-From";
