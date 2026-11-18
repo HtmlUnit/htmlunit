@@ -718,7 +718,12 @@ public class WebRequest implements Serializable {
         }
 
         try {
-            setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(url).toExternalForm());
+            URL referer = UrlUtils.getUrlWithoutRef(url);
+            if (referer.getUserInfo() != null) {
+                // the referrer never contains the credentials
+                referer = UrlUtils.getUrlWithNewUserName(UrlUtils.getUrlWithNewUserPassword(referer, null), null);
+            }
+            setAdditionalHeader(HttpHeader.REFERER, referer.toExternalForm());
         }
         catch (final MalformedURLException ignored) {
             // bad luck use the whole url from the pager

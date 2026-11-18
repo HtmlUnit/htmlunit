@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="Vidya m">
+                The Referer and Origin request headers (and by this document.referrer and the origin of
+                message events and WebSocket requests) no longer contain the user name and password of the
+                page url; the credentials of a page like http://user:password@host/ were sent to every site
+                the page referenced.
+            </action>
             <action type="fix" dev="rbri">
                 A document without browsing context (created by DOMImplementation.createHTMLDocument(),
                 DOMImplementation.createDocument() or DOMParser) is cookie-averse like in the browsers: document.cookie

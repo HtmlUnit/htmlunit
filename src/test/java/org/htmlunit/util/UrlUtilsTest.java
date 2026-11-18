@@ -216,6 +216,28 @@ public class UrlUtilsTest {
         a = new URL("http://my.home.com/#href");
         b = UrlUtils.getUrlWithProtocolAndAuthority(a);
         assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("http://user:secret@my.home.com:8080/index.html");
+        b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com:8080", b.toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getUrlWithoutPathRefQuery() throws Exception {
+        URL a = new URL("http://my.home.com/folder/index.html?query#ref");
+        URL b = UrlUtils.getUrlWithoutPathRefQuery(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("https://user:secret@my.home.com:8443/index.html");
+        b = UrlUtils.getUrlWithoutPathRefQuery(a);
+        assertEquals("https://my.home.com:8443", b.toExternalForm());
+
+        a = new URL("http://user@my.home.com/");
+        b = UrlUtils.getUrlWithoutPathRefQuery(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
     }
 
     /**

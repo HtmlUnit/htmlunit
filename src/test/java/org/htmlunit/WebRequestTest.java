@@ -346,4 +346,21 @@ public class WebRequestTest {
         assertEquals(StandardCharsets.UTF_8, deserialized.getCharset());
         assertEquals(StandardCharsets.US_ASCII, deserialized.getDefaultResponseContentCharset());
     }
+
+    /**
+     * The Referer header never contains the credentials of the referring url.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void refererHeaderWithoutCredentials() throws Exception {
+        WebRequest request = new WebRequest(new URL("http://evil.example/"), StandardCharsets.UTF_8,
+                new URL("http://admin:s3cret@intranet.example/app/index.html?q=1#frag"));
+        assertEquals("http://intranet.example/app/index.html?q=1",
+                request.getAdditionalHeader(HttpHeader.REFERER));
+
+        request = new WebRequest(new URL("http://evil.example/"), StandardCharsets.UTF_8,
+                new URL("https://admin@intranet.example:8443/"));
+        assertEquals("https://intranet.example:8443/", request.getAdditionalHeader(HttpHeader.REFERER));
+    }
 }
