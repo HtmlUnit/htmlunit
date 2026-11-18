@@ -9,6 +9,11 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                The private suffixes of the public suffix list (e.g. 'github.io') are handled as public suffixes
+                like in the browsers: cookies for these domains are ignored and the hosts below are different
+                sites (Sec-Fetch-Site, SameSite).
+            </action>
+            <action type="fix" dev="rbri">
                 Cookies are sent based on their SameSite attribute like in the browsers: for cross-site requests
                 'Strict' cookies are not sent, 'Lax' cookies and cookies without (or with an invalid) SameSite
                 attribute only for top-level navigations (cookies without SameSite attribute also for unsafe

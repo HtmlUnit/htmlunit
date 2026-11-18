@@ -14,15 +14,23 @@
  */
 package org.htmlunit.httpclient;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.IDN;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.conn.util.InetAddressUtils;
+import org.apache.http.conn.util.PublicSuffixList;
+import org.apache.http.conn.util.PublicSuffixListParser;
 import org.apache.http.conn.util.PublicSuffixMatcher;
 import org.apache.http.conn.util.PublicSuffixMatcherLoader;
 import org.apache.http.cookie.ClientCookie;
@@ -44,10 +52,41 @@ import org.htmlunit.util.UrlUtils;
  */
 public final class HttpClientConverter {
 
-    private static final PublicSuffixMatcher PUBLIC_SUFFIX_MATCHER = PublicSuffixMatcherLoader.getDefault();
+    private static final Log LOG = LogFactory.getLog(HttpClientConverter.class);
+
+    // like the browsers, all rules of the public suffix list (ICANN and PRIVATE section) are used;
+    // the default matcher of HttpClient (PublicSuffixMatcherLoader.getDefault()) handles the private
+    // suffixes (e.g. 'github.io') as registrable domains
+    private static final PublicSuffixMatcher PUBLIC_SUFFIX_MATCHER = loadPublicSuffixMatcher();
 
     private HttpClientConverter() {
         // util class
+    }
+
+    /**
+     * Returns the {@link PublicSuffixMatcher} used for cookies and the site computation;
+     * the private suffixes (e.g. 'github.io') are handled as public suffixes like in the browsers.
+     *
+     * @return the public suffix matcher
+     */
+    static PublicSuffixMatcher getPublicSuffixMatcher() {
+        return PUBLIC_SUFFIX_MATCHER;
+    }
+
+    private static PublicSuffixMatcher loadPublicSuffixMatcher() {
+        // the list is part of the HttpClient jar
+        final URL url = PublicSuffixMatcherLoader.class.getResource("/mozilla/public-suffix-list.txt");
+        if (url != null) {
+            try (Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8)) {
+                // parse() ignores the sections; all rules are handled the same way
+                final PublicSuffixList list = new PublicSuffixListParser().parse(reader);
+                return new PublicSuffixMatcher(list.getRules(), list.getExceptions());
+            }
+            catch (final IOException e) {
+                LOG.warn("Failure loading the public suffix list; using the default", e);
+            }
+        }
+        return PublicSuffixMatcherLoader.getDefault();
     }
 
     /**

@@ -199,4 +199,32 @@ public class CookieManager2Test extends SimpleWebTestCase {
 
         assertTrue(webClient.getCookies(new URL("https://www.example.co.uk/")).isEmpty());
     }
+
+    /**
+     * Method document.cookie must not set cookies for a private suffix of the
+     * public suffix list (e.g. 'github.io') like in the browsers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void documentCookiePrivateSuffix() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  document.cookie = 'own=1; domain=attacker.github.io; path=/';\n"
+            + "  document.cookie = 'suffix=1; domain=github.io; path=/';\n"
+            + "  document.cookie = 'suffixDot=1; domain=.github.io; path=/';\n"
+            + "  document.title = document.cookie.split('; ').sort().join('; ');\n"
+            + "</script></head><body></body></html>";
+
+        final URL url = new URL("https://attacker.github.io/");
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(url, html);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage(url);
+        assertEquals("own=1", page.getTitleText());
+        assertTrue(webClient.getCookies(new URL("https://victim.github.io/")).isEmpty());
+    }
 }

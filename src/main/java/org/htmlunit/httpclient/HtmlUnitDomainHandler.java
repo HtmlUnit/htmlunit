@@ -18,7 +18,6 @@ import java.util.Locale;
 
 import org.apache.http.conn.util.InetAddressUtils;
 import org.apache.http.conn.util.PublicSuffixMatcher;
-import org.apache.http.conn.util.PublicSuffixMatcherLoader;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
@@ -39,7 +38,7 @@ import org.htmlunit.HttpHeader;
  * @author Vidya m
  */
 final class HtmlUnitDomainHandler extends BasicDomainHandler {
-    private static final PublicSuffixMatcher PUBLIC_SUFFIX_MATCHER = PublicSuffixMatcherLoader.getDefault();
+    private static final PublicSuffixMatcher PUBLIC_SUFFIX_MATCHER = HttpClientConverter.getPublicSuffixMatcher();
 
     HtmlUnitDomainHandler() {
         super();

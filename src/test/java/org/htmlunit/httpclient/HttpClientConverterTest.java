@@ -53,7 +53,12 @@ public class HttpClientConverterTest {
     public void privateSectionSuffixIsHonored() {
         // appspot.com is a PRIVATE-section PSL entry; real browsers treat it as its
         // own site boundary too, same as the public suffix list's ICANN section
-        assertEquals("appspot.com", HttpClientConverter.registrableDomain("test.appspot.com"));
+        assertEquals("test.appspot.com", HttpClientConverter.registrableDomain("test.appspot.com"));
+        assertEquals("test.appspot.com", HttpClientConverter.registrableDomain("www.test.appspot.com"));
+        assertEquals("foo.github.io", HttpClientConverter.registrableDomain("foo.github.io"));
+        assertEquals("foo.github.io", HttpClientConverter.registrableDomain("a.b.foo.github.io"));
+        assertNotEquals(HttpClientConverter.registrableDomain("foo.github.io"),
+                HttpClientConverter.registrableDomain("bar.github.io"));
     }
 
     @Test
@@ -159,5 +164,27 @@ public class HttpClientConverterTest {
                 () -> HttpClientConverter.parseCookie("a=1; domain=uk", url, browserVersion));
         assertThrows(MalformedCookieException.class,
                 () -> HttpClientConverter.parseCookie("a=1; domain=.uk", url, browserVersion));
+    }
+
+    /**
+     * A private suffix (e.g. 'github.io') is handled as public suffix like in the browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void parseCookieDomainPrivateSuffix() throws Exception {
+        final URL url = new URL("https://foo.github.io/");
+        final BrowserVersion browserVersion = BrowserVersion.BEST_SUPPORTED;
+
+        assertEquals(".foo.github.io",
+                HttpClientConverter.parseCookie("a=1; domain=foo.github.io", url, browserVersion).get(0).getDomain());
+        assertEquals("foo.github.io",
+                HttpClientConverter.parseCookie("a=1", url, browserVersion).get(0).getDomain());
+
+        assertThrows(MalformedCookieException.class,
+                () -> HttpClientConverter.parseCookie("a=1; domain=github.io", url, browserVersion));
+        assertThrows(MalformedCookieException.class,
+                () -> HttpClientConverter.parseCookie("a=1; domain=.github.io", url, browserVersion));
+        assertThrows(MalformedCookieException.class,
+                () -> HttpClientConverter.parseCookie("a=1; domain=bar.github.io", url, browserVersion));
     }
 }
