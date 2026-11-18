@@ -64,17 +64,16 @@ public class HtmlInlineFrameSandboxTest extends WebDriverTestCase {
 
     /**
      * CSP allow-scripts: the frame has an opaque origin.
-     * <p>HtmlUnit does not support window.origin and has no cross-origin restrictions
-     * for parent.document.</p>
+     * <p>HtmlUnit has no cross-origin restrictions for parent.document.</p>
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"null", "about:srcdoc", "", "SecurityError", "SecurityError", "SecurityError", "done"})
-    @HtmlUnitNYI(CHROME = {"undefined", "about:srcdoc", "", "SecurityError", "SecurityError", "", "done"},
-            EDGE = {"undefined", "about:srcdoc", "", "SecurityError", "SecurityError", "", "done"},
-            FF = {"undefined", "about:srcdoc", "", "SecurityError", "SecurityError", "", "done"},
-            FF_ESR = {"undefined", "about:srcdoc", "", "SecurityError", "SecurityError", "", "done"})
+    @HtmlUnitNYI(CHROME = {"null", "about:srcdoc", "", "SecurityError", "SecurityError", "", "done"},
+            EDGE = {"null", "about:srcdoc", "", "SecurityError", "SecurityError", "", "done"},
+            FF = {"null", "about:srcdoc", "", "SecurityError", "SecurityError", "", "done"},
+            FF_ESR = {"null", "about:srcdoc", "", "SecurityError", "SecurityError", "", "done"})
     public void sandboxAllowScripts() throws Exception {
         loadPageVerify("<iframe id='f' sandbox='allow-scripts' srcdoc=\"<script>" + REPORT
                 + "r(window.origin);"
@@ -141,16 +140,11 @@ public class HtmlInlineFrameSandboxTest extends WebDriverTestCase {
 
     /**
      * A sandboxed frame with src has an opaque origin also.
-     * <p>HtmlUnit does not support window.origin.</p>
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"null", "SecurityError", "done"})
-    @HtmlUnitNYI(CHROME = {"undefined", "SecurityError", "done"},
-            EDGE = {"undefined", "SecurityError", "done"},
-            FF = {"undefined", "SecurityError", "done"},
-            FF_ESR = {"undefined", "SecurityError", "done"})
     public void sandboxSrc() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "sandboxed.html"),
                 DOCTYPE_HTML + "<html><body><script>" + REPORT

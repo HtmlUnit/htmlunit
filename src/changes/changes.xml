@@ -8,6 +8,13 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Property window.origin (replaceable; about:blank and about:srcdoc documents have the origin of
+                the creator, sandboxed documents without 'allow-same-origin' the origin 'null').
+            </action>
+            <action type="add" dev="rbri">
+                Method DOMTokenList.toString().
+            </action>
             <action type="fix" dev="rbri">
                 XMLHttpRequest.getResponseHeader() and XMLHttpRequest.getAllResponseHeaders() (and by this the
                 headers of fetch() responses) of a cross-origin response expose only the CORS-safelisted response

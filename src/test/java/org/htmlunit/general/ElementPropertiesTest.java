@@ -1210,7 +1210,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "ontransitionend,onunhandledrejection,onunload,onvolumechange,onwaiting,"
                 + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,"
+                + "onwebkittransitionend,onwheel,open(),opener,origin,outerHeight,outerWidth,pageXOffset,"
                 + "pageYOffset,parent,performance,PERSISTENT,postMessage(),print(),process(),prompt(),"
                 + "queueMicrotask(),"
                 + "releaseEvents(),removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),"
@@ -1238,7 +1238,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "ontransitionend,onunhandledrejection,onunload,onvolumechange,onwaiting,"
                 + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,"
+                + "onwebkittransitionend,onwheel,open(),opener,origin,outerHeight,outerWidth,pageXOffset,pageYOffset,"
                 + "parent,performance,PERSISTENT,postMessage(),print(),process(),prompt(),"
                 + "queueMicrotask(),"
                 + "releaseEvents(),removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),"
@@ -1264,7 +1264,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onoffline,ononline,onpagehide,onpageshow,onpause,onplay,onplaying,"
                 + "onpopstate,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,onunload,"
-                + "onvolumechange,onwaiting,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,"
+                + "onvolumechange,onwaiting,onwheel,open(),opener,origin,outerHeight,outerWidth,pageXOffset,"
                 + "pageYOffset,parent,performance,postMessage(),print(),process(),prompt(),"
                 + "queueMicrotask(),releaseEvents(),"
                 + "removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),screen,scroll(),"
@@ -1289,7 +1289,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onoffline,ononline,onpagehide,onpageshow,onpause,onplay,onplaying,"
                 + "onpopstate,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,onunload,"
-                + "onvolumechange,onwaiting,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,"
+                + "onvolumechange,onwaiting,onwheel,open(),opener,origin,outerHeight,outerWidth,pageXOffset,"
                 + "pageYOffset,parent,performance,postMessage(),print(),process(),prompt(),"
                 + "queueMicrotask(),releaseEvents(),"
                 + "removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),screen,scroll(),"
@@ -10608,14 +10608,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "toString(),value,values()",
             FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),replace(),supports(),toggle(),"
                 + "toString(),value,values()")
-    @HtmlUnitNYI(CHROME = "add(),contains(),entries(),forEach(),item(),keys(),length,"
-                + "remove(),replace(),supports(),toggle(),value,values()",
-            EDGE = "add(),contains(),entries(),forEach(),item(),keys(),length,"
-                + "remove(),replace(),supports(),toggle(),value,values()",
-            FF = "add(),contains(),entries(),forEach(),item(),keys(),length,"
-                + "remove(),replace(),supports(),toggle(),value,values()",
-            FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,"
-                + "remove(),replace(),supports(),toggle(),value,values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
     }

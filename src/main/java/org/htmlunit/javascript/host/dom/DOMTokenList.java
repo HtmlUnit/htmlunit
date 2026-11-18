@@ -152,6 +152,20 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the value of the underlying attribute (the stringifier of DOMTokenList).
+     *
+     * @return the value or an empty string if the attribute is not set
+     */
+    @JsxFunction(functionName = "toString")
+    public String jsToString() {
+        final String value = getValue();
+        if (value == null) {
+            return "";
+        }
+        return value;
+    }
+
+    /**
      * Adds the given tokens to the list, omitting any that are already present.
      *
      * @param context the JavaScript context

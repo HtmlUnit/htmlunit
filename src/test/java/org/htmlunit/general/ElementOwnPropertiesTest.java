@@ -1039,7 +1039,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontransitionend[GSCE],onunhandledrejection[GSCE],onunload[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],"
                 + "onwebkitanimationstart[GSCE],onwebkittransitionend[GSCE],onwheel[GSCE],open(),opener[GSCE],"
-                + "outerHeight[GSCE],outerWidth[GSCE],pageXOffset[GCE],pageYOffset[GCE],parent[GCE],"
+                + "origin[GSCE],outerHeight[GSCE],outerWidth[GSCE],pageXOffset[GCE],pageYOffset[GCE],parent[GCE],"
                 + "performance[GSCE],PERSISTENT[E],postMessage(),print(),prompt(),queueMicrotask(),releaseEvents(),"
                 + "requestAnimationFrame(),resizeBy(),resizeTo(),screen[GCE],scroll(),scrollBy(),scrollTo(),"
                 + "scrollX[GCE],scrollY[GCE],self[GCE],sessionStorage[GCE],setInterval(),setTimeout(),"
@@ -1070,7 +1070,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontransitionend[GSCE],onunhandledrejection[GSCE],onunload[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],"
                 + "onwebkitanimationstart[GSCE],onwebkittransitionend[GSCE],onwheel[GSCE],open(),opener[GSCE],"
-                + "outerHeight[GSCE],outerWidth[GSCE],pageXOffset[GCE],pageYOffset[GCE],parent[GCE],"
+                + "origin[GSCE],outerHeight[GSCE],outerWidth[GSCE],pageXOffset[GCE],pageYOffset[GCE],parent[GCE],"
                 + "performance[GSCE],PERSISTENT[E],postMessage(),print(),prompt(),queueMicrotask(),releaseEvents(),"
                 + "requestAnimationFrame(),resizeBy(),resizeTo(),screen[GCE],scroll(),scrollBy(),scrollTo(),"
                 + "scrollX[GCE],scrollY[GCE],self[GCE],sessionStorage[GCE],setInterval(),setTimeout(),"
@@ -1097,7 +1097,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpopstate[GSCE],onprogress[GSCE],onratechange[GSCE],onreset[GSCE],onresize[GSCE],onscroll[GSCE],"
                 + "onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onstalled[GSCE],onstorage[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],onunload[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],onwheel[GSCE],open(),opener[GSCE],outerHeight[GSCE],outerWidth[GSCE],"
+                + "onwaiting[GSCE],onwheel[GSCE],open(),opener[GSCE],origin[GSCE],outerHeight[GSCE],outerWidth[GSCE],"
                 + "pageXOffset[GCE],pageYOffset[GCE],parent[GCE],performance[GSCE],postMessage(),print(),prompt(),"
                 + "queueMicrotask(),"
                 + "releaseEvents(),requestAnimationFrame(),resizeBy(),resizeTo(),screen[GCE],scroll(),scrollBy(),"
@@ -1125,7 +1125,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpopstate[GSCE],onprogress[GSCE],onratechange[GSCE],onreset[GSCE],onresize[GSCE],onscroll[GSCE],"
                 + "onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onstalled[GSCE],onstorage[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],onunload[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],onwheel[GSCE],open(),opener[GSCE],outerHeight[GSCE],outerWidth[GSCE],"
+                + "onwaiting[GSCE],onwheel[GSCE],open(),opener[GSCE],origin[GSCE],outerHeight[GSCE],outerWidth[GSCE],"
                 + "pageXOffset[GCE],pageYOffset[GCE],parent[GCE],performance[GSCE],postMessage(),print(),prompt(),"
                 + "queueMicrotask(),"
                 + "releaseEvents(),requestAnimationFrame(),resizeBy(),resizeTo(),screen[GCE],scroll(),scrollBy(),"
@@ -18995,14 +18995,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "supports(),toggle(),toString(),value[GSCE],values()",
             FF_ESR = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],remove(),replace(),"
                 + "supports(),toggle(),toString(),value[GSCE],values()")
-    @HtmlUnitNYI(CHROME = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),replace(),supports(),toggle(),value[GSCE],values()",
-            EDGE = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),replace(),supports(),toggle(),value[GSCE],values()",
-            FF = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),replace(),supports(),toggle(),value[GSCE],values()",
-            FF_ESR = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),replace(),supports(),toggle(),value[GSCE],values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
     }

@@ -197,6 +197,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private DocumentProxy documentProxy_;
     private Navigator navigator_;
     private Object clientInformation_;
+    // the value set by script (origin is replaceable)
+    private Object originShadow_;
     private WebWindow webWindow_;
     private WindowProxy windowProxy_;
     private Screen screen_;
@@ -625,6 +627,70 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             return clientInformation_;
         }
         return navigator_;
+    }
+
+    /**
+     * Returns the {@code origin} property: the serialized origin of the document of this window.
+     * The origin of an about:blank or about:srcdoc document is the origin of its creator; the origin
+     * of a sandboxed document without 'allow-same-origin' (opaque origin) is 'null'.
+     *
+     * @return the origin
+     * @see <a href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-origin-dev">HTML Living Standard
+     *     - window.origin</a>
+     */
+    @JsxGetter
+    public Object getOrigin() {
+        if (originShadow_ != null) {
+            return originShadow_;
+        }
+
+        final Page page = getWebWindow().getEnclosedPage();
+        if (page == null) {
+            return "null";
+        }
+        final URL url;
+        if (page instanceof HtmlPage htmlPage) {
+            if (htmlPage.isOpaqueOrigin()) {
+                return "null";
+            }
+            url = htmlPage.getOriginUrl();
+        }
+        else {
+            url = page.getUrl();
+        }
+        return serializeOrigin(url);
+    }
+
+    /**
+     * Sets the {@code origin} property; like the browsers, this replaces the value
+     * (see https://webidl.spec.whatwg.org/#Replaceable).
+     *
+     * @param origin the new value
+     */
+    @JsxSetter
+    public void setOrigin(final Object origin) {
+        originShadow_ = origin;
+    }
+
+    /**
+     * Serializes the origin of the given url; only http(s) urls have a tuple origin,
+     * all other urls (about:, data:, file:...) have an opaque origin ('null').
+     *
+     * @param url the url
+     * @return the serialized origin
+     */
+    private static String serializeOrigin(final URL url) {
+        final String protocol = url.getProtocol();
+        if (!"http".equals(protocol) && !"https".equals(protocol)) {
+            return "null";
+        }
+
+        final StringBuilder origin = new StringBuilder().append(protocol).append("://").append(url.getHost());
+        final int port = url.getPort();
+        if (port != -1 && port != url.getDefaultPort()) {
+            origin.append(':').append(port);
+        }
+        return origin.toString();
     }
 
     /**

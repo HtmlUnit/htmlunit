@@ -2293,4 +2293,35 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The stringifier returns the value of the attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[ a b ]", "[ a b ]", "[ a b ]", "[]", "true", "true"})
+    public void jsToString() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<div id='d1' class='  a   b '></div>\n"
+            + "<div id='d2'></div>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    log('[' + list.toString() + ']');\n"
+            + "    log('[' + list + ']');\n"
+            + "    log('[' + String(list) + ']');\n"
+            + "    log('[' + document.getElementById('d2').classList.toString() + ']');\n"
+            + "    log(DOMTokenList.prototype.hasOwnProperty('toString'));\n"
+            + "    log(list.toString === DOMTokenList.prototype.toString);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
