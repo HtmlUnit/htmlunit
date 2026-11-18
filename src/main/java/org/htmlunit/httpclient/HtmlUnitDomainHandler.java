@@ -20,13 +20,16 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Locale;
 
+import org.apache.http.conn.util.InetAddressUtils;
 import org.apache.http.conn.util.PublicSuffixMatcher;
 import org.apache.http.conn.util.PublicSuffixMatcherLoader;
+import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieRestrictionViolationException;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.SetCookie;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.BasicDomainHandler;
 import org.apache.http.util.Args;
 import org.apache.http.util.TextUtils;
@@ -82,6 +85,19 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
      */
     @Override
     public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
+        // like the browsers, a domain attribute with the ip address of the host is accepted;
+        // the cookie is a host-only cookie (no other host can match an ip address)
+        final String host = origin.getHost();
+        if (isIpAddress(host) && cookie instanceof BasicClientCookie clientCookie
+                && clientCookie.containsAttribute(ClientCookie.DOMAIN_ATTR)) {
+            final String cookieDomain = cookie.getDomain();
+            if (cookieDomain != null
+                    && host.equalsIgnoreCase(cookieDomain.startsWith(".") ? cookieDomain.substring(1) : cookieDomain)) {
+                clientCookie.setDomain(host);
+                clientCookie.removeAttribute(ClientCookie.DOMAIN_ATTR);
+            }
+        }
+
         super.validate(cookie, origin);
 
         final String domain = cookie.getDomain();
@@ -125,5 +141,13 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
         }
 
         return super.match(cookie, origin);
+    }
+
+    private static boolean isIpAddress(final String host) {
+        String h = host;
+        if (h.startsWith("[") && h.endsWith("]")) {
+            h = h.substring(1, h.length() - 1);
+        }
+        return InetAddressUtils.isIPv4Address(h) || InetAddressUtils.isIPv6Address(h);
     }
 }

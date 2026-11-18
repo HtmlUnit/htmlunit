@@ -14,6 +14,9 @@
  */
 package org.htmlunit.httpclient;
 
+import java.util.Locale;
+
+import org.apache.http.conn.util.InetAddressUtils;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieRestrictionViolationException;
@@ -31,7 +34,7 @@ final class HtmlUnitSecureHandler extends BasicSecureHandler {
     /**
      * {@inheritDoc}
      * Like the browsers, a page from an insecure origin can't set a secure cookie
-     * (RFC 6265bis section 5.7); localhost is handled as secure (see {@link #match(Cookie, CookieOrigin)}).
+     * (RFC 6265bis section 5.7); localhost and the loopback addresses are handled as secure.
      */
     @Override
     public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
@@ -50,7 +53,25 @@ final class HtmlUnitSecureHandler extends BasicSecureHandler {
         return !cookie.isSecure() || isSecure(origin);
     }
 
+    /**
+     * Like the browsers, localhost and the loopback addresses are handled as secure
+     * (potentially trustworthy origins).
+     *
+     * @param origin the origin
+     * @return true if the origin is handled as secure
+     * @see <a href="https://w3c.github.io/webappsec-secure-contexts/#is-origin-trustworthy">
+     *     Secure Contexts - Is origin potentially trustworthy?</a>
+     */
     private static boolean isSecure(final CookieOrigin origin) {
-        return origin.isSecure() || "localhost".equalsIgnoreCase(origin.getHost());
+        if (origin.isSecure()) {
+            return true;
+        }
+
+        final String host = origin.getHost().toLowerCase(Locale.ROOT);
+        return "localhost".equals(host)
+                || host.endsWith(".localhost")
+                || (InetAddressUtils.isIPv4Address(host) && host.startsWith("127."))
+                || "::1".equals(host)
+                || "[::1]".equals(host);
     }
 }

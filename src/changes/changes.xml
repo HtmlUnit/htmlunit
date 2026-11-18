@@ -9,6 +9,14 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Method document.cookie of an about:blank document (e.g. an iframe without src or a window opened
+                without url) uses the cookies of the creator like in the browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                A cookie domain attribute with the ip address of the host is accepted (host-only cookie);
+                the loopback addresses and *.localhost are handled as secure for cookies like localhost.
+            </action>
+            <action type="fix" dev="rbri">
                 Cookies with the prefixes '__Secure-' and '__Host-' (case-insensitive) are only accepted if they
                 follow the rules (secure; for '__Host-' no domain attribute and the path '/') like in the browsers.
             </action>

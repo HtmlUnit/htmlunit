@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -1198,6 +1199,306 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML, responseHeader);
 
         loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * An about:blank iframe uses the cookies of the creator (the parent page).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("parent=1")
+    public void aboutBlankIframeRead() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function cookies(doc) { return doc.cookie.split('; ').sort().join('; '); }\n"
+            + "  function test() {\n"
+            + "    document.cookie = 'parent=1; path=/';\n"
+            + "    log(cookies(frames[0].document));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<iframe></iframe>\n"
+            + "<script>test();</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A cookie set by an about:blank iframe is a cookie of the creator (the parent page).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"frame=1", "frame=1"})
+    public void aboutBlankIframeWrite() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function cookies(doc) { return doc.cookie.split('; ').sort().join('; '); }\n"
+            + "  function test() {\n"
+            + "    frames[0].document.cookie = 'frame=1; path=/';\n"
+            + "    log(cookies(frames[0].document));\n"
+            + "    log(cookies(document));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<iframe></iframe>\n"
+            + "<script>test();</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An about:blank iframe created by script uses the cookies of the creator.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"parent=1", "frame=1; parent=1"})
+    public void aboutBlankIframeCreatedByScript() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function cookies(doc) { return doc.cookie.split('; ').sort().join('; '); }\n"
+            + "  function test() {\n"
+            + "    document.cookie = 'parent=1; path=/';\n"
+            + "    var iframe = document.createElement('iframe');\n"
+            + "    document.body.appendChild(iframe);\n"
+            + "    log(cookies(iframe.contentDocument));\n"
+            + "    iframe.contentDocument.cookie = 'frame=1; path=/';\n"
+            + "    log(cookies(document));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<script>test();</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A srcdoc iframe uses the cookies of the parent page.
+     * <p>HtmlUnit does not support srcdoc; the empty (about:blank) iframe uses the cookies of the parent also.</p>
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"parent=1", "frame=1; parent=1"})
+    public void srcdocIframe() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function cookies(doc) { return doc.cookie.split('; ').sort().join('; '); }\n"
+            + "  document.cookie = 'parent=1; path=/';\n"
+            + "  function test(iframe) {\n"
+            + "    log(cookies(iframe.contentDocument));\n"
+            + "    iframe.contentDocument.cookie = 'frame=1; path=/';\n"
+            + "    log(cookies(document));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<iframe srcdoc='<p>srcdoc</p>' onload='test(this)'></iframe>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A sandboxed srcdoc iframe (opaque origin) has no access to the cookies.
+     * <p>HtmlUnit does not support srcdoc (and sandbox); the iframe content is not executed.</p>
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"read SecurityError", "write SecurityError"})
+    @HtmlUnitNYI(
+            CHROME = {},
+            EDGE = {},
+            FF = {},
+            FF_ESR = {})
+    public void srcdocIframeSandboxed() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function cookies(doc) { return doc.cookie.split('; ').sort().join('; '); }\n"
+            + "  document.cookie = 'parent=1; path=/';\n"
+            + "  window.addEventListener('message', function(e) { log(e.data); });\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<iframe sandbox='allow-scripts' srcdoc=\""
+            + "<script>"
+            + "try { parent.postMessage('cookie: ' + document.cookie, '*'); }"
+            + "catch(e) { parent.postMessage('read ' + e.name, '*'); }"
+            + "try { document.cookie = 'frame=1; path=/'; parent.postMessage('write ok', '*'); }"
+            + "catch(e) { parent.postMessage('write ' + e.name, '*'); }"
+            + "</script>\"></iframe>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * A window opened without url (about:blank) uses the cookies of the creator.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"parent=1", "parent=1; popup=1"})
+    public void windowOpenAboutBlank() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function cookies(doc) { return doc.cookie.split('; ').sort().join('; '); }\n"
+            + "  function test() {\n"
+            + "    document.cookie = 'parent=1; path=/';\n"
+            + "    var w = window.open('');\n"
+            + "    log(cookies(w.document));\n"
+            + "    w.document.cookie = 'popup=1; path=/';\n"
+            + "    log(cookies(document));\n"
+            + "    w.close();\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<script>test();</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A page from an IP address sets cookies with domain attribute. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("host=1; own=1; ownDot=1")
+    public void ipDomainAttributeFromJs() throws Exception {
+        cookiesFromJs(urlIp(),
+                "host=1; Path=/",
+                "own=1; Domain=127.0.0.1; Path=/",
+                "ownDot=1; Domain=.127.0.0.1; Path=/",
+                "part=1; Domain=0.0.1; Path=/",
+                "other=1; Domain=127.0.0.2; Path=/");
+    }
+
+    /**
+     * A page from an IP address sets cookies with domain attribute. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("host=1; own=1; ownDot=1")
+    public void ipDomainAttributeFromHeader() throws Exception {
+        cookiesFromHeader(urlIp(),
+                "host=1; Path=/",
+                "own=1; Domain=127.0.0.1; Path=/",
+                "ownDot=1; Domain=.127.0.0.1; Path=/",
+                "part=1; Domain=0.0.1; Path=/",
+                "other=1; Domain=127.0.0.2; Path=/");
+    }
+
+    /**
+     * A Secure cookie from an IP address (127.0.0.1 is potentially trustworthy in some browsers); the Secure cookie
+     * replaces the cookie set before if accepted. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("sec=1; x=secure")
+    public void ipSecureFromJs() throws Exception {
+        cookiesFromJs(urlIp(),
+                "x=plain; Path=/",
+                "x=secure; Secure; Path=/",
+                "sec=1; Secure; Path=/");
+    }
+
+    /**
+     * A Secure cookie from an IP address (127.0.0.1 is potentially trustworthy in some browsers); the Secure cookie
+     * replaces the cookie set before if accepted. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("sec=1; x=secure")
+    public void ipSecureFromHeader() throws Exception {
+        cookiesFromHeader(urlIp(),
+                "x=plain; Path=/",
+                "x=secure; Secure; Path=/",
+                "sec=1; Secure; Path=/");
+    }
+
+    /**
+     * Cookies with prefix from an IP address. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("__Host-b=1; __Host-c=1; __Secure-a=1")
+    public void ipPrefixFromJs() throws Exception {
+        cookiesFromJs(urlIp(),
+                "__Secure-a=1; Secure; Path=/",
+                "__Host-b=1; Secure; Path=/",
+                "__Host-c=1; Secure; Domain=127.0.0.1; Path=/");
+    }
+
+    /**
+     * Cookies with prefix from an IP address. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("__Host-b=1; __Host-c=1; __Secure-a=1")
+    public void ipPrefixFromHeader() throws Exception {
+        cookiesFromHeader(urlIp(),
+                "__Secure-a=1; Secure; Path=/",
+                "__Host-b=1; Secure; Path=/",
+                "__Host-c=1; Secure; Domain=127.0.0.1; Path=/");
+    }
+
+    // the page served from an ip address (same server as localhost)
+    private static URL urlIp() throws MalformedURLException {
+        return new URL("http://127.0.0.1:" + PORT + "/");
+    }
+
+    private void cookiesFromJs(final URL url, final String... cookies) throws Exception {
+        final StringBuilder js = new StringBuilder();
+        for (final String cookie : cookies) {
+            js.append("  document.cookie = '").append(cookie).append("';\n");
+        }
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + js
+            + "  log(document.cookie.split('; ').sort().join('; '));\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        getMockWebConnection().setResponse(url, html);
+        loadPage2(url, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    private void cookiesFromHeader(final URL url, final String... cookies) throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        for (final String cookie : cookies) {
+            responseHeader.add(new NameValuePair("Set-Cookie", cookie));
+        }
+        getMockWebConnection().setResponse(url, HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        loadPage2(url, StandardCharsets.ISO_8859_1);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 }

@@ -1135,7 +1135,7 @@ public class Document extends Node {
         final SgmlPage sgmlPage = getPage();
 
         final StringBuilder builder = new StringBuilder();
-        final Set<Cookie> cookies = sgmlPage.getWebClient().getCookies(sgmlPage.getUrl());
+        final Set<Cookie> cookies = sgmlPage.getWebClient().getCookies(getCookieUrl(sgmlPage));
         final List<Cookie> visibleCookies = new ArrayList<>();
         for (final Cookie cookie : cookies) {
             if (cookie.isHttpOnly()) {
@@ -1179,7 +1179,22 @@ public class Document extends Node {
         }
 
         final SgmlPage sgmlPage = getPage();
-        sgmlPage.getWebClient().addCookie(newCookie, sgmlPage.getUrl(), this);
+        sgmlPage.getWebClient().addCookie(newCookie, getCookieUrl(sgmlPage), this);
+    }
+
+    /**
+     * Returns the url used for the cookies of the document. Like in the browsers, an
+     * about:blank document (e.g. an iframe without src or a window opened without url)
+     * uses the cookies of its creator.
+     *
+     * @param sgmlPage the page of this document
+     * @return the url
+     */
+    private static URL getCookieUrl(final SgmlPage sgmlPage) {
+        if (sgmlPage instanceof HtmlPage htmlPage) {
+            return htmlPage.getOriginUrl();
+        }
+        return sgmlPage.getUrl();
     }
 
     /**
