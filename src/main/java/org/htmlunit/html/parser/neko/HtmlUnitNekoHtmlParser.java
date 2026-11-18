@@ -105,8 +105,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
         domBuilder.setInsideSvg(isSvgContext(context));
 
         final boolean xhtml = page instanceof XHtmlPage;
-        final boolean selfClosing = xhtml
-                || htmlPage.getWebClient().getOptions().isHtmlFragmentSelfClosingTagsAllowed();
+        final boolean selfClosing = xhtml || webClient.getOptions().isHtmlFragmentSelfClosingTagsAllowed();
         domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, selfClosing);
         domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME, selfClosing);
         domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_SCRIPT, xhtml);
