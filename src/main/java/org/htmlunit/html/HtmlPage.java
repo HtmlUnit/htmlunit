@@ -358,13 +358,17 @@ public class HtmlPage extends SgmlPage {
      *
      * Returns the url of the 'site for cookies' of this document: the url of the top-level
      * document if this document and all its ancestors are same-site with it, otherwise
-     * 'about:blank' (no site, never same-site with any url).
+     * 'about:blank' (no site, never same-site with any url). A document without a window
+     * (e.g. created by DOMImplementation.createHTMLDocument() or DOMParser) uses its own origin.
      *
      * @return the url of the site for cookies
      * @see <a href="https://html.spec.whatwg.org/multipage/browsers.html#site-for-cookies">site for cookies</a>
      */
     public URL getSiteForCookiesUrl() {
         final WebWindow window = getEnclosingWindow();
+        if (window == null) {
+            return getOriginUrl();
+        }
         final WebWindow top = window.getTopWindow();
         if (!(top.getEnclosedPage() instanceof HtmlPage topPage)) {
             return getOriginUrl();
