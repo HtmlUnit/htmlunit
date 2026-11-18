@@ -11,6 +11,12 @@
             <action type="fix" dev="rbri">
                 Cookies of hosts with a single label name (e.g. 'intranet') are handled without name resolution;
                 cookies of hosts that could not be resolved (e.g. when using a proxy or a mock connection)
+                were ignored. A single label domain attribute with leading dot ('.intranet') is handled as
+                'intranet' for all browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                Cookies of hosts with a single label name (e.g. 'intranet') are handled without name resolution;
+                cookies of hosts that could not be resolved (e.g. when using a proxy or a mock connection)
                 were ignored.
             </action>
             <action type="fix" dev="rbri">

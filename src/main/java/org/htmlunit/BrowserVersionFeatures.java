@@ -193,10 +193,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF_ESR)
     HTTP_COOKIE_HOST_PREFIX_PATH_ATTRIBUTE_OPTIONAL,
 
-    /** domain '.org' is handled as 'org'. */
-    @BrowserFeature({FF, FF_ESR})
-    HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS,
-
     /** Browser sends Sec-ch headers. */
     @BrowserFeature({CHROME, EDGE})
     HTTP_HEADER_CH_UA,

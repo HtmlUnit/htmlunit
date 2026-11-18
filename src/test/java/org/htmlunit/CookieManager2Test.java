@@ -23,8 +23,6 @@ import java.util.Set;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.Cookie;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.util.MimeType;
-import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -34,7 +32,6 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
- * @author Vidya m
  */
 public class CookieManager2Test extends SimpleWebTestCase {
 
@@ -155,6 +152,8 @@ public class CookieManager2Test extends SimpleWebTestCase {
     /**
      * Cookies of a host with a single label name are handled without name resolution;
      * the host 'htmlunit-unresolvable' does not exist (served by the mock connection).
+     * <p>The mock connection does not process Set-Cookie headers (only the HttpClient
+     * based connection does); therefore the cookies are set by document.cookie.</p>
      *
      * @throws Exception if the test fails
      */
@@ -165,22 +164,19 @@ public class CookieManager2Test extends SimpleWebTestCase {
             + "<script>\n"
             + "  document.cookie = 'js=1; path=/';\n"
             + "  document.cookie = 'jsDomain=1; domain=htmlunit-unresolvable; path=/';\n"
+            + "  document.cookie = 'jsDomainDot=1; domain=.htmlunit-unresolvable; path=/';\n"
             + "  document.title = document.cookie.split('; ').sort().join('; ');\n"
             + "</script></head><body></body></html>";
-
-        final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Set-Cookie", "header=1; path=/"));
-        headers.add(new NameValuePair("Set-Cookie", "headerDomain=1; domain=htmlunit-unresolvable; path=/"));
 
         final URL url = new URL("http://htmlunit-unresolvable/");
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(url, html, 200, "OK", MimeType.TEXT_HTML, headers);
+        webConnection.setResponse(url, html);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(url);
-        assertEquals("header=1; headerDomain=1; js=1; jsDomain=1", page.getTitleText());
-        assertEquals(4, webClient.getCookies(url).size());
+        assertEquals("js=1; jsDomain=1; jsDomainDot=1", page.getTitleText());
+        assertEquals(3, webClient.getCookies(url).size());
         assertTrue(webClient.getCookies(new URL("http://other-host/")).isEmpty());
     }
 

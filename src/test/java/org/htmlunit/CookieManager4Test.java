@@ -261,10 +261,18 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF_ESR = {"c11=11; c12=12",
                       "c12=12; path=/; domain=htmlunit-dev; sameSite=None",
                       "c11=11; path=/; domain=htmlunit-dev; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=.htmlunit-dev"},
-            EDGE = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=.htmlunit-dev"},
-            FF = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
-            FF_ESR = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"})
+    @HtmlUnitNYI(CHROME = {"c11=11; c12=12",
+                           "c12=12; path=/; domain=htmlunit-dev",
+                           "c11=11; path=/; domain=htmlunit-dev"},
+            EDGE = {"c11=11; c12=12",
+                    "c12=12; path=/; domain=htmlunit-dev",
+                    "c11=11; path=/; domain=htmlunit-dev"},
+            FF = {"c11=11; c12=12",
+                  "c12=12; path=/; domain=htmlunit-dev",
+                  "c11=11; path=/; domain=htmlunit-dev"},
+            FF_ESR = {"c11=11; c12=12",
+                      "c12=12; path=/; domain=htmlunit-dev",
+                      "c11=11; path=/; domain=htmlunit-dev"})
     public void storedDomain4() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + HOSTS_DOMAIN + "; Path=/"));
@@ -288,9 +296,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         verifyTitle2(driver, getExpectedAlerts()[0]);
 
         assertEquals(getExpectedAlerts()[1], driver.manage().getCookieNamed("c12").toString());
-        if (driver.manage().getCookieNamed("c11") != null) {
-            assertEquals(getExpectedAlerts()[2], driver.manage().getCookieNamed("c11").toString());
-        }
+        assertEquals(getExpectedAlerts()[2], driver.manage().getCookieNamed("c11").toString());
     }
 
     /**
@@ -457,10 +463,18 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF_ESR = {"2",
                       "c12=12; path=/; domain=htmlunit-dev; sameSite=None",
                       "c11=11; path=/; domain=htmlunit-dev; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=.htmlunit-dev"},
-            EDGE = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=.htmlunit-dev"},
-            FF = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
-            FF_ESR = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"})
+    @HtmlUnitNYI(CHROME = {"2",
+                           "c12=12; path=/; domain=htmlunit-dev",
+                           "c11=11; path=/; domain=htmlunit-dev"},
+            EDGE = {"2",
+                    "c12=12; path=/; domain=htmlunit-dev",
+                    "c11=11; path=/; domain=htmlunit-dev"},
+            FF = {"2",
+                  "c12=12; path=/; domain=htmlunit-dev",
+                  "c11=11; path=/; domain=htmlunit-dev"},
+            FF_ESR = {"2",
+                      "c12=12; path=/; domain=htmlunit-dev",
+                      "c11=11; path=/; domain=htmlunit-dev"})
     public void storedDomainFromJs4() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"

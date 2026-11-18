@@ -14,8 +14,6 @@
  */
 package org.htmlunit.httpclient;
 
-import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS;
-
 import java.util.Locale;
 
 import org.apache.http.conn.util.InetAddressUtils;
@@ -31,7 +29,6 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.BasicDomainHandler;
 import org.apache.http.util.Args;
 import org.apache.http.util.TextUtils;
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 
 /**
@@ -44,11 +41,8 @@ import org.htmlunit.HttpHeader;
 final class HtmlUnitDomainHandler extends BasicDomainHandler {
     private static final PublicSuffixMatcher PUBLIC_SUFFIX_MATCHER = PublicSuffixMatcherLoader.getDefault();
 
-    private final BrowserVersion browserVersion_;
-
-    HtmlUnitDomainHandler(final BrowserVersion browserVersion) {
+    HtmlUnitDomainHandler() {
         super();
-        browserVersion_ = browserVersion;
     }
 
     @Override
@@ -65,8 +59,9 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
         String domain = value.toLowerCase(Locale.ROOT);
 
         final int dotIndex = domain.indexOf('.');
-        if (browserVersion_.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)
-                && dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
+        if (dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
+            // like the browsers, a single label domain is stored without the leading dot
+            // ('.intranet' is handled as 'intranet')
             domain = domain.substring(1);
         }
         if (dotIndex > 0) {
@@ -121,8 +116,8 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
 
         final int dotIndex = domain.indexOf('.');
         if (dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
-            // single label domain with leading dot (e.g. '.intranet'); like the browsers
-            // the cookie matches the host itself
+            // single label domain with leading dot (e.g. '.intranet', only possible for cookies
+            // added by the api); like the browsers the cookie matches the host itself
             return origin.getHost().equalsIgnoreCase(domain.substring(1));
         }
 
