@@ -3179,6 +3179,20 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Same-site comparison per the HTML "same site" algorithm: same scheme and same
+     * registrable domain (eTLD+1, based on the public suffix list), ignoring port and subdomain.
+     *
+     * @param url1 the first url
+     * @param url2 the second url
+     * @return whether both urls are same-site
+     */
+    public static boolean isSameSite(final URL url1, final URL url2) {
+        return HttpClientConverter.isSameSite(url1, url2);
+    }
+
+    /**
      * Parses the given cookie and adds this to our cookie store.
      * The cookie is treated as set by a non-HTTP API (e.g. document.cookie);
      * HttpOnly cookies are ignored and existing HttpOnly cookies are not replaced.
@@ -3187,6 +3201,23 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param origin the requester
      */
     public void addCookie(final String cookieString, final URL pageUrl, final Object origin) {
+        addCookie(cookieString, pageUrl, origin, false);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Parses the given cookie and adds this to our cookie store.
+     * The cookie is treated as set by a non-HTTP API (e.g. document.cookie);
+     * HttpOnly cookies are ignored and existing HttpOnly cookies are not replaced.
+     * @param cookieString the string to parse
+     * @param pageUrl the url of the page that likes to set the cookie
+     * @param origin the requester
+     * @param sameSiteNoneOnly if {@code true} only 'SameSite=None' cookies are added; like the browsers,
+     *        a document in a cross-site context (e.g. a cross-site iframe) can set only these cookies
+     */
+    public void addCookie(final String cookieString, final URL pageUrl, final Object origin,
+            final boolean sameSiteNoneOnly) {
         final CookieManager cookieManager = getCookieManager();
         if (!cookieManager.isCookiesEnabled()) {
             if (LOG.isDebugEnabled()) {
@@ -3203,6 +3234,10 @@ public class WebClient implements Serializable, AutoCloseable {
             // final List<Cookie> cookies = CookieParser.parseCookie(cookieString, pageUrl, getBrowserVersion());
 
             for (final Cookie cookie : cookies) {
+                if (sameSiteNoneOnly && !"none".equalsIgnoreCase(cookie.getSameSite())) {
+                    continue;
+                }
+
                 // RFC 6265 5.3 steps 10 and 11: a non-HTTP API must neither
                 // create an HttpOnly cookie nor replace an existing one
                 if (cookie.isHttpOnly()) {

@@ -77,7 +77,6 @@ import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -378,7 +377,7 @@ public class HtmlPage extends SgmlPage {
         WebWindow current = window;
         while (current != null && current != top) {
             if (current.getEnclosedPage() instanceof HtmlPage currentPage
-                    && !HttpClientConverter.isSameSite(currentPage.getOriginUrl(), topUrl)) {
+                    && !WebClient.isSameSite(currentPage.getOriginUrl(), topUrl)) {
                 return UrlUtils.URL_ABOUT_BLANK;
             }
             current = current.getParentWindow();

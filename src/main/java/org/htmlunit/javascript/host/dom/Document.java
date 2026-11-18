@@ -38,11 +38,11 @@ import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.cookie.MalformedCookieException;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.StringWebResponse;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Callable;
@@ -82,7 +82,6 @@ import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.http.Cookie;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
-import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -1191,22 +1190,9 @@ public class Document extends Node {
 
         final SgmlPage sgmlPage = getPage();
         final URL cookieUrl = getCookieUrl(sgmlPage);
-        if (isCrossSiteContext(sgmlPage, cookieUrl)) {
-            // a document in a cross-site context (e.g. a cross-site iframe)
-            // can set only 'SameSite=None' cookies
-            try {
-                for (final Cookie cookie : HttpClientConverter.parseCookie(newCookie, cookieUrl,
-                        sgmlPage.getWebClient().getBrowserVersion())) {
-                    if (!"none".equalsIgnoreCase(cookie.getSameSite())) {
-                        return;
-                    }
-                }
-            }
-            catch (final MalformedCookieException e) {
-                return;
-            }
-        }
-        sgmlPage.getWebClient().addCookie(newCookie, cookieUrl, this);
+        // a document in a cross-site context (e.g. a cross-site iframe)
+        // can set only 'SameSite=None' cookies
+        sgmlPage.getWebClient().addCookie(newCookie, cookieUrl, this, isCrossSiteContext(sgmlPage, cookieUrl));
     }
 
     /**
@@ -1235,7 +1221,7 @@ public class Document extends Node {
      */
     private static boolean isCrossSiteContext(final SgmlPage sgmlPage, final URL cookieUrl) {
         return sgmlPage instanceof HtmlPage htmlPage
-                && !HttpClientConverter.isSameSite(htmlPage.getSiteForCookiesUrl(), cookieUrl);
+                && !WebClient.isSameSite(htmlPage.getSiteForCookiesUrl(), cookieUrl);
     }
 
     /**
