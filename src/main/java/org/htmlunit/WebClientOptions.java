@@ -103,6 +103,8 @@ public class WebClientOptions implements Serializable {
 
     private boolean isFetchPolyfillEnabled_;
 
+    private boolean htmlFragmentSelfClosingTagsAllowed_;
+
     /**
      * Sets the SSLContext; if this is set it is used and some other settings are
      * ignored (protocol, keyStore, keyStorePassword, trustStore,
@@ -953,6 +955,29 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isFetchPolyfillEnabled() {
         return isFetchPolyfillEnabled_;
+    }
+
+    /**
+     * Sets whether the fragment parser of html pages (e.g. {@code setInnerHtml()}) closes a non void element
+     * or iframe written as empty-element tag (e.g. {@code <h3/>}), like up to version 5.5.0. By default the
+     * trailing slash is ignored like in the browsers. A self-closed script is not affected.
+     * Enable this to read back markup written by {@code asXml()} before 5.8.0, which wrote empty elements
+     * like {@code <h3/>}. XHTML pages always honor the trailing slash.
+     *
+     * @param allowed {@code true} to close a non void element written as empty-element tag
+     */
+    public void setHtmlFragmentSelfClosingTagsAllowed(final boolean allowed) {
+        htmlFragmentSelfClosingTagsAllowed_ = allowed;
+    }
+
+    /**
+     * Returns whether the fragment parser of html pages closes a non void element written as empty-element tag.
+     *
+     * @return {@code true} if the fragment parser of html pages closes a non void element written as
+     *         empty-element tag
+     */
+    public boolean isHtmlFragmentSelfClosingTagsAllowed() {
+        return htmlFragmentSelfClosingTagsAllowed_;
     }
 
     /**
