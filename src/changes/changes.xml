@@ -9,6 +9,13 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Cookies are sent based on their SameSite attribute like in the browsers: for cross-site requests
+                'Strict' cookies are not sent, 'Lax' cookies and cookies without (or with an invalid) SameSite
+                attribute only for top-level navigations (cookies without SameSite attribute also for unsafe
+                methods like POST within two minutes after they were set). Cookies with 'SameSite=None' have
+                to be secure.
+            </action>
+            <action type="fix" dev="rbri">
                 Cookies of hosts with a single label name (e.g. 'intranet') are handled without name resolution;
                 cookies of hosts that could not be resolved (e.g. when using a proxy or a mock connection)
                 were ignored. A single label domain attribute with leading dot ('.intranet') is handled as

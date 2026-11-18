@@ -59,6 +59,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.client.AuthCache;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -108,6 +109,7 @@ import org.htmlunit.WebRequest.HttpHint;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import org.htmlunit.httpclient.HtmlUnitCookieStore;
+import org.htmlunit.httpclient.HtmlUnitSameSiteCookieStore;
 import org.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
 import org.htmlunit.httpclient.HttpClientConverter;
@@ -1134,7 +1136,13 @@ public class HttpWebConnection implements WebConnection {
             }
             else if (HttpHeader.COOKIE.equals(header)) {
                 if (!webRequest.hasHint(HttpHint.BlockCookies)) {
-                    list.add(new RequestAddCookies());
+                    final URL requestingUrl = webRequest.getRequestingUrl();
+                    if (requestingUrl != null && !isSameSite(requestingUrl, url)) {
+                        list.add(new CrossSiteRequestAddCookies(webRequest));
+                    }
+                    else {
+                        list.add(new RequestAddCookies());
+                    }
                 }
             }
             else if (HttpHeader.DNT.equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
@@ -1269,6 +1277,45 @@ public class HttpWebConnection implements WebConnection {
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_FETCH_MODE, value_);
+        }
+    }
+
+    /**
+     * Adds the cookies to a cross-site request; the cookies are filtered based on
+     * their SameSite attribute (see {@link HtmlUnitSameSiteCookieStore}).
+     */
+    private static final class CrossSiteRequestAddCookies implements HttpRequestInterceptor {
+        private final RequestAddCookies delegate_ = new RequestAddCookies();
+        private final boolean topLevelNavigation_;
+        private final boolean safeMethod_;
+
+        CrossSiteRequestAddCookies(final WebRequest webRequest) {
+            topLevelNavigation_ = webRequest.getFetchDestination() == WebRequest.FetchDestination.DOCUMENT;
+
+            final HttpMethod method = webRequest.getHttpMethod();
+            safeMethod_ = method == HttpMethod.GET
+                    || method == HttpMethod.HEAD
+                    || method == HttpMethod.OPTIONS
+                    || method == HttpMethod.TRACE;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            final HttpClientContext clientContext = HttpClientContext.adapt(context);
+            final CookieStore cookieStore = clientContext.getCookieStore();
+            if (cookieStore == null) {
+                delegate_.process(request, context);
+                return;
+            }
+
+            clientContext.setCookieStore(
+                    new HtmlUnitSameSiteCookieStore(cookieStore, topLevelNavigation_, safeMethod_));
+            try {
+                delegate_.process(request, context);
+            }
+            finally {
+                clientContext.setCookieStore(cookieStore);
+            }
         }
     }
 

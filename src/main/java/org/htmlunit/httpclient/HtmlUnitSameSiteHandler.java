@@ -14,9 +14,11 @@
  */
 package org.htmlunit.httpclient;
 
+import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.CommonCookieAttributeHandler;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookieRestrictionViolationException;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.SetCookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
@@ -29,11 +31,21 @@ import org.htmlunit.util.StringUtils;
  */
 final class HtmlUnitSameSiteHandler implements CommonCookieAttributeHandler {
 
-    private static final String SAMESITE_ATTR = "samesite";
+    /** The name of the attribute. */
+    static final String SAMESITE_ATTR = "samesite";
 
+    /**
+     * {@inheritDoc}
+     * Like the browsers, a cookie with 'SameSite=None' has to be secure.
+     */
     @Override
     public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
-        // nothing
+        if (cookie instanceof ClientCookie clientCookie
+                && "none".equalsIgnoreCase(clientCookie.getAttribute(SAMESITE_ATTR))
+                && !cookie.isSecure()) {
+            throw new CookieRestrictionViolationException(
+                    "Cookie '" + cookie.getName() + "' with 'SameSite=None' requires the 'secure' attribute");
+        }
     }
 
     @Override

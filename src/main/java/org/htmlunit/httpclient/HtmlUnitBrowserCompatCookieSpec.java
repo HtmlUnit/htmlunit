@@ -263,6 +263,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             }
             final String value = elem.getValue();
             final BasicClientCookie cookie = new BasicClientCookie(name, value);
+            // used for the SameSite handling (Lax-allowing-unsafe)
+            cookie.setCreationDate(new Date());
             cookie.setPath(getDefaultPath(origin));
             cookie.setDomain(getDefaultDomain(origin));
 

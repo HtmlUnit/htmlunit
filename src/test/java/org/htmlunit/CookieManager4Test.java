@@ -19,6 +19,7 @@ import static org.htmlunit.CookieManagerTest.HTML_ALERT_COOKIE;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -1023,6 +1024,224 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict, None (without Secure; insecure origin) and an
+     * invalid value are set by host1; the page from htmlunit-dev (another site) includes an iframe from host1.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void sameSiteDefaultCrossSiteIFrame() throws Exception {
+        crossSite("<iframe src='" + URL_HOST1 + "target'></iframe>\n", null);
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict, None (without Secure; insecure origin) and an
+     * invalid value are set by host1; the page from htmlunit-dev (another site) includes an image from host1.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void sameSiteDefaultCrossSiteImage() throws Exception {
+        // HtmlUnit loads images only if there is an event handler (or the download is enabled)
+        crossSite("<img src='" + URL_HOST1 + "target' onerror='void 0'>\n", null);
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict, None (without Secure; insecure origin) and an
+     * invalid value are set by host1; the page from htmlunit-dev (another site) includes a script from host1.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void sameSiteDefaultCrossSiteScript() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_HOST1 + "target"), "var x = 1;", MimeType.TEXT_JAVASCRIPT);
+        crossSite("<script src='" + URL_HOST1 + "target'></script>\n", null);
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict, None (without Secure; insecure origin) and an
+     * invalid value are set by host1; the page from htmlunit-dev (another site) navigates (link) to host1.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("default=1; invalid=1; lax=1")
+    public void sameSiteDefaultCrossSiteLink() throws Exception {
+        crossSite("<a id='go' href='" + URL_HOST1 + "target'>go</a>\n", "go");
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict, None (without Secure; insecure origin) and an
+     * invalid value are set by host1; the page from htmlunit-dev (another site) submits a form (GET) to host1.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("default=1; invalid=1; lax=1")
+    public void sameSiteDefaultCrossSiteFormGet() throws Exception {
+        crossSite("<form method='get' action='" + URL_HOST1 + "target'>"
+                + "<input type='submit' id='go'></form>\n", "go");
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict, None (without Secure; insecure origin) and an
+     * invalid value are set by host1; the page from htmlunit-dev (another site) submits a form (POST) to host1; some
+     * browsers send cookies without SameSite attribute for a short time after they were set (Lax-allowing-unsafe).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("default=1; invalid=1")
+    public void sameSiteDefaultCrossSiteFormPost() throws Exception {
+        crossSite("<form method='post' action='" + URL_HOST1 + "target'>"
+                + "<input type='submit' id='go'></form>\n", "go");
+    }
+
+    /**
+     * Cookies without SameSite attribute (default), with Lax, Strict, None (without Secure; insecure origin) and an
+     * invalid value are set by host1; the page from host2 (same site) includes an iframe from host1.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("default=1; invalid=1; lax=1; strict=1")
+    public void sameSiteDefaultSameSiteIFrame() throws Exception {
+        sameSite("<iframe src='" + URL_HOST1 + "target'></iframe>\n", null);
+    }
+
+    /**
+     * The SameSite value of the cookies reported by the WebDriver api.
+     * <p>HtmlUnitDriver reports the attribute value as it is (there is no default).</p>
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "default=1; path=/; domain=host1.htmlunit-dev.org; sameSite=Lax\n"
+                + "lax=1; path=/; domain=host1.htmlunit-dev.org; sameSite=Lax\n"
+                + "strict=1; path=/; domain=host1.htmlunit-dev.org; sameSite=Strict\n"
+                + "none -\n"
+                + "invalid=1; path=/; domain=host1.htmlunit-dev.org; sameSite=Lax",
+            FF = "default=1; path=/; domain=host1.htmlunit-dev.org; sameSite=None\n"
+                    + "lax=1; path=/; domain=host1.htmlunit-dev.org; sameSite=Lax\n"
+                    + "strict=1; path=/; domain=host1.htmlunit-dev.org; sameSite=Strict\n"
+                    + "none -\n"
+                    + "invalid=1; path=/; domain=host1.htmlunit-dev.org; sameSite=None",
+            FF_ESR = "default=1; path=/; domain=host1.htmlunit-dev.org; sameSite=None\n"
+                    + "lax=1; path=/; domain=host1.htmlunit-dev.org; sameSite=Lax\n"
+                    + "strict=1; path=/; domain=host1.htmlunit-dev.org; sameSite=Strict\n"
+                    + "none -\n"
+                    + "invalid=1; path=/; domain=host1.htmlunit-dev.org; sameSite=None")
+    @HtmlUnitNYI(CHROME = "default=1; path=/; domain=host1.htmlunit-dev.org\n"
+                    + "lax=1; path=/; domain=host1.htmlunit-dev.org; sameSite=lax\n"
+                    + "strict=1; path=/; domain=host1.htmlunit-dev.org; sameSite=strict\n"
+                    + "none -\n"
+                    + "invalid=1; path=/; domain=host1.htmlunit-dev.org; sameSite=invalid",
+            EDGE = "default=1; path=/; domain=host1.htmlunit-dev.org\n"
+                    + "lax=1; path=/; domain=host1.htmlunit-dev.org; sameSite=lax\n"
+                    + "strict=1; path=/; domain=host1.htmlunit-dev.org; sameSite=strict\n"
+                    + "none -\n"
+                    + "invalid=1; path=/; domain=host1.htmlunit-dev.org; sameSite=invalid",
+            FF = "default=1; path=/; domain=host1.htmlunit-dev.org\n"
+                    + "lax=1; path=/; domain=host1.htmlunit-dev.org; sameSite=lax\n"
+                    + "strict=1; path=/; domain=host1.htmlunit-dev.org; sameSite=strict\n"
+                    + "none -\n"
+                    + "invalid=1; path=/; domain=host1.htmlunit-dev.org; sameSite=invalid",
+            FF_ESR = "default=1; path=/; domain=host1.htmlunit-dev.org\n"
+                    + "lax=1; path=/; domain=host1.htmlunit-dev.org; sameSite=lax\n"
+                    + "strict=1; path=/; domain=host1.htmlunit-dev.org; sameSite=strict\n"
+                    + "none -\n"
+                    + "invalid=1; path=/; domain=host1.htmlunit-dev.org; sameSite=invalid")
+    public void sameSiteDefaultReported() throws Exception {
+        final URL url = new URL(URL_HOST1);
+        getMockWebConnection().setResponse(url, "", 200, "OK", MimeType.TEXT_HTML, sameSiteCookies());
+        final WebDriver driver = loadPage2(url, StandardCharsets.ISO_8859_1);
+
+        final List<String> result = new ArrayList<>();
+        for (final String name : new String[] {"default", "lax", "strict", "none", "invalid"}) {
+            final org.openqa.selenium.Cookie cookie = driver.manage().getCookieNamed(name);
+            result.add(cookie == null ? name + " -" : cookie.toString());
+        }
+        assertEquals(String.join("\n", getExpectedAlerts()), String.join("\n", result));
+    }
+
+    private static List<NameValuePair> sameSiteCookies() {
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Set-Cookie", "default=1; Path=/"));
+        headers.add(new NameValuePair("Set-Cookie", "lax=1; SameSite=Lax; Path=/"));
+        headers.add(new NameValuePair("Set-Cookie", "strict=1; SameSite=Strict; Path=/"));
+        headers.add(new NameValuePair("Set-Cookie", "none=1; SameSite=None; Path=/"));
+        headers.add(new NameValuePair("Set-Cookie", "invalid=1; SameSite=invalid; Path=/"));
+        return headers;
+    }
+
+    private void crossSite(final String content, final String clickId) throws Exception {
+        // htmlunit-dev is another site than host1.htmlunit-dev.org; not localhost because
+        // localhost is a secure context (FF asks before submitting a form to an insecure host)
+        verifySameSiteCookies(new URL(URL_HOST4 + "start"), content, clickId);
+    }
+
+    private void sameSite(final String content, final String clickId) throws Exception {
+        verifySameSiteCookies(new URL(URL_HOST2 + "start"), content, clickId);
+    }
+
+    /**
+     * Sets the cookies (host1), loads the start page and records the cookies
+     * sent with the request to host1/target.
+     */
+    private void verifySameSiteCookies(final URL startUrl, final String content, final String clickId)
+            throws Exception {
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(new URL(URL_HOST1), "", 200, "OK", MimeType.TEXT_HTML, sameSiteCookies());
+
+        final String startHtml = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='log(\"done\")'>\n"
+            + content
+            + "</body></html>";
+        getMockWebConnection().setResponse(startUrl, startHtml);
+
+        final String targetHtml = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('target');\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+        final URL targetUrl = new URL(URL_HOST1 + "target");
+        if (!getMockWebConnection().hasResponse(targetUrl)) {
+            getMockWebConnection().setResponse(targetUrl, targetHtml);
+        }
+
+        // set the cookies
+        final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
+
+        driver.get(startUrl.toExternalForm());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, "done");
+        if (clickId != null) {
+            driver.findElement(By.id(clickId)).click();
+            verifyTitle2(DEFAULT_WAIT_TIME, driver, "target");
+        }
+
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        // ignore the query (form get)
+        assertEquals(targetUrl.getHost() + targetUrl.getPath(),
+                lastRequest.getUrl().getHost() + lastRequest.getUrl().getPath());
+
+        // there is no order
+        final String cookieHeader = lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE);
+        final String cookies = cookieHeader == null ? "" : String.join("; ",
+                Arrays.stream(cookieHeader.split(";\\s*")).sorted().toList());
+        assertEquals(getExpectedAlerts()[0], cookies);
     }
 
     private void testCookies(final URL url, final String cookie1, final String cookie2) throws Exception {
