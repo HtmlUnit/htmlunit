@@ -63,7 +63,7 @@ public class HtmlInlineFrameSandboxTest extends WebDriverTestCase {
     }
 
     /**
-     * allow-scripts: the frame has an opaque origin.
+     * CSP allow-scripts: the frame has an opaque origin.
      * <p>HtmlUnit does not support window.origin and has no cross-origin restrictions
      * for parent.document.</p>
      *
@@ -88,7 +88,7 @@ public class HtmlInlineFrameSandboxTest extends WebDriverTestCase {
     }
 
     /**
-     * allow-scripts allow-same-origin: the frame has the origin of the parent.
+     * CSP allow-scripts allow-same-origin: the frame has the origin of the parent.
      *
      * @throws Exception if the test fails
      */

@@ -361,7 +361,7 @@ public class HtmlInlineFrameSrcdocTest extends WebDriverTestCase {
     }
 
     /**
-     * location.reload() of a srcdoc document.
+     * The method location.reload() of a srcdoc document.
      *
      * @throws Exception if the test fails
      */
