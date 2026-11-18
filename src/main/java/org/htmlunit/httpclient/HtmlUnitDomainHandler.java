@@ -38,6 +38,7 @@ import org.htmlunit.HttpHeader;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ * @author Vidya m
  */
 final class HtmlUnitDomainHandler extends BasicDomainHandler {
     private static final PublicSuffixMatcher PUBLIC_SUFFIX_MATCHER = PublicSuffixMatcherLoader.getDefault();
@@ -85,8 +86,9 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
 
         final String domain = cookie.getDomain();
         final String normalizedDomain = domain.startsWith(".") ? domain.substring(1) : domain;
-        if (normalizedDomain.indexOf('.') > 0
-                && !normalizedDomain.equalsIgnoreCase(origin.getHost())
+        // top level domains (e.g. 'com') are public suffixes also; single label names
+        // not on the list (e.g. 'localhost', 'intranet') are no public suffixes
+        if (!normalizedDomain.equalsIgnoreCase(origin.getHost())
                 && PUBLIC_SUFFIX_MATCHER.matches(normalizedDomain)) {
             throw new CookieRestrictionViolationException("Illegal 'domain' attribute \"" + domain
                     + "\"; cookies for a public suffix are not allowed");

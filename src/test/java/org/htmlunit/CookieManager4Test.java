@@ -715,7 +715,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("cross-domain=1")
+    @Alerts("")
     public void differentHostsSameDomainCookieFromMeta() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -731,6 +731,81 @@ public class CookieManager4Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
+        final URL firstUrl = new URL(URL_HOST1);
+        getMockWebConnection().setResponse(firstUrl, html);
+
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Method document.cookie must not set cookies for another domain or for
+     * a public suffix (RFC 6265 section 5.3, steps 5 and 6).
+     * The page on host1 sets the cookies, logs document.cookie and
+     * navigates to host2; host2 logs the value from host1 and its own document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"host=1; own=1", "own=1"})
+    public void documentCookieForeignDomain() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  document.cookie = 'host=1; Path=/';\n"
+            + "  document.cookie = 'own=1; Domain=" + HOSTS_DOMAIN + "; Path=/';\n"
+            + "  document.cookie = 'sibling=1; Domain=" + HOST2 + "; Path=/';\n"
+            + "  document.cookie = 'foreign=1; Domain=victim.example; Path=/';\n"
+            + "  document.cookie = 'unqualified=1; Domain=" + HOST_WITHOUT_DOMAIN + "; Path=/';\n"
+            + "  document.cookie = 'tld=1; Domain=org; Path=/';\n"
+            + "  document.cookie = 'tldDot=1; Domain=.org; Path=/';\n"
+            + "  var c = document.cookie.split('; ').sort().join('; ');\n"
+            + "  location.replace('" + URL_HOST2 + "?' + encodeURIComponent(c));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        verifyForeignDomain(html);
+    }
+
+    /**
+     * Meta http-equiv set-cookie is ignored by the browsers; therefore there are no
+     * cookies for another domain or for a public suffix also.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", ""})
+    public void metaSetCookieForeignDomain() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "  <meta http-equiv='Set-Cookie' content='own=1; Domain=" + HOSTS_DOMAIN + "; Path=/'>\n"
+            + "  <meta http-equiv='Set-Cookie' content='sibling=1; Domain=" + HOST2 + "; Path=/'>\n"
+            + "  <meta http-equiv='Set-Cookie' content='foreign=1; Domain=victim.example; Path=/'>\n"
+            + "  <meta http-equiv='Set-Cookie' content='tld=1; Domain=org; Path=/'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  var c = document.cookie.split('; ').sort().join('; ');\n"
+            + "  location.replace('" + URL_HOST2 + "?' + encodeURIComponent(c));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        verifyForeignDomain(html);
+    }
+
+    private void verifyForeignDomain(final String html) throws Exception {
+        // host2 logs the cookies of host1 (passed as query) and its own cookies
+        final String html2 = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(decodeURIComponent(location.search.substring(1)));\n"
+            + "  log(document.cookie.split('; ').sort().join('; '));\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse(html2);
         final URL firstUrl = new URL(URL_HOST1);
         getMockWebConnection().setResponse(firstUrl, html);
 

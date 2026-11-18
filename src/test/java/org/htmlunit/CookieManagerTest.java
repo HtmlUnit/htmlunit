@@ -922,4 +922,49 @@ public class CookieManagerTest extends WebDriverTestCase {
         loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * Setting a cookie again replaces the value.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"cookie:button1", "cookie:button2"})
+    public void resettingCookie() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function createCookie(name, value, days, path) {\n"
+            + "    var date = new Date();\n"
+            + "    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));\n"
+            + "    document.cookie = name + '=' + value + '; expires=' + date.toGMTString() + '; path=' + path;\n"
+            + "  }\n"
+            + "\n"
+            + "  function readCookie(name) {\n"
+            + "    var nameEQ = name + '=';\n"
+            + "    var ca = document.cookie.split(';');\n"
+            + "    for (var i = 0; i < ca.length; i++) {\n"
+            + "      var c = ca[i].trim();\n"
+            + "      if (c.indexOf(nameEQ) == 0) {\n"
+            + "        return c.substring(nameEQ.length, c.length);\n"
+            + "      }\n"
+            + "    }\n"
+            + "    return null;\n"
+            + "  }\n"
+            + "</script></head><body>\n"
+            + "  <input id='button1' type='button' "
+            + "onclick=\"createCookie('button','button1',1,'/'); log('cookie:' + readCookie('button'));\" "
+            + "value='Button 1'>\n"
+            + "  <input id='button2' type='button' "
+            + "onclick=\"createCookie('button','button2',1,'/'); log('cookie:' + readCookie('button'));\" "
+            + "value='Button 2'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("button1")).click();
+        driver.findElement(By.id("button2")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
 }

@@ -28,7 +28,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -50,7 +49,6 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
-import org.htmlunit.http.Cookie;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -1222,11 +1220,10 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test the "set-cookie" meta tag.
+     * The "set-cookie" meta tag is ignored like in the browsers.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("webm=none")
     public void setCookieMetaTag() throws Exception {
         final String content = DOCTYPE_HTML
             + "<html><head>\n"
@@ -1236,15 +1233,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
-        assertEquals(getExpectedAlerts()[0], page.getTitleText());
-
-        final Set<Cookie> cookies = page.getWebClient().getCookieManager().getCookies();
-        assertEquals(1, cookies.size());
-        final Cookie cookie = cookies.iterator().next();
-        assertEquals(page.getUrl().getHost(), cookie.getDomain());
-        assertEquals("webm", cookie.getName());
-        assertEquals("none", cookie.getValue());
-        assertEquals("/", cookie.getPath());
+        assertEquals("", page.getTitleText());
+        assertTrue(page.getWebClient().getCookieManager().getCookies().isEmpty());
     }
 
     /**

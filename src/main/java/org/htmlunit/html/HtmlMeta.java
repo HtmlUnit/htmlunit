@@ -14,12 +14,10 @@
  */
 package org.htmlunit.html;
 
-import java.net.URL;
 import java.util.Map;
 
 import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.WebClient;
 import org.htmlunit.html.csp.ContentSecurityPolicy;
 
 /**
@@ -49,13 +47,8 @@ public class HtmlMeta extends HtmlElement {
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
-        // Handles the cookies specified in meta tags,
-        // like <code>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</code>.
-        if ("set-cookie".equalsIgnoreCase(getHttpEquivAttribute())) {
-            final WebClient client = page.getWebClient();
-            final URL url = page.getUrl();
-            client.addCookie(getContentAttribute(), url, this);
-        }
+        // <meta http-equiv='set-cookie'> is ignored like in the browsers
+        // (the HTML spec says user agents must ignore this pragma)
     }
 
     /**

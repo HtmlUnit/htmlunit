@@ -40,6 +40,7 @@ import org.htmlunit.util.UrlUtils;
  * Helper methods to convert from/to HttpClient.
  *
  * @author Ronald Brill
+ * @author Vidya m
  */
 public final class HttpClientConverter {
 

@@ -22,7 +22,6 @@ import java.net.URL;
 
 import org.apache.http.cookie.MalformedCookieException;
 import org.htmlunit.BrowserVersion;
-
 import org.junit.jupiter.api.Test;
 
 /**
@@ -156,5 +155,9 @@ public class HttpClientConverterTest {
                 () -> HttpClientConverter.parseCookie("a=1; domain=other.co.uk", url, browserVersion));
         assertThrows(MalformedCookieException.class,
                 () -> HttpClientConverter.parseCookie("a=1; domain=co.uk", url, browserVersion));
+        assertThrows(MalformedCookieException.class,
+                () -> HttpClientConverter.parseCookie("a=1; domain=uk", url, browserVersion));
+        assertThrows(MalformedCookieException.class,
+                () -> HttpClientConverter.parseCookie("a=1; domain=.uk", url, browserVersion));
     }
 }

@@ -81,4 +81,109 @@ public class HtmlMetaTest extends WebDriverTestCase {
         assertFalse(displayed);
     }
 
+    /**
+     * The set-cookie pragma is ignored.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void setCookie() throws Exception {
+        setCookie("<meta http-equiv='set-cookie' content='meta=1; path=/'>\n", "");
+    }
+
+    /**
+     * The set-cookie pragma is ignored; the http-equiv value is case-insensitive.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void setCookieUpperCase() throws Exception {
+        setCookie("<meta http-equiv='SET-COOKIE' content='meta=1; path=/'>\n", "");
+    }
+
+    /**
+     * The set-cookie pragma is ignored also in the body.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void setCookieInBody() throws Exception {
+        setCookie("", "<meta http-equiv='set-cookie' content='meta=1; path=/'>\n");
+    }
+
+    /**
+     * The set-cookie pragma of a meta element created by script is ignored.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void setCookieCreatedByScript() throws Exception {
+        setCookie("", "<script>\n"
+                + "  var meta = document.createElement('meta');\n"
+                + "  meta.httpEquiv = 'set-cookie';\n"
+                + "  meta.content = 'meta=1; path=/';\n"
+                + "  document.head.appendChild(meta);\n"
+                + "</script>\n");
+    }
+
+    /**
+     * The set-cookie pragma of a meta element added by innerHTML is ignored.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void setCookieInnerHtml() throws Exception {
+        setCookie("", "<div id='d'></div>\n"
+                + "<script>\n"
+                + "  document.getElementById('d').innerHTML = "
+                + "\"<meta http-equiv='set-cookie' content='meta=1; path=/'>\";\n"
+                + "</script>\n");
+    }
+
+    /**
+     * The set-cookie pragma of a meta element written by document.write() is ignored.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void setCookieDocumentWrite() throws Exception {
+        setCookie("", "<script>\n"
+                + "  document.write(\"<meta http-equiv='set-cookie' content='meta=1; path=/'>\");\n"
+                + "</script>\n");
+    }
+
+    /**
+     * The set-cookie pragma does not overwrite an existing cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("meta=0")
+    public void setCookieDoesNotOverwrite() throws Exception {
+        setCookie("<script>document.cookie = 'meta=0; path=/';</script>\n"
+                + "<meta http-equiv='set-cookie' content='meta=1; path=/'>\n", "");
+    }
+
+    private void setCookie(final String head, final String body) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + head
+            + "</head><body>\n"
+            + body
+            + "<script>\n"
+            + "  log(document.cookie);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

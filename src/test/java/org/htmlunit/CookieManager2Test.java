@@ -32,56 +32,9 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Vidya m
  */
 public class CookieManager2Test extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void resettingCookie() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head>\n"
-            + "<script>\n"
-            + "  function createCookie(name, value, days, path) {\n"
-            + "    if (days) {\n"
-            + "      var date = new Date();\n"
-            + "      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));\n"
-            + "      var expires = '; expires=' + date.toGMTString();\n"
-            + "    }\n"
-            + "    else\n"
-            + "      var expires = '';\n"
-            + "    document.cookie = name + '=' + value + expires + '; path=' + path;\n"
-            + "  }\n"
-            + "\n"
-            + "  function readCookie(name) {\n"
-            + "    var nameEQ = name + '=';\n"
-            + "    var ca = document.cookie.split(';');\n"
-            + "    for(var i = 0; i < ca.length; i++) {\n"
-            + "      var c = ca[i];\n"
-            + "      while (c.charAt(0) == ' ')\n"
-            + "        c = c.substring(1, c.length);\n"
-            + "      if (c.indexOf(nameEQ) == 0)\n"
-            + "        return c.substring(nameEQ.length, c.length);\n"
-            + "    }\n"
-            + "    return null;\n"
-            + "  }\n"
-            + "</script></head><body>\n"
-            + "  <input id='button1' type='button' "
-            + "onclick=\"createCookie('button','button1',1,'/'); alert('cookie:' + readCookie('button'));\" "
-            + "value='Button 1'>\n"
-            + "  <input id='button2' type='button' "
-            + "onclick=\"createCookie('button','button2',1,'/'); alert('cookie:' + readCookie('button'));\" "
-            + "value='Button 2'>\n"
-            + "</form></body></html>";
-
-        final String[] expectedAlerts = {"cookie:button1", "cookie:button2"};
-        final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(html, collectedAlerts);
-        page.getHtmlElementById("button1").click();
-        page.getHtmlElementById("button2").click();
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 
     /**
      * @throws Exception if the test fails
@@ -179,6 +132,8 @@ public class CookieManager2Test extends SimpleWebTestCase {
             + "  document.cookie = 'own=1; domain=attacker.co.uk; path=/';\n"
             + "  document.cookie = 'foreign=1; domain=victim.example; path=/';\n"
             + "  document.cookie = 'suffix=1; domain=co.uk; path=/';\n"
+            + "  document.cookie = 'tld=1; domain=uk; path=/';\n"
+            + "  document.cookie = 'tldDot=1; domain=.uk; path=/';\n"
             + "</script></head><body></body></html>";
 
         final WebClient webClient = getWebClient();
@@ -192,5 +147,6 @@ public class CookieManager2Test extends SimpleWebTestCase {
                 webClient.getCookieManager().getCookies().toString());
         assertTrue(webClient.getCookies(new URL("https://victim.example/")).isEmpty());
         assertTrue(webClient.getCookies(new URL("https://victim.co.uk/")).isEmpty());
+        assertTrue(webClient.getCookies(new URL("https://victim.uk/")).isEmpty());
     }
 }
