@@ -220,6 +220,8 @@ public abstract class BaseFrameElement extends HtmlElement {
                     ? WebRequest.FetchDestination.IFRAME
                     : WebRequest.FetchDestination.FRAME;
             webRequest.markAsNavigation(fetchDestination, pageUrl, false);
+            // the site for cookies of a frame is the one of its container document
+            webRequest.setSiteForCookies(((HtmlPage) page).getSiteForCookiesUrl());
 
             // about:blank is not fetched and javascript: urls are checked against script-src;
             // both are not checked against frame-src

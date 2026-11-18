@@ -1009,6 +1009,7 @@ public final class ContentSecurityPolicy implements Serializable {
                 request.setFetchDestination(WebRequest.FetchDestination.REPORT);
                 request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
                 request.setRequestingUrl(page.getUrl());
+                request.setSiteForCookies(page.getSiteForCookiesUrl());
                 webClient.loadWebResponse(request);
             }
             catch (final IOException | RuntimeException e) {

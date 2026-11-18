@@ -119,6 +119,23 @@ public final class HttpClientConverter {
     }
 
     /**
+     * Same-site comparison per the HTML "same site" algorithm: same scheme and same
+     * registrable domain (eTLD+1), ignoring port and subdomain.
+     *
+     * @param a first URL
+     * @param b second URL
+     * @return whether both URLs are considered "same-site"
+     */
+    public static boolean isSameSite(final URL a, final URL b) {
+        if (!a.getProtocol().equals(b.getProtocol())) {
+            return false;
+        }
+
+        // both are normalized and in lower case
+        return registrableDomain(a.getHost()).equals(registrableDomain(b.getHost()));
+    }
+
+    /**
      * Helper that builds a CookieOrigin.
      * @param url the url to be used
      * @return the new CookieOrigin

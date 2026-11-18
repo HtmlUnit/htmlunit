@@ -884,7 +884,7 @@ public class HttpWebConnection implements WebConnection {
         if (isSameOrigin(requestingUrl, targetUrl)) {
             return "same-origin";
         }
-        if (isSameSite(requestingUrl, targetUrl)) {
+        if (HttpClientConverter.isSameSite(requestingUrl, targetUrl)) {
             return "same-site";
         }
         return "cross-site";
@@ -899,26 +899,6 @@ public class HttpWebConnection implements WebConnection {
     private static int effectivePort(final URL url) {
         final int port = url.getPort();
         return port == -1 ? url.getDefaultPort() : port;
-    }
-
-    /**
-     * Same-site comparison per the Fetch Metadata / HTML "same site" algorithm: same
-     * scheme and same registrable domain (eTLD+1), ignoring port and subdomain.
-     *
-     * @param a first URL
-     * @param b second URL
-     * @return whether both URLs are considered "same-site"
-     */
-    private static boolean isSameSite(final URL a, final URL b) {
-        if (!a.getProtocol().equals(b.getProtocol())) {
-            return false;
-        }
-
-        final String registrableDomainA = HttpClientConverter.registrableDomain(a.getHost());
-        final String registrableDomainB = HttpClientConverter.registrableDomain(b.getHost());
-
-        // both are normalized and in lower case
-        return registrableDomainA.equals(registrableDomainB);
     }
 
     /**
@@ -1136,8 +1116,15 @@ public class HttpWebConnection implements WebConnection {
             }
             else if (HttpHeader.COOKIE.equals(header)) {
                 if (!webRequest.hasHint(HttpHint.BlockCookies)) {
-                    final URL requestingUrl = webRequest.getRequestingUrl();
-                    if (requestingUrl != null && !isSameSite(requestingUrl, url)) {
+                    // top-level navigations: the initiator decides (Lax);
+                    // other requests: the site for cookies of the initiating document
+                    // (the top-level document if all ancestors are same-site)
+                    URL siteForCookies = webRequest.getRequestingUrl();
+                    if (webRequest.getFetchDestination() != WebRequest.FetchDestination.DOCUMENT
+                            && webRequest.getSiteForCookies() != null) {
+                        siteForCookies = webRequest.getSiteForCookies();
+                    }
+                    if (siteForCookies != null && !HttpClientConverter.isSameSite(siteForCookies, url)) {
                         list.add(new CrossSiteRequestAddCookies(webRequest));
                     }
                     else {

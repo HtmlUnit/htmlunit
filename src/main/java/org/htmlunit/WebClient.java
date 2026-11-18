@@ -1937,6 +1937,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 wrs.setFetchDestination(webRequest.getFetchDestination());
                 wrs.setFetchModeOverride(webRequest.getFetchModeOverride());
                 wrs.setRequestingUrl(webRequest.getRequestingUrl());
+                wrs.setSiteForCookies(webRequest.getSiteForCookies());
                 wrs.setRedirectFilter(redirectFilter);
                 wrs.setRedirectUrlMapper(redirectUrlMapper);
 

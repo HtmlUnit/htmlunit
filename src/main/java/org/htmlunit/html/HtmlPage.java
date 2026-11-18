@@ -77,6 +77,7 @@ import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.http.HttpStatus;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -304,6 +305,35 @@ public class HtmlPage extends SgmlPage {
             return creatorPage.getOriginUrl();
         }
         return url;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the url of the 'site for cookies' of this document: the url of the top-level
+     * document if this document and all its ancestors are same-site with it, otherwise
+     * 'about:blank' (no site, never same-site with any url).
+     *
+     * @return the url of the site for cookies
+     * @see <a href="https://html.spec.whatwg.org/multipage/browsers.html#site-for-cookies">site for cookies</a>
+     */
+    public URL getSiteForCookiesUrl() {
+        final WebWindow window = getEnclosingWindow();
+        final WebWindow top = window.getTopWindow();
+        if (!(top.getEnclosedPage() instanceof HtmlPage topPage)) {
+            return getOriginUrl();
+        }
+
+        final URL topUrl = topPage.getOriginUrl();
+        WebWindow current = window;
+        while (current != null && current != top) {
+            if (current.getEnclosedPage() instanceof HtmlPage currentPage
+                    && !HttpClientConverter.isSameSite(currentPage.getOriginUrl(), topUrl)) {
+                return UrlUtils.URL_ABOUT_BLANK;
+            }
+            current = current.getParentWindow();
+        }
+        return topUrl;
     }
 
     /**
@@ -1218,6 +1248,7 @@ public class HtmlPage extends SgmlPage {
 
         request.setFetchDestination(WebRequest.FetchDestination.SCRIPT);
         request.setRequestingUrl(referringRequest.getUrl());
+        request.setSiteForCookies(getSiteForCookiesUrl());
         request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
 
         request.setRefererHeader(referringRequest.getUrl());
