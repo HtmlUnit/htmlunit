@@ -413,13 +413,14 @@ public final class UrlUtils {
     }
 
     /**
-     * Creates and returns a new URL using only the protocol and authority from the given one.
+     * Creates and returns a new URL using only the protocol and authority (without the user info)
+     * from the given one.
      * @param u the URL on which to base the returned URL
      * @return a new URL using only the protocol and authority from the given one
      * @throws MalformedURLException if there is a problem creating the new URL
      */
     public static URL getUrlWithoutPathRefQuery(final URL u) throws MalformedURLException {
-        return createNewUrl(u.getProtocol(), u.getAuthority(), null, null, null);
+        return createNewUrl(u.getProtocol(), getAuthorityWithoutUserInfo(u), null, null, null);
     }
 
     /**
@@ -516,13 +517,32 @@ public final class UrlUtils {
     }
 
     /**
-     * Creates and returns a new URL identical to the specified URL, ignoring path, protocol and query.
+     * Creates and returns a new URL identical to the specified URL, ignoring path, ref, query
+     * and user info.
      * @param u the URL on which to base the returned URL
-     * @return a new URL identical to the specified URL, ignoring path, protocol and query
+     * @return a new URL identical to the specified URL, ignoring path, ref, query and user info
      * @throws MalformedURLException if there is a problem creating the new URL
      */
     public static URL getUrlWithProtocolAndAuthority(final URL u) throws MalformedURLException {
-        return createNewUrl(u.getProtocol(), u.getAuthority(), null, null, null);
+        return createNewUrl(u.getProtocol(), getAuthorityWithoutUserInfo(u), null, null, null);
+    }
+
+    /**
+     * Returns the authority of the given URL without the user info; an origin never
+     * contains the credentials.
+     * @param u the URL
+     * @return the authority without the user info
+     */
+    private static String getAuthorityWithoutUserInfo(final URL u) {
+        final String authority = u.getAuthority();
+        if (authority == null) {
+            return null;
+        }
+        final int atPos = authority.lastIndexOf('@');
+        if (atPos == -1) {
+            return authority;
+        }
+        return authority.substring(atPos + 1);
     }
 
     /**
