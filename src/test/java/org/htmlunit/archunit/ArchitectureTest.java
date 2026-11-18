@@ -329,6 +329,8 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.intl.Locale.getRegion()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.intl.Locale.getScript()")
 
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getOrigin()")
+
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope.getSelf()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XMLHttpRequest.getResponse()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XMLHttpRequest.getResponseXML()")

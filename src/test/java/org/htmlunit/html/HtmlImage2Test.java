@@ -818,4 +818,100 @@ public class HtmlImage2Test extends WebDriverTestCase {
                 statusCode, "test", MimeType.TEXT_JAVASCRIPT, null);
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * An image of a document created by DOMImplementation.createHTMLDocument() (no browsing context)
+     * is not loaded. The alert is the number of requests (page, marker image and maybe the image).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void loadImageCreateHTMLDocument() throws Exception {
+        loadImageInertDocument("document.implementation.createHTMLDocument('test').body");
+    }
+
+    /**
+     * An image of a document created by DOMParser (no browsing context) is not loaded.
+     * The alert is the number of requests (page, marker image and maybe the image).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void loadImageDOMParser() throws Exception {
+        loadImageInertDocument(
+                "new DOMParser().parseFromString('<html><body></body></html>', 'text/html').body");
+    }
+
+    /**
+     * An image of the content of a template (no browsing context) is not loaded.
+     * The alert is the number of requests (page, marker image and maybe the image).
+     * <p>HtmlUnit downloads the image when it is created (if downloadImages is enabled);
+     * the content of a template is part of the page.</p>
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @HtmlUnitNYI(CHROME = "3",
+            EDGE = "3",
+            FF = "3",
+            FF_ESR = "3")
+    public void loadImageTemplate() throws Exception {
+        loadImageInertDocument("document.createElement('template')");
+    }
+
+    /**
+     * Creates an image in the given container (of a document without browsing context); afterwards
+     * a marker image is loaded in the page. When the marker is loaded, the requests are counted.
+     * All urls are unique for every run, requests of other tests (e.g. late image downloads) are not counted.
+     */
+    private void loadImageInertDocument(final String container) throws Exception {
+        final String id = "inert" + System.nanoTime();
+        final URL pageUrl = new URL(URL_FIRST, id + ".html");
+
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            getMockWebConnection().setResponse(new URL(URL_FIRST, id + ".jpg"), directBytes,
+                    200, "ok", "image/jpg", Collections.emptyList());
+            getMockWebConnection().setResponse(new URL(URL_FIRST, id + "-marker.jpg"), directBytes,
+                    200, "ok", "image/jpg", Collections.emptyList());
+        }
+
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var container = " + container + ";\n"
+            + "    container.innerHTML = \"<img src='" + id + ".jpg'>\";\n"
+
+            + "    var marker = document.createElement('img');\n"
+            + "    marker.onload = function() { alert('marker'); };\n"
+            + "    marker.onerror = function() { alert('marker error'); };\n"
+            + "    marker.src = '" + id + "-marker.jpg';\n"
+            + "    document.body.appendChild(marker);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(pageUrl, html);
+
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(pageUrl, null);
+        verifyAlerts(driver, "marker");
+
+        // count the requests of this run only (page, marker image and maybe the image)
+        int count = 0;
+        for (final String url : getMockWebConnection().getRequestedUrls(URL_FIRST)) {
+            if (url.startsWith(id)) {
+                count++;
+            }
+        }
+        assertEquals(getExpectedAlerts()[0], String.valueOf(count));
+    }
 }

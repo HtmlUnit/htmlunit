@@ -1138,6 +1138,9 @@ public class Document extends Node {
 
         final StringBuilder builder = new StringBuilder();
         final URL cookieUrl = getCookieUrl(sgmlPage);
+        if (isCookieAverse(sgmlPage, cookieUrl)) {
+            return "";
+        }
         final boolean crossSite = isCrossSiteContext(sgmlPage, cookieUrl);
         final Set<Cookie> cookies = sgmlPage.getWebClient().getCookies(cookieUrl);
         final List<Cookie> visibleCookies = new ArrayList<>();
@@ -1190,9 +1193,31 @@ public class Document extends Node {
 
         final SgmlPage sgmlPage = getPage();
         final URL cookieUrl = getCookieUrl(sgmlPage);
+        if (isCookieAverse(sgmlPage, cookieUrl)) {
+            return;
+        }
         // a document in a cross-site context (e.g. a cross-site iframe)
         // can set only 'SameSite=None' cookies
         sgmlPage.getWebClient().addCookie(newCookie, cookieUrl, this, isCrossSiteContext(sgmlPage, cookieUrl));
+    }
+
+    /**
+     * Returns whether the document is cookie-averse: reading the cookies returns an empty string,
+     * writing is ignored. Like the browsers, this is the case for documents without browsing context
+     * (e.g. created by DOMImplementation.createHTMLDocument(), DOMImplementation.createDocument() or
+     * DOMParser) and for documents whose url has no host (e.g. about:blank without creator);
+     * file urls are supported by HtmlUnit (see HtmlUnitBrowserCompatCookieSpec#LOCAL_FILESYSTEM_DOMAIN).
+     *
+     * @param sgmlPage the page of this document
+     * @param cookieUrl the url used for the cookies
+     * @return whether the document is cookie-averse
+     * @see <a href="https://html.spec.whatwg.org/multipage/dom.html#cookie-averse-document-object">
+     *     HTML Living Standard - cookie-averse Document object</a>
+     */
+    private static boolean isCookieAverse(final SgmlPage sgmlPage, final URL cookieUrl) {
+        return sgmlPage.getEnclosingWindow() == null
+                || cookieUrl == null
+                || (StringUtils.isEmptyOrNull(cookieUrl.getHost()) && !"file".equals(cookieUrl.getProtocol()));
     }
 
     /**

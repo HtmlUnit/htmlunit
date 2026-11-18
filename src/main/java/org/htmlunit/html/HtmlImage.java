@@ -271,6 +271,11 @@ public class HtmlImage extends HtmlElement {
         if (htmlPage == null) {
             return; // nothing to do if embedded in XML code
         }
+        if (isInDocumentWithoutBrowsingContext()) {
+            // nothing is loaded and no event is fired; this happens if the image
+            // is imported into a document with browsing context
+            return;
+        }
 
         // like the browsers, the image url is checked against the Content-Security-Policy
         // also if HtmlUnit does not download the image
@@ -688,7 +693,7 @@ public class HtmlImage extends HtmlElement {
      * @throws IOException if an error occurs while downloading the image
      */
     private void downloadImageIfNeeded() throws IOException {
-        if (!downloaded_) {
+        if (!downloaded_ && !isInDocumentWithoutBrowsingContext()) {
             // HTMLIMAGE_BLANK_SRC_AS_EMPTY
             final String src = getSrcAttribute();
 
@@ -780,6 +785,16 @@ public class HtmlImage extends HtmlElement {
             width_ = -1;
             height_ = -1;
         }
+    }
+
+    /**
+     * Returns whether this image is part of a document without browsing context (e.g. created by
+     * DOMImplementation.createHTMLDocument() or DOMParser); like the browsers, such an image is not loaded.
+     *
+     * @return whether the document of this image has no browsing context
+     */
+    private boolean isInDocumentWithoutBrowsingContext() {
+        return getPage().getEnclosingWindow() == null;
     }
 
     /**
