@@ -967,4 +967,237 @@ public class CookieManagerTest extends WebDriverTestCase {
         verifyTitle2(driver, getExpectedAlerts());
     }
 
+    /**
+     * A Secure cookie set by a page from localhost (secure context in some browsers). Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("plain=1; sec=1")
+    public void secureCookieFromJs() throws Exception {
+        cookiesFromJs("plain=1; Path=/",
+                "sec=1; Secure; Path=/");
+    }
+
+    /**
+     * A Secure cookie set by a page from localhost (secure context in some browsers). Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("plain=1; sec=1")
+    public void secureCookieFromHeader() throws Exception {
+        cookiesFromHeader("plain=1; Path=/",
+                "sec=1; Secure; Path=/");
+    }
+
+    /**
+     * A non-Secure cookie must not overwrite a Secure cookie (RFC 6265bis, section 5.7). Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("sec=2")
+    public void secureCookieOverwrittenByNonSecureFromJs() throws Exception {
+        cookiesFromJs("sec=1; Secure; Path=/",
+                "sec=2; Path=/");
+    }
+
+    /**
+     * A non-Secure cookie must not overwrite a Secure cookie (RFC 6265bis, section 5.7). Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("sec=2")
+    public void secureCookieOverwrittenByNonSecureFromHeader() throws Exception {
+        cookiesFromHeader("sec=1; Secure; Path=/",
+                "sec=2; Path=/");
+    }
+
+    /**
+     * The __Secure- prefix requires the Secure attribute. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("__Secure-b=1")
+    public void prefixSecureFromJs() throws Exception {
+        cookiesFromJs("__Secure-a=1; Path=/",
+                "__Secure-b=1; Secure; Path=/");
+    }
+
+    /**
+     * The __Secure- prefix requires the Secure attribute. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("__Secure-b=1")
+    public void prefixSecureFromHeader() throws Exception {
+        cookiesFromHeader("__Secure-a=1; Path=/",
+                "__Secure-b=1; Secure; Path=/");
+    }
+
+    /**
+     * The __Host- prefix requires the Secure attribute. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("__Host-b=1")
+    public void prefixHostFromJs() throws Exception {
+        cookiesFromJs("__Host-a=1; Path=/",
+                "__Host-b=1; Secure; Path=/");
+    }
+
+    /**
+     * The __Host- prefix requires the Secure attribute. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("__Host-b=1")
+    public void prefixHostFromHeader() throws Exception {
+        cookiesFromHeader("__Host-a=1; Path=/",
+                "__Host-b=1; Secure; Path=/");
+    }
+
+    /**
+     * The __Host- prefix does not allow a Domain attribute (also not the host itself). Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "__Host-b=1",
+            FF = "__Host-a=1; __Host-b=1",
+            FF_ESR = "__Host-a=1; __Host-b=1")
+    public void prefixHostDomainFromJs() throws Exception {
+        cookiesFromJs("__Host-a=1; Secure; Domain=localhost; Path=/",
+                "__Host-b=1; Secure; Path=/");
+    }
+
+    /**
+     * The __Host- prefix does not allow a Domain attribute (also not the host itself). Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "__Host-b=1",
+            FF = "__Host-a=1; __Host-b=1",
+            FF_ESR = "__Host-a=1; __Host-b=1")
+    public void prefixHostDomainFromHeader() throws Exception {
+        cookiesFromHeader("__Host-a=1; Secure; Domain=localhost; Path=/",
+                "__Host-b=1; Secure; Path=/");
+    }
+
+    /**
+     * The __Host- prefix requires the Path attribute with the value '/'. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "__Host-c=1",
+            FF_ESR = "__Host-b=1; __Host-c=1")
+    public void prefixHostPathFromJs() throws Exception {
+        cookiesFromJs("__Host-a=1; Secure; Path=/foo",
+                "__Host-b=1; Secure",
+                "__Host-c=1; Secure; Path=/");
+    }
+
+    /**
+     * The __Host- prefix requires the Path attribute with the value '/'. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "__Host-c=1",
+            FF_ESR = "__Host-b=1; __Host-c=1")
+    public void prefixHostPathFromHeader() throws Exception {
+        cookiesFromHeader("__Host-a=1; Secure; Path=/foo",
+                "__Host-b=1; Secure",
+                "__Host-c=1; Secure; Path=/");
+    }
+
+    /**
+     * The prefixes are checked case-insensitive. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            FF = "__HOST-c=1",
+            FF_ESR = "__HOST-c=1")
+    public void prefixCaseInsensitiveFromJs() throws Exception {
+        cookiesFromJs("__secure-a=1; Path=/",
+                "__host-b=1; Path=/",
+                "__HOST-c=1; Secure; Domain=localhost; Path=/");
+    }
+
+    /**
+     * The prefixes are checked case-insensitive. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            FF = "__HOST-c=1",
+            FF_ESR = "__HOST-c=1")
+    public void prefixCaseInsensitiveFromHeader() throws Exception {
+        cookiesFromHeader("__secure-a=1; Path=/",
+                "__host-b=1; Path=/",
+                "__HOST-c=1; Secure; Domain=localhost; Path=/");
+    }
+
+    /**
+     * A prefix only counts at the start of the name. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x__Host-b=1; x__Secure-a=1")
+    public void prefixPartOfNameFromJs() throws Exception {
+        cookiesFromJs("x__Secure-a=1; Path=/",
+                "x__Host-b=1; Domain=localhost; Path=/");
+    }
+
+    /**
+     * A prefix only counts at the start of the name. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x__Host-b=1; x__Secure-a=1")
+    public void prefixPartOfNameFromHeader() throws Exception {
+        cookiesFromHeader("x__Secure-a=1; Path=/",
+                "x__Host-b=1; Domain=localhost; Path=/");
+    }
+
+    private void cookiesFromJs(final String... cookies) throws Exception {
+        final StringBuilder js = new StringBuilder();
+        for (final String cookie : cookies) {
+            js.append("  document.cookie = '").append(cookie).append("';\n");
+        }
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + js
+            + "  log(document.cookie.split('; ').sort().join('; '));\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    private void cookiesFromHeader(final String... cookies) throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        for (final String cookie : cookies) {
+            responseHeader.add(new NameValuePair("Set-Cookie", cookie));
+        }
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
 }

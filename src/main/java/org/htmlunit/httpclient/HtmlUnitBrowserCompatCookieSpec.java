@@ -14,6 +14,9 @@
  */
 package org.htmlunit.httpclient;
 
+import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_HOST_PREFIX_ALLOWS_DOMAIN_OF_HOST;
+import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_HOST_PREFIX_PATH_ATTRIBUTE_OPTIONAL;
+
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Calendar;
@@ -29,10 +32,12 @@ import org.apache.http.HeaderElement;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.utils.DateUtils;
+import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieAttributeHandler;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookiePathComparator;
+import org.apache.http.cookie.CookieRestrictionViolationException;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.SM;
 import org.apache.http.impl.cookie.BasicClientCookie;
@@ -74,6 +79,9 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
     /** Workaround for domain of local files. */
     public static final String LOCAL_FILESYSTEM_DOMAIN = "LOCAL_FILESYSTEM";
 
+    private static final String SECURE_PREFIX = "__Secure-";
+    private static final String HOST_PREFIX = "__Host-";
+
     /**
      * Comparator for sending cookies in right order.
      * See specification:
@@ -95,6 +103,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         DATE_1_1_1970 = calendar.getTime();
     }
 
+    private final BrowserVersion browserVersion_;
+
     /**
      * Constructor.
      *
@@ -110,6 +120,66 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 new HtmlUnitExpiresHandler(browserVersion),
                 new HtmlUnitHttpOnlyHandler(),
                 new HtmlUnitSameSiteHandler());
+        browserVersion_ = browserVersion;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Additionally checks the cookie name prefixes '__Secure-' and '__Host-' (case-insensitive).
+     *
+     * @see <a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-rfc6265bis#name-cookie-name-prefixes">
+     *     RFC 6265bis - Cookie Name Prefixes</a>
+     */
+    @Override
+    public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
+        super.validate(cookie, origin);
+
+        final String name = cookie.getName();
+        if (StringUtils.startsWithIgnoreCase(name, SECURE_PREFIX)) {
+            if (!cookie.isSecure()) {
+                throw new CookieRestrictionViolationException(
+                        "Cookie '" + name + "' requires the 'secure' attribute");
+            }
+        }
+        else if (StringUtils.startsWithIgnoreCase(name, HOST_PREFIX)) {
+            validateHostPrefix(cookie, origin);
+        }
+    }
+
+    /**
+     * A '__Host-' cookie has to be secure and host-only (no domain attribute) and has to use the path '/'.
+     *
+     * @param cookie the cookie to check
+     * @param origin the origin of the cookie
+     * @throws CookieRestrictionViolationException if the cookie violates the rules
+     */
+    private void validateHostPrefix(final Cookie cookie, final CookieOrigin origin)
+            throws CookieRestrictionViolationException {
+        final String name = cookie.getName();
+        if (!cookie.isSecure()) {
+            throw new CookieRestrictionViolationException(
+                    "Cookie '" + name + "' requires the 'secure' attribute");
+        }
+
+        final ClientCookie clientCookie = cookie instanceof ClientCookie cc ? cc : null;
+        if (clientCookie != null && clientCookie.containsAttribute(ClientCookie.DOMAIN_ATTR)) {
+            String domain = cookie.getDomain();
+            if (domain != null && domain.startsWith(".")) {
+                domain = domain.substring(1);
+            }
+            final boolean domainOfHost = domain != null && domain.equalsIgnoreCase(origin.getHost());
+            if (!domainOfHost || !browserVersion_.hasFeature(HTTP_COOKIE_HOST_PREFIX_ALLOWS_DOMAIN_OF_HOST)) {
+                throw new CookieRestrictionViolationException(
+                        "Cookie '" + name + "' does not allow the 'domain' attribute");
+            }
+        }
+
+        if (!"/".equals(cookie.getPath())
+                || (!browserVersion_.hasFeature(HTTP_COOKIE_HOST_PREFIX_PATH_ATTRIBUTE_OPTIONAL)
+                        && (clientCookie == null || !clientCookie.containsAttribute(ClientCookie.PATH_ATTR)))) {
+            throw new CookieRestrictionViolationException(
+                    "Cookie '" + name + "' requires the 'path' attribute '/'");
+        }
     }
 
     /**

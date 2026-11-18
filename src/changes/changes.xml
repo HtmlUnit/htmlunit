@@ -9,6 +9,14 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Cookies with the prefixes '__Secure-' and '__Host-' (case-insensitive) are only accepted if they
+                follow the rules (secure; for '__Host-' no domain attribute and the path '/') like in the browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                Secure cookies set by a page from an insecure origin (http, except localhost) are ignored
+                like in the browsers.
+            </action>
+            <action type="fix" dev="rbri">
                 The set-cookie pragma (meta http-equiv='set-cookie') is ignored like in the browsers;
                 the HTML spec says user agents must ignore this pragma.
             </action>

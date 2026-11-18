@@ -794,6 +794,10 @@ public class CookieManager4Test extends WebDriverTestCase {
         verifyForeignDomain(html);
     }
 
+    /**
+     * Loads the page from host1 (html or the response already defined, if html is null);
+     * the page has to navigate to host2 passing its cookies as query.
+     */
     private void verifyForeignDomain(final String html) throws Exception {
         // host2 logs the cookies of host1 (passed as query) and its own cookies
         final String html2 = DOCTYPE_HTML
@@ -807,10 +811,127 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse(html2);
         final URL firstUrl = new URL(URL_HOST1);
-        getMockWebConnection().setResponse(firstUrl, html);
+        if (html != null) {
+            getMockWebConnection().setResponse(firstUrl, html);
+        }
 
         loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * An insecure origin must not set a Secure cookie (RFC 6265bis, section 5.7); the Secure cookie would replace
+     * (and hide) the cookie set before. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"x=plain", ""})
+    public void secureFromInsecureOriginFromJs() throws Exception {
+        cookiesHost1FromJs("x=plain; Path=/",
+                "x=secure; Secure; Path=/");
+    }
+
+    /**
+     * An insecure origin must not set a Secure cookie (RFC 6265bis, section 5.7); the Secure cookie would replace
+     * (and hide) the cookie set before. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"x=plain", ""})
+    public void secureFromInsecureOriginFromHeader() throws Exception {
+        cookiesHost1FromHeader("x=plain; Path=/",
+                "x=secure; Secure; Path=/");
+    }
+
+    /**
+     * Cookies with prefix from an insecure origin. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"plain=1", ""})
+    public void prefixFromInsecureOriginFromJs() throws Exception {
+        cookiesHost1FromJs("__Secure-a=1; Path=/",
+                "__Host-b=1; Path=/",
+                "plain=1; Path=/");
+    }
+
+    /**
+     * Cookies with prefix from an insecure origin. Set by Set-Cookie headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"plain=1", ""})
+    public void prefixFromInsecureOriginFromHeader() throws Exception {
+        cookiesHost1FromHeader("__Secure-a=1; Path=/",
+                "__Host-b=1; Path=/",
+                "plain=1; Path=/");
+    }
+
+    /**
+     * A __Host- cookie with Domain attribute must not be visible on another host of the domain. Set by document.cookie.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"own=1", "own=1"})
+    public void prefixHostDomainFromInsecureOriginFromJs() throws Exception {
+        cookiesHost1FromJs("__Host-a=1; Domain=" + HOSTS_DOMAIN + "; Path=/",
+                "own=1; Domain=" + HOSTS_DOMAIN + "; Path=/");
+    }
+
+    /**
+     * A __Host- cookie with Domain attribute must not be visible on another host of the domain. Set by Set-Cookie
+     * headers.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"own=1", "own=1"})
+    public void prefixHostDomainFromInsecureOriginFromHeader() throws Exception {
+        cookiesHost1FromHeader("__Host-a=1; Domain=" + HOSTS_DOMAIN + "; Path=/",
+                "own=1; Domain=" + HOSTS_DOMAIN + "; Path=/");
+    }
+
+    private void cookiesHost1FromJs(final String... cookies) throws Exception {
+        final StringBuilder js = new StringBuilder();
+        for (final String cookie : cookies) {
+            js.append("  document.cookie = '").append(cookie).append("';\n");
+        }
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + js
+            + "  var c = document.cookie.split('; ').sort().join('; ');\n"
+            + "  location.replace('" + URL_HOST2 + "?' + encodeURIComponent(c));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        verifyForeignDomain(html);
+    }
+
+    private void cookiesHost1FromHeader(final String... cookies) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  var c = document.cookie.split('; ').sort().join('; ');\n"
+            + "  location.replace('" + URL_HOST2 + "?' + encodeURIComponent(c));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        for (final String cookie : cookies) {
+            responseHeader.add(new NameValuePair("Set-Cookie", cookie));
+        }
+
+        final URL firstUrl = new URL(URL_HOST1);
+        getMockWebConnection().setResponse(firstUrl, html, 200, "OK", MimeType.TEXT_HTML, responseHeader);
+        verifyForeignDomain(null);
     }
 
     private void testCookies(final URL url, final String cookie1, final String cookie2) throws Exception {
@@ -882,7 +1003,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         if (driver instanceof HtmlUnitDriver) {
             final CookieManager mgr = getWebClient().getCookieManager();
-            assertEquals(8, mgr.getCookies().size());
+            // c1 (secure) from an insecure origin is ignored
+            assertEquals(7, mgr.getCookies().size());
             assertNull(mgr.getCookie("first").getSameSite());
             assertEquals("lax", mgr.getCookie("c2").getSameSite());
             assertEquals("strict", mgr.getCookie("c3").getSameSite());
@@ -961,7 +1083,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         if (driver instanceof HtmlUnitDriver) {
             final CookieManager mgr = getWebClient().getCookieManager();
-            assertEquals(6, mgr.getCookies().size());
+            // c1 (secure) from an insecure origin is ignored
+            assertEquals(5, mgr.getCookies().size());
             assertNull(mgr.getCookie("first").getSameSite());
             assertEquals("lax", mgr.getCookie("c2").getSameSite());
             assertEquals("strict", mgr.getCookie("c3").getSameSite());
@@ -1016,7 +1139,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         if (driver instanceof HtmlUnitDriver) {
             final CookieManager mgr = getWebClient().getCookieManager();
-            assertEquals(6, mgr.getCookies().size());
+            // c1 (secure) from an insecure origin is ignored
+            assertEquals(5, mgr.getCookies().size());
             assertNull(mgr.getCookie("first").getSameSite());
             assertEquals("lax", mgr.getCookie("c2").getSameSite());
             assertEquals("strict", mgr.getCookie("c3").getSameSite());
@@ -1071,7 +1195,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         if (driver instanceof HtmlUnitDriver) {
             final CookieManager mgr = getWebClient().getCookieManager();
-            assertEquals(12, mgr.getCookies().size());
+            // c1 (secure) from an insecure origin is ignored
+            assertEquals(10, mgr.getCookies().size());
             assertNull(mgr.getCookie("first").getSameSite());
             assertEquals("lax", mgr.getCookie("c2").getSameSite());
             assertEquals("strict", mgr.getCookie("c3").getSameSite());
@@ -1126,7 +1251,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         if (driver instanceof HtmlUnitDriver) {
             final CookieManager mgr = getWebClient().getCookieManager();
-            assertEquals(6, mgr.getCookies().size());
+            // c1 (secure) from an insecure origin is ignored
+            assertEquals(5, mgr.getCookies().size());
             assertNull(mgr.getCookie("first").getSameSite());
             assertEquals("lax", mgr.getCookie("c2").getSameSite());
             assertEquals("strict", mgr.getCookie("c3").getSameSite());
@@ -1181,7 +1307,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         if (driver instanceof HtmlUnitDriver) {
             final CookieManager mgr = getWebClient().getCookieManager();
-            assertEquals(12, mgr.getCookies().size());
+            // c1 (secure) from an insecure origin is ignored
+            assertEquals(10, mgr.getCookies().size());
             assertNull(mgr.getCookie("first").getSameSite());
             assertEquals("lax", mgr.getCookie("c2").getSameSite());
             assertEquals("strict", mgr.getCookie("c3").getSameSite());

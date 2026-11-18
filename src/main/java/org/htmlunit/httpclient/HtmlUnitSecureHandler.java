@@ -16,6 +16,8 @@ package org.htmlunit.httpclient;
 
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookieRestrictionViolationException;
+import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.impl.cookie.BasicSecureHandler;
 import org.apache.http.util.Args;
 
@@ -26,10 +28,29 @@ import org.apache.http.util.Args;
  */
 final class HtmlUnitSecureHandler extends BasicSecureHandler {
 
+    /**
+     * {@inheritDoc}
+     * Like the browsers, a page from an insecure origin can't set a secure cookie
+     * (RFC 6265bis section 5.7); localhost is handled as secure (see {@link #match(Cookie, CookieOrigin)}).
+     */
+    @Override
+    public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
+        Args.notNull(cookie, "Cookie");
+        Args.notNull(origin, "Cookie origin");
+        if (cookie.isSecure() && !isSecure(origin)) {
+            throw new CookieRestrictionViolationException(
+                    "Cookie '" + cookie.getName() + "' with 'secure' attribute from an insecure origin");
+        }
+    }
+
     @Override
     public boolean match(final Cookie cookie, final CookieOrigin origin) {
         Args.notNull(cookie, "Cookie");
         Args.notNull(origin, "Cookie origin");
-        return !cookie.isSecure() || origin.isSecure() || "localhost".equalsIgnoreCase(origin.getHost());
+        return !cookie.isSecure() || isSecure(origin);
+    }
+
+    private static boolean isSecure(final CookieOrigin origin) {
+        return origin.isSecure() || "localhost".equalsIgnoreCase(origin.getHost());
     }
 }

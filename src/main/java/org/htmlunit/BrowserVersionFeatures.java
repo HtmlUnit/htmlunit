@@ -185,6 +185,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2,
 
+    /** Cookie prefix '__Host-' allows a domain attribute if the domain is the host itself. */
+    @BrowserFeature({FF, FF_ESR})
+    HTTP_COOKIE_HOST_PREFIX_ALLOWS_DOMAIN_OF_HOST,
+
+    /** Cookie prefix '__Host-' requires only the path '/'; the path attribute is optional. */
+    @BrowserFeature(FF_ESR)
+    HTTP_COOKIE_HOST_PREFIX_PATH_ATTRIBUTE_OPTIONAL,
+
     /** domain '.org' is handled as 'org'. */
     @BrowserFeature({FF, FF_ESR})
     HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS,
