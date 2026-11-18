@@ -9,6 +9,11 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Cookies of hosts with a single label name (e.g. 'intranet') are handled without name resolution;
+                cookies of hosts that could not be resolved (e.g. when using a proxy or a mock connection)
+                were ignored.
+            </action>
+            <action type="fix" dev="rbri">
                 Method document.cookie of an about:blank document (e.g. an iframe without src or a window opened
                 without url) uses the cookies of the creator like in the browsers.
             </action>

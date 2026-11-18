@@ -261,8 +261,8 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF_ESR = {"c11=11; c12=12",
                       "c12=12; path=/; domain=htmlunit-dev; sameSite=None",
                       "c11=11; path=/; domain=htmlunit-dev; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
-            EDGE = {"c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
+    @HtmlUnitNYI(CHROME = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=.htmlunit-dev"},
+            EDGE = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=.htmlunit-dev"},
             FF = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
             FF_ESR = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"})
     public void storedDomain4() throws Exception {
@@ -457,8 +457,8 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF_ESR = {"2",
                       "c12=12; path=/; domain=htmlunit-dev; sameSite=None",
                       "c11=11; path=/; domain=htmlunit-dev; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"1", "c12=12; path=/; domain=htmlunit-dev"},
-            EDGE = {"1", "c12=12; path=/; domain=htmlunit-dev"},
+    @HtmlUnitNYI(CHROME = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=.htmlunit-dev"},
+            EDGE = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=.htmlunit-dev"},
             FF = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
             FF_ESR = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"})
     public void storedDomainFromJs4() throws Exception {
@@ -491,9 +491,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         final String[] expected = getExpectedAlerts();
         assertEquals(Integer.parseInt(expected[0]), driver.manage().getCookies().size());
         assertEquals(expected[1], driver.manage().getCookieNamed("c12").toString());
-        if (Integer.parseInt(expected[0]) > 1) {
-            assertEquals(expected[2], driver.manage().getCookieNamed("c11").toString());
-        }
+        assertEquals(expected[2], driver.manage().getCookieNamed("c11").toString());
     }
 
     /**
@@ -932,6 +930,85 @@ public class CookieManager4Test extends WebDriverTestCase {
         final URL firstUrl = new URL(URL_HOST1);
         getMockWebConnection().setResponse(firstUrl, html, 200, "OK", MimeType.TEXT_HTML, responseHeader);
         verifyForeignDomain(null);
+    }
+
+    /**
+     * Cookies of a host with a single label name (htmlunit-dev); the page on this host sets the cookies
+     * (document.cookie), logs its cookies and navigates to htmlunit-dev.org (another host); this host logs the
+     * value from the first one and its own cookies.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"host=1; own=1; ownDot=1", ""})
+    public void unqualifiedHostFromJs() throws Exception {
+        cookiesUnqualifiedHostJs("host=1; Path=/",
+                "own=1; Domain=" + HOST_WITHOUT_DOMAIN + "; Path=/",
+                "ownDot=1; Domain=." + HOST_WITHOUT_DOMAIN + "; Path=/",
+                "foreign=1; Domain=localhost; Path=/",
+                "tld=1; Domain=org; Path=/");
+    }
+
+    /**
+     * Cookies of a host with a single label name (htmlunit-dev); the page on this host sets the cookies
+     * (Set-Cookie headers), logs its cookies and navigates to htmlunit-dev.org (another host); this host logs the
+     * value from the first one and its own cookies.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"host=1; own=1; ownDot=1", ""})
+    public void unqualifiedHostFromHeader() throws Exception {
+        cookiesUnqualifiedHostHeader("host=1; Path=/",
+                "own=1; Domain=" + HOST_WITHOUT_DOMAIN + "; Path=/",
+                "ownDot=1; Domain=." + HOST_WITHOUT_DOMAIN + "; Path=/",
+                "foreign=1; Domain=localhost; Path=/",
+                "tld=1; Domain=org; Path=/");
+    }
+
+    private void cookiesUnqualifiedHostJs(final String... cookies) throws Exception {
+        final StringBuilder js = new StringBuilder();
+        for (final String cookie : cookies) {
+            js.append("  document.cookie = '").append(cookie).append("';\n");
+        }
+        verifyUnqualifiedHost(js.toString(), new ArrayList<>());
+    }
+
+    private void cookiesUnqualifiedHostHeader(final String... cookies) throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        for (final String cookie : cookies) {
+            responseHeader.add(new NameValuePair("Set-Cookie", cookie));
+        }
+        verifyUnqualifiedHost("", responseHeader);
+    }
+
+    private void verifyUnqualifiedHost(final String js, final List<NameValuePair> responseHeader) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + js
+            + "  var c = document.cookie.split('; ').sort().join('; ');\n"
+            + "  location.replace('" + URL_HOST3 + "?' + encodeURIComponent(c));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        // the second host logs the cookies of the first one (passed as query) and its own cookies
+        final String html2 = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(decodeURIComponent(location.search.substring(1)));\n"
+            + "  log(document.cookie.split('; ').sort().join('; '));\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse(html2);
+        final URL firstUrl = new URL(URL_HOST4);
+        getMockWebConnection().setResponse(firstUrl, html, 200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     private void testCookies(final URL url, final String cookie1, final String cookie2) throws Exception {

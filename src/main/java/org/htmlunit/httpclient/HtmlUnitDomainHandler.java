@@ -16,8 +16,6 @@ package org.htmlunit.httpclient;
 
 import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Locale;
 
 import org.apache.http.conn.util.InetAddressUtils;
@@ -116,28 +114,26 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
      */
     @Override
     public boolean match(final Cookie cookie, final CookieOrigin origin) {
-        String domain = cookie.getDomain();
+        final String domain = cookie.getDomain();
         if (domain == null) {
             return false;
         }
 
         final int dotIndex = domain.indexOf('.');
         if (dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
-            final String host = origin.getHost();
-            if (browserVersion_.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)) {
-                domain = domain.substring(1);
-            }
-            return host.equalsIgnoreCase(domain);
+            // single label domain with leading dot (e.g. '.intranet'); like the browsers
+            // the cookie matches the host itself
+            return origin.getHost().equalsIgnoreCase(domain.substring(1));
         }
 
-        if (dotIndex == -1
-                && !HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN.equalsIgnoreCase(domain)) {
-            try {
-                InetAddress.getByName(domain);
-            }
-            catch (final UnknownHostException e) {
-                return false;
-            }
+        // cookies for a public suffix (e.g. 'com') are rejected by validate() already; this check
+        // is for cookies added by the api. Single label names that are no public suffix
+        // (e.g. 'localhost', 'intranet') match like any other domain - without name resolution.
+        final String normalizedDomain = dotIndex == 0 ? domain.substring(1) : domain;
+        if (!normalizedDomain.equalsIgnoreCase(origin.getHost())
+                && !HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN.equalsIgnoreCase(normalizedDomain)
+                && PUBLIC_SUFFIX_MATCHER.matches(normalizedDomain)) {
+            return false;
         }
 
         return super.match(cookie, origin);

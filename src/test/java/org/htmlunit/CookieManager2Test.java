@@ -23,6 +23,8 @@ import java.util.Set;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.Cookie;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.util.MimeType;
+import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -148,5 +150,57 @@ public class CookieManager2Test extends SimpleWebTestCase {
         assertTrue(webClient.getCookies(new URL("https://victim.example/")).isEmpty());
         assertTrue(webClient.getCookies(new URL("https://victim.co.uk/")).isEmpty());
         assertTrue(webClient.getCookies(new URL("https://victim.uk/")).isEmpty());
+    }
+
+    /**
+     * Cookies of a host with a single label name are handled without name resolution;
+     * the host 'htmlunit-unresolvable' does not exist (served by the mock connection).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void unqualifiedHostWithoutNameResolution() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  document.cookie = 'js=1; path=/';\n"
+            + "  document.cookie = 'jsDomain=1; domain=htmlunit-unresolvable; path=/';\n"
+            + "  document.title = document.cookie.split('; ').sort().join('; ');\n"
+            + "</script></head><body></body></html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Set-Cookie", "header=1; path=/"));
+        headers.add(new NameValuePair("Set-Cookie", "headerDomain=1; domain=htmlunit-unresolvable; path=/"));
+
+        final URL url = new URL("http://htmlunit-unresolvable/");
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(url, html, 200, "OK", MimeType.TEXT_HTML, headers);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage(url);
+        assertEquals("header=1; headerDomain=1; js=1; jsDomain=1", page.getTitleText());
+        assertEquals(4, webClient.getCookies(url).size());
+        assertTrue(webClient.getCookies(new URL("http://other-host/")).isEmpty());
+    }
+
+    /**
+     * Cookies for a public suffix added by the api are not sent.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void publicSuffixCookieAddedByApi() throws Exception {
+        final WebClient webClient = getWebClient();
+        final CookieManager mgr = webClient.getCookieManager();
+        mgr.addCookie(new Cookie("com", "tld", "1", "/", null, false));
+        mgr.addCookie(new Cookie("co.uk", "suffix", "1", "/", null, false));
+        mgr.addCookie(new Cookie("example.com", "own", "1", "/", null, false));
+
+        final Set<Cookie> exampleCom = webClient.getCookies(new URL("https://www.example.com/"));
+        assertEquals(1, exampleCom.size());
+        assertEquals("own", exampleCom.iterator().next().getName());
+
+        assertTrue(webClient.getCookies(new URL("https://www.example.co.uk/")).isEmpty());
     }
 }
