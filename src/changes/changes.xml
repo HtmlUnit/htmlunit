@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Support for the srcdoc attribute of iframes (and the HTMLIFrameElement.srcdoc property); the
+                document has the url about:srcdoc, the origin and the base url of the parent document.
+            </action>
             <action type="fix" dev="rbri">
                 A page (document.cookie) or response (Set-Cookie) from an insecure origin can no longer overwrite
                 or shadow a secure cookie (RFC 6265bis section 5.7) like in the browsers.

@@ -511,8 +511,12 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
         else {
+            // the document of an iframe with srcdoc attribute is not fetched (the content is the attribute)
+            webResponse = makeWebResponseForSrcdoc(webWindow, webRequest);
             try {
-                webResponse = loadWebResponse(webRequest);
+                if (webResponse == null) {
+                    webResponse = loadWebResponse(webRequest);
+                }
             }
             catch (final NoHttpResponseException e) {
                 webResponse = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, webRequest, 0);
@@ -893,8 +897,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Returns the url of the given page used as origin when checking the frame-ancestors
-     * directive of a content security policy. Like in the browsers, an about:blank frame
-     * inherits the origin of its parent.
+     * directive of a content security policy. Like in the browsers, an about:blank (or about:srcdoc)
+     * frame inherits the origin of its parent.
      *
      * @param page the page containing the frame
      * @return the url
@@ -902,7 +906,8 @@ public class WebClient implements Serializable, AutoCloseable {
     private static URL getFrameAncestorUrl(final Page page) {
         Page current = page;
         URL url = current.getUrl();
-        while (UrlUtils.ABOUT_BLANK.equals(url.toExternalForm())
+        while ((UrlUtils.ABOUT_BLANK.equals(url.toExternalForm())
+                    || UrlUtils.ABOUT_SRCDOC.equals(url.toExternalForm()))
                 && current.getEnclosingWindow() instanceof FrameWindow frameWindow) {
             current = frameWindow.getEnclosingPage();
             url = current.getUrl();
@@ -1610,6 +1615,25 @@ public class WebClient implements Serializable, AutoCloseable {
             final WebResponseData data = new WebResponseData(downloadedContent, 200, "OK", responseHeaders);
             return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
         }
+    }
+
+    /**
+     * Builds the response for the document of an iframe with srcdoc attribute (about:srcdoc);
+     * the content is the value of the srcdoc attribute.
+     *
+     * @param webWindow the window the response is loaded into
+     * @param webRequest the request
+     * @return the response or {@code null} if the request is not for the srcdoc of a frame
+     */
+    private static WebResponse makeWebResponseForSrcdoc(final WebWindow webWindow, final WebRequest webRequest) {
+        if (webWindow instanceof FrameWindow frameWindow
+                && UrlUtils.ABOUT_SRCDOC.equals(webRequest.getUrl().toExternalForm())) {
+            final String srcdoc = frameWindow.getFrameElement().getAttributeDirect(BaseFrameElement.SRCDOC_ATTRIBUTE);
+            if (DomElement.ATTRIBUTE_NOT_DEFINED != srcdoc) {
+                return new StringWebResponse(srcdoc, UrlUtils.URL_ABOUT_SRCDOC);
+            }
+        }
+        return null;
     }
 
     private static WebResponse makeWebResponseForAboutUrl(final WebRequest webRequest) throws MalformedURLException {
@@ -3005,9 +3029,11 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final LoadJob loadJob;
         try {
-            WebResponse response;
+            WebResponse response = makeWebResponseForSrcdoc(targetWindow, request);
             try {
-                response = loadWebResponse(request);
+                if (response == null) {
+                    response = loadWebResponse(request);
+                }
                 if (response == null) {
                     // blocked by the redirect filter of the request
                     return;

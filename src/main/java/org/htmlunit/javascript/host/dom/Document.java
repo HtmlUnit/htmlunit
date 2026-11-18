@@ -1398,7 +1398,7 @@ public class Document extends Node {
     public String getDomain() {
         if (domain_ == null && getPage().getWebResponse() != null) {
             URL url = getPage().getUrl();
-            if (url == UrlUtils.URL_ABOUT_BLANK) {
+            if (url == UrlUtils.URL_ABOUT_BLANK || UrlUtils.ABOUT_SRCDOC.equals(url.toExternalForm())) {
                 final WebWindow w = getWindow().getWebWindow();
                 if (w instanceof FrameWindow window) {
                     url = window.getEnclosingPage().getUrl();

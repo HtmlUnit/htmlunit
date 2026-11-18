@@ -289,7 +289,9 @@ public class HtmlPage extends SgmlPage {
      */
     public URL getOriginUrl() {
         final URL url = getUrl();
-        if (!UrlUtils.ABOUT_BLANK.equals(url.toExternalForm())) {
+        final String urlString = url.toExternalForm();
+        // about:blank and about:srcdoc documents have the origin of the creator (parent)
+        if (!UrlUtils.ABOUT_BLANK.equals(urlString) && !UrlUtils.ABOUT_SRCDOC.equals(urlString)) {
             return url;
         }
 
@@ -2804,6 +2806,12 @@ public class HtmlPage extends SgmlPage {
         final WebWindow window = getEnclosingWindow();
         final boolean frame = window != null && window != window.getTopWindow();
         if (frame) {
+            // the base url of a srcdoc document is the base url of the parent document
+            if (UrlUtils.ABOUT_SRCDOC.equals(baseUrl.toExternalForm())
+                    && window.getParentWindow().getEnclosedPage() instanceof HtmlPage parentPage) {
+                return parentPage.getBaseURL();
+            }
+
             final boolean frameSrcIsNotSet = baseUrl == UrlUtils.URL_ABOUT_BLANK;
             final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
             if (frameSrcIsNotSet || frameSrcIsJs) {

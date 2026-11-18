@@ -73,6 +73,25 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
+     * Returns the value of the {@code srcdoc} attribute.
+     * @return the value of the {@code srcdoc} attribute
+     */
+    @JsxGetter
+    public String getSrcdoc() {
+        return getDomNodeOrDie().getAttribute(BaseFrameElement.SRCDOC_ATTRIBUTE);
+    }
+
+    /**
+     * Sets the value of the {@code srcdoc} attribute; this loads the content.
+     * @param srcdoc the new value
+     */
+    @JsxSetter
+    public void setSrcdoc(final String srcdoc) {
+        getDomNodeOrDie().setAttribute(BaseFrameElement.SRCDOC_ATTRIBUTE, srcdoc);
+        isAttachedToPageDuringOnload_ = false;
+    }
+
+    /**
      * Returns the document the frame contains, if any.
      * @return {@code null} if no document is contained
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
