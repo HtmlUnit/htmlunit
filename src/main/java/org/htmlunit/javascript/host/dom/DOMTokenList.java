@@ -144,11 +144,8 @@ public class DOMTokenList extends HtmlUnitScriptable {
             return (String) super.getDefaultValue(hint);
         }
 
-        final String value = getValue();
-        if (value != null) {
-            return String.join(" ", StringUtils.split(value, WHITESPACE_CHARS));
-        }
-        return "";
+        // like toString(), the value of the attribute (not normalized)
+        return jsToString();
     }
 
     /**

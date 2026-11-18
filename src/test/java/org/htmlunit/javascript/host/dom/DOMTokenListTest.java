@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -464,10 +463,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
-    @HtmlUnitNYI(CHROME = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,value,values",
-            EDGE = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,value,values",
-            FF = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,value,values",
-            FF_ESR = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,value,values")
     public void forIn() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -497,10 +492,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
-    @HtmlUnitNYI(CHROME = "add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,value,values",
-            EDGE = "add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,value,values",
-            FF = "add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,value,values",
-            FF_ESR = "add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,value,values")
     public void forInEmptyList() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
