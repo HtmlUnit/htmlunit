@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Native fetch() support (first step): requests to the origin of the page and to data:/blob: urls,
+                redirects, abort signals, the redirect modes 'error' and 'manual'. Requests to other origins
+                are still rejected (no CORS support so far). The fetch polyfill is still available as option
+                and replaces the native implementation if enabled.
+            </action>
             <action type="fix" dev="rbri">
                 FormData get(), getAll(), forEach() and the iterators are returning File objects for file entries
                 (instead of strings); like in the browsers blobs are converted to files.

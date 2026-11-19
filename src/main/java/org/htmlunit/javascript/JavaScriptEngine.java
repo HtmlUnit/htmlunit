@@ -505,6 +505,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Context context, final VarScope scope, final HtmlUnitScriptable scriptable) throws IOException {
 
         if (webClient.getOptions().isFetchPolyfillEnabled()) {
+            // the polyfill installs itself (fetch, Headers, Request and Response) only if there is no fetch()
+            scriptable.put("fetch", scriptable, UNDEFINED);
             Polyfill.getFetchPolyfill().apply(context, scope, scriptable);
         }
     }

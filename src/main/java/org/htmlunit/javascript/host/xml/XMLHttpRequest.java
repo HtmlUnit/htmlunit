@@ -1312,6 +1312,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns the url a response redirects to.
      *
      * @param response the response
@@ -1319,7 +1321,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @return the url or {@code null} if the response is not a redirect (or has no location)
      * @throws IOException if the location is invalid or not a http(s) url
      */
-    private static URL getRedirectUrl(final WebResponse response, final URL currentUrl) throws IOException {
+    public static URL getRedirectUrl(final WebResponse response, final URL currentUrl) throws IOException {
         final int status = response.getStatusCode();
         if (status != 301 && status != 302 && status != 303 && status != 307 && status != 308) {
             return null;
@@ -1347,9 +1349,17 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Creates the request for the target of a redirect.
+     *
+     * @param request the request that was redirected
+     * @param status the status of the redirect response
+     * @param url the target of the redirect
+     * @param crossOriginRedirect whether the redirect leaves the origin of the request
+     * @return the new request
      */
-    private static WebRequest createRedirectRequest(final WebRequest request, final int status,
+    public static WebRequest createRedirectRequest(final WebRequest request, final int status,
             final URL url, final boolean crossOriginRedirect) {
         final HttpMethod method = request.getHttpMethod();
         final boolean toGet = ((status == 301 || status == 302) && method == HttpMethod.POST)

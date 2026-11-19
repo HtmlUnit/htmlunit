@@ -117,6 +117,23 @@ public class Request extends HtmlUnitScriptable {
         return request;
     }
 
+    /**
+     * Creates a new {@code Request} like {@code new Request(input, init)}; used by {@code fetch()}.
+     *
+     * @param global the window or the worker global scope
+     * @param input the input - a url or a {@code Request}
+     * @param init the init dictionary or {@code undefined}
+     * @return the new request
+     */
+    static Request create(final HtmlUnitScriptable global, final Object input, final Object init) {
+        final Request request = new Request();
+        request.setParentScope(global.getParentScope());
+        request.setPrototype(global.getPrototype(Request.class));
+
+        request.init(input, init, global);
+        return request;
+    }
+
     private void init(final Object input, final Object init, final Scriptable ctorObj) {
         final Request inputRequest = input instanceof Request r ? r : null;
         final List<AbortSignal> signals = new ArrayList<>();

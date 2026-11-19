@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.fetch;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.net.URL;
+import java.util.List;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.EcmaError;
@@ -34,6 +35,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxStaticFunction;
 import org.htmlunit.javascript.host.ReadableStream;
+import org.htmlunit.util.NameValuePair;
 
 /**
  * A JavaScript object for {@code Response}.
@@ -104,6 +106,42 @@ public class Response extends HtmlUnitScriptable {
         response.setParentScope(owner.getParentScope());
         response.setPrototype(owner.getPrototype(Response.class));
         response.initHeaders();
+        return response;
+    }
+
+    /**
+     * Creates the response of a network request ({@code fetch()}); the headers are immutable.
+     *
+     * @param global the window or the worker global scope
+     * @param type the type ('basic', 'cors', ...)
+     * @param url the url of the response
+     * @param redirected whether the request was redirected
+     * @param status the status
+     * @param statusText the status text
+     * @param headers the headers
+     * @param body the body or {@code null}
+     * @return the new response
+     */
+    static Response createNetworkResponse(final HtmlUnitScriptable global, final String type, final String url,
+            final boolean redirected, final int status, final String statusText,
+            final List<NameValuePair> headers, final FetchBody body) {
+        final Response response = newResponse(global);
+        response.type_ = type;
+        response.url_ = url;
+        response.redirected_ = redirected;
+        response.status_ = status;
+        response.statusText_ = statusText;
+        response.headers_.setGuard(Headers.Guard.NONE);
+        for (final NameValuePair header : headers) {
+            try {
+                response.headers_.appendHeader(header.getName(), header.getValue());
+            }
+            catch (final EcmaError e) {
+                // ignore headers with invalid names or values
+            }
+        }
+        response.headers_.setGuard(Headers.Guard.IMMUTABLE);
+        response.body_ = body;
         return response;
     }
 

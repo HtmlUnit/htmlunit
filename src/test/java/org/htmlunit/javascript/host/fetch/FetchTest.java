@@ -14,6 +14,9 @@
  */
 package org.htmlunit.javascript.host.fetch;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +29,6 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Tests for Fetch API.
@@ -64,8 +66,7 @@ public class FetchTest extends WebDriverTestCase {
         final String xml = "<xml><content>blah</content></xml>";
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -101,8 +102,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "<response/>", MimeType.TEXT_XML);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_FIRST, getMockWebConnection().getLastWebRequest().getUrl());
@@ -135,8 +135,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "<response/>", MimeType.TEXT_XML);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
 
         assertEquals(1, getMockWebConnection().getRequestCount());
@@ -173,8 +172,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "<response/>", MimeType.TEXT_XML);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -209,8 +207,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "bla bla", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -245,8 +242,7 @@ public class FetchTest extends WebDriverTestCase {
         final String json = "{ 'Html': 'Unit' }";
         getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -286,8 +282,7 @@ public class FetchTest extends WebDriverTestCase {
         final String json = "{ \"Html\": \"Unit\" }";
         getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -299,15 +294,6 @@ public class FetchTest extends WebDriverTestCase {
     @Test
     @Alerts({"200", "OK", "true", "text/plain;charset=iso-8859-1",
              "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"})
-    @HtmlUnitNYI(
-            CHROME = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
-                      "[object\\sBlob]", "4", "text/plain"},
-            EDGE = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
-                    "[object\\sBlob]", "4", "text/plain"},
-            FF = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
-                  "[object\\sBlob]", "4", "text/plain"},
-            FF_ESR = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
-                      "[object\\sBlob]", "4", "text/plain"})
     public void fetchGetBlob() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -334,8 +320,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "ABCD", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -372,8 +357,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "ABCD", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -410,8 +394,7 @@ public class FetchTest extends WebDriverTestCase {
         final String json = "{ \"Html\": \"Unit\" }";
         getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -454,8 +437,7 @@ public class FetchTest extends WebDriverTestCase {
         headers.add(new NameValuePair("X-Custom-Header", "x-tEsT"));
         getMockWebConnection().setResponse(URL_SECOND, "HtmlUnit", 200, "ok", MimeType.TEXT_PLAIN, headers);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -498,8 +480,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "HtmlUnit", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -553,8 +534,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, content, "multipart/form-data; boundary=" + boundary);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -590,8 +570,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "HtmlUnit", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -640,8 +619,7 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "HtmlUnit", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = enableFetchPolyfill();
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -654,164 +632,503 @@ public class FetchTest extends WebDriverTestCase {
         assertEquals("{\"hello\":\"world\"}", lastRequest.getRequestBody());
     }
 
-//    /**
-//     * Tests fetch with credentials.
-//     * @throws Exception if the test fails
-//     */
-//    @Test
-//    @Alerts("ok")
-//    public void fetchWithCredentials() throws Exception {
-//        final String html = DOCTYPE_HTML
-//            + "<html><head>\n"
-//            + "<script>\n"
-//            + LOG_TITLE_FUNCTION
-//            + "function test() {\n"
-//            + "  fetch('" + URL_SECOND + "', {\n"
-//            + "    method: 'GET',\n"
-//            + "    credentials: 'include'\n"
-//            + "  })\n"
-//            + "    .then(response => log(response.ok ? 'ok' : 'not ok'))\n"
-//            + "    .catch(e => logEx(e));\n"
-//            + "}\n"
-//            + "</script>\n"
-//            + "</head>\n"
-//            + "<body onload='test()'></body></html>";
-//
-//        getMockWebConnection().setDefaultResponse("<response/>\n", MimeType.TEXT_XML);
-//        final WebDriver driver = loadPage2(html);
-//        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
-//    }
-//
-//    /**
-//     * Tests fetch response cloning.
-//     * @throws Exception if the test fails
-//     */
-//    @Test
-//    @Alerts({"true", "text1", "text2"})
-//    public void fetchResponseClone() throws Exception {
-//        final String html = DOCTYPE_HTML
-//            + "<html><head>\n"
-//            + "<script>\n"
-//            + LOG_TITLE_FUNCTION
-//            + "function test() {\n"
-//            + "  fetch('" + URL_SECOND + "')\n"
-//            + "    .then(response => {\n"
-//            + "      var cloned = response.clone();\n"
-//            + "      log(cloned.ok);\n"
-//            + "      return Promise.all([\n"
-//            + "        response.text(),\n"
-//            + "        cloned.text()\n"
-//            + "      ]);\n"
-//            + "    })\n"
-//            + "    .then(texts => {\n"
-//            + "      log('text' + (texts[0] === texts[1] ? '1' : '0'));\n"
-//            + "      log('text2');\n"
-//            + "    })\n"
-//            + "    .catch(e => logEx(e));\n"
-//            + "}\n"
-//            + "</script>\n"
-//            + "</head>\n"
-//            + "<body onload='test()'></body></html>";
-//
-//        getMockWebConnection().setDefaultResponse("response body", MimeType.TEXT_PLAIN);
-//        final WebDriver driver = loadPage2(html);
-//        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
-//    }
-//
-//    /**
-//     * Tests fetch with mode option.
-//     * @throws Exception if the test fails
-//     */
-//    @Test
-//    @Alerts("ok")
-//    public void fetchWithMode() throws Exception {
-//        final String html = DOCTYPE_HTML
-//            + "<html><head>\n"
-//            + "<script>\n"
-//            + LOG_TITLE_FUNCTION
-//            + "function test() {\n"
-//            + "  fetch('" + URL_SECOND + "', {\n"
-//            + "    method: 'GET',\n"
-//            + "    mode: 'cors'\n"
-//            + "  })\n"
-//            + "    .then(response => log(response.ok ? 'ok' : 'not ok'))\n"
-//            + "    .catch(e => logEx(e));\n"
-//            + "}\n"
-//            + "</script>\n"
-//            + "</head>\n"
-//            + "<body onload='test()'></body></html>";
-//
-//        getMockWebConnection().setDefaultResponse("<response/>\n", MimeType.TEXT_XML);
-//        final WebDriver driver = loadPage2(html);
-//        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
-//    }
-//
-//    /**
-//     * Tests fetch with cache option.
-//     * @throws Exception if the test fails
-//     */
-//    @Test
-//    @Alerts("ok")
-//    public void fetchWithCache() throws Exception {
-//        final String html = DOCTYPE_HTML
-//            + "<html><head>\n"
-//            + "<script>\n"
-//            + LOG_TITLE_FUNCTION
-//            + "function test() {\n"
-//            + "  fetch('" + URL_SECOND + "', {\n"
-//            + "    method: 'GET',\n"
-//            + "    cache: 'no-cache'\n"
-//            + "  })\n"
-//            + "    .then(response => log(response.ok ? 'ok' : 'not ok'))\n"
-//            + "    .catch(e => logEx(e));\n"
-//            + "}\n"
-//            + "</script>\n"
-//            + "</head>\n"
-//            + "<body onload='test()'></body></html>";
-//
-//        getMockWebConnection().setDefaultResponse("<response/>\n", MimeType.TEXT_XML);
-//        final WebDriver driver = loadPage2(html);
-//        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
-//    }
-//
-//    /**
-//     * Tests fetch response with text encoding.
-//     * @throws Exception if the test fails
-//     */
-//    @Test
-//    @Alerts("olé")
-//    public void fetchResponseTextEncoding() throws Exception {
-//        final String html = DOCTYPE_HTML
-//            + "<html>\n"
-//            + "  <head>\n"
-//            + "    <script>\n"
-//            + LOG_TITLE_FUNCTION
-//            + "      function test() {\n"
-//            + "        fetch('" + URL_SECOND + "')\n"
-//            + "          .then(response => response.text())\n"
-//            + "          .then(text => log(text))\n"
-//            + "          .catch(e => logEx(e));\n"
-//            + "      }\n"
-//            + "    </script>\n"
-//            + "  </head>\n"
-//            + "  <body onload='test()'>\n"
-//            + "  </body>\n"
-//            + "</html>";
-//
-//        final String response = "olé";
-//        final byte[] responseBytes = response.getBytes(UTF_8);
-//
-//        getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK",
-//            MimeType.TEXT_HTML, new ArrayList<>());
-//        final WebDriver driver = loadPage2(html);
-//        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
-//    }
+    /**
+     * Tests fetch with credentials.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ok")
+    public void fetchWithCredentials() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  fetch('" + URL_SECOND + "', {\n"
+            + "    method: 'GET',\n"
+            + "    credentials: 'include'\n"
+            + "  })\n"
+            + "    .then(response => log(response.ok ? 'ok' : 'not ok'))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
 
-    private WebDriver enableFetchPolyfill() {
-        final WebDriver driver = getWebDriver();
-        if (driver instanceof HtmlUnitDriver) {
-            ((HtmlUnitDriver) driver).getWebClient().getOptions().setFetchPolyfillEnabled(true);
-        }
-        return driver;
+        getMockWebConnection().setDefaultResponse("<response/>\n", MimeType.TEXT_XML);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Tests fetch response cloning.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true",
+             "text1",
+             "text2"})
+    public void fetchResponseClone() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  fetch('" + URL_SECOND + "')\n"
+            + "    .then(response => {\n"
+            + "      var cloned = response.clone();\n"
+            + "      log(cloned.ok);\n"
+            + "      return Promise.all([\n"
+            + "        response.text(),\n"
+            + "        cloned.text()\n"
+            + "      ]);\n"
+            + "    })\n"
+            + "    .then(texts => {\n"
+            + "      log('text' + (texts[0] === texts[1] ? '1' : '0'));\n"
+            + "      log('text2');\n"
+            + "    })\n"
+            + "    .catch(e => logEx(e));\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("response body", MimeType.TEXT_PLAIN);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Tests fetch with mode option.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ok")
+    public void fetchWithMode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  fetch('" + URL_SECOND + "', {\n"
+            + "    method: 'GET',\n"
+            + "    mode: 'cors'\n"
+            + "  })\n"
+            + "    .then(response => log(response.ok ? 'ok' : 'not ok'))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<response/>\n", MimeType.TEXT_XML);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Tests fetch with cache option.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ok")
+    public void fetchWithCache() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  fetch('" + URL_SECOND + "', {\n"
+            + "    method: 'GET',\n"
+            + "    cache: 'no-cache'\n"
+            + "  })\n"
+            + "    .then(response => log(response.ok ? 'ok' : 'not ok'))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<response/>\n", MimeType.TEXT_XML);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Tests fetch response with text encoding.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ol\u00E9")
+    public void fetchResponseTextEncoding() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        fetch('" + URL_SECOND + "')\n"
+            + "          .then(response => response.text())\n"
+            + "          .then(text => log(text))\n"
+            + "          .catch(e => logEx(e));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String response = "olé";
+        final byte[] responseBytes = response.getBytes(UTF_8);
+
+        getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK",
+            MimeType.TEXT_HTML, new ArrayList<>());
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"200",
+             "true",
+             "<response/>"})
+    public void fetchRequestObject() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const req = new Request('" + URL_SECOND + "', {method: 'POST', body: 'abc'});\n"
+            + "  fetch(req)\n"
+            + "    .then(r => { log(r.status); log(req.bodyUsed); return r.text(); })\n"
+            + "    .then(t => log(t))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "<response/>", MimeType.TEXT_XML);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        assertEquals(URL_SECOND, lastRequest.getUrl());
+        assertEquals("abc", lastRequest.getRequestBody());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true",
+             "true",
+             "basic",
+             "§§URL§§",
+             "false",
+             "false",
+             "[object ReadableStream]",
+             "TypeError",
+             "null"})
+    public void responseProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const p = fetch('" + URL_SECOND + "#hash');\n"
+            + "  log(p instanceof Promise);\n"
+            + "  p.then(r => {\n"
+            + "      log(r instanceof Response);\n"
+            + "      log(r.type);\n"
+            + "      log(r.url);\n"
+            + "      log(r.redirected);\n"
+            + "      log(r.bodyUsed);\n"
+            + "      log(Object.prototype.toString.call(r.body));\n"
+            + "      try { r.headers.set('x-a', 'b'); log('set'); } catch (e) { logEx(e); }\n"
+            + "      log(r.headers.get('set-cookie'));\n"
+            + "    })\n"
+            + "    .catch(e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Set-Cookie", "c=v"));
+        getMockWebConnection().setResponse(URL_SECOND, "x", 200, "OK", MimeType.TEXT_PLAIN, headers);
+
+        expandExpectedAlertsVariables(URL_SECOND);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"404",
+             "false",
+             "Not Found",
+             "missing"})
+    public void status404() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + URL_SECOND + "')\n"
+            + "    .then(r => { log(r.status); log(r.ok); log(r.statusText); return r.text(); })\n"
+            + "    .then(t => log(t))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "missing", 404, "Not Found", MimeType.TEXT_PLAIN,
+                new ArrayList<>());
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"200", "[object ReadableStream]", "[]"},
+            FF = {"200", "null", "[]"},
+            FF_ESR = {"200", "null", "[]"})
+    @HtmlUnitNYI(CHROME = {"200", "null", "[]"},
+            EDGE = {"200", "null", "[]"})
+    public void head() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + URL_SECOND + "', {method: 'HEAD'})\n"
+            + "    .then(r => { log(r.status); log(r.body); return r.text(); })\n"
+            + "    .then(t => log('[' + t + ']'))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "content", MimeType.TEXT_PLAIN);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+
+        assertEquals("HEAD", getMockWebConnection().getLastWebRequest().getHttpMethod().name());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"200",
+             "true",
+             "§§URL§§target",
+             "target content"})
+    public void redirectFollow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + URL_FIRST + "redirect', {method: 'POST', body: 'x'})\n"
+            + "    .then(r => { log(r.status); log(r.redirected); log(r.url); return r.text(); })\n"
+            + "    .then(t => log(t))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", "/target"));
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "redirect"), "", 302, "Found",
+                MimeType.TEXT_PLAIN, headers);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "target"), "target content",
+                MimeType.TEXT_PLAIN);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+
+        // 302 for POST switches to GET
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        assertEquals(new URL(URL_FIRST, "target"), lastRequest.getUrl());
+        assertEquals("GET", lastRequest.getHttpMethod().name());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError",
+             "opaqueredirect 0 [] false false",
+             "§§URL§§redirect",
+             "null",
+             "null"})
+    public void redirectErrorAndManual() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + URL_FIRST + "redirect', {redirect: 'error'})\n"
+            + "    .then(r => log(r.status), e => logEx(e))\n"
+            + "    .then(() => fetch('" + URL_FIRST + "redirect', {redirect: 'manual'}))\n"
+            + "    .then(r => {\n"
+            + "      log(r.type + ' ' + r.status + ' [' + r.statusText + '] ' + r.ok + ' ' + r.redirected);\n"
+            + "      log(r.url);\n"
+            + "      log(r.headers.get('location'));\n"
+            + "      log(r.body);\n"
+            + "    })\n"
+            + "    .catch(e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", "/target"));
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "redirect"), "", 302, "Found",
+                MimeType.TEXT_PLAIN, headers);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "target"), "target content",
+                MimeType.TEXT_PLAIN);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"AbortError",
+             "my reason"})
+    public void abortBeforeFetch() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + URL_SECOND + "', {signal: AbortSignal.abort()})\n"
+            + "    .then(r => log(r.status), e => log(e.name))\n"
+            + "    .then(() => fetch('" + URL_SECOND + "', {signal: AbortSignal.abort('my reason')}))\n"
+            + "    .then(r => log(r.status), e => log(e));\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "x", MimeType.TEXT_PLAIN);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"aborted",
+             "AbortError"})
+    public void abortWhileRunning() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const ctrl = new AbortController();\n"
+            + "  fetch('" + URL_SECOND + "', {signal: ctrl.signal})\n"
+            + "    .then(r => log(r.status), e => log(e.name));\n"
+            + "  ctrl.abort();\n"
+            + "  log('aborted');\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "x", MimeType.TEXT_PLAIN);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true",
+             "TypeError",
+             "TypeError",
+             "TypeError",
+             "TypeError"})
+    public void invalidArguments() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let p;\n"
+            + "  try { p = fetch(); log(p instanceof Promise); } catch (e) { logEx(e); }\n"
+            + "  p.then(r => log(r.status), e => logEx(e))\n"
+            + "    .then(() => fetch('http://user:pwd@localhost/'))\n"
+            + "    .then(r => log(r.status), e => logEx(e))\n"
+            + "    .then(() => fetch('" + URL_SECOND + "', {method: 'CONNECT'}))\n"
+            + "    .then(r => log(r.status), e => logEx(e))\n"
+            + "    .then(() => fetch('about:blank'))\n"
+            + "    .then(r => log(r.status), e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"200 basic text/plain;charset=utf-8",
+             "Hello World"})
+    @HtmlUnitNYI(CHROME = {"200 basic text/plain;charset=UTF-8", "Hello World"},
+            EDGE = {"200 basic text/plain;charset=UTF-8", "Hello World"},
+            FF = {"200 basic text/plain;charset=UTF-8", "Hello World"},
+            FF_ESR = {"200 basic text/plain;charset=UTF-8", "Hello World"})
+    public void dataUrl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('data:text/plain;charset=utf-8,Hello%20World')\n"
+            + "    .then(r => {\n"
+            + "      log(r.status + ' ' + r.type + ' ' + r.headers.get('content-type'));\n"
+            + "      return r.text();\n"
+            + "    })\n"
+            + "    .then(t => log(t))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("200")
+    public void requestHeaders() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + URL_SECOND + "', {method: 'POST', body: 'x', headers: {'X-Custom': 'v'}})\n"
+            + "    .then(r => log(r.status))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "x", MimeType.TEXT_PLAIN);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        assertEquals("*/*", lastRequest.getAdditionalHeader(HttpHeader.ACCEPT));
+        assertEquals("v", lastRequest.getAdditionalHeader("X-Custom"));
+        assertEquals(URL_FIRST.toExternalForm(), lastRequest.getAdditionalHeader(HttpHeader.REFERER));
+        assertEquals("http://localhost:" + PORT, lastRequest.getAdditionalHeader(HttpHeader.ORIGIN));
+        assertTrue(lastRequest.getAdditionalHeader(HttpHeader.CONTENT_TYPE).startsWith("text/plain"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError",
+            FF = {},
+            FF_ESR = {})
+    @HtmlUnitNYI(FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void crossOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + URL_CROSS_ORIGIN + "')\n"
+            + "    .then(r => log(r.status), e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 }

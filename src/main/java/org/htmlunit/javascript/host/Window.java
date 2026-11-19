@@ -63,6 +63,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeConsole.Level;
 import org.htmlunit.corejs.javascript.NativeObject;
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Slot;
@@ -111,6 +112,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.event.UIEvent;
+import org.htmlunit.javascript.host.fetch.Fetch;
 import org.htmlunit.javascript.host.html.DocumentProxy;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLDocument;
@@ -294,6 +296,19 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @Override
     public String btoa(final String stringToEncode) {
         return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode, this);
+    }
+
+    /**
+     * Starts the process of fetching a resource from the network.
+     *
+     * @param input the resource to fetch - a url or a {@code Request}
+     * @param init the options (optional)
+     * @return a promise for the {@code Response}
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch">MDN Documentation</a>
+     */
+    @JsxFunction
+    public NativePromise fetch(final Object input, final Object init) {
+        return Fetch.fetch(this, input, init);
     }
 
     /**
