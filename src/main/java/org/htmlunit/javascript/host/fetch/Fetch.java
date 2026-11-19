@@ -36,10 +36,8 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
 import org.htmlunit.ReferrerPolicy;
-import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebRequest.FetchMode;
-import org.htmlunit.WebRequest.HttpHint;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.BaseFunction;
@@ -57,15 +55,14 @@ import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.abort.AbortSignal;
-import org.htmlunit.javascript.host.xml.XMLHttpRequest;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
 /**
  * The implementation of {@code fetch()}.
  *
- * <p>Supported are requests to the origin of the page (and data: and blob: urls); requests to
- * other origins are rejected for the moment (CORS support is not implemented yet).</p>
+ * <p>Requests to other origins are supported in the mode 'cors' only; the mode 'no-cors'
+ * (opaque responses) is not implemented yet.</p>
  *
  * @see <a href="https://fetch.spec.whatwg.org/#fetch-method">Fetch Standard - fetch()</a>
  * @author Ronald Brill
@@ -73,8 +70,6 @@ import org.htmlunit.util.UrlUtils;
 public final class Fetch {
 
     private static final Log LOG = LogFactory.getLog(Fetch.class);
-
-    private static final int MAX_REDIRECTS = 20;
 
     private Fetch() {
         // util class
@@ -214,15 +209,10 @@ public final class Fetch {
             webRequest.setAdditionalHeader(header.getName(), header.getValue());
         }
 
-        // the Origin header is sent for all methods but GET and HEAD
-        if (method != HttpMethod.GET && method != HttpMethod.HEAD
+        // the Origin header is sent for requests to other origins and for all methods but GET and HEAD
+        if ((!isSameOrigin(originUrl, url) || method != HttpMethod.GET && method != HttpMethod.HEAD)
                 && ("http".equals(originUrl.getProtocol()) || "https".equals(originUrl.getProtocol()))) {
-            final StringBuilder origin = new StringBuilder().append(originUrl.getProtocol()).append("://")
-                    .append(originUrl.getHost());
-            if (originUrl.getPort() != -1) {
-                origin.append(':').append(originUrl.getPort());
-            }
-            webRequest.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
+            webRequest.setAdditionalHeader(HttpHeader.ORIGIN, CorsLoader.serializeOrigin(originUrl));
         }
 
         final FetchBody body = request.getFetchBody();
@@ -230,9 +220,6 @@ public final class Fetch {
             setRequestBody(webRequest, body.getBytes());
         }
 
-        if ("omit".equals(request.getCredentials())) {
-            webRequest.addHint(HttpHint.BlockCookies);
-        }
         return webRequest;
     }
 
@@ -281,12 +268,33 @@ public final class Fetch {
         }
 
         if (!UrlUtils.isSameOrigin(originUrl, url)) {
-            if (LOG.isWarnEnabled() && !"same-origin".equals(mode)) {
-                LOG.warn("fetch(): requests to other origins are not supported yet (" + url + ").");
+            if ("no-cors".equals(mode)) {
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("fetch(): requests to other origins with mode 'no-cors' are not supported yet ("
+                            + url + ").");
+                }
+                return false;
             }
-            return false;
+            // 'same-origin' does not allow other origins
+            return "cors".equals(mode);
         }
         return true;
+    }
+
+    /**
+     * Returns whether the url has the origin of the page (data: urls and same origin blob: urls too).
+     *
+     * @param originUrl the url of the origin of the page
+     * @param url the url
+     * @return whether the url has the origin of the page
+     */
+    static boolean isSameOrigin(final URL originUrl, final URL url) {
+        final String protocol = url.getProtocol();
+        if ("data".equals(protocol) || "blob".equals(protocol)) {
+            // only same origin blob urls are supported (see isSupportedUrl())
+            return true;
+        }
+        return UrlUtils.isSameOrigin(originUrl, url);
     }
 
     private static FetchMode toFetchMode(final String mode) {
@@ -301,12 +309,6 @@ public final class Fetch {
         final Function ctor = (Function) ScriptableObject.getProperty(scope, "Promise");
         final Function reject = (Function) ScriptableObject.getProperty(ctor, "reject");
         return (NativePromise) reject.call(Context.getCurrentContext(), scope, ctor, new Object[] {reason});
-    }
-
-    /**
-     * The result of the network part.
-     */
-    private record NetworkResult(WebResponse response, URL url, boolean redirected, boolean opaqueRedirect) {
     }
 
     /**
@@ -373,10 +375,11 @@ public final class Fetch {
         }
 
         private void load(final WebWindow webWindow, final WebRequest webRequest) {
-            final NetworkResult result;
+            final CorsLoader.Result result;
             final byte[] content;
+            final boolean includeCredentials = "include".equals(request_.getCredentials());
             try {
-                result = loadFollowingRedirects(webWindow, webRequest);
+                result = loadResponse(webWindow, webRequest);
                 content = result.opaqueRedirect() ? null : readContent(result.response());
             }
             catch (final IOException e) {
@@ -399,80 +402,53 @@ public final class Fetch {
                         false, 0, "", new ArrayList<>(), null);
             }
             else {
-                // like the browsers, the cookie headers are not exposed
+                // the cookie headers are never exposed; for responses of other origins only the
+                // CORS-safelisted and the exposed headers are visible
                 final List<NameValuePair> headers = new ArrayList<>();
                 for (final NameValuePair header : webResponse.getResponseHeaders()) {
-                    final String name = header.getName();
-                    if (!"set-cookie".equalsIgnoreCase(name) && !"set-cookie2".equalsIgnoreCase(name)) {
+                    if (CorsLoader.isExposedResponseHeader(webResponse, header.getName(),
+                            result.corsTainting(), includeCredentials)) {
                         headers.add(header);
                     }
                 }
-                response = Response.createNetworkResponse(window_, "basic", toResponseUrl(result.url()),
-                        result.redirected(), status, webResponse.getStatusMessage(), headers, body);
+                response = Response.createNetworkResponse(window_, result.corsTainting() ? "cors" : "basic",
+                        toResponseUrl(result.url()), result.redirected(), status, webResponse.getStatusMessage(),
+                        headers, body);
             }
             webResponse.cleanUp();
 
             settle(resolve_, response, true);
         }
 
-        private NetworkResult loadFollowingRedirects(final WebWindow webWindow, final WebRequest webRequest)
+        private CorsLoader.Result loadResponse(final WebWindow webWindow, final WebRequest webRequest)
                 throws IOException {
-            final WebClient wc = webWindow.getWebClient();
-            final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
-            final URL originUrl = webRequest.getRequestingUrl();
-            final boolean blockCookies = webRequest.hasHint(HttpHint.BlockCookies);
+            final CorsLoader.CredentialsMode credentialsMode = switch (request_.getCredentials()) {
+                case "omit" -> CorsLoader.CredentialsMode.OMIT;
+                case "include" -> CorsLoader.CredentialsMode.INCLUDE;
+                default -> CorsLoader.CredentialsMode.SAME_ORIGIN;
+            };
+            final CorsLoader.RedirectMode redirectMode = switch (request_.getRedirect()) {
+                case "error" -> CorsLoader.RedirectMode.ERROR;
+                case "manual" -> CorsLoader.RedirectMode.MANUAL;
+                default -> CorsLoader.RedirectMode.FOLLOW;
+            };
+            final CorsLoader loader = new CorsLoader(webWindow, credentialsMode, redirectMode, 0,
+                    "same-origin".equals(request_.getMode()));
 
-            WebRequest current = webRequest;
-            for (int redirects = 0;; redirects++) {
-                ensureConnectionAllowed(page, current.getUrl(), webRequest.getUrl());
+            final URL url = webRequest.getUrl();
+            loader.ensureConnectionAllowed(url, url);
 
-                // the redirects are handled here, the web client has to return the response as it is
-                current.addHint(HttpHint.DoNotFollowRedirects);
-                if (blockCookies) {
-                    current.addHint(HttpHint.BlockCookies);
+            final boolean sameOrigin = isSameOrigin(webRequest.getRequestingUrl(), url);
+            if (!sameOrigin && CorsLoader.isPreflight(webRequest)) {
+                final WebResponse preflightResponse = loader.sendPreflight(webRequest);
+                if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
+                        || !loader.isPreflightAuthorized(webRequest, preflightResponse)) {
+                    throw new CorsLoader.NoPermittedHeaderException(
+                            "No permitted \"Access-Control-Allow-Origin\" header.");
                 }
-
-                final WebResponse response = wc.loadWebResponse(current);
-                final URL currentUrl = current.getUrl();
-                URL nextUrl = wc.getOptions().isRedirectEnabled()
-                        ? XMLHttpRequest.getRedirectUrl(response, currentUrl)
-                        : null;
-                if (nextUrl == null) {
-                    return new NetworkResult(response, currentUrl, redirects > 0, false);
-                }
-
-                final String redirectMode = request_.getRedirect();
-                if ("error".equals(redirectMode)) {
-                    response.cleanUp();
-                    throw new IOException("Redirect for '" + currentUrl + "' with redirect mode 'error'.");
-                }
-                if ("manual".equals(redirectMode)) {
-                    return new NetworkResult(response, currentUrl, redirects > 0, true);
-                }
-                if (redirects >= MAX_REDIRECTS) {
-                    response.cleanUp();
-                    throw new IOException("Too many redirects for " + webRequest.getUrl());
-                }
-                response.cleanUp();
-
-                nextUrl = ContentSecurityPolicy.upgradeInsecureRequest(page, nextUrl);
-                if (!UrlUtils.isSameOrigin(originUrl, nextUrl)) {
-                    if (LOG.isWarnEnabled()) {
-                        LOG.warn("fetch(): redirects to other origins are not supported yet (" + nextUrl + ").");
-                    }
-                    throw new IOException("Redirect to another origin '" + nextUrl + "'.");
-                }
-
-                current = XMLHttpRequest.createRedirectRequest(current, response.getStatusCode(), nextUrl, false);
             }
-        }
 
-        private static void ensureConnectionAllowed(final HtmlPage page, final URL url, final URL reportedUrl)
-                throws IOException {
-            if (!ContentSecurityPolicy.allowsConnection(page, url, reportedUrl)) {
-                throw new IOException("Refused to connect to '" + url
-                        + "' because it violates the Content Security Policy of the page.");
-            }
+            return loader.load(webRequest, sameOrigin);
         }
 
         private static byte[] readContent(final WebResponse webResponse) throws IOException {

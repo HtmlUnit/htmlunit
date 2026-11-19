@@ -14,11 +14,9 @@
  */
 package org.htmlunit.javascript.host.xml;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
 import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
-import static org.htmlunit.BrowserVersionFeatures.XHR_PREFLIGHT_CORS;
 import static org.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TEXT_EMPTY_UNSENT;
 import static org.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -38,9 +36,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -92,6 +87,7 @@ import org.htmlunit.javascript.host.dom.DOMParser;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.ProgressEvent;
+import org.htmlunit.javascript.host.fetch.CorsLoader;
 import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.EncodingSniffer;
@@ -128,11 +124,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
 
-    // https://fetch.spec.whatwg.org/#cors-safelisted-response-header-name
-    private static final Set<String> CORS_SAFELISTED_RESPONSE_HEADERS = Set.of(
-            "cache-control", "content-language", "content-length", "content-type",
-            "expires", "last-modified", "pragma");
-
     /** The object has been created, but not initialized (the {@code open()} method has not been called). */
     @JsxConstant
     public static final int UNSENT = 0;
@@ -159,10 +150,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private static final String RESPONSE_TYPE_DOCUMENT = "document";
     private static final String RESPONSE_TYPE_JSON = "json";
     private static final String RESPONSE_TYPE_TEXT = "text";
-
-    private static final String ALLOW_ORIGIN_ALL = "*";
-
-    private static final int MAX_REDIRECTS = 20;
 
     private static final HashSet<String> PROHIBITED_HEADERS_ = new HashSet<>(Arrays.asList(
         "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
@@ -506,8 +493,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 LOG.debug("XMLHttpRequest.responseXML returns because of a network error ("
                         + resp.getError() + ")");
             }
-            if (resp.getError() instanceof NoPermittedHeaderException
-                    || resp.getError() instanceof RedirectException) {
+            if (resp.getError() instanceof CorsLoader.NoPermittedHeaderException
+                    || resp.getError() instanceof CorsLoader.RedirectException) {
                 return "";
             }
             return null;
@@ -720,54 +707,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Set-Cookie and Set-Cookie2 are never exposed to scripts, otherwise HttpOnly cookies are readable.
-     *
-     * @see <a href="https://fetch.spec.whatwg.org/#forbidden-response-header-name">Fetch Standard</a>
-     * @param name the header name
-     * @return {@code true} if the header is a forbidden response header
-     */
-    private static boolean isForbiddenResponseHeader(final String name) {
-        return "set-cookie".equalsIgnoreCase(name) || "set-cookie2".equalsIgnoreCase(name);
-    }
-
-    /**
-     * Returns whether the response header is visible for scripts. Forbidden response headers are never
-     * visible; for a response of a cross-origin request (response tainting 'cors') only the CORS-safelisted
-     * response headers and the headers listed in Access-Control-Expose-Headers are visible.
+     * Returns whether the response header is visible for scripts.
      *
      * @param name the header name
      * @return {@code true} if the header is visible
-     * @see <a href="https://fetch.spec.whatwg.org/#concept-filtered-response-cors">Fetch Standard - CORS filtered
-     *     response</a>
      */
     private boolean isExposedResponseHeader(final String name) {
-        if (isForbiddenResponseHeader(name)) {
-            return false;
-        }
-        if (!corsResponseTainting_) {
-            return true;
-        }
-
-        if (name == null) {
-            return false;
-        }
-        final String nameLC = name.toLowerCase(Locale.ROOT);
-        if (CORS_SAFELISTED_RESPONSE_HEADERS.contains(nameLC)) {
-            return true;
-        }
-
-        for (final NameValuePair header : webResponse_.getResponseHeaders()) {
-            if (HttpHeader.ACCESS_CONTROL_EXPOSE_HEADERS.equalsIgnoreCase(header.getName())) {
-                for (final String token : StringUtils.splitAtComma(header.getValue())) {
-                    final String exposed = token.trim();
-                    // the wildcard is a header name for requests with credentials
-                    if (exposed.equalsIgnoreCase(name) || ("*".equals(exposed) && !isWithCredentials())) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return CorsLoader.isExposedResponseHeader(webResponse_, name, corsResponseTainting_, isWithCredentials());
     }
 
     /**
@@ -1083,12 +1029,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         final BrowserVersion browserVersion = getBrowserVersion();
         try {
-            ensureConnectionAllowed(webWindow, webRequest_.getUrl());
+            final CorsLoader loader = new CorsLoader(webWindow,
+                    isWithCredentials() ? CorsLoader.CredentialsMode.INCLUDE : CorsLoader.CredentialsMode.SAME_ORIGIN,
+                    CorsLoader.RedirectMode.FOLLOW, timeout_);
+            loader.ensureConnectionAllowed(webRequest_.getUrl(), webRequest_.getUrl());
 
-            if (!isSameOrigin_ && isPreflight(webRequest_)) {
-                final WebResponse preflightResponse = sendPreflight(wc, webRequest_);
+            if (!isSameOrigin_ && CorsLoader.isPreflight(webRequest_)) {
+                final WebResponse preflightResponse = loader.sendPreflight(webRequest_);
                 if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
-                        || !isPreflightAuthorized(webRequest_, preflightResponse)) {
+                        || !loader.isPreflightAuthorized(webRequest_, preflightResponse)) {
                     setState(DONE);
                     if (async_ || browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
                         fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
@@ -1108,7 +1057,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             // follows the redirects like the fetch standard describes it
             // and checks the CORS headers of all responses of a cross origin request
-            webResponse_ = loadWebResponseFollowingRedirects(wc);
+            webResponse_ = loadWebResponseFollowingRedirects(loader);
             LOG.debug("Web response loaded successfully.");
 
             if (overriddenMimeType_ != null) {
@@ -1204,403 +1153,17 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Checks the connect-src directive of the Content-Security-Policy of the page.
+     * Loads the response of the request (following the redirects) and checks the CORS headers.
      *
-     * @param webWindow the window
-     * @param url the url to connect to (the request url or a redirect target)
-     * @throws IOException if the connection is not allowed
-     */
-    private void ensureConnectionAllowed(final WebWindow webWindow, final URL url) throws IOException {
-        if (webWindow != null
-                && webWindow.getEnclosedPage() instanceof HtmlPage page
-                && !ContentSecurityPolicy.allowsConnection(page, url, webRequest_.getUrl())) {
-            throw new IOException("Refused to connect to '" + url
-                    + "' because it violates the Content Security Policy of the page.");
-        }
-    }
-
-    /**
-     * Loads the response of the request and follows the redirects the way the
-     * <a href="https://fetch.spec.whatwg.org/#http-redirect-fetch">fetch standard</a> describes it for a
-     * request in cors mode:.
-     * <ul>
-     *   <li>only http and https locations are followed, not more than {@value #MAX_REDIRECTS} times</li>
-     *   <li>as soon as a url of another origin is involved, all responses (also the ones that redirect)
-     *       have to pass the CORS check and cookies are only sent if credentials are used</li>
-     *   <li>the Origin header is the one of the page; after a redirect from one foreign origin to another
-     *       one it is 'null'</li>
-     *   <li>a redirect to a foreign url with credentials is a network error</li>
-     *   <li>301/302 (for POST) and 303 switch to GET and drop the body; 307/308 keep method and body</li>
-     *   <li>the Authorization header and the credentials of the request are dropped if the redirect
-     *       leaves the origin</li>
-     * </ul>
-     *
-     * @param wc the web client
+     * @param loader the loader
      * @return the final response
      * @throws IOException in case of a network error
      */
-    private WebResponse loadWebResponseFollowingRedirects(final WebClient wc) throws IOException {
-        final URL pageUrl = webRequest_.getRequestingUrl();
-        final String pageOrigin = serializeOrigin(pageUrl);
-
-        WebRequest request = webRequest_;
-        // the response tainting 'cors' of the fetch standard: as soon as an url of another origin is involved
-        boolean corsTainting = !isSameOrigin_;
+    private WebResponse loadWebResponseFollowingRedirects(final CorsLoader loader) throws IOException {
         corsResponseTainting_ = false;
-        // the origin of the request is 'null' after a redirect from one foreign origin to another one
-        boolean taintedOrigin = false;
-
-        for (int redirects = 0;; redirects++) {
-            // the redirects are handled here, the web client has to return the response as it is
-            request.addHint(HttpHint.DoNotFollowRedirects);
-            if (corsTainting && !isWithCredentials()) {
-                // Cookies should not be sent for cross-origin requests when withCredentials is false
-                request.addHint(HttpHint.BlockCookies);
-            }
-
-            final WebResponse response = wc.loadWebResponse(request);
-            final String originHeader = request.getAdditionalHeaders().get(HttpHeader.ORIGIN);
-            final URL currentUrl = request.getUrl();
-
-            URL nextUrl = wc.getOptions().isRedirectEnabled() ? getRedirectUrl(response, currentUrl) : null;
-            // upgrade-insecure-requests of the Content-Security-Policy
-            if (nextUrl != null && getWindow().getWebWindow().getEnclosedPage() instanceof HtmlPage page) {
-                nextUrl = ContentSecurityPolicy.upgradeInsecureRequest(page, nextUrl);
-            }
-
-            // each response of a cors request has to pass the check, also the one that redirects
-            if (corsTainting && !isCorsAllowed(response, originHeader)) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + currentUrl);
-                }
-                throw new NoPermittedHeaderException("No permitted \"Access-Control-Allow-Origin\" header.");
-            }
-
-            if (nextUrl == null) {
-                corsResponseTainting_ = corsTainting;
-                return response;
-            }
-
-            if (redirects >= MAX_REDIRECTS) {
-                throw new RedirectException("Too many redirects for " + webRequest_.getUrl());
-            }
-
-            ensureConnectionAllowed(getWindow().getWebWindow(), nextUrl);
-
-            final boolean crossOriginRedirect = !UrlUtils.isSameOrigin(currentUrl, nextUrl);
-            final boolean foreignTarget = !UrlUtils.isSameOrigin(pageUrl, nextUrl);
-            if (nextUrl.getUserInfo() != null && (corsTainting || foreignTarget)) {
-                throw new RedirectException("Redirect to a URL with credentials is not allowed: " + currentUrl);
-            }
-
-            if (crossOriginRedirect && !UrlUtils.isSameOrigin(pageUrl, currentUrl)) {
-                taintedOrigin = true;
-            }
-            corsTainting = corsTainting || foreignTarget;
-
-            request = createRedirectRequest(request, response.getStatusCode(), nextUrl, crossOriginRedirect);
-            setOriginHeader(request, corsTainting, taintedOrigin, pageOrigin);
-
-            if (corsTainting && isPreflight(request)) {
-                final WebResponse preflightResponse = sendPreflight(wc, request);
-                if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
-                        || !isPreflightAuthorized(request, preflightResponse)) {
-                    throw new NoPermittedHeaderException("No permitted \"Access-Control-Allow-Origin\" header.");
-                }
-            }
-        }
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Returns the url a response redirects to.
-     *
-     * @param response the response
-     * @param currentUrl the url the response was loaded from
-     * @return the url or {@code null} if the response is not a redirect (or has no location)
-     * @throws IOException if the location is invalid or not a http(s) url
-     */
-    public static URL getRedirectUrl(final WebResponse response, final URL currentUrl) throws IOException {
-        final int status = response.getStatusCode();
-        if (status != 301 && status != 302 && status != 303 && status != 307 && status != 308) {
-            return null;
-        }
-
-        String location = response.getResponseHeaderValue("Location");
-        if (location == null) {
-            return null;
-        }
-        location = new String(location.getBytes(ISO_8859_1), UTF_8);
-
-        final URL url;
-        try {
-            url = WebClient.expandUrl(currentUrl, location);
-        }
-        catch (final MalformedURLException e) {
-            throw new RedirectException("Invalid redirect location '" + location + "'", e);
-        }
-
-        final String protocol = url.getProtocol();
-        if (!"http".equals(protocol) && !"https".equals(protocol)) {
-            throw new RedirectException("Redirect to the unsupported scheme '" + protocol + "' is not allowed.");
-        }
-        return url;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Creates the request for the target of a redirect.
-     *
-     * @param request the request that was redirected
-     * @param status the status of the redirect response
-     * @param url the target of the redirect
-     * @param crossOriginRedirect whether the redirect leaves the origin of the request
-     * @return the new request
-     */
-    public static WebRequest createRedirectRequest(final WebRequest request, final int status,
-            final URL url, final boolean crossOriginRedirect) {
-        final HttpMethod method = request.getHttpMethod();
-        final boolean toGet = ((status == 301 || status == 302) && method == HttpMethod.POST)
-                || (status == 303 && method != HttpMethod.GET && method != HttpMethod.HEAD);
-
-        final WebRequest next = new WebRequest(url, toGet ? HttpMethod.GET : method);
-        next.setCharset(request.getCharset());
-        next.setDefaultResponseContentCharset(request.getDefaultResponseContentCharset());
-        next.setFetchDestination(request.getFetchDestination());
-        next.setFetchModeOverride(request.getFetchModeOverride());
-        next.setRequestingUrl(request.getRequestingUrl());
-        next.setSiteForCookies(request.getSiteForCookies());
-        next.setTimeout(request.getTimeout());
-        if (request.hasHint(HttpHint.IncludeCharsetInContentTypeHeader)) {
-            next.addHint(HttpHint.IncludeCharsetInContentTypeHeader);
-        }
-
-        for (final Entry<String, String> header : request.getAdditionalHeaders().entrySet()) {
-            next.setAdditionalHeader(header.getKey(), header.getValue());
-        }
-
-        if (toGet) {
-            // the body is gone, and the headers that describe it
-            next.removeAdditionalHeader(HttpHeader.CONTENT_TYPE);
-            next.removeAdditionalHeader("Content-Length");
-            next.removeAdditionalHeader("Content-Encoding");
-            next.removeAdditionalHeader("Content-Language");
-            next.removeAdditionalHeader("Content-Location");
-        }
-        else if (request.getRequestBody() != null) {
-            next.setRequestBody(request.getRequestBody());
-            next.setEncodingType(request.getEncodingType());
-        }
-        else if (!request.getRequestParameters().isEmpty()) {
-            next.setRequestParameters(request.getRequestParameters());
-        }
-
-        if (crossOriginRedirect) {
-            // credentials are not forwarded to another origin
-            next.removeAdditionalHeader("Authorization");
-        }
-        else {
-            next.setCredentials(request.getCredentials());
-        }
-        return next;
-    }
-
-    /**
-     * The Origin header is sent for requests of another origin and for all methods but GET and HEAD.
-     */
-    private static void setOriginHeader(final WebRequest request, final boolean corsTainting,
-            final boolean taintedOrigin, final String pageOrigin) {
-        final HttpMethod method = request.getHttpMethod();
-        if (corsTainting || (method != HttpMethod.GET && method != HttpMethod.HEAD)) {
-            request.setAdditionalHeader(HttpHeader.ORIGIN, taintedOrigin ? "null" : pageOrigin);
-        }
-        else {
-            request.removeAdditionalHeader(HttpHeader.ORIGIN);
-        }
-    }
-
-    private static String serializeOrigin(final URL url) {
-        final StringBuilder origin = new StringBuilder().append(url.getProtocol()).append("://")
-                .append(url.getHost());
-        if (url.getPort() != -1) {
-            origin.append(':').append(url.getPort());
-        }
-        return origin.toString();
-    }
-
-    /**
-     * The CORS check of the fetch standard.
-     */
-    private boolean isCorsAllowed(final WebResponse response, final String origin) {
-        String value = response.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
-        final boolean allowed = origin != null && origin.equals(value);
-        if (isWithCredentials()) {
-            // second step: check the allow-credentials header for true
-            value = response.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
-            return allowed && Boolean.parseBoolean(value);
-        }
-        return allowed || ALLOW_ORIGIN_ALL.equals(value);
-    }
-
-    /**
-     * Sends the preflight request for the given request.
-     */
-    private WebResponse sendPreflight(final WebClient wc, final WebRequest request) throws IOException {
-        final WebRequest preflightRequest = new WebRequest(request.getUrl(), HttpMethod.OPTIONS);
-        preflightRequest.setEncodingType(null);
-
-        // preflight request shouldn't have cookies
-        preflightRequest.addHint(HttpHint.BlockCookies);
-
-        // header origin
-        final String originHeaderValue = request.getAdditionalHeaders().get(HttpHeader.ORIGIN);
-        preflightRequest.setAdditionalHeader(HttpHeader.ORIGIN, originHeaderValue);
-
-        // header request-method
-        preflightRequest.setAdditionalHeader(
-                HttpHeader.ACCESS_CONTROL_REQUEST_METHOD,
-                request.getHttpMethod().name());
-
-        // header request-headers
-        final StringBuilder builder = new StringBuilder();
-        for (final Entry<String, String> header
-                : new TreeMap<>(request.getAdditionalHeaders()).entrySet()) {
-            final String name = org.htmlunit.util.StringUtils
-                                    .toRootLowerCase(header.getKey());
-            if (isPreflightHeader(name, header.getValue())) {
-                if (builder.length() != 0) {
-                    builder.append(',');
-                }
-                builder.append(name);
-            }
-        }
-        preflightRequest.setAdditionalHeader(HttpHeader.ACCESS_CONTROL_REQUEST_HEADERS, builder.toString());
-        if (timeout_ > 0) {
-            preflightRequest.setTimeout(timeout_);
-        }
-
-        if (getBrowserVersion().hasFeature(XHR_PREFLIGHT_CORS)) {
-            // preflightRequest.setFetchModeOverride(FetchMode.CORS);
-            preflightRequest.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "cors");
-        }
-
-        final HtmlPage containingPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
-        preflightRequest.setRefererHeader(containingPage.getUrl());
-        preflightRequest.setReferrerPolicy(containingPage.getReferrerPolicy());
-
-        // do the preflight request
-        return wc.loadWebResponse(preflightRequest);
-    }
-
-    private static boolean isPreflight(final WebRequest request) {
-        final HttpMethod method = request.getHttpMethod();
-        if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST) {
-            return true;
-        }
-        for (final Entry<String, String> header : request.getAdditionalHeaders().entrySet()) {
-            if (isPreflightHeader(header.getKey().toLowerCase(Locale.ROOT), header.getValue())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isPreflightAuthorized(final WebRequest request, final WebResponse preflightResponse) {
-        // the preflight response has to pass the CORS check too; for a request with credentials
-        // this requires the exact origin and Access-Control-Allow-Credentials
-        if (!isCorsAllowed(preflightResponse, request.getAdditionalHeaders().get(HttpHeader.ORIGIN))) {
-            return false;
-        }
-
-        // the wildcard is not supported for requests with credentials
-        final boolean wildcard = !isWithCredentials();
-
-        final HttpMethod method = request.getHttpMethod();
-        if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST
-                && !isPreflightMethodAllowed(method.name(), preflightResponse, wildcard)) {
-            return false;
-        }
-
-        // there is no test case for this because the servlet API has no support
-        // for adding the same header twice
-        final HashSet<String> accessControlValues = new HashSet<>();
-        for (final NameValuePair pair : preflightResponse.getResponseHeaders()) {
-            if (HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS.equalsIgnoreCase(pair.getName())) {
-                String value = pair.getValue();
-                if (value != null) {
-                    if (wildcard && ALLOW_ORIGIN_ALL.equals(value)) {
-                        // all headers are allowed
-                        return true;
-                    }
-                    value = org.htmlunit.util.StringUtils.toRootLowerCase(value);
-                    final String[] values = org.htmlunit.util.StringUtils.splitAtComma(value);
-                    for (String part : values) {
-                        part = part.trim();
-                        if (!org.htmlunit.util.StringUtils.isEmptyOrNull(part)) {
-                            accessControlValues.add(part);
-                        }
-                    }
-                }
-            }
-        }
-
-        for (final Entry<String, String> header : request.getAdditionalHeaders().entrySet()) {
-            final String key = org.htmlunit.util.StringUtils.toRootLowerCase(header.getKey());
-            if (isPreflightHeader(key, header.getValue())
-                    && !accessControlValues.contains(key)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Checks whether the given method is listed in the Access-Control-Allow-Methods header
-     * of the preflight response (the method names are case-sensitive).
-     *
-     * @param method the method name
-     * @param preflightResponse the preflight response
-     * @param wildcard whether the wildcard '*' allows all methods
-     * @return {@code true} if the method is allowed
-     */
-    private static boolean isPreflightMethodAllowed(final String method, final WebResponse preflightResponse,
-            final boolean wildcard) {
-        for (final NameValuePair pair : preflightResponse.getResponseHeaders()) {
-            if (HttpHeader.ACCESS_CONTROL_ALLOW_METHODS.equalsIgnoreCase(pair.getName())
-                    && pair.getValue() != null) {
-                for (final String part : StringUtils.splitAtComma(pair.getValue())) {
-                    final String allowed = part.trim();
-                    if (method.equals(allowed) || (wildcard && ALLOW_ORIGIN_ALL.equals(allowed))) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Checks whether the given header name requires a preflight request.
-     *
-     * @param name the header name (MUST be lower-case for performance reasons)
-     * @param value the header value
-     * @return {@code true} if this header requires a preflight
-     */
-    private static boolean isPreflightHeader(final String name, final String value) {
-        if (HttpHeader.CONTENT_TYPE_LC.equals(name)) {
-            final String lcValue = value.toLowerCase(Locale.ROOT);
-            return !lcValue.startsWith(FormEncodingType.URL_ENCODED.getName())
-                    && !lcValue.startsWith(FormEncodingType.MULTIPART.getName())
-                    && !lcValue.startsWith(FormEncodingType.TEXT_PLAIN.getName());
-        }
-        return !(HttpHeader.ACCEPT_LC.equals(name)
-                || HttpHeader.ACCEPT_LANGUAGE_LC.equals(name)
-                || HttpHeader.CONTENT_LANGUAGE_LC.equals(name)
-                || HttpHeader.REFERER_LC.equals(name)
-                || "accept-encoding".equals(name)
-                || HttpHeader.ORIGIN_LC.equals(name));
+        final CorsLoader.Result result = loader.load(webRequest_, isSameOrigin_);
+        corsResponseTainting_ = result.corsTainting();
+        return result.response();
     }
 
     /**
@@ -1865,26 +1428,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
          */
         public IOException getError() {
             return error_;
-        }
-    }
-
-    private static final class NoPermittedHeaderException extends IOException {
-        NoPermittedHeaderException(final String msg) {
-            super(msg);
-        }
-    }
-
-    /**
-     * A redirect that is not allowed (or not possible); this is a network error, but
-     * like for the CORS errors the browsers do not hide the (empty) responseText.
-     */
-    private static final class RedirectException extends IOException {
-        RedirectException(final String msg) {
-            super(msg);
-        }
-
-        RedirectException(final String msg, final Throwable cause) {
-            super(msg, cause);
         }
     }
 }

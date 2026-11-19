@@ -33,7 +33,6 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -2093,36 +2092,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         startSecondServer();
         pivot("/pivot", 302, originB() + "/expose?acao=*&aceh=X-Custom");
         loadAndVerify(headersPage("", originA() + "/pivot"));
-    }
-
-    /**
-     * The headers of a fetch() response are filtered the same way.
-     * @throws Exception if the test fails.
-     */
-    @Test
-    @Disabled
-    @Alerts({"abc", "null", "de"})
-    public void exposeHeadersFetch() throws Exception {
-        startSecondServer();
-
-        final String html = DOCTYPE_HTML
-                + "<html><head>\n"
-                + "<script>\n"
-                + LOG_TITLE_FUNCTION
-                + "function test() {\n"
-                + "  fetch('" + originB() + "/expose?acao=*&aceh=X-Custom')\n"
-                + "    .then(function(response) {\n"
-                + "      log(response.headers.get('X-Custom'));\n"
-                + "      log(response.headers.get('X-Other'));\n"
-                + "      log(response.headers.get('Content-Language'));\n"
-                + "    })\n"
-                + "    .catch(function(e) { logEx(e); });\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body onload='test()'></body></html>";
-
-        loadAndVerify(html);
     }
 
     /**

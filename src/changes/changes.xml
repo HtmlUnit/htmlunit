@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri">
+                fetch() supports requests to other origins (CORS) in the mode 'cors': preflight requests,
+                the credentials modes, redirects to other origins and the filtering of the response headers
+                (Access-Control-Expose-Headers); the response type is 'cors'.
+            </action>
             <action type="fix" dev="rbri">
                 The content type of data urls is serialized like the browsers do it (e.g. the charset is no longer
                 normalized and not added if missing; 'text/plain;charset=US-ASCII' for urls without a valid MIME type).
