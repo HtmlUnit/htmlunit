@@ -42,6 +42,7 @@ import org.htmlunit.javascript.host.ReadableStream;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
 import org.htmlunit.javascript.host.abort.AbortSignal;
+import org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -387,6 +388,10 @@ public class Request extends HtmlUnitScriptable {
                     && window.getWebWindow().getEnclosedPage() instanceof HtmlPage page) {
                 return page.getFullyQualifiedUrl(url);
             }
+            // in workers the url of the worker script is the base url
+            if (global instanceof DedicatedWorkerGlobalScope worker && worker.getWorkerUrl() != null) {
+                return UrlUtils.toUrlUnsafe(UrlUtils.resolveUrl(worker.getWorkerUrl(), url));
+            }
             return UrlUtils.toUrlUnsafe(url);
         }
         catch (final MalformedURLException e) {
@@ -397,6 +402,11 @@ public class Request extends HtmlUnitScriptable {
     private static URL getOwnerUrl(final Scriptable ctorObj) {
         final WindowOrWorkerGlobalScope global = getWindowOrWorkerGlobalScope(ctorObj);
         if (global instanceof Window window && window.getWebWindow().getEnclosedPage() instanceof HtmlPage page) {
+            return page.getOriginUrl();
+        }
+        // a worker has the origin of the page that created it
+        if (global instanceof DedicatedWorkerGlobalScope worker
+                && worker.getOwningWindow().getWebWindow().getEnclosedPage() instanceof HtmlPage page) {
             return page.getOriginUrl();
         }
         return UrlUtils.URL_ABOUT_BLANK;

@@ -50,10 +50,12 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.csp.ContentSecurityPolicy;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope;
 import org.htmlunit.javascript.host.abort.AbortSignal;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
@@ -85,33 +87,34 @@ public final class Fetch {
     /**
      * Starts a fetch.
      *
-     * @param window the window
+     * @param global the window or the worker global scope
      * @param input the input - a url or a {@code Request}
      * @param init the init dictionary or {@code undefined}
      * @return the promise for the {@code Response}
      */
-    public static NativePromise fetch(final Window window, final Object input, final Object init) {
-        final VarScope scope = window.getParentScope();
+    public static NativePromise fetch(final HtmlUnitScriptable global, final Object input, final Object init) {
+        final VarScope scope = global.getParentScope();
+        final FetchClient client = FetchClient.of(global);
 
         // like the browsers, all errors are reported by rejecting the promise
         if (JavaScriptEngine.isUndefined(input)) {
             // fetch() without arguments; we can't distinguish this from fetch(undefined)
-            final EcmaError e = JavaScriptEngine.typeError(
-                    "Failed to execute 'fetch' on 'Window': 1 argument required, but only 0 present.");
+            final EcmaError e = JavaScriptEngine.typeError("Failed to execute 'fetch' on '"
+                    + client.globalName() + "': 1 argument required, but only 0 present.");
             return rejectedPromise(scope, JavaScriptEngine.toErrorObject(e, scope));
         }
 
         final Request request;
         final WebRequest webRequest;
         try {
-            request = Request.create(window, input, init);
-            webRequest = createWebRequest(window, request);
+            request = Request.create(global, input, init);
+            webRequest = createWebRequest(client, request);
         }
         catch (final EcmaError e) {
             return rejectedPromise(scope, JavaScriptEngine.toErrorObject(e, scope));
         }
 
-        final PendingFetch pending = new PendingFetch(window, request);
+        final PendingFetch pending = new PendingFetch(client, request);
         final NativePromise promise = pending.createPromise();
 
         final AbortSignal signal = request.getSignal();
@@ -132,12 +135,13 @@ public final class Fetch {
     /**
      * Creates the {@link WebRequest} for the request.
      *
-     * @param window the window
+     * @param client the window or the worker
      * @param request the request
      * @return the web request or {@code null} if the url is not supported (network error)
      */
-    private static WebRequest createWebRequest(final Window window, final Request request) {
-        if (!(window.getWebWindow().getEnclosedPage() instanceof HtmlPage page)) {
+    private static WebRequest createWebRequest(final FetchClient client, final Request request) {
+        final HtmlPage page = client.page();
+        if (page == null) {
             return null;
         }
 
@@ -172,7 +176,7 @@ public final class Fetch {
             accept = "*/*";
         }
         final WebRequest webRequest = new WebRequest(url, accept,
-                                            window.getBrowserVersion().getAcceptEncodingHeader());
+                                            client.global().getBrowserVersion().getAcceptEncodingHeader());
         webRequest.setHttpMethod(method);
         webRequest.setCharset(UTF_8);
         webRequest.setDefaultResponseContentCharset(UTF_8);
@@ -185,7 +189,7 @@ public final class Fetch {
         final String referrer = request.getReferrer();
         if (!referrer.isEmpty()) {
             if ("about:client".equals(referrer)) {
-                webRequest.setRefererHeader(page.getUrl());
+                webRequest.setRefererHeader(client.url());
             }
             else {
                 try {
@@ -343,10 +347,46 @@ public final class Fetch {
     }
 
     /**
+     * The environment of a fetch: a window or a dedicated worker (that uses the window that created it).
+     *
+     * @param global the window or the worker global scope
+     * @param webWindow the web window
+     * @param page the page (of the window that created the worker) or {@code null}
+     * @param url the url of the client (the page or the worker script); used as referrer
+     * @param globalName the name of the global object (for error messages)
+     */
+    private record FetchClient(HtmlUnitScriptable global, WebWindow webWindow, HtmlPage page, URL url,
+            String globalName) {
+
+        /**
+         * Creates the client for the window or the worker global scope.
+         *
+         * @param global the window or the worker global scope
+         * @return the client
+         */
+        static FetchClient of(final HtmlUnitScriptable global) {
+            if (global instanceof DedicatedWorkerGlobalScope worker) {
+                final WebWindow webWindow = worker.getOwningWindow().getWebWindow();
+                final HtmlPage page = webWindow.getEnclosedPage() instanceof HtmlPage p ? p : null;
+                URL url = worker.getWorkerUrl();
+                if (url == null && page != null) {
+                    url = page.getUrl();
+                }
+                return new FetchClient(global, webWindow, page, url, "WorkerGlobalScope");
+            }
+
+            final WebWindow webWindow = ((Window) global).getWebWindow();
+            final HtmlPage page = webWindow.getEnclosedPage() instanceof HtmlPage p ? p : null;
+            return new FetchClient(global, webWindow, page, page == null ? null : page.getUrl(), "Window");
+        }
+    }
+
+    /**
      * A running fetch: holds the promise functions and settles the promise once.
      */
     private static final class PendingFetch {
-        private final Window window_;
+        private final FetchClient client_;
+        private final HtmlUnitScriptable global_;
         private final Request request_;
         private final VarScope scope_;
         private Function resolve_;
@@ -355,10 +395,11 @@ public final class Fetch {
         private int jobId_ = -1;
         private Runnable abortAlgorithm_;
 
-        PendingFetch(final Window window, final Request request) {
-            window_ = window;
+        PendingFetch(final FetchClient client, final Request request) {
+            client_ = client;
+            global_ = client.global();
             request_ = request;
-            scope_ = window.getParentScope();
+            scope_ = global_.getParentScope();
         }
 
         NativePromise createPromise() {
@@ -375,8 +416,8 @@ public final class Fetch {
         }
 
         void start(final WebRequest webRequest) {
-            final WebWindow webWindow = window_.getWebWindow();
-            final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+            final WebWindow webWindow = client_.webWindow();
+            final HtmlPage page = client_.page();
             final JavaScriptEngine engine = (JavaScriptEngine) webWindow.getWebClient().getJavaScriptEngine();
 
             abortAlgorithm_ = () -> {
@@ -443,11 +484,11 @@ public final class Fetch {
             final Response response;
             if (opaque && !result.opaqueRedirect()) {
                 // nothing of an opaque response is visible
-                response = Response.createNetworkResponse(window_, "opaque", "",
+                response = Response.createNetworkResponse(global_, "opaque", "",
                         false, 0, "", new ArrayList<>(), null);
             }
             else if (result.opaqueRedirect()) {
-                response = Response.createNetworkResponse(window_, "opaqueredirect", toResponseUrl(result.url()),
+                response = Response.createNetworkResponse(global_, "opaqueredirect", toResponseUrl(result.url()),
                         false, 0, "", new ArrayList<>(), null);
             }
             else {
@@ -460,7 +501,7 @@ public final class Fetch {
                         headers.add(header);
                     }
                 }
-                response = Response.createNetworkResponse(window_, result.corsTainting() ? "cors" : "basic",
+                response = Response.createNetworkResponse(global_, result.corsTainting() ? "cors" : "basic",
                         toResponseUrl(result.url()), result.redirected(), status, webResponse.getStatusMessage(),
                         headers, body);
             }
@@ -558,7 +599,7 @@ public final class Fetch {
                 if (abortAlgorithm_ != null) {
                     request_.getSignal().removeAbortAlgorithm(abortAlgorithm_);
                 }
-                function.call(Context.getCurrentContext(), scope_, window_, new Object[] {value});
+                function.call(Context.getCurrentContext(), scope_, global_, new Object[] {value});
                 return;
             }
 
@@ -566,10 +607,10 @@ public final class Fetch {
             // because the promise is already settled
 
             // the job is not a script; the engine takes care of the page lock and the microtasks
-            final WebWindow webWindow = window_.getWebWindow();
+            final WebWindow webWindow = client_.webWindow();
             if (webWindow.getEnclosedPage() instanceof HtmlPage page) {
                 final JavaScriptEngine engine = (JavaScriptEngine) webWindow.getWebClient().getJavaScriptEngine();
-                engine.callFunction(page, function, scope_, window_, new Object[] {value});
+                engine.callFunction(page, function, scope_, global_, new Object[] {value});
             }
         }
     }

@@ -9,6 +9,10 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="add" dev="rbri">
+                fetch() is available in dedicated workers; relative urls are resolved against the url of the
+                worker script. The iterators of Headers, URLSearchParams and FormData are available in workers too.
+            </action>
+            <action type="add" dev="rbri">
                 fetch(): support of the request mode 'no-cors' (opaque responses and the restricted request
                 headers), the cache modes, subresource integrity and the body size limit of keepalive requests.
             </action>

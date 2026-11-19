@@ -375,7 +375,13 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     @SuppressWarnings("unchecked")
     public Scriptable getPrototype(final Class<? extends HtmlUnitScriptable> javaScriptClass) {
-        final Scriptable prototype = getWindow().getPrototype(javaScriptClass);
+        // the window or the worker global scope; both override this method
+        HtmlUnitScriptable global = (HtmlUnitScriptable) getWindowOrWorkerGlobalScope(this);
+        if (global == this) {
+            // e.g. the prototype of the WorkerGlobalScope
+            global = getWindow();
+        }
+        final Scriptable prototype = global.getPrototype(javaScriptClass);
         if (prototype == null && javaScriptClass != HtmlUnitScriptable.class) {
             return getPrototype((Class<? extends HtmlUnitScriptable>) javaScriptClass.getSuperclass());
         }
@@ -446,14 +452,19 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
             return node.getPage().getWebClient().getBrowserVersion();
         }
 
-        final Window window = getWindow();
-        if (window != null) {
+        final WindowOrWorkerGlobalScope global = getWindowOrWorkerGlobalScope(this);
+        if (global instanceof Window window) {
             final WebWindow webWindow = window.getWebWindow();
             if (webWindow != null) {
                 return webWindow.getWebClient().getBrowserVersion();
             }
+            return null;
         }
 
+        // e.g. the worker global scope
+        if (global != this && global instanceof HtmlUnitScriptable scriptable) {
+            return scriptable.getBrowserVersion();
+        }
         return null;
     }
 
