@@ -1834,6 +1834,12 @@ public class HtmlPage extends SgmlPage {
     // because there we are directly replacing the response before loading the response into the window
     // here we are replacing the page in the window (maybe after some time)
     private void processRefresh(final URL url, final double time) throws IOException {
+        // accessing to local resource is forbidden for security reason
+        if (!UrlUtils.isLocalResourceAccessAllowed(getUrl(), url)) {
+            notifyIncorrectness("Not allowed to load local resource: " + url);
+            return;
+        }
+
         final WebClient webClient = getWebClient();
 
         final int refreshLimit = webClient.getOptions().getPageRefreshLimit();

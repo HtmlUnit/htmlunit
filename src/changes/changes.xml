@@ -9,6 +9,11 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, Cookies, Bugfixes">
             <action type="fix" dev="Vidya m">
+                Like in the browsers, a page that was not loaded from a file is no longer able to load a local
+                file (file url) into a frame or window by setting the location, using window.open(), clicking
+                a link, submitting a form or a refresh; this was only blocked for the src attribute of frames.
+            </action>
+            <action type="fix" dev="Vidya m">
                 XMLHttpRequest.setRequestHeader() ignores the forbidden request headers Origin, DNT, Set-Cookie,
                 Access-Control-Request-Headers and Access-Control-Request-Method like the browsers; a page was able
                 to replace the Origin header and by this pass the CORS check of a server that trusts another origin.

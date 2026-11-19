@@ -1599,4 +1599,18 @@ public final class UrlUtils {
         }
         return originPort == newPort;
     }
+
+    /**
+     * Determines whether a page loaded from the given URL is allowed to load the specified URL
+     * (e.g. into a frame or a window). Like in the browsers, only pages loaded from a file
+     * are allowed to access local resources (file URLs).
+     *
+     * @param pageUrl the URL of the page that wants to load the URL (must not be null)
+     * @param url the URL to load (must not be null)
+     * @return {@code false} if the URL is a file URL and the page was not loaded from a file
+     */
+    public static boolean isLocalResourceAccessAllowed(final URL pageUrl, final URL url) {
+        final String protocol = url.getProtocol();
+        return !"file".equals(protocol) || protocol.equals(pageUrl.getProtocol());
+    }
 }

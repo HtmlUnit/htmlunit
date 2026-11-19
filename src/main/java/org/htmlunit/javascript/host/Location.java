@@ -355,6 +355,13 @@ public class Location extends HtmlUnitScriptable {
             }
             url = upgradeInsecureRequest(callingPage, window_.getWebWindow(), url);
 
+            // accessing to local resource is forbidden for security reason
+            if (!UrlUtils.isLocalResourceAccessAllowed(callingPage.getUrl(), url)) {
+                webWindow.getWebClient().getIncorrectnessListener()
+                        .notify("Not allowed to load local resource: " + url, this);
+                return;
+            }
+
             final WebRequest webRequest = new WebRequest(url,
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
             webRequest.setRefererHeader(callingPage.getUrl());
@@ -697,6 +704,14 @@ public class Location extends HtmlUnitScriptable {
         if (webWindow.getEnclosedPage() instanceof HtmlPage page) {
             requestUrl = upgradeInsecureRequest(page, webWindow, url);
         }
+
+        // accessing to local resource is forbidden for security reason
+        if (!UrlUtils.isLocalResourceAccessAllowed(getUrl(), requestUrl)) {
+            webWindow.getWebClient().getIncorrectnessListener()
+                    .notify("Not allowed to load local resource: " + requestUrl, this);
+            return;
+        }
+
         final WebRequest webRequest = new WebRequest(requestUrl,
                 browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
 
