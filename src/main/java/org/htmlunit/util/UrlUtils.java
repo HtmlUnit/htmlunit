@@ -436,6 +436,16 @@ public final class UrlUtils {
     }
 
     /**
+     * Creates and returns a new URL identical to the specified URL, ignoring the user info.
+     * @param u the URL on which to base the returned URL
+     * @return a new URL identical to the specified URL, ignoring the user info
+     * @throws MalformedURLException if there is a problem creating the new URL
+     */
+    public static URL getUrlWithoutUserInfo(final URL u) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), getAuthorityWithoutUserInfo(u), u.getPath(), u.getRef(), u.getQuery());
+    }
+
+    /**
      * Creates and returns a new URL identical to the specified URL, ignoring the ref and the user info;
      * this is the url used as referrer (the Fetch standard 'strip url for use as a referrer'
      * for http(s) urls).

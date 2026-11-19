@@ -1315,9 +1315,12 @@ public class HtmlPage extends SgmlPage {
         if (crossorigin) {
             request.setFetchModeOverride(WebRequest.FetchMode.CORS);
 
-            if (client.getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)) {
-                request.setAdditionalHeader(HttpHeader.ORIGIN,
-                        UrlUtils.getUrlWithProtocolAndAuthority(url).toExternalForm());
+            // the Origin is the origin of this document (not the one of the script);
+            // it is sent for cross-origin requests, Chrome sends it always
+            final boolean crossOriginRequest = !UrlUtils.isSameOrigin(getOriginUrl(), url);
+            if (crossOriginRequest || client.getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)) {
+                request.setAdditionalHeader(HttpHeader.ORIGIN, isOpaqueOrigin()
+                        ? "null" : UrlUtils.getUrlWithProtocolAndAuthority(getOriginUrl()).toExternalForm());
             }
         }
 

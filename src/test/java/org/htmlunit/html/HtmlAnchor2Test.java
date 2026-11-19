@@ -17,16 +17,19 @@ package org.htmlunit.html;
 import static org.apache.commons.lang3.StringUtils.right;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 
+import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
@@ -36,11 +39,13 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.TopLevelWindow;
 import org.htmlunit.UnexpectedPage;
 import org.htmlunit.WebClient;
+import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.WebConnectionWrapper;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -1171,5 +1176,51 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         finally {
             getWebClient().setAttachmentHandler(null);
         }
+    }
+
+    /**
+     * Like the Referer, the Ping-From and Ping-To headers never contain the user info
+     * (the credentials) of the urls; the Origin neither.
+     * Not a WebDriver test: the browsers ask before they open a url with credentials.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void pingWithoutCredentials() throws Exception {
+        final String base = "http://localhost:" + PORT;
+        final URL pageUrl = new URL("http://user:secret@localhost:" + PORT + "/page.html");
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <a href='http://joe:pw@localhost:" + PORT + "/target.html?q=1#frag' ping='ping'>clickMe</a>\n"
+            + "</body></html>";
+
+        // the urls with credentials are not matched by the MockWebConnection, all get this page
+        getMockWebConnection().setDefaultResponse(html);
+
+        final List<WebRequest> pings = new ArrayList<>();
+        final WebClient client = getWebClientWithMockWebConnection();
+        new WebConnectionWrapper(client) {
+            @Override
+            public WebResponse getResponse(final WebRequest request) throws IOException {
+                if (request.getAdditionalHeaders().containsKey(HttpHeader.PING_FROM)) {
+                    pings.add(request);
+                }
+                return super.getResponse(request);
+            }
+        };
+
+        final HtmlPage page = client.getPage(pageUrl);
+        page.getAnchorByText("clickMe").click();
+
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.ANCHOR_SEND_PING_REQUEST)) {
+            assertTrue(pings.isEmpty());
+            return;
+        }
+
+        assertEquals(1, pings.size());
+        final Map<String, String> headers = pings.get(0).getAdditionalHeaders();
+        assertEquals(base + "/page.html", headers.get(HttpHeader.PING_FROM));
+        assertEquals(base + "/target.html?q=1#frag", headers.get(HttpHeader.PING_TO));
+        assertEquals(base, headers.get(HttpHeader.ORIGIN));
     }
 }

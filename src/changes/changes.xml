@@ -8,6 +8,14 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                The Ping-From and Ping-To headers of hyperlink auditing (a ping) requests no longer contain the
+                user name and password of the urls.
+            </action>
+            <action type="fix" dev="rbri">
+                The Origin header of a crossorigin script request is the origin of the document (and not the one
+                of the script); for a cross-origin script it is sent for all browsers.
+            </action>
             <action type="fix" dev="Vidya m">
                 The Referer and Origin request headers (and by this document.referrer and the origin of
                 message events and WebSocket requests) no longer contain the user name and password of the
