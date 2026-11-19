@@ -10496,10 +10496,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "arrayBuffer(),blob(),bodyUsed,bytes(),cache,clone(),credentials,destination,formData(),headers,"
                 + "integrity,json(),keepalive,method,mode,redirect,referrer,referrerPolicy,signal,text(),"
                 + "url")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF = "-",
-            FF_ESR = "-")
+    @HtmlUnitNYI(CHROME = "arrayBuffer(),blob(),body,bodyUsed,bytes(),cache,clone(),credentials,destination,duplex,"
+                + "formData(),headers,integrity,isHistoryNavigation,isReloadNavigation,json(),keepalive,method,mode,"
+                + "redirect,referrer,referrerPolicy,signal,text(),"
+                + "url",
+            EDGE = "arrayBuffer(),blob(),body,bodyUsed,bytes(),cache,clone(),credentials,destination,duplex,"
+                + "formData(),headers,integrity,isHistoryNavigation,isReloadNavigation,json(),keepalive,method,mode,"
+                + "redirect,referrer,referrerPolicy,signal,text(),"
+                + "url")
     public void request() throws Exception {
         testString("", "new Request('https://www.htmlunit.org')");
     }
@@ -10522,10 +10526,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "arrayBuffer(),blob(),body,bodyUsed,bytes(),clone(),formData(),headers,json(),ok,redirected,"
                 + "status,statusText,text(),type,"
                 + "url")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF = "-",
-            FF_ESR = "-")
+    @HtmlUnitNYI(CHROME = "arrayBuffer(),blob(),body,bodyUsed,bytes(),clone(),formData(),headers,json(),ok,redirected,"
+                + "status,statusText,text(),type,"
+                + "url",
+            EDGE = "arrayBuffer(),blob(),body,bodyUsed,bytes(),clone(),formData(),headers,json(),ok,redirected,"
+                + "status,statusText,text(),type,"
+                + "url")
     public void response() throws Exception {
         testString("", "new Response()");
     }

@@ -20,9 +20,7 @@ import java.util.List;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.IteratorLikeIterable;
 import org.htmlunit.corejs.javascript.JavaScriptException;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.SymbolKey;
@@ -61,6 +59,9 @@ public class AbortSignal extends EventTarget {
     private final transient List<Runnable> abortAlgorithms_ = new ArrayList<>();
     // the signals created by any() that depend on this signal
     private final List<AbortSignal> dependentSignals_ = new ArrayList<>();
+    // true for signals created by any(); their sources are never dependent signals
+    private boolean dependent_;
+    private final List<AbortSignal> sourceSignals_ = new ArrayList<>();
 
     /**
      * JavaScript constructor; like the browsers, an {@code AbortSignal} can't be created by script.
@@ -206,18 +207,35 @@ public class AbortSignal extends EventTarget {
         }
 
         final List<AbortSignal> signals = new ArrayList<>();
-        final Object iterator = ScriptRuntime.callIterator(iterable, cx, iterable.getParentScope());
-        try (IteratorLikeIterable itr = new IteratorLikeIterable(cx, iterable.getParentScope(), iterator)) {
-            for (final Object item : itr) {
-                if (!(item instanceof AbortSignal s)) {
-                    throw JavaScriptEngine.typeError("Failed to execute 'any' on 'AbortSignal': "
-                            + "Failed to convert value to 'AbortSignal'.");
-                }
-                signals.add(s);
-            }
-        }
+        JavaScriptEngine.iterate(cx, scope, iterable,
+                item -> {
+                    if (!(item instanceof AbortSignal s)) {
+                        throw JavaScriptEngine.typeError("Failed to execute 'any' on 'AbortSignal': "
+                                + "Failed to convert value to 'AbortSignal'.");
+                    }
+                    signals.add(s);
+                });
 
-        final AbortSignal result = newSignal(funObj);
+        return createDependentSignal(newSignal(funObj), signals);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Creates a signal that is aborted when any of the given signals is aborted (like {@code AbortSignal.any()});
+     * used e.g. for the signal of a {@code Request}.
+     *
+     * @param owner the object used for the scope and the prototype of the new signal
+     * @param signals the signals
+     * @return the new signal
+     * @see <a href="https://dom.spec.whatwg.org/#create-a-dependent-abort-signal">DOM Standard -
+     *     create a dependent abort signal</a>
+     */
+    public static AbortSignal createDependentSignal(final HtmlUnitScriptable owner, final List<AbortSignal> signals) {
+        return createDependentSignal(newSignal(owner), signals);
+    }
+
+    private static AbortSignal createDependentSignal(final AbortSignal result, final List<AbortSignal> signals) {
         for (final AbortSignal s : signals) {
             if (s.aborted_) {
                 result.aborted_ = true;
@@ -225,10 +243,26 @@ public class AbortSignal extends EventTarget {
                 return result;
             }
         }
+        result.dependent_ = true;
         for (final AbortSignal s : signals) {
-            s.dependentSignals_.add(result);
+            if (s.dependent_) {
+                // link to the sources of a dependent signal (a dependent signal is never aborted by itself)
+                for (final AbortSignal source : s.sourceSignals_) {
+                    result.addSource(source);
+                }
+            }
+            else {
+                result.addSource(s);
+            }
         }
         return result;
+    }
+
+    private void addSource(final AbortSignal source) {
+        if (!sourceSignals_.contains(source)) {
+            sourceSignals_.add(source);
+            source.dependentSignals_.add(this);
+        }
     }
 
     /**

@@ -18885,10 +18885,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "destination[GCE],formData(),headers[GCE],integrity[GCE],json(),keepalive[GCE],method[GCE],"
                 + "mode[GCE],redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],text(),"
                 + "url[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF = "constructor()",
-            FF_ESR = "constructor()")
+    @HtmlUnitNYI(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),cache[GCE],clone(),constructor(),"
+                + "credentials[GCE],destination[GCE],duplex[GCE],formData(),headers[GCE],integrity[GCE],"
+                + "isHistoryNavigation[GCE],isReloadNavigation[GCE],json(),keepalive[GCE],method[GCE],mode[GCE],"
+                + "redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],text(),"
+                + "url[GCE]",
+            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),cache[GCE],clone(),constructor(),"
+                + "credentials[GCE],destination[GCE],duplex[GCE],formData(),headers[GCE],integrity[GCE],"
+                + "isHistoryNavigation[GCE],isReloadNavigation[GCE],json(),keepalive[GCE],method[GCE],mode[GCE],"
+                + "redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],text(),"
+                + "url[GCE]")
     public void request() throws Exception {
         testString("", "new Request('https://www.htmlunit.org')");
     }
@@ -18913,10 +18919,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),clone(),constructor(),formData(),"
                 + "headers[GCE],json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
                 + "url[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF = "constructor()",
-            FF_ESR = "constructor()")
+    @HtmlUnitNYI(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),clone(),constructor(),formData(),"
+                + "headers[GCE],json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),"
+                + "type[GCE],"
+                + "url[GCE]",
+            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),clone(),constructor(),formData(),"
+                + "headers[GCE],json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),"
+                + "type[GCE],"
+                + "url[GCE]")
     public void response() throws Exception {
         testString("", "new Response()");
     }

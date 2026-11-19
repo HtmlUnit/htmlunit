@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.fetch;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -25,7 +24,6 @@ import org.openqa.selenium.WebDriver;
  *
  * @author Ronald Brill
  */
-@Disabled
 public class ResponseTest extends WebDriverTestCase {
 
     /**
@@ -164,5 +162,263 @@ public class ResponseTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void notConstructor() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try { Response(); log('ok'); } catch (e) { logEx(e); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"RangeError",
+             "RangeError",
+             "RangeError",
+             "204",
+             "TypeError",
+             "TypeError",
+             "TypeError",
+             "TypeError",
+             "TypeError"})
+    public void invalidInit() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const cases = [\n"
+            + "    [null, {status: 199}],\n"
+            + "    [null, {status: 600}],\n"
+            + "    [null, {status: 0}],\n"
+            + "    [null, {status: 204}],\n"
+            + "    ['x', {status: 204}],\n"
+            + "    ['x', {status: 304}],\n"
+            + "    [null, {statusText: 'a\\nb'}],\n"
+            + "    [null, {statusText: '\\u0100'}],\n"
+            + "    [null, 'string']\n"
+            + "  ];\n"
+            + "  for (const c of cases) {\n"
+            + "    try { const r = new Response(c[0], c[1]); log(r.status); } catch (e) { logEx(e); }\n"
+            + "  }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null",
+             "text/plain;charset=UTF-8",
+             "application/x-www-form-urlencoded;charset=UTF-8",
+             "text/html",
+             "null",
+             "a/b"})
+    public void contentType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(new Response().headers.get('content-type'));\n"
+            + "  log(new Response('x').headers.get('content-type'));\n"
+            + "  log(new Response(new URLSearchParams('a=b')).headers.get('content-type'));\n"
+            + "  log(new Response(new Blob(['x'], {type: 'Text/HTML'})).headers.get('content-type'));\n"
+            + "  log(new Response(new ArrayBuffer(1)).headers.get('content-type'));\n"
+            + "  log(new Response('x', {headers: {'content-type': 'a/b'}}).headers.get('content-type'));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"RangeError",
+             "TypeError",
+             "TypeError",
+             "307 default null",
+             "TypeError",
+             "false null []",
+             "TypeError"})
+    public void redirectInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try { Response.redirect('/a', 200); log('ok'); } catch (e) { logEx(e); }\n"
+            + "  try { Response.redirect('http://[x', 301); log('ok'); } catch (e) { logEx(e); }\n"
+            + "  try { Response.redirect(); log('ok'); } catch (e) { logEx(e); }\n"
+            + "  const r = Response.redirect('/a', 307);\n"
+            + "  log(r.status + ' ' + r.statusText + ' ' + r.type + ' ' + r.body);\n"
+            + "  try { r.headers.set('x', 'y'); log('ok'); } catch (e) { logEx(e); }\n"
+            + "  const err = Response.error();\n"
+            + "  log(err.ok + ' ' + err.statusText + ' ' + err.body + ' [' + err.url + ']');\n"
+            + "  try { err.headers.append('x', 'y'); log('ok'); } catch (e) { logEx(e); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"202",
+             "application/json",
+             "v",
+             "TypeError",
+             "TypeError",
+             "text/plain",
+             "{\"a\":1,\"b\":[true,null]}"})
+    public void jsonStatic() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const r = Response.json({a: 1, b: [true, null]}, {status: 202, headers: {'x-a': 'v'}});\n"
+            + "  log(r.status);\n"
+            + "  log(r.headers.get('content-type'));\n"
+            + "  log(r.headers.get('x-a'));\n"
+            + "  try { Response.json(undefined); log('ok'); } catch (e) { logEx(e); }\n"
+            + "  try { Response.json(1, {status: 204}); log('ok'); } catch (e) { logEx(e); }\n"
+            + "  log(Response.json('x', {headers: {'content-type': 'text/plain'}}).headers.get('content-type'));\n"
+            + "  r.text().then(t => log(t));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"201 C v true",
+             "abc",
+             "false",
+             "TypeError",
+             "error 0"})
+    public void cloneAfterUse() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const r = new Response('abc', {status: 201, statusText: 'C', headers: {'x-a': 'v'}});\n"
+            + "  const c = r.clone();\n"
+            + "  log(c.status + ' ' + c.statusText + ' ' + c.headers.get('x-a') + ' ' + (c.headers !== r.headers));\n"
+            + "  r.text().then(t => {\n"
+            + "    log(t);\n"
+            + "    log(c.bodyUsed);\n"
+            + "    try { r.clone(); log('ok'); } catch (e) { logEx(e); }\n"
+            + "    const e = Response.error().clone();\n"
+            + "    log(e.type + ' ' + e.status);\n"
+            + "  });\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null",
+             "[object ReadableStream]",
+             "true"})
+    public void bodyStream() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(new Response().body);\n"
+            + "  const r = new Response('x');\n"
+            + "  log(r.body);\n"
+            + "  log(r.body === r.body);\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2 a\u00E4",
+             "195,164",
+             "SyntaxError"})
+    public void textEncoding() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  new Response(new Uint8Array([0xEF, 0xBB, 0xBF, 0x61, 0xC3, 0xA4])).text()\n"
+            + "    .then(t => { log(t.length + ' ' + t); return new Response('\\u00e4').bytes(); })\n"
+            + "    .then(b => { log(b.join(',')); return new Response('{bad').json(); })\n"
+            + "    .then(j => log(j), e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3 text/plain;charset=utf-8",
+             "3 []"})
+    public void blobType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  new Response('abc', {headers: {'content-type': 'Text/Plain;Charset=UTF-8'}}).blob()\n"
+            + "    .then(b => { log(b.size + ' ' + b.type); return new Response(new ArrayBuffer(3)).blob(); })\n"
+            + "    .then(b => log(b.size + ' [' + b.type + ']'));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1|x y",
+             "file.txt text/plain 7",
+             "content",
+             "TypeError",
+             "1 2 \u00E4"})
+    public void formDataRoundTrip() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const fd = new FormData();\n"
+            + "  fd.append('a', '1');\n"
+            + "  fd.append('a', 'x y');\n"
+            + "  fd.append('f', new Blob(['content'], {type: 'text/plain'}), 'file.txt');\n"
+            + "  new Response(fd).formData()\n"
+            + "    .then(f => {\n"
+            + "      log(f.getAll('a').join('|'));\n"
+            + "      const file = f.get('f');\n"
+            + "      log(file.name + ' ' + file.type + ' ' + file.size);\n"
+            + "      return file.text();\n"
+            + "    })\n"
+            + "    .then(t => { log(t); return new Response('a=1+2&b=%C3%A4').formData(); })\n"
+            + "    .then(f => log('ok'), e => logEx(e))\n"
+            + "    .then(() => new Response('a=1+2&b=%C3%A4',\n"
+            + "        {headers: {'content-type': 'application/x-www-form-urlencoded'}}).formData())\n"
+            + "    .then(f => log(f.get('a') + ' ' + f.get('b')));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 }

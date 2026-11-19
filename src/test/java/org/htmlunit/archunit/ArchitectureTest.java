@@ -281,6 +281,7 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getParent()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getSelf()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getTop()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.abort.AbortSignal.getReason()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.AbstractRange.getEndContainer()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.AbstractRange.getStartContainer()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.CharacterData.getData()")
@@ -634,6 +635,7 @@ public class ArchitectureTest {
     public static final ArchRule corejsScriptRuntimeRule = noClasses()
         .that()
             .doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.URLSearchParams")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.fetch.Headers")
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.HtmlUnitContextFactory")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine")

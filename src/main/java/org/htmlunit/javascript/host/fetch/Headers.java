@@ -205,26 +205,26 @@ public class Headers extends HtmlUnitScriptable {
 
         if (ScriptableObject.hasProperty(initScriptable, SymbolKey.ITERATOR)) {
             final Context cx = Context.getCurrentContext();
-            try (IteratorLikeIterable itr = buildIteratorLikeIterable(cx, initScriptable)) {
-                for (final Object pair : itr) {
-                    if (!(pair instanceof Scriptable pairScriptable)
-                            || !ScriptableObject.hasProperty(pairScriptable, SymbolKey.ITERATOR)) {
-                        throw JavaScriptEngine.typeError(
+            JavaScriptEngine.iterate(cx, initScriptable.getParentScope(), initScriptable,
+                    pair -> {
+                        if (!(pair instanceof Scriptable pairScriptable)
+                                || !ScriptableObject.hasProperty(pairScriptable, SymbolKey.ITERATOR)) {
+                            throw JavaScriptEngine.typeError(
                                 "Failed to construct 'Headers': The provided value cannot be converted to a sequence.");
-                    }
-
-                    final List<Object> items = new ArrayList<>();
-                    try (IteratorLikeIterable pairItr = buildIteratorLikeIterable(cx, pairScriptable)) {
-                        for (final Object item : pairItr) {
-                            items.add(item);
                         }
-                    }
-                    if (items.size() != 2) {
-                        throw JavaScriptEngine.typeError("Failed to construct 'Headers': Invalid value");
-                    }
-                    appendHeader(JavaScriptEngine.toString(items.get(0)), JavaScriptEngine.toString(items.get(1)));
-                }
-            }
+
+                        final List<Object> items = new ArrayList<>();
+                        try (IteratorLikeIterable pairItr = buildIteratorLikeIterable(cx, pairScriptable)) {
+                            for (final Object item : pairItr) {
+                                items.add(item);
+                            }
+                        }
+                        if (items.size() != 2) {
+                            throw JavaScriptEngine.typeError("Failed to construct 'Headers': Invalid value");
+                        }
+                        appendHeader(JavaScriptEngine.toString(items.get(0)), JavaScriptEngine.toString(items.get(1)));
+                    });
+
             return;
         }
 

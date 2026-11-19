@@ -322,6 +322,16 @@ public class FormData extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the entries of this {@code FormData} (strings are {@link NameValuePair}s, files and
+     * blobs are {@link org.htmlunit.util.KeyDataPair}s).
+     *
+     * @return the entries
+     */
+    public List<NameValuePair> getEntries() {
+        return Collections.unmodifiableList(requestParameters_);
+    }
+
+    /**
      * Populates the given {@link WebRequest} with the parameters from this {@code FormData}.
      *
      * @param webRequest the web request to fill

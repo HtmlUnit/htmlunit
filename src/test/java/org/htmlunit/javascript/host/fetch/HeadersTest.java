@@ -536,7 +536,7 @@ public class HeadersTest extends WebDriverTestCase {
     }
 
     /**
-     * set() replaces all values of the header.
+     * Method set() replaces all values of the header.
      * @throws Exception if the test fails
      */
     @Test
@@ -576,7 +576,7 @@ public class HeadersTest extends WebDriverTestCase {
     }
 
     /**
-     * get() of a missing header.
+     * Method get() of a missing header.
      * @throws Exception if the test fails
      */
     @Test
@@ -594,7 +594,7 @@ public class HeadersTest extends WebDriverTestCase {
     }
 
     /**
-     * get() with an invalid name.
+     * Method get() with an invalid name.
      * @throws Exception if the test fails
      */
     @Test
@@ -613,7 +613,7 @@ public class HeadersTest extends WebDriverTestCase {
     }
 
     /**
-     * has() without arguments.
+     * Method has() without arguments.
      * @throws Exception if the test fails
      */
     @Test
@@ -690,7 +690,7 @@ public class HeadersTest extends WebDriverTestCase {
     }
 
     /**
-     * getSetCookie() without Set-Cookie headers.
+     * Method getSetCookie() without Set-Cookie headers.
      * @throws Exception if the test fails
      */
     @Test
@@ -746,7 +746,7 @@ public class HeadersTest extends WebDriverTestCase {
     }
 
     /**
-     * null is not a valid init.
+     * Value null is not a valid init.
      * @throws Exception if the test fails
      */
     @Test
@@ -822,7 +822,7 @@ public class HeadersTest extends WebDriverTestCase {
     }
 
     /**
-     * forEach() requires a function.
+     * Method forEach() requires a function.
      * @throws Exception if the test fails
      */
     @Test

@@ -9,6 +9,11 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="add" dev="rbri">
+                Request and Response implemented (without network access): constructors with the init validation,
+                clone(), the body methods text(), json(), arrayBuffer(), bytes(), blob() and formData(), bodyUsed,
+                Response.error(), Response.redirect() and Response.json().
+            </action>
+            <action type="add" dev="rbri">
                 Headers implemented (constructor from Headers, sequence and record, append(), set(), delete(), get(),
                 has(), getSetCookie(), forEach() and the iterators with the sort-and-combine semantics, name and value
                 validation).

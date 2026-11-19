@@ -48,7 +48,7 @@ public class AbortSignalTest extends WebDriverTestCase {
     }
 
     /**
-     * abort() without a reason: the reason is an AbortError.
+     * Method abort() without a reason: the reason is an AbortError.
      * @throws Exception if the test fails
      */
     @Test
@@ -75,7 +75,7 @@ public class AbortSignalTest extends WebDriverTestCase {
     }
 
     /**
-     * abort() with a reason.
+     * Method abort() with a reason.
      * @throws Exception if the test fails
      */
     @Test
@@ -94,7 +94,7 @@ public class AbortSignalTest extends WebDriverTestCase {
     }
 
     /**
-     * abort(undefined) is like abort().
+     * Method abort(undefined) is like abort().
      * @throws Exception if the test fails
      */
     @Test
@@ -112,7 +112,7 @@ public class AbortSignalTest extends WebDriverTestCase {
     }
 
     /**
-     * abort(null): null is a reason.
+     * Method abort(null): null is a reason.
      * @throws Exception if the test fails
      */
     @Test
@@ -179,7 +179,7 @@ public class AbortSignalTest extends WebDriverTestCase {
     }
 
     /**
-     * throwIfAborted() throws the reason.
+     * Method throwIfAborted() throws the reason.
      * @throws Exception if the test fails
      */
     @Test
