@@ -1603,12 +1603,11 @@ public class WebClient implements Serializable, AutoCloseable {
         final DataURLConnection connection = new DataURLConnection(url);
 
         final List<NameValuePair> responseHeaders = new ArrayList<>();
-        responseHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE_LC,
-            connection.getMediaType() + ";charset=" + connection.getCharset()));
+        responseHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE_LC, connection.getContentType()));
 
         if (HttpMethod.HEAD.equals(webRequest.getHttpMethod())) {
             final WebResponseData data = new WebResponseData(200, "OK", responseHeaders);
-            return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
+            return new WebResponse(data, webRequest, 0);
         }
 
         try (InputStream is = connection.getInputStream()) {
@@ -1617,7 +1616,8 @@ public class WebClient implements Serializable, AutoCloseable {
                             getOptions().getMaxInMemory(),
                             getOptions().getTempFileDirectory());
             final WebResponseData data = new WebResponseData(downloadedContent, 200, "OK", responseHeaders);
-            return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
+            // the request is used for the default charset (e.g. UTF-8 for XMLHttpRequest)
+            return new WebResponse(data, webRequest, 0);
         }
     }
 

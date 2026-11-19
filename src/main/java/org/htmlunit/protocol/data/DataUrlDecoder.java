@@ -23,6 +23,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Base64;
+import java.util.Locale;
 
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.StringUtils;
@@ -38,9 +39,13 @@ import org.htmlunit.util.UrlUtils;
 public class DataUrlDecoder {
     private static final Charset DEFAULT_CHARSET = US_ASCII;
     private static final String DEFAULT_MEDIA_TYPE = MimeType.TEXT_PLAIN;
+    /** The MIME type of a data url without (valid) MIME type. */
+    private static final String DEFAULT_CONTENT_TYPE = "text/plain;charset=US-ASCII";
+
     private final String mediaType_;
     private final Charset charset_;
     private final byte[] content_;
+    private String contentType_;
 
     /**
      * C'tor.
@@ -94,7 +99,9 @@ public class DataUrlDecoder {
             if (base64) {
                 data = Base64.getDecoder().decode(data);
             }
-            return new DataUrlDecoder(data, mediaType, charset);
+            final DataUrlDecoder decoder = new DataUrlDecoder(data, mediaType, charset);
+            decoder.contentType_ = toContentType(url.substring(DATA_PREFIX.length(), comma));
+            return decoder;
         }
         catch (final IllegalArgumentException e) {
             final UnsupportedEncodingException ex =
@@ -102,6 +109,191 @@ public class DataUrlDecoder {
             ex.initCause(e);
             throw ex;
         }
+    }
+
+    /**
+     * Returns the content type like the fetch standard does it for the MIME type part of a data url.
+     *
+     * @param beforeData the part of the url between 'data:' and the comma
+     * @return the serialized MIME type
+     * @see <a href="https://fetch.spec.whatwg.org/#data-url-processor">Fetch Standard - data: URL processor</a>
+     */
+    static String toContentType(final String beforeData) {
+        String mimeType = beforeData.strip();
+
+        // remove ';base64' (case-insensitive, spaces allowed before 'base64')
+        final int semicolon = mimeType.lastIndexOf(';');
+        if (semicolon > -1 && "base64".equalsIgnoreCase(mimeType.substring(semicolon + 1).stripLeading())) {
+            mimeType = mimeType.substring(0, semicolon);
+        }
+
+        if (mimeType.startsWith(";")) {
+            mimeType = MimeType.TEXT_PLAIN + mimeType;
+        }
+
+        final String serialized = parseAndSerializeMimeType(mimeType);
+        if (serialized == null) {
+            return DEFAULT_CONTENT_TYPE;
+        }
+        return serialized;
+    }
+
+    /**
+     * Parses the MIME type and serializes it again like the browsers do it for data urls:
+     * type, subtype and parameter names are lower case, the parameter values are kept, invalid parameters
+     * are ignored. Different from the MIME Sniffing Standard duplicate parameters are kept and the charset
+     * parameter is moved to the end.
+     *
+     * @param input the MIME type
+     * @return the serialized MIME type or {@code null} if the input is not a valid MIME type
+     * @see <a href="https://mimesniff.spec.whatwg.org/#parse-a-mime-type">MIME Sniffing Standard
+     *      - parse a MIME type</a>
+     */
+    static String parseAndSerializeMimeType(final String input) {
+        final String mimeType = stripHttpWhitespace(input);
+
+        final int slash = mimeType.indexOf('/');
+        if (slash < 1) {
+            return null;
+        }
+        final String type = mimeType.substring(0, slash);
+        if (!isToken(type)) {
+            return null;
+        }
+
+        int position = mimeType.indexOf(';', slash + 1);
+        if (position < 0) {
+            position = mimeType.length();
+        }
+        final String subtype = stripHttpWhitespace(mimeType.substring(slash + 1, position));
+        if (subtype.isEmpty() || !isToken(subtype)) {
+            return null;
+        }
+
+        final StringBuilder result = new StringBuilder()
+                .append(type.toLowerCase(Locale.ROOT))
+                .append('/')
+                .append(subtype.toLowerCase(Locale.ROOT));
+
+        String charset = null;
+        final int length = mimeType.length();
+        while (position < length) {
+            // skip the ';' and the leading whitespace
+            position++;
+            while (position < length && isHttpWhitespace(mimeType.charAt(position))) {
+                position++;
+            }
+
+            // the name
+            final int nameStart = position;
+            while (position < length && mimeType.charAt(position) != ';' && mimeType.charAt(position) != '=') {
+                position++;
+            }
+            final String name = mimeType.substring(nameStart, position).toLowerCase(Locale.ROOT);
+            if (position >= length) {
+                break;
+            }
+            if (mimeType.charAt(position) == ';') {
+                continue;
+            }
+            // skip the '='
+            position++;
+
+            // the value
+            final String value;
+            if (position < length && mimeType.charAt(position) == '"') {
+                final StringBuilder quoted = new StringBuilder();
+                position++;
+                while (position < length && mimeType.charAt(position) != '"') {
+                    char c = mimeType.charAt(position);
+                    if (c == '\\' && position + 1 < length) {
+                        position++;
+                        c = mimeType.charAt(position);
+                    }
+                    quoted.append(c);
+                    position++;
+                }
+                value = quoted.toString();
+                // ignore the rest up to the next ';'
+                while (position < length && mimeType.charAt(position) != ';') {
+                    position++;
+                }
+            }
+            else {
+                final int valueStart = position;
+                while (position < length && mimeType.charAt(position) != ';') {
+                    position++;
+                }
+                value = stripHttpWhitespace(mimeType.substring(valueStart, position));
+                if (value.isEmpty()) {
+                    continue;
+                }
+            }
+
+            if (!name.isEmpty() && isToken(name) && isQuotedStringContent(value)) {
+                final String parameter = ";" + name + "=" + serializeParameterValue(value);
+                if ("charset".equals(name)) {
+                    if (charset == null) {
+                        charset = parameter;
+                    }
+                }
+                else {
+                    result.append(parameter);
+                }
+            }
+        }
+
+        if (charset != null) {
+            result.append(charset);
+        }
+        return result.toString();
+    }
+
+    private static String serializeParameterValue(final String value) {
+        if (!value.isEmpty() && isToken(value)) {
+            return value;
+        }
+        return '"' + value.replace("\\", "\\\\").replace("\"", "\\\"") + '"';
+    }
+
+    private static boolean isHttpWhitespace(final char c) {
+        return c == ' ' || c == '\t' || c == '\n' || c == '\r';
+    }
+
+    private static String stripHttpWhitespace(final String value) {
+        int start = 0;
+        int end = value.length();
+        while (start < end && isHttpWhitespace(value.charAt(start))) {
+            start++;
+        }
+        while (end > start && isHttpWhitespace(value.charAt(end - 1))) {
+            end--;
+        }
+        return value.substring(start, end);
+    }
+
+    private static boolean isToken(final String value) {
+        if (value.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < value.length(); i++) {
+            final char c = value.charAt(i);
+            if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9'
+                    || "!#$%&'*+-.^_`|~".indexOf(c) > -1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isQuotedStringContent(final String value) {
+        for (int i = 0; i < value.length(); i++) {
+            final char c = value.charAt(i);
+            if (c != '\t' && (c < 0x20 || c == 0x7F || c > 0xFF)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static Charset extractCharset(final String beforeData) {
@@ -137,6 +329,18 @@ public class DataUrlDecoder {
      */
     public String getMediaType() {
         return mediaType_;
+    }
+
+    /**
+     * Gets the content type of the data URL, serialized like the browsers do it
+     * (e.g. 'text/plain;charset=utf-8' for 'data:text/plain;charset=utf-8,...').
+     * @return the content type; "text/plain;charset=US-ASCII" if the URL didn't contain a valid MIME type
+     */
+    public String getContentType() {
+        if (contentType_ == null) {
+            return mediaType_ + ";charset=" + charset_.name();
+        }
+        return contentType_;
     }
 
     /**

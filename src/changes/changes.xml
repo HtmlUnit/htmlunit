@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                The content type of data urls is serialized like the browsers do it (e.g. the charset is no longer
+                normalized and not added if missing; 'text/plain;charset=US-ASCII' for urls without a valid MIME type).
+            </action>
             <action type="add" dev="rbri">
                 Native fetch() support (first step): requests to the origin of the page and to data:/blob: urls,
                 redirects, abort signals, the redirect modes 'error' and 'manual'. Requests to other origins

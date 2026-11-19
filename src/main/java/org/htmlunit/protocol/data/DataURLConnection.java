@@ -69,6 +69,15 @@ public class DataURLConnection extends URLConnection {
     }
 
     /**
+     * Returns the content type of the data URL, serialized like the browsers do it.
+     * @return the content type
+     */
+    @Override
+    public String getContentType() {
+        return dataUrlDecoder_.getContentType();
+    }
+
+    /**
      * Gets the media type information contained in the data URL.
      * @return "text/plain" if the URL didn't contain any media type information
      */

@@ -16,6 +16,7 @@ package org.htmlunit.protocol.data;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -123,5 +124,71 @@ public class DataURLDecoderTest extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(dataUrl);
         verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * The content type and the charset of documents loaded from data urls.
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts("0: text/html windows-1252 2 | 1: text/html UTF-8 1 | 2: text/html UTF-8 1 | "
+            + "3: text/html windows-1252 2 | 4: text/html windows-1252 2")
+    @HtmlUnitNYI(CHROME = "0: text/html ISO-8859-1 2 | 1: text/html UTF-8 1 | 2: text/html UTF-8 1 | "
+                + "3: text/html windows-1252 2 | 4: text/html ISO-8859-1 2",
+            EDGE = "0: text/html ISO-8859-1 2 | 1: text/html UTF-8 1 | 2: text/html UTF-8 1 | "
+                + "3: text/html windows-1252 2 | 4: text/html ISO-8859-1 2",
+            FF = "0: text/html ISO-8859-1 2 | 1: text/html UTF-8 1 | 2: text/html UTF-8 1 | "
+                + "3: text/html windows-1252 2 | 4: text/html ISO-8859-1 2",
+            FF_ESR = "0: text/html ISO-8859-1 2 | 1: text/html UTF-8 1 | 2: text/html UTF-8 1 | "
+                + "3: text/html windows-1252 2 | 4: text/html ISO-8859-1 2")
+    public void iframeContentTypeAndCharset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><meta charset='utf-8'><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const types = ['text/html', 'text/html;charset=utf-8', 'Text/HTML;Charset=UTF-8',\n"
+            + "                 'text/html;charset=iso-8859-1', 'text/html;charset=foo'];\n"
+            + "  const results = [];\n"
+            + "  window.addEventListener('message', e => {\n"
+            + "    results[e.data.idx] = e.data.idx + ': ' + e.data.res;\n"
+            + "    if (results.filter(r => r).length == types.length) {\n"
+            + "      log(results.join(' | '));\n"
+            + "    }\n"
+            + "  });\n"
+            + "  function test() {\n"
+            + "    types.forEach((type, idx) => {\n"
+            + "      const content = '<html><body>%C3%A4<script>'\n"
+            + "          + 'parent.postMessage({idx: ' + idx + ', res: document.contentType + \" \" + '\n"
+            + "          + 'document.characterSet + \" \" + document.body.firstChild.data.length}, \"*\");'\n"
+            + "          + '</scr' + 'ipt></body></html>';\n"
+            + "      const frame = document.createElement('iframe');\n"
+            + "      frame.src = 'data:' + type + ',' + content.replace(/ /g, '%20').replace(/#/g, '%23');\n"
+            + "      document.body.appendChild(frame);\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * A script from a data url without charset uses the charset of the document.
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts({"2", "1", "2", "2"})
+    public void scriptCharset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><meta charset='utf-8'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "<script src=\"data:text/javascript,log('%C3%A4'.length)\"></script>\n"
+            + "<script src=\"data:text/javascript;charset=utf-8,log('%C3%A4'.length)\"></script>\n"
+            + "<script src=\"data:text/javascript;charset=iso-8859-1,log('%C3%A4'.length)\"></script>\n"
+            + "<script src=\"data:,log('%C3%A4'.length)\"></script>\n"
+            + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

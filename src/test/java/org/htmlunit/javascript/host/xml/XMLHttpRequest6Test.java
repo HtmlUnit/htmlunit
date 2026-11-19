@@ -414,4 +414,62 @@ public class XMLHttpRequest6Test extends WebDriverTestCase {
 
         assertEquals(requestCount + 1, getMockWebConnection().getRequestCount());
     }
+
+    /**
+     * The content type of data urls is serialized like the browsers do it.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain;charset=utf-8 | text/html;charset=UTF-8 | text/html | "
+            + "text/plain;charset=US-ASCII | text/plain;charset=utf-8 | text/plain;charset=US-ASCII | "
+            + "text/plain;a=b;a=c;charset=foo | text/plain | ")
+    public void sendDataUrl_ContentType() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  const urls = ['data:text/plain;charset=utf-8,x', 'data:Text/HTML;Charset=UTF-8,x',\n"
+                + "                'data:text/html,x', 'data:,x', 'data:;charset=utf-8,x', 'data:invalid,x',\n"
+                + "                'data:text/plain;charset=foo;a=b;a=c,x', 'data:text/plain;base64,eA=='];\n"
+                + "  let result = '';\n"
+                + "  for (const url of urls) {\n"
+                + "    try {\n"
+                + "      const xhr = new XMLHttpRequest();\n"
+                + "      xhr.open('GET', url, false);\n"
+                + "      xhr.send();\n"
+                + "      result += xhr.getResponseHeader('content-type') + ' | ';\n"
+                + "    } catch (e) { result += e.name + ' | '; }\n"
+                + "  }\n"
+                + "  log(result);\n"
+                + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The response text of data urls without charset is decoded as UTF-8.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1:228 1:228 2:195 2:195 ")
+    public void sendDataUrl_ResponseTextCharset() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  const urls = ['data:text/plain,%C3%A4', 'data:text/plain;charset=utf-8,%C3%A4',\n"
+                + "                'data:text/plain;charset=iso-8859-1,%C3%A4', 'data:,%C3%A4'];\n"
+                + "  let result = '';\n"
+                + "  for (const url of urls) {\n"
+                + "    try {\n"
+                + "      const xhr = new XMLHttpRequest();\n"
+                + "      xhr.open('GET', url, false);\n"
+                + "      xhr.send();\n"
+                + "      const text = xhr.responseText;\n"
+                + "      result += text.length + ':' + text.charCodeAt(0) + ' ';\n"
+                + "    } catch (e) { result += e.name + ' '; }\n"
+                + "  }\n"
+                + "  log(result);\n"
+                + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -1063,10 +1063,6 @@ public class FetchTest extends WebDriverTestCase {
     @Test
     @Alerts({"200 basic text/plain;charset=utf-8",
              "Hello World"})
-    @HtmlUnitNYI(CHROME = {"200 basic text/plain;charset=UTF-8", "Hello World"},
-            EDGE = {"200 basic text/plain;charset=UTF-8", "Hello World"},
-            FF = {"200 basic text/plain;charset=UTF-8", "Hello World"},
-            FF_ESR = {"200 basic text/plain;charset=UTF-8", "Hello World"})
     public void dataUrl() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1126,6 +1122,69 @@ public class FetchTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  fetch('" + URL_CROSS_ORIGIN + "')\n"
             + "    .then(r => log(r.status), e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;charset=utf-8 "
+                        + "| text/html;charset=UTF-8 "
+                        + "| text/html | text/plain;charset=US-ASCII "
+                        + "| text/plain | text/plain;charset=utf-8 "
+                        + "| text/plain;charset=US-ASCII "
+                        + "| text/plain;a=b;a=c;charset=foo "
+                        + "| text/plain "
+                        + "| text/plain;a=\"b c\"",
+            FF = "text/plain;charset=utf-8 "
+                    + "| text/html;charset=UTF-8 "
+                    + "| text/html | text/plain;charset=US-ASCII "
+                    + "| text/plain | text/plain;charset=utf-8 "
+                    + "| text/plain;charset=US-ASCII "
+                    + "| text/plain;charset=foo;a=b "
+                    + "| text/plain "
+                    + "| text/plain;a=\"bc\"",
+            FF_ESR = "text/plain;charset=utf-8 "
+                    + "| text/html;charset=UTF-8 "
+                    + "| text/html | text/plain;charset=US-ASCII "
+                    + "| text/plain | text/plain;charset=utf-8 "
+                    + "| text/plain;charset=US-ASCII "
+                    + "| text/plain;charset=foo;a=b "
+                    + "| text/plain "
+                    + "| text/plain;a=\"bc\"")
+    @HtmlUnitNYI(
+            FF = "text/plain;charset=utf-8 "
+                    + "| text/html;charset=UTF-8 "
+                    + "| text/html | text/plain;charset=US-ASCII "
+                    + "| text/plain | text/plain;charset=utf-8 "
+                    + "| text/plain;charset=US-ASCII "
+                    + "| text/plain;a=b;a=c;charset=foo "
+                    + "| text/plain "
+                    + "| text/plain;a=\"b c\"",
+            FF_ESR = "text/plain;charset=utf-8 "
+                    + "| text/html;charset=UTF-8 "
+                    + "| text/html | text/plain;charset=US-ASCII "
+                    + "| text/plain | text/plain;charset=utf-8 "
+                    + "| text/plain;charset=US-ASCII "
+                    + "| text/plain;a=b;a=c;charset=foo "
+                    + "| text/plain "
+                    + "| text/plain;a=\"b c\"")
+
+    public void dataUrlContentType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const urls = ['data:text/plain;charset=utf-8,x', 'data:Text/HTML;Charset=UTF-8,x',\n"
+            + "                'data:text/html,x',\n"
+            + "                'data:,x', 'data:;,x', 'data:;charset=utf-8,x', 'data:invalid,x',\n"
+            + "                'data:text/plain;charset=foo;a=b;a=c,x', 'data:text/plain;base64,eA==',\n"
+            + "                'data:text/plain ; a=\"b c\" ;base64,eA=='];\n"
+            + "  Promise.all(urls.map(u => fetch(u).then(r => r.headers.get('content-type'), e => e.name)))\n"
+            + "    .then(types => log(types.join(' | ')));\n"
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
