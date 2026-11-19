@@ -56,6 +56,7 @@ import org.htmlunit.History;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.OnbeforeunloadHandler;
 import org.htmlunit.Page;
+import org.htmlunit.ReferrerPolicy;
 import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.StringWebResponse;
@@ -90,6 +91,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.SerializableLock;
 import org.htmlunit.util.UrlUtils;
 import org.w3c.dom.Attr;
@@ -195,6 +197,8 @@ public class HtmlPage extends SgmlPage {
     private boolean autofocusProcessed_;
 
     private ContentSecurityPolicy contentSecurityPolicy_;
+    // the referrer policy of this document (Referrer-Policy header, meta element); null for the default
+    private ReferrerPolicy referrerPolicy_;
     // the sandbox tokens (allowed features) of this document; null if not sandboxed
     private Set<String> sandboxTokens_;
     // true if the page is loaded; candidates inserted later are processed by a job
@@ -261,6 +265,85 @@ public class HtmlPage extends SgmlPage {
                                             webWindow);
             }
         }
+
+        referrerPolicy_ = referrerPolicyFromResponse(webResponse);
+        if (referrerPolicy_ == null && webWindow != null) {
+            // like the Content-Security-Policy: the content written by document.open()/write()/close()
+            // keeps the policy, about:blank and about:srcdoc documents of frames have the one of the parent
+            if (webResponse instanceof StringWebResponse stringWebResponse
+                    && stringWebResponse.isFromJavascript()
+                    && webWindow.getEnclosedPage() instanceof HtmlPage currentPage) {
+                referrerPolicy_ = currentPage.referrerPolicy_;
+            }
+            else if (webResponse != null
+                    && "about".equals(webResponse.getWebRequest().getUrl().getProtocol())
+                    && webWindow instanceof FrameWindow frameWindow
+                    && frameWindow.getEnclosingPage() != null) {
+                referrerPolicy_ = frameWindow.getEnclosingPage().referrerPolicy_;
+            }
+        }
+    }
+
+    /**
+     * Returns the policy of the Referrer-Policy header(s) of the response.
+     *
+     * @param webResponse the response
+     * @return the policy or {@code null} if there is no (valid) header
+     */
+    private static ReferrerPolicy referrerPolicyFromResponse(final WebResponse webResponse) {
+        if (webResponse == null) {
+            return null;
+        }
+        final StringBuilder value = new StringBuilder();
+        for (final NameValuePair header : webResponse.getResponseHeaders()) {
+            if (HttpHeader.REFERRER_POLICY.equalsIgnoreCase(header.getName())) {
+                if (value.length() > 0) {
+                    value.append(',');
+                }
+                value.append(header.getValue());
+            }
+        }
+        return ReferrerPolicy.fromHeader(value.toString());
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the referrer policy of this document (from the Referrer-Policy header or a
+     * meta element with the name 'referrer').
+     *
+     * @return the referrer policy, {@link ReferrerPolicy#DEFAULT} if not set
+     */
+    public ReferrerPolicy getReferrerPolicy() {
+        return referrerPolicy_ == null ? ReferrerPolicy.DEFAULT : referrerPolicy_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the referrer policy for a request of the given element: the policy of the
+     * referrerpolicy attribute of the element if valid, otherwise the policy of this document.
+     *
+     * @param element the element
+     * @return the referrer policy
+     */
+    public ReferrerPolicy getReferrerPolicy(final DomElement element) {
+        final ReferrerPolicy policy = ReferrerPolicy.fromToken(element.getAttributeDirect("referrerpolicy"));
+        if (policy != null) {
+            return policy;
+        }
+        return getReferrerPolicy();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets the referrer policy of this document (e.g. from a meta element).
+     *
+     * @param referrerPolicy the referrer policy
+     */
+    public void setReferrerPolicy(final ReferrerPolicy referrerPolicy) {
+        referrerPolicy_ = referrerPolicy;
     }
 
     /**
@@ -1301,6 +1384,7 @@ public class HtmlPage extends SgmlPage {
         request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
 
         request.setRefererHeader(referringRequest.getUrl());
+        request.setReferrerPolicy(element == null ? getReferrerPolicy() : getReferrerPolicy(element));
         request.setCharset(scriptCharset);
 
         // use info from script tag or fall back to utf-8

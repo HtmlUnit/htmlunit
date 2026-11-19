@@ -190,6 +190,7 @@ public final class HyperlinkElementSupport {
 
         if (!relContainsNoreferrer(element)) {
             webRequest.setRefererHeader(page.getUrl());
+            webRequest.setReferrerPolicy(page.getReferrerPolicy(htmlElement));
         }
 
         if (LOG.isDebugEnabled()) {

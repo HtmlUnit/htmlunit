@@ -17,6 +17,7 @@ package org.htmlunit.html;
 import java.util.Map;
 
 import org.htmlunit.HttpHeader;
+import org.htmlunit.ReferrerPolicy;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.csp.ContentSecurityPolicy;
 
@@ -66,6 +67,17 @@ public class HtmlMeta extends HtmlElement {
                 && getPage() instanceof HtmlPage htmlPage) {
             contentSecurityPolicyProcessed_ = true;
             ContentSecurityPolicy.addMetaPolicy(htmlPage, getContentAttribute());
+        }
+
+        // a meta element with the name 'referrer' sets the referrer policy of the document
+        // (also in the body and if added by script)
+        if ("referrer".equalsIgnoreCase(getNameAttribute().trim())
+                && isAttachedToPage()
+                && getPage() instanceof HtmlPage htmlPage) {
+            final ReferrerPolicy policy = ReferrerPolicy.fromMetaContent(getContentAttribute());
+            if (policy != null) {
+                htmlPage.setReferrerPolicy(policy);
+            }
         }
     }
 

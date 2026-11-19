@@ -218,6 +218,9 @@ public abstract class BaseFrameElement extends HtmlElement {
                                                             webClient.getBrowserVersion().getAcceptEncodingHeader());
             webRequest.setCharset(pageCharset);
             webRequest.setRefererHeader(pageUrl);
+            if (page instanceof HtmlPage containingPage) {
+                webRequest.setReferrerPolicy(containingPage.getReferrerPolicy(this));
+            }
 
             // Use parent document's charset as container charset if same origin
             // https://html.spec.whatwg.org/multipage/parsing.html#determining-the-character-encoding

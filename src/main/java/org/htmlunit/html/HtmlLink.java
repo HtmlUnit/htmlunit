@@ -278,6 +278,7 @@ public class HtmlLink extends HtmlElement {
         // use the page encoding even if this is a GET requests
         request.setCharset(page.getCharset());
         request.setRefererHeader(page.getUrl());
+        request.setReferrerPolicy(page.getReferrerPolicy(this));
 
         request.setFetchDestination(WebRequest.FetchDestination.STYLE);
         request.setFetchModeOverride(FetchMode.NO_CORS);

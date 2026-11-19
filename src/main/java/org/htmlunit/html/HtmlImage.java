@@ -716,6 +716,7 @@ public class HtmlImage extends HtmlElement {
                                                                     browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
                     request.setRefererHeader(page.getUrl());
+                    request.setReferrerPolicy(page.getReferrerPolicy(this));
 
                     // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
                     // an <img> load is never user-activated, and is initiated by the

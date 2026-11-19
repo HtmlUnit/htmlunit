@@ -807,6 +807,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             // https://xhr.spec.whatwg.org/#response-body
             request.setDefaultResponseContentCharset(UTF_8);
             request.setRefererHeader(pageUrl);
+            request.setReferrerPolicy(containingPage.getReferrerPolicy());
 
             request.setFetchDestination(WebRequest.FetchDestination.EMPTY);
             request.setFetchModeOverride(FetchMode.CORS);
@@ -1477,6 +1478,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         final HtmlPage containingPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         preflightRequest.setRefererHeader(containingPage.getUrl());
+        preflightRequest.setReferrerPolicy(containingPage.getReferrerPolicy());
 
         // do the preflight request
         return wc.loadWebResponse(preflightRequest);

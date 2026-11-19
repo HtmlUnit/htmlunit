@@ -217,6 +217,9 @@ public class WebRequest implements Serializable {
     // null means "no initiator" (e.g. a browser-chrome-initiated navigation), which
     // maps to Sec-Fetch-Site: none.
     private String requestingUrl_;
+    // the full referrer (without user info and ref) and the policy used to determine the Referer header
+    private String referrer_;
+    private ReferrerPolicy referrerPolicy_;
     private String siteForCookies_;
 
     // e.g. the CSP form-action check
@@ -720,11 +723,47 @@ public class WebRequest implements Serializable {
 
         try {
             // the referrer never contains the credentials and the ref
-            setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutUserInfoAndRef(url).toExternalForm());
+            referrer_ = UrlUtils.getUrlWithoutUserInfoAndRef(url).toExternalForm();
+            setAdditionalHeader(HttpHeader.REFERER, referrer_);
         }
         catch (final MalformedURLException ignored) {
             // bad luck use the whole url from the pager
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the full referrer (without user info and ref) set by {@link #setRefererHeader(URL)};
+     * the {@code Referer} header is determined from this url and the {@link #getReferrerPolicy() referrer policy}.
+     *
+     * @return the referrer url or {@code null}
+     */
+    public URL getReferrer() {
+        return referrer_ == null ? null : UrlUtils.toUrlSafe(referrer_);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the referrer policy used to determine the {@code Referer} header when the request is sent.
+     *
+     * @return the referrer policy or {@code null} if the {@code Referer} header is sent as set
+     */
+    public ReferrerPolicy getReferrerPolicy() {
+        return referrerPolicy_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets the referrer policy used to determine the {@code Referer} header when the request is sent
+     * (for the final url, also after redirects).
+     *
+     * @param referrerPolicy the referrer policy or {@code null} if the {@code Referer} header is sent as set
+     */
+    public void setReferrerPolicy(final ReferrerPolicy referrerPolicy) {
+        referrerPolicy_ = referrerPolicy;
     }
 
     /**

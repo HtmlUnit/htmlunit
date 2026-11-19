@@ -478,6 +478,13 @@ public enum BrowserVersionFeatures {
     KEYBOARD_EVENT_OEM_KEY_CODES,
 
     /**
+     * The less restrictive referrer policies ('unsafe-url' and 'no-referrer-when-downgrade')
+     * are ignored for cross-site requests (the default policy is used).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    REFERRER_POLICY_IGNORE_CROSS_SITE_RELAXING,
+
+    /**
      * Indicates that the Browser handles async and sync network errors the same way.
      */
     @BrowserFeature({FF, FF_ESR})

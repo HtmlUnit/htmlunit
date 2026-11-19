@@ -1328,6 +1328,9 @@ public class WebClient implements Serializable, AutoCloseable {
                 final Page openerPage = opener.getEnclosedPage();
                 if (openerPage != null && openerPage.getUrl() != null) {
                     request.setRefererHeader(openerPage.getUrl());
+                    if (openerPage instanceof HtmlPage openerHtmlPage) {
+                        request.setReferrerPolicy(openerHtmlPage.getReferrerPolicy());
+                    }
                 }
                 getPage(window, request);
             }
@@ -1454,6 +1457,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         if (openerPage != null) {
             request.setRefererHeader(openerPage.getUrl());
+            request.setReferrerPolicy(openerPage.getReferrerPolicy());
         }
 
         getPage(window, request);
@@ -1817,6 +1821,28 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
+     * Sets the {@code Referer} header of the request according to its referrer policy
+     * (if the request has a referrer and a policy).
+     *
+     * @param webRequest the request
+     */
+    private void applyReferrerPolicy(final WebRequest webRequest) {
+        final URL referrer = webRequest.getReferrer();
+        final ReferrerPolicy policy = webRequest.getReferrerPolicy();
+        if (referrer == null || policy == null) {
+            return;
+        }
+
+        final String value = policy.getReferrer(referrer, webRequest.getUrl(), getBrowserVersion());
+        if (value == null) {
+            webRequest.removeAdditionalHeader(HttpHeader.REFERER);
+        }
+        else {
+            webRequest.setAdditionalHeader(HttpHeader.REFERER, value);
+        }
+    }
+
+    /**
      * Loads a {@link WebResponse} from the server through the WebConnection.
      * @param webRequest the request
      * @param allowedRedirects the number of allowed redirects remaining
@@ -1836,6 +1862,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         url = UrlUtils.encodeUrl(url, webRequest.getCharset());
         webRequest.setUrl(url);
+        applyReferrerPolicy(webRequest);
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("Load response for " + method + " " + url.toExternalForm());
@@ -1958,6 +1985,9 @@ public class WebClient implements Serializable, AutoCloseable {
                     // credentials are not forwarded to another origin
                     wrs.removeAdditionalHeader("Authorization");
                 }
+                // the Referer header is determined again for the new url
+                wrs.setRefererHeader(webRequest.getReferrer());
+                wrs.setReferrerPolicy(webRequest.getReferrerPolicy());
                 wrs.setFetchDestination(webRequest.getFetchDestination());
                 wrs.setFetchModeOverride(webRequest.getFetchModeOverride());
                 wrs.setRequestingUrl(webRequest.getRequestingUrl());
@@ -1993,6 +2023,9 @@ public class WebClient implements Serializable, AutoCloseable {
                     // credentials are not forwarded to another origin
                     wrs.removeAdditionalHeader("Authorization");
                 }
+                // the Referer header is determined again for the new url
+                wrs.setRefererHeader(webRequest.getReferrer());
+                wrs.setReferrerPolicy(webRequest.getReferrerPolicy());
                 wrs.setRedirectFilter(redirectFilter);
                 wrs.setRedirectUrlMapper(redirectUrlMapper);
 

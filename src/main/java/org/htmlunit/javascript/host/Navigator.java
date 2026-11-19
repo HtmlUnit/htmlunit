@@ -481,6 +481,7 @@ public class Navigator extends HtmlUnitScriptable {
         // added unconditionally, same as HyperlinkElementSupport's ping request
         try {
             request.setRefererHeader(pageUrl);
+            request.setReferrerPolicy(page.getReferrerPolicy());
             request.setAdditionalHeader(HttpHeader.ORIGIN,
                     UrlUtils.getUrlWithProtocolAndAuthority(pageUrl).toExternalForm());
         }

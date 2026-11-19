@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Referrer policy support: the Referer header (and document.referrer) is determined by the
+                referrer policy (default 'strict-origin-when-cross-origin', only the origin is sent to other origins);
+                the policy is taken from the Referrer-Policy header, meta elements with the name 'referrer' and the
+                referrerpolicy attribute (a, area, iframe, img, link, script).
+            </action>
             <action type="fix" dev="rbri">
                 Like in the browsers, location.href (and location.toString()) no longer contains the user name and
                 password of the page url (document.URL still does).

@@ -254,6 +254,7 @@ public class Location extends HtmlUnitScriptable {
         request.setUrl(UrlUtils.toUrlUnsafe(getHref()));
         if (getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
             request.setRefererHeader(htmlPage.getUrl());
+            request.setReferrerPolicy(htmlPage.getReferrerPolicy());
         }
 
         webWindow.getWebClient().download(webWindow, "", request, false, null, "JS location.reload");
@@ -357,6 +358,7 @@ public class Location extends HtmlUnitScriptable {
             final WebRequest webRequest = new WebRequest(url,
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
             webRequest.setRefererHeader(callingPage.getUrl());
+            webRequest.setReferrerPolicy(callingPage.getReferrerPolicy());
 
             webRequest.markAsNavigation(getUrl(), false);
             webRequest.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
@@ -702,6 +704,9 @@ public class Location extends HtmlUnitScriptable {
         webRequest.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
 
         webRequest.setRefererHeader(getUrl());
+        if (webWindow.getEnclosedPage() instanceof HtmlPage referrerPage) {
+            webRequest.setReferrerPolicy(referrerPage.getReferrerPolicy());
+        }
 
         if (webWindow.getEnclosedPage() instanceof HtmlPage page) {
             upgradeInsecureRedirects(page, webWindow, webRequest);

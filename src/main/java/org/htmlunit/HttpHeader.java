@@ -28,6 +28,9 @@ public final class HttpHeader {
     /** referer. */
     public static final String REFERER_LC = "referer";
 
+    /** Referrer-Policy. */
+    public static final String REFERRER_POLICY = "Referrer-Policy";
+
     /** Origin. */
     public static final String ORIGIN = "Origin";
     /** origin. */
