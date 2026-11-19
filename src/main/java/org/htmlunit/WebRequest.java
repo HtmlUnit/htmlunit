@@ -54,6 +54,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Michael Lueck
  * @author Lai Quang Duong
  * @author Kristof Neirynck
+ * @author Vidya m
  */
 @SuppressWarnings("PMD.TooManyFields")
 public class WebRequest implements Serializable {
@@ -718,12 +719,8 @@ public class WebRequest implements Serializable {
         }
 
         try {
-            URL referer = UrlUtils.getUrlWithoutRef(url);
-            if (referer.getUserInfo() != null) {
-                // the referrer never contains the credentials
-                referer = UrlUtils.getUrlWithNewUserName(UrlUtils.getUrlWithNewUserPassword(referer, null), null);
-            }
-            setAdditionalHeader(HttpHeader.REFERER, referer.toExternalForm());
+            // the referrer never contains the credentials and the ref
+            setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutUserInfoAndRef(url).toExternalForm());
         }
         catch (final MalformedURLException ignored) {
             // bad luck use the whole url from the pager

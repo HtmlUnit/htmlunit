@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Hartmut Arlt
+ * @author Vidya m
  */
 public class UrlUtilsTest {
 
@@ -220,6 +221,39 @@ public class UrlUtilsTest {
         a = new URL("http://user:secret@my.home.com:8080/index.html");
         b = UrlUtils.getUrlWithProtocolAndAuthority(a);
         assertEquals("http://my.home.com:8080", b.toExternalForm());
+    }
+
+    /**
+     * The url used as referrer: no user info and no ref; all other parts unchanged.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getUrlWithoutUserInfoAndRef() throws Exception {
+        // nothing to strip
+        assertReferrer("http://my.home.com/folder/index.html?q=1", "http://my.home.com/folder/index.html?q=1");
+        assertReferrer("http://my.home.com", "http://my.home.com");
+
+        // user info
+        assertReferrer("http://my.home.com/index.html", "http://user:secret@my.home.com/index.html");
+        assertReferrer("http://my.home.com/index.html", "http://user@my.home.com/index.html");
+        assertReferrer("http://my.home.com/index.html", "http://:secret@my.home.com/index.html");
+        assertReferrer("http://my.home.com/index.html", "http://@my.home.com/index.html");
+        assertReferrer("http://my.home.com/", "http://user:se%40cret@my.home.com/");
+        assertReferrer("https://my.home.com:8443/", "https://user:secret@my.home.com:8443/");
+        assertReferrer("http://[::1]:8080/index.html", "http://user:secret@[::1]:8080/index.html");
+
+        // ref
+        assertReferrer("http://my.home.com/index.html?q=1", "http://my.home.com/index.html?q=1#ref");
+        assertReferrer("http://my.home.com/index.html", "http://my.home.com/index.html#");
+        assertReferrer("http://my.home.com/index.html", "http://user:secret@my.home.com/index.html#ref");
+
+        // the encoding of path and query is not changed
+        assertReferrer("http://my.home.com/a%20b/c%2Fd?x=%26y&z=%C3%A4",
+                "http://user:secret@my.home.com/a%20b/c%2Fd?x=%26y&z=%C3%A4#ref");
+    }
+
+    private static void assertReferrer(final String expected, final String url) throws Exception {
+        assertEquals(expected, UrlUtils.getUrlWithoutUserInfoAndRef(new URL(url)).toExternalForm());
     }
 
     /**

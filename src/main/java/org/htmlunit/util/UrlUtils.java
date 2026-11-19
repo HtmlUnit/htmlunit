@@ -45,6 +45,7 @@ import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
  * @author Ronald Brill
  * @author Joerg Werner
  * @author Hartmut Arlt
+ * @author Vidya m
  */
 public final class UrlUtils {
 
@@ -432,6 +433,20 @@ public final class UrlUtils {
      */
     public static URL getUrlWithoutRef(final URL u) throws MalformedURLException {
         return createNewUrl(u.getProtocol(), u.getAuthority(), u.getPath(), null, u.getQuery());
+    }
+
+    /**
+     * Creates and returns a new URL identical to the specified URL, ignoring the ref and the user info;
+     * this is the url used as referrer (the Fetch standard 'strip url for use as a referrer'
+     * for http(s) urls).
+     * @param u the URL on which to base the returned URL
+     * @return a new URL identical to the specified URL, ignoring the ref and the user info
+     * @throws MalformedURLException if there is a problem creating the new URL
+     * @see <a href="https://fetch.spec.whatwg.org/#strip-url">Fetch Standard - strip url for use
+     *     as a referrer</a>
+     */
+    public static URL getUrlWithoutUserInfoAndRef(final URL u) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), getAuthorityWithoutUserInfo(u), u.getPath(), null, u.getQuery());
     }
 
     /**
