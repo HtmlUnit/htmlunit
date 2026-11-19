@@ -141,6 +141,28 @@ public class File extends Blob {
     }
 
     /**
+     * Creates an instance backed by the given file.
+     *
+     * @param file the file
+     */
+    public File(final java.io.File file) {
+        this(file.getAbsolutePath());
+    }
+
+    /**
+     * Creates an instance holding the given bytes in memory.
+     *
+     * @param bytes the bytes
+     * @param fileName the name
+     * @param type the type
+     * @param lastModified the last modified timestamp
+     */
+    public File(final byte[] bytes, final String fileName, final String type, final long lastModified) {
+        super();
+        setBackend(new InMemoryBackend(bytes, fileName, type == null ? "" : type, lastModified));
+    }
+
+    /**
      * Returns the {@code name} property.
      * @return the {@code name} property
      */

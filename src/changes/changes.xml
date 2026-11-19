@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                FormData get(), getAll(), forEach() and the iterators are returning File objects for file entries
+                (instead of strings); like in the browsers blobs are converted to files.
+            </action>
             <action type="add" dev="rbri">
                 Request and Response implemented (without network access): constructors with the init validation,
                 clone(), the body methods text(), json(), arrayBuffer(), bytes(), blob() and formData(), bodyUsed,
