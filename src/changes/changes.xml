@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="Vidya m">
+                navigator.sendBeacon(): a beacon whose body has a type that is not CORS-safelisted (e.g. a Blob of
+                type application/json) is a cors request; it is only sent to another origin if the preflight allows it.
+            </action>
             <action type="add" dev="rbri">
                 fetch() is available in dedicated workers; relative urls are resolved against the url of the
                 worker script. The iterators of Headers, URLSearchParams and FormData are available in workers too.
