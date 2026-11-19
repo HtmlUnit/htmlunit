@@ -23,9 +23,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 /**
  * The JavaScript object {@code AbortController}.
  *
- * @author Ronald Brill
- *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController">MDN Documentation</a>
+ * @author Ronald Brill
  */
 @JsxClass
 public class AbortController extends HtmlUnitScriptable {
@@ -37,9 +36,7 @@ public class AbortController extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
-        signal_ = new AbortSignal();
-        signal_.setParentScope(getParentScope());
-        signal_.setPrototype(getPrototype(signal_.getClass()));
+        signal_ = AbortSignal.newSignal(this);
     }
 
     /**
@@ -54,9 +51,11 @@ public class AbortController extends HtmlUnitScriptable {
     /**
      * Aborts an asynchronous operation before it has completed. This is able to abort fetch requests,
      * consumption of any response bodies, and streams.
+     *
+     * @param reason the reason (an {@code AbortError} if {@code undefined})
      */
     @JsxFunction
-    public void abort() {
-        // empty impl for the moment
+    public void abort(final Object reason) {
+        signal_.signalAbort(reason);
     }
 }

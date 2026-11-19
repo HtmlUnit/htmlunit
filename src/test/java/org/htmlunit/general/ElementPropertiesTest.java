@@ -10586,10 +10586,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "when()",
             FF = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),throwIfAborted()",
             FF_ESR = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),throwIfAborted()")
-    @HtmlUnitNYI(CHROME = "addEventListener(),dispatchEvent(),removeEventListener()",
-            EDGE = "addEventListener(),dispatchEvent(),removeEventListener()",
-            FF = "addEventListener(),dispatchEvent(),removeEventListener()",
-            FF_ESR = "addEventListener(),dispatchEvent(),removeEventListener()")
+    @HtmlUnitNYI(CHROME = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),"
+                + "throwIfAborted()",
+            EDGE = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),"
+                + "throwIfAborted()")
     public void abortSignal() throws Exception {
         testString("", "new AbortController().signal");
     }
