@@ -47,7 +47,6 @@ public class HtmxTest2x0x0 extends HtmxTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Disabled
     @Alerts(DEFAULT = "passes:506failures:65",
             FF = "passes:506failures:64",
             FF_ESR = "passes:506failures:64")
@@ -56,6 +55,7 @@ public class HtmxTest2x0x0 extends HtmxTest {
             EDGE = "passes:505failures:65",
             FF = "passes:505failures:65",
             FF_ESR = "passes:505failures:65")
+    @Disabled
     public void htmxMin() throws Exception {
         htmx("htmx-2.0.0", true);
     }
