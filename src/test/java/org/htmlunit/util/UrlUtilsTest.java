@@ -224,6 +224,40 @@ public class UrlUtilsTest {
     }
 
     /**
+     * No user info; all other parts (including the ref) unchanged.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getUrlWithoutUserInfo() throws Exception {
+        // nothing to strip
+        assertWithoutUserInfo("http://my.home.com/folder/index.html?q=1#ref",
+                "http://my.home.com/folder/index.html?q=1#ref");
+        assertWithoutUserInfo("http://my.home.com", "http://my.home.com");
+
+        // user info
+        assertWithoutUserInfo("http://my.home.com/index.html", "http://user:secret@my.home.com/index.html");
+        assertWithoutUserInfo("http://my.home.com/index.html", "http://user@my.home.com/index.html");
+        assertWithoutUserInfo("http://my.home.com/index.html", "http://:secret@my.home.com/index.html");
+        assertWithoutUserInfo("http://my.home.com/index.html", "http://@my.home.com/index.html");
+        assertWithoutUserInfo("http://my.home.com/", "http://user:se%40cret@my.home.com/");
+        assertWithoutUserInfo("https://my.home.com:8443/", "https://user:secret@my.home.com:8443/");
+        assertWithoutUserInfo("http://[::1]:8080/index.html", "http://user:secret@[::1]:8080/index.html");
+
+        // the ref is kept (also an empty one)
+        assertWithoutUserInfo("http://my.home.com/index.html?q=1#ref",
+                "http://user:secret@my.home.com/index.html?q=1#ref");
+        assertWithoutUserInfo("http://my.home.com/index.html#", "http://user:secret@my.home.com/index.html#");
+
+        // the encoding of path, query and ref is not changed
+        assertWithoutUserInfo("http://my.home.com/a%20b/c%2Fd?x=%26y&z=%C3%A4#r%20f",
+                "http://user:secret@my.home.com/a%20b/c%2Fd?x=%26y&z=%C3%A4#r%20f");
+    }
+
+    private static void assertWithoutUserInfo(final String expected, final String url) throws Exception {
+        assertEquals(expected, UrlUtils.getUrlWithoutUserInfo(new URL(url)).toExternalForm());
+    }
+
+    /**
      * The url used as referrer: no user info and no ref; all other parts unchanged.
      * @throws Exception if the test fails
      */

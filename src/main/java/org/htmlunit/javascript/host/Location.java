@@ -298,6 +298,10 @@ public class Location extends HtmlUnitScriptable {
         }
         try {
             URL url = page.getUrl();
+            if (url.getUserInfo() != null) {
+                // like the browsers, location never contains the credentials (document.URL does)
+                url = UrlUtils.getUrlWithoutUserInfo(url);
+            }
             final String hash = getHash(true);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);

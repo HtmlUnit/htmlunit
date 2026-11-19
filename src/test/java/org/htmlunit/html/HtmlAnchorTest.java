@@ -890,14 +890,19 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * and the Ping-From and Ping-To headers of a ping. The alerts are document.URL, location.href,
      * location.origin and the Ping-From and Ping-To headers received by the server ('null' if not sent).
      * <p>Real Firefox asks before it opens a url with credentials (and does not send pings);
-     * therefore this test does not run with real Firefox.</p>
+     * therefore this test does not run with Firefox.</p>
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
+    @Alerts({"http://user:secret@localhost:§§PORT§§/page.html",
+             "http://localhost:§§PORT§§/page.html",
+             "http://localhost:§§PORT§§",
+             "http://user:secret@localhost:§§PORT§§/page.html",
+             "http://joe:pw@localhost:§§PORT§§/target.html?q=1#frag"})
     public void pingWithCredentials() throws Exception {
-        Assumptions.assumeFalse(useRealBrowser() && getBrowserVersion().isFirefox(),
+        // there is no recording for Firefox
+        Assumptions.assumeFalse(getBrowserVersion().isFirefox(),
                 "real Firefox asks before it opens a url with credentials");
 
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));

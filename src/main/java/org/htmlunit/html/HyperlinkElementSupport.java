@@ -136,9 +136,8 @@ public final class HyperlinkElementSupport {
             final URL pingUrl = getTargetUrl(element.getPingAttribute(), page);
             final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
             pingRequest.setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, browser.getAcceptEncodingHeader());
-            // like the Referer, the urls never contain the credentials
-            setPingHeader(pingRequest, HttpHeader.PING_FROM, pageUrl);
-            setPingHeader(pingRequest, HttpHeader.PING_TO, url);
+            pingRequest.setAdditionalHeader(HttpHeader.PING_FROM, pageUrl.toExternalForm());
+            pingRequest.setAdditionalHeader(HttpHeader.PING_TO, url.toExternalForm());
             pingRequest.setEncodingType(FormEncodingType.TEXT_PLAIN); // text/ping
             try {
                 pingRequest.setAdditionalHeader(HttpHeader.ORIGIN,
@@ -213,25 +212,6 @@ public final class HyperlinkElementSupport {
         page.getWebClient().download(page.getEnclosingWindow(), target, webRequest,
                 true, (ATTRIBUTE_NOT_DEFINED == downloadAttribute) ? null : downloadAttribute,
                 htmlElement.getClass().getSimpleName() + " click");
-    }
-
-    /**
-     * Sets the ping header to the given url without the user info; if this is not possible,
-     * the header is not set.
-     *
-     * @param pingRequest the ping request
-     * @param name the header name
-     * @param url the url
-     */
-    private static void setPingHeader(final WebRequest pingRequest, final String name, final URL url) {
-        try {
-            pingRequest.setAdditionalHeader(name, UrlUtils.getUrlWithoutUserInfo(url).toExternalForm());
-        }
-        catch (final MalformedURLException e) {
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Invalid url '" + url + "' for header " + name);
-            }
-        }
     }
 
     /**

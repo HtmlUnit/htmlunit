@@ -9,8 +9,8 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
-                The Ping-From and Ping-To headers of hyperlink auditing (a ping) requests no longer contain the
-                user name and password of the urls.
+                Like in the browsers, location.href (and location.toString()) no longer contains the user name and
+                password of the page url (document.URL still does).
             </action>
             <action type="fix" dev="rbri">
                 The Origin header of a crossorigin script request is the origin of the document (and not the one
