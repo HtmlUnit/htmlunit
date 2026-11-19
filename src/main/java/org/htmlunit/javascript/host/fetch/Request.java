@@ -273,18 +273,21 @@ public class Request extends HtmlUnitScriptable {
         headers_.setParentScope(getParentScope());
         headers_.setPrototype(getPrototype(Headers.class));
         headers_.setGuard(Headers.Guard.REQUEST);
+        if ("no-cors".equals(mode_)) {
+            if (!"GET".equals(method_) && !"HEAD".equals(method_) && !"POST".equals(method_)) {
+                throw JavaScriptEngine.typeError("Failed to construct 'Request': '" + method_
+                        + "' is unsupported in no-cors mode.");
+            }
+            // only the no-CORS-safelisted request headers are allowed
+            headers_.setGuard(Headers.Guard.REQUEST_NO_CORS);
+        }
+
         final Object initHeaders = initObject == null ? null : getMember(initObject, "headers");
         if (initHeaders != null) {
             headers_.fill(initHeaders);
         }
         else if (inputRequest != null) {
             headers_.fill(inputRequest.headers_);
-        }
-
-        if ("no-cors".equals(mode_)
-                && !"GET".equals(method_) && !"HEAD".equals(method_) && !"POST".equals(method_)) {
-            throw JavaScriptEngine.typeError("Failed to construct 'Request': '" + method_
-                    + "' is unsupported in no-cors mode.");
         }
 
         // the body

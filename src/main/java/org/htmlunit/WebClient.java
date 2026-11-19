@@ -1913,7 +1913,16 @@ public class WebClient implements Serializable, AutoCloseable {
         addDefaultHeaders(webRequest);
 
         // Retrieve the response, either from the cache or from the server.
-        final WebResponse fromCache = getCache().getCachedResponse(webRequest);
+        final WebRequest.CacheMode cacheMode = webRequest.getCacheMode();
+        addCacheModeHeaders(webRequest, cacheMode);
+        final WebResponse fromCache = cacheMode == WebRequest.CacheMode.NO_STORE
+                                        || cacheMode == WebRequest.CacheMode.RELOAD
+                                    ? null
+                                    : getCache().getCachedResponse(webRequest);
+        if (fromCache == null && cacheMode == WebRequest.CacheMode.ONLY_IF_CACHED) {
+            throw new IOException("No cached response for '" + webRequest.getUrl()
+                    + "' (cache mode 'only-if-cached').");
+        }
         final WebResponse webResponse = getWebResponseOrUseCached(webRequest, fromCache);
 
         // Continue according to the HTTP status code.
@@ -2033,10 +2042,34 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
 
-        if (fromCache == null) {
+        if (fromCache == null && cacheMode != WebRequest.CacheMode.NO_STORE) {
             getCache().cacheIfPossible(webRequest, webResponse, null);
         }
         return webResponse;
+    }
+
+    /**
+     * Adds the headers the fetch standard requires for the cache mode
+     * (only if the request does not already have them).
+     *
+     * @param webRequest the request
+     * @param cacheMode the cache mode
+     * @see <a href="https://fetch.spec.whatwg.org/#http-network-or-cache-fetch">Fetch Standard
+     *      - HTTP-network-or-cache fetch</a>
+     */
+    private static void addCacheModeHeaders(final WebRequest webRequest, final WebRequest.CacheMode cacheMode) {
+        if (cacheMode == WebRequest.CacheMode.NO_STORE || cacheMode == WebRequest.CacheMode.RELOAD) {
+            if (webRequest.getAdditionalHeader("Pragma") == null) {
+                webRequest.setAdditionalHeader("Pragma", "no-cache");
+            }
+            if (webRequest.getAdditionalHeader(HttpHeader.CACHE_CONTROL) == null) {
+                webRequest.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "no-cache");
+            }
+        }
+        else if (cacheMode == WebRequest.CacheMode.NO_CACHE
+                && webRequest.getAdditionalHeader(HttpHeader.CACHE_CONTROL) == null) {
+            webRequest.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "max-age=0");
+        }
     }
 
     /**
@@ -2051,7 +2084,9 @@ public class WebClient implements Serializable, AutoCloseable {
             return getWebConnection().getResponse(webRequest);
         }
 
-        if (!HeaderUtils.containsNoCache(cached)) {
+        final WebRequest.CacheMode cacheMode = webRequest.getCacheMode();
+        if (cacheMode == WebRequest.CacheMode.FORCE_CACHE || cacheMode == WebRequest.CacheMode.ONLY_IF_CACHED
+                || cacheMode != WebRequest.CacheMode.NO_CACHE && !HeaderUtils.containsNoCache(cached)) {
             return new WebResponseFromCache(cached, webRequest);
         }
 

@@ -70,6 +70,11 @@ public class Headers extends HtmlUnitScriptable {
         NONE,
         /** The headers of a request; changes of forbidden request headers are ignored. */
         REQUEST,
+        /**
+         * The headers of a request in mode 'no-cors'; only the no-CORS-safelisted request headers
+         * (with safe values) can be changed.
+         */
+        REQUEST_NO_CORS,
         /** The headers of a response; changes of forbidden response headers are ignored. */
         RESPONSE,
         /** No changes are allowed. */
@@ -414,6 +419,12 @@ public class Headers extends HtmlUnitScriptable {
         if (isIgnoredByGuard(name)) {
             return;
         }
+        if (guard_ == Guard.REQUEST_NO_CORS) {
+            final String existing = getHeader(name);
+            if (!isNoCorsSafelistedRequestHeader(name, existing == null ? normalized : existing + ", " + normalized)) {
+                return;
+            }
+        }
         headerList_.add(new NameValuePair(name, normalized));
     }
 
@@ -429,6 +440,9 @@ public class Headers extends HtmlUnitScriptable {
         validateName(name);
         validateValue(normalized);
         if (isIgnoredByGuard(name)) {
+            return;
+        }
+        if (guard_ == Guard.REQUEST_NO_CORS && !isNoCorsSafelistedRequestHeader(name, normalized)) {
             return;
         }
 
@@ -459,6 +473,9 @@ public class Headers extends HtmlUnitScriptable {
     public void deleteHeader(final String name) {
         validateName(name);
         if (isIgnoredByGuard(name)) {
+            return;
+        }
+        if (guard_ == Guard.REQUEST_NO_CORS && !isNoCorsSafelistedRequestHeaderName(name)) {
             return;
         }
         headerList_.removeIf(header -> header.getName().equalsIgnoreCase(name));
@@ -556,13 +573,66 @@ public class Headers extends HtmlUnitScriptable {
         switch (guard_) {
             case IMMUTABLE:
                 throw JavaScriptEngine.typeError("Headers are immutable");
-            case REQUEST:
+            case REQUEST, REQUEST_NO_CORS:
                 return isForbiddenRequestHeader(name);
             case RESPONSE:
                 return SET_COOKIE.equalsIgnoreCase(name) || "set-cookie2".equalsIgnoreCase(name);
             default:
                 return false;
         }
+    }
+
+    private static boolean isNoCorsSafelistedRequestHeaderName(final String name) {
+        final String lcName = name.toLowerCase(Locale.ROOT);
+        return "accept".equals(lcName) || "accept-language".equals(lcName)
+                || "content-language".equals(lcName) || "content-type".equals(lcName);
+    }
+
+    /**
+     * Returns whether the header is a no-CORS-safelisted request header (name and value).
+     *
+     * @param name the name
+     * @param value the value
+     * @return whether the header is a no-CORS-safelisted request header
+     * @see <a href="https://fetch.spec.whatwg.org/#no-cors-safelisted-request-header">Fetch Standard -
+     *     no-CORS-safelisted request-header</a>
+     */
+    static boolean isNoCorsSafelistedRequestHeader(final String name, final String value) {
+        if (!isNoCorsSafelistedRequestHeaderName(name) || value.length() > 128) {
+            return false;
+        }
+
+        final String lcName = name.toLowerCase(Locale.ROOT);
+        if ("accept-language".equals(lcName) || "content-language".equals(lcName)) {
+            for (int i = 0; i < value.length(); i++) {
+                final char c = value.charAt(i);
+                if (!(c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z'
+                        || " *,-.;=".indexOf(c) > -1)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // accept and content-type: no CORS-unsafe request-header bytes
+        for (int i = 0; i < value.length(); i++) {
+            final char c = value.charAt(i);
+            if (c < 0x20 && c != '\t' || c == 0x7F || "\"():<>?@[\\]{}".indexOf(c) > -1) {
+                return false;
+            }
+        }
+
+        if ("content-type".equals(lcName)) {
+            int end = value.indexOf(';');
+            if (end < 0) {
+                end = value.length();
+            }
+            final String essence = value.substring(0, end).trim().toLowerCase(Locale.ROOT);
+            return "application/x-www-form-urlencoded".equals(essence)
+                    || "multipart/form-data".equals(essence)
+                    || "text/plain".equals(essence);
+        }
+        return true;
     }
 
     /**

@@ -9,6 +9,10 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="add" dev="rbri">
+                fetch(): support of the request mode 'no-cors' (opaque responses and the restricted request
+                headers), the cache modes, subresource integrity and the body size limit of keepalive requests.
+            </action>
+            <action type="add" dev="rbri">
                 fetch() supports requests to other origins (CORS) in the mode 'cors': preflight requests,
                 the credentials modes, redirects to other origins and the filtering of the response headers
                 (Access-Control-Expose-Headers); the response type is 'cors'.

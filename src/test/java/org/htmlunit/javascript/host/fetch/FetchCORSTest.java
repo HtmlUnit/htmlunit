@@ -1063,10 +1063,6 @@ public class FetchCORSTest extends WebDriverTestCase {
                       "[]",
                       "",
                       "[]"})
-    @HtmlUnitNYI(CHROME = "TypeError",
-            EDGE = "TypeError",
-            FF = "TypeError",
-            FF_ESR = "TypeError")
     public void modeNoCors() throws Exception {
         startSecondServer();
 
@@ -1090,6 +1086,148 @@ public class FetchCORSTest extends WebDriverTestCase {
                 + "<body onload='test()'></body></html>";
 
         loadAndVerify(html);
+    }
+
+    /**
+     * A GET in mode 'no-cors' has no Origin header; the non-safelisted headers are not sent,
+     * cookies only with 'include'.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"opaque 0",
+                      "GET origin=null;cookie=null;x-custom=null;content-type=null;accept=text/plain;content-language=d"
+                          + "e"})
+    public void modeNoCorsGet() throws Exception {
+        noCors("{mode: 'no-cors', headers: {'X-Custom': 'v', 'Content-Type': 'application/json', "
+                + "'Accept': 'text/plain', 'Content-Language': 'de'}}");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"opaque 0",
+                      "POST origin=http://localhost:22222;cookie=null;x-custom=null;content-type=text/plain;accept=*/*;"
+                          + "content-language=null"})
+    public void modeNoCorsPost() throws Exception {
+        noCors("{mode: 'no-cors', method: 'POST', body: 'data', headers: {'Content-Type': 'text/plain'}}");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"opaque 0",
+                      "GET origin=null;cookie=cookie=sweet;x-custom=null;content-type=null;accept=*/*;content-language="
+                          + "null"})
+    public void modeNoCorsInclude() throws Exception {
+        noCors("{mode: 'no-cors', credentials: 'include'}");
+    }
+
+    /**
+     * A cross origin request in mode 'no-cors' has to follow the redirects.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"TypeError",
+                      "nothing"})
+    public void modeNoCorsRedirectManual() throws Exception {
+        noCors("{mode: 'no-cors', redirect: 'manual'}");
+    }
+
+    /**
+     * The integrity of an opaque response can't be checked.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"TypeError",
+                      "GET origin=null;cookie=null;x-custom=null;content-type=null;accept=*/*;content-language=null"})
+    public void modeNoCorsIntegrity() throws Exception {
+        noCors("{mode: 'no-cors', integrity: 'sha256-ungWv48Bz+pBQUDeXa4iI7ADYaOWF3qctBD/YfIAFa0='}");
+    }
+
+    /**
+     * A redirect to another origin in mode 'no-cors' results in an opaque response.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"0",
+                      "opaque",
+                      ""})
+    public void modeNoCorsRedirectToOtherOrigin() throws Exception {
+        startSecondServer();
+        pivot("/pivot", 302, originB() + "/echo");
+
+        loadAndVerify(fetchPage("", "{mode: 'no-cors'}", originA() + "/pivot"));
+    }
+
+    /**
+     * Sends the request in mode 'no-cors' and logs afterwards what the server has received.
+     */
+    private void noCors(final String init) throws Exception {
+        final String url = originB() + "/nocors";
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  fetch('" + url + "', " + init + ")\n"
+                + "    .then(function(r) { log(r.type + ' ' + r.status); }, function(e) { logEx(e); })\n"
+                + "    .then(function() { return fetch('" + url + "?received'); })\n"
+                + "    .then(function(r) { return r.text(); })\n"
+                + "    .then(function(t) { log(t); })\n"
+                + "    .catch(function(e) { logEx(e); });\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        NoCorsServlet.RECEIVED_ = null;
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/nocors", NoCorsServlet.class);
+        startWebServer2(".", servlets2);
+
+        expandExpectedAlertsVariables(new URL(originA()));
+        loadAndVerify(html, "cookie=sweet");
+    }
+
+    /**
+     * Remembers the request (without sending CORS headers) and answers the 'received' GET request
+     * with it.
+     */
+    public static class NoCorsServlet extends HttpServlet {
+        private static String RECEIVED_;
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            if ("received".equals(request.getQueryString())) {
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setContentType(MimeType.TEXT_PLAIN);
+                response.getWriter().write(RECEIVED_ == null ? "nothing" : RECEIVED_);
+                return;
+            }
+            received(request, response);
+        }
+
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            received(request, response);
+        }
+
+        private static void received(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            RECEIVED_ = request.getMethod()
+                    + " origin=" + request.getHeader(HttpHeader.ORIGIN)
+                    + ";cookie=" + request.getHeader(HttpHeader.COOKIE)
+                    + ";x-custom=" + request.getHeader("X-Custom")
+                    + ";content-type=" + request.getHeader(HttpHeader.CONTENT_TYPE)
+                    + ";accept=" + request.getHeader(HttpHeader.ACCEPT)
+                    + ";content-language=" + request.getHeader("Content-Language");
+            response.setContentType(MimeType.TEXT_PLAIN);
+            response.getWriter().write("abc");
+        }
     }
 
     // ---------------------------------------------------------------------------

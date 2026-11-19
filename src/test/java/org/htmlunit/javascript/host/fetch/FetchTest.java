@@ -16,9 +16,12 @@ package org.htmlunit.javascript.host.fetch;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
@@ -29,6 +32,11 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for Fetch API.
@@ -1140,22 +1148,12 @@ public class FetchTest extends WebDriverTestCase {
                         + "| text/plain;a=b;a=c;charset=foo "
                         + "| text/plain "
                         + "| text/plain;a=\"b c\"",
-            FF = "text/plain;charset=utf-8 "
-                    + "| text/html;charset=UTF-8 "
-                    + "| text/html | text/plain;charset=US-ASCII "
-                    + "| text/plain | text/plain;charset=utf-8 "
-                    + "| text/plain;charset=US-ASCII "
-                    + "| text/plain;charset=foo;a=b "
-                    + "| text/plain "
-                    + "| text/plain;a=\"bc\"",
-            FF_ESR = "text/plain;charset=utf-8 "
-                    + "| text/html;charset=UTF-8 "
-                    + "| text/html | text/plain;charset=US-ASCII "
-                    + "| text/plain | text/plain;charset=utf-8 "
-                    + "| text/plain;charset=US-ASCII "
-                    + "| text/plain;charset=foo;a=b "
-                    + "| text/plain "
-                    + "| text/plain;a=\"bc\"")
+            FF = "text/plain;charset=utf-8 | text/html;charset=UTF-8 | text/html | text/plain;charset=US-ASCII | t"
+                + "ext/plain | text/plain;charset=utf-8 | text/plain;charset=US-ASCII | text/plain;charset=foo;a=b "
+                + "| text/plain | text/plain;a=bc",
+            FF_ESR = "text/plain;charset=utf-8 | text/html;charset=UTF-8 | text/html | text/plain;charset=US-ASCII | t"
+                + "ext/plain | text/plain;charset=utf-8 | text/plain;charset=US-ASCII | text/plain;charset=foo;a=b "
+                + "| text/plain | text/plain;a=bc")
     @HtmlUnitNYI(
             FF = "text/plain;charset=utf-8 "
                     + "| text/html;charset=UTF-8 "
@@ -1190,4 +1188,302 @@ public class FetchTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
+
+    // ---------------------------------------------------------------------------
+    // integrity
+    // ---------------------------------------------------------------------------
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"abc",
+                      "TypeError",
+                      "abc",
+                      "abc",
+                      "TypeError",
+                      "abc",
+                      "abc",
+                      "abc"})
+    public void integrity() throws Exception {
+        final String sha256 = "sha256-ungWv48Bz+pBQUDeXa4iI7ADYaOWF3qctBD/YfIAFa0=";
+        final String sha512 = "sha512-3a81oZNherrMQXNJriBBMRLm+k6JqX6iCp7u5ktV05ohkpkqJ0/BqDa6PCOj/uu9RU1EI2Q86A4"
+                + "qmslPpUyknw==";
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const url = '" + URL_SECOND + "';\n"
+            + "  const values = ['" + sha256 + "', 'sha256-wrong', '" + sha512 + "',\n"
+            + "                  'sha256-wrong " + sha512 + "', '" + sha256 + " sha512-wrong',\n"
+            + "                  'md5-abc', '" + sha256.replace('+', '-').replace('/', '_') + "', ''];\n"
+            + "  values.reduce((p, v) => p.then(() =>\n"
+            + "      fetch(url, {integrity: v}).then(r => r.text()).then(t => log(t), e => logEx(e))),\n"
+            + "    Promise.resolve());\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "abc", MimeType.TEXT_PLAIN);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    // ---------------------------------------------------------------------------
+    // keepalive
+    // ---------------------------------------------------------------------------
+
+    /**
+     * The body of a keepalive request is limited to 64 KiB.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"200",
+                      "TypeError",
+                      "200"})
+    public void keepaliveBodySize() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const url = '" + URL_SECOND + "';\n"
+            + "  fetch(url, {method: 'POST', keepalive: true, body: 'x'.repeat(65536)})\n"
+            + "    .then(r => log(r.status), e => logEx(e))\n"
+            + "    .then(() => fetch(url, {method: 'POST', keepalive: true, body: 'x'.repeat(65537)}))\n"
+            + "    .then(r => log(r.status), e => logEx(e))\n"
+            + "    .then(() => fetch(url, {method: 'POST', keepalive: false, body: 'x'.repeat(65537)}))\n"
+            + "    .then(r => log(r.status), e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "x", MimeType.TEXT_PLAIN);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
+    }
+
+    // ---------------------------------------------------------------------------
+    // referrer
+    // ---------------------------------------------------------------------------
+
+    /**
+     * The referrer and the referrerPolicy options.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"referer=http://localhost:22222/page?q=1",
+                      "referer=null",
+                      "referer=http://localhost:22222/other?x=1",
+                      "referer=http://localhost:22222/page?q=1",
+                      "referer=null",
+                      "referer=http://localhost:22222/",
+                      "referer=http://localhost:22222/page?q=1",
+                      "referer=http://localhost:22222/page?q=1",
+                      "referer=http://localhost:22222/"})
+    public void referrerOptions() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const url = '/referer';\n"
+            + "  const inits = [{}, {referrer: ''}, {referrer: '/other?x=1'}, {referrer: 'about:client'},\n"
+            + "                 {referrerPolicy: 'no-referrer'}, {referrerPolicy: 'origin'},\n"
+            + "                 {referrerPolicy: 'same-origin'}, {referrerPolicy: 'unsafe-url'},\n"
+            + "                 {referrer: '/other', referrerPolicy: 'origin'}];\n"
+            + "  inits.reduce((p, init) => p.then(() =>\n"
+            + "      fetch(url, init).then(r => r.text()).then(t => log(t), e => logEx(e))),\n"
+            + "    Promise.resolve());\n"
+            + "</script></head><body></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/referer", RefererServlet.class);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "/page?q=1"), servlets);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Answers with the Referer header of the request.
+     */
+    public static class RefererServlet extends HttpServlet {
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            response.setContentType(MimeType.TEXT_PLAIN);
+            response.getWriter().write("referer=" + request.getHeader(HttpHeader.REFERER));
+        }
+    }
+
+    // ---------------------------------------------------------------------------
+    // cache modes
+    // ---------------------------------------------------------------------------
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null"})
+    public void cacheDefault() throws Exception {
+        cache("{}");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=2;cache-control=no-cache;pragma=no-cache;if-none-match=null",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null"})
+    public void cacheNoStore() throws Exception {
+        cache("{cache: 'no-store'}");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=2;cache-control=no-cache;pragma=no-cache;if-none-match=null",
+                      "count=2;cache-control=no-cache;pragma=no-cache;if-none-match=null"})
+    public void cacheReload() throws Exception {
+        cache("{cache: 'reload'}");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null"})
+    public void cacheNoCache() throws Exception {
+        cache("{cache: 'no-cache'}");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null"})
+    public void cacheForceCache() throws Exception {
+        cache("{cache: 'force-cache'}");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null"})
+    public void cacheOnlyIfCached() throws Exception {
+        cache("{cache: 'only-if-cached', mode: 'same-origin'}");
+    }
+
+    /**
+     * A request with a conditional header bypasses the cache.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"count=1;cache-control=null;pragma=null;if-none-match=null",
+                                "count=2;cache-control=max-age=0;pragma=null;if-none-match=\"other\"",
+                                "count=1;cache-control=null;pragma=null;if-none-match=null"},
+            FF = {"count=1;cache-control=null;pragma=null;if-none-match=null",
+                  "count=2;cache-control=no-cache;pragma=no-cache;if-none-match=\"other\"",
+                  "count=1;cache-control=null;pragma=null;if-none-match=null"},
+            FF_ESR = {"count=1;cache-control=null;pragma=null;if-none-match=null",
+                      "count=2;cache-control=no-cache;pragma=no-cache;if-none-match=\"other\"",
+                      "count=1;cache-control=null;pragma=null;if-none-match=null"})
+    @HtmlUnitNYI(CHROME = {"count=1;cache-control=null;pragma=null;if-none-match=null",
+                           "count=2;cache-control=no-cache;pragma=no-cache;if-none-match=\"other\"",
+                           "count=1;cache-control=null;pragma=null;if-none-match=null"},
+            EDGE = {"count=1;cache-control=null;pragma=null;if-none-match=null",
+                    "count=2;cache-control=no-cache;pragma=no-cache;if-none-match=\"other\"",
+                    "count=1;cache-control=null;pragma=null;if-none-match=null"})
+    public void cacheConditionalHeader() throws Exception {
+        cache("{headers: {'If-None-Match': '\"other\"'}}");
+    }
+
+    /**
+     * Fetches the (cacheable) resource with the default cache mode, then with the given init
+     * and at last again with the default cache mode; logs the answers of the server.
+     */
+    private void cache(final String init) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const url = '/cache?id=" + System.currentTimeMillis() + "';\n"
+            + "  fetch(url)\n"
+            + "    .then(r => r.text()).then(t => log(t))\n"
+            + "    .then(() => fetch(url, " + init + "))\n"
+            + "    .then(r => r.text()).then(t => log(t), e => logEx(e))\n"
+            + "    .then(() => fetch(url))\n"
+            + "    .then(r => r.text()).then(t => log(t), e => logEx(e))\n"
+            + "    .catch(e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        CacheServlet.COUNT_ = 0;
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/cache", CacheServlet.class);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST, servlets);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Answers with a cacheable response (max-age and ETag) that contains the number of the request
+     * and the cache headers of the request; answers conditional requests with 304.
+     */
+    public static class CacheServlet extends HttpServlet {
+        private static int COUNT_;
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            COUNT_++;
+            response.setHeader("Cache-Control", "max-age=3600");
+            response.setHeader("ETag", "\"v1\"");
+            if ("\"v1\"".equals(request.getHeader("If-None-Match"))) {
+                response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+                return;
+            }
+
+            response.setContentType(MimeType.TEXT_PLAIN);
+            response.getWriter().write("count=" + COUNT_
+                    + ";cache-control=" + request.getHeader("Cache-Control")
+                    + ";pragma=" + request.getHeader("Pragma")
+                    + ";if-none-match=" + request.getHeader("If-None-Match"));
+        }
+    }
+
+    // ---------------------------------------------------------------------------
+    // mode no-cors
+    // ---------------------------------------------------------------------------
+
+    /**
+     * A request in mode 'no-cors' to the origin of the page is a normal request.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"200 basic", "content"})
+    public void noCorsSameOrigin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + URL_SECOND + "',\n"
+            + "      {mode: 'no-cors', headers: {'X-Custom': 'v', 'Accept': 'text/plain'}})\n"
+            + "    .then(r => { log(r.status + ' ' + r.type); return r.text(); })\n"
+            + "    .then(t => log(t), e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "content", MimeType.TEXT_PLAIN);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        assertNull(lastRequest.getAdditionalHeader("X-Custom"));
+        assertEquals("text/plain", lastRequest.getAdditionalHeader(HttpHeader.ACCEPT));
+    }
 }
+

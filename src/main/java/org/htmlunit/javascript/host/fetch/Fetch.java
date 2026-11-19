@@ -61,8 +61,9 @@ import org.htmlunit.util.UrlUtils;
 /**
  * The implementation of {@code fetch()}.
  *
- * <p>Requests to other origins are supported in the mode 'cors' only; the mode 'no-cors'
- * (opaque responses) is not implemented yet.</p>
+ * <p>Supported are the request modes 'cors', 'same-origin' and 'no-cors' (opaque responses), the
+ * credentials, redirect and cache modes, the referrer options, subresource integrity and the size limit
+ * of keepalive requests.</p>
  *
  * @see <a href="https://fetch.spec.whatwg.org/#fetch-method">Fetch Standard - fetch()</a>
  * @author Ronald Brill
@@ -70,6 +71,12 @@ import org.htmlunit.util.UrlUtils;
 public final class Fetch {
 
     private static final Log LOG = LogFactory.getLog(Fetch.class);
+
+    /** The maximal size of the body of a keepalive request (64 KiB). */
+    private static final int KEEPALIVE_MAX_BODY_SIZE = 64 * 1024;
+
+    private static final String[] CONDITIONAL_HEADERS =
+        {"If-Modified-Since", "If-None-Match", "If-Unmodified-Since", "If-Match", "If-Range"};
 
     private Fetch() {
         // util class
@@ -209,17 +216,26 @@ public final class Fetch {
             webRequest.setAdditionalHeader(header.getName(), header.getValue());
         }
 
-        // the Origin header is sent for requests to other origins and for all methods but GET and HEAD
-        if ((!isSameOrigin(originUrl, url) || method != HttpMethod.GET && method != HttpMethod.HEAD)
+        // the Origin header is sent for requests to other origins in mode 'cors'
+        // and for all methods but GET and HEAD
+        final boolean corsRequest = !isSameOrigin(originUrl, url) && "cors".equals(request.getMode());
+        if ((corsRequest || method != HttpMethod.GET && method != HttpMethod.HEAD)
                 && ("http".equals(originUrl.getProtocol()) || "https".equals(originUrl.getProtocol()))) {
             webRequest.setAdditionalHeader(HttpHeader.ORIGIN, CorsLoader.serializeOrigin(originUrl));
         }
 
         final FetchBody body = request.getFetchBody();
         if (body != null) {
+            if (request.isKeepalive() && body.getBytes().length > KEEPALIVE_MAX_BODY_SIZE) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("fetch(): the body of a keepalive request is limited to 64 KiB.");
+                }
+                return null;
+            }
             setRequestBody(webRequest, body.getBytes());
         }
 
+        webRequest.setCacheMode(toCacheMode(request.getCache(), webRequest));
         return webRequest;
     }
 
@@ -267,18 +283,8 @@ public final class Fetch {
             return false;
         }
 
-        if (!UrlUtils.isSameOrigin(originUrl, url)) {
-            if ("no-cors".equals(mode)) {
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("fetch(): requests to other origins with mode 'no-cors' are not supported yet ("
-                            + url + ").");
-                }
-                return false;
-            }
-            // 'same-origin' does not allow other origins
-            return "cors".equals(mode);
-        }
-        return true;
+        // 'same-origin' does not allow other origins
+        return !"same-origin".equals(mode) || UrlUtils.isSameOrigin(originUrl, url);
     }
 
     /**
@@ -295,6 +301,31 @@ public final class Fetch {
             return true;
         }
         return UrlUtils.isSameOrigin(originUrl, url);
+    }
+
+    /**
+     * Returns the cache mode; requests with conditional headers bypass the cache.
+     *
+     * @see <a href="https://fetch.spec.whatwg.org/#http-network-or-cache-fetch">Fetch Standard
+     *      - HTTP-network-or-cache fetch</a>
+     */
+    private static WebRequest.CacheMode toCacheMode(final String cache, final WebRequest webRequest) {
+        if ("default".equals(cache)) {
+            for (final String conditional : CONDITIONAL_HEADERS) {
+                if (webRequest.getAdditionalHeader(conditional) != null) {
+                    return WebRequest.CacheMode.NO_STORE;
+                }
+            }
+        }
+
+        return switch (cache) {
+            case "no-store" -> WebRequest.CacheMode.NO_STORE;
+            case "reload" -> WebRequest.CacheMode.RELOAD;
+            case "no-cache" -> WebRequest.CacheMode.NO_CACHE;
+            case "force-cache" -> WebRequest.CacheMode.FORCE_CACHE;
+            case "only-if-cached" -> WebRequest.CacheMode.ONLY_IF_CACHED;
+            default -> WebRequest.CacheMode.DEFAULT;
+        };
     }
 
     private static FetchMode toFetchMode(final String mode) {
@@ -389,6 +420,19 @@ public final class Fetch {
             }
 
             final WebResponse webResponse = result.response();
+            final boolean opaque = result.corsTainting() && "no-cors".equals(request_.getMode());
+
+            // subresource integrity; the content of an opaque response can't be checked
+            final String integrity = request_.getIntegrity();
+            if (!integrity.isEmpty() && !result.opaqueRedirect()
+                    && (opaque || !SubresourceIntegrity.matches(integrity, content))) {
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("fetch(): the integrity check for '" + result.url() + "' failed.");
+                }
+                rejectWithTypeError("Failed to fetch", true);
+                return;
+            }
+
             final int status = webResponse.getStatusCode();
             FetchBody body = null;
             if (content != null && !isNullBodyStatus(status)
@@ -397,7 +441,12 @@ public final class Fetch {
             }
 
             final Response response;
-            if (result.opaqueRedirect()) {
+            if (opaque && !result.opaqueRedirect()) {
+                // nothing of an opaque response is visible
+                response = Response.createNetworkResponse(window_, "opaque", "",
+                        false, 0, "", new ArrayList<>(), null);
+            }
+            else if (result.opaqueRedirect()) {
                 response = Response.createNetworkResponse(window_, "opaqueredirect", toResponseUrl(result.url()),
                         false, 0, "", new ArrayList<>(), null);
             }
@@ -415,7 +464,7 @@ public final class Fetch {
                         toResponseUrl(result.url()), result.redirected(), status, webResponse.getStatusMessage(),
                         headers, body);
             }
-            webResponse.cleanUp();
+            // no cleanUp() of the web response; the response may be stored in the cache
 
             settle(resolve_, response, true);
         }
@@ -432,14 +481,23 @@ public final class Fetch {
                 case "manual" -> CorsLoader.RedirectMode.MANUAL;
                 default -> CorsLoader.RedirectMode.FOLLOW;
             };
-            final CorsLoader loader = new CorsLoader(webWindow, credentialsMode, redirectMode, 0,
-                    "same-origin".equals(request_.getMode()));
+            final CorsLoader.RequestMode requestMode = switch (request_.getMode()) {
+                case "same-origin" -> CorsLoader.RequestMode.SAME_ORIGIN;
+                case "no-cors" -> CorsLoader.RequestMode.NO_CORS;
+                default -> CorsLoader.RequestMode.CORS;
+            };
+            final CorsLoader loader = new CorsLoader(webWindow, credentialsMode, redirectMode, 0, requestMode);
 
             final URL url = webRequest.getUrl();
             loader.ensureConnectionAllowed(url, url);
 
             final boolean sameOrigin = isSameOrigin(webRequest.getRequestingUrl(), url);
-            if (!sameOrigin && CorsLoader.isPreflight(webRequest)) {
+            if (!sameOrigin && requestMode == CorsLoader.RequestMode.NO_CORS
+                    && redirectMode != CorsLoader.RedirectMode.FOLLOW) {
+                throw new CorsLoader.RedirectException(
+                        "The redirect mode has to be 'follow' for a request in mode 'no-cors'.");
+            }
+            if (!sameOrigin && requestMode == CorsLoader.RequestMode.CORS && CorsLoader.isPreflight(webRequest)) {
                 final WebResponse preflightResponse = loader.sendPreflight(webRequest);
                 if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
                         || !loader.isPreflightAuthorized(webRequest, preflightResponse)) {

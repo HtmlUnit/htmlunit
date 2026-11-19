@@ -78,6 +78,18 @@ public final class CorsLoader {
     }
 
     /**
+     * The mode of the request (the modes 'navigate' and 'websocket' are not supported here).
+     */
+    public enum RequestMode {
+        /** Requests to other origins have to pass the CORS checks. */
+        CORS,
+        /** Only requests to the origin of the page are allowed (also after redirects). */
+        SAME_ORIGIN,
+        /** Requests to other origins are not checked; their responses are opaque. */
+        NO_CORS
+    }
+
+    /**
      * The redirect mode of the request.
      */
     public enum RedirectMode {
@@ -95,7 +107,8 @@ public final class CorsLoader {
      * @param response the response
      * @param url the url of the response
      * @param redirected whether a redirect was followed
-     * @param corsTainting whether an url of another origin was involved (response tainting 'cors')
+     * @param corsTainting whether an url of another origin was involved (response tainting 'cors' or,
+     *        for the request mode 'no-cors', 'opaque')
      * @param opaqueRedirect whether the response is a redirect returned because of {@link RedirectMode#MANUAL}
      */
     public record Result(WebResponse response, URL url, boolean redirected,
@@ -141,7 +154,7 @@ public final class CorsLoader {
     private final CredentialsMode credentialsMode_;
     private final RedirectMode redirectMode_;
     private final int timeout_;
-    private final boolean sameOriginOnly_;
+    private final RequestMode requestMode_;
 
     /**
      * Ctor.
@@ -153,7 +166,7 @@ public final class CorsLoader {
      */
     public CorsLoader(final WebWindow webWindow, final CredentialsMode credentialsMode,
             final RedirectMode redirectMode, final int timeout) {
-        this(webWindow, credentialsMode, redirectMode, timeout, false);
+        this(webWindow, credentialsMode, redirectMode, timeout, RequestMode.CORS);
     }
 
     /**
@@ -163,16 +176,15 @@ public final class CorsLoader {
      * @param credentialsMode the credentials mode
      * @param redirectMode the redirect mode
      * @param timeout the timeout for the preflight requests (0 means no timeout)
-     * @param sameOriginOnly true for the request mode 'same-origin' (redirects to other origins are
-     *        network errors)
+     * @param requestMode the request mode
      */
     public CorsLoader(final WebWindow webWindow, final CredentialsMode credentialsMode,
-            final RedirectMode redirectMode, final int timeout, final boolean sameOriginOnly) {
+            final RedirectMode redirectMode, final int timeout, final RequestMode requestMode) {
         webWindow_ = webWindow;
         credentialsMode_ = credentialsMode;
         redirectMode_ = redirectMode;
         timeout_ = timeout;
-        sameOriginOnly_ = sameOriginOnly;
+        requestMode_ = requestMode;
     }
 
     private boolean isIncludeCredentials() {
@@ -247,7 +259,8 @@ public final class CorsLoader {
             }
 
             // each response of a cors request has to pass the check, also the one that redirects
-            if (corsTainting && !isCorsAllowed(response, originHeader)) {
+            // (in mode 'no-cors' the response is opaque instead)
+            if (corsTainting && requestMode_ != RequestMode.NO_CORS && !isCorsAllowed(response, originHeader)) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + currentUrl);
                 }
@@ -273,11 +286,12 @@ public final class CorsLoader {
 
             final boolean crossOriginRedirect = !UrlUtils.isSameOrigin(currentUrl, nextUrl);
             final boolean foreignTarget = !UrlUtils.isSameOrigin(pageUrl, nextUrl);
-            if (sameOriginOnly_ && foreignTarget) {
+            if (requestMode_ == RequestMode.SAME_ORIGIN && foreignTarget) {
                 throw new RedirectException("Redirect to another origin with request mode 'same-origin': "
                         + nextUrl);
             }
-            if (nextUrl.getUserInfo() != null && (corsTainting || foreignTarget)) {
+            if (requestMode_ == RequestMode.CORS && nextUrl.getUserInfo() != null
+                    && (corsTainting || foreignTarget)) {
                 throw new RedirectException("Redirect to a URL with credentials is not allowed: " + currentUrl);
             }
 
@@ -287,9 +301,9 @@ public final class CorsLoader {
             corsTainting = corsTainting || foreignTarget;
 
             request = createRedirectRequest(request, response.getStatusCode(), nextUrl, crossOriginRedirect);
-            setOriginHeader(request, corsTainting, taintedOrigin, pageOrigin);
+            setOriginHeader(request, corsTainting && requestMode_ != RequestMode.NO_CORS, taintedOrigin, pageOrigin);
 
-            if (corsTainting && isPreflight(request)) {
+            if (corsTainting && requestMode_ != RequestMode.NO_CORS && isPreflight(request)) {
                 final WebResponse preflightResponse = sendPreflight(request);
                 if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
                         || !isPreflightAuthorized(request, preflightResponse)) {
@@ -357,6 +371,7 @@ public final class CorsLoader {
         next.setRequestingUrl(request.getRequestingUrl());
         next.setSiteForCookies(request.getSiteForCookies());
         next.setTimeout(request.getTimeout());
+        next.setCacheMode(request.getCacheMode());
         if (request.hasHint(HttpHint.IncludeCharsetInContentTypeHeader)) {
             next.addHint(HttpHint.IncludeCharsetInContentTypeHeader);
         }

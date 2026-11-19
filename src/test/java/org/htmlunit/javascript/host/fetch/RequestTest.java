@@ -484,4 +484,38 @@ public class RequestTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
+
+    /**
+     * In mode 'no-cors' only the no-CORS-safelisted request headers are allowed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"accept,text/plain|accept-language,de-DE",
+             "accept,text/plain, text/html|content-type,text/plain;charset=utf-8",
+             "text/plain, text/html", "text/plain;charset=utf-8", "text/plain;charset=UTF-8", "null"})
+    public void noCorsHeaders() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const req = new Request('" + URL_SECOND + "', {mode: 'no-cors', headers: {\n"
+            + "      'X-Custom': 'v', 'Accept': 'text/plain', 'Accept-Language': 'de-DE', 'Content-Language': 'd?',\n"
+            + "      'Content-Type': 'application/json'}});\n"
+            + "  log(Array.from(req.headers).join('|'));\n"
+            + "  req.headers.set('Content-Type', 'text/plain;charset=utf-8');\n"
+            + "  req.headers.append('X-Other', 'v');\n"
+            + "  req.headers.append('Accept', 'text/html');\n"
+            + "  req.headers.delete('Accept-Language');\n"
+            + "  log(Array.from(req.headers).join('|'));\n"
+            + "  req.headers.set('Accept', 'x'.repeat(129));\n"
+            + "  log(req.headers.get('Accept'));\n"
+            + "  log(new Request(req).headers.get('Content-Type'));\n"
+            + "  const post = new Request('" + URL_SECOND + "', {mode: 'no-cors', method: 'POST', body: 'x'});\n"
+            + "  log(post.headers.get('Content-Type'));\n"
+            + "  const blob = new Request('" + URL_SECOND + "',\n"
+            + "      {mode: 'no-cors', method: 'POST', body: new Blob(['x'], {type: 'image/png'})});\n"
+            + "  log(blob.headers.get('Content-Type'));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
