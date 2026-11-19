@@ -25,6 +25,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.http.auth.BasicUserPrincipal;
 import org.apache.http.auth.Credentials;
+import org.htmlunit.util.UrlUtils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -396,7 +397,7 @@ public class WebRequestTest {
         assertNull(request.getAdditionalHeader(HttpHeader.REFERER));
 
         request = new WebRequest(new URL("http://example.com/"), StandardCharsets.UTF_8,
-                new URL("about:blank"));
+                UrlUtils.URL_ABOUT_BLANK);
         assertNull(request.getAdditionalHeader(HttpHeader.REFERER));
 
         request = new WebRequest(new URL("http://example.com/"), StandardCharsets.UTF_8, null);
