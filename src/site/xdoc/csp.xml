@@ -23,6 +23,17 @@
                 but violates its own policy is detected in your unit tests, without a real browser.
             </p>
             <p>
+                Because your application runs in real browsers enforcing its policies, there is
+                intentionally no option to disable the CSP support of HtmlUnit; a test passing only
+                because the policy is ignored would hide a problem your users will see. If an
+                application breaks after upgrading HtmlUnit because of CSP, check first whether the
+                page also violates its policy in a real browser (the browser console shows the
+                violations); if HtmlUnit behaves differently from the browsers, please
+                <a href="https://github.com/HtmlUnit/htmlunit/issues">open an issue</a>.
+                Only the sending of the violation reports can be disabled
+                (see <a href="#sec_report_uri">report-uri</a>).
+            </p>
+            <p>
                 The matching of urls and source expressions is done by
                 <a href="https://github.com/HtmlUnit/htmlunit-csp">htmlunit-csp</a>; HtmlUnit
                 applies the result to the different places scripts, connections and frames are used.
@@ -63,8 +74,9 @@
                 </li>
             </ul>
             <p>
-                The <code>frame-ancestors</code> directive is only supported in the response header
-                (like in browsers).
+                The <code>frame-ancestors</code> and <code>sandbox</code> directives are only supported in
+                the response header (like in browsers); <code>sandbox</code> is also ignored in
+                <code>Content-Security-Policy-Report-Only</code> headers.
             </p>
         </section>
 
@@ -182,9 +194,11 @@
                     <td>
                         form submission (submit button, <code>form.submit()</code>,
                         <code>form.requestSubmit()</code>), including the <code>formaction</code>
-                        attribute of the submit button and <code>javascript:</code> urls as action;
-                        like Chrome, redirects are checked also (the url of the form submission
-                        is reported). There is no fallback to <code>default-src</code>. Forms with
+                        attribute of the submit button and <code>javascript:</code> urls as action.
+                        When simulating Chrome/Edge redirects are checked also (the url of the form
+                        submission is reported; the path of the source expressions is ignored for the
+                        redirect targets); like Firefox, redirects are not checked when simulating Firefox.
+                        There is no fallback to <code>default-src</code>. Forms with
                         method <code>dialog</code> are not checked.
                     </td>
                 </tr>
@@ -202,6 +216,19 @@
                         loading a page into a frame or iframe; all ancestors up to the top window
                         have to be allowed. A frame showing <code>about:blank</code> uses the origin
                         of its parent.
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>sandbox</code></td>
+                    <td>
+                        like the <code>sandbox</code> attribute of an iframe, the directive sandboxes the
+                        document: without <code>allow-scripts</code> no script and no event handler is
+                        executed, without <code>allow-same-origin</code> the document has an opaque origin
+                        (e.g. <code>document.domain</code> is empty), without <code>allow-forms</code> forms are
+                        not submitted and without <code>allow-popups</code> no window can be opened.
+                        If the page is loaded into a sandboxed iframe, only the tokens allowed by both are
+                        used. Like the browsers, this is not a violation (no event, no report); the
+                        directive is ignored in report only policies and meta elements.
                     </td>
                 </tr>
                 <tr>
@@ -232,6 +259,10 @@
                 <code>@import</code>), scripts, images, frames, form submissions and
                 <code>XMLHttpRequest</code>/<code>fetch()</code> have to be allowed by the policy;
                 for stylesheets, scripts and images the url of the original request is reported.
+                Like the browsers (and the spec), the path part of the source expressions is ignored for
+                redirect targets: <code>script-src https://cdn.example.com/js/</code> allows a script
+                from this path that is redirected to <code>https://cdn.example.com/other/lib.js</code>;
+                scheme, host and port of the redirect target are still checked.
             </p>
             <subsection name="Source Expressions" id="sec_source_expressions">
                 <p>
@@ -273,7 +304,33 @@
                     </li>
                     <li>
                         <code>*</code> and <code>'self'</code> do not match urls without host
-                        (e.g. <code>data:</code> or <code>blob:</code>); list the scheme instead.
+                        (e.g. <code>data:</code> or <code>blob:</code>); list the scheme instead
+                        (e.g. <code>script-src 'self' data:</code>).
+                    </li>
+                    <li>
+                        A host source without port only matches the default port of the scheme
+                        (<code>localhost</code> does not match <code>http://localhost:8080/</code>);
+                        use <code>localhost:8080</code> or <code>localhost:*</code>. This is a common
+                        pitfall for tests running a server on a random port.
+                    </li>
+                    <li>
+                        <code>localhost</code> and <code>127.0.0.1</code> are different hosts;
+                        <code>'self'</code> only matches the host used to load the page.
+                    </li>
+                    <li>
+                        Directive names, keywords, schemes and hosts are case-insensitive; paths and nonces
+                        are case-sensitive. A path ending with <code>/</code> matches all urls below this
+                        directory, a path without trailing <code>/</code> has to match exactly; the query is
+                        ignored.
+                    </li>
+                    <li>
+                        For duplicate directives in one policy only the first one is used; unknown directives
+                        and invalid source expressions are ignored.
+                    </li>
+                    <li>
+                        Leading and trailing whitespace of the <code>nonce</code> attribute is ignored when
+                        simulating Chrome/Edge; like Firefox, the nonce has to match exactly when simulating
+                        Firefox.
                     </li>
                 </ul>
             </subsection>
@@ -285,7 +342,10 @@
                 <code>blob:</code>) inherit a copy of the policy of the document creating them:
             </p>
             <ul>
-                <li>frames and iframes inherit the policy of the parent document</li>
+                <li>
+                    frames and iframes inherit the policy of the parent document; this includes
+                    <code>srcdoc</code> iframes (<code>about:srcdoc</code>)
+                </li>
                 <li>windows opened by <code>window.open()</code> inherit the policy of the opener</li>
                 <li>
                     <code>'self'</code> refers to the origin of the creator; policies added later
@@ -352,6 +412,11 @@
                     <code>lineNumber</code> and <code>columnNumber</code>.
                 </p>
                 <p>
+                    Like the browsers, <code>blockedURI</code> is <code>inline</code> for inline scripts,
+                    styles and event handlers, <code>eval</code> for <code>eval()</code> and friends and
+                    only the scheme for urls without host (e.g. <code>data</code> for a <code>data:</code> url).
+                </p>
+                <p>
                     Browsers fire the event asynchronously; HtmlUnit fires it after the current script has finished
                     to provide a deterministic order.
                 </p>
@@ -368,6 +433,14 @@
                     the Firefox format (sorted keys, absolute report uris in <code>original-policy</code>).
                     Violations of <code>frame-ancestors</code> are not reported this way.
                 </p>
+                <p>
+                    Sending the reports can be disabled; the policies are still enforced, the event is
+                    still fired and the <a href="#sec_listener">listener</a> is still informed. This is useful
+                    if the additional requests disturb your tests (e.g. if the report endpoint requires
+                    authentication or your tests are counting requests):
+                </p>
+                <source><![CDATA[
+webClient.getOptions().setContentSecurityPolicyReportsEnabled(false);]]></source>
             </subsection>
 
             <subsection name="Java Listener" id="sec_listener">
@@ -422,7 +495,10 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                     <code>font-src</code>, <code>manifest-src</code>; HtmlUnit does not load fonts and
                     manifests (the browsers are loading them only on demand)
                 </li>
-                <li><code>sandbox</code></li>
+                <li>
+                    the <code>sandbox</code> directive of the policy delivered with the response of a worker
+                    script (blocking the worker without <code>allow-scripts</code>)
+                </li>
                 <li><code>require-trusted-types-for</code>, <code>trusted-types</code></li>
                 <li>
                     <code>report-to</code> (Reporting API); no reports are sent for this directive,
@@ -433,7 +509,6 @@ webClient.setContentSecurityPolicyViolationListener((page, violation) -> {
                 Known limitations:
             </p>
             <ul>
-                <li>HtmlUnit does not support <code>srcdoc</code> iframes.</li>
                 <li>
                     <code>javascript:</code> urls used as <code>src</code> of a frame or with
                     <code>window.open()</code> are not checked.
