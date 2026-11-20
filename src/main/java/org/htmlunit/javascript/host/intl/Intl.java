@@ -267,7 +267,7 @@ public class Intl extends HtmlUnitScriptable {
      * @return the language tag of the available locale or {@code null} if there is none
      * @see <a href="https://tc39.es/ecma402/#sec-bestavailablelocale">spec</a>
      */
-    private static String bestAvailableLocale(final String languageTag) {
+    static String bestAvailableLocale(final String languageTag) {
         String candidate = java.util.Locale.forLanguageTag(languageTag).stripExtensions().toLanguageTag();
         while (true) {
             if (LocaleUtils.isAvailableLocale(java.util.Locale.forLanguageTag(candidate))) {

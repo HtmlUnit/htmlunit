@@ -11112,6 +11112,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-")
+    @HtmlUnitNYI(CHROME = "compare,resolvedOptions()",
+            EDGE = "compare,resolvedOptions()",
+            FF = "compare,resolvedOptions()",
+            FF_ESR = "compare,resolvedOptions()")
     public void intl_Collator() throws Exception {
         testString("", "new Intl.Collator('de')");
     }

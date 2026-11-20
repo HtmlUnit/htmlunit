@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Intl.Collator: the locales argument is supported; compare (based on java.text.Collator),
+                resolvedOptions() and supportedLocalesOf() are available. The options are not supported so far.
+            </action>
             <action type="fix" dev="rbri">
                 Intl.DateTimeFormat and Intl.NumberFormat: if more than one locale is requested, the first
                 supported one is used (and not the last one with a known format); unsupported locales

@@ -19554,11 +19554,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "compare[GC],constructor(),resolvedOptions()",
             FF = "compare[GC],constructor(),resolvedOptions()",
             FF_ESR = "compare[GC],constructor(),resolvedOptions()")
-    @HtmlUnitNYI(
-            CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF = "constructor()",
-            FF_ESR = "constructor()")
     public void intl_Collator() throws Exception {
         testString("", "new Intl.Collator('de')");
     }
