@@ -9,6 +9,9 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="add" dev="rbri">
+                Intl.NumberFormat: formatToParts(), formatRange() and formatRangeToParts() implemented.
+            </action>
+            <action type="add" dev="rbri">
                 Intl.NumberFormat: support of the options (style percent, currency and unit, currencyDisplay,
                 currencySign, notation scientific, engineering and compact, the digit and rounding options,
                 useGrouping, signDisplay and numberingSystem); format is a bound getter like in the browsers,

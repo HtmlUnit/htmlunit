@@ -19624,11 +19624,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
             FF = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
             FF_ESR = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()")
-    @HtmlUnitNYI(
-            CHROME = "constructor(),format[GC],resolvedOptions()",
-            EDGE = "constructor(),format[GC],resolvedOptions()",
-            FF = "constructor(),format[GC],resolvedOptions()",
-            FF_ESR = "constructor(),format[GC],resolvedOptions()")
     public void intl_NumberFormat() throws Exception {
         testString("", "new Intl.NumberFormat('de-DE')");
     }

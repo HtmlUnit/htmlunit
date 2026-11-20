@@ -488,28 +488,106 @@ public class NumberFormat extends HtmlUnitScriptable {
     }
 
     private String format(final Object value) {
+        final NumberFormatter.Value mathematicalValue = toIntlMathematicalValue(value);
+        return getFormatter().format(mathematicalValue.number(), mathematicalValue.negative());
+    }
+
+    private NumberFormatter getFormatter() {
         if (formatter_ == null) {
             formatter_ = new NumberFormatter(options_, Locale.forLanguageTag(formatLocale_), separators_, zeroDigit_);
         }
+        return formatter_;
+    }
 
-        // ToIntlMathematicalValue
+    // ToIntlMathematicalValue
+    private static NumberFormatter.Value toIntlMathematicalValue(final Object value) {
         if (value instanceof BigInteger bigInteger) {
-            return formatter_.format(new BigDecimal(bigInteger), bigInteger.signum() < 0);
+            return new NumberFormatter.Value(new BigDecimal(bigInteger), bigInteger.signum() < 0);
         }
         if (value instanceof CharSequence) {
             final String string = value.toString().trim();
             if (DECIMAL_LITERAL.matcher(string).matches()) {
                 // strings are formatted with all digits
-                return formatter_.format(new BigDecimal(string), string.startsWith("-"));
+                return new NumberFormatter.Value(new BigDecimal(string), string.startsWith("-"));
             }
         }
 
         final double number = JavaScriptEngine.toNumber(value);
         if (Double.isNaN(number) || Double.isInfinite(number)) {
-            return formatter_.format(Double.valueOf(number), number < 0);
+            return new NumberFormatter.Value(Double.valueOf(number), number < 0);
         }
         final boolean negative = number < 0 || number == 0 && 1 / number < 0;
-        return formatter_.format(new BigDecimal(JavaScriptEngine.toString(number)), negative);
+        return new NumberFormatter.Value(new BigDecimal(JavaScriptEngine.toString(number)), negative);
+    }
+
+    /**
+     * Formats a number into parts.
+     *
+     * @param value the number
+     * @return an array of objects with the type and the value of the parts
+     * @see <a href="https://tc39.es/ecma402/#sec-intl.numberformat.prototype.formattoparts">spec</a>
+     */
+    @JsxFunction
+    public Scriptable formatToParts(final Object value) {
+        checkNumberFormat("Intl.NumberFormat.prototype.formatToParts");
+        final NumberFormatter.Value mathematicalValue = toIntlMathematicalValue(value);
+        return toArray(getFormatter().formatToParts(mathematicalValue.number(), mathematicalValue.negative()));
+    }
+
+    /**
+     * Formats a range of numbers.
+     *
+     * @param start the start of the range
+     * @param end the end of the range
+     * @return the formatted range
+     * @see <a href="https://tc39.es/ecma402/#sec-intl.numberformat.prototype.formatrange">spec</a>
+     */
+    @JsxFunction
+    public String formatRange(final Object start, final Object end) {
+        checkNumberFormat("Intl.NumberFormat.prototype.formatRange");
+        return NumberFormatter.join(formatRangeParts(start, end));
+    }
+
+    /**
+     * Formats a range of numbers into parts.
+     *
+     * @param start the start of the range
+     * @param end the end of the range
+     * @return an array of objects with the type, the value and the source of the parts
+     * @see <a href="https://tc39.es/ecma402/#sec-intl.numberformat.prototype.formatrangetoparts">spec</a>
+     */
+    @JsxFunction
+    public Scriptable formatRangeToParts(final Object start, final Object end) {
+        checkNumberFormat("Intl.NumberFormat.prototype.formatRangeToParts");
+        return toArray(formatRangeParts(start, end));
+    }
+
+    private List<NumberFormatter.Part> formatRangeParts(final Object start, final Object end) {
+        if (JavaScriptEngine.isUndefined(start) || JavaScriptEngine.isUndefined(end)) {
+            throw JavaScriptEngine.typeError("start or end is undefined");
+        }
+        final NumberFormatter.Value startValue = toIntlMathematicalValue(start);
+        final NumberFormatter.Value endValue = toIntlMathematicalValue(end);
+        if (startValue.isNaN() || endValue.isNaN()) {
+            throw JavaScriptEngine.rangeError("Invalid NaN value in the range");
+        }
+        return getFormatter().formatRangeToParts(startValue, endValue);
+    }
+
+    // the parts as array of objects ({type, value[, source]})
+    private Scriptable toArray(final List<NumberFormatter.Part> parts) {
+        final Object[] objects = new Object[parts.size()];
+        for (int i = 0; i < objects.length; i++) {
+            final NumberFormatter.Part part = parts.get(i);
+            final Scriptable object = JavaScriptEngine.newObject(getParentScope());
+            object.put("type", object, part.type());
+            object.put("value", object, part.value());
+            if (part.source() != null) {
+                object.put("source", object, part.source());
+            }
+            objects[i] = object;
+        }
+        return JavaScriptEngine.newArray(getParentScope(), objects);
     }
 
     /**

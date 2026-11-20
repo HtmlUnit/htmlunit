@@ -11156,10 +11156,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-")
-    @HtmlUnitNYI(CHROME = "format,resolvedOptions()",
-            EDGE = "format,resolvedOptions()",
-            FF = "format,resolvedOptions()",
-            FF_ESR = "format,resolvedOptions()")
+    @HtmlUnitNYI(CHROME = "format,formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
+            EDGE = "format,formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
+            FF = "format,formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
+            FF_ESR = "format,formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()")
     public void intl_NumberFormat() throws Exception {
         testString("", "new Intl.NumberFormat('de-DE')");
     }

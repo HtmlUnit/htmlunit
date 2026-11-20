@@ -19,8 +19,10 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -282,6 +284,38 @@ final class NumberFormatter {
         UNITS.put(name, new String[] {shortPattern, narrowPattern, "{0} " + longSingular, "{0} " + longPlural});
     }
 
+    /**
+     * A part of a formatted number.
+     *
+     * @param type the type (e.g. 'integer' or 'currency')
+     * @param value the value
+     * @param source the source of a part of a formatted range (startRange, endRange or shared);
+     *        {@code null} for a single number
+     */
+    record Part(String type, String value, String source) {
+
+        Part(final String partType, final String partValue) {
+            this(partType, partValue, null);
+        }
+
+        Part withSource(final String newSource) {
+            return new Part(type, value, newSource);
+        }
+    }
+
+    /**
+     * A mathematical value to format.
+     *
+     * @param number the value; a {@link BigDecimal} or a {@link Double} for NaN and the infinities
+     * @param negative whether the value is negative (including -0)
+     */
+    record Value(Number number, boolean negative) {
+
+        boolean isNaN() {
+            return number instanceof Double d && d.isNaN();
+        }
+    }
+
     private final Options options_;
     private final Locale locale_;
 
@@ -298,6 +332,8 @@ final class NumberFormatter {
     private final String negativePrefix_;
     private final String negativeSuffix_;
     private final char minusSign_;
+    // the text of the currency used in the affixes; null for other styles
+    private final String currencyDisplayText_;
 
     /**
      * Ctor.
@@ -366,15 +402,18 @@ final class NumberFormatter {
         String negativePrefix = format.getNegativePrefix();
         String negativeSuffix = format.getNegativeSuffix();
 
+        String currencyDisplayText = null;
         if ("currency".equals(options.getStyle())) {
             final String symbol = currencySymbol(format);
             final String display = currencyDisplay();
+            currencyDisplayText = display;
             positivePrefix = currencySpacing(positivePrefix.replace(symbol, display), true);
             positiveSuffix = currencySpacing(positiveSuffix.replace(symbol, display), false);
             negativePrefix = currencySpacing(negativePrefix.replace(symbol, display), true);
             negativeSuffix = currencySpacing(negativeSuffix.replace(symbol, display), false);
         }
 
+        currencyDisplayText_ = currencyDisplayText;
         positivePrefix_ = positivePrefix;
         positiveSuffix_ = positiveSuffix;
         negativePrefix_ = negativePrefix;
@@ -482,12 +521,38 @@ final class NumberFormatter {
      * @return the formatted value
      */
     String format(final Number value, final boolean negative) {
+        return join(formatToParts(value, negative));
+    }
+
+    /**
+     * Joins the values of the given parts.
+     *
+     * @param parts the parts
+     * @return the joined values
+     */
+    static String join(final List<Part> parts) {
+        final StringBuilder result = new StringBuilder();
+        for (final Part part : parts) {
+            result.append(part.value());
+        }
+        return result.toString();
+    }
+
+    /**
+     * Formats the given value into parts.
+     *
+     * @param value the value; a {@link BigDecimal} or a {@link Double} for NaN and the infinities
+     * @param negative whether the value is negative (including -0)
+     * @return the parts
+     * @see <a href="https://tc39.es/ecma402/#sec-partitionnumberpattern">spec</a>
+     */
+    List<Part> formatToParts(final Number value, final boolean negative) {
         if (value instanceof Double d && d.isNaN()) {
-            return affixed(nan_, false, false, true);
+            return affixed(List.of(new Part("nan", nan_)), false, false, true);
         }
 
         if (value instanceof Double d && d.isInfinite()) {
-            return affixed(infinity_, negative, false, false);
+            return affixed(List.of(new Part("infinity", infinity_)), negative, false, false);
         }
 
         BigDecimal abs = ((BigDecimal) value).abs();
@@ -495,56 +560,155 @@ final class NumberFormatter {
             abs = abs.movePointRight(2);
         }
 
-        final String number;
-        final boolean zero;
         switch (options_.getNotation()) {
             case "scientific":
             case "engineering":
-                final String[] scientific =
+                final List<Part> scientific =
                         formatScientific(abs, "engineering".equals(options_.getNotation()), negative);
-                number = scientific[0];
-                zero = "0".equals(scientific[1]);
-                break;
+                return affixed(scientific, negative, abs.signum() == 0, false);
 
             case "compact":
                 return formatCompact(abs, negative);
 
             default:
                 final BigDecimal rounded = round(abs, negative);
-                number = formatDigits(rounded);
-                zero = rounded.signum() == 0;
+                return affixed(formatDigits(rounded), negative, rounded.signum() == 0, false);
         }
-        return affixed(number, negative, zero, false);
     }
 
-    // returns the mantissa with the exponent and the rounded mantissa
-    private String[] formatScientific(final BigDecimal abs, final boolean engineering, final boolean negative) {
-        if (abs.signum() == 0) {
-            final BigDecimal rounded = round(abs, negative);
-            return new String[] {formatDigits(rounded) + exponentSeparator_ + localizeDigits("0"), "0"};
+    /**
+     * Formats the given range into parts.
+     *
+     * @param start the start of the range
+     * @param end the end of the range
+     * @return the parts; every part has a source (startRange, endRange or shared)
+     * @see <a href="https://tc39.es/ecma402/#sec-partitionnumberrangepattern">spec</a>
+     */
+    List<Part> formatRangeToParts(final Value start, final Value end) {
+        final List<Part> startParts = formatToParts(start.number(), start.negative());
+        final List<Part> endParts = formatToParts(end.number(), end.negative());
+
+        final List<Part> result = new ArrayList<>();
+        if (join(startParts).equals(join(endParts))) {
+            // FormatApproximately
+            result.add(new Part("approximatelySign", "~", "shared"));
+            for (final Part part : startParts) {
+                result.add(part.withSource("shared"));
+            }
+            return result;
         }
 
-        int exponent = abs.precision() - abs.scale() - 1;
-        if (engineering) {
-            exponent = Math.floorDiv(exponent, 3) * 3;
+        // a unit or currency after both numbers is shared (e.g. '3–5 km'); the form of the end is used
+        final List<Part> sharedSuffix = new ArrayList<>();
+        if ("unit".equals(options_.getStyle()) || "currency".equals(options_.getStyle())) {
+            final int startSuffix = suffixStart(startParts);
+            final int endSuffix = suffixStart(endParts);
+            if (startSuffix < startParts.size() && endSuffix < endParts.size()
+                    && sameSuffix(startParts.subList(startSuffix, startParts.size()),
+                                    endParts.subList(endSuffix, endParts.size()))) {
+                sharedSuffix.addAll(endParts.subList(endSuffix, endParts.size()));
+                startParts.subList(startSuffix, startParts.size()).clear();
+                endParts.subList(endSuffix, endParts.size()).clear();
+            }
         }
-        BigDecimal rounded = round(abs.movePointLeft(exponent), negative);
-        // the rounding may result in a mantissa of 10 (1000)
-        final BigDecimal limit = engineering ? BigDecimal.valueOf(1000) : BigDecimal.TEN;
-        if (rounded.compareTo(limit) >= 0) {
-            exponent += engineering ? 3 : 1;
+
+        // the range separator is surrounded by spaces if the start has a sign or affixes
+        boolean onlyNumbers = true;
+        for (final Part part : startParts) {
+            onlyNumbers &= isNumberPart(part);
+        }
+
+        for (final Part part : startParts) {
+            result.add(part.withSource("startRange"));
+        }
+        result.add(new Part("literal", onlyNumbers ? "\u2013" : " \u2013 ", "shared"));
+        for (final Part part : endParts) {
+            result.add(part.withSource("endRange"));
+        }
+        for (final Part part : sharedSuffix) {
+            result.add(part.withSource("shared"));
+        }
+        return result;
+    }
+
+    // the index of the unit or currency (with the literals) after the number; the size if there is none
+    private static int suffixStart(final List<Part> parts) {
+        int index = parts.size();
+        while (index > 0) {
+            final String type = parts.get(index - 1).type();
+            if (!"unit".equals(type) && !"currency".equals(type) && !"literal".equals(type)) {
+                break;
+            }
+            index--;
+        }
+        return index;
+    }
+
+    // units are shared even if the plural forms differ, currencies only if they are equal
+    private static boolean sameSuffix(final List<Part> start, final List<Part> end) {
+        if (start.size() != end.size()) {
+            return false;
+        }
+        boolean hasUnitOrCurrency = false;
+        for (int i = 0; i < start.size(); i++) {
+            final Part startPart = start.get(i);
+            final Part endPart = end.get(i);
+            if (!startPart.type().equals(endPart.type())) {
+                return false;
+            }
+            if ("unit".equals(startPart.type())) {
+                hasUnitOrCurrency = true;
+            }
+            else {
+                hasUnitOrCurrency |= "currency".equals(startPart.type());
+                if (!startPart.value().equals(endPart.value())) {
+                    return false;
+                }
+            }
+        }
+        return hasUnitOrCurrency;
+    }
+
+    private static boolean isNumberPart(final Part part) {
+        switch (part.type()) {
+            case "integer":
+            case "group":
+            case "decimal":
+            case "fraction":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    // the mantissa with the exponent
+    private List<Part> formatScientific(final BigDecimal abs, final boolean engineering, final boolean negative) {
+        int exponent = 0;
+        BigDecimal rounded = round(abs, negative);
+        if (abs.signum() != 0) {
+            exponent = abs.precision() - abs.scale() - 1;
+            if (engineering) {
+                exponent = Math.floorDiv(exponent, 3) * 3;
+            }
             rounded = round(abs.movePointLeft(exponent), negative);
+            // the rounding may result in a mantissa of 10 (1000)
+            final BigDecimal limit = engineering ? BigDecimal.valueOf(1000) : BigDecimal.TEN;
+            if (rounded.compareTo(limit) >= 0) {
+                exponent += engineering ? 3 : 1;
+                rounded = round(abs.movePointLeft(exponent), negative);
+            }
         }
 
-        final StringBuilder result = new StringBuilder(formatDigits(rounded)).append(exponentSeparator_);
+        final List<Part> parts = formatDigits(rounded);
+        parts.add(new Part("exponentSeparator", exponentSeparator_));
         if (exponent < 0) {
-            result.append(minusSign_);
+            parts.add(new Part("exponentMinusSign", String.valueOf(minusSign_)));
         }
-        result.append(localizeDigits(Integer.toString(Math.abs(exponent))));
-        return new String[] {result.toString(), rounded.signum() == 0 ? "0" : "1"};
+        parts.add(new Part("exponentInteger", localizeDigits(Integer.toString(Math.abs(exponent)))));
+        return parts;
     }
 
-    private String formatCompact(final BigDecimal abs, final boolean negative) {
+    private List<Part> formatCompact(final BigDecimal abs, final boolean negative) {
         final java.text.NumberFormat compact = java.text.NumberFormat.getCompactNumberInstance(locale_,
                 "long".equals(options_.getCompactDisplay())
                     ? java.text.NumberFormat.Style.LONG : java.text.NumberFormat.Style.SHORT);
@@ -561,7 +725,6 @@ final class NumberFormatter {
             rounded = round(abs.movePointLeft(exponent), negative);
         }
 
-        final String number = formatDigits(rounded);
         // the affixes of the compact form (they depend on the plural form of the value)
         final String formatted = compact.format(rounded.movePointRight(exponent));
         int start = 0;
@@ -572,10 +735,13 @@ final class NumberFormatter {
         while (end > start && !Character.isDigit(formatted.charAt(end - 1))) {
             end--;
         }
-        final String prefix = start < formatted.length() ? formatted.substring(0, start) : "";
+        final String prefix = start < formatted.length() ? stripSign(formatted.substring(0, start)) : "";
         final String suffix = start < formatted.length() ? formatted.substring(end) : "";
 
-        return affixed(stripSign(prefix) + number + suffix, negative, rounded.signum() == 0, false);
+        final List<Part> parts = new ArrayList<>(textParts(prefix, "compact"));
+        parts.addAll(formatDigits(rounded));
+        parts.addAll(textParts(suffix, "compact"));
+        return affixed(parts, negative, rounded.signum() == 0, false);
     }
 
     // the exponent of the divisor used by the compact form of the given value
@@ -596,6 +762,36 @@ final class NumberFormatter {
 
     private String stripSign(final String prefix) {
         return prefix.replace(String.valueOf(minusSign_), "");
+    }
+
+    /**
+     * Splits the given text into the leading and trailing whitespace (literal parts)
+     * and the text in between (a part of the given type).
+     */
+    private static List<Part> textParts(final String text, final String type) {
+        final List<Part> parts = new ArrayList<>();
+        int start = 0;
+        while (start < text.length() && isSpace(text.charAt(start))) {
+            start++;
+        }
+        int end = text.length();
+        while (end > start && isSpace(text.charAt(end - 1))) {
+            end--;
+        }
+        if (start > 0) {
+            parts.add(new Part("literal", text.substring(0, start)));
+        }
+        if (end > start) {
+            parts.add(new Part(type, text.substring(start, end)));
+        }
+        if (end < text.length() && end >= start) {
+            parts.add(new Part("literal", text.substring(Math.max(start, end))));
+        }
+        return parts;
+    }
+
+    private static boolean isSpace(final char c) {
+        return Character.isWhitespace(c) || Character.isSpaceChar(c);
     }
 
     // rounds the absolute value according to the digit options
@@ -698,7 +894,7 @@ final class NumberFormatter {
     }
 
     // formats the (rounded, non negative) value: integer digits, grouping and fraction
-    private String formatDigits(final BigDecimal rounded) {
+    private List<Part> formatDigits(final BigDecimal rounded) {
         final String plain = rounded.toPlainString();
         final int dot = plain.indexOf('.');
         String integer = dot == -1 ? plain : plain.substring(0, dot);
@@ -714,21 +910,31 @@ final class NumberFormatter {
         }
         integer = integerPadded.toString();
 
-        final StringBuilder result = new StringBuilder();
+        final List<Part> parts = new ArrayList<>();
         final boolean minimumGroupingDigits2 = "min2".equals(options_.getUseGrouping())
                 || "auto".equals(options_.getUseGrouping()) && hasMinimumGroupingDigits2();
         final boolean grouping = options_.getUseGrouping() != null
                 && !(minimumGroupingDigits2 && integer.length() < 5);
-        for (int i = 0; i < integer.length(); i++) {
-            if (grouping && i > 0 && (integer.length() - i) % 3 == 0) {
-                result.append(groupingSeparator_);
+        if (grouping) {
+            int groupStart = 0;
+            int groupEnd = integer.length() % 3 == 0 ? 3 : integer.length() % 3;
+            while (groupStart < integer.length()) {
+                if (groupStart > 0) {
+                    parts.add(new Part("group", String.valueOf(groupingSeparator_)));
+                }
+                parts.add(new Part("integer", localizeDigits(integer.substring(groupStart, groupEnd))));
+                groupStart = groupEnd;
+                groupEnd += 3;
             }
-            result.append(localizeDigit(integer.charAt(i)));
+        }
+        else {
+            parts.add(new Part("integer", localizeDigits(integer)));
         }
         if (!fraction.isEmpty()) {
-            result.append(decimalSeparator_).append(localizeDigits(fraction));
+            parts.add(new Part("decimal", String.valueOf(decimalSeparator_)));
+            parts.add(new Part("fraction", localizeDigits(fraction)));
         }
-        return result.toString();
+        return parts;
     }
 
     // some locales group only numbers with at least 5 integer digits (CLDR minimumGroupingDigits)
@@ -754,7 +960,8 @@ final class NumberFormatter {
     }
 
     // adds the sign and the affixes of the style to the formatted number
-    private String affixed(final String number, final boolean negative, final boolean zero, final boolean nan) {
+    private List<Part> affixed(final List<Part> numberParts, final boolean negative, final boolean zero,
+            final boolean nan) {
         final int sign;
         switch (options_.getSignDisplay()) {
             case "never":
@@ -796,15 +1003,82 @@ final class NumberFormatter {
             suffix = positiveSuffix_;
         }
 
-        if ("currency".equals(options_.getStyle()) && "name".equals(options_.getCurrencyDisplay())) {
-            final String signText = sign < 0 ? String.valueOf(minusSign_) : sign > 0 ? "+" : "";
-            return signText + number + " " + currencyName(number);
+        final List<Part> parts = new ArrayList<>();
+        final String number = join(numberParts);
+        if ("currency".equals(options_.getStyle()) && "name".equals(options_.getCurrencyDisplay())
+                || "unit".equals(options_.getStyle())) {
+            if (sign < 0) {
+                parts.add(new Part("minusSign", minus));
+            }
+            else if (sign > 0) {
+                parts.add(new Part("plusSign", "+"));
+            }
+            parts.addAll(numberParts);
+            if ("unit".equals(options_.getStyle())) {
+                final String pattern = unitPattern(number);
+                final int pos = pattern.indexOf("{0}");
+                parts.addAll(0, textParts(pattern.substring(0, pos), "unit"));
+                parts.addAll(textParts(pattern.substring(pos + 3), "unit"));
+            }
+            else {
+                parts.add(new Part("literal", " "));
+                parts.add(new Part("currency", currencyName(number)));
+            }
+            return parts;
         }
-        if ("unit".equals(options_.getStyle())) {
-            final String signText = prefix.isEmpty() ? "" : prefix.replaceAll("[^+\\-−]", "");
-            return signText + unitPattern(number).replace("{0}", number);
+
+        parts.addAll(affixParts(prefix));
+        parts.addAll(numberParts);
+        parts.addAll(affixParts(suffix));
+        return parts;
+    }
+
+    // splits an affix of the style into the signs, the currency, the percent sign and literals
+    private List<Part> affixParts(final String affix) {
+        final List<Part> parts = new ArrayList<>();
+        final StringBuilder literal = new StringBuilder();
+        int i = 0;
+        while (i < affix.length()) {
+            final String type;
+            String value = null;
+            final char c = affix.charAt(i);
+            if (currencyDisplayText_ != null && !currencyDisplayText_.isEmpty()
+                    && affix.startsWith(currencyDisplayText_, i)) {
+                type = "currency";
+                value = currencyDisplayText_;
+            }
+            else if (c == minusSign_ || c == '-' || c == '\u2212') {
+                type = "minusSign";
+            }
+            else if (c == '+') {
+                type = "plusSign";
+            }
+            else if (c == '%' || c == '\u066a' || c == '\u2030') {
+                type = "percentSign";
+            }
+            else {
+                type = null;
+            }
+
+            if (type == null) {
+                literal.append(c);
+                i++;
+                continue;
+            }
+            if (literal.length() > 0) {
+                parts.add(new Part("literal", literal.toString()));
+                literal.setLength(0);
+            }
+            if (value == null) {
+                value = String.valueOf(c);
+            }
+            parts.add(new Part(type, value));
+            i += value.length();
         }
-        return prefix + number + suffix;
+        if (literal.length() > 0) {
+            parts.add(new Part("literal", literal.toString()));
+        }
+        return parts;
     }
 
     private String unitPattern(final String number) {

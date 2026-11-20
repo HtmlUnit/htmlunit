@@ -2740,9 +2740,9 @@ public class NumberFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "5"},
-            CHROME = {},
-            EDGE = {})
+    @Alerts(DEFAULT = {},
+            FF = {"0", "0", "5"},
+            FF_ESR = {"0", "0", "5"})
     // chrome and edge throw a RangeError (the default maximumFractionDigits are not adjusted)
     @HtmlUnitNYI(CHROME = {"0", "0", "5"},
             EDGE = {"0", "0", "5"})
@@ -3712,6 +3712,1307 @@ public class NumberFormatTest extends WebDriverTestCase {
                 + "  function test() {\n"
                 + "    var f = new Intl.NumberFormat('sv', {}).format;\n"
                 + "    try { log(f(-1234.5)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "1", "formatToParts"})
+    public void formatToPartsFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    try { log(typeof Intl.NumberFormat.prototype.formatToParts); } catch(e) { logEx(e) }\n"
+                + "    try { log(Intl.NumberFormat.prototype.formatToParts.length); } catch(e) { logEx(e) }\n"
+                + "    try { log(Intl.NumberFormat.prototype.formatToParts.name); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void formatToPartsOnPrototype() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.NumberFormat.prototype.formatToParts(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "3", "type,value", "string"})
+    public void formatToPartsResult() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var r = new Intl.NumberFormat('en').formatToParts(1.5);\n"
+                + "    try { log(Array.isArray(r)); } catch(e) { logEx(e) }\n"
+                + "    try { log(r.length); } catch(e) { logEx(e) }\n"
+                + "    try { log(Object.keys(r[0]).join()); } catch(e) { logEx(e) }\n"
+                + "    try { log(typeof r[0].value); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"minusSign:-|integer:1|group:,|integer:234|group:,|integer:567|decimal:.|fraction:891", "integer:0",
+             "integer:1|group:,|integer:234"})
+    public void formatToPartsDecimal() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(parts(nf.formatToParts(-1234567.891))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(0))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(1234))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("minusSign:-|integer:1|group:.|integer:234|group:.|integer:567|decimal:,|fraction:891")
+    public void formatToPartsGerman() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('de', {});\n"
+                + "    try { log(parts(nf.formatToParts(-1234567.891))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:1234567")
+    public void formatToPartsNoGrouping() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { useGrouping: false });\n"
+                + "    try { log(parts(nf.formatToParts(1234567))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:005")
+    public void formatToPartsMinimumIntegerDigits() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { minimumIntegerDigits: 3 });\n"
+                + "    try { log(parts(nf.formatToParts(5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"integer:25|percentSign:%", "minusSign:-|integer:25|percentSign:%"})
+    public void formatToPartsPercent() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'percent' });\n"
+                + "    try { log(parts(nf.formatToParts(0.25))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(-0.25))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:25|literal:\u00A0|percentSign:%")
+    public void formatToPartsPercentGerman() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('de', { style: 'percent' });\n"
+                + "    try { log(parts(nf.formatToParts(0.25))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50",
+             "minusSign:-|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50"})
+    public void formatToPartsCurrency() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' });\n"
+                + "    try { log(parts(nf.formatToParts(1234.5))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(-1234.5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("minusSign:-|integer:1|group:.|integer:234|decimal:,|fraction:50|literal:\u00A0|currency:\u20AC")
+    public void formatToPartsCurrencyGerman() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('de', { style: 'currency', currency: 'EUR' });\n"
+                + "    try { log(parts(nf.formatToParts(-1234.5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("currency:USD|literal:\u00A0|integer:1|group:,|integer:234|decimal:.|fraction:50")
+    public void formatToPartsCurrencyCode() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD',"
+                + " currencyDisplay: 'code' });\n"
+                + "    try { log(parts(nf.formatToParts(1234.5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"integer:1|group:,|integer:234|decimal:.|fraction:50|literal: |currency:US dollars",
+             "minusSign:-|integer:1|decimal:.|fraction:00|literal: |currency:US dollars"})
+    public void formatToPartsCurrencyName() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD',"
+                + " currencyDisplay: 'name' });\n"
+                + "    try { log(parts(nf.formatToParts(1234.5))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(-1))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            CHROME = "literal:(|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50|literal:)",
+            EDGE = "literal:(|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50|literal:)",
+            FF = "literal:(|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50|literal:)",
+            FF_ESR = "literal:(|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50|literal:)")
+    public void formatToPartsCurrencyAccounting() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD', currencySign:"
+                + " 'accounting' });\n"
+                + "    try { log(parts(nf.formatToParts(-1234.5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"integer:50|literal: |unit:km/h", "minusSign:-|integer:50|literal: |unit:km/h"})
+    public void formatToPartsUnit() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'unit', unit: 'kilometer-per-hour' });\n"
+                + "    try { log(parts(nf.formatToParts(50))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(-50))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:50|literal: |unit:kilometers per hour")
+    public void formatToPartsUnitLong() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'unit', unit: 'kilometer-per-hour',"
+                + " unitDisplay: 'long' });\n"
+                + "    try { log(parts(nf.formatToParts(50))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:21|decimal:.|fraction:5|unit:\u00B0C")
+    public void formatToPartsUnitNarrow() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'unit', unit: 'celsius', unitDisplay:"
+                + " 'narrow' });\n"
+                + "    try { log(parts(nf.formatToParts(21.5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:50|unit:%")
+    public void formatToPartsUnitPercent() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'unit', unit: 'percent' });\n"
+                + "    try { log(parts(nf.formatToParts(50))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"integer:1|decimal:.|fraction:23|exponentSeparator:E|exponentMinusSign:-|exponentInteger:3",
+             "minusSign:-|integer:3|decimal:.|fraction:142|exponentSeparator:E|exponentInteger:4"})
+    public void formatToPartsScientific() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { notation: 'scientific' });\n"
+                + "    try { log(parts(nf.formatToParts(0.00123))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(-31415.9))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:1|decimal:.|fraction:235|exponentSeparator:E|exponentInteger:6")
+    public void formatToPartsEngineering() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { notation: 'engineering' });\n"
+                + "    try { log(parts(nf.formatToParts(1234567))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"integer:1|decimal:.|fraction:2|compact:K", "minusSign:-|integer:1|decimal:.|fraction:5|compact:M"})
+    public void formatToPartsCompact() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { notation: 'compact' });\n"
+                + "    try { log(parts(nf.formatToParts(1234))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(-1500000))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:31|literal: |compact:thousand")
+    public void formatToPartsCompactLong() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { notation: 'compact', compactDisplay: 'long' });\n"
+                + "    try { log(parts(nf.formatToParts(31415))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:1|decimal:,|fraction:5|literal:\u00A0|compact:Mio.")
+    public void formatToPartsCompactGerman() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('de', { notation: 'compact' });\n"
+                + "    try { log(parts(nf.formatToParts(1500000))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:3|decimal:.|fraction:1|compact:\u4E07")
+    public void formatToPartsCompactJapanese() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('ja', { notation: 'compact' });\n"
+                + "    try { log(parts(nf.formatToParts(31415))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"nan:NaN", "infinity:\u221E", "minusSign:-|infinity:\u221E", "minusSign:-|integer:0"})
+    public void formatToPartsSpecialValues() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(parts(nf.formatToParts(NaN))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(Infinity))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(-Infinity))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(-0))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"plusSign:+|integer:5", "minusSign:-|integer:5", "plusSign:+|integer:0"})
+    public void formatToPartsSignDisplay() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { signDisplay: 'always' });\n"
+                + "    try { log(parts(nf.formatToParts(5))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(-5))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(0))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("literal:\u061C|minusSign:-|integer:\u0661|group:\u066C|integer:\u0662\u0663\u0664|decimal:\u066B|fraction:"
+            + "\u0665")
+    public void formatToPartsArabic() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('ar-EG', {});\n"
+                + "    try { log(parts(nf.formatToParts(-1234.5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"integer:12|group:,|integer:345|group:,|integer:678|group:,|integer:901|group:,|integer:234|group:,"
+                 + "|integer:567|group:,|integer:890", "integer:1|group:,|integer:234|decimal:.|fraction:5678",
+             "nan:NaN", "integer:1"})
+    public void formatToPartsInputs() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value;"
+                + " }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { maximumFractionDigits: 20 });\n"
+                + "    try { log(parts(nf.formatToParts(BigInt('12345678901234567890')))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts('1234.5678'))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(undefined))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatToParts(true))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "2", "formatRange", "function", "2"})
+    public void formatRangeFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    try { log(typeof Intl.NumberFormat.prototype.formatRange); } catch(e) { logEx(e) }\n"
+                + "    try { log(Intl.NumberFormat.prototype.formatRange.length); } catch(e) { logEx(e) }\n"
+                + "    try { log(Intl.NumberFormat.prototype.formatRange.name); } catch(e) { logEx(e) }\n"
+                + "    try { log(typeof Intl.NumberFormat.prototype.formatRangeToParts); } catch(e) { logEx(e) }\n"
+                + "    try { log(Intl.NumberFormat.prototype.formatRangeToParts.length); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void formatRangeOnPrototype() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.NumberFormat.prototype.formatRange(1, 2)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void formatRangeToPartsOnPrototype() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.NumberFormat.prototype.formatRangeToParts(1, 2)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3\u20135", "3.142\u20135.5", "1,234\u20135,678", "0\u20131"})
+    public void formatRange() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(nf.formatRange(3, 5)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(3.14159, 5.5)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(1234, 5678)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(0, 1)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"~5", "~-5", "0\u2013-0"})
+    public void formatRangeSame() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(nf.formatRange(5, 5)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(-5, -5)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(0, -0)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"~3", "2\u20133"})
+    public void formatRangeRoundsToSame() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });\n"
+                + "    try { log(nf.formatRange(2.9, 3.1)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(2.4, 3.4)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-5 \u2013 -3", "-5 \u2013 3", "5\u2013-3"})
+    public void formatRangeNegative() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(nf.formatRange(-5, -3)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(-5, 3)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(5, -3)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("5\u20133")
+    public void formatRangeStartGreaterThanEnd() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(nf.formatRange(5, 3)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3\u2013\u221E", "-\u221E \u2013 \u221E"})
+    public void formatRangeInfinity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(nf.formatRange(3, Infinity)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(-Infinity, Infinity)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"RangeError", "RangeError"})
+    public void formatRangeNaN() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(nf.formatRange(NaN, 5)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(3, NaN)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError"})
+    public void formatRangeUndefined() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(nf.formatRange(undefined, 5)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(3, undefined)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void formatRangeMissingEnd() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.NumberFormat('en').formatRange(3)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3\u20135", "1.5\u20132.5", "0\u20131"})
+    public void formatRangeInputs() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { maximumFractionDigits: 20 });\n"
+                + "    try { log(nf.formatRange(BigInt(3), BigInt(5))); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange('1.5', '2.5')); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(null, true)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1.234,5\u20135.678,5")
+    public void formatRangeGerman() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('de', {});\n"
+                + "    try { log(nf.formatRange(1234.5, 5678.5)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"$3.00 \u2013 $5.00", "~$3.00"})
+    public void formatRangeCurrency() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' });\n"
+                + "    try { log(nf.formatRange(3, 5)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(3, 3)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3,00\u20135,00\u00A0\u20AC")
+    public void formatRangeCurrencyGerman() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('de', { style: 'currency', currency: 'EUR' });\n"
+                + "    try { log(nf.formatRange(3, 5)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3% \u2013 5%")
+    public void formatRangePercent() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'percent' });\n"
+                + "    try { log(nf.formatRange(0.03, 0.05)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3\u20135 km", "1\u20132 km"})
+    public void formatRangeUnit() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'unit', unit: 'kilometer' });\n"
+                + "    try { log(nf.formatRange(3, 5)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(1, 2)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1\u20132 kilometers")
+    public void formatRangeUnitLong() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'unit', unit: 'kilometer', unitDisplay:"
+                + " 'long' });\n"
+                + "    try { log(nf.formatRange(1, 2)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("20\u201325\u00B0C")
+    public void formatRangeUnitNarrow() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'unit', unit: 'celsius', unitDisplay:"
+                + " 'narrow' });\n"
+                + "    try { log(nf.formatRange(20, 25)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1K \u2013 5K", "1K \u2013 5M"})
+    public void formatRangeCompact() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { notation: 'compact' });\n"
+                + "    try { log(nf.formatRange(1000, 5000)); } catch(e) { logEx(e) }\n"
+                + "    try { log(nf.formatRange(1000, 5000000)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1E3 \u2013 5E3")
+    public void formatRangeScientific() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { notation: 'scientific' });\n"
+                + "    try { log(nf.formatRange(1000, 5000)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("+3 \u2013 +5")
+    public void formatRangeSignDisplay() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nf = new Intl.NumberFormat('en', { signDisplay: 'always' });\n"
+                + "    try { log(nf.formatRange(3, 5)); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"integer:3:startRange|literal:\u2013:shared|integer:5:endRange",
+             "approximatelySign:~:shared|integer:5:shared"})
+    public void formatRangeToParts() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value + ':' +"
+                + " p.source; }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(parts(nf.formatRangeToParts(3, 5))); } catch(e) { logEx(e) }\n"
+                + "    try { log(parts(nf.formatRangeToParts(5, 5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("currency:$:startRange|integer:3:startRange|decimal:.:startRange|fraction:00:startRange|literal: \u2013 "
+            + ":shared|currency:$:endRange|integer:5:endRange|decimal:.:endRange|fraction:00:endRange")
+    public void formatRangeToPartsCurrency() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value + ':' +"
+                + " p.source; }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' });\n"
+                + "    try { log(parts(nf.formatRangeToParts(3, 5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:3:startRange|literal:\u2013:shared|integer:5:endRange|literal: :shared|unit:km:shared")
+    public void formatRangeToPartsUnit() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value + ':' +"
+                + " p.source; }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { style: 'unit', unit: 'kilometer' });\n"
+                + "    try { log(parts(nf.formatRangeToParts(3, 5))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("integer:1:startRange|compact:K:startRange|literal: \u2013 :shared|integer:5:endRange|compact:K:endRange")
+    public void formatRangeToPartsCompact() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value + ':' +"
+                + " p.source; }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', { notation: 'compact' });\n"
+                + "    try { log(parts(nf.formatRangeToParts(1000, 5000))); } catch(e) { logEx(e) }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("minusSign:-:startRange|integer:5:startRange|literal: \u2013 "
+            + ":shared|minusSign:-:endRange|integer:3:endRange")
+    public void formatRangeToPartsNegative() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    function parts(a) { return a.map(function(p) { return p.type + ':' + p.value + ':' +"
+                + " p.source; }).join('|'); }\n"
+                + "    var nf = new Intl.NumberFormat('en', {});\n"
+                + "    try { log(parts(nf.formatRangeToParts(-5, -3))); } catch(e) { logEx(e) }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
