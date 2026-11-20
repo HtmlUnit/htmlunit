@@ -722,10 +722,6 @@ public class ContentSecurityPolicyScriptTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("external ")
-    @HtmlUnitNYI(CHROME = "external localhost",
-            EDGE = "external localhost",
-            FF = "external localhost",
-            FF_ESR = "external localhost")
     public void headerSandboxAllowScriptsSelf() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "test.js"), "log('external ' + document.domain);",
                 MimeType.TEXT_JAVASCRIPT);

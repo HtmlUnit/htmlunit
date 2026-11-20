@@ -254,6 +254,22 @@ public class ContentSecurityPolicyViolationListenerTest extends SimpleWebTestCas
     }
 
     /**
+     * The sandbox directive (header) disables scripts; this is no violation.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sandbox() throws Exception {
+        final CollectingContentSecurityPolicyViolationListener listener = setListener();
+        final HtmlPage page = loadPageWithPolicy(HttpHeader.CONTENT_SECURIRY_POLICY, "sandbox",
+                "<script>document.title = 'executed';</script>\n"
+                + "<script src='test.js'></script>\n");
+
+        assertEquals("", page.getTitleText());
+        assertTrue(listener.getViolations().isEmpty());
+    }
+
+    /**
      * Without listener violations are only logged.
      *
      * @throws Exception if the test fails

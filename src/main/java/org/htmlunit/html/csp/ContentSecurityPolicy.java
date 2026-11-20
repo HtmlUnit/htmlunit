@@ -27,9 +27,11 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
@@ -48,6 +50,7 @@ import org.htmlunit.corejs.javascript.ScriptStackElement;
 import org.htmlunit.csp.FetchDirectiveKind;
 import org.htmlunit.csp.Policy;
 import org.htmlunit.csp.directive.ReportUriDirective;
+import org.htmlunit.csp.directive.SandboxDirective;
 import org.htmlunit.csp.directive.SourceExpressionDirective;
 import org.htmlunit.csp.url.GUID;
 import org.htmlunit.csp.url.URI;
@@ -279,8 +282,10 @@ public final class ContentSecurityPolicy implements Serializable {
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.ScriptSrcElem, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
+        final boolean redirected = isRedirect(url, reportedUrl);
         return csp.check(page, violation,
-                policy -> policy.allowsExternalScript(nonce, integrity, scriptUrl, parserInserted, origin));
+                policy -> policy.allowsExternalScript(nonce, integrity, scriptUrl, parserInserted, origin,
+                        redirected));
     }
 
     /**
@@ -350,7 +355,9 @@ public final class ContentSecurityPolicy implements Serializable {
         final Violation violation = new Violation(FetchDirectiveKind.ConnectSrc, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
         // like browsers, ws: and wss: urls are not mapped to http: and https: before matching
-        final boolean allowed = csp.check(page, violation, policy -> policy.allowsConnection(target, origin, false));
+        final boolean redirected = isRedirect(url, reportedUrl);
+        final boolean allowed = csp.check(page, violation,
+                policy -> policy.allowsConnection(target, origin, false, redirected));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }
@@ -434,8 +441,9 @@ public final class ContentSecurityPolicy implements Serializable {
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.StyleSrcElem, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
+        final boolean redirected = isRedirect(url, reportedUrl);
         final boolean allowed = csp.check(page, violation,
-                policy -> policy.allowsExternalStyle(nonce, styleUrl, origin));
+                policy -> policy.allowsExternalStyle(nonce, styleUrl, origin, redirected));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }
@@ -562,7 +570,9 @@ public final class ContentSecurityPolicy implements Serializable {
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.ImgSrc, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
-        final boolean allowed = csp.check(page, violation, policy -> policy.allowsImage(target, origin));
+        final boolean redirected = isRedirect(url, reportedUrl);
+        final boolean allowed = csp.check(page, violation,
+                policy -> policy.allowsImage(target, origin, redirected));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }
@@ -1085,6 +1095,36 @@ public final class ContentSecurityPolicy implements Serializable {
         return json.append('"').toString();
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the sandbox tokens (e.g. 'allow-scripts') of the sandbox directives of the enforced
+     * policies; like in the browsers report only policies and policies delivered by a meta element
+     * are ignored. If more than one policy has a sandbox directive, only the tokens of all
+     * directives are allowed.
+     *
+     * @return the tokens (lower case) or {@code null} if no enforced policy has a sandbox directive
+     */
+    public Set<String> getSandboxTokens() {
+        Set<String> tokens = null;
+        for (final Policy policy : getEnforcedPolicies()) {
+            final SandboxDirective sandbox = policy.deliveredViaMeta() ? null : policy.sandbox().orElse(null);
+            if (sandbox != null) {
+                final Set<String> policyTokens = new HashSet<>();
+                for (final String value : sandbox.getValues()) {
+                    policyTokens.add(value.toLowerCase(Locale.ROOT));
+                }
+                if (tokens == null) {
+                    tokens = policyTokens;
+                }
+                else {
+                    tokens.retainAll(policyTokens);
+                }
+            }
+        }
+        return tokens;
+    }
+
     private List<Policy> getEnforcedPolicies() {
         if (enforcedPolicies_ == null) {
             final List<Policy> policies = parse(enforced_);
@@ -1250,6 +1290,15 @@ public final class ContentSecurityPolicy implements Serializable {
             port = URI.defaultPortForProtocol(scheme);
         }
         return new URI(scheme, host.toLowerCase(Locale.ROOT), port, url.getPath());
+    }
+
+    /**
+     * Returns whether the url is the target of a redirect; the checks for redirects are called
+     * with the redirect target as url and the url of the initial request as reported url.
+     * Like the browsers, the path part of the source expressions is ignored for redirects.
+     */
+    private static boolean isRedirect(final URL url, final URL reportedUrl) {
+        return !url.toExternalForm().equals(reportedUrl.toExternalForm());
     }
 
     /**

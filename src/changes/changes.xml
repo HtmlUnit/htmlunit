@@ -9,6 +9,24 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                csp: like the browsers, the path part of the source expressions is ignored for the redirect targets
+                of scripts, stylesheets, images and connections (XMLHttpRequest, fetch).
+            </action>
+            <action type="fix" dev="rbri">
+                csp: the sandbox directive of an enforced policy delivered by a header sandboxes the document
+                (like the sandbox attribute of an iframe); e.g. without 'allow-scripts' no script is executed
+                and without 'allow-same-origin' the document has an opaque origin.
+            </action>
+            <action type="update" dev="rbri">
+                htmlunit-csp: 5.9.0-SNAPSHOT.
+            </action>
+            <action type="fix" dev="rbri">
+                htmlunit-csp: The path part of a source expression is no longer compared for redirected requests
+                (CSP3 "Does url match expression in origin with redirect count"). New overloads with a trailing
+                boolean redirected for the URL-based allows* queries and doesUrlMatchSourceListInOrigin();
+                allowsNavigation() ignores the path of redirectedTo.
+            </action>
+            <action type="fix" dev="rbri">
                 csp: data: urls of external scripts and stylesheets are matched by scheme sources (e.g. data:)
                 like in the browsers (they were always blocked); like the browsers, only the scheme is reported
                 as blocked uri for such urls.

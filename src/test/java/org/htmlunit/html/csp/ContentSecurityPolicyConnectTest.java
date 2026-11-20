@@ -293,6 +293,36 @@ public class ContentSecurityPolicyConnectTest extends WebDriverTestCase {
     }
 
     /**
+     * A redirect; the path of the source expression is ignored for the redirect target.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("error 4 0")
+    public void redirectPathIgnored() throws Exception {
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", URL_CROSS_ORIGIN_BASE + "other/data.txt"));
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN_BASE, "allowed/redirect.txt"), "", 302,
+                "Found", MimeType.TEXT_PLAIN, headers);
+        setCrossOriginResponse("other/data.txt");
+        loadPageVerify("connect-src 'self' http://localhost:" + PORT2 + "/allowed/",
+                xhrAsync(URL_CROSS_ORIGIN_BASE + "allowed/redirect.txt"));
+    }
+
+    /**
+     * No redirect; the path of the source expression does not match.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"violation connect-src http://localhost:22223/other/data.txt", "error 4 0"})
+    public void pathNotMatching() throws Exception {
+        setCrossOriginResponse("other/data.txt");
+        loadPageVerify("connect-src 'self' http://localhost:" + PORT2 + "/allowed/",
+                xhrAsync(URL_CROSS_ORIGIN_BASE + "other/data.txt"));
+    }
+
+    /**
      * A Content-Security-Policy-Report-Only policy does not block, but reports.
      *
      * @throws Exception if the test fails
