@@ -62,6 +62,20 @@
         </Or>
     </Match>
 
+    <!--
+        The identity check of the strings is an intended shortcut (performance);
+        the result is the same without it.
+    -->
+    <Match>
+        <Bug pattern="ES_COMPARING_PARAMETER_STRING_WITH_EQ"/>
+        <Class name="org.htmlunit.util.StringUtils"/>
+        <Or>
+            <Method name="startsWithIgnoreCase"/>
+            <Method name="endsWithIgnoreCase"/>
+            <Method name="containsIgnoreCase"/>
+        </Or>
+    </Match>
+
     <!-- Exclude org.htmlunit.util.brotli package -->
     <Match>
         <Package name="org.htmlunit.util.brotli"/>
