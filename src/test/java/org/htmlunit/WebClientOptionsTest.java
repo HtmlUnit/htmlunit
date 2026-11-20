@@ -69,6 +69,8 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
                         deserialized.getWebSocketMaxBinaryMessageSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
+        assertEquals(original.isHtmlFragmentSelfClosingTagsAllowed(),
+                        deserialized.isHtmlFragmentSelfClosingTagsAllowed());
     }
 
     /**
@@ -96,6 +98,7 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         original.setWebSocketMaxBinaryMessageSize(44);
 
         original.setFetchPolyfillEnabled(true);
+        original.setHtmlFragmentSelfClosingTagsAllowed(true);
 
         final byte[] bytes = SerializationUtils.serialize(original);
         final WebClientOptions deserialized = SerializationUtils.deserialize(bytes);
@@ -130,6 +133,8 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
                         deserialized.getWebSocketMaxBinaryMessageSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
+        assertEquals(original.isHtmlFragmentSelfClosingTagsAllowed(),
+                        deserialized.isHtmlFragmentSelfClosingTagsAllowed());
     }
 
     /**

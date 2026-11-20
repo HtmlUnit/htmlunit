@@ -180,6 +180,38 @@ public class WebClient8Test extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
+    public void parseFragmentIgnoresTrailingSlashOfNonVoidElement() throws Exception {
+        final String html = DOCTYPE_HTML + "<html><body><div id='copy'></div></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            final DomElement copy = page.getElementById("copy");
+            copy.setInnerHtml("<h3/><p>x</p>");
+            assertEquals("<div id=\"copy\"><h3><p>x</p></h3></div>", copy.asXml());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void parseFragmentHtmlFragmentSelfClosingTagsAllowed() throws Exception {
+        final String html = DOCTYPE_HTML + "<html><body><div id='copy'></div></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            webClient.getOptions().setHtmlFragmentSelfClosingTagsAllowed(true);
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            final DomElement copy = page.getElementById("copy");
+            // markup written by asXml() before 5.8.0
+            copy.setInnerHtml("<h3/><p>x</p><iframe/><p>y</p><br/>");
+            assertEquals("<div id=\"copy\"><h3></h3><p>x</p><iframe></iframe><p>y</p><br/></div>", copy.asXml());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
     public void cloneNode() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
