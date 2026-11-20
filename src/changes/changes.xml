@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                A page with a NodeIterator or a TreeWalker using a javascript filter can be serialized.
+            </action>
             <action type="update" dev="rbri">
                 The interfaces FrameContentHandler, HTMLParserListener and ScriptPreProcessor extend Serializable
                 (like the other handlers of the WebClient); a WebClient using them can be serialized.

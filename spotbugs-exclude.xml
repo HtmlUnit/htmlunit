@@ -63,6 +63,19 @@
     </Match>
 
     <!--
+        The filter type org.w3c.dom.traversal.NodeFilter is part of the public api and can't be changed;
+        the filters created by HtmlUnit (javascript) are serializable.
+    -->
+    <Match>
+        <Bug pattern="SE_BAD_FIELD"/>
+        <Or>
+            <Class name="org.htmlunit.html.DomNodeIterator"/>
+            <Class name="org.htmlunit.html.HtmlDomTreeWalker"/>
+        </Or>
+        <Field name="filter_"/>
+    </Match>
+
+    <!--
         The identity check of the strings is an intended shortcut (performance);
         the result is the same without it.
     -->

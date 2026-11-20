@@ -156,6 +156,64 @@ public class WebClient2Test extends SimpleWebTestCase {
     }
 
     /**
+     * The filter of a NodeIterator created by javascript has to survive the serialization.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_nodeIteratorFilter() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='a'></div><div id='b'></div><div id='c'></div>\n"
+            + "<script>\n"
+            + "  var it = document.createNodeIterator(document.body, NodeFilter.SHOW_ELEMENT,\n"
+            + "    function(n) { return n.id == 'b' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; });\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        try (WebClient client = getWebClient()) {
+            final HtmlPage page = loadPage(client, html, null, URL_FIRST);
+
+            try (WebClient copy = clone(client)) {
+                final HtmlPage copyPage = (HtmlPage) copy.getCurrentWindow().getEnclosedPage();
+                assertEquals("b", copyPage.executeJavaScript("it.nextNode().id").getJavaScriptResult());
+                assertEquals("true", copyPage.executeJavaScript(
+                        "String(it.nextNode() === null)").getJavaScriptResult());
+            }
+
+            assertEquals("b", page.executeJavaScript("it.nextNode().id").getJavaScriptResult());
+        }
+    }
+
+    /**
+     * The filter of a TreeWalker created by javascript has to survive the serialization.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_treeWalkerFilter() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='a'></div><div id='b'></div><div id='c'></div>\n"
+            + "<script>\n"
+            + "  var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT,\n"
+            + "    function(n) { return n.id == 'b' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; }, false);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        try (WebClient client = getWebClient()) {
+            final HtmlPage page = loadPage(client, html, null, URL_FIRST);
+
+            try (WebClient copy = clone(client)) {
+                final HtmlPage copyPage = (HtmlPage) copy.getCurrentWindow().getEnclosedPage();
+                assertEquals("b", copyPage.executeJavaScript("tw.nextNode().id").getJavaScriptResult());
+                assertEquals("true", copyPage.executeJavaScript(
+                        "String(tw.nextNode() === null)").getJavaScriptResult());
+            }
+
+            assertEquals("b", page.executeJavaScript("tw.nextNode().id").getJavaScriptResult());
+        }
+    }
+
+    /**
      * Regression test for bug 2836355.
      * @throws Exception if an error occurs
      */
