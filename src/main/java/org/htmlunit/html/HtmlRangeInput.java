@@ -15,6 +15,7 @@
 package org.htmlunit.html;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -202,6 +203,23 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
         }
 
         final double step = getStepNumeric();
+        if (Double.isFinite(value) && Double.isFinite(min) && Double.isFinite(step) && step > 0) {
+            // decimal arithmetic; with doubles step 0.1 results in values like 0.30000000000000004
+            // and the rounding of 0.25 to the step is wrong (0.2 instead of 0.3)
+            final BigDecimal decimalMin = BigDecimal.valueOf(min);
+            final BigDecimal decimalStep = BigDecimal.valueOf(step);
+            final BigDecimal diff = BigDecimal.valueOf(value).subtract(decimalMin);
+            // round to the nearest step (ties up); below min (max < min) truncate like before
+            final BigDecimal steps = diff.divide(decimalStep, 0,
+                    diff.signum() < 0 ? RoundingMode.DOWN : RoundingMode.HALF_UP);
+            BigDecimal result = decimalMin.add(decimalStep.multiply(steps));
+            if (Double.isFinite(max) && result.compareTo(BigDecimal.valueOf(max)) > 0 && steps.signum() > 0) {
+                // the largest value matching the step that is not greater than max
+                result = result.subtract(decimalStep);
+            }
+            return format(result.doubleValue());
+        }
+
         value = value - min;
         long fact = (long) (value / step);
         final double rest = value % step;

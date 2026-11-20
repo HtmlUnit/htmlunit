@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                HtmlRangeInput: no floating point artifacts (e.g. 0.30000000000000004) for fractional steps,
+                correct rounding to the step and the value is never greater than max.
+            </action>
             <action type="update" dev="rbri">
                 The interface ContentSecurityPolicyViolationListener extends Serializable
                 (like the other handlers of the WebClient); a WebClient using it can be serialized.
