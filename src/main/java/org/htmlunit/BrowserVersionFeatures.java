@@ -309,6 +309,20 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_EVENT_KEYBOARD_CTOR_WHICH,
 
+    /**
+     * Javascript SecurityPolicyViolationEvent created by the constructor always bubbles,
+     * is composed and is not cancelable (the init values are ignored).
+     */
+    @BrowserFeature({CHROME, EDGE})
+    JS_EVENT_SECURITY_POLICY_VIOLATION_CTOR_BUBBLES_COMPOSED,
+
+    /**
+     * Javascript SecurityPolicyViolationEvent lineNumber and columnNumber are unsigned
+     * (-1 is converted to 4294967295).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_EVENT_SECURITY_POLICY_VIOLATION_POSITION_UNSIGNED,
+
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,

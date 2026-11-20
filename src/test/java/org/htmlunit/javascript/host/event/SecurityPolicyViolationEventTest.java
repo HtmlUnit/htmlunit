@@ -57,8 +57,6 @@ public class SecurityPolicyViolationEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "true", "false", "true"},
             FF = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "false", "false", "false"},
             FF_ESR = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "false", "false", "false"})
-    @HtmlUnitNYI(CHROME = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "false", "false", "false"},
-            EDGE = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -81,10 +79,6 @@ public class SecurityPolicyViolationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("TypeError")
-    @HtmlUnitNYI(CHROME = {"[object SecurityPolicyViolationEvent]", "undefined", "false", "false", "false"},
-            EDGE = {"[object SecurityPolicyViolationEvent]", "undefined", "false", "false", "false"},
-            FF = {"[object SecurityPolicyViolationEvent]", "undefined", "false", "false", "false"},
-            FF_ESR = {"[object SecurityPolicyViolationEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -109,8 +103,6 @@ public class SecurityPolicyViolationEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SecurityPolicyViolationEvent]", "42", "true", "false", "true"},
             FF = {"[object SecurityPolicyViolationEvent]", "42", "false", "false", "false"},
             FF_ESR = {"[object SecurityPolicyViolationEvent]", "42", "false", "false", "false"})
-    @HtmlUnitNYI(CHROME = {"[object SecurityPolicyViolationEvent]", "42", "false", "false", "false"},
-            EDGE = {"[object SecurityPolicyViolationEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -135,8 +127,6 @@ public class SecurityPolicyViolationEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SecurityPolicyViolationEvent]", "null", "true", "false", "true"},
             FF = {"[object SecurityPolicyViolationEvent]", "null", "false", "false", "false"},
             FF_ESR = {"[object SecurityPolicyViolationEvent]", "null", "false", "false", "false"})
-    @HtmlUnitNYI(CHROME = {"[object SecurityPolicyViolationEvent]", "null", "false", "false", "false"},
-            EDGE = {"[object SecurityPolicyViolationEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -183,8 +173,6 @@ public class SecurityPolicyViolationEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SecurityPolicyViolationEvent]", "HtmlUnitEvent", "true", "false", "true"},
             FF = {"[object SecurityPolicyViolationEvent]", "HtmlUnitEvent", "false", "false", "false"},
             FF_ESR = {"[object SecurityPolicyViolationEvent]", "HtmlUnitEvent", "false", "false", "false"})
-    @HtmlUnitNYI(CHROME = {"[object SecurityPolicyViolationEvent]", "HtmlUnitEvent", "false", "false", "false"},
-            EDGE = {"[object SecurityPolicyViolationEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -209,8 +197,6 @@ public class SecurityPolicyViolationEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "true", "false", "true"},
             FF = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "true", "true", "true"},
             FF_ESR = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "true", "true", "true"})
-    @HtmlUnitNYI(CHROME = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "true", "true", "true"},
-            EDGE = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "true", "true", "true"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -239,8 +225,6 @@ public class SecurityPolicyViolationEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "true", "false", "true"},
             FF = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "false", "false", "false"},
             FF_ESR = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "false", "false", "false"})
-    @HtmlUnitNYI(CHROME = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "false", "false", "false"},
-            EDGE = {"[object SecurityPolicyViolationEvent]", "securitypolicyviolation", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -252,6 +236,29 @@ public class SecurityPolicyViolationEventTest extends WebDriverTestCase {
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Calling the constructor without new.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void create_withoutNew() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = SecurityPolicyViolationEvent('securitypolicyviolation');\n"
+            + "      log(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -361,8 +368,6 @@ public class SecurityPolicyViolationEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"42", "", "null", "", "", "", "", "", "enforce", "404", "-1", "3"},
             FF = {"42", "", "null", "", "", "", "", "", "enforce", "404", "4294967295", "3"},
             FF_ESR = {"42", "", "null", "", "", "", "", "", "enforce", "404", "4294967295", "3"})
-    @HtmlUnitNYI(FF = {"42", "", "null", "", "", "", "", "", "enforce", "404", "-1", "3"},
-            FF_ESR = {"42", "", "null", "", "", "", "", "", "enforce", "404", "-1", "3"})
     public void properties_ctorConversion() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                SecurityPolicyViolationEvent constructor: throws a TypeError if called without type or without new;
+                when simulating Chrome/Edge the event always bubbles, is composed and is not cancelable;
+                when simulating Firefox lineNumber and columnNumber are unsigned.
+            </action>
             <action type="add" dev="rbri">
                 csp: new option WebClientOptions.setContentSecurityPolicyReportsEnabled(boolean) (default true);
                 if disabled, the violation reports are not sent to the uris of the report-uri directive.
