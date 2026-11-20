@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="update" dev="rbri">
+                The interface ContentSecurityPolicyViolationListener extends Serializable
+                (like the other handlers of the WebClient); a WebClient using it can be serialized.
+            </action>
             <action type="fix" dev="rbri">
                 HtmlRangeInput: values outside of the int range are no longer truncated.
             </action>

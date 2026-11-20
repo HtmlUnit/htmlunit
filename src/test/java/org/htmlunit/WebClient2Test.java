@@ -110,6 +110,21 @@ public class WebClient2Test extends SimpleWebTestCase {
     }
 
     /**
+     * Verifies that the content security policy violation listener survives the serialization.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_contentSecurityPolicyViolationListener() throws Exception {
+        try (WebClient client = getWebClient()) {
+            client.setContentSecurityPolicyViolationListener((page, violation) -> { });
+
+            try (WebClient copy = clone(client)) {
+                assertNotNull(copy.getContentSecurityPolicyViolationListener());
+            }
+        }
+    }
+
+    /**
      * Regression test for bug 2833433.
      * @throws Exception if an error occurs
      */
