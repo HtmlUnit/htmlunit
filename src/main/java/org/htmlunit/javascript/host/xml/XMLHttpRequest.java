@@ -153,10 +153,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private static final HashSet<String> PROHIBITED_HEADERS_ = new HashSet<>(Arrays.asList(
         "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
+        "access-control-request-headers", "access-control-request-method",
         HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",
-        "content-transfer-encoding", "date", "expect",
-        HttpHeader.HOST_LC, "keep-alive", HttpHeader.REFERER_LC, "te", "trailer", "transfer-encoding",
-        "upgrade", HttpHeader.USER_AGENT_LC, "via"));
+        "content-transfer-encoding", "date", "dnt", "expect",
+        HttpHeader.HOST_LC, "keep-alive", HttpHeader.ORIGIN_LC, HttpHeader.REFERER_LC, "set-cookie",
+        "te", "trailer", "transfer-encoding", "upgrade", HttpHeader.USER_AGENT_LC, "via"));
 
     private int state_;
     private WebRequest webRequest_;

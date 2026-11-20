@@ -2094,6 +2094,40 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         loadAndVerify(headersPage("", originA() + "/pivot"));
     }
 
+    // ---------------------------------------------------------------------------
+    // the Origin header is a forbidden request header
+    // ---------------------------------------------------------------------------
+
+    /**
+     * The Origin header can not be set by the page; the server gets the origin of the page.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "origin=§§URL§§;cookie=null;auth=null"})
+    public void setRequestHeaderOriginIgnored() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+
+        loadAndVerify(xhrPage("", "    xhr.setRequestHeader('Origin', '" + originB() + "');\n",
+                originB() + "/echo?acao=*"));
+    }
+
+    /**
+     * A page can not pass the CORS check of a server that only trusts another origin
+     * by setting the Origin header to that origin.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
+    public void setRequestHeaderOriginDoesNotPassCorsCheck() throws Exception {
+        startSecondServer();
+
+        loadAndVerify(xhrPage("  document.cookie = 'c=1; path=/';\n",
+                "    xhr.withCredentials = true;\n"
+                + "    xhr.setRequestHeader('Origin', '" + originB() + "');\n",
+                originB() + "/echo?acac=true&acao=" + enc(originB())));
+    }
+
     /**
      * Synchronous request; logs the (sorted, lower case) names of getAllResponseHeaders()
      * and the values of some headers using getResponseHeader().
