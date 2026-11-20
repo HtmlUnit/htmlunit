@@ -368,6 +368,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE,
 
+    /** Indicates that the collation (from the options or for usage 'search') is part of the Intl.Collator locale. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_INTL_COLLATOR_COLLATION_IN_LOCALE,
+
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,

@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Intl.Collator: support of the options usage, sensitivity, ignorePunctuation, numeric, caseFirst
+                and collation (and the unicode extensions co, kf and kn of the locale); the collations
+                German phonebook (phonebk) and traditional Spanish (trad) are supported.
+            </action>
             <action type="fix" dev="rbri">
                 Intl.DateTimeFormat and Intl.NumberFormat: resolvedOptions().locale is the resolved locale
                 (e.g. 'de' for 'de-XX') including the relevant unicode extensions ('ca', 'hc' and 'nu' for

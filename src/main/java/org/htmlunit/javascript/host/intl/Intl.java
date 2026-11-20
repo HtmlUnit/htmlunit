@@ -19,6 +19,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.IllformedLocaleException;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -284,56 +285,217 @@ public class Intl extends HtmlUnitScriptable {
     }
 
     /**
+     * The result of the locale resolution: the resolved language tag and the values of the
+     * relevant unicode extension keys (from the locale or the options).
+     *
+     * @param locale the resolved language tag
+     * @param values the values of the relevant extension keys; keys without a value are missing
+     */
+    record ResolvedLocale(String locale, Map<String, String> values) {
+    }
+
+    /**
      * Resolves the locale of an Intl object: the available locale for the requested one
      * plus the given (relevant) unicode extension keys of the requested locale, if their
      * values are supported.
      *
      * @param requestedLocale the requested (canonicalized) language tag
      * @param relevantExtensionKeys the unicode extension keys relevant for the Intl object
-     *        (e.g. 'co', 'kf' and 'kn' for a collator)
+     *        (e.g. 'ca', 'hc' and 'nu' for a date time format)
      * @return the resolved language tag
      * @see <a href="https://tc39.es/ecma402/#sec-resolvelocale">spec</a>
      */
     static String resolveLocale(final String requestedLocale, final String... relevantExtensionKeys) {
+        return resolveLocale(requestedLocale, new HashMap<>(), relevantExtensionKeys).locale();
+    }
+
+    /**
+     * Resolves the locale of an Intl object: the available locale for the requested one
+     * plus the given (relevant) unicode extension keys of the requested locale, if their
+     * values are supported.
+     * <p>
+     * A supported value from the options overrides the value of the extension; if the value
+     * differs, the key is removed from the resolved locale.
+     * </p>
+     *
+     * @param requestedLocale the requested (canonicalized) language tag
+     * @param optionValues the values of the extension keys given by the options (e.g. 'kn' for the
+     *        option 'numeric'); keys without a value are missing
+     * @param relevantExtensionKeys the unicode extension keys relevant for the Intl object
+     *        (e.g. 'co', 'kf' and 'kn' for a collator)
+     * @return the resolved locale
+     * @see <a href="https://tc39.es/ecma402/#sec-resolvelocale">spec</a>
+     */
+    static ResolvedLocale resolveLocale(final String requestedLocale, final Map<String, String> optionValues,
+            final String... relevantExtensionKeys) {
         final java.util.Locale locale = java.util.Locale.forLanguageTag(requestedLocale);
         String availableLocale = bestAvailableLocale(requestedLocale);
         if (availableLocale == null) {
             availableLocale = locale.stripExtensions().toLanguageTag();
         }
+        final String language = java.util.Locale.forLanguageTag(availableLocale).getLanguage();
 
+        final Map<String, String> values = new HashMap<>();
         // the keys are sorted like in the canonicalized tag
         final StringBuilder extension = new StringBuilder();
         for (final String key : new TreeSet<>(Arrays.asList(relevantExtensionKeys))) {
-            final String value = locale.getUnicodeLocaleType(key);
-            if (value != null && isSupportedExtensionValue(key, value)) {
-                extension.append('-').append(key);
-                // 'true' is the default value of a key; it is not part of the tag
-                if (!value.isEmpty() && !"true".equals(value)) {
-                    extension.append('-').append(value);
+            String value = null;
+            boolean partOfTag = false;
+
+            String extensionValue = locale.getUnicodeLocaleType(key);
+            if (extensionValue != null) {
+                // a key without a value means 'true'
+                if (extensionValue.isEmpty()) {
+                    extensionValue = "true";
+                }
+                if (isSupportedExtensionValue(key, extensionValue, language)) {
+                    value = extensionValue;
+                    partOfTag = true;
+                }
+            }
+
+            final String optionValue = optionValues.get(key);
+            if (optionValue != null && !optionValue.equals(value)
+                    && isSupportedExtensionValue(key, optionValue, language)) {
+                value = optionValue;
+                partOfTag = false;
+            }
+
+            if (value != null) {
+                values.put(key, value);
+                if (partOfTag) {
+                    extension.append('-').append(key);
+                    // 'true' is the default value of a key; it is not part of the tag
+                    if (!"true".equals(value)) {
+                        extension.append('-').append(value);
+                    }
                 }
             }
         }
 
         if (extension.length() == 0) {
-            return availableLocale;
+            return new ResolvedLocale(availableLocale, values);
         }
-        return availableLocale + "-u" + extension;
+        return new ResolvedLocale(availableLocale + "-u" + extension, values);
     }
 
-    private static boolean isSupportedExtensionValue(final String key, final String value) {
+    private static boolean isSupportedExtensionValue(final String key, final String value, final String language) {
         switch (key) {
             case "co":
-                // 'standard' and 'search' are not allowed as collation
-                return !value.isEmpty() && !"standard".equals(value) && !"search".equals(value);
+                return isSupportedCollation(value, language);
             case "kf":
                 return "upper".equals(value) || "lower".equals(value) || "false".equals(value);
             case "kn":
-                return value.isEmpty() || "true".equals(value) || "false".equals(value);
+                return "true".equals(value) || "false".equals(value);
             case "hc":
                 return "h11".equals(value) || "h12".equals(value) || "h23".equals(value) || "h24".equals(value);
             default:
                 // e.g. 'ca' and 'nu'
                 return !value.isEmpty();
         }
+    }
+
+    /**
+     * Returns whether the given collation is supported for the given language
+     * ('standard' and 'search' are never allowed as collation).
+     *
+     * @param collation the collation type
+     * @param language the language
+     * @return true if supported
+     */
+    private static boolean isSupportedCollation(final String collation, final String language) {
+        switch (collation) {
+            case "emoji":
+            case "eor":
+                // supported for all languages
+                return true;
+            case "phonebk":
+                return "de".equals(language);
+            case "trad":
+                return "es".equals(language);
+            case "pinyin":
+            case "stroke":
+            case "zhuyin":
+                return "zh".equals(language);
+            case "unihan":
+                return "zh".equals(language) || "ja".equals(language) || "ko".equals(language);
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Converts the options argument of the Intl constructors into an object
+     * (the abstract operation CoerceOptionsToObject).
+     *
+     * @param scope the scope
+     * @param options the options argument
+     * @return the options object or {@code null} if the options argument is {@code undefined}
+     * @throws org.htmlunit.corejs.javascript.EcmaError a {@code TypeError} if the options argument
+     *         is {@code null}
+     * @see <a href="https://tc39.es/ecma402/#sec-coerceoptionstoobject">spec</a>
+     */
+    static Scriptable coerceOptionsToObject(final VarScope scope, final Object options) {
+        if (JavaScriptEngine.isUndefined(options)) {
+            return null;
+        }
+        if (options == null) {
+            throw JavaScriptEngine.typeError("Cannot convert null to object");
+        }
+        return JavaScriptEngine.toObject(scope, options);
+    }
+
+    /**
+     * Returns the string value of an option (the abstract operation GetOption).
+     *
+     * @param options the options object; may be {@code null}
+     * @param property the name of the option
+     * @param values the allowed values; {@code null} if all values are allowed
+     * @param fallback the value used if the option is {@code undefined}
+     * @param className the name of the Intl object (for the error message)
+     * @return the value of the option or the fallback
+     * @throws org.htmlunit.corejs.javascript.EcmaError a {@code RangeError} if the value is not allowed
+     * @see <a href="https://tc39.es/ecma402/#sec-getoption">spec</a>
+     */
+    static String getStringOption(final Scriptable options, final String property, final String[] values,
+            final String fallback, final String className) {
+        final Object value = getOptionValue(options, property);
+        if (JavaScriptEngine.isUndefined(value)) {
+            return fallback;
+        }
+
+        final String stringValue = JavaScriptEngine.toString(value);
+        if (values != null && !Arrays.asList(values).contains(stringValue)) {
+            throw JavaScriptEngine.rangeError("Value " + stringValue + " out of range for "
+                    + className + " options property " + property);
+        }
+        return stringValue;
+    }
+
+    /**
+     * Returns the boolean value of an option (the abstract operation GetOption).
+     *
+     * @param options the options object; may be {@code null}
+     * @param property the name of the option
+     * @return the value of the option or {@code null} if the option is {@code undefined}
+     * @see <a href="https://tc39.es/ecma402/#sec-getoption">spec</a>
+     */
+    static Boolean getBooleanOption(final Scriptable options, final String property) {
+        final Object value = getOptionValue(options, property);
+        if (JavaScriptEngine.isUndefined(value)) {
+            return null;
+        }
+        return JavaScriptEngine.toBoolean(value);
+    }
+
+    private static Object getOptionValue(final Scriptable options, final String property) {
+        if (options == null) {
+            return JavaScriptEngine.UNDEFINED;
+        }
+        final Object value = ScriptableObject.getProperty(options, property);
+        if (value == Scriptable.NOT_FOUND) {
+            return JavaScriptEngine.UNDEFINED;
+        }
+        return value;
     }
 }
