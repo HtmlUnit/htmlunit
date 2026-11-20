@@ -55,8 +55,9 @@ public class AbortSignal extends EventTarget {
     private boolean aborted_;
     private Object reason_ = JavaScriptEngine.UNDEFINED;
 
-    // the steps to run when this signal is aborted (e.g. abort a fetch)
-    private final transient List<Runnable> abortAlgorithms_ = new ArrayList<>();
+    // the steps to run when this signal is aborted (e.g. abort a fetch);
+    // not serialized (the algorithms are lambdas), created on demand
+    private transient List<Runnable> abortAlgorithms_;
     // the signals created by any() that depend on this signal
     private final List<AbortSignal> dependentSignals_ = new ArrayList<>();
     // true for signals created by any(); their sources are never dependent signals
@@ -271,6 +272,9 @@ public class AbortSignal extends EventTarget {
      * @param algorithm the algorithm
      */
     public void addAbortAlgorithm(final Runnable algorithm) {
+        if (abortAlgorithms_ == null) {
+            abortAlgorithms_ = new ArrayList<>();
+        }
         abortAlgorithms_.add(algorithm);
     }
 
@@ -280,7 +284,9 @@ public class AbortSignal extends EventTarget {
      * @param algorithm the algorithm
      */
     public void removeAbortAlgorithm(final Runnable algorithm) {
-        abortAlgorithms_.remove(algorithm);
+        if (abortAlgorithms_ != null) {
+            abortAlgorithms_.remove(algorithm);
+        }
     }
 
     /**
@@ -317,10 +323,12 @@ public class AbortSignal extends EventTarget {
     }
 
     private void runAbortSteps() {
-        final List<Runnable> algorithms = new ArrayList<>(abortAlgorithms_);
-        abortAlgorithms_.clear();
-        for (final Runnable algorithm : algorithms) {
-            algorithm.run();
+        if (abortAlgorithms_ != null) {
+            final List<Runnable> algorithms = abortAlgorithms_;
+            abortAlgorithms_ = null;
+            for (final Runnable algorithm : algorithms) {
+                algorithm.run();
+            }
         }
 
         final Event event = new Event(this, Event.TYPE_ABORT);
