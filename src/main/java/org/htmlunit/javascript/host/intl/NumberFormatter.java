@@ -293,7 +293,6 @@ final class NumberFormatter {
      *        {@code null} for a single number
      */
     record Part(String type, String value, String source) {
-
         Part(final String partType, final String partValue) {
             this(partType, partValue, null);
         }
@@ -310,7 +309,6 @@ final class NumberFormatter {
      * @param negative whether the value is negative (including -0)
      */
     record Value(Number number, boolean negative) {
-
         boolean isNaN() {
             return number instanceof Double d && d.isNaN();
         }

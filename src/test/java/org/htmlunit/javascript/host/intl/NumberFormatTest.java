@@ -4032,11 +4032,7 @@ public class NumberFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            CHROME = "literal:(|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50|literal:)",
-            EDGE = "literal:(|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50|literal:)",
-            FF = "literal:(|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50|literal:)",
-            FF_ESR = "literal:(|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50|literal:)")
+    @Alerts("literal:(|currency:$|integer:1|group:,|integer:234|decimal:.|fraction:50|literal:)")
     public void formatToPartsCurrencyAccounting() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
