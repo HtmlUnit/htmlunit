@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="update" dev="rbri">
+                htmlunit-csp: INCOMPATIBLE CHANGE: the sandbox directive no longer makes allowsExternalScript(),
+                allowsInlineScript(), allowsScriptAsAttribute() and allowsFormAction() return false; the user agent
+                has to apply the sandbox flags itself (Policy.sandbox() still returns the tokens).
+            </action>
+            <action type="add" dev="rbri">
+                htmlunit-csp: New Policy/PolicyList.allowsFormAction(to, origin, redirected) checks a single request
+                of a form submission; the path of form-action sources is not compared for redirect targets.
+            </action>
             <action type="fix" dev="rbri">
                 csp: like the browsers, the path part of the source expressions is ignored for the redirect targets
                 of scripts, stylesheets, images and connections (XMLHttpRequest, fetch).
