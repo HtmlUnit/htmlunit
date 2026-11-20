@@ -14,6 +14,8 @@
  */
 package org.htmlunit;
 
+import java.io.Serializable;
+
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 
@@ -25,7 +27,7 @@ import org.htmlunit.html.HtmlPage;
  * @author Ronald Brill
  */
 @FunctionalInterface
-public interface ScriptPreProcessor {
+public interface ScriptPreProcessor extends Serializable {
 
     /**
      * Pre process the specified source code in the context of the given page.

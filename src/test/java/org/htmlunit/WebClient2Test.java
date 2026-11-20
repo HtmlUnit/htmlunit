@@ -34,6 +34,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.http.Cookie;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -84,6 +85,28 @@ public class WebClient2Test extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final WebClient copy = clone(client);
         assertNotNull(copy);
+    }
+
+    /**
+     * Verifies that the script pre processor, the html parser listener and the
+     * frame content handler survive the serialization.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_handlers() throws Exception {
+        try (WebClient client = getWebClient()) {
+            client.setScriptPreProcessor(
+                    (page, sourceCode, sourceName, lineNumber, htmlElement) -> "pre " + sourceCode);
+            client.setHTMLParserListener(HTMLParserListener.LOG_REPORTER);
+            client.setFrameContentHandler(element -> false);
+
+            try (WebClient copy = clone(client)) {
+                assertEquals("pre code",
+                        copy.getScriptPreProcessor().preProcess(null, "code", "name", 1, null));
+                assertNotNull(copy.getHTMLParserListener());
+                assertFalse(copy.getFrameContentHandler().loadFrameDocument(null));
+            }
+        }
     }
 
     /**
