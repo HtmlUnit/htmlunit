@@ -9,6 +9,14 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                csp: data: urls of external scripts and stylesheets are matched by scheme sources (e.g. data:)
+                like in the browsers (they were always blocked); like the browsers, only the scheme is reported
+                as blocked uri for such urls.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: when simulating Chrome/Edge, leading and trailing whitespace of the nonce attribute is ignored.
+            </action>
+            <action type="fix" dev="rbri">
                 HtmlRangeInput: no floating point artifacts (e.g. 0.30000000000000004) for fractional steps,
                 correct rounding to the step and the value is never greater than max.
             </action>

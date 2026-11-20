@@ -17,6 +17,7 @@ package org.htmlunit.html.csp;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.CSP_META_SINGLE_POLICY;
 import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_HIDING_ENFORCED_ONLY;
+import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_TRIMMED;
 import static org.htmlunit.BrowserVersionFeatures.CSP_REPORT_FIREFOX_FORMAT;
 import static org.htmlunit.BrowserVersionFeatures.CSP_UPGRADE_INSECURE_REQUESTS_MATCHES_HTTPS;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
@@ -35,6 +36,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
+import org.htmlunit.SgmlPage;
 import org.htmlunit.TopLevelWindow;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
@@ -272,10 +274,10 @@ public final class ContentSecurityPolicy implements Serializable {
         final String integrityAttrib = element.getAttributeDirect("integrity");
         final Optional<String> integrity = ATTRIBUTE_NOT_DEFINED == integrityAttrib
                 ? Optional.empty() : Optional.of(integrityAttrib);
-        final Optional<URI> scriptUrl = URI.parseURI(matchingUrl(page, url).toExternalForm());
+        final Optional<URLWithScheme> scriptUrl = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<Boolean> parserInserted = Optional.of(isParserInserted(element));
         final Optional<URI> origin = origin(page);
-        final Violation violation = new Violation(FetchDirectiveKind.ScriptSrcElem, withoutRef(reportedUrl), null,
+        final Violation violation = new Violation(FetchDirectiveKind.ScriptSrcElem, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
         return csp.check(page, violation,
                 policy -> policy.allowsExternalScript(nonce, integrity, scriptUrl, parserInserted, origin));
@@ -428,9 +430,9 @@ public final class ContentSecurityPolicy implements Serializable {
         }
 
         final Optional<String> nonce = element == null ? Optional.empty() : nonce(element);
-        final Optional<URI> styleUrl = URI.parseURI(matchingUrl(page, url).toExternalForm());
+        final Optional<URLWithScheme> styleUrl = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
-        final Violation violation = new Violation(FetchDirectiveKind.StyleSrcElem, withoutRef(reportedUrl), null,
+        final Violation violation = new Violation(FetchDirectiveKind.StyleSrcElem, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
         final boolean allowed = csp.check(page, violation,
                 policy -> policy.allowsExternalStyle(nonce, styleUrl, origin));
@@ -1136,7 +1138,11 @@ public final class ContentSecurityPolicy implements Serializable {
      * empty if the element has no nonce or is not nonceable.
      */
     private static Optional<String> nonce(final DomElement element) {
-        final String nonce = element.getNonce();
+        String nonce = element.getNonce();
+        final SgmlPage page = element.getPage();
+        if (page != null && page.getWebClient().getBrowserVersion().hasFeature(CSP_NONCE_TRIMMED)) {
+            nonce = nonce.trim();
+        }
         if (nonce.isEmpty() || !isNonceable(element)) {
             return Optional.empty();
         }

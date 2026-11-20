@@ -52,6 +52,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     CSP_NONCE_HIDING_ENFORCED_ONLY,
 
+    /**
+     * Leading and trailing whitespace of the nonce of an element is ignored when matching
+     * the nonce source expressions of the Content-Security-Policy.
+     */
+    @BrowserFeature({CHROME, EDGE})
+    CSP_NONCE_TRIMMED,
+
     /** The error event is fired at an object element if the data url is blocked by the object-src directive. */
     @BrowserFeature({FF, FF_ESR})
     CSP_OBJECT_BLOCKED_FIRES_ERROR,

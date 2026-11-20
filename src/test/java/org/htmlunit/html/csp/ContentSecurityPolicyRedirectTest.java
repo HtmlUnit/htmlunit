@@ -27,6 +27,7 @@ import org.apache.commons.io.IOUtils;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
@@ -253,6 +254,120 @@ public class ContentSecurityPolicyRedirectTest extends WebDriverTestCase {
         getMockWebConnection().setThrowable(new URL("https://" + HOST1 + ":" + PORT2 + "/img.jpg"),
                 new IOException("https is not supported by the test server"));
         loadPageVerify("upgrade-insecure-requests", "addImage('redirect.jpg');\n");
+    }
+
+    /**
+     * Script redirected; the path of the source expression is ignored for the redirect target.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"script",
+             "load script",
+             "rgb(0, 0, 0)",
+             "done"})
+    @HtmlUnitNYI(CHROME = {"error script",
+                           "rgb(0, 0, 0)",
+                           "violation script-src-elem http://localhost:22223/allowed/redirect.js enforce",
+                           "done"},
+            EDGE = {"error script",
+                    "rgb(0, 0, 0)",
+                    "violation script-src-elem http://localhost:22223/allowed/redirect.js enforce",
+                    "done"},
+            FF = {"error script",
+                  "rgb(0, 0, 0)",
+                  "violation script-src-elem http://localhost:22223/allowed/redirect.js enforce",
+                  "done"},
+            FF_ESR = {"error script",
+                      "rgb(0, 0, 0)",
+                      "violation script-src-elem http://localhost:22223/allowed/redirect.js enforce",
+                      "done"})
+    public void script_pathIgnoredAfterRedirect() throws Exception {
+        expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
+        setRedirect(new URL(URL_CROSS_ORIGIN_BASE, "allowed/redirect.js"),
+                new URL(URL_CROSS_ORIGIN_BASE, "other/script.js"));
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN_BASE, "other/script.js"), "log('script');",
+                MimeType.TEXT_JAVASCRIPT);
+        loadPageVerify("script-src 'self' http://localhost:" + PORT2 + "/allowed/",
+                "addScript('" + URL_CROSS_ORIGIN_BASE + "allowed/redirect.js');\n");
+    }
+
+    /**
+     * Script not redirected; the path of the source expression does not match.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error script",
+             "rgb(0, 0, 0)",
+             "violation script-src-elem http://localhost:22223/other/script.js enforce",
+             "done"})
+    public void script_pathNotRedirected() throws Exception {
+        expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN_BASE, "other/script.js"), "log('script');",
+                MimeType.TEXT_JAVASCRIPT);
+        loadPageVerify("script-src 'self' http://localhost:" + PORT2 + "/allowed/",
+                "addScript('" + URL_CROSS_ORIGIN_BASE + "other/script.js');\n");
+    }
+
+    /**
+     * Script redirected to an other origin; the origin of the redirect target is still checked.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error script",
+             "rgb(0, 0, 0)",
+             "violation script-src-elem http://localhost:22223/allowed/redirect.js enforce",
+             "done"})
+    public void script_pathIgnoredAfterRedirectOtherOrigin() throws Exception {
+        expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
+        setRedirect(new URL(URL_CROSS_ORIGIN_BASE, "allowed/redirect.js"),
+                new URL(URL_CROSS_ORIGIN2, "allowed/script.js"));
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN2, "allowed/script.js"), "log('script');",
+                MimeType.TEXT_JAVASCRIPT);
+        loadPageVerify("script-src 'self' http://localhost:" + PORT2 + "/allowed/",
+                "addScript('" + URL_CROSS_ORIGIN_BASE + "allowed/redirect.js');\n");
+    }
+
+    /**
+     * Image redirected; the path of the source expression is ignored for the redirect target.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"load img",
+             "rgb(0, 0, 0)",
+             "done"})
+    @HtmlUnitNYI(CHROME = {"error img",
+                           "rgb(0, 0, 0)",
+                           "violation img-src http://localhost:22223/allowed/redirect.jpg enforce",
+                           "done"},
+            EDGE = {"error img",
+                    "rgb(0, 0, 0)",
+                    "violation img-src http://localhost:22223/allowed/redirect.jpg enforce",
+                    "done"},
+            FF = {"error img",
+                  "rgb(0, 0, 0)",
+                  "violation img-src http://localhost:22223/allowed/redirect.jpg enforce",
+                  "done"},
+            FF_ESR = {"error img",
+                      "rgb(0, 0, 0)",
+                      "violation img-src http://localhost:22223/allowed/redirect.jpg enforce",
+                      "done"})
+    public void image_pathIgnoredAfterRedirect() throws Exception {
+        expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
+        setRedirect(new URL(URL_CROSS_ORIGIN_BASE, "allowed/redirect.jpg"),
+                new URL(URL_CROSS_ORIGIN_BASE, "other/img.jpg"));
+        setImage(new URL(URL_CROSS_ORIGIN_BASE, "other/img.jpg"));
+        loadPageVerify("img-src 'self' http://localhost:" + PORT2 + "/allowed/",
+                "addImage('" + URL_CROSS_ORIGIN_BASE + "allowed/redirect.jpg');\n");
+    }
+
+    private void setRedirect(final URL url, final URL target) {
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", target.toExternalForm()));
+        getMockWebConnection().setResponse(url, "", 302, "Found", MimeType.TEXT_PLAIN, headers);
     }
 
     private void setRedirect(final String path, final URL target) throws Exception {
