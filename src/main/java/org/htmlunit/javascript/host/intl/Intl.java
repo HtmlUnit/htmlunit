@@ -389,10 +389,77 @@ public class Intl extends HtmlUnitScriptable {
                 return "true".equals(value) || "false".equals(value);
             case "hc":
                 return "h11".equals(value) || "h12".equals(value) || "h23".equals(value) || "h24".equals(value);
+            case "nu":
+                return getZeroDigit(value) != 0;
             default:
                 // e.g. 'ca' and 'nu'
                 return !value.isEmpty();
         }
+    }
+
+    /**
+     * Returns the zero digit of the given numbering system.
+     *
+     * @param numberingSystem the numbering system (e.g. 'latn' or 'arab')
+     * @return the zero digit or {@code 0} if the numbering system is not supported
+     */
+    static char getZeroDigit(final String numberingSystem) {
+        switch (numberingSystem) {
+            case "latn":
+                return '0';
+            case "arab":
+                return '\u0660';
+            case "arabext":
+                return '\u06f0';
+            case "beng":
+                return '\u09e6';
+            case "deva":
+                return '\u0966';
+            case "fullwide":
+                return '\uff10';
+            case "gujr":
+                return '\u0ae6';
+            case "guru":
+                return '\u0a66';
+            case "khmr":
+                return '\u17e0';
+            case "knda":
+                return '\u0ce6';
+            case "laoo":
+                return '\u0ed0';
+            case "mlym":
+                return '\u0d66';
+            case "mymr":
+                return '\u1040';
+            case "orya":
+                return '\u0b66';
+            case "tamldec":
+                return '\u0be6';
+            case "telu":
+                return '\u0c66';
+            case "thai":
+                return '\u0e50';
+            case "tibt":
+                return '\u0f20';
+            default:
+                return 0;
+        }
+    }
+
+    /**
+     * Returns the numbering system of the given zero digit.
+     *
+     * @param zeroDigit the zero digit
+     * @return the numbering system; 'latn' for unknown zero digits
+     */
+    static String getNumberingSystem(final char zeroDigit) {
+        for (final String numberingSystem : new String[] {"arab", "arabext", "beng", "deva", "fullwide", "gujr",
+            "guru", "khmr", "knda", "laoo", "mlym", "mymr", "orya", "tamldec", "telu", "thai", "tibt"}) {
+            if (getZeroDigit(numberingSystem) == zeroDigit) {
+                return numberingSystem;
+            }
+        }
+        return "latn";
     }
 
     /**
@@ -488,7 +555,14 @@ public class Intl extends HtmlUnitScriptable {
         return JavaScriptEngine.toBoolean(value);
     }
 
-    private static Object getOptionValue(final Scriptable options, final String property) {
+    /**
+     * Returns the value of an option.
+     *
+     * @param options the options object; may be {@code null}
+     * @param property the name of the option
+     * @return the value or {@code undefined}
+     */
+    static Object getOptionValue(final Scriptable options, final String property) {
         if (options == null) {
             return JavaScriptEngine.UNDEFINED;
         }

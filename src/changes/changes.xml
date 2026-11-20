@@ -9,6 +9,12 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="add" dev="rbri">
+                Intl.NumberFormat: support of the options (style percent, currency and unit, currencyDisplay,
+                currencySign, notation scientific, engineering and compact, the digit and rounding options,
+                useGrouping, signDisplay and numberingSystem); format is a bound getter like in the browsers,
+                resolvedOptions() provides all values. The unit names are English only.
+            </action>
+            <action type="add" dev="rbri">
                 Intl.Collator: support of the options usage, sensitivity, ignorePunctuation, numeric, caseFirst
                 and collation (and the unicode extensions co, kf and kn of the locale); the collations
                 German phonebook (phonebk) and traditional Spanish (trad) are supported.
