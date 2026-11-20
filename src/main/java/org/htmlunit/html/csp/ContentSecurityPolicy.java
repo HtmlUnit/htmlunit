@@ -807,8 +807,9 @@ public final class ContentSecurityPolicy implements Serializable {
         final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FORM_ACTION, blockedUri(reportedUrl), null, null, "", 0, 0);
+        final boolean redirected = isRedirect(url, reportedUrl);
         final boolean allowed = csp.check(page, violation,
-                policy -> policy.allowsFormAction(target, Optional.of(false), Optional.empty(), origin));
+                policy -> policy.allowsFormAction(target, origin, redirected));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }

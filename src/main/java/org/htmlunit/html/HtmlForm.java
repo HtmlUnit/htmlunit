@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.CSP_FORM_ACTION_REDIRECTS_NOT_CHECKED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_IGNORE_REL_NOREFERRER;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 
@@ -213,10 +214,13 @@ public class HtmlForm extends HtmlElement {
         if (!ContentSecurityPolicy.allowsFormAction(htmlPage, url, url)) {
             return;
         }
-        // like Chrome, redirects are checked (and upgraded) also; the url of the form submission is reported
+        // redirects are upgraded also; Chrome checks the redirects (the url of the form submission
+        // is reported), Firefox does not
         ContentSecurityPolicy.upgradeInsecureRedirects(htmlPage, request);
-        request.setRedirectFilter(
-                redirectUrl -> ContentSecurityPolicy.allowsFormAction(htmlPage, redirectUrl, url));
+        if (!htmlPage.getWebClient().getBrowserVersion().hasFeature(CSP_FORM_ACTION_REDIRECTS_NOT_CHECKED)) {
+            request.setRedirectFilter(
+                    redirectUrl -> ContentSecurityPolicy.allowsFormAction(htmlPage, redirectUrl, url));
+        }
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();

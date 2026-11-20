@@ -26,7 +26,6 @@ import java.util.List;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
@@ -735,20 +734,36 @@ public class ContentSecurityPolicyScriptTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("inline")
-    @HtmlUnitNYI(CHROME = {"violation script-src-elem http://localhost:22222/harness.js",
-                           "inline",
-                           "violation script-src-elem inline"},
-            EDGE = {"violation script-src-elem http://localhost:22222/harness.js",
-                    "inline",
-                    "violation script-src-elem inline"},
-            FF = {"violation script-src-elem http://localhost:22222/harness.js",
-                  "inline",
-                  "violation script-src-elem inline"},
-            FF_ESR = {"violation script-src-elem http://localhost:22222/harness.js",
-                      "inline",
-                      "violation script-src-elem inline"})
     public void headerSandboxReportOnly() throws Exception {
         loadPageVerify(HEADER_REPORT_ONLY, "sandbox", "", INLINE_SCRIPT);
+    }
+
+    /**
+     * The sandbox directive (header) without allow-scripts; event handlers are not executed
+     * and no violation is reported.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("initial")
+    public void headerSandboxEventHandler() throws Exception {
+        final WebDriver driver = loadPage("sandbox", "",
+                "<div id='d'>initial</div>\n"
+                + "<button id='btn' onclick=\"document.getElementById('d').textContent = 'clicked';\">"
+                + "click</button>\n");
+        driver.findElement(By.id("btn")).click();
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("d")).getText());
+    }
+
+    /**
+     * The sandbox directive (header) with allow-scripts and a script-src directive in the same policy.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("violation script-src-elem inline")
+    public void headerSandboxAllowScriptsInlineBlocked() throws Exception {
+        loadPageVerify("sandbox allow-scripts; script-src 'self'", "", INLINE_SCRIPT);
     }
 
     /**

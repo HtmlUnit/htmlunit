@@ -39,6 +39,13 @@ public enum BrowserVersionFeatures {
     ANCHOR_SEND_PING_REQUEST,
 
     /**
+     * The form-action directive of the Content-Security-Policy is not checked for the
+     * redirects of a form submission.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    CSP_FORM_ACTION_REDIRECTS_NOT_CHECKED,
+
+    /**
      * The content of a Content-Security-Policy meta element is parsed as one policy
      * (commas are not splitting the content into several policies).
      */
