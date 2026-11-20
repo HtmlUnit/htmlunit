@@ -73,7 +73,7 @@ public class ContentSecurityPolicyReportsOptionTest extends SimpleWebTestCase {
     @Test
     public void reportsDisabled() throws Exception {
         final CollectingContentSecurityPolicyViolationListener listener = setListener();
-        getWebClient().getOptions().setContentSecurityPolicyReportsEnabled(false);
+        getWebClientWithMockWebConnection().getOptions().setContentSecurityPolicyReportsEnabled(false);
 
         final HtmlPage page = loadPageWithPolicy(HttpHeader.CONTENT_SECURIRY_POLICY,
                 "script-src 'self'; report-uri /csp-report", INLINE_SCRIPT);
@@ -88,7 +88,7 @@ public class ContentSecurityPolicyReportsOptionTest extends SimpleWebTestCase {
     @Test
     public void reportsDisabledReportOnly() throws Exception {
         final CollectingContentSecurityPolicyViolationListener listener = setListener();
-        getWebClient().getOptions().setContentSecurityPolicyReportsEnabled(false);
+        getWebClientWithMockWebConnection().getOptions().setContentSecurityPolicyReportsEnabled(false);
 
         final HtmlPage page = loadPageWithPolicy(HEADER_REPORT_ONLY,
                 "script-src 'self'; report-uri /csp-report", INLINE_SCRIPT);
@@ -101,7 +101,7 @@ public class ContentSecurityPolicyReportsOptionTest extends SimpleWebTestCase {
     private CollectingContentSecurityPolicyViolationListener setListener() {
         final CollectingContentSecurityPolicyViolationListener listener =
                 new CollectingContentSecurityPolicyViolationListener();
-        getWebClient().setContentSecurityPolicyViolationListener(listener);
+        getWebClientWithMockWebConnection().setContentSecurityPolicyViolationListener(listener);
         return listener;
     }
 
