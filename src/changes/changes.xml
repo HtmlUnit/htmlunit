@@ -9,6 +9,9 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                HtmlRangeInput: values outside of the int range are no longer truncated.
+            </action>
+            <action type="fix" dev="rbri">
                 A page with a NodeIterator or a TreeWalker using a javascript filter can be serialized.
             </action>
             <action type="update" dev="rbri">

@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -148,35 +149,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
     }
 
     private void setValue(final double newValue) {
-        double value = newValue;
-
-        final double min = getMinNumeric();
-        final double max = getMaxNumeric();
-
-        if (value > max) {
-            value = max;
-        }
-        else {
-            if (value < min) {
-                value = min;
-            }
-        }
-
-        final double step = getStepNumeric();
-        value = value - min;
-        int fact = (int) (value / step);
-        final double rest = value % step;
-        if (rest >= step / 2) {
-            fact++;
-        }
-        value = min + step * fact;
-
-        if (!Double.isInfinite(value) && (value == Math.floor(value))) {
-            super.setValue(Integer.toString((int) value));
-        }
-        else {
-            super.setValue(Double.toString(value));
-        }
+        super.setValue(toValueString(newValue));
     }
 
     @Override
@@ -203,6 +176,17 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
     }
 
     private void setRawValue(final double newValue) {
+        setRawValue(toValueString(newValue));
+    }
+
+    /**
+     * Clamps the given value to min/max, aligns it to the step and converts it into the string
+     * representation used as value.
+     *
+     * @param newValue the value
+     * @return the value string
+     */
+    private String toValueString(final double newValue) {
         double value = newValue;
 
         final double min = getMinNumeric();
@@ -219,19 +203,31 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
 
         final double step = getStepNumeric();
         value = value - min;
-        int fact = (int) (value / step);
+        long fact = (long) (value / step);
         final double rest = value % step;
         if (rest >= step / 2) {
             fact++;
         }
         value = min + step * fact;
 
-        if (!Double.isInfinite(value) && value == Math.floor(value)) {
-            setRawValue(Integer.toString((int) value));
+        return format(value);
+    }
+
+    /**
+     * Formats the given number; integral values are formatted without fraction digits
+     * (also outside of the int range).
+     *
+     * @param value the number
+     * @return the string representation
+     */
+    private static String format(final double value) {
+        if (Double.isFinite(value)) {
+            final BigDecimal decimal = BigDecimal.valueOf(value).stripTrailingZeros();
+            if (decimal.scale() <= 0) {
+                return decimal.toPlainString();
+            }
         }
-        else {
-            setRawValue(Double.toString(value));
-        }
+        return Double.toString(value);
     }
 
     /**
