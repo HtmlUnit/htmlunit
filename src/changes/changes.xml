@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="Vidya m">
+                A response that exceeds the max in memory size is stored in a temporary file that is only
+                readable by the owner; so far the file was created in the shared temp directory with the
+                default permissions (world readable on Posix systems). The same for the report folder of
+                the DebuggingWebConnection.
+            </action>
             <action type="fix" dev="rbri">
                 csp: when simulating Chrome/Edge, the securitypolicyviolation event for an XMLHttpRequest blocked
                 because of the redirect target is fired after the error event (like Chrome).

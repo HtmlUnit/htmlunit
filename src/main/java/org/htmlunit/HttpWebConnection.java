@@ -30,6 +30,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -783,10 +784,14 @@ public class HttpWebConnection implements WebConnection {
                 while ((nbRead = is.read(buffer)) != -1) {
                     bos.write(buffer, 0, nbRead);
                     if (maxInMemory > 0 && bos.size() > maxInMemory) {
-                        // we have exceeded the max for memory, let's write everything to a temporary file
-                        final File file = File.createTempFile("htmlunit", ".tmp", tempFileDirectory);
+                        // we have exceeded the max for memory, let's write everything to a temporary file;
+                        // Files.createTempFile() restricts the access to the owner of the file
+                        final Path path = tempFileDirectory == null
+                                ? Files.createTempFile("htmlunit", ".tmp")
+                                : Files.createTempFile(tempFileDirectory.toPath(), "htmlunit", ".tmp");
+                        final File file = path.toFile();
                         file.deleteOnExit();
-                        try (OutputStream fos = Files.newOutputStream(file.toPath())) {
+                        try (OutputStream fos = Files.newOutputStream(path)) {
                             bos.writeTo(fos); // what we have already read
                             IOUtils.copyLarge(is, fos); // what remains from the server response
                         }
