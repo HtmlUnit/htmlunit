@@ -17,11 +17,9 @@ package org.htmlunit.javascript.host.intl;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxSymbolConstant;
@@ -53,22 +51,10 @@ public class Collator extends HtmlUnitScriptable {
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
-        final String[] locales;
-        if (args.length == 0) {
-            locales = new String[] {""};
-        }
-        else {
-            if (args[0] instanceof NativeArray array) {
-                locales = new String[(int) array.getLength()];
-                for (int i = 0; i < locales.length; i++) {
-                    locales[i] = JavaScriptEngine.toString(array.get(i));
-                }
-            }
-            else {
-                locales = new String[] {JavaScriptEngine.toString(args[0])};
-            }
-        }
-        final Collator format = new Collator(/*locales, window.getBrowserVersion()*/);
+        // the locales are validated but not used so far
+        Intl.canonicalizeLocaleList(cx, Intl.firstArgument(args));
+
+        final Collator format = new Collator();
         format.setParentScope(scope);
         format.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return format;

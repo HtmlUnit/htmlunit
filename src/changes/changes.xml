@@ -8,6 +8,17 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Intl.DateTimeFormat and Intl.NumberFormat: if more than one locale is requested, the first
+                supported one is used (and not the last one with a known format); unsupported locales
+                (e.g. 'ban') are skipped like in the browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                Intl: the locales argument of Intl.Collator, Intl.DateTimeFormat, Intl.NumberFormat,
+                Intl.v8BreakIterator and of the supportedLocalesOf() functions is processed like
+                Intl.getCanonicalLocales() does it (canonicalized language tags, array like objects,
+                Intl.Locale objects, TypeError/RangeError for invalid arguments).
+            </action>
             <action type="add" dev="rbri">
                 fetch() is available in dedicated workers; relative urls are resolved against the url of the
                 worker script. The iterators of Headers, URLSearchParams and FormData are available in workers too.

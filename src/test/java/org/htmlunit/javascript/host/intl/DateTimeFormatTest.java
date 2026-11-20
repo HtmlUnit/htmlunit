@@ -458,4 +458,438 @@ public class DateTimeFormatTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void ctorLocalesNoArgument() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat().resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void ctorLocalesUndefined() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(undefined).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void ctorLocalesNull() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat(null).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void ctorLocalesEmptyString() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat('').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void ctorLocalesMixedCase() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat('EN-us').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("zh-Hant-TW")
+    public void ctorLocalesScript() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('zh-hant-tw').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void ctorLocalesInvalidTag() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('en-US!@#').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void ctorLocalesPrivateUse() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('x-private').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void ctorLocalesInvalidVariant() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('no-NO-NY').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void ctorLocalesNumber() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat(42).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void ctorLocalesBoolean() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat(true).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void ctorLocalesSymbol() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(Symbol('de')).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void ctorLocalesEmptyObject() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat({}).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de")
+    public void ctorLocalesArrayLike() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat({ length: 2, 0: 'de', 1: 'ja' }).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void ctorLocalesStringObject() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(new String('de')).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de")
+    public void ctorLocalesArrayDuplicates() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(['de', 'DE', 'ja']).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void ctorLocalesArrayNumber() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(['de', 42]).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void ctorLocalesArrayNull() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(['de', null]).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void ctorLocalesArrayUndefined() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(['de', undefined]).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void ctorLocalesArrayInvalidTag() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(['de', 'en-US!@#']).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ja")
+    public void ctorLocalesArrayLocale() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat([new Intl.Locale('ja')]).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ja")
+    public void ctorLocalesLocale() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(new Intl.Locale('ja')).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void ctorLocalesEmptyArray() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat([]).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void supportedLocalesOfNoArgument() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf()"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void supportedLocalesOfUndefined() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf(undefined)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void supportedLocalesOfNull() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf(null)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void supportedLocalesOfEmptyString() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf('')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void supportedLocalesOfMixedCase() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf('EN-us')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("zh-Hant-TW")
+    public void supportedLocalesOfScript() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf('zh-hant-tw')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void supportedLocalesOfInvalidTag() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf('en-US!@#')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void supportedLocalesOfPrivateUse() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf('x-private')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void supportedLocalesOfInvalidVariant() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf('no-NO-NY')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void supportedLocalesOfNumber() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf(42)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void supportedLocalesOfBoolean() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf(true)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void supportedLocalesOfSymbol() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf(Symbol('de'))"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void supportedLocalesOfEmptyObject() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf({})"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de,ja")
+    public void supportedLocalesOfArrayLike() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "Intl.DateTimeFormat.supportedLocalesOf({ length: 2, 0: 'de', 1: 'ja' })"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void supportedLocalesOfStringObject() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf(new String('de'))"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de,ja")
+    public void supportedLocalesOfArrayDuplicates() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "Intl.DateTimeFormat.supportedLocalesOf(['de', 'DE', 'ja'])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void supportedLocalesOfArrayNumber() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf(['de', 42])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void supportedLocalesOfArrayNull() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf(['de', null])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void supportedLocalesOfArrayUndefined() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf(['de', undefined])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void supportedLocalesOfArrayInvalidTag() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "Intl.DateTimeFormat.supportedLocalesOf(['de', 'en-US!@#'])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ja")
+    public void supportedLocalesOfArrayLocale() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "Intl.DateTimeFormat.supportedLocalesOf([new Intl.Locale('ja')])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ja")
+    public void supportedLocalesOfLocale() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "Intl.DateTimeFormat.supportedLocalesOf(new Intl.Locale('ja'))"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void supportedLocalesOfEmptyArray() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf([])"));
+    }
 }

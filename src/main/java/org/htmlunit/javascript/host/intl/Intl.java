@@ -29,9 +29,9 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Symbol;
 import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
@@ -137,81 +137,147 @@ public class Intl extends HtmlUnitScriptable {
     @JsxStaticFunction
     public static Object getCanonicalLocales(final Context cx, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function funObj) {
-        if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {
-            return cx.newArray(ScriptableObject.getTopLevelScope(scope), new Object[0]);
-        }
-
-        final Object localesArgument = args[0];
-        if (localesArgument == null) {
-            throw JavaScriptEngine.typeError("Cannot convert null to object");
-        }
-
-        final List<String> languageTags = new ArrayList<>();
-        if (localesArgument instanceof String s) {
-            languageTags.add(s);
-        }
-        else if (localesArgument instanceof Scriptable scriptable) {
-            if (JavaScriptEngine.isArrayLike(scriptable)) {
-                JavaScriptEngine.iterateArrayLike(cx, scriptable, elem -> {
-                    if (elem instanceof String s) {
-                        languageTags.add(s);
-                    }
-                    else if (elem instanceof ScriptableObject) {
-                        languageTags.add(JavaScriptEngine.toString(elem));
-                    }
-                    else {
-                        throw JavaScriptEngine.typeError("Invalid element in locales argument");
-                    }
-                });
-            }
-            else {
-                languageTags.add(JavaScriptEngine.toString(localesArgument));
-            }
-        }
-
-        final Set<String> canonicalLocales = new LinkedHashSet<>(languageTags.size());
-        for (final String tag : languageTags) {
-            try {
-                canonicalLocales.add(
-                        new java.util.Locale.Builder().setLanguageTag(tag).build().toLanguageTag());
-            }
-            catch (final IllformedLocaleException e) {
-                throw JavaScriptEngine.rangeError("Invalid language tag: '" + tag + "'");
-            }
-        }
-
-        return cx.newArray(ScriptableObject.getTopLevelScope(scope), canonicalLocales.toArray());
+        final List<String> locales = canonicalizeLocaleList(cx, firstArgument(args));
+        return cx.newArray(ScriptableObject.getTopLevelScope(scope), locales.toArray());
     }
 
     /**
-     * Shared utility for {@code supportedLocalesOf} implementations.
-     * @param localesArgument the locales argument
-     * @return a Scriptable array of supported locale strings
+     * Converts the locales argument of the Intl constructors and functions into a list of
+     * canonicalized language tags without duplicates.
+     * <p>
+     * A string or an {@code Intl.Locale} is a list with one entry. Any other object is processed
+     * like an array; every element has to be a string or an object (converted to a string),
+     * otherwise a {@code TypeError} is thrown. All other primitives (number, boolean, symbol)
+     * result in an empty list.
+     * </p>
+     *
+     * @param cx the current context
+     * @param locales the locales argument
+     * @return the canonicalized language tags; empty if the locales argument is {@code undefined}
+     * @throws org.htmlunit.corejs.javascript.EcmaError a {@code TypeError} if the locales argument
+     *         is {@code null} or contains an invalid element, a {@code RangeError} if one of the language
+     *         tags is not valid
+     * @see <a href="https://tc39.es/ecma402/#sec-canonicalizelocalelist">spec</a>
      */
-    static Scriptable supportedLocalesOf(final Scriptable localesArgument) {
-        final String[] locales;
-        if (localesArgument instanceof NativeArray array) {
-            locales = new String[(int) array.getLength()];
-            for (int i = 0; i < locales.length; i++) {
-                locales[i] = JavaScriptEngine.toString(array.get(i));
-            }
+    static List<String> canonicalizeLocaleList(final Context cx, final Object locales) {
+        final Set<String> languageTags = new LinkedHashSet<>();
+        if (JavaScriptEngine.isUndefined(locales)) {
+            return new ArrayList<>(languageTags);
         }
-        else {
-            locales = new String[] {JavaScriptEngine.toString(localesArgument)};
+        if (locales == null) {
+            throw JavaScriptEngine.typeError("Cannot convert null to object");
         }
 
-        final List<String> supportedLocales = new ArrayList<>();
-        for (final String locale : locales) {
-            if (locale.isEmpty()) {
-                throw JavaScriptEngine.rangeError("Invalid language tag: '" + locale + "'");
+        if (locales instanceof CharSequence || locales instanceof Locale) {
+            languageTags.add(canonicalizeLanguageTag(toLanguageTag(locales)));
+        }
+        else if (locales instanceof Scriptable scriptable && !(locales instanceof Symbol)) {
+            final int length = JavaScriptEngine.toArrayLength(JavaScriptEngine.lengthOfArrayLike(cx, scriptable));
+            for (int i = 0; i < length; i++) {
+                final Object element = ScriptableObject.getProperty(scriptable, i);
+                if (element == Scriptable.NOT_FOUND) {
+                    continue;
+                }
+                if (!(element instanceof CharSequence)
+                        && (!(element instanceof Scriptable) || element instanceof Symbol)) {
+                    throw JavaScriptEngine.typeError("Invalid element in locales argument");
+                }
+                languageTags.add(canonicalizeLanguageTag(toLanguageTag(element)));
             }
-            final java.util.Locale l = java.util.Locale.forLanguageTag(locale);
-            if (LocaleUtils.isAvailableLocale(l)) {
+        }
+        // the remaining primitives are converted to objects without a length
+
+        return new ArrayList<>(languageTags);
+    }
+
+    /**
+     * Returns the first argument; {@code undefined} if there is none.
+     *
+     * @param args the arguments
+     * @return the first argument or {@code undefined}
+     */
+    static Object firstArgument(final Object[] args) {
+        return args.length == 0 ? JavaScriptEngine.UNDEFINED : args[0];
+    }
+
+    private static String toLanguageTag(final Object locale) {
+        if (locale instanceof Locale intlLocale) {
+            return intlLocale.jsToString();
+        }
+        return JavaScriptEngine.toString(locale);
+    }
+
+    private static String canonicalizeLanguageTag(final String tag) {
+        try {
+            final java.util.Locale locale = new java.util.Locale.Builder().setLanguageTag(tag).build();
+            // private use only tags (e.g. 'x-private') are not supported
+            if (!locale.getLanguage().isEmpty()) {
+                return locale.toLanguageTag();
+            }
+        }
+        catch (final IllformedLocaleException e) {
+            // handled below
+        }
+        throw JavaScriptEngine.rangeError("Invalid language tag: " + tag);
+    }
+
+    /**
+     * Shared implementation of the {@code supportedLocalesOf} functions: the canonicalized
+     * language tags of the locales argument that are available.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param args the arguments; the first one is the locales argument
+     * @return an array of the supported language tags
+     */
+    static Scriptable supportedLocalesOf(final Context cx, final VarScope scope, final Object[] args) {
+        final List<String> locales = canonicalizeLocaleList(cx, firstArgument(args));
+
+        final List<Object> supportedLocales = new ArrayList<>();
+        for (final String locale : locales) {
+            if (bestAvailableLocale(locale) != null) {
                 supportedLocales.add(locale);
             }
         }
 
-        return Context.getCurrentContext().newArray(
-                ScriptableObject.getTopLevelScope(localesArgument.getParentScope()), supportedLocales.toArray());
+        return cx.newArray(ScriptableObject.getTopLevelScope(scope), supportedLocales.toArray());
+    }
+
+    /**
+     * Returns the first of the given (canonicalized) language tags that is supported.
+     *
+     * @param locales the language tags
+     * @return the first supported language tag or {@code null} if none is supported
+     * @see <a href="https://tc39.es/ecma402/#sec-lookupmatcher">spec</a>
+     */
+    static String lookupSupportedLocale(final List<String> locales) {
+        for (final String locale : locales) {
+            if (bestAvailableLocale(locale) != null) {
+                return locale;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches the available locales for the given language tag (without extensions);
+     * if there is no match the subtags are removed from the end one by one.
+     *
+     * @param languageTag the canonicalized language tag
+     * @return the language tag of the available locale or {@code null} if there is none
+     * @see <a href="https://tc39.es/ecma402/#sec-bestavailablelocale">spec</a>
+     */
+    private static String bestAvailableLocale(final String languageTag) {
+        String candidate = java.util.Locale.forLanguageTag(languageTag).stripExtensions().toLanguageTag();
+        while (true) {
+            if (LocaleUtils.isAvailableLocale(java.util.Locale.forLanguageTag(candidate))) {
+                return candidate;
+            }
+            final int pos = candidate.lastIndexOf('-');
+            if (pos == -1) {
+                return null;
+            }
+            candidate = candidate.substring(0, pos);
+        }
     }
 }

@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.intl;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,7 +26,6 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -120,7 +120,7 @@ public class NumberFormat extends HtmlUnitScriptable {
         super();
     }
 
-    private NumberFormat(final String[] locales, final BrowserVersion browserVersion) {
+    private NumberFormat(final List<String> locales, final BrowserVersion browserVersion) {
         super();
 
         final Map<String, String> formats;
@@ -137,30 +137,22 @@ public class NumberFormat extends HtmlUnitScriptable {
             formats = FF_FORMATS_;
         }
 
+        // the first supported requested locale wins
+        final String requestedLocale = Intl.lookupSupportedLocale(locales);
         String locale = "";
         String pattern = null;
-
-        for (final String l : locales) {
-            pattern = getPattern(formats, l);
-            if (pattern != null) {
-                locale = l;
-            }
+        if (requestedLocale != null) {
+            locale = requestedLocale;
+            pattern = getPattern(formats, locale);
         }
-
         if (pattern == null) {
             pattern = formats.get("");
-            if (locales.length > 0) {
-                locale = locales[0];
-            }
         }
 
         formatter_ = new NumberFormatHelper(locale, browserVersion, pattern);
     }
 
     private static String getPattern(final Map<String, String> formats, final String locale) {
-        if ("no-NO-NY".equals(locale)) {
-            throw JavaScriptEngine.rangeError("Invalid language tag: " + locale);
-        }
         String pattern = formats.get(locale);
         if (pattern == null && locale.indexOf('-') != -1) {
             pattern = formats.get(locale.substring(0, locale.indexOf('-')));
@@ -180,21 +172,7 @@ public class NumberFormat extends HtmlUnitScriptable {
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
-        final String[] locales;
-        if (args.length == 0) {
-            locales = new String[] {""};
-        }
-        else {
-            if (args[0] instanceof NativeArray array) {
-                locales = new String[(int) array.getLength()];
-                for (int i = 0; i < locales.length; i++) {
-                    locales[i] = JavaScriptEngine.toString(array.get(i));
-                }
-            }
-            else {
-                locales = new String[] {JavaScriptEngine.toString(args[0])};
-            }
-        }
+        final List<String> locales = Intl.canonicalizeLocaleList(cx, Intl.firstArgument(args));
         final Window window = getWindow(ctorObj);
         final NumberFormat format = new NumberFormat(locales, window.getBrowserVersion());
         format.setParentScope(getTopLevelScope(scope));
@@ -226,13 +204,18 @@ public class NumberFormat extends HtmlUnitScriptable {
     /**
      * Returns an array containing those of the provided locales that are supported
      * without having to fall back to the default locale.
-     * @param localesArgument A string with a BCP 47 language tag, or an array of such strings
-     * @param options unused
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this
+     * @param args the arguments; a string with a BCP 47 language tag or an array of such strings
+     *        and the options (unused)
+     * @param funObj the function object
      * @return an array containing supported locales
      */
     @JsxStaticFunction
-    public static Scriptable supportedLocalesOf(final Scriptable localesArgument, final Scriptable options) {
-        return Intl.supportedLocalesOf(localesArgument);
+    public static Scriptable supportedLocalesOf(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        return Intl.supportedLocalesOf(cx, scope, args);
     }
 
     @Override
