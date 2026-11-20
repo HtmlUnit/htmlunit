@@ -95,6 +95,7 @@ public class Intl extends HtmlUnitScriptable {
         try {
             final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
             final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, scope);
+            makeNotEnumerable(prototype, config);
             final FunctionObject constructorFn = new FunctionObject(config.getJsConstructor().getKey(),
                     config.getJsConstructor().getValue(), scope);
 
@@ -110,6 +111,28 @@ public class Intl extends HtmlUnitScriptable {
         }
         catch (final Exception e) {
             throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+        }
+    }
+
+    /**
+     * The accessor properties and the methods of the ECMAScript built-in objects are
+     * not enumerable (unlike the attributes and operations of the Web IDL interfaces).
+     *
+     * @param prototype the prototype
+     * @param config the class configuration
+     */
+    private static void makeNotEnumerable(final ScriptableObject prototype, final ClassConfiguration config) {
+        final Map<String, ClassConfiguration.PropertyInfo> propertyMap = config.getPropertyMap();
+        if (propertyMap != null) {
+            for (final String name : propertyMap.keySet()) {
+                prototype.setAttributes(name, ScriptableObject.DONTENUM);
+            }
+        }
+        final Map<String, Method> functionMap = config.getFunctionMap();
+        if (functionMap != null) {
+            for (final String name : functionMap.keySet()) {
+                prototype.setAttributes(name, ScriptableObject.DONTENUM);
+            }
         }
     }
 
