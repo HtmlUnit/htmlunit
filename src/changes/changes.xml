@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri">
+                csp: new option WebClientOptions.setContentSecurityPolicyReportsEnabled(boolean) (default true);
+                if disabled, the violation reports are not sent to the uris of the report-uri directive.
+            </action>
             <action type="fix" dev="rbri">
                 csp: a sandbox directive delivered by a Content-Security-Policy-Report-Only header is ignored
                 (no violations are reported); the sandbox directive of an enforced policy no longer

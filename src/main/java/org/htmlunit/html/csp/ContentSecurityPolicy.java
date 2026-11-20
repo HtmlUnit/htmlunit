@@ -1012,6 +1012,9 @@ public final class ContentSecurityPolicy implements Serializable {
      */
     private static void sendReports(final HtmlPage page, final List<String> uris, final String report) {
         final WebClient webClient = page.getWebClient();
+        if (!webClient.getOptions().isContentSecurityPolicyReportsEnabled()) {
+            return;
+        }
         for (final String uri : uris) {
             try {
                 final URL url = page.getFullyQualifiedUrl(uri);
