@@ -18,11 +18,13 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.IllformedLocaleException;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.lang3.LocaleUtils;
 import org.htmlunit.BrowserVersion;
@@ -267,7 +269,7 @@ public class Intl extends HtmlUnitScriptable {
      * @return the language tag of the available locale or {@code null} if there is none
      * @see <a href="https://tc39.es/ecma402/#sec-bestavailablelocale">spec</a>
      */
-    static String bestAvailableLocale(final String languageTag) {
+    private static String bestAvailableLocale(final String languageTag) {
         String candidate = java.util.Locale.forLanguageTag(languageTag).stripExtensions().toLanguageTag();
         while (true) {
             if (LocaleUtils.isAvailableLocale(java.util.Locale.forLanguageTag(candidate))) {
@@ -278,6 +280,60 @@ public class Intl extends HtmlUnitScriptable {
                 return null;
             }
             candidate = candidate.substring(0, pos);
+        }
+    }
+
+    /**
+     * Resolves the locale of an Intl object: the available locale for the requested one
+     * plus the given (relevant) unicode extension keys of the requested locale, if their
+     * values are supported.
+     *
+     * @param requestedLocale the requested (canonicalized) language tag
+     * @param relevantExtensionKeys the unicode extension keys relevant for the Intl object
+     *        (e.g. 'co', 'kf' and 'kn' for a collator)
+     * @return the resolved language tag
+     * @see <a href="https://tc39.es/ecma402/#sec-resolvelocale">spec</a>
+     */
+    static String resolveLocale(final String requestedLocale, final String... relevantExtensionKeys) {
+        final java.util.Locale locale = java.util.Locale.forLanguageTag(requestedLocale);
+        String availableLocale = bestAvailableLocale(requestedLocale);
+        if (availableLocale == null) {
+            availableLocale = locale.stripExtensions().toLanguageTag();
+        }
+
+        // the keys are sorted like in the canonicalized tag
+        final StringBuilder extension = new StringBuilder();
+        for (final String key : new TreeSet<>(Arrays.asList(relevantExtensionKeys))) {
+            final String value = locale.getUnicodeLocaleType(key);
+            if (value != null && isSupportedExtensionValue(key, value)) {
+                extension.append('-').append(key);
+                // 'true' is the default value of a key; it is not part of the tag
+                if (!value.isEmpty() && !"true".equals(value)) {
+                    extension.append('-').append(value);
+                }
+            }
+        }
+
+        if (extension.length() == 0) {
+            return availableLocale;
+        }
+        return availableLocale + "-u" + extension;
+    }
+
+    private static boolean isSupportedExtensionValue(final String key, final String value) {
+        switch (key) {
+            case "co":
+                // 'standard' and 'search' are not allowed as collation
+                return !value.isEmpty() && !"standard".equals(value) && !"search".equals(value);
+            case "kf":
+                return "upper".equals(value) || "lower".equals(value) || "false".equals(value);
+            case "kn":
+                return value.isEmpty() || "true".equals(value) || "false".equals(value);
+            case "hc":
+                return "h11".equals(value) || "h12".equals(value) || "h23".equals(value) || "h24".equals(value);
+            default:
+                // e.g. 'ca' and 'nu'
+                return !value.isEmpty();
         }
     }
 }

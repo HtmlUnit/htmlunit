@@ -78,50 +78,8 @@ public class Collator extends HtmlUnitScriptable {
         if (requestedLocale == null) {
             requestedLocale = collator.getBrowserVersion().getBrowserLocale().toLanguageTag();
         }
-        collator.locale_ = resolveLocale(requestedLocale);
+        collator.locale_ = Intl.resolveLocale(requestedLocale, "co", "kf", "kn");
         return collator;
-    }
-
-    /**
-     * Resolves the locale of a collator: the available locale for the requested one
-     * plus the supported collation extension keys ('co', 'kf' and 'kn') of the requested locale.
-     *
-     * @param requestedLocale the requested (canonicalized) language tag
-     * @return the resolved language tag
-     * @see <a href="https://tc39.es/ecma402/#sec-resolvelocale">spec</a>
-     */
-    private static String resolveLocale(final String requestedLocale) {
-        String availableLocale = Intl.bestAvailableLocale(requestedLocale);
-        final java.util.Locale locale = java.util.Locale.forLanguageTag(requestedLocale);
-        if (availableLocale == null) {
-            availableLocale = locale.stripExtensions().toLanguageTag();
-        }
-
-        final StringBuilder extension = new StringBuilder();
-        final String collation = locale.getUnicodeLocaleType("co");
-        if (collation != null && !collation.isEmpty()
-                && !"standard".equals(collation) && !"search".equals(collation)) {
-            extension.append("-co-").append(collation);
-        }
-        final String caseFirst = locale.getUnicodeLocaleType("kf");
-        if ("upper".equals(caseFirst) || "lower".equals(caseFirst) || "false".equals(caseFirst)) {
-            extension.append("-kf-").append(caseFirst);
-        }
-        final String numeric = locale.getUnicodeLocaleType("kn");
-        if (numeric != null) {
-            // 'true' is the default value of the key; it is not part of the tag
-            if (numeric.isEmpty() || "true".equals(numeric)) {
-                extension.append("-kn");
-            }
-            else if ("false".equals(numeric)) {
-                extension.append("-kn-false");
-            }
-        }
-
-        if (extension.length() == 0) {
-            return availableLocale;
-        }
-        return availableLocale + "-u" + extension;
     }
 
     /**

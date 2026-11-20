@@ -60,6 +60,8 @@ public class NumberFormat extends HtmlUnitScriptable {
     private static final ConcurrentHashMap<String, String> FF_ESR_FORMATS_ = new ConcurrentHashMap<>();
 
     private transient NumberFormatHelper formatter_;
+    // the locale reported by resolvedOptions()
+    private String resolvedLocale_;
 
     static {
         final Map<String, String> commonFormats = new HashMap<>();
@@ -150,6 +152,11 @@ public class NumberFormat extends HtmlUnitScriptable {
         }
 
         formatter_ = new NumberFormatHelper(locale, browserVersion, pattern);
+
+        // the browser locale is the fallback
+        resolvedLocale_ = Intl.resolveLocale(
+                requestedLocale == null ? browserVersion.getBrowserLocale().toLanguageTag() : requestedLocale,
+                "nu");
     }
 
     private static String getPattern(final Map<String, String> formats, final String locale) {
@@ -198,7 +205,9 @@ public class NumberFormat extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Scriptable resolvedOptions() {
-        return JavaScriptEngine.newObject(getParentScope());
+        final Scriptable options = JavaScriptEngine.newObject(getParentScope());
+        options.put("locale", options, resolvedLocale_);
+        return options;
     }
 
     /**

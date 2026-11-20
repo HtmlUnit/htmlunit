@@ -32,13 +32,13 @@ public class NumberFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"zh-CN", "latn", "standard", "auto", "decimal", "1", "0", "3", "auto"})
-    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+    @HtmlUnitNYI(CHROME = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                            "undefined", "undefined"},
-            EDGE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+            EDGE = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                     "undefined", "undefined"},
-            FF = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+            FF = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                   "undefined", "undefined"},
-            FF_ESR = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+            FF_ESR = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                       "undefined", "undefined"})
     public void resolvedOptionsValues() throws Exception {
         final String html = DOCTYPE_HTML
@@ -554,5 +554,159 @@ public class NumberFormatTest extends WebDriverTestCase {
     @Alerts("")
     public void supportedLocalesOfEmptyArray() throws Exception {
         loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.NumberFormat.supportedLocalesOf([])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void resolvedOptionsLocaleNoArgument() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.NumberFormat().resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void resolvedOptionsLocaleMixedCase() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.NumberFormat('EN-us').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de-DE")
+    public void resolvedOptionsLocaleRegion() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.NumberFormat('de-DE').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de")
+    public void resolvedOptionsLocaleFallback() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.NumberFormat('de-XX').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("zh-Hant-TW")
+    public void resolvedOptionsLocaleScript() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat('zh-hant-tw').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void resolvedOptionsLocaleUnsupported() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.NumberFormat('ban').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de")
+    public void resolvedOptionsLocaleUnsupportedFirst() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat(['ban', 'de']).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("he")
+    public void resolvedOptionsLocaleDeprecated() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.NumberFormat('iw').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ja-JP")
+    public void resolvedOptionsLocaleCalendar() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat('ja-JP-u-ca-japanese').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en")
+    public void resolvedOptionsLocaleCalendarOther() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat('en-u-ca-buddhist').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("th-TH-u-nu-thai")
+    public void resolvedOptionsLocaleNumberingSystem() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat('th-TH-u-nu-thai').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en")
+    public void resolvedOptionsLocaleHourCycle() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat('en-u-hc-h23').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en")
+    public void resolvedOptionsLocaleHourCycleInvalid() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat('en-u-hc-h25').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de")
+    public void resolvedOptionsLocaleCollation() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat('de-u-co-phonebk').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en")
+    public void resolvedOptionsLocaleNumeric() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat('en-u-kn-true').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-u-nu-thai")
+    public void resolvedOptionsLocaleMultipleExtensions() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.NumberFormat('en-u-nu-thai-ca-buddhist-co-phonebk').resolvedOptions().locale"));
     }
 }

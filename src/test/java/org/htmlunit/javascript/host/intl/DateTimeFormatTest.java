@@ -892,4 +892,158 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     public void supportedLocalesOfEmptyArray() throws Exception {
         loadPageVerifyTitle2(IntlTest.localesArgumentHtml("Intl.DateTimeFormat.supportedLocalesOf([])"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void resolvedOptionsLocaleNoArgument() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat().resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void resolvedOptionsLocaleMixedCase() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat('EN-us').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de-DE")
+    public void resolvedOptionsLocaleRegion() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat('de-DE').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de")
+    public void resolvedOptionsLocaleFallback() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat('de-XX').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("zh-Hant-TW")
+    public void resolvedOptionsLocaleScript() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('zh-hant-tw').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void resolvedOptionsLocaleUnsupported() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat('ban').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de")
+    public void resolvedOptionsLocaleUnsupportedFirst() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat(['ban', 'de']).resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("he")
+    public void resolvedOptionsLocaleDeprecated() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml("new Intl.DateTimeFormat('iw').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ja-JP-u-ca-japanese")
+    public void resolvedOptionsLocaleCalendar() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('ja-JP-u-ca-japanese').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-u-ca-buddhist")
+    public void resolvedOptionsLocaleCalendarOther() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('en-u-ca-buddhist').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("th-TH-u-nu-thai")
+    public void resolvedOptionsLocaleNumberingSystem() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('th-TH-u-nu-thai').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-u-hc-h23")
+    public void resolvedOptionsLocaleHourCycle() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('en-u-hc-h23').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en")
+    public void resolvedOptionsLocaleHourCycleInvalid() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('en-u-hc-h25').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de")
+    public void resolvedOptionsLocaleCollation() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('de-u-co-phonebk').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en")
+    public void resolvedOptionsLocaleNumeric() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('en-u-kn-true').resolvedOptions().locale"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-u-ca-buddhist-nu-thai")
+    public void resolvedOptionsLocaleMultipleExtensions() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.DateTimeFormat('en-u-nu-thai-ca-buddhist-co-phonebk').resolvedOptions().locale"));
+    }
 }

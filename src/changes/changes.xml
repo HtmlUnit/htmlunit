@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Intl.DateTimeFormat and Intl.NumberFormat: resolvedOptions().locale is the resolved locale
+                (e.g. 'de' for 'de-XX') including the relevant unicode extensions ('ca', 'hc' and 'nu' for
+                DateTimeFormat, 'nu' for NumberFormat); NumberFormat.resolvedOptions() provides the locale.
+            </action>
             <action type="add" dev="rbri">
                 Intl.Collator: the locales argument is supported; compare (based on java.text.Collator),
                 resolvedOptions() and supportedLocalesOf() are available. The options are not supported so far.

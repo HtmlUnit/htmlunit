@@ -41,7 +41,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxStaticFunction;
 import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for Intl.DateTimeFormat.
@@ -70,6 +69,8 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     private static final ConcurrentHashMap<String, Chronology> FF_ESR_CHRONOLOGIES_ = new ConcurrentHashMap<>();
 
     private transient DateTimeFormatHelper formatter_;
+    // the locale reported by resolvedOptions()
+    private String resolvedLocale_;
 
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
@@ -221,7 +222,10 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         final Chronology chronology = getChronology(chronologies, locale);
 
+        // the formats are looked up for the requested locale (including the extensions),
+        // the resolved locale is the available one with the relevant extensions
         formatter_ = new DateTimeFormatHelper(locale, chronology, pattern);
+        resolvedLocale_ = Intl.resolveLocale(locale, "ca", "hc", "nu");
     }
 
     private static String getPattern(final Map<String, String> formats, final String locale) {
@@ -287,12 +291,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final Scriptable options = JavaScriptEngine.newObject(getParentScope());
         options.put("timeZone", options, cx.getTimeZone().getID());
 
-        if (StringUtils.isEmptyOrNull(formatter_.locale_)) {
-            options.put("locale", options, cx.getLocale().toLanguageTag());
-        }
-        else {
-            options.put("locale", options, formatter_.locale_);
-        }
+        options.put("locale", options, resolvedLocale_);
         return options;
     }
 
@@ -328,10 +327,8 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         private final DateTimeFormatter formatter_;
         private final Chronology chronology_;
-        private final String locale_;
 
         DateTimeFormatHelper(final String locale, final Chronology chronology, final String pattern) {
-            locale_ = locale;
             chronology_ = chronology;
 
             if (locale.startsWith("ar")
