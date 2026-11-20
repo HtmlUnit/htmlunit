@@ -39,6 +39,13 @@ public enum BrowserVersionFeatures {
     ANCHOR_SEND_PING_REQUEST,
 
     /**
+     * The securitypolicyviolation event for a connection (XMLHttpRequest, fetch) blocked because of
+     * a redirect target is fired after the request has failed (after the error event).
+     */
+    @BrowserFeature({CHROME, EDGE})
+    CSP_CONNECT_REDIRECT_VIOLATION_DELAYED,
+
+    /**
      * The form-action directive of the Content-Security-Policy is not checked for the
      * redirects of a form submission.
      */

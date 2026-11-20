@@ -9,6 +9,10 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                csp: when simulating Chrome/Edge, the securitypolicyviolation event for an XMLHttpRequest blocked
+                because of the redirect target is fired after the error event (like Chrome).
+            </action>
+            <action type="fix" dev="rbri">
                 SecurityPolicyViolationEvent constructor: throws a TypeError if called without type or without new;
                 when simulating Chrome/Edge the event always bubbles, is composed and is not cancelable;
                 when simulating Firefox lineNumber and columnNumber are unsigned.

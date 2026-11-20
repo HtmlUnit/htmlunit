@@ -16,6 +16,7 @@ package org.htmlunit.html.csp;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.CSP_META_SINGLE_POLICY;
+import static org.htmlunit.BrowserVersionFeatures.CSP_CONNECT_REDIRECT_VIOLATION_DELAYED;
 import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_HIDING_ENFORCED_ONLY;
 import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_TRIMMED;
 import static org.htmlunit.BrowserVersionFeatures.CSP_REPORT_FIREFOX_FORMAT;
@@ -358,7 +359,13 @@ public final class ContentSecurityPolicy implements Serializable {
         final boolean redirected = isRedirect(url, reportedUrl);
         final boolean allowed = csp.check(page, violation,
                 policy -> policy.allowsConnection(target, origin, false, redirected));
-        firePendingViolationsIfNoScriptRunning(page);
+        // Chrome reports a violation of a redirect target (checked by the network stack) after the
+        // request has failed; the violation stays pending until the error is handled
+        // (see XMLHttpRequest) or the next script has finished
+        if (!redirected
+                || !page.getWebClient().getBrowserVersion().hasFeature(CSP_CONNECT_REDIRECT_VIOLATION_DELAYED)) {
+            firePendingViolationsIfNoScriptRunning(page);
+        }
         return allowed;
     }
 
