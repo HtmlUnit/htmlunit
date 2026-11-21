@@ -9920,6 +9920,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function SpeechGrammar() { [native code] }",
+            FF = "function webkitSpeechGrammar() { [native code] }",
             FF_ESR = "ReferenceError")
     public void webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar");
@@ -9930,6 +9931,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function SpeechGrammarList() { [native code] }",
+            FF = "function webkitSpeechGrammarList() { [native code] }",
             FF_ESR = "ReferenceError")
     public void webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList");
@@ -9940,6 +9942,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function SpeechRecognition() { [native code] }",
+            FF = "function webkitSpeechRecognition() { [native code] }",
             FF_ESR = "ReferenceError")
     public void webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition");
