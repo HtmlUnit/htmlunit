@@ -420,9 +420,15 @@ public class XMLHttpRequest6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("text/plain;charset=utf-8 | text/html;charset=UTF-8 | text/html | "
-            + "text/plain;charset=US-ASCII | text/plain;charset=utf-8 | text/plain;charset=US-ASCII | "
-            + "text/plain;a=b;a=c;charset=foo | text/plain | ")
+    @Alerts(DEFAULT = "text/plain;charset=utf-8 | text/html;charset=UTF-8 | text/html | "
+                + "text/plain;charset=US-ASCII | text/plain;charset=utf-8 | text/plain;charset=US-ASCII | "
+                + "text/plain;a=b;a=c;charset=foo | text/plain | ",
+            FF = "text/plain;charset=utf-8 | text/html;charset=UTF-8 | text/html | "
+                + "text/plain;charset=US-ASCII | text/plain;charset=utf-8 | text/plain;charset=US-ASCII | "
+                + "text/plain;charset=foo;a=b | text/plain | ",
+            FF_ESR = "text/plain;charset=utf-8 | text/html;charset=UTF-8 | text/html | "
+                + "text/plain;charset=US-ASCII | text/plain;charset=utf-8 | text/plain;charset=US-ASCII | "
+                + "text/plain;charset=foo;a=b | text/plain | ")
     public void sendDataUrl_ContentType() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"

@@ -5253,7 +5253,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
                 + "currentTarget,defaultPrevented,error,eventPhase,initEvent(),isTrusted,message,NONE,preventDefault(),"
                 + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            FF = "ReferenceError",
+            FF = "TypeError",
             FF_ESR = "ReferenceError")
     @HtmlUnitNYI(
             CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,currentTarget,"

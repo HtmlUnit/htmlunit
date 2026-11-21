@@ -15885,7 +15885,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "constructor(),error[GCE],message[GCE]",
-            FF = "ReferenceError",
+            FF = "TypeError",
             FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()")
