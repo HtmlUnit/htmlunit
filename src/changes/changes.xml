@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, Cookies, Bugfixes">
+            <action type="fix" dev="rbri">
+                fetch() and XMLHttpRequest.setRequestHeader() ignore the method override headers (X-HTTP-Method,
+                X-HTTP-Method-Override, X-Method-Override) if the value contains a forbidden method (CONNECT, TRACE,
+                TRACK) like the browsers; XMLHttpRequest uses the forbidden request headers of fetch().
+            </action>
             <action type="fix" dev="Vidya m">
                 XMLHttpRequest.setRequestHeader() ignores the forbidden request headers Origin, DNT, Set-Cookie,
                 Access-Control-Request-Headers and Access-Control-Request-Method like the browsers; a page was able

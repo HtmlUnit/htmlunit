@@ -88,6 +88,7 @@ import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.ProgressEvent;
 import org.htmlunit.javascript.host.fetch.CorsLoader;
+import org.htmlunit.javascript.host.fetch.Headers;
 import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.EncodingSniffer;
@@ -151,13 +152,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private static final String RESPONSE_TYPE_JSON = "json";
     private static final String RESPONSE_TYPE_TEXT = "text";
 
+    // in addition to the forbidden request headers of the Fetch standard (see Headers);
+    // to be verified by the tests XMLHttpRequest2Test.setRequestHeaderUserAgent/ContentTransferEncoding
     private static final HashSet<String> PROHIBITED_HEADERS_ = new HashSet<>(Arrays.asList(
-        "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
-        "access-control-request-headers", "access-control-request-method",
-        HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",
-        "content-transfer-encoding", "date", "dnt", "expect",
-        HttpHeader.HOST_LC, "keep-alive", HttpHeader.ORIGIN_LC, HttpHeader.REFERER_LC, "set-cookie",
-        "te", "trailer", "transfer-encoding", "upgrade", HttpHeader.USER_AGENT_LC, "via"));
+        "content-transfer-encoding", HttpHeader.USER_AGENT_LC));
 
     private int state_;
     private WebRequest webRequest_;
@@ -1178,7 +1176,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     @JsxFunction
     public void setRequestHeader(final String name, final String value) {
-        if (!isAuthorizedHeader(name)) {
+        if (!isAuthorizedHeader(name, value)) {
             if (LOG.isWarnEnabled()) {
                 LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
                     + ": it is a restricted header");
@@ -1205,11 +1203,22 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @return {@code true} if the header can be set from JavaScript
      */
     static boolean isAuthorizedHeader(final String name) {
-        final String nameLowerCase = org.htmlunit.util.StringUtils.toRootLowerCase(name);
-        if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
+        return isAuthorizedHeader(name, "");
+    }
+
+    /**
+     * Checks whether the specified request header may be set from JavaScript; the forbidden
+     * request headers of the Fetch standard (shared with {@code fetch()}) and some more.
+     *
+     * @param name the header name
+     * @param value the header value (the method override headers are forbidden for some values)
+     * @return {@code true} if the header can be set from JavaScript
+     */
+    static boolean isAuthorizedHeader(final String name, final String value) {
+        if (Headers.isForbiddenRequestHeader(name, value == null ? "" : value)) {
             return false;
         }
-        return !nameLowerCase.startsWith("proxy-") && !nameLowerCase.startsWith("sec-");
+        return !PROHIBITED_HEADERS_.contains(org.htmlunit.util.StringUtils.toRootLowerCase(name));
     }
 
     /**

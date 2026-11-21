@@ -26,6 +26,7 @@ import java.util.Map;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
+import org.htmlunit.javascript.host.xml.XMLHttpRequest2Test;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
@@ -1298,6 +1299,107 @@ public class FetchTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "/page?q=1"), servlets);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * The method override header with a forbidden method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void headerMethodOverrideTrace() throws Exception {
+        requestHeader("X-HTTP-Method-Override", "TRACE");
+    }
+
+    /**
+     * The method override header with a forbidden method (lower case).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void headerMethodOverrideTrack() throws Exception {
+        requestHeader("X-Method-Override", "track");
+    }
+
+    /**
+     * The method override header with a forbidden method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void headerHttpMethodConnect() throws Exception {
+        requestHeader("X-HTTP-Method", "CONNECT");
+    }
+
+    /**
+     * The method override header with a list containing a forbidden method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void headerMethodOverrideList() throws Exception {
+        requestHeader("X-HTTP-Method-Override", "GET, TRACE");
+    }
+
+    /**
+     * The method override header with an allowed method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void headerMethodOverridePut() throws Exception {
+        requestHeader("X-HTTP-Method-Override", "PUT");
+    }
+
+    /**
+     * The User-Agent header (removed from the forbidden headers of the Fetch standard).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "false"},
+            FF = {"true", "true"},
+            FF_ESR = {"true", "true"})
+    public void headerUserAgent() throws Exception {
+        requestHeader("User-Agent", "HtmlUnitTest");
+    }
+
+    /**
+     * The Content-Transfer-Encoding header.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void headerContentTransferEncoding() throws Exception {
+        requestHeader("Content-Transfer-Encoding", "HtmlUnitTest");
+    }
+
+    /**
+     * Fetches with the given header; logs whether the header is part of the request headers
+     * and whether the server got the header value.
+     */
+    private void requestHeader(final String name, final String value) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const req = new Request('/headerEcho?name=" + name + "',\n"
+            + "      {headers: {'" + name + "': '" + value + "'}});\n"
+            + "  log(req.headers.has('" + name + "'));\n"
+            + "  fetch(req).then(r => r.text())\n"
+            + "    .then(t => log(t.indexOf('" + value + "') > -1), e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/headerEcho", XMLHttpRequest2Test.HeaderEchoServlet.class);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST, servlets);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 

@@ -2390,6 +2390,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             assertFalse(XMLHttpRequest.isAuthorizedHeader(header));
             assertFalse(XMLHttpRequest.isAuthorizedHeader(header.toUpperCase(Locale.ROOT)));
         }
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("X-HTTP-Method-Override", "TRACE"));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("x-http-method", "connect"));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("X-Method-Override", "GET, Track"));
+        assertTrue(XMLHttpRequest.isAuthorizedHeader("X-HTTP-Method-Override", "PUT"));
+        assertTrue(XMLHttpRequest.isAuthorizedHeader("X-HTTP-Method-Override"));
+
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-"));
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Control"));
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Hack"));
