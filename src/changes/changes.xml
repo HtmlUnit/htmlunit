@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, Cookies, Bugfixes">
+            <action type="update" dev="rbri">
+                csp: when simulating Chrome/Edge, a WebSocket blocked by connect-src fires only the error event
+                and no close event (like Chrome/Edge 158).
+            </action>
             <action type="fix" dev="Vidya m">
                 XMLHttpRequest and fetch(): cross-origin requests send the CORS preflight if the value of the
                 Accept, Accept-Language, Content-Language or Content-Type header is not CORS-safelisted

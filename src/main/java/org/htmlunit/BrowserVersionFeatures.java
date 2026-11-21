@@ -473,6 +473,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_STORAGE_PRESERVED_INCLUDED,
 
+    /** A WebSocket blocked by the Content-Security-Policy fires only the error event, no close event. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_WEBSOCKET_CSP_BLOCKED_NO_CLOSE_EVENT,
+
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,
