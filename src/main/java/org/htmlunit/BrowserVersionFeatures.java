@@ -486,7 +486,7 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_INSTALL_TRIGGER_NULL,
 
     /**
-     * window.open() of a local file (file url) from a page that was not loaded from a file
+     * Method window.open() of a local file (file url) from a page that was not loaded from a file
      * throws an Error.
      */
     @BrowserFeature({FF, FF_ESR})

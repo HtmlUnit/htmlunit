@@ -142,7 +142,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
     }
 
     /**
-     * window.open() into an existing frame.
+     * Method window.open() into an existing frame.
      *
      * @throws Exception if the test fails
      */
@@ -442,7 +442,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
     }
 
     /**
-     * window.open() of a local file from a page loaded from the server.
+     * Method window.open() of a local file from a page loaded from the server.
      *
      * @throws Exception if the test fails
      */
@@ -648,7 +648,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
     }
 
     /**
-     * window.open() into an existing frame from a page loaded from a file.
+     * Method window.open() into an existing frame from a page loaded from a file.
      *
      * @throws Exception if the test fails
      */
@@ -748,7 +748,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
     }
 
     /**
-     * window.open() of a local file from a page loaded from a file.
+     * Method window.open() of a local file from a page loaded from a file.
      *
      * @throws Exception if the test fails
      */
