@@ -357,6 +357,97 @@ public class ContentSecurityPolicyInheritanceTest extends WebDriverTestCase {
                 + "testEval(inner.contentWindow);\n");
     }
 
+    /**
+     * Inline script in a srcdoc iframe; the parent has no policy.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"srcdoc inline", "loaded"})
+    public void srcdoc_noPolicy() throws Exception {
+        loadPageVerify(null,
+                "var frame = document.createElement('iframe');\n"
+                + "frame.srcdoc = '<script>parent.log(\\'srcdoc inline\\');<\\/script>';\n"
+                + "frame.onload = function() { log('loaded'); };\n"
+                + "document.body.appendChild(frame);\n");
+    }
+
+    /**
+     * Inline script in a srcdoc iframe; the srcdoc document inherits the policy of the parent.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("loaded")
+    public void srcdoc_inlineScript() throws Exception {
+        loadPageVerify("script-src 'self'",
+                "var frame = document.createElement('iframe');\n"
+                + "frame.srcdoc = '<script>parent.log(\\'srcdoc inline\\');<\\/script>';\n"
+                + "frame.onload = function() { log('loaded'); };\n"
+                + "document.body.appendChild(frame);\n");
+    }
+
+    /**
+     * Inline script in a srcdoc iframe; the inherited policy allows inline scripts.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"srcdoc inline", "loaded"})
+    public void srcdoc_inlineScriptUnsafeInline() throws Exception {
+        loadPageVerify("script-src 'self' 'unsafe-inline'",
+                "var frame = document.createElement('iframe');\n"
+                + "frame.srcdoc = '<script>parent.log(\\'srcdoc inline\\');<\\/script>';\n"
+                + "frame.onload = function() { log('loaded'); };\n"
+                + "document.body.appendChild(frame);\n");
+    }
+
+    /**
+     * Inline script in a srcdoc iframe; the inherited policy is report only.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"srcdoc inline", "loaded"})
+    public void srcdoc_reportOnly() throws Exception {
+        loadPageVerify("Content-Security-Policy-Report-Only", "script-src 'self'", "",
+                "var frame = document.createElement('iframe');\n"
+                + "frame.srcdoc = '<script>parent.log(\\'srcdoc inline\\');<\\/script>';\n"
+                + "frame.onload = function() { log('loaded'); };\n"
+                + "document.body.appendChild(frame);\n");
+    }
+
+    /**
+     * Eval inside a srcdoc iframe; the srcdoc document inherits the policy of the parent.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("eval EvalError")
+    public void srcdoc_eval() throws Exception {
+        loadPageVerify("script-src 'self'",
+                "var frame = document.createElement('iframe');\n"
+                + "frame.srcdoc = '<p>srcdoc</p>';\n"
+                + "frame.onload = function() { testEval(frame.contentWindow); };\n"
+                + "document.body.appendChild(frame);\n");
+    }
+
+    /**
+     * Policy defined by a meta element in a srcdoc iframe (combined with the inherited policy).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("eval EvalError")
+    public void srcdoc_meta() throws Exception {
+        loadPageVerify("script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+                "var frame = document.createElement('iframe');\n"
+                + "frame.srcdoc = '<meta http-equiv=\"Content-Security-Policy\" content=\"script-src \\'self\\'\">'\n"
+                + "    + '<p>srcdoc</p>';\n"
+                + "frame.onload = function() { testEval(frame.contentWindow); };\n"
+                + "document.body.appendChild(frame);\n");
+    }
+
     private void loadPageVerify(final String policy, final String testJs) throws Exception {
         loadPageVerify(HttpHeader.CONTENT_SECURIRY_POLICY, policy, "", testJs);
     }

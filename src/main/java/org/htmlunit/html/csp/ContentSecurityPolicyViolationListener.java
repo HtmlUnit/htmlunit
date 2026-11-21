@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html.csp;
 
+import java.io.Serializable;
+
 import org.htmlunit.Page;
 import org.htmlunit.WebClient;
 
@@ -36,7 +38,7 @@ import org.htmlunit.WebClient;
  * @see WebClient#setContentSecurityPolicyViolationListener(ContentSecurityPolicyViolationListener)
  */
 @FunctionalInterface
-public interface ContentSecurityPolicyViolationListener {
+public interface ContentSecurityPolicyViolationListener extends Serializable {
 
     /**
      * Informs about a violation of the Content-Security-Policy.

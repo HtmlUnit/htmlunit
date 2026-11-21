@@ -43,7 +43,7 @@
             --add-opens org.htmlunit/org.htmlunit.util.quercus.servlet=ALL-UNNAMED
         </surefire.argLine.modules>
 
-        <htmlunit-csp.version>5.8.0</htmlunit-csp.version>
+        <htmlunit-csp.version>5.9.0-SNAPSHOT</htmlunit-csp.version>
         <htmlunit-cssparser.version>5.8.0</htmlunit-cssparser.version>
         <htmlunit-corejs.version>5.8.0</htmlunit-corejs.version>
         <htmlunit-neko.version>5.8.0</htmlunit-neko.version>
@@ -66,7 +66,7 @@
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>12.1.15</jetty.version>
         <quercus.version>4.0.66</quercus.version>
-        <logback-classic.version>1.6.7</logback-classic.version>
+        <logback-classic.version>1.6.8</logback-classic.version>
         <commons-text.version>1.15.0</commons-text.version>
         <commons-fileupload.version>2.0.0-M1</commons-fileupload.version>
         <image-comparison.version>4.4.0</image-comparison.version>

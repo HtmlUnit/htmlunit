@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html.parser;
 
+import java.io.Serializable;
 import java.net.URL;
 
 import org.apache.commons.logging.Log;
@@ -30,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-public interface HTMLParserListener {
+public interface HTMLParserListener extends Serializable {
 
     /**
      * Simple implementation of {@link HTMLParserListener} logging the received warnings

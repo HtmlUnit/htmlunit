@@ -1132,6 +1132,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     fireJavascriptEvent(Event.TYPE_ERROR);
                 }
                 fireJavascriptEvent(Event.TYPE_LOAD_END);
+                // violations of the Content-Security-Policy delayed until the request has failed
+                ContentSecurityPolicy.firePendingViolations();
             }
             else {
                 setState(DONE);

@@ -18,17 +18,16 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import java.text.BreakIterator;
+import java.util.List;
 import java.util.Locale;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -59,22 +58,10 @@ public class V8BreakIterator extends HtmlUnitScriptable {
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
-        Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
-        if (args.length != 0) {
-            final Object locales = args[0];
-            if (locales instanceof NativeArray array) {
-                if (array.getLength() != 0) {
-                    locale = new Locale.Builder().setLanguageTag(array.get(0).toString()).build();
-                }
-            }
-            else if (locales instanceof String) {
-                locale = new Locale.Builder().setLanguageTag(locales.toString()).build();
-            }
-            else if (!JavaScriptEngine.isUndefined(locales)) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(
-                        new Exception("Unknown type " + locales.getClass().getName()));
-            }
-        }
+        final List<String> locales = Intl.canonicalizeLocaleList(cx, Intl.firstArgument(args));
+        final Locale locale = locales.isEmpty()
+                ? new Locale.Builder().setLanguage("en").setRegion("US").build()
+                : Locale.forLanguageTag(locales.get(0));
 
         final V8BreakIterator iterator = new V8BreakIterator();
         if (args.length > 1) {

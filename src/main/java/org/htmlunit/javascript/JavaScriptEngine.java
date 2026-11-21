@@ -1326,6 +1326,18 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Converts the given value to an object (the abstract operation ToObject); primitives
+     * are wrapped, {@code null} and {@code undefined} result in a {@code TypeError}.
+     *
+     * @param scope the scope to create the wrapper object in
+     * @param value the value to convert
+     * @return the object
+     */
+    public static Scriptable toObject(final VarScope scope, final Object value) {
+        return ScriptRuntime.toObject(scope, value);
+    }
+
+    /**
      * Report a TypeError with the message "Illegal constructor.".
      *
      * @return EcmaError

@@ -12,6 +12,115 @@
                 navigator.sendBeacon(): a beacon whose body has a type that is not CORS-safelisted (e.g. a Blob of
                 type application/json) is a cors request; it is only sent to another origin if the preflight allows it.
             </action>
+            <action type="fix" dev="rbri">
+                csp: when simulating Chrome/Edge, the securitypolicyviolation event for an XMLHttpRequest blocked
+                because of the redirect target is fired after the error event (like Chrome).
+            </action>
+            <action type="fix" dev="rbri">
+                SecurityPolicyViolationEvent constructor: throws a TypeError if called without type or without new;
+                when simulating Chrome/Edge the event always bubbles, is composed and is not cancelable;
+                when simulating Firefox lineNumber and columnNumber are unsigned.
+            </action>
+            <action type="add" dev="rbri">
+                csp: new option WebClientOptions.setContentSecurityPolicyReportsEnabled(boolean) (default true);
+                if disabled, the violation reports are not sent to the uris of the report-uri directive.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: a sandbox directive delivered by a Content-Security-Policy-Report-Only header is ignored
+                (no violations are reported); the sandbox directive of an enforced policy no longer
+                produces violations (the document is sandboxed instead).
+            </action>
+            <action type="fix" dev="rbri">
+                csp: the path of form-action sources is ignored for the redirect targets of a form submission;
+                when simulating Firefox, the redirects of a form submission are not checked against form-action.
+            </action>
+            <action type="update" dev="rbri">
+                htmlunit-csp: INCOMPATIBLE CHANGE: the sandbox directive no longer makes allowsExternalScript(),
+                allowsInlineScript(), allowsScriptAsAttribute() and allowsFormAction() return false; the user agent
+                has to apply the sandbox flags itself (Policy.sandbox() still returns the tokens).
+            </action>
+            <action type="add" dev="rbri">
+                htmlunit-csp: New Policy/PolicyList.allowsFormAction(to, origin, redirected) checks a single request
+                of a form submission; the path of form-action sources is not compared for redirect targets.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: like the browsers, the path part of the source expressions is ignored for the redirect targets
+                of scripts, stylesheets, images and connections (XMLHttpRequest, fetch).
+            </action>
+            <action type="fix" dev="rbri">
+                csp: the sandbox directive of an enforced policy delivered by a header sandboxes the document
+                (like the sandbox attribute of an iframe); e.g. without 'allow-scripts' no script is executed
+                and without 'allow-same-origin' the document has an opaque origin.
+            </action>
+            <action type="update" dev="rbri">
+                htmlunit-csp: 5.9.0-SNAPSHOT.
+            </action>
+            <action type="fix" dev="rbri">
+                htmlunit-csp: The path part of a source expression is no longer compared for redirected requests
+                (CSP3 "Does url match expression in origin with redirect count"). New overloads with a trailing
+                boolean redirected for the URL-based allows* queries and doesUrlMatchSourceListInOrigin();
+                allowsNavigation() ignores the path of redirectedTo.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: data: urls of external scripts and stylesheets are matched by scheme sources (e.g. data:)
+                like in the browsers (they were always blocked); like the browsers, only the scheme is reported
+                as blocked uri for such urls.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: when simulating Chrome/Edge, leading and trailing whitespace of the nonce attribute is ignored.
+            </action>
+            <action type="fix" dev="rbri">
+                HtmlRangeInput: no floating point artifacts (e.g. 0.30000000000000004) for fractional steps,
+                correct rounding to the step and the value is never greater than max.
+            </action>
+            <action type="update" dev="rbri">
+                The interface ContentSecurityPolicyViolationListener extends Serializable
+                (like the other handlers of the WebClient); a WebClient using it can be serialized.
+            </action>
+            <action type="fix" dev="rbri">
+                HtmlRangeInput: values outside of the int range are no longer truncated.
+            </action>
+            <action type="fix" dev="rbri">
+                A page with a NodeIterator or a TreeWalker using a javascript filter can be serialized.
+            </action>
+            <action type="update" dev="rbri">
+                The interfaces FrameContentHandler, HTMLParserListener and ScriptPreProcessor extend Serializable
+                (like the other handlers of the WebClient); a WebClient using them can be serialized.
+            </action>
+            <action type="add" dev="rbri">
+                Intl.NumberFormat: formatToParts(), formatRange() and formatRangeToParts() implemented.
+            </action>
+            <action type="add" dev="rbri">
+                Intl.NumberFormat: support of the options (style percent, currency and unit, currencyDisplay,
+                currencySign, notation scientific, engineering and compact, the digit and rounding options,
+                useGrouping, signDisplay and numberingSystem); format is a bound getter like in the browsers,
+                resolvedOptions() provides all values. The unit names are English only.
+            </action>
+            <action type="add" dev="rbri">
+                Intl.Collator: support of the options usage, sensitivity, ignorePunctuation, numeric, caseFirst
+                and collation (and the unicode extensions co, kf and kn of the locale); the collations
+                German phonebook (phonebk) and traditional Spanish (trad) are supported.
+            </action>
+            <action type="fix" dev="rbri">
+                Intl.DateTimeFormat and Intl.NumberFormat: resolvedOptions().locale is the resolved locale
+                (e.g. 'de' for 'de-XX') including the relevant unicode extensions ('ca', 'hc' and 'nu' for
+                DateTimeFormat, 'nu' for NumberFormat); NumberFormat.resolvedOptions() provides the locale.
+            </action>
+            <action type="add" dev="rbri">
+                Intl.Collator: the locales argument is supported; compare (based on java.text.Collator),
+                resolvedOptions() and supportedLocalesOf() are available. The options are not supported so far.
+            </action>
+            <action type="fix" dev="rbri">
+                Intl.DateTimeFormat and Intl.NumberFormat: if more than one locale is requested, the first
+                supported one is used (and not the last one with a known format); unsupported locales
+                (e.g. 'ban') are skipped like in the browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                Intl: the locales argument of Intl.Collator, Intl.DateTimeFormat, Intl.NumberFormat,
+                Intl.v8BreakIterator and of the supportedLocalesOf() functions is processed like
+                Intl.getCanonicalLocales() does it (canonicalized language tags, array like objects,
+                Intl.Locale objects, TypeError/RangeError for invalid arguments).
+            </action>
             <action type="add" dev="rbri">
                 fetch() is available in dedicated workers; relative urls are resolved against the url of the
                 worker script. The iterators of Headers, URLSearchParams and FormData are available in workers too.

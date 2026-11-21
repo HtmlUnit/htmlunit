@@ -34,6 +34,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.http.Cookie;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -87,6 +88,43 @@ public class WebClient2Test extends SimpleWebTestCase {
     }
 
     /**
+     * Verifies that the script pre processor, the html parser listener and the
+     * frame content handler survive the serialization.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_handlers() throws Exception {
+        try (WebClient client = getWebClient()) {
+            client.setScriptPreProcessor(
+                    (page, sourceCode, sourceName, lineNumber, htmlElement) -> "pre " + sourceCode);
+            client.setHTMLParserListener(HTMLParserListener.LOG_REPORTER);
+            client.setFrameContentHandler(element -> false);
+
+            try (WebClient copy = clone(client)) {
+                assertEquals("pre code",
+                        copy.getScriptPreProcessor().preProcess(null, "code", "name", 1, null));
+                assertNotNull(copy.getHTMLParserListener());
+                assertFalse(copy.getFrameContentHandler().loadFrameDocument(null));
+            }
+        }
+    }
+
+    /**
+     * Verifies that the content security policy violation listener survives the serialization.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_contentSecurityPolicyViolationListener() throws Exception {
+        try (WebClient client = getWebClient()) {
+            client.setContentSecurityPolicyViolationListener((page, violation) -> { });
+
+            try (WebClient copy = clone(client)) {
+                assertNotNull(copy.getContentSecurityPolicyViolationListener());
+            }
+        }
+    }
+
+    /**
      * Regression test for bug 2833433.
      * @throws Exception if an error occurs
      */
@@ -129,6 +167,64 @@ public class WebClient2Test extends SimpleWebTestCase {
                 assertEquals(Boolean.TRUE, copyPage.executeJavaScript(
                         "document.getElementById('d').isContentEditable").getJavaScriptResult());
             }
+        }
+    }
+
+    /**
+     * The filter of a NodeIterator created by javascript has to survive the serialization.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_nodeIteratorFilter() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='a'></div><div id='b'></div><div id='c'></div>\n"
+            + "<script>\n"
+            + "  var it = document.createNodeIterator(document.body, NodeFilter.SHOW_ELEMENT,\n"
+            + "    function(n) { return n.id == 'b' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; });\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        try (WebClient client = getWebClient()) {
+            final HtmlPage page = loadPage(client, html, null, URL_FIRST);
+
+            try (WebClient copy = clone(client)) {
+                final HtmlPage copyPage = (HtmlPage) copy.getCurrentWindow().getEnclosedPage();
+                assertEquals("b", copyPage.executeJavaScript("it.nextNode().id").getJavaScriptResult());
+                assertEquals("true", copyPage.executeJavaScript(
+                        "String(it.nextNode() === null)").getJavaScriptResult());
+            }
+
+            assertEquals("b", page.executeJavaScript("it.nextNode().id").getJavaScriptResult());
+        }
+    }
+
+    /**
+     * The filter of a TreeWalker created by javascript has to survive the serialization.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization_treeWalkerFilter() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='a'></div><div id='b'></div><div id='c'></div>\n"
+            + "<script>\n"
+            + "  var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT,\n"
+            + "    function(n) { return n.id == 'b' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; }, false);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        try (WebClient client = getWebClient()) {
+            final HtmlPage page = loadPage(client, html, null, URL_FIRST);
+
+            try (WebClient copy = clone(client)) {
+                final HtmlPage copyPage = (HtmlPage) copy.getCurrentWindow().getEnclosedPage();
+                assertEquals("b", copyPage.executeJavaScript("tw.nextNode().id").getJavaScriptResult());
+                assertEquals("true", copyPage.executeJavaScript(
+                        "String(tw.nextNode() === null)").getJavaScriptResult());
+            }
+
+            assertEquals("b", page.executeJavaScript("tw.nextNode().id").getJavaScriptResult());
         }
     }
 

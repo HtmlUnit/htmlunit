@@ -19,6 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.util.Locale;
@@ -46,7 +47,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  * @see <a href="https://fetch.spec.whatwg.org/#body-mixin">Fetch Standard - Body mixin</a>
  */
-final class FetchBody {
+final class FetchBody implements Serializable {
 
     /** The kinds of consuming the body. */
     enum Kind { TEXT, JSON, ARRAY_BUFFER, BYTES, BLOB, FORM_DATA }

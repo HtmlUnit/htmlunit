@@ -62,6 +62,55 @@
         </Or>
     </Match>
 
+    <!--
+        The filter type org.w3c.dom.traversal.NodeFilter is part of the public api and can't be changed;
+        the filters created by HtmlUnit (javascript) are serializable.
+    -->
+    <Match>
+        <Bug pattern="SE_BAD_FIELD"/>
+        <Or>
+            <Class name="org.htmlunit.html.DomNodeIterator"/>
+            <Class name="org.htmlunit.html.HtmlDomTreeWalker"/>
+        </Or>
+        <Field name="filter_"/>
+    </Match>
+
+    <!--
+        Ignored for the moment: identity check against DomElement.ATTRIBUTE_NOT_DEFINED.
+    -->
+    <Match>
+        <Bug pattern="ES_COMPARING_PARAMETER_STRING_WITH_EQ"/>
+        <Class name="org.htmlunit.html.csp.ContentSecurityPolicy"/>
+        <Or>
+            <Method name="allowsObject"/>
+            <Method name="allowsMedia"/>
+        </Or>
+    </Match>
+
+    <!--
+        HttpClientCookie is only a carrier of the HttpClient cookie; the identity of a cookie is
+        name, domain and path (Cookie.equals()), a HttpClientCookie has to be equal to a Cookie
+        with the same identity.
+    -->
+    <Match>
+        <Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS"/>
+        <Class name="org.htmlunit.httpclient.HttpClientCookie"/>
+    </Match>
+
+    <!--
+        The identity check of the strings is an intended shortcut (performance);
+        the result is the same without it.
+    -->
+    <Match>
+        <Bug pattern="ES_COMPARING_PARAMETER_STRING_WITH_EQ"/>
+        <Class name="org.htmlunit.util.StringUtils"/>
+        <Or>
+            <Method name="startsWithIgnoreCase"/>
+            <Method name="endsWithIgnoreCase"/>
+            <Method name="containsIgnoreCase"/>
+        </Or>
+    </Match>
+
     <!-- Exclude org.htmlunit.util.brotli package -->
     <Match>
         <Package name="org.htmlunit.util.brotli"/>

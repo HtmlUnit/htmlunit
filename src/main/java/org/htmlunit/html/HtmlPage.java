@@ -266,6 +266,22 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
+        // the sandbox directive of an enforced policy delivered by a header sandboxes the document
+        // (in addition to the sandbox attribute of the iframe)
+        if (contentSecurityPolicy_ != null) {
+            final Set<String> cspSandboxTokens = contentSecurityPolicy_.getSandboxTokens();
+            if (cspSandboxTokens != null) {
+                if (sandboxTokens_ == null) {
+                    sandboxTokens_ = cspSandboxTokens;
+                }
+                else {
+                    final Set<String> tokens = new HashSet<>(sandboxTokens_);
+                    tokens.retainAll(cspSandboxTokens);
+                    sandboxTokens_ = tokens;
+                }
+            }
+        }
+
         referrerPolicy_ = referrerPolicyFromResponse(webResponse);
         if (referrerPolicy_ == null && webWindow != null) {
             // like the Content-Security-Policy: the content written by document.open()/write()/close()

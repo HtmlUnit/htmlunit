@@ -248,4 +248,271 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
         test("zh", null, "\u56FD\u52A1\u9662\u5173\u4E8E\u300A\u571F\u5730\u623F\u5C4B\u7BA1\u7406\u6761\u4F8B\u300B");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesNoArgument() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator() instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesUndefined() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(undefined) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void ctorLocalesNull() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(null) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "RangeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesEmptyString() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator('') instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesMixedCase() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator('EN-us') instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesScript() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator('zh-hant-tw') instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "RangeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesInvalidTag() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator('en-US!@#') instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "RangeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesPrivateUse() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator('x-private') instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "RangeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesInvalidVariant() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator('no-NO-NY') instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesNumber() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(42) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesBoolean() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(true) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesSymbol() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(Symbol('de')) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesEmptyObject() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator({}) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesArrayLike() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator({ length: 2, 0: 'de', 1: 'ja' }) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "RangeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesStringObject() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(new String('de')) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesArrayDuplicates() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(['de', 'DE', 'ja']) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void ctorLocalesArrayNumber() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(['de', 42]) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void ctorLocalesArrayNull() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(['de', null]) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void ctorLocalesArrayUndefined() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(['de', undefined]) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "RangeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesArrayInvalidTag() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(['de', 'en-US!@#']) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesArrayLocale() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator([new Intl.Locale('ja')]) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesLocale() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator(new Intl.Locale('ja')) instanceof Intl.v8BreakIterator"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void ctorLocalesEmptyArray() throws Exception {
+        loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
+                "new Intl.v8BreakIterator([]) instanceof Intl.v8BreakIterator"));
+    }
 }

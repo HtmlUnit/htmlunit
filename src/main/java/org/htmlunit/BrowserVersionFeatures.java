@@ -39,6 +39,20 @@ public enum BrowserVersionFeatures {
     ANCHOR_SEND_PING_REQUEST,
 
     /**
+     * The securitypolicyviolation event for a connection (XMLHttpRequest, fetch) blocked because of
+     * a redirect target is fired after the request has failed (after the error event).
+     */
+    @BrowserFeature({CHROME, EDGE})
+    CSP_CONNECT_REDIRECT_VIOLATION_DELAYED,
+
+    /**
+     * The form-action directive of the Content-Security-Policy is not checked for the
+     * redirects of a form submission.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    CSP_FORM_ACTION_REDIRECTS_NOT_CHECKED,
+
+    /**
      * The content of a Content-Security-Policy meta element is parsed as one policy
      * (commas are not splitting the content into several policies).
      */
@@ -51,6 +65,13 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({FF, FF_ESR})
     CSP_NONCE_HIDING_ENFORCED_ONLY,
+
+    /**
+     * Leading and trailing whitespace of the nonce of an element is ignored when matching
+     * the nonce source expressions of the Content-Security-Policy.
+     */
+    @BrowserFeature({CHROME, EDGE})
+    CSP_NONCE_TRIMMED,
 
     /** The error event is fired at an object element if the data url is blocked by the object-src directive. */
     @BrowserFeature({FF, FF_ESR})
@@ -295,6 +316,20 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_EVENT_KEYBOARD_CTOR_WHICH,
 
+    /**
+     * Javascript SecurityPolicyViolationEvent created by the constructor always bubbles,
+     * is composed and is not cancelable (the init values are ignored).
+     */
+    @BrowserFeature({CHROME, EDGE})
+    JS_EVENT_SECURITY_POLICY_VIOLATION_CTOR_BUBBLES_COMPOSED,
+
+    /**
+     * Javascript SecurityPolicyViolationEvent lineNumber and columnNumber are unsigned
+     * (-1 is converted to 4294967295).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_EVENT_SECURITY_POLICY_VIOLATION_POSITION_UNSIGNED,
+
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,
@@ -367,6 +402,10 @@ public enum BrowserVersionFeatures {
     /** FF comma at end is not an integer. */
     @BrowserFeature({FF, FF_ESR})
     JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE,
+
+    /** Indicates that the collation (from the options or for usage 'search') is part of the Intl.Collator locale. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_INTL_COLLATOR_COLLATION_IN_LOCALE,
 
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature({CHROME, EDGE})

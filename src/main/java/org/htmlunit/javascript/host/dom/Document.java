@@ -1337,7 +1337,8 @@ public class Document extends Node {
             final boolean filterFunctionOnly) {
         org.w3c.dom.traversal.NodeFilter filterWrapper = null;
         if (filter != null) {
-            filterWrapper = n -> {
+            // serializable, the wrapper is part of the iterator/walker state of the page
+            filterWrapper = (org.w3c.dom.traversal.NodeFilter & Serializable) n -> {
                 final Object[] args = {((DomNode) n).getScriptableObject()};
                 final Object response;
                 if (filter instanceof Callable callable) {
