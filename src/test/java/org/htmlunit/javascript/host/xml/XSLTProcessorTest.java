@@ -45,9 +45,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             FF_ESR = "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
                 + "<body><h2>My CD Collection</h2>"
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>")
-    @HtmlUnitNYI(CHROME = "<html><body><h2>My CD Collection</h2>"
-                + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>",
-            EDGE = "<html><body><h2>My CD Collection</h2>"
+    @HtmlUnitNYI(EDGE = "<html><body><h2>My CD Collection</h2>"
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>",
             FF = "<html><body><h2>My CD Collection</h2>"
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>",
@@ -260,8 +258,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             CHROME = "exception ReferenceError",
             FF = {"preparation done", "exception "},
             FF_ESR = {"preparation done", "exception "})
-    @HtmlUnitNYI(CHROME = {"preparation done", "exception InternalError"},
-            EDGE = {"preparation done", "exception InternalError"},
+    @HtmlUnitNYI(EDGE = {"preparation done", "exception InternalError"},
             FF = {"preparation done", "exception InternalError"},
             FF_ESR = {"preparation done", "exception InternalError"})
     public void testSecurity() throws Exception {

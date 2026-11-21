@@ -63,7 +63,6 @@ public class SpeechRecognitionEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "TypeError",
-            FF = "TypeError",
             FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"})

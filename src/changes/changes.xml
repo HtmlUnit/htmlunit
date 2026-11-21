@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, Cookies, Bugfixes">
+        <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
+            <action type="update" dev="rbri">
+                Chrome 158 no longer supports the XSLTProcessor javascript object.
+            </action>
             <action type="fix" dev="rbri">
                 Local files (file urls): about:blank and about:srcdoc documents are checked with the origin of
                 their creator (e.g. an about:blank popup opened by a page loaded from a file is allowed to load
