@@ -25,7 +25,9 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -95,9 +97,25 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         if (reportFolder_.exists()) {
             FileUtils.forceDelete(reportFolder_);
         }
-        FileUtils.forceMkdir(reportFolder_);
+        createReportFolder(reportFolder_.toPath());
         javaScriptFile_ = new File(reportFolder_, "hu.js");
         createOverview();
+    }
+
+    /**
+     * Creates the report folder; the responses (and the request parameters) are only readable
+     * by the owner because the folder is created inside the shared temp directory.
+     *
+     * @param folder the folder to create
+     * @throws IOException if the folder can't be created
+     */
+    private static void createReportFolder(final Path folder) throws IOException {
+        if (folder.getFileSystem().supportedFileAttributeViews().contains("posix")) {
+            Files.createDirectories(folder,
+                    PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------")));
+            return;
+        }
+        Files.createDirectories(folder);
     }
 
     /**

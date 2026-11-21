@@ -27,11 +27,18 @@ import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -545,6 +552,41 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             try (InputStream is = response.getContentAsStream()) {
                 assertEquals(new ByteArrayInputStream(content.getBytes()), is);
             }
+        }
+    }
+
+    /**
+     * The response is stored in the shared temp directory as soon as it exceeds the max in memory
+     * size; the content has to be readable for the owner only.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void downloadContentTempFileAccess() throws Exception {
+        final Path tempDirectory = Files.createTempDirectory("htmlunitTest");
+        try {
+            final byte[] content = "secret response".getBytes(StandardCharsets.UTF_8);
+            final DownloadedContent downloaded = HttpWebConnection.downloadContent(
+                    new ByteArrayInputStream(content), 4, tempDirectory.toFile());
+
+            try (InputStream is = downloaded.getInputStream()) {
+                assertEquals(content, IOUtils.toByteArray(is));
+            }
+
+            try (Stream<Path> files = Files.list(tempDirectory)) {
+                final List<Path> tempFiles = files.collect(Collectors.toList());
+                assertEquals(1, tempFiles.size());
+
+                final Path tempFile = tempFiles.get(0);
+                if (tempFile.getFileSystem().supportedFileAttributeViews().contains("posix")) {
+                    assertEquals("rw-------",
+                            PosixFilePermissions.toString(Files.getPosixFilePermissions(tempFile)));
+                }
+            }
+
+            downloaded.cleanUp();
+        }
+        finally {
+            FileUtils.deleteDirectory(tempDirectory.toFile());
         }
     }
 
