@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.fetch;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -610,11 +611,36 @@ public class Headers extends HtmlUnitScriptable {
      *     no-CORS-safelisted request-header</a>
      */
     static boolean isNoCorsSafelistedRequestHeader(final String name, final String value) {
-        if (!isNoCorsSafelistedRequestHeaderName(name) || value.length() > 128) {
+        if (!isNoCorsSafelistedRequestHeaderName(name)) {
+            return false;
+        }
+        return isCorsSafelistedRequestHeader(name, value);
+    }
+
+    /**
+     * Returns whether the header is a CORS-safelisted request header (name and value); requests
+     * with other headers need a CORS preflight. In addition to the no-CORS-safelisted request headers
+     * a Range header with a simple range (e.g. 'bytes=0-499') is safelisted.
+     *
+     * @param name the name
+     * @param value the value
+     * @return whether the header is a CORS-safelisted request header
+     * @see <a href="https://fetch.spec.whatwg.org/#cors-safelisted-request-header">Fetch Standard -
+     *     CORS-safelisted request-header</a>
+     */
+    static boolean isCorsSafelistedRequestHeader(final String name, final String value) {
+        if (value.length() > 128) {
             return false;
         }
 
         final String lcName = name.toLowerCase(Locale.ROOT);
+        if ("range".equals(lcName)) {
+            return isSimpleRangeHeaderValue(value);
+        }
+        if (!isNoCorsSafelistedRequestHeaderName(lcName)) {
+            return false;
+        }
+
         if ("accept-language".equals(lcName) || "content-language".equals(lcName)) {
             for (int i = 0; i < value.length(); i++) {
                 final char c = value.charAt(i);
@@ -643,6 +669,47 @@ public class Headers extends HtmlUnitScriptable {
             return "application/x-www-form-urlencoded".equals(essence)
                     || "multipart/form-data".equals(essence)
                     || "text/plain".equals(essence);
+        }
+        return true;
+    }
+
+    /**
+     * Returns whether the value is a simple range header value: 'bytes=' (lower case) followed by a start
+     * position, '-' and an optional end position (no whitespace, a single range, the start is required).
+     *
+     * @see <a href="https://fetch.spec.whatwg.org/#simple-range-header-value">Fetch Standard -
+     *     simple range header value</a>
+     */
+    private static boolean isSimpleRangeHeaderValue(final String value) {
+        // like the browsers, the unit is case-sensitive
+        if (!value.startsWith("bytes=")) {
+            return false;
+        }
+        final String range = value.substring(6);
+        final int dash = range.indexOf('-');
+        if (dash < 1 || !isDigits(range.substring(0, dash))) {
+            return false;
+        }
+        final String end = range.substring(dash + 1);
+        if (end.isEmpty()) {
+            return true;
+        }
+        if (!isDigits(end)) {
+            return false;
+        }
+        // the end has to be greater or equal than the start
+        return new BigInteger(end).compareTo(new BigInteger(range.substring(0, dash))) >= 0;
+    }
+
+    private static boolean isDigits(final String value) {
+        if (value.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < value.length(); i++) {
+            final char c = value.charAt(i);
+            if (c < '0' || c > '9') {
+                return false;
+            }
         }
         return true;
     }

@@ -623,7 +623,7 @@ public final class CorsLoader {
                 || HttpHeader.ORIGIN_LC.equals(name)) {
             return false;
         }
-        return !Headers.isNoCorsSafelistedRequestHeader(name, value);
+        return !Headers.isCorsSafelistedRequestHeader(name, value);
     }
 
     /**

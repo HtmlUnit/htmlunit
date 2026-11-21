@@ -836,6 +836,126 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     /**
+     * A safelisted Accept-Language value needs no preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_acceptLanguageSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Accept-Language", "de-DE,de;q=0.9");
+    }
+
+    /**
+     * A safelisted Content-Language value needs no preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_contentLanguageSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Content-Language", "de-DE");
+    }
+
+    /**
+     * A safelisted Accept value needs no preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_acceptSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Accept", "application/json, text/plain, */*");
+    }
+
+    /**
+     * Accept values with CORS-unsafe bytes need a preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_acceptNotSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Accept", "text/html(1)");
+    }
+
+    /**
+     * A Content-Type value with 128 characters is still safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_contentTypeLength128() throws Exception {
+        doPreflightTestReceivedHeader("Content-Type", "text/plain;x=" + "a".repeat(115));
+    }
+
+    /**
+     * A simple range is safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_rangeSimple() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=0-499");
+    }
+
+    /**
+     * A simple range without end is safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_rangeOpenEnd() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=500-");
+    }
+
+    /**
+     * A suffix range is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeSuffix() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=-500");
+    }
+
+    /**
+     * More than one range is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeMultiple() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=0-1,5-9");
+    }
+
+    /**
+     * A range with whitespace is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeWhitespace() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes = 0-499");
+    }
+
+    /**
+     * A range with the start after the end is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeStartAfterEnd() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=500-100");
+    }
+
+    /**
+     * The unit of a simple range is case-sensitive.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeUpperCase() throws Exception {
+        doPreflightTestReceivedHeader("Range", "BYTES=0-499");
+    }
+
+    /**
      * Sends a POST with credentials and the given header; the preflight response does not allow
      * any header. Logs afterwards the request that reached the server ('nothing' if the request was not sent).
      */
