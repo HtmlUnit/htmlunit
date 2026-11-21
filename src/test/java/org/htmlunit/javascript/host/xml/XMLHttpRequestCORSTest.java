@@ -805,6 +805,92 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     /**
+     * The essence of the content type has to be one of the three safelisted ones,
+     * a prefix is not enough.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_contentTypeNotSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Content-Type", "application/x-www-form-urlencoded+json");
+    }
+
+    /**
+     * Accept-Language values with other characters are not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_acceptLanguageNotSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Accept-Language", "en_US");
+    }
+
+    /**
+     * Values longer than 128 characters are not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_contentLanguageTooLong() throws Exception {
+        doPreflightTestReceivedHeader("Content-Language", "de".repeat(65));
+    }
+
+    /**
+     * Sends a POST with credentials and the given header; the preflight response does not allow
+     * any header. Logs afterwards the request that reached the server ('nothing' if the request was not sent).
+     */
+    private void doPreflightTestReceivedHeader(final String headerName, final String headerValue)
+            throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  try {\n"
+
+                // a unique url for every test; browsers cache the preflight result per url
+                + "    xhr.open('POST', url + '?id=" + System.currentTimeMillis() + "', false);\n"
+
+                + "    xhr.withCredentials = true;\n"
+                + "    xhr.setRequestHeader('" + headerName + "', '" + headerValue + "');\n"
+                + "    xhr.send('{\"amount\":1000}');\n"
+                + "  } catch(e) { logEx(e) }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
+
+                + "  var received = new XMLHttpRequest();\n"
+                + "  received.open('GET', url + '?received', false);\n"
+                + "  received.send();\n"
+                + "  log(received.responseText);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_CREDENTIALS_ = "true";
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_METHODS_ = null;
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
+        PreflightReceivedServlet.RECEIVED_ = null;
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/preflight2", PreflightReceivedServlet.class);
+        startWebServer2(".", servlets2);
+
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
+
+        final URL url = new URL(URL_FIRST, "/preflight1");
+        getMockWebConnection().setResponse(url, html,
+                200, "OK", "text/html;charset=ISO-8859-1", ISO_8859_1, responseHeader);
+
+        loadPage2(url, null);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
      * Sends a request that needs a preflight and logs afterwards the request that
      * reached the server ('nothing' if the request was not sent).
      */
@@ -904,6 +990,15 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
          */
         @Override
         protected void doPut(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            received(request, response);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
             received(request, response);
         }
 

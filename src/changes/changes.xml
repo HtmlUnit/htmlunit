@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, Cookies, Bugfixes">
+            <action type="fix" dev="Vidya m">
+                XMLHttpRequest and fetch(): cross-origin requests send the CORS preflight if the value of the
+                Accept, Accept-Language, Content-Language or Content-Type header is not CORS-safelisted
+                (e.g. 'Content-Type: application/x-www-form-urlencoded+json'); before only the name and the
+                prefix of the content type were checked.
+            </action>
             <action type="fix" dev="rbri">
                 fetch() and XMLHttpRequest.setRequestHeader() ignore the method override headers (X-HTTP-Method,
                 X-HTTP-Method-Override, X-Method-Override) if the value contains a forbidden method (CONNECT, TRACE,

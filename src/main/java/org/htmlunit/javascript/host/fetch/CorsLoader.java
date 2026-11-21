@@ -29,7 +29,6 @@ import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.FormEncodingType;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
 import org.htmlunit.WebClient;
@@ -609,25 +608,22 @@ public final class CorsLoader {
     }
 
     /**
-     * Checks whether the given header name requires a preflight request.
+     * Checks whether the given header requires a preflight request. Accept, Accept-Language,
+     * Content-Language and Content-Type need no preflight only if the value is CORS-safelisted.
      *
      * @param name the header name (MUST be lower-case for performance reasons)
      * @param value the header value
      * @return {@code true} if this header requires a preflight
+     * @see <a href="https://fetch.spec.whatwg.org/#cors-safelisted-request-header">Fetch Standard -
+     *     CORS-safelisted request-header</a>
      */
     private static boolean isPreflightHeader(final String name, final String value) {
-        if (HttpHeader.CONTENT_TYPE_LC.equals(name)) {
-            final String lcValue = value.toLowerCase(Locale.ROOT);
-            return !lcValue.startsWith(FormEncodingType.URL_ENCODED.getName())
-                    && !lcValue.startsWith(FormEncodingType.MULTIPART.getName())
-                    && !lcValue.startsWith(FormEncodingType.TEXT_PLAIN.getName());
-        }
-        return !(HttpHeader.ACCEPT_LC.equals(name)
-                || HttpHeader.ACCEPT_LANGUAGE_LC.equals(name)
-                || HttpHeader.CONTENT_LANGUAGE_LC.equals(name)
-                || HttpHeader.REFERER_LC.equals(name)
+        if (HttpHeader.REFERER_LC.equals(name)
                 || "accept-encoding".equals(name)
-                || HttpHeader.ORIGIN_LC.equals(name));
+                || HttpHeader.ORIGIN_LC.equals(name)) {
+            return false;
+        }
+        return !Headers.isNoCorsSafelistedRequestHeader(name, value);
     }
 
     /**
