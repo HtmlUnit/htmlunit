@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.speech;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -30,7 +31,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition">MDN Documentation</a>
  */
-@JsxClass({CHROME, EDGE})
+@JsxClass({CHROME, EDGE, FF})
 public class SpeechRecognition extends EventTarget {
 
     /**
