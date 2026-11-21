@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="Vidya m">
+                navigator.sendBeacon(): a beacon whose body has a type that is not CORS-safelisted (e.g. a Blob of
+                type application/json) is a cors request; it is only sent to another origin if the preflight allows it.
+            </action>
             <action type="fix" dev="rbri">
                 csp: when simulating Chrome/Edge, the securitypolicyviolation event for an XMLHttpRequest blocked
                 because of the redirect target is fired after the error event (like Chrome).
