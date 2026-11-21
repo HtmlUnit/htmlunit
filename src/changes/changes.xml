@@ -13,6 +13,10 @@
                 X-HTTP-Method-Override, X-Method-Override) if the value contains a forbidden method (CONNECT, TRACE,
                 TRACK) like the browsers; XMLHttpRequest uses the forbidden request headers of fetch().
             </action>
+            <action type="fix" dev="rbri">
+                XMLHttpRequest.setRequestHeader() allows the Content-Transfer-Encoding header; when simulating Firefox
+                setRequestHeader() and fetch() allow the User-Agent header (Chrome/Edge ignore it) like the browsers.
+            </action>
             <action type="fix" dev="Vidya m">
                 XMLHttpRequest.setRequestHeader() ignores the forbidden request headers Origin, DNT, Set-Cookie,
                 Access-Control-Request-Headers and Access-Control-Request-Method like the browsers; a page was able

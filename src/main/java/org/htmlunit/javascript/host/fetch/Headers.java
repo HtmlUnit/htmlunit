@@ -14,12 +14,16 @@
  */
 package org.htmlunit.javascript.host.fetch;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.TreeSet;
 
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.HttpHeader;
 import org.htmlunit.corejs.javascript.ClassDescriptor;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
@@ -582,7 +586,7 @@ public class Headers extends HtmlUnitScriptable {
             case IMMUTABLE:
                 throw JavaScriptEngine.typeError("Headers are immutable");
             case REQUEST, REQUEST_NO_CORS:
-                return isForbiddenRequestHeader(name, value);
+                return isForbiddenRequestHeader(name, value, getBrowserVersion());
             case RESPONSE:
                 return SET_COOKIE.equalsIgnoreCase(name) || "set-cookie2".equalsIgnoreCase(name);
             default:
@@ -654,14 +658,23 @@ public class Headers extends HtmlUnitScriptable {
      * X-Method-Override) if one of the values is a forbidden method (CONNECT, TRACE, TRACK).
      * </p>
      *
+     * Like Chrome/Edge, the User-Agent header is forbidden also (feature
+     * {@code JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN}).
+     *
      * @param name the name
      * @param value the value
+     * @param browserVersion the browser version
      * @return whether the header is a forbidden request header
      * @see <a href="https://fetch.spec.whatwg.org/#forbidden-request-header">Fetch Standard -
      *     forbidden request-header</a>
      */
-    public static boolean isForbiddenRequestHeader(final String name, final String value) {
+    public static boolean isForbiddenRequestHeader(final String name, final String value,
+            final BrowserVersion browserVersion) {
         final String lcName = name.toLowerCase(Locale.ROOT);
+        if (HttpHeader.USER_AGENT_LC.equals(lcName)
+                && browserVersion.hasFeature(JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN)) {
+            return true;
+        }
         for (final String forbidden : FORBIDDEN_REQUEST_HEADERS) {
             if (forbidden.equals(lcName)) {
                 return true;
