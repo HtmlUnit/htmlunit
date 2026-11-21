@@ -120,7 +120,9 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = "done",
+            FF = {"done", "TypeError"},
+            FF_ESR = {"done", "TypeError"})
     public void fetchGetNotExistingUrl() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -137,6 +139,7 @@ public class FetchTest extends WebDriverTestCase {
             + "         })\n"
             + "        .then(text => log(text))\n"
             + "        .catch(e => logEx(e));\n"
+            + "        log('done');\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";

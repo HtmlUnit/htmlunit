@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+        <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, Cookies, Bugfixes">
             <action type="fix" dev="Vidya m">
                 navigator.sendBeacon(): a beacon whose body has a type that is not CORS-safelisted (e.g. a Blob of
                 type application/json) is a cors request; it is only sent to another origin if the preflight allows it.

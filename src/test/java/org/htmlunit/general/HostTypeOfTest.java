@@ -10213,7 +10213,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("function")
+    @Alerts(DEFAULT = "function",
+            CHROME = "undefined")
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
     }

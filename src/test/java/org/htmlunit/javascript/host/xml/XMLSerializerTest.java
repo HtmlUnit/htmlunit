@@ -615,12 +615,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "<catalog>\n"
-                    + "  <cd>\n"
-                    + "    <title>Empire Burlesque</title>\n"
-                    + "    <artist>Bob Dylan \u1042</artist>\n"
-                    + "  </cd>\n"
-                    + "</catalog>",
+    @Alerts(CHROME = "exception",
             EDGE = "<catalog>\n"
                     + "  <cd>\n"
                     + "    <title>Empire Burlesque</title>\n"
@@ -641,12 +636,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "<catalog>\n"
-                    + "  <cd>\n"
-                    + "    <title>Empire Burlesque</title>\n"
-                    + "    <artist>Bob Dylan \u1042</artist>\n"
-                    + "  </cd>\n"
-                    + "</catalog>",
+    @Alerts(CHROME = "exception",
             EDGE = "<catalog>\n"
                     + "  <cd>\n"
                     + "    <title>Empire Burlesque</title>\n"
@@ -667,7 +657,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+    @Alerts(CHROME = "exception",
             EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                     + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
@@ -683,7 +673,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+    @Alerts(CHROME = "exception",
             EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
                     + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
@@ -699,7 +689,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+    @Alerts(CHROME = "exception",
             EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n"
                 + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
@@ -715,7 +705,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+    @Alerts(DEFAULT = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            CHROME = "exception")
     public void outputOmitXmlDeclaration() throws Exception {
         transform("<xsl:output omit-xml-declaration='yes' />");
     }
@@ -724,7 +715,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+    @Alerts(CHROME = "exception",
             EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                     + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
@@ -768,7 +759,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                 + "      var resultDocument = xsltProcessor.transformToDocument(xmlDoc);\n"
                 + "      var xml = new XMLSerializer().serializeToString(resultDocument);\n"
                 + "      ta.value = xml + '\\u00a7';\n"
-                + "    } catch(e) { ta.value = 'exception'; }\n"
+                + "    } catch(e) { ta.value = 'exception\\u00a7'; }\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
