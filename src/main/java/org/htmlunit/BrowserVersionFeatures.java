@@ -485,6 +485,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_INSTALL_TRIGGER_NULL,
 
+    /**
+     * window.open() of a local file (file url) from a page that was not loaded from a file
+     * throws an Error.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WINDOW_OPEN_LOCAL_FILE_THROWS,
+
     /** window.open() of a sandboxed document without 'allow-popups' throws an InvalidAccessError. */
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_OPEN_SANDBOXED_THROWS,

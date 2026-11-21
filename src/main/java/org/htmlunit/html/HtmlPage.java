@@ -415,6 +415,21 @@ public class HtmlPage extends SgmlPage {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
+     * Determines whether this page is allowed to load the specified URL (e.g. into a frame or a window).
+     * Like in the browsers, only pages from a file are allowed to load local resources (file URLs);
+     * about:blank and about:srcdoc documents are judged by the origin of their creator
+     * (see {@link #getOriginUrl()}).
+     *
+     * @param url the URL to load
+     * @return {@code false} if the URL is a file URL and this page does not have a file origin
+     */
+    public boolean isLocalResourceAccessAllowed(final URL url) {
+        return UrlUtils.isLocalResourceAccessAllowed(getOriginUrl(), url);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns the sandbox tokens (the allowed features, e.g. 'allow-scripts') of this document;
      * the document of an iframe with sandbox attribute is sandboxed.
      *
@@ -1835,7 +1850,7 @@ public class HtmlPage extends SgmlPage {
     // here we are replacing the page in the window (maybe after some time)
     private void processRefresh(final URL url, final double time) throws IOException {
         // accessing to local resource is forbidden for security reason
-        if (!UrlUtils.isLocalResourceAccessAllowed(getUrl(), url)) {
+        if (!isLocalResourceAccessAllowed(url)) {
             notifyIncorrectness("Not allowed to load local resource: " + url);
             return;
         }
@@ -2991,6 +3006,11 @@ public class HtmlPage extends SgmlPage {
         try {
             if (href.startsWith("http://") || href.startsWith("https://")) {
                 return new URL(href);
+            }
+            // an absolute url with another scheme (e.g. file:)
+            final int colon = href.indexOf(':');
+            if (colon > 0 && UrlUtils.isValidScheme(href.substring(0, colon))) {
+                return UrlUtils.toUrlUnsafe(href);
             }
             if (href.startsWith("//")) {
                 return new URL("%s:%s".formatted(url.getProtocol(), href));

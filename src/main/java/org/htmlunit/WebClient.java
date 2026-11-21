@@ -1365,7 +1365,7 @@ public class WebClient implements Serializable, AutoCloseable {
             windowToOpen = defaultName;
         }
 
-        WebWindow webWindow = resolveWindow(opener, windowToOpen);
+        WebWindow webWindow = resolveWindow(opener, windowToOpen, true);
 
         if (webWindow == null) {
             if (TARGET_BLANK.equals(windowToOpen)) {
@@ -1381,7 +1381,22 @@ public class WebClient implements Serializable, AutoCloseable {
         return webWindow;
     }
 
-    private WebWindow resolveWindow(final WebWindow opener, final String name) {
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the existing window for the given target name (e.g. a frame or a window opened before);
+     * the name may be a special target name of _self, _parent or _top (relative to the opener window).
+     * Unlike {@link #openTargetWindow(WebWindow, String, String)} no new window is created.
+     *
+     * @param opener the web window that is looking for the target
+     * @param name the target name
+     * @return the window or {@code null} if there is no window with this name
+     */
+    public WebWindow findTargetWindow(final WebWindow opener, final String name) {
+        return resolveWindow(opener, name, false);
+    }
+
+    private WebWindow resolveWindow(final WebWindow opener, final String name, final boolean loadsContent) {
         if (name == null || name.isEmpty() || TARGET_SELF.equals(name)) {
             return opener;
         }
@@ -1406,7 +1421,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 try {
                     final FrameWindow frame = ((HtmlPage) page).getFrameByName(name);
                     final HtmlUnitScriptable scriptable = frame.getFrameElement().getScriptableObject();
-                    if (scriptable instanceof HTMLIFrameElement element) {
+                    if (loadsContent && scriptable instanceof HTMLIFrameElement element) {
                         element.onRefresh();
                     }
                     return frame;
@@ -1966,6 +1981,13 @@ public class WebClient implements Serializable, AutoCloseable {
             final UnaryOperator<URL> redirectUrlMapper = webRequest.getRedirectUrlMapper();
             if (redirectUrlMapper != null) {
                 newUrl = redirectUrlMapper.apply(newUrl);
+            }
+
+            // Fetch standard: a redirect to an url that is not http(s) (e.g. a local file) is a network error
+            final String newProtocol = newUrl.getProtocol();
+            if (!"http".equals(newProtocol) && !"https".equals(newProtocol)) {
+                throw new IOException("Redirect to the non HTTP(S) url '" + newUrl + "' is not allowed ("
+                        + webResponse.getWebRequest().getUrl() + ")");
             }
 
             final Predicate<URL> redirectFilter = webRequest.getRedirectFilter();
@@ -3052,7 +3074,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final WebRequest request, final boolean checkHash,
         final String forceAttachmentWithFilename, final String description) {
 
-        final WebWindow targetWindow = resolveWindow(requestingWindow, target);
+        final WebWindow targetWindow = resolveWindow(requestingWindow, target, true);
         final URL url = request.getUrl();
 
         if (targetWindow != null && HttpMethod.POST != request.getHttpMethod()) {
@@ -3153,7 +3175,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 continue;
             }
 
-            final WebWindow window = resolveWindow(loadJob.requestingWindow_, loadJob.target_);
+            final WebWindow window = resolveWindow(loadJob.requestingWindow_, loadJob.target_, true);
             if (updatedWindows.contains(window)) {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("No usage of download: " + loadJob);

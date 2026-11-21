@@ -8,6 +8,31 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, Cookies, Bugfixes">
+            <action type="fix" dev="rbri">
+                Local files (file urls): about:blank and about:srcdoc documents are checked with the origin of
+                their creator (e.g. an about:blank popup opened by a page loaded from a file is allowed to load
+                local files); the Location setters (e.g. protocol) check the page of the running script like
+                location.href does.
+            </action>
+            <action type="fix" dev="rbri">
+                Like the browsers, window.open() of a local file (file url) from a page that was not loaded from
+                a file opens no window and returns null (before an empty window was opened); an existing window
+                with this name is not navigated and returned (before it was navigated to about:blank); when simulating
+                Firefox an Error is thrown.
+            </action>
+            <action type="fix" dev="rbri">
+                Like the browsers (Fetch standard), a redirect to an url that is not http(s) (e.g. a local file)
+                is a network error; before the url was handed over to the web connection.
+            </action>
+            <action type="fix" dev="rbri">
+                The href of the base element may be an absolute url with any scheme (e.g. file:); before such an
+                url was appended to the url of the page if this url ends with a slash.
+            </action>
+            <action type="update" dev="Vidya m">
+                Like in the browsers, a page that was not loaded from a file is no longer able to load a local
+                file (file url) into a frame or window by setting the location, using window.open(), clicking
+                a link, submitting a form or a refresh; this was only blocked for the src attribute of frames.
+            </action>
             <action type="update" dev="rbri">
                 csp: when simulating Chrome/Edge, a WebSocket blocked by connect-src fires only the error event
                 and no close event (like Chrome/Edge 158).
@@ -36,11 +61,6 @@
             <action type="fix" dev="rbri">
                 XMLHttpRequest.setRequestHeader() allows the Content-Transfer-Encoding header; when simulating Firefox
                 setRequestHeader() and fetch() allow the User-Agent header (Chrome/Edge ignore it) like the browsers.
-            </action>
-            <action type="fix" dev="Vidya m">
-                Like in the browsers, a page that was not loaded from a file is no longer able to load a local
-                file (file url) into a frame or window by setting the location, using window.open(), clicking
-                a link, submitting a form or a refresh; this was only blocked for the src attribute of frames.
             </action>
             <action type="fix" dev="Vidya m">
                 XMLHttpRequest.setRequestHeader() ignores the forbidden request headers Origin, DNT, Set-Cookie,

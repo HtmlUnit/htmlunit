@@ -202,7 +202,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             final URL pageUrl = page.getUrl();
 
             // accessing to local resource is forbidden for security reason
-            if (!UrlUtils.isLocalResourceAccessAllowed(pageUrl, url)) {
+            if (!((HtmlPage) page).isLocalResourceAccessAllowed(url)) {
                 notifyIncorrectness("Not allowed to load local resource: " + source);
                 return;
             }

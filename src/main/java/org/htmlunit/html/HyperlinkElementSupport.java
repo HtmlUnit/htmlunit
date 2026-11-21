@@ -133,7 +133,7 @@ public final class HyperlinkElementSupport {
         final WebClient webClient = page.getWebClient();
 
         // accessing to local resource is forbidden for security reason
-        if (!UrlUtils.isLocalResourceAccessAllowed(pageUrl, url)) {
+        if (!page.isLocalResourceAccessAllowed(url)) {
             webClient.getIncorrectnessListener().notify("Not allowed to load local resource: " + url, htmlElement);
             return;
         }

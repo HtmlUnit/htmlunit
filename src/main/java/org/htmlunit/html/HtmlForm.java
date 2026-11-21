@@ -212,7 +212,7 @@ public class HtmlForm extends HtmlElement {
         request.setUrl(ContentSecurityPolicy.upgradeInsecureRequest(htmlPage, request.getUrl()));
         final URL url = request.getUrl();
         // accessing to local resource is forbidden for security reason
-        if (!UrlUtils.isLocalResourceAccessAllowed(htmlPage.getUrl(), url)) {
+        if (!htmlPage.isLocalResourceAccessAllowed(url)) {
             notifyIncorrectness("Not allowed to load local resource: " + url);
             return;
         }

@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
+import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OPEN_LOCAL_FILE_THROWS;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OPEN_SANDBOXED_THROWS;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -475,19 +476,36 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                 // nothing
             }
         }
-        URL newUrl = makeUrlForOpenWindow(urlString);
+        final URL newUrl = makeUrlForOpenWindow(urlString);
 
         // accessing to local resource is forbidden for security reason;
-        // like in the browsers the new window shows an empty page
+        // like in the browsers no window is opened and an existing window with this name is not navigated
+        // (but returned); Firefox throws
         final Page openerPage = getWebWindow().getEnclosedPage();
-        if (newUrl != null && openerPage != null
-                && !UrlUtils.isLocalResourceAccessAllowed(openerPage.getUrl(), newUrl)) {
+        if (newUrl != null && openerPage != null && !isLocalResourceAccessAllowed(openerPage, newUrl)) {
             webClient.getIncorrectnessListener().notify("Not allowed to load local resource: " + newUrl, this);
-            newUrl = UrlUtils.URL_ABOUT_BLANK;
+            if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OPEN_LOCAL_FILE_THROWS)) {
+                throw JavaScriptEngine.constructError("Error", "Access to '" + newUrl + "' from script denied");
+            }
+            if (StringUtils.isEmptyOrNull(windowName)) {
+                return null;
+            }
+            final WebWindow existingWindow = webClient.findTargetWindow(webWindow_, windowName);
+            if (existingWindow == null) {
+                return null;
+            }
+            return getProxy(existingWindow);
         }
 
         final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow_);
         return getProxy(newWebWindow);
+    }
+
+    private static boolean isLocalResourceAccessAllowed(final Page page, final URL url) {
+        if (page instanceof HtmlPage htmlPage) {
+            return htmlPage.isLocalResourceAccessAllowed(url);
+        }
+        return UrlUtils.isLocalResourceAccessAllowed(page.getUrl(), url);
     }
 
     private URL makeUrlForOpenWindow(final String urlString) {

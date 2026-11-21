@@ -356,7 +356,7 @@ public class Location extends HtmlUnitScriptable {
             url = upgradeInsecureRequest(callingPage, window_.getWebWindow(), url);
 
             // accessing to local resource is forbidden for security reason
-            if (!UrlUtils.isLocalResourceAccessAllowed(callingPage.getUrl(), url)) {
+            if (!callingPage.isLocalResourceAccessAllowed(url)) {
                 webWindow.getWebClient().getIncorrectnessListener()
                         .notify("Not allowed to load local resource: " + url, this);
                 return;
@@ -705,8 +705,17 @@ public class Location extends HtmlUnitScriptable {
             requestUrl = upgradeInsecureRequest(page, webWindow, url);
         }
 
-        // accessing to local resource is forbidden for security reason
-        if (!UrlUtils.isLocalResourceAccessAllowed(getUrl(), requestUrl)) {
+        // accessing to local resource is forbidden for security reason;
+        // like in setHref() the page of the running script decides, not the page shown in this window
+        final WebWindow callingWindow = ((Window) JavaScriptEngine.getTopCallScope().getGlobalThis()).getWebWindow();
+        final boolean allowed;
+        if (callingWindow.getEnclosedPage() instanceof HtmlPage callingPage) {
+            allowed = callingPage.isLocalResourceAccessAllowed(requestUrl);
+        }
+        else {
+            allowed = UrlUtils.isLocalResourceAccessAllowed(callingWindow.getEnclosedPage().getUrl(), requestUrl);
+        }
+        if (!allowed) {
             webWindow.getWebClient().getIncorrectnessListener()
                     .notify("Not allowed to load local resource: " + requestUrl, this);
             return;
