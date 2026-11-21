@@ -475,7 +475,17 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                 // nothing
             }
         }
-        final URL newUrl = makeUrlForOpenWindow(urlString);
+        URL newUrl = makeUrlForOpenWindow(urlString);
+
+        // accessing to local resource is forbidden for security reason;
+        // like in the browsers the new window shows an empty page
+        final Page openerPage = getWebWindow().getEnclosedPage();
+        if (newUrl != null && openerPage != null
+                && !UrlUtils.isLocalResourceAccessAllowed(openerPage.getUrl(), newUrl)) {
+            webClient.getIncorrectnessListener().notify("Not allowed to load local resource: " + newUrl, this);
+            newUrl = UrlUtils.URL_ABOUT_BLANK;
+        }
+
         final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow_);
         return getProxy(newWebWindow);
     }
