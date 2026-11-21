@@ -2771,7 +2771,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionErrorEvent]",
-            FF = "ReferenceError",
+            FF = "TypeError",
             FF_ESR = "ReferenceError")
     public void speechRecognitionErrorEvent() throws Exception {
         testString("", "new SpeechRecognitionErrorEvent('event')");

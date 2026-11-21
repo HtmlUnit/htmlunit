@@ -7172,9 +7172,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = "function SpeechGrammar() { [native code] }",
-            EDGE = "function SpeechGrammar() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechGrammar() { [native code] }",
+            FF_ESR = "ReferenceError")
     public void speechGrammar() throws Exception {
         test("SpeechGrammar");
     }
@@ -7183,9 +7182,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = "function SpeechGrammarList() { [native code] }",
-            EDGE = "function SpeechGrammarList() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechGrammarList() { [native code] }",
+            FF_ESR = "ReferenceError")
     public void speechGrammarList() throws Exception {
         test("SpeechGrammarList");
     }
@@ -7194,9 +7192,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = "function SpeechRecognition() { [native code] }",
-            EDGE = "function SpeechRecognition() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechRecognition() { [native code] }",
+            FF_ESR = "ReferenceError")
     public void speechRecognition() throws Exception {
         test("SpeechRecognition");
     }
@@ -7205,7 +7202,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ReferenceError")
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "function SpeechRecognitionAlternative() { [native code] }")
     public void speechRecognitionAlternative() throws Exception {
         test("SpeechRecognitionAlternative");
     }
@@ -7223,9 +7221,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = "function SpeechRecognitionErrorEvent() { [native code] }",
-            EDGE = "function SpeechRecognitionErrorEvent() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechRecognitionErrorEvent() { [native code] }",
+            FF_ESR = "ReferenceError")
     public void speechRecognitionErrorEvent() throws Exception {
         test("SpeechRecognitionErrorEvent");
     }
@@ -7234,9 +7231,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = "function SpeechRecognitionEvent() { [native code] }",
-            EDGE = "function SpeechRecognitionEvent() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechRecognitionEvent() { [native code] }",
+            FF_ESR = "ReferenceError")
     public void speechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent");
     }
@@ -7245,7 +7241,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ReferenceError")
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "function SpeechRecognitionResult() { [native code] }")
     public void speechRecognitionResult() throws Exception {
         test("SpeechRecognitionResult");
     }
@@ -7254,7 +7251,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ReferenceError")
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "function SpeechRecognitionResultList() { [native code] }")
     public void speechRecognitionResultList() throws Exception {
         test("SpeechRecognitionResultList");
     }
@@ -9921,9 +9919,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = "function SpeechGrammar() { [native code] }",
-            EDGE = "function SpeechGrammar() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechGrammar() { [native code] }",
+            FF_ESR = "ReferenceError")
     public void webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar");
     }
@@ -9932,9 +9929,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = "function SpeechGrammarList() { [native code] }",
-            EDGE = "function SpeechGrammarList() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechGrammarList() { [native code] }",
+            FF_ESR = "ReferenceError")
     public void webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList");
     }
@@ -9943,9 +9939,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = "function SpeechRecognition() { [native code] }",
-            EDGE = "function SpeechRecognition() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechRecognition() { [native code] }",
+            FF_ESR = "ReferenceError")
     public void webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition");
     }
