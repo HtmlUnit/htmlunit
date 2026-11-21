@@ -10284,7 +10284,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("function XSLTProcessor() { [native code] }")
+    @Alerts(DEFAULT = "function XSLTProcessor() { [native code] }",
+            CHROME = "ReferenceError")
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
     }

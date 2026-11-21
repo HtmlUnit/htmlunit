@@ -422,7 +422,7 @@ public class ContentSecurityPolicyConnectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
+    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3"},
             FF = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"},
             FF_ESR = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"})
     @HtmlUnitNYI(FF = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
@@ -460,7 +460,7 @@ public class ContentSecurityPolicyConnectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
+    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3"},
             FF = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"},
             FF_ESR = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"})
     @HtmlUnitNYI(FF = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},

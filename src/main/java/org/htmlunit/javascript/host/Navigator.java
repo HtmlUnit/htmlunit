@@ -34,6 +34,7 @@ import org.htmlunit.HttpMethod;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebRequest.HttpHint;
+import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
@@ -45,6 +46,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.host.fetch.CorsLoader;
 import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.geo.Geolocation;
 import org.htmlunit.javascript.host.media.MediaDevices;
@@ -502,7 +504,28 @@ public class Navigator extends HtmlUnitScriptable {
 
         final WebClient webClient = webWindow.getWebClient();
         try {
-            webClient.loadWebResponse(request);
+            // a body with a type that is not CORS-safelisted (e.g. a Blob of type application/json)
+            // makes the beacon a cors request with credentials; another origin has to allow it
+            // in the preflight before the request is sent (also for redirect targets)
+            if (CorsLoader.isPreflight(request)) {
+                final CorsLoader loader = new CorsLoader(webWindow, CorsLoader.CredentialsMode.INCLUDE,
+                        CorsLoader.RedirectMode.FOLLOW, 0);
+                final boolean sameOrigin = UrlUtils.isSameOrigin(pageUrl, targetUrl);
+                if (!sameOrigin) {
+                    final WebResponse preflightResponse = loader.sendPreflight(request);
+                    if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
+                            || !loader.isPreflightAuthorized(request, preflightResponse)) {
+                        if (LOG.isInfoEnabled()) {
+                            LOG.info("sendBeacon(): the preflight for '" + targetUrl + "' does not allow the request");
+                        }
+                        return true;
+                    }
+                }
+                loader.load(request, sameOrigin);
+            }
+            else {
+                webClient.loadWebResponse(request);
+            }
         }
         catch (final IOException e) {
             if (LOG.isInfoEnabled()) {
