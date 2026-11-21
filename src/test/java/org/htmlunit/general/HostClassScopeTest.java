@@ -428,4 +428,10 @@ public class HostClassScopeTest extends WebDriverTestCase {
     void _webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent");
     }
+
+    @Alerts(DEFAULT = {"true", "function", "function"},
+            CHROME = {"false", "undefined", "undefined"})
+    void _XSLTProcessor() throws Exception {
+        test("webkitSpeechRecognitionEvent");
+    }
 }

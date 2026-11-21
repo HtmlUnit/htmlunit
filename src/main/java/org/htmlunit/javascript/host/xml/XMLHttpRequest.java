@@ -31,9 +31,7 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -88,6 +86,7 @@ import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.ProgressEvent;
 import org.htmlunit.javascript.host.fetch.CorsLoader;
+import org.htmlunit.javascript.host.fetch.Headers;
 import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.EncodingSniffer;
@@ -150,13 +149,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private static final String RESPONSE_TYPE_DOCUMENT = "document";
     private static final String RESPONSE_TYPE_JSON = "json";
     private static final String RESPONSE_TYPE_TEXT = "text";
-
-    private static final HashSet<String> PROHIBITED_HEADERS_ = new HashSet<>(Arrays.asList(
-        "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
-        HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",
-        "content-transfer-encoding", "date", "expect",
-        HttpHeader.HOST_LC, "keep-alive", HttpHeader.REFERER_LC, "te", "trailer", "transfer-encoding",
-        "upgrade", HttpHeader.USER_AGENT_LC, "via"));
 
     private int state_;
     private WebRequest webRequest_;
@@ -1177,7 +1169,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     @JsxFunction
     public void setRequestHeader(final String name, final String value) {
-        if (!isAuthorizedHeader(name)) {
+        if (!isAuthorizedHeader(name, value, getBrowserVersion())) {
             if (LOG.isWarnEnabled()) {
                 LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
                     + ": it is a restricted header");
@@ -1197,18 +1189,17 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Checks whether the specified request header may be set from JavaScript.
+     * Checks whether the specified request header may be set from JavaScript; the forbidden
+     * request headers are the same as for {@code fetch()}.
      *
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader">MDN Documentation</a>
      * @param name the header name
+     * @param value the header value (the method override headers are forbidden for some values)
+     * @param browserVersion the browser version
      * @return {@code true} if the header can be set from JavaScript
      */
-    static boolean isAuthorizedHeader(final String name) {
-        final String nameLowerCase = org.htmlunit.util.StringUtils.toRootLowerCase(name);
-        if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
-            return false;
-        }
-        return !nameLowerCase.startsWith("proxy-") && !nameLowerCase.startsWith("sec-");
+    static boolean isAuthorizedHeader(final String name, final String value, final BrowserVersion browserVersion) {
+        return !Headers.isForbiddenRequestHeader(name, value == null ? "" : value, browserVersion);
     }
 
     /**

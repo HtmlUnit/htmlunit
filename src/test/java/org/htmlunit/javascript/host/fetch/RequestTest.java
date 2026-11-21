@@ -376,6 +376,30 @@ public class RequestTest extends WebDriverTestCase {
     }
 
     /**
+     * The method override headers are forbidden if the value contains a forbidden method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"x-a,v", "x-a,v|x-http-method-override,PUT", "x-a,v|x-http-method-override,PUT"})
+    public void forbiddenHeadersMethodOverride() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const req = new Request('" + URL_SECOND + "',\n"
+            + "      {headers: {'X-HTTP-Method-Override': 'TRACE', 'X-HTTP-Method': 'connect',\n"
+            + "                 'X-Method-Override': 'GET, Track', 'x-a': 'v'}});\n"
+            + "  log([...req.headers].join('|'));\n"
+            + "  req.headers.set('X-HTTP-Method-Override', 'PUT');\n"
+            + "  log([...req.headers].join('|'));\n"
+            + "  req.headers.set('X-HTTP-Method-Override', 'trace');\n"
+            + "  log([...req.headers].join('|'));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

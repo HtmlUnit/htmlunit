@@ -14,9 +14,12 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import java.util.List;
 
 import org.htmlunit.HttpHeader;
+import org.htmlunit.HttpMethod;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -638,6 +641,64 @@ public class NavigatorTest extends WebDriverTestCase {
 
         assertEquals("text/plain", contentType);
         assertEquals("HtmlUnit", requestBody);
+    }
+
+    /**
+     * A {@code Blob} with a CORS-safelisted type is sent to another origin without preflight.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void sendBeaconBlobCrossOrigin() throws Exception {
+        getMockWebConnection().setResponse(URL_THIRD, "");
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var blob = new Blob(['HtmlUnit'], {type: 'text/plain'});\n"
+            + "  log(navigator.sendBeacon('" + URL_THIRD + "', blob));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+
+        sleepRealBrowser(100);
+        assertEquals(URL_THIRD, getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(HttpMethod.POST, getMockWebConnection().getLastMethod());
+        assertEquals("HtmlUnit", getMockWebConnection().getLastWebRequest().getRequestBody());
+    }
+
+    /**
+     * A {@code Blob} with a type that is not CORS-safelisted makes the beacon a cors request;
+     * it must not be sent to another origin that does not allow it in the preflight.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("done")
+    public void sendBeaconBlobCrossOriginNotSafelistedType() throws Exception {
+        getMockWebConnection().setResponse(URL_THIRD, "");
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var blob = new Blob(['{\"amount\":1000}'], {type: 'application/json'});\n"
+            + "  try {\n"
+            + "    navigator.sendBeacon('" + URL_THIRD + "', blob);\n"
+            + "  } catch(e) {}\n"
+            + "  log('done');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+
+        sleepRealBrowser(100);
+        assertNotEquals(HttpMethod.POST, getMockWebConnection().getLastMethod());
     }
 
     /**

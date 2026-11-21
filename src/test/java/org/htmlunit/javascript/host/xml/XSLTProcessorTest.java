@@ -38,6 +38,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
                 + "<head></head><body> <h2>My CD Collection</h2> "
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul> </body></html>",
+            CHROME = "ReferenceError",
             FF = "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
                 + "<body><h2>My CD Collection</h2>"
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>",
@@ -121,7 +122,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("*bar*")
+    @Alerts(DEFAULT = "*bar*",
+            CHROME = "ReferenceError")
     public void transformToFragment() throws Exception {
         final String xsl
             = "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
@@ -155,8 +157,9 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "function", "function", "function", "function",
-             "undefined", "undefined", "undefined", "undefined"})
+    @Alerts(DEFAULT = {"function", "function", "function", "function", "function",
+                       "undefined", "undefined", "undefined", "undefined"},
+            CHROME = "ReferenceError")
     public void methods() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -190,8 +193,9 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "function XSLTProcessor() { [native code] }",
-             "[object XSLTProcessor]"})
+    @Alerts(DEFAULT = {"function", "function XSLTProcessor() { [native code] }",
+                       "[object XSLTProcessor]"},
+            CHROME = {"undefined", "ReferenceError"})
     public void type() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -214,7 +218,10 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"})
+    @Alerts(DEFAULT = {"exception str", "exception numb", "exception bool", "exception ?", "exception if"},
+            EDGE = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"},
+            FF = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"},
+            FF_ESR = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"})
     public void browserDetection() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -250,6 +257,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"preparation done", "null"},
+            CHROME = "exception ReferenceError",
             FF = {"preparation done", "exception "},
             FF_ESR = {"preparation done", "exception "})
     @HtmlUnitNYI(CHROME = {"preparation done", "exception InternalError"},

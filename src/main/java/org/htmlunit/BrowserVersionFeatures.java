@@ -450,6 +450,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,
 
+    /**
+     * The User-Agent header is a forbidden request header (fetch() and XMLHttpRequest);
+     * it is no longer part of the forbidden request headers of the Fetch standard.
+     */
+    @BrowserFeature({CHROME, EDGE})
+    JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN,
+
     /** script tags created from js as child of templates is processed if added to the dom. */
     @BrowserFeature({CHROME, EDGE})
     JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH,

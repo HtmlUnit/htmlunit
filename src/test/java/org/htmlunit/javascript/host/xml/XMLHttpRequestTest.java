@@ -30,6 +30,8 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
@@ -2376,24 +2378,37 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     public void isAuthorizedHeader() throws Exception {
-        assertTrue(XMLHttpRequest.isAuthorizedHeader("Foo"));
-        assertTrue(XMLHttpRequest.isAuthorizedHeader(HttpHeader.CONTENT_TYPE));
+        final BrowserVersion browserVersion = getBrowserVersion();
+        assertTrue(XMLHttpRequest.isAuthorizedHeader("Foo", "", browserVersion));
+        assertTrue(XMLHttpRequest.isAuthorizedHeader(HttpHeader.CONTENT_TYPE, "", browserVersion));
+        assertTrue(XMLHttpRequest.isAuthorizedHeader("content-transfer-encoding", "", browserVersion));
 
         final String[] headers = {"accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
+                "access-control-request-headers", "access-control-request-method",
                 HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",
-                "content-transfer-encoding", "date",
-                "expect", HttpHeader.HOST_LC, "keep-alive", HttpHeader.REFERER_LC,
-                "te", "trailer", "transfer-encoding", "upgrade",
-                HttpHeader.USER_AGENT_LC, "via" };
+                "date", "dnt",
+                "expect", HttpHeader.HOST_LC, "keep-alive", HttpHeader.ORIGIN_LC, HttpHeader.REFERER_LC,
+                "set-cookie", "te", "trailer", "transfer-encoding", "upgrade", "via" };
         for (final String header : headers) {
-            assertFalse(XMLHttpRequest.isAuthorizedHeader(header));
-            assertFalse(XMLHttpRequest.isAuthorizedHeader(header.toUpperCase(Locale.ROOT)));
+            assertFalse(XMLHttpRequest.isAuthorizedHeader(header, "", browserVersion));
+            assertFalse(XMLHttpRequest.isAuthorizedHeader(header.toUpperCase(Locale.ROOT), "", browserVersion));
         }
-        assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-"));
-        assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Control"));
-        assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Hack"));
-        assertFalse(XMLHttpRequest.isAuthorizedHeader("Sec-"));
-        assertFalse(XMLHttpRequest.isAuthorizedHeader("Sec-Hack"));
+
+        // Chrome/Edge do not allow to set the User-Agent header, Firefox does
+        assertEquals(!browserVersion.hasFeature(BrowserVersionFeatures.JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN),
+                XMLHttpRequest.isAuthorizedHeader(HttpHeader.USER_AGENT, "", browserVersion));
+
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("X-HTTP-Method-Override", "TRACE", browserVersion));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("x-http-method", "connect", browserVersion));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("X-Method-Override", "GET, Track", browserVersion));
+        assertTrue(XMLHttpRequest.isAuthorizedHeader("X-HTTP-Method-Override", "PUT", browserVersion));
+        assertTrue(XMLHttpRequest.isAuthorizedHeader("X-HTTP-Method-Override", "", browserVersion));
+
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-", "", browserVersion));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Control", "", browserVersion));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Hack", "", browserVersion));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Sec-", "", browserVersion));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Sec-Hack", "", browserVersion));
     }
 
     /**

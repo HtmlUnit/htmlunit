@@ -1769,6 +1769,37 @@ public class FetchCORSTest extends WebDriverTestCase {
         loadAndVerify(headersPage(null, originA() + "/pivot"));
     }
 
+    /**
+     * The Origin header can not be set by the page; the server gets the origin of the page.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"200", "cors", "origin=§§URL§§;cookie=null;auth=null"})
+    public void originHeaderIgnored() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+
+        loadAndVerify(fetchPage("", "{headers: {'Origin': '" + originB() + "'}}",
+                originB() + "/echo?acao=*"));
+    }
+
+    /**
+     * A page can not pass the CORS check of a server that only trusts another origin
+     * by setting the Origin header to that origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void originHeaderDoesNotPassCorsCheck() throws Exception {
+        startSecondServer();
+
+        loadAndVerify(fetchPage("  document.cookie = 'c=1; path=/';\n",
+                "{credentials: 'include', headers: {'Origin': '" + originB() + "'}}",
+                originB() + "/echo?acac=true&acao=" + enc(originB())));
+    }
+
     // ---------------------------------------------------------------------------
     // servlets
     // ---------------------------------------------------------------------------
