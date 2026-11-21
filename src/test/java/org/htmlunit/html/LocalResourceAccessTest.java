@@ -32,7 +32,6 @@ import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
@@ -96,8 +95,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"top",
-             "frame: frame",
-             "log: "})
+             "frame: frame"})
     public void http_frameLocationAssign() throws Exception {
         httpFrameTest("frames.f.location.assign('" + targetUrl() + "');");
     }
@@ -109,8 +107,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"top",
-             "frame: frame",
-             "log: "})
+             "frame: frame"})
     public void http_frameLocationReplace() throws Exception {
         httpFrameTest("frames.f.location.replace('" + targetUrl() + "');");
     }
@@ -122,8 +119,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"top",
-             "frame: frame",
-             "log: "})
+             "frame: frame"})
     public void http_frameLocationHref() throws Exception {
         httpFrameTest("frames.f.location.href = '" + targetUrl() + "';");
     }
@@ -137,7 +133,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
     @Test
     @Alerts({"top",
              "frame: frame",
-             "log: http:\u00A7"})
+             "http:"})
     public void http_frameLocationProtocol() throws Exception {
         httpFrameTest("try {\n"
                 + "  frames.f.location.protocol = 'file:';\n"
@@ -152,14 +148,13 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"top",
-                       "frame: frame",
-                       "log: "},
+                       "frame: frame"},
             FF = {"top",
                   "frame: frame",
-                  "log: Error/Error\u00A7"},
+                  "Error/Error"},
             FF_ESR = {"top",
                       "frame: frame",
-                      "log: Error/Error\u00A7"})
+                      "Error/Error"})
     public void http_windowOpenIntoFrame() throws Exception {
         httpFrameTest("try {\n"
                 + "  window.open('" + targetUrl() + "', 'f');\n"
@@ -173,8 +168,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"top",
-             "frame: frame",
-             "log: "})
+             "frame: frame"})
     public void http_linkTarget() throws Exception {
         httpFrameTest("<a id='a' href='" + targetUrl() + "' target='f'>link</a>",
                 "document.getElementById('a').click();");
@@ -187,8 +181,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"top",
-             "frame: frame",
-             "log: "})
+             "frame: frame"})
     public void http_areaTarget() throws Exception {
         httpFrameTest("<map name='m'><area id='a' shape='rect' coords='0,0,10,10' href='" + targetUrl()
                 + "' target='f'></map>",
@@ -226,8 +219,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"top",
-             "frame: frame",
-             "log: "})
+             "frame: frame"})
     public void http_formTarget() throws Exception {
         httpFrameTest("<form id='form' action='" + targetUrl() + "' method='get' target='f'>"
                 + "<input type='submit' id='s'></form>",
@@ -241,8 +233,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"top",
-             "frame: frame",
-             "log: "})
+             "frame: frame"})
     public void http_formAction() throws Exception {
         httpFrameTest("<form id='form' action='" + URL_THIRD + "' method='get' target='f'>"
                 + "<button type='submit' id='s' formaction='" + targetUrl() + "'>go</button></form>",
@@ -256,8 +247,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"top",
-             "frame: frame",
-             "log: "})
+             "frame: frame"})
     public void http_formSubmit() throws Exception {
         httpFrameTest("<form id='form' action='" + targetUrl() + "' method='get' target='f'></form>",
                 "document.getElementById('form').submit();");
@@ -270,8 +260,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"top",
-             "frame: frame",
-             "log: "})
+             "frame: frame"})
     public void http_formRequestSubmit() throws Exception {
         httpFrameTest("<form id='form' action='" + targetUrl() + "' method='get' target='f'></form>",
                 "document.getElementById('form').requestSubmit();");
@@ -505,13 +494,14 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"top",
                        "frame: frame",
-                       "log: false\u00A7true\u00A7"},
+                       "false",
+                       "true"},
             FF = {"top",
                   "frame: frame",
-                  "log: Error/Error\u00A7"},
+                  "Error/Error"},
             FF_ESR = {"top",
                       "frame: frame",
-                      "log: Error/Error\u00A7"})
+                      "Error/Error"})
     public void http_windowOpenIntoFrameReturnValue() throws Exception {
         httpFrameTest("try {\n"
                 + "  var w = window.open('" + targetUrl() + "', 'f');\n"
@@ -817,7 +807,7 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
 
     /**
      * Loads a page from the server with a frame 'f' (loaded from the server) and runs the script
-     * when the page is loaded. Verifies the title of the page, the text of the frame and the log.
+     * when the page is loaded. Verifies the title of the page, the text of the frame and the logged entries.
      */
     private void httpFrameTest(final String script) throws Exception {
         httpFrameTest("", script);
@@ -840,7 +830,13 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, FRAME_HTML);
 
         final WebDriver driver = loadPage2(html);
-        verifyResults(driver, d -> List.of(d.getTitle(), frameText(d, "f"), logContent(d)));
+        verifyResults(driver, d -> {
+            final List<String> results = new ArrayList<>();
+            results.add(d.getTitle());
+            results.add(frameText(d, "f"));
+            results.addAll(getWindowName2Entries(d));
+            return results;
+        });
     }
 
     /**
@@ -956,13 +952,6 @@ public class LocalResourceAccessTest extends WebDriverTestCase {
         finally {
             driver.switchTo().defaultContent();
         }
-    }
-
-    /**
-     * Returns the content of the log (window.name) of the top window.
-     */
-    private static String logContent(final WebDriver driver) {
-        return "log: " + ((JavascriptExecutor) driver).executeScript("return window.top.name");
     }
 
     /**
