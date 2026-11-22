@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -79,7 +80,7 @@ public class URL extends HtmlUnitScriptable {
                 url_ = UrlUtils.toUrlUnsafe(UrlUtils.resolveUrl(baseUrl, url));
             }
             url_ = UrlUtils.removeRedundantPort(url_);
-            if (fileWithoutHost()) {
+            if ("file".equals(url_.getProtocol()) && fileWithoutHost()) {
                 url_ = UrlUtils.removeLocalhostFromFileUrl(url_);
             }
         }
@@ -622,6 +623,8 @@ public class URL extends HtmlUnitScriptable {
     }
 
     private boolean fileWithoutHost() {
-        return getBrowserVersion().hasFeature(JS_URL_FILE_WITHOUT_HOST);
+        // the browser version is not available for internal instances without scope (e.g. of URLSearchParams)
+        final BrowserVersion browserVersion = getBrowserVersion();
+        return browserVersion != null && browserVersion.hasFeature(JS_URL_FILE_WITHOUT_HOST);
     }
 }
