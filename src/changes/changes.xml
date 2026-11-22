@@ -9,6 +9,13 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
             <action type="fix" dev="rbri">
+                The protocol setters (URL, HTMLAnchorElement, HTMLAreaElement, location) follow the rules of the
+                URL Standard: the scheme is not changed to 'file' if the url has credentials or a port, not
+                from 'file' if the host is empty and not between special and not special schemes.
+                Like the HTML Standard, location.protocol throws a SyntaxError for an invalid scheme and
+                navigates only to http(s) urls (before e.g. 'file:' or 'foo:' was navigated).
+            </action>
+            <action type="fix" dev="rbri">
                 Like the browsers, a page not loaded from a file is not allowed to load scripts, images,
                 stylesheets (also @import), workers and importScripts() from local files (file urls);
                 the load fails like a network error. new Worker() throws a SecurityError (Firefox fires the

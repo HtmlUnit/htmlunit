@@ -858,7 +858,9 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "foo3.html", "foo2.html"})
+    @Alerts(DEFAULT = {"", "foo3.html", "foo2.html"},
+            FF = ", foo2.html",
+            FF_ESR = ", foo2.html")
     public void onlick_set_location_WithHref() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
@@ -1480,10 +1482,8 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "2", "3", "a.html?urlParam=urlVal",
                        "4", "http://§§URL§§", "http://§§URL§§/second/a.html?urlParam=urlVal", "§§URL§§"},
-            FF = {"1", "2", "3", "a.html?urlParam=urlVal",
-                  "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"},
-            FF_ESR = {"1", "2", "3", "a.html?urlParam=urlVal",
-                      "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"})
+            FF = "2",
+            FF_ESR = "2")
     public void reloadPost() throws Exception {
         final String form = DOCTYPE_HTML
               + "<html>\n"
@@ -1761,5 +1761,94 @@ public class Location2Test extends WebDriverTestCase {
         driver.navigate().refresh();
         assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
         assertEquals(0, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * Setting location.protocol to an invalid scheme.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SyntaxError/DOMException",
+                      "loads 1"})
+    public void setProtocolInvalid() throws Exception {
+        setFrameProtocol("1x");
+    }
+
+    /**
+     * Setting location.protocol to an empty string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SyntaxError/DOMException",
+                      "loads 1"})
+    public void setProtocolEmpty() throws Exception {
+        setFrameProtocol("");
+    }
+
+    /**
+     * Setting location.protocol to 'ftp' (no http(s) scheme, no navigation).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"http:",
+                      "loads 1"})
+    public void setProtocolFtp() throws Exception {
+        setFrameProtocol("ftp");
+    }
+
+    /**
+     * Setting location.protocol to 'file' for an url with a port (the scheme is not changed,
+     * the url is navigated again).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"http:",
+                                "loads 2"},
+            FF = {"http:",
+                  "loads 1"},
+            FF_ESR = {"http:",
+                      "loads 1"})
+    public void setProtocolFileWithPort() throws Exception {
+        setFrameProtocol("file");
+    }
+
+    /**
+     * Setting location.protocol to a not special scheme (the scheme is not changed).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"http:",
+                                "loads 2"},
+            FF = {"http:",
+                  "loads 1"},
+            FF_ESR = {"http:",
+                      "loads 1"})
+    public void setProtocolNotSpecial() throws Exception {
+        setFrameProtocol("foo");
+    }
+
+    /**
+     * Sets the protocol of the location of a frame; logs the exception, the protocol and
+     * the number of loads of the frame.
+     */
+    private void setFrameProtocol(final String protocol) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var loads = 0;\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      frames.f.location.protocol = '" + protocol + "';\n"
+            + "      log(frames.f.location.protocol);\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "    setTimeout(function() { log('loads ' + loads); }, 500);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<iframe name='f' src='" + URL_SECOND + "' onload='loads++'></iframe>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, DOCTYPE_HTML + "<html><body>frame</body></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 }

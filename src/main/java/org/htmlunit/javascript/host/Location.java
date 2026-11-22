@@ -650,13 +650,27 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Sets the protocol portion of the location URL.
+     * Like the HTML Standard, an invalid scheme throws a SyntaxError and only http(s) urls are
+     * navigated (e.g. setting 'file:' or 'ftp:' does nothing); the URL Standard rules of the
+     * {@code protocol} setter apply (see {@link UrlUtils#getUrlWithNewProtocolLikeSetter(URL, String)}).
      *
      * @param protocol the new protocol portion of the location URL
      * @throws Exception if an error occurs
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol">MDN Documentation</a>
+     * @see <a href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-protocol">
+     *      HTML Standard - location.protocol</a>
      */
     public void setProtocol(final String protocol) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), protocol));
+        final URL newUrl = UrlUtils.getUrlWithNewProtocolLikeSetter(getUrl(), protocol);
+        if (newUrl == null) {
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "Failed to set the 'protocol' property on 'Location': '" + protocol
+                    + "' is an invalid scheme.", DOMException.SYNTAX_ERR);
+        }
+        final String scheme = newUrl.getProtocol();
+        if (!"http".equals(scheme) && !"https".equals(scheme)) {
+            return;
+        }
+        setUrl(newUrl);
     }
 
     /**

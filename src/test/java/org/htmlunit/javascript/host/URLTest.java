@@ -1402,4 +1402,102 @@ public class URLTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Sets the protocol to 'file' for an url with a port.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("http://localhost:8080/a")
+    public void protocolFileWithPort() throws Exception {
+        setProtocol("http://localhost:8080/a", "file");
+    }
+
+    /**
+     * Sets the protocol to 'file' for an url with credentials.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("http://user:pwd@localhost/a")
+    public void protocolFileWithCredentials() throws Exception {
+        setProtocol("http://user:pwd@localhost/a", "file");
+    }
+
+    /**
+     * Sets the protocol to 'file' for an url without port and credentials.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "file://localhost/a",
+            FF = "file:///a",
+            FF_ESR = "file:///a")
+    public void protocolFile() throws Exception {
+        setProtocol("http://localhost/a", "file");
+    }
+
+    /**
+     * Sets the protocol from 'file' for an url with an empty host.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("file:///C:/a")
+    public void protocolFromFileEmptyHost() throws Exception {
+        setProtocol("file:///C:/a", "http");
+    }
+
+    /**
+     * Sets the protocol from 'file' for an url with a host.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "http://localhost/a",
+            FF = "file:///a",
+            FF_ESR = "file:///a")
+    public void protocolFromFileWithHost() throws Exception {
+        setProtocol("file://localhost/a", "http");
+    }
+
+    /**
+     * Sets the protocol from a special scheme to a not special one.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("http://localhost/a")
+    public void protocolNotSpecial() throws Exception {
+        setProtocol("http://localhost/a", "foo");
+    }
+
+    /**
+     * Sets the protocol to an invalid scheme.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("http://localhost/a")
+    public void protocolInvalid() throws Exception {
+        setProtocol("http://localhost/a", "1x");
+    }
+
+    /**
+     * Sets the protocol to a scheme with the port as default port.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("https://localhost/a")
+    public void protocolDefaultPort() throws Exception {
+        setProtocol("http://localhost:443/a", "https");
+    }
+
+    private void setProtocol(final String url, final String protocol) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    var u = new URL('" + url + "');\n"
+            + "    u.protocol = '" + protocol + "';\n"
+            + "    log(u.href);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

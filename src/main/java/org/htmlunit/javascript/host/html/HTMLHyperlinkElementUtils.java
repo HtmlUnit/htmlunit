@@ -141,22 +141,11 @@ final class HTMLHyperlinkElementUtils {
             return null;
         }
 
-        final String bareProtocol = StringUtils.substringBefore(protocol, ":").trim();
-        if (!UrlUtils.isValidScheme(bareProtocol)) {
+        final URL result = UrlUtils.getUrlWithNewProtocolLikeSetter(url, protocol);
+        if (result == null || result == url) {
             return null;
         }
-        if (!UrlUtils.isSpecialScheme(bareProtocol)) {
-            return null;
-        }
-
-        try {
-            URL result = UrlUtils.getUrlWithNewProtocol(url, bareProtocol);
-            result = UrlUtils.removeRedundantPort(result);
-            return result;
-        }
-        catch (final MalformedURLException ignored) {
-            return null;
-        }
+        return result;
     }
 
     /**

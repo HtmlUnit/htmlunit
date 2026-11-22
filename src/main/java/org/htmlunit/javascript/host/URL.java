@@ -464,20 +464,9 @@ public class URL extends HtmlUnitScriptable {
             return;
         }
 
-        final String bareProtocol = org.htmlunit.util.StringUtils.substringBefore(protocol, ":").trim();
-        if (!UrlUtils.isValidScheme(bareProtocol)) {
-            return;
-        }
-        if (!UrlUtils.isSpecialScheme(bareProtocol)) {
-            return;
-        }
-
-        try {
-            url_ = UrlUtils.getUrlWithNewProtocol(url_, bareProtocol);
-            url_ = UrlUtils.removeRedundantPort(url_);
-        }
-        catch (final MalformedURLException ignored) {
-            // ignore
+        final java.net.URL newUrl = UrlUtils.getUrlWithNewProtocolLikeSetter(url_, protocol);
+        if (newUrl != null) {
+            url_ = newUrl;
         }
     }
 
