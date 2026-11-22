@@ -15,6 +15,10 @@
                 parameters are kept like Chrome does it (names and values unchanged, split at every semicolon).
             </action>
             <action type="fix" dev="rbri">
+                The ';base64' marker of data urls is case-insensitive and may be surrounded by spaces
+                (e.g. 'data:text/plain ; BASE64,eA==').
+            </action>
+            <action type="fix" dev="rbri">
                 When simulating Firefox, the content type of a file with the extension 'properties' is text/plain
                 (e.g. for file uploads); like Firefox' built-in mapping.
             </action>

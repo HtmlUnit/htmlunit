@@ -89,9 +89,12 @@ public class DataUrlDecoder {
         }
 
         String beforeData = url.substring(DATA_PREFIX.length(), comma);
-        final boolean base64 = beforeData.endsWith(";base64");
+        // ';base64' at the end (case-insensitive, spaces allowed)
+        final int lastSemicolon = beforeData.lastIndexOf(';');
+        final boolean base64 = lastSemicolon > -1
+                && "base64".equalsIgnoreCase(beforeData.substring(lastSemicolon + 1).strip());
         if (base64) {
-            beforeData = beforeData.substring(0, beforeData.length() - 7);
+            beforeData = beforeData.substring(0, lastSemicolon);
         }
         final String mediaType = extractMediaType(beforeData);
         final Charset charset = extractCharset(beforeData);
@@ -283,8 +286,9 @@ public class DataUrlDecoder {
 
     /**
      * Appends the parameters like Chrome does it for data urls: split at every ';', parameters without
-     * '=' or with an invalid name are ignored, names and values are kept (a quoted value ends at the next
-     * quote or at the end of the parameter), the first charset parameter is moved to the end.
+     * '=' or with whitespace around the '=' are ignored, names and values are kept (a quoted value ends
+     * at the next not escaped quote or at the end of the parameter), the first charset parameter is moved
+     * to the end (without quotes).
      *
      * @param result the serialized type and subtype
      * @param parameters the parameter part of the MIME type (starting with ';' or empty)
@@ -298,18 +302,34 @@ public class DataUrlDecoder {
                 continue;
             }
             final String name = parameter.substring(0, equals);
-            String value = stripHttpWhitespace(parameter.substring(equals + 1));
-            if (!isToken(name) || !isQuotedStringContent(value)) {
+            // whitespace around the '=' makes the parameter invalid ('a = b')
+            if (isHttpWhitespace(name.charAt(name.length() - 1))
+                    || equals + 1 < parameter.length() && isHttpWhitespace(parameter.charAt(equals + 1))) {
                 continue;
             }
+            String value = parameter.substring(equals + 1);
+            if (!isQuotedStringContent(value)) {
+                continue;
+            }
+            String unquoted = value;
             if (value.startsWith("\"")) {
-                final int quote = value.indexOf('"', 1);
-                value = '"' + (quote < 0 ? value.substring(1) : value.substring(1, quote)) + '"';
+                final StringBuilder content = new StringBuilder();
+                int i = 1;
+                while (i < value.length() && value.charAt(i) != '"') {
+                    if (value.charAt(i) == '\\' && i + 1 < value.length()) {
+                        i++;
+                    }
+                    content.append(value.charAt(i));
+                    i++;
+                }
+                unquoted = content.toString();
+                // the raw value (with escapes) up to the closing quote
+                value = i < value.length() ? value.substring(0, i + 1) : value + '"';
             }
 
             if ("charset".equalsIgnoreCase(name)) {
-                if (charset == null && !value.isEmpty()) {
-                    charset = value;
+                if (charset == null && !unquoted.isEmpty()) {
+                    charset = unquoted;
                 }
                 continue;
             }

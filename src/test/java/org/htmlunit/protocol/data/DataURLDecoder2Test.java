@@ -14,6 +14,7 @@
  */
 package org.htmlunit.protocol.data;
 
+import static java.nio.charset.StandardCharsets.US_ASCII;
 import static org.htmlunit.protocol.data.DataUrlDecoder.decodeDataURL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -131,6 +132,13 @@ public class DataURLDecoder2Test {
                 DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b;c\";a=d"));
         assertEquals("text/plain;a=\"b c\"", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b c\""));
         assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;d"));
+        assertEquals("text/plain;a b=c;d=e", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a b=c;d=e"));
+        assertEquals("text/plain;@=x;d=e", DataUrlDecoder.parseAndSerializeMimeType("text/plain;@=x;d=e"));
+        assertEquals("text/plain;c=d", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a = b;c=d"));
+        assertEquals("text/plain;a=\"b\\\"c\";d=e",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b\\\"c\";d=e"));
+        assertEquals("text/plain;charset=utf-8",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=\"utf-8\""));
         Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("text"));
         Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("/plain"));
         Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("text/"));
@@ -179,6 +187,12 @@ public class DataURLDecoder2Test {
         final DataUrlDecoder spaces = decodeDataURL("data:text/plain ; a=\"b c\" ;base64,eA==");
         assertEquals("text/plain;a=\"b c\"", spaces.getContentType(false));
         assertEquals("text/plain;a=bc", spaces.getContentType(true));
+
+        // base64 is case-insensitive, spaces are allowed
+        final DataUrlDecoder upperCase = decodeDataURL("data:text/plain ; a=\"b c\" ; BASE64,eA==");
+        assertEquals("x", new String(upperCase.getBytes(), US_ASCII));
+        assertEquals("text/plain;a=\"b c\"", upperCase.getContentType(false));
+        assertEquals("text/plain;a=bc", upperCase.getContentType(true));
 
         final DataUrlDecoder spacesNoBase64 = decodeDataURL("data:text/plain;a=\"b c\",x");
         assertEquals("text/plain;a=\"b c\"", spacesNoBase64.getContentType(false));

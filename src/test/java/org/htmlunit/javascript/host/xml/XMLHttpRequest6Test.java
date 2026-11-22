@@ -552,6 +552,106 @@ public class XMLHttpRequest6Test extends WebDriverTestCase {
         sendDataUrlContentType("data:text/plain;a=\"b;c\";a=d,x");
     }
 
+    /**
+     * The content type of a data url with a parameter with a space in the name.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;a b=c;d=e",
+            FF = "text/plain;d=e",
+            FF_ESR = "text/plain;d=e")
+    public void sendDataUrl_ContentTypeInvalidName() throws Exception {
+        sendDataUrlContentType("data:text/plain;a b=c;d=e,x");
+    }
+
+    /**
+     * The content type of a data url with a parameter with an invalid character as name.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;@=x;d=e",
+            FF = "text/plain;d=e",
+            FF_ESR = "text/plain;d=e")
+    public void sendDataUrl_ContentTypeInvalidNameChar() throws Exception {
+        sendDataUrlContentType("data:text/plain;@=x;d=e,x");
+    }
+
+    /**
+     * The content type of a data url with spaces around the equals sign of a parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain;c=d")
+    public void sendDataUrl_ContentTypeSpaceAroundEquals() throws Exception {
+        sendDataUrlContentType("data:text/plain;a = b;c=d,x");
+    }
+
+    /**
+     * The content type of a data url with an empty charset parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain")
+    public void sendDataUrl_ContentTypeEmptyCharset() throws Exception {
+        sendDataUrlContentType("data:text/plain;charset=,x");
+    }
+
+    /**
+     * The content type of a data url with a quoted charset parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain;charset=utf-8")
+    public void sendDataUrl_ContentTypeQuotedCharset() throws Exception {
+        sendDataUrlContentType("data:text/plain;charset=\"utf-8\",x");
+    }
+
+    /**
+     * The content type of a data url with a quoted value containing an escaped quote.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain;a=\"b\\\"c\";d=e")
+    public void sendDataUrl_ContentTypeQuotedBackslash() throws Exception {
+        sendDataUrlContentType("data:text/plain;a=\"b\\\\\"c\";d=e,x");
+    }
+
+    /**
+     * The content type of a data url with spaces around the parameters (no base64).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain;a=b;c=d")
+    public void sendDataUrl_ContentTypeSpacesNoBase64() throws Exception {
+        sendDataUrlContentType("data:text/plain ; a=b ; c=d,x");
+    }
+
+    /**
+     * The content type of a data url with spaces and an upper case base64.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"text/plain;a=\"b c\"",
+                                "x"},
+            FF = {"text/plain;a=bc",
+                  "x"},
+            FF_ESR = {"text/plain;a=bc",
+                      "x"})
+    public void sendDataUrl_ContentTypeSpacesBase64UpperCase() throws Exception {
+        sendDataUrlContentTypeAndText("data:text/plain ; a=\"b c\" ; BASE64,eA==");
+    }
+
+    /**
+     * The content type of a data url with base64 not as the last parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"text/plain;a=b",
+                      "eA=="})
+    public void sendDataUrl_ContentTypeBase64NotLast() throws Exception {
+        sendDataUrlContentTypeAndText("data:text/plain;base64;a=b,eA==");
+    }
+
     private void sendDataUrlContentType(final String url) throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
@@ -561,6 +661,22 @@ public class XMLHttpRequest6Test extends WebDriverTestCase {
                 + "    xhr.open('GET', '" + url + "', false);\n"
                 + "    xhr.send();\n"
                 + "    log(xhr.getResponseHeader('content-type'));\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    private void sendDataUrlContentTypeAndText(final String url) throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    const xhr = new XMLHttpRequest();\n"
+                + "    xhr.open('GET', '" + url + "', false);\n"
+                + "    xhr.send();\n"
+                + "    log(xhr.getResponseHeader('content-type'));\n"
+                + "    log(xhr.responseText);\n"
                 + "  } catch (e) { logEx(e); }\n"
                 + "</script></head><body></body></html>";
 
