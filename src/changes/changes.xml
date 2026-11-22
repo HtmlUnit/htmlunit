@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Skip holes of the array returned by the flatMap callback.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Skip for-in properties shadowed by non-enumerable properties.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix Number.prototype.toPrecision for values below 0.1 that need padding zeros.
+            </action>
             <action type="fix" dev="rbri">
                 The protocol setters (URL, HTMLAnchorElement, HTMLAreaElement, location) follow the rules of the
                 URL Standard: the scheme is not changed to 'file' if the url has credentials or a port, not
