@@ -134,4 +134,33 @@ public class DataURLDecoder2Test {
         Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("te xt/plain"));
         Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType(""));
     }
+
+    /**
+     * Tests the MIME type parsing and serialization like the MIME Sniffing Standard (and Firefox)
+     * does it for data urls; duplicate parameters are ignored, the charset stays in place.
+     */
+    @Test
+    public void parseAndSerializeMimeTypeStandard() {
+        assertEquals("text/plain", DataUrlDecoder.parseAndSerializeMimeType(" Text/Plain ", true));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;a=c", true));
+        assertEquals("text/plain;charset=foo;a=b",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;a=c", true));
+        assertEquals("text/plain;charset=foo;a=b",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;charset=bar", true));
+        assertEquals("text/plain;a=b;charset=foo",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;charset=foo", true));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;c=;d", true));
+    }
+
+    /**
+     * Tests the content type with and without standard serialization.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void contentTypeStandardSerialization() throws Exception {
+        final DataUrlDecoder decoder = decodeDataURL("data:text/plain;charset=foo;a=b;a=c,x");
+        assertEquals("text/plain;a=b;a=c;charset=foo", decoder.getContentType());
+        assertEquals("text/plain;a=b;a=c;charset=foo", decoder.getContentType(false));
+        assertEquals("text/plain;charset=foo;a=b", decoder.getContentType(true));
+    }
 }

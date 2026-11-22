@@ -116,6 +116,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
+    /**
+     * The MIME type of a data url is serialized like the MIME Sniffing Standard does it
+     * (duplicate parameters are ignored, the charset parameter stays in place).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    DATA_URL_MIME_TYPE_STANDARD_SERIALIZATION,
+
     /** The context menu MouseEvent has a detail of 1. */
     @BrowserFeature({FF, FF_ESR})
     EVENT_CONTEXT_MENU_HAS_DETAIL_1,

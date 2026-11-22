@@ -23,7 +23,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Base64;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.StringUtils;
@@ -46,6 +48,7 @@ public class DataUrlDecoder {
     private final Charset charset_;
     private final byte[] content_;
     private String contentType_;
+    private String beforeData_;
 
     /**
      * C'tor.
@@ -100,7 +103,8 @@ public class DataUrlDecoder {
                 data = Base64.getDecoder().decode(data);
             }
             final DataUrlDecoder decoder = new DataUrlDecoder(data, mediaType, charset);
-            decoder.contentType_ = toContentType(url.substring(DATA_PREFIX.length(), comma));
+            decoder.beforeData_ = url.substring(DATA_PREFIX.length(), comma);
+            decoder.contentType_ = toContentType(decoder.beforeData_, false);
             return decoder;
         }
         catch (final IllegalArgumentException e) {
@@ -115,10 +119,12 @@ public class DataUrlDecoder {
      * Returns the content type like the fetch standard does it for the MIME type part of a data url.
      *
      * @param beforeData the part of the url between 'data:' and the comma
+     * @param standardSerialization whether to serialize like the MIME Sniffing Standard
+     *        (see {@link #parseAndSerializeMimeType(String, boolean)})
      * @return the serialized MIME type
      * @see <a href="https://fetch.spec.whatwg.org/#data-url-processor">Fetch Standard - data: URL processor</a>
      */
-    static String toContentType(final String beforeData) {
+    static String toContentType(final String beforeData, final boolean standardSerialization) {
         String mimeType = beforeData.strip();
 
         // remove ';base64' (case-insensitive, spaces allowed before 'base64')
@@ -131,7 +137,7 @@ public class DataUrlDecoder {
             mimeType = MimeType.TEXT_PLAIN + mimeType;
         }
 
-        final String serialized = parseAndSerializeMimeType(mimeType);
+        final String serialized = parseAndSerializeMimeType(mimeType, standardSerialization);
         if (serialized == null) {
             return DEFAULT_CONTENT_TYPE;
         }
@@ -139,17 +145,31 @@ public class DataUrlDecoder {
     }
 
     /**
+     * Parses the MIME type and serializes it again like Chrome does it for data urls
+     * (see {@link #parseAndSerializeMimeType(String, boolean)}).
+     *
+     * @param input the MIME type
+     * @return the serialized MIME type or {@code null} if the input is not a valid MIME type
+     */
+    static String parseAndSerializeMimeType(final String input) {
+        return parseAndSerializeMimeType(input, false);
+    }
+
+    /**
      * Parses the MIME type and serializes it again like the browsers do it for data urls:
      * type, subtype and parameter names are lower case, the parameter values are kept, invalid parameters
-     * are ignored. Different from the MIME Sniffing Standard duplicate parameters are kept and the charset
+     * are ignored.
+     * With standard serialization (like Firefox) only the first parameter of a name is used (like the
+     * MIME Sniffing Standard), otherwise (like Chrome) duplicate parameters are kept and the first charset
      * parameter is moved to the end.
      *
      * @param input the MIME type
+     * @param standardSerialization whether to serialize like the MIME Sniffing Standard
      * @return the serialized MIME type or {@code null} if the input is not a valid MIME type
      * @see <a href="https://mimesniff.spec.whatwg.org/#parse-a-mime-type">MIME Sniffing Standard
      *      - parse a MIME type</a>
      */
-    static String parseAndSerializeMimeType(final String input) {
+    static String parseAndSerializeMimeType(final String input, final boolean standardSerialization) {
         final String mimeType = stripHttpWhitespace(input);
 
         final int slash = mimeType.indexOf('/');
@@ -176,6 +196,7 @@ public class DataUrlDecoder {
                 .append(subtype.toLowerCase(Locale.ROOT));
 
         String charset = null;
+        final Set<String> names = new HashSet<>();
         final int length = mimeType.length();
         while (position < length) {
             // skip the ';' and the leading whitespace
@@ -232,7 +253,12 @@ public class DataUrlDecoder {
 
             if (!name.isEmpty() && isToken(name) && isQuotedStringContent(value)) {
                 final String parameter = ";" + name + "=" + serializeParameterValue(value);
-                if ("charset".equals(name)) {
+                if (standardSerialization) {
+                    if (names.add(name)) {
+                        result.append(parameter);
+                    }
+                }
+                else if ("charset".equals(name)) {
                     if (charset == null) {
                         charset = parameter;
                     }
@@ -341,6 +367,19 @@ public class DataUrlDecoder {
             return mediaType_ + ";charset=" + charset_.name();
         }
         return contentType_;
+    }
+
+    /**
+     * Gets the content type of the data URL, serialized like the browsers do it.
+     * @param standardSerialization whether to serialize like the MIME Sniffing Standard (like Firefox;
+     *        duplicate parameters are ignored) or like Chrome (see {@link #getContentType()})
+     * @return the content type; "text/plain;charset=US-ASCII" if the URL didn't contain a valid MIME type
+     */
+    public String getContentType(final boolean standardSerialization) {
+        if (!standardSerialization || beforeData_ == null) {
+            return getContentType();
+        }
+        return toContentType(beforeData_, true);
     }
 
     /**

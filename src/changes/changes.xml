@@ -9,6 +9,10 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
             <action type="fix" dev="rbri">
+                When simulating Firefox, the MIME type of data urls is serialized like the MIME Sniffing Standard
+                does it (duplicate parameters are ignored, the charset parameter stays in place).
+            </action>
+            <action type="fix" dev="rbri">
                 When simulating Firefox, the content type of a file with the extension 'properties' is text/plain
                 (e.g. for file uploads); like Firefox' built-in mapping.
             </action>

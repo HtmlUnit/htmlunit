@@ -16,6 +16,7 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.htmlunit.BrowserVersionFeatures.DATA_URL_MIME_TYPE_STANDARD_SERIALIZATION;
 import static org.htmlunit.BrowserVersionFeatures.FILE_PROPERTIES_TEXT_PLAIN;
 
 import java.io.BufferedInputStream;
@@ -1619,7 +1620,10 @@ public class WebClient implements Serializable, AutoCloseable {
         final DataURLConnection connection = new DataURLConnection(url);
 
         final List<NameValuePair> responseHeaders = new ArrayList<>();
-        responseHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE_LC, connection.getContentType()));
+        final boolean standardSerialization =
+                getBrowserVersion().hasFeature(DATA_URL_MIME_TYPE_STANDARD_SERIALIZATION);
+        responseHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE_LC,
+                connection.getContentType(standardSerialization)));
 
         if (HttpMethod.HEAD.equals(webRequest.getHttpMethod())) {
             final WebResponseData data = new WebResponseData(200, "OK", responseHeaders);
