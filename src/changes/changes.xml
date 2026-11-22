@@ -40,7 +40,7 @@
             </action>
             <action type="fix" dev="rbri">
                 When simulating Firefox, the content type of a file with the extension 'properties' is text/plain
-                (file uploads and local files); like Firefox' built-in mapping.
+                (file uploads, File.type); like Firefox' built-in mapping.
             </action>
             <action type="update" dev="rbri">
                 Chrome 158 no longer supports the XSLTProcessor javascript object.
