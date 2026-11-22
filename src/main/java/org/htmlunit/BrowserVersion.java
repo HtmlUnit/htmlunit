@@ -432,6 +432,8 @@ public final class BrowserVersion implements Serializable {
             browser.registerUploadMimeType("ogg",  "application/ogg"); // differs
             browser.registerUploadMimeType("flac", "audio/x-flac");    // differs
             // xhtm absent in Firefox — intentionally not registered
+
+            browser.registerUploadMimeType("properties", MimeType.TEXT_PLAIN); // Firefox only (built-in mapping)
         }
     }
 

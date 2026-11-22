@@ -1687,9 +1687,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://localhost:8080/a",
-            FF = "http://localhost:8080/a",
-            FF_ESR = "http://localhost:8080/a")
+    @Alerts("http://localhost:8080/a")
     public void protocolFileWithPort() throws Exception {
         setProtocol("http://localhost:8080/a", "file");
     }

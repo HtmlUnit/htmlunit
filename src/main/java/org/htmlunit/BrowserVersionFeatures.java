@@ -541,14 +541,14 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
 
     /**
-     * importScripts() of a local file (file url) from a worker of a page that was not loaded from a file
+     * Calling importScripts() of a local file (file url) from a worker of a page that was not loaded from a file
      * throws a SecurityError (instead of a NetworkError).
      */
     @BrowserFeature({FF, FF_ESR})
     JS_WORKER_IMPORT_SCRIPTS_LOCAL_FILE_SECURITY_ERROR,
 
     /**
-     * new Worker() of a local file (file url) from a page that was not loaded from a file does not throw;
+     * Calling new Worker() of a local file (file url) from a page that was not loaded from a file does not throw;
      * the worker is not started and the error event is fired.
      */
     @BrowserFeature({FF, FF_ESR})
