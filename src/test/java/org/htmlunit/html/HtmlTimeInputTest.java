@@ -114,7 +114,9 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
     @BuggyWebDriver(FF = {"", ""},
             FF_ESR = {"", ""})
     @HtmlUnitNYI(CHROME = {"08:04", "20:04"},
-            EDGE = {"08:04", "20:04"})
+            EDGE = {"08:04", "20:04"},
+            FF = {"08:04", "20:04"},
+            FF_ESR = {"08:04", "20:04"})
     public void type() throws Exception {
         final String htmlContent = DOCTYPE_HTML
             + "<html><head></head><body>\n"
