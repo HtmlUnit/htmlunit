@@ -73,8 +73,8 @@
         <imageio-batik.version>3.15.3</imageio-batik.version>
         <batik-transcoder.version>1.20</batik-transcoder.version>
         <jfreechart.version>1.5.6</jfreechart.version>
-        <maven-model.version>3.10.1</maven-model.version>
-        <maven-artifact.version>3.10.1</maven-artifact.version>
+        <maven-model.version>3.10.2</maven-model.version>
+        <maven-artifact.version>3.10.2</maven-artifact.version>
 
         <!-- quality -->
         <checkstyle.version>12.3.1</checkstyle.version>
