@@ -25,6 +25,7 @@ import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
@@ -1475,15 +1476,25 @@ public class Location2Test extends WebDriverTestCase {
     }
 
     /**
+     * Reloads the result of a POST request; the POST request is sent again.
+     * Firefox asks whether to resend the data; the driver dismisses this prompt
+     * (unhandledPromptBehavior), therefore there is no reload with the real Firefox.
+     * When the prompt is accepted, Firefox sends the referrer of the original request
+     * (HtmlUnit simulates that).
+     *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = {"1", "2", "3", "a.html?urlParam=urlVal",
                        "4", "http://§§URL§§", "http://§§URL§§/second/a.html?urlParam=urlVal", "§§URL§§"},
-            FF = {"1", "2", "2", "a.html?urlParam=urlVal",
-                    "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"},
+            FF = {"1", "2", "3", "a.html?urlParam=urlVal",
+                  "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"},
+            FF_ESR = {"1", "2", "3", "a.html?urlParam=urlVal",
+                      "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"})
+    @BuggyWebDriver(FF = {"1", "2", "2", "a.html?urlParam=urlVal",
+                          "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"},
             FF_ESR = {"1", "2", "2", "a.html?urlParam=urlVal",
-                    "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"})
+                      "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"})
     public void reloadPost() throws Exception {
         final String form = DOCTYPE_HTML
               + "<html>\n"
