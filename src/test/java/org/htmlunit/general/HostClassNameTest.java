@@ -9922,6 +9922,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function SpeechGrammar() { [native code] }",
             FF = "function webkitSpeechGrammar() { [native code] }",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = "function SpeechGrammar() { [native code] }")
     public void webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar");
     }
@@ -9933,6 +9934,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function SpeechGrammarList() { [native code] }",
             FF = "function webkitSpeechGrammarList() { [native code] }",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = "function SpeechGrammarList() { [native code] }")
     public void webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList");
     }
@@ -9944,6 +9946,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function SpeechRecognition() { [native code] }",
             FF = "function webkitSpeechRecognition() { [native code] }",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = "function SpeechRecognition() { [native code] }")
     public void webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition");
     }
@@ -9955,6 +9958,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechRecognitionErrorEvent() { [native code] }",
             EDGE = "function SpeechRecognitionErrorEvent() { [native code] }")
+    @HtmlUnitNYI(FF = "function SpeechRecognitionErrorEvent() { [native code] }")
     public void webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError");
     }
@@ -9966,6 +9970,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechRecognitionEvent() { [native code] }",
             EDGE = "function SpeechRecognitionEvent() { [native code] }")
+    @HtmlUnitNYI(FF = "function SpeechRecognitionEvent() { [native code] }")
     public void webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent");
     }

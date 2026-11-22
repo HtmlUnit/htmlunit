@@ -41,6 +41,7 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"},
             FF = "TypeError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -66,7 +67,8 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
             FF_ESR = "ReferenceError")
     @HtmlUnitNYI(
             CHROME = {"[object SpeechRecognitionErrorEvent]", "undefined", "false", "false", "false"},
-            EDGE = {"[object SpeechRecognitionErrorEvent]", "undefined", "false", "false", "false"})
+            EDGE = {"[object SpeechRecognitionErrorEvent]", "undefined", "false", "false", "false"},
+            FF = {"[object SpeechRecognitionErrorEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -91,6 +93,7 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "42", "false", "false", "false"},
             FF = "TypeError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -115,6 +118,7 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "null", "false", "false", "false"},
             FF = "TypeError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -161,6 +165,7 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "HtmlUnitEvent", "false", "false", "false"},
             FF = "TypeError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -211,6 +216,7 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"},
             FF = "TypeError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
