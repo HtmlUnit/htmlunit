@@ -9,6 +9,13 @@
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
             <action type="fix" dev="rbri">
+                Like the browsers, a page not loaded from a file is not allowed to load scripts, images,
+                stylesheets (also @import), workers and importScripts() from local files (file urls);
+                the load fails like a network error. new Worker() throws a SecurityError (Firefox fires the
+                error event), importScripts() throws a NetworkError (Firefox a SecurityError). Like Chrome/Edge,
+                a page loaded from a file is not allowed to start a worker from a local file.
+            </action>
+            <action type="fix" dev="rbri">
                 When simulating Firefox, the MIME type of data urls is serialized like the MIME Sniffing Standard
                 does it (duplicate parameters are ignored, the charset parameter stays in place); like Firefox all
                 whitespace is removed from the MIME type of base64 data urls. When simulating Chrome/Edge the

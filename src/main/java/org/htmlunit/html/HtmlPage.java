@@ -1395,6 +1395,12 @@ public class HtmlPage extends SgmlPage {
                     final boolean crossorigin, final DomElement element) throws IOException,
         FailingHttpStatusCodeException {
 
+        // like the browsers, a page not loaded from a file is not allowed to load a local file (network error)
+        if (!isLocalResourceAccessAllowed(url)) {
+            notifyIncorrectness("Not allowed to load local resource: " + url);
+            throw new IOException("Not allowed to load local resource: " + url);
+        }
+
         final WebRequest referringRequest = getWebResponse().getWebRequest();
 
         final WebClient client = getWebClient();

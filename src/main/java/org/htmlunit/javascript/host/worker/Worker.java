@@ -14,8 +14,12 @@
  */
 package org.htmlunit.javascript.host.worker;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_WORKER_LOCAL_FILE_FIRES_ERROR;
+import static org.htmlunit.BrowserVersionFeatures.JS_WORKER_LOCAL_FILE_FORBIDDEN;
+
 import java.net.URL;
 
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
@@ -32,6 +36,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 
@@ -66,6 +71,24 @@ public class Worker extends EventTarget {
         setPrototype(getPrototype(getClass()));
 
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
+
+        // like the browsers, a page not loaded from a file is not allowed to start a worker from a local file;
+        // Chrome does not allow workers from local files at all (every file has its own origin)
+        final BrowserVersion browserVersion = webClient.getBrowserVersion();
+        final HtmlPage ownerPage = (HtmlPage) owningWindow.getDocument().getPage();
+        final URL workerUrl = ownerPage.getFullyQualifiedUrl(url);
+        final boolean localFileBlocked = !ownerPage.isLocalResourceAccessAllowed(workerUrl)
+                || "file".equals(workerUrl.getProtocol()) && browserVersion.hasFeature(JS_WORKER_LOCAL_FILE_FORBIDDEN);
+        if (localFileBlocked) {
+            webClient.getIncorrectnessListener().notify("Not allowed to load local resource: " + workerUrl, this);
+            if (!browserVersion.hasFeature(JS_WORKER_LOCAL_FILE_FIRES_ERROR)) {
+                throw JavaScriptEngine.asJavaScriptException(owningWindow,
+                        "Failed to construct 'Worker': Script at '" + workerUrl
+                        + "' cannot be accessed from origin '" + ownerPage.getOriginUrl() + "'.",
+                        DOMException.SECURITY_ERR);
+            }
+        }
+
         String name = null;
         if (options != null && options.has("name", options)) {
             name = JavaScriptEngine.toString(options.get("name", options));
@@ -76,19 +99,28 @@ public class Worker extends EventTarget {
         // upgrade-insecure-requests of the Content-Security-Policy
         final URL resolvedUrl = page.getFullyQualifiedUrl(url);
         final URL fullUrl = ContentSecurityPolicy.upgradeInsecureRequest(page, resolvedUrl);
+        if (localFileBlocked) {
+            // Firefox: the worker is not started and the error event is fired (async)
+            fireErrorEvent(webClient, owningWindow, page, "worker from a local file blocked");
+            return;
+        }
         if (!ContentSecurityPolicy.allowsWorker(page, fullUrl)) {
             // like the browsers, the worker is not started and the error event is fired (async)
-            final ContextAction<Object> action = c -> {
-                dispatchEvent(new Event(this, Event.TYPE_ERROR));
-                return null;
-            };
-            final HtmlUnitContextFactory cf = webClient.getJavaScriptEngine().getContextFactory();
-            owningWindow.getWebWindow().getJobManager()
-                    .addJob(new WorkerJob(cf, action, "worker blocked by the Content-Security-Policy"), page);
+            fireErrorEvent(webClient, owningWindow, page, "worker blocked by the Content-Security-Policy");
             return;
         }
 
         workerScope_.loadAndExecute(webClient, fullUrl == resolvedUrl ? url : fullUrl.toExternalForm(), null, false);
+    }
+
+    private void fireErrorEvent(final WebClient webClient, final Window owningWindow, final HtmlPage page,
+            final String description) {
+        final ContextAction<Object> action = c -> {
+            dispatchEvent(new Event(this, Event.TYPE_ERROR));
+            return null;
+        };
+        final HtmlUnitContextFactory cf = webClient.getJavaScriptEngine().getContextFactory();
+        owningWindow.getWebWindow().getJobManager().addJob(new WorkerJob(cf, action, description), page);
     }
 
     /**

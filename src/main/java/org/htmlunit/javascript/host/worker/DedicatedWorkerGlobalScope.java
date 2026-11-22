@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.worker;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_WORKER_IMPORT_SCRIPTS_LOCAL_FILE_SECURITY_ERROR;
 import static org.htmlunit.BrowserVersionFeatures.JS_WORKER_SCRIPT_HONORS_CHARSET_HEADER;
 
 import java.io.IOException;
@@ -58,6 +59,7 @@ import org.htmlunit.javascript.configuration.WorkerJavaScriptConfiguration;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScopeMixin;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
@@ -413,6 +415,18 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
             final Context context, final boolean checkMimeType) throws IOException {
         final HtmlPage page = (HtmlPage) owningWindow_.getDocument().getPage();
         final URL fullUrl = page.getFullyQualifiedUrl(url);
+
+        // like the browsers, a page not loaded from a file is not allowed to load a local file
+        if (!page.isLocalResourceAccessAllowed(fullUrl)) {
+            webClient.getIncorrectnessListener().notify("Not allowed to load local resource: " + fullUrl, this);
+            if (webClient.getBrowserVersion().hasFeature(JS_WORKER_IMPORT_SCRIPTS_LOCAL_FILE_SECURITY_ERROR)) {
+                throw JavaScriptEngine.asJavaScriptException(this,
+                        "The operation is insecure.", DOMException.SECURITY_ERR);
+            }
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at '" + fullUrl
+                    + "' failed to load.", DOMException.NETWORK_ERR);
+        }
 
         if (workerUrl_ == null) {
             // the url of the worker script (and not of the imported scripts)
