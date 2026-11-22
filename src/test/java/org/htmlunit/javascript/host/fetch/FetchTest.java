@@ -1158,24 +1158,6 @@ public class FetchTest extends WebDriverTestCase {
             FF_ESR = "text/plain;charset=utf-8 | text/html;charset=UTF-8 | text/html | text/plain;charset=US-ASCII | t"
                 + "ext/plain | text/plain;charset=utf-8 | text/plain;charset=US-ASCII | text/plain;charset=foo;a=b "
                 + "| text/plain | text/plain;a=bc")
-    @HtmlUnitNYI(
-            FF = "text/plain;charset=utf-8 "
-                    + "| text/html;charset=UTF-8 "
-                    + "| text/html | text/plain;charset=US-ASCII "
-                    + "| text/plain | text/plain;charset=utf-8 "
-                    + "| text/plain;charset=US-ASCII "
-                    + "| text/plain;a=b;a=c;charset=foo "
-                    + "| text/plain "
-                    + "| text/plain;a=\"b c\"",
-            FF_ESR = "text/plain;charset=utf-8 "
-                    + "| text/html;charset=UTF-8 "
-                    + "| text/html | text/plain;charset=US-ASCII "
-                    + "| text/plain | text/plain;charset=utf-8 "
-                    + "| text/plain;charset=US-ASCII "
-                    + "| text/plain;a=b;a=c;charset=foo "
-                    + "| text/plain "
-                    + "| text/plain;a=\"b c\"")
-
     public void dataUrlContentType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1187,6 +1169,87 @@ public class FetchTest extends WebDriverTestCase {
             + "                'data:text/plain ; a=\"b c\" ;base64,eA=='];\n"
             + "  Promise.all(urls.map(u => fetch(u).then(r => r.headers.get('content-type'), e => e.name)))\n"
             + "    .then(types => log(types.join(' | ')));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * The content type of a data url with a second charset parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;a=b;charset=foo",
+            FF = "text/plain;charset=foo;a=b",
+            FF_ESR = "text/plain;charset=foo;a=b")
+    public void dataUrlContentTypeDuplicateCharset() throws Exception {
+        dataUrlContentType("data:text/plain;charset=foo;a=b;charset=bar,x");
+    }
+
+    /**
+     * The content type of a data url with the charset parameter between other parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;a=b;c=d;charset=foo",
+            FF = "text/plain;a=b;charset=foo;c=d",
+            FF_ESR = "text/plain;a=b;charset=foo;c=d")
+    public void dataUrlContentTypeCharsetInTheMiddle() throws Exception {
+        dataUrlContentType("data:text/plain;a=b;charset=foo;c=d,x");
+    }
+
+    /**
+     * The type of the blob of a data url with duplicate parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;a=b;a=c;charset=foo",
+            FF = "text/plain;charset=foo;a=b",
+            FF_ESR = "text/plain;charset=foo;a=b")
+    public void dataUrlBlobTypeDuplicateParameters() throws Exception {
+        dataUrlBlobType("data:text/plain;charset=foo;a=b;a=c,x");
+    }
+
+    /**
+     * The type of the blob of a data url with upper case letters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain;a=b")
+    public void dataUrlBlobTypeUpperCase() throws Exception {
+        dataUrlBlobType("data:Text/Plain;A=B,x");
+    }
+
+    /**
+     * The type of the blob of a data url with a quoted parameter value containing a space.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain;a=\"b c\"")
+    public void dataUrlBlobTypeQuotedSpace() throws Exception {
+        dataUrlBlobType("data:text/plain;a=\"b c\",x");
+    }
+
+    private void dataUrlContentType(final String url) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + url + "')\n"
+            + "    .then(r => log(r.headers.get('content-type')), e => logEx(e));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    private void dataUrlBlobType(final String url) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  fetch('" + url + "')\n"
+            + "    .then(r => r.blob())\n"
+            + "    .then(b => log(b.type), e => logEx(e));\n"
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);

@@ -111,23 +111,26 @@ public class DataURLDecoder2Test {
     }
 
     /**
-     * Tests the MIME type parsing and serialization (the way the browsers do it for data urls).
+     * Tests the MIME type parsing and serialization like Chrome does it for data urls.
      */
     @Test
     public void parseAndSerializeMimeType() {
         assertEquals("text/plain", DataUrlDecoder.parseAndSerializeMimeType(" Text/Plain "));
-        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain; A=b"));
+        assertEquals("text/plain;A=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain; A=b"));
         assertEquals("text/plain;a=b;a=c", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;a=c"));
+        assertEquals("text/plain;A=b;a=c", DataUrlDecoder.parseAndSerializeMimeType("text/plain;A=b;a=c"));
         assertEquals("text/plain;a=b;a=c;charset=foo",
                 DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;a=c"));
         assertEquals("text/plain;a=b;charset=foo",
                 DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;charset=bar"));
-        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;c=;d"));
+        assertEquals("text/plain;a=b;c=d;charset=foo",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;charset=foo;c=d"));
+        assertEquals("text/plain;a=;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=;a=b"));
+        assertEquals("text/plain;a=b c;a=d", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b c;a=d"));
+        assertEquals("text/plain;a=\"b\";a=d",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b;c\";a=d"));
         assertEquals("text/plain;a=\"b c\"", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b c\""));
-        assertEquals("text/plain;a=bc", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"bc\"x"));
-        assertEquals("text/plain;a=\"\"", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"\""));
-        assertEquals("text/plain;a=\"b\\\"c\"",
-                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b\\\"c\""));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;d"));
         Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("text"));
         Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("/plain"));
         Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("text/"));
@@ -143,12 +146,21 @@ public class DataURLDecoder2Test {
     public void parseAndSerializeMimeTypeStandard() {
         assertEquals("text/plain", DataUrlDecoder.parseAndSerializeMimeType(" Text/Plain ", true));
         assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;a=c", true));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;A=b;a=c", true));
         assertEquals("text/plain;charset=foo;a=b",
                 DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;a=c", true));
         assertEquals("text/plain;charset=foo;a=b",
                 DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;charset=bar", true));
-        assertEquals("text/plain;a=b;charset=foo",
-                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;charset=foo", true));
+        assertEquals("text/plain;a=b;charset=foo;c=d",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;charset=foo;c=d", true));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=;a=b", true));
+        assertEquals("text/plain;a=\"b c\"",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b c;a=d", true));
+        assertEquals("text/plain;a=\"b;c\"",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b;c\";a=d", true));
+        assertEquals("text/plain;a=bc", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"bc\"x", true));
+        assertEquals("text/plain;a=\"b\\\"c\"",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b\\\"c\"", true));
         assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;c=;d", true));
     }
 
@@ -162,5 +174,14 @@ public class DataURLDecoder2Test {
         assertEquals("text/plain;a=b;a=c;charset=foo", decoder.getContentType());
         assertEquals("text/plain;a=b;a=c;charset=foo", decoder.getContentType(false));
         assertEquals("text/plain;charset=foo;a=b", decoder.getContentType(true));
+
+        // Firefox removes all whitespace from base64 data urls
+        final DataUrlDecoder spaces = decodeDataURL("data:text/plain ; a=\"b c\" ;base64,eA==");
+        assertEquals("text/plain;a=\"b c\"", spaces.getContentType(false));
+        assertEquals("text/plain;a=bc", spaces.getContentType(true));
+
+        final DataUrlDecoder spacesNoBase64 = decodeDataURL("data:text/plain;a=\"b c\",x");
+        assertEquals("text/plain;a=\"b c\"", spacesNoBase64.getContentType(false));
+        assertEquals("text/plain;a=\"b c\"", spacesNoBase64.getContentType(true));
     }
 }

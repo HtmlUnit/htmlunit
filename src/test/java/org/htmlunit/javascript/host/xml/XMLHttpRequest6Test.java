@@ -478,4 +478,92 @@ public class XMLHttpRequest6Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * The content type of a data url with a second charset parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;a=b;charset=foo",
+            FF = "text/plain;charset=foo;a=b",
+            FF_ESR = "text/plain;charset=foo;a=b")
+    public void sendDataUrl_ContentTypeDuplicateCharset() throws Exception {
+        sendDataUrlContentType("data:text/plain;charset=foo;a=b;charset=bar,x");
+    }
+
+    /**
+     * The content type of a data url with the charset parameter between other parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;a=b;c=d;charset=foo",
+            FF = "text/plain;a=b;charset=foo;c=d",
+            FF_ESR = "text/plain;a=b;charset=foo;c=d")
+    public void sendDataUrl_ContentTypeCharsetInTheMiddle() throws Exception {
+        sendDataUrlContentType("data:text/plain;a=b;charset=foo;c=d,x");
+    }
+
+    /**
+     * The content type of a data url with two parameters with the same name in different case.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;A=b;a=c",
+            FF = "text/plain;a=b",
+            FF_ESR = "text/plain;a=b")
+    public void sendDataUrl_ContentTypeDuplicateNameCase() throws Exception {
+        sendDataUrlContentType("data:text/plain;A=b;a=c,x");
+    }
+
+    /**
+     * The content type of a data url with an ignored (empty) parameter followed by a valid one with the same name.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;a=;a=b",
+            FF = "text/plain;a=b",
+            FF_ESR = "text/plain;a=b")
+    public void sendDataUrl_ContentTypeDuplicateAfterEmpty() throws Exception {
+        sendDataUrlContentType("data:text/plain;a=;a=b,x");
+    }
+
+    /**
+     * The content type of a data url with a value with a space followed by a parameter with the same name.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;a=b c;a=d",
+            FF = "text/plain;a=\"b c\"",
+            FF_ESR = "text/plain;a=\"b c\"")
+    public void sendDataUrl_ContentTypeDuplicateAfterSpace() throws Exception {
+        sendDataUrlContentType("data:text/plain;a=b c;a=d,x");
+    }
+
+    /**
+     * The content type of a data url with a quoted value containing a semicolon followed by a parameter
+     * with the same name.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text/plain;a=\"b\";a=d",
+            FF = "text/plain;a=\"b;c\"",
+            FF_ESR = "text/plain;a=\"b;c\"")
+    public void sendDataUrl_ContentTypeDuplicateQuoted() throws Exception {
+        sendDataUrlContentType("data:text/plain;a=\"b;c\";a=d,x");
+    }
+
+    private void sendDataUrlContentType(final String url) throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    const xhr = new XMLHttpRequest();\n"
+                + "    xhr.open('GET', '" + url + "', false);\n"
+                + "    xhr.send();\n"
+                + "    log(xhr.getResponseHeader('content-type'));\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

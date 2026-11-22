@@ -120,7 +120,8 @@ public class DataUrlDecoder {
      *
      * @param beforeData the part of the url between 'data:' and the comma
      * @param standardSerialization whether to serialize like the MIME Sniffing Standard
-     *        (see {@link #parseAndSerializeMimeType(String, boolean)})
+     *        (see {@link #parseAndSerializeMimeType(String, boolean)}); like Firefox all whitespace
+     *        is removed from base64 data urls (e.g. 'a="b c";base64' is 'a=bc')
      * @return the serialized MIME type
      * @see <a href="https://fetch.spec.whatwg.org/#data-url-processor">Fetch Standard - data: URL processor</a>
      */
@@ -131,6 +132,18 @@ public class DataUrlDecoder {
         final int semicolon = mimeType.lastIndexOf(';');
         if (semicolon > -1 && "base64".equalsIgnoreCase(mimeType.substring(semicolon + 1).stripLeading())) {
             mimeType = mimeType.substring(0, semicolon);
+
+            // Firefox removes all whitespace from base64 data urls (also from the MIME type)
+            if (standardSerialization) {
+                final StringBuilder withoutWhitespace = new StringBuilder(mimeType.length());
+                for (int i = 0; i < mimeType.length(); i++) {
+                    final char c = mimeType.charAt(i);
+                    if (!isHttpWhitespace(c)) {
+                        withoutWhitespace.append(c);
+                    }
+                }
+                mimeType = withoutWhitespace.toString();
+            }
         }
 
         if (mimeType.startsWith(";")) {
@@ -156,12 +169,16 @@ public class DataUrlDecoder {
     }
 
     /**
-     * Parses the MIME type and serializes it again like the browsers do it for data urls:
-     * type, subtype and parameter names are lower case, the parameter values are kept, invalid parameters
-     * are ignored.
-     * With standard serialization (like Firefox) only the first parameter of a name is used (like the
-     * MIME Sniffing Standard), otherwise (like Chrome) duplicate parameters are kept and the first charset
-     * parameter is moved to the end.
+     * Parses the MIME type and serializes it again like the browsers do it for data urls;
+     * type and subtype are lower case, invalid parameters are ignored.
+     * <ul>
+     * <li>With standard serialization (like Firefox) the parameters are parsed and serialized like the
+     * MIME Sniffing Standard does it: the parameter names are lower case, only the first parameter of a
+     * name is used, values are quoted if needed.</li>
+     * <li>Otherwise (like Chrome) the parameters are split at every ';' (also inside quotes), names and
+     * values are kept as they are (no quotes added), duplicates are kept, the first charset parameter is
+     * moved to the end.</li>
+     * </ul>
      *
      * @param input the MIME type
      * @param standardSerialization whether to serialize like the MIME Sniffing Standard
@@ -195,7 +212,11 @@ public class DataUrlDecoder {
                 .append('/')
                 .append(subtype.toLowerCase(Locale.ROOT));
 
-        String charset = null;
+        if (!standardSerialization) {
+            appendParametersLikeChrome(result, mimeType.substring(position));
+            return result.toString();
+        }
+
         final Set<String> names = new HashSet<>();
         final int length = mimeType.length();
         while (position < length) {
@@ -252,27 +273,52 @@ public class DataUrlDecoder {
             }
 
             if (!name.isEmpty() && isToken(name) && isQuotedStringContent(value)) {
-                final String parameter = ";" + name + "=" + serializeParameterValue(value);
-                if (standardSerialization) {
-                    if (names.add(name)) {
-                        result.append(parameter);
-                    }
-                }
-                else if ("charset".equals(name)) {
-                    if (charset == null) {
-                        charset = parameter;
-                    }
-                }
-                else {
-                    result.append(parameter);
+                if (names.add(name)) {
+                    result.append(';').append(name).append('=').append(serializeParameterValue(value));
                 }
             }
         }
+        return result.toString();
+    }
+
+    /**
+     * Appends the parameters like Chrome does it for data urls: split at every ';', parameters without
+     * '=' or with an invalid name are ignored, names and values are kept (a quoted value ends at the next
+     * quote or at the end of the parameter), the first charset parameter is moved to the end.
+     *
+     * @param result the serialized type and subtype
+     * @param parameters the parameter part of the MIME type (starting with ';' or empty)
+     */
+    private static void appendParametersLikeChrome(final StringBuilder result, final String parameters) {
+        String charset = null;
+        for (final String part : parameters.split(";", -1)) {
+            final String parameter = stripHttpWhitespace(part);
+            final int equals = parameter.indexOf('=');
+            if (equals < 1) {
+                continue;
+            }
+            final String name = parameter.substring(0, equals);
+            String value = stripHttpWhitespace(parameter.substring(equals + 1));
+            if (!isToken(name) || !isQuotedStringContent(value)) {
+                continue;
+            }
+            if (value.startsWith("\"")) {
+                final int quote = value.indexOf('"', 1);
+                value = '"' + (quote < 0 ? value.substring(1) : value.substring(1, quote)) + '"';
+            }
+
+            if ("charset".equalsIgnoreCase(name)) {
+                if (charset == null && !value.isEmpty()) {
+                    charset = value;
+                }
+                continue;
+            }
+            result.append(';').append(name).append('=').append(value);
+        }
 
         if (charset != null) {
-            result.append(charset);
+            result.append(";charset=").append(charset);
         }
-        return result.toString();
     }
 
     private static String serializeParameterValue(final String value) {
