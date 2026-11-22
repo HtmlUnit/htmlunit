@@ -858,9 +858,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "foo3.html", "foo2.html"},
-            FF = ", foo2.html",
-            FF_ESR = ", foo2.html")
+    @Alerts({"", "foo3.html", "foo2.html"})
     public void onlick_set_location_WithHref() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
@@ -1482,8 +1480,10 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "2", "3", "a.html?urlParam=urlVal",
                        "4", "http://§§URL§§", "http://§§URL§§/second/a.html?urlParam=urlVal", "§§URL§§"},
-            FF = "2",
-            FF_ESR = "2")
+            FF = {"1", "2", "2", "a.html?urlParam=urlVal",
+                    "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"},
+            FF_ESR = {"1", "2", "2", "a.html?urlParam=urlVal",
+                    "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"})
     public void reloadPost() throws Exception {
         final String form = DOCTYPE_HTML
               + "<html>\n"
