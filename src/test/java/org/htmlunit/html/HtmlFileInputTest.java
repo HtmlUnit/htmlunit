@@ -77,7 +77,13 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("--BOUNDARY, Content-Disposition: form-data; name=\"myInput\"; filename=\"\", Content-Type: application/octet-stream, --BOUNDARY, Content-Disposition: form-data; name=\"myInput2\"; filename=\"\", Content-Type: application/octet-stream, --BOUNDARY--")
+    @Alerts({"--BOUNDARY",
+             "Content-Disposition: form-data; name=\"myInput\"; filename=\"\"",
+             "Content-Type: application/octet-stream",
+             "--BOUNDARY",
+             "Content-Disposition: form-data; name=\"myInput2\"; filename=\"\"",
+             "Content-Type: application/octet-stream",
+             "--BOUNDARY--"})
     public void empty() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html>\n"
@@ -100,9 +106,27 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "--BOUNDARY, Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\", Content-Type: application/octet-stream, --BOUNDARY, Content-Disposition: form-data; name=\"myInput2\"; filename=\"\", Content-Type: application/octet-stream, --BOUNDARY--",
-            FF = "--BOUNDARY, Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\", Content-Type: text/plain, --BOUNDARY, Content-Disposition: form-data; name=\"myInput2\"; filename=\"\", Content-Type: application/octet-stream, --BOUNDARY--",
-            FF_ESR = "--BOUNDARY, Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\", Content-Type: text/plain, --BOUNDARY, Content-Disposition: form-data; name=\"myInput2\"; filename=\"\", Content-Type: application/octet-stream, --BOUNDARY--")
+    @Alerts(DEFAULT = {"--BOUNDARY",
+                       "Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"",
+                       "Content-Type: application/octet-stream",
+                       "--BOUNDARY",
+                       "Content-Disposition: form-data; name=\"myInput2\"; filename=\"\"",
+                       "Content-Type: application/octet-stream",
+                       "--BOUNDARY--"},
+            FF = {"--BOUNDARY",
+                  "Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"",
+                  "Content-Type: text/plain",
+                  "--BOUNDARY",
+                  "Content-Disposition: form-data; name=\"myInput2\"; filename=\"\"",
+                  "Content-Type: application/octet-stream",
+                  "--BOUNDARY--"},
+            FF_ESR = {"--BOUNDARY",
+                      "Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"",
+                      "Content-Type: text/plain",
+                      "--BOUNDARY",
+                      "Content-Disposition: form-data; name=\"myInput2\"; filename=\"\"",
+                      "Content-Type: application/octet-stream",
+                      "--BOUNDARY--"})
     public void realFile() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html>\n"

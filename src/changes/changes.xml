@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
+            <action type="fix" dev="rbri">
+                When simulating Firefox, the content type of a file with the extension 'properties' is text/plain
+                (e.g. for file uploads); like Firefox' built-in mapping.
+            </action>
             <action type="update" dev="rbri">
                 Chrome 158 no longer supports the XSLTProcessor javascript object.
             </action>

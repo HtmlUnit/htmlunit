@@ -16,6 +16,7 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.htmlunit.BrowserVersionFeatures.FILE_PROPERTIES_TEXT_PLAIN;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -1768,6 +1769,11 @@ public class WebClient implements Serializable, AutoCloseable {
 
         if (fileNameLC.endsWith(".css")) {
             return MimeType.TEXT_CSS;
+        }
+
+        // Firefox has a built-in mapping for this extension
+        if (fileNameLC.endsWith(".properties") && getBrowserVersion().hasFeature(FILE_PROPERTIES_TEXT_PLAIN)) {
+            return MimeType.TEXT_PLAIN;
         }
 
         String contentType = null;
