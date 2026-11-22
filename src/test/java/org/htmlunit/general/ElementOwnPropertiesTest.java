@@ -15888,7 +15888,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "TypeError",
             FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()")
+            EDGE = "constructor()",
+            FF = "constructor()")
     public void speechRecognitionErrorEvent() throws Exception {
         testString("", "new SpeechRecognitionErrorEvent('event')");
     }
@@ -16079,7 +16080,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()")
+            EDGE = "constructor()",
+            FF = "constructor()")
     public void webkitSpeechRecognitionError() throws Exception {
         testString("", "new webkitSpeechRecognitionError('webkitSpeechRecognition')");
     }
@@ -16095,7 +16097,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()")
+            EDGE = "constructor()",
+            FF = "constructor()")
     public void webkitSpeechRecognitionEvent() throws Exception {
         testString("", "new webkitSpeechRecognitionEvent('webkitSpeechRecognition')");
     }
