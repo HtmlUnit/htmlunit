@@ -422,6 +422,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
 
+    /** Setting location.protocol does not navigate if the url is not changed (e.g. 'file:' for an url with port). */
+    @BrowserFeature({FF, FF_ESR})
+    JS_LOCATION_PROTOCOL_UNCHANGED_NO_NAVIGATION,
+
     /** Reload sends a referrer header. */
     @BrowserFeature({CHROME, EDGE})
     JS_LOCATION_RELOAD_REFERRER,
@@ -483,6 +487,13 @@ public enum BrowserVersionFeatures {
     /** Whether to add to the storage even preserved words. */
     @BrowserFeature({FF, FF_ESR})
     JS_STORAGE_PRESERVED_INCLUDED,
+
+    /**
+     * File urls of URL objects have no host: the host 'localhost' is removed, setting the protocol to
+     * 'file' removes the host.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_URL_FILE_WITHOUT_HOST,
 
     /** A WebSocket blocked by the Content-Security-Policy fires only the error event, no close event. */
     @BrowserFeature({CHROME, EDGE})

@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_PROTOCOL_UNCHANGED_NO_NAVIGATION;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 
 import java.io.IOException;
@@ -660,7 +661,8 @@ public class Location extends HtmlUnitScriptable {
      *      HTML Standard - location.protocol</a>
      */
     public void setProtocol(final String protocol) throws Exception {
-        final URL newUrl = UrlUtils.getUrlWithNewProtocolLikeSetter(getUrl(), protocol);
+        final URL url = getUrl();
+        final URL newUrl = UrlUtils.getUrlWithNewProtocolLikeSetter(url, protocol);
         if (newUrl == null) {
             throw JavaScriptEngine.asJavaScriptException(this,
                     "Failed to set the 'protocol' property on 'Location': '" + protocol
@@ -668,6 +670,12 @@ public class Location extends HtmlUnitScriptable {
         }
         final String scheme = newUrl.getProtocol();
         if (!"http".equals(scheme) && !"https".equals(scheme)) {
+            return;
+        }
+        if (newUrl == url
+                && window_.getWebWindow().getWebClient().getBrowserVersion()
+                        .hasFeature(JS_LOCATION_PROTOCOL_UNCHANGED_NO_NAVIGATION)) {
+            // Firefox does not navigate if nothing was changed
             return;
         }
         setUrl(newUrl);

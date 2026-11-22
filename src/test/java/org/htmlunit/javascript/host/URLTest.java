@@ -1092,23 +1092,6 @@ public class URLTest extends WebDriverTestCase {
                       "ws:", "ws://mydomain.com/svn/Repos/",
                       "wss:", "wss://mydomain.com/svn/Repos/",
                       "file:", "file:///svn/Repos/"})
-    @HtmlUnitNYI(
-            FF = {"https:",
-                  "http:", "http://mydomain.com/svn/Repos/",
-                  "https:", "https://mydomain.com/svn/Repos/",
-                  "ftp:", "ftp://mydomain.com/svn/Repos/",
-                  "ftp:", "ftp://mydomain.com/svn/Repos/",
-                  "ws:", "ws://mydomain.com/svn/Repos/",
-                  "wss:", "wss://mydomain.com/svn/Repos/",
-                  "file:", "file://mydomain.com/svn/Repos/"},
-            FF_ESR = {"https:",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "https:", "https://mydomain.com/svn/Repos/",
-                      "ftp:", "ftp://mydomain.com/svn/Repos/",
-                      "ftp:", "ftp://mydomain.com/svn/Repos/",
-                      "ws:", "ws://mydomain.com/svn/Repos/",
-                      "wss:", "wss://mydomain.com/svn/Repos/",
-                      "file:", "file://mydomain.com/svn/Repos/"})
     public void specialScheme() throws Exception {
         final String html = DOCTYPE_HTML
                         + "<html>\n"

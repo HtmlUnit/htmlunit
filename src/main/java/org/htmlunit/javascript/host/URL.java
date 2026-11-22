@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_URL_FILE_WITHOUT_HOST;
+
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.UUID;
@@ -77,6 +79,9 @@ public class URL extends HtmlUnitScriptable {
                 url_ = UrlUtils.toUrlUnsafe(UrlUtils.resolveUrl(baseUrl, url));
             }
             url_ = UrlUtils.removeRedundantPort(url_);
+            if (fileWithoutHost()) {
+                url_ = UrlUtils.removeLocalhostFromFileUrl(url_);
+            }
         }
         catch (final MalformedURLException e) {
             throw JavaScriptEngine.typeError(e.toString());
@@ -464,7 +469,7 @@ public class URL extends HtmlUnitScriptable {
             return;
         }
 
-        final java.net.URL newUrl = UrlUtils.getUrlWithNewProtocolLikeSetter(url_, protocol);
+        final java.net.URL newUrl = UrlUtils.getUrlWithNewProtocolLikeSetter(url_, protocol, fileWithoutHost());
         if (newUrl != null) {
             url_ = newUrl;
         }
@@ -607,12 +612,16 @@ public class URL extends HtmlUnitScriptable {
     public String jsToString() {
         if (org.htmlunit.util.StringUtils.isEmptyOrNull(url_.getPath())) {
             try {
-                return UrlUtils.getUrlWithNewPath(url_, "/").toExternalForm();
+                return UrlUtils.serialize(UrlUtils.getUrlWithNewPath(url_, "/"));
             }
             catch (final MalformedURLException e) {
-                return url_.toExternalForm();
+                return UrlUtils.serialize(url_);
             }
         }
-        return url_.toExternalForm();
+        return UrlUtils.serialize(url_);
+    }
+
+    private boolean fileWithoutHost() {
+        return getBrowserVersion().hasFeature(JS_URL_FILE_WITHOUT_HOST);
     }
 }

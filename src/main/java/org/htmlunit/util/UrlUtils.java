@@ -488,6 +488,21 @@ public final class UrlUtils {
      * @see <a href="https://url.spec.whatwg.org/#dom-url-protocol">URL Standard - protocol setter</a>
      */
     public static URL getUrlWithNewProtocolLikeSetter(final URL url, final String protocol) {
+        return getUrlWithNewProtocolLikeSetter(url, protocol, false);
+    }
+
+    /**
+     * Returns the URL with the scheme changed like the {@code protocol} setter of the URL Standard does it
+     * (see {@link #getUrlWithNewProtocolLikeSetter(URL, String)}).
+     *
+     * @param url the URL
+     * @param protocol the new protocol (everything from the first ':' is ignored)
+     * @param fileWithoutHost whether the host is removed if the scheme is changed to 'file' (like Firefox)
+     * @return the new URL, the given URL if the scheme is not changed or {@code null} if the
+     *         protocol is not a valid scheme
+     */
+    public static URL getUrlWithNewProtocolLikeSetter(final URL url, final String protocol,
+            final boolean fileWithoutHost) {
         final String scheme = StringUtils.substringBefore(protocol, ":").trim();
         if (!isValidScheme(scheme)) {
             return null;
@@ -507,7 +522,45 @@ public final class UrlUtils {
         }
 
         try {
+            if (fileWithoutHost && "file".equals(newScheme)) {
+                return createNewUrl(newScheme, "", url.getPath(), url.getRef(), url.getQuery());
+            }
             return removeRedundantPort(getUrlWithNewProtocol(url, newScheme));
+        }
+        catch (final MalformedURLException e) {
+            return url;
+        }
+    }
+
+    /**
+     * Serializes the URL like the URL Standard does it; different from {@link URL#toExternalForm()}
+     * a file URL without host has an empty host ('file:///C:/a' and not 'file:/C:/a').
+     *
+     * @param url the URL
+     * @return the serialized URL
+     * @see <a href="https://url.spec.whatwg.org/#concept-url-serializer">URL Standard - URL serializer</a>
+     */
+    public static String serialize(final URL url) {
+        final String externalForm = url.toExternalForm();
+        if ("file".equals(url.getProtocol()) && !externalForm.startsWith("file://")) {
+            return "file://" + externalForm.substring("file:".length());
+        }
+        return externalForm;
+    }
+
+    /**
+     * Returns the file URL without the host if the host is 'localhost' (like the URL Standard parses
+     * file URLs); other URLs are returned unchanged.
+     *
+     * @param url the URL
+     * @return the URL without the host 'localhost'
+     */
+    public static URL removeLocalhostFromFileUrl(final URL url) {
+        if (!"file".equals(url.getProtocol()) || !"localhost".equalsIgnoreCase(url.getHost())) {
+            return url;
+        }
+        try {
+            return createNewUrl("file", "", url.getPath(), url.getRef(), url.getQuery());
         }
         catch (final MalformedURLException e) {
             return url;

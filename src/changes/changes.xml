@@ -16,6 +16,12 @@
                 navigates only to http(s) urls (before e.g. 'file:' or 'foo:' was navigated).
             </action>
             <action type="fix" dev="rbri">
+                URL.href and the href of anchors and areas serialize file urls without host like the URL
+                Standard ('file:///C:/a', before 'file:/C:/a'). When simulating Firefox, file urls of URL objects
+                have no host (like Firefox) and setting location.protocol does not reload the page if the url
+                is not changed.
+            </action>
+            <action type="fix" dev="rbri">
                 Like the browsers, a page not loaded from a file is not allowed to load scripts, images,
                 stylesheets (also @import), workers and importScripts() from local files (file urls);
                 the load fails like a network error. new Worker() throws a SecurityError (Firefox fires the

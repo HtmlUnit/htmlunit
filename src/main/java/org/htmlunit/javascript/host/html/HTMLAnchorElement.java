@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
+import static org.htmlunit.BrowserVersionFeatures.JS_URL_FILE_WITHOUT_HOST;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.net.MalformedURLException;
@@ -95,7 +96,7 @@ public class HTMLAnchorElement extends HTMLElement {
         }
 
         try {
-            return getUrl().toString();
+            return UrlUtils.serialize(getUrl());
         }
         catch (final MalformedURLException e) {
             return hrefAttr;
@@ -479,7 +480,8 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter
     public void setProtocol(final String protocol) throws Exception {
-        final URL result = HTMLHyperlinkElementUtils.setProtocol(getUrl(), protocol);
+        final URL result = HTMLHyperlinkElementUtils.setProtocol(getUrl(), protocol,
+                getBrowserVersion().hasFeature(JS_URL_FILE_WITHOUT_HOST));
         if (result != null) {
             setUrl(result);
         }

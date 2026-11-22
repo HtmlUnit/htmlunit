@@ -134,14 +134,15 @@ final class HTMLHyperlinkElementUtils {
      * if the protocol is invalid or should not be applied.
      * @param url the current URL
      * @param protocol the new protocol value (with or without trailing {@code :})
+     * @param fileWithoutHost whether the host is removed if the scheme is changed to 'file' (like Firefox)
      * @return the new URL, or {@code null} if the protocol is invalid
      */
-    static URL setProtocol(final URL url, final String protocol) {
+    static URL setProtocol(final URL url, final String protocol, final boolean fileWithoutHost) {
         if (protocol.isEmpty()) {
             return null;
         }
 
-        final URL result = UrlUtils.getUrlWithNewProtocolLikeSetter(url, protocol);
+        final URL result = UrlUtils.getUrlWithNewProtocolLikeSetter(url, protocol, fileWithoutHost);
         if (result == null || result == url) {
             return null;
         }
