@@ -106,6 +106,8 @@ public class WebClientOptions implements Serializable {
     private boolean htmlFragmentSelfClosingTagsAllowed_;
     private boolean contentSecurityPolicyReportsEnabled_ = true;
 
+    private boolean localFileAccessFromRemotePagesAllowed_;
+
     /**
      * Sets the SSLContext; if this is set it is used and some other settings are
      * ignored (protocol, keyStore, keyStorePassword, trustStore,
@@ -1171,5 +1173,31 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isContentSecurityPolicyReportsEnabled() {
         return contentSecurityPolicyReportsEnabled_;
+    }
+
+    /**
+     * Sets whether pages that were not loaded from a local file are allowed to access
+     * local files (file URLs), default {@code false}.
+     * <p>Like the browsers, HtmlUnit blocks e.g. scripts, images, stylesheets, frames, workers
+     * and navigations to file URLs if the page was not loaded from a file.
+     * Redirects to file URLs are always blocked (Fetch Standard).
+     * Enable this only for tests that depend on the old (insecure) behavior of HtmlUnit;
+     * real browsers will not load these resources.</p>
+     *
+     * @param allowed whether pages not loaded from a file are allowed to access local files
+     */
+    public void setLocalFileAccessFromRemotePagesAllowed(final boolean allowed) {
+        localFileAccessFromRemotePagesAllowed_ = allowed;
+    }
+
+    /**
+     * Returns whether pages that were not loaded from a local file are allowed to access
+     * local files (file URLs), default {@code false}.
+     *
+     * @return {@code true} if pages not loaded from a file are allowed to access local files
+     * @see #setLocalFileAccessFromRemotePagesAllowed(boolean)
+     */
+    public boolean isLocalFileAccessFromRemotePagesAllowed() {
+        return localFileAccessFromRemotePagesAllowed_;
     }
 }

@@ -505,7 +505,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         if (page instanceof HtmlPage htmlPage) {
             return htmlPage.isLocalResourceAccessAllowed(url);
         }
-        return UrlUtils.isLocalResourceAccessAllowed(page.getUrl(), url);
+        return page.getEnclosingWindow().getWebClient().getOptions().isLocalFileAccessFromRemotePagesAllowed()
+                || UrlUtils.isLocalResourceAccessAllowed(page.getUrl(), url);
     }
 
     private URL makeUrlForOpenWindow(final String urlString) {

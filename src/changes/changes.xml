@@ -14,6 +14,12 @@
                 tag (e.g. &lt;h3/&gt;) like up to version 5.5.0. This allows applications to read back markup written by
                 asXml() before 5.8.0. The option is disabled by default (like the browsers).
             </action>
+            <action type="add" dev="rbri">
+                New option WebClientOptions.setLocalFileAccessFromRemotePagesAllowed(boolean) (default false).
+                If enabled, pages that were not loaded from a file are allowed again to load local files (file urls),
+                to navigate to them and to follow redirects to them, like HtmlUnit did before this release.
+                Real browsers block this; use the option only if your tests depend on the old behavior.
+            </action>
             <action type="fix" dev="rbri">
                 The files stored by the DownloadingAttachmentHandler are readable for the owner only (by default
                 they are stored in the shared temp directory). The report folder of the DebuggingWebConnection is
@@ -35,30 +41,34 @@
                 core-js: Fix Number.prototype.toPrecision for values below 0.1 that need padding zeros.
             </action>
             <action type="fix" dev="rbri">
-                The protocol setters (URL, HTMLAnchorElement, HTMLAreaElement, location) follow the rules of the
-                URL Standard: the scheme is not changed to 'file' if the url has credentials or a port, not
-                from 'file' if the host is empty and not between special and not special schemes.
+                INCOMPATIBLE CHANGE: The protocol setters (URL, HTMLAnchorElement, HTMLAreaElement, location)
+                follow the rules of the URL Standard: the scheme is not changed to 'file' if the url has
+                credentials or a port, not from 'file' if the host is empty and not between special and not
+                special schemes.
                 Like the HTML Standard, location.protocol throws a SyntaxError for an invalid scheme and
                 navigates only to http(s) urls (before e.g. 'file:' or 'foo:' was navigated).
             </action>
             <action type="fix" dev="rbri">
-                URL.href and the href of anchors and areas serialize file urls without host like the URL
-                Standard ('file:///C:/a', before 'file:/C:/a'). When simulating Firefox, file urls of URL objects
-                have no host (like Firefox) and setting location.protocol does not reload the page if the url
-                is not changed.
+                INCOMPATIBLE CHANGE: URL.href and the href of anchors and areas serialize file urls without host
+                like the URL Standard ('file:///C:/a', before 'file:/C:/a'). When simulating Firefox, file urls
+                of URL objects have no host (like Firefox) and setting location.protocol does not reload the page
+                if the url is not changed.
             </action>
             <action type="fix" dev="rbri">
-                Like the browsers, a page not loaded from a file is not allowed to load scripts, images,
-                stylesheets (also @import), workers and importScripts() from local files (file urls);
-                the load fails like a network error. new Worker() throws a SecurityError (Firefox fires the
-                error event), importScripts() throws a NetworkError (Firefox a SecurityError). Like Chrome/Edge,
-                a page loaded from a file is not allowed to start a worker from a local file.
+                INCOMPATIBLE CHANGE: Like the browsers, a page not loaded from a file is not allowed to load
+                scripts, images, stylesheets (also @import), workers and importScripts() from local files
+                (file urls); the load fails like a network error
+                (see WebClientOptions.setLocalFileAccessFromRemotePagesAllowed(true)). new Worker() throws a
+                SecurityError (Firefox fires the error event), importScripts() throws a NetworkError (Firefox a
+                SecurityError). Like Chrome/Edge, a page loaded from a file is not allowed to start a worker from
+                a local file.
             </action>
             <action type="fix" dev="rbri">
-                When simulating Firefox, the MIME type of data urls is serialized like the MIME Sniffing Standard
-                does it (duplicate parameters are ignored, the charset parameter stays in place); like Firefox all
-                whitespace is removed from the MIME type of base64 data urls. When simulating Chrome/Edge the
-                parameters are kept like Chrome does it (names and values unchanged, split at every semicolon).
+                INCOMPATIBLE CHANGE: When simulating Firefox, the MIME type of data urls is serialized like the
+                MIME Sniffing Standard does it (duplicate parameters are ignored, the charset parameter stays in
+                place); like Firefox all whitespace is removed from the MIME type of base64 data urls. When
+                simulating Chrome/Edge the parameters are kept like Chrome does it (names and values unchanged,
+                split at every semicolon).
             </action>
             <action type="fix" dev="rbri">
                 The ';base64' marker of data urls is case-insensitive and may be surrounded by spaces
@@ -78,23 +88,26 @@
                 location.href does.
             </action>
             <action type="fix" dev="rbri">
-                Like the browsers, window.open() of a local file (file url) from a page that was not loaded from
-                a file opens no window and returns null (before an empty window was opened); an existing window
-                with this name is not navigated and returned (before it was navigated to about:blank); when simulating
-                Firefox an Error is thrown.
+                INCOMPATIBLE CHANGE: Like the browsers, window.open() of a local file (file url) from a page that
+                was not loaded from a file opens no window and returns null (before an empty window was opened);
+                an existing window with this name is not navigated and returned (before it was navigated to
+                about:blank); when simulating Firefox an Error is thrown
+                (see WebClientOptions.setLocalFileAccessFromRemotePagesAllowed(true)).
             </action>
             <action type="fix" dev="rbri">
-                Like the browsers (Fetch standard), a redirect to an url that is not http(s) (e.g. a local file)
-                is a network error; before the url was handed over to the web connection.
+                INCOMPATIBLE CHANGE: Like the browsers (Fetch standard), a redirect to an url that is not http(s)
+                (e.g. a local file) is a network error; before the url was handed over to the web connection
+                (redirects to local files: see WebClientOptions.setLocalFileAccessFromRemotePagesAllowed(true)).
             </action>
             <action type="fix" dev="rbri">
                 The href of the base element may be an absolute url with any scheme (e.g. file:); before such an
                 url was appended to the url of the page if this url ends with a slash.
             </action>
             <action type="update" dev="Vidya m">
-                Like in the browsers, a page that was not loaded from a file is no longer able to load a local
-                file (file url) into a frame or window by setting the location, using window.open(), clicking
-                a link, submitting a form or a refresh; this was only blocked for the src attribute of frames.
+                INCOMPATIBLE CHANGE: Like in the browsers, a page that was not loaded from a file is no longer able
+                to load a local file (file url) into a frame or window by setting the location, using window.open(),
+                clicking a link, submitting a form or a refresh; this was only blocked for the src attribute of
+                frames (see WebClientOptions.setLocalFileAccessFromRemotePagesAllowed(true)).
             </action>
             <action type="update" dev="rbri">
                 csp: when simulating Chrome/Edge, a WebSocket blocked by connect-src fires only the error event

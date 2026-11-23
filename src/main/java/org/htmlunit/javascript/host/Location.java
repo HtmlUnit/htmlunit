@@ -26,6 +26,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.Page;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
@@ -720,7 +721,8 @@ public class Location extends HtmlUnitScriptable {
      */
     private void setUrl(final URL url) throws IOException {
         final WebWindow webWindow = window_.getWebWindow();
-        final BrowserVersion browserVersion = webWindow.getWebClient().getBrowserVersion();
+        final WebClient webClient = webWindow.getWebClient();
+        final BrowserVersion browserVersion = webClient.getBrowserVersion();
 
         URL requestUrl = url;
         if (webWindow.getEnclosedPage() instanceof HtmlPage page) {
@@ -735,11 +737,11 @@ public class Location extends HtmlUnitScriptable {
             allowed = callingPage.isLocalResourceAccessAllowed(requestUrl);
         }
         else {
-            allowed = UrlUtils.isLocalResourceAccessAllowed(callingWindow.getEnclosedPage().getUrl(), requestUrl);
+            allowed = webClient.getOptions().isLocalFileAccessFromRemotePagesAllowed()
+                    || UrlUtils.isLocalResourceAccessAllowed(callingWindow.getEnclosedPage().getUrl(), requestUrl);
         }
         if (!allowed) {
-            webWindow.getWebClient().getIncorrectnessListener()
-                    .notify("Not allowed to load local resource: " + requestUrl, this);
+            webClient.getIncorrectnessListener().notify("Not allowed to load local resource: " + requestUrl, this);
             return;
         }
 
@@ -758,7 +760,7 @@ public class Location extends HtmlUnitScriptable {
             upgradeInsecureRedirects(page, webWindow, webRequest);
         }
 
-        webWindow.getWebClient().getPage(webWindow, webRequest);
+        webClient.getPage(webWindow, webRequest);
     }
 
     /**
