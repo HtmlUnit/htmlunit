@@ -14,6 +14,11 @@
  */
 package org.htmlunit.util;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.PosixFilePermissions;
+
 /**
  * File utility class for functions not covered by third-party libraries.
  *
@@ -78,5 +83,27 @@ public final class FileUtils {
 
     private static boolean isTrimmed(final char c) {
         return c == '.' || Character.isWhitespace(c);
+    }
+
+    /**
+     * Creates the given directory and all the nonexistent parent directories; a directory
+     * created by this method is accessible for the owner only ({@code rwx------}). This is
+     * relevant for directories inside the shared temp directory, where the default permissions
+     * (taken from the umask) usually allow every other user of the machine to read the content.
+     * <p>On file systems without posix support the permissions are not set, the directory is
+     * created with the defaults of the platform. Nothing is done if the directory already
+     * exists; the permissions of an existing directory are not changed.</p>
+     *
+     * @param directory the directory to create
+     * @throws IOException if the directory can't be created
+     */
+    public static void createUserOnlyDirectories(final Path directory) throws IOException {
+        if (directory.getFileSystem().supportedFileAttributeViews().contains("posix")) {
+            Files.createDirectories(directory,
+                    PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------")));
+            return;
+        }
+
+        Files.createDirectories(directory);
     }
 }

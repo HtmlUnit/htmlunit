@@ -17,6 +17,9 @@ package org.htmlunit.util;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -86,6 +89,28 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
         assertEquals(".xml", DebuggingWebConnection.chooseExtension(MimeType.TEXT_XML));
 
         assertEquals(".txt", DebuggingWebConnection.chooseExtension(MimeType.TEXT_PLAIN));
+    }
+
+    /**
+     * The report folder is created inside the shared temp directory; the saved responses
+     * (and the request parameters) have to be readable for the owner only.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void reportFolderAccess() throws Exception {
+        final MockWebConnection mockConnection = new MockWebConnection();
+        mockConnection.setResponse(URL_FIRST, "<html></html>");
+
+        final String dirName = "test-" + getClass().getSimpleName() + "-access";
+        try (DebuggingWebConnection dwc = new DebuggingWebConnection(mockConnection, dirName)) {
+            final Path reportFolder = dwc.getReportFolder().toPath();
+            if (reportFolder.getFileSystem().supportedFileAttributeViews().contains("posix")) {
+                assertEquals("rwx------",
+                        PosixFilePermissions.toString(Files.getPosixFilePermissions(reportFolder)));
+            }
+
+            FileUtils.deleteDirectory(dwc.getReportFolder());
+        }
     }
 
     /**

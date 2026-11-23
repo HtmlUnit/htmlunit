@@ -95,7 +95,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         if (reportFolder_.exists()) {
             FileUtils.forceDelete(reportFolder_);
         }
-        FileUtils.forceMkdir(reportFolder_);
+        org.htmlunit.util.FileUtils.createUserOnlyDirectories(reportFolder_.toPath());
         javaScriptFile_ = new File(reportFolder_, "hu.js");
         createOverview();
     }
