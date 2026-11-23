@@ -104,6 +104,7 @@ public class WebClientOptions implements Serializable {
     private boolean isFetchPolyfillEnabled_;
 
     private boolean htmlFragmentSelfClosingTagsAllowed_;
+
     private boolean contentSecurityPolicyReportsEnabled_ = true;
 
     private boolean localFileAccessFromRemotePagesAllowed_;
@@ -966,6 +967,12 @@ public class WebClientOptions implements Serializable {
      * trailing slash is ignored like in the browsers. A self-closed script is not affected.
      * Enable this to read back markup written by {@code asXml()} before 5.8.0, which wrote empty elements
      * like {@code <h3/>}. XHTML pages always honor the trailing slash.
+     * <p>The option applies to every fragment parsed for an html page, also to the markup set by
+     * the scripts of the page (e.g. {@code innerHTML}, {@code outerHTML}, {@code insertAdjacentHTML()},
+     * {@code createContextualFragment()}). Real browsers ignore the trailing slash; with this option
+     * the DOM can differ from the one of the browsers. This is relevant for security, e.g. for
+     * sanitizers: the content after {@code <iframe/>} is markup and no longer the text of the iframe.
+     * Enable this only to read back markup written by old versions of HtmlUnit.</p>
      *
      * @param allowed {@code true} to close a non void element written as empty-element tag
      */
@@ -974,10 +981,12 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns whether the fragment parser of html pages closes a non void element written as empty-element tag.
+     * Returns whether the fragment parser of html pages closes a non void element written as empty-element tag
+     * (default {@code false}).
      *
      * @return {@code true} if the fragment parser of html pages closes a non void element written as
      *         empty-element tag
+     * @see #setHtmlFragmentSelfClosingTagsAllowed(boolean)
      */
     public boolean isHtmlFragmentSelfClosingTagsAllowed() {
         return htmlFragmentSelfClosingTagsAllowed_;

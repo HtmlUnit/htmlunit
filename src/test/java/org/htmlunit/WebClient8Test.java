@@ -20,6 +20,7 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlCheckBoxInput;
+import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlRadioButtonInput;
@@ -205,6 +206,49 @@ public class WebClient8Test extends SimpleWebTestCase {
             // markup written by asXml() before 5.8.0
             copy.setInnerHtml("<h3/><p>x</p><iframe/><p>y</p><br/>");
             assertEquals("<div id=\"copy\"><h3></h3><p>x</p><iframe></iframe><p>y</p><br/></div>", copy.asXml());
+        }
+    }
+
+    /**
+     * The option applies also to the markup set by the scripts of the page.
+     *
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void parseFragmentHtmlFragmentSelfClosingTagsAllowedScript() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body><div id='copy'></div>\n"
+                + "<script>document.getElementById('copy').innerHTML = '<h3/><p>x</p>';</script>\n"
+                + "</body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), true, null, -1)) {
+            webClient.getOptions().setHtmlFragmentSelfClosingTagsAllowed(true);
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            final DomElement copy = page.getElementById("copy");
+            assertEquals("<div id=\"copy\"><h3></h3><p>x</p></div>", copy.asXml());
+        }
+    }
+
+    /**
+     * A self-closed script is not closed, also if the option is enabled; the following markup
+     * is the text of the script.
+     *
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void parseFragmentHtmlFragmentSelfClosingTagsAllowedNotForScript() throws Exception {
+        final String html = DOCTYPE_HTML + "<html><body><div id='copy'></div></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            webClient.getOptions().setHtmlFragmentSelfClosingTagsAllowed(true);
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            final DomElement copy = page.getElementById("copy");
+            copy.setInnerHtml("<script/><p>x</p>");
+
+            assertEquals(0, copy.getElementsByTagName("p").size());
+            final DomNodeList<HtmlElement> scripts = copy.getElementsByTagName("script");
+            assertEquals(1, scripts.size());
+            assertEquals("<p>x</p>", scripts.get(0).getTextContent());
         }
     }
 
