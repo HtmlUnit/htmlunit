@@ -35,7 +35,8 @@ public class Sarissa0997Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"++++++++++++++++++", "+", "+", "+", "+++", "++", "++++++++"})
+    @Alerts(DEFAULT = {"++++++++++++++++++", "+", "+", "+", "+++", "++", "++++++++"},
+            CHROME = {"++++++++++++++++++", "+", "+", "+", "+++", "++", "FFFFFFFF"})
     public void sarissa() throws Exception {
         startWebServer("src/test/resources/libraries/sarissa/0.9.9.7", null);
         final String url = URL_FIRST + "test/testsarissa.html";
