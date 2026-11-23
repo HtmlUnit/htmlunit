@@ -173,7 +173,7 @@ public enum ReferrerPolicy {
         final String referrer = full.length() > MAX_REFERRER_LENGTH ? origin : full;
 
         final boolean sameOrigin = UrlUtils.isSameOrigin(referrerUrl, targetUrl);
-        final boolean downgrade = isTlsProtected(referrerUrl) && !isPotentiallyTrustworthy(targetUrl);
+        final boolean downgrade = isTlsProtected(referrerUrl) && !UrlUtils.isPotentiallyTrustworthy(targetUrl);
 
         ReferrerPolicy policy = this;
         if ((policy == UNSAFE_URL || policy == NO_REFERRER_WHEN_DOWNGRADE)
@@ -209,19 +209,5 @@ public enum ReferrerPolicy {
 
     private static boolean isTlsProtected(final URL url) {
         return "https".equals(url.getProtocol()) || "wss".equals(url.getProtocol());
-    }
-
-    /**
-     * Returns whether the url is potentially trustworthy: https and localhost urls.
-     * @see <a href="https://w3c.github.io/webappsec-secure-contexts/#is-url-trustworthy">
-     *     Is url potentially trustworthy?</a>
-     */
-    private static boolean isPotentiallyTrustworthy(final URL url) {
-        if (isTlsProtected(url)) {
-            return true;
-        }
-        final String host = url.getHost().toLowerCase(Locale.ROOT);
-        return "localhost".equals(host) || host.endsWith(".localhost")
-                || host.startsWith("127.") || "[::1]".equals(host);
     }
 }

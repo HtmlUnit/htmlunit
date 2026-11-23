@@ -1710,4 +1710,79 @@ public final class UrlUtils {
         final String protocol = url.getProtocol();
         return !"file".equals(protocol) || protocol.equals(pageUrl.getProtocol());
     }
+
+    /**
+     * Returns whether the origin of the given URL is potentially trustworthy (a secure context)
+     * like defined by the Secure Contexts specification: https, wss and file URLs and http/ws URLs
+     * of localhost (also *.localhost) and of the loopback addresses (127.0.0.0/8, [::1]).
+     * Other schemes (e.g. about:, data:, blob:) are not trustworthy; callers have to handle
+     * them before (e.g. by using the origin of the creator).
+     *
+     * @param url the URL to check (must not be null)
+     * @return whether the origin of the URL is potentially trustworthy
+     * @see <a href="https://w3c.github.io/webappsec-secure-contexts/#is-origin-trustworthy">
+     *     Is origin potentially trustworthy?</a>
+     */
+    public static boolean isPotentiallyTrustworthy(final URL url) {
+        final String protocol = url.getProtocol();
+        if ("https".equals(protocol) || "wss".equals(protocol) || "file".equals(protocol)) {
+            return true;
+        }
+        if (!"http".equals(protocol) && !"ws".equals(protocol)) {
+            return false;
+        }
+        return isLocalhostOrLoopback(url.getHost());
+    }
+
+    /**
+     * Returns whether the given host is localhost (also *.localhost, case-insensitive, with an
+     * optional trailing dot) or a loopback address (127.0.0.0/8 or [::1]); the origins of these
+     * hosts are potentially trustworthy also for http.
+     *
+     * @param host the host to check (as returned by {@link URL#getHost()}; may be null)
+     * @return whether the host is localhost or a loopback address
+     */
+    public static boolean isLocalhostOrLoopback(final String host) {
+        if (host == null || host.isEmpty()) {
+            return false;
+        }
+
+        String lower = host.toLowerCase(Locale.ROOT);
+        if (lower.endsWith(".")) {
+            lower = lower.substring(0, lower.length() - 1);
+        }
+        if ("localhost".equals(lower) || lower.endsWith(".localhost")) {
+            return true;
+        }
+
+        if (lower.startsWith("[") && lower.endsWith("]")) {
+            lower = lower.substring(1, lower.length() - 1);
+        }
+        if ("::1".equals(lower) || "0:0:0:0:0:0:0:1".equals(lower)) {
+            return true;
+        }
+
+        return isIPv4Loopback(lower);
+    }
+
+    private static boolean isIPv4Loopback(final String host) {
+        final String[] parts = host.split("\\.", -1);
+        if (parts.length != 4) {
+            return false;
+        }
+        for (final String part : parts) {
+            if (part.isEmpty() || part.length() > 3) {
+                return false;
+            }
+            for (int i = 0; i < part.length(); i++) {
+                if (part.charAt(i) < '0' || part.charAt(i) > '9') {
+                    return false;
+                }
+            }
+            if (Integer.parseInt(part) > 255) {
+                return false;
+            }
+        }
+        return "127".equals(parts[0]);
+    }
 }

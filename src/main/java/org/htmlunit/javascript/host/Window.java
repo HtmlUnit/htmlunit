@@ -4000,24 +4000,11 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxGetter
     public boolean isIsSecureContext() {
         final Page page = getWebWindow().getEnclosedPage();
-        if (page != null) {
-            final String protocol = page.getUrl().getProtocol();
-            if ("https".equals(protocol)
-                    || "wss".equals(protocol)
-                    || "file".equals(protocol)) {
-                return true;
-            }
-
-            final String host = page.getUrl().getHost();
-            if ("localhost".equals(host)
-                    || "localhost.".equals(host)
-                    || host.endsWith(".localhost")
-                    || host.endsWith(".localhost.")) {
-                return true;
-            }
+        if (page instanceof HtmlPage htmlPage) {
+            // about:blank and about:srcdoc documents are judged by the url of their creator
+            return UrlUtils.isPotentiallyTrustworthy(htmlPage.getOriginUrl());
         }
-
-        return false;
+        return page != null && UrlUtils.isPotentiallyTrustworthy(page.getUrl());
     }
 }
 

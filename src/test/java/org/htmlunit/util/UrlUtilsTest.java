@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.net.InetAddress;
 import java.net.URL;
 
+import org.htmlunit.protocol.AnyHandler;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -891,5 +892,79 @@ public class UrlUtilsTest {
 
         assertFalse(UrlUtils.isLocalResourceAccessAllowed(httpUrl, fileUrl));
         assertFalse(UrlUtils.isLocalResourceAccessAllowed(UrlUtils.URL_ABOUT_BLANK, fileUrl));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isPotentiallyTrustworthySchemes() throws Exception {
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("https://example.com/")));
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("file:///tmp/test.html")));
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(new URL("http://example.com/")));
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(UrlUtils.URL_ABOUT_BLANK));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isPotentiallyTrustworthyLocalhost() throws Exception {
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("http://localhost:8080/")));
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("http://LocalHost/")));
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("http://localhost./")));
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("http://app.localhost/")));
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(new URL("http://localhost.example.com/")));
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(new URL("http://notlocalhost/")));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isPotentiallyTrustworthyLoopback() throws Exception {
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("http://127.0.0.1:8080/")));
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("http://127.1.2.3/")));
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("http://[::1]:8080/")));
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL("http://[0:0:0:0:0:0:0:1]/")));
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(new URL("http://128.0.0.1/")));
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(new URL("http://[::2]/")));
+    }
+
+    /**
+     * A host name starting with '127.' is not a loopback address.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isPotentiallyTrustworthyHostLikeLoopback() throws Exception {
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(new URL("http://127.example.com/")));
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(new URL("http://127.0.0.1.example.com/")));
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(new URL("http://127.0.0.256/")));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isPotentiallyTrustworthyWebSocket() throws Exception {
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL(null, "wss://example.com/", new AnyHandler())));
+        assertTrue(UrlUtils.isPotentiallyTrustworthy(new URL(null, "ws://localhost/", new AnyHandler())));
+        assertFalse(UrlUtils.isPotentiallyTrustworthy(new URL(null, "ws://example.com/", new AnyHandler())));
+    }
+
+    /**
+     * Test for {@link UrlUtils#isLocalhostOrLoopback(String)}.
+     */
+    @Test
+    public void isLocalhostOrLoopback() {
+        assertTrue(UrlUtils.isLocalhostOrLoopback("localhost"));
+        assertTrue(UrlUtils.isLocalhostOrLoopback("127.0.0.1"));
+        assertTrue(UrlUtils.isLocalhostOrLoopback("::1"));
+        assertTrue(UrlUtils.isLocalhostOrLoopback("[::1]"));
+        assertFalse(UrlUtils.isLocalhostOrLoopback(null));
+        assertFalse(UrlUtils.isLocalhostOrLoopback(""));
+        assertFalse(UrlUtils.isLocalhostOrLoopback("example.com"));
+        assertFalse(UrlUtils.isLocalhostOrLoopback("127.0.0"));
     }
 }

@@ -150,12 +150,7 @@ public final class HttpClientConverter {
             return true;
         }
 
-        final String host = origin.getHost().toLowerCase(Locale.ROOT);
-        return "localhost".equals(host)
-                || host.endsWith(".localhost")
-                || (InetAddressUtils.isIPv4Address(host) && host.startsWith("127."))
-                || "::1".equals(host)
-                || "[::1]".equals(host);
+        return UrlUtils.isLocalhostOrLoopback(origin.getHost());
     }
 
     /**

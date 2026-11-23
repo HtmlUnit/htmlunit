@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
+            <action type="fix" dev="rbri">
+                window.isSecureContext is true for pages from the loopback addresses (e.g. http://127.0.0.1 and
+                http://[::1]) like in the browsers. All checks for potentially trustworthy origins (secure cookies,
+                Sec-Fetch headers, referrer policy, CSP upgrade-insecure-requests, isSecureContext) use the same
+                rules now; a host name like '127.example.com' is no longer handled as loopback address.
+            </action>
             <action type="add" dev="Ronny Shapiro">
                 New option WebClientOptions.setHtmlFragmentSelfClosingTagsAllowed(); when enabled, the fragment parser
                 of html pages (e.g. setInnerHtml()) closes a non void element or iframe written as empty-element

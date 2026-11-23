@@ -913,34 +913,6 @@ public class HttpWebConnection implements WebConnection {
         return port == -1 ? url.getDefaultPort() : port;
     }
 
-    /**
-     * Returns whether the given URL is a "potentially trustworthy origin" as defined by
-     * the Secure Contexts spec, which gates whether {@code Sec-Fetch-*} headers (and
-     * {@code Upgrade-Insecure-Requests}) are sent at all. Note that {@code localhost}
-     * and loopback addresses are considered trustworthy even over plain HTTP.
-     * @param url the target URL
-     * @return whether the origin is potentially trustworthy
-     */
-    private static boolean isPotentiallyTrustworthy(final URL url) {
-        final String protocol = url.getProtocol();
-        if ("https".equals(protocol) || "wss".equals(protocol) || "file".equals(protocol)) {
-            return true;
-        }
-        if (!"http".equals(protocol) && !"ws".equals(protocol)) {
-            // be conservative for schemes not explicitly handled here (e.g. about:, data:, blob:
-            // callers should special-case these before reaching HTTP request construction)
-            return false;
-        }
-
-        final String host = url.getHost();
-        return "localhost".equalsIgnoreCase(host)
-                || host.toLowerCase(java.util.Locale.ROOT).endsWith(".localhost")
-                || "127.0.0.1".equals(host)
-                || host.startsWith("127.")
-                || "::1".equals(host)
-                || "[::1]".equals(host);
-    }
-
     private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) {
         final List<HttpRequestInterceptor> list = new ArrayList<>();
         final Map<String, String> requestHeaders = new HashMap<>(webRequest.getAdditionalHeaders());
@@ -957,7 +929,7 @@ public class HttpWebConnection implements WebConnection {
         // Both Sec-Fetch-* (https://www.w3.org/TR/fetch-metadata/) and Client Hints
         // (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-CH-UA) are
         // only sent to potentially-trustworthy target origins; computed once up front.
-        final boolean isSecureContext = isPotentiallyTrustworthy(url);
+        final boolean isSecureContext = UrlUtils.isPotentiallyTrustworthy(url);
 
         // computed unconditionally: also drives Upgrade-Insecure-Requests below,
         // which is not gated by origin trustworthiness the way Sec-Fetch-*/Client

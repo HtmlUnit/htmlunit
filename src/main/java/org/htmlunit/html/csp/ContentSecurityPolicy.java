@@ -716,16 +716,7 @@ public final class ContentSecurityPolicy implements Serializable {
         if (!"http".equals(protocol) && !"ws".equals(protocol)) {
             return false;
         }
-        return !isLoopback(url.getHost());
-    }
-
-    private static boolean isLoopback(final String host) {
-        final String lower = host.toLowerCase(Locale.ROOT);
-        return "localhost".equals(lower)
-                || lower.endsWith(".localhost")
-                || lower.startsWith("127.")
-                || "[::1]".equals(lower)
-                || "::1".equals(lower);
+        return !UrlUtils.isLocalhostOrLoopback(url.getHost());
     }
 
     private static int effectivePort(final URL url) {
