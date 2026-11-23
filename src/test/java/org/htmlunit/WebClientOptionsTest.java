@@ -69,8 +69,13 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
                         deserialized.getWebSocketMaxBinaryMessageSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
+
         assertEquals(original.isHtmlFragmentSelfClosingTagsAllowed(),
                         deserialized.isHtmlFragmentSelfClosingTagsAllowed());
+        assertEquals(original.isContentSecurityPolicyReportsEnabled(),
+                        deserialized.isContentSecurityPolicyReportsEnabled());
+        assertEquals(original.isLocalFileAccessFromRemotePagesAllowed(),
+                        deserialized.isLocalFileAccessFromRemotePagesAllowed());
     }
 
     /**
@@ -99,6 +104,9 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
 
         original.setFetchPolyfillEnabled(true);
         original.setHtmlFragmentSelfClosingTagsAllowed(true);
+
+        original.setContentSecurityPolicyReportsEnabled(false);
+        original.setLocalFileAccessFromRemotePagesAllowed(true);
 
         final byte[] bytes = SerializationUtils.serialize(original);
         final WebClientOptions deserialized = SerializationUtils.deserialize(bytes);
@@ -133,8 +141,13 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
                         deserialized.getWebSocketMaxBinaryMessageSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
+
         assertEquals(original.isHtmlFragmentSelfClosingTagsAllowed(),
                         deserialized.isHtmlFragmentSelfClosingTagsAllowed());
+        assertEquals(original.isContentSecurityPolicyReportsEnabled(),
+                        deserialized.isContentSecurityPolicyReportsEnabled());
+        assertEquals(original.isLocalFileAccessFromRemotePagesAllowed(),
+                        deserialized.isLocalFileAccessFromRemotePagesAllowed());
     }
 
     /**

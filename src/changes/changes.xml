@@ -16,8 +16,9 @@
             </action>
             <action type="add" dev="rbri">
                 New option WebClientOptions.setLocalFileAccessFromRemotePagesAllowed(boolean) (default false).
-                If enabled, pages that were not loaded from a file are allowed again to load local files (file urls),
-                to navigate to them and to follow redirects to them, like HtmlUnit did before this release.
+                If enabled, pages that were not loaded from a file are allowed again to load local files (file urls)
+                and to navigate to them, like HtmlUnit did before this release (redirects to local files are still
+                blocked).
                 Real browsers block this; use the option only if your tests depend on the old behavior.
             </action>
             <action type="fix" dev="rbri">
@@ -96,8 +97,7 @@
             </action>
             <action type="fix" dev="rbri">
                 INCOMPATIBLE CHANGE: Like the browsers (Fetch standard), a redirect to an url that is not http(s)
-                (e.g. a local file) is a network error; before the url was handed over to the web connection
-                (redirects to local files: see WebClientOptions.setLocalFileAccessFromRemotePagesAllowed(true)).
+                (e.g. a local file) is a network error; before the url was handed over to the web connection.
             </action>
             <action type="fix" dev="rbri">
                 The href of the base element may be an absolute url with any scheme (e.g. file:); before such an
