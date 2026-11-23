@@ -827,11 +827,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         options.setBinary(binary);
 
-        String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
-        locale = locale + "," + getBrowserVersion().getBrowserLocale().getLanguage();
+        final String browserLocale = getBrowserVersion().getBrowserLocale().toLanguageTag();
+        final String locale = browserLocale + "," + getBrowserVersion().getBrowserLocale().getLanguage();
 
         final FirefoxProfile profile = new FirefoxProfile();
         profile.setPreference("intl.accept_languages", locale);
+        // like --lang for Chrome: use the browser locale as app locale and for the regional settings
+        // (date/time input fields, default locale of Intl) instead of the locale of the operating system
+        profile.setPreference("intl.locale.requested", browserLocale);
+        profile.setPreference("intl.regional_prefs.use_os_locales", false);
         if (needDownloads()) {
             profile.setPreference("browser.download.folderList", 2);
             profile.setPreference("browser.download.dir", createDownloadDirectory().getAbsolutePath());

@@ -1046,4 +1046,97 @@ public class DateTimeFormatTest extends WebDriverTestCase {
         loadPageVerifyTitle2(IntlTest.localesArgumentHtml(
                 "new Intl.DateTimeFormat('en-u-nu-thai-ca-buddhist-co-phonebk').resolvedOptions().locale"));
     }
+
+    /**
+     * Logs the default locale, the hour cycle and the format of the default locale
+     * (the browser locale, not the locale of the operating system).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"en-US", "h12", "Dec 20, 2013, 3:04 PM", "12/20/2013, 3:04:05 PM", "en-US"})
+    @HtmlUnitNYI(
+            CHROME = {"en-US", "undefined", "12/20/2013", "2013-12-20 10:04:05", "en-US"},
+            EDGE = {"en-US", "undefined", "12/20/2013", "2013-12-20 10:04:05", "en-US"},
+            FF = {"en-US", "undefined", "12/20/2013", "2013-12-20 10:04:05", "en-US"},
+            FF_ESR = {"en-US", "undefined", "12/20/2013", "2013-12-20 10:04:05", "en-US"})
+    public void defaultLocaleFormat() throws Exception {
+        defaultLocaleFormat(null);
+    }
+
+    /**
+     * Logs the default locale, the hour cycle and the format of the default locale if the browser language is de-DE.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"de", "h23", "20.12.2013, 15:04", "20.12.2013, 15:04:05", "de-DE"})
+    @BuggyWebDriver(
+            EDGE = {"de-DE", "h23", "20.12.2013, 15:04", "20.12.2013, 15:04:05", "de-DE"},
+            FF = {"en-US", "h12", "Dec 20, 2013, 3:04 PM", "12/20/2013, 3:04:05 PM", "de-DE"},
+            FF_ESR = {"en-US", "h12", "Dec 20, 2013, 3:04 PM", "12/20/2013, 3:04:05 PM", "de-DE"})
+    @HtmlUnitNYI(
+            CHROME = {"de-DE", "undefined", "20.12.2013", "2013-12-20 10:04:05", "de-DE"},
+            EDGE = {"de-DE", "undefined", "20.12.2013", "2013-12-20 10:04:05", "de-DE"},
+            FF = {"de-DE", "undefined", "20.12.2013", "2013-12-20 10:04:05", "de-DE"},
+            FF_ESR = {"de-DE", "undefined", "20.12.2013", "2013-12-20 10:04:05", "de-DE"})
+    public void defaultLocaleFormatGermany() throws Exception {
+        defaultLocaleFormat(Locale.GERMANY.toLanguageTag());
+    }
+
+    /**
+     * Logs the default locale, the hour cycle and the format of the default locale if the browser language is fr.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"fr", "h23", "20 d\u00E9c. 2013, 15:04", "20/12/2013 15:04:05", "fr"})
+    @BuggyWebDriver(
+            FF = {"en-US", "h12", "Dec 20, 2013, 3:04 PM", "12/20/2013, 3:04:05 PM", "fr"},
+            FF_ESR = {"en-US", "h12", "Dec 20, 2013, 3:04 PM", "12/20/2013, 3:04:05 PM", "fr"})
+    @HtmlUnitNYI(
+            CHROME = {"fr", "undefined", "20/12/2013", "2013-12-20 10:04:05", "fr"},
+            EDGE = {"fr", "undefined", "20/12/2013", "2013-12-20 10:04:05", "fr"},
+            FF = {"fr", "undefined", "20/12/2013", "2013-12-20 10:04:05", "fr"},
+            FF_ESR = {"fr", "undefined", "20/12/2013", "2013-12-20 10:04:05", "fr"})
+    public void defaultLocaleFormatFrench() throws Exception {
+        defaultLocaleFormat(Locale.FRENCH.toLanguageTag());
+    }
+
+    /**
+     * Logs the default locale, the default hour cycle, a date formatted with the default locale
+     * (Intl.DateTimeFormat and Date.toLocaleString()) and the default time zone.
+     * @param language the browser language or {@code null} for the default
+     */
+    private void defaultLocaleFormat(final String language) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var date = new Date(Date.UTC(2013, 11, 20, 15, 4, 5));\n"
+            + "  log(Intl.DateTimeFormat().resolvedOptions().locale);\n"
+            + "  log(new Intl.DateTimeFormat(undefined, { hour: 'numeric' }).resolvedOptions().hourCycle);\n"
+            + "  log(new Intl.DateTimeFormat(undefined,"
+                        + " { timeZone: 'UTC', dateStyle: 'medium', timeStyle: 'short' }).format(date));\n"
+            + "  log(date.toLocaleString(undefined, { timeZone: 'UTC' }));\n"
+            + "  log(navigator.language);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        if (language == null) {
+            loadPageVerifyTitle2(html);
+            return;
+        }
+
+        shutDownAll();
+        try {
+            final BrowserVersion.BrowserVersionBuilder builder
+                = new BrowserVersion.BrowserVersionBuilder(getBrowserVersion());
+            builder.setBrowserLanguage(language);
+            setBrowserVersion(builder.build());
+
+            loadPageVerifyTitle2(html);
+        }
+        finally {
+            shutDownAll();
+        }
+    }
 }
