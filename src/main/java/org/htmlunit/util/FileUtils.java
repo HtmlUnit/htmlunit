@@ -111,6 +111,9 @@ public final class FileUtils {
      * shared temp directory) is never used. Existing parent directories are used as they are.</p>
      * <p>On file systems without posix support the permissions are not set, the directories are
      * created with the defaults of the platform.</p>
+     * <p>On non-POSIX file systems (e.g. Windows) no permissions are set; the file inherits the
+     * access rules of its parent folder. The default temp folder on Windows is already
+     * restricted to the current user.</p>
      *
      * @param directory the directory to create
      * @throws FileAlreadyExistsException if the directory already exists
@@ -139,6 +142,9 @@ public final class FileUtils {
      * is never used.
      * <p>On file systems without posix support the permissions are not set, the file is
      * created with the defaults of the platform.</p>
+     * <p>On non-POSIX file systems (e.g. Windows) no permissions are set; the file inherits the
+     * access rules of its parent folder. The default temp folder on Windows is already
+     * restricted to the current user.</p>
      *
      * @param file the file to create
      * @return the output stream to write the content
