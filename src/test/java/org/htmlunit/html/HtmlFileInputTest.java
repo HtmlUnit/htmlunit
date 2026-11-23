@@ -15,17 +15,19 @@
 package org.htmlunit.html;
 
 import java.io.File;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -43,6 +45,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("multipart/form-data; ")
     public void contentTypeHeader() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html>\n"
@@ -61,18 +64,26 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
         driver.findElement(By.name("myInput")).sendKeys(path);
         driver.findElement(By.id("mySubmit")).click();
+        // real browsers do not wait for the upload
+        assertEquals(2, () -> getMockWebConnection().getRequestCount(), DEFAULT_WAIT_TIME);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        final String contentType = request.getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE);
-        assertTrue(StringUtils.isNotBlank(contentType));
-        assertFalse(StringUtils.containsIgnoreCase(contentType, "charset"));
+        String contentType = "" + request.getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE);
+        contentType = StringUtils.substringBefore(contentType, "boundary=");
+        assertEquals(getExpectedAlerts()[0], contentType);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"\"")
+    @Alerts({"--BOUNDARY",
+             "Content-Disposition: form-data; name=\"myInput\"; filename=\"\"",
+             "Content-Type: application/octet-stream",
+             "--BOUNDARY",
+             "Content-Disposition: form-data; name=\"myInput2\"; filename=\"\"",
+             "Content-Type: application/octet-stream",
+             "--BOUNDARY--"})
     public void empty() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html>\n"
@@ -88,16 +99,34 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
         driver.findElement(By.id("mySubmit")).click();
 
-        final String pageSource = getMockWebConnection().getLastWebRequest().getRequestBody();
-        final Matcher matcher = Pattern.compile(getExpectedAlerts()[0]).matcher(pageSource);
-        assertTrue(pageSource, matcher.find());
+        assertEquals(getExpectedAlerts(), this::uploadBody, DEFAULT_WAIT_TIME);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"")
+    @Alerts(DEFAULT = {"--BOUNDARY",
+                       "Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"",
+                       "Content-Type: application/octet-stream",
+                       "--BOUNDARY",
+                       "Content-Disposition: form-data; name=\"myInput2\"; filename=\"\"",
+                       "Content-Type: application/octet-stream",
+                       "--BOUNDARY--"},
+            FF = {"--BOUNDARY",
+                  "Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"",
+                  "Content-Type: text/plain",
+                  "--BOUNDARY",
+                  "Content-Disposition: form-data; name=\"myInput2\"; filename=\"\"",
+                  "Content-Type: application/octet-stream",
+                  "--BOUNDARY--"},
+            FF_ESR = {"--BOUNDARY",
+                      "Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"",
+                      "Content-Type: text/plain",
+                      "--BOUNDARY",
+                      "Content-Disposition: form-data; name=\"myInput2\"; filename=\"\"",
+                      "Content-Type: application/octet-stream",
+                      "--BOUNDARY--"})
     public void realFile() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html>\n"
@@ -118,9 +147,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.name("myInput")).sendKeys(path);
         driver.findElement(By.id("mySubmit")).click();
 
-        final String pageSource = getMockWebConnection().getLastWebRequest().getRequestBody();
-        final Matcher matcher = Pattern.compile(getExpectedAlerts()[0]).matcher(pageSource);
-        assertTrue(pageSource, matcher.find());
+        assertEquals(getExpectedAlerts(), this::uploadBody, DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -142,9 +169,50 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
 
         driver.findElement(By.id("mySubmit")).click();
+        // real browsers do not wait for the upload
+        assertEquals(2, () -> getMockWebConnection().getRequestCount(), DEFAULT_WAIT_TIME);
 
         final String pageSource = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertFalse(pageSource.contains("chunked"));
+    }
+
+    /**
+     * Returns the lines of the body of the last request (the upload, real browsers do not wait for it);
+     * the boundary is replaced by 'BOUNDARY' (it differs from browser to browser) and the content of the
+     * parts (e.g. the file) is removed.
+     */
+    private List<String> uploadBody() {
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        final String body = request.getRequestBody();
+        if (body == null) {
+            return List.of("no body: " + request.getUrl());
+        }
+
+        final String contentType = request.getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE);
+        final String boundary = StringUtils.strip(StringUtils.substringAfter(contentType, "boundary="), "\"");
+
+        final List<String> lines = new ArrayList<>();
+        boolean inContent = false;
+        for (final String line : body.split("\r\n", -1)) {
+            if (("--" + boundary).equals(line)) {
+                lines.add("--BOUNDARY");
+                inContent = false;
+            }
+            else if (("--" + boundary + "--").equals(line)) {
+                lines.add("--BOUNDARY--");
+                inContent = false;
+            }
+            else if (!inContent) {
+                if (line.isEmpty()) {
+                    // end of the headers of the part
+                    inContent = true;
+                }
+                else {
+                    lines.add(line);
+                }
+            }
+        }
+        return lines;
     }
 
     /**
@@ -1010,6 +1078,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"C:\\fakepath\\index.html-Hello world-Hello world",
              "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\" webkitdirectory=\"\">"})
+    @BuggyWebDriver(FF = "InvalidArgumentException",
+            FF_ESR = "InvalidArgumentException")
     public void valueWebkitdirectory() throws Exception {
         final String html = DOCTYPE_HTML
               + "<html>\n"
@@ -1031,7 +1101,13 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         assertTrue(dir.exists());
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("f")).sendKeys(dir.getAbsolutePath());
+        try {
+            driver.findElement(By.id("f")).sendKeys(dir.getAbsolutePath());
+        }
+        catch (final InvalidArgumentException e) {
+            assertEquals(getExpectedAlerts()[0], "InvalidArgumentException");
+            return;
+        }
         driver.findElement(By.id("clickMe")).click();
         verifyTitle2(driver, getExpectedAlerts());
     }

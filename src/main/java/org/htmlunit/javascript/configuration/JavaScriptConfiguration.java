@@ -411,8 +411,11 @@ import org.htmlunit.javascript.host.security.PasswordCredential;
 import org.htmlunit.javascript.host.speech.SpeechGrammar;
 import org.htmlunit.javascript.host.speech.SpeechGrammarList;
 import org.htmlunit.javascript.host.speech.SpeechRecognition;
+import org.htmlunit.javascript.host.speech.SpeechRecognitionAlternative;
 import org.htmlunit.javascript.host.speech.SpeechRecognitionErrorEvent;
 import org.htmlunit.javascript.host.speech.SpeechRecognitionEvent;
+import org.htmlunit.javascript.host.speech.SpeechRecognitionResult;
+import org.htmlunit.javascript.host.speech.SpeechRecognitionResultList;
 import org.htmlunit.javascript.host.speech.SpeechSynthesis;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisEvent;
@@ -607,7 +610,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         RTCPeerConnectionIceEvent.class, RTCSctpTransport.class, Range.class, RemotePlayback.class, Screen.class,
         ScreenOrientation.class, SecurityPolicyViolationEvent.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, SharedWorker.class, SourceBuffer.class, SourceBufferList.class,
-        SpeechRecognition.class, SpeechRecognitionErrorEvent.class, SpeechRecognitionEvent.class, SpeechSynthesis.class,
+        SpeechRecognition.class, SpeechRecognitionAlternative.class,
+        SpeechRecognitionErrorEvent.class, SpeechRecognitionEvent.class,
+        SpeechRecognitionResult.class, SpeechRecognitionResultList.class, SpeechSynthesis.class,
         SpeechSynthesisEvent.class, SpeechSynthesisUtterance.class, StorageEvent.class, SubmitEvent.class,
         TextTrack.class, TextTrackCue.class, TextTrackList.class, TimeEvent.class, TrackEvent.class,
         TransitionEvent.class, UIEvent.class, WebGLContextEvent.class, WebSocket.class, Window.class, Worker.class,

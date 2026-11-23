@@ -827,11 +827,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         options.setBinary(binary);
 
-        String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
-        locale = locale + "," + getBrowserVersion().getBrowserLocale().getLanguage();
+        final String browserLocale = getBrowserVersion().getBrowserLocale().toLanguageTag();
+        final String locale = browserLocale + "," + getBrowserVersion().getBrowserLocale().getLanguage();
 
         final FirefoxProfile profile = new FirefoxProfile();
         profile.setPreference("intl.accept_languages", locale);
+        // like --lang for Chrome: use the browser locale as app locale and for the regional settings
+        // (date/time input fields, default locale of Intl) instead of the locale of the operating system
+        profile.setPreference("intl.locale.requested", browserLocale);
+        profile.setPreference("intl.regional_prefs.use_os_locales", false);
         if (needDownloads()) {
             profile.setPreference("browser.download.folderList", 2);
             profile.setPreference("browser.download.dir", createDownloadDirectory().getAbsolutePath());
@@ -1388,6 +1392,37 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         return verifyJsVariable(driver, "window.top.name", expected.toString());
+    }
+
+    /**
+     * Returns the entries logged by the {@link #LOG_WINDOW_NAME_FUNCTION} (the content of
+     * window.top.name split at the separator). Use this to verify the log together with other
+     * values (e.g. read by the driver); for the log alone use
+     * {@link #verifyWindowName2(Duration, WebDriver, String...)}.
+     *
+     * @param driver the driver
+     * @return the logged entries (empty if nothing was logged)
+     */
+    protected static List<String> getWindowName2Entries(final WebDriver driver) {
+        final Object log = ((JavascriptExecutor) driver).executeScript("return String(window.top.name)");
+        final List<String> entries = new ArrayList<>();
+        if (log == null) {
+            return entries;
+        }
+
+        final String logString = log.toString();
+        int start = 0;
+        int end = logString.indexOf('\u00A7');
+        while (end > -1) {
+            entries.add(logString.substring(start, end));
+            start = end + 1;
+            end = logString.indexOf('\u00A7', start);
+        }
+        // something without a trailing separator (written without the log function)
+        if (start < logString.length()) {
+            entries.add(logString.substring(start));
+        }
+        return entries;
     }
 
     protected final WebDriver verifySessionStorage2(final WebDriver driver,

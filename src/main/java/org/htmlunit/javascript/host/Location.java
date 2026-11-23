@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_PROTOCOL_UNCHANGED_NO_NAVIGATION;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 
 import java.io.IOException;
@@ -355,6 +356,13 @@ public class Location extends HtmlUnitScriptable {
             }
             url = upgradeInsecureRequest(callingPage, window_.getWebWindow(), url);
 
+            // accessing to local resource is forbidden for security reason
+            if (!callingPage.isLocalResourceAccessAllowed(url)) {
+                webWindow.getWebClient().getIncorrectnessListener()
+                        .notify("Not allowed to load local resource: " + url, this);
+                return;
+            }
+
             final WebRequest webRequest = new WebRequest(url,
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
             webRequest.setRefererHeader(callingPage.getUrl());
@@ -643,13 +651,34 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Sets the protocol portion of the location URL.
+     * Like the HTML Standard, an invalid scheme throws a SyntaxError and only http(s) urls are
+     * navigated (e.g. setting 'file:' or 'ftp:' does nothing); the URL Standard rules of the
+     * {@code protocol} setter apply (see {@link UrlUtils#getUrlWithNewProtocolLikeSetter(URL, String)}).
      *
      * @param protocol the new protocol portion of the location URL
      * @throws Exception if an error occurs
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol">MDN Documentation</a>
+     * @see <a href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-protocol">
+     *      HTML Standard - location.protocol</a>
      */
     public void setProtocol(final String protocol) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), protocol));
+        final URL url = getUrl();
+        final URL newUrl = UrlUtils.getUrlWithNewProtocolLikeSetter(url, protocol);
+        if (newUrl == null) {
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "Failed to set the 'protocol' property on 'Location': '" + protocol
+                    + "' is an invalid scheme.", DOMException.SYNTAX_ERR);
+        }
+        final String scheme = newUrl.getProtocol();
+        if (!"http".equals(scheme) && !"https".equals(scheme)) {
+            return;
+        }
+        if (newUrl == url
+                && window_.getWebWindow().getWebClient().getBrowserVersion()
+                        .hasFeature(JS_LOCATION_PROTOCOL_UNCHANGED_NO_NAVIGATION)) {
+            // Firefox does not navigate if nothing was changed
+            return;
+        }
+        setUrl(newUrl);
     }
 
     /**
@@ -697,6 +726,23 @@ public class Location extends HtmlUnitScriptable {
         if (webWindow.getEnclosedPage() instanceof HtmlPage page) {
             requestUrl = upgradeInsecureRequest(page, webWindow, url);
         }
+
+        // accessing to local resource is forbidden for security reason;
+        // like in setHref() the page of the running script decides, not the page shown in this window
+        final WebWindow callingWindow = ((Window) JavaScriptEngine.getTopCallScope().getGlobalThis()).getWebWindow();
+        final boolean allowed;
+        if (callingWindow.getEnclosedPage() instanceof HtmlPage callingPage) {
+            allowed = callingPage.isLocalResourceAccessAllowed(requestUrl);
+        }
+        else {
+            allowed = UrlUtils.isLocalResourceAccessAllowed(callingWindow.getEnclosedPage().getUrl(), requestUrl);
+        }
+        if (!allowed) {
+            webWindow.getWebClient().getIncorrectnessListener()
+                    .notify("Not allowed to load local resource: " + requestUrl, this);
+            return;
+        }
+
         final WebRequest webRequest = new WebRequest(requestUrl,
                 browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
 

@@ -27,7 +27,6 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
@@ -351,50 +350,6 @@ public class ContentSecurityPolicyReportUriTest extends WebDriverTestCase {
                 + ",\"disposition\":\"enforce\",\"document-uri\":\"§§URL§§/\",\"effective-d"
                 + "irective\":\"img-src\",\"original-policy\":\"script-src 'self'; img-src "
                 + "'none'; report-uri §§URL§§/csp-report\",\"referrer\":\"\",\"status-code"
-                + "\":200,\"violated-directive\":\"img-src\"}}",
-            "POST /csp-report",
-            "application/csp-report",
-            "{\"csp-report\":{\"blocked-uri\":\"§§URL§§/favicon.ico\",\"column-number"
-                + "\":1,\"disposition\":\"enforce\",\"document-uri\":\"§§URL§§/\",\"effecti"
-                + "ve-directive\":\"img-src\",\"original-policy\":\"script-src 'self'; img-"
-                + "src 'none'; report-uri §§URL§§/csp-report\",\"referrer\":\"\",\"status-c"
-                + "ode\":200,\"violated-directive\":\"img-src\"}}"},
-            FF_ESR = {"POST /csp-report",
-            "application/csp-report",
-            "{\"csp-report\":{\"blocked-uri\":\"inline\",\"column-number\":9,\"dispos"
-                + "ition\":\"enforce\",\"document-uri\":\"§§URL§§/\",\"effective-directive"
-                + "\":\"script-src-elem\",\"line-number\":5,\"original-policy\":\"script-sr"
-                + "c 'self'; img-src 'none'; report-uri §§URL§§/csp-report\",\"referrer\":"
-                + "\"\",\"source-file\":\"§§URL§§/\",\"status-code\":200,\"violated-directi"
-                + "ve\":\"script-src-elem\"}}",
-            "POST /csp-report",
-            "application/csp-report",
-            "{\"csp-report\":{\"blocked-uri\":\"§§URL§§/img.png\",\"column-number\":1"
-                + ",\"disposition\":\"enforce\",\"document-uri\":\"§§URL§§/\",\"effective-d"
-                + "irective\":\"img-src\",\"original-policy\":\"script-src 'self'; img-src "
-                + "'none'; report-uri §§URL§§/csp-report\",\"referrer\":\"\",\"status-code"
-                + "\":200,\"violated-directive\":\"img-src\"}}",
-            "POST /csp-report",
-            "application/csp-report",
-            "{\"csp-report\":{\"blocked-uri\":\"§§URL§§/favicon.ico\",\"column-number"
-                + "\":1,\"disposition\":\"enforce\",\"document-uri\":\"§§URL§§/\",\"effecti"
-                + "ve-directive\":\"img-src\",\"original-policy\":\"script-src 'self'; img-"
-                + "src 'none'; report-uri §§URL§§/csp-report\",\"referrer\":\"\",\"status-c"
-                + "ode\":200,\"violated-directive\":\"img-src\"}}"})
-    @HtmlUnitNYI(FF = {"POST /csp-report",
-            "application/csp-report",
-            "{\"csp-report\":{\"blocked-uri\":\"inline\",\"column-number\":9,\"dispos"
-                + "ition\":\"enforce\",\"document-uri\":\"§§URL§§/\",\"effective-directive"
-                + "\":\"script-src-elem\",\"line-number\":5,\"original-policy\":\"script-sr"
-                + "c 'self'; img-src 'none'; report-uri §§URL§§/csp-report\",\"referrer\":"
-                + "\"\",\"source-file\":\"§§URL§§/\",\"status-code\":200,\"violated-directi"
-                + "ve\":\"script-src-elem\"}}",
-            "POST /csp-report",
-            "application/csp-report",
-            "{\"csp-report\":{\"blocked-uri\":\"§§URL§§/img.png\",\"column-number\":1"
-                + ",\"disposition\":\"enforce\",\"document-uri\":\"§§URL§§/\",\"effective-d"
-                + "irective\":\"img-src\",\"original-policy\":\"script-src 'self'; img-src "
-                + "'none'; report-uri §§URL§§/csp-report\",\"referrer\":\"\",\"status-code"
                 + "\":200,\"violated-directive\":\"img-src\"}}"},
             FF_ESR = {"POST /csp-report",
             "application/csp-report",
@@ -498,12 +453,34 @@ public class ContentSecurityPolicyReportUriTest extends WebDriverTestCase {
         final List<String> actual = new ArrayList<>();
         synchronized (reports_) {
             for (final WebRequest report : reports_) {
-                actual.add(report.getHttpMethod() + " " + report.getUrl().getPath());
+                // Firefox reports the blocked favicon (loaded by the browser, not by the page; the line
+                // number points into the browser code and differs from version to version)
+                final String requestBody = report.getRequestBody();
+                if (requestBody != null && requestBody.contains("/favicon.ico\"")) {
+                    continue;
+                }
                 final String contentType = report.getAdditionalHeader(HttpHeader.CONTENT_TYPE);
-                actual.add(contentType == null ? "no content type" : contentType);
-                actual.add(report.getRequestBody());
+                actual.add(report.getHttpMethod() + " " + report.getUrl().getPath()
+                        + "\n" + (contentType == null ? "no content type" : contentType)
+                        + "\n" + requestBody);
             }
         }
-        assertEquals(String.join("\n", getExpectedAlerts()), String.join("\n", actual));
+
+        // every report is sent with its own request, the order of arrival is not
+        // defined if there is more than one (e.g. two violations)
+        final List<String> expectedReports = new ArrayList<>();
+        final String[] expectedAlerts = getExpectedAlerts();
+        if (expectedAlerts.length % 3 == 0) {
+            for (int i = 0; i < expectedAlerts.length; i += 3) {
+                expectedReports.add(expectedAlerts[i] + "\n" + expectedAlerts[i + 1] + "\n" + expectedAlerts[i + 2]);
+            }
+            Collections.sort(expectedReports);
+            Collections.sort(actual);
+        }
+        else {
+            // no list of reports (e.g. a stub to be recorded), keep the order of arrival
+            expectedReports.add(String.join("\n", expectedAlerts));
+        }
+        assertEquals(String.join("\n", expectedReports), String.join("\n", actual));
     }
 }

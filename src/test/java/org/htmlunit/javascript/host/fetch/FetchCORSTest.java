@@ -209,8 +209,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "<root><origin>http://localhost:22222</origin><cookie>null</cookie></root>"})
+             "cors",
+             "<root><origin>§§URL§§</origin><cookie>null</cookie></root>"})
     public void simple() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
@@ -224,8 +224,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      ""})
+             "cors",
+             ""})
     public void simpleHead() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
@@ -239,8 +239,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "<root><origin>http://localhost:22222</origin><cookie>null</cookie></root>"})
+             "cors",
+             "<root><origin>§§URL§§</origin><cookie>null</cookie></root>"})
     public void simplePost() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
@@ -293,7 +293,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200 OK true cors false",
-                      "http://localhost:22223/simple2?x=1"})
+             "§§URL§§/simple2?x=1"})
     public void responseProperties() throws Exception {
         expandExpectedAlertsVariables(new URL(originB()));
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
@@ -375,9 +375,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-pingother;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-pingother;"
+                 + "options_cookie=null"})
     public void preflight() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN, null);
     }
@@ -387,9 +387,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-pingother;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-pingother;"
+                 + "options_cookie=null"})
     public void preflight_cookie() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN, "cookie=sweet");
     }
@@ -399,9 +399,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-pingother;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-pingother;"
+                 + "options_cookie=null"})
     public void preflight_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN + ";charset=utf-8", null);
     }
@@ -411,9 +411,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-pingother;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-pingother;"
+                 + "options_cookie=null"})
     public void preflightUrlEncoded() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded", null);
     }
@@ -423,9 +423,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-pingother;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-pingother;"
+                 + "options_cookie=null"})
     public void preflightUrlEncoded_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded;charset=utf-8", null);
     }
@@ -435,9 +435,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-pingother;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-pingother;"
+                 + "options_cookie=null"})
     public void preflightMultipart() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data", null);
     }
@@ -447,9 +447,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-pingother;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-pingother;"
+                 + "options_cookie=null"})
     public void preflightMultipart_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data;charset=utf-8", null);
     }
@@ -469,9 +469,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-pingother;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-pingother;"
+                 + "options_cookie=null"})
     public void preflight_incorrect_methods() throws Exception {
         doPreflightTestAllowedMethods(null, MimeType.TEXT_PLAIN, null);
     }
@@ -508,6 +508,205 @@ public class FetchCORSTest extends WebDriverTestCase {
     }
 
     /**
+     * A safelisted Accept-Language value needs no preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"200",
+             "cors",
+             "origin=§§URL§§;options_origin=null;options_method=null;options_headers=null;options_cookie=null"})
+    public void preflight_acceptLanguageSafelisted() throws Exception {
+        doPreflightTestHeader("Accept-Language", "de-DE,de;q=0.9");
+    }
+
+    /**
+     * A safelisted Content-Language value needs no preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"200",
+             "cors",
+             "origin=§§URL§§;options_origin=null;options_method=null;options_headers=null;options_cookie=null"})
+    public void preflight_contentLanguageSafelisted() throws Exception {
+        doPreflightTestHeader("Content-Language", "de-DE");
+    }
+
+    /**
+     * A safelisted Accept value needs no preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"200",
+             "cors",
+             "origin=§§URL§§;options_origin=null;options_method=null;options_headers=null;options_cookie=null"})
+    public void preflight_acceptSafelisted() throws Exception {
+        doPreflightTestHeader("Accept", "application/json, text/plain, */*");
+    }
+
+    /**
+     * Accept values with CORS-unsafe bytes need a preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_acceptNotSafelisted() throws Exception {
+        doPreflightTestHeader("Accept", "text/html(1)");
+    }
+
+    /**
+     * A Content-Type value with 128 characters is still safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"200",
+             "cors",
+             "origin=§§URL§§;options_origin=null;options_method=null;options_headers=null;options_cookie=null"})
+    public void preflight_contentTypeLength128() throws Exception {
+        doPreflightTestHeader("Content-Type", "text/plain;x=" + "a".repeat(115));
+    }
+
+    /**
+     * A simple range is safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"200",
+             "cors",
+             "origin=§§URL§§;options_origin=null;options_method=null;options_headers=null;options_cookie=null"})
+    public void preflight_rangeSimple() throws Exception {
+        doPreflightTestHeader("Range", "bytes=0-499");
+    }
+
+    /**
+     * A simple range without end is safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"200",
+             "cors",
+             "origin=§§URL§§;options_origin=null;options_method=null;options_headers=null;options_cookie=null"})
+    public void preflight_rangeOpenEnd() throws Exception {
+        doPreflightTestHeader("Range", "bytes=500-");
+    }
+
+    /**
+     * A suffix range is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_rangeSuffix() throws Exception {
+        doPreflightTestHeader("Range", "bytes=-500");
+    }
+
+    /**
+     * More than one range is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_rangeMultiple() throws Exception {
+        doPreflightTestHeader("Range", "bytes=0-1,5-9");
+    }
+
+    /**
+     * A range with whitespace is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_rangeWhitespace() throws Exception {
+        doPreflightTestHeader("Range", "bytes = 0-499");
+    }
+
+    /**
+     * A range with the start after the end is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_rangeStartAfterEnd() throws Exception {
+        doPreflightTestHeader("Range", "bytes=500-100");
+    }
+
+    /**
+     * The unit of a simple range is case-sensitive.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_rangeUpperCase() throws Exception {
+        doPreflightTestHeader("Range", "BYTES=0-499");
+    }
+
+    /**
+     * The essence of the content type has to be one of the three safelisted ones.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_contentTypeNotSafelisted() throws Exception {
+        doPreflightTestHeader("Content-Type", "application/x-www-form-urlencoded+json");
+    }
+
+    /**
+     * Accept-Language values with other characters are not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_acceptLanguageNotSafelisted() throws Exception {
+        doPreflightTestHeader("Accept-Language", "en_US");
+    }
+
+    /**
+     * Values longer than 128 characters are not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_contentLanguageTooLong() throws Exception {
+        doPreflightTestHeader("Content-Language", "de".repeat(65));
+    }
+
+    /**
+     * Two Accept headers (append); each value is safelisted, the combined value is longer
+     * than 128 characters.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("TypeError")
+    public void preflight_acceptAppendedTwice() throws Exception {
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = originA();
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
+        startPreflightServer();
+
+        final String value = "text/plain;x=" + "a".repeat(80);
+        loadAndVerify(fetchPage("  var headers = new Headers();\n"
+                + "  headers.append('Accept', '" + value + "');\n"
+                + "  headers.append('Accept', '" + value + "');\n",
+                "{headers: headers}",
+                originB() + "/preflight2?id=" + System.currentTimeMillis()));
+    }
+
+    /**
+     * Fetches the url with the given header; the preflight response does not allow any header.
+     * Logs the response (no preflight) or the error (preflight).
+     */
+    private void doPreflightTestHeader(final String name, final String value) throws Exception {
+        expandExpectedAlertsVariables(new URL(originA())); // url without trailing "/"
+
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = originA();
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
+        startPreflightServer();
+
+        loadAndVerify(fetchPage("", "{headers: {'" + name + "': '" + value + "'}}",
+                originB() + "/preflight2?id=" + System.currentTimeMillis()));
+    }
+
+    /**
      * The preflight response has no Access-Control-Allow-Origin header.
      * @throws Exception if the test fails.
      */
@@ -528,9 +727,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-ping,x-pong;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-ping,x-pong;"
+                 + "options_cookie=null"})
     public void preflight_many_header_values() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = originA();
@@ -547,9 +746,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;options_origin=http://localhost:22222;options_method=GET;options_h"
-                          + "eaders=x-ping,x-pong;options_cookie=null"})
+             "cors",
+             "origin=§§URL§§;options_origin=§§URL§§;options_method=GET;options_headers=x-ping,x-pong;"
+                 + "options_cookie=null"})
     public void preflight_wildcard_allow_headers() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = originA();
@@ -625,7 +824,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "PUT null"})
+             "PUT null"})
     public void preflight_put() throws Exception {
         doPreflightTestReceived("same-origin", "PUT", originA(), null, "PUT", "X-PING");
     }
@@ -636,7 +835,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError",
-                      "nothing"})
+             "nothing"})
     public void preflight_put_methodNotAllowed() throws Exception {
         doPreflightTestReceived("same-origin", "PUT", originA(), null, "POST, GET, OPTIONS", "X-PING");
     }
@@ -646,7 +845,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "PUT null"})
+             "PUT null"})
     public void preflight_put_wildcardMethods() throws Exception {
         doPreflightTestReceived("same-origin", "PUT", originA(), null, "*", "X-PING");
     }
@@ -657,7 +856,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError",
-                      "nothing"})
+             "nothing"})
     public void preflight_patch_lowerCaseMethod() throws Exception {
         doPreflightTestReceived("same-origin", "PATCH", originA(), null, "patch", "X-PING");
     }
@@ -667,7 +866,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "PUT cookie=sweet"})
+             "PUT cookie=sweet"})
     public void preflight_put_include() throws Exception {
         doPreflightTestReceived("include", "PUT", originA(), "true", "PUT", "X-PING");
     }
@@ -678,7 +877,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError",
-                      "nothing"})
+             "nothing"})
     public void preflight_put_include_wildcardOrigin() throws Exception {
         doPreflightTestReceived("include", "PUT", "*", "true", "PUT", "X-PING");
     }
@@ -689,7 +888,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError",
-                      "nothing"})
+             "nothing"})
     public void preflight_put_include_noAllowCredentials() throws Exception {
         doPreflightTestReceived("include", "PUT", originA(), null, "PUT", "X-PING");
     }
@@ -700,7 +899,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError",
-                      "nothing"})
+             "nothing"})
     public void preflight_put_include_wildcardMethods() throws Exception {
         doPreflightTestReceived("include", "PUT", originA(), "true", "*", "X-PING");
     }
@@ -711,7 +910,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError",
-                      "nothing"})
+             "nothing"})
     public void preflight_include_wildcardHeaders() throws Exception {
         doPreflightTestReceived("include", "GET", originA(), "true", null, "*");
     }
@@ -722,7 +921,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "PUT null"})
+             "PUT null"})
     public void preflight_put_omit_wildcards() throws Exception {
         doPreflightTestReceived("omit", "PUT", "*", null, "*", "*");
     }
@@ -862,8 +1061,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=cookie=sweet"})
+             "cors",
+             "origin=§§URL§§;cookie=cookie=sweet"})
     public void include_origin() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         testCredentials("include", originA(), "true");
@@ -911,8 +1110,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=null"})
+             "cors",
+             "origin=§§URL§§;cookie=null"})
     public void sameOrigin_wildcardOrigin() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         testCredentials("same-origin", "*", null);
@@ -924,8 +1123,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=null"})
+             "cors",
+             "origin=§§URL§§;cookie=null"})
     public void sameOrigin_origin_allowCredentials() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         testCredentials("same-origin", originA(), "true");
@@ -936,8 +1135,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=null"})
+             "cors",
+             "origin=§§URL§§;cookie=null"})
     public void omit_wildcardOrigin() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         testCredentials("omit", "*", null);
@@ -949,8 +1148,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=null"})
+             "cors",
+             "origin=§§URL§§;cookie=null"})
     public void omit_origin_allowCredentials() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         testCredentials("omit", originA(), "true");
@@ -974,7 +1173,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "basic"})
+             "basic"})
     public void omit_sameOriginRequest() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "/data"), "data", MimeType.TEXT_PLAIN);
 
@@ -1060,9 +1259,9 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"opaque 0 [] false",
-                      "[]",
-                      "",
-                      "[]"})
+             "[]",
+             "",
+             "[]"})
     public void modeNoCors() throws Exception {
         startSecondServer();
 
@@ -1095,8 +1294,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"opaque 0",
-                      "GET origin=null;cookie=null;x-custom=null;content-type=null;accept=text/plain;content-language=d"
-                          + "e"})
+             "GET origin=null;cookie=null;x-custom=null;content-type=null;accept=text/plain;content-language=de"})
     public void modeNoCorsGet() throws Exception {
         noCors("{mode: 'no-cors', headers: {'X-Custom': 'v', 'Content-Type': 'application/json', "
                 + "'Accept': 'text/plain', 'Content-Language': 'de'}}");
@@ -1107,8 +1305,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"opaque 0",
-                      "POST origin=http://localhost:22222;cookie=null;x-custom=null;content-type=text/plain;accept=*/*;"
-                          + "content-language=null"})
+             "POST origin=§§URL§§;cookie=null;x-custom=null;content-type=text/plain;accept=*/*;content-language=null"})
     public void modeNoCorsPost() throws Exception {
         noCors("{mode: 'no-cors', method: 'POST', body: 'data', headers: {'Content-Type': 'text/plain'}}");
     }
@@ -1118,8 +1315,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"opaque 0",
-                      "GET origin=null;cookie=cookie=sweet;x-custom=null;content-type=null;accept=*/*;content-language="
-                          + "null"})
+             "GET origin=null;cookie=cookie=sweet;x-custom=null;content-type=null;accept=*/*;content-language=null"})
     public void modeNoCorsInclude() throws Exception {
         noCors("{mode: 'no-cors', credentials: 'include'}");
     }
@@ -1130,7 +1326,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError",
-                      "nothing"})
+             "nothing"})
     public void modeNoCorsRedirectManual() throws Exception {
         noCors("{mode: 'no-cors', redirect: 'manual'}");
     }
@@ -1141,7 +1337,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError",
-                      "GET origin=null;cookie=null;x-custom=null;content-type=null;accept=*/*;content-language=null"})
+             "GET origin=null;cookie=null;x-custom=null;content-type=null;accept=*/*;content-language=null"})
     public void modeNoCorsIntegrity() throws Exception {
         noCors("{mode: 'no-cors', integrity: 'sha256-ungWv48Bz+pBQUDeXa4iI7ADYaOWF3qctBD/YfIAFa0='}");
     }
@@ -1152,8 +1348,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0",
-                      "opaque",
-                      ""})
+             "opaque",
+             ""})
     public void modeNoCorsRedirectToOtherOrigin() throws Exception {
         startSecondServer();
         pivot("/pivot", 302, originB() + "/echo");
@@ -1240,8 +1436,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "basic",
-                      "FINAL"})
+             "basic",
+             "FINAL"})
     public void sameOriginRedirect() throws Exception {
         pivot("/pivot", 302, new URL(URL_FIRST, "/final").toExternalForm());
         getMockWebConnection().setResponse(new URL(URL_FIRST, "/final"), "FINAL");
@@ -1255,8 +1451,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=null;auth=null"})
+             "cors",
+             "origin=§§URL§§;cookie=null;auth=null"})
     public void crossOriginRedirectWithCorsWildcard() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         startSecondServer();
@@ -1271,8 +1467,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=null;auth=null"})
+             "cors",
+             "origin=§§URL§§;cookie=null;auth=null"})
     public void crossOriginRedirectWithCorsOrigin() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         startSecondServer();
@@ -1287,7 +1483,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200 cors true",
-                      "http://localhost:22223/echo?acao=*"})
+             "§§URL§§/echo?acao=*"})
     public void crossOriginRedirectResponseProperties() throws Exception {
         expandExpectedAlertsVariables(new URL(originB()));
         startSecondServer();
@@ -1318,10 +1514,10 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "200",
-                      "200",
-                      "200",
-                      "200"})
+             "200",
+             "200",
+             "200",
+             "200"})
     public void crossOriginRedirectStatusCodesWithCors() throws Exception {
         startSecondServer();
         final int[] codes = {301, 302, 303, 307, 308};
@@ -1340,7 +1536,7 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"opaqueredirect 0 false",
-                      "http://localhost:22222/pivot"})
+             "§§URL§§/pivot"})
     public void crossOriginRedirectManual() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         startSecondServer();
@@ -1429,10 +1625,10 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"200",
-                                "TypeError",
-                                "TypeError",
-                                "TypeError",
-                                "200"},
+                       "TypeError",
+                       "TypeError",
+                       "TypeError",
+                       "200"},
             FF = {"TypeError",
                   "TypeError",
                   "TypeError",
@@ -1492,10 +1688,10 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError",
-                      "TypeError",
-                      "TypeError",
-                      "TypeError",
-                      "TypeError"})
+             "TypeError",
+             "TypeError",
+             "TypeError",
+             "TypeError"})
     public void redirectToNonHttpSchemes() throws Exception {
         final String[] locations = {
             "file:///etc/passwd", "data:text/plain,secret", "about:blank", "ftp://localhost/secret",
@@ -1520,8 +1716,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=null;auth=null"})
+             "cors",
+             "origin=§§URL§§;cookie=null;auth=null"})
     public void crossOriginRedirectDoesNotForwardCookies() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         startSecondServer();
@@ -1536,12 +1732,12 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"200",
-                                "cors",
-                                "origin=http://localhost:22222;cookie=null;auth=null"},
+                       "cors",
+                       "origin=§§URL§§;cookie=null;auth=null"},
             FF = "TypeError",
             FF_ESR = "TypeError")
-    @HtmlUnitNYI(FF = {"200", "cors", "origin=http://localhost:22222;cookie=null;auth=null"},
-            FF_ESR = {"200", "cors", "origin=http://localhost:22222;cookie=null;auth=null"})
+    @HtmlUnitNYI(FF = {"200", "cors", "origin=§§URL§§;cookie=null;auth=null"},
+            FF_ESR = {"200", "cors", "origin=§§URL§§;cookie=null;auth=null"})
     public void crossOriginRedirectDropsAuthorizationHeader() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         startSecondServer();
@@ -1570,8 +1766,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=c=1;auth=null"})
+             "cors",
+             "origin=§§URL§§;cookie=c=1;auth=null"})
     public void crossOriginRedirectInclude() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         startSecondServer();
@@ -1604,8 +1800,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=http://localhost:22222;cookie=null;auth=null"})
+             "cors",
+             "origin=§§URL§§;cookie=null;auth=null"})
     public void crossOriginRequestRedirectWithCors() throws Exception {
         expandExpectedAlertsVariables(new URL(originA()));
         startSecondServer();
@@ -1621,8 +1817,8 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200",
-                      "cors",
-                      "origin=null;cookie=null;auth=null"})
+             "cors",
+             "origin=null;cookie=null;auth=null"})
     public void crossOriginToCrossOriginRedirectOriginIsNull() throws Exception {
         startSecondServer();
 
@@ -1668,12 +1864,12 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma",
-                      "null",
-                      "null",
-                      "no-cache",
-                      "de",
-                      "7",
-                      "null"})
+             "null",
+             "null",
+             "no-cache",
+             "de",
+             "7",
+             "null"})
     public void exposeHeadersNone() throws Exception {
         startSecondServer();
         loadAndVerify(headersPage(null, originB() + "/expose?acao=*"));
@@ -1685,12 +1881,12 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma,x-custom",
-                      "abc",
-                      "null",
-                      "no-cache",
-                      "de",
-                      "7",
-                      "null"})
+             "abc",
+             "null",
+             "no-cache",
+             "de",
+             "7",
+             "null"})
     public void exposeHeadersList() throws Exception {
         startSecondServer();
         loadAndVerify(headersPage(null, originB() + "/expose?acao=*&aceh=" + enc("x-CUSTOM, Pragma")));
@@ -1701,14 +1897,14 @@ public class FetchCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"access-control-allow-origin,access-control-expose-headers,cache-control,content-language,"
-                          + "content-length,content-type,date,expires,last-modified,pragma,server,x-custom,x-other",
-                      "abc",
-                      "def",
-                      "no-cache",
-                      "de",
-                      "7",
-                      "*"})
+    @Alerts({"access-control-allow-origin,access-control-expose-headers,cache-control,content-language,content-length,c"
+                 + "ontent-type,date,expires,last-modified,pragma,server,x-custom,x-other",
+             "abc",
+             "def",
+             "no-cache",
+             "de",
+             "7",
+             "*"})
     public void exposeHeadersWildcard() throws Exception {
         startSecondServer();
         loadAndVerify(headersPage(null, originB() + "/expose?acao=*&aceh=*"));
@@ -1720,12 +1916,12 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma",
-                      "null",
-                      "null",
-                      "no-cache",
-                      "de",
-                      "7",
-                      "null"})
+             "null",
+             "null",
+             "no-cache",
+             "de",
+             "7",
+             "null"})
     public void exposeHeadersWildcardWithCredentials() throws Exception {
         startSecondServer();
         loadAndVerify(headersPage("{credentials: 'include'}",
@@ -1738,12 +1934,12 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma,x-custom",
-                      "abc",
-                      "null",
-                      "no-cache",
-                      "de",
-                      "7",
-                      "null"})
+             "abc",
+             "null",
+             "no-cache",
+             "de",
+             "7",
+             "null"})
     public void exposeHeadersWildcardAndNameWithCredentials() throws Exception {
         startSecondServer();
         loadAndVerify(headersPage("{credentials: 'include'}",
@@ -1757,16 +1953,49 @@ public class FetchCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"cache-control,content-language,content-length,content-type,expires,last-modified,pragma,x-custom",
-                      "abc",
-                      "null",
-                      "no-cache",
-                      "de",
-                      "7",
-                      "null"})
+             "abc",
+             "null",
+             "no-cache",
+             "de",
+             "7",
+             "null"})
     public void exposeHeadersAfterCrossOriginRedirect() throws Exception {
         startSecondServer();
         pivot("/pivot", 302, originB() + "/expose?acao=*&aceh=X-Custom");
         loadAndVerify(headersPage(null, originA() + "/pivot"));
+    }
+
+    /**
+     * The Origin header can not be set by the page; the server gets the origin of the page.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"200",
+             "cors",
+             "origin=§§URL§§;cookie=null;auth=null"})
+    public void originHeaderIgnored() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+
+        loadAndVerify(fetchPage("", "{headers: {'Origin': '" + originB() + "'}}",
+                originB() + "/echo?acao=*"));
+    }
+
+    /**
+     * A page can not pass the CORS check of a server that only trusts another origin
+     * by setting the Origin header to that origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void originHeaderDoesNotPassCorsCheck() throws Exception {
+        startSecondServer();
+
+        loadAndVerify(fetchPage("  document.cookie = 'c=1; path=/';\n",
+                "{credentials: 'include', headers: {'Origin': '" + originB() + "'}}",
+                originB() + "/echo?acac=true&acao=" + enc(originB())));
     }
 
     // ---------------------------------------------------------------------------

@@ -78,6 +78,16 @@ public class DataURLConnection extends URLConnection {
     }
 
     /**
+     * Returns the content type of the data URL, serialized like the browsers do it.
+     * @param standardSerialization whether to serialize like the MIME Sniffing Standard (like Firefox;
+     *        duplicate parameters are ignored) or like Chrome
+     * @return the content type
+     */
+    public String getContentType(final boolean standardSerialization) {
+        return dataUrlDecoder_.getContentType(standardSerialization);
+    }
+
+    /**
      * Gets the media type information contained in the data URL.
      * @return "text/plain" if the URL didn't contain any media type information
      */

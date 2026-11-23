@@ -116,6 +116,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
+    /**
+     * The MIME type of a data url is serialized like the MIME Sniffing Standard does it
+     * (duplicate parameters are ignored, the charset parameter stays in place).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    DATA_URL_MIME_TYPE_STANDARD_SERIALIZATION,
+
     /** The context menu MouseEvent has a detail of 1. */
     @BrowserFeature({FF, FF_ESR})
     EVENT_CONTEXT_MENU_HAS_DETAIL_1,
@@ -411,6 +418,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
 
+    /** Setting location.protocol does not navigate if the url is not changed (e.g. 'file:' for an url with port). */
+    @BrowserFeature({FF, FF_ESR})
+    JS_LOCATION_PROTOCOL_UNCHANGED_NO_NAVIGATION,
+
     /** Reload sends a referrer header. */
     @BrowserFeature({CHROME, EDGE})
     JS_LOCATION_RELOAD_REFERRER,
@@ -450,6 +461,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,
 
+    /**
+     * The User-Agent header is a forbidden request header (fetch() and XMLHttpRequest);
+     * it is no longer part of the forbidden request headers of the Fetch standard.
+     */
+    @BrowserFeature({CHROME, EDGE})
+    JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN,
+
     /** script tags created from js as child of templates is processed if added to the dom. */
     @BrowserFeature({CHROME, EDGE})
     JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH,
@@ -466,6 +484,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_STORAGE_PRESERVED_INCLUDED,
 
+    /**
+     * File urls of URL objects have no host: the host 'localhost' is removed, setting the protocol to
+     * 'file' removes the host.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_URL_FILE_WITHOUT_HOST,
+
+    /** A WebSocket blocked by the Content-Security-Policy fires only the error event, no close event. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_WEBSOCKET_CSP_BLOCKED_NO_CLOSE_EVENT,
+
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,
@@ -473,6 +502,13 @@ public enum BrowserVersionFeatures {
     /** Javascript InstallTrigger property set to null. */
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_INSTALL_TRIGGER_NULL,
+
+    /**
+     * Method window.open() of a local file (file url) from a page that was not loaded from a file
+     * throws an Error.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WINDOW_OPEN_LOCAL_FILE_THROWS,
 
     /** window.open() of a sandboxed document without 'allow-popups' throws an InvalidAccessError. */
     @BrowserFeature({FF, FF_ESR})
@@ -499,6 +535,24 @@ public enum BrowserVersionFeatures {
     /** Window.getSelection returns null, if the window is not visible. */
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
+
+    /**
+     * Calling importScripts() of a local file (file url) from a worker of a page that was not loaded from a file
+     * throws a SecurityError (instead of a NetworkError).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WORKER_IMPORT_SCRIPTS_LOCAL_FILE_SECURITY_ERROR,
+
+    /**
+     * Calling new Worker() of a local file (file url) from a page that was not loaded from a file does not throw;
+     * the worker is not started and the error event is fired.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WORKER_LOCAL_FILE_FIRES_ERROR,
+
+    /** A page loaded from a file is not allowed to start a worker from a local file (SecurityError). */
+    @BrowserFeature({CHROME, EDGE})
+    JS_WORKER_LOCAL_FILE_FORBIDDEN,
 
     /** Take care of the response charset when reading a worker script. */
     @BrowserFeature({CHROME, EDGE})

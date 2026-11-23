@@ -471,6 +471,103 @@ public final class UrlUtils {
     }
 
     /**
+     * Returns the URL with the scheme changed like the {@code protocol} setter of the URL Standard does it
+     * (e.g. for {@code URL.protocol}, {@code HTMLAnchorElement.protocol} and {@code location.protocol}).
+     * The scheme is not changed
+     * <ul>
+     * <li>from a special scheme to a not special one (and the other way round),</li>
+     * <li>to 'file' if the URL has credentials or a port,</li>
+     * <li>from 'file' if the URL has an empty host.</li>
+     * </ul>
+     * A port that is the default port of the new scheme is removed.
+     *
+     * @param url the URL
+     * @param protocol the new protocol (everything from the first ':' is ignored)
+     * @return the new URL, the given URL if the scheme is not changed or {@code null} if the
+     *         protocol is not a valid scheme
+     * @see <a href="https://url.spec.whatwg.org/#dom-url-protocol">URL Standard - protocol setter</a>
+     */
+    public static URL getUrlWithNewProtocolLikeSetter(final URL url, final String protocol) {
+        return getUrlWithNewProtocolLikeSetter(url, protocol, false);
+    }
+
+    /**
+     * Returns the URL with the scheme changed like the {@code protocol} setter of the URL Standard does it
+     * (see {@link #getUrlWithNewProtocolLikeSetter(URL, String)}).
+     *
+     * @param url the URL
+     * @param protocol the new protocol (everything from the first ':' is ignored)
+     * @param fileWithoutHost whether the host is removed if the scheme is changed to 'file' (like Firefox)
+     * @return the new URL, the given URL if the scheme is not changed or {@code null} if the
+     *         protocol is not a valid scheme
+     */
+    public static URL getUrlWithNewProtocolLikeSetter(final URL url, final String protocol,
+            final boolean fileWithoutHost) {
+        final String scheme = StringUtils.substringBefore(protocol, ":").trim();
+        if (!isValidScheme(scheme)) {
+            return null;
+        }
+
+        final String newScheme = scheme.toLowerCase(Locale.ROOT);
+        final String oldScheme = url.getProtocol();
+        if (newScheme.equals(oldScheme)
+                || !isSpecialScheme(newScheme) || !isSpecialScheme(oldScheme)) {
+            return url;
+        }
+        if ("file".equals(newScheme) && (url.getUserInfo() != null || url.getPort() != -1)) {
+            return url;
+        }
+        if ("file".equals(oldScheme) && StringUtils.isEmptyOrNull(url.getHost())) {
+            return url;
+        }
+
+        try {
+            if (fileWithoutHost && "file".equals(newScheme)) {
+                return createNewUrl(newScheme, "", url.getPath(), url.getRef(), url.getQuery());
+            }
+            return removeRedundantPort(getUrlWithNewProtocol(url, newScheme));
+        }
+        catch (final MalformedURLException e) {
+            return url;
+        }
+    }
+
+    /**
+     * Serializes the URL like the URL Standard does it; different from {@link URL#toExternalForm()}
+     * a file URL without host has an empty host ('file:///C:/a' and not 'file:/C:/a').
+     *
+     * @param url the URL
+     * @return the serialized URL
+     * @see <a href="https://url.spec.whatwg.org/#concept-url-serializer">URL Standard - URL serializer</a>
+     */
+    public static String serialize(final URL url) {
+        final String externalForm = url.toExternalForm();
+        if ("file".equals(url.getProtocol()) && !externalForm.startsWith("file://")) {
+            return "file://" + externalForm.substring("file:".length());
+        }
+        return externalForm;
+    }
+
+    /**
+     * Returns the file URL without the host if the host is 'localhost' (like the URL Standard parses
+     * file URLs); other URLs are returned unchanged.
+     *
+     * @param url the URL
+     * @return the URL without the host 'localhost'
+     */
+    public static URL removeLocalhostFromFileUrl(final URL url) {
+        if (!"file".equals(url.getProtocol()) || !"localhost".equalsIgnoreCase(url.getHost())) {
+            return url;
+        }
+        try {
+            return createNewUrl("file", "", url.getPath(), url.getRef(), url.getQuery());
+        }
+        catch (final MalformedURLException e) {
+            return url;
+        }
+    }
+
+    /**
      * Creates and returns a new URL identical to the specified URL, except using the specified host.
      * @param u the URL on which to base the returned URL
      * @param newHost the new host to use in the returned URL
@@ -1598,5 +1695,19 @@ public final class UrlUtils {
             newPort = newUrl.getDefaultPort();
         }
         return originPort == newPort;
+    }
+
+    /**
+     * Determines whether a page loaded from the given URL is allowed to load the specified URL
+     * (e.g. into a frame or a window). Like in the browsers, only pages loaded from a file
+     * are allowed to access local resources (file URLs).
+     *
+     * @param pageUrl the URL of the page that wants to load the URL (must not be null)
+     * @param url the URL to load (must not be null)
+     * @return {@code false} if the URL is a file URL and the page was not loaded from a file
+     */
+    public static boolean isLocalResourceAccessAllowed(final URL pageUrl, final URL url) {
+        final String protocol = url.getProtocol();
+        return !"file".equals(protocol) || protocol.equals(pageUrl.getProtocol());
     }
 }

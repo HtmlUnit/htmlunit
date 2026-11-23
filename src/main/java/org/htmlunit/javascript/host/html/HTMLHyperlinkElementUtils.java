@@ -134,29 +134,19 @@ final class HTMLHyperlinkElementUtils {
      * if the protocol is invalid or should not be applied.
      * @param url the current URL
      * @param protocol the new protocol value (with or without trailing {@code :})
+     * @param fileWithoutHost whether the host is removed if the scheme is changed to 'file' (like Firefox)
      * @return the new URL, or {@code null} if the protocol is invalid
      */
-    static URL setProtocol(final URL url, final String protocol) {
+    static URL setProtocol(final URL url, final String protocol, final boolean fileWithoutHost) {
         if (protocol.isEmpty()) {
             return null;
         }
 
-        final String bareProtocol = StringUtils.substringBefore(protocol, ":").trim();
-        if (!UrlUtils.isValidScheme(bareProtocol)) {
+        final URL result = UrlUtils.getUrlWithNewProtocolLikeSetter(url, protocol, fileWithoutHost);
+        if (result == null || result == url) {
             return null;
         }
-        if (!UrlUtils.isSpecialScheme(bareProtocol)) {
-            return null;
-        }
-
-        try {
-            URL result = UrlUtils.getUrlWithNewProtocol(url, bareProtocol);
-            result = UrlUtils.removeRedundantPort(result);
-            return result;
-        }
-        catch (final MalformedURLException ignored) {
-            return null;
-        }
+        return result;
     }
 
     /**

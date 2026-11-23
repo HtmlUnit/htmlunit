@@ -43,6 +43,66 @@ public class HostParentOfS2Test extends HostParentOf {
         });
     }
 
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechRecognition_SpeechRecognition() throws Exception {
+        test("SpeechRecognition", "SpeechRecognition");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechRecognition_webkitSpeechRecognition() throws Exception {
+        test("SpeechRecognition", "webkitSpeechRecognition");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechGrammar_SpeechGrammar() throws Exception {
+        test("SpeechGrammar", "SpeechGrammar");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechGrammar_webkitSpeechGrammar() throws Exception {
+        test("SpeechGrammar", "webkitSpeechGrammar");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechGrammarList_SpeechGrammarList() throws Exception {
+        test("SpeechGrammarList", "SpeechGrammarList");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechGrammarList_webkitSpeechGrammarList() throws Exception {
+        test("SpeechGrammarList", "webkitSpeechGrammarList");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechRecognitionAlternative_SpeechRecognitionAlternative() throws Exception {
+        test("SpeechRecognitionAlternative", "SpeechRecognitionAlternative");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechRecognitionErrorEvent_SpeechRecognitionErrorEvent() throws Exception {
+        test("SpeechRecognitionErrorEvent", "SpeechRecognitionErrorEvent");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechRecognitionEvent_SpeechRecognitionEvent() throws Exception {
+        test("SpeechRecognitionEvent", "SpeechRecognitionEvent");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechRecognitionResult_SpeechRecognitionResult() throws Exception {
+        test("SpeechRecognitionResult", "SpeechRecognitionResult");
+    }
+
     @Alerts("true/false")
     void _SVGGElement_SVGGElement() throws Exception {
         test("SVGGElement", "SVGGElement");
@@ -188,9 +248,7 @@ public class HostParentOfS2Test extends HostParentOf {
         test("SVGGraphicsElement", "SVGSwitchElement");
     }
 
-    @Alerts(DEFAULT = "true/true",
-            FF_ESR = "false/false")
-    @HtmlUnitNYI(FF_ESR = "true/true")
+    @Alerts("true/true")
     void _SVGGraphicsElement_SVGSymbolElement() throws Exception {
         test("SVGGraphicsElement", "SVGSymbolElement");
     }

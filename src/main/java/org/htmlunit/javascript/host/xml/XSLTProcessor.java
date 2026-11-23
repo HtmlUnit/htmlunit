@@ -15,6 +15,9 @@
 package org.htmlunit.javascript.host.xml;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_XSLT_TRANSFORM_INDENT;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.Charset;
@@ -62,7 +65,7 @@ import org.w3c.dom.NodeList;
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/XSLTProcessor">MDN Documentation</a>
  */
-@JsxClass
+@JsxClass({EDGE, FF, FF_ESR})
 public class XSLTProcessor extends HtmlUnitScriptable {
 
     private Node style_;

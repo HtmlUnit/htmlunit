@@ -14,12 +14,17 @@
  */
 package org.htmlunit.javascript.host.fetch;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN;
+
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.TreeSet;
 
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.HttpHeader;
 import org.htmlunit.corejs.javascript.ClassDescriptor;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
@@ -60,6 +65,14 @@ public class Headers extends HtmlUnitScriptable {
         "connection", "content-length", "cookie", "cookie2", "date", "dnt", "expect", "host", "keep-alive",
         "origin", "referer", "set-cookie", "te", "trailer", "transfer-encoding", "upgrade", "via"
     };
+
+    // https://fetch.spec.whatwg.org/#forbidden-request-header (the method override headers)
+    private static final String[] METHOD_OVERRIDE_HEADERS = {
+        "x-http-method", "x-http-method-override", "x-method-override"
+    };
+
+    // https://fetch.spec.whatwg.org/#forbidden-method
+    private static final String[] FORBIDDEN_METHODS = {"connect", "trace", "track"};
 
     /**
      * The guard of a headers object; determines which changes are allowed.
@@ -416,7 +429,7 @@ public class Headers extends HtmlUnitScriptable {
         final String normalized = normalizeValue(value);
         validateName(name);
         validateValue(normalized);
-        if (isIgnoredByGuard(name)) {
+        if (isIgnoredByGuard(name, normalized)) {
             return;
         }
         if (guard_ == Guard.REQUEST_NO_CORS) {
@@ -439,7 +452,7 @@ public class Headers extends HtmlUnitScriptable {
         final String normalized = normalizeValue(value);
         validateName(name);
         validateValue(normalized);
-        if (isIgnoredByGuard(name)) {
+        if (isIgnoredByGuard(name, normalized)) {
             return;
         }
         if (guard_ == Guard.REQUEST_NO_CORS && !isNoCorsSafelistedRequestHeader(name, normalized)) {
@@ -472,7 +485,7 @@ public class Headers extends HtmlUnitScriptable {
      */
     public void deleteHeader(final String name) {
         validateName(name);
-        if (isIgnoredByGuard(name)) {
+        if (isIgnoredByGuard(name, "")) {
             return;
         }
         if (guard_ == Guard.REQUEST_NO_CORS && !isNoCorsSafelistedRequestHeaderName(name)) {
@@ -569,12 +582,12 @@ public class Headers extends HtmlUnitScriptable {
         return result;
     }
 
-    private boolean isIgnoredByGuard(final String name) {
+    private boolean isIgnoredByGuard(final String name, final String value) {
         switch (guard_) {
             case IMMUTABLE:
                 throw JavaScriptEngine.typeError("Headers are immutable");
             case REQUEST, REQUEST_NO_CORS:
-                return isForbiddenRequestHeader(name);
+                return isForbiddenRequestHeader(name, value, getBrowserVersion());
             case RESPONSE:
                 return SET_COOKIE.equalsIgnoreCase(name) || "set-cookie2".equalsIgnoreCase(name);
             default:
@@ -598,11 +611,36 @@ public class Headers extends HtmlUnitScriptable {
      *     no-CORS-safelisted request-header</a>
      */
     static boolean isNoCorsSafelistedRequestHeader(final String name, final String value) {
-        if (!isNoCorsSafelistedRequestHeaderName(name) || value.length() > 128) {
+        if (!isNoCorsSafelistedRequestHeaderName(name)) {
+            return false;
+        }
+        return isCorsSafelistedRequestHeader(name, value);
+    }
+
+    /**
+     * Returns whether the header is a CORS-safelisted request header (name and value); requests
+     * with other headers need a CORS preflight. In addition to the no-CORS-safelisted request headers
+     * a Range header with a simple range (e.g. 'bytes=0-499') is safelisted.
+     *
+     * @param name the name
+     * @param value the value
+     * @return whether the header is a CORS-safelisted request header
+     * @see <a href="https://fetch.spec.whatwg.org/#cors-safelisted-request-header">Fetch Standard -
+     *     CORS-safelisted request-header</a>
+     */
+    static boolean isCorsSafelistedRequestHeader(final String name, final String value) {
+        if (value.length() > 128) {
             return false;
         }
 
         final String lcName = name.toLowerCase(Locale.ROOT);
+        if ("range".equals(lcName)) {
+            return isSimpleRangeHeaderValue(value);
+        }
+        if (!isNoCorsSafelistedRequestHeaderName(lcName)) {
+            return false;
+        }
+
         if ("accept-language".equals(lcName) || "content-language".equals(lcName)) {
             for (int i = 0; i < value.length(); i++) {
                 final char c = value.charAt(i);
@@ -636,21 +674,97 @@ public class Headers extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns whether the name is a forbidden request header name.
+     * Returns whether the value is a simple range header value: 'bytes=' (lower case) followed by a start
+     * position, '-' and an optional end position (no whitespace, a single range, the start is required).
+     *
+     * @see <a href="https://fetch.spec.whatwg.org/#simple-range-header-value">Fetch Standard -
+     *     simple range header value</a>
+     */
+    private static boolean isSimpleRangeHeaderValue(final String value) {
+        // like the browsers, the unit is case-sensitive
+        if (!value.startsWith("bytes=")) {
+            return false;
+        }
+        final String range = value.substring(6);
+        final int dash = range.indexOf('-');
+        if (dash < 1 || !isDigits(range.substring(0, dash))) {
+            return false;
+        }
+        final String end = range.substring(dash + 1);
+        if (end.isEmpty()) {
+            return true;
+        }
+        if (!isDigits(end)) {
+            return false;
+        }
+        // the end has to be greater or equal than the start
+        return new BigInteger(end).compareTo(new BigInteger(range.substring(0, dash))) >= 0;
+    }
+
+    private static boolean isDigits(final String value) {
+        if (value.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < value.length(); i++) {
+            final char c = value.charAt(i);
+            if (c < '0' || c > '9') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns whether the header is a forbidden request header; used by {@code fetch()} and
+     * by {@code XMLHttpRequest}.
+     * <p>
+     * Forbidden are the names of the list of the Fetch standard, the names starting with
+     * 'proxy-' or 'sec-' and the method override headers (X-HTTP-Method, X-HTTP-Method-Override,
+     * X-Method-Override) if one of the values is a forbidden method (CONNECT, TRACE, TRACK).
+     * </p>
+     *
+     * Like Chrome/Edge, the User-Agent header is forbidden also (feature
+     * {@code JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN}).
      *
      * @param name the name
-     * @return whether the name is a forbidden request header name
+     * @param value the value
+     * @param browserVersion the browser version
+     * @return whether the header is a forbidden request header
      * @see <a href="https://fetch.spec.whatwg.org/#forbidden-request-header">Fetch Standard -
      *     forbidden request-header</a>
      */
-    static boolean isForbiddenRequestHeader(final String name) {
+    public static boolean isForbiddenRequestHeader(final String name, final String value,
+            final BrowserVersion browserVersion) {
         final String lcName = name.toLowerCase(Locale.ROOT);
+        if (HttpHeader.USER_AGENT_LC.equals(lcName)
+                && browserVersion.hasFeature(JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN)) {
+            return true;
+        }
         for (final String forbidden : FORBIDDEN_REQUEST_HEADERS) {
             if (forbidden.equals(lcName)) {
                 return true;
             }
         }
-        return lcName.startsWith("proxy-") || lcName.startsWith("sec-");
+        if (lcName.startsWith("proxy-") || lcName.startsWith("sec-")) {
+            return true;
+        }
+
+        for (final String override : METHOD_OVERRIDE_HEADERS) {
+            if (override.equals(lcName)) {
+                for (final String method : value.split(",")) {
+                    final String lcMethod = normalizeValue(method).toLowerCase(Locale.ROOT);
+                    for (final String forbiddenMethod : FORBIDDEN_METHODS) {
+                        if (forbiddenMethod.equals(lcMethod)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+        return false;
     }
 
     private static void checkArguments(final String function, final Object[] args, final int required) {

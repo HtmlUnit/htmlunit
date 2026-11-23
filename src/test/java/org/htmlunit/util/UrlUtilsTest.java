@@ -876,4 +876,20 @@ public class UrlUtilsTest {
         final URL url2 = new URL("http://user2:pass2@example.com/path2");
         assertTrue(UrlUtils.isSameOrigin(url1, url2));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isLocalResourceAccessAllowed() throws Exception {
+        final URL httpUrl = new URL("http://example.com/index.html");
+        final URL fileUrl = new URL("file:///tmp/secret.html");
+
+        assertTrue(UrlUtils.isLocalResourceAccessAllowed(httpUrl, new URL("https://example.com/")));
+        assertTrue(UrlUtils.isLocalResourceAccessAllowed(fileUrl, new URL("file:///tmp/other.html")));
+        assertTrue(UrlUtils.isLocalResourceAccessAllowed(fileUrl, httpUrl));
+
+        assertFalse(UrlUtils.isLocalResourceAccessAllowed(httpUrl, fileUrl));
+        assertFalse(UrlUtils.isLocalResourceAccessAllowed(UrlUtils.URL_ABOUT_BLANK, fileUrl));
+    }
 }

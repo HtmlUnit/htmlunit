@@ -110,13 +110,13 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "20:04"},
+    @Alerts({"", "20:04"})
+    @BuggyWebDriver(FF = {"", ""},
+            FF_ESR = {"", ""})
+    @HtmlUnitNYI(CHROME = {"08:04", "20:04"},
+            EDGE = {"08:04", "20:04"},
             FF = {"08:04", "20:04"},
             FF_ESR = {"08:04", "20:04"})
-    @BuggyWebDriver(FF = {"08:04", ""},
-            FF_ESR = {"08:04", ""})
-    @HtmlUnitNYI(CHROME = {"08:04", "20:04"},
-            EDGE = {"08:04", "20:04"})
     public void type() throws Exception {
         final String htmlContent = DOCTYPE_HTML
             + "<html><head></head><body>\n"

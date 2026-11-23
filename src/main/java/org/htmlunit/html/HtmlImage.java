@@ -708,6 +708,10 @@ public class HtmlImage extends HtmlElement {
                     // blocked by the Content-Security-Policy; forget the response of a previous src
                     imageWebResponse_ = null;
                 }
+                else if (!blank && !isLocalResourceAccessAllowed(page)) {
+                    // like the browsers, a page not loaded from a file is not allowed to load a local file
+                    imageWebResponse_ = null;
+                }
                 else if (!blank) {
                     // upgrade-insecure-requests of the Content-Security-Policy
                     final URL url = ContentSecurityPolicy.upgradeInsecureRequest(page,
@@ -919,6 +923,21 @@ public class HtmlImage extends HtmlElement {
      * @param page the page
      * @return {@code true} if the image is allowed (or the src is empty or invalid)
      */
+    private boolean isLocalResourceAccessAllowed(final HtmlPage page) {
+        final URL url;
+        try {
+            url = page.getFullyQualifiedUrl(getSrcAttribute());
+        }
+        catch (final MalformedURLException e) {
+            return true;
+        }
+        if (page.isLocalResourceAccessAllowed(url)) {
+            return true;
+        }
+        notifyIncorrectness("Not allowed to load local resource: " + url);
+        return false;
+    }
+
     private boolean isAllowedByContentSecurityPolicy(final HtmlPage page) {
         final String src = getSrcAttribute();
         if (StringUtils.isBlank(src)) {

@@ -897,4 +897,22 @@ public class HeadersTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Headers created by the constructor have no guard; the method override header is kept.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x-http-method-override,TRACE")
+    public void methodOverrideWithoutGuard() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const headers = new Headers({'X-HTTP-Method-Override': 'TRACE'});\n"
+            + "  log([...headers].join('|'));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -805,6 +805,212 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     /**
+     * The essence of the content type has to be one of the three safelisted ones,
+     * a prefix is not enough.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_contentTypeNotSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Content-Type", "application/x-www-form-urlencoded+json");
+    }
+
+    /**
+     * Accept-Language values with other characters are not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_acceptLanguageNotSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Accept-Language", "en_US");
+    }
+
+    /**
+     * Values longer than 128 characters are not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_contentLanguageTooLong() throws Exception {
+        doPreflightTestReceivedHeader("Content-Language", "de".repeat(65));
+    }
+
+    /**
+     * A safelisted Accept-Language value needs no preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_acceptLanguageSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Accept-Language", "de-DE,de;q=0.9");
+    }
+
+    /**
+     * A safelisted Content-Language value needs no preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_contentLanguageSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Content-Language", "de-DE");
+    }
+
+    /**
+     * A safelisted Accept value needs no preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_acceptSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Accept", "application/json, text/plain, */*");
+    }
+
+    /**
+     * Accept values with CORS-unsafe bytes need a preflight.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_acceptNotSafelisted() throws Exception {
+        doPreflightTestReceivedHeader("Accept", "text/html(1)");
+    }
+
+    /**
+     * A Content-Type value with 128 characters is still safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_contentTypeLength128() throws Exception {
+        doPreflightTestReceivedHeader("Content-Type", "text/plain;x=" + "a".repeat(115));
+    }
+
+    /**
+     * A simple range is safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_rangeSimple() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=0-499");
+    }
+
+    /**
+     * A simple range without end is safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "POST cookie=sweet"})
+    public void preflight_rangeOpenEnd() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=500-");
+    }
+
+    /**
+     * A suffix range is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeSuffix() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=-500");
+    }
+
+    /**
+     * More than one range is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeMultiple() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=0-1,5-9");
+    }
+
+    /**
+     * A range with whitespace is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeWhitespace() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes = 0-499");
+    }
+
+    /**
+     * A range with the start after the end is not safelisted.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeStartAfterEnd() throws Exception {
+        doPreflightTestReceivedHeader("Range", "bytes=500-100");
+    }
+
+    /**
+     * The unit of a simple range is case-sensitive.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", "nothing"})
+    public void preflight_rangeUpperCase() throws Exception {
+        doPreflightTestReceivedHeader("Range", "BYTES=0-499");
+    }
+
+    /**
+     * Sends a POST with credentials and the given header; the preflight response does not allow
+     * any header. Logs afterwards the request that reached the server ('nothing' if the request was not sent).
+     */
+    private void doPreflightTestReceivedHeader(final String headerName, final String headerValue)
+            throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  try {\n"
+
+                // a unique url for every test; browsers cache the preflight result per url
+                + "    xhr.open('POST', url + '?id=" + System.currentTimeMillis() + "', false);\n"
+
+                + "    xhr.withCredentials = true;\n"
+                + "    xhr.setRequestHeader('" + headerName + "', '" + headerValue + "');\n"
+                + "    xhr.send('{\"amount\":1000}');\n"
+                + "  } catch(e) { logEx(e) }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
+
+                + "  var received = new XMLHttpRequest();\n"
+                + "  received.open('GET', url + '?received', false);\n"
+                + "  received.send();\n"
+                + "  log(received.responseText);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_CREDENTIALS_ = "true";
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_METHODS_ = null;
+        PreflightReceivedServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
+        PreflightReceivedServlet.RECEIVED_ = null;
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/preflight2", PreflightReceivedServlet.class);
+        startWebServer2(".", servlets2);
+
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
+
+        final URL url = new URL(URL_FIRST, "/preflight1");
+        getMockWebConnection().setResponse(url, html,
+                200, "OK", "text/html;charset=ISO-8859-1", ISO_8859_1, responseHeader);
+
+        loadPage2(url, null);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
      * Sends a request that needs a preflight and logs afterwards the request that
      * reached the server ('nothing' if the request was not sent).
      */
@@ -904,6 +1110,15 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
          */
         @Override
         protected void doPut(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            received(request, response);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
             received(request, response);
         }
 
@@ -2092,6 +2307,40 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         startSecondServer();
         pivot("/pivot", 302, originB() + "/expose?acao=*&aceh=X-Custom");
         loadAndVerify(headersPage("", originA() + "/pivot"));
+    }
+
+    // ---------------------------------------------------------------------------
+    // the Origin header is a forbidden request header
+    // ---------------------------------------------------------------------------
+
+    /**
+     * The Origin header can not be set by the page; the server gets the origin of the page.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"4", "200", "origin=§§URL§§;cookie=null;auth=null"})
+    public void setRequestHeaderOriginIgnored() throws Exception {
+        expandExpectedAlertsVariables(new URL(originA()));
+        startSecondServer();
+
+        loadAndVerify(xhrPage("", "    xhr.setRequestHeader('Origin', '" + originB() + "');\n",
+                originB() + "/echo?acao=*"));
+    }
+
+    /**
+     * A page can not pass the CORS check of a server that only trusts another origin
+     * by setting the Origin header to that origin.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
+    public void setRequestHeaderOriginDoesNotPassCorsCheck() throws Exception {
+        startSecondServer();
+
+        loadAndVerify(xhrPage("  document.cookie = 'c=1; path=/';\n",
+                "    xhr.withCredentials = true;\n"
+                + "    xhr.setRequestHeader('Origin', '" + originB() + "');\n",
+                originB() + "/echo?acac=true&acao=" + enc(originB())));
     }
 
     /**

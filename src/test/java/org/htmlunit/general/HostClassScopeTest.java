@@ -23,6 +23,7 @@ import java.util.Set;
 import org.htmlunit.TestCaseTest;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -320,38 +321,52 @@ public class HostClassScopeTest extends WebDriverTestCase {
     }
 
     @Alerts(DEFAULT = {"true", "function", "function"},
-            FF = {"false", "undefined", "undefined"},
             FF_ESR = {"false", "undefined", "undefined"})
     void _SpeechGrammar() throws Exception {
         test("SpeechGrammar");
     }
 
     @Alerts(DEFAULT = {"true", "function", "function"},
-            FF = {"false", "undefined", "undefined"},
             FF_ESR = {"false", "undefined", "undefined"})
     void _SpeechGrammarList() throws Exception {
         test("SpeechGrammarList");
     }
 
     @Alerts(DEFAULT = {"true", "function", "function"},
-            FF = {"false", "undefined", "undefined"},
             FF_ESR = {"false", "undefined", "undefined"})
     void _SpeechRecognition() throws Exception {
         test("SpeechRecognition");
     }
 
+    @Alerts(DEFAULT = {"false", "undefined", "undefined"},
+            FF = {"true", "function", "function"})
+    void _SpeechRecognitionAlternative() throws Exception {
+        test("SpeechRecognitionAlternative");
+    }
+
     @Alerts(DEFAULT = {"true", "function", "function"},
-            FF = {"false", "undefined", "undefined"},
             FF_ESR = {"false", "undefined", "undefined"})
     void _SpeechRecognitionErrorEvent() throws Exception {
         test("SpeechRecognitionErrorEvent");
     }
 
     @Alerts(DEFAULT = {"true", "function", "function"},
-            FF = {"false", "undefined", "undefined"},
             FF_ESR = {"false", "undefined", "undefined"})
     void _SpeechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent");
+    }
+
+    @Alerts(DEFAULT = {"false", "undefined", "undefined"},
+            FF = {"true", "function", "function"})
+    void _SpeechRecognitionResult() throws Exception {
+        test("SpeechRecognitionResult");
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"false", "undefined", "undefined"},
+            FF = {"true", "function", "function"})
+    void _SpeechRecognitionResultList() throws Exception {
+        test("SpeechRecognitionResultList");
     }
 
     @Alerts({"false", "undefined", "undefined"})
@@ -426,6 +441,12 @@ public class HostClassScopeTest extends WebDriverTestCase {
             FF = {"false", "undefined", "undefined"},
             FF_ESR = {"false", "undefined", "undefined"})
     void _webkitSpeechRecognitionEvent() throws Exception {
+        test("webkitSpeechRecognitionEvent");
+    }
+
+    @Alerts(DEFAULT = {"true", "function", "function"},
+            CHROME = {"false", "undefined", "undefined"})
+    void _XSLTProcessor() throws Exception {
         test("webkitSpeechRecognitionEvent");
     }
 }

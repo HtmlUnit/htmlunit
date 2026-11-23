@@ -131,6 +131,13 @@ public final class HyperlinkElementSupport {
         final URL pageUrl = page.getUrl();
 
         final WebClient webClient = page.getWebClient();
+
+        // accessing to local resource is forbidden for security reason
+        if (!page.isLocalResourceAccessAllowed(url)) {
+            webClient.getIncorrectnessListener().notify("Not allowed to load local resource: " + url, htmlElement);
+            return;
+        }
+
         final BrowserVersion browser = webClient.getBrowserVersion();
         if (ATTRIBUTE_NOT_DEFINED != element.getPingAttribute() && browser.hasFeature(ANCHOR_SEND_PING_REQUEST)) {
             final URL pingUrl = getTargetUrl(element.getPingAttribute(), page);

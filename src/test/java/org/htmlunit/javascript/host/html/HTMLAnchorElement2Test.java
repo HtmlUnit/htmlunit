@@ -1681,4 +1681,54 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Sets the protocol of a link to 'file' for an url with a port.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("http://localhost:8080/a")
+    public void protocolFileWithPort() throws Exception {
+        setProtocol("http://localhost:8080/a", "file");
+    }
+
+    /**
+     * Sets the protocol of a link to 'file' for an url without port and credentials.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "file://localhost/a",
+            FF = "file:///a",
+            FF_ESR = "file:///a")
+    public void protocolFile() throws Exception {
+        setProtocol("http://localhost/a", "file");
+    }
+
+    /**
+     * Sets the protocol of a link from 'file' for an url with an empty host.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("file:///C:/a")
+    public void protocolFromFileEmptyHost() throws Exception {
+        setProtocol("file:///C:/a", "http");
+    }
+
+    private void setProtocol(final String url, final String protocol) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var a = document.getElementById('a');\n"
+            + "      a.protocol = '" + protocol + "';\n"
+            + "      log(a.href);\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<a id='a' href='" + url + "'>link</a>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -17,7 +17,7 @@ package org.htmlunit.general.huge;
 import java.util.Collection;
 
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.jupiter.api.Test;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.params.provider.Arguments;
 
 /**
@@ -204,37 +204,32 @@ public class HostParentOfWTest extends HostParentOf {
         test("webkitRTCPeerConnection", "webkitRTCPeerConnection");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            CHROME = "true/false",
-            EDGE = "true/false")
+    @Alerts(DEFAULT = "true/false",
+            FF_ESR = "false/false")
     void _webkitSpeechGrammar_SpeechGrammar() throws Exception {
         test("webkitSpeechGrammar", "SpeechGrammar");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            CHROME = "true/false",
-            EDGE = "true/false")
+    @Alerts(DEFAULT = "true/false",
+            FF_ESR = "false/false")
     void _webkitSpeechGrammar_webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar", "webkitSpeechGrammar");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            CHROME = "true/false",
-            EDGE = "true/false")
+    @Alerts(DEFAULT = "true/false",
+            FF_ESR = "false/false")
     void _webkitSpeechGrammarList_SpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList", "SpeechGrammarList");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            CHROME = "true/false",
-            EDGE = "true/false")
+    @Alerts(DEFAULT = "true/false",
+            FF_ESR = "false/false")
     void _webkitSpeechGrammarList_webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList", "webkitSpeechGrammarList");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            CHROME = "true/false",
-            EDGE = "true/false")
+    @Alerts(DEFAULT = "true/false",
+            FF_ESR = "false/false")
     void _webkitSpeechRecognition_SpeechRecognition() throws Exception {
         test("webkitSpeechRecognition", "SpeechRecognition");
     }
@@ -242,13 +237,13 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/false",
             EDGE = "true/false")
+    @HtmlUnitNYI(FF = "true/false")
     void _webkitSpeechRecognitionError_SpeechRecognitionErrorEvent() throws Exception {
         test("webkitSpeechRecognitionError", "SpeechRecognitionErrorEvent");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            CHROME = "true/false",
-            EDGE = "true/false")
+    @Alerts(DEFAULT = "true/false",
+            FF_ESR = "false/false")
     void _webkitSpeechRecognition_webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition", "webkitSpeechRecognition");
     }
@@ -256,6 +251,7 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/false",
             EDGE = "true/false")
+    @HtmlUnitNYI(FF = "true/false")
     void _webkitSpeechRecognitionError_webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError", "webkitSpeechRecognitionError");
     }
@@ -263,7 +259,7 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/false",
             EDGE = "true/false")
-    @Test
+    @HtmlUnitNYI(FF = "true/false")
     void _webkitSpeechRecognitionEvent_SpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent", "SpeechRecognitionEvent");
     }
@@ -271,6 +267,7 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/false",
             EDGE = "true/false")
+    @HtmlUnitNYI(FF = "true/false")
     void _webkitSpeechRecognitionEvent_webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent", "webkitSpeechRecognitionEvent");
     }
@@ -355,7 +352,8 @@ public class HostParentOfWTest extends HostParentOf {
         test("XPathResult", "XPathResult");
     }
 
-    @Alerts("true/false")
+    @Alerts(DEFAULT = "true/false",
+            CHROME = "false/false")
     void _XSLTProcessor_XSLTProcessor() throws Exception {
         test("XSLTProcessor", "XSLTProcessor");
     }

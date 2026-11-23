@@ -208,6 +208,13 @@ public class HtmlLink extends HtmlElement {
         final WebRequest request = webRequest == null ? getWebRequest() : webRequest;
 
         if (downloadIfNeeded) {
+            // like the browsers, a page not loaded from a file is not allowed to load a local file
+            if (getPage() instanceof HtmlPage htmlPage && !htmlPage.isLocalResourceAccessAllowed(request.getUrl())) {
+                notifyIncorrectness("Not allowed to load local resource: " + request.getUrl());
+                fireEvent(webClient, Event.TYPE_ERROR, isStylesheetRequest);
+                return null;
+            }
+
             if (isStylesheetRequest && getPage() instanceof HtmlPage htmlPage
                     && htmlPage.getContentSecurityPolicy() != null) {
                 final URL styleUrl = request.getUrl();
