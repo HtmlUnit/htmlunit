@@ -16,8 +16,12 @@ package org.htmlunit.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermissions;
@@ -211,12 +215,12 @@ public class FileUtilsTest {
      * @throws Exception if the test fails
      */
     @Test
-    public void createUserOnlyDirectories(@TempDir final Path folder) throws Exception {
+    public void createUserOnlyDirectory(@TempDir final Path folder) throws Exception {
         final Path directory = folder.resolve("parent").resolve("report");
-        FileUtils.createUserOnlyDirectories(directory);
+        FileUtils.createUserOnlyDirectory(directory);
 
         assertTrue(Files.isDirectory(directory));
-        if (directory.getFileSystem().supportedFileAttributeViews().contains("posix")) {
+        if (isPosix(directory)) {
             assertEquals("rwx------", PosixFilePermissions.toString(Files.getPosixFilePermissions(directory)));
             assertEquals("rwx------",
                     PosixFilePermissions.toString(Files.getPosixFilePermissions(directory.getParent())));
@@ -224,13 +228,48 @@ public class FileUtilsTest {
     }
 
     /**
-     * An already existing directory is accepted.
+     * An already existing directory (e.g. created by someone else in the shared temp directory)
+     * is not used.
      * @param folder the folder
      * @throws Exception if the test fails
      */
     @Test
-    public void createUserOnlyDirectoriesExisting(@TempDir final Path folder) throws Exception {
-        FileUtils.createUserOnlyDirectories(folder);
-        assertTrue(Files.isDirectory(folder));
+    public void createUserOnlyDirectoryExisting(@TempDir final Path folder) throws Exception {
+        final Path directory = Files.createDirectory(folder.resolve("report"));
+        assertThrows(FileAlreadyExistsException.class, () -> FileUtils.createUserOnlyDirectory(directory));
+    }
+
+    /**
+     * The new file is readable for the owner only.
+     * @param folder the folder
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void newUserOnlyOutputStream(@TempDir final Path folder) throws Exception {
+        final Path file = folder.resolve("download.txt");
+        try (OutputStream out = FileUtils.newUserOnlyOutputStream(file)) {
+            out.write("content".getBytes(StandardCharsets.UTF_8));
+        }
+
+        assertEquals("content", Files.readString(file, StandardCharsets.UTF_8));
+        if (isPosix(file)) {
+            assertEquals("rw-------", PosixFilePermissions.toString(Files.getPosixFilePermissions(file)));
+        }
+    }
+
+    /**
+     * An already existing file is not overwritten.
+     * @param folder the folder
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void newUserOnlyOutputStreamExisting(@TempDir final Path folder) throws Exception {
+        final Path file = Files.writeString(folder.resolve("download.txt"), "old", StandardCharsets.UTF_8);
+        assertThrows(FileAlreadyExistsException.class, () -> FileUtils.newUserOnlyOutputStream(file));
+        assertEquals("old", Files.readString(file, StandardCharsets.UTF_8));
+    }
+
+    private static boolean isPosix(final Path path) {
+        return path.getFileSystem().supportedFileAttributeViews().contains("posix");
     }
 }

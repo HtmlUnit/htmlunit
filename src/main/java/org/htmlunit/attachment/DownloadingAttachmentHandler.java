@@ -16,6 +16,7 @@ package org.htmlunit.attachment;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -68,7 +69,8 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 
     /**
      * Creates a new DownloadingAttachmentHandler that stores all downloaded files in the
-     * 'temp'-dir (System.getProperty("java.io.tmpdir")).
+     * 'temp'-dir (System.getProperty("java.io.tmpdir")); like all downloaded files, the files
+     * are readable for the owner only.
      *
      * @throws IOException if the folder does not exist or the folder is not writable
      */
@@ -84,8 +86,10 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
         final Path destination = determineDestionationFile(page, attachmentFilename);
 
         final WebResponse webResponse = page.getWebResponse();
-        try (InputStream contentAsStream = webResponse.getContentAsStream()) {
-            Files.copy(contentAsStream, destination);
+        // the file is readable for the owner only (the default folder is the shared temp folder)
+        try (InputStream contentAsStream = webResponse.getContentAsStream();
+                OutputStream out = FileUtils.newUserOnlyOutputStream(destination)) {
+            contentAsStream.transferTo(out);
         }
         catch (final Exception e) {
             LOG.error("Failed to write attachment response content to '"

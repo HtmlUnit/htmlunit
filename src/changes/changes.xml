@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
+            <action type="fix" dev="rbri">
+                The files stored by the DownloadingAttachmentHandler are readable for the owner only (by default
+                they are stored in the shared temp directory). The report folder of the DebuggingWebConnection is
+                no longer used if someone else created it in the meantime.
+            </action>
             <action type="fix" dev="Vidya m">
                 A response that exceeds the max in memory size is stored in a temporary file that is only
                 readable by the owner; so far the file was created in the shared temp directory with the
