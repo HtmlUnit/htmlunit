@@ -419,11 +419,16 @@ public class HtmlPage extends SgmlPage {
      * Like in the browsers, only pages from a file are allowed to load local resources (file URLs);
      * about:blank and about:srcdoc documents are judged by the origin of their creator
      * (see {@link #getOriginUrl()}).
+     * This check can be disabled with
+     * {@link org.htmlunit.WebClientOptions#setLocalFileAccessFromRemotePagesAllowed(boolean)}.
      *
      * @param url the URL to load
      * @return {@code false} if the URL is a file URL and this page does not have a file origin
      */
     public boolean isLocalResourceAccessAllowed(final URL url) {
+        if (getWebClient().getOptions().isLocalFileAccessFromRemotePagesAllowed()) {
+            return true;
+        }
         return UrlUtils.isLocalResourceAccessAllowed(getOriginUrl(), url);
     }
 

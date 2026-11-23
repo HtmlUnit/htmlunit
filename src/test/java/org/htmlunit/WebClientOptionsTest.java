@@ -69,6 +69,11 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
                         deserialized.getWebSocketMaxBinaryMessageSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
+
+        assertEquals(original.isContentSecurityPolicyReportsEnabled(),
+                        deserialized.isContentSecurityPolicyReportsEnabled());
+        assertEquals(original.isLocalFileAccessFromRemotePagesAllowed(),
+                        deserialized.isLocalFileAccessFromRemotePagesAllowed());
     }
 
     /**
@@ -96,6 +101,9 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         original.setWebSocketMaxBinaryMessageSize(44);
 
         original.setFetchPolyfillEnabled(true);
+
+        original.setContentSecurityPolicyReportsEnabled(false);
+        original.setLocalFileAccessFromRemotePagesAllowed(true);
 
         final byte[] bytes = SerializationUtils.serialize(original);
         final WebClientOptions deserialized = SerializationUtils.deserialize(bytes);
@@ -130,6 +138,11 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
                         deserialized.getWebSocketMaxBinaryMessageSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
+
+        assertEquals(original.isContentSecurityPolicyReportsEnabled(),
+                        deserialized.isContentSecurityPolicyReportsEnabled());
+        assertEquals(original.isLocalFileAccessFromRemotePagesAllowed(),
+                        deserialized.isLocalFileAccessFromRemotePagesAllowed());
     }
 
     /**
