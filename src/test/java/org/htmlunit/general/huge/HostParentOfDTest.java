@@ -1380,6 +1380,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/true",
             EDGE = "true/true")
+    @HtmlUnitNYI(FF = "true/true")
     void _Event_webkitSpeechRecognitionError() throws Exception {
         test("Event", "webkitSpeechRecognitionError");
     }
@@ -1387,6 +1388,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/true",
             EDGE = "true/true")
+    @HtmlUnitNYI(FF = "true/true")
     void _Event_webkitSpeechRecognitionEvent() throws Exception {
         test("Event", "webkitSpeechRecognitionEvent");
     }
@@ -2237,10 +2239,27 @@ public class HostParentOfDTest extends HostParentOf {
     }
 
     @Alerts(DEFAULT = "true/true",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _EventTarget_SpeechRecognition() throws Exception {
         test("EventTarget", "SpeechRecognition");
+    }
+
+    @Alerts("false/false")
+    @HtmlUnitNYI(FF = "true/true")
+    void _EventTarget_SpeechRecognitionAlternative() throws Exception {
+        test("EventTarget", "SpeechRecognitionAlternative");
+    }
+
+    @Alerts("false/false")
+    @HtmlUnitNYI(FF = "true/true")
+    void _EventTarget_SpeechRecognitionResult() throws Exception {
+        test("EventTarget", "SpeechRecognitionResult");
+    }
+
+    @Alerts("false/false")
+    @HtmlUnitNYI(FF = "true/true")
+    void _EventTarget_SpeechRecognitionResultList() throws Exception {
+        test("EventTarget", "SpeechRecognitionResultList");
     }
 
     @Alerts("true/true")
@@ -2667,9 +2686,10 @@ public class HostParentOfDTest extends HostParentOf {
         test("EventTarget", "webkitRTCPeerConnection");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            CHROME = "true/true",
-            EDGE = "true/true")
+    @Alerts(DEFAULT = "true/true",
+            FF = "true/false",
+            FF_ESR = "false/false")
+    @HtmlUnitNYI(FF = "true/true")
     void _EventTarget_webkitSpeechRecognition() throws Exception {
         test("EventTarget", "webkitSpeechRecognition");
     }
@@ -2710,14 +2730,12 @@ public class HostParentOfDTest extends HostParentOf {
     }
 
     @Alerts(DEFAULT = "true/true",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _Event_SpeechRecognitionEvent() throws Exception {
         test("Event", "SpeechRecognitionEvent");
     }
 
     @Alerts(DEFAULT = "true/true",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _Event_SpeechRecognitionErrorEvent() throws Exception {
         test("Event", "SpeechRecognitionErrorEvent");
