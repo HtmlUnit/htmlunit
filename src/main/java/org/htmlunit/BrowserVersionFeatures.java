@@ -39,6 +39,20 @@ public enum BrowserVersionFeatures {
     ANCHOR_SEND_PING_REQUEST,
 
     /**
+     * The securitypolicyviolation event for a connection (XMLHttpRequest, fetch) blocked because of
+     * a redirect target is fired after the request has failed (after the error event).
+     */
+    @BrowserFeature({CHROME, EDGE})
+    CSP_CONNECT_REDIRECT_VIOLATION_DELAYED,
+
+    /**
+     * The form-action directive of the Content-Security-Policy is not checked for the
+     * redirects of a form submission.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    CSP_FORM_ACTION_REDIRECTS_NOT_CHECKED,
+
+    /**
      * The content of a Content-Security-Policy meta element is parsed as one policy
      * (commas are not splitting the content into several policies).
      */
@@ -51,6 +65,13 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({FF, FF_ESR})
     CSP_NONCE_HIDING_ENFORCED_ONLY,
+
+    /**
+     * Leading and trailing whitespace of the nonce of an element is ignored when matching
+     * the nonce source expressions of the Content-Security-Policy.
+     */
+    @BrowserFeature({CHROME, EDGE})
+    CSP_NONCE_TRIMMED,
 
     /** The error event is fired at an object element if the data url is blocked by the object-src directive. */
     @BrowserFeature({FF, FF_ESR})
@@ -94,6 +115,13 @@ public enum BrowserVersionFeatures {
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
     @BrowserFeature({FF, FF_ESR})
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
+
+    /**
+     * The MIME type of a data url is serialized like the MIME Sniffing Standard does it
+     * (duplicate parameters are ignored, the charset parameter stays in place).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    DATA_URL_MIME_TYPE_STANDARD_SERIALIZATION,
 
     /** The context menu MouseEvent has a detail of 1. */
     @BrowserFeature({FF, FF_ESR})
@@ -295,6 +323,20 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_EVENT_KEYBOARD_CTOR_WHICH,
 
+    /**
+     * Javascript SecurityPolicyViolationEvent created by the constructor always bubbles,
+     * is composed and is not cancelable (the init values are ignored).
+     */
+    @BrowserFeature({CHROME, EDGE})
+    JS_EVENT_SECURITY_POLICY_VIOLATION_CTOR_BUBBLES_COMPOSED,
+
+    /**
+     * Javascript SecurityPolicyViolationEvent lineNumber and columnNumber are unsigned
+     * (-1 is converted to 4294967295).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_EVENT_SECURITY_POLICY_VIOLATION_POSITION_UNSIGNED,
+
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,
@@ -368,9 +410,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE,
 
+    /** Indicates that the collation (from the options or for usage 'search') is part of the Intl.Collator locale. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_INTL_COLLATOR_COLLATION_IN_LOCALE,
+
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
+
+    /** Setting location.protocol does not navigate if the url is not changed (e.g. 'file:' for an url with port). */
+    @BrowserFeature({FF, FF_ESR})
+    JS_LOCATION_PROTOCOL_UNCHANGED_NO_NAVIGATION,
 
     /** Reload sends a referrer header. */
     @BrowserFeature({CHROME, EDGE})
@@ -411,6 +461,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,
 
+    /**
+     * The User-Agent header is a forbidden request header (fetch() and XMLHttpRequest);
+     * it is no longer part of the forbidden request headers of the Fetch standard.
+     */
+    @BrowserFeature({CHROME, EDGE})
+    JS_REQUEST_HEADER_USER_AGENT_FORBIDDEN,
+
     /** script tags created from js as child of templates is processed if added to the dom. */
     @BrowserFeature({CHROME, EDGE})
     JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH,
@@ -427,6 +484,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_STORAGE_PRESERVED_INCLUDED,
 
+    /**
+     * File urls of URL objects have no host: the host 'localhost' is removed, setting the protocol to
+     * 'file' removes the host.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_URL_FILE_WITHOUT_HOST,
+
+    /** A WebSocket blocked by the Content-Security-Policy fires only the error event, no close event. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_WEBSOCKET_CSP_BLOCKED_NO_CLOSE_EVENT,
+
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,
@@ -434,6 +502,17 @@ public enum BrowserVersionFeatures {
     /** Javascript InstallTrigger property set to null. */
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_INSTALL_TRIGGER_NULL,
+
+    /**
+     * Method window.open() of a local file (file url) from a page that was not loaded from a file
+     * throws an Error.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WINDOW_OPEN_LOCAL_FILE_THROWS,
+
+    /** window.open() of a sandboxed document without 'allow-popups' throws an InvalidAccessError. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WINDOW_OPEN_SANDBOXED_THROWS,
 
     /**
      * Difference of window.outer/inner height is 138.
@@ -457,6 +536,24 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
 
+    /**
+     * Calling importScripts() of a local file (file url) from a worker of a page that was not loaded from a file
+     * throws a SecurityError (instead of a NetworkError).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WORKER_IMPORT_SCRIPTS_LOCAL_FILE_SECURITY_ERROR,
+
+    /**
+     * Calling new Worker() of a local file (file url) from a page that was not loaded from a file does not throw;
+     * the worker is not started and the error event is fired.
+     */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WORKER_LOCAL_FILE_FIRES_ERROR,
+
+    /** A page loaded from a file is not allowed to start a worker from a local file (SecurityError). */
+    @BrowserFeature({CHROME, EDGE})
+    JS_WORKER_LOCAL_FILE_FORBIDDEN,
+
     /** Take care of the response charset when reading a worker script. */
     @BrowserFeature({CHROME, EDGE})
     JS_WORKER_SCRIPT_HONORS_CHARSET_HEADER,
@@ -472,6 +569,13 @@ public enum BrowserVersionFeatures {
     /** The key codes of the ';', '=' and '-' keys are 186, 187 and 189 (instead of 59, 61 and 173). */
     @BrowserFeature({CHROME, EDGE})
     KEYBOARD_EVENT_OEM_KEY_CODES,
+
+    /**
+     * The less restrictive referrer policies ('unsafe-url' and 'no-referrer-when-downgrade')
+     * are ignored for cross-site requests (the default policy is used).
+     */
+    @BrowserFeature({FF, FF_ESR})
+    REFERRER_POLICY_IGNORE_CROSS_SITE_RELAXING,
 
     /**
      * Indicates that the Browser handles async and sync network errors the same way.

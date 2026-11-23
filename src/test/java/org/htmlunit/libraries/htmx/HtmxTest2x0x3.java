@@ -36,10 +36,10 @@ public class HtmxTest2x0x3 extends HtmxTest {
             FF = "passes:605failures:0",
             FF_ESR = "passes:605failures:0")
     @HtmlUnitNYI(
-            CHROME = "passes:599failures:8",
-            EDGE = "passes:599failures:8",
-            FF = "passes:599failures:8",
-            FF_ESR = "passes:599failures:8")
+            CHROME = "passes:600failures:7",
+            EDGE = "passes:600failures:7",
+            FF = "passes:600failures:7",
+            FF_ESR = "passes:600failures:7")
     public void htmx() throws Exception {
         htmx("htmx-2.0.3", false);
     }

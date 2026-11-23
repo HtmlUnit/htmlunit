@@ -271,6 +271,11 @@ public class HtmlImage extends HtmlElement {
         if (htmlPage == null) {
             return; // nothing to do if embedded in XML code
         }
+        if (isInDocumentWithoutBrowsingContext()) {
+            // nothing is loaded and no event is fired; this happens if the image
+            // is imported into a document with browsing context
+            return;
+        }
 
         // like the browsers, the image url is checked against the Content-Security-Policy
         // also if HtmlUnit does not download the image
@@ -688,7 +693,7 @@ public class HtmlImage extends HtmlElement {
      * @throws IOException if an error occurs while downloading the image
      */
     private void downloadImageIfNeeded() throws IOException {
-        if (!downloaded_) {
+        if (!downloaded_ && !isInDocumentWithoutBrowsingContext()) {
             // HTMLIMAGE_BLANK_SRC_AS_EMPTY
             final String src = getSrcAttribute();
 
@@ -703,6 +708,10 @@ public class HtmlImage extends HtmlElement {
                     // blocked by the Content-Security-Policy; forget the response of a previous src
                     imageWebResponse_ = null;
                 }
+                else if (!blank && !isLocalResourceAccessAllowed(page)) {
+                    // like the browsers, a page not loaded from a file is not allowed to load a local file
+                    imageWebResponse_ = null;
+                }
                 else if (!blank) {
                     // upgrade-insecure-requests of the Content-Security-Policy
                     final URL url = ContentSecurityPolicy.upgradeInsecureRequest(page,
@@ -711,6 +720,7 @@ public class HtmlImage extends HtmlElement {
                                                                     browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
                     request.setRefererHeader(page.getUrl());
+                    request.setReferrerPolicy(page.getReferrerPolicy(this));
 
                     // Sec-Fetch-* support (https://www.w3.org/TR/fetch-metadata/):
                     // an <img> load is never user-activated, and is initiated by the
@@ -780,6 +790,16 @@ public class HtmlImage extends HtmlElement {
             width_ = -1;
             height_ = -1;
         }
+    }
+
+    /**
+     * Returns whether this image is part of a document without browsing context (e.g. created by
+     * DOMImplementation.createHTMLDocument() or DOMParser); like the browsers, such an image is not loaded.
+     *
+     * @return whether the document of this image has no browsing context
+     */
+    private boolean isInDocumentWithoutBrowsingContext() {
+        return getPage().getEnclosingWindow() == null;
     }
 
     /**
@@ -903,6 +923,21 @@ public class HtmlImage extends HtmlElement {
      * @param page the page
      * @return {@code true} if the image is allowed (or the src is empty or invalid)
      */
+    private boolean isLocalResourceAccessAllowed(final HtmlPage page) {
+        final URL url;
+        try {
+            url = page.getFullyQualifiedUrl(getSrcAttribute());
+        }
+        catch (final MalformedURLException e) {
+            return true;
+        }
+        if (page.isLocalResourceAccessAllowed(url)) {
+            return true;
+        }
+        notifyIncorrectness("Not allowed to load local resource: " + url);
+        return false;
+    }
+
     private boolean isAllowedByContentSecurityPolicy(final HtmlPage page) {
         final String src = getSrcAttribute();
         if (StringUtils.isBlank(src)) {

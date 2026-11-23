@@ -3565,4 +3565,72 @@ public class Window2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         verifyTitle2(Duration.ofSeconds(1), driver, getExpectedAlerts());
     }
+
+    /**
+     * The serialized origin of the document of the window.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§", "true", "string"})
+    public void origin() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(window.origin);\n"
+            + "  log(self.origin == location.origin);\n"
+            + "  log(typeof window.origin);\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An iframe without src (about:blank) has the origin of the parent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§", "about:blank"})
+    public void originAboutBlankFrame() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var f = document.getElementById('f');\n"
+            + "    log(f.contentWindow.origin);\n"
+            + "    log(f.contentWindow.location.href);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'><iframe id='f'></iframe></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The origin property is replaceable.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§", "abc", "number", "false"})
+    public void originReplaceable() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    log(window.origin);\n"
+            + "    window.origin = 'abc';\n"
+            + "    log(window.origin);\n"
+            + "    window.origin = 7;\n"
+            + "    log(typeof window.origin);\n"
+            + "    log(location.origin == 'abc');\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

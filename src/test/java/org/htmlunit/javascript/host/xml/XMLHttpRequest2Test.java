@@ -760,6 +760,122 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     }
 
     /**
+     * The method override header with a forbidden method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void setRequestHeaderMethodOverrideTrace() throws Exception {
+        setRequestHeader("X-HTTP-Method-Override", "TRACE");
+    }
+
+    /**
+     * The method override header with a forbidden method (lower case).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void setRequestHeaderMethodOverrideTrack() throws Exception {
+        setRequestHeader("X-Method-Override", "track");
+    }
+
+    /**
+     * The method override header with a forbidden method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void setRequestHeaderHttpMethodConnect() throws Exception {
+        setRequestHeader("X-HTTP-Method", "CONNECT");
+    }
+
+    /**
+     * The method override header with a list containing a forbidden method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void setRequestHeaderMethodOverrideList() throws Exception {
+        setRequestHeader("X-HTTP-Method-Override", "GET, TRACE");
+    }
+
+    /**
+     * The method override header with an allowed method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void setRequestHeaderMethodOverridePut() throws Exception {
+        setRequestHeader("X-HTTP-Method-Override", "PUT");
+    }
+
+    /**
+     * The User-Agent header (removed from the forbidden headers of the Fetch standard).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true",
+            FF_ESR = "true")
+    public void setRequestHeaderUserAgent() throws Exception {
+        setRequestHeader("User-Agent", "HtmlUnitTest");
+    }
+
+    /**
+     * The Content-Transfer-Encoding header.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void setRequestHeaderContentTransferEncoding() throws Exception {
+        setRequestHeader("Content-Transfer-Encoding", "HtmlUnitTest");
+    }
+
+    /**
+     * Sends a request with the given header; logs whether the server got the header value.
+     */
+    private void setRequestHeader(final String name, final String value) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  xhr.open('GET', '/headerEcho?name=" + name + "', false);\n"
+            + "  xhr.setRequestHeader('" + name + "', '" + value + "');\n"
+            + "  xhr.send();\n"
+            + "  log(xhr.responseText.indexOf('" + value + "') > -1);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/headerEcho", HeaderEchoServlet.class);
+
+        loadPage2(html, servlets);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * Answers with the value of the request header given by the parameter 'name'.
+     */
+    public static class HeaderEchoServlet extends HttpServlet {
+
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            resp.setContentType(MimeType.TEXT_PLAIN);
+            final String name = req.getParameter("name");
+            resp.getWriter().write(name + "=" + req.getHeader(name));
+        }
+    }
+
+    /**
      * Servlet for {@link #post()}.
      */
     public static class PostServlet2 extends HttpServlet {
@@ -1337,6 +1453,47 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "</html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", MimeType.TEXT_XML);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Set-Cookie and Set-Cookie2 are forbidden response header names; scripts must not see them
+     * (otherwise the value of HttpOnly cookies is readable).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null", "null", "false", "false", "abc"})
+    public void getResponseHeaderSetCookie() throws Exception {
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
+                        + "  <head>\n"
+                        + "    <script>\n"
+                        + LOG_TITLE_FUNCTION
+                        + "      function test() {\n"
+                        + "        var request = new XMLHttpRequest();\n"
+                        + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+                        + "        request.send();\n"
+                        + "        log(request.getResponseHeader('Set-Cookie'));\n"
+                        + "        log(request.getResponseHeader('set-cookie'));\n"
+                        + "        log(request.getResponseHeader('Set-Cookie2'));\n"
+                        + "        var headers = request.getAllResponseHeaders().toLowerCase();\n"
+                        + "        log(headers.indexOf('set-cookie') != -1);\n"
+                        + "        log(headers.indexOf('secret') != -1);\n"
+                        + "        log(request.getResponseHeader('X-Custom'));\n"
+                        + "      }\n"
+                        + "    </script>\n"
+                        + "  </head>\n"
+                        + "  <body onload='test()'>\n"
+                        + "  </body>\n"
+                        + "</html>";
+
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Set-Cookie", "session=secret; HttpOnly"));
+        responseHeaders.add(new NameValuePair("Set-Cookie2", "legacy=secret"));
+        responseHeaders.add(new NameValuePair("X-Custom", "abc"));
+        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", 200, "OK", MimeType.TEXT_XML,
+                responseHeaders);
 
         loadPageVerifyTitle2(html);
     }

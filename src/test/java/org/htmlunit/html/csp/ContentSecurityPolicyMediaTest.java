@@ -129,11 +129,7 @@ public class ContentSecurityPolicyMediaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"error a", "violation media-src http://localhost:§§PORT§§/audio.wav enforce", "done"},
-            FF = {"loadedmetadata a", "done"},
-            FF_ESR = {"loadedmetadata a", "done"})
-    @HtmlUnitNYI(FF = {"error a", "violation media-src http://localhost:§§PORT§§/audio.wav enforce", "done"},
-            FF_ESR = {"error a", "violation media-src http://localhost:§§PORT§§/audio.wav enforce", "done"})
+    @Alerts({"error a", "violation media-src http://localhost:§§PORT§§/audio.wav enforce", "done"})
     public void self_crossOrigin() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT, PORT2);
         loadPageVerify("media-src 'self'", audio("a", URL_CROSS_ORIGIN_BASE + "audio.wav"), "track('a');\n");

@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.fetch;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -24,7 +23,6 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ronald Brill
  */
-@Disabled
 public class HeadersTest extends WebDriverTestCase {
 
     /**
@@ -532,6 +530,387 @@ public class HeadersTest extends WebDriverTestCase {
             + "  try {\n"
             + "    new Headers(1);\n"
             + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Method set() replaces all values of the header.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"v3", "1"})
+    public void setReplacesAllValues() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const h = new Headers();\n"
+            + "  h.append('X-Test', 'v1');\n"
+            + "  h.append('x-test', 'v2');\n"
+            + "  h.set('X-TEST', 'v3');\n"
+            + "  log(h.get('x-test'));\n"
+            + "  log(Array.from(h.entries()).length);\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Deleting a missing header is fine.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void deleteMissing() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const h = new Headers({'a': '1'});\n"
+            + "  h.delete('b');\n"
+            + "  log(h.has('a'));\n"
+            + "  log(h.has('b'));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Method get() of a missing header.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "false"})
+    public void getMissing() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const h = new Headers();\n"
+            + "  log(h.get('x-test'));\n"
+            + "  log(h.has('x-test'));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Method get() with an invalid name.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void getInvalidName() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    new Headers().get('x test');\n"
+            + "    log('no exception');\n"
+            + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Method has() without arguments.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void hasNoArgs() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    new Headers().has();\n"
+            + "    log('no exception');\n"
+            + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A value with a char > 0xFF is not a ByteString.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void appendValueNonByteString() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    new Headers().append('x-test', 'v\\u0100');\n"
+            + "    log('no exception');\n"
+            + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A tab inside of the value is fine, tabs at the start and the end are removed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[a b]")
+    public void appendValueTab() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const h = new Headers();\n"
+            + "  h.append('x-test', '\\ta\\tb\\t');\n"
+            + "  log('[' + h.get('x-test') + ']');\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The Set-Cookie headers are not combined when iterating; get() combines them.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"set-cookie=c1|set-cookie=c2|x-a=a", "c1, c2"})
+    public void setCookieNotCombinedInIteration() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const h = new Headers();\n"
+            + "  h.append('Set-Cookie', 'c1');\n"
+            + "  h.append('X-A', 'a');\n"
+            + "  h.append('set-cookie', 'c2');\n"
+            + "  log(Array.from(h.entries()).map(e => e[0] + '=' + e[1]).join('|'));\n"
+            + "  log(h.get('set-cookie'));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Method getSetCookie() without Set-Cookie headers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "0"})
+    public void getSetCookieEmpty() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const c = new Headers({'a': '1'}).getSetCookie();\n"
+            + "  log(Array.isArray(c));\n"
+            + "  log(c.length);\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A sequence entry has to be a pair.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void constructorPairTooShort() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    new Headers([['a']]);\n"
+            + "    log('no exception');\n"
+            + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A sequence entry has to be a pair.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void constructorPairTooLong() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    new Headers([['a', '1', '2']]);\n"
+            + "    log('no exception');\n"
+            + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Value null is not a valid init.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void constructorNull() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    new Headers(null);\n"
+            + "    log('no exception');\n"
+            + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A string is not a valid init.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void constructorString() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    new Headers('a');\n"
+            + "    log('no exception');\n"
+            + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The values of a record are converted to strings.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "true"})
+    public void constructorRecordNumberValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const h = new Headers({'a': 1, 'b': true});\n"
+            + "  log(h.get('a'));\n"
+            + "  log(h.get('b'));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The second argument of forEach() is used as this.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ctx a=1 true")
+    public void forEachThisArg() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const h = new Headers({'a': '1'});\n"
+            + "  const ctx = { name: 'ctx' };\n"
+            + "  h.forEach(function(v, k, headers) {\n"
+            + "    log(this.name + ' ' + k + '=' + v + ' ' + (headers === h));\n"
+            + "  }, ctx);\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Method forEach() requires a function.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void forEachNoFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    new Headers().forEach('x');\n"
+            + "    log('no exception');\n"
+            + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The iterator works on the state at creation time or the current state.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a,b")
+    public void iteratorIsLive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const h = new Headers({'a': '1'});\n"
+            + "  const it = h.keys();\n"
+            + "  h.append('b', '2');\n"
+            + "  log(Array.from(it).join(','));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The string tags of Headers and its iterator.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object Headers]", "[object Headers Iterator]", "function", "true"})
+    public void toStringTag() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const h = new Headers();\n"
+            + "  log(Object.prototype.toString.call(h));\n"
+            + "  log(Object.prototype.toString.call(h.entries()));\n"
+            + "  log(typeof h[Symbol.iterator]);\n"
+            + "  log(h[Symbol.iterator] === h.entries);\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Headers is a constructor.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void constructorWithoutNew() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    Headers();\n"
+            + "    log('no exception');\n"
+            + "  } catch (e) { log(e.name); }\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Headers created by the constructor have no guard; the method override header is kept.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x-http-method-override,TRACE")
+    public void methodOverrideWithoutGuard() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const headers = new Headers({'X-HTTP-Method-Override': 'TRACE'});\n"
+            + "  log([...headers].join('|'));\n"
             + "</script></head><body></body></html>";
 
         loadPageVerifyTitle2(html);

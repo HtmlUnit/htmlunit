@@ -35,10 +35,10 @@ public class HtmxTest2x0x7 extends HtmxTest {
             FF = "passes:734failures:2",
             FF_ESR = "passes:734failures:2")
     @HtmlUnitNYI(
-            CHROME = "passes:724failures:17",
-            EDGE = "passes:724failures:17",
-            FF = "passes:723failures:15",
-            FF_ESR = "passes:723failures:15")
+            CHROME = "passes:727failures:14",
+            EDGE = "passes:727failures:14",
+            FF = "passes:726failures:12",
+            FF_ESR = "passes:726failures:12")
     public void htmx() throws Exception {
         htmx("htmx-2.0.7", false);
     }
@@ -51,10 +51,10 @@ public class HtmxTest2x0x7 extends HtmxTest {
             FF = "passes:637failures:99",
             FF_ESR = "passes:637failures:99")
     @HtmlUnitNYI(
-            CHROME = "passes:623failures:116",
-            EDGE = "passes:623failures:116",
-            FF = "passes:628failures:108",
-            FF_ESR = "passes:628failures:108")
+            CHROME = "passes:626failures:113",
+            EDGE = "passes:626failures:113",
+            FF = "passes:631failures:105",
+            FF_ESR = "passes:631failures:105")
     public void htmxMin() throws Exception {
         htmx("htmx-2.0.7", true);
     }

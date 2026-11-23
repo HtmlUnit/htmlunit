@@ -104,6 +104,7 @@ public class WebClientOptions implements Serializable {
     private boolean isFetchPolyfillEnabled_;
 
     private boolean htmlFragmentSelfClosingTagsAllowed_;
+    private boolean contentSecurityPolicyReportsEnabled_ = true;
 
     /**
      * Sets the SSLContext; if this is set it is used and some other settings are
@@ -1144,5 +1145,31 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isFileProtocolForXMLHttpRequestsAllowed() {
         return fileProtocolForXMLHttpRequestsAllowed_;
+    }
+
+    /**
+     * Enables/disables sending the Content-Security-Policy violation reports to the
+     * uris of the report-uri directive (default {@code true}).
+     * <p>
+     * If disabled, the policies are still enforced, the
+     * {@link org.htmlunit.html.csp.ContentSecurityPolicyViolationListener} is informed and the
+     * securitypolicyviolation event is fired; only the report requests are not sent.
+     * </p>
+     *
+     * @param enabled {@code true} to send the violation reports
+     */
+    public void setContentSecurityPolicyReportsEnabled(final boolean enabled) {
+        contentSecurityPolicyReportsEnabled_ = enabled;
+    }
+
+    /**
+     * Returns whether the Content-Security-Policy violation reports are sent to the
+     * uris of the report-uri directive (default {@code true}).
+     *
+     * @return {@code true} if the violation reports are sent
+     * @see #setContentSecurityPolicyReportsEnabled(boolean)
+     */
+    public boolean isContentSecurityPolicyReportsEnabled() {
+        return contentSecurityPolicyReportsEnabled_;
     }
 }

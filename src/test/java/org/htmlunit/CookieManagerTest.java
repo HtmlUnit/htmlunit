@@ -1313,16 +1313,11 @@ public class CookieManagerTest extends WebDriverTestCase {
 
     /**
      * A sandboxed srcdoc iframe (opaque origin) has no access to the cookies.
-     * <p>HtmlUnit does not support sandbox; the srcdoc document has the origin of the parent.</p>
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"read SecurityError", "write SecurityError"})
-    @HtmlUnitNYI(CHROME = {"cookie: parent=1", "write ok"},
-            EDGE = {"cookie: parent=1", "write ok"},
-            FF = {"cookie: parent=1", "write ok"},
-            FF_ESR = {"cookie: parent=1", "write ok"})
     public void srcdocIframeSandboxed() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -1344,6 +1339,35 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * A document created by script (no browsing context) is cookie-averse:
+     * reading returns an empty string, writing is ignored.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"html []", "parser []", "xml []", "parent=1"})
+    public void documentWithoutBrowsingContext() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function cookies(doc) { return doc.cookie.split('; ').sort().join('; '); }\n"
+            + "  function check(name, doc) {\n"
+            + "    try { log(name + ' [' + doc.cookie + ']'); } catch(e) { log(name + ' ' + e.name); }\n"
+            + "    try { doc.cookie = name + '=1; path=/'; } catch(e) { log(name + ' write ' + e.name); }\n"
+            + "  }\n"
+            + "  document.cookie = 'parent=1; path=/';\n"
+            + "  check('html', document.implementation.createHTMLDocument('test'));\n"
+            + "  check('parser', new DOMParser().parseFromString('<html></html>', 'text/html'));\n"
+            + "  check('xml', document.implementation.createDocument(null, 'root', null));\n"
+            + "  log(cookies(document));\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     /**

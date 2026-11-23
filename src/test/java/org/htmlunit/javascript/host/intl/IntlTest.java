@@ -217,4 +217,230 @@ public class IntlTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Builds a page that logs the result of the given expression or the name of the exception.
+     *
+     * @param expression the expression
+     * @return the html
+     */
+    static String localesArgumentHtml(final String expression) {
+        return DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try { log(" + expression + "); } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getCanonicalLocalesNoArgument() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales()"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getCanonicalLocalesUndefined() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(undefined)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void getCanonicalLocalesNull() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(null)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void getCanonicalLocalesEmptyString() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales('')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void getCanonicalLocalesMixedCase() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales('EN-us')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("zh-Hant-TW")
+    public void getCanonicalLocalesScript() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales('zh-hant-tw')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void getCanonicalLocalesInvalidTag() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales('en-US!@#')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void getCanonicalLocalesPrivateUse() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales('x-private')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void getCanonicalLocalesInvalidVariant() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales('no-NO-NY')"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getCanonicalLocalesNumber() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(42)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getCanonicalLocalesBoolean() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(true)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getCanonicalLocalesSymbol() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(Symbol('de'))"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getCanonicalLocalesEmptyObject() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales({})"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de,ja")
+    public void getCanonicalLocalesArrayLike() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales({ length: 2, 0: 'de', 1: 'ja' })"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void getCanonicalLocalesStringObject() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(new String('de'))"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("de,ja")
+    public void getCanonicalLocalesArrayDuplicates() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(['de', 'DE', 'ja'])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void getCanonicalLocalesArrayNumber() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(['de', 42])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void getCanonicalLocalesArrayNull() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(['de', null])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void getCanonicalLocalesArrayUndefined() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(['de', undefined])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void getCanonicalLocalesArrayInvalidTag() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(['de', 'en-US!@#'])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ja")
+    public void getCanonicalLocalesArrayLocale() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales([new Intl.Locale('ja')])"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ja")
+    public void getCanonicalLocalesLocale() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales(new Intl.Locale('ja'))"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getCanonicalLocalesEmptyArray() throws Exception {
+        loadPageVerifyTitle2(localesArgumentHtml("Intl.getCanonicalLocales([])"));
+    }
 }

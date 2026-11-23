@@ -41,6 +41,7 @@ public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "result", "false", "false", "false"},
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionEvent]", "result", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -66,7 +67,8 @@ public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"},
-            EDGE = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"})
+            EDGE = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"},
+            FF = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -91,6 +93,7 @@ public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "42", "false", "false", "false"},
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -115,6 +118,7 @@ public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "null", "false", "false", "false"},
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -161,6 +165,7 @@ public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "HtmlUnitEvent", "false", "false", "false"},
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -185,6 +190,7 @@ public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "result", "false", "false", "false"},
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionEvent]", "result", "false", "false", "false"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -211,6 +217,7 @@ public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "result", "false", "false", "false"},
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionEvent]", "result", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -255,10 +262,10 @@ public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "true",
-            EDGE = "true",
+    @Alerts(DEFAULT = "true",
             FF = "false",
             FF_ESR = "false")
+    @HtmlUnitNYI(FF = "true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

@@ -45,6 +45,7 @@ import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
  * @author Ronald Brill
  * @author Joerg Werner
  * @author Hartmut Arlt
+ * @author Vidya m
  */
 public final class UrlUtils {
 
@@ -413,13 +414,14 @@ public final class UrlUtils {
     }
 
     /**
-     * Creates and returns a new URL using only the protocol and authority from the given one.
+     * Creates and returns a new URL using only the protocol and authority (without the user info)
+     * from the given one.
      * @param u the URL on which to base the returned URL
      * @return a new URL using only the protocol and authority from the given one
      * @throws MalformedURLException if there is a problem creating the new URL
      */
     public static URL getUrlWithoutPathRefQuery(final URL u) throws MalformedURLException {
-        return createNewUrl(u.getProtocol(), u.getAuthority(), null, null, null);
+        return createNewUrl(u.getProtocol(), getAuthorityWithoutUserInfo(u), null, null, null);
     }
 
     /**
@@ -434,6 +436,30 @@ public final class UrlUtils {
     }
 
     /**
+     * Creates and returns a new URL identical to the specified URL, ignoring the user info.
+     * @param u the URL on which to base the returned URL
+     * @return a new URL identical to the specified URL, ignoring the user info
+     * @throws MalformedURLException if there is a problem creating the new URL
+     */
+    public static URL getUrlWithoutUserInfo(final URL u) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), getAuthorityWithoutUserInfo(u), u.getPath(), u.getRef(), u.getQuery());
+    }
+
+    /**
+     * Creates and returns a new URL identical to the specified URL, ignoring the ref and the user info;
+     * this is the url used as referrer (the Fetch standard 'strip url for use as a referrer'
+     * for http(s) urls).
+     * @param u the URL on which to base the returned URL
+     * @return a new URL identical to the specified URL, ignoring the ref and the user info
+     * @throws MalformedURLException if there is a problem creating the new URL
+     * @see <a href="https://fetch.spec.whatwg.org/#strip-url">Fetch Standard - strip url for use
+     *     as a referrer</a>
+     */
+    public static URL getUrlWithoutUserInfoAndRef(final URL u) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), getAuthorityWithoutUserInfo(u), u.getPath(), null, u.getQuery());
+    }
+
+    /**
      * Creates and returns a new URL identical to the specified URL, except using the specified protocol.
      * @param u the URL on which to base the returned URL
      * @param newProtocol the new protocol to use in the returned URL
@@ -442,6 +468,103 @@ public final class UrlUtils {
      */
     public static URL getUrlWithNewProtocol(final URL u, final String newProtocol) throws MalformedURLException {
         return createNewUrl(newProtocol, u.getAuthority(), u.getPath(), u.getRef(), u.getQuery());
+    }
+
+    /**
+     * Returns the URL with the scheme changed like the {@code protocol} setter of the URL Standard does it
+     * (e.g. for {@code URL.protocol}, {@code HTMLAnchorElement.protocol} and {@code location.protocol}).
+     * The scheme is not changed
+     * <ul>
+     * <li>from a special scheme to a not special one (and the other way round),</li>
+     * <li>to 'file' if the URL has credentials or a port,</li>
+     * <li>from 'file' if the URL has an empty host.</li>
+     * </ul>
+     * A port that is the default port of the new scheme is removed.
+     *
+     * @param url the URL
+     * @param protocol the new protocol (everything from the first ':' is ignored)
+     * @return the new URL, the given URL if the scheme is not changed or {@code null} if the
+     *         protocol is not a valid scheme
+     * @see <a href="https://url.spec.whatwg.org/#dom-url-protocol">URL Standard - protocol setter</a>
+     */
+    public static URL getUrlWithNewProtocolLikeSetter(final URL url, final String protocol) {
+        return getUrlWithNewProtocolLikeSetter(url, protocol, false);
+    }
+
+    /**
+     * Returns the URL with the scheme changed like the {@code protocol} setter of the URL Standard does it
+     * (see {@link #getUrlWithNewProtocolLikeSetter(URL, String)}).
+     *
+     * @param url the URL
+     * @param protocol the new protocol (everything from the first ':' is ignored)
+     * @param fileWithoutHost whether the host is removed if the scheme is changed to 'file' (like Firefox)
+     * @return the new URL, the given URL if the scheme is not changed or {@code null} if the
+     *         protocol is not a valid scheme
+     */
+    public static URL getUrlWithNewProtocolLikeSetter(final URL url, final String protocol,
+            final boolean fileWithoutHost) {
+        final String scheme = StringUtils.substringBefore(protocol, ":").trim();
+        if (!isValidScheme(scheme)) {
+            return null;
+        }
+
+        final String newScheme = scheme.toLowerCase(Locale.ROOT);
+        final String oldScheme = url.getProtocol();
+        if (newScheme.equals(oldScheme)
+                || !isSpecialScheme(newScheme) || !isSpecialScheme(oldScheme)) {
+            return url;
+        }
+        if ("file".equals(newScheme) && (url.getUserInfo() != null || url.getPort() != -1)) {
+            return url;
+        }
+        if ("file".equals(oldScheme) && StringUtils.isEmptyOrNull(url.getHost())) {
+            return url;
+        }
+
+        try {
+            if (fileWithoutHost && "file".equals(newScheme)) {
+                return createNewUrl(newScheme, "", url.getPath(), url.getRef(), url.getQuery());
+            }
+            return removeRedundantPort(getUrlWithNewProtocol(url, newScheme));
+        }
+        catch (final MalformedURLException e) {
+            return url;
+        }
+    }
+
+    /**
+     * Serializes the URL like the URL Standard does it; different from {@link URL#toExternalForm()}
+     * a file URL without host has an empty host ('file:///C:/a' and not 'file:/C:/a').
+     *
+     * @param url the URL
+     * @return the serialized URL
+     * @see <a href="https://url.spec.whatwg.org/#concept-url-serializer">URL Standard - URL serializer</a>
+     */
+    public static String serialize(final URL url) {
+        final String externalForm = url.toExternalForm();
+        if ("file".equals(url.getProtocol()) && !externalForm.startsWith("file://")) {
+            return "file://" + externalForm.substring("file:".length());
+        }
+        return externalForm;
+    }
+
+    /**
+     * Returns the file URL without the host if the host is 'localhost' (like the URL Standard parses
+     * file URLs); other URLs are returned unchanged.
+     *
+     * @param url the URL
+     * @return the URL without the host 'localhost'
+     */
+    public static URL removeLocalhostFromFileUrl(final URL url) {
+        if (!"file".equals(url.getProtocol()) || !"localhost".equalsIgnoreCase(url.getHost())) {
+            return url;
+        }
+        try {
+            return createNewUrl("file", "", url.getPath(), url.getRef(), url.getQuery());
+        }
+        catch (final MalformedURLException e) {
+            return url;
+        }
     }
 
     /**
@@ -516,13 +639,32 @@ public final class UrlUtils {
     }
 
     /**
-     * Creates and returns a new URL identical to the specified URL, ignoring path, protocol and query.
+     * Creates and returns a new URL identical to the specified URL, ignoring path, ref, query
+     * and user info.
      * @param u the URL on which to base the returned URL
-     * @return a new URL identical to the specified URL, ignoring path, protocol and query
+     * @return a new URL identical to the specified URL, ignoring path, ref, query and user info
      * @throws MalformedURLException if there is a problem creating the new URL
      */
     public static URL getUrlWithProtocolAndAuthority(final URL u) throws MalformedURLException {
-        return createNewUrl(u.getProtocol(), u.getAuthority(), null, null, null);
+        return createNewUrl(u.getProtocol(), getAuthorityWithoutUserInfo(u), null, null, null);
+    }
+
+    /**
+     * Returns the authority of the given URL without the user info; an origin never
+     * contains the credentials.
+     * @param u the URL
+     * @return the authority without the user info
+     */
+    private static String getAuthorityWithoutUserInfo(final URL u) {
+        final String authority = u.getAuthority();
+        if (authority == null) {
+            return null;
+        }
+        final int atPos = authority.lastIndexOf('@');
+        if (atPos == -1) {
+            return authority;
+        }
+        return authority.substring(atPos + 1);
     }
 
     /**
@@ -1553,5 +1695,19 @@ public final class UrlUtils {
             newPort = newUrl.getDefaultPort();
         }
         return originPort == newPort;
+    }
+
+    /**
+     * Determines whether a page loaded from the given URL is allowed to load the specified URL
+     * (e.g. into a frame or a window). Like in the browsers, only pages loaded from a file
+     * are allowed to access local resources (file URLs).
+     *
+     * @param pageUrl the URL of the page that wants to load the URL (must not be null)
+     * @param url the URL to load (must not be null)
+     * @return {@code false} if the URL is a file URL and the page was not loaded from a file
+     */
+    public static boolean isLocalResourceAccessAllowed(final URL pageUrl, final URL url) {
+        final String protocol = url.getProtocol();
+        return !"file".equals(protocol) || protocol.equals(pageUrl.getProtocol());
     }
 }

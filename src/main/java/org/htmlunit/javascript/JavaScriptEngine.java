@@ -85,6 +85,7 @@ import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
 import org.htmlunit.javascript.host.dom.DOMException;
+import org.htmlunit.javascript.host.fetch.Headers;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLImageElement;
 import org.htmlunit.javascript.host.html.HTMLOptionElement;
@@ -123,6 +124,8 @@ import org.htmlunit.util.StringUtils;
 public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
+
+    private static final String SANDBOX_ALLOW_SCRIPTS = "allow-scripts";
 
     /** ScriptRuntime.emptyArgs. */
     public static final Object[] EMPTY_ARGS = ScriptRuntime.emptyArgs;
@@ -263,6 +266,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         // TODO remove the cast
         URLSearchParams.NativeParamsIterator.init(cx, scope, "URLSearchParams Iterator");
         FormData.FormDataIterator.init(cx, scope, "FormData Iterator");
+        Headers.HeadersIterator.init(cx, scope);
 
         // strange but this is the reality for browsers
         // because there will be still some sites using this for browser detection the property is
@@ -501,6 +505,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Context context, final VarScope scope, final HtmlUnitScriptable scriptable) throws IOException {
 
         if (webClient.getOptions().isFetchPolyfillEnabled()) {
+            // the polyfill installs itself (fetch, Headers, Request and Response) only if there is no fetch()
+            scriptable.put("fetch", scriptable, UNDEFINED);
             Polyfill.getFetchPolyfill().apply(context, scope, scriptable);
         }
     }
@@ -822,6 +828,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             // shutdown was already called
             return null;
         }
+        if (page != null && !page.isSandboxAllowed(SANDBOX_ALLOW_SCRIPTS)) {
+            // a sandboxed document without 'allow-scripts' does not execute scripts
+            return null;
+        }
 
         final HtmlUnitContextAction action = new HtmlUnitContextAction(page) {
             @Override
@@ -886,6 +896,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final VarScope scope, final Scriptable thisObject, final Object[] args) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
+            return null;
+        }
+        if (page != null && !page.isSandboxAllowed(SANDBOX_ALLOW_SCRIPTS)) {
+            // a sandboxed document without 'allow-scripts' does not execute scripts (e.g. event handlers)
             return null;
         }
 
@@ -1309,6 +1323,18 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static Scriptable toErrorObject(final EcmaError error, final VarScope scope) {
         return ScriptRuntime.wrapException(error, scope, Context.getCurrentContext());
+    }
+
+    /**
+     * Converts the given value to an object (the abstract operation ToObject); primitives
+     * are wrapped, {@code null} and {@code undefined} result in a {@code TypeError}.
+     *
+     * @param scope the scope to create the wrapper object in
+     * @param value the value to convert
+     * @return the object
+     */
+    public static Scriptable toObject(final VarScope scope, final Object value) {
+        return ScriptRuntime.toObject(scope, value);
     }
 
     /**

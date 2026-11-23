@@ -311,6 +311,172 @@ public class ContentSecurityPolicyScriptTest extends WebDriverTestCase {
     }
 
     /**
+     * Inline script with matching sha384 hash.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("inline")
+    public void inline_hashSha384() throws Exception {
+        final String script = "log('inline');";
+        loadPageVerify("script-src 'self' '" + hash("SHA-384", "sha384", script) + "'", "",
+                "<script>" + script + "</script>\n");
+    }
+
+    /**
+     * Inline script with matching sha512 hash.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("inline")
+    public void inline_hashSha512() throws Exception {
+        final String script = "log('inline');";
+        loadPageVerify("script-src 'self' '" + hash("SHA-512", "sha512", script) + "'", "",
+                "<script>" + script + "</script>\n");
+    }
+
+    /**
+     * Inline script containing non ASCII characters; the hash is calculated from the UTF-8 bytes.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("inline \u00E4\u00F6\u00FC")
+    public void inline_hashNonAscii() throws Exception {
+        final String script = "log('inline \u00e4\u00f6\u00fc');";
+        loadPageVerify("script-src 'self' '" + sha256(script) + "'", "",
+                "<script>" + script + "</script>\n");
+    }
+
+    /**
+     * Inline script with a hash in upper case notation of the algorithm.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("inline")
+    public void inline_hashAlgorithmUpperCase() throws Exception {
+        final String script = "log('inline');";
+        loadPageVerify("script-src 'self' '" + sha256(script).replace("sha256-", "SHA256-") + "'", "",
+                "<script>" + script + "</script>\n");
+    }
+
+    /**
+     * A hash disables 'unsafe-inline'.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"inline",
+             "violation script-src-elem inline"})
+    public void inline_hashDisablesUnsafeInline() throws Exception {
+        final String script = "log('inline');";
+        loadPageVerify("script-src 'self' 'unsafe-inline' '" + sha256(script) + "'", "",
+                "<script>" + script + "</script>\n"
+                + "<script>log('other');</script>\n");
+    }
+
+    /**
+     * 'strict-dynamic': a script written by document.write() of a trusted script is parser inserted
+     * and therefore blocked.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("violation script-src-elem http://localhost:22222/written.js")
+    public void strictDynamic_documentWrite() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "loader.js"),
+                "document.write(\"<script src='written.js'><\\/script>\");\n",
+                MimeType.TEXT_JAVASCRIPT);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "written.js"), "log('written');",
+                MimeType.TEXT_JAVASCRIPT);
+        loadPageVerify("script-src 'nonce-harness' 'nonce-abc123' 'strict-dynamic'", "",
+                "<script src='loader.js' nonce='abc123'></script>\n");
+    }
+
+    /**
+     * 'strict-dynamic': 'self' is ignored for parser inserted scripts.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("violation script-src-elem http://localhost:22222/test.js")
+    public void strictDynamic_ignoresSelf() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "test.js"), "log('external');",
+                MimeType.TEXT_JAVASCRIPT);
+        loadPageVerify("script-src 'self' 'nonce-harness' 'strict-dynamic'", "",
+                "<script src='test.js'></script>\n");
+    }
+
+    /**
+     * 'strict-dynamic': 'unsafe-inline' is ignored.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("violation script-src-elem inline")
+    public void strictDynamic_ignoresUnsafeInline() throws Exception {
+        loadPageVerify("script-src 'nonce-harness' 'unsafe-inline' 'strict-dynamic'", "", INLINE_SCRIPT);
+    }
+
+    /**
+     * 'strict-dynamic': a script created by a trusted script is allowed even from an other origin.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("dynamic")
+    public void strictDynamic_crossOrigin() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "loader.js"),
+                "var s = document.createElement('script');\n"
+                + "s.src = '" + URL_CROSS_ORIGIN_BASE + "dynamic.js';\n"
+                + "document.head.appendChild(s);\n",
+                MimeType.TEXT_JAVASCRIPT);
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN_BASE, "dynamic.js"), "log('dynamic');",
+                MimeType.TEXT_JAVASCRIPT);
+        loadPageVerify("script-src 'nonce-harness' 'nonce-abc123' 'strict-dynamic'", "",
+                "<script src='loader.js' nonce='abc123'></script>\n");
+    }
+
+    /**
+     * 'strict-dynamic': an inline script created by a trusted script (text instead of src).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("dynamic inline")
+    public void strictDynamic_inlineCreated() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "loader.js"),
+                "var s = document.createElement('script');\n"
+                + "s.text = \"log('dynamic inline');\";\n"
+                + "document.head.appendChild(s);\n",
+                MimeType.TEXT_JAVASCRIPT);
+        loadPageVerify("script-src 'nonce-harness' 'nonce-abc123' 'strict-dynamic'", "",
+                "<script src='loader.js' nonce='abc123'></script>\n");
+    }
+
+    /**
+     * 'strict-dynamic' in default-src (without script-src); img-src allows the favicon
+     * requested by Firefox.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("dynamic")
+    public void strictDynamic_defaultSrc() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "loader.js"),
+                "var s = document.createElement('script');\n"
+                + "s.src = 'dynamic.js';\n"
+                + "document.head.appendChild(s);\n",
+                MimeType.TEXT_JAVASCRIPT);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "dynamic.js"), "log('dynamic');",
+                MimeType.TEXT_JAVASCRIPT);
+        loadPageVerify("default-src 'nonce-harness' 'nonce-abc123' 'strict-dynamic'; img-src 'self'", "",
+                "<script src='loader.js' nonce='abc123'></script>\n");
+    }
+
+    /**
      * Event handler attributes are blocked by script-src 'self'.
      *
      * @throws Exception if the test fails
@@ -520,6 +686,87 @@ public class ContentSecurityPolicyScriptTest extends WebDriverTestCase {
     }
 
     /**
+     * The sandbox directive delivered by the header blocks all scripts.
+     * The window name can't be used for the check because no script is running
+     * (the browsers keep the window name of the previous test); the content of the
+     * div is checked instead.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("initial")
+    public void headerSandbox() throws Exception {
+        final WebDriver driver = loadPage("sandbox", "",
+                "<div id='d'>initial</div>\n"
+                + "<script>document.getElementById('d').textContent = 'changed';</script>\n");
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("d")).getText());
+    }
+
+    /**
+     * The sandbox directive delivered by the header with allow-scripts.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("inline")
+    public void headerSandboxAllowScripts() throws Exception {
+        loadPageVerify("sandbox allow-scripts", "", INLINE_SCRIPT);
+    }
+
+    /**
+     * The sandbox directive delivered by the header with allow-scripts; the document has an
+     * opaque origin but 'self' still matches the url of the document.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("external ")
+    public void headerSandboxAllowScriptsSelf() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "test.js"), "log('external ' + document.domain);",
+                MimeType.TEXT_JAVASCRIPT);
+        loadPageVerify("sandbox allow-scripts; script-src 'self'", "", "<script src='test.js'></script>\n");
+    }
+
+    /**
+     * The sandbox directive is ignored in a report only policy.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("inline")
+    public void headerSandboxReportOnly() throws Exception {
+        loadPageVerify(HEADER_REPORT_ONLY, "sandbox", "", INLINE_SCRIPT);
+    }
+
+    /**
+     * The sandbox directive (header) without allow-scripts; event handlers are not executed
+     * and no violation is reported.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("initial")
+    public void headerSandboxEventHandler() throws Exception {
+        final WebDriver driver = loadPage("sandbox", "",
+                "<div id='d'>initial</div>\n"
+                + "<button id='btn' onclick=\"document.getElementById('d').textContent = 'clicked';\">"
+                + "click</button>\n");
+        driver.findElement(By.id("btn")).click();
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("d")).getText());
+    }
+
+    /**
+     * The sandbox directive (header) with allow-scripts and a script-src directive in the same policy.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("violation script-src-elem inline")
+    public void headerSandboxAllowScriptsInlineBlocked() throws Exception {
+        loadPageVerify("sandbox allow-scripts; script-src 'self'", "", INLINE_SCRIPT);
+    }
+
+    /**
      * The sandbox directive is ignored when delivered via a meta element.
      *
      * @throws Exception if the test fails
@@ -666,7 +913,15 @@ public class ContentSecurityPolicyScriptTest extends WebDriverTestCase {
      * Returns the CSP hash source (without quotes) of the given script.
      */
     private static String sha256(final String script) throws Exception {
-        final byte[] digest = MessageDigest.getInstance("SHA-256").digest(script.getBytes(UTF_8));
-        return "sha256-" + Base64.getEncoder().encodeToString(digest);
+        return hash("SHA-256", "sha256", script);
+    }
+
+    /**
+     * Returns the CSP hash source (without quotes) of the given script using the given algorithm.
+     */
+    private static String hash(final String algorithm, final String prefix, final String script)
+            throws Exception {
+        final byte[] digest = MessageDigest.getInstance(algorithm).digest(script.getBytes(UTF_8));
+        return prefix + "-" + Base64.getEncoder().encodeToString(digest);
     }
 }

@@ -16,6 +16,8 @@ package org.htmlunit.attachment;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -80,7 +82,13 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
 
             Collection<File> files = FileUtils.listFiles(downloadFolder, null, false);
             assertEquals(1, files.size());
-            assertEquals("download", files.iterator().next().getName());
+            final File downloaded = files.iterator().next();
+            assertEquals("download", downloaded.getName());
+            // the default download folder is the shared temp folder, the file is readable for the owner only
+            if (downloaded.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
+                assertEquals("rw-------",
+                        PosixFilePermissions.toString(Files.getPosixFilePermissions(downloaded.toPath())));
+            }
 
             anchor.click();
             files = FileUtils.listFiles(downloadFolder, null, false);

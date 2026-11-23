@@ -18,6 +18,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.javascript.preprocessor.HtmxTwoZeroSevenScriptPreProcessor;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -35,29 +36,30 @@ public class HtmxTest2x0x5 extends HtmxTest {
             FF = "passes:720failures:2",
             FF_ESR = "passes:720failures:2")
     @HtmlUnitNYI(
-            CHROME = "passes:697failures:18",
-            EDGE = "passes:697failures:18",
-            FF = "passes:710failures:14",
-            FF_ESR = "passes:710failures:14")
+            CHROME = "passes:700failures:15",
+            EDGE = "passes:700failures:15",
+            FF = "passes:713failures:11",
+            FF_ESR = "passes:713failures:11")
     public void htmx() throws Exception {
         htmx("htmx-2.0.5", false);
     }
 
-//    /**
-//     * @throws Exception if an error occurs
-//     */
-//    @Test
-//    @Alerts(DEFAULT = "passes:552failures:68",
-//            FF = "passes:552failures:67",
-//            FF_ESR = "passes:552failures:67")
-//    @HtmlUnitNYI(
-//            CHROME = "passes:547failures:72",
-//            EDGE = "passes:547failures:72",
-//            FF = "passes:547failures:72",
-//            FF_ESR = "passes:547failures:72")
-//    public void htmxMin() throws Exception {
-//        htmx("htmx-2.0.5", true);
-//    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "passes:552failures:68",
+            FF = "passes:552failures:67",
+            FF_ESR = "passes:552failures:67")
+    @HtmlUnitNYI(
+            CHROME = "passes:547failures:72",
+            EDGE = "passes:547failures:72",
+            FF = "passes:547failures:72",
+            FF_ESR = "passes:547failures:72")
+    @Disabled
+    public void htmxMin() throws Exception {
+        htmx("htmx-2.0.5", true);
+    }
 
     @Override
     protected void setupWebClient(final WebClient webClient) {

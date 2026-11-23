@@ -15,6 +15,8 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
+import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OPEN_LOCAL_FILE_THROWS;
+import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OPEN_SANDBOXED_THROWS;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -62,6 +64,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeConsole.Level;
 import org.htmlunit.corejs.javascript.NativeObject;
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Slot;
@@ -110,6 +113,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.event.UIEvent;
+import org.htmlunit.javascript.host.fetch.Fetch;
 import org.htmlunit.javascript.host.html.DocumentProxy;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLDocument;
@@ -196,6 +200,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private DocumentProxy documentProxy_;
     private Navigator navigator_;
     private Object clientInformation_;
+    // the value set by script (origin is replaceable)
+    private Object originShadow_;
     private WebWindow webWindow_;
     private WindowProxy windowProxy_;
     private Screen screen_;
@@ -291,6 +297,19 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @Override
     public String btoa(final String stringToEncode) {
         return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode, this);
+    }
+
+    /**
+     * Starts the process of fetching a resource from the network.
+     *
+     * @param input the resource to fetch - a url or a {@code Request}
+     * @param init the options (optional)
+     * @return a promise for the {@code Response}
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch">MDN Documentation</a>
+     */
+    @JsxFunction
+    public NativePromise fetch(final Object input, final Object init) {
+        return Fetch.fetch(this, input, init);
     }
 
     /**
@@ -415,6 +434,17 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         if (!JavaScriptEngine.isUndefined(features)) {
             featuresString = JavaScriptEngine.toString(features);
         }
+        // a sandboxed document without 'allow-popups' can't open windows
+        if (getWebWindow().getEnclosedPage() instanceof HtmlPage openerPage
+                && !openerPage.isSandboxAllowed("allow-popups")) {
+            if (getBrowserVersion().hasFeature(JS_WINDOW_OPEN_SANDBOXED_THROWS)) {
+                throw JavaScriptEngine.asJavaScriptException(this,
+                        "The document is sandboxed and lacks the 'allow-popups' flag.",
+                        DOMException.INVALID_ACCESS_ERR);
+            }
+            return null;
+        }
+
         final WebClient webClient = getWebWindow().getWebClient();
 
         if (webClient.getOptions().isPopupBlockerEnabled()) {
@@ -447,8 +477,35 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
         }
         final URL newUrl = makeUrlForOpenWindow(urlString);
+
+        // accessing to local resource is forbidden for security reason;
+        // like in the browsers no window is opened and an existing window with this name is not navigated
+        // (but returned); Firefox throws
+        final Page openerPage = getWebWindow().getEnclosedPage();
+        if (newUrl != null && openerPage != null && !isLocalResourceAccessAllowed(openerPage, newUrl)) {
+            webClient.getIncorrectnessListener().notify("Not allowed to load local resource: " + newUrl, this);
+            if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OPEN_LOCAL_FILE_THROWS)) {
+                throw JavaScriptEngine.constructError("Error", "Access to '" + newUrl + "' from script denied");
+            }
+            if (StringUtils.isEmptyOrNull(windowName)) {
+                return null;
+            }
+            final WebWindow existingWindow = webClient.findTargetWindow(webWindow_, windowName);
+            if (existingWindow == null) {
+                return null;
+            }
+            return getProxy(existingWindow);
+        }
+
         final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow_);
         return getProxy(newWebWindow);
+    }
+
+    private static boolean isLocalResourceAccessAllowed(final Page page, final URL url) {
+        if (page instanceof HtmlPage htmlPage) {
+            return htmlPage.isLocalResourceAccessAllowed(url);
+        }
+        return UrlUtils.isLocalResourceAccessAllowed(page.getUrl(), url);
     }
 
     private URL makeUrlForOpenWindow(final String urlString) {
@@ -616,6 +673,70 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
+     * Returns the {@code origin} property: the serialized origin of the document of this window.
+     * The origin of an about:blank or about:srcdoc document is the origin of its creator; the origin
+     * of a sandboxed document without 'allow-same-origin' (opaque origin) is 'null'.
+     *
+     * @return the origin
+     * @see <a href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-origin-dev">HTML Living Standard
+     *     - window.origin</a>
+     */
+    @JsxGetter
+    public Object getOrigin() {
+        if (originShadow_ != null) {
+            return originShadow_;
+        }
+
+        final Page page = getWebWindow().getEnclosedPage();
+        if (page == null) {
+            return "null";
+        }
+        final URL url;
+        if (page instanceof HtmlPage htmlPage) {
+            if (htmlPage.isOpaqueOrigin()) {
+                return "null";
+            }
+            url = htmlPage.getOriginUrl();
+        }
+        else {
+            url = page.getUrl();
+        }
+        return serializeOrigin(url);
+    }
+
+    /**
+     * Sets the {@code origin} property; like the browsers, this replaces the value
+     * (see https://webidl.spec.whatwg.org/#Replaceable).
+     *
+     * @param origin the new value
+     */
+    @JsxSetter
+    public void setOrigin(final Object origin) {
+        originShadow_ = origin;
+    }
+
+    /**
+     * Serializes the origin of the given url; only http(s) urls have a tuple origin,
+     * all other urls (about:, data:, file:...) have an opaque origin ('null').
+     *
+     * @param url the url
+     * @return the serialized origin
+     */
+    private static String serializeOrigin(final URL url) {
+        final String protocol = url.getProtocol();
+        if (!"http".equals(protocol) && !"https".equals(protocol)) {
+            return "null";
+        }
+
+        final StringBuilder origin = new StringBuilder().append(protocol).append("://").append(url.getHost());
+        final int port = url.getPort();
+        if (port != -1 && port != url.getDefaultPort()) {
+            origin.append(':').append(port);
+        }
+        return origin.toString();
+    }
+
+    /**
      * Sets the {@code clientInformation} property.
      *
      * @param clientInformation the new value
@@ -640,6 +761,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Storage getLocalStorage() {
+        checkStorageAccess();
         return getStorage(Type.LOCAL_STORAGE);
     }
 
@@ -649,7 +771,20 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Storage getSessionStorage() {
+        checkStorageAccess();
         return getStorage(Type.SESSION_STORAGE);
+    }
+
+    /**
+     * Like the browsers, a document with an opaque origin (a sandboxed document without
+     * 'allow-same-origin') has no access to the storage.
+     */
+    private void checkStorageAccess() {
+        if (getWebWindow().getEnclosedPage() instanceof HtmlPage htmlPage && htmlPage.isOpaqueOrigin()) {
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "The document is sandboxed and lacks the 'allow-same-origin' flag.",
+                    DOMException.SECURITY_ERR);
+        }
     }
 
     /**
@@ -2060,12 +2195,18 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         }
 
         final String origin;
-        try {
-            final URL originUrl = UrlUtils.getUrlWithoutPathRefQuery(senderURL);
-            origin = UrlUtils.removeRedundantPort(originUrl).toExternalForm();
+        if (page instanceof HtmlPage senderPage && senderPage.isOpaqueOrigin()) {
+            // the origin of a sandboxed document without 'allow-same-origin'
+            origin = "null";
         }
-        catch (final MalformedURLException e) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+        else {
+            try {
+                final URL originUrl = UrlUtils.getUrlWithoutPathRefQuery(senderURL);
+                origin = UrlUtils.removeRedundantPort(originUrl).toExternalForm();
+            }
+            catch (final MalformedURLException e) {
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+            }
         }
 
         final MessageEvent event = new MessageEvent();

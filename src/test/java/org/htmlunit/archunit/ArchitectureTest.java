@@ -281,6 +281,7 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getParent()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getSelf()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getTop()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.abort.AbortSignal.getReason()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.AbstractRange.getEndContainer()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.AbstractRange.getStartContainer()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.CharacterData.getData()")
@@ -329,6 +330,8 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.intl.Locale.getRegion()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.intl.Locale.getScript()")
 
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getOrigin()")
+
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope.getSelf()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XMLHttpRequest.getResponse()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XMLHttpRequest.getResponseXML()")
@@ -373,6 +376,7 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.intl.V8BreakIterator.resolvedOptions()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope.setInterval(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.VarScope, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope.setTimeout(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.VarScope, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.FormData.get(java.lang.String)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XSLTProcessor.getParameter(java.lang.String, java.lang.String)")
 
             .should().haveRawReturnType(String.class)
@@ -632,6 +636,7 @@ public class ArchitectureTest {
     public static final ArchRule corejsScriptRuntimeRule = noClasses()
         .that()
             .doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.URLSearchParams")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.fetch.Headers")
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.HtmlUnitContextFactory")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine")

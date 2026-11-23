@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_WEBSOCKET_CSP_BLOCKED_NO_CLOSE_EVENT;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -182,18 +184,20 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
         if (!isConnectionAllowed(page, url)) {
             // like a failed connection (error event, close event 1006), but after the running script
-            // and after the securitypolicyviolation event
+            // and after the securitypolicyviolation event; Chrome and Edge fire no close event
+            final boolean fireClose = !page.getWebClient().getBrowserVersion()
+                    .hasFeature(JS_WEBSOCKET_CSP_BLOCKED_NO_CLOSE_EVENT);
             final AbstractJavaScriptEngine<?> engine = page.getWebClient().getJavaScriptEngine();
             if (engine != null && engine.isScriptRunning()) {
                 engine.addPostponedAction(new PostponedAction(page, "WebSocket blocked by CSP") {
                     @Override
                     public void execute() {
-                        connectionEnded(CLOSE_ABNORMAL, "", true);
+                        connectionEnded(CLOSE_ABNORMAL, "", true, fireClose);
                     }
                 });
             }
             else {
-                queueTask(() -> connectionEnded(CLOSE_ABNORMAL, "", true));
+                queueTask(() -> connectionEnded(CLOSE_ABNORMAL, "", true, fireClose));
             }
             return;
         }
@@ -789,6 +793,19 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * @param reportedAsFailure whether the adapter reported an error
      */
     private void connectionEnded(final int statusCode, final String reason, final boolean reportedAsFailure) {
+        connectionEnded(statusCode, reason, reportedAsFailure, true);
+    }
+
+    /**
+     * Ends the connection like {@link #connectionEnded(int, String, boolean)}, optionally without the close event.
+     *
+     * @param statusCode the status code reported by the adapter
+     * @param reason the reason reported by the adapter
+     * @param reportedAsFailure whether the adapter reported an error
+     * @param fireClose whether to fire the close event
+     */
+    private void connectionEnded(final int statusCode, final String reason, final boolean reportedAsFailure,
+            final boolean fireClose) {
         final int previous = switchToClosed();
         if (previous == CLOSED) {
             return;
@@ -816,6 +833,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 errorEvent.setSrcElement(WebSocket.this);
                 errorEvent.setTarget(WebSocket.this);
                 executeEventLocally(errorEvent);
+            }
+
+            if (!fireClose) {
+                return null;
             }
 
             final CloseEvent closeEvent = new CloseEvent();

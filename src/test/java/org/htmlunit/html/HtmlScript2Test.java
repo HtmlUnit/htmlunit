@@ -1664,4 +1664,37 @@ public class HtmlScript2Test extends WebDriverTestCase {
         uniqueId_++;
         return Integer.toString(uniqueId_);
     }
+
+    /**
+     * The Origin header of a crossorigin script request is the origin of the document,
+     * not the origin of the script.
+     * The alert is the Origin header received by the server ('null' if not sent).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§")
+    public void crossoriginScriptFromOtherOriginOriginHeader() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        // 127.0.0.1 is another origin than localhost, but the same server
+        final URL scriptUrl = new URL("http://127.0.0.1:" + PORT + "/script.js");
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Access-Control-Allow-Origin", "*"));
+        getMockWebConnection().setResponse(scriptUrl, "document.title = 'loaded';",
+                200, "OK", MimeType.TEXT_JAVASCRIPT, headers);
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script crossorigin='anonymous' src='" + scriptUrl + "'></script>\n"
+                + "</head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, "loaded");
+
+        // the script is the last request (favicon.ico is not recorded)
+        assertEquals(scriptUrl.toExternalForm(), getMockWebConnection().getLastWebRequest().getUrl().toExternalForm());
+        assertEquals(getExpectedAlerts()[0],
+                String.valueOf(getMockWebConnection().getLastAdditionalHeaders().get(HttpHeader.ORIGIN)));
+    }
 }

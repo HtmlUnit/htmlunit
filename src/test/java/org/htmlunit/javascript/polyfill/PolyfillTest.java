@@ -31,12 +31,13 @@ public class PolyfillTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Content fetched")
+    @Alerts({"true", "Content fetched"})
     public void fetch() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
+            + "  alert(fetch.polyfill);\n"
             + "  if (typeof fetch == 'function') {\n"
             + "    fetch('fetch.txt')\n"
             + "      .then(response => response.text())\n"
@@ -58,13 +59,14 @@ public class PolyfillTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts({"true", "undefined"})
     public void fetchPolyfillDisabled() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(typeof fetch == 'function');\n"
+            + "    alert(fetch.polyfill);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

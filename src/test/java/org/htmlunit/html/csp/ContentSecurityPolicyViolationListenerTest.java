@@ -21,6 +21,7 @@ import java.util.List;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -253,6 +254,22 @@ public class ContentSecurityPolicyViolationListenerTest extends SimpleWebTestCas
     }
 
     /**
+     * The sandbox directive (header) disables scripts; this is no violation.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sandbox() throws Exception {
+        final CollectingContentSecurityPolicyViolationListener listener = setListener();
+        final HtmlPage page = loadPageWithPolicy(HttpHeader.CONTENT_SECURIRY_POLICY, "sandbox",
+                "<script>document.title = 'executed';</script>\n"
+                + "<script src='test.js'></script>\n");
+
+        assertEquals("", page.getTitleText());
+        assertTrue(listener.getViolations().isEmpty());
+    }
+
+    /**
      * Without listener violations are only logged.
      *
      * @throws Exception if the test fails
@@ -278,6 +295,27 @@ public class ContentSecurityPolicyViolationListenerTest extends SimpleWebTestCas
 
         listener.clear();
         assertTrue(listener.getViolations().isEmpty());
+    }
+
+    /**
+     * The collected violations have to survive the serialization of the web client.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void serialization() throws Exception {
+        final CollectingContentSecurityPolicyViolationListener listener = setListener();
+        loadPageWithPolicy(HttpHeader.CONTENT_SECURIRY_POLICY, "script-src 'self'",
+                "<script>document.title = 'executed';</script>\n");
+        assertEquals(1, listener.getViolations().size());
+
+        try (WebClient copy = clone(getWebClient())) {
+            final CollectingContentSecurityPolicyViolationListener copyListener =
+                    (CollectingContentSecurityPolicyViolationListener)
+                        copy.getContentSecurityPolicyViolationListener();
+            assertNotSame(listener, copyListener);
+            assertEquals(1, copyListener.getViolations().size());
+            assertEquals("script-src-elem", copyListener.getViolations().get(0).getEffectiveDirective());
+        }
     }
 
     private CollectingContentSecurityPolicyViolationListener setListener() {

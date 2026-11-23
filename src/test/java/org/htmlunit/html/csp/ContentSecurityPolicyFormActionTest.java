@@ -340,8 +340,6 @@ public class ContentSecurityPolicyFormActionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "violation form-action §§URL§§/redirect.html enforce",
             FF = "submitted /action.html",
             FF_ESR = "submitted /action.html")
-    @HtmlUnitNYI(FF = "violation form-action §§URL§§/redirect.html enforce",
-            FF_ESR = "violation form-action §§URL§§/redirect.html enforce")
     public void redirect() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT);
         setTargetResponse(URL_CROSS_ORIGIN_BASE, "action.html");
@@ -352,6 +350,50 @@ public class ContentSecurityPolicyFormActionTest extends WebDriverTestCase {
                 MimeType.TEXT_HTML, headers);
 
         loadPageVerify("form-action 'self'", form("redirect.html", "post"), SUBMIT_JS);
+    }
+
+    /**
+     * Redirect to a url not matching the path of the form-action source; the path is ignored
+     * for redirect targets.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("submitted /other/action.html")
+    public void redirectPathIgnored() throws Exception {
+        setTargetResponse(URL_FIRST, "other/action.html");
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", URL_FIRST + "other/action.html"));
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "allowed/redirect.html"), "", 302, "Found",
+                MimeType.TEXT_HTML, headers);
+
+        loadPageVerify("form-action " + URL_FIRST + "allowed/", form("allowed/redirect.html", "post"), SUBMIT_JS);
+    }
+
+    /**
+     * The sandbox directive (header) without allow-forms blocks the submission;
+     * this is no violation.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("done")
+    public void sandboxWithoutAllowForms() throws Exception {
+        setTargetResponse(URL_FIRST, "action.html");
+        loadPageVerify("sandbox allow-scripts", form("action.html", "post"), SUBMIT_JS + "log('done');\n");
+    }
+
+    /**
+     * The sandbox directive (header) with allow-forms.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("submitted /action.html")
+    public void sandboxAllowForms() throws Exception {
+        setTargetResponse(URL_FIRST, "action.html");
+        loadPageVerify("sandbox allow-scripts allow-forms", form("action.html", "post"), SUBMIT_JS);
     }
 
     private static String form(final String action, final String method) {

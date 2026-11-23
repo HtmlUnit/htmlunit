@@ -264,8 +264,6 @@ public class ContentSecurityPolicyConnectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"error 4 0", "violation connect-src §§URL§§/redirect.txt"},
             FF = {"violation connect-src §§URL§§/redirect.txt", "error 4 0"},
             FF_ESR = {"violation connect-src §§URL§§/redirect.txt", "error 4 0"})
-    @HtmlUnitNYI(CHROME = {"violation connect-src §§URL§§/redirect.txt", "error 4 0"},
-            EDGE = {"violation connect-src §§URL§§/redirect.txt", "error 4 0"})
     public void redirectToBlocked() throws Exception {
         expandExpectedAlertsVariables("http://localhost:" + PORT);
         final List<NameValuePair> headers = new ArrayList<>();
@@ -274,6 +272,28 @@ public class ContentSecurityPolicyConnectTest extends WebDriverTestCase {
                 MimeType.TEXT_PLAIN, headers);
         setCrossOriginResponse("data.txt");
         loadPageVerify("connect-src 'self'", xhrAsync("redirect.txt"));
+    }
+
+    /**
+     * A redirect to a blocked origin (fetch).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"error TypeError", "violation connect-src §§URL§§/redirect.txt"},
+            FF = {"violation connect-src §§URL§§/redirect.txt", "error TypeError"},
+            FF_ESR = {"violation connect-src §§URL§§/redirect.txt", "error TypeError"})
+    public void redirectToBlocked_fetch() throws Exception {
+        expandExpectedAlertsVariables("http://localhost:" + PORT);
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", URL_CROSS_ORIGIN_BASE + "data.txt"));
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "redirect.txt"), "", 302, "Found",
+                MimeType.TEXT_PLAIN, headers);
+        setCrossOriginResponse("data.txt");
+        loadPageVerify("connect-src 'self'",
+                "fetch('redirect.txt')\n"
+                + "  .then(function(r) { log('load ' + r.status); })\n"
+                + "  .catch(function(e) { log('error ' + e.name); });\n");
     }
 
     /**
@@ -290,6 +310,38 @@ public class ContentSecurityPolicyConnectTest extends WebDriverTestCase {
                 MimeType.TEXT_PLAIN, headers);
         setCrossOriginResponse("data.txt");
         loadPageVerify("connect-src 'self' http://localhost:" + PORT2, xhrAsync("redirect.txt"));
+    }
+
+    /**
+     * A redirect; the path of the source expression is ignored for the redirect target.
+     * The redirect response (cross origin) needs the Access-Control-Allow-Origin header also.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("load 200 cross")
+    public void redirectPathIgnored() throws Exception {
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", URL_CROSS_ORIGIN_BASE + "other/data.txt"));
+        headers.add(new NameValuePair(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, "*"));
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN_BASE, "allowed/redirect.txt"), "", 302,
+                "Found", MimeType.TEXT_PLAIN, headers);
+        setCrossOriginResponse("other/data.txt");
+        loadPageVerify("connect-src 'self' http://localhost:" + PORT2 + "/allowed/",
+                xhrAsync(URL_CROSS_ORIGIN_BASE + "allowed/redirect.txt"));
+    }
+
+    /**
+     * No redirect; the path of the source expression does not match.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"violation connect-src http://localhost:22223/other/data.txt", "error 4 0"})
+    public void pathNotMatching() throws Exception {
+        setCrossOriginResponse("other/data.txt");
+        loadPageVerify("connect-src 'self' http://localhost:" + PORT2 + "/allowed/",
+                xhrAsync(URL_CROSS_ORIGIN_BASE + "other/data.txt"));
     }
 
     /**
@@ -370,7 +422,7 @@ public class ContentSecurityPolicyConnectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
+    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3"},
             FF = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"},
             FF_ESR = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"})
     @HtmlUnitNYI(FF = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
@@ -408,7 +460,7 @@ public class ContentSecurityPolicyConnectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},
+    @Alerts(DEFAULT = {"violation connect-src §§URL§§/ws", "error 3"},
             FF = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"},
             FF_ESR = {"NS_ERROR_CONTENT_BLOCKED/Exception", "violation connect-src §§URL§§/ws"})
     @HtmlUnitNYI(FF = {"violation connect-src §§URL§§/ws", "error 3", "close 1006 false"},

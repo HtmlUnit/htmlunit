@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import java.util.Set;
+
 import org.htmlunit.Page;
 import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebResponse;
@@ -42,6 +44,8 @@ public class FrameWindow extends WebWindowImpl {
 
     private final BaseFrameElement frame_;
     private PageDenied pageDenied_;
+    // the sandbox tokens for the documents loaded into this window; null if not sandboxed
+    private Set<String> sandboxTokens_;
 
     /**
      * Creates an instance for a given frame.
@@ -53,6 +57,26 @@ public class FrameWindow extends WebWindowImpl {
 
         final WebWindowImpl parent = (WebWindowImpl) frame_.getPage().getEnclosingWindow();
         parent.addChildWindow(this);
+    }
+
+    /**
+     * Returns the sandbox tokens (the allowed features, e.g. 'allow-scripts') used for the
+     * documents loaded into this window.
+     *
+     * @return the tokens or {@code null} if the documents are not sandboxed
+     */
+    public Set<String> getSandboxTokens() {
+        return sandboxTokens_;
+    }
+
+    /**
+     * Sets the sandbox tokens used for the documents loaded into this window; like the browsers,
+     * the tokens are determined when the frame starts loading.
+     *
+     * @param sandboxTokens the tokens or {@code null} if the documents are not sandboxed
+     */
+    void setSandboxTokens(final Set<String> sandboxTokens) {
+        sandboxTokens_ = sandboxTokens;
     }
 
     /**

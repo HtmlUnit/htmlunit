@@ -99,18 +99,34 @@ public class EventTarget extends HtmlUnitScriptable {
      */
     public void executeEventLocally(final Event event) {
         final EventListenersContainer eventListenersContainer = getEventListenersContainer();
-        final Window window = getWindow();
+        final Window window = getWindowIfAvailable();
         final Object[] args = {event};
 
-        final Event previousEvent = window.getCurrentEvent();
-        window.setCurrentEvent(event);
+        final Event previousEvent = window == null ? null : window.getCurrentEvent();
+        if (window != null) {
+            window.setCurrentEvent(event);
+        }
         try {
             event.setEventPhase(Event.AT_TARGET);
             eventListenersContainer.executeAtTargetListeners(event, args);
         }
         finally {
-            window.setCurrentEvent(previousEvent); // reset event
+            if (window != null) {
+                window.setCurrentEvent(previousEvent); // reset event
+            }
         }
+    }
+
+    /**
+     * Returns the window of this object; {@code null} for objects of a worker.
+     *
+     * @return the window or {@code null}
+     */
+    private Window getWindowIfAvailable() {
+        if (getWindowOrWorkerGlobalScope(this) instanceof Window window) {
+            return window;
+        }
+        return null;
     }
 
     /**
@@ -120,11 +136,14 @@ public class EventTarget extends HtmlUnitScriptable {
      * @return the script result
      */
     public ScriptResult fireEvent(final Event event) {
-        final Window window = getWindow();
+        // null inside of workers
+        final Window window = getWindowIfAvailable();
 
         event.startFire();
-        final Event previousEvent = window.getCurrentEvent();
-        window.setCurrentEvent(event);
+        final Event previousEvent = window == null ? null : window.getCurrentEvent();
+        if (window != null) {
+            window.setCurrentEvent(event);
+        }
 
         try {
             // These can be null if we aren't tied to a DOM node
@@ -155,7 +174,7 @@ public class EventTarget extends HtmlUnitScriptable {
             // (see Note in https://www.w3.org/TR/DOM-Level-3-Events/#event-type-load)
             if (!Event.TYPE_LOAD.equals(event.getType())) {
                 // Add Window if the propagation path reached Document
-                if (propagationPath.get(propagationPath.size() - 1) instanceof Document) {
+                if (window != null && propagationPath.get(propagationPath.size() - 1) instanceof Document) {
                     propagationPath.add(window);
                 }
             }
@@ -234,7 +253,9 @@ public class EventTarget extends HtmlUnitScriptable {
         }
         finally {
             event.endFire();
-            window.setCurrentEvent(previousEvent); // reset event
+            if (window != null) {
+                window.setCurrentEvent(previousEvent); // reset event
+            }
         }
 
         return new ScriptResult(null);

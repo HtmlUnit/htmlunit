@@ -35,7 +35,7 @@ public class Sarissa0993Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
+    @Alerts(CHROME = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "FFFFFFFF"},
             EDGE = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
             FF = {"+++++++++++F++++++", "+", "+", "+", "F++", "++", "++++F+++"},
             FF_ESR = {"+++++++++++F++++++", "+", "+", "+", "F++", "++", "++++F+++"})

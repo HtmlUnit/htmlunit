@@ -17,6 +17,7 @@ package org.htmlunit;
 import static org.htmlunit.WebTestCase.URL_FIRST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -24,6 +25,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.http.auth.BasicUserPrincipal;
 import org.apache.http.auth.Credentials;
+import org.htmlunit.util.UrlUtils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,6 +38,7 @@ import org.junit.jupiter.api.Test;
  * @author Joerg Werner
  * @author Michael Lueck
  * @author Kristof Neirynck
+ * @author Vidya m
  */
 public class WebRequestTest {
 
@@ -345,5 +348,59 @@ public class WebRequestTest {
         assertEquals(URL_FIRST, deserialized.getUrl());
         assertEquals(StandardCharsets.UTF_8, deserialized.getCharset());
         assertEquals(StandardCharsets.US_ASCII, deserialized.getDefaultResponseContentCharset());
+    }
+
+    /**
+     * The Referer header never contains the credentials of the referring url.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void refererHeaderWithoutCredentials() throws Exception {
+        WebRequest request = new WebRequest(new URL("http://evil.example/"), StandardCharsets.UTF_8,
+                new URL("http://admin:s3cret@intranet.example/app/index.html?q=1#frag"));
+        assertEquals("http://intranet.example/app/index.html?q=1",
+                request.getAdditionalHeader(HttpHeader.REFERER));
+
+        request = new WebRequest(new URL("http://evil.example/"), StandardCharsets.UTF_8,
+                new URL("https://admin@intranet.example:8443/"));
+        assertEquals("https://intranet.example:8443/", request.getAdditionalHeader(HttpHeader.REFERER));
+    }
+
+    /**
+     * The Referer header is the referring url without the ref; everything else is unchanged.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void refererHeader() throws Exception {
+        WebRequest request = new WebRequest(new URL("http://example.com/"), StandardCharsets.UTF_8,
+                new URL("http://intranet.example/app/index.html?q=1"));
+        assertEquals("http://intranet.example/app/index.html?q=1",
+                request.getAdditionalHeader(HttpHeader.REFERER));
+
+        request = new WebRequest(new URL("http://example.com/"), StandardCharsets.UTF_8,
+                new URL("https://intranet.example:8443/a%20b?x=%26y#ref"));
+        assertEquals("https://intranet.example:8443/a%20b?x=%26y",
+                request.getAdditionalHeader(HttpHeader.REFERER));
+    }
+
+    /**
+     * Only http(s) urls are sent as Referer.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void refererHeaderNotHttp() throws Exception {
+        WebRequest request = new WebRequest(new URL("http://example.com/"), StandardCharsets.UTF_8,
+                new URL("file:///C:/temp/page.html"));
+        assertNull(request.getAdditionalHeader(HttpHeader.REFERER));
+
+        request = new WebRequest(new URL("http://example.com/"), StandardCharsets.UTF_8,
+                UrlUtils.URL_ABOUT_BLANK);
+        assertNull(request.getAdditionalHeader(HttpHeader.REFERER));
+
+        request = new WebRequest(new URL("http://example.com/"), StandardCharsets.UTF_8, null);
+        assertNull(request.getAdditionalHeader(HttpHeader.REFERER));
     }
 }

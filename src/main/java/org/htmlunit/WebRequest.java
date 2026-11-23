@@ -54,6 +54,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Michael Lueck
  * @author Lai Quang Duong
  * @author Kristof Neirynck
+ * @author Vidya m
  */
 @SuppressWarnings("PMD.TooManyFields")
 public class WebRequest implements Serializable {
@@ -141,6 +142,26 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * The cache mode of a request, as defined by the Fetch spec; used by {@code fetch()}.
+     *
+     * @see <a href="https://fetch.spec.whatwg.org/#concept-request-cache-mode">Fetch Standard - cache mode</a>
+     */
+    public enum CacheMode {
+        /** Use the cache like the browser does it for normal requests. */
+        DEFAULT,
+        /** Do not use the cache: no lookup and the response is not stored. */
+        NO_STORE,
+        /** No lookup in the cache, but the response is stored. */
+        RELOAD,
+        /** A cached response is always validated with a conditional request. */
+        NO_CACHE,
+        /** A cached response is used also if it is stale. */
+        FORCE_CACHE,
+        /** Only a cached response (also a stale one) is used; without one this is a network error. */
+        ONLY_IF_CACHED
+    }
+
+    /**
      * The mode of a request, as defined by the Fetch spec
      * (<a href="https://fetch.spec.whatwg.org/#concept-request-mode">
      * https://fetch.spec.whatwg.org/#concept-request-mode</a>).
@@ -211,11 +232,15 @@ public class WebRequest implements Serializable {
     private FetchDestination fetchDestination_ = FetchDestination.EMPTY;
     private FetchMode fetchModeOverride_;
     private boolean userActivation_;
+    private CacheMode cacheMode_ = CacheMode.DEFAULT;
 
     // String instead of java.net.URL for the same serialization reason as url_ above;
     // null means "no initiator" (e.g. a browser-chrome-initiated navigation), which
     // maps to Sec-Fetch-Site: none.
     private String requestingUrl_;
+    // the full referrer (without user info and ref) and the policy used to determine the Referer header
+    private String referrer_;
+    private ReferrerPolicy referrerPolicy_;
     private String siteForCookies_;
 
     // e.g. the CSP form-action check
@@ -718,11 +743,48 @@ public class WebRequest implements Serializable {
         }
 
         try {
-            setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(url).toExternalForm());
+            // the referrer never contains the credentials and the ref
+            referrer_ = UrlUtils.getUrlWithoutUserInfoAndRef(url).toExternalForm();
+            setAdditionalHeader(HttpHeader.REFERER, referrer_);
         }
         catch (final MalformedURLException ignored) {
             // bad luck use the whole url from the pager
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the full referrer (without user info and ref) set by {@link #setRefererHeader(URL)};
+     * the {@code Referer} header is determined from this url and the {@link #getReferrerPolicy() referrer policy}.
+     *
+     * @return the referrer url or {@code null}
+     */
+    public URL getReferrer() {
+        return referrer_ == null ? null : UrlUtils.toUrlSafe(referrer_);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the referrer policy used to determine the {@code Referer} header when the request is sent.
+     *
+     * @return the referrer policy or {@code null} if the {@code Referer} header is sent as set
+     */
+    public ReferrerPolicy getReferrerPolicy() {
+        return referrerPolicy_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets the referrer policy used to determine the {@code Referer} header when the request is sent
+     * (for the final url, also after redirects).
+     *
+     * @param referrerPolicy the referrer policy or {@code null} if the {@code Referer} header is sent as set
+     */
+    public void setReferrerPolicy(final ReferrerPolicy referrerPolicy) {
+        referrerPolicy_ = referrerPolicy;
     }
 
     /**
@@ -745,6 +807,24 @@ public class WebRequest implements Serializable {
      */
     public void setFetchDestination(final FetchDestination fetchDestination) {
         fetchDestination_ = fetchDestination == null ? FetchDestination.EMPTY : fetchDestination;
+    }
+
+    /**
+     * Returns the cache mode of this request.
+     *
+     * @return the cache mode
+     */
+    public CacheMode getCacheMode() {
+        return cacheMode_;
+    }
+
+    /**
+     * Sets the cache mode of this request.
+     *
+     * @param cacheMode the cache mode, or {@code null} to reset to {@link CacheMode#DEFAULT}
+     */
+    public void setCacheMode(final CacheMode cacheMode) {
+        cacheMode_ = cacheMode == null ? CacheMode.DEFAULT : cacheMode;
     }
 
     /**

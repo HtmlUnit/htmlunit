@@ -1504,6 +1504,122 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     /**
+     * Blobs are converted to Files.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object File] false true",
+             "blob text/plain 3 number",
+             "[object File] name.txt text/plain 3",
+             "abc"})
+    public void getBlob() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const fd = new FormData();\n"
+            + "  const blob = new Blob(['abc'], {type: 'Text/Plain'});\n"
+            + "  fd.append('b', blob);\n"
+            + "  fd.append('n', blob, 'name.txt');\n"
+            + "  let f = fd.get('b');\n"
+            + "  log(Object.prototype.toString.call(f) + ' ' + (f === blob) + ' ' + (f === fd.get('b')));\n"
+            + "  log(f.name + ' ' + f.type + ' ' + f.size + ' ' + (typeof f.lastModified));\n"
+            + "  f = fd.get('n');\n"
+            + "  log(Object.prototype.toString.call(f) + ' ' + f.name + ' ' + f.type + ' ' + f.size);\n"
+            + "  f.text().then(t => log(t));\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * A File is used as is, but a File with a filename is a new File.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true orig.txt text/plain 4 1234",
+             "false renamed.txt text/plain 4 1234",
+             "true"})
+    public void getFile() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const fd = new FormData();\n"
+            + "  const file = new File(['abcd'], 'orig.txt', {type: 'text/plain', lastModified: 1234});\n"
+            + "  fd.append('f', file);\n"
+            + "  fd.append('r', file, 'renamed.txt');\n"
+            + "  fd.set('s', file);\n"
+            + "  let f = fd.get('f');\n"
+            + "  log((f === file) + ' ' + f.name + ' ' + f.type + ' ' + f.size + ' ' + f.lastModified);\n"
+            + "  f = fd.get('r');\n"
+            + "  log((f === file) + ' ' + f.name + ' ' + f.type + ' ' + f.size + ' ' + f.lastModified);\n"
+            + "  log(fd.get('s') === file);\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Files in getAll(), the iterators and forEach().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2 string a.bin true",
+             "text a.bin ",
+             "a=text a=2 ",
+             "a:[object String] a:[object File] ",
+             "null"})
+    public void filesInGetAllAndIterators() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const fd = new FormData();\n"
+            + "  fd.append('a', 'text');\n"
+            + "  fd.append('a', new Blob(['xy']), 'a.bin');\n"
+            + "  const all = fd.getAll('a');\n"
+            + "  log(all.length + ' ' + typeof all[0] + ' ' + all[1].name + ' ' + (all[1] === fd.getAll('a')[1]));\n"
+            + "  let res = '';\n"
+            + "  for (const v of fd.values()) { res += (typeof v === 'string' ? v : v.name) + ' '; }\n"
+            + "  log(res);\n"
+            + "  res = '';\n"
+            + "  for (const [k, v] of fd) { res += k + '=' + (typeof v === 'string' ? v : v.size) + ' '; }\n"
+            + "  log(res);\n"
+            + "  res = '';\n"
+            + "  fd.forEach((v, k) => { res += k + ':' + Object.prototype.toString.call(v) + ' '; });\n"
+            + "  log(res);\n"
+            + "  fd.delete('a');\n"
+            + "  log(fd.get('a'));\n"
+            + "</script></head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An empty file input of a form.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object File]",
+             "[] application/octet-stream 0"})
+    public void fromFormEmptyFileInput() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    const fd = new FormData(document.forms[0]);\n"
+            + "    const f = fd.get('upload');\n"
+            + "    log(Object.prototype.toString.call(f));\n"
+            + "    log('[' + f.name + '] ' + f.type + ' ' + f.size);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form><input type='file' name='upload'></form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Servlet for post().
      */
     public static class PostServlet extends HttpServlet {

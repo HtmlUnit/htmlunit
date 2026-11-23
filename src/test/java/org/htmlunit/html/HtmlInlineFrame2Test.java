@@ -308,9 +308,14 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     }
 
     /**
+     * A page not loaded from a file is not allowed to load a local file into a frame.
+     * The frame is checked from the page and not by switching the driver into the frame;
+     * Chrome and Edge block switching into the frame of the blocked navigation.
+     *
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"about:blank", ""})
     public void localFile() throws Exception {
         final URL fileURL = getClass().getClassLoader().getResource("testfiles/xhtml.html");
         final File file = new File(fileURL.toURI());
@@ -318,8 +323,22 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
 
         final String html = DOCTYPE_HTML
                 + "<html>"
-                + "<head><title>Top Page</title></head>\n"
-                + "<body>\n"
+                + "<head><title>Top Page</title>\n"
+                + "<script>\n"
+                + LOG_WINDOW_NAME_FUNCTION
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var doc = document.getElementById('myFrame').contentDocument;\n"
+                + "      if (doc == null) {\n"
+                + "        log('no document');\n"
+                + "        return;\n"
+                + "      }\n"
+                + "      log(doc.URL);\n"
+                + "      log(doc.body == null ? 'no body' : doc.body.textContent);\n"
+                + "    } catch(e) { logEx(e); }\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
                 + "  <iframe id='myFrame' src='" + fileURL + "'></iframe>\n"
                 + "  <div>HtmlUnit</div>\n"
                 + "</body>\n"
@@ -329,7 +348,123 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         assertTitle(driver, "Top Page");
         assertEquals("HtmlUnit", driver.findElement(By.tagName("body")).getText());
 
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void localFileSetLocation() throws Exception {
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/xhtml.html");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        final String html = DOCTYPE_HTML
+                + "<html>"
+                + "<head><title>Top Page</title></head>\n"
+                + "<body>\n"
+                + "  <iframe id='myFrame' name='myFrame'></iframe>\n"
+                + "  <div>HtmlUnit</div>\n"
+                + "  <script>\n"
+                + "    document.getElementById('myFrame').contentWindow.location.href = '" + fileURL + "';\n"
+                + "  </script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, "Top Page");
+        assertEquals("HtmlUnit", driver.findElement(By.tagName("body")).getText());
+
         driver.switchTo().frame("myFrame");
         assertEquals("", driver.findElement(By.tagName("body")).getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void localFileAnchorTarget() throws Exception {
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/xhtml.html");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        final String html = DOCTYPE_HTML
+                + "<html>"
+                + "<head><title>Top Page</title></head>\n"
+                + "<body>\n"
+                + "  <iframe id='myFrame' name='myFrame'></iframe>\n"
+                + "  <a id='myAnchor' href='" + fileURL + "' target='myFrame'>HtmlUnit</a>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, "Top Page");
+        driver.findElement(By.id("myAnchor")).click();
+        assertEquals("HtmlUnit", driver.findElement(By.tagName("body")).getText());
+
+        driver.switchTo().frame("myFrame");
+        assertEquals("", driver.findElement(By.tagName("body")).getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void localFileFormTarget() throws Exception {
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/xhtml.html");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        final String html = DOCTYPE_HTML
+                + "<html>"
+                + "<head><title>Top Page</title></head>\n"
+                + "<body>\n"
+                + "  <iframe id='myFrame' name='myFrame'></iframe>\n"
+                + "  <form action='" + fileURL + "' method='get' target='myFrame'>\n"
+                + "    <input type='submit' id='mySubmit' value='HtmlUnit'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, "Top Page");
+        driver.findElement(By.id("mySubmit")).click();
+
+        driver.switchTo().frame("myFrame");
+        assertEquals("", driver.findElement(By.tagName("body")).getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void localFileRefresh() throws Exception {
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/xhtml.html");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        final String html = DOCTYPE_HTML
+                + "<html>"
+                + "<head><title>Top Page</title></head>\n"
+                + "<body>\n"
+                + "  <iframe id='myFrame' name='myFrame' src='" + URL_SECOND + "'></iframe>\n"
+                + "  <div>HtmlUnit</div>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final String frame = DOCTYPE_HTML
+                + "<html>"
+                + "<head><meta http-equiv='refresh' content='0;url=" + fileURL + "'></head>\n"
+                + "<body>Frame</body>\n"
+                + "</html>";
+        getMockWebConnection().setResponse(URL_SECOND, frame);
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, "Top Page");
+        assertEquals("HtmlUnit", driver.findElement(By.tagName("body")).getText());
+
+        driver.switchTo().frame("myFrame");
+        assertEquals("Frame", driver.findElement(By.tagName("body")).getText());
     }
 }

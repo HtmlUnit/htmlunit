@@ -23,6 +23,7 @@ import java.time.format.DecimalStyle;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,7 +31,6 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -41,7 +41,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxStaticFunction;
 import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for Intl.DateTimeFormat.
@@ -70,6 +69,8 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     private static final ConcurrentHashMap<String, Chronology> FF_ESR_CHRONOLOGIES_ = new ConcurrentHashMap<>();
 
     private transient DateTimeFormatHelper formatter_;
+    // the locale reported by resolvedOptions()
+    private String resolvedLocale_;
 
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
@@ -86,7 +87,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final Map<String, String> commonFormats = new HashMap<>();
         commonFormats.put("", ddDot);
         commonFormats.put("ar", "dd\u200F/MM\u200F/YYYY");
-        commonFormats.put("ban", mmSlash);
         commonFormats.put("be", ddDot);
         commonFormats.put("bg", ddDot + "\u200E \u0433.");
         commonFormats.put("ca", ddSlash);
@@ -117,14 +117,13 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("fr", ddSlash);
         commonFormats.put("fr-CA", yyyyDash);
         commonFormats.put("ga", ddSlash);
+        commonFormats.put("he", ddDot);
         commonFormats.put("hi", ddSlash);
         commonFormats.put("hr", ddDotBlankDot);
         commonFormats.put("hu", yyyyDotBlankDot);
         commonFormats.put("id", ddSlash);
-        commonFormats.put("in", ddSlash);
         commonFormats.put("is", ddDot);
         commonFormats.put("it", ddSlash);
-        commonFormats.put("iw", ddDot);
         commonFormats.put("ja", yyyySlash);
         commonFormats.put("ja-JP-u-ca-japanese", "'H'yy/MM/dd");
         commonFormats.put("ko", yyyyDotBlankDot);
@@ -184,7 +183,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         super();
     }
 
-    private DateTimeFormat(final String[] locales, final BrowserVersion browserVersion) {
+    private DateTimeFormat(final List<String> locales, final BrowserVersion browserVersion) {
         super();
 
         final Map<String, String> formats;
@@ -206,15 +205,12 @@ public class DateTimeFormat extends HtmlUnitScriptable {
             chronologies = FF_CHRONOLOGIES_;
         }
 
-        String locale = browserVersion.getBrowserLocale().toLanguageTag();
+        // the first supported requested locale wins; the browser locale is the fallback
+        final String requestedLocale = Intl.lookupSupportedLocale(locales);
+        final String locale = requestedLocale == null
+                ? browserVersion.getBrowserLocale().toLanguageTag()
+                : requestedLocale;
         String pattern = getPattern(formats, locale);
-
-        for (final String l : locales) {
-            pattern = getPattern(formats, l);
-            if (pattern != null) {
-                locale = l;
-            }
-        }
 
         if (pattern == null) {
             pattern = formats.get("");
@@ -226,13 +222,13 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         final Chronology chronology = getChronology(chronologies, locale);
 
+        // the formats are looked up for the requested locale (including the extensions),
+        // the resolved locale is the available one with the relevant extensions
         formatter_ = new DateTimeFormatHelper(locale, chronology, pattern);
+        resolvedLocale_ = Intl.resolveLocale(locale, "ca", "hc", "nu");
     }
 
     private static String getPattern(final Map<String, String> formats, final String locale) {
-        if ("no-NO-NY".equals(locale)) {
-            throw JavaScriptEngine.rangeError("Invalid language tag: " + locale);
-        }
         String tag = locale;
         String pattern = formats.get(tag);
         while (pattern == null && tag.indexOf('-') != -1) {
@@ -264,21 +260,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
-        final String[] locales;
-        if (args.length != 0) {
-            if (args[0] instanceof NativeArray array) {
-                locales = new String[(int) array.getLength()];
-                for (int i = 0; i < locales.length; i++) {
-                    locales[i] = JavaScriptEngine.toString(array.get(i));
-                }
-            }
-            else {
-                locales = new String[] {JavaScriptEngine.toString(args[0])};
-            }
-        }
-        else {
-            locales = new String[0];
-        }
+        final List<String> locales = Intl.canonicalizeLocaleList(cx, Intl.firstArgument(args));
 
         final Window window = getWindow(ctorObj);
         final DateTimeFormat format = new DateTimeFormat(locales, window.getBrowserVersion());
@@ -309,25 +291,25 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final Scriptable options = JavaScriptEngine.newObject(getParentScope());
         options.put("timeZone", options, cx.getTimeZone().getID());
 
-        if (StringUtils.isEmptyOrNull(formatter_.locale_)) {
-            options.put("locale", options, cx.getLocale().toLanguageTag());
-        }
-        else {
-            options.put("locale", options, formatter_.locale_);
-        }
+        options.put("locale", options, resolvedLocale_);
         return options;
     }
 
     /**
      * Returns an array containing those of the provided locales that are supported
      * without having to fall back to the default locale.
-     * @param localesArgument A string with a BCP 47 language tag, or an array of such strings
-     * @param options unused
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this
+     * @param args the arguments; a string with a BCP 47 language tag or an array of such strings
+     *        and the options (unused)
+     * @param funObj the function object
      * @return an array containing supported locales
      */
     @JsxStaticFunction
-    public static Scriptable supportedLocalesOf(final Scriptable localesArgument, final Scriptable options) {
-        return Intl.supportedLocalesOf(localesArgument);
+    public static Scriptable supportedLocalesOf(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        return Intl.supportedLocalesOf(cx, scope, args);
     }
 
     @Override
@@ -345,10 +327,8 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         private final DateTimeFormatter formatter_;
         private final Chronology chronology_;
-        private final String locale_;
 
         DateTimeFormatHelper(final String locale, final Chronology chronology, final String pattern) {
-            locale_ = locale;
             chronology_ = chronology;
 
             if (locale.startsWith("ar")

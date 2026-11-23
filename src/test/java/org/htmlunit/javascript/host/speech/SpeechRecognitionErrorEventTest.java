@@ -38,9 +38,10 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"},
-            EDGE = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"})
+    @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"},
+            FF = "TypeError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -62,12 +63,12 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = "TypeError",
-            EDGE = "TypeError")
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "ReferenceError")
     @HtmlUnitNYI(
             CHROME = {"[object SpeechRecognitionErrorEvent]", "undefined", "false", "false", "false"},
-            EDGE = {"[object SpeechRecognitionErrorEvent]", "undefined", "false", "false", "false"})
+            EDGE = {"[object SpeechRecognitionErrorEvent]", "undefined", "false", "false", "false"},
+            FF = {"[object SpeechRecognitionErrorEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -89,9 +90,10 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = {"[object SpeechRecognitionErrorEvent]", "42", "false", "false", "false"},
-            EDGE = {"[object SpeechRecognitionErrorEvent]", "42", "false", "false", "false"})
+    @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "42", "false", "false", "false"},
+            FF = "TypeError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -113,9 +115,10 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = {"[object SpeechRecognitionErrorEvent]", "null", "false", "false", "false"},
-            EDGE = {"[object SpeechRecognitionErrorEvent]", "null", "false", "false", "false"})
+    @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "null", "false", "false", "false"},
+            FF = "TypeError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -159,9 +162,10 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = {"[object SpeechRecognitionErrorEvent]", "HtmlUnitEvent", "false", "false", "false"},
-            EDGE = {"[object SpeechRecognitionErrorEvent]", "HtmlUnitEvent", "false", "false", "false"})
+    @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "HtmlUnitEvent", "false", "false", "false"},
+            FF = "TypeError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -183,9 +187,8 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"},
-            EDGE = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"})
+    @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"},
+            FF_ESR = "ReferenceError")
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -210,9 +213,10 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            CHROME = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"},
-            EDGE = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"})
+    @Alerts(DEFAULT = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"},
+            FF = "TypeError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = {"[object SpeechRecognitionErrorEvent]", "error", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -257,9 +261,8 @@ public class SpeechRecognitionErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "true",
+            FF_ESR = "false")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

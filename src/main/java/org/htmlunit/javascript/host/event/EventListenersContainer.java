@@ -38,6 +38,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.html.HTMLElement;
+import org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope;
 
 /**
  * Container for event listeners.
@@ -299,6 +300,10 @@ public class EventListenersContainer implements Serializable {
                 }
                 else if (scriptableObj instanceof HTMLDocument document) {
                     page = document.getPage();
+                }
+                else if (scriptableObj instanceof DedicatedWorkerGlobalScope worker) {
+                    // the listeners of the objects of a worker run in the page of the window that created it
+                    page = (HtmlPage) worker.getOwningWindow().getDomNodeOrDie();
                 }
                 else if (scriptableObj != null) {
                     page = ((HTMLElement) scriptableObj).getDomNodeOrDie().getHtmlPageOrNull();

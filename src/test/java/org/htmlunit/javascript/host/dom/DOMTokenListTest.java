@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -464,10 +463,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
-    @HtmlUnitNYI(CHROME = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
-            EDGE = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
-            FF = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
-            FF_ESR = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values")
     public void forIn() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -497,10 +492,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
-    @HtmlUnitNYI(CHROME = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
-            EDGE = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
-            FF = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
-            FF_ESR = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values")
     public void forInEmptyList() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -2287,6 +2278,37 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    log(o.hasOwnProperty('0'));\n"
             + "    log('0' in o);\n"
             + "    log(Object.getOwnPropertyDescriptor(o, '0'));\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The stringifier returns the value of the attribute.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[ a b ]", "[ a b ]", "[ a b ]", "[]", "true", "true"})
+    public void jsToString() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<div id='d1' class='  a   b '></div>\n"
+            + "<div id='d2'></div>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    log('[' + list.toString() + ']');\n"
+            + "    log('[' + list + ']');\n"
+            + "    log('[' + String(list) + ']');\n"
+            + "    log('[' + document.getElementById('d2').classList.toString() + ']');\n"
+            + "    log(DOMTokenList.prototype.hasOwnProperty('toString'));\n"
+            + "    log(list.toString === DOMTokenList.prototype.toString);\n"
             + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";

@@ -247,10 +247,18 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
                 final BrowserVersion browser = webClient.getBrowserVersion();
                 // upgrade-insecure-requests of the Content-Security-Policy
                 final URL url = ContentSecurityPolicy.upgradeInsecureRequest(page, new URL(src));
+                // like the browsers, a page not loaded from a file is not allowed to load a local file
+                if (!page.isLocalResourceAccessAllowed(url)) {
+                    notifyIncorrectness("Not allowed to load local resource: " + url);
+                    imageWebResponse_ = null;
+                    downloaded_ = true;
+                    return;
+                }
                 final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
                                                                 browser.getAcceptEncodingHeader());
                 request.setCharset(page.getCharset());
                 request.setRefererHeader(page.getUrl());
+                request.setReferrerPolicy(page.getReferrerPolicy(this));
                 imageWebResponse_ = webClient.loadWebResponse(request);
             }
 

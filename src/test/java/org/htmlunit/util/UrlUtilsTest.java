@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Hartmut Arlt
+ * @author Vidya m
  */
 public class UrlUtilsTest {
 
@@ -215,6 +216,95 @@ public class UrlUtilsTest {
 
         a = new URL("http://my.home.com/#href");
         b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("http://user:secret@my.home.com:8080/index.html");
+        b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com:8080", b.toExternalForm());
+    }
+
+    /**
+     * No user info; all other parts (including the ref) unchanged.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getUrlWithoutUserInfo() throws Exception {
+        // nothing to strip
+        assertWithoutUserInfo("http://my.home.com/folder/index.html?q=1#ref",
+                "http://my.home.com/folder/index.html?q=1#ref");
+        assertWithoutUserInfo("http://my.home.com", "http://my.home.com");
+
+        // user info
+        assertWithoutUserInfo("http://my.home.com/index.html", "http://user:secret@my.home.com/index.html");
+        assertWithoutUserInfo("http://my.home.com/index.html", "http://user@my.home.com/index.html");
+        assertWithoutUserInfo("http://my.home.com/index.html", "http://:secret@my.home.com/index.html");
+        assertWithoutUserInfo("http://my.home.com/index.html", "http://@my.home.com/index.html");
+        assertWithoutUserInfo("http://my.home.com/", "http://user:se%40cret@my.home.com/");
+        assertWithoutUserInfo("https://my.home.com:8443/", "https://user:secret@my.home.com:8443/");
+        assertWithoutUserInfo("http://[::1]:8080/index.html", "http://user:secret@[::1]:8080/index.html");
+
+        // the ref is kept (also an empty one)
+        assertWithoutUserInfo("http://my.home.com/index.html?q=1#ref",
+                "http://user:secret@my.home.com/index.html?q=1#ref");
+        assertWithoutUserInfo("http://my.home.com/index.html#", "http://user:secret@my.home.com/index.html#");
+
+        // the encoding of path, query and ref is not changed
+        assertWithoutUserInfo("http://my.home.com/a%20b/c%2Fd?x=%26y&z=%C3%A4#r%20f",
+                "http://user:secret@my.home.com/a%20b/c%2Fd?x=%26y&z=%C3%A4#r%20f");
+    }
+
+    private static void assertWithoutUserInfo(final String expected, final String url) throws Exception {
+        assertEquals(expected, UrlUtils.getUrlWithoutUserInfo(new URL(url)).toExternalForm());
+    }
+
+    /**
+     * The url used as referrer: no user info and no ref; all other parts unchanged.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getUrlWithoutUserInfoAndRef() throws Exception {
+        // nothing to strip
+        assertReferrer("http://my.home.com/folder/index.html?q=1", "http://my.home.com/folder/index.html?q=1");
+        assertReferrer("http://my.home.com", "http://my.home.com");
+
+        // user info
+        assertReferrer("http://my.home.com/index.html", "http://user:secret@my.home.com/index.html");
+        assertReferrer("http://my.home.com/index.html", "http://user@my.home.com/index.html");
+        assertReferrer("http://my.home.com/index.html", "http://:secret@my.home.com/index.html");
+        assertReferrer("http://my.home.com/index.html", "http://@my.home.com/index.html");
+        assertReferrer("http://my.home.com/", "http://user:se%40cret@my.home.com/");
+        assertReferrer("https://my.home.com:8443/", "https://user:secret@my.home.com:8443/");
+        assertReferrer("http://[::1]:8080/index.html", "http://user:secret@[::1]:8080/index.html");
+
+        // ref
+        assertReferrer("http://my.home.com/index.html?q=1", "http://my.home.com/index.html?q=1#ref");
+        assertReferrer("http://my.home.com/index.html", "http://my.home.com/index.html#");
+        assertReferrer("http://my.home.com/index.html", "http://user:secret@my.home.com/index.html#ref");
+
+        // the encoding of path and query is not changed
+        assertReferrer("http://my.home.com/a%20b/c%2Fd?x=%26y&z=%C3%A4",
+                "http://user:secret@my.home.com/a%20b/c%2Fd?x=%26y&z=%C3%A4#ref");
+    }
+
+    private static void assertReferrer(final String expected, final String url) throws Exception {
+        assertEquals(expected, UrlUtils.getUrlWithoutUserInfoAndRef(new URL(url)).toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getUrlWithoutPathRefQuery() throws Exception {
+        URL a = new URL("http://my.home.com/folder/index.html?query#ref");
+        URL b = UrlUtils.getUrlWithoutPathRefQuery(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("https://user:secret@my.home.com:8443/index.html");
+        b = UrlUtils.getUrlWithoutPathRefQuery(a);
+        assertEquals("https://my.home.com:8443", b.toExternalForm());
+
+        a = new URL("http://user@my.home.com/");
+        b = UrlUtils.getUrlWithoutPathRefQuery(a);
         assertEquals("http://my.home.com", b.toExternalForm());
     }
 
@@ -785,5 +875,21 @@ public class UrlUtilsTest {
         final URL url1 = new URL("http://user1:pass1@example.com/path1");
         final URL url2 = new URL("http://user2:pass2@example.com/path2");
         assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isLocalResourceAccessAllowed() throws Exception {
+        final URL httpUrl = new URL("http://example.com/index.html");
+        final URL fileUrl = new URL("file:///tmp/secret.html");
+
+        assertTrue(UrlUtils.isLocalResourceAccessAllowed(httpUrl, new URL("https://example.com/")));
+        assertTrue(UrlUtils.isLocalResourceAccessAllowed(fileUrl, new URL("file:///tmp/other.html")));
+        assertTrue(UrlUtils.isLocalResourceAccessAllowed(fileUrl, httpUrl));
+
+        assertFalse(UrlUtils.isLocalResourceAccessAllowed(httpUrl, fileUrl));
+        assertFalse(UrlUtils.isLocalResourceAccessAllowed(UrlUtils.URL_ABOUT_BLANK, fileUrl));
     }
 }

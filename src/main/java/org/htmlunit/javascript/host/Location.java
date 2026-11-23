@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_PROTOCOL_UNCHANGED_NO_NAVIGATION;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 
 import java.io.IOException;
@@ -39,6 +40,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.HashChangeEvent;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
@@ -253,6 +255,7 @@ public class Location extends HtmlUnitScriptable {
         request.setUrl(UrlUtils.toUrlUnsafe(getHref()));
         if (getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
             request.setRefererHeader(htmlPage.getUrl());
+            request.setReferrerPolicy(htmlPage.getReferrerPolicy());
         }
 
         webWindow.getWebClient().download(webWindow, "", request, false, null, "JS location.reload");
@@ -297,6 +300,10 @@ public class Location extends HtmlUnitScriptable {
         }
         try {
             URL url = page.getUrl();
+            if (url.getUserInfo() != null) {
+                // like the browsers, location never contains the credentials (document.URL does)
+                url = UrlUtils.getUrlWithoutUserInfo(url);
+            }
             final String hash = getHash(true);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
@@ -338,6 +345,7 @@ public class Location extends HtmlUnitScriptable {
             // we need to get the caller window to get the calling page
             WebWindow webWindow = ((Window) JavaScriptEngine.getTopCallScope().getGlobalThis()).getWebWindow();
             final HtmlPage callingPage = (HtmlPage) webWindow.getEnclosedPage();
+            checkSandboxedNavigation(callingPage, webWindow, window_.getWebWindow());
 
             final BrowserVersion browserVersion = webWindow.getWebClient().getBrowserVersion();
 
@@ -348,9 +356,17 @@ public class Location extends HtmlUnitScriptable {
             }
             url = upgradeInsecureRequest(callingPage, window_.getWebWindow(), url);
 
+            // accessing to local resource is forbidden for security reason
+            if (!callingPage.isLocalResourceAccessAllowed(url)) {
+                webWindow.getWebClient().getIncorrectnessListener()
+                        .notify("Not allowed to load local resource: " + url, this);
+                return;
+            }
+
             final WebRequest webRequest = new WebRequest(url,
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
             webRequest.setRefererHeader(callingPage.getUrl());
+            webRequest.setReferrerPolicy(callingPage.getReferrerPolicy());
 
             webRequest.markAsNavigation(getUrl(), false);
             webRequest.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
@@ -365,6 +381,43 @@ public class Location extends HtmlUnitScriptable {
             }
             throw e;
         }
+    }
+
+    /**
+     * A sandboxed document is only allowed to navigate its own window and the windows of its
+     * descendants; the top window only with 'allow-top-navigation'.
+     *
+     * @param callingPage the page navigating
+     * @param callingWindow the window of the calling page
+     * @param targetWindow the window to be navigated
+     */
+    private void checkSandboxedNavigation(final HtmlPage callingPage, final WebWindow callingWindow,
+            final WebWindow targetWindow) {
+        if (callingPage.getSandboxTokens() == null) {
+            return;
+        }
+
+        // the window itself or a descendant
+        WebWindow window = targetWindow;
+        while (true) {
+            if (window == callingWindow) {
+                return;
+            }
+            final WebWindow parent = window.getParentWindow();
+            if (parent == null || parent == window) {
+                break;
+            }
+            window = parent;
+        }
+
+        if (targetWindow == callingWindow.getTopWindow()
+                && callingPage.isSandboxAllowed("allow-top-navigation")) {
+            return;
+        }
+
+        throw JavaScriptEngine.asJavaScriptException(window_,
+                "The document is sandboxed and lacks the 'allow-top-navigation' flag.",
+                DOMException.SECURITY_ERR);
     }
 
     /**
@@ -598,13 +651,34 @@ public class Location extends HtmlUnitScriptable {
 
     /**
      * Sets the protocol portion of the location URL.
+     * Like the HTML Standard, an invalid scheme throws a SyntaxError and only http(s) urls are
+     * navigated (e.g. setting 'file:' or 'ftp:' does nothing); the URL Standard rules of the
+     * {@code protocol} setter apply (see {@link UrlUtils#getUrlWithNewProtocolLikeSetter(URL, String)}).
      *
      * @param protocol the new protocol portion of the location URL
      * @throws Exception if an error occurs
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol">MDN Documentation</a>
+     * @see <a href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-protocol">
+     *      HTML Standard - location.protocol</a>
      */
     public void setProtocol(final String protocol) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), protocol));
+        final URL url = getUrl();
+        final URL newUrl = UrlUtils.getUrlWithNewProtocolLikeSetter(url, protocol);
+        if (newUrl == null) {
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "Failed to set the 'protocol' property on 'Location': '" + protocol
+                    + "' is an invalid scheme.", DOMException.SYNTAX_ERR);
+        }
+        final String scheme = newUrl.getProtocol();
+        if (!"http".equals(scheme) && !"https".equals(scheme)) {
+            return;
+        }
+        if (newUrl == url
+                && window_.getWebWindow().getWebClient().getBrowserVersion()
+                        .hasFeature(JS_LOCATION_PROTOCOL_UNCHANGED_NO_NAVIGATION)) {
+            // Firefox does not navigate if nothing was changed
+            return;
+        }
+        setUrl(newUrl);
     }
 
     /**
@@ -652,6 +726,23 @@ public class Location extends HtmlUnitScriptable {
         if (webWindow.getEnclosedPage() instanceof HtmlPage page) {
             requestUrl = upgradeInsecureRequest(page, webWindow, url);
         }
+
+        // accessing to local resource is forbidden for security reason;
+        // like in setHref() the page of the running script decides, not the page shown in this window
+        final WebWindow callingWindow = ((Window) JavaScriptEngine.getTopCallScope().getGlobalThis()).getWebWindow();
+        final boolean allowed;
+        if (callingWindow.getEnclosedPage() instanceof HtmlPage callingPage) {
+            allowed = callingPage.isLocalResourceAccessAllowed(requestUrl);
+        }
+        else {
+            allowed = UrlUtils.isLocalResourceAccessAllowed(callingWindow.getEnclosedPage().getUrl(), requestUrl);
+        }
+        if (!allowed) {
+            webWindow.getWebClient().getIncorrectnessListener()
+                    .notify("Not allowed to load local resource: " + requestUrl, this);
+            return;
+        }
+
         final WebRequest webRequest = new WebRequest(requestUrl,
                 browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
 
@@ -659,6 +750,9 @@ public class Location extends HtmlUnitScriptable {
         webRequest.setFetchModeOverride(WebRequest.FetchMode.NAVIGATE);
 
         webRequest.setRefererHeader(getUrl());
+        if (webWindow.getEnclosedPage() instanceof HtmlPage referrerPage) {
+            webRequest.setReferrerPolicy(referrerPage.getReferrerPolicy());
+        }
 
         if (webWindow.getEnclosedPage() instanceof HtmlPage page) {
             upgradeInsecureRedirects(page, webWindow, webRequest);

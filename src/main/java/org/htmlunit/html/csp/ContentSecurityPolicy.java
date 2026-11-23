@@ -16,7 +16,9 @@ package org.htmlunit.html.csp;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.CSP_META_SINGLE_POLICY;
+import static org.htmlunit.BrowserVersionFeatures.CSP_CONNECT_REDIRECT_VIOLATION_DELAYED;
 import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_HIDING_ENFORCED_ONLY;
+import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_TRIMMED;
 import static org.htmlunit.BrowserVersionFeatures.CSP_REPORT_FIREFOX_FORMAT;
 import static org.htmlunit.BrowserVersionFeatures.CSP_UPGRADE_INSECURE_REQUESTS_MATCHES_HTTPS;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
@@ -26,15 +28,18 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
+import org.htmlunit.SgmlPage;
 import org.htmlunit.TopLevelWindow;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
@@ -46,6 +51,7 @@ import org.htmlunit.corejs.javascript.ScriptStackElement;
 import org.htmlunit.csp.FetchDirectiveKind;
 import org.htmlunit.csp.Policy;
 import org.htmlunit.csp.directive.ReportUriDirective;
+import org.htmlunit.csp.directive.SandboxDirective;
 import org.htmlunit.csp.directive.SourceExpressionDirective;
 import org.htmlunit.csp.url.GUID;
 import org.htmlunit.csp.url.URI;
@@ -272,13 +278,15 @@ public final class ContentSecurityPolicy implements Serializable {
         final String integrityAttrib = element.getAttributeDirect("integrity");
         final Optional<String> integrity = ATTRIBUTE_NOT_DEFINED == integrityAttrib
                 ? Optional.empty() : Optional.of(integrityAttrib);
-        final Optional<URI> scriptUrl = URI.parseURI(matchingUrl(page, url).toExternalForm());
+        final Optional<URLWithScheme> scriptUrl = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<Boolean> parserInserted = Optional.of(isParserInserted(element));
         final Optional<URI> origin = origin(page);
-        final Violation violation = new Violation(FetchDirectiveKind.ScriptSrcElem, withoutRef(reportedUrl), null,
+        final Violation violation = new Violation(FetchDirectiveKind.ScriptSrcElem, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
+        final boolean redirected = isRedirect(url, reportedUrl);
         return csp.check(page, violation,
-                policy -> policy.allowsExternalScript(nonce, integrity, scriptUrl, parserInserted, origin));
+                policy -> policy.allowsExternalScript(nonce, integrity, scriptUrl, parserInserted, origin,
+                        redirected));
     }
 
     /**
@@ -348,8 +356,16 @@ public final class ContentSecurityPolicy implements Serializable {
         final Violation violation = new Violation(FetchDirectiveKind.ConnectSrc, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
         // like browsers, ws: and wss: urls are not mapped to http: and https: before matching
-        final boolean allowed = csp.check(page, violation, policy -> policy.allowsConnection(target, origin, false));
-        firePendingViolationsIfNoScriptRunning(page);
+        final boolean redirected = isRedirect(url, reportedUrl);
+        final boolean allowed = csp.check(page, violation,
+                policy -> policy.allowsConnection(target, origin, false, redirected));
+        // Chrome reports a violation of a redirect target (checked by the network stack) after the
+        // request has failed; the violation stays pending until the error is handled
+        // (see XMLHttpRequest) or the next script has finished
+        if (!redirected
+                || !page.getWebClient().getBrowserVersion().hasFeature(CSP_CONNECT_REDIRECT_VIOLATION_DELAYED)) {
+            firePendingViolationsIfNoScriptRunning(page);
+        }
         return allowed;
     }
 
@@ -428,12 +444,13 @@ public final class ContentSecurityPolicy implements Serializable {
         }
 
         final Optional<String> nonce = element == null ? Optional.empty() : nonce(element);
-        final Optional<URI> styleUrl = URI.parseURI(matchingUrl(page, url).toExternalForm());
+        final Optional<URLWithScheme> styleUrl = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
-        final Violation violation = new Violation(FetchDirectiveKind.StyleSrcElem, withoutRef(reportedUrl), null,
+        final Violation violation = new Violation(FetchDirectiveKind.StyleSrcElem, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
+        final boolean redirected = isRedirect(url, reportedUrl);
         final boolean allowed = csp.check(page, violation,
-                policy -> policy.allowsExternalStyle(nonce, styleUrl, origin));
+                policy -> policy.allowsExternalStyle(nonce, styleUrl, origin, redirected));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }
@@ -560,7 +577,9 @@ public final class ContentSecurityPolicy implements Serializable {
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FetchDirectiveKind.ImgSrc, blockedUri(reportedUrl), null,
                 null, "", 0, 0);
-        final boolean allowed = csp.check(page, violation, policy -> policy.allowsImage(target, origin));
+        final boolean redirected = isRedirect(url, reportedUrl);
+        final boolean allowed = csp.check(page, violation,
+                policy -> policy.allowsImage(target, origin, redirected));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }
@@ -795,8 +814,9 @@ public final class ContentSecurityPolicy implements Serializable {
         final Optional<URLWithScheme> target = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<URI> origin = origin(page);
         final Violation violation = new Violation(FORM_ACTION, blockedUri(reportedUrl), null, null, "", 0, 0);
+        final boolean redirected = isRedirect(url, reportedUrl);
         final boolean allowed = csp.check(page, violation,
-                policy -> policy.allowsFormAction(target, Optional.of(false), Optional.empty(), origin));
+                policy -> policy.allowsFormAction(target, origin, redirected));
         firePendingViolationsIfNoScriptRunning(page);
         return allowed;
     }
@@ -999,6 +1019,9 @@ public final class ContentSecurityPolicy implements Serializable {
      */
     private static void sendReports(final HtmlPage page, final List<String> uris, final String report) {
         final WebClient webClient = page.getWebClient();
+        if (!webClient.getOptions().isContentSecurityPolicyReportsEnabled()) {
+            return;
+        }
         for (final String uri : uris) {
             try {
                 final URL url = page.getFullyQualifiedUrl(uri);
@@ -1083,6 +1106,36 @@ public final class ContentSecurityPolicy implements Serializable {
         return json.append('"').toString();
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the sandbox tokens (e.g. 'allow-scripts') of the sandbox directives of the enforced
+     * policies; like in the browsers report only policies and policies delivered by a meta element
+     * are ignored. If more than one policy has a sandbox directive, only the tokens of all
+     * directives are allowed.
+     *
+     * @return the tokens (lower case) or {@code null} if no enforced policy has a sandbox directive
+     */
+    public Set<String> getSandboxTokens() {
+        Set<String> tokens = null;
+        for (final Policy policy : getEnforcedPolicies()) {
+            final SandboxDirective sandbox = policy.deliveredViaMeta() ? null : policy.sandbox().orElse(null);
+            if (sandbox != null) {
+                final Set<String> policyTokens = new HashSet<>();
+                for (final String value : sandbox.getValues()) {
+                    policyTokens.add(value.toLowerCase(Locale.ROOT));
+                }
+                if (tokens == null) {
+                    tokens = policyTokens;
+                }
+                else {
+                    tokens.retainAll(policyTokens);
+                }
+            }
+        }
+        return tokens;
+    }
+
     private List<Policy> getEnforcedPolicies() {
         if (enforcedPolicies_ == null) {
             final List<Policy> policies = parse(enforced_);
@@ -1136,7 +1189,11 @@ public final class ContentSecurityPolicy implements Serializable {
      * empty if the element has no nonce or is not nonceable.
      */
     private static Optional<String> nonce(final DomElement element) {
-        final String nonce = element.getNonce();
+        String nonce = element.getNonce();
+        final SgmlPage page = element.getPage();
+        if (page != null && page.getWebClient().getBrowserVersion().hasFeature(CSP_NONCE_TRIMMED)) {
+            nonce = nonce.trim();
+        }
         if (nonce.isEmpty() || !isNonceable(element)) {
             return Optional.empty();
         }
@@ -1244,6 +1301,15 @@ public final class ContentSecurityPolicy implements Serializable {
             port = URI.defaultPortForProtocol(scheme);
         }
         return new URI(scheme, host.toLowerCase(Locale.ROOT), port, url.getPath());
+    }
+
+    /**
+     * Returns whether the url is the target of a redirect; the checks for redirects are called
+     * with the redirect target as url and the url of the initial request as reported url.
+     * Like the browsers, the path part of the source expressions is ignored for redirects.
+     */
+    private static boolean isRedirect(final URL url, final URL reportedUrl) {
+        return !url.toExternalForm().equals(reportedUrl.toExternalForm());
     }
 
     /**

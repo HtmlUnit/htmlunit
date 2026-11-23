@@ -56,6 +56,7 @@ import org.htmlunit.History;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.OnbeforeunloadHandler;
 import org.htmlunit.Page;
+import org.htmlunit.ReferrerPolicy;
 import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.StringWebResponse;
@@ -77,7 +78,6 @@ import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -91,6 +91,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.SerializableLock;
 import org.htmlunit.util.UrlUtils;
 import org.w3c.dom.Attr;
@@ -196,6 +197,10 @@ public class HtmlPage extends SgmlPage {
     private boolean autofocusProcessed_;
 
     private ContentSecurityPolicy contentSecurityPolicy_;
+    // the referrer policy of this document (Referrer-Policy header, meta element); null for the default
+    private ReferrerPolicy referrerPolicy_;
+    // the sandbox tokens (allowed features) of this document; null if not sandboxed
+    private Set<String> sandboxTokens_;
     // true if the page is loaded; candidates inserted later are processed by a job
     private boolean autofocusAfterLoad_;
     private boolean autofocusJobScheduled_;
@@ -242,6 +247,9 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
+        if (webWindow instanceof FrameWindow frameWindow) {
+            sandboxTokens_ = frameWindow.getSandboxTokens();
+        }
         contentSecurityPolicy_ = ContentSecurityPolicy.fromResponse(webResponse);
         if (contentSecurityPolicy_ == null && webResponse != null) {
             // the content written by document.open()/write()/close() and the result of a
@@ -257,6 +265,101 @@ public class HtmlPage extends SgmlPage {
                                             webWindow);
             }
         }
+
+        // the sandbox directive of an enforced policy delivered by a header sandboxes the document
+        // (in addition to the sandbox attribute of the iframe)
+        if (contentSecurityPolicy_ != null) {
+            final Set<String> cspSandboxTokens = contentSecurityPolicy_.getSandboxTokens();
+            if (cspSandboxTokens != null) {
+                if (sandboxTokens_ == null) {
+                    sandboxTokens_ = cspSandboxTokens;
+                }
+                else {
+                    final Set<String> tokens = new HashSet<>(sandboxTokens_);
+                    tokens.retainAll(cspSandboxTokens);
+                    sandboxTokens_ = tokens;
+                }
+            }
+        }
+
+        referrerPolicy_ = referrerPolicyFromResponse(webResponse);
+        if (referrerPolicy_ == null && webWindow != null) {
+            // like the Content-Security-Policy: the content written by document.open()/write()/close()
+            // keeps the policy, about:blank and about:srcdoc documents of frames have the one of the parent
+            if (webResponse instanceof StringWebResponse stringWebResponse
+                    && stringWebResponse.isFromJavascript()
+                    && webWindow.getEnclosedPage() instanceof HtmlPage currentPage) {
+                referrerPolicy_ = currentPage.referrerPolicy_;
+            }
+            else if (webResponse != null
+                    && "about".equals(webResponse.getWebRequest().getUrl().getProtocol())
+                    && webWindow instanceof FrameWindow frameWindow
+                    && frameWindow.getEnclosingPage() != null) {
+                referrerPolicy_ = frameWindow.getEnclosingPage().referrerPolicy_;
+            }
+        }
+    }
+
+    /**
+     * Returns the policy of the Referrer-Policy header(s) of the response.
+     *
+     * @param webResponse the response
+     * @return the policy or {@code null} if there is no (valid) header
+     */
+    private static ReferrerPolicy referrerPolicyFromResponse(final WebResponse webResponse) {
+        if (webResponse == null) {
+            return null;
+        }
+        final StringBuilder value = new StringBuilder();
+        for (final NameValuePair header : webResponse.getResponseHeaders()) {
+            if (HttpHeader.REFERRER_POLICY.equalsIgnoreCase(header.getName())) {
+                if (value.length() > 0) {
+                    value.append(',');
+                }
+                value.append(header.getValue());
+            }
+        }
+        return ReferrerPolicy.fromHeader(value.toString());
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the referrer policy of this document (from the Referrer-Policy header or a
+     * meta element with the name 'referrer').
+     *
+     * @return the referrer policy, {@link ReferrerPolicy#DEFAULT} if not set
+     */
+    public ReferrerPolicy getReferrerPolicy() {
+        return referrerPolicy_ == null ? ReferrerPolicy.DEFAULT : referrerPolicy_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the referrer policy for a request of the given element: the policy of the
+     * referrerpolicy attribute of the element if valid, otherwise the policy of this document.
+     *
+     * @param element the element
+     * @return the referrer policy
+     */
+    public ReferrerPolicy getReferrerPolicy(final DomElement element) {
+        final ReferrerPolicy policy = ReferrerPolicy.fromToken(element.getAttributeDirect("referrerpolicy"));
+        if (policy != null) {
+            return policy;
+        }
+        return getReferrerPolicy();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets the referrer policy of this document (e.g. from a meta element).
+     *
+     * @param referrerPolicy the referrer policy
+     */
+    public void setReferrerPolicy(final ReferrerPolicy referrerPolicy) {
+        referrerPolicy_ = referrerPolicy;
     }
 
     /**
@@ -312,15 +415,73 @@ public class HtmlPage extends SgmlPage {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
+     * Determines whether this page is allowed to load the specified URL (e.g. into a frame or a window).
+     * Like in the browsers, only pages from a file are allowed to load local resources (file URLs);
+     * about:blank and about:srcdoc documents are judged by the origin of their creator
+     * (see {@link #getOriginUrl()}).
+     *
+     * @param url the URL to load
+     * @return {@code false} if the URL is a file URL and this page does not have a file origin
+     */
+    public boolean isLocalResourceAccessAllowed(final URL url) {
+        return UrlUtils.isLocalResourceAccessAllowed(getOriginUrl(), url);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the sandbox tokens (the allowed features, e.g. 'allow-scripts') of this document;
+     * the document of an iframe with sandbox attribute is sandboxed.
+     *
+     * @return the tokens or {@code null} if this document is not sandboxed
+     */
+    public Set<String> getSandboxTokens() {
+        return sandboxTokens_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns whether the feature is allowed for this document; all features are allowed if this
+     * document is not sandboxed.
+     *
+     * @param token the token of the feature (e.g. 'allow-scripts')
+     * @return true if the feature is allowed
+     * @see <a href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-sandbox">
+     *     HTML Living Standard - sandbox</a>
+     */
+    public boolean isSandboxAllowed(final String token) {
+        return sandboxTokens_ == null || sandboxTokens_.contains(token);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns whether this document has an opaque origin: a sandboxed document without 'allow-same-origin'.
+     * Such a document has no access to the cookies and the storage.
+     *
+     * @return true if the origin is opaque
+     */
+    public boolean isOpaqueOrigin() {
+        return sandboxTokens_ != null && !sandboxTokens_.contains("allow-same-origin");
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns the url of the 'site for cookies' of this document: the url of the top-level
      * document if this document and all its ancestors are same-site with it, otherwise
-     * 'about:blank' (no site, never same-site with any url).
+     * 'about:blank' (no site, never same-site with any url). A document without a window
+     * (e.g. created by DOMImplementation.createHTMLDocument() or DOMParser) uses its own origin.
      *
      * @return the url of the site for cookies
      * @see <a href="https://html.spec.whatwg.org/multipage/browsers.html#site-for-cookies">site for cookies</a>
      */
     public URL getSiteForCookiesUrl() {
         final WebWindow window = getEnclosingWindow();
+        if (window == null) {
+            return getOriginUrl();
+        }
         final WebWindow top = window.getTopWindow();
         if (!(top.getEnclosedPage() instanceof HtmlPage topPage)) {
             return getOriginUrl();
@@ -330,7 +491,7 @@ public class HtmlPage extends SgmlPage {
         WebWindow current = window;
         while (current != null && current != top) {
             if (current.getEnclosedPage() instanceof HtmlPage currentPage
-                    && !HttpClientConverter.isSameSite(currentPage.getOriginUrl(), topUrl)) {
+                    && !WebClient.isSameSite(currentPage.getOriginUrl(), topUrl)) {
                 return UrlUtils.URL_ABOUT_BLANK;
             }
             current = current.getParentWindow();
@@ -1234,6 +1395,12 @@ public class HtmlPage extends SgmlPage {
                     final boolean crossorigin, final DomElement element) throws IOException,
         FailingHttpStatusCodeException {
 
+        // like the browsers, a page not loaded from a file is not allowed to load a local file (network error)
+        if (!isLocalResourceAccessAllowed(url)) {
+            notifyIncorrectness("Not allowed to load local resource: " + url);
+            throw new IOException("Not allowed to load local resource: " + url);
+        }
+
         final WebRequest referringRequest = getWebResponse().getWebRequest();
 
         final WebClient client = getWebClient();
@@ -1254,6 +1421,7 @@ public class HtmlPage extends SgmlPage {
         request.setFetchModeOverride(WebRequest.FetchMode.NO_CORS);
 
         request.setRefererHeader(referringRequest.getUrl());
+        request.setReferrerPolicy(element == null ? getReferrerPolicy() : getReferrerPolicy(element));
         request.setCharset(scriptCharset);
 
         // use info from script tag or fall back to utf-8
@@ -1268,9 +1436,12 @@ public class HtmlPage extends SgmlPage {
         if (crossorigin) {
             request.setFetchModeOverride(WebRequest.FetchMode.CORS);
 
-            if (client.getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)) {
-                request.setAdditionalHeader(HttpHeader.ORIGIN,
-                        UrlUtils.getUrlWithProtocolAndAuthority(url).toExternalForm());
+            // the Origin is the origin of this document (not the one of the script);
+            // it is sent for cross-origin requests, Chrome sends it always
+            final boolean crossOriginRequest = !UrlUtils.isSameOrigin(getOriginUrl(), url);
+            if (crossOriginRequest || client.getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)) {
+                request.setAdditionalHeader(HttpHeader.ORIGIN, isOpaqueOrigin()
+                        ? "null" : UrlUtils.getUrlWithProtocolAndAuthority(getOriginUrl()).toExternalForm());
             }
         }
 
@@ -1684,6 +1855,12 @@ public class HtmlPage extends SgmlPage {
     // because there we are directly replacing the response before loading the response into the window
     // here we are replacing the page in the window (maybe after some time)
     private void processRefresh(final URL url, final double time) throws IOException {
+        // accessing to local resource is forbidden for security reason
+        if (!isLocalResourceAccessAllowed(url)) {
+            notifyIncorrectness("Not allowed to load local resource: " + url);
+            return;
+        }
+
         final WebClient webClient = getWebClient();
 
         final int refreshLimit = webClient.getOptions().getPageRefreshLimit();
@@ -2835,6 +3012,11 @@ public class HtmlPage extends SgmlPage {
         try {
             if (href.startsWith("http://") || href.startsWith("https://")) {
                 return new URL(href);
+            }
+            // an absolute url with another scheme (e.g. file:)
+            final int colon = href.indexOf(':');
+            if (colon > 0 && UrlUtils.isValidScheme(href.substring(0, colon))) {
+                return UrlUtils.toUrlUnsafe(href);
             }
             if (href.startsWith("//")) {
                 return new URL("%s:%s".formatted(url.getProtocol(), href));

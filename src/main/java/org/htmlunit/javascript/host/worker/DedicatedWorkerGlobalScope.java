@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.worker;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_WORKER_IMPORT_SCRIPTS_LOCAL_FILE_SECURITY_ERROR;
 import static org.htmlunit.BrowserVersionFeatures.JS_WORKER_SCRIPT_HONORS_CHARSET_HEADER;
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.TopLevel;
@@ -54,14 +56,19 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.WorkerJavaScriptConfiguration;
+import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScopeMixin;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
+import org.htmlunit.javascript.host.fetch.Fetch;
+import org.htmlunit.javascript.host.fetch.Headers;
 import org.htmlunit.javascript.host.media.MediaSource;
 import org.htmlunit.javascript.host.media.SourceBuffer;
 import org.htmlunit.javascript.host.media.SourceBufferList;
+import org.htmlunit.javascript.host.xml.FormData;
 import org.htmlunit.util.MimeType;
 
 /**
@@ -87,6 +94,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     private String name_;
     private final Worker worker_;
     private WorkerLocation workerLocation_;
+    private URL workerUrl_;
     private WorkerNavigator workerNavigator_;
 
     static {
@@ -176,6 +184,10 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         if (!webClient.getOptions().isWebSocketEnabled()) {
             delete("WebSocket");
         }
+
+        URLSearchParams.NativeParamsIterator.init(context, scope, "URLSearchParams Iterator");
+        FormData.FormDataIterator.init(context, scope, "FormData Iterator");
+        Headers.HeadersIterator.init(context, scope);
 
         setPrototypes(prototypes);
 
@@ -332,6 +344,52 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
     }
 
     /**
+     * Starts the process of fetching a resource from the network.
+     *
+     * @param input the resource to fetch - a url or a {@code Request}
+     * @param init the options (optional)
+     * @return a promise for the {@code Response}
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/fetch">MDN Documentation</a>
+     */
+    @JsxFunction
+    public NativePromise fetch(final Object input, final Object init) {
+        return Fetch.fetch(this, input, init);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BrowserVersion getBrowserVersion() {
+        if (owningWindow_ == null) {
+            return null;
+        }
+        return owningWindow_.getBrowserVersion();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the window that created this worker.
+     *
+     * @return the window
+     */
+    public Window getOwningWindow() {
+        return owningWindow_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the url of the worker script.
+     *
+     * @return the url or {@code null} if the script is not loaded so far
+     */
+    public URL getWorkerUrl() {
+        return workerUrl_;
+    }
+
+    /**
      * Imports one or more external scripts into the worker's scope.
      *
      * @param cx the current context
@@ -358,6 +416,22 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final HtmlPage page = (HtmlPage) owningWindow_.getDocument().getPage();
         final URL fullUrl = page.getFullyQualifiedUrl(url);
 
+        // like the browsers, a page not loaded from a file is not allowed to load a local file
+        if (!page.isLocalResourceAccessAllowed(fullUrl)) {
+            webClient.getIncorrectnessListener().notify("Not allowed to load local resource: " + fullUrl, this);
+            if (webClient.getBrowserVersion().hasFeature(JS_WORKER_IMPORT_SCRIPTS_LOCAL_FILE_SECURITY_ERROR)) {
+                throw JavaScriptEngine.asJavaScriptException(this,
+                        "The operation is insecure.", DOMException.SECURITY_ERR);
+            }
+            throw JavaScriptEngine.asJavaScriptException(this,
+                    "Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at '" + fullUrl
+                    + "' failed to load.", DOMException.NETWORK_ERR);
+        }
+
+        if (workerUrl_ == null) {
+            // the url of the worker script (and not of the imported scripts)
+            workerUrl_ = fullUrl;
+        }
         workerLocation_ = new WorkerLocation(fullUrl, origin_);
         workerLocation_.setParentScope(getParentScope());
         workerLocation_.setPrototype(getPrototype(workerLocation_.getClass()));

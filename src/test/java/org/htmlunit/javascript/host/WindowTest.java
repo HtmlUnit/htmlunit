@@ -471,6 +471,33 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
+     * A page not loaded from a file is not allowed to open a local file;
+     * no window is opened (Firefox throws).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            FF = "Error",
+            FF_ESR = "Error")
+    public void openWindow_localFile() throws Exception {
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/xhtml.html");
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var w = window.open('" + fileURL + "', 'foo');\n"
+            + "    alert(w);\n"
+            + "  } catch(e) { alert(e.name); }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+        assertEquals(1, getWebClient().getTopLevelWindows().size());
+    }
+
+    /**
      * Verifies that <tt>window.open</tt> behaves correctly when popups are blocked.
      * @throws Exception if an error occurs
      */

@@ -296,6 +296,12 @@ public final class ScriptElementSupport {
             return false;
         }
 
+        // scripting is disabled for sandboxed documents without 'allow-scripts'
+        // (iframe sandbox attribute or sandbox directive of the Content-Security-Policy)
+        if (htmlPage != null && !htmlPage.isSandboxAllowed("allow-scripts")) {
+            return false;
+        }
+
         // If the script node is nested in an iframe, a noframes, or a noscript node, we don't need to execute.
         for (DomNode o = element; o != null; o = o.getParentNode()) {
             if (o instanceof HtmlInlineFrame || o instanceof HtmlNoFrames) {

@@ -14,6 +14,7 @@
  */
 package org.htmlunit.protocol.data;
 
+import static java.nio.charset.StandardCharsets.US_ASCII;
 import static org.htmlunit.protocol.data.DataUrlDecoder.decodeDataURL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -91,5 +92,110 @@ public class DataURLDecoder2Test {
         ) {
             ImageIO.read(in);
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void contentType() throws Exception {
+        assertEquals("text/plain;charset=utf-8", decodeDataURL("data:text/plain;charset=utf-8,x").getContentType());
+        assertEquals("text/plain;charset=UTF-8", decodeDataURL("data:text/plain;charset=UTF-8,x").getContentType());
+        assertEquals("text/html", decodeDataURL("data:text/html,x").getContentType());
+        assertEquals("text/html;charset=utf-8",
+                decodeDataURL("data:Text/HTML;Charset=utf-8;base64,eA==").getContentType());
+        assertEquals("text/plain;charset=US-ASCII", decodeDataURL("data:,x").getContentType());
+        assertEquals("text/plain;charset=US-ASCII", decodeDataURL("data:invalid,x").getContentType());
+        assertEquals("text/plain;charset=utf-8", decodeDataURL("data:;charset=utf-8,x").getContentType());
+        assertEquals("text/plain", decodeDataURL("data:;,x").getContentType());
+        assertEquals("text/plain;charset=foo", decodeDataURL("data:text/plain;charset=foo,x").getContentType());
+    }
+
+    /**
+     * Tests the MIME type parsing and serialization like Chrome does it for data urls.
+     */
+    @Test
+    public void parseAndSerializeMimeType() {
+        assertEquals("text/plain", DataUrlDecoder.parseAndSerializeMimeType(" Text/Plain "));
+        assertEquals("text/plain;A=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain; A=b"));
+        assertEquals("text/plain;a=b;a=c", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;a=c"));
+        assertEquals("text/plain;A=b;a=c", DataUrlDecoder.parseAndSerializeMimeType("text/plain;A=b;a=c"));
+        assertEquals("text/plain;a=b;a=c;charset=foo",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;a=c"));
+        assertEquals("text/plain;a=b;charset=foo",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;charset=bar"));
+        assertEquals("text/plain;a=b;c=d;charset=foo",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;charset=foo;c=d"));
+        assertEquals("text/plain;a=;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=;a=b"));
+        assertEquals("text/plain;a=b c;a=d", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b c;a=d"));
+        assertEquals("text/plain;a=\"b\";a=d",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b;c\";a=d"));
+        assertEquals("text/plain;a=\"b c\"", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b c\""));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;d"));
+        assertEquals("text/plain;a b=c;d=e", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a b=c;d=e"));
+        assertEquals("text/plain;@=x;d=e", DataUrlDecoder.parseAndSerializeMimeType("text/plain;@=x;d=e"));
+        assertEquals("text/plain;c=d", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a = b;c=d"));
+        assertEquals("text/plain;a=\"b\\\"c\";d=e",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b\\\"c\";d=e"));
+        assertEquals("text/plain;charset=utf-8",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=\"utf-8\""));
+        Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("text"));
+        Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("/plain"));
+        Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("text/"));
+        Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType("te xt/plain"));
+        Assertions.assertNull(DataUrlDecoder.parseAndSerializeMimeType(""));
+    }
+
+    /**
+     * Tests the MIME type parsing and serialization like the MIME Sniffing Standard (and Firefox)
+     * does it for data urls; duplicate parameters are ignored, the charset stays in place.
+     */
+    @Test
+    public void parseAndSerializeMimeTypeStandard() {
+        assertEquals("text/plain", DataUrlDecoder.parseAndSerializeMimeType(" Text/Plain ", true));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;a=c", true));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;A=b;a=c", true));
+        assertEquals("text/plain;charset=foo;a=b",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;a=c", true));
+        assertEquals("text/plain;charset=foo;a=b",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;charset=foo;a=b;charset=bar", true));
+        assertEquals("text/plain;a=b;charset=foo;c=d",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;charset=foo;c=d", true));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=;a=b", true));
+        assertEquals("text/plain;a=\"b c\"",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b c;a=d", true));
+        assertEquals("text/plain;a=\"b;c\"",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b;c\";a=d", true));
+        assertEquals("text/plain;a=bc", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"bc\"x", true));
+        assertEquals("text/plain;a=\"b\\\"c\"",
+                DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=\"b\\\"c\"", true));
+        assertEquals("text/plain;a=b", DataUrlDecoder.parseAndSerializeMimeType("text/plain;a=b;c=;d", true));
+    }
+
+    /**
+     * Tests the content type with and without standard serialization.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void contentTypeStandardSerialization() throws Exception {
+        final DataUrlDecoder decoder = decodeDataURL("data:text/plain;charset=foo;a=b;a=c,x");
+        assertEquals("text/plain;a=b;a=c;charset=foo", decoder.getContentType());
+        assertEquals("text/plain;a=b;a=c;charset=foo", decoder.getContentType(false));
+        assertEquals("text/plain;charset=foo;a=b", decoder.getContentType(true));
+
+        // Firefox removes all whitespace from base64 data urls
+        final DataUrlDecoder spaces = decodeDataURL("data:text/plain ; a=\"b c\" ;base64,eA==");
+        assertEquals("text/plain;a=\"b c\"", spaces.getContentType(false));
+        assertEquals("text/plain;a=bc", spaces.getContentType(true));
+
+        // base64 is case-insensitive, spaces are allowed
+        final DataUrlDecoder upperCase = decodeDataURL("data:text/plain ; a=\"b c\" ; BASE64,eA==");
+        assertEquals("x", new String(upperCase.getBytes(), US_ASCII));
+        assertEquals("text/plain;a=\"b c\"", upperCase.getContentType(false));
+        assertEquals("text/plain;a=bc", upperCase.getContentType(true));
+
+        final DataUrlDecoder spacesNoBase64 = decodeDataURL("data:text/plain;a=\"b c\",x");
+        assertEquals("text/plain;a=\"b c\"", spacesNoBase64.getContentType(false));
+        assertEquals("text/plain;a=\"b c\"", spacesNoBase64.getContentType(true));
     }
 }

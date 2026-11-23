@@ -14,8 +14,15 @@
  */
 package org.htmlunit.javascript.host.event;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_SECURITY_POLICY_VIOLATION_CTOR_BUBBLES_COMPOSED;
+import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_SECURITY_POLICY_VIOLATION_POSITION_UNSIGNED;
+
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -51,8 +58,8 @@ public class SecurityPolicyViolationEvent extends Event {
     private String disposition_ = DISPOSITION_ENFORCE;
     private boolean composed_;
     private int statusCode_;
-    private int lineNumber_;
-    private int columnNumber_;
+    private long lineNumber_;
+    private long columnNumber_;
 
     /**
      * Default constructor used to build the prototype.
@@ -74,14 +81,41 @@ public class SecurityPolicyViolationEvent extends Event {
     }
 
     /**
-     * {@inheritDoc}
+     * JavaScript constructor.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param args the arguments (the type and the optional init dictionary)
+     * @param ctorObj the function object
+     * @param inNewExpr whether invoked via {@code new}
+     * @return the new event
      */
-    @Override
     @JsxConstructor
-    public void jsConstructor(final String type, final ScriptableObject details) {
+    public static SecurityPolicyViolationEvent jsConstructor(final Context cx, final VarScope scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
+        if (!inNewExpr) {
+            throw JavaScriptEngine.typeError("Failed to construct 'SecurityPolicyViolationEvent': Please use "
+                    + "the 'new' operator, this DOM object constructor cannot be called as a function.");
+        }
+        if (args.length < 1) {
+            throw JavaScriptEngine.typeError("Failed to construct 'SecurityPolicyViolationEvent': "
+                    + "1 argument required, but only 0 present.");
+        }
+
+        final SecurityPolicyViolationEvent event = new SecurityPolicyViolationEvent();
+        event.setParentScope(getTopLevelScope(scope));
+        event.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
+
+        final ScriptableObject details =
+                args.length > 1 && args[1] instanceof ScriptableObject so ? so : null;
+        event.init(JavaScriptEngine.toString(args[0]), details);
+        return event;
+    }
+
+    private void init(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
-        if (details != null && !JavaScriptEngine.isUndefined(details)) {
+        if (details != null) {
             composed_ = JavaScriptEngine.toBoolean(details.get("composed"));
 
             final Object documentURI = ScriptableObject.getProperty(details, "documentURI");
@@ -130,14 +164,30 @@ public class SecurityPolicyViolationEvent extends Event {
             if (isSet(statusCode)) {
                 statusCode_ = JavaScriptEngine.toInt32(statusCode);
             }
+
+            // Firefox uses unsigned long for the position (-1 is 4294967295)
+            final boolean unsigned =
+                    getBrowserVersion().hasFeature(JS_EVENT_SECURITY_POLICY_VIOLATION_POSITION_UNSIGNED);
             final Object lineNumber = ScriptableObject.getProperty(details, "lineNumber");
             if (isSet(lineNumber)) {
-                lineNumber_ = JavaScriptEngine.toInt32(lineNumber);
+                lineNumber_ = unsigned
+                        ? JavaScriptEngine.toUint32(lineNumber)
+                        : JavaScriptEngine.toInt32(lineNumber);
             }
             final Object columnNumber = ScriptableObject.getProperty(details, "columnNumber");
             if (isSet(columnNumber)) {
-                columnNumber_ = JavaScriptEngine.toInt32(columnNumber);
+                columnNumber_ = unsigned
+                        ? JavaScriptEngine.toUint32(columnNumber)
+                        : JavaScriptEngine.toInt32(columnNumber);
             }
+        }
+
+        // Chrome ignores the bubbles, cancelable and composed init values;
+        // the event always bubbles, is composed and is not cancelable
+        if (getBrowserVersion().hasFeature(JS_EVENT_SECURITY_POLICY_VIOLATION_CTOR_BUBBLES_COMPOSED)) {
+            setBubbles(true);
+            setCancelable(false);
+            composed_ = true;
         }
     }
 
@@ -353,7 +403,7 @@ public class SecurityPolicyViolationEvent extends Event {
      * @return the lineNumber
      */
     @JsxGetter
-    public int getLineNumber() {
+    public long getLineNumber() {
         return lineNumber_;
     }
 
@@ -372,7 +422,7 @@ public class SecurityPolicyViolationEvent extends Event {
      * @return the columnNumber
      */
     @JsxGetter
-    public int getColumnNumber() {
+    public long getColumnNumber() {
         return columnNumber_;
     }
 

@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,12 +34,18 @@ import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link HtmlAnchor}.
@@ -878,4 +885,89 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
+    /**
+     * A page loaded from a url with credentials (user info): what the page sees of its url
+     * and the Ping-From and Ping-To headers of a ping. The alerts are document.URL, location.href,
+     * location.origin and the Ping-From and Ping-To headers received by the server ('null' if not sent).
+     * <p>Real Firefox asks before it opens a url with credentials (and does not send pings);
+     * therefore this test does not run with Firefox.</p>
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"http://user:secret@localhost:§§PORT§§/page.html",
+             "http://localhost:§§PORT§§/page.html",
+             "http://localhost:§§PORT§§",
+             "http://user:secret@localhost:§§PORT§§/page.html",
+             "http://joe:pw@localhost:§§PORT§§/target.html?q=1#frag"})
+    public void pingWithCredentials() throws Exception {
+        // there is no recording for Firefox
+        Assumptions.assumeFalse(getBrowserVersion().isFirefox(),
+                "real Firefox asks before it opens a url with credentials");
+
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.URL);\n"
+            + "  log(location.href);\n"
+            + "  log(location.origin);\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <a href='http://joe:pw@localhost:" + PORT + "/target.html?q=1#frag' ping='pingWithCredentials'>"
+                    + "clickMe</a>\n"
+            + "</body></html>";
+
+        final URL pageUrl = new URL("http://localhost:" + PORT + "/page.html");
+        // the servers see the urls without credentials
+        getMockWebConnection().setResponse(pageUrl, html);
+        getMockWebConnection().setResponse(new URL("http://localhost:" + PORT + "/target.html?q=1"), "target");
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/pingWithCredentials", PingHeadersServlet.class);
+        PingHeadersServlet.PING_FROM_ = null;
+        PingHeadersServlet.PING_TO_ = null;
+
+        final WebDriver driver = loadPage2(html,
+                new URL("http://user:secret@localhost:" + PORT + "/page.html"), servlets);
+        final String title = driver.getTitle();
+
+        driver.findElement(By.linkText("clickMe")).click();
+
+        // the browsers send the ping in parallel to the navigation; wait for it
+        // (if a ping is expected - the fourth alert is the Ping-From header)
+        final String[] expectedAlerts = getExpectedAlerts();
+        if (expectedAlerts.length < 4 || !"null".equals(expectedAlerts[3])) {
+            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
+            while (PingHeadersServlet.PING_FROM_ == null && System.currentTimeMillis() < maxWait) {
+                Thread.sleep(50);
+            }
+        }
+
+        final StringBuilder expected = new StringBuilder();
+        for (final String alert : getExpectedAlerts()) {
+            expected.append(alert).append('\u00a7');
+        }
+        assertEquals(expected.toString(),
+                title + PingHeadersServlet.PING_FROM_ + '\u00a7' + PingHeadersServlet.PING_TO_ + '\u00a7');
+    }
+
+    /**
+     * Servlet for {@link #pingWithCredentials()}; remembers the ping headers.
+     */
+    public static class PingHeadersServlet extends HttpServlet {
+        private static volatile String PING_FROM_;
+        private static volatile String PING_TO_;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response) {
+            PING_FROM_ = request.getHeader(HttpHeader.PING_FROM);
+            PING_TO_ = request.getHeader(HttpHeader.PING_TO);
+        }
+    }
 }

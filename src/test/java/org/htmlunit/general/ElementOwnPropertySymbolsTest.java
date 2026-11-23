@@ -2771,8 +2771,9 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionErrorEvent]",
-            FF = "ReferenceError",
+            FF = "TypeError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionErrorEvent]")
     public void speechRecognitionErrorEvent() throws Exception {
         testString("", "new SpeechRecognitionErrorEvent('event')");
     }
@@ -2926,6 +2927,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             EDGE = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionErrorEvent]",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionErrorEvent]")
     public void webkitSpeechRecognitionError() throws Exception {
         testString("", "new webkitSpeechRecognitionError('webkitSpeechRecognition')");
     }
@@ -2940,6 +2942,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             EDGE = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionEvent]",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionEvent]")
     public void webkitSpeechRecognitionEvent() throws Exception {
         testString("", "new webkitSpeechRecognitionEvent('webkitSpeechRecognition')");
     }

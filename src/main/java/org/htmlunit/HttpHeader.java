@@ -28,6 +28,9 @@ public final class HttpHeader {
     /** referer. */
     public static final String REFERER_LC = "referer";
 
+    /** Referrer-Policy. */
+    public static final String REFERRER_POLICY = "Referrer-Policy";
+
     /** Origin. */
     public static final String ORIGIN = "Origin";
     /** origin. */
@@ -144,6 +147,8 @@ public final class HttpHeader {
     public static final String ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
     /** Access-Control-Allow-Methods. */
     public static final String ACCESS_CONTROL_ALLOW_METHODS = "Access-Control-Allow-Methods";
+    /** Access-Control-Expose-Headers. */
+    public static final String ACCESS_CONTROL_EXPOSE_HEADERS = "Access-Control-Expose-Headers";
 
     /** Ping-From. */
     public static final String PING_FROM = "Ping-From";

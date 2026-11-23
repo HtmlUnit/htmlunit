@@ -14,6 +14,8 @@
  */
 package org.htmlunit;
 
+import java.io.Serializable;
+
 import org.htmlunit.html.BaseFrameElement;
 
 /**
@@ -24,7 +26,7 @@ import org.htmlunit.html.BaseFrameElement;
  * @author Ronald Brill
  */
 @FunctionalInterface
-public interface FrameContentHandler {
+public interface FrameContentHandler extends Serializable {
 
     /**
      * Called to decide if the content (referred from the source attribute)

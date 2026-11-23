@@ -7,12 +7,337 @@
     </properties>
 
     <body>
-        <release version="5.9.0" date="xxxx xx, 2026" description="Bugfixes">
+        <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
             <action type="add" dev="Ronny Shapiro">
                 New option WebClientOptions.setHtmlFragmentSelfClosingTagsAllowed(); when enabled, the fragment parser
                 of html pages (e.g. setInnerHtml()) closes a non void element or iframe written as empty-element
                 tag (e.g. &lt;h3/&gt;) like up to version 5.5.0. This allows applications to read back markup written by
                 asXml() before 5.8.0. The option is disabled by default (like the browsers).
+            </action>
+            <action type="fix" dev="rbri">
+                The files stored by the DownloadingAttachmentHandler are readable for the owner only (by default
+                they are stored in the shared temp directory). The report folder of the DebuggingWebConnection is
+                no longer used if someone else created it in the meantime.
+            </action>
+            <action type="fix" dev="Vidya m">
+                A response that exceeds the max in memory size is stored in a temporary file that is only
+                readable by the owner; so far the file was created in the shared temp directory with the
+                default permissions (world readable on Posix systems). The same for the report folder of
+                the DebuggingWebConnection.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Skip holes of the array returned by the flatMap callback.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Skip for-in properties shadowed by non-enumerable properties.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix Number.prototype.toPrecision for values below 0.1 that need padding zeros.
+            </action>
+            <action type="fix" dev="rbri">
+                The protocol setters (URL, HTMLAnchorElement, HTMLAreaElement, location) follow the rules of the
+                URL Standard: the scheme is not changed to 'file' if the url has credentials or a port, not
+                from 'file' if the host is empty and not between special and not special schemes.
+                Like the HTML Standard, location.protocol throws a SyntaxError for an invalid scheme and
+                navigates only to http(s) urls (before e.g. 'file:' or 'foo:' was navigated).
+            </action>
+            <action type="fix" dev="rbri">
+                URL.href and the href of anchors and areas serialize file urls without host like the URL
+                Standard ('file:///C:/a', before 'file:/C:/a'). When simulating Firefox, file urls of URL objects
+                have no host (like Firefox) and setting location.protocol does not reload the page if the url
+                is not changed.
+            </action>
+            <action type="fix" dev="rbri">
+                Like the browsers, a page not loaded from a file is not allowed to load scripts, images,
+                stylesheets (also @import), workers and importScripts() from local files (file urls);
+                the load fails like a network error. new Worker() throws a SecurityError (Firefox fires the
+                error event), importScripts() throws a NetworkError (Firefox a SecurityError). Like Chrome/Edge,
+                a page loaded from a file is not allowed to start a worker from a local file.
+            </action>
+            <action type="fix" dev="rbri">
+                When simulating Firefox, the MIME type of data urls is serialized like the MIME Sniffing Standard
+                does it (duplicate parameters are ignored, the charset parameter stays in place); like Firefox all
+                whitespace is removed from the MIME type of base64 data urls. When simulating Chrome/Edge the
+                parameters are kept like Chrome does it (names and values unchanged, split at every semicolon).
+            </action>
+            <action type="fix" dev="rbri">
+                The ';base64' marker of data urls is case-insensitive and may be surrounded by spaces
+                (e.g. 'data:text/plain ; BASE64,eA==').
+            </action>
+            <action type="fix" dev="rbri">
+                When simulating Firefox, the content type of a file with the extension 'properties' is text/plain
+                (file uploads, File.type); like Firefox' built-in mapping.
+            </action>
+            <action type="update" dev="rbri">
+                Chrome 158 no longer supports the XSLTProcessor javascript object.
+            </action>
+            <action type="fix" dev="rbri">
+                Local files (file urls): about:blank and about:srcdoc documents are checked with the origin of
+                their creator (e.g. an about:blank popup opened by a page loaded from a file is allowed to load
+                local files); the Location setters (e.g. protocol) check the page of the running script like
+                location.href does.
+            </action>
+            <action type="fix" dev="rbri">
+                Like the browsers, window.open() of a local file (file url) from a page that was not loaded from
+                a file opens no window and returns null (before an empty window was opened); an existing window
+                with this name is not navigated and returned (before it was navigated to about:blank); when simulating
+                Firefox an Error is thrown.
+            </action>
+            <action type="fix" dev="rbri">
+                Like the browsers (Fetch standard), a redirect to an url that is not http(s) (e.g. a local file)
+                is a network error; before the url was handed over to the web connection.
+            </action>
+            <action type="fix" dev="rbri">
+                The href of the base element may be an absolute url with any scheme (e.g. file:); before such an
+                url was appended to the url of the page if this url ends with a slash.
+            </action>
+            <action type="update" dev="Vidya m">
+                Like in the browsers, a page that was not loaded from a file is no longer able to load a local
+                file (file url) into a frame or window by setting the location, using window.open(), clicking
+                a link, submitting a form or a refresh; this was only blocked for the src attribute of frames.
+            </action>
+            <action type="update" dev="rbri">
+                csp: when simulating Chrome/Edge, a WebSocket blocked by connect-src fires only the error event
+                and no close event (like Chrome/Edge 158).
+            </action>
+            <action type="fix" dev="Vidya m">
+                XMLHttpRequest and fetch(): cross-origin requests send the CORS preflight if the value of the
+                Accept, Accept-Language, Content-Language or Content-Type header is not CORS-safelisted
+                (e.g. 'Content-Type: application/x-www-form-urlencoded+json'); before only the name and the
+                prefix of the content type were checked.
+            </action>
+            <action type="fix" dev="rbri">
+                XMLHttpRequest and fetch(): like the browsers (Fetch standard), a Range header with a simple range
+                (e.g. 'bytes=0-499') does not require a CORS preflight.
+            </action>
+            <action type="fix" dev="Vidya m">
+                XMLHttpRequest and fetch(): cross-origin requests send the CORS preflight if the value of the
+                Accept, Accept-Language, Content-Language or Content-Type header is not CORS-safelisted
+                (e.g. 'Content-Type: application/x-www-form-urlencoded+json'); before only the name and the
+                prefix of the content type were checked.
+            </action>
+            <action type="fix" dev="rbri">
+                fetch() and XMLHttpRequest.setRequestHeader() ignore the method override headers (X-HTTP-Method,
+                X-HTTP-Method-Override, X-Method-Override) if the value contains a forbidden method (CONNECT, TRACE,
+                TRACK) like the browsers; XMLHttpRequest uses the forbidden request headers of fetch().
+            </action>
+            <action type="fix" dev="rbri">
+                XMLHttpRequest.setRequestHeader() allows the Content-Transfer-Encoding header; when simulating Firefox
+                setRequestHeader() and fetch() allow the User-Agent header (Chrome/Edge ignore it) like the browsers.
+            </action>
+            <action type="fix" dev="Vidya m">
+                XMLHttpRequest.setRequestHeader() ignores the forbidden request headers Origin, DNT, Set-Cookie,
+                Access-Control-Request-Headers and Access-Control-Request-Method like the browsers; a page was able
+                to replace the Origin header and by this pass the CORS check of a server that trusts another origin.
+            </action>
+            <action type="fix" dev="Vidya m">
+                navigator.sendBeacon(): a beacon whose body has a type that is not CORS-safelisted (e.g. a Blob of
+                type application/json) is a cors request; it is only sent to another origin if the preflight allows it.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: when simulating Chrome/Edge, the securitypolicyviolation event for an XMLHttpRequest blocked
+                because of the redirect target is fired after the error event (like Chrome).
+            </action>
+            <action type="fix" dev="rbri">
+                SecurityPolicyViolationEvent constructor: throws a TypeError if called without type or without new;
+                when simulating Chrome/Edge the event always bubbles, is composed and is not cancelable;
+                when simulating Firefox lineNumber and columnNumber are unsigned.
+            </action>
+            <action type="add" dev="rbri">
+                csp: new option WebClientOptions.setContentSecurityPolicyReportsEnabled(boolean) (default true);
+                if disabled, the violation reports are not sent to the uris of the report-uri directive.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: a sandbox directive delivered by a Content-Security-Policy-Report-Only header is ignored
+                (no violations are reported); the sandbox directive of an enforced policy no longer
+                produces violations (the document is sandboxed instead).
+            </action>
+            <action type="fix" dev="rbri">
+                csp: the path of form-action sources is ignored for the redirect targets of a form submission;
+                when simulating Firefox, the redirects of a form submission are not checked against form-action.
+            </action>
+            <action type="update" dev="rbri">
+                htmlunit-csp: INCOMPATIBLE CHANGE: the sandbox directive no longer makes allowsExternalScript(),
+                allowsInlineScript(), allowsScriptAsAttribute() and allowsFormAction() return false; the user agent
+                has to apply the sandbox flags itself (Policy.sandbox() still returns the tokens).
+            </action>
+            <action type="add" dev="rbri">
+                htmlunit-csp: New Policy/PolicyList.allowsFormAction(to, origin, redirected) checks a single request
+                of a form submission; the path of form-action sources is not compared for redirect targets.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: like the browsers, the path part of the source expressions is ignored for the redirect targets
+                of scripts, stylesheets, images and connections (XMLHttpRequest, fetch).
+            </action>
+            <action type="fix" dev="rbri">
+                csp: the sandbox directive of an enforced policy delivered by a header sandboxes the document
+                (like the sandbox attribute of an iframe); e.g. without 'allow-scripts' no script is executed
+                and without 'allow-same-origin' the document has an opaque origin.
+            </action>
+            <action type="update" dev="rbri">
+                htmlunit-csp: 5.9.0-SNAPSHOT.
+            </action>
+            <action type="fix" dev="rbri">
+                htmlunit-csp: The path part of a source expression is no longer compared for redirected requests
+                (CSP3 "Does url match expression in origin with redirect count"). New overloads with a trailing
+                boolean redirected for the URL-based allows* queries and doesUrlMatchSourceListInOrigin();
+                allowsNavigation() ignores the path of redirectedTo.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: data: urls of external scripts and stylesheets are matched by scheme sources (e.g. data:)
+                like in the browsers (they were always blocked); like the browsers, only the scheme is reported
+                as blocked uri for such urls.
+            </action>
+            <action type="fix" dev="rbri">
+                csp: when simulating Chrome/Edge, leading and trailing whitespace of the nonce attribute is ignored.
+            </action>
+            <action type="fix" dev="rbri">
+                HtmlRangeInput: no floating point artifacts (e.g. 0.30000000000000004) for fractional steps,
+                correct rounding to the step and the value is never greater than max.
+            </action>
+            <action type="update" dev="rbri">
+                The interface ContentSecurityPolicyViolationListener extends Serializable
+                (like the other handlers of the WebClient); a WebClient using it can be serialized.
+            </action>
+            <action type="fix" dev="rbri">
+                HtmlRangeInput: values outside of the int range are no longer truncated.
+            </action>
+            <action type="fix" dev="rbri">
+                A page with a NodeIterator or a TreeWalker using a javascript filter can be serialized.
+            </action>
+            <action type="update" dev="rbri">
+                The interfaces FrameContentHandler, HTMLParserListener and ScriptPreProcessor extend Serializable
+                (like the other handlers of the WebClient); a WebClient using them can be serialized.
+            </action>
+            <action type="add" dev="rbri">
+                Intl.NumberFormat: formatToParts(), formatRange() and formatRangeToParts() implemented.
+            </action>
+            <action type="add" dev="rbri">
+                Intl.NumberFormat: support of the options (style percent, currency and unit, currencyDisplay,
+                currencySign, notation scientific, engineering and compact, the digit and rounding options,
+                useGrouping, signDisplay and numberingSystem); format is a bound getter like in the browsers,
+                resolvedOptions() provides all values. The unit names are English only.
+            </action>
+            <action type="add" dev="rbri">
+                Intl.Collator: support of the options usage, sensitivity, ignorePunctuation, numeric, caseFirst
+                and collation (and the unicode extensions co, kf and kn of the locale); the collations
+                German phonebook (phonebk) and traditional Spanish (trad) are supported.
+            </action>
+            <action type="fix" dev="rbri">
+                Intl.DateTimeFormat and Intl.NumberFormat: resolvedOptions().locale is the resolved locale
+                (e.g. 'de' for 'de-XX') including the relevant unicode extensions ('ca', 'hc' and 'nu' for
+                DateTimeFormat, 'nu' for NumberFormat); NumberFormat.resolvedOptions() provides the locale.
+            </action>
+            <action type="add" dev="rbri">
+                Intl.Collator: the locales argument is supported; compare (based on java.text.Collator),
+                resolvedOptions() and supportedLocalesOf() are available. The options are not supported so far.
+            </action>
+            <action type="fix" dev="rbri">
+                Intl.DateTimeFormat and Intl.NumberFormat: if more than one locale is requested, the first
+                supported one is used (and not the last one with a known format); unsupported locales
+                (e.g. 'ban') are skipped like in the browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                Intl: the locales argument of Intl.Collator, Intl.DateTimeFormat, Intl.NumberFormat,
+                Intl.v8BreakIterator and of the supportedLocalesOf() functions is processed like
+                Intl.getCanonicalLocales() does it (canonicalized language tags, array like objects,
+                Intl.Locale objects, TypeError/RangeError for invalid arguments).
+            </action>
+            <action type="add" dev="rbri">
+                fetch() is available in dedicated workers; relative urls are resolved against the url of the
+                worker script. The iterators of Headers, URLSearchParams and FormData are available in workers too.
+            </action>
+            <action type="add" dev="rbri">
+                fetch(): support of the request mode 'no-cors' (opaque responses and the restricted request
+                headers), the cache modes, subresource integrity and the body size limit of keepalive requests.
+            </action>
+            <action type="add" dev="rbri">
+                fetch() supports requests to other origins (CORS) in the mode 'cors': preflight requests,
+                the credentials modes, redirects to other origins and the filtering of the response headers
+                (Access-Control-Expose-Headers); the response type is 'cors'.
+            </action>
+            <action type="fix" dev="rbri">
+                The content type of data urls is serialized like the browsers do it (e.g. the charset is no longer
+                normalized and not added if missing; 'text/plain;charset=US-ASCII' for urls without a valid MIME type).
+            </action>
+            <action type="add" dev="rbri">
+                Native fetch() support (first step): requests to the origin of the page and to data:/blob: urls,
+                redirects, abort signals, the redirect modes 'error' and 'manual'. Requests to other origins
+                are still rejected (no CORS support so far). The fetch polyfill is still available as option
+                and replaces the native implementation if enabled.
+            </action>
+            <action type="fix" dev="rbri">
+                FormData get(), getAll(), forEach() and the iterators are returning File objects for file entries
+                (instead of strings); like in the browsers blobs are converted to files.
+            </action>
+            <action type="add" dev="rbri">
+                Request and Response implemented (without network access): constructors with the init validation,
+                clone(), the body methods text(), json(), arrayBuffer(), bytes(), blob() and formData(), bodyUsed,
+                Response.error(), Response.redirect() and Response.json().
+            </action>
+            <action type="add" dev="rbri">
+                Headers implemented (constructor from Headers, sequence and record, append(), set(), delete(), get(),
+                has(), getSetCookie(), forEach() and the iterators with the sort-and-combine semantics, name and value
+                validation).
+            </action>
+            <action type="add" dev="rbri">
+                AbortController and AbortSignal implemented (abort() with reason, aborted, reason, throwIfAborted(),
+                onabort and the abort event, AbortSignal.abort(), AbortSignal.timeout() and AbortSignal.any()).
+            </action>
+            <action type="add" dev="rbri">
+                Referrer policy support: the Referer header (and document.referrer) is determined by the
+                referrer policy (default 'strict-origin-when-cross-origin', only the origin is sent to other origins);
+                the policy is taken from the Referrer-Policy header, meta elements with the name 'referrer' and the
+                referrerpolicy attribute (a, area, iframe, img, link, script).
+            </action>
+            <action type="fix" dev="rbri">
+                Like in the browsers, location.href (and location.toString()) no longer contains the user name and
+                password of the page url (document.URL still does).
+            </action>
+            <action type="fix" dev="rbri">
+                The Origin header of a crossorigin script request is the origin of the document (and not the one
+                of the script); for a cross-origin script it is sent for all browsers.
+            </action>
+            <action type="fix" dev="Vidya m">
+                The Referer and Origin request headers (and by this document.referrer and the origin of
+                message events and WebSocket requests) no longer contain the user name and password of the
+                page url; the credentials of a page like http://user:password@host/ were sent to every site
+                the page referenced.
+            </action>
+            <action type="fix" dev="rbri">
+                A document without browsing context (created by DOMImplementation.createHTMLDocument(),
+                DOMImplementation.createDocument() or DOMParser) is cookie-averse like in the browsers: document.cookie
+                returns an empty string and setting is ignored (instead of an IllegalArgumentException).
+            </action>
+            <action type="fix" dev="rbri">
+                An image of a document without browsing context (created by DOMImplementation.createHTMLDocument() or
+                DOMParser) is not loaded and fires no events like in the browsers; the image is loaded if it is
+                imported into the page.
+            </action>
+            <action type="add" dev="rbri">
+                Property window.origin (replaceable; about:blank and about:srcdoc documents have the origin of
+                the creator, sandboxed documents without 'allow-same-origin' the origin 'null').
+            </action>
+            <action type="add" dev="rbri">
+                Method DOMTokenList.toString().
+            </action>
+            <action type="fix" dev="rbri">
+                XMLHttpRequest.getResponseHeader() and XMLHttpRequest.getAllResponseHeaders() (and by this the
+                headers of fetch() responses) of a cross-origin response expose only the CORS-safelisted response
+                headers and the headers listed in Access-Control-Expose-Headers (the wildcard '*' only for requests
+                without credentials).
+            </action>
+            <action type="fix" dev="Vidya m">
+                XMLHttpRequest.getResponseHeader() and XMLHttpRequest.getAllResponseHeaders() (and by this the
+                headers of fetch() responses) no longer expose the Set-Cookie and Set-Cookie2 headers; the value
+                of HttpOnly cookies was readable from JavaScript.
+            </action>
+            <action type="add" dev="rbri">
+                Support for the sandbox attribute of iframes (and the HTMLIFrameElement.sandbox property): no scripts
+                without 'allow-scripts', no form submission without 'allow-forms', no popups without 'allow-popups',
+                no navigation of the top window without 'allow-top-navigation'; without 'allow-same-origin' the
+                document has an opaque origin (no cookies, no storage, contentDocument is null, message origin 'null').
+                DOMTokenList.supports() is available for the sandbox tokens.
             </action>
             <action type="add" dev="rbri">
                 Support for the srcdoc attribute of iframes (and the HTMLIFrameElement.srcdoc property); the

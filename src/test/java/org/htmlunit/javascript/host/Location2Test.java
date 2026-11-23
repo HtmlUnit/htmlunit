@@ -25,6 +25,7 @@ import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
@@ -1475,6 +1476,12 @@ public class Location2Test extends WebDriverTestCase {
     }
 
     /**
+     * Reloads the result of a POST request; the POST request is sent again.
+     * Firefox asks whether to resend the data; the driver dismisses this prompt
+     * (unhandledPromptBehavior), therefore there is no reload with the real Firefox.
+     * When the prompt is accepted, Firefox sends the referrer of the original request
+     * (HtmlUnit simulates that).
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1483,6 +1490,10 @@ public class Location2Test extends WebDriverTestCase {
             FF = {"1", "2", "3", "a.html?urlParam=urlVal",
                   "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"},
             FF_ESR = {"1", "2", "3", "a.html?urlParam=urlVal",
+                      "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"})
+    @BuggyWebDriver(FF = {"1", "2", "2", "a.html?urlParam=urlVal",
+                          "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"},
+            FF_ESR = {"1", "2", "2", "a.html?urlParam=urlVal",
                       "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"})
     public void reloadPost() throws Exception {
         final String form = DOCTYPE_HTML
@@ -1761,5 +1772,94 @@ public class Location2Test extends WebDriverTestCase {
         driver.navigate().refresh();
         assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
         assertEquals(0, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * Setting location.protocol to an invalid scheme.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SyntaxError/DOMException",
+                      "loads 1"})
+    public void setProtocolInvalid() throws Exception {
+        setFrameProtocol("1x");
+    }
+
+    /**
+     * Setting location.protocol to an empty string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SyntaxError/DOMException",
+                      "loads 1"})
+    public void setProtocolEmpty() throws Exception {
+        setFrameProtocol("");
+    }
+
+    /**
+     * Setting location.protocol to 'ftp' (no http(s) scheme, no navigation).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"http:",
+                      "loads 1"})
+    public void setProtocolFtp() throws Exception {
+        setFrameProtocol("ftp");
+    }
+
+    /**
+     * Setting location.protocol to 'file' for an url with a port (the scheme is not changed,
+     * the url is navigated again).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"http:",
+                                "loads 2"},
+            FF = {"http:",
+                  "loads 1"},
+            FF_ESR = {"http:",
+                      "loads 1"})
+    public void setProtocolFileWithPort() throws Exception {
+        setFrameProtocol("file");
+    }
+
+    /**
+     * Setting location.protocol to a not special scheme (the scheme is not changed).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"http:",
+                                "loads 2"},
+            FF = {"http:",
+                  "loads 1"},
+            FF_ESR = {"http:",
+                      "loads 1"})
+    public void setProtocolNotSpecial() throws Exception {
+        setFrameProtocol("foo");
+    }
+
+    /**
+     * Sets the protocol of the location of a frame; logs the exception, the protocol and
+     * the number of loads of the frame.
+     */
+    private void setFrameProtocol(final String protocol) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var loads = 0;\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      frames.f.location.protocol = '" + protocol + "';\n"
+            + "      log(frames.f.location.protocol);\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "    setTimeout(function() { log('loads ' + loads); }, 500);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<iframe name='f' src='" + URL_SECOND + "' onload='loads++'></iframe>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, DOCTYPE_HTML + "<html><body>frame</body></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 }

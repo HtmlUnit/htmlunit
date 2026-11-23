@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
+import static org.htmlunit.BrowserVersionFeatures.JS_URL_FILE_WITHOUT_HOST;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
@@ -189,7 +190,7 @@ public class HTMLAreaElement extends HTMLElement {
         }
 
         try {
-            return getUrl().toString();
+            return UrlUtils.serialize(getUrl());
         }
         catch (final MalformedURLException e) {
             return hrefAttr;
@@ -226,7 +227,8 @@ public class HTMLAreaElement extends HTMLElement {
      */
     @JsxSetter
     public void setProtocol(final String protocol) throws Exception {
-        final URL result = HTMLHyperlinkElementUtils.setProtocol(getUrl(), protocol);
+        final URL result = HTMLHyperlinkElementUtils.setProtocol(getUrl(), protocol,
+                getBrowserVersion().hasFeature(JS_URL_FILE_WITHOUT_HOST));
         if (result != null) {
             setUrl(result);
         }

@@ -22,10 +22,9 @@ import org.htmlunit.html.HtmlPage;
  * A {@link ScriptPreProcessor} implementation that applies compatibility patches to
  * htmx 2.0.3 - 2.0.10 versions of the htmx JavaScript library.
  * <p>
- * This preprocessor rewrites certain ECMAScript syntax constructs
- * (such as spread operator usage in array push and for-of loops over array copies)
- * to equivalent ES5-compatible code. This is necessary because these features are
- * not yet supported by the JavaScript engine htmlunit-corejs (Rhino).
+ * This preprocessor rewrites the spread syntax in function call arguments
+ * (used with array push) to equivalent ES5-compatible code. This is necessary because
+ * spread in call arguments is not yet supported by the JavaScript engine htmlunit-corejs (Rhino).
  * </p>
  * <p>
  * The class can be chained with other {@link ScriptPreProcessor} instances via its constructor.
@@ -34,9 +33,10 @@ import org.htmlunit.html.HtmlPage;
  * Supported patches include:
  * </p>
  * <ul>
- *   <li>Replacing <code>result.push(...toArray(...))</code> with <code>result.push.apply(result, toArray(...))</code></li>
- *   <li>Replacing <code>result.push(...findAttributeTargets(...))</code> with <code>result.push.apply(result, findAttributeTargets(...))</code></li>
- *   <li>Replacing <code>for (const preservedElt of [...pantry.children])</code> with <code>for (const preservedElt of Array.from(pantry.children))</code></li>
+ *   <li>Replacing <code>result.push(...toArray(...))</code>
+ *       with <code>result.push.apply(result, toArray(...))</code></li>
+ *   <li>Replacing <code>result.push(...findAttributeTargets(...))</code>
+ *       with <code>result.push.apply(result, findAttributeTargets(...))</code></li>
  *   <li>Similar replacements for minified htmx scripts (e.g., <code>htmx.min.js</code>)</li>
  * </ul>
  * <p>
@@ -88,10 +88,6 @@ public class HtmxTwoZeroSevenScriptPreProcessor implements ScriptPreProcessor {
             patchedSourceCode = patchedSourceCode.replace(
                     "result.push(...findAttributeTargets(eltToInheritFrom, attrName))",
                     "result.push.apply(result, findAttributeTargets(eltToInheritFrom, attrName))");
-
-            patchedSourceCode = patchedSourceCode.replace(
-                    "for (const preservedElt of [...pantry.children]) {",
-                    "for (const preservedElt of Array.from(pantry.children)) {");
         }
         else if (sourceName.contains("/htmx.min.js") && !sourceName.contains("/htmx.min.js#")) {
             // 2.0.4
@@ -107,10 +103,6 @@ public class HtmxTwoZeroSevenScriptPreProcessor implements ScriptPreProcessor {
             patchedSourceCode = patchedSourceCode.replace(
                     "r.push(...we(i,n))",
                     "r.push.apply(r,we(i,n))");
-
-            patchedSourceCode = patchedSourceCode.replace(
-                    "for(const t of[...e.children]){",
-                    "for(const t of Array.from(e.children)){");
 
             // 2.0.10
             patchedSourceCode = patchedSourceCode.replace(

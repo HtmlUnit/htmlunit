@@ -436,6 +436,30 @@ public class ContentSecurityPolicyStyleTest extends WebDriverTestCase {
     }
 
     /**
+     * Data url stylesheet allowed by the data: scheme source.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"load", "rgb(255, 0, 0)"})
+    public void link_dataScheme() throws Exception {
+        loadPageVerify("style-src 'self' data:", "", DIV,
+                "addLink('data:text/css,' + encodeURIComponent('" + RED_CSS + "'));\n");
+    }
+
+    /**
+     * Data url stylesheet; the wildcard does not match data urls.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error", "rgb(0, 0, 0)","violation style-src-elem data enforce"})
+    public void link_starDataUrl() throws Exception {
+        loadPageVerify("style-src 'self' *", "", DIV,
+                "addLink('data:text/css,' + encodeURIComponent('" + RED_CSS + "'));\n");
+    }
+
+    /**
      * Cross origin stylesheet allowed by a nonce.
      *
      * @throws Exception if the test fails

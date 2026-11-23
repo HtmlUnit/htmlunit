@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.CSP_FORM_ACTION_REDIRECTS_NOT_CHECKED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_IGNORE_REL_NOREFERRER;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 
@@ -128,6 +129,13 @@ public class HtmlForm extends HtmlElement {
      */
     public void submit(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
+        if (!htmlPage.isSandboxAllowed("allow-forms")) {
+            // a sandboxed document without 'allow-forms' does not submit forms
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Form submission blocked because the document is sandboxed.");
+            }
+            return;
+        }
         final WebClient webClient = htmlPage.getWebClient();
 
         if (webClient.isJavaScriptEnabled()) {
@@ -203,13 +211,21 @@ public class HtmlForm extends HtmlElement {
         // upgrade-insecure-requests of the Content-Security-Policy
         request.setUrl(ContentSecurityPolicy.upgradeInsecureRequest(htmlPage, request.getUrl()));
         final URL url = request.getUrl();
+        // accessing to local resource is forbidden for security reason
+        if (!htmlPage.isLocalResourceAccessAllowed(url)) {
+            notifyIncorrectness("Not allowed to load local resource: " + url);
+            return;
+        }
         if (!ContentSecurityPolicy.allowsFormAction(htmlPage, url, url)) {
             return;
         }
-        // like Chrome, redirects are checked (and upgraded) also; the url of the form submission is reported
+        // redirects are upgraded also; Chrome checks the redirects (the url of the form submission
+        // is reported), Firefox does not
         ContentSecurityPolicy.upgradeInsecureRedirects(htmlPage, request);
-        request.setRedirectFilter(
-                redirectUrl -> ContentSecurityPolicy.allowsFormAction(htmlPage, redirectUrl, url));
+        if (!htmlPage.getWebClient().getBrowserVersion().hasFeature(CSP_FORM_ACTION_REDIRECTS_NOT_CHECKED)) {
+            request.setRedirectFilter(
+                    redirectUrl -> ContentSecurityPolicy.allowsFormAction(htmlPage, redirectUrl, url));
+        }
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
@@ -383,6 +399,7 @@ public class HtmlForm extends HtmlElement {
         // forms are ignoring the rel='noreferrer'
         if (browser.hasFeature(FORM_IGNORE_REL_NOREFERRER) || !relContainsNoreferrer()) {
             request.setRefererHeader(htmlPage.getUrl());
+            request.setReferrerPolicy(htmlPage.getReferrerPolicy());
         }
 
         return request;
