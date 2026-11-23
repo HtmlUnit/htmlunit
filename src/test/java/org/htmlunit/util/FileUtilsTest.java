@@ -16,8 +16,11 @@ package org.htmlunit.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.PosixFilePermissions;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -200,5 +203,34 @@ public class FileUtilsTest {
     public void sanitizeFilenameLong() {
         final String name = "a".repeat(1000) + ".txt";
         assertEquals(name, FileUtils.sanitizeFilename(name));
+    }
+
+    /**
+     * The new directory (and the created parents) is accessible for the owner only.
+     * @param folder the folder
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void createUserOnlyDirectories(@TempDir final Path folder) throws Exception {
+        final Path directory = folder.resolve("parent").resolve("report");
+        FileUtils.createUserOnlyDirectories(directory);
+
+        assertTrue(Files.isDirectory(directory));
+        if (directory.getFileSystem().supportedFileAttributeViews().contains("posix")) {
+            assertEquals("rwx------", PosixFilePermissions.toString(Files.getPosixFilePermissions(directory)));
+            assertEquals("rwx------",
+                    PosixFilePermissions.toString(Files.getPosixFilePermissions(directory.getParent())));
+        }
+    }
+
+    /**
+     * An already existing directory is accepted.
+     * @param folder the folder
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void createUserOnlyDirectoriesExisting(@TempDir final Path folder) throws Exception {
+        FileUtils.createUserOnlyDirectories(folder);
+        assertTrue(Files.isDirectory(folder));
     }
 }
