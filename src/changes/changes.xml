@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
+            <action type="add" dev="Ronny Shapiro">
+                New option WebClientOptions.setHtmlFragmentSelfClosingTagsAllowed(); when enabled, the fragment parser
+                of html pages (e.g. setInnerHtml()) closes a non void element or iframe written as empty-element
+                tag (e.g. &lt;h3/&gt;) like up to version 5.5.0. This allows applications to read back markup written by
+                asXml() before 5.8.0. The option is disabled by default (like the browsers).
+            </action>
             <action type="add" dev="rbri">
                 New option WebClientOptions.setLocalFileAccessFromRemotePagesAllowed(boolean) (default false).
                 If enabled, pages that were not loaded from a file are allowed again to load local files (file urls)

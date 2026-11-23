@@ -70,6 +70,8 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
 
+        assertEquals(original.isHtmlFragmentSelfClosingTagsAllowed(),
+                        deserialized.isHtmlFragmentSelfClosingTagsAllowed());
         assertEquals(original.isContentSecurityPolicyReportsEnabled(),
                         deserialized.isContentSecurityPolicyReportsEnabled());
         assertEquals(original.isLocalFileAccessFromRemotePagesAllowed(),
@@ -101,6 +103,7 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         original.setWebSocketMaxBinaryMessageSize(44);
 
         original.setFetchPolyfillEnabled(true);
+        original.setHtmlFragmentSelfClosingTagsAllowed(true);
 
         original.setContentSecurityPolicyReportsEnabled(false);
         original.setLocalFileAccessFromRemotePagesAllowed(true);
@@ -139,6 +142,8 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
 
+        assertEquals(original.isHtmlFragmentSelfClosingTagsAllowed(),
+                        deserialized.isHtmlFragmentSelfClosingTagsAllowed());
         assertEquals(original.isContentSecurityPolicyReportsEnabled(),
                         deserialized.isContentSecurityPolicyReportsEnabled());
         assertEquals(original.isLocalFileAccessFromRemotePagesAllowed(),
