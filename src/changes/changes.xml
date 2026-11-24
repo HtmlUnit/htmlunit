@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.9.0" date="xxxx xx, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
+        <release version="5.9.0" date="November 24, 2026" description="Firefox 160, Chrome/Edge 158, Fetch, Intl, CSP, CORS, Cookies, Bugfixes">
             <action type="fix" dev="rbri">
                 window.isSecureContext is true for pages from the loopback addresses (e.g. http://127.0.0.1 and
                 http://[::1]) like in the browsers. All checks for potentially trustworthy origins (secure cookies,
