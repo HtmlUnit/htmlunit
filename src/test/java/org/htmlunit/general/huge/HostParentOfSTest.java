@@ -114,63 +114,60 @@ public class HostParentOfSTest extends HostParentOf {
     }
 
     @Alerts(DEFAULT = "true/false",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _SpeechGrammar_SpeechGrammar() throws Exception {
         test("SpeechGrammar", "SpeechGrammar");
     }
 
     @Alerts(DEFAULT = "true/false",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _SpeechGrammar_webkitSpeechGrammar() throws Exception {
         test("SpeechGrammar", "webkitSpeechGrammar");
     }
 
     @Alerts(DEFAULT = "true/false",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _SpeechGrammarList_SpeechGrammarList() throws Exception {
         test("SpeechGrammarList", "SpeechGrammarList");
     }
 
     @Alerts(DEFAULT = "true/false",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _SpeechGrammarList_webkitSpeechGrammarList() throws Exception {
         test("SpeechGrammarList", "webkitSpeechGrammarList");
     }
 
     @Alerts(DEFAULT = "true/false",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _SpeechRecognition_SpeechRecognition() throws Exception {
         test("SpeechRecognition", "SpeechRecognition");
     }
 
     @Alerts(DEFAULT = "true/false",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _SpeechRecognition_webkitSpeechRecognition() throws Exception {
         test("SpeechRecognition", "webkitSpeechRecognition");
     }
 
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechRecognitionAlternative_SpeechRecognitionAlternative() throws Exception {
+        test("SpeechRecognitionAlternative", "SpeechRecognitionAlternative");
+    }
+
     @Alerts(DEFAULT = "true/false",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _SpeechRecognitionErrorEvent_SpeechRecognitionErrorEvent() throws Exception {
         test("SpeechRecognitionErrorEvent", "SpeechRecognitionErrorEvent");
     }
 
     @Alerts(DEFAULT = "true/false",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _SpeechRecognitionErrorEvent_webkitSpeechRecognitionError() throws Exception {
         test("SpeechRecognitionErrorEvent", "webkitSpeechRecognitionError");
     }
 
     @Alerts(DEFAULT = "true/false",
-            FF = "false/false",
             FF_ESR = "false/false")
     void _SpeechRecognitionEvent_SpeechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent", "SpeechRecognitionEvent");
@@ -179,8 +176,21 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts(DEFAULT = "true/false",
             FF = "false/false",
             FF_ESR = "false/false")
+    @HtmlUnitNYI(FF = "true/false")
     void _SpeechRecognitionEvent_webkitSpeechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent", "webkitSpeechRecognitionEvent");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechRecognitionResult_SpeechRecognitionResult() throws Exception {
+        test("SpeechRecognitionResult", "SpeechRecognitionResult");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false")
+    void _SpeechRecognitionResultList_SpeechRecognitionResultList() throws Exception {
+        test("SpeechRecognitionResultList", "SpeechRecognitionResultList");
     }
 
     @Alerts("true/false")
