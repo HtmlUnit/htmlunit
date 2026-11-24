@@ -163,7 +163,7 @@ public class LocalResourceAccess3Test extends SimpleWebTestCase {
     }
 
     /**
-     * window.open() of a local file opens the window if the option is enabled.
+     * Method window.open() of a local file opens the window if the option is enabled.
      *
      * @throws Exception if the test fails
      */
