@@ -213,6 +213,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     /**
      * Shared encrypt/decrypt implementation.
      */
+    @SuppressWarnings("PMD.InsecureCryptoIv") // the iv is a parameter of the script (WebCrypto API)
     private NativePromise doCipher(final Object algorithm, final CryptoKey key,
             final Object data, final int cipherMode) {
         final String operation = switch (cipherMode) {
