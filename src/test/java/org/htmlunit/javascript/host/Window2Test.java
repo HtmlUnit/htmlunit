@@ -3573,7 +3573,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts({"sync", "onerror boom", "second"})
     public void queueMicrotaskErrorOnError() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

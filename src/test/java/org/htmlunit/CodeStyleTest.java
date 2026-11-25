@@ -346,12 +346,27 @@ public class CodeStyleTest {
 
     /**
      * Verifies that no XML files have bad indentation levels (each indentation level is 4 spaces).
+     * The continuation lines of a multi-line comment are not checked; they are usually
+     * aligned with the text of the first line.
      */
     private void badIndentationLevels(final List<String> lines, final String relativePath) {
+        boolean inComment = false;
         for (int i = 0; i < lines.size(); i++) {
-            final int indentation = getIndentation(lines.get(i));
-            if (indentation % 4 != 0) {
-                addFailure(relativePath, i + 1, "Bad indentation level (" + indentation + ")");
+            final String line = lines.get(i);
+            if (!inComment) {
+                final int indentation = getIndentation(line);
+                if (indentation % 4 != 0) {
+                    addFailure(relativePath, i + 1, "Bad indentation level (" + indentation + ")");
+                }
+            }
+
+            final int commentStart = line.lastIndexOf("<!--");
+            final int commentEnd = line.lastIndexOf("-->");
+            if (commentStart > commentEnd) {
+                inComment = true;
+            }
+            else if (commentEnd != -1) {
+                inComment = false;
             }
         }
     }
