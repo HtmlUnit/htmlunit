@@ -21,7 +21,7 @@ import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_HIDING_ENFORCED_ONLY
 import static org.htmlunit.BrowserVersionFeatures.CSP_NONCE_TRIMMED;
 import static org.htmlunit.BrowserVersionFeatures.CSP_REPORT_FIREFOX_FORMAT;
 import static org.htmlunit.BrowserVersionFeatures.CSP_UPGRADE_INSECURE_REQUESTS_MATCHES_HTTPS;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -276,7 +276,7 @@ public final class ContentSecurityPolicy implements Serializable {
 
         final Optional<String> nonce = nonce(element);
         final String integrityAttrib = element.getAttributeDirect("integrity");
-        final Optional<String> integrity = ATTRIBUTE_NOT_DEFINED == integrityAttrib
+        final Optional<String> integrity = !isAttributeDefined(integrityAttrib)
                 ? Optional.empty() : Optional.of(integrityAttrib);
         final Optional<URLWithScheme> scriptUrl = Optional.of(toUrlWithScheme(matchingUrl(page, url)));
         final Optional<Boolean> parserInserted = Optional.of(isParserInserted(element));
@@ -492,7 +492,7 @@ public final class ContentSecurityPolicy implements Serializable {
     public static boolean allowsObject(final DomElement element, final String src) {
         final HtmlPage page = element.getHtmlPageOrNull();
         if (page == null || page.getContentSecurityPolicy() == null
-                || ATTRIBUTE_NOT_DEFINED == src || StringUtils.isBlank(src)) {
+                || !isAttributeDefined(src) || StringUtils.isBlank(src)) {
             return true;
         }
 
@@ -526,7 +526,7 @@ public final class ContentSecurityPolicy implements Serializable {
     public static boolean allowsMedia(final DomElement element, final String src) {
         final HtmlPage page = element.getHtmlPageOrNull();
         if (page == null || page.getContentSecurityPolicy() == null
-                || ATTRIBUTE_NOT_DEFINED == src || StringUtils.isBlank(src)) {
+                || !isAttributeDefined(src) || StringUtils.isBlank(src)) {
             return true;
         }
 
@@ -1232,7 +1232,7 @@ public final class ContentSecurityPolicy implements Serializable {
         }
 
         final String nonce = element.getAttributeDirect(DomElement.NONCE_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED == nonce || nonce.isEmpty()) {
+        if (!isAttributeDefined(nonce) || nonce.isEmpty()) {
             return;
         }
         element.hideNonce();

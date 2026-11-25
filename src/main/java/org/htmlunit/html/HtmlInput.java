@@ -132,7 +132,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public final String getTypeAttribute() {
         final String type = getAttributeDirect(TYPE_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED == type) {
+        if (!isAttributeDefined(type)) {
             return "text";
         }
         return type;
@@ -306,7 +306,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public String getSrc() {
         final String src = getSrcAttributeNormalized();
-        if (ATTRIBUTE_NOT_DEFINED == src) {
+        if (!isAttributeDefined(src)) {
             return src;
         }
 
@@ -1082,7 +1082,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     public boolean isValueMissingValidityState() {
         return isRequiredSupported()
-                && ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
+                && isAttributeDefined(getAttributeDirect(ATTRIBUTE_REQUIRED))
                 && getValue().isEmpty();
     }
 
@@ -1163,7 +1163,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             }
 
             // create a new one only if we have a new type
-            if (ATTRIBUTE_NOT_DEFINED != currentType || !"text".equalsIgnoreCase(type)) {
+            if (isAttributeDefined(currentType) || !"text".equalsIgnoreCase(type)) {
                 final HtmlInput newInput = (HtmlInput) webClient.getPageCreator().getHtmlParser()
                         .getFactory(TAG_NAME)
                         .createElement(page, TAG_NAME, attributes);
@@ -1193,7 +1193,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     protected void adjustValueAfterTypeChange(final HtmlInput oldInput, final BrowserVersion browserVersion) {
         final String originalValue = oldInput.getValue();
-        if (ATTRIBUTE_NOT_DEFINED != originalValue) {
+        if (isAttributeDefined(originalValue)) {
             setValue(originalValue);
         }
     }

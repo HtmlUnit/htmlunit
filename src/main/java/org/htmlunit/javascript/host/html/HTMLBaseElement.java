@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import org.htmlunit.html.HtmlBase;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -49,7 +49,7 @@ public class HTMLBaseElement extends HTMLElement {
     @JsxGetter
     public String getHref() {
         final String href = getDomNodeOrDie().getAttributeDirect("href");
-        if (ATTRIBUTE_NOT_DEFINED == href) {
+        if (!isAttributeDefined(href)) {
             return getWindow().getLocation().getHref();
         }
         return href;

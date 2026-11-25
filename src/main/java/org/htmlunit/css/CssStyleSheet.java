@@ -16,7 +16,7 @@ package org.htmlunit.css;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -634,9 +634,9 @@ public class CssStyleSheet implements Serializable {
                     final String name = attributeCondition.getLocalName();
                     final String attrValue = element.getAttribute(name);
                     if (attributeCondition.isCaseInSensitive() || DomElement.TYPE_ATTRIBUTE.equals(name)) {
-                        return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equalsIgnoreCase(value);
+                        return isAttributeDefined(attrValue) && attrValue.equalsIgnoreCase(value);
                     }
-                    return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equals(value);
+                    return isAttributeDefined(attrValue) && attrValue.equals(value);
                 }
                 return element.hasAttribute(condition.getLocalName());
 
@@ -700,7 +700,7 @@ public class CssStyleSheet implements Serializable {
                 final int lcLangLength = lcLang.length();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
                     final String nodeLang = ((HtmlElement) node).getAttributeDirect("lang");
-                    if (ATTRIBUTE_NOT_DEFINED != nodeLang) {
+                    if (isAttributeDefined(nodeLang)) {
                         // "en", "en-GB" should be matched by "en" but not "english"
                         return nodeLang.startsWith(lcLang)
                             && (nodeLang.length() == lcLangLength || '-' == nodeLang.charAt(lcLangLength));
@@ -804,7 +804,7 @@ public class CssStyleSheet implements Serializable {
     private static boolean matchesHyphenSeparated(final String condition, final String attribute) {
         final int conditionLength = condition.length();
         if (conditionLength < 1) {
-            if (attribute != ATTRIBUTE_NOT_DEFINED) {
+            if (isAttributeDefined(attribute)) {
                 final int attribLength = attribute.length();
                 return attribLength == 0 || '-' == attribute.charAt(0);
             }

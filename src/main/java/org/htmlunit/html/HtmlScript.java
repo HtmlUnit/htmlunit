@@ -164,7 +164,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      */
     @Override
     public boolean isDeferred() {
-        return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;
+        return isAttributeDefined(getDeferAttribute());
     }
 
     /**

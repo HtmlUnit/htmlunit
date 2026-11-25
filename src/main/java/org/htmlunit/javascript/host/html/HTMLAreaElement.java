@@ -16,7 +16,7 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 import static org.htmlunit.BrowserVersionFeatures.JS_URL_FILE_WITHOUT_HOST;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
@@ -152,7 +152,7 @@ public class HTMLAreaElement extends HTMLElement {
         final HtmlArea area = (HtmlArea) getDomNodeOrDie();
         final String hrefAttr = area.getHrefAttribute();
 
-        if (ATTRIBUTE_NOT_DEFINED != hrefAttr
+        if (isAttributeDefined(hrefAttr)
                 || getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE)) {
             area.focus();
         }
@@ -185,7 +185,7 @@ public class HTMLAreaElement extends HTMLElement {
         final HtmlArea area = (HtmlArea) getDomNodeOrDie();
         final String hrefAttr = area.getHrefAttribute();
 
-        if (ATTRIBUTE_NOT_DEFINED == hrefAttr) {
+        if (!isAttributeDefined(hrefAttr)) {
             return "";
         }
 
@@ -440,7 +440,7 @@ public class HTMLAreaElement extends HTMLElement {
         try {
             final HtmlArea area = (HtmlArea) getDomNodeOrDie();
             final String href = area.getHrefAttribute();
-            if (ATTRIBUTE_NOT_DEFINED == href) {
+            if (!isAttributeDefined(href)) {
                 return;
             }
 
@@ -475,7 +475,7 @@ public class HTMLAreaElement extends HTMLElement {
         try {
             final HtmlArea area = (HtmlArea) getDomNodeOrDie();
             final String href = area.getHrefAttribute();
-            if (ATTRIBUTE_NOT_DEFINED == href) {
+            if (!isAttributeDefined(href)) {
                 return;
             }
 
@@ -495,7 +495,7 @@ public class HTMLAreaElement extends HTMLElement {
     private URL getUrl() throws MalformedURLException {
         final HtmlArea area = (HtmlArea) getDomNodeOrDie();
         final String href = area.getHrefAttribute();
-        if (ATTRIBUTE_NOT_DEFINED == href) {
+        if (!isAttributeDefined(href)) {
             throw new MalformedURLException("no href attribute");
         }
         return ((HtmlPage) area.getPage()).getFullyQualifiedUrl(href);

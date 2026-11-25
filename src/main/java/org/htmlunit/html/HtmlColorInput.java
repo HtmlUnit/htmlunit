@@ -39,7 +39,7 @@ public class HtmlColorInput extends HtmlInput implements LabelableElement {
     HtmlColorInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        if (getValueAttribute() == ATTRIBUTE_NOT_DEFINED) {
+        if (!isAttributeDefined(getValueAttribute())) {
             setValue("#000000");
         }
     }

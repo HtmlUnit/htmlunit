@@ -64,7 +64,7 @@ public class HtmlBaseFont extends HtmlElement {
      */
     public final String getSizeAttribute() {
         final String size = getAttributeDirect("size");
-        if (ATTRIBUTE_NOT_DEFINED == size) {
+        if (!isAttributeDefined(size)) {
             return "3";
         }
         return size;

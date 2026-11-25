@@ -227,7 +227,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final HtmlAttributeChangeEvent event;
-        if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
+        if (!isAttributeDefined(oldAttributeValue)) {
             event = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
         }
         else {
@@ -254,7 +254,7 @@ public abstract class HtmlElement extends DomElement {
     protected static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
             final HtmlElement element, final String oldAttributeValue, final boolean notifyMutationObservers) {
         final List<HtmlAttributeChangeListener> listeners = new ArrayList<>(element.attributeListeners_);
-        if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
+        if (!isAttributeDefined(oldAttributeValue)) {
             synchronized (listeners) {
                 for (final HtmlAttributeChangeListener listener : listeners) {
                     if (notifyMutationObservers || !(listener instanceof MutationObserver)) {
@@ -285,7 +285,7 @@ public abstract class HtmlElement extends DomElement {
             htmlPage.addMappedElement(this, false);
         }
 
-        if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
+        if (!isAttributeDefined(oldAttributeValue)) {
             fireHtmlAttributeAdded(event);
             htmlPage.fireHtmlAttributeAdded(event);
         }
@@ -324,7 +324,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final HtmlAttributeChangeEvent event;
-        if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
+        if (!isAttributeDefined(oldAttributeValue)) {
             event = new HtmlAttributeChangeEvent(this, qualifiedName, attribute.getValue());
         }
         else {
@@ -346,7 +346,7 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public void removeAttribute(final String attributeName) {
         final String value = getAttribute(attributeName);
-        if (ATTRIBUTE_NOT_DEFINED == value) {
+        if (!isAttributeDefined(value)) {
             return;
         }
 
@@ -504,7 +504,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public HtmlForm getEnclosingForm() {
         final String formId = getAttribute("form");
-        if (ATTRIBUTE_NOT_DEFINED != formId) {
+        if (isAttributeDefined(formId)) {
             final Element formById = getPage().getElementById(formId);
             if (formById instanceof HtmlForm form) {
                 return form;
@@ -1493,7 +1493,7 @@ public abstract class HtmlElement extends DomElement {
      * @return true if the hidden attribute is set.
      */
     public boolean isHidden() {
-        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_HIDDEN);
+        return isAttributeDefined(getAttributeDirect(ATTRIBUTE_HIDDEN));
     }
 
     /**
@@ -1563,7 +1563,7 @@ public abstract class HtmlElement extends DomElement {
      */
     protected final String getSrcAttributeNormalized() {
         final String attrib = getAttributeDirect(SRC_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED == attrib) {
+        if (!isAttributeDefined(attrib)) {
             return attrib;
         }
 
@@ -1668,7 +1668,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public boolean isValid() {
         return !isRequiredSupported()
-                || ATTRIBUTE_NOT_DEFINED == getAttributeDirect(ATTRIBUTE_REQUIRED)
+                || !isAttributeDefined(getAttributeDirect(ATTRIBUTE_REQUIRED))
                 || !getAttributeDirect(VALUE_ATTRIBUTE).isEmpty();
     }
 

@@ -18,7 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_PROCESSING_INSTRUCTION_NO_QUESTION_MARK;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_VOID_ELEMENT_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_XHTML_RAW_SCRIPT_STYLE;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -214,7 +214,7 @@ public class Element extends Node {
     public String getAttribute(final String attributeName) {
         String value = getDomNodeOrDie().getAttribute(attributeName);
 
-        if (ATTRIBUTE_NOT_DEFINED == value) {
+        if (!isAttributeDefined(value)) {
             value = null;
         }
 
@@ -474,7 +474,7 @@ public class Element extends Node {
     @JsxFunction
     public String getAttributeNS(final String namespaceURI, final String localName) {
         final String value = getDomNodeOrDie().getAttributeNS(namespaceURI, localName);
-        if (ATTRIBUTE_NOT_DEFINED == value) {
+        if (!isAttributeDefined(value)) {
             return null;
         }
         return value;
@@ -679,7 +679,7 @@ public class Element extends Node {
                         return false;
                     }
                     String classAttribute = ((HtmlElement) node).getAttributeDirect("class");
-                    if (ATTRIBUTE_NOT_DEFINED == classAttribute) {
+                    if (!isAttributeDefined(classAttribute)) {
                         return false; // probably better performance as most elements won't have a class attribute
                     }
 

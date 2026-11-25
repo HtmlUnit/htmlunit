@@ -141,4 +141,21 @@ public final class DomElement2Test extends SimpleWebTestCase {
         assertEquals(2, outer.getChildElementCount());
         assertEquals(0, page.getElementsById("c").size());
     }
+
+    /**
+     * Test for {@link DomElement#isAttributeDefined(String)}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isAttributeDefined() throws Exception {
+        assertFalse(DomElement.isAttributeDefined(DomElement.ATTRIBUTE_NOT_DEFINED));
+        assertTrue(DomElement.isAttributeDefined(""));
+        assertTrue(DomElement.isAttributeDefined("value"));
+
+        final HtmlPage page = loadPage(DOCTYPE_HTML + "<html><body><div id='d' title=''></div></body></html>");
+        final DomElement div = page.getElementById("d");
+        assertTrue(DomElement.isAttributeDefined(div.getAttribute("title")));
+        assertFalse(DomElement.isAttributeDefined(div.getAttribute("lang")));
+    }
 }

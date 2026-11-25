@@ -1884,7 +1884,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         // explicit 'width' HTML attribute (not CSS style) says otherwise
         if (element instanceof HtmlInlineFrame iframe) {
             final String widthAttribute = iframe.getAttributeDirect("width");
-            if (DomElement.ATTRIBUTE_NOT_DEFINED != widthAttribute) {
+            if (DomElement.isAttributeDefined(widthAttribute)) {
                 return CssPixelValueConverter.pixelValue(widthAttribute);
             }
             return 300;
@@ -2179,7 +2179,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         if (element instanceof HtmlInlineFrame iframe) {
             final String heightAttribute = iframe.getAttributeDirect("height");
-            if (DomElement.ATTRIBUTE_NOT_DEFINED != heightAttribute) {
+            if (DomElement.isAttributeDefined(heightAttribute)) {
                 final int height = CssPixelValueConverter.pixelValue(heightAttribute);
                 return updateCachedEmptyHeight(height);
             }

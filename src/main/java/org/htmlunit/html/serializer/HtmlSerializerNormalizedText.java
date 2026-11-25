@@ -15,7 +15,7 @@
 package org.htmlunit.html.serializer;
 
 import static org.htmlunit.css.CssStyleSheet.BLOCK;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.util.IdentityHashMap;
 import java.util.Iterator;
@@ -232,7 +232,7 @@ public class HtmlSerializerNormalizedText {
      */
     protected void appendSubmitInput(final HtmlSerializerTextBuilder builder, final HtmlSubmitInput htmlSubmitInput) {
         String text = htmlSubmitInput.getValueAttribute();
-        if (ATTRIBUTE_NOT_DEFINED == text) {
+        if (!isAttributeDefined(text)) {
             text = HtmlSubmitInput.DEFAULT_VALUE;
         }
 
@@ -278,7 +278,7 @@ public class HtmlSerializerNormalizedText {
      */
     protected void appendResetInput(final HtmlSerializerTextBuilder builder, final HtmlResetInput htmlResetInput) {
         String text = htmlResetInput.getValueAttribute();
-        if (ATTRIBUTE_NOT_DEFINED == text) {
+        if (!isAttributeDefined(text)) {
             text = HtmlResetInput.DEFAULT_VALUE;
         }
 
@@ -472,7 +472,7 @@ public class HtmlSerializerNormalizedText {
         int i = 1;
 
         final String start = htmlOrderedList.getStartAttribute();
-        if (ATTRIBUTE_NOT_DEFINED != start) {
+        if (isAttributeDefined(start)) {
             try {
                 i = (int) Math.round(Double.parseDouble(start));
             }

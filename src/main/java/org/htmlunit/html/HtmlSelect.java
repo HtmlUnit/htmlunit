@@ -494,7 +494,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return {@code true} if this select is using "multiple select"
      */
     public boolean isMultipleSelectEnabled() {
-        return getAttributeDirect("multiple") != ATTRIBUTE_NOT_DEFINED;
+        return isAttributeDefined(getAttributeDirect("multiple"));
     }
 
     /**
@@ -562,7 +562,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     public final int getSize() {
         final String sizeAttribute = getSizeAttribute();
-        if (ATTRIBUTE_NOT_DEFINED != sizeAttribute && !sizeAttribute.isEmpty()) {
+        if (isAttributeDefined(sizeAttribute) && !sizeAttribute.isEmpty()) {
             try {
                 final int size = Integer.parseInt(getSizeAttribute());
                 if (size < 0) {
@@ -779,7 +779,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isValueMissingValidityState() {
-        if (ATTRIBUTE_NOT_DEFINED == getAttributeDirect(ATTRIBUTE_REQUIRED)) {
+        if (!isAttributeDefined(getAttributeDirect(ATTRIBUTE_REQUIRED))) {
             return false;
         }
 

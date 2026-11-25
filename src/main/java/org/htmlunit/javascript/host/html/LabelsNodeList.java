@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ class LabelsNodeList extends NodeList {
             }
         }
         final String id = domElement.getId();
-        if (ATTRIBUTE_NOT_DEFINED != id) {
+        if (isAttributeDefined(id)) {
             for (final DomElement label : domElement.getHtmlPageOrNull().getElementsByTagName("label")) {
                 if (id.equals(label.getAttributeDirect("for"))) {
                     response.add(label);

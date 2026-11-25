@@ -57,7 +57,7 @@ public class HTMLObjectElement extends HTMLElement {
     public String getData() {
         final DomElement element = getDomNodeOrDie();
         final String data = element.getAttributeDirect("data");
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == data) {
+        if (!DomElement.isAttributeDefined(data)) {
             return "";
         }
         if (element.getPage() instanceof HtmlPage page) {

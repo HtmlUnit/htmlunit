@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import org.htmlunit.html.HtmlOptionGroup;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -67,7 +67,7 @@ public class HTMLOptGroupElement extends HTMLElement {
     @JsxGetter
     public String getLabel() {
         final String label = getDomNodeOrDie().getAttributeDirect("label");
-        if (ATTRIBUTE_NOT_DEFINED == label) {
+        if (!isAttributeDefined(label)) {
             return "";
         }
         return label;

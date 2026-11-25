@@ -16,7 +16,7 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_HTMLOPTIONSCOLLECTION_NAMED_PROPERTIES_ENUMERABLE;
 import static org.htmlunit.BrowserVersionFeatures.JS_NAMED_PROPERTIES_OWN_PROPERTY_NAMES_INCLUDE_HIDDEN;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -207,7 +207,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
                 names.add(id);
             }
             final String name = option.getAttributeDirect(DomElement.NAME_ATTRIBUTE);
-            if (ATTRIBUTE_NOT_DEFINED != name && !name.isEmpty() && !names.contains(name)) {
+            if (isAttributeDefined(name) && !name.isEmpty() && !names.contains(name)) {
                 names.add(name);
             }
         }

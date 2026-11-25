@@ -14,7 +14,7 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -85,7 +85,7 @@ public final class ScriptElementSupport {
         }
 
         final String srcAttrib = script.getScriptSource();
-        final boolean hasNoSrcAttrib = ATTRIBUTE_NOT_DEFINED == srcAttrib;
+        final boolean hasNoSrcAttrib = !isAttributeDefined(srcAttrib);
         // the defer attribute has only an effect for parser-inserted scripts; scripts inserted
         // by javascript (e.g. createElement() and appendChild()) ignore it (like the browsers)
         if (!hasNoSrcAttrib && script.isDeferred() && script.wasParserInserted()) {
@@ -189,7 +189,7 @@ public final class ScriptElementSupport {
         }
 
         final HtmlPage page = (HtmlPage) element.getPage();
-        if (src != ATTRIBUTE_NOT_DEFINED) {
+        if (isAttributeDefined(src)) {
             if (!src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // <script src="[url]"></script>
                 if (LOG.isDebugEnabled()) {
@@ -377,7 +377,7 @@ public final class ScriptElementSupport {
         }
 
         final String scriptCode = getScriptCode(element);
-        if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
+        if (!isAttributeDefined(forr) || "onload".equals(event)) {
             final HtmlPage page = (HtmlPage) element.getPage();
             if (!ContentSecurityPolicy.allowsInlineScript(page, element, scriptCode)) {
                 script.setExecuted(true);

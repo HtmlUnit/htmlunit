@@ -89,7 +89,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             // src-less IFrame or src='about:blank'
             // these are loaded sync
             if (hasSrcdocAttribute()
-                    || (ATTRIBUTE_NOT_DEFINED != src && !UrlUtils.ABOUT_BLANK.equals(src.trim()))) {
+                    || (isAttributeDefined(src) && !UrlUtils.ABOUT_BLANK.equals(src.trim()))) {
                 loadSrcWhenAddedToPage_ = true;
             }
         }
@@ -624,7 +624,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         Set<String> tokens = null;
         if (this instanceof HtmlInlineFrame) {
             final String sandbox = getAttributeDirect(SANDBOX_ATTRIBUTE);
-            if (ATTRIBUTE_NOT_DEFINED != sandbox) {
+            if (isAttributeDefined(sandbox)) {
                 tokens = new HashSet<>();
                 for (final String token : org.htmlunit.util.StringUtils.splitAtJavaWhitespace(sandbox)) {
                     if (!token.isEmpty()) {
@@ -654,7 +654,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return true if the srcdoc attribute is defined
      */
     public boolean hasSrcdocAttribute() {
-        return this instanceof HtmlInlineFrame && ATTRIBUTE_NOT_DEFINED != getAttributeDirect(SRCDOC_ATTRIBUTE);
+        return this instanceof HtmlInlineFrame && isAttributeDefined(getAttributeDirect(SRCDOC_ATTRIBUTE));
     }
 
     /**

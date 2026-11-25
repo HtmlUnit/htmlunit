@@ -16,7 +16,7 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.ANCHOR_SEND_PING_REQUEST;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -78,7 +78,7 @@ public final class HyperlinkElementSupport {
             final String w = htmlElement.getPage().getEnclosingWindow().getName();
             LOG.debug("do click action in window '" + w + "', using href '" + href + "'");
         }
-        if (ATTRIBUTE_NOT_DEFINED == element.getHrefAttribute()) {
+        if (!isAttributeDefined(element.getHrefAttribute())) {
             return;
         }
         final String downloadAttribute = element.getDownloadAttribute();
@@ -106,7 +106,7 @@ public final class HyperlinkElementSupport {
             }
 
             final String target;
-            if (shiftKey || ctrlKey || ATTRIBUTE_NOT_DEFINED != downloadAttribute) {
+            if (shiftKey || ctrlKey || isAttributeDefined(downloadAttribute)) {
                 target = WebClient.TARGET_BLANK;
             }
             else {
@@ -139,7 +139,7 @@ public final class HyperlinkElementSupport {
         }
 
         final BrowserVersion browser = webClient.getBrowserVersion();
-        if (ATTRIBUTE_NOT_DEFINED != element.getPingAttribute() && browser.hasFeature(ANCHOR_SEND_PING_REQUEST)) {
+        if (isAttributeDefined(element.getPingAttribute()) && browser.hasFeature(ANCHOR_SEND_PING_REQUEST)) {
             final URL pingUrl = getTargetUrl(element.getPingAttribute(), page);
             final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
             pingRequest.setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, browser.getAcceptEncodingHeader());
@@ -211,14 +211,14 @@ public final class HyperlinkElementSupport {
         final String target;
         if (shiftKey || ctrlKey
                 || (webClient.getAttachmentHandler() == null
-                        && ATTRIBUTE_NOT_DEFINED != downloadAttribute)) {
+                        && isAttributeDefined(downloadAttribute))) {
             target = WebClient.TARGET_BLANK;
         }
         else {
             target = page.getResolvedTarget(element.getTargetAttribute());
         }
         page.getWebClient().download(page.getEnclosingWindow(), target, webRequest,
-                true, (ATTRIBUTE_NOT_DEFINED == downloadAttribute) ? null : downloadAttribute,
+                true, (!isAttributeDefined(downloadAttribute)) ? null : downloadAttribute,
                 htmlElement.getClass().getSimpleName() + " click");
     }
 

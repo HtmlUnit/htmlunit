@@ -16,7 +16,7 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.io.File;
 import java.io.IOException;
@@ -1934,7 +1934,7 @@ public class HtmlPage extends SgmlPage {
         for (final HtmlElement elem : doc.getHtmlElementDescendants()) {
             if ("script".equals(elem.getLocalName()) && (elem instanceof HtmlScript script)) {
                 if (script.isDeferred() && script.wasParserInserted()
-                        && ATTRIBUTE_NOT_DEFINED != script.getSrcAttribute()) {
+                        && isAttributeDefined(script.getSrcAttribute())) {
                     scripts.add(script);
                 }
             }
@@ -2400,7 +2400,7 @@ public class HtmlPage extends SgmlPage {
 
     private void addElement(final DomElement element, final boolean recurse) {
         final String idValue = element.getAttribute(DomElement.ID_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED != idValue) {
+        if (isAttributeDefined(idValue)) {
             MappedElementIndexEntry elements = idMap_.get(idValue);
             if (elements == null) {
                 elements = new MappedElementIndexEntry();
@@ -2413,7 +2413,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         final String nameValue = element.getAttribute(DomElement.NAME_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED != nameValue) {
+        if (isAttributeDefined(nameValue)) {
             MappedElementIndexEntry elements = nameMap_.get(nameValue);
             if (elements == null) {
                 elements = new MappedElementIndexEntry();
@@ -2456,7 +2456,7 @@ public class HtmlPage extends SgmlPage {
 
     private void removeElement(final DomElement element, final boolean recurse) {
         final String idValue = element.getAttribute(DomElement.ID_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED != idValue) {
+        if (isAttributeDefined(idValue)) {
             final MappedElementIndexEntry elements = idMap_.remove(idValue);
             if (elements != null) {
                 elements.remove(element);
@@ -2467,7 +2467,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         final String nameValue = element.getAttribute(DomElement.NAME_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED != nameValue) {
+        if (isAttributeDefined(nameValue)) {
             final MappedElementIndexEntry elements = nameMap_.remove(nameValue);
             if (elements != null) {
                 elements.remove(element);

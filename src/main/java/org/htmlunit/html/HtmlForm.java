@@ -155,7 +155,7 @@ public class HtmlForm extends HtmlElement {
                 }
 
                 if (validate
-                        && getAttributeDirect(ATTRIBUTE_NOVALIDATE) != ATTRIBUTE_NOT_DEFINED) {
+                        && isAttributeDefined(getAttributeDirect(ATTRIBUTE_NOVALIDATE))) {
                     validate = false;
                 }
 
@@ -263,19 +263,19 @@ public class HtmlForm extends HtmlElement {
             }
 
             final String formaction = element.getAttributeDirect("formaction");
-            if (ATTRIBUTE_NOT_DEFINED != formaction) {
+            if (isAttributeDefined(formaction)) {
                 setActionAttribute(formaction);
             }
             final String formmethod = element.getAttributeDirect("formmethod");
-            if (ATTRIBUTE_NOT_DEFINED != formmethod) {
+            if (isAttributeDefined(formmethod)) {
                 setMethodAttribute(formmethod);
             }
             final String formtarget = element.getAttributeDirect("formtarget");
-            if (ATTRIBUTE_NOT_DEFINED != formtarget) {
+            if (isAttributeDefined(formtarget)) {
                 setTargetAttribute(formtarget);
             }
             final String formenctype = element.getAttributeDirect("formenctype");
-            if (ATTRIBUTE_NOT_DEFINED != formenctype) {
+            if (isAttributeDefined(formenctype)) {
                 setEnctypeAttribute(formenctype);
             }
         }

@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomElement;
@@ -100,7 +100,7 @@ public class HTMLOptionElement extends HTMLElement {
     @Override
     public String getValue() {
         String value = getDomNodeOrNull().getAttributeDirect(DomElement.VALUE_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED == value) {
+        if (!isAttributeDefined(value)) {
             value = ((HtmlOption) getDomNodeOrNull()).getText();
         }
         return value;

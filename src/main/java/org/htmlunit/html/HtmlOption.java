@@ -206,7 +206,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     public final String getValueAttribute() {
         String value = getAttributeDirect(VALUE_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED == value) {
+        if (!isAttributeDefined(value)) {
             value = getText();
         }
         return value;
@@ -261,7 +261,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     @Override
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         super.printOpeningTagContentAsXml(printWriter);
-        if (selected_ && getAttributeDirect("selected") == ATTRIBUTE_NOT_DEFINED) {
+        if (selected_ && !isAttributeDefined(getAttributeDirect("selected"))) {
             printWriter.print(" selected=\"selected\"");
         }
     }

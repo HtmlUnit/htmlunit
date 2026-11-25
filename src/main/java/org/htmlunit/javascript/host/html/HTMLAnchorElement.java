@@ -18,7 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
 import static org.htmlunit.BrowserVersionFeatures.JS_URL_FILE_WITHOUT_HOST;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -91,7 +91,7 @@ public class HTMLAnchorElement extends HTMLElement {
         final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
         final String hrefAttr = anchor.getHrefAttribute();
 
-        if (ATTRIBUTE_NOT_DEFINED == hrefAttr) {
+        if (!isAttributeDefined(hrefAttr)) {
             return "";
         }
 
@@ -111,7 +111,7 @@ public class HTMLAnchorElement extends HTMLElement {
         final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
         final String hrefAttr = anchor.getHrefAttribute();
 
-        if (ATTRIBUTE_NOT_DEFINED != hrefAttr) {
+        if (isAttributeDefined(hrefAttr)) {
             anchor.focus();
         }
     }
@@ -505,7 +505,7 @@ public class HTMLAnchorElement extends HTMLElement {
     static String getDefaultValue(final HtmlElement element) {
         String href = element.getAttributeDirect("href");
 
-        if (ATTRIBUTE_NOT_DEFINED == href) {
+        if (!isAttributeDefined(href)) {
             return ""; // for example for named anchors
         }
 
@@ -639,7 +639,7 @@ public class HTMLAnchorElement extends HTMLElement {
         try {
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
             final String href = anchor.getHrefAttribute();
-            if (ATTRIBUTE_NOT_DEFINED == href) {
+            if (!isAttributeDefined(href)) {
                 return;
             }
 
@@ -674,7 +674,7 @@ public class HTMLAnchorElement extends HTMLElement {
         try {
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
             final String href = anchor.getHrefAttribute();
-            if (ATTRIBUTE_NOT_DEFINED == href) {
+            if (!isAttributeDefined(href)) {
                 return;
             }
 

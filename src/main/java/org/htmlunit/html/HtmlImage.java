@@ -148,7 +148,7 @@ public class HtmlImage extends HtmlElement {
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
         final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
-        if (SRC_ATTRIBUTE.equals(qualifiedNameLC) && value != ATTRIBUTE_NOT_DEFINED && htmlPage != null) {
+        if (SRC_ATTRIBUTE.equals(qualifiedNameLC) && isAttributeDefined(value) && htmlPage != null) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedNameLC);
             if (!oldValue.equals(value)) {
                 super.setAttributeNS(namespaceURI, qualifiedNameLC, value, notifyAttributeChangeListeners,
@@ -527,7 +527,7 @@ public class HtmlImage extends HtmlElement {
     public int getHeightOrDefault() {
         final String height = getHeightAttribute();
 
-        if (ATTRIBUTE_NOT_DEFINED != height) {
+        if (isAttributeDefined(height)) {
             try {
                 return Integer.parseInt(height);
             }
@@ -537,7 +537,7 @@ public class HtmlImage extends HtmlElement {
         }
 
         final String src = getSrcAttribute();
-        if (ATTRIBUTE_NOT_DEFINED == src) {
+        if (!isAttributeDefined(src)) {
             final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
                     || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
@@ -589,7 +589,7 @@ public class HtmlImage extends HtmlElement {
     public int getWidthOrDefault() {
         final String widthAttrib = getWidthAttribute();
 
-        if (ATTRIBUTE_NOT_DEFINED != widthAttrib) {
+        if (isAttributeDefined(widthAttrib)) {
             try {
                 return Integer.parseInt(widthAttrib);
             }
@@ -599,7 +599,7 @@ public class HtmlImage extends HtmlElement {
         }
 
         final String src = getSrcAttribute();
-        if (ATTRIBUTE_NOT_DEFINED == src) {
+        if (!isAttributeDefined(src)) {
             final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
                     || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
@@ -1015,7 +1015,7 @@ public class HtmlImage extends HtmlElement {
      */
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
-        if (ATTRIBUTE_NOT_DEFINED != getUseMapAttribute()) {
+        if (isAttributeDefined(getUseMapAttribute())) {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);
             final HtmlElement doc = ((HtmlPage) getPage()).getDocumentElement();
@@ -1033,7 +1033,7 @@ public class HtmlImage extends HtmlElement {
         if (anchor == null) {
             return false;
         }
-        if (ATTRIBUTE_NOT_DEFINED != getIsmapAttribute()) {
+        if (isAttributeDefined(getIsmapAttribute())) {
             final String suffix = "?" + Math.max(lastClickX_, 0) + "," + Math.max(lastClickY_, 0);
             anchor.doClickStateUpdate(false, false, suffix);
             return false;
@@ -1072,7 +1072,7 @@ public class HtmlImage extends HtmlElement {
      *         {@code src} attribute
      */
     public boolean isComplete() {
-        return isComplete_ || ATTRIBUTE_NOT_DEFINED == getSrcAttribute();
+        return isComplete_ || !isAttributeDefined(getSrcAttribute());
     }
 
     /**
@@ -1081,7 +1081,7 @@ public class HtmlImage extends HtmlElement {
     @Override
     public boolean isDisplayed() {
         final String src = getSrcAttribute();
-        if (ATTRIBUTE_NOT_DEFINED == src) {
+        if (!isAttributeDefined(src)) {
             return false;
         }
         if (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src)) {

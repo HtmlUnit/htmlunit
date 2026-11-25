@@ -100,7 +100,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     /** type. */
     public static final String TYPE_ATTRIBUTE = "type";
 
-    /** Constant meaning that the specified attribute was not defined. */
+    /** Constant meaning that the specified attribute was not defined; see {@link #isAttributeDefined(String)}. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 
     /**
@@ -137,6 +137,20 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /** The internal nonce slot; null if the slot follows the nonce attribute. */
     private String nonce_;
+
+    /**
+     * Returns whether the given attribute value stands for a defined attribute, i.e. whether
+     * it is not the marker {@link #ATTRIBUTE_NOT_DEFINED} returned by e.g.
+     * {@link #getAttribute(String)} for a missing attribute. The marker is compared by identity;
+     * an empty attribute value is a defined attribute.
+     *
+     * @param value the attribute value to check
+     * @return {@code true} if the value is not {@link #ATTRIBUTE_NOT_DEFINED}
+     */
+    @SuppressWarnings("PMD.UseEqualsToCompareStrings")
+    public static boolean isAttributeDefined(final String value) {
+        return value != ATTRIBUTE_NOT_DEFINED;
+    }
 
     /**
      * Creates an instance of a DOM element that can have a namespace.
@@ -339,7 +353,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final LinkedHashMap<String, StyleElement> styleMap = new LinkedHashMap<>();
-        if (ATTRIBUTE_NOT_DEFINED == styleAttribute || styleAttribute.isEmpty()
+        if (!isAttributeDefined(styleAttribute) || styleAttribute.isEmpty()
                 || styleAttribute.equals(blockedStyleAttribute_)) {
             styleMap_ = styleMap;
             styleString_ = styleAttribute;
@@ -640,7 +654,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             return nonce_;
         }
         final String nonce = getAttributeDirect(NONCE_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED == nonce) {
+        if (!isAttributeDefined(nonce)) {
             return "";
         }
         return nonce;
@@ -1195,9 +1209,9 @@ public class DomElement extends DomNamespaceNode implements Element {
                     DomElement elementToFocus = null;
                     if (this instanceof SubmittableElement
                         || this instanceof HtmlAnchor anchor
-                            && ATTRIBUTE_NOT_DEFINED != anchor.getHrefAttribute()
+                            && isAttributeDefined(anchor.getHrefAttribute())
                         || this instanceof HtmlArea area
-                            && (ATTRIBUTE_NOT_DEFINED != area.getHrefAttribute()
+                            && (isAttributeDefined(area.getHrefAttribute())
                                 || webClient.getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
                         || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
                         elementToFocus = this;
@@ -1708,9 +1722,9 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public void focus() {
         if (!(this instanceof SubmittableElement
-            || this instanceof HtmlAnchor anchor && ATTRIBUTE_NOT_DEFINED != anchor.getHrefAttribute()
+            || this instanceof HtmlAnchor anchor && isAttributeDefined(anchor.getHrefAttribute())
             || this instanceof HtmlArea area
-                && (ATTRIBUTE_NOT_DEFINED != area.getHrefAttribute()
+                && (isAttributeDefined(area.getHrefAttribute())
                     || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
             || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null)) {
             return;

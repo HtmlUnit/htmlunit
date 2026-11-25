@@ -15,7 +15,7 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -1105,7 +1105,7 @@ public class HTMLElement extends Element {
     @JsxGetter
     public String getContentEditable() {
         final String attribute = getDomNodeOrDie().getAttribute("contentEditable");
-        if (ATTRIBUTE_NOT_DEFINED == attribute) {
+        if (!isAttributeDefined(attribute)) {
             return "inherit";
         }
         if (attribute.isEmpty()) {
@@ -1463,7 +1463,7 @@ public class HTMLElement extends Element {
             return "until-found";
         }
 
-        return ATTRIBUTE_NOT_DEFINED != hidden;
+        return isAttributeDefined(hidden);
     }
 
     /**

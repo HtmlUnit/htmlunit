@@ -14,7 +14,7 @@
  */
 package org.htmlunit.util;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -356,7 +356,7 @@ public final class XmlUtils {
                 ? element.getAttributeDirect("xmlns")
                 : element.getAttribute("xmlns:" + prefix);
 
-        if (ATTRIBUTE_NOT_DEFINED != uri) {
+        if (isAttributeDefined(uri)) {
             return uri;
         }
 

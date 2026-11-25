@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -110,7 +110,7 @@ public class HTMLEmbedElement extends HTMLElement {
     public String getSrc() {
         final HtmlEmbed embed = (HtmlEmbed) getDomNodeOrDie();
         String src = embed.getAttributeDirect("src");
-        if (ATTRIBUTE_NOT_DEFINED == src) {
+        if (!isAttributeDefined(src)) {
             return src;
         }
         try {

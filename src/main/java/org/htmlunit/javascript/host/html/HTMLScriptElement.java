@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -64,7 +64,7 @@ public class HTMLScriptElement extends HTMLElement {
     public String getSrc() {
         final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
         String src = tmpScript.getSrcAttribute();
-        if (ATTRIBUTE_NOT_DEFINED == src) {
+        if (!isAttributeDefined(src)) {
             return src;
         }
         try {

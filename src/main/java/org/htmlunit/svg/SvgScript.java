@@ -93,7 +93,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      */
     protected final String getSrcAttributeNormalized() {
         final String attrib = getAttributeDirect(SRC_ATTRIBUTE);
-        if (ATTRIBUTE_NOT_DEFINED == attrib) {
+        if (!isAttributeDefined(attrib)) {
             return attrib;
         }
 
@@ -137,7 +137,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      */
     @Override
     public boolean isDeferred() {
-        return ATTRIBUTE_NOT_DEFINED != getDeferAttribute();
+        return isAttributeDefined(getDeferAttribute());
     }
 
     /**

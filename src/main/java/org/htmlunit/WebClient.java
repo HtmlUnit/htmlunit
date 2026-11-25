@@ -1652,7 +1652,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (webWindow instanceof FrameWindow frameWindow
                 && UrlUtils.ABOUT_SRCDOC.equals(webRequest.getUrl().toExternalForm())) {
             final String srcdoc = frameWindow.getFrameElement().getAttributeDirect(BaseFrameElement.SRCDOC_ATTRIBUTE);
-            if (DomElement.ATTRIBUTE_NOT_DEFINED != srcdoc) {
+            if (DomElement.isAttributeDefined(srcdoc)) {
                 return new StringWebResponse(srcdoc, UrlUtils.URL_ABOUT_SRCDOC);
             }
         }

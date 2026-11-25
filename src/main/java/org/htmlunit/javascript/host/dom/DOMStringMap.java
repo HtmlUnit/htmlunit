@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +77,7 @@ public final class DOMStringMap extends HtmlUnitScriptable {
         final HtmlElement e = (HtmlElement) getDomNodeOrNull();
         if (e != null) {
             final String value = e.getAttribute(DATA_PREFIX + deCamelize(name));
-            if (ATTRIBUTE_NOT_DEFINED != value) {
+            if (isAttributeDefined(value)) {
                 return value;
             }
         }
@@ -141,7 +141,7 @@ public final class DOMStringMap extends HtmlUnitScriptable {
         final HtmlElement e = (HtmlElement) getDomNodeOrNull();
         if (e != null && id instanceof CharSequence) {
             final String value = e.getAttribute(DATA_PREFIX + deCamelize(id.toString()));
-            if (ATTRIBUTE_NOT_DEFINED != value) {
+            if (isAttributeDefined(value)) {
                 return ScriptableObject.buildDataDescriptor(value, ScriptableObject.EMPTY);
             }
         }

@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static org.htmlunit.html.DomElement.isAttributeDefined;
 
 import java.util.List;
 
@@ -96,7 +96,7 @@ public class RadioNodeList extends NodeList {
         for (final DomNode node : getElements()) {
             if (node instanceof HtmlRadioButtonInput input && input.isChecked()) {
                 final String value = input.getValueAttribute();
-                return value == ATTRIBUTE_NOT_DEFINED ? "on" : value;
+                return !isAttributeDefined(value) ? "on" : value;
             }
         }
 
@@ -113,7 +113,7 @@ public class RadioNodeList extends NodeList {
         for (final DomNode node : getElements()) {
             if (node instanceof HtmlRadioButtonInput input) {
                 String value = input.getValueAttribute();
-                if (value == ATTRIBUTE_NOT_DEFINED) {
+                if (!isAttributeDefined(value)) {
                     value = "on";
                 }
                 if (newValue.equals(value)) {

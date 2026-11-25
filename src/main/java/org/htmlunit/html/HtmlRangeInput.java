@@ -43,7 +43,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
         super(qualifiedName, page, attributes);
 
         final String value = getValueAttribute();
-        if (value == ATTRIBUTE_NOT_DEFINED) {
+        if (!isAttributeDefined(value)) {
             final double min = getMinNumeric();
             final double max = getMaxNumeric();
             if (max < min) {
@@ -70,7 +70,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
      */
     public double getMinNumeric() {
         final String min = getAttributeDirect("min");
-        if (min == ATTRIBUTE_NOT_DEFINED) {
+        if (!isAttributeDefined(min)) {
             return 0;
         }
         try {
@@ -89,7 +89,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
      */
     public double getMaxNumeric() {
         final String max = getAttributeDirect("max");
-        if (max == ATTRIBUTE_NOT_DEFINED) {
+        if (!isAttributeDefined(max)) {
             return 100;
         }
         try {
@@ -108,7 +108,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
      */
     public double getStepNumeric() {
         final String step = getAttributeDirect("step");
-        if (step == ATTRIBUTE_NOT_DEFINED) {
+        if (!isAttributeDefined(step)) {
             return 1;
         }
         try {

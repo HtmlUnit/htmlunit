@@ -58,7 +58,7 @@ public abstract class HtmlMedia extends HtmlElement {
         childrenChecked_ = false;
         final String src = getAttributeDirect(SRC_ATTRIBUTE);
         // the src may be checked already (set by script before the element was added)
-        if (ATTRIBUTE_NOT_DEFINED != src && !src.equals(checkedSrc_)) {
+        if (isAttributeDefined(src) && !src.equals(checkedSrc_)) {
             checkSrc(src);
         }
         if (getFirstElementChild() != null) {

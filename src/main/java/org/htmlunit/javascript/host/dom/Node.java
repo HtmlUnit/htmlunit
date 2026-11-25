@@ -320,7 +320,7 @@ public class Node extends EventTarget {
      */
     private static void initInlineFrameIfNeeded(final DomNode childDomNode) {
         if (childDomNode instanceof HtmlInlineFrame frame) {
-            if (DomElement.ATTRIBUTE_NOT_DEFINED == frame.getSrcAttribute()) {
+            if (!DomElement.isAttributeDefined(frame.getSrcAttribute())) {
                 frame.loadInnerPage();
             }
         }

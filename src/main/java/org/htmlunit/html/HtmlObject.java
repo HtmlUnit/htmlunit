@@ -341,7 +341,7 @@ public class HtmlObject extends HtmlElement implements ValidatableHtmlElement {
         }
 
         final String clsId = getClassIdAttribute();
-        if (ATTRIBUTE_NOT_DEFINED != clsId && getPage().getWebClient().isJavaScriptEngineEnabled()) {
+        if (isAttributeDefined(clsId) && getPage().getWebClient().isJavaScriptEngineEnabled()) {
             ((HTMLObjectElement) getScriptableObject()).setClassid(clsId);
         }
     }

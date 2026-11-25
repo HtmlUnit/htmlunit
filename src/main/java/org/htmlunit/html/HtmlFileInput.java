@@ -213,7 +213,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
      * @param files the list of files to upload
      */
     public void setFiles(final File... files) {
-        if (files.length > 1 && ATTRIBUTE_NOT_DEFINED == getAttributeDirect("multiple")) {
+        if (files.length > 1 && !isAttributeDefined(getAttributeDirect("multiple"))) {
             throw new IllegalStateException("HtmlFileInput - 'multiple' is not set.");
         }
 
@@ -234,11 +234,11 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
             return;
         }
 
-        if (ATTRIBUTE_NOT_DEFINED == getAttributeDirect("webkitdirectory")) {
+        if (!isAttributeDefined(getAttributeDirect("webkitdirectory"))) {
             throw new IllegalStateException("HtmlFileInput - 'webkitdirectory' is not set.");
         }
 
-        if (ATTRIBUTE_NOT_DEFINED == getAttributeDirect("multiple")) {
+        if (!isAttributeDefined(getAttributeDirect("multiple"))) {
             throw new IllegalStateException("HtmlFileInput - 'multiple' is not set.");
         }
 
@@ -319,7 +319,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
         return isCustomValidityValid()
                 && (!isRequiredSupported()
-                        || ATTRIBUTE_NOT_DEFINED == getAttributeDirect("required")
+                        || !isAttributeDefined(getAttributeDirect("required"))
                         || files_.length > 0);
     }
 
