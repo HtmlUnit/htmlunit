@@ -64,6 +64,12 @@ public final class CorsLoader {
 
     private static final int MAX_REDIRECTS = 20;
 
+    private final WebWindow webWindow_;
+    private final CredentialsMode credentialsMode_;
+    private final RedirectMode redirectMode_;
+    private final int timeout_;
+    private final RequestMode requestMode_;
+
     /**
      * The credentials mode of the request.
      */
@@ -148,12 +154,6 @@ public final class CorsLoader {
             super(msg, cause);
         }
     }
-
-    private final WebWindow webWindow_;
-    private final CredentialsMode credentialsMode_;
-    private final RedirectMode redirectMode_;
-    private final int timeout_;
-    private final RequestMode requestMode_;
 
     /**
      * Ctor.

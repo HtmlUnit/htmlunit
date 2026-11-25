@@ -38,14 +38,65 @@ import java.util.Set;
  */
 final class NumberFormatter {
 
+    /** The style, part type and option value {@code auto}. */
+    static final String AUTO = "auto";
+    /** The style and part type {@code currency}. */
+    static final String CURRENCY = "currency";
+    /** The style and part type {@code unit}. */
+    static final String UNIT = "unit";
+    /** The style and unit {@code percent}. */
+    static final String PERCENT = "percent";
+    /** The notation {@code compact}. */
+    static final String COMPACT = "compact";
+    /** The notation and currency sign {@code standard}. */
+    static final String STANDARD = "standard";
+    /** The display option {@code short}. */
+    static final String SHORT = "short";
+
+    private static final String LITERAL = "literal";
+    private static final String SHARED = "shared";
+    private static final String PER = "-per-";
+    // the start of the long unit patterns
+    private static final String NUMBER_AND_SPACE = "{0} ";
+
+    // English currency names without a plural form
+    private static final Set<String> INVARIANT_CURRENCY_NAMES = Set.of("yen", "yuan", "won", "baht");
+
+    // the English short forms of the time units used after 'per' (e.g. 'kB/s')
+    private static final Map<String, String> PER_UNITS = Map.of(
+            "second", "s", "minute", "min", "hour", "h", "day", "d", "week", "w", "month", "m", "year", "y");
+
+    // English unit patterns: short, narrow, long (singular), long (plural); short and narrow
+    // may have a plural form separated by '|'
+    private static final Map<String, String[]> UNITS = new HashMap<>();
+
+    private final Options options_;
+    private final Locale locale_;
+
+    private final char zeroDigit_;
+    private final char groupingSeparator_;
+    private final char decimalSeparator_;
+    private final String exponentSeparator_;
+    private final String nan_;
+    private final String infinity_;
+
+    // the affixes of the style for positive and negative numbers
+    private final String positivePrefix_;
+    private final String positiveSuffix_;
+    private final String negativePrefix_;
+    private final String negativeSuffix_;
+    private final char minusSign_;
+    // the text of the currency used in the affixes; null for other styles
+    private final String currencyDisplayText_;
+
     /** The resolved options of a {@link NumberFormat}. */
     static final class Options implements java.io.Serializable {
         private String style_ = "decimal";
         private String currency_;
         private String currencyDisplay_ = "symbol";
-        private String currencySign_ = "standard";
+        private String currencySign_ = STANDARD;
         private String unit_;
-        private String unitDisplay_ = "short";
+        private String unitDisplay_ = SHORT;
         private int minimumIntegerDigits_ = 1;
         private int minimumFractionDigits_;
         private int maximumFractionDigits_ = 3;
@@ -54,11 +105,11 @@ final class NumberFormatter {
         private String roundingType_ = "fractionDigits";
         private int roundingIncrement_ = 1;
         private String roundingMode_ = "halfExpand";
-        private String trailingZeroDisplay_ = "auto";
-        private String useGrouping_ = "auto";
-        private String notation_ = "standard";
-        private String compactDisplay_ = "short";
-        private String signDisplay_ = "auto";
+        private String trailingZeroDisplay_ = AUTO;
+        private String useGrouping_ = AUTO;
+        private String notation_ = STANDARD;
+        private String compactDisplay_ = SHORT;
+        private String signDisplay_ = AUTO;
 
         String getStyle() {
             return style_;
@@ -213,75 +264,65 @@ final class NumberFormatter {
         }
     }
 
-    // English currency names without a plural form
-    private static final Set<String> INVARIANT_CURRENCY_NAMES = Set.of("yen", "yuan", "won", "baht");
-
-    // the English short forms of the time units used after 'per' (e.g. 'kB/s')
-    private static final Map<String, String> PER_UNITS = Map.of(
-            "second", "s", "minute", "min", "hour", "h", "day", "d", "week", "w", "month", "m", "year", "y");
-
-    // English unit patterns: short, narrow, long (singular), long (plural); short and narrow
-    // may have a plural form separated by '|'
-    private static final Map<String, String[]> UNITS = new HashMap<>();
-
     static {
-        unit("acre", "{0} ac", "{0}ac", "acre", "acres");
-        unit("bit", "{0} bit", "{0}bit", "bit", "bits");
-        unit("byte", "{0} byte", "{0}B", "byte", "bytes");
-        unit("celsius", "{0}°C", "{0}°C", "degree Celsius", "degrees Celsius");
-        unit("centimeter", "{0} cm", "{0}cm", "centimeter", "centimeters");
-        unit("day", "{0} day|{0} days", "{0}d", "day", "days");
-        unit("degree", "{0} deg", "{0}°", "degree", "degrees");
-        unit("fahrenheit", "{0}°F", "{0}°", "degree Fahrenheit", "degrees Fahrenheit");
-        unit("fluid-ounce", "{0} fl oz", "{0}fl oz", "fluid ounce", "fluid ounces");
-        unit("foot", "{0} ft", "{0}′", "foot", "feet");
-        unit("gallon", "{0} gal", "{0}gal", "gallon", "gallons");
-        unit("gigabit", "{0} Gb", "{0}Gb", "gigabit", "gigabits");
-        unit("gigabyte", "{0} GB", "{0}GB", "gigabyte", "gigabytes");
-        unit("gram", "{0} g", "{0}g", "gram", "grams");
-        unit("hectare", "{0} ha", "{0}ha", "hectare", "hectares");
-        unit("hour", "{0} hr", "{0}h", "hour", "hours");
-        unit("inch", "{0} in", "{0}″", "inch", "inches");
-        unit("kilobit", "{0} kb", "{0}kb", "kilobit", "kilobits");
-        unit("kilobyte", "{0} kB", "{0}kB", "kilobyte", "kilobytes");
-        unit("kilogram", "{0} kg", "{0}kg", "kilogram", "kilograms");
-        unit("kilometer", "{0} km", "{0}km", "kilometer", "kilometers");
-        unit("liter", "{0} L", "{0}L", "liter", "liters");
-        unit("megabit", "{0} Mb", "{0}Mb", "megabit", "megabits");
-        unit("megabyte", "{0} MB", "{0}MB", "megabyte", "megabytes");
-        unit("meter", "{0} m", "{0}m", "meter", "meters");
-        unit("microsecond", "{0} μs", "{0}μs", "microsecond", "microseconds");
-        unit("mile", "{0} mi", "{0}mi", "mile", "miles");
-        unit("mile-scandinavian", "{0} smi", "{0}smi", "mile-scandinavian", "miles-scandinavian");
-        unit("milliliter", "{0} mL", "{0}mL", "milliliter", "milliliters");
-        unit("millimeter", "{0} mm", "{0}mm", "millimeter", "millimeters");
-        unit("millisecond", "{0} ms", "{0}ms", "millisecond", "milliseconds");
-        unit("minute", "{0} min", "{0}m", "minute", "minutes");
-        unit("month", "{0} mth|{0} mths", "{0}m", "month", "months");
-        unit("nanosecond", "{0} ns", "{0}ns", "nanosecond", "nanoseconds");
-        unit("ounce", "{0} oz", "{0}oz", "ounce", "ounces");
-        unit("percent", "{0}%", "{0}%", "percent", "percent");
-        unit("petabyte", "{0} PB", "{0}PB", "petabyte", "petabytes");
-        unit("pound", "{0} lb", "{0}#", "pound", "pounds");
-        unit("second", "{0} sec", "{0}s", "second", "seconds");
-        unit("stone", "{0} st", "{0}st", "stone", "stones");
-        unit("terabit", "{0} Tb", "{0}Tb", "terabit", "terabits");
-        unit("terabyte", "{0} TB", "{0}TB", "terabyte", "terabytes");
-        unit("week", "{0} wk|{0} wks", "{0}w", "week", "weeks");
-        unit("yard", "{0} yd", "{0}yd", "yard", "yards");
-        unit("year", "{0} yr|{0} yrs", "{0}y", "year", "years");
+        addUnit("acre", "{0} ac", "{0}ac", "acre", "acres");
+        addUnit("bit", "{0} bit", "{0}bit", "bit", "bits");
+        addUnit("byte", "{0} byte", "{0}B", "byte", "bytes");
+        addUnit("celsius", "{0}°C", "{0}°C", "degree Celsius", "degrees Celsius");
+        addUnit("centimeter", "{0} cm", "{0}cm", "centimeter", "centimeters");
+        addUnit("day", "{0} day|{0} days", "{0}d", "day", "days");
+        addUnit("degree", "{0} deg", "{0}°", "degree", "degrees");
+        addUnit("fahrenheit", "{0}°F", "{0}°", "degree Fahrenheit", "degrees Fahrenheit");
+        addUnit("fluid-ounce", "{0} fl oz", "{0}fl oz", "fluid ounce", "fluid ounces");
+        addUnit("foot", "{0} ft", "{0}′", "foot", "feet");
+        addUnit("gallon", "{0} gal", "{0}gal", "gallon", "gallons");
+        addUnit("gigabit", "{0} Gb", "{0}Gb", "gigabit", "gigabits");
+        addUnit("gigabyte", "{0} GB", "{0}GB", "gigabyte", "gigabytes");
+        addUnit("gram", "{0} g", "{0}g", "gram", "grams");
+        addUnit("hectare", "{0} ha", "{0}ha", "hectare", "hectares");
+        addUnit("hour", "{0} hr", "{0}h", "hour", "hours");
+        addUnit("inch", "{0} in", "{0}″", "inch", "inches");
+        addUnit("kilobit", "{0} kb", "{0}kb", "kilobit", "kilobits");
+        addUnit("kilobyte", "{0} kB", "{0}kB", "kilobyte", "kilobytes");
+        addUnit("kilogram", "{0} kg", "{0}kg", "kilogram", "kilograms");
+        addUnit("kilometer", "{0} km", "{0}km", "kilometer", "kilometers");
+        addUnit("liter", "{0} L", "{0}L", "liter", "liters");
+        addUnit("megabit", "{0} Mb", "{0}Mb", "megabit", "megabits");
+        addUnit("megabyte", "{0} MB", "{0}MB", "megabyte", "megabytes");
+        addUnit("meter", "{0} m", "{0}m", "meter", "meters");
+        addUnit("microsecond", "{0} μs", "{0}μs", "microsecond", "microseconds");
+        addUnit("mile", "{0} mi", "{0}mi", "mile", "miles");
+        addUnit("mile-scandinavian", "{0} smi", "{0}smi", "mile-scandinavian", "miles-scandinavian");
+        addUnit("milliliter", "{0} mL", "{0}mL", "milliliter", "milliliters");
+        addUnit("millimeter", "{0} mm", "{0}mm", "millimeter", "millimeters");
+        addUnit("millisecond", "{0} ms", "{0}ms", "millisecond", "milliseconds");
+        addUnit("minute", "{0} min", "{0}m", "minute", "minutes");
+        addUnit("month", "{0} mth|{0} mths", "{0}m", "month", "months");
+        addUnit("nanosecond", "{0} ns", "{0}ns", "nanosecond", "nanoseconds");
+        addUnit("ounce", "{0} oz", "{0}oz", "ounce", "ounces");
+        addUnit(PERCENT, "{0}%", "{0}%", PERCENT, PERCENT);
+        addUnit("petabyte", "{0} PB", "{0}PB", "petabyte", "petabytes");
+        addUnit("pound", "{0} lb", "{0}#", "pound", "pounds");
+        addUnit("second", "{0} sec", "{0}s", "second", "seconds");
+        addUnit("stone", "{0} st", "{0}st", "stone", "stones");
+        addUnit("terabit", "{0} Tb", "{0}Tb", "terabit", "terabits");
+        addUnit("terabyte", "{0} TB", "{0}TB", "terabyte", "terabytes");
+        addUnit("week", "{0} wk|{0} wks", "{0}w", "week", "weeks");
+        addUnit("yard", "{0} yd", "{0}yd", "yard", "yards");
+        addUnit("year", "{0} yr|{0} yrs", "{0}y", "year", "years");
 
         // compound units with patterns of their own
-        unit("kilometer-per-hour", "{0} km/h", "{0}km/h", "kilometer per hour", "kilometers per hour");
-        unit("meter-per-second", "{0} m/s", "{0}m/s", "meter per second", "meters per second");
-        unit("mile-per-hour", "{0} mph", "{0}mph", "mile per hour", "miles per hour");
-        unit("mile-per-gallon", "{0} mpg", "{0}mpg", "mile per gallon", "miles per gallon");
-        unit("liter-per-kilometer", "{0} L/km", "{0}L/km", "liter per kilometer", "liters per kilometer");
+        addUnit("kilometer-per-hour", "{0} km/h", "{0}km/h", "kilometer per hour", "kilometers per hour");
+        addUnit("meter-per-second", "{0} m/s", "{0}m/s", "meter per second", "meters per second");
+        addUnit("mile-per-hour", "{0} mph", "{0}mph", "mile per hour", "miles per hour");
+        addUnit("mile-per-gallon", "{0} mpg", "{0}mpg", "mile per gallon", "miles per gallon");
+        addUnit("liter-per-kilometer", "{0} L/km", "{0}L/km", "liter per kilometer", "liters per kilometer");
     }
 
-    private static void unit(final String name, final String shortPattern, final String narrowPattern,
+    private static void addUnit(final String name, final String shortPattern, final String narrowPattern,
             final String longSingular, final String longPlural) {
-        UNITS.put(name, new String[] {shortPattern, narrowPattern, "{0} " + longSingular, "{0} " + longPlural});
+        UNITS.put(name, new String[] {shortPattern, narrowPattern,
+            NUMBER_AND_SPACE + longSingular, NUMBER_AND_SPACE + longPlural});
     }
 
     /**
@@ -313,25 +354,6 @@ final class NumberFormatter {
             return number instanceof Double d && d.isNaN();
         }
     }
-
-    private final Options options_;
-    private final Locale locale_;
-
-    private final char zeroDigit_;
-    private final char groupingSeparator_;
-    private final char decimalSeparator_;
-    private final String exponentSeparator_;
-    private final String nan_;
-    private final String infinity_;
-
-    // the affixes of the style for positive and negative numbers
-    private final String positivePrefix_;
-    private final String positiveSuffix_;
-    private final String negativePrefix_;
-    private final String negativeSuffix_;
-    private final char minusSign_;
-    // the text of the currency used in the affixes; null for other styles
-    private final String currencyDisplayText_;
 
     /**
      * Ctor.
@@ -376,10 +398,10 @@ final class NumberFormatter {
         minusSign_ = symbols.getMinusSign();
 
         final DecimalFormat format;
-        if ("percent".equals(options.getStyle())) {
+        if (PERCENT.equals(options.getStyle())) {
             format = (DecimalFormat) java.text.NumberFormat.getPercentInstance(locale);
         }
-        else if ("currency".equals(options.getStyle())) {
+        else if (CURRENCY.equals(options.getStyle())) {
             Locale currencyLocale = locale;
             if ("accounting".equals(options.getCurrencySign())) {
                 currencyLocale = new Locale.Builder().setLocale(locale)
@@ -401,7 +423,7 @@ final class NumberFormatter {
         String negativeSuffix = format.getNegativeSuffix();
 
         String currencyDisplayText = null;
-        if ("currency".equals(options.getStyle())) {
+        if (CURRENCY.equals(options.getStyle())) {
             final String symbol = currencySymbol(format);
             final String display = currencyDisplay();
             currencyDisplayText = display;
@@ -554,7 +576,7 @@ final class NumberFormatter {
         }
 
         BigDecimal abs = ((BigDecimal) value).abs();
-        if ("percent".equals(options_.getStyle())) {
+        if (PERCENT.equals(options_.getStyle())) {
             abs = abs.movePointRight(2);
         }
 
@@ -565,7 +587,7 @@ final class NumberFormatter {
                         formatScientific(abs, "engineering".equals(options_.getNotation()), negative);
                 return affixed(scientific, negative, abs.signum() == 0, false);
 
-            case "compact":
+            case COMPACT:
                 return formatCompact(abs, negative);
 
             default:
@@ -589,16 +611,16 @@ final class NumberFormatter {
         final List<Part> result = new ArrayList<>();
         if (join(startParts).equals(join(endParts))) {
             // FormatApproximately
-            result.add(new Part("approximatelySign", "~", "shared"));
+            result.add(new Part("approximatelySign", "~", SHARED));
             for (final Part part : startParts) {
-                result.add(part.withSource("shared"));
+                result.add(part.withSource(SHARED));
             }
             return result;
         }
 
         // a unit or currency after both numbers is shared (e.g. '3–5 km'); the form of the end is used
         final List<Part> sharedSuffix = new ArrayList<>();
-        if ("unit".equals(options_.getStyle()) || "currency".equals(options_.getStyle())) {
+        if (UNIT.equals(options_.getStyle()) || CURRENCY.equals(options_.getStyle())) {
             final int startSuffix = suffixStart(startParts);
             final int endSuffix = suffixStart(endParts);
             if (startSuffix < startParts.size() && endSuffix < endParts.size()
@@ -619,12 +641,12 @@ final class NumberFormatter {
         for (final Part part : startParts) {
             result.add(part.withSource("startRange"));
         }
-        result.add(new Part("literal", onlyNumbers ? "\u2013" : " \u2013 ", "shared"));
+        result.add(new Part(LITERAL, onlyNumbers ? "\u2013" : " \u2013 ", SHARED));
         for (final Part part : endParts) {
             result.add(part.withSource("endRange"));
         }
         for (final Part part : sharedSuffix) {
-            result.add(part.withSource("shared"));
+            result.add(part.withSource(SHARED));
         }
         return result;
     }
@@ -634,7 +656,7 @@ final class NumberFormatter {
         int index = parts.size();
         while (index > 0) {
             final String type = parts.get(index - 1).type();
-            if (!"unit".equals(type) && !"currency".equals(type) && !"literal".equals(type)) {
+            if (!UNIT.equals(type) && !CURRENCY.equals(type) && !LITERAL.equals(type)) {
                 break;
             }
             index--;
@@ -654,11 +676,11 @@ final class NumberFormatter {
             if (!startPart.type().equals(endPart.type())) {
                 return false;
             }
-            if ("unit".equals(startPart.type())) {
+            if (UNIT.equals(startPart.type())) {
                 hasUnitOrCurrency = true;
             }
             else {
-                hasUnitOrCurrency |= "currency".equals(startPart.type());
+                hasUnitOrCurrency |= CURRENCY.equals(startPart.type());
                 if (!startPart.value().equals(endPart.value())) {
                     return false;
                 }
@@ -736,9 +758,9 @@ final class NumberFormatter {
         final String prefix = start < formatted.length() ? stripSign(formatted.substring(0, start)) : "";
         final String suffix = start < formatted.length() ? formatted.substring(end) : "";
 
-        final List<Part> parts = new ArrayList<>(textParts(prefix, "compact"));
+        final List<Part> parts = new ArrayList<>(textParts(prefix, COMPACT));
         parts.addAll(formatDigits(rounded));
-        parts.addAll(textParts(suffix, "compact"));
+        parts.addAll(textParts(suffix, COMPACT));
         return affixed(parts, negative, rounded.signum() == 0, false);
     }
 
@@ -777,13 +799,13 @@ final class NumberFormatter {
             end--;
         }
         if (start > 0) {
-            parts.add(new Part("literal", text.substring(0, start)));
+            parts.add(new Part(LITERAL, text.substring(0, start)));
         }
         if (end > start) {
             parts.add(new Part(type, text.substring(start, end)));
         }
         if (end < text.length() && end >= start) {
-            parts.add(new Part("literal", text.substring(Math.max(start, end))));
+            parts.add(new Part(LITERAL, text.substring(Math.max(start, end))));
         }
         return parts;
     }
@@ -910,7 +932,7 @@ final class NumberFormatter {
 
         final List<Part> parts = new ArrayList<>();
         final boolean minimumGroupingDigits2 = "min2".equals(options_.getUseGrouping())
-                || "auto".equals(options_.getUseGrouping()) && hasMinimumGroupingDigits2();
+                || AUTO.equals(options_.getUseGrouping()) && hasMinimumGroupingDigits2();
         final boolean grouping = options_.getUseGrouping() != null
                 && !(minimumGroupingDigits2 && integer.length() < 5);
         if (grouping) {
@@ -1003,8 +1025,8 @@ final class NumberFormatter {
 
         final List<Part> parts = new ArrayList<>();
         final String number = join(numberParts);
-        if ("currency".equals(options_.getStyle()) && "name".equals(options_.getCurrencyDisplay())
-                || "unit".equals(options_.getStyle())) {
+        if (CURRENCY.equals(options_.getStyle()) && "name".equals(options_.getCurrencyDisplay())
+                || UNIT.equals(options_.getStyle())) {
             if (sign < 0) {
                 parts.add(new Part("minusSign", minus));
             }
@@ -1012,15 +1034,15 @@ final class NumberFormatter {
                 parts.add(new Part("plusSign", "+"));
             }
             parts.addAll(numberParts);
-            if ("unit".equals(options_.getStyle())) {
+            if (UNIT.equals(options_.getStyle())) {
                 final String pattern = unitPattern(number);
                 final int pos = pattern.indexOf("{0}");
-                parts.addAll(0, textParts(pattern.substring(0, pos), "unit"));
-                parts.addAll(textParts(pattern.substring(pos + 3), "unit"));
+                parts.addAll(0, textParts(pattern.substring(0, pos), UNIT));
+                parts.addAll(textParts(pattern.substring(pos + 3), UNIT));
             }
             else {
-                parts.add(new Part("literal", " "));
-                parts.add(new Part("currency", currencyName(number)));
+                parts.add(new Part(LITERAL, " "));
+                parts.add(new Part(CURRENCY, currencyName(number)));
             }
             return parts;
         }
@@ -1042,7 +1064,7 @@ final class NumberFormatter {
             final char c = affix.charAt(i);
             if (currencyDisplayText_ != null && !currencyDisplayText_.isEmpty()
                     && affix.startsWith(currencyDisplayText_, i)) {
-                type = "currency";
+                type = CURRENCY;
                 value = currencyDisplayText_;
             }
             else if (c == minusSign_ || c == '-' || c == '\u2212') {
@@ -1064,7 +1086,7 @@ final class NumberFormatter {
                 continue;
             }
             if (literal.length() > 0) {
-                parts.add(new Part("literal", literal.toString()));
+                parts.add(new Part(LITERAL, literal.toString()));
                 literal.setLength(0);
             }
             if (value == null) {
@@ -1074,18 +1096,18 @@ final class NumberFormatter {
             i += value.length();
         }
         if (literal.length() > 0) {
-            parts.add(new Part("literal", literal.toString()));
+            parts.add(new Part(LITERAL, literal.toString()));
         }
         return parts;
     }
 
     private String unitPattern(final String number) {
-        final String[] parts = options_.getUnit().split("-per-");
+        final String[] parts = options_.getUnit().split(PER);
         if (parts.length == 2 && !UNITS.containsKey(options_.getUnit())) {
             final String numerator = unitPattern(parts[0], number);
             final String denominator = unitPattern(parts[1], "1");
             if ("long".equals(options_.getUnitDisplay())) {
-                return numerator + " per " + denominator.replace("{0} ", "");
+                return numerator + " per " + denominator.replace(NUMBER_AND_SPACE, "");
             }
             final String perUnit = PER_UNITS.get(parts[1]);
             return numerator + "/" + (perUnit == null ? denominator.replace("{0}", "").trim() : perUnit);
@@ -1096,7 +1118,7 @@ final class NumberFormatter {
     private String unitPattern(final String unit, final String number) {
         final String[] patterns = UNITS.get(unit);
         if (patterns == null) {
-            return "{0} " + unit;
+            return NUMBER_AND_SPACE + unit;
         }
         // English plural rules: 'one' for the integer 1
         final boolean one = "1".equals(number);
@@ -1127,11 +1149,11 @@ final class NumberFormatter {
      * @see <a href="https://tc39.es/ecma402/#sec-iswellformedunitidentifier">spec</a>
      */
     static boolean isWellFormedUnitIdentifier(final String unit) {
-        if (UNITS.containsKey(unit) && !unit.contains("-per-")) {
+        if (UNITS.containsKey(unit) && !unit.contains(PER)) {
             return true;
         }
-        final int pos = unit.indexOf("-per-");
-        if (pos == -1 || unit.indexOf("-per-", pos + 1) != -1) {
+        final int pos = unit.indexOf(PER);
+        if (pos == -1 || unit.indexOf(PER, pos + 1) != -1) {
             return false;
         }
         return UNITS.containsKey(unit.substring(0, pos)) && UNITS.containsKey(unit.substring(pos + 5));

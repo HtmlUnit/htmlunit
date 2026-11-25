@@ -50,6 +50,9 @@ import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 public final class UrlUtils {
 
     /** "about". */
+    private static final String FILE = "file";
+    private static final String HTTPS = "https";
+
     public static final String ABOUT = "about";
     /** "about:". */
     public static final String ABOUT_SCHEME = ABOUT + ":";
@@ -514,15 +517,15 @@ public final class UrlUtils {
                 || !isSpecialScheme(newScheme) || !isSpecialScheme(oldScheme)) {
             return url;
         }
-        if ("file".equals(newScheme) && (url.getUserInfo() != null || url.getPort() != -1)) {
+        if (FILE.equals(newScheme) && (url.getUserInfo() != null || url.getPort() != -1)) {
             return url;
         }
-        if ("file".equals(oldScheme) && StringUtils.isEmptyOrNull(url.getHost())) {
+        if (FILE.equals(oldScheme) && StringUtils.isEmptyOrNull(url.getHost())) {
             return url;
         }
 
         try {
-            if (fileWithoutHost && "file".equals(newScheme)) {
+            if (fileWithoutHost && FILE.equals(newScheme)) {
                 return createNewUrl(newScheme, "", url.getPath(), url.getRef(), url.getQuery());
             }
             return removeRedundantPort(getUrlWithNewProtocol(url, newScheme));
@@ -542,7 +545,7 @@ public final class UrlUtils {
      */
     public static String serialize(final URL url) {
         final String externalForm = url.toExternalForm();
-        if ("file".equals(url.getProtocol()) && !externalForm.startsWith("file://")) {
+        if (FILE.equals(url.getProtocol()) && !externalForm.startsWith("file://")) {
             return "file://" + externalForm.substring("file:".length());
         }
         return externalForm;
@@ -556,11 +559,11 @@ public final class UrlUtils {
      * @return the URL without the host 'localhost'
      */
     public static URL removeLocalhostFromFileUrl(final URL url) {
-        if (!"file".equals(url.getProtocol()) || !"localhost".equalsIgnoreCase(url.getHost())) {
+        if (!FILE.equals(url.getProtocol()) || !"localhost".equalsIgnoreCase(url.getHost())) {
             return url;
         }
         try {
-            return createNewUrl("file", "", url.getPath(), url.getRef(), url.getQuery());
+            return createNewUrl(FILE, "", url.getPath(), url.getRef(), url.getQuery());
         }
         catch (final MalformedURLException e) {
             return url;
@@ -1114,9 +1117,9 @@ public final class UrlUtils {
 
         final String schemeLC = scheme.toLowerCase(Locale.ROOT);
         return "ftp".equals(schemeLC)
-                || "file".equals(schemeLC)
+                || FILE.equals(schemeLC)
                 || "http".equals(schemeLC)
-                || "https".equals(schemeLC)
+                || HTTPS.equals(schemeLC)
                 || "ws".equals(schemeLC)
                 || "wss".equals(schemeLC);
     }
@@ -1375,7 +1378,7 @@ public final class UrlUtils {
     }
 
     static boolean isNormalUrlProtocol(final String protocol) {
-        return "http".equals(protocol) || "https".equals(protocol) || "file".equals(protocol);
+        return "http".equals(protocol) || HTTPS.equals(protocol) || FILE.equals(protocol);
     }
 
     /**
@@ -1538,7 +1541,7 @@ public final class UrlUtils {
      * @throws MalformedURLException if the URL string cannot be converted to a URL instance
      */
     public static URL removeRedundantPort(final URL url) throws MalformedURLException {
-        if (("https".equals(url.getProtocol()) && url.getPort() == 443)
+        if ((HTTPS.equals(url.getProtocol()) && url.getPort() == 443)
                 || ("http".equals(url.getProtocol()) && url.getPort() == 80)) {
             return getUrlWithNewPort(url, -1);
         }
@@ -1708,7 +1711,7 @@ public final class UrlUtils {
      */
     public static boolean isLocalResourceAccessAllowed(final URL pageUrl, final URL url) {
         final String protocol = url.getProtocol();
-        return !"file".equals(protocol) || protocol.equals(pageUrl.getProtocol());
+        return !FILE.equals(protocol) || protocol.equals(pageUrl.getProtocol());
     }
 
     /**
@@ -1725,7 +1728,7 @@ public final class UrlUtils {
      */
     public static boolean isPotentiallyTrustworthy(final URL url) {
         final String protocol = url.getProtocol();
-        if ("https".equals(protocol) || "wss".equals(protocol) || "file".equals(protocol)) {
+        if (HTTPS.equals(protocol) || "wss".equals(protocol) || FILE.equals(protocol)) {
             return true;
         }
         if (!"http".equals(protocol) && !"ws".equals(protocol)) {
@@ -1742,6 +1745,7 @@ public final class UrlUtils {
      * @param host the host to check (as returned by {@link URL#getHost()}; may be null)
      * @return whether the host is localhost or a loopback address
      */
+    @SuppressWarnings("PMD.AvoidUsingHardCodedIP") // the loopback addresses are the point of this check
     public static boolean isLocalhostOrLoopback(final String host) {
         if (host == null || host.isEmpty()) {
             return false;

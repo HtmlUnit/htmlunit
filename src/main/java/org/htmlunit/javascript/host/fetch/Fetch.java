@@ -272,7 +272,7 @@ public final class Fetch {
     private static boolean isSupportedUrl(final URL originUrl, final URL url, final String mode) {
         final String protocol = url.getProtocol();
         if ("data".equals(protocol)) {
-            return !"same-origin".equals(mode);
+            return !Request.SAME_ORIGIN.equals(mode);
         }
         if ("blob".equals(protocol)) {
             try {
@@ -288,7 +288,7 @@ public final class Fetch {
         }
 
         // 'same-origin' does not allow other origins
-        return !"same-origin".equals(mode) || UrlUtils.isSameOrigin(originUrl, url);
+        return !Request.SAME_ORIGIN.equals(mode) || UrlUtils.isSameOrigin(originUrl, url);
     }
 
     /**
@@ -334,7 +334,7 @@ public final class Fetch {
 
     private static FetchMode toFetchMode(final String mode) {
         return switch (mode) {
-            case "same-origin" -> FetchMode.SAME_ORIGIN;
+            case Request.SAME_ORIGIN -> FetchMode.SAME_ORIGIN;
             case "no-cors" -> FetchMode.NO_CORS;
             default -> FetchMode.CORS;
         };
@@ -523,7 +523,7 @@ public final class Fetch {
                 default -> CorsLoader.RedirectMode.FOLLOW;
             };
             final CorsLoader.RequestMode requestMode = switch (request_.getMode()) {
-                case "same-origin" -> CorsLoader.RequestMode.SAME_ORIGIN;
+                case Request.SAME_ORIGIN -> CorsLoader.RequestMode.SAME_ORIGIN;
                 case "no-cors" -> CorsLoader.RequestMode.NO_CORS;
                 default -> CorsLoader.RequestMode.CORS;
             };

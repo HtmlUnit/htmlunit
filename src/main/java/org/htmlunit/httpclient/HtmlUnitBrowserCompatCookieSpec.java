@@ -81,6 +81,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
 
     private static final String SECURE_PREFIX = "__Secure-";
     private static final String HOST_PREFIX = "__Host-";
+    private static final String COOKIE_MESSAGE_PREFIX = "Cookie '";
 
     /**
      * Comparator for sending cookies in right order.
@@ -138,7 +139,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         if (StringUtils.startsWithIgnoreCase(name, SECURE_PREFIX)) {
             if (!cookie.isSecure()) {
                 throw new CookieRestrictionViolationException(
-                        "Cookie '" + name + "' requires the 'secure' attribute");
+                        COOKIE_MESSAGE_PREFIX + name + "' requires the 'secure' attribute");
             }
         }
         else if (StringUtils.startsWithIgnoreCase(name, HOST_PREFIX)) {
@@ -158,7 +159,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         final String name = cookie.getName();
         if (!cookie.isSecure()) {
             throw new CookieRestrictionViolationException(
-                    "Cookie '" + name + "' requires the 'secure' attribute");
+                    COOKIE_MESSAGE_PREFIX + name + "' requires the 'secure' attribute");
         }
 
         final ClientCookie clientCookie = cookie instanceof ClientCookie cc ? cc : null;
@@ -170,7 +171,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             final boolean domainOfHost = domain != null && domain.equalsIgnoreCase(origin.getHost());
             if (!domainOfHost || !browserVersion_.hasFeature(HTTP_COOKIE_HOST_PREFIX_ALLOWS_DOMAIN_OF_HOST)) {
                 throw new CookieRestrictionViolationException(
-                        "Cookie '" + name + "' does not allow the 'domain' attribute");
+                        COOKIE_MESSAGE_PREFIX + name + "' does not allow the 'domain' attribute");
             }
         }
 
@@ -178,7 +179,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 || (!browserVersion_.hasFeature(HTTP_COOKIE_HOST_PREFIX_PATH_ATTRIBUTE_OPTIONAL)
                         && (clientCookie == null || !clientCookie.containsAttribute(ClientCookie.PATH_ATTR)))) {
             throw new CookieRestrictionViolationException(
-                    "Cookie '" + name + "' requires the 'path' attribute '/'");
+                    COOKIE_MESSAGE_PREFIX + name + "' requires the 'path' attribute '/'");
         }
     }
 

@@ -49,6 +49,9 @@ import org.htmlunit.util.UrlUtils;
  */
 final class FetchBody implements Serializable {
 
+    private static final String CRLF = "\r\n";
+    private static final String FORM_DATA_PARSE_ERROR = "Could not parse content as FormData.";
+
     /** The kinds of consuming the body. */
     enum Kind { TEXT, JSON, ARRAY_BUFFER, BYTES, BLOB, FORM_DATA }
 
@@ -118,11 +121,11 @@ final class FetchBody implements Serializable {
     private static byte[] toMultipart(final FormData formData, final String boundary) {
         try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             for (final NameValuePair entry : formData.getEntries()) {
-                out.write(("--" + boundary + "\r\n").getBytes(UTF_8));
+                out.write(("--" + boundary + CRLF).getBytes(UTF_8));
                 if (entry instanceof KeyDataPair file) {
                     final String fileName = file.getFileName() == null ? "blob" : file.getFileName();
                     out.write(("Content-Disposition: form-data; name=\"" + escapeName(entry.getName())
-                            + "\"; filename=\"" + escapeName(fileName) + "\"\r\n").getBytes(UTF_8));
+                            + "\"; filename=\"" + escapeName(fileName) + "\"" + CRLF).getBytes(UTF_8));
                     final String mimeType = file.getMimeType() == null || file.getMimeType().isEmpty()
                             ? "application/octet-stream" : file.getMimeType();
                     out.write(("Content-Type: " + mimeType + "\r\n\r\n").getBytes(UTF_8));
@@ -138,7 +141,7 @@ final class FetchBody implements Serializable {
                             + "\"\r\n\r\n").getBytes(UTF_8));
                     out.write(entry.getValue().getBytes(UTF_8));
                 }
-                out.write("\r\n".getBytes(UTF_8));
+                out.write(CRLF.getBytes(UTF_8));
             }
             out.write(("--" + boundary + "--\r\n").getBytes(UTF_8));
             return out.toByteArray();
@@ -315,7 +318,7 @@ final class FetchBody implements Serializable {
             }
         }
 
-        throw JavaScriptEngine.typeError("Could not parse content as FormData.");
+        throw JavaScriptEngine.typeError(FORM_DATA_PARSE_ERROR);
     }
 
     private static String getBoundary(final String mimeType) {
@@ -349,26 +352,26 @@ final class FetchBody implements Serializable {
 
         int pos = content.indexOf(delimiter);
         if (pos < 0) {
-            throw JavaScriptEngine.typeError("Could not parse content as FormData.");
+            throw JavaScriptEngine.typeError(FORM_DATA_PARSE_ERROR);
         }
         while (true) {
             pos += delimiter.length();
             if (content.startsWith("--", pos)) {
                 return;
             }
-            if (content.startsWith("\r\n", pos)) {
+            if (content.startsWith(CRLF, pos)) {
                 pos += 2;
             }
             final int headerEnd = content.indexOf("\r\n\r\n", pos);
-            final int next = content.indexOf("\r\n" + delimiter, pos);
+            final int next = content.indexOf(CRLF + delimiter, pos);
             if (headerEnd < 0 || next < 0 || headerEnd > next) {
-                throw JavaScriptEngine.typeError("Could not parse content as FormData.");
+                throw JavaScriptEngine.typeError(FORM_DATA_PARSE_ERROR);
             }
 
             String name = null;
             String fileName = null;
             String partType = "";
-            for (final String header : content.substring(pos, headerEnd).split("\r\n")) {
+            for (final String header : content.substring(pos, headerEnd).split(CRLF)) {
                 final int colon = header.indexOf(':');
                 if (colon < 0) {
                     continue;
@@ -384,7 +387,7 @@ final class FetchBody implements Serializable {
                 }
             }
             if (name == null) {
-                throw JavaScriptEngine.typeError("Could not parse content as FormData.");
+                throw JavaScriptEngine.typeError(FORM_DATA_PARSE_ERROR);
             }
 
             final byte[] partBytes = content.substring(headerEnd + 4, next).getBytes(

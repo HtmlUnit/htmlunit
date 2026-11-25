@@ -56,22 +56,25 @@ import org.htmlunit.util.UrlUtils;
 public class Request extends HtmlUnitScriptable {
 
     private static final String ABOUT_CLIENT = "about:client";
+    /** The mode and credentials mode {@code same-origin}. */
+    static final String SAME_ORIGIN = "same-origin";
+    private static final String GET = "GET";
 
-    private static final String[] MODES = {"same-origin", "no-cors", "cors"};
-    private static final String[] CREDENTIALS = {"omit", "same-origin", "include"};
+    private static final String[] MODES = {SAME_ORIGIN, "no-cors", "cors"};
+    private static final String[] CREDENTIALS = {"omit", SAME_ORIGIN, "include"};
     private static final String[] CACHE_MODES =
         {"default", "no-store", "reload", "no-cache", "force-cache", "only-if-cached"};
     private static final String[] REDIRECT_MODES = {"follow", "error", "manual"};
     private static final String[] REFERRER_POLICIES = {"no-referrer", "no-referrer-when-downgrade",
-        "same-origin", "origin", "strict-origin", "origin-when-cross-origin",
+        SAME_ORIGIN, "origin", "strict-origin", "origin-when-cross-origin",
         "strict-origin-when-cross-origin", "unsafe-url"};
 
-    private String method_ = "GET";
+    private String method_ = GET;
     private String url_;
     private Headers headers_;
     private FetchBody body_;
     private String mode_ = "cors";
-    private String credentials_ = "same-origin";
+    private String credentials_ = SAME_ORIGIN;
     private String cache_ = "default";
     private String redirect_ = "follow";
     private String referrer_ = ABOUT_CLIENT;
@@ -227,7 +230,7 @@ public class Request extends HtmlUnitScriptable {
             if (cache != null) {
                 cache_ = checkEnum("cache", JavaScriptEngine.toString(cache), CACHE_MODES);
             }
-            if ("only-if-cached".equals(cache_) && !"same-origin".equals(mode_)) {
+            if ("only-if-cached".equals(cache_) && !SAME_ORIGIN.equals(mode_)) {
                 throw JavaScriptEngine.typeError("Failed to construct 'Request': 'only-if-cached' can be set "
                         + "only with 'same-origin' mode");
             }
@@ -275,7 +278,7 @@ public class Request extends HtmlUnitScriptable {
         headers_.setPrototype(getPrototype(Headers.class));
         headers_.setGuard(Headers.Guard.REQUEST);
         if ("no-cors".equals(mode_)) {
-            if (!"GET".equals(method_) && !"HEAD".equals(method_) && !"POST".equals(method_)) {
+            if (!GET.equals(method_) && !"HEAD".equals(method_) && !"POST".equals(method_)) {
                 throw JavaScriptEngine.typeError("Failed to construct 'Request': '" + method_
                         + "' is unsupported in no-cors mode.");
             }
@@ -294,7 +297,7 @@ public class Request extends HtmlUnitScriptable {
         // the body
         final Object initBody = initObject == null ? null : getMember(initObject, "body");
         final FetchBody inputBody = inputRequest == null ? null : inputRequest.body_;
-        if ((initBody != null || inputBody != null) && ("GET".equals(method_) || "HEAD".equals(method_))) {
+        if ((initBody != null || inputBody != null) && (GET.equals(method_) || "HEAD".equals(method_))) {
             throw JavaScriptEngine.typeError("Failed to construct 'Request': Request with GET/HEAD method "
                     + "cannot have body.");
         }
@@ -361,7 +364,7 @@ public class Request extends HtmlUnitScriptable {
             throw JavaScriptEngine.typeError("Failed to construct 'Request': '" + method
                     + "' HTTP method is unsupported.");
         }
-        if ("DELETE".equals(upper) || "GET".equals(upper) || "HEAD".equals(upper)
+        if ("DELETE".equals(upper) || GET.equals(upper) || "HEAD".equals(upper)
                 || "OPTIONS".equals(upper) || "POST".equals(upper) || "PUT".equals(upper)) {
             return upper;
         }

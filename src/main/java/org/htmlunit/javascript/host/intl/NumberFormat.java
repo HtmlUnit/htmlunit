@@ -60,6 +60,13 @@ public class NumberFormat extends HtmlUnitScriptable {
 
     private static final String CLASS_NAME = "Intl.NumberFormat";
 
+    private static final String AUTO = NumberFormatter.AUTO;
+    private static final String COMPACT = NumberFormatter.COMPACT;
+    private static final String CURRENCY = NumberFormatter.CURRENCY;
+    private static final String SHORT = NumberFormatter.SHORT;
+    private static final String STANDARD = NumberFormatter.STANDARD;
+    private static final String UNIT = NumberFormatter.UNIT;
+
     private static final ConcurrentHashMap<String, String> CHROME_FORMATS_ = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, String> EDGE_FORMATS_ = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, String> FF_FORMATS_ = new ConcurrentHashMap<>();
@@ -232,7 +239,7 @@ public class NumberFormat extends HtmlUnitScriptable {
 
         final int minimumFractionDigitsDefault;
         final int maximumFractionDigitsDefault;
-        if ("currency".equals(resolvedOptions.getStyle())) {
+        if (CURRENCY.equals(resolvedOptions.getStyle())) {
             final int currencyDigits = NumberFormatter.currencyDigits(resolvedOptions.getCurrency());
             minimumFractionDigitsDefault = currencyDigits;
             maximumFractionDigitsDefault = currencyDigits;
@@ -243,17 +250,17 @@ public class NumberFormat extends HtmlUnitScriptable {
         }
 
         resolvedOptions.setNotation(Intl.getStringOption(options, "notation",
-                new String[] {"standard", "scientific", "engineering", "compact"}, "standard", CLASS_NAME));
+                new String[] {STANDARD, "scientific", "engineering", COMPACT}, STANDARD, CLASS_NAME));
         setDigitOptions(options, resolvedOptions, minimumFractionDigitsDefault, maximumFractionDigitsDefault);
 
         resolvedOptions.setCompactDisplay(Intl.getStringOption(options, "compactDisplay",
-                new String[] {"short", "long"}, "short", CLASS_NAME));
+                new String[] {SHORT, "long"}, SHORT, CLASS_NAME));
 
-        final String defaultUseGrouping = "compact".equals(resolvedOptions.getNotation()) ? "min2" : "auto";
+        final String defaultUseGrouping = COMPACT.equals(resolvedOptions.getNotation()) ? "min2" : AUTO;
         resolvedOptions.setUseGrouping(getUseGroupingOption(options, defaultUseGrouping));
 
         resolvedOptions.setSignDisplay(Intl.getStringOption(options, "signDisplay",
-                new String[] {"auto", "never", "always", "exceptZero", "negative"}, "auto", CLASS_NAME));
+                new String[] {AUTO, "never", "always", "exceptZero", "negative"}, AUTO, CLASS_NAME));
 
         options_ = resolvedOptions;
     }
@@ -261,31 +268,31 @@ public class NumberFormat extends HtmlUnitScriptable {
     // SetNumberFormatUnitOptions
     private static void setUnitOptions(final Scriptable options, final NumberFormatter.Options resolvedOptions) {
         resolvedOptions.setStyle(Intl.getStringOption(options, "style",
-                new String[] {"decimal", "percent", "currency", "unit"}, "decimal", CLASS_NAME));
+                new String[] {"decimal", "percent", CURRENCY, UNIT}, "decimal", CLASS_NAME));
 
-        final String currency = Intl.getStringOption(options, "currency", null, null, CLASS_NAME);
+        final String currency = Intl.getStringOption(options, CURRENCY, null, null, CLASS_NAME);
         if (currency != null && !currency.matches("[a-zA-Z]{3}")) {
             throw JavaScriptEngine.rangeError("Invalid currency code : " + currency);
         }
         resolvedOptions.setCurrencyDisplay(Intl.getStringOption(options, "currencyDisplay",
                 new String[] {"code", "symbol", "narrowSymbol", "name"}, "symbol", CLASS_NAME));
         resolvedOptions.setCurrencySign(Intl.getStringOption(options, "currencySign",
-                new String[] {"standard", "accounting"}, "standard", CLASS_NAME));
+                new String[] {STANDARD, "accounting"}, STANDARD, CLASS_NAME));
 
-        final String unit = Intl.getStringOption(options, "unit", null, null, CLASS_NAME);
+        final String unit = Intl.getStringOption(options, UNIT, null, null, CLASS_NAME);
         if (unit != null && !NumberFormatter.isWellFormedUnitIdentifier(unit)) {
             throw JavaScriptEngine.rangeError("Invalid unit argument for Intl.NumberFormat() '" + unit + "'");
         }
         resolvedOptions.setUnitDisplay(Intl.getStringOption(options, "unitDisplay",
-                new String[] {"short", "narrow", "long"}, "short", CLASS_NAME));
+                new String[] {SHORT, "narrow", "long"}, SHORT, CLASS_NAME));
 
-        if ("currency".equals(resolvedOptions.getStyle())) {
+        if (CURRENCY.equals(resolvedOptions.getStyle())) {
             if (currency == null) {
                 throw JavaScriptEngine.typeError("Currency code is required with currency style.");
             }
             resolvedOptions.setCurrency(currency.toUpperCase(Locale.ROOT));
         }
-        if ("unit".equals(resolvedOptions.getStyle())) {
+        if (UNIT.equals(resolvedOptions.getStyle())) {
             if (unit == null) {
                 throw JavaScriptEngine.typeError("Unit is required with unit style.");
             }
@@ -317,9 +324,9 @@ public class NumberFormat extends HtmlUnitScriptable {
                 new String[] {"ceil", "floor", "expand", "trunc", "halfCeil", "halfFloor", "halfExpand",
                     "halfTrunc", "halfEven"}, "halfExpand", CLASS_NAME));
         final String roundingPriority = Intl.getStringOption(options, "roundingPriority",
-                new String[] {"auto", "morePrecision", "lessPrecision"}, "auto", CLASS_NAME);
+                new String[] {AUTO, "morePrecision", "lessPrecision"}, AUTO, CLASS_NAME);
         resolvedOptions.setTrailingZeroDisplay(Intl.getStringOption(options, "trailingZeroDisplay",
-                new String[] {"auto", "stripIfInteger"}, "auto", CLASS_NAME));
+                new String[] {AUTO, "stripIfInteger"}, AUTO, CLASS_NAME));
 
         int maximumFractionDigitsFallback = maximumFractionDigitsDefault;
         if (roundingIncrement != 1) {
@@ -333,9 +340,9 @@ public class NumberFormat extends HtmlUnitScriptable {
                 || !JavaScriptEngine.isUndefined(maximumFractionDigits);
         boolean needSignificantDigits = true;
         boolean needFractionDigits = true;
-        if ("auto".equals(roundingPriority)) {
+        if (AUTO.equals(roundingPriority)) {
             needSignificantDigits = hasSignificantDigits;
-            if (needSignificantDigits || !hasFractionDigits && "compact".equals(resolvedOptions.getNotation())) {
+            if (needSignificantDigits || !hasFractionDigits && COMPACT.equals(resolvedOptions.getNotation())) {
                 needFractionDigits = false;
             }
         }
@@ -396,9 +403,9 @@ public class NumberFormat extends HtmlUnitScriptable {
             hasFractionDigits_ = true;
             hasSignificantDigits_ = true;
         }
-        else if ("auto".equals(roundingPriority)) {
+        else if (AUTO.equals(roundingPriority)) {
             resolvedOptions.setRoundingType(needSignificantDigits ? "significantDigits" : "fractionDigits");
-            roundingPriority_ = "auto";
+            roundingPriority_ = AUTO;
             hasFractionDigits_ = needFractionDigits;
             hasSignificantDigits_ = needSignificantDigits;
         }
@@ -449,7 +456,7 @@ public class NumberFormat extends HtmlUnitScriptable {
         final String stringValue = JavaScriptEngine.toString(value);
         switch (stringValue) {
             case "min2":
-            case "auto":
+            case AUTO:
             case "always":
                 return stringValue;
             case "true":
@@ -603,13 +610,13 @@ public class NumberFormat extends HtmlUnitScriptable {
         options.put("locale", options, locale_);
         options.put("numberingSystem", options, numberingSystem_);
         options.put("style", options, o.getStyle());
-        if ("currency".equals(o.getStyle())) {
-            options.put("currency", options, o.getCurrency());
+        if (CURRENCY.equals(o.getStyle())) {
+            options.put(CURRENCY, options, o.getCurrency());
             options.put("currencyDisplay", options, o.getCurrencyDisplay());
             options.put("currencySign", options, o.getCurrencySign());
         }
-        if ("unit".equals(o.getStyle())) {
-            options.put("unit", options, o.getUnit());
+        if (UNIT.equals(o.getStyle())) {
+            options.put(UNIT, options, o.getUnit());
             options.put("unitDisplay", options, o.getUnitDisplay());
         }
         options.put("minimumIntegerDigits", options, Integer.valueOf(o.getMinimumIntegerDigits()));
@@ -623,7 +630,7 @@ public class NumberFormat extends HtmlUnitScriptable {
         }
         options.put("useGrouping", options, o.getUseGrouping() == null ? Boolean.FALSE : o.getUseGrouping());
         options.put("notation", options, o.getNotation());
-        if ("compact".equals(o.getNotation())) {
+        if (COMPACT.equals(o.getNotation())) {
             options.put("compactDisplay", options, o.getCompactDisplay());
         }
         options.put("signDisplay", options, o.getSignDisplay());

@@ -155,6 +155,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
+    // the serialization of an opaque origin
+    private static final String NULL_ORIGIN = "null";
+
     /** To be documented. */
     @JsxConstant({CHROME, EDGE})
     public static final int TEMPORARY = 0;
@@ -690,12 +693,12 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
         final Page page = getWebWindow().getEnclosedPage();
         if (page == null) {
-            return "null";
+            return NULL_ORIGIN;
         }
         final URL url;
         if (page instanceof HtmlPage htmlPage) {
             if (htmlPage.isOpaqueOrigin()) {
-                return "null";
+                return NULL_ORIGIN;
             }
             url = htmlPage.getOriginUrl();
         }
@@ -726,7 +729,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private static String serializeOrigin(final URL url) {
         final String protocol = url.getProtocol();
         if (!"http".equals(protocol) && !"https".equals(protocol)) {
-            return "null";
+            return NULL_ORIGIN;
         }
 
         final StringBuilder origin = new StringBuilder().append(protocol).append("://").append(url.getHost());
@@ -2198,7 +2201,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         final String origin;
         if (page instanceof HtmlPage senderPage && senderPage.isOpaqueOrigin()) {
             // the origin of a sandboxed document without 'allow-same-origin'
-            origin = "null";
+            origin = NULL_ORIGIN;
         }
         else {
             try {
