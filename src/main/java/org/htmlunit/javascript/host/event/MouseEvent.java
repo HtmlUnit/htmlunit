@@ -457,7 +457,8 @@ public class MouseEvent extends UIEvent {
      */
     @Override
     public boolean processLabelAfterBubbling() {
-        return MouseEvent.TYPE_CLICK  == getType() && processLabelAfterBubbling_;
+        // an event created by a script (new MouseEvent('click')) has a type string of its own
+        return MouseEvent.TYPE_CLICK.equals(getType()) && processLabelAfterBubbling_;
     }
 
     /**

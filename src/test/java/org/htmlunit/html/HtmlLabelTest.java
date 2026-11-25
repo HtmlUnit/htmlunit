@@ -1905,4 +1905,54 @@ public class HtmlLabelTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
     }
+
+    /**
+     * A click MouseEvent created by a script and dispatched to a child of a label.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void dispatchMouseEventClickToLabelChild() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var span = document.getElementById('s');\n"
+            + "    span.dispatchEvent(new MouseEvent('click', { bubbles: true }));\n"
+            + "    log(document.getElementById('c').checked);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<label><span id='s'>Item</span><input type='checkbox' id='c'></label>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A click Event (no MouseEvent) created by a script and dispatched to a child of a label.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void dispatchEventClickToLabelChild() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var span = document.getElementById('s');\n"
+            + "    span.dispatchEvent(new Event('click', { bubbles: true }));\n"
+            + "    log(document.getElementById('c').checked);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<label><span id='s'>Item</span><input type='checkbox' id='c'></label>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
