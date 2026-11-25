@@ -343,7 +343,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     public synchronized String jobStatusDump(final JavaScriptJobFilter filter) {
         final String lineSeparator = System.lineSeparator();
 
-        final StringBuilder status = new StringBuilder(110)
+        final StringBuilder status = new StringBuilder(512)
                 .append("------ JavaScript job status -----")
                 .append(lineSeparator);
 

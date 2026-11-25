@@ -50,7 +50,7 @@ public class XmlSerializer {
 
     private static final Log LOG = LogFactory.getLog(XmlSerializer.class);
 
-    private final StringBuilder builder_ = new StringBuilder();
+    private final StringBuilder builder_ = new StringBuilder(1024);
     private final StringBuilder indent_ = new StringBuilder();
     private File outputDir_;
 
@@ -418,7 +418,7 @@ public class XmlSerializer {
         name = StringUtils.substring(name, 0, 30); // many file systems have a limit at 255, let's limit it
         name = org.htmlunit.util.StringUtils.sanitizeForFileName(name);
         if (!name.endsWith(extension)) {
-            name += extension;
+            name = name.concat(extension);
         }
         int counter = 0;
         while (true) {

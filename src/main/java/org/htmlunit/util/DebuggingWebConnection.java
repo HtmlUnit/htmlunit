@@ -190,10 +190,10 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             LOG.info("Created file " + file.getAbsolutePath() + " for response " + counter_ + ": " + url);
         }
 
-        final StringBuilder bduiler = new StringBuilder();
+        final StringBuilder bduiler = new StringBuilder(512);
         bduiler.append("tab[tab.length] = {code: ").append(response.getStatusCode())
-                .append(", fileName: '").append(file.getName()).append("', ")
-                .append("contentType: '").append(response.getContentType())
+                .append(", fileName: '").append(file.getName())
+                .append("', contentType: '").append(response.getContentType())
                 .append("', method: '").append(request.getHttpMethod().name()).append("', ");
         if (request.getHttpMethod() == HttpMethod.POST && request.getEncodingType() == FormEncodingType.URL_ENCODED) {
             bduiler.append("postParameters: ").append(nameValueListToJsMap(request.getRequestParameters()))
@@ -283,7 +283,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         name = StringUtils.substring(name, 0, 30); // avoid exceptions due to too long file names
         name = org.htmlunit.util.StringUtils.sanitizeForFileName(name);
         if (!name.endsWith(extension)) {
-            name += extension;
+            name = name.concat(extension);
         }
         int counter = 0;
         while (true) {

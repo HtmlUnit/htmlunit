@@ -834,7 +834,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
         }
 
         class OrderedEntryIterator implements Iterator<Map.Entry<K, V>> {
-            private int pos_ = 0;
+            private int pos_;
 
             @Override
             public boolean hasNext() {
@@ -905,7 +905,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
         }
 
         class OrderedKeyIterator implements Iterator<K> {
-            private int pos_ = 0;
+            private int pos_;
 
             @Override
             public boolean hasNext() {
