@@ -209,7 +209,7 @@ public final class ScriptElementSupport {
                                 scriptSrc = scriptUrl.toExternalForm();
                             }
                         }
-                        catch (final MalformedURLException e) {
+                        catch (final MalformedURLException ignored) {
                             // handled by loadExternalJavaScriptFile()
                         }
                         if (scriptUrl != null

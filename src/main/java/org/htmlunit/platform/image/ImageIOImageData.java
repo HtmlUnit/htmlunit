@@ -81,7 +81,7 @@ public class ImageIOImageData implements ImageData {
             try (ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
                 // nothing
             }
-            catch (final IOException e) {
+            catch (final IOException ignored) {
                 // optionally log
             }
             finally {
@@ -93,7 +93,7 @@ public class ImageIOImageData implements ImageData {
             try {
                 inputStream_.close();
             }
-            catch (final IOException e) {
+            catch (final IOException ignored) {
                 // optionally log
             }
             finally {

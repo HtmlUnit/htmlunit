@@ -661,7 +661,7 @@ public class HtmlSerializerVisibleText {
             try {
                 return Double.parseDouble(opacity.trim()) <= 0;
             }
-            catch (final NumberFormatException e) {
+            catch (final NumberFormatException ignored) {
                 // ignore
             }
         }

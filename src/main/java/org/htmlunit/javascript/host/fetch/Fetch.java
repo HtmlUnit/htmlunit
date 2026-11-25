@@ -195,7 +195,7 @@ public final class Fetch {
                 try {
                     webRequest.setRefererHeader(UrlUtils.toUrlUnsafe(referrer));
                 }
-                catch (final MalformedURLException e) {
+                catch (final MalformedURLException ignored) {
                     // ignore
                 }
             }

@@ -1045,7 +1045,7 @@ public final class ContentSecurityPolicy implements Serializable {
             try {
                 absolute = page.getFullyQualifiedUrl(uri).toExternalForm();
             }
-            catch (final MalformedURLException e) {
+            catch (final MalformedURLException ignored) {
                 // keep the uri as it is
             }
             uris.append(' ').append(absolute);

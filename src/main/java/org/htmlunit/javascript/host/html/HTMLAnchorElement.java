@@ -357,7 +357,7 @@ public class HTMLAnchorElement extends HTMLElement {
         try {
             setUrl(UrlUtils.getUrlWithNewHost(getUrl(), host));
         }
-        catch (final MalformedURLException  e) {
+        catch (final MalformedURLException ignored) {
             // do nothing
         }
     }

@@ -476,7 +476,7 @@ public class HtmlSerializerNormalizedText {
             try {
                 i = (int) Math.round(Double.parseDouble(start));
             }
-            catch (final Exception e) {
+            catch (final Exception ignored) {
                 // ignore start with 1
             }
         }

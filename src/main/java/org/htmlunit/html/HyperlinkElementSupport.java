@@ -171,7 +171,10 @@ public final class HyperlinkElementSupport {
                 webClient.loadWebResponse(pingRequest);
             }
             catch (final Exception e) {
-                // ignore
+                // the result of the ping does not matter for the page
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Ping request to '" + pingRequest.getUrl() + "' failed", e);
+                }
             }
         }
 

@@ -241,7 +241,7 @@ public class Intl extends HtmlUnitScriptable {
                 return locale.toLanguageTag();
             }
         }
-        catch (final IllformedLocaleException e) {
+        catch (final IllformedLocaleException ignored) {
             // handled below
         }
         throw JavaScriptEngine.rangeError("Invalid language tag: " + tag);

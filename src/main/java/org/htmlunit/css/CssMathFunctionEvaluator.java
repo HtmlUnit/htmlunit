@@ -138,7 +138,7 @@ final class CssMathFunctionEvaluator {
                 return unit;
             }
         }
-        catch (final Exception e) {
+        catch (final Exception ignored) {
             // not supported
         }
         return null;

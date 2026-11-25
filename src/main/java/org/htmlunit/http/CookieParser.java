@@ -222,7 +222,7 @@ public final class CookieParser {
             final ZonedDateTime zonedDateTime = ZonedDateTime.parse(dateString, formatter);
             return Date.from(zonedDateTime.toInstant());
         }
-        catch (final DateTimeParseException e) {
+        catch (final DateTimeParseException ignored) {
             // Try other formats
         }
 
@@ -233,7 +233,7 @@ public final class CookieParser {
                 sdf.setLenient(false);
                 return sdf.parse(dateString);
             }
-            catch (final ParseException e) {
+            catch (final ParseException ignored) {
                 // Try next pattern
             }
         }

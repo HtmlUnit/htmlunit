@@ -136,7 +136,7 @@ public class Response extends HtmlUnitScriptable {
             try {
                 response.headers_.appendHeader(header.getName(), header.getValue());
             }
-            catch (final EcmaError e) {
+            catch (final EcmaError ignored) {
                 // ignore headers with invalid names or values
             }
         }

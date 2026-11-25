@@ -276,7 +276,7 @@ public class URL extends HtmlUnitScriptable {
         try {
             url_ = UrlUtils.getUrlWithNewHost(url_, host);
         }
-        catch (final MalformedURLException  e) {
+        catch (final MalformedURLException ignored) {
             // do nothing
         }
     }
