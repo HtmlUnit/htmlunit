@@ -36,6 +36,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.javascript.host.Window;
@@ -422,11 +423,38 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
             return window;
         }
 
-        final TopLevel topLevel = ScriptableObject.getTopLevelScope(s.getParentScope());
-        if (topLevel.getGlobalThis() instanceof Window window) {
+        if (getGlobalThis(s.getParentScope()) instanceof Window window) {
             return window;
         }
         throw new RuntimeException("Unable to find window associated with " + s);
+    }
+
+    /**
+     * Returns the global object ({@code globalThis}) of the top level scope of the given scope,
+     * e.g. the {@link Window} or the global scope of a worker.
+     *
+     * @param scope the scope
+     * @return the global object
+     */
+    public static ScriptableObject getGlobalThis(final VarScope scope) {
+        return ScriptableObject.getTopLevelScope(scope).getGlobalThis();
+    }
+
+    /**
+     * Returns the object the given scope stands for: the global object of a top level scope
+     * or the object of a with scope (e.g. the document for an event handler of an element).
+     *
+     * @param scope the scope
+     * @return the object or {@code null} for other scopes
+     */
+    public static Scriptable getScopeObject(final VarScope scope) {
+        if (scope instanceof TopLevel topLevel) {
+            return topLevel.getGlobalThis();
+        }
+        if (scope instanceof WithScope withScope) {
+            return withScope.getObject();
+        }
+        return null;
     }
 
     protected static WindowOrWorkerGlobalScope getWindowOrWorkerGlobalScope(
@@ -435,8 +463,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
             return wow;
         }
 
-        final TopLevel topLevel = ScriptableObject.getTopLevelScope(s.getParentScope());
-        if (topLevel.getGlobalThis() instanceof WindowOrWorkerGlobalScope wow) {
+        if (getGlobalThis(s.getParentScope()) instanceof WindowOrWorkerGlobalScope wow) {
             return wow;
         }
         throw new RuntimeException("Unable to find WindowOrWorkerGlobalScope associated with " + s);

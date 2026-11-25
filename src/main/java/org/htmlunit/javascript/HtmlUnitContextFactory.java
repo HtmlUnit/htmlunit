@@ -36,7 +36,6 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptStackElement;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.debug.Debugger;
 import org.htmlunit.html.HtmlElement;
@@ -245,7 +244,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
         Object page = null;
         if (scope != null
-                && ScriptableObject.getTopLevelScope(scope).getGlobalThis() instanceof Window window) {
+                && HtmlUnitScriptable.getGlobalThis(scope) instanceof Window window) {
             page = window.getWebWindow().getEnclosedPage();
         }
         if (!(page instanceof HtmlPage)) {

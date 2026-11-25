@@ -183,13 +183,13 @@ public class DOMTokenList extends HtmlUnitScriptable {
 
                 if (org.htmlunit.util.StringUtils.isEmptyOrNull(token)) {
                     throw JavaScriptEngine.asJavaScriptException(
-                            (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
+                            (HtmlUnitScriptable) getGlobalThis(scope),
                             "DOMTokenList: add() does not support empty tokens",
                             DOMException.SYNTAX_ERR);
                 }
                 if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
                     throw JavaScriptEngine.asJavaScriptException(
-                            (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
+                            (HtmlUnitScriptable) getGlobalThis(scope),
                             "DOMTokenList: add() does not support whitespace chars in tokens",
                             DOMException.INVALID_CHARACTER_ERR);
                 }
@@ -229,13 +229,13 @@ public class DOMTokenList extends HtmlUnitScriptable {
 
                 if (org.htmlunit.util.StringUtils.isEmptyOrNull(token)) {
                     throw JavaScriptEngine.asJavaScriptException(
-                            (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
+                            (HtmlUnitScriptable) getGlobalThis(scope),
                             "DOMTokenList: remove() does not support empty tokens",
                             DOMException.SYNTAX_ERR);
                 }
                 if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
                     throw JavaScriptEngine.asJavaScriptException(
-                            (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
+                            (HtmlUnitScriptable) getGlobalThis(scope),
                             "DOMTokenList: remove() does not support whitespace chars in tokens",
                             DOMException.INVALID_CHARACTER_ERR);
                 }

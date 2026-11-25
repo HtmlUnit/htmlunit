@@ -27,9 +27,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
-import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -198,15 +196,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
     }
 
     private static void reportUncaughtException(final VarScope scope, final Exception e) {
-        Scriptable scriptableObj = null;
-        if (scope instanceof TopLevel topLevel) {
-            scriptableObj = topLevel.getGlobalThis();
-        }
-        else if (scope instanceof WithScope withScope) {
-            scriptableObj = withScope.getObject();
-        }
-
-        if (scriptableObj instanceof Window window) {
+        if (HtmlUnitScriptable.getScopeObject(scope) instanceof Window window) {
             final WebWindow webWindow = window.getWebWindow();
             if (webWindow != null
                     && webWindow.getEnclosedPage() instanceof HtmlPage page

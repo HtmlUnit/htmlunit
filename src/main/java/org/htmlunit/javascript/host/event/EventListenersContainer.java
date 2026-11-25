@@ -29,11 +29,9 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.TopLevel;
-import org.htmlunit.corejs.javascript.VarScope;
-import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.html.HTMLDocument;
@@ -286,14 +284,7 @@ public class EventListenersContainer implements Serializable {
                 page = (HtmlPage) jsNode_.getDomNodeOrDie();
             }
             else {
-                Scriptable scriptableObj = null;
-                final VarScope parentScope = jsNode_.getParentScope();
-                if (parentScope instanceof TopLevel topLevel) {
-                    scriptableObj = topLevel.getGlobalThis();
-                }
-                else if (parentScope instanceof WithScope withScope) {
-                    scriptableObj = withScope.getObject();
-                }
+                final Scriptable scriptableObj = HtmlUnitScriptable.getScopeObject(jsNode_.getParentScope());
 
                 if (scriptableObj instanceof Window window) {
                     page = (HtmlPage) window.getDomNodeOrDie();

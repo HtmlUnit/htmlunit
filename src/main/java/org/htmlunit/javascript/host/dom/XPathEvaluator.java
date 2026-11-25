@@ -18,7 +18,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -142,7 +141,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
 
         try {
             final String xpath = JavaScriptEngine.toString(args[0]);
-            final Window window = (Window) (ScriptableObject.getTopLevelScope(scope)).getGlobalThis();
+            final Window window = (Window) getGlobalThis(scope);
             final DomNode doc = window.getDocument().getDocumentElement().getDomNodeOrDie();
             final XPathExpression xPathExpression  = new XPathExpression(xpath, prefixResolver, doc);
             xPathExpression.setParentScope(evaluator.getParentScope());
