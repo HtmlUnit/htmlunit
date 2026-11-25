@@ -499,6 +499,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,
 
+    /** The ErrorEvent fired at the window for an uncaught script error bubbles. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_WINDOW_ERROR_EVENT_BUBBLES,
+
     /** Javascript InstallTrigger property set to null. */
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_INSTALL_TRIGGER_NULL,

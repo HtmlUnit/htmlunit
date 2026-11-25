@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
+import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_ERROR_EVENT_BUBBLES;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OPEN_LOCAL_FILE_THROWS;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OPEN_SANDBOXED_THROWS;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
@@ -1626,7 +1627,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             final ErrorEvent event = new ErrorEvent();
             event.setParentScope(scope);
             event.setPrototype(getPrototype(ErrorEvent.class));
-            event.initEvent(Event.TYPE_ERROR, false, true);
+            event.initEvent(Event.TYPE_ERROR, getBrowserVersion().hasFeature(JS_WINDOW_ERROR_EVENT_BUBBLES), true);
             event.initErrorEvent(msg, url, line, column, jsError);
             event.setTarget(this);
             fireEvent(event);

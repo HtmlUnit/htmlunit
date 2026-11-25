@@ -18,6 +18,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Tests for {@link ErrorEvent}.
@@ -365,6 +366,9 @@ public class ErrorEventTest extends WebDriverTestCase {
             + "<script>throw new Error('boom');</script>\n"
             + "</body></html>";
 
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
         loadPageVerifyTitle2(html);
     }
 
@@ -389,6 +393,9 @@ public class ErrorEventTest extends WebDriverTestCase {
             + "<script>throw new Error('boom');</script>\n"
             + "</body></html>";
 
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
         loadPageVerifyTitle2(html);
     }
 
@@ -412,6 +419,9 @@ public class ErrorEventTest extends WebDriverTestCase {
             + "<script>throw new Error('boom');</script>\n"
             + "</body></html>";
 
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
         loadPageVerifyTitle2(html);
     }
 
@@ -432,6 +442,9 @@ public class ErrorEventTest extends WebDriverTestCase {
             + "<script>throw new Error('boom');</script>\n"
             + "</body></html>";
 
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
         loadPageVerifyTitle2(html);
     }
 
@@ -454,6 +467,9 @@ public class ErrorEventTest extends WebDriverTestCase {
             + "<script>log('done ' + count);</script>\n"
             + "</body></html>";
 
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
+        }
         loadPageVerifyTitle2(html);
     }
 }
