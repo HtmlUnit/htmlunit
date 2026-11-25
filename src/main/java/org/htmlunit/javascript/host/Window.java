@@ -108,6 +108,7 @@ import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.Selection;
+import org.htmlunit.javascript.host.event.ErrorEvent;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
@@ -212,6 +213,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private Location location_;
     private Selection selection_;
     private Event currentEvent_;
+    // true while an error is reported (HTML Standard: errors reported while reporting are not re-reported)
+    private transient boolean errorReportingMode_;
     private String status_ = "";
     private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
     private Object controllers_;
@@ -1583,12 +1586,20 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Triggers the {@code onerror} handler, if one has been set.
+     * Reports the error like the browsers do ("report an exception" of the HTML Standard):
+     * an {@link ErrorEvent} is fired at the window; the {@code onerror} handler is called with
+     * the arguments message, source, lineno, colno and error, the listeners get the event.
+     * An error of a handler or listener of this event is not reported again with an event.
+     *
      * @param e the error that needs to be reported
      */
     public void triggerOnError(final ScriptException e) {
-        final Function f = getOnerror();
-        if (f != null) {
+        if (errorReportingMode_) {
+            return;
+        }
+
+        errorReportingMode_ = true;
+        try {
             String msg = e.getMessage();
             final String url = e.getPage().getUrl().toExternalForm();
 
@@ -1612,8 +1623,16 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                 jsError = err;
             }
 
-            final Object[] args = {msg, url, Integer.valueOf(line), Integer.valueOf(column), jsError};
-            f.call(Context.getCurrentContext(), scope, this, args);
+            final ErrorEvent event = new ErrorEvent();
+            event.setParentScope(scope);
+            event.setPrototype(getPrototype(ErrorEvent.class));
+            event.initEvent(Event.TYPE_ERROR, false, true);
+            event.initErrorEvent(msg, url, line, column, jsError);
+            event.setTarget(this);
+            fireEvent(event);
+        }
+        finally {
+            errorReportingMode_ = false;
         }
     }
 

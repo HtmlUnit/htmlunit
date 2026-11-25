@@ -15281,10 +15281,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
             FF = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
             FF_ESR = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF_ESR = "constructor()",
-            FF = "constructor()")
     public void errorEvent() throws Exception {
         testString("", "new ErrorEvent('error')");
     }

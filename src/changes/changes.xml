@@ -9,6 +9,15 @@
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                An uncaught script error fires an ErrorEvent (message, filename, lineno, colno, error) at the window
+                like in the browsers; so far only window.onerror was called and the listeners added with
+                addEventListener('error', ...) were not. Returning true from window.onerror cancels the event.
+                An error of the error handlers is not reported to them again.
+            </action>
+            <action type="add" dev="rbri">
+                ErrorEvent: properties message, filename, lineno, colno and error (also for the constructor).
+            </action>
+            <action type="fix" dev="rbri">
                 An exception thrown by a queueMicrotask() callback is reported like in the browsers (window.onerror,
                 error event, JavaScriptErrorListener) instead of being ignored; the remaining microtasks still run.
                 Because of that, the exception is not thrown even if throwExceptionOnScriptError is enabled.

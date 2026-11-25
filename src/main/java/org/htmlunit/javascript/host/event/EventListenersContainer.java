@@ -326,11 +326,25 @@ public class EventListenersContainer implements Serializable {
                     }
                 }
                 if (function != null) {
+                    // HTML Standard: the onerror handler of the global object (OnErrorEventHandler) is called
+                    // with message, source, lineno, colno and error; returning true cancels the event
+                    final boolean isOnErrorEventHandler = isPropertyHandler
+                            && event instanceof ErrorEvent && jsNode_ instanceof Window;
+                    final Object[] functionArgs = isOnErrorEventHandler
+                            ? ((ErrorEvent) event).getOnErrorHandlerArgs()
+                            : args;
                     final ScriptResult result =
-                            page.executeJavaScriptFunction(function, thisObject, args, node);
+                            page.executeJavaScriptFunction(function, thisObject, functionArgs, node);
                     // Return value is only honored for property handlers (Tested in Chrome/FF/IE11)
                     if (isPropertyHandler && !ScriptResult.isUndefined(result)) {
-                        event.handlePropertyHandlerReturnValue(result.getJavaScriptResult());
+                        if (isOnErrorEventHandler) {
+                            if (Boolean.TRUE.equals(result.getJavaScriptResult())) {
+                                event.preventDefault();
+                            }
+                        }
+                        else {
+                            event.handlePropertyHandlerReturnValue(result.getJavaScriptResult());
+                        }
                     }
                 }
                 if (event.isImmediatePropagationStopped()) {

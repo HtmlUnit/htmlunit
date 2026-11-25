@@ -3598,10 +3598,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"error boom", "second"})
-    @HtmlUnitNYI(CHROME = "second",
-            EDGE = "second",
-            FF = "second",
-            FF_ESR = "second")
     public void queueMicrotaskErrorEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

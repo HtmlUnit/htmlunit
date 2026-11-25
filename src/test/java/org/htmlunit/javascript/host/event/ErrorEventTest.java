@@ -289,4 +289,171 @@ public class ErrorEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * The properties of an ErrorEvent created with details.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"m",
+                      "f",
+                      "3",
+                      "4",
+                      "true"})
+    public void ctorDetails() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var err = new Error('e');\n"
+            + "  var e = new ErrorEvent('error', { message: 'm', filename: 'f', lineno: 3, colno: 4, error: err });\n"
+            + "  log(e.message); log(e.filename); log(e.lineno); log(e.colno); log(e.error === err);\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The properties of an ErrorEvent created without details.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"",
+                      "",
+                      "0",
+                      "0",
+                      "undefined"})
+    public void ctorDefaults() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var e = new ErrorEvent('error');\n"
+            + "  log(e.message); log(e.filename); log(e.lineno); log(e.colno); log(e.error);\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An uncaught script error fires an ErrorEvent at the window.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"error true true",
+                                "false true true",
+                                "boom number string"},
+            FF = {"error true true",
+                  "true true true",
+                  "boom number string"},
+            FF_ESR = {"error true true",
+                      "true true true",
+                      "boom number string"})
+    public void scriptErrorListener() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  window.addEventListener('error', function(e) {\n"
+            + "    log(e.type + ' ' + (e instanceof ErrorEvent) + ' ' + e.cancelable);\n"
+            + "    log(e.bubbles + ' ' + e.isTrusted + ' ' + (e.target === window));\n"
+            + "    log(e.error.message + ' ' + (typeof e.lineno) + ' ' + (typeof e.filename));\n"
+            + "    e.preventDefault();\n"
+            + "  });\n"
+            + "</script></head><body>\n"
+            + "<script>throw new Error('boom');</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The onerror handler of the window gets message, source, lineno, colno and error.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string string number number boom",
+                      "5"})
+    public void scriptErrorOnerrorArgs() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  window.onerror = function(msg, src, line, col, err) {\n"
+            + "    log(typeof msg + ' ' + typeof src + ' ' + typeof line + ' ' + typeof col + ' ' + err.message);\n"
+            + "    log(arguments.length);\n"
+            + "    return true;\n"
+            + "  };\n"
+            + "</script></head><body>\n"
+            + "<script>throw new Error('boom');</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The onerror handler is called in its registration order between the listeners.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"listener1",
+                      "onerror",
+                      "listener2 true"})
+    public void scriptErrorOrder() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  window.addEventListener('error', function(e) { log('listener1'); });\n"
+            + "  window.onerror = function() { log('onerror'); return true; };\n"
+            + "  window.addEventListener('error', function(e) { log('listener2 ' + e.defaultPrevented); });\n"
+            + "</script></head><body>\n"
+            + "<script>throw new Error('boom');</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Returning false from onerror does not cancel the error event.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void scriptErrorOnerrorReturnFalse() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  window.onerror = function() { return false; };\n"
+            + "  window.addEventListener('error', function(e) { log(e.defaultPrevented); e.preventDefault(); });\n"
+            + "</script></head><body>\n"
+            + "<script>throw new Error('boom');</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * An error thrown by the onerror handler is not reported to it again.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onerror 1",
+                      "done 1"})
+    public void scriptErrorInOnerror() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var count = 0;\n"
+            + "  window.onerror = function() { count++; log('onerror ' + count); throw new Error('again'); };\n"
+            + "</script></head><body>\n"
+            + "<script>throw new Error('boom');</script>\n"
+            + "<script>log('done ' + count);</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

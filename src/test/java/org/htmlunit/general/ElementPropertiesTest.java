@@ -4145,20 +4145,22 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "stopPropagation(),target,timeStamp,"
                 + "type")
     @HtmlUnitNYI(
-            CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,currentTarget,"
-                + "defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),returnValue,srcElement,"
+            CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,colno,composed,"
+                + "currentTarget,defaultPrevented,error,eventPhase,filename,initEvent(),isTrusted,lineno,message,"
+                + "NONE,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,colno,composed,"
+                + "currentTarget,defaultPrevented,error,eventPhase,filename,initEvent(),isTrusted,lineno,message,"
+                + "NONE,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,colno,"
+                + "composed,CONTROL_MASK,currentTarget,defaultPrevented,error,eventPhase,filename,initEvent(),"
+                + "isTrusted,lineno,message,META_MASK,NONE,preventDefault(),returnValue,SHIFT_MASK,srcElement,"
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,currentTarget,"
-                + "defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),returnValue,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,CONTROL_MASK,"
-                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,META_MASK,NONE,preventDefault(),"
-                + "returnValue,"
-                + "SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,CONTROL_MASK,"
-                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,META_MASK,NONE,preventDefault(),"
-                + "returnValue,"
-                + "SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,colno,"
+                + "composed,CONTROL_MASK,currentTarget,defaultPrevented,error,eventPhase,filename,initEvent(),"
+                + "isTrusted,lineno,message,META_MASK,NONE,preventDefault(),returnValue,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
     public void errorEvent() throws Exception {
         testString("", "new ErrorEvent('error')");
     }
