@@ -9,6 +9,14 @@
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Proxy auto-config (PAC): timeRange(hour1, min1, hour2, min2) and
+                timeRange(hour1, min1, sec1, hour2, min2, sec2) were checking the date instead of the time,
+                dateRange(month1, year1, month2, year2) was not working at all. The range ends are no longer
+                influenced by the current minutes and seconds (e.g. timeRange(8, 17) is true from 8:00:00 to 17:59:59),
+                a month range includes the complete end month and date and time ranges may wrap around
+                (e.g. dateRange('NOV', 'FEB'), timeRange(22, 0, 6, 0)).
+            </action>
+            <action type="fix" dev="rbri">
                 An uncaught script error fires an ErrorEvent (message, filename, lineno, colno, error) at the window
                 like in the browsers; so far only window.onerror was called and the listeners added with
                 addEventListener('error', ...) were not. Returning true from window.onerror cancels the event.

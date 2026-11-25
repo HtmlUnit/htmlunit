@@ -18,7 +18,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -216,6 +220,316 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
         finally {
             TimeZone.setDefault(timeZone);
         }
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void weekdayRangeSingleDay() {
+        assertTrue(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.WEDNESDAY, List.of("WED")));
+        assertFalse(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.WEDNESDAY, List.of("THU")));
+        assertTrue(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.SUNDAY, List.of("SUN")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void weekdayRangeRange() {
+        assertTrue(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.MONDAY, List.of("MON", "FRI")));
+        assertTrue(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.WEDNESDAY, List.of("MON", "FRI")));
+        assertTrue(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.FRIDAY, List.of("MON", "FRI")));
+        assertFalse(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.SATURDAY, List.of("MON", "FRI")));
+        assertFalse(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.SUNDAY, List.of("MON", "FRI")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void weekdayRangeWrapAround() {
+        assertTrue(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.FRIDAY, List.of("FRI", "MON")));
+        assertTrue(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.SUNDAY, List.of("FRI", "MON")));
+        assertTrue(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.MONDAY, List.of("FRI", "MON")));
+        assertFalse(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.TUESDAY, List.of("FRI", "MON")));
+        assertFalse(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.THURSDAY, List.of("FRI", "MON")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void weekdayRangeInvalid() {
+        assertFalse(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.WEDNESDAY, List.of()));
+        assertFalse(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.WEDNESDAY, List.of("wed")));
+        assertFalse(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.WEDNESDAY, List.of("MON", "XYZ")));
+        assertFalse(ProxyAutoConfig.isInWeekdayRange(DayOfWeek.WEDNESDAY, List.of("MON", "TUE", "WED")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeSingleDay() {
+        final LocalDate today = LocalDate.of(2026, 11, 25);
+        assertTrue(ProxyAutoConfig.isInDateRange(today, List.of("25")));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("24")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeSingleMonth() {
+        final LocalDate today = LocalDate.of(2026, 11, 25);
+        assertTrue(ProxyAutoConfig.isInDateRange(today, List.of("NOV")));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("DEC")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeSingleYear() {
+        final LocalDate today = LocalDate.of(2026, 11, 25);
+        assertTrue(ProxyAutoConfig.isInDateRange(today, List.of("2026")));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("2025")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeDays() {
+        // a range of days is a range in the current month
+        final LocalDate today = LocalDate.of(2026, 11, 25);
+        assertTrue(ProxyAutoConfig.isInDateRange(today, List.of("1", "25")));
+        assertTrue(ProxyAutoConfig.isInDateRange(today, List.of("25", "31")));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("1", "24")));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("26", "31")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeMonths() {
+        // the end month is included completely
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 1, 1), List.of("JAN", "MAR")));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 3, 31), List.of("JAN", "MAR")));
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 4, 1), List.of("JAN", "MAR")));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 2, 28), List.of("JAN", "FEB")));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2028, 2, 29), List.of("JAN", "FEB")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeMonthsWrapAround() {
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 12, 31), List.of("NOV", "FEB")));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 1, 15), List.of("NOV", "FEB")));
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 3, 1), List.of("NOV", "FEB")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeYears() {
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2025, 1, 1), List.of("2025", "2026")));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 12, 31), List.of("2025", "2026")));
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(2027, 1, 1), List.of("2025", "2026")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeDayMonth() {
+        final List<String> args = List.of("1", "JUN", "15", "AUG");
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 5, 31), args));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 6, 1), args));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 8, 15), args));
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 8, 16), args));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeMonthYear() {
+        final List<String> args = List.of("JUN", "1995", "AUG", "1995");
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(1995, 5, 31), args));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(1995, 6, 1), args));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(1995, 8, 31), args));
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(1995, 9, 1), args));
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(1996, 7, 1), args));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeDayMonthYear() {
+        final List<String> args = List.of("1", "JUN", "1995", "15", "AUG", "1995");
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(1995, 5, 31), args));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(1995, 6, 1), args));
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(1995, 8, 15), args));
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(1995, 8, 16), args));
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 7, 1), args));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeDayAfterEndOfMonth() {
+        // 31 JUN is the last day of june
+        final List<String> args = List.of("1", "JUN", "31", "JUN");
+        assertTrue(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 6, 30), args));
+        assertFalse(ProxyAutoConfig.isInDateRange(LocalDate.of(2026, 7, 1), args));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeInvalid() {
+        final LocalDate today = LocalDate.of(2026, 11, 25);
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of()));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("XYZ")));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("nov")));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("JAN", "XYZ")));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("0", "31")));
+        assertFalse(ProxyAutoConfig.isInDateRange(today, List.of("1", "2", "3", "4", "5", "6", "7")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void timeRangeHour() {
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(12, 0), List.of("12")));
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(12, 59, 59), List.of("12")));
+        assertFalse(ProxyAutoConfig.isInTimeRange(LocalTime.of(13, 0), List.of("12")));
+        assertFalse(ProxyAutoConfig.isInTimeRange(LocalTime.of(11, 59, 59), List.of("12")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void timeRangeHours() {
+        assertFalse(ProxyAutoConfig.isInTimeRange(LocalTime.of(7, 59, 59), List.of("8", "17")));
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(8, 0), List.of("8", "17")));
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(17, 59, 59), List.of("8", "17")));
+        assertFalse(ProxyAutoConfig.isInTimeRange(LocalTime.of(18, 0), List.of("8", "17")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void timeRangeHoursMinutes() {
+        final List<String> args = List.of("8", "30", "17", "0");
+        assertFalse(ProxyAutoConfig.isInTimeRange(LocalTime.of(8, 29, 59), args));
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(8, 30), args));
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(17, 0, 59), args));
+        assertFalse(ProxyAutoConfig.isInTimeRange(LocalTime.of(17, 1), args));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void timeRangeHoursMinutesSeconds() {
+        final List<String> args = List.of("0", "0", "0", "0", "0", "30");
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(0, 0), args));
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(0, 0, 30, 999_000_000), args));
+        assertFalse(ProxyAutoConfig.isInTimeRange(LocalTime.of(0, 0, 31), args));
+        assertFalse(ProxyAutoConfig.isInTimeRange(LocalTime.of(23, 59, 59), args));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void timeRangeWrapAround() {
+        final List<String> args = List.of("22", "0", "6", "0");
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(23, 0), args));
+        assertTrue(ProxyAutoConfig.isInTimeRange(LocalTime.of(5, 0), args));
+        assertFalse(ProxyAutoConfig.isInTimeRange(LocalTime.of(12, 0), args));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void timeRangeInvalid() {
+        final LocalTime now = LocalTime.of(12, 0);
+        assertFalse(ProxyAutoConfig.isInTimeRange(now, List.of()));
+        assertFalse(ProxyAutoConfig.isInTimeRange(now, List.of("XYZ")));
+        assertFalse(ProxyAutoConfig.isInTimeRange(now, List.of("10", "0", "14")));
+        assertFalse(ProxyAutoConfig.isInTimeRange(now, List.of("10", "0", "25", "0")));
+        assertFalse(ProxyAutoConfig.isInTimeRange(now, List.of("1", "2", "3", "4", "5", "6", "7")));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void weekdayRangeScriptGmt() throws MalformedURLException {
+        final String content = "function FindProxyForURL(url, host) {\n"
+                + "  return weekdayRange('SUN', 'SAT', 'GMT') ? 'DIRECT' : 'PROXY proxy.example.com:8000';\n"
+                + "}";
+
+        final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
+                                            content, new URL("https://www.mozilla.org"));
+        assertEquals("DIRECT", value);
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void dateRangeScriptGmt() throws MalformedURLException {
+        final String content = "function FindProxyForURL(url, host) {\n"
+                + "  return dateRange('JAN', 'DEC', 'GMT') ? 'DIRECT' : 'PROXY proxy.example.com:8000';\n"
+                + "}";
+
+        final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
+                                            content, new URL("https://www.mozilla.org"));
+        assertEquals("DIRECT", value);
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void timeRangeScript() throws MalformedURLException {
+        final String content = "function FindProxyForURL(url, host) {\n"
+                + "  return timeRange(0, 0, 0, 23, 59, 59) ? 'DIRECT' : 'PROXY proxy.example.com:8000';\n"
+                + "}";
+
+        final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
+                                            content, new URL("https://www.mozilla.org"));
+        assertEquals("DIRECT", value);
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void timeRangeScriptGmt() throws MalformedURLException {
+        final String content = "function FindProxyForURL(url, host) {\n"
+                + "  return timeRange(0, 23, 'GMT') ? 'DIRECT' : 'PROXY proxy.example.com:8000';\n"
+                + "}";
+
+        final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
+                                            content, new URL("https://www.mozilla.org"));
+        assertEquals("DIRECT", value);
     }
 
     /**
