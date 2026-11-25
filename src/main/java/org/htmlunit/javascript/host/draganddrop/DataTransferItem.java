@@ -160,6 +160,6 @@ public class DataTransferItem extends HtmlUnitScriptable {
      * @return {@code true} if this item represents a file
      */
     public boolean isFile() {
-        return kind_ == KIND_FILE;
+        return KIND_FILE.equals(kind_);
     }
 }

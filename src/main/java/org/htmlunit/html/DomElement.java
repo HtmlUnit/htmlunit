@@ -346,8 +346,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @return a sorted map containing style elements, keyed on style element name
      */
+    @SuppressWarnings("PMD.UseEqualsToCompareStrings")
     public LinkedHashMap<String, StyleElement> getStyleMap() {
         final String styleAttribute = getAttributeDirect("style");
+        // cache check by identity: the map is valid as long as the attribute value object is unchanged
         if (styleString_ == styleAttribute) {
             return styleMap_;
         }

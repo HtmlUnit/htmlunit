@@ -473,6 +473,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("PMD.UseEqualsToCompareStrings") // see the comment for ABOUT_BLANK
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObserver) {
         final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);

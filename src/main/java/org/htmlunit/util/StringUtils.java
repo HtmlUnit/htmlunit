@@ -170,6 +170,7 @@ public final class StringUtils {
      * @param expectedStart the expected prefix (must not be {@code null} or empty)
      * @return {@code true} if the string starts with the given prefix, ignoring case
      */
+    @SuppressWarnings("PMD.UseEqualsToCompareStrings") // the identity check is a shortcut
     public static boolean startsWithIgnoreCase(final String s, final String expectedStart) {
         if (expectedStart == null || expectedStart.length() == 0) {
             throw new IllegalArgumentException("Expected start string can't be null or empty");
@@ -192,6 +193,7 @@ public final class StringUtils {
      * @param expectedEnd the expected suffix (must not be {@code null} or empty)
      * @return {@code true} if the string ends with the given suffix, ignoring case
      */
+    @SuppressWarnings("PMD.UseEqualsToCompareStrings") // the identity check is a shortcut
     public static boolean endsWithIgnoreCase(final String s, final String expectedEnd) {
         if (expectedEnd == null) {
             throw new IllegalArgumentException("Expected end string can't be null or empty");
@@ -219,6 +221,7 @@ public final class StringUtils {
      * @param expected the substring to look for (must not be {@code null} or empty)
      * @return {@code true} if the string contains the substring, ignoring case
      */
+    @SuppressWarnings("PMD.UseEqualsToCompareStrings") // the identity check is a shortcut
     public static boolean containsIgnoreCase(final String s, final String expected) {
         if (expected == null) {
             throw new IllegalArgumentException("Expected string can't be null or empty");
