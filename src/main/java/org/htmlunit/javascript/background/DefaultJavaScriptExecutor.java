@@ -139,6 +139,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
 
     /** Runs the eventLoop. */
     @Override
+    @SuppressWarnings("PMD.GuardLogStatement") // guarded by the local variable trace
     public void run() {
         final boolean trace = LOG.isTraceEnabled();
         // this has to be a multiple of 10ms

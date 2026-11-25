@@ -348,6 +348,7 @@ class HtmlUnitNekoHTMLErrorHandler implements XMLErrorHandler {
      * @see DefaultErrorHandler#warning(String,String,XMLParseException)
      */
     @Override
+    @SuppressWarnings("PMD.GuardLogStatement") // listener_ is not a logger
     public void warning(final String domain, final String key,
             final XMLParseException exception) throws XNIException {
         listener_.warning(exception.getMessage(),

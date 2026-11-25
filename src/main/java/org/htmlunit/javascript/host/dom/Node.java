@@ -553,7 +553,7 @@ public class Node extends EventTarget {
         final Node node = (Node) thisObj;
         try {
             node.getDomNodeOrDie().moveBefore(movedNode.getDomNodeOrDie(),
-                    referenceNodeObject == null ? null : ((Node) referenceNodeObject).getDomNodeOrDie());
+                    referenceNodeObject instanceof Node referenceNode ? referenceNode.getDomNodeOrDie() : null);
         }
         catch (final org.w3c.dom.DOMException e) {
             throw JavaScriptEngine.asJavaScriptException(

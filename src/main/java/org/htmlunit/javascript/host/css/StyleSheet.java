@@ -100,7 +100,9 @@ public class StyleSheet extends HtmlUnitScriptable {
                 }
                 catch (final MalformedURLException e) {
                     // Log the error and fall through to the return values below.
-                    LOG.warn(e.getMessage(), e);
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn(e.getMessage(), e);
+                    }
                 }
             }
         }

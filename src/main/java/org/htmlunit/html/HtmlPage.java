@@ -646,6 +646,7 @@ public class HtmlPage extends SgmlPage {
      * Clean up this page.
      */
     @Override
+    @SuppressWarnings("PMD.CloseResource") // the closeables are closed here
     public void cleanUp() {
         //To avoid endless recursion caused by window.close() in onUnload
         if (cleaning_) {

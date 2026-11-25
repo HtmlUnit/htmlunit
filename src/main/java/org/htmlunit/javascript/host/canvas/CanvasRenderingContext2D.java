@@ -460,9 +460,11 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                 }
             }
             catch (final IOException ex) {
-                LOG.info("There is no ImageReader available for your image with src '" + imageElem.getSrc() + "'. "
-                        + "Please have a look at https://www.htmlunit.org/images-howto.html "
-                        + "for a possible solution.");
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("There is no ImageReader available for your image with src '" + imageElem.getSrc() + "'. "
+                            + "Please have a look at https://www.htmlunit.org/images-howto.html "
+                            + "for a possible solution.");
+                }
             }
         }
     }

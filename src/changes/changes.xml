@@ -9,6 +9,10 @@
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                The connection to a SOCKS proxy was not closed if the connect or the SSL setup of an https request
+                failed.
+            </action>
+            <action type="fix" dev="rbri">
                 Proxy auto-config (PAC): timeRange(hour1, min1, hour2, min2) and
                 timeRange(hour1, min1, sec1, hour2, min2, sec2) were checking the date instead of the time,
                 dateRange(month1, year1, month2, year2) was not working at all. The range ends are no longer

@@ -374,6 +374,7 @@ public abstract class AbstractJavaScriptConfiguration {
      * @param clazz the class to get the scriptable for
      * @return the mappings
      */
+    @SuppressWarnings("PMD.GuardLogStatement") // guarded by the local variable debug
     public Class<? extends HtmlUnitScriptable> getDomJavaScriptMappingFor(final Class<?> clazz) {
         if (domJavaScriptMap_ == null) {
             final Map<Class<?>, Class<? extends HtmlUnitScriptable>> map =

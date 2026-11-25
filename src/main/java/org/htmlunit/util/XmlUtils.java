@@ -117,6 +117,7 @@ public final class XmlUtils {
      * @throws SAXException if parsing fails
      * @throws ParserConfigurationException if a {@link DocumentBuilder} cannot be created
      */
+    @SuppressWarnings("PMD.CloseResource") // the BOMInputStream is the stream closed by the try-with-resources
     public static Document buildDocument(final WebResponse webResponse)
         throws IOException, SAXException, ParserConfigurationException {
 
@@ -137,11 +138,9 @@ public final class XmlUtils {
                 }
             }
 
-            try (InputStreamReader reader = new InputStreamReader(is, charset)) {
-                // we have to do the blank input check and the parsing in one step
-                final TrackBlankContentAndSkipLeadingWhitespaceReader tracker
-                        = new TrackBlankContentAndSkipLeadingWhitespaceReader(reader);
-
+            // we have to do the blank input check and the parsing in one step
+            try (TrackBlankContentAndSkipLeadingWhitespaceReader tracker
+                        = new TrackBlankContentAndSkipLeadingWhitespaceReader(new InputStreamReader(is, charset))) {
                 final InputSource source = new InputSource(tracker);
                 final DocumentBuilder builder = factory.newDocumentBuilder();
                 builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);

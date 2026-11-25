@@ -155,23 +155,34 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
         final HttpHost socksProxy = SocksConnectionSocketFactory.getSocksProxy(context);
         if (socksProxy != null) {
             final Socket underlying = SocksConnectionSocketFactory.createSocketWithSocksProxy(socksProxy);
-            underlying.setReuseAddress(true);
-
+            boolean connected = false;
             try {
-                //underlying.setSoTimeout(soTimeout);
-                underlying.connect(remoteAddress, connectTimeout);
-            }
-            catch (final SocketTimeoutException ex) {
-                final ConnectTimeoutException cex =
-                        new ConnectTimeoutException("Connect to " + socksProxy.toURI() + " timed out");
-                cex.initCause(ex);
-                throw cex;
-            }
+                underlying.setReuseAddress(true);
 
-            final Socket sslSocket = getSSLSocketFactory().createSocket(underlying, remoteAddress.getHostName(),
-                    remoteAddress.getPort(), true);
-            configureSocket((SSLSocket) sslSocket, context);
-            return sslSocket;
+                try {
+                    //underlying.setSoTimeout(soTimeout);
+                    underlying.connect(remoteAddress, connectTimeout);
+                }
+                catch (final SocketTimeoutException ex) {
+                    final ConnectTimeoutException cex =
+                            new ConnectTimeoutException("Connect to " + socksProxy.toURI() + " timed out");
+                    cex.initCause(ex);
+                    throw cex;
+                }
+
+                // closing the sslSocket closes the underlying socket also (autoClose)
+                final Socket sslSocket = getSSLSocketFactory().createSocket(underlying,
+                        remoteAddress.getHostName(), remoteAddress.getPort(), true);
+                configureSocket((SSLSocket) sslSocket, context);
+                connected = true;
+                return sslSocket;
+            }
+            finally {
+                if (!connected) {
+                    // do not leak the connection to the socks proxy
+                    closeQuietly(underlying);
+                }
+            }
         }
         try {
             return super.connectSocket(connectTimeout, socket, host, remoteAddress, localAddress, context);
@@ -185,6 +196,15 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
                         host, remoteAddress, localAddress, context);
             }
             throw e;
+        }
+    }
+
+    private static void closeQuietly(final Socket socket) {
+        try {
+            socket.close();
+        }
+        catch (final IOException ignored) {
+            // the exception that caused the close is more important
         }
     }
 

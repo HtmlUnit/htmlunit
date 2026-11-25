@@ -1120,6 +1120,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * Returns the executor for this {@link WebClient}.
      * @return the executor
      */
+    @SuppressWarnings("PMD.CloseResource") // the executor is shut down in close()
     public Executor getExecutor() {
         synchronized (executorLock_) {
             if (executor_ == null) {
@@ -3363,7 +3364,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         catch (final MalformedCookieException e) {
             if (LOG.isDebugEnabled()) {
-                LOG.warn("Adding cookie '" + cookieString + "' failed.", e);
+                LOG.debug("Adding cookie '" + cookieString + "' failed.", e);
             }
             getIncorrectnessListener().notify("Adding cookie '" + cookieString
                         + "' failed; reason: '" + e.getMessage() + "'.", origin);

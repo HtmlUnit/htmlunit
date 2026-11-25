@@ -227,7 +227,6 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("PMD.GuardLogStatement")
     public int waitForJobsStartingBefore(final long delayMillis, final JavaScriptJobFilter filter) {
         return waitForJobsStartingBefore(delayMillis, -1, filter);
     }

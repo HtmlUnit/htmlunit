@@ -1435,7 +1435,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                             fontSize = parent.getPage().getEnclosingWindow().getComputedStyle(parent, null)
                                     .getStyleAttribute(Definition.FONT_SIZE, true);
                         }
-                        left += (int) Math.round(getDomElement().getPage().getWebClient().getBrowserVersion()
+                        left += Math.round(getDomElement().getPage().getWebClient().getBrowserVersion()
                                 .getTextWidth(content.trim(), fontSize));
                     }
                 }
@@ -2005,7 +2005,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 final DomNode parent = child.getParentNode();
                 if (parent instanceof HtmlElement) {
                     final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) parent, null);
-                    inlineWidth += (int) Math.round(browserVersion.getTextWidth(getLayoutText(child),
+                    inlineWidth += Math.round(browserVersion.getTextWidth(getLayoutText(child),
                                         style.getStyleAttribute(Definition.FONT_SIZE, true)));
                 }
                 else {

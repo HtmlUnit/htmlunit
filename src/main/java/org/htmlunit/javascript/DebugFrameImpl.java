@@ -144,17 +144,17 @@ public class DebugFrameImpl extends DebugFrameAdapter {
     @Override
     public void onExceptionThrown(final Context cx, final Throwable t) {
         if (LOG.isTraceEnabled()) {
+            final Object details;
             if (t instanceof JavaScriptException e) {
-                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
-                    + " Exception thrown: " + e.details());
+                details = e.details();
             }
             else if (t instanceof EcmaError e) {
-                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
-                    + " Exception thrown: " + e.details());
+                details = e.details();
             }
             else {
-                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
+                details = t.getCause();
             }
+            LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + details);
         }
     }
 

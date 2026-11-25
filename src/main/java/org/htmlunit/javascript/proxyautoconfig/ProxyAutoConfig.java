@@ -344,7 +344,6 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
      * @param zone UTC if the "GMT" argument was present, the default time zone otherwise
      */
     private record Arguments(List<String> values, ZoneId zone) {
-
         /**
          * Creates the arguments from the values passed from JavaScript.
          * @param values the values passed from JavaScript (padded with undefined)

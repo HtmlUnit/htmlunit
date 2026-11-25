@@ -407,6 +407,7 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("PMD.GuardLogStatement") // guarded by the local variable trace
     public ComputedCssStyleDeclaration getComputedStyle(final DomElement element, final String pseudoElement) {
         String normalizedPseudo = pseudoElement;
         if (normalizedPseudo != null) {

@@ -206,6 +206,7 @@ public class WebResponse implements Serializable {
      * </p>
      * @return the content charset for this response
      */
+    @SuppressWarnings("PMD.CloseResource") // the BOMInputStream is the stream closed by the try-with-resources
     public Charset getContentCharset() {
         wasContentCharsetTentative_ = false;
 
@@ -313,7 +314,9 @@ public class WebResponse implements Serializable {
                 return IOUtils.toString(in, encoding);
             }
             catch (final IOException e) {
-                LOG.warn(e.getMessage(), e);
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(e.getMessage(), e);
+                }
             }
         }
         return null;

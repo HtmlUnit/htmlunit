@@ -187,8 +187,8 @@ public class StyleSheetList extends HtmlUnitScriptable {
      */
     @Override
     protected Object equivalentValues(final Object value) {
-        return value != null
-                && getClass() == value.getClass()
-                && getDomNodeOrNull() == ((StyleSheetList) value).getDomNodeOrNull();
+        return value instanceof StyleSheetList other
+                && getClass() == other.getClass()
+                && getDomNodeOrNull() == other.getDomNodeOrNull();
     }
 }
