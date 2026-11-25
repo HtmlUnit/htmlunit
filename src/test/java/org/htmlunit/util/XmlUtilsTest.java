@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -460,6 +461,9 @@ public class XmlUtilsTest {
     }
 
     private static Object invokeWasBlank(final Object trackerInstance) throws Exception {
-        return trackerInstance.getClass().getMethod("wasBlank").invoke(trackerInstance);
+        // package private, the class itself is private
+        final Method wasBlank = trackerInstance.getClass().getDeclaredMethod("wasBlank");
+        wasBlank.setAccessible(true);
+        return wasBlank.invoke(trackerInstance);
     }
 }
