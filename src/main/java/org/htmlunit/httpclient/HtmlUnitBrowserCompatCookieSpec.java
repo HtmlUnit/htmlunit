@@ -19,7 +19,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_HOST_PREFIX_PATH_A
 
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -31,7 +30,6 @@ import org.apache.http.Header;
 import org.apache.http.HeaderElement;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
-import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieAttributeHandler;
@@ -94,15 +92,9 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
     private static final NetscapeDraftHeaderParser DEFAULT_NETSCAPE_DRAFT_HEADER_PARSER
                             = new NetscapeDraftHeaderParser();
 
-    static final Date DATE_1_1_1970;
-
-    static {
-        final Calendar calendar = Calendar.getInstance(Locale.ROOT);
-        calendar.setTimeZone(DateUtils.GMT);
-        calendar.set(1970, Calendar.JANUARY, 1, 0, 0, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        DATE_1_1_1970 = calendar.getTime();
-    }
+    // 1970-01-01T00:00:00Z
+    @SuppressWarnings("PMD.ReplaceJavaUtilDate") // DateUtils.parseDate() of HttpClient 4 needs a Date
+    static final Date DATE_1_1_1970 = new Date(0L);
 
     private final BrowserVersion browserVersion_;
 
