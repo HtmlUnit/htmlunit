@@ -313,7 +313,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             authScope_ = authScope;
         }
 
-        public AuthScope getAuthScope() {
+        AuthScope getAuthScope() {
             return authScope_;
         }
 

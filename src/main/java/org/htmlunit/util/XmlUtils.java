@@ -172,7 +172,7 @@ public final class XmlUtils {
             reader_ = characterStream;
         }
 
-        public boolean wasBlank() {
+        boolean wasBlank() {
             return wasBlank_;
         }
 

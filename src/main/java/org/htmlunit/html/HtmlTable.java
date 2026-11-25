@@ -396,7 +396,7 @@ public class HtmlTable extends HtmlElement {
          * @return the next row from this iterator
          * @throws NoSuchElementException if no more rows are available
          */
-        public HtmlTableRow nextRow() throws NoSuchElementException {
+        HtmlTableRow nextRow() throws NoSuchElementException {
             if (nextRow_ != null) {
                 final HtmlTableRow result = nextRow_;
                 setNextRow(nextRow_.getNextSibling());

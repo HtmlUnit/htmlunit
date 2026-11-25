@@ -2547,7 +2547,7 @@ public class WebClient implements Serializable, AutoCloseable {
         /**
          * Postprocessing to make sure we have always one top level window open.
          */
-        public void afterWebWindowClosedListenersProcessed(final WebWindowEvent event) {
+        void afterWebWindowClosedListenersProcessed(final WebWindowEvent event) {
             if (!ensureOneTopLevelWindow_) {
                 return;
             }
@@ -3047,7 +3047,7 @@ public class WebClient implements Serializable, AutoCloseable {
             forceAttachmentWithFilename_ = forceAttachmentWithFilename;
         }
 
-        public boolean isOutdated() {
+        boolean isOutdated() {
             if (target_ != null && !target_.isEmpty()) {
                 return false;
             }
@@ -3505,7 +3505,7 @@ public class WebClient implements Serializable, AutoCloseable {
          *
          * @return a parser
          */
-        public PooledCSS3Parser get() {
+        PooledCSS3Parser get() {
             // see if we have one, LIFO
             final PooledCSS3Parser parser = parsers_.pollLast();
 

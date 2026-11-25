@@ -431,75 +431,75 @@ public final class CookieParser {
             version_ = 0;
         }
 
-        public String getName() {
+        String getName() {
             return name_;
         }
 
-        public String getValue() {
+        String getValue() {
             return value_;
         }
 
-        public String getDomain() {
+        String getDomain() {
             return domain_;
         }
 
-        public void setDomain(final String domain) {
+        void setDomain(final String domain) {
             domain_ = domain;
         }
 
-        public String getPath() {
+        String getPath() {
             return path_;
         }
 
-        public void setPath(final String path) {
+        void setPath(final String path) {
             path_ = path;
         }
 
-        public Date getExpires() {
+        Date getExpires() {
             return expires_;
         }
 
-        public void setExpires(final Date expires) {
+        void setExpires(final Date expires) {
             expires_ = expires;
         }
 
-        public Integer getMaxAge() {
+        Integer getMaxAge() {
             return maxAge_;
         }
 
-        public void setMaxAge(final Integer maxAge) {
+        void setMaxAge(final Integer maxAge) {
             maxAge_ = maxAge;
         }
 
-        public boolean isSecure() {
+        boolean isSecure() {
             return secure_;
         }
 
-        public void setSecure(final boolean secure) {
+        void setSecure(final boolean secure) {
             secure_ = secure;
         }
 
-        public boolean isHttpOnly() {
+        boolean isHttpOnly() {
             return httpOnly_;
         }
 
-        public void setHttpOnly(final boolean httpOnly) {
+        void setHttpOnly(final boolean httpOnly) {
             httpOnly_ = httpOnly;
         }
 
-        public String getSameSite() {
+        String getSameSite() {
             return sameSite_;
         }
 
-        public void setSameSite(final String sameSite) {
+        void setSameSite(final String sameSite) {
             sameSite_ = sameSite;
         }
 
-        public int getVersion() {
+        int getVersion() {
             return version_;
         }
 
-        public void setVersion(final int version) {
+        void setVersion(final int version) {
             version_ = version;
         }
     }

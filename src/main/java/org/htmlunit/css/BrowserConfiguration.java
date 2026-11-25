@@ -40,7 +40,7 @@ abstract class BrowserConfiguration {
 
     abstract boolean matches(BrowserVersion browserVersion);
 
-    public boolean isIterable() {
+    boolean isIterable() {
         return true;
     }
 
@@ -127,12 +127,12 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean matches(final BrowserVersion browserVersion) {
+        boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isChrome() || browserVersion.isEdge();
         }
 
         @Override
-        public boolean isIterable() {
+        boolean isIterable() {
             return false;
         }
     }
@@ -143,7 +143,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean matches(final BrowserVersion browserVersion) {
+        boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isChrome();
         }
     }
@@ -154,7 +154,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean matches(final BrowserVersion browserVersion) {
+        boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isEdge();
         }
     }
@@ -165,7 +165,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean matches(final BrowserVersion browserVersion) {
+        boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isChrome() || browserVersion.isEdge();
         }
     }
@@ -176,7 +176,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean matches(final BrowserVersion browserVersion) {
+        boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isChrome()
                     || browserVersion.isEdge()
                     || browserVersion.isFirefox();
@@ -189,7 +189,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean matches(final BrowserVersion browserVersion) {
+        boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isFirefox();
         }
     }
@@ -200,12 +200,12 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean matches(final BrowserVersion browserVersion) {
+        boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isFirefox();
         }
 
         @Override
-        public boolean isIterable() {
+        boolean isIterable() {
             return false;
         }
     }
@@ -216,7 +216,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean matches(final BrowserVersion browserVersion) {
+        boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isFirefox()
                     && browserVersion.getBrowserVersionNumeric()
                         == BrowserVersion.FIREFOX_ESR.getBrowserVersionNumeric();
@@ -229,7 +229,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean matches(final BrowserVersion browserVersion) {
+        boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isFirefox()
                     && browserVersion.getBrowserVersionNumeric()
                         > BrowserVersion.FIREFOX_ESR.getBrowserVersionNumeric();

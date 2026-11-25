@@ -614,6 +614,7 @@ public class HtmlSerializerNormalizedText {
     /**
      * Helper to compose the text for the serializer based on several modes.
      */
+    @SuppressWarnings("PMD.PublicMemberInNonPublicType") // protected type, used by subclasses in other packages
     protected static class HtmlSerializerTextBuilder {
 
         /** Mode. */

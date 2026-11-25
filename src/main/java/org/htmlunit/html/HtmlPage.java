@@ -3509,7 +3509,7 @@ public class HtmlPage extends SgmlPage {
             super();
         }
 
-        public synchronized ComputedCssStyleDeclaration get(final DomElement element,
+        synchronized ComputedCssStyleDeclaration get(final DomElement element,
                 final String normalizedPseudo) {
             final Map<String, ComputedCssStyleDeclaration> elementMap = computedStyles_.get(element);
             if (elementMap != null) {
@@ -3518,14 +3518,14 @@ public class HtmlPage extends SgmlPage {
             return null;
         }
 
-        public synchronized void put(final DomElement element,
+        synchronized void put(final DomElement element,
                 final String normalizedPseudo, final ComputedCssStyleDeclaration style) {
             final Map<String, ComputedCssStyleDeclaration>
                     elementMap = computedStyles_.computeIfAbsent(element, k -> new WeakHashMap<>());
             elementMap.put(normalizedPseudo, style);
         }
 
-        public synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
+        synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
             final Iterator<Map.Entry<DomElement, Map<String, ComputedCssStyleDeclaration>>>
                     i = computedStyles_.entrySet().iterator();
             while (i.hasNext()) {
@@ -3568,11 +3568,11 @@ public class HtmlPage extends SgmlPage {
             //            }
         }
 
-        public synchronized void clear() {
+        synchronized void clear() {
             computedStyles_.clear();
         }
 
-        public synchronized Map<String, ComputedCssStyleDeclaration> remove(final DomNode element) {
+        synchronized Map<String, ComputedCssStyleDeclaration> remove(final DomNode element) {
             return computedStyles_.remove(element);
         }
 

@@ -62,7 +62,7 @@ public class EventListenersContainer implements Serializable {
 
     private record TypeContainer(List<Scriptable> capturingListeners_, List<Scriptable> bubblingListeners_,
                                  List<Scriptable> atTargetListeners_, Function handler_) implements Serializable {
-        public static final TypeContainer EMPTY = new TypeContainer();
+        static final TypeContainer EMPTY = new TypeContainer();
 
         // This sentinel value could be some singleton instance but null
         // isn't used for anything else so why not.
@@ -81,7 +81,7 @@ public class EventListenersContainer implements Serializable {
             };
         }
 
-        public TypeContainer setPropertyHandler(final Function propertyHandler) {
+        TypeContainer setPropertyHandler(final Function propertyHandler) {
             if (propertyHandler != null) {
                 // If we already have a handler then the position of the existing
                 // placeholder should not be changed so just change the handler
@@ -105,7 +105,7 @@ public class EventListenersContainer implements Serializable {
             return new TypeContainer(capturingListeners_, bubblingListeners_, atTargetListeners_, propertyHandler);
         }
 
-        public TypeContainer addListener(final Scriptable listener, final boolean useCapture) {
+        TypeContainer addListener(final Scriptable listener, final boolean useCapture) {
             List<Scriptable> capturingListeners = capturingListeners_;
             List<Scriptable> bubblingListeners = bubblingListeners_;
             final List<Scriptable> listeners = useCapture ? capturingListeners : bubblingListeners;
@@ -134,7 +134,7 @@ public class EventListenersContainer implements Serializable {
             return new TypeContainer(capturingListeners, bubblingListeners, atTargetListeners, handler_);
         }
 
-        public TypeContainer removeListener(final Scriptable listener, final boolean useCapture) {
+        TypeContainer removeListener(final Scriptable listener, final boolean useCapture) {
             List<Scriptable> capturingListeners = capturingListeners_;
             List<Scriptable> bubblingListeners = bubblingListeners_;
             final List<Scriptable> listeners = useCapture ? capturingListeners : bubblingListeners;

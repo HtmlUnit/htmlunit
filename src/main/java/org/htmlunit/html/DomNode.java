@@ -1428,6 +1428,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * An iterator over all children of this node.
      */
+    @SuppressWarnings("PMD.PublicMemberInNonPublicType") // protected type, used by subclasses in other packages
     protected static class ChildIterator implements Iterator<DomNode> {
 
         private DomNode nextNode_;
@@ -1501,6 +1502,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Iterates over all descendants DomNodes, in document order.
      */
+    @SuppressWarnings("PMD.PublicMemberInNonPublicType") // protected type, used by subclasses in other packages
     protected final class DescendantDomNodesIterator implements Iterator<DomNode> {
         private DomNode currentNode_;
         private DomNode nextNode_;
@@ -1579,6 +1581,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param <T> the element type
      */
+    @SuppressWarnings("PMD.PublicMemberInNonPublicType") // protected type, used by subclasses in other packages
     protected abstract class AbstractDescendantIterator<T extends DomNode> implements Iterator<T> {
         private DomNode currentNode_;
         private DomNode nextNode_;

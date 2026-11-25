@@ -105,7 +105,7 @@ public class Cache implements Serializable {
         /**
          * Updates the last access date.
          */
-        public void touch() {
+        void touch() {
             lastAccess_ = System.currentTimeMillis();
         }
 

@@ -1419,7 +1419,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
          *
          * @return the error
          */
-        public IOException getError() {
+        IOException getError() {
             return error_;
         }
     }

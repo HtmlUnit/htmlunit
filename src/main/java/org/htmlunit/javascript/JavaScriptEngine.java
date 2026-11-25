@@ -835,7 +835,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         final HtmlUnitContextAction action = new HtmlUnitContextAction(page) {
             @Override
-            public Object doRun(final Context cx) {
+            protected Object doRun(final Context cx) {
                 return script.exec(cx, scope, HtmlUnitScriptable.getGlobalThis(scope));
             }
 
@@ -905,7 +905,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         final HtmlUnitContextAction action = new HtmlUnitContextAction(page) {
             @Override
-            public Object doRun(final Context cx) {
+            protected Object doRun(final Context cx) {
                 if (ScriptRuntime.hasTopCall(cx)) {
                     return function.call(cx, scope, thisObject, args);
                 }

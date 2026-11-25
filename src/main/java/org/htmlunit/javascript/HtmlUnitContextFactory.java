@@ -142,11 +142,11 @@ public class HtmlUnitContextFactory extends ContextFactory {
             super(factory);
         }
 
-        public void startClock() {
+        void startClock() {
             startTime_ = System.currentTimeMillis();
         }
 
-        public void terminateScriptIfNecessary() {
+        void terminateScriptIfNecessary() {
             if (timeout_ > 0) {
                 final long currentTime = System.currentTimeMillis();
                 if (currentTime - startTime_ > timeout_) {
