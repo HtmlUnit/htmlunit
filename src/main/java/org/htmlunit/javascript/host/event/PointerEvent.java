@@ -69,6 +69,7 @@ public class PointerEvent extends MouseEvent {
     public static Scriptable jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         final PointerEvent event = new PointerEvent();
+        event.setIsTrusted(false);
 
         event.setBubbles(false);
         event.setCancelable(false);

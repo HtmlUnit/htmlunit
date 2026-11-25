@@ -47,7 +47,6 @@ import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 
@@ -1621,38 +1620,6 @@ public class WindowTest extends SimpleWebTestCase {
                     + "§event afterprint"
                     + "§[object Event]afterprint-false-false-false-[object Window]"
                         + "-false-2-true-true-[object Window]-[object Window]-afterprint"
-                    + "§printed§")
-    @HtmlUnitNYI(CHROME = "before print"
-                    + "§event beforeprint"
-                    + "§[object Event]beforeprint-false-false-false-[object Window]"
-                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
-                    + "§event afterprint"
-                    + "§[object Event]afterprint-false-false-false-[object Window]"
-                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
-                    + "§printed§",
-            EDGE = "before print"
-                    + "§event beforeprint"
-                    + "§[object Event]beforeprint-false-false-false-[object Window]"
-                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
-                    + "§event afterprint"
-                    + "§[object Event]afterprint-false-false-false-[object Window]"
-                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
-                    + "§printed§",
-            FF = "before print"
-                    + "§event beforeprint"
-                    + "§[object Event]beforeprint-false-false-false-[object Window]"
-                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
-                    + "§event afterprint"
-                    + "§[object Event]afterprint-false-false-false-[object Window]"
-                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
-                    + "§printed§",
-            FF_ESR = "before print"
-                    + "§event beforeprint"
-                    + "§[object Event]beforeprint-false-false-false-[object Window]"
-                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
-                    + "§event afterprint"
-                    + "§[object Event]afterprint-false-false-false-[object Window]"
-                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
                     + "§printed§")
     public void printEvent() throws Exception {
         // we have to test this manually

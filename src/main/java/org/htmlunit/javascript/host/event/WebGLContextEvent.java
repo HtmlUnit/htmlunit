@@ -31,6 +31,6 @@ public class WebGLContextEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
-        // nothing to do
+        setIsTrusted(false);
     }
 }

@@ -983,22 +983,24 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "type[GCE]")
     @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],"
-                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),isTrusted[GCE],NONE[E],preventDefault(),"
                 + "returnValue[GSCE],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
                 + "target[GCE],timeStamp[GCE],type[GCE]",
             EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],"
-                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),isTrusted[GCE],NONE[E],preventDefault(),"
                 + "returnValue[GSCE],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
                 + "target[GCE],timeStamp[GCE],type[GCE]",
             FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],currentTarget[GCE],"
-                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],preventDefault(),"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),isTrusted[GCE],META_MASK[E],NONE[E],"
+                + "preventDefault(),"
                 + "returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
                 + "target[GCE],timeStamp[GCE],type[GCE]",
             FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],currentTarget[GCE],"
-                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],preventDefault(),"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),isTrusted[GCE],META_MASK[E],NONE[E],"
+                + "preventDefault(),"
                 + "returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
                 + "target[GCE],timeStamp[GCE],type[GCE]")
     public void event() throws Exception {
@@ -15001,22 +15003,24 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "type[GCE]")
     @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
-                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
+                + "eventPhase[GCE],initEvent(),isTrusted[GCE],NONE[E],preventDefault(),returnValue[GSCE],"
+                + "srcElement[GCE],"
                 + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
             EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
-                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
+                + "eventPhase[GCE],initEvent(),isTrusted[GCE],NONE[E],preventDefault(),returnValue[GSCE],"
+                + "srcElement[GCE],"
                 + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
             FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],"
                 + "currentTarget[GCE],defaultPrevented[GCE],"
-                + "eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],"
+                + "eventPhase[GCE],initEvent(),isTrusted[GCE],META_MASK[E],NONE[E],"
                 + "preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
                 + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
             FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],"
                 + "currentTarget[GCE],defaultPrevented[GCE],"
-                + "eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],"
+                + "eventPhase[GCE],initEvent(),isTrusted[GCE],META_MASK[E],NONE[E],"
                 + "preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
                 + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]")
     public void event2() throws Exception {
@@ -15315,19 +15319,23 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "type[GCE]")
     @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
                 + "composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],initEvent(),"
+                + "isTrusted[GCE],"
                 + "NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
                 + "target[GCE],timeStamp[GCE],type[GCE]",
             EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
                 + "composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],initEvent(),"
+                + "isTrusted[GCE],"
                 + "NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
                 + "target[GCE],timeStamp[GCE],type[GCE]",
             FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
                 + "composed[GCE],constructor(),CONTROL_MASK[E],currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],"
-                + "initEvent(),META_MASK[E],NONE[E],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "initEvent(),isTrusted[GCE],META_MASK[E],NONE[E],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],"
+                + "srcElement[GCE],"
                 + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
             FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
                 + "composed[GCE],constructor(),CONTROL_MASK[E],currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],"
-                + "initEvent(),META_MASK[E],NONE[E],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "initEvent(),isTrusted[GCE],META_MASK[E],NONE[E],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],"
+                + "srcElement[GCE],"
                 + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]")
     public void eventEvent() throws Exception {
         testString("", "new Event('event')");

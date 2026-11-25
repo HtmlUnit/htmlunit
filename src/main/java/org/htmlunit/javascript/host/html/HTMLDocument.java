@@ -796,6 +796,8 @@ public class HTMLDocument extends Document {
     @Override
     @JsxFunction
     public boolean dispatchEvent(final Event event) {
+        // DOM Standard: an event dispatched by a script is not trusted
+        event.setIsTrusted(false);
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
         return !event.isAborted(result);

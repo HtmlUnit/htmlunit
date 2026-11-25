@@ -497,6 +497,12 @@ public class Event extends HtmlUnitScriptable {
     private final long timeStamp_ = System.currentTimeMillis();
 
     /**
+     * Whether the event was fired by the user agent (HtmlUnit); events created by a script
+     * (constructor, document.createEvent()) and events dispatched by a script are not trusted.
+     */
+    private boolean isTrusted_ = true;
+
+    /**
      * Creates a new event instance.
      *
      * @param domNode the DOM node that triggered the event
@@ -592,6 +598,8 @@ public class Event extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor(final String type, final ScriptableObject details) {
+        isTrusted_ = false;
+
         boolean bubbles = false;
         boolean cancelable = false;
 
@@ -817,6 +825,28 @@ public class Event extends HtmlUnitScriptable {
             throw new IllegalArgumentException("Illegal phase specified: " + phase);
         }
         eventPhase_ = phase;
+    }
+
+    /**
+     * Returns the {@code isTrusted} property: whether the event was fired by the user agent
+     * (and not created or dispatched by a script).
+     *
+     * @return the {@code isTrusted} property
+     */
+    @JsxGetter
+    public boolean isIsTrusted() {
+        return isTrusted_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets whether the event is trusted; events created or dispatched by a script are not trusted.
+     *
+     * @param isTrusted whether the event is trusted
+     */
+    public void setIsTrusted(final boolean isTrusted) {
+        isTrusted_ = isTrusted;
     }
 
     /**

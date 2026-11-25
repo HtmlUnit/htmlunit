@@ -2082,6 +2082,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @Override
     public boolean dispatchEvent(final Event event) {
+        // DOM Standard: an event dispatched by a script is not trusted
+        event.setIsTrusted(false);
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
         return !event.isAborted(result);

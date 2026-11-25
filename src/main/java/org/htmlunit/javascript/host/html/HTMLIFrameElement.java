@@ -237,12 +237,9 @@ public class HTMLIFrameElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("PMD.UseEqualsToCompareStrings")
     public void executeEventLocally(final Event event) {
-        // compared by identity on purpose: HtmlUnit fires the load event of the frame with the
-        // constant Event.TYPE_LOAD; a load event created by a script (new Event('load')) has a type
-        // string of its own and is always executed
-        if (Event.TYPE_LOAD != event.getType()
+        // a load event dispatched by a script is always executed
+        if (!Event.TYPE_LOAD.equals(event.getType()) || !event.isIsTrusted()
                 || !isAttachedToPageDuringOnload_ || getBrowserVersion().hasFeature(JS_IFRAME_ALWAYS_EXECUTE_ONLOAD)) {
             super.executeEventLocally(event);
         }

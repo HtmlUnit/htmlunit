@@ -1299,6 +1299,7 @@ public class Document extends Node {
 
         try {
             final Event event = clazz.getDeclaredConstructor().newInstance();
+            event.setIsTrusted(false);
             event.setParentScope(getParentScope());
             event.setPrototype(getPrototype(clazz));
             event.eventCreated();

@@ -242,7 +242,8 @@ public class EventTarget extends HtmlUnitScriptable {
                 final HtmlElement element = label.getLabeledElement();
                 if (element != null && element != getDomNodeOrNull()) {
                     try {
-                        element.click(event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), false, true, true, true);
+                        element.click(event.isShiftKey(), event.isCtrlKey(), event.isAltKey(),
+                                        false, true, true, true, true);
                     }
                     catch (final IOException ignored) {
                         // ignore for now
@@ -297,6 +298,8 @@ public class EventTarget extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean dispatchEvent(final Event event) {
+        // DOM Standard: an event dispatched by a script is not trusted
+        event.setIsTrusted(false);
         event.setTarget(this);
 
         ScriptResult result = null;

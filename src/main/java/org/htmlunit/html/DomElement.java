@@ -1134,7 +1134,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
             final boolean triggerMouseEvents) throws IOException {
-        return click(shiftKey, ctrlKey, altKey, triggerMouseEvents, true, false, false);
+        return click(shiftKey, ctrlKey, altKey, triggerMouseEvents, true, false, false, true);
     }
 
     /**
@@ -1161,6 +1161,8 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param handleFocus if true set the focus (and trigger the event)
      * @param ignoreVisibility whether to ignore visibility or not
      * @param disableProcessLabelAfterBubbling ignore label processing
+     * @param isTrusted whether the click event is trusted; {@code false} for the click() method
+     *        called by a script (a synthetic click)
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @throws IOException if an IO error occurs
@@ -1168,7 +1170,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     @SuppressWarnings("unchecked")
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
             final boolean triggerMouseEvents, final boolean handleFocus, final boolean ignoreVisibility,
-            final boolean disableProcessLabelAfterBubbling) throws IOException {
+            final boolean disableProcessLabelAfterBubbling, final boolean isTrusted) throws IOException {
 
         // make enclosing window the current one
         final SgmlPage page = getPage();
@@ -1241,6 +1243,9 @@ public class DomElement extends DomNamespaceNode implements Element {
 
                     if (disableProcessLabelAfterBubbling) {
                         event.disableProcessLabelAfterBubbling();
+                    }
+                    if (!isTrusted) {
+                        event.setIsTrusted(false);
                     }
                 }
                 click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);

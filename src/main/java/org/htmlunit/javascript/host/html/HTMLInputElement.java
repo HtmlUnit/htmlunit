@@ -544,7 +544,8 @@ public class HTMLInputElement extends HTMLElement {
         final HtmlInput domNode = getDomNodeOrDie();
         final boolean originalState = domNode.isChecked();
 
-        domNode.click(false, false, false, false, false, true, false);
+        // the click event of the click() method is not trusted
+        domNode.click(false, false, false, false, false, true, false, false);
 
         final boolean newState = domNode.isChecked();
 

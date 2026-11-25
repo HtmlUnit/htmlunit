@@ -151,15 +151,10 @@ public class AbortSignalTest extends WebDriverTestCase {
 
     /**
      * The abort event: handler and listeners.
-     * <p>HtmlUnit does not support Event.isTrusted.</p>
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"function", "onabort abort true true", "false false true", "listener true", "done"})
-    @HtmlUnitNYI(CHROME = {"function", "onabort abort true undefined", "false false true", "listener true", "done"},
-            EDGE = {"function", "onabort abort true undefined", "false false true", "listener true", "done"},
-            FF = {"function", "onabort abort true undefined", "false false true", "listener true", "done"},
-            FF_ESR = {"function", "onabort abort true undefined", "false false true", "listener true", "done"})
     public void abortEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
