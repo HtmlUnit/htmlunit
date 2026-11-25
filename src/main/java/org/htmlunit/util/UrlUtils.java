@@ -1401,7 +1401,7 @@ public final class UrlUtils {
         // Compare the protocols.
         final String p1 = u1.getProtocol();
         final String p2 = u2.getProtocol();
-        if (!(p1 == p2 || (p1 != null && p1.equalsIgnoreCase(p2)))) {
+        if (p1 == null ? p2 != null : !p1.equalsIgnoreCase(p2)) {
             return false;
         }
 
@@ -1415,7 +1415,7 @@ public final class UrlUtils {
         // Compare the hosts.
         final String h1 = u1.getHost();
         final String h2 = u2.getHost();
-        if (!(h1 == h2 || (h1 != null && h1.equalsIgnoreCase(h2)))) {
+        if (h1 == null ? h2 != null : !h1.equalsIgnoreCase(h2)) {
             return false;
         }
 

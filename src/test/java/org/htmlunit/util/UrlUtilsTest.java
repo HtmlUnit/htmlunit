@@ -967,4 +967,18 @@ public class UrlUtilsTest {
         assertFalse(UrlUtils.isLocalhostOrLoopback("example.com"));
         assertFalse(UrlUtils.isLocalhostOrLoopback("127.0.0"));
     }
+
+    /**
+     * The protocol and the host are compared case-insensitive (and not by identity).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameFileIgnoreCase() throws Exception {
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost/bug.html"), new URL("HTTP://LocalHost/bug.html")));
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost/bug.html"),
+                new URL(new String("http"), new String("localhost"), "/bug.html")));
+        assertFalse(UrlUtils.sameFile(new URL("http://localhost/bug.html"), new URL("https://localhost/bug.html")));
+        assertFalse(UrlUtils.sameFile(new URL("http://localhost/bug.html"), new URL("http://127.0.0.1/bug.html")));
+    }
 }
