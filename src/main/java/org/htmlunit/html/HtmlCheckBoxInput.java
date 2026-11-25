@@ -124,7 +124,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
      */
     @Override
     protected void doClickFireChangeEvent() {
-        executeOnChangeHandlerIfAppropriate(this);
+        executeOnInputAndChangeHandlerIfAppropriate(this);
     }
 
     /**

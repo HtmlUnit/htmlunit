@@ -182,7 +182,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      */
     @Override
     protected void doClickFireChangeEvent() {
-        executeOnChangeHandlerIfAppropriate(this);
+        executeOnInputAndChangeHandlerIfAppropriate(this);
     }
 
     /**

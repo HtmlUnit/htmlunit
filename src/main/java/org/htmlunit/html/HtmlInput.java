@@ -587,6 +587,23 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      *         may not be the same as the original page)
      */
     static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
+        return executeOnChangeHandlerIfAppropriate(htmlElement, false);
+    }
+
+    /**
+     * Fires the input and the change event after a click changed the checkedness of a checkbox
+     * or radio button (the input activation behavior), if this is appropriate
+     * (see {@link #executeOnChangeHandlerIfAppropriate(HtmlElement)}).
+     *
+     * @param htmlElement the checkbox or radio button
+     * @return the page that occupies this window after this method completes (may or
+     *         may not be the same as the original page)
+     */
+    static Page executeOnInputAndChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
+        return executeOnChangeHandlerIfAppropriate(htmlElement, true);
+    }
+
+    private static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement, final boolean fireInput) {
         final SgmlPage page = htmlElement.getPage();
         final WebClient webClient = page.getWebClient();
 
@@ -597,6 +614,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
         if (engine.isScriptRunning()) {
             return page;
+        }
+        if (fireInput) {
+            final Event inputEvent = new Event(htmlElement, Event.TYPE_INPUT);
+            inputEvent.setCancelable(false);
+            htmlElement.fireEvent(inputEvent);
         }
         final ScriptResult scriptResult = htmlElement.fireEvent(Event.TYPE_CHANGE);
 

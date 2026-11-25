@@ -551,6 +551,10 @@ public class HTMLInputElement extends HTMLElement {
 
         if (originalState != newState
                 && (domNode instanceof HtmlRadioButtonInput || domNode instanceof HtmlCheckBoxInput)) {
+            // the input and change events of the state change are fired by the browser (trusted)
+            final Event inputEvent = new Event(domNode, Event.TYPE_INPUT);
+            inputEvent.setCancelable(false);
+            domNode.fireEvent(inputEvent);
             domNode.fireEvent(Event.TYPE_CHANGE);
         }
     }

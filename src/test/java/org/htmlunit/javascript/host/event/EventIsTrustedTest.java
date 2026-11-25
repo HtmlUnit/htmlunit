@@ -192,7 +192,7 @@ public class EventIsTrustedTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts({"click false", "input true", "change true"})
     public void clickFromScriptCheckbox() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -207,6 +207,60 @@ public class EventIsTrustedTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'><input type='checkbox' id='c'></body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The click() method of a radio button fires a synthetic click event; the input and change
+     * events of the state change are fired by the browser.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"click false", "input true", "change true", "click false"})
+    public void clickFromScriptRadio() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var r = document.getElementById('r');\n"
+            + "    r.addEventListener('click', function(e) { log('click ' + e.isTrusted); });\n"
+            + "    r.addEventListener('input', function(e) { log('input ' + e.isTrusted); });\n"
+            + "    r.addEventListener('change', function(e) { log('change ' + e.isTrusted); });\n"
+            + "    r.click();\n"
+            + "    r.click();\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'><input type='radio' name='n' id='r'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A click of the user (WebDriver) on a checkbox; the input event is a plain Event,
+     * bubbles and is not cancelable.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"click true PointerEvent true true", "input true Event true false", "change true Event true false"})
+    public void clickByUserCheckbox() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var c = document.getElementById('c');\n"
+            + "    var handler = function(e) {\n"
+            + "      log(e.type + ' ' + e.isTrusted + ' ' + e.constructor.name\n"
+            + "          + ' ' + e.bubbles + ' ' + e.cancelable);\n"
+            + "    };\n"
+            + "    c.addEventListener('click', handler);\n"
+            + "    c.addEventListener('input', handler);\n"
+            + "    c.addEventListener('change', handler);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'><input type='checkbox' id='c'></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("c")).click();
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**

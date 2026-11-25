@@ -9,6 +9,9 @@
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Clicking a checkbox or radio button fires the input event before the change event like in the browsers.
+            </action>
+            <action type="fix" dev="rbri">
                 The connection to a SOCKS proxy was not closed if the connect or the SSL setup of an https request
                 failed.
             </action>
