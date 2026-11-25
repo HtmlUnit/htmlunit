@@ -66,6 +66,7 @@ public class PointerEvent extends MouseEvent {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
+    @SuppressWarnings("PMD.UseUnderscoresInNumericLiterals") // the angles are the values of the browsers
     public static Scriptable jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         final PointerEvent event = new PointerEvent();
@@ -233,7 +234,6 @@ public class PointerEvent extends MouseEvent {
      * @return the pointer altitude angle
      */
     @JsxGetter
-    @SuppressWarnings("PMD.UseUnderscoresInNumericLiterals")
     public double getAltitudeAngle() {
         return altitudeAngle_;
     }

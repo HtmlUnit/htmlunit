@@ -850,7 +850,6 @@ public class CssStyleSheet implements Serializable {
         return false;
     }
 
-    @SuppressWarnings("PMD.UselessParentheses")
     private static boolean selectsPseudoClass(
             final BrowserVersion browserVersion,
             final DomElement element,

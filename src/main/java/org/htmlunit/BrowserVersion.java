@@ -1014,7 +1014,6 @@ public final class BrowserVersion implements Serializable {
      * Because BrowserVersion is immutable we need a builder
      * for this complex object setup.
      */
-    @SuppressWarnings("PMD.LinguisticNaming")
     public static class BrowserVersionBuilder {
         private final BrowserVersion workPiece_;
 
