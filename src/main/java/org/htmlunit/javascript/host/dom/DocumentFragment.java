@@ -133,7 +133,7 @@ public class DocumentFragment extends Node {
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
+                    + selectors + "' error: " + e.getMessage() + ").", e);
         }
     }
 
@@ -154,7 +154,7 @@ public class DocumentFragment extends Node {
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
+                    + selectors + "' error: " + e.getMessage() + ").", e);
         }
     }
 

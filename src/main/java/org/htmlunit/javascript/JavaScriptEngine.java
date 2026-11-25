@@ -1296,10 +1296,32 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * Report a runtime error using the error reporter for the current thread.
      *
      * @param message the error message to report
+     * @param cause the Java exception that caused the error (kept as cause for debugging)
+     * @return RuntimeException as dummy the method always throws
+     */
+    public static RuntimeException reportRuntimeError(final String message, final Throwable cause) {
+        throw withCause(Context.reportRuntimeError(message), cause);
+    }
+
+    /**
+     * Report a runtime error using the error reporter for the current thread.
+     *
+     * @param message the error message to report
      * @return EcmaError
      */
     public static EcmaError syntaxError(final String message) {
         return ScriptRuntime.syntaxError(message);
+    }
+
+    /**
+     * Creates a SyntaxError.
+     *
+     * @param message the error message to report
+     * @param cause the Java exception that caused the error (kept as cause for debugging)
+     * @return EcmaError
+     */
+    public static EcmaError syntaxError(final String message, final Throwable cause) {
+        return withCause(ScriptRuntime.syntaxError(message), cause);
     }
 
     /**
@@ -1310,6 +1332,17 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static EcmaError typeError(final String message) {
         return ScriptRuntime.typeError(message);
+    }
+
+    /**
+     * Creates a TypeError.
+     *
+     * @param message the error message to report
+     * @param cause the Java exception that caused the error (kept as cause for debugging)
+     * @return EcmaError
+     */
+    public static EcmaError typeError(final String message, final Throwable cause) {
+        return withCause(ScriptRuntime.typeError(message), cause);
     }
 
     /**
@@ -1357,6 +1390,33 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Creates a RangeError.
+     *
+     * @param message the error message to report
+     * @param cause the Java exception that caused the error (kept as cause for debugging)
+     * @return EcmaError
+     */
+    public static EcmaError rangeError(final String message, final Throwable cause) {
+        return withCause(ScriptRuntime.rangeError(message), cause);
+    }
+
+    /**
+     * Sets the cause of the given exception (if not already set); the script does not see the cause,
+     * but the Java stack trace shows the original problem.
+     *
+     * @param <T> the exception type
+     * @param exception the exception
+     * @param cause the cause
+     * @return the exception
+     */
+    private static <T extends Throwable> T withCause(final T exception, final Throwable cause) {
+        if (cause != null && exception.getCause() == null) {
+            exception.initCause(cause);
+        }
+        return exception;
+    }
+
+    /**
      * Constructs a new ECMAScript error.
      *
      * @param error the error type
@@ -1397,6 +1457,22 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         domException.setLocation(fileName, helper.lineNumber());
 
         return new JavaScriptException(domException, fileName, helper.lineNumber());
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Creates a {@link DOMException} and encapsulates it into a Rhino-compatible exception.
+     *
+     * @param scriptable the scriptable triggering this
+     * @param message the exception message
+     * @param type the exception type
+     * @param cause the Java exception that caused the error (kept as cause for debugging)
+     * @return the created exception
+     */
+    public static RhinoException asJavaScriptException(final HtmlUnitScriptable scriptable, final String message,
+            final int type, final Throwable cause) {
+        return withCause(asJavaScriptException(scriptable, message, type), cause);
     }
 
     /**

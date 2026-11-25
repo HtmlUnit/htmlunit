@@ -330,7 +330,7 @@ public abstract class AbstractJavaScriptConfiguration {
                                 throw JavaScriptEngine.reportRuntimeError(
                                         "Cannot get field '" + field.getName()
                                         + "' for type: " + classConfiguration.getHostClass().getName()
-                                        + "reason: " + e.getMessage());
+                                        + "reason: " + e.getMessage(), e);
                             }
                         }
                     }

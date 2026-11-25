@@ -286,7 +286,7 @@ public class Node extends EventTarget {
             parentNode.appendChild(childDomNode);
         }
         catch (final org.w3c.dom.DOMException e) {
-            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code);
+            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code, e);
         }
 
         initInlineFrameIfNeeded(childDomNode);
@@ -409,7 +409,7 @@ public class Node extends EventTarget {
             domNode.insertBefore(newChildNode, refChildNode);
         }
         catch (final org.w3c.dom.DOMException e) {
-            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), DOMException.NOT_FOUND_ERR);
+            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), DOMException.NOT_FOUND_ERR, e);
         }
         return newChild;
     }
@@ -558,7 +558,7 @@ public class Node extends EventTarget {
             throw JavaScriptEngine.asJavaScriptException(
                     node.getWindow(),
                     "Failed to execute 'moveBefore' on '" + interfaceName + "': " + e.getMessage(),
-                    e.code);
+                    e.code, e);
         }
     }
 

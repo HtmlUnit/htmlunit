@@ -88,7 +88,7 @@ public class XMLDocument extends Document {
                 setDomNode(page);
             }
             catch (final IOException e) {
-                throw JavaScriptEngine.reportRuntimeError("IOException: " + e);
+                throw JavaScriptEngine.reportRuntimeError("IOException: " + e, e);
             }
         }
     }

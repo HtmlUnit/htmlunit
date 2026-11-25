@@ -116,7 +116,7 @@ public class Locale extends HtmlUnitScriptable {
                     .build();
         }
         catch (final IllformedLocaleException e) {
-            throw JavaScriptEngine.rangeError("Invalid language tag: " + languageTag);
+            throw JavaScriptEngine.rangeError("Invalid language tag: " + languageTag, e);
         }
 
         // Override by options if present
@@ -175,7 +175,7 @@ public class Locale extends HtmlUnitScriptable {
             }
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.rangeError("Invalid value for option \"" + optionName + "\"");
+            throw JavaScriptEngine.rangeError("Invalid value for option \"" + optionName + "\"", e);
         }
     }
 
@@ -191,7 +191,7 @@ public class Locale extends HtmlUnitScriptable {
             s = JavaScriptEngine.toString(value);
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.rangeError("Invalid value for option \"" + optionName + "\"");
+            throw JavaScriptEngine.rangeError("Invalid value for option \"" + optionName + "\"", e);
         }
         if (allowedValues != null && !allowedValues.contains(s)) {
             throw JavaScriptEngine.rangeError("Invalid value for option \"" + optionName + "\"");

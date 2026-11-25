@@ -2185,7 +2185,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                             sender,
                             "Failed to execute 'postMessage' on 'Window': Invalid target origin '"
                                     + targetOrigin + "' was specified (reason: " + e.getMessage() + ".",
-                            DOMException.SYNTAX_ERR);
+                            DOMException.SYNTAX_ERR, e);
                 }
             }
 

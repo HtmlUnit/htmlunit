@@ -114,14 +114,16 @@ public class CSSGroupingRule extends CSSRule {
                     return positionInt;
                 }
                 catch (final DOMException ex) {
+                    // keep the original problem
+                    ex.addSuppressed(e);
                     throw JavaScriptEngine.asJavaScriptException(
-                            getWindow(), ex.getMessage(), ex.code);
+                            getWindow(), ex.getMessage(), ex.code, ex);
                 }
             }
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
                     e.getMessage(),
-                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR);
+                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR, e);
         }
     }
 
@@ -137,7 +139,7 @@ public class CSSGroupingRule extends CSSRule {
             refreshCssRules();
         }
         catch (final DOMException e) {
-            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code);
+            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code, e);
         }
     }
 

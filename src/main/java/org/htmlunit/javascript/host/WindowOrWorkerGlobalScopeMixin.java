@@ -72,7 +72,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
             throw JavaScriptEngine.asJavaScriptException(
                     scriptable,
                     "Failed to execute atob(): " + e.getMessage(),
-                    org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
+                    org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR, e);
         }
     }
 
@@ -102,7 +102,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
             throw JavaScriptEngine.asJavaScriptException(
                     scriptable,
                     "Failed to execute btoa(): " + e.getMessage(),
-                    org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
+                    org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR, e);
         }
     }
 

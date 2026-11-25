@@ -248,7 +248,7 @@ final class FetchBody implements Serializable {
                             .parseValue(decodeUtf8(bytes));
                 }
                 catch (final JsonParser.ParseException e) {
-                    throw JavaScriptEngine.syntaxError("Unexpected token in JSON: " + e.getMessage());
+                    throw JavaScriptEngine.syntaxError("Unexpected token in JSON: " + e.getMessage(), e);
                 }
 
             case ARRAY_BUFFER:

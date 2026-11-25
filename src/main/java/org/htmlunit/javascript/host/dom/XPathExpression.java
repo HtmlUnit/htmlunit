@@ -122,7 +122,7 @@ public class XPathExpression extends HtmlUnitScriptable {
             return xPathResult;
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.reportRuntimeError("Failed to execute 'evaluate': " + e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError("Failed to execute 'evaluate': " + e.getMessage(), e);
         }
     }
 }

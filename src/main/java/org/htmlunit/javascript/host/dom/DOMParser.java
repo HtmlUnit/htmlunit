@@ -72,7 +72,7 @@ public class DOMParser extends HtmlUnitScriptable {
             return document;
         }
         catch (final IOException e) {
-            throw JavaScriptEngine.syntaxError("Parsing failed" + e.getMessage());
+            throw JavaScriptEngine.syntaxError("Parsing failed" + e.getMessage(), e);
         }
     }
 

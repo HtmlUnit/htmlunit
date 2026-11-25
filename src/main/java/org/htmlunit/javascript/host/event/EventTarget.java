@@ -309,7 +309,7 @@ public class EventTarget extends HtmlUnitScriptable {
                 element.click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
             }
             catch (final IOException e) {
-                throw JavaScriptEngine.reportRuntimeError("Error calling click(): " + e.getMessage());
+                throw JavaScriptEngine.reportRuntimeError("Error calling click(): " + e.getMessage(), e);
             }
         }
         else {

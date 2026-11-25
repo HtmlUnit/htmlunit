@@ -273,7 +273,7 @@ public class Range extends AbstractRange {
         catch (final Exception e) {
             LogFactory.getLog(Range.class).error("Unexpected exception occurred in createContextualFragment", e);
             throw JavaScriptEngine.reportRuntimeError("Unexpected exception occurred in createContextualFragment: "
-                    + e.getMessage());
+                    + e.getMessage(), e);
         }
 
         return fragment.getScriptableObject();
@@ -289,7 +289,7 @@ public class Range extends AbstractRange {
             return getSimpleRange().extractContents().getScriptableObject();
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage(), e);
         }
     }
 
@@ -359,7 +359,7 @@ public class Range extends AbstractRange {
             return getSimpleRange().cloneContents().getScriptableObject();
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage(), e);
         }
     }
 
@@ -372,7 +372,7 @@ public class Range extends AbstractRange {
             getSimpleRange().deleteContents();
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage(), e);
         }
     }
 
@@ -387,7 +387,7 @@ public class Range extends AbstractRange {
             getSimpleRange().insertNode(newNode.getDomNodeOrDie());
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage(), e);
         }
     }
 
@@ -401,7 +401,7 @@ public class Range extends AbstractRange {
             getSimpleRange().surroundContents(newNode.getDomNodeOrDie());
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage(), e);
         }
     }
 
@@ -415,7 +415,7 @@ public class Range extends AbstractRange {
             return new Range(getSimpleRange().cloneRange());
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage(), e);
         }
     }
 
@@ -437,7 +437,7 @@ public class Range extends AbstractRange {
             return getSimpleRange().toString();
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage(), e);
         }
     }
 
@@ -473,7 +473,7 @@ public class Range extends AbstractRange {
             return rectList;
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage(), e);
         }
     }
 
@@ -512,7 +512,7 @@ public class Range extends AbstractRange {
             return rect;
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage(), e);
         }
     }
 

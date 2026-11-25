@@ -247,7 +247,7 @@ public class XSLTProcessor extends HtmlUnitScriptable {
             throw e;
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.reportRuntimeError("Exception: " + e);
+            throw JavaScriptEngine.reportRuntimeError("Exception: " + e, e);
         }
     }
 

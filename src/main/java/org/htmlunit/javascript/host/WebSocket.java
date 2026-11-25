@@ -217,7 +217,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             // nothing was handed out yet, so nobody else will release the client
             releaseClient();
 
-            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: connecting to '" + url + "' failed.");
+            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: connecting to '" + url + "' failed.", e);
         }
 
         page.addAutoCloseable(this);
@@ -304,7 +304,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             throw JavaScriptEngine.asJavaScriptException(
                     win,
                     "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.",
-                    DOMException.SYNTAX_ERR);
+                    DOMException.SYNTAX_ERR, e);
         }
 
         final URI uri;
@@ -314,7 +314,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         catch (final URISyntaxException e) {
             throw JavaScriptEngine.asJavaScriptException(win,
                     "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.",
-                    DOMException.SYNTAX_ERR);
+                    DOMException.SYNTAX_ERR, e);
         }
 
         final List<String> protocols = toProtocols(cx, scope, args.length > 1 ? args[1] : JavaScriptEngine.UNDEFINED);

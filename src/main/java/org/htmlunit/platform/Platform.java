@@ -93,6 +93,7 @@ public final class Platform {
      *         or a {@link NoOpImageData} if image processing is unavailable
      * @throws IOException if an I/O error occurs while reading the image data
      */
+    @SuppressWarnings("PMD.PreserveStackTrace") // the IOException of the reader is rethrown unwrapped
     public static ImageData buildImageData(final InputStream inputStream) throws IOException {
         try {
             final Class<?> backendClass = Class.forName(
@@ -102,6 +103,7 @@ public final class Platform {
         catch (final InvocationTargetException ex) {
             final Throwable targetEx = ex.getTargetException();
             if (targetEx instanceof IOException exception) {
+                // unwrap the IOException of the image reader
                 throw exception;
             }
 

@@ -322,7 +322,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
             return page.getScriptableObject();
         }
         catch (final IOException e) {
-            throw JavaScriptEngine.reportRuntimeError("Parsing failed" + e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError("Parsing failed" + e.getMessage(), e);
         }
     }
 }

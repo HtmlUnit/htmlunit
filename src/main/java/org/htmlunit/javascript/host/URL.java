@@ -85,7 +85,7 @@ public class URL extends HtmlUnitScriptable {
             }
         }
         catch (final MalformedURLException e) {
-            throw JavaScriptEngine.typeError(e.toString());
+            throw JavaScriptEngine.typeError(e.toString(), e);
         }
     }
 

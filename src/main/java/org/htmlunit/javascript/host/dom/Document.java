@@ -309,7 +309,7 @@ public class Document extends Node {
             return DOMParser.parseHtmlDocument(win.getDocument(), webResponse, webWindow);
         }
         catch (final IOException e) {
-            throw JavaScriptEngine.syntaxError("Parsing failed" + e.getMessage());
+            throw JavaScriptEngine.syntaxError("Parsing failed" + e.getMessage(), e);
         }
     }
 
@@ -619,7 +619,7 @@ public class Document extends Node {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
                     "Failed to execute 'evaluate': " + e.getMessage(),
-                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR);
+                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR, e);
         }
     }
 
@@ -1028,7 +1028,7 @@ public class Document extends Node {
                     getWindow(),
                     "An invalid or illegal selector was specified (selector: '"
                             + selectors + "' error: " + e.getMessage() + ").",
-                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR);
+                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR, e);
         }
     }
 
@@ -1052,7 +1052,7 @@ public class Document extends Node {
                     getWindow(),
                     "An invalid or illegal selector was specified (selector: '"
                             + selectors + "' error: " + e.getMessage() + ").",
-                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR);
+                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR, e);
         }
     }
 
@@ -1308,7 +1308,7 @@ public class Document extends Node {
         catch (final InstantiationException | IllegalAccessException
                 | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
             throw JavaScriptEngine.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
-                            + "' for event type of '" + eventType + "': " + e.getMessage());
+                            + "' for event type of '" + eventType + "': " + e.getMessage(), e);
         }
     }
 

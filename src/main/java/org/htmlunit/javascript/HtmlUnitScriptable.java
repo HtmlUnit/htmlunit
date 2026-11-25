@@ -104,7 +104,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         catch (final IllegalArgumentException e) {
             // is it the right place or should Rhino throw a RuntimeError instead of an IllegalArgumentException?
             throw JavaScriptEngine.typeError("'set "
-                + name + "' called on an object that does not implement interface " + getClassName());
+                + name + "' called on an object that does not implement interface " + getClassName(), e);
         }
     }
 
@@ -506,7 +506,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
             return (HtmlUnitScriptable) super.clone();
         }
         catch (final Exception e) {
-            throw new IllegalStateException("Clone not supported");
+            throw new IllegalStateException("Clone not supported", e);
         }
     }
 

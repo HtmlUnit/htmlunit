@@ -182,7 +182,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
             url_.setSearch(resolveParams(params));
         }
         catch (final EcmaError e) {
-            throw JavaScriptEngine.typeError("Failed to construct 'URLSearchParams': " + e.getErrorMessage());
+            throw JavaScriptEngine.typeError("Failed to construct 'URLSearchParams': " + e.getErrorMessage(), e);
         }
         catch (final MalformedURLException e) {
             LOG.error(e.getMessage(), e);

@@ -106,7 +106,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
             return xPathResult;
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.typeError("Failed to execute 'evaluate': " + e.getMessage());
+            throw JavaScriptEngine.typeError("Failed to execute 'evaluate': " + e.getMessage(), e);
         }
     }
 
@@ -152,7 +152,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
         }
         catch (final Exception e) {
             throw JavaScriptEngine.syntaxError(
-                    "Failed to compile xpath '" + args[0] + "' (" + e.getMessage() + ")");
+                    "Failed to compile xpath '" + args[0] + "' (" + e.getMessage() + ")", e);
         }
     }
 }

@@ -553,7 +553,7 @@ public class Element extends Node {
                     getWindow(),
                     "An invalid or illegal selector was specified (selector: '"
                             + selectors + "' error: " + e.getMessage() + ").",
-                    DOMException.SYNTAX_ERR);
+                    DOMException.SYNTAX_ERR, e);
         }
     }
 
@@ -579,7 +579,7 @@ public class Element extends Node {
                     getWindow(),
                     "An invalid or illegal selector was specified (selector: '"
                             + selectors + "' error: " + e.getMessage() + ").",
-                    DOMException.SYNTAX_ERR);
+                    DOMException.SYNTAX_ERR, e);
         }
     }
 
@@ -917,7 +917,7 @@ public class Element extends Node {
         catch (final IOException | SAXException e) {
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
             throw JavaScriptEngine.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
-                    + e.getMessage());
+                    + e.getMessage(), e);
         }
     }
 
@@ -947,7 +947,7 @@ public class Element extends Node {
             return getInnerHTML(domNode);
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.typeError(e.getMessage());
+            throw JavaScriptEngine.typeError(e.getMessage(), e);
         }
     }
 
@@ -963,7 +963,7 @@ public class Element extends Node {
             domNode = getDomNodeOrDie();
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.typeError(e.getMessage());
+            throw JavaScriptEngine.typeError(e.getMessage(), e);
         }
 
         String html = null;
@@ -980,7 +980,7 @@ public class Element extends Node {
         catch (final IOException | SAXException e) {
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
             throw JavaScriptEngine.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
-                    + e.getMessage());
+                    + e.getMessage(), e);
         }
     }
 
@@ -1788,7 +1788,7 @@ public class Element extends Node {
                     (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
                     "An invalid or illegal selector was specified (selector: '"
                             + selectorString + "' error: " + e.getMessage() + ").",
-                    DOMException.SYNTAX_ERR);
+                    DOMException.SYNTAX_ERR, e);
         }
     }
 
@@ -1858,7 +1858,7 @@ public class Element extends Node {
         catch (final CSSException e) {
             throw JavaScriptEngine.syntaxError(
                     "An invalid or illegal selector was specified (selector: '"
-                    + selectorString + "' error: " + e.getMessage() + ").");
+                    + selectorString + "' error: " + e.getMessage() + ").", e);
         }
     }
 

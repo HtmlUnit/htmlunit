@@ -398,7 +398,7 @@ public class Request extends HtmlUnitScriptable {
             return UrlUtils.toUrlUnsafe(url);
         }
         catch (final MalformedURLException e) {
-            throw JavaScriptEngine.typeError(errorPrefix + "Failed to parse URL from " + url);
+            throw JavaScriptEngine.typeError(errorPrefix + "Failed to parse URL from " + url, e);
         }
     }
 

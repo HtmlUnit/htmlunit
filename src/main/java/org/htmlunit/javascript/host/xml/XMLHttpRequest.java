@@ -759,7 +759,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
                         e.getMessage(),
-                        DOMException.SYNTAX_ERR);
+                        DOMException.SYNTAX_ERR, e);
             }
 
             final String methodUC = method.toUpperCase(Locale.ROOT);
@@ -1141,7 +1141,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
 
                 throw JavaScriptEngine.asJavaScriptException(window,
-                        e.getMessage(), DOMException.NETWORK_ERR);
+                        e.getMessage(), DOMException.NETWORK_ERR, e);
             }
         }
     }

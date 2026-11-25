@@ -185,7 +185,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         catch (final IllegalArgumentException e) {
             throw JavaScriptEngine.asJavaScriptException(this,
                     "Failed to parse '" + transformList + "': " + e.getMessage(),
-                    DOMException.SYNTAX_ERR);
+                    DOMException.SYNTAX_ERR, e);
         }
     }
 
