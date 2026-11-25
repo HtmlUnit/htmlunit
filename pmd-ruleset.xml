@@ -75,7 +75,13 @@
         <exclude name="MissingSerialVersionUID"/>
     </rule>
 
-    <rule ref="category/java/multithreading.xml" />
+    <!-- AvoidSynchronizedStatement, AvoidUsingVolatile and DoNotUseThreads contradict the
+         thread-safety fixes requested by SpotBugs (volatile fields, synchronized blocks) -->
+    <rule ref="category/java/multithreading.xml">
+        <exclude name="AvoidSynchronizedStatement"/>
+        <exclude name="AvoidUsingVolatile"/>
+        <exclude name="DoNotUseThreads"/>
+    </rule>
 
     <rule ref="category/java/performance.xml">
         <!-- todo reenable this and check -->
