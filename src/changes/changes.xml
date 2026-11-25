@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                An exception thrown by a queueMicrotask() callback is reported like in the browsers (window.onerror,
+                error event, JavaScriptErrorListener) instead of being ignored; the remaining microtasks still run.
+                Because of that, the exception is not thrown even if throwExceptionOnScriptError is enabled.
+            </action>
             <action type="add" dev="rbri">
                 Property Event.isTrusted: events fired by HtmlUnit are trusted, events created by a script (constructors,
                 document.createEvent()) and events dispatched by a script (dispatchEvent()) are not.

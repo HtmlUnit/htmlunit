@@ -18,6 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
@@ -25,7 +27,10 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.corejs.javascript.WithScope;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -41,6 +46,8 @@ import org.htmlunit.util.StringUtils;
  * @author Lai Quang Duong
  */
 public final class WindowOrWorkerGlobalScopeMixin {
+
+    private static final Log LOG = LogFactory.getLog(WindowOrWorkerGlobalScopeMixin.class);
 
     /**
      * The minimum delay that can be used with {@code setInterval()} or {@code setTimeout()}.
@@ -181,11 +188,36 @@ public final class WindowOrWorkerGlobalScopeMixin {
                 callback.call(cx, scope, thisObj, JavaScriptEngine.EMPTY_ARGS);
             }
             catch (final Exception e) {
-                // uncaught exception in a microtask must not prevent remaining microtasks from running.
+                // an uncaught exception in a microtask is reported (window.onerror, JavaScriptErrorListener)
+                // and must not prevent the remaining microtasks from running
+                reportUncaughtException(scope, e);
             }
         });
 
         return JavaScriptEngine.UNDEFINED;
+    }
+
+    private static void reportUncaughtException(final VarScope scope, final Exception e) {
+        Scriptable scriptableObj = null;
+        if (scope instanceof TopLevel topLevel) {
+            scriptableObj = topLevel.getGlobalThis();
+        }
+        else if (scope instanceof WithScope withScope) {
+            scriptableObj = withScope.getObject();
+        }
+
+        if (scriptableObj instanceof Window window) {
+            final WebWindow webWindow = window.getWebWindow();
+            if (webWindow != null
+                    && webWindow.getEnclosedPage() instanceof HtmlPage page
+                    && webWindow.getWebClient().getJavaScriptEngine() instanceof JavaScriptEngine engine) {
+                engine.reportUncaughtException(page, e);
+                return;
+            }
+        }
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Uncaught exception in a microtask", e);
+        }
     }
 
     private static int setTimeoutIntervalImpl(final Window window, final Object code,

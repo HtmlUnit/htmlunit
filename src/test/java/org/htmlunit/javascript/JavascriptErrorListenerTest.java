@@ -124,6 +124,32 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
     }
 
     /**
+     * An exception of a microtask is reported to the listener and does not stop the remaining microtasks.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void listenForMicrotaskException() throws Exception {
+        final WebClient webClient = getWebClient();
+        final CollectingJavaScriptErrorListener javaScriptErrorListener = new CollectingJavaScriptErrorListener();
+        webClient.setJavaScriptErrorListener(javaScriptErrorListener);
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Microtask</title>"
+            + "<script>\n"
+            + "  queueMicrotask(function() { throw new Error('boom'); });\n"
+            + "  queueMicrotask(function() { document.title = 'done'; });\n"
+            + "</script></head>"
+            + "<body></body></html>";
+
+        // throwExceptionOnScriptError is enabled; the exception of a microtask is reported only
+        final HtmlPage page = loadPage(html);
+
+        assertEquals("done", page.getTitleText());
+        assertTrue(javaScriptErrorListener.getScriptExceptions(),
+                javaScriptErrorListener.getScriptExceptions().contains("boom"));
+    }
+
+    /**
      * Listener should capture script exception.
      * @throws Exception if the test fails
      */

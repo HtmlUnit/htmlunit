@@ -3567,6 +3567,58 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * An exception thrown by a microtask is reported (window.onerror) and does not
+     * prevent the remaining microtasks from running.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void queueMicrotaskErrorOnError() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  window.onerror = function(msg, src, line, col, error) {\n"
+            + "    log('onerror ' + (error ? error.message : ''));\n"
+            + "    return true;\n"
+            + "  };\n"
+            + "  queueMicrotask(function() { throw new Error('boom'); });\n"
+            + "  queueMicrotask(function() { log('second'); });\n"
+            + "  log('sync');\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(Duration.ofSeconds(1), driver, getExpectedAlerts());
+    }
+
+    /**
+     * An exception thrown by a microtask fires the error event of the window.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error boom", "second"})
+    @HtmlUnitNYI(CHROME = "second",
+            EDGE = "second",
+            FF = "second",
+            FF_ESR = "second")
+    public void queueMicrotaskErrorEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  window.addEventListener('error', function(e) {\n"
+            + "    log('error ' + (e.error ? e.error.message : ''));\n"
+            + "    e.preventDefault();\n"
+            + "  });\n"
+            + "  queueMicrotask(function() { throw new Error('boom'); });\n"
+            + "  queueMicrotask(function() { log('second'); });\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(Duration.ofSeconds(1), driver, getExpectedAlerts());
+    }
+
+    /**
      * The serialized origin of the document of the window.
      * @throws Exception if the test fails
      */

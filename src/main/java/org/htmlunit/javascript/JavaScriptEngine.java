@@ -1119,6 +1119,28 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Reports an exception of a script that has no caller to propagate to, e.g. an exception
+     * thrown by a {@code queueMicrotask()} callback: like the browsers this triggers the onerror
+     * handler of the window and informs the {@link JavaScriptErrorListener}.
+     * The exception is never thrown from here (also not if
+     * {@link org.htmlunit.WebClientOptions#setThrowExceptionOnScriptError(boolean)} is enabled),
+     * because the remaining tasks have to run.
+     *
+     * @param page the page the script belongs to
+     * @param exception the exception
+     */
+    public void reportUncaughtException(final HtmlPage page, final Exception exception) {
+        try {
+            handleJavaScriptException(new ScriptException(page, exception), true);
+        }
+        catch (final ScriptException ignored) {
+            // already reported; throwExceptionOnScriptError can not be honored here
+        }
+    }
+
+    /**
      * Handles an exception that occurred during execution of JavaScript code.
      * @param scriptException the exception
      * @param triggerOnError if true, this triggers the onerror handler
