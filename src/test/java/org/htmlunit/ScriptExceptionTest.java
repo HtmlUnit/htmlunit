@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.PrintWriter;
@@ -53,12 +54,8 @@ public final class ScriptExceptionTest extends SimpleWebTestCase {
     @Test
     public void getPage() throws Exception {
         final String html = DOCTYPE_HTML + "<html><script>notExisting()</script></html>";
-        try {
-            loadPage(html);
-        }
-        catch (final ScriptException e) {
-            assertEquals(URL_FIRST, e.getPage().getUrl());
-        }
+        final ScriptException e = assertThrows(ScriptException.class, () -> loadPage(html));
+        assertEquals(URL_FIRST, e.getPage().getUrl());
     }
 
     /**
