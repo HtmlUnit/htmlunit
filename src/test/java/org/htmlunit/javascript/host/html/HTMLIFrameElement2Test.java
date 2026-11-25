@@ -1150,4 +1150,30 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_SECOND);
         verifyTextArea2(driver, getExpectedAlerts());
     }
+
+    /**
+     * A load event created by a script and dispatched to an iframe whose onload handler was
+     * set while the iframe was attached to the page.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onload", "done"})
+    public void dispatchLoadEventOnloadSetWhileAttached() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myFrame = document.getElementById('myFrame');\n"
+            + "    myFrame.onload = function() { log('onload'); };\n"
+            + "    myFrame.dispatchEvent(new Event('load'));\n"
+            + "    log('done');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe id='myFrame'></iframe>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
