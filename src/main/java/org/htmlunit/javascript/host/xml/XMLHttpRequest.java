@@ -418,7 +418,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
                 catch (final ParseException e) {
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug("XMLHttpRequest json parsing faild (" + e.getMessage() + ")");
+                        LOG.debug("XMLHttpRequest json parsing faild (" + e.getMessage() + ")", e);
                     }
                     return null;
                 }
