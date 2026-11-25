@@ -26,6 +26,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -204,6 +205,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return the language
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getLanguage() {
         return language_ != null ? language_ : JavaScriptEngine.UNDEFINED;
     }
@@ -213,6 +215,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return the script
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getScript() {
         return script_ != null ? script_ : JavaScriptEngine.UNDEFINED;
     }
@@ -222,6 +225,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return the region
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getRegion() {
         return region_ != null ? region_ : JavaScriptEngine.UNDEFINED;
     }
@@ -231,6 +235,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return the calendar type
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getCalendar() {
         return calendar_ != null ? calendar_ : JavaScriptEngine.UNDEFINED;
     }
@@ -240,6 +245,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return the collation type
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getCollation() {
         return collation_ != null ? collation_ : JavaScriptEngine.UNDEFINED;
     }
@@ -249,6 +255,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return the numbering system
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getNumberingSystem() {
         return numberingSystem_ != null ? numberingSystem_ : JavaScriptEngine.UNDEFINED;
     }
@@ -258,6 +265,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return the case first setting
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getCaseFirst() {
         return caseFirst_ != null ? caseFirst_ : JavaScriptEngine.UNDEFINED;
     }
@@ -267,6 +275,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return the hour cycle
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getHourCycle() {
         return hourCycle_ != null ? hourCycle_ : JavaScriptEngine.UNDEFINED;
     }
@@ -285,6 +294,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return the base name (without Unicode extensions)
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getBaseName() {
         final String variant = locale_.getVariant().replace("_", "-");
         return language_

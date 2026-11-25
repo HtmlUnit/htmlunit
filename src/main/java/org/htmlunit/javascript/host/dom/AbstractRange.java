@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.dom;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -154,6 +155,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      * @return <code>undefined</code> if not initialized
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getStartContainer() {
         if (startContainer_ == null) {
             return JavaScriptEngine.UNDEFINED;
@@ -166,6 +168,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      * @return <code>undefined</code> if not initialized
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getEndContainer() {
         if (endContainer_ == null) {
             return JavaScriptEngine.UNDEFINED;

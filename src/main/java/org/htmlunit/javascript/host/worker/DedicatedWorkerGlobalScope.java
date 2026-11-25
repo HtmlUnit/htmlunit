@@ -50,6 +50,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BasicJavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -208,6 +209,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
      * @return this scope
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getSelf() {
         return this;
     }
@@ -486,6 +488,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
      * @return the id of the created timer
      */
     @JsxFunction
+    @JsxAnyReturnType
     public static Object setTimeout(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setTimeout(context,
@@ -505,6 +508,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
      * @return the id of the created interval
      */
     @JsxFunction
+    @JsxAnyReturnType
     public static Object setInterval(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setInterval(context,

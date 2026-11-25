@@ -19,6 +19,7 @@ import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -154,6 +155,7 @@ public class MessageEvent extends Event {
      * @return the data contained
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getData() {
         return data_;
     }
@@ -198,6 +200,7 @@ public class MessageEvent extends Event {
      * @return the {@code ports} property
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getPorts() {
         return ports_;
     }

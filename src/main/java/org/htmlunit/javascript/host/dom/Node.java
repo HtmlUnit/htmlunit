@@ -34,6 +34,7 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -764,6 +765,7 @@ public class Node extends EventTarget {
      * @return the parent node
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getParentNode() {
         return getJavaScriptNode(getDomNodeOrDie().getParentNode());
     }

@@ -28,6 +28,7 @@ import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -107,6 +108,7 @@ public class V8BreakIterator extends HtmlUnitScriptable {
      * @return the options
      */
     @JsxFunction
+    @JsxAnyReturnType
     public Object resolvedOptions() {
         return Context.getCurrentContext().evaluateString(getParentScope(),
                 "var x = {locale: 'en-US'}; x", "", -1, null);

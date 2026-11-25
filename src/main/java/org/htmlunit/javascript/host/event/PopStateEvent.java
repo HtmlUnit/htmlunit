@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.event;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -70,6 +71,7 @@ public class PopStateEvent extends Event {
      * @return the state object
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getState() {
         return state_;
     }

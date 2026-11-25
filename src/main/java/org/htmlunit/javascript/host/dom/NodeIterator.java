@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.dom;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomNodeIterator;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -95,6 +96,7 @@ public class NodeIterator extends HtmlUnitScriptable {
      * @return the filter
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getFilter() {
         //TODO: we should return the original filter
         return iterator_.getFilter();

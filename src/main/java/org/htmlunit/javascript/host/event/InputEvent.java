@@ -19,6 +19,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_INPUT_CTOR_INPUTTYPE;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -119,6 +120,7 @@ public class InputEvent extends UIEvent {
      * @return the data
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getData() {
         return data_;
     }
@@ -129,6 +131,7 @@ public class InputEvent extends UIEvent {
      * @return the input type
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getInputType() {
         return inputType_;
     }

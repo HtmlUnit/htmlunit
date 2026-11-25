@@ -84,6 +84,7 @@ import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -446,6 +447,7 @@ public class Document extends Node {
      * @return the window
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getDefaultView() {
         return getWindow();
     }
@@ -800,6 +802,7 @@ public class Document extends Node {
      * @return the value of the {@code activeElement} property
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getActiveElement() {
         return null;
     }
@@ -2010,6 +2013,7 @@ public class Document extends Node {
      * @return this document's {@code head} element
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getHead() {
         return null;
     }

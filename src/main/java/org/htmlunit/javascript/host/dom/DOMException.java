@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -283,6 +284,7 @@ public class DOMException extends HtmlUnitScriptable {
      * @return the exception code
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getCode() {
         if (code_ == -1) {
             return JavaScriptEngine.UNDEFINED;
@@ -304,6 +306,7 @@ public class DOMException extends HtmlUnitScriptable {
      * @return the exception message
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getMessage() {
         if (message_ == null) {
             return JavaScriptEngine.UNDEFINED;
@@ -316,6 +319,7 @@ public class DOMException extends HtmlUnitScriptable {
      * @return the line of the exception
      */
     @JsxGetter({FF, FF_ESR})
+    @JsxAnyReturnType
     public Object getLineNumber() {
         if (lineNumber_ == -1) {
             return JavaScriptEngine.UNDEFINED;
@@ -328,6 +332,7 @@ public class DOMException extends HtmlUnitScriptable {
      * @return the name of the source file
      */
     @JsxGetter({FF, FF_ESR})
+    @JsxAnyReturnType
     public Object getFilename() {
         if (fileName_ == null) {
             return JavaScriptEngine.UNDEFINED;

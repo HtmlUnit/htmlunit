@@ -32,6 +32,7 @@ import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -209,6 +210,7 @@ public class FormData extends HtmlUnitScriptable {
      * @return the first value found (a string or a {@link File}), or {@code null} if not found
      */
     @JsxFunction
+    @JsxAnyReturnType
     public Object get(final String name) {
         if (StringUtils.isEmptyOrNull(name)) {
             return null;

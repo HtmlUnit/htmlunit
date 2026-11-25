@@ -94,6 +94,7 @@ import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -391,6 +392,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the current event, or {@code null} if no event is currently available
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getEvent() {
         if (currentEvent_ == null) {
             return JavaScriptEngine.UNDEFINED;
@@ -552,6 +554,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the id of the created timer
      */
     @JsxFunction
+    @JsxAnyReturnType
     public static Object setTimeout(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setTimeout(context, thisObj, args, function);
@@ -570,6 +573,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return undefined
      */
     @JsxFunction
+    @JsxAnyReturnType
     public static Object queueMicrotask(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.queueMicrotask(thisObj, args);
@@ -588,6 +592,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the id of the created interval
      */
     @JsxFunction
+    @JsxAnyReturnType
     public static Object setInterval(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setInterval(context, thisObj, args, function);
@@ -673,6 +678,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the client information
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getClientInformation() {
         if (clientInformation_ != null) {
             return clientInformation_;
@@ -690,6 +696,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      *     - window.origin</a>
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getOrigin() {
         if (originShadow_ != null) {
             return originShadow_;
@@ -1025,6 +1032,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the value of {@code top}
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getTop() {
         final WebWindow top = getWebWindow().getTopWindow();
         return top.getScriptableObject();
@@ -1035,6 +1043,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the value of the {@code opener}, or {@code null} for a top level window
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getOpener() {
         Object opener = opener_;
         if (opener instanceof Window window) {
@@ -1070,6 +1079,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the number of frames contained by this window
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getLength() {
         return JavaScriptEngine.UNDEFINED;
     }
@@ -1105,6 +1115,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return this
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getSelf() {
         return JavaScriptEngine.UNDEFINED;
     }
@@ -1136,6 +1147,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the value of the {@code parent} property
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getParent() {
         return JavaScriptEngine.UNDEFINED;
     }
@@ -1168,6 +1180,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the value of the {@code frames} property
      */
     @JsxGetter(propertyName = "frames")
+    @JsxAnyReturnType
     public Object getFrames_js() {
         return JavaScriptEngine.UNDEFINED;
     }
@@ -1972,6 +1985,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return some object
      */
     @JsxGetter({FF, FF_ESR})
+    @JsxAnyReturnType
     public Object getControllers() {
         return controllers_;
     }

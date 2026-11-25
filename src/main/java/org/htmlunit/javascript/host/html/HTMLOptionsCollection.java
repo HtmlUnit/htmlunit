@@ -35,6 +35,7 @@ import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -288,6 +289,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      * @return the object or NOT_FOUND
      */
     @JsxFunction
+    @JsxAnyReturnType
     public Object item(final int index) {
         final Object item = get(index, this);
         if (JavaScriptEngine.UNDEFINED == item) {

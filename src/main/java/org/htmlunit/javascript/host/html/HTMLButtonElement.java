@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlButton;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -130,6 +131,7 @@ public class HTMLButtonElement extends HTMLElement {
      * {@inheritDoc}
      */
     @JsxGetter
+    @JsxAnyReturnType
     @Override
     public Object getValue() {
         return super.getValue();

@@ -27,6 +27,7 @@ import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -196,6 +197,7 @@ public class NodeList extends AbstractList implements Callable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList/item">MDN Documentation</a>
      */
     @JsxFunction
+    @JsxAnyReturnType
     public Object item(final Object index) {
         final Object object = getIt(index);
         if (object == NOT_FOUND) {

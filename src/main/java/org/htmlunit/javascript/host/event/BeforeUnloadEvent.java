@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.event;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -92,6 +93,7 @@ public class BeforeUnloadEvent extends Event {
      * @return the return value associated with the event
      */
     @JsxGetter
+    @JsxAnyReturnType
     @Override
     public Object getReturnValue() {
         return returnValue_;

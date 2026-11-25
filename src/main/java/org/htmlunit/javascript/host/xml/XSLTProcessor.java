@@ -45,6 +45,7 @@ import org.htmlunit.html.DomText;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -307,6 +308,7 @@ public class XSLTProcessor extends HtmlUnitScriptable {
      * @return the value of the XSLT parameter, or {@code null} if not found
      */
     @JsxFunction
+    @JsxAnyReturnType
     public Object getParameter(final String namespaceURI, final String localName) {
         return parameters_.get(getQualifiedName(namespaceURI, localName));
     }

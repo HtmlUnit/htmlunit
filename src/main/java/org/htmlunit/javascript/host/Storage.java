@@ -39,6 +39,7 @@ import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -340,6 +341,7 @@ public class Storage extends HtmlUnitScriptable {
      * @return the value for the given key, or {@code null} if not found
      */
     @JsxFunction(functionName = "getItem")
+    @JsxAnyReturnType
     public static Object jsGetItem(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         checkArguments(args, 1, "getItem");

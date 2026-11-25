@@ -18,6 +18,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlDomTreeWalker;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -111,6 +112,7 @@ public class TreeWalker extends HtmlUnitScriptable {
      * @return the filter used to screen nodes
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getFilter() {
         //TODO: we should return the original filter
         return walker_.getFilter();

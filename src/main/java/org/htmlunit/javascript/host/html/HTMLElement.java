@@ -96,6 +96,7 @@ import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.serializer.HtmlSerializerInnerOuterText;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -1457,6 +1458,7 @@ public class HTMLElement extends Element {
      * @return the {@code hidden} property
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getHidden() {
         final String hidden = getDomNodeOrDie().getHidden();
         if ("until-found".equalsIgnoreCase(hidden)) {

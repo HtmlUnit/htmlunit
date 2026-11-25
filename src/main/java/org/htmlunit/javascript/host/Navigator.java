@@ -42,6 +42,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.csp.ContentSecurityPolicy;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -384,6 +385,7 @@ public class Navigator extends HtmlUnitScriptable {
      * @return the {@code doNotTrack} property
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getDoNotTrack() {
         final WebClient client = getWindow().getWebWindow().getWebClient();
         if (client.getOptions().isDoNotTrackEnabled()) {

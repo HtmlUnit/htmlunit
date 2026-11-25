@@ -27,6 +27,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -177,6 +178,7 @@ public class HTMLCollection extends AbstractList {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection/item">MDN Documentation</a>
      */
     @JsxFunction
+    @JsxAnyReturnType
     public Object item(final Object index) {
         int idx = 0;
         final double doubleValue = JavaScriptEngine.toNumber(index);

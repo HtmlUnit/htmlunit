@@ -25,6 +25,7 @@ import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -156,6 +157,7 @@ public class HTMLSelectElement extends HTMLElement {
      * @return the option
      */
     @JsxFunction
+    @JsxAnyReturnType
     public Object item(final int index) {
         final Object option = getOptions().item(index);
         if (JavaScriptEngine.isUndefined(option)) {

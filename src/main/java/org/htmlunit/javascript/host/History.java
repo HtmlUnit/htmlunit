@@ -22,6 +22,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -76,6 +77,7 @@ public class History extends HtmlUnitScriptable {
      * @return the current history state object
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getState() {
         final WebWindow w = getWindow().getWebWindow();
         return w.getHistory().getCurrentState();

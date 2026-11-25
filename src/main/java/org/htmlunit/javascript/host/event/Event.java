@@ -26,6 +26,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -642,6 +643,7 @@ public class Event extends HtmlUnitScriptable {
      * @return the object that fired the event
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getSrcElement() {
         return srcElement_;
     }
@@ -661,6 +663,7 @@ public class Event extends HtmlUnitScriptable {
      * @return the event target to which the event was originally dispatched
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getTarget() {
         return target_;
     }
@@ -1041,6 +1044,7 @@ public class Event extends HtmlUnitScriptable {
      * @return the return value
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getReturnValue() {
         return !preventDefault_;
     }

@@ -27,6 +27,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxConstructorAlias;
@@ -317,6 +318,7 @@ public class URL extends HtmlUnitScriptable {
      * @return the origin
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getOrigin() {
         if (url_ == null) {
             return null;

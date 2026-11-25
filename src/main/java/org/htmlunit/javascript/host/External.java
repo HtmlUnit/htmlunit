@@ -21,6 +21,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -60,6 +61,7 @@ public class External extends HtmlUnitScriptable {
      * @return {@code undefined}
      */
     @JsxFunction(functionName = "IsSearchProviderInstalled")
+    @JsxAnyReturnType
     public Object isSearchProviderInstalled() {
         return JavaScriptEngine.UNDEFINED;
     }

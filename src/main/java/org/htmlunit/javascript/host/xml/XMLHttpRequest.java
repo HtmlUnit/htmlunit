@@ -71,6 +71,7 @@ import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -304,6 +305,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @return the response body
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getResponse() {
         if (RESPONSE_TYPE_DEFAULT.equals(responseType_) || RESPONSE_TYPE_TEXT.equals(responseType_)) {
             if (webResponse_ != null) {
@@ -511,6 +513,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @return a DOM-compatible document object, or {@code null}
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getResponseXML() {
         if (responseXML_ != null) {
             return responseXML_;

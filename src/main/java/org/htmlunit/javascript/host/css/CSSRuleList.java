@@ -24,6 +24,7 @@ import org.htmlunit.corejs.javascript.CompoundOperationMap;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -107,6 +108,7 @@ public class CSSRuleList extends HtmlUnitScriptable {
      * @return the item in the given index
      */
     @JsxFunction
+    @JsxAnyReturnType
     public Object item(final int index) {
         final Object item = get(index, this);
         if (NOT_FOUND == item) {

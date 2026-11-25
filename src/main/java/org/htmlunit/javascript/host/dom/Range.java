@@ -31,6 +31,7 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxAnyReturnType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -234,6 +235,7 @@ public class Range extends AbstractRange {
      * @return the deepest common ancestor container of the Range's two boundary points
      */
     @JsxGetter
+    @JsxAnyReturnType
     public Object getCommonAncestorContainer() {
         final HashSet<Node> startAncestors = new HashSet<>();
         Node ancestor = internGetStartContainer();
