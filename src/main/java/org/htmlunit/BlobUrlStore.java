@@ -28,6 +28,8 @@ import org.htmlunit.javascript.host.file.Blob;
  */
 public class BlobUrlStore {
 
+    private final Map<String, Entry> store_ = new ConcurrentHashMap<>();
+
     private static final class Entry {
         private final Blob object_;
         private final Page owningPage_;
@@ -37,8 +39,6 @@ public class BlobUrlStore {
             owningPage_ = owningPage;
         }
     }
-
-    private final Map<String, Entry> store_ = new ConcurrentHashMap<>();
 
     /**
      * Adds an entry.

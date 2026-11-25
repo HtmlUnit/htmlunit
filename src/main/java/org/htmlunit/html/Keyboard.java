@@ -45,6 +45,13 @@ import org.htmlunit.javascript.host.event.KeyboardEvent;
  */
 public class Keyboard {
 
+    /** Use the default location of the key code (e.g. the left one for the shift key). */
+    public static final int DEFAULT_LOCATION = -1;
+
+    private final List<KeyAction> keys_ = new ArrayList<>();
+    private final boolean startAtEnd_;
+    private boolean[] modifiers_;
+
     /**
      * Represents a single keyboard input action.
      *
@@ -93,13 +100,6 @@ public class Keyboard {
      * @param down {@code true} for the key down, {@code false} for the key up
      */
     public record KeyCodeKeyAction(int keyCode, int location, boolean down) implements KeyAction { }
-
-    /** Use the default location of the key code (e.g. the left one for the shift key). */
-    public static final int DEFAULT_LOCATION = -1;
-
-    private final List<KeyAction> keys_ = new ArrayList<>();
-    private final boolean startAtEnd_;
-    private boolean[] modifiers_;
 
     /**
      * Creates a new instance.

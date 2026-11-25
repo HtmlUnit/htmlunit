@@ -48,6 +48,13 @@ import org.htmlunit.jetty.websocket.client.WebSocketClient;
  */
 public final class JettyWebSocketAdapter implements WebSocketAdapter {
 
+    private final Object clientLock_ = new Object();
+    private WebSocketClient client_;
+    private final WebSocketListener listener_;
+
+    private volatile Session incomingSession_;
+    private volatile Session outgoingSession_;
+
     /**
      * Our {@link WebSocketAdapterFactory}.
      */
@@ -126,13 +133,6 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
             return false;
         }
     }
-
-    private final Object clientLock_ = new Object();
-    private WebSocketClient client_;
-    private final WebSocketListener listener_;
-
-    private volatile Session incomingSession_;
-    private volatile Session outgoingSession_;
 
     /**
      * Ctor.

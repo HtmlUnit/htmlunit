@@ -825,6 +825,54 @@ public class KeyboardEvent extends UIEvent {
      * @see <a href="https://www.asquare.net/javascript/tests/KeyCode.html">Key Code Reference</a>
      */
     private static final Map<Character, Integer> KEX_CODE_MAP = new HashMap<>();
+
+    /**
+     * Maps the key codes of the special keys (the keys not typed as character) to the
+     * values of the {@code key}, {@code code} and {@code location} properties.
+     *
+     * @see <a href="https://www.w3.org/TR/uievents-key/">UI Events KeyboardEvent key Values</a>
+     * @see <a href="https://www.w3.org/TR/uievents-code/">UI Events KeyboardEvent code Values</a>
+     */
+    private static final Map<Integer, KeyInfo> KEY_CODE_INFO_MAP = new HashMap<>();
+
+    /**
+     * Maps the characters to the value of the {@code code} property
+     * (the physical key on a US keyboard); letters and digits are calculated.
+     */
+    private static final Map<Character, String> CHAR_CODE_MAP = new HashMap<>();
+
+    /*
+     * Standard properties
+     */
+
+    /** The key value of the key represented by the event. */
+    private String key_ = "";
+
+    /** The code value of the physical key represented by the event. */
+    private String code_ = "";
+
+    /** The location of the key on the keyboard or other input device. See DOM_KEY_LOCATION_* constants. */
+    private int location_;
+
+    /** Whether or not the "meta" key was pressed during the firing of the event. */
+    private boolean metaKey_;
+
+    /** Whether the key is being held down such that it is automatically repeating. */
+    private boolean repeat_;
+
+    /** Whether the event is fired after the compositionstart and before the compositionend events. */
+    private boolean isComposing_;
+
+    /*
+     * Deprecated properties
+     */
+
+    /** The Unicode reference number of the key. */
+    private int charCode_;
+
+    /** The unmodified value of the pressed key. This is usually the same as keyCode. */
+    private int which_;
+
     static {
         KEX_CODE_MAP.put('`', DOM_VK_BACK_QUOTE);
         KEX_CODE_MAP.put('~', DOM_VK_BACK_QUOTE);
@@ -860,33 +908,6 @@ public class KeyboardEvent extends UIEvent {
         KEX_CODE_MAP.put('\\', DOM_VK_BACK_SLASH);
         KEX_CODE_MAP.put('|', DOM_VK_BACK_SLASH);
     }
-
-    /**
-     * The values of the {@code key}, {@code code} and {@code location} properties
-     * of the events for a key code.
-     *
-     * @param key the key value
-     * @param shiftedKey the key value if the shift key is pressed
-     * @param code the code value (the physical key on a US keyboard)
-     * @param location the location (see DOM_KEY_LOCATION_* constants)
-     */
-    private record KeyInfo(String key, String shiftedKey, String code, int location) {
-    }
-
-    /**
-     * Maps the key codes of the special keys (the keys not typed as character) to the
-     * values of the {@code key}, {@code code} and {@code location} properties.
-     *
-     * @see <a href="https://www.w3.org/TR/uievents-key/">UI Events KeyboardEvent key Values</a>
-     * @see <a href="https://www.w3.org/TR/uievents-code/">UI Events KeyboardEvent code Values</a>
-     */
-    private static final Map<Integer, KeyInfo> KEY_CODE_INFO_MAP = new HashMap<>();
-
-    /**
-     * Maps the characters to the value of the {@code code} property
-     * (the physical key on a US keyboard); letters and digits are calculated.
-     */
-    private static final Map<Character, String> CHAR_CODE_MAP = new HashMap<>();
 
     static {
         addKey(DOM_VK_CANCEL, "Cancel", "");
@@ -994,37 +1015,17 @@ public class KeyboardEvent extends UIEvent {
         CHAR_CODE_MAP.put(shiftedKey, code);
     }
 
-    /*
-     * Standard properties
+    /**
+     * The values of the {@code key}, {@code code} and {@code location} properties
+     * of the events for a key code.
+     *
+     * @param key the key value
+     * @param shiftedKey the key value if the shift key is pressed
+     * @param code the code value (the physical key on a US keyboard)
+     * @param location the location (see DOM_KEY_LOCATION_* constants)
      */
-
-    /** The key value of the key represented by the event. */
-    private String key_ = "";
-
-    /** The code value of the physical key represented by the event. */
-    private String code_ = "";
-
-    /** The location of the key on the keyboard or other input device. See DOM_KEY_LOCATION_* constants. */
-    private int location_;
-
-    /** Whether or not the "meta" key was pressed during the firing of the event. */
-    private boolean metaKey_;
-
-    /** Whether the key is being held down such that it is automatically repeating. */
-    private boolean repeat_;
-
-    /** Whether the event is fired after the compositionstart and before the compositionend events. */
-    private boolean isComposing_;
-
-    /*
-     * Deprecated properties
-     */
-
-    /** The Unicode reference number of the key. */
-    private int charCode_;
-
-    /** The unmodified value of the pressed key. This is usually the same as keyCode. */
-    private int which_;
+    private record KeyInfo(String key, String shiftedKey, String code, int location) {
+    }
 
     /**
      * Creates a new keyboard event instance.
