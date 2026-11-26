@@ -57,7 +57,10 @@ public class MemoryLeakDetector {
         if (ref == null) {
             throw new IllegalArgumentException("No object registered with ID '" + id + "'.");
         }
-        gc();
+        // the JVM gives no guarantee to collect everything on request; retry some times
+        for (int i = 0; i < 10 && ref.get() != null; i++) {
+            gc();
+        }
         return ref.get() == null;
     }
 
