@@ -1699,7 +1699,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final String display = getDisplay();
-        if (NONE.equals(getDisplay())) {
+        if (NONE.equals(display)) {
             return updateCachedWidth(0);
         }
 

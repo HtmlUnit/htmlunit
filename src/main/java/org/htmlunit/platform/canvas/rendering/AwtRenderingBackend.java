@@ -1027,11 +1027,12 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         // Extract the first point of the current subpath — this is where
         // the spec requires the new subpath to be seeded after closing.
-        final double[] coords = new double[6];
         final PathIterator it = current.getPathIterator(null);
         if (it.isDone()) {
             return; // empty path, nothing to close
         }
+
+        final double[] coords = new double[6];
         it.currentSegment(coords); // first segment is always SEG_MOVETO
         final double firstX = coords[0];
         final double firstY = coords[1];

@@ -817,13 +817,13 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         // threads can stall.
         releaseClientAsync();
 
-        // never established or aborted while connecting: failed, whatever the adapter reports
-        final boolean failed = reportedAsFailure || previous == CONNECTING || previous == ABORTED;
-
         final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
         if (engine == null) {
             return;
         }
+
+        // never established or aborted while connecting: failed, whatever the adapter reports
+        final boolean failed = reportedAsFailure || previous == CONNECTING || previous == ABORTED;
 
         engine.getContextFactory().call(cx -> {
             if (failed) {
