@@ -1839,13 +1839,13 @@ public class Element extends Node {
     @JsxFunction
     public static Element closest(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
-        if (!(thisObj instanceof Element)) {
+        if (!(thisObj instanceof Element thisElement)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
         final String selectorString = (String) args[0];
         try {
-            final DomNode domNode = ((Element) thisObj).getDomNodeOrNull();
+            final DomNode domNode = thisElement.getDomNodeOrNull();
             if (domNode == null) {
                 return null;
             }

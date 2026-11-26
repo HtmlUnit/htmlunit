@@ -1090,11 +1090,15 @@ public class Node extends EventTarget {
      */
     protected static void after(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+        if (!(thisObj instanceof Node thisNode)) {
+            throw JavaScriptEngine.typeError("Illegal invocation");
+        }
+
+        final DomNode thisDomNode = thisNode.getDomNodeOrDie();
         final DomNode parentNode = thisDomNode.getParentNode();
         final DomNode nextSibling = thisDomNode.getNextSibling();
         for (final Object arg : args) {
-            final Node node = toNodeOrTextNode((Node) thisObj, arg);
+            final Node node = toNodeOrTextNode(thisNode, arg);
             final DomNode newNode = node.getDomNodeOrDie();
             if (nextSibling == null) {
                 parentNode.appendChild(newNode);
@@ -1197,9 +1201,14 @@ public class Node extends EventTarget {
      */
     protected static void before(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
+        if (!(thisObj instanceof Node thisNode)) {
+            throw JavaScriptEngine.typeError("Illegal invocation");
+        }
+
+        final DomNode thisDomNode = thisNode.getDomNodeOrDie();
         for (final Object arg : args) {
-            final Node node = toNodeOrTextNode((Node) thisObj, arg);
-            ((Node) thisObj).getDomNodeOrDie().insertBefore(node.getDomNodeOrDie());
+            final Node node = toNodeOrTextNode(thisNode, arg);
+            thisDomNode.insertBefore(node.getDomNodeOrDie());
         }
     }
 
@@ -1212,7 +1221,11 @@ public class Node extends EventTarget {
      */
     protected static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+        if (!(thisObj instanceof Node thisNode)) {
+            throw JavaScriptEngine.typeError("Illegal invocation");
+        }
+
+        final DomNode thisDomNode = thisNode.getDomNodeOrDie();
         final DomNode parentNode = thisDomNode.getParentNode();
 
         if (args.length == 0) {
@@ -1223,7 +1236,7 @@ public class Node extends EventTarget {
         final DomNode nextSibling = thisDomNode.getNextSibling();
         boolean isFirst = true;
         for (final Object arg : args) {
-            final DomNode newNode = toNodeOrTextNode((Node) thisObj, arg).getDomNodeOrDie();
+            final DomNode newNode = toNodeOrTextNode(thisNode, arg).getDomNodeOrDie();
             if (isFirst) {
                 isFirst = false;
                 thisDomNode.replace(newNode);
