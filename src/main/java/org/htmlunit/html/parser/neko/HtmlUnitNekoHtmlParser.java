@@ -27,17 +27,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.htmlunit.ObjectInstantiationException;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.cyberneko.HTMLScanner;
 import org.htmlunit.cyberneko.HTMLTagBalancer;
-import org.htmlunit.cyberneko.xerces.util.DefaultErrorHandler;
 import org.htmlunit.cyberneko.xerces.xni.QName;
 import org.htmlunit.cyberneko.xerces.xni.XNIException;
-import org.htmlunit.cyberneko.xerces.xni.parser.XMLErrorHandler;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLInputSource;
-import org.htmlunit.cyberneko.xerces.xni.parser.XMLParseException;
 import org.htmlunit.html.DefaultElementFactory;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.ElementFactory;
@@ -47,7 +43,6 @@ import org.htmlunit.html.HtmlSvg;
 import org.htmlunit.html.UnknownElementFactory;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
-import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.svg.SvgElementFactory;
 import org.htmlunit.svg.SvgForeignObject;
 import org.htmlunit.util.StringUtils;
@@ -309,64 +304,5 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
             }
         }
         return UnknownElementFactory.INSTANCE;
-    }
-}
-
-/**
- * Utility to transmit parsing errors to a {@link HTMLParserListener}.
- */
-class HtmlUnitNekoHTMLErrorHandler implements XMLErrorHandler {
-    private final HTMLParserListener listener_;
-    private final URL url_;
-    private final String html_;
-
-    HtmlUnitNekoHTMLErrorHandler(final HTMLParserListener listener, final URL url, final String htmlContent) {
-        WebAssert.notNull("listener", listener);
-        WebAssert.notNull("url", url);
-        listener_ = listener;
-        url_ = url;
-        html_ = htmlContent;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see DefaultErrorHandler#error(String,String,XMLParseException)
-     */
-    @Override
-    public void error(final String domain, final String key,
-            final XMLParseException exception) throws XNIException {
-        listener_.error(exception.getMessage(),
-                url_,
-                html_,
-                exception.getLineNumber(),
-                exception.getColumnNumber(),
-                key);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see DefaultErrorHandler#warning(String,String,XMLParseException)
-     */
-    @Override
-    @SuppressWarnings("PMD.GuardLogStatement") // listener_ is not a logger
-    public void warning(final String domain, final String key,
-            final XMLParseException exception) throws XNIException {
-        listener_.warning(exception.getMessage(),
-                url_,
-                html_,
-                exception.getLineNumber(),
-                exception.getColumnNumber(),
-                key);
-    }
-
-    @Override
-    public void fatalError(final String domain, final String key,
-            final XMLParseException exception) throws XNIException {
-        listener_.error(exception.getMessage(),
-                url_,
-                html_,
-                exception.getLineNumber(),
-                exception.getColumnNumber(),
-                key);
     }
 }

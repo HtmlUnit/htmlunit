@@ -34,7 +34,6 @@ import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativePromise;
@@ -47,7 +46,6 @@ import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.javascript.background.BasicJavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.JsxAnyReturnType;
@@ -533,28 +531,5 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
      */
     public void setPrototypes(final Map<Class<? extends Scriptable>, Scriptable> map) {
         prototypes_ = map;
-    }
-}
-
-class WorkerJob extends BasicJavaScriptJob {
-    private final ContextFactory contextFactory_;
-    private final ContextAction<Object> action_;
-    private final String description_;
-
-    WorkerJob(final ContextFactory contextFactory, final ContextAction<Object> action, final String description) {
-        super();
-        contextFactory_ = contextFactory;
-        action_ = action;
-        description_ = description;
-    }
-
-    @Override
-    public void run() {
-        contextFactory_.call(action_);
-    }
-
-    @Override
-    public String toString() {
-        return "WorkerJob(" + description_ + ")";
     }
 }

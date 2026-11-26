@@ -17,9 +17,6 @@ package org.htmlunit.html.parser;
 import java.io.Serializable;
 import java.net.URL;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * Listener for messages from the HTML parser. <br>
  * The classification of problems as warnings or errors is the one of the HTML parser
@@ -63,46 +60,4 @@ public interface HTMLParserListener extends Serializable {
      */
     void warning(String message, URL url, String html,
             int line, int column, String key);
-}
-
-/**
- * Simple implementation of {@link HTMLParserListener} logging the received warnings
- * and errors in the "org.htmlunit.html.HTMLParserListener" log.<br/>
- * Errors are logged at the error level and warnings at the warning level.
- */
-class SimpleHTMLParserListener implements HTMLParserListener {
-
-    private static final Log LOG = LogFactory.getLog(SimpleHTMLParserListener.class);
-
-    @Override
-    public void error(final String message, final URL url, final String html,
-            final int line, final int column, final String key) {
-        LOG.error(format(message, url, html, line, column));
-    }
-
-    @Override
-    public void warning(final String message, final URL url, final String html,
-            final int line, final int column, final String key) {
-        if (LOG.isWarnEnabled()) {
-            LOG.warn(format(message, url, html, line, column));
-        }
-    }
-
-    private static String format(final String message, final URL url, final String html,
-            final int line, final int column) {
-        final StringBuilder builder = new StringBuilder(message);
-        builder.append(" (")
-                .append(url.toExternalForm())
-                .append(' ')
-                .append(line)
-                .append(':')
-                .append(column);
-        if (null != html) {
-            builder.append(" htmlSnippet: '")
-                    .append(html)
-                    .append('\'');
-        }
-        builder.append(')');
-        return builder.toString();
-    }
 }

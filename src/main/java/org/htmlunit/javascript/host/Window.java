@@ -35,7 +35,6 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import org.apache.commons.logging.Log;
@@ -72,7 +71,6 @@ import org.htmlunit.corejs.javascript.Slot;
 import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
-import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.FrameWindow;
@@ -4043,45 +4041,5 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             return UrlUtils.isPotentiallyTrustworthy(htmlPage.getOriginUrl());
         }
         return page != null && UrlUtils.isPotentiallyTrustworthy(page.getUrl());
-    }
-}
-
-class HTMLCollectionFrames extends HTMLCollection {
-    private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames.class);
-
-    HTMLCollectionFrames(final HtmlPage page) {
-        super(page, false);
-        this.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof BaseFrameElement);
-    }
-
-    @Override
-    protected Scriptable getScriptableForElement(final Object obj) {
-        final WebWindow window;
-        if (obj instanceof BaseFrameElement element) {
-            window = element.getEnclosedWindow();
-        }
-        else {
-            window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
-        }
-
-        return window.getScriptableObject();
-    }
-
-    @Override
-    protected Object getWithPreemption(final String name) {
-        final List<DomNode> elements = getElements();
-
-        for (final Object next : elements) {
-            final BaseFrameElement frameElt = (BaseFrameElement) next;
-            final WebWindow window = frameElt.getEnclosedWindow();
-            if (name.equals(window.getName())) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Property \"" + name + "\" evaluated (by name) to " + window);
-                }
-                return getScriptableForElement(window);
-            }
-        }
-
-        return NOT_FOUND;
     }
 }
