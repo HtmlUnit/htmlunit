@@ -177,6 +177,9 @@ public abstract class WebWindowImpl implements WebWindow {
      * by the JavaScript engine as soon as the page is replaced.
      * There is no wait if this is called from a JavaScript thread, because the running
      * job might be the caller itself.
+     * There is also no wait if the current thread holds the script lock of the page
+     * (e.g. the navigation is done by {@link DomElement#click()}); the running job might wait
+     * for this lock and therefore cannot finish.
      */
     private void waitForRunningJob() {
         final JavaScriptJobManager jobManager = getJobManager();
@@ -186,6 +189,10 @@ public abstract class WebWindowImpl implements WebWindow {
 
         final AbstractJavaScriptEngine<?> engine = webClient_.getJavaScriptEngine();
         if (engine == null || engine.isScriptRunning()) {
+            return;
+        }
+
+        if (enclosedPage_ instanceof SgmlPage page && Thread.holdsLock(page.getScriptLock())) {
             return;
         }
 

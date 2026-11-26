@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                A click navigating to another page waited up to 10s if a background job (e.g. the events
+                of an asynchronous XMLHttpRequest) was waiting to run a script of the page.
+            </action>
             <action type="fix" dev="rbri" issue="#245">
                 XMLHttpRequest: the state changes and the events of an asynchronous request are no longer processed
                 while a script of the page is running; handlers assigned after send() are called now also if the
