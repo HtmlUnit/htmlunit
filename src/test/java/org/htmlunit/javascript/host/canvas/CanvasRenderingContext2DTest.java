@@ -101,14 +101,15 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "removeHitRegion",
-             "scrollPathIntoView", "36 methods"})
+             "scrollPathIntoView", "38 methods"})
     public void methods() throws Exception {
         final String[] methods = {"addHitRegion", "arc", "arcTo", "beginPath", "bezierCurveTo", "clearRect", "clip",
             "closePath", "createImageData", "createLinearGradient", "createPattern", "createRadialGradient",
             "drawImage", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "fill", "fillRect", "fillText",
-            "getImageData", "getLineDash", "isPointInPath", "lineTo", "measureText", "moveTo", "putImageData",
-            "quadraticCurveTo", "rect", "removeHitRegion", "restore", "rotate", "save", "scale", "scrollPathIntoView",
-            "setLineDash", "setTransform", "stroke", "strokeRect", "strokeText", "transform", "translate" };
+            "getImageData", "getLineDash", "isPointInPath", "isPointInStroke", "lineTo", "measureText", "moveTo",
+            "putImageData", "quadraticCurveTo", "rect", "removeHitRegion", "restore", "rotate", "roundRect", "save",
+            "scale", "scrollPathIntoView", "setLineDash", "setTransform", "stroke", "strokeRect", "strokeText",
+            "transform", "translate" };
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<canvas id='myCanvas'></canvas>\n"
@@ -3476,6 +3477,446 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "      context.fillText('Hu', 30, 15);\n");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void isPointInPath() throws Exception {
+        final String js =
+            "      context.rect(10, 10, 50, 50);\n"
+            + "      log(context.isPointInPath(30, 30));\n"
+            + "      log(context.isPointInPath(70, 30));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void isPointInPathEmpty() throws Exception {
+        final String js =
+            "      log(context.isPointInPath(30, 30));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void isPointInPathEdge() throws Exception {
+        final String js =
+            "      context.rect(10, 10, 50, 50);\n"
+            + "      log(context.isPointInPath(10, 30));\n"
+            + "      log(context.isPointInPath(60, 60));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void isPointInPathEvenOdd() throws Exception {
+        final String js =
+            "      context.rect(0, 0, 100, 100);\n"
+            + "      context.rect(25, 25, 50, 50);\n"
+            + "      log(context.isPointInPath(50, 50, 'nonzero'));\n"
+            + "      log(context.isPointInPath(50, 50, 'evenodd'));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void isPointInPathInvalidRule() throws Exception {
+        final String js =
+            "      context.rect(0, 0, 100, 100);\n"
+            + "      log(context.isPointInPath(50, 50, 'foo'));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void isPointInPathNotFinite() throws Exception {
+        final String js =
+            "      context.rect(0, 0, 100, 100);\n"
+            + "      log(context.isPointInPath(NaN, 50));\n"
+            + "      log(context.isPointInPath(50, Infinity));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void isPointInPathMissingArgument() throws Exception {
+        final String js =
+            "      log(context.isPointInPath(50));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void isPointInPathOpenPath() throws Exception {
+        final String js =
+            "      context.moveTo(0, 0);\n"
+            + "      context.lineTo(100, 0);\n"
+            + "      context.lineTo(0, 100);\n"
+            + "      log(context.isPointInPath(20, 20));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void isPointInPathTransform() throws Exception {
+        final String js =
+            "      context.translate(50, 50);\n"
+            + "      context.rect(0, 0, 10, 10);\n"
+            + "      log(context.isPointInPath(5, 5));\n"
+            + "      log(context.isPointInPath(55, 55));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void isPointInPathTransformAfterPath() throws Exception {
+        final String js =
+            "      context.rect(0, 0, 10, 10);\n"
+            + "      context.translate(50, 50);\n"
+            + "      log(context.isPointInPath(5, 5));\n"
+            + "      log(context.isPointInPath(55, 55));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void isPointInPathBeginPath() throws Exception {
+        final String js =
+            "      context.rect(0, 0, 10, 10);\n"
+            + "      context.beginPath();\n"
+            + "      log(context.isPointInPath(5, 5));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void isPointInPathAfterFill() throws Exception {
+        final String js =
+            "      context.rect(0, 0, 10, 10);\n"
+            + "      context.fill();\n"
+            + "      log(context.isPointInPath(5, 5));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void isPointInStroke() throws Exception {
+        final String js =
+            "      context.moveTo(10, 10);\n"
+            + "      context.lineTo(100, 10);\n"
+            + "      log(context.isPointInStroke(50, 10));\n"
+            + "      log(context.isPointInStroke(50, 12));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void isPointInStrokeLineWidth() throws Exception {
+        final String js =
+            "      context.lineWidth = 10;\n"
+            + "      context.moveTo(10, 10);\n"
+            + "      context.lineTo(100, 10);\n"
+            + "      log(context.isPointInStroke(50, 14));\n"
+            + "      log(context.isPointInStroke(50, 16));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void isPointInStrokeTransform() throws Exception {
+        final String js =
+            "      context.transform(2, 0, 0, 2, 0, 0);\n"
+            + "      context.moveTo(10, 10);\n"
+            + "      context.lineTo(100, 10);\n"
+            + "      log(context.isPointInStroke(100, 20.8));\n"
+            + "      log(context.isPointInStroke(100, 21.2));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void isPointInStrokeMissingArgument() throws Exception {
+        final String js =
+            "      log(context.isPointInStroke(50));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void arcTo() throws Exception {
+        final String js =
+            "      context.moveTo(0, 0);\n"
+            + "      context.arcTo(100, 0, 100, 100, 50);\n"
+            + "      context.lineTo(100, 100);\n"
+            + "      context.lineTo(0, 100);\n"
+            + "      context.closePath();\n"
+            + "      log(context.isPointInPath(98, 2));\n"
+            + "      log(context.isPointInPath(60, 20));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("IndexSizeError/DOMException")
+    public void arcToNegativeRadius() throws Exception {
+        final String js =
+            "      context.arcTo(10, 10, 20, 20, -1);\n"
+            + "      log('done');\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("done")
+    public void arcToNotFinite() throws Exception {
+        final String js =
+            "      context.arcTo(10, NaN, 20, 20, -1);\n"
+            + "      log('done');\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("IndexSizeError/DOMException")
+    public void arcNegativeRadius() throws Exception {
+        final String js =
+            "      context.arc(10, 10, -1, 0, Math.PI);\n"
+            + "      log('done');\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("IndexSizeError/DOMException")
+    public void ellipseNegativeRadius() throws Exception {
+        final String js =
+            "      context.ellipse(10, 10, 5, -1, 0, 0, Math.PI);\n"
+            + "      log('done');\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void roundRect() throws Exception {
+        final String js =
+            "      context.roundRect(0, 0, 100, 100, 20);\n"
+            + "      log(context.isPointInPath(2, 2));\n"
+            + "      log(context.isPointInPath(50, 50));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void roundRectRadiiArray() throws Exception {
+        final String js =
+            "      context.roundRect(0, 0, 100, 100, [0, 20]);\n"
+            + "      log(context.isPointInPath(2, 2));\n"
+            + "      log(context.isPointInPath(98, 2));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void roundRectNegativeRadius() throws Exception {
+        final String js =
+            "      context.roundRect(0, 0, 100, 100, -1);\n"
+            + "      log('done');\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("RangeError")
+    public void roundRectTooManyRadii() throws Exception {
+        final String js =
+            "      context.roundRect(0, 0, 100, 100, [1, 2, 3, 4, 5]);\n"
+            + "      log('done');\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void fillInvalidRule() throws Exception {
+        final String js =
+            "      context.rect(0, 0, 100, 100);\n"
+            + "      context.fill('foo');\n"
+            + "      log('done');\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void clipInvalidRule() throws Exception {
+        final String js =
+            "      context.rect(0, 0, 100, 100);\n"
+            + "      context.clip('foo');\n"
+            + "      log('done');\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void scale() throws Exception {
+        final String js =
+            "      context.scale(2, 3);\n"
+            + "      context.rect(10, 10, 10, 10);\n"
+            + "      log(context.isPointInPath(15, 15));\n"
+            + "      log(context.isPointInPath(30, 45));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void scaleAfterPath() throws Exception {
+        final String js =
+            "      context.rect(10, 10, 10, 10);\n"
+            + "      context.scale(2, 2);\n"
+            + "      log(context.isPointInPath(15, 15));\n"
+            + "      log(context.isPointInPath(35, 35));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void scaleNegative() throws Exception {
+        final String js =
+            "      context.translate(100, 0);\n"
+            + "      context.scale(-1, 1);\n"
+            + "      context.rect(10, 10, 10, 10);\n"
+            + "      log(context.isPointInPath(85, 15));\n"
+            + "      log(context.isPointInPath(15, 15));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void scaleNotFinite() throws Exception {
+        final String js =
+            "      context.scale(2, NaN);\n"
+            + "      context.scale(Infinity, 2);\n"
+            + "      context.rect(10, 10, 10, 10);\n"
+            + "      log(context.isPointInPath(15, 15));\n"
+            + "      log(context.isPointInPath(30, 30));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void scaleLineWidth() throws Exception {
+        final String js =
+            "      context.scale(1, 4);\n"
+            + "      context.moveTo(10, 10);\n"
+            + "      context.lineTo(100, 10);\n"
+            + "      log(context.isPointInStroke(50, 41.5));\n"
+            + "      log(context.isPointInStroke(50, 42.5));\n";
+        verifyPath(js);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void scaleSaveRestore() throws Exception {
+        final String js =
+            "      context.save();\n"
+            + "      context.scale(2, 2);\n"
+            + "      context.restore();\n"
+            + "      context.rect(10, 10, 10, 10);\n"
+            + "      log(context.isPointInPath(15, 15));\n"
+            + "      log(context.isPointInPath(30, 30));\n";
+        verifyPath(js);
+    }
+
     private void draw(final String canvasSetup, final String drawJS) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -3517,5 +3958,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTextArea2(html);
+    }
+
+    private void verifyPath(final String js) throws Exception {
+        verify("<canvas id='myCanvas'></canvas>\n",
+                "      try {\n"
+                + js
+                + "      } catch(e) { logEx(e); }\n");
     }
 }

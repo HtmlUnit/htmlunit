@@ -150,6 +150,16 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
+    public void fill(final WindingRule windingRule, final RecordedPath path) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] fill(path)");
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void fillRect(final double x, final double y, final double w, final double h) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] fillRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
@@ -327,6 +337,49 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
+    public void stroke(final RecordedPath path) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] stroke(path)");
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void arcTo(final double x1, final double y1, final double x2, final double y2, final double radius) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] arcTo()");
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isPointInPath(final RecordedPath path, final double x, final double y,
+            final WindingRule windingRule) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] isPointInPath()");
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isPointInStroke(final RecordedPath path, final double x, final double y) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] isPointInStroke()");
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void strokeRect(final double x, final double y, final double w, final double h) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] strokeRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
@@ -358,8 +411,7 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void clip(final RenderingBackend.WindingRule windingRule,
-            final org.htmlunit.javascript.host.canvas.Path2D path) {
+    public void clip(final RenderingBackend.WindingRule windingRule, final RecordedPath path) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] clip(" + windingRule + ", " + path + ")");
         }

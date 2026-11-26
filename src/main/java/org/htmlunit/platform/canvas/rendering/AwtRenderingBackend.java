@@ -25,6 +25,7 @@ import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
+import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
@@ -42,6 +43,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -62,6 +64,9 @@ public class AwtRenderingBackend implements RenderingBackend {
     private static final AtomicInteger ID_GENERATOR = new AtomicInteger();
 
     private static final Map<String, Color> KNOWN_COLORS = new HashMap<>();
+
+    // the width of the line around the edges of a path used to treat points on the path as inside
+    private static final float EDGE_TOLERANCE = 0.002f;
 
     private final int id_;
     private final BufferedImage image_;
@@ -346,29 +351,36 @@ public class AwtRenderingBackend implements RenderingBackend {
             return;
         }
 
-        final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-        final AffineTransform transformation = new AffineTransform();
-        transformation.rotate(rotation, p.getX(), p.getY());
+        // the arc is built in user space; the transformation is applied to the whole shape
+        // (a scaled or skewed context changes the radii, not only the center)
+        final AffineTransform transformation = new AffineTransform(transformation_);
+        transformation.rotate(rotation, x, y);
 
         double startAngleDegree = Math.toDegrees(startAngle);
         double endAngleDegree = Math.toDegrees(endAngle);
 
         double extendAngle = endAngleDegree - startAngleDegree;
         final Arc2D arc;
-        if (Math.abs(extendAngle) >= 360) {
-            arc = new Arc2D.Double(p.getX() - radiusX, p.getY() - radiusY, radiusX * 2, radiusY * 2,
+        // a whole turn (or more) in the drawing direction or a multiple of a whole turn
+        // in the other direction draws the whole ellipse (like the browsers do)
+        if ((!anticlockwise && extendAngle >= 360) || (anticlockwise && extendAngle <= -360)
+                || (Math.abs(extendAngle) >= 360 && Math.abs(Math.IEEEremainder(extendAngle, 360)) < 1e-9)) {
+            arc = new Arc2D.Double(x - radiusX, y - radiusY, radiusX * 2, radiusY * 2,
                     0, 360, Arc2D.OPEN);
         }
         else {
             startAngleDegree = reverseAngle(startAngleDegree);
             endAngleDegree = reverseAngle(endAngleDegree);
 
-            extendAngle = endAngleDegree - startAngleDegree;
-            if (!anticlockwise) {
-                extendAngle = -reverseAngle(extendAngle);
+            // Arc2D angles are counterclockwise on the screen; the extent has to follow the given direction
+            if (anticlockwise) {
+                extendAngle = reverseAngle(startAngleDegree - endAngleDegree);
+            }
+            else {
+                extendAngle = -reverseAngle(endAngleDegree - startAngleDegree);
             }
 
-            arc = new Arc2D.Double(p.getX() - radiusX, p.getY() - radiusY, radiusX * 2, radiusY * 2,
+            arc = new Arc2D.Double(x - radiusX, y - radiusY, radiusX * 2, radiusY * 2,
                                             startAngleDegree, extendAngle, Arc2D.OPEN);
         }
 
@@ -567,6 +579,191 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         graphics2D_.setColor(fillColor_);
         graphics2D_.fill(shape);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void fill(final RenderingBackend.WindingRule windingRule, final RecordedPath path) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] fill(path, "
+                    + (windingRule == RenderingBackend.WindingRule.EVEN_ODD ? "evenOdd" : "nonZero") + ")");
+        }
+
+        withPath(path, () -> {
+            fill(windingRule);
+            return null;
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stroke(final RecordedPath path) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] stroke(path)");
+        }
+
+        withPath(path, () -> {
+            stroke();
+            return null;
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void arcTo(final double x1, final double y1, final double x2, final double y2, final double radius) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] arcTo(" + x1 + ", " + y1 + ", " + x2 + ", " + y2 + ", " + radius + ")");
+        }
+
+        // the path is stored in device coordinates; the geometry of arcTo works in user coordinates
+        final Point2D current = subPaths_.isEmpty() ? null : subPaths_.get(subPaths_.size() - 1).getCurrentPoint();
+        if (current == null) {
+            moveTo(x1, y1);
+            return;
+        }
+
+        final Point2D p0;
+        try {
+            p0 = transformation_.inverseTransform(current, null);
+        }
+        catch (final NoninvertibleTransformException e) {
+            // nothing visible can be drawn with this transformation
+            return;
+        }
+
+        final double x0 = p0.getX();
+        final double y0 = p0.getY();
+
+        // the direction vectors from the corner (x1, y1) to the two other points
+        final double v1x = x0 - x1;
+        final double v1y = y0 - y1;
+        final double v2x = x2 - x1;
+        final double v2y = y2 - y1;
+        final double len1 = Math.hypot(v1x, v1y);
+        final double len2 = Math.hypot(v2x, v2y);
+        final double cross = v1x * v2y - v1y * v2x;
+
+        // same points, zero radius or collinear points: a straight line to (x1, y1)
+        if (len1 == 0 || len2 == 0 || radius == 0 || Math.abs(cross) < 1e-12 * len1 * len2) {
+            lineTo(x1, y1);
+            return;
+        }
+
+        final double u1x = v1x / len1;
+        final double u1y = v1y / len1;
+        final double u2x = v2x / len2;
+        final double u2y = v2y / len2;
+
+        // half of the angle at the corner
+        final double cos = Math.max(-1, Math.min(1, u1x * u2x + u1y * u2y));
+        final double halfAngle = Math.acos(cos) / 2;
+        final double tangentDistance = radius / Math.tan(halfAngle);
+        final double centerDistance = radius / Math.sin(halfAngle);
+
+        final double t1x = x1 + u1x * tangentDistance;
+        final double t1y = y1 + u1y * tangentDistance;
+        final double t2x = x1 + u2x * tangentDistance;
+        final double t2y = y1 + u2y * tangentDistance;
+
+        final double bisectorX = u1x + u2x;
+        final double bisectorY = u1y + u2y;
+        final double bisectorLength = Math.hypot(bisectorX, bisectorY);
+        final double cx = x1 + bisectorX / bisectorLength * centerDistance;
+        final double cy = y1 + bisectorY / bisectorLength * centerDistance;
+
+        lineTo(t1x, t1y);
+        arc(cx, cy, radius, Math.atan2(t1y - cy, t1x - cx), Math.atan2(t2y - cy, t2x - cx), cross > 0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isPointInPath(final RecordedPath path, final double x, final double y,
+            final RenderingBackend.WindingRule windingRule) {
+        if (!Double.isFinite(x) || !Double.isFinite(y)) {
+            return false;
+        }
+
+        return withPath(path, () -> {
+            final Path2D shape = new Path2D.Double(windingRule == RenderingBackend.WindingRule.EVEN_ODD
+                    ? Path2D.WIND_EVEN_ODD : Path2D.WIND_NON_ZERO);
+            for (final Path2D path2d : subPaths_) {
+                shape.append(path2d, false);
+            }
+
+            // points on the path are inside; Shape.contains() only includes some edges
+            return shape.contains(x, y)
+                    || new BasicStroke(EDGE_TOLERANCE).createStrokedShape(shape).contains(x, y);
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isPointInStroke(final RecordedPath path, final double x, final double y) {
+        if (!Double.isFinite(x) || !Double.isFinite(y)) {
+            return false;
+        }
+
+        return withPath(path, () -> {
+            // the path is in device coordinates but the stroke is defined in user space
+            // (e.g. scale(1, 4) makes horizontal lines four times thicker)
+            final AffineTransform inverse;
+            try {
+                inverse = transformation_.createInverse();
+            }
+            catch (final NoninvertibleTransformException e) {
+                return false;
+            }
+            final BasicStroke stroke = new BasicStroke(getLineWidth(),
+                    toAwtLineCap(lineCap_), toAwtLineJoin(lineJoin_), miterLimit_);
+
+            for (final Path2D path2d : subPaths_) {
+                if (hasSegments(path2d)) {
+                    final Shape userPath = inverse.createTransformedShape(path2d);
+                    final Shape strokedShape =
+                            transformation_.createTransformedShape(stroke.createStrokedShape(userPath));
+                    if (strokedShape.contains(x, y)
+                            || new BasicStroke(EDGE_TOLERANCE).createStrokedShape(strokedShape).contains(x, y)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
+    }
+
+    /**
+     * Runs the action with the given path as current path (the current transformation is applied
+     * to the path); the current path is restored afterwards.
+     * @param <T> the result type
+     * @param path the path or {@code null} to run the action on the current path
+     * @param action the action
+     * @return the result of the action
+     */
+    private <T> T withPath(final RecordedPath path, final Supplier<T> action) {
+        if (path == null) {
+            return action.get();
+        }
+
+        final List<Path2D> saved = new ArrayList<>(subPaths_);
+        subPaths_.clear();
+        try {
+            path.replay(this);
+            return action.get();
+        }
+        finally {
+            subPaths_.clear();
+            subPaths_.addAll(saved);
+        }
     }
 
     /**
@@ -977,26 +1174,22 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void clip(final RenderingBackend.WindingRule windingRule,
-            final org.htmlunit.javascript.host.canvas.Path2D path) {
+    public void clip(final RenderingBackend.WindingRule windingRule, final RecordedPath path) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] clip(" + windingRule + ", " + path + ")");
         }
 
         final Path2D clipPath = new Path2D.Double();
 
-        if (path == null) {
-            if (subPaths_.isEmpty()) {
-                return;
-            }
+        final boolean hasSubPaths = withPath(path, () -> {
             for (final Path2D path2d : subPaths_) {
                 if (hasSegments(path2d)) {
                     clipPath.append(path2d, false);
                 }
             }
-        }
-        else {
-            // TODO integrate external Path2D host object once available
+            return !subPaths_.isEmpty();
+        });
+        if (!hasSubPaths) {
             return;
         }
 

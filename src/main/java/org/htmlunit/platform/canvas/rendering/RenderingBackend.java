@@ -17,8 +17,6 @@ package org.htmlunit.platform.canvas.rendering;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import org.htmlunit.javascript.host.canvas.Path2D;
-
 /**
  * Interface to the rendering context used by
  * {@link org.htmlunit.javascript.host.canvas.CanvasRenderingContext2D}.
@@ -185,10 +183,18 @@ public interface RenderingBackend {
             boolean anticlockwise);
 
     /**
-     * Fills the current or given path with the current fillStyle.
+     * Fills the current path with the current fillStyle.
      * @param windingRule the {@link WindingRule}
      */
     void fill(RenderingBackend.WindingRule windingRule);
+
+    /**
+     * Fills the given path with the current fillStyle; the current transformation
+     * is applied to the path, the current path is not changed.
+     * @param windingRule the {@link WindingRule}
+     * @param path the path
+     */
+    void fill(RenderingBackend.WindingRule windingRule, RecordedPath path);
 
     /**
      * Paints the specified rectangular area.
@@ -332,9 +338,48 @@ public interface RenderingBackend {
     void setTransform(double m11, double m12, double m21, double m22, double dx, double dy);
 
     /**
-     * Strokes (outlines) the current or given path with the current stroke style.
+     * Strokes (outlines) the current path with the current stroke style.
      */
     void stroke();
+
+    /**
+     * Strokes (outlines) the given path with the current stroke style; the current transformation
+     * is applied to the path, the current path is not changed.
+     * @param path the path
+     */
+    void stroke(RecordedPath path);
+
+    /**
+     * Adds an arc with the given control points and radius to the current path,
+     * connected to the previous point by a straight line (see {@code arcTo()} of the canvas).
+     * @param x1 the x of the first control point
+     * @param y1 the y of the first control point
+     * @param x2 the x of the second control point
+     * @param y2 the y of the second control point
+     * @param radius the radius (not negative)
+     */
+    void arcTo(double x1, double y1, double x2, double y2, double radius);
+
+    /**
+     * Checks whether the given point is inside the current or the given path
+     * (points on the path are inside).
+     * @param path the path or {@code null} for the current path
+     * @param x the x of the point (not affected by the current transformation)
+     * @param y the y of the point (not affected by the current transformation)
+     * @param windingRule the {@link WindingRule}
+     * @return whether the point is inside the path
+     */
+    boolean isPointInPath(RecordedPath path, double x, double y, RenderingBackend.WindingRule windingRule);
+
+    /**
+     * Checks whether the given point is inside the area covered by the stroke of the current or the given path
+     * (using the current line width, line cap, line join and miter limit).
+     * @param path the path or {@code null} for the current path
+     * @param x the x of the point (not affected by the current transformation)
+     * @param y the y of the point (not affected by the current transformation)
+     * @return whether the point is inside the stroke
+     */
+    boolean isPointInStroke(RecordedPath path, double x, double y);
 
     /**
      * Paints the specified rectangular area.
@@ -372,7 +417,7 @@ public interface RenderingBackend {
      *        to be used
      * @param path the path or null if the current path should be used
      */
-    void clip(RenderingBackend.WindingRule windingRule, Path2D path);
+    void clip(RenderingBackend.WindingRule windingRule, RecordedPath path);
 
     /**
      * Attempts to add a straight line from the current point to the start of the current sub-path.

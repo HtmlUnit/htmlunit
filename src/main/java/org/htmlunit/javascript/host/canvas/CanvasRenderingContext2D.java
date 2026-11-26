@@ -36,6 +36,7 @@ import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.html.HTMLCanvasElement;
 import org.htmlunit.javascript.host.html.HTMLImageElement;
 import org.htmlunit.platform.Platform;
+import org.htmlunit.platform.canvas.rendering.RecordedPath;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend.LineCap;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend.LineJoin;
@@ -59,6 +60,7 @@ import org.htmlunit.util.MimeType;
 public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(CanvasRenderingContext2D.class);
+    private static final String TYPE = "CanvasRenderingContext2D";
 
     private HTMLCanvasElement canvas_;
     private RenderingBackend renderingBackend_;
@@ -199,6 +201,10 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxFunction
     public void arc(final double x, final double y, final double radius, final double startAngle,
                 final double endAngle, final boolean anticlockwise) {
+        if (!Path2D.areFinite(x, y, radius, startAngle, endAngle)) {
+            return;
+        }
+        Path2D.checkRadius(this, "arc", TYPE, radius);
         getRenderingBackend().arc(x, y, radius, startAngle, endAngle, anticlockwise);
     }
 
@@ -213,7 +219,11 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxFunction
     public void arcTo(final double x1, final double y1, final double x2, final double y2,
                 final double radius) {
-        LOG.info("CanvasRenderingContext2D.arcTo() not yet implemented");
+        if (!Path2D.areFinite(x1, y1, x2, y2, radius)) {
+            return;
+        }
+        Path2D.checkRadius(this, "arcTo", TYPE, radius);
+        getRenderingBackend().arcTo(x1, y1, x2, y2, radius);
     }
 
     /**
@@ -267,33 +277,10 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                     "CanvasRenderingContext2D.clip() failed - this is not a CanvasRenderingContext2D");
         }
 
-        RenderingBackend.WindingRule windingRule = WindingRule.NON_ZERO;
-        if (args.length == 1) {
-            final String windingRuleParam = JavaScriptEngine.toString(args[0]);
-            if ("evenodd".contentEquals(windingRuleParam)) {
-                windingRule = WindingRule.EVEN_ODD;
-            }
-            canvas.getRenderingBackend().clip(windingRule, null);
-            return;
-        }
-
-        if (args.length > 1) {
-            if (!(args[0] instanceof Path2D)) {
-                throw JavaScriptEngine.reportRuntimeError(
-                        "CanvasRenderingContext2D.clip() failed - the first parameter has to be a Path2D");
-            }
-
-            final String windingRuleParam = JavaScriptEngine.toString(args[1]);
-            if ("evenodd".contentEquals(windingRuleParam)) {
-                windingRule = WindingRule.EVEN_ODD;
-            }
-
-            LOG.info("CanvasRenderingContext2D.clip(path, fillRule) not yet implemented");
-            // canvas.getRenderingBackend().clip(windingRule, (Path2D) args[0]);
-            return;
-        }
-
-        canvas.getRenderingBackend().clip(WindingRule.NON_ZERO, null);
+        // clip(optional CanvasFillRule fillRule) or clip(Path2D path, optional CanvasFillRule fillRule)
+        final Path2D path = pathArgument(args, 2, "clip");
+        final WindingRule windingRule = windingRule(args, path == null ? 0 : 1, "clip");
+        canvas.getRenderingBackend().clip(windingRule, path == null ? null : path.getRecordedPath());
     }
 
     /**
@@ -502,6 +489,11 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                     final double radiusX, final double radiusY,
                     final double rotation, final double startAngle, final double endAngle,
                     final boolean anticlockwise) {
+        if (!Path2D.areFinite(x, y, radiusX, radiusY, rotation, startAngle, endAngle)) {
+            return;
+        }
+        Path2D.checkRadius(this, "ellipse", TYPE, radiusX, "major-axis");
+        Path2D.checkRadius(this, "ellipse", TYPE, radiusY, "minor-axis");
         getRenderingBackend().ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
     }
 
@@ -521,34 +513,58 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                     "CanvasRenderingContext2D.fill() failed - this is not a CanvasRenderingContext2D");
         }
 
-        // Determine which argument (if any) is the fill rule string.
-        // Signature 1: fill(optional CanvasFillRule fillRule)
-        // Signature 2: fill(Path2D path, optional CanvasFillRule fillRule)
-        String fillRuleStr = null;
-        if (args.length > 1) {
-            fillRuleStr = JavaScriptEngine.toString(args[1]);
+        // fill(optional CanvasFillRule fillRule) or fill(Path2D path, optional CanvasFillRule fillRule)
+        final Path2D path = pathArgument(args, 2, "fill");
+        final int ruleIndex = path == null ? 0 : 1;
+        final WindingRule windingRule = windingRule(args, ruleIndex, "fill");
+
+        if (path == null) {
+            renderingCtx.getRenderingBackend().fill(windingRule);
         }
-        else if (args.length > 0) {
-            fillRuleStr = JavaScriptEngine.toString(args[0]);
+        else {
+            renderingCtx.getRenderingBackend().fill(windingRule, path.getRecordedPath());
+        }
+    }
+
+    /**
+     * Returns the Path2D argument of a method with an optional Path2D as first parameter.
+     * @param args the arguments
+     * @param minArgsForPath if there are at least this number of arguments, the first one has to be a path
+     * @param method the method name for the error message
+     * @return the path or {@code null} if the first argument is not a path
+     */
+    private static Path2D pathArgument(final Object[] args, final int minArgsForPath, final String method) {
+        if (args.length > 0 && args[0] instanceof Path2D path) {
+            return path;
+        }
+        if (args.length >= minArgsForPath) {
+            throw JavaScriptEngine.typeError("Failed to execute '" + method
+                    + "' on 'CanvasRenderingContext2D': parameter 1 is not of type 'Path2D'.");
+        }
+        return null;
+    }
+
+    /**
+     * Returns the CanvasFillRule argument.
+     * @param args the arguments
+     * @param index the index of the fill rule argument
+     * @param method the method name for the error message
+     * @return the winding rule (default is non zero)
+     */
+    private static WindingRule windingRule(final Object[] args, final int index, final String method) {
+        if (args.length <= index || JavaScriptEngine.isUndefined(args[index])) {
+            return WindingRule.NON_ZERO;
         }
 
-        RenderingBackend.WindingRule windingRule = RenderingBackend.WindingRule.NON_ZERO;
-        if (fillRuleStr != null) {
-            if ("evenodd".equals(fillRuleStr)) {
-                windingRule = RenderingBackend.WindingRule.EVEN_ODD;
-            }
-            else if (!"nonzero".equals(fillRuleStr)) {
-                // Per spec: unrecognised values are ignored entirely.
-                // Since fill() has no persistent fill-rule state, we just
-                // use the default nonzero — which is already set above.
-                // Log it for debugging purposes.
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("fill() called with unrecognised fillRule: '" + fillRuleStr + "', using 'nonzero'.");
-                }
-            }
+        final String rule = JavaScriptEngine.toString(args[index]);
+        if ("nonzero".equals(rule)) {
+            return WindingRule.NON_ZERO;
         }
-
-        renderingCtx.getRenderingBackend().fill(windingRule);
+        if ("evenodd".equals(rule)) {
+            return WindingRule.EVEN_ODD;
+        }
+        throw JavaScriptEngine.typeError("Failed to execute '" + method + "' on 'CanvasRenderingContext2D': "
+                + "The provided value '" + rule + "' is not a valid enum value of type CanvasFillRule.");
     }
 
     /**
@@ -614,11 +630,64 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     }
 
     /**
-     * Dummy placeholder.
+     * Checks whether the given point is inside the current or the given path.
+     * Supported signatures are {@code isPointInPath(x, y, optional fillRule)}
+     * and {@code isPointInPath(path, x, y, optional fillRule)}.
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return whether the point is inside the path
      */
     @JsxFunction
-    public void isPointInPath() {
-        LOG.info("CanvasRenderingContext2D.isPointInPath() not yet implemented");
+    public static boolean isPointInPath(final Context context, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
+            throw JavaScriptEngine.typeError("Illegal invocation");
+        }
+
+        final Path2D path = pathArgument(args, 4, "isPointInPath");
+        final int xIndex = path == null ? 0 : 1;
+        if (args.length < xIndex + 2) {
+            throw JavaScriptEngine.typeError("Failed to execute 'isPointInPath' on 'CanvasRenderingContext2D': "
+                    + (xIndex + 2) + " arguments required, but only " + args.length + " present.");
+        }
+
+        final double x = JavaScriptEngine.toNumber(args[xIndex]);
+        final double y = JavaScriptEngine.toNumber(args[xIndex + 1]);
+        final WindingRule windingRule = windingRule(args, xIndex + 2, "isPointInPath");
+        return canvas.getRenderingBackend().isPointInPath(
+                path == null ? null : path.getRecordedPath(), x, y, windingRule);
+    }
+
+    /**
+     * Checks whether the given point is inside the area covered by the stroke of the current or the given path.
+     * Supported signatures are {@code isPointInStroke(x, y)} and {@code isPointInStroke(path, x, y)}.
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return whether the point is inside the stroke
+     */
+    @JsxFunction
+    public static boolean isPointInStroke(final Context context, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
+            throw JavaScriptEngine.typeError("Illegal invocation");
+        }
+
+        final Path2D path = pathArgument(args, 3, "isPointInStroke");
+        final int xIndex = path == null ? 0 : 1;
+        if (args.length < xIndex + 2) {
+            throw JavaScriptEngine.typeError("Failed to execute 'isPointInStroke' on 'CanvasRenderingContext2D': "
+                    + (xIndex + 2) + " arguments required, but only " + args.length + " present.");
+        }
+
+        final double x = JavaScriptEngine.toNumber(args[xIndex]);
+        final double y = JavaScriptEngine.toNumber(args[xIndex + 1]);
+        return canvas.getRenderingBackend().isPointInStroke(path == null ? null : path.getRecordedPath(), x, y);
     }
 
     /**
@@ -731,6 +800,21 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     }
 
     /**
+     * Adds a rectangle with rounded corners to the current path.
+     * @param x the x
+     * @param y the y
+     * @param w the width
+     * @param h the height
+     * @param radii a radius, a DOMPointInit or an array of up to four of them
+     */
+    @JsxFunction
+    public void roundRect(final double x, final double y, final double w, final double h, final Object radii) {
+        final RecordedPath path = new RecordedPath();
+        Path2D.roundRect(path, TYPE, x, y, w, h, radii);
+        path.replay(getRenderingBackend());
+    }
+
+    /**
      * Pops state stack and restore state.
      */
     @JsxFunction
@@ -761,8 +845,11 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @param y the scale factor in the vertical direction
      */
     @JsxFunction
-    public void scale(final Object x, final Object y) {
-        LOG.info("CanvasRenderingContext2D.scale() not yet implemented");
+    public void scale(final double x, final double y) {
+        if (!Path2D.areFinite(x, y)) {
+            return;
+        }
+        getRenderingBackend().transform(x, 0, 0, y, 0, 0);
     }
 
     /**
@@ -791,11 +878,21 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     }
 
     /**
-     * Calculates the strokes of all the subpaths of the current path.
+     * Calculates the strokes of all the subpaths of the current path or of the given path.
+     * @param path the path to stroke or undefined to stroke the current path
      */
     @JsxFunction
-    public void stroke() {
-        getRenderingBackend().stroke();
+    public void stroke(final Object path) {
+        if (JavaScriptEngine.isUndefined(path)) {
+            getRenderingBackend().stroke();
+            return;
+        }
+
+        if (!(path instanceof Path2D path2d)) {
+            throw JavaScriptEngine.typeError("Failed to execute 'stroke' on 'CanvasRenderingContext2D': "
+                    + "parameter 1 is not of type 'Path2D'.");
+        }
+        getRenderingBackend().stroke(path2d.getRecordedPath());
     }
 
     /**
