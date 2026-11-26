@@ -454,12 +454,9 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage page1 = getPageWithRedirectionsSameURL(1);
         assertEquals("Second", page1.getTitleText());
 
-        try {
-            getPageWithRedirectionsSameURL(30);
-        }
-        catch (final Exception e) {
-            assertTrue(e.getMessage(), e.getMessage().contains("Too many redirects"));
-        }
+        final FailingHttpStatusCodeException e = Assertions.assertThrows(FailingHttpStatusCodeException.class,
+            () -> getPageWithRedirectionsSameURL(30));
+        assertTrue(e.getMessage(), e.getMessage().contains("Too many redirects"));
     }
 
     private HtmlPage getPageWithRedirectionsSameURL(final int nbRedirections) throws Exception {

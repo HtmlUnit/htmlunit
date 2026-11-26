@@ -282,12 +282,9 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</head><body>\n"
             + "</body></html>";
 
-        try {
-            loadPageWithAlerts(content1);
-        }
-        catch (final Exception e) {
-            assertTrue(e.getMessage().contains(URL_FIRST.toString()));
-        }
+        final ScriptException e1 = Assertions.assertThrows(ScriptException.class,
+            () -> loadPageWithAlerts(content1));
+        assertTrue(e1.getMessage().contains(URL_FIRST.toString()));
 
         // external script
         final WebClient client = getWebClient();
@@ -305,12 +302,9 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         webConnection.setResponse(urlScript, jsContent, "text/javascript");
         client.setWebConnection(webConnection);
 
-        try {
-            client.getPage(URL_FIRST);
-        }
-        catch (final Exception e) {
-            assertTrue(e.getMessage(), e.getMessage().contains(urlScript.toString()));
-        }
+        final ScriptException e2 = Assertions.assertThrows(ScriptException.class,
+            () -> client.getPage(URL_FIRST));
+        assertTrue(e2.getMessage(), e2.getMessage().contains(urlScript.toString()));
     }
 
     /**
