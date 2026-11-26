@@ -584,16 +584,12 @@ public class Document extends Node {
     @JsxFunction
     public XPathResult evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
-        XPathResult xPathResult = null;
-        if (result instanceof XPathResult pathResult) {
+        final XPathResult xPathResult;
+        if (result instanceof XPathResult pathResult
+                && !getBrowserVersion().hasFeature(JS_DOCUMENT_EVALUATE_RECREATES_RESULT)) {
             xPathResult = pathResult;
-
-            if (getBrowserVersion().hasFeature(JS_DOCUMENT_EVALUATE_RECREATES_RESULT)) {
-                xPathResult = new XPathResult();
-                xPathResult.setParentScope(getParentScope());
-                xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
-            }
         }
+        // a XPathResult is a ScriptableObject; it is replaced by a new one if the feature is set
         else if (result == null
                 || JavaScriptEngine.isUndefined(result)
                 || result instanceof ScriptableObject) {

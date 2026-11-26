@@ -1986,7 +1986,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             return;
         }
 
-        String unit = "px";
+        final String unit;
         if (percent && valueString.endsWith("%")) {
             unit = valueString.substring(valueString.length() - 1);
             valueString = valueString.substring(0, valueString.length() - 1);

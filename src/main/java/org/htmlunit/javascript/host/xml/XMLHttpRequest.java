@@ -1127,6 +1127,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             synchronized (pageLock) {
                 webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
+                corsResponseTainting_ = false;
                 if (async_) {
                     setState(DONE);
                     fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
@@ -1182,7 +1183,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @throws IOException in case of a network error
      */
     private WebResponse loadWebResponseFollowingRedirects(final CorsLoader loader) throws IOException {
-        corsResponseTainting_ = false;
         final CorsLoader.Result result = loader.load(webRequest_, isSameOrigin_);
         corsResponseTainting_ = result.corsTainting();
         return result.response();

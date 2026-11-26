@@ -403,7 +403,7 @@ public class HtmlSerializerNormalizedText {
         first = appendTableRows(builder, tableRows, first, tableHeader, tableFooter);
 
         if (tableFooter != null) {
-            first = appendTableRows(builder, tableFooter.getRows(), first, null, null);
+            appendTableRows(builder, tableFooter.getRows(), first, null, null);
         }
         else if (tableRows.isEmpty()) {
             final DomNode firstChild = htmlTable.getFirstChild();

@@ -300,7 +300,6 @@ public class EventListenersContainer implements Serializable {
                     page = ((HTMLElement) scriptableObj).getDomNodeOrDie().getHtmlPageOrNull();
                 }
                 else {
-                    page = null;
                     throw new UnsupportedOperationException("TODO ");
                 }
             }

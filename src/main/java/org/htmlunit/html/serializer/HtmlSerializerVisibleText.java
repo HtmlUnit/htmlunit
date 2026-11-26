@@ -718,7 +718,7 @@ public class HtmlSerializerVisibleText {
         first = appendTableRows(builder, mode, tableRows, first, tableHeader, tableFooter);
 
         if (tableFooter != null && !footerFirst) {
-            first = appendTableRows(builder, mode, tableFooter.getRows(), first, null, null);
+            appendTableRows(builder, mode, tableFooter.getRows(), first, null, null);
         }
         else if (tableRows.isEmpty()) {
             final DomNode firstChild = htmlTable.getFirstChild();

@@ -3121,6 +3121,7 @@ public class HtmlPage extends SgmlPage {
      * @return true if the specified element now has the focus
      * @see #getFocusedElement()
      */
+    @SuppressWarnings("PMD.UnusedAssignment") // while the blur handlers run, no element has the focus
     public boolean setFocusedElement(final DomElement newElement, final boolean windowActivated) {
         if (elementWithFocus_ == newElement && !windowActivated) {
             // nothing to do
