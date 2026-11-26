@@ -76,6 +76,18 @@
     </Match>
 
     <!--
+        SpotBugs treats XMLHttpRequest as shared between threads because doSend() synchronizes
+        on the script lock of the page (SgmlPage.getScriptLock()).
+        All the fields are written by the scripts of the page (open(), send(), abort(), the setters),
+        which hold this lock (JavaScriptEngine), or by doSend() while holding it; the values set before
+        send() are passed to the thread of the event loop by the job manager (synchronized).
+    -->
+    <Match>
+        <Bug pattern="AT_STALE_THREAD_WRITE_OF_PRIMITIVE"/>
+        <Class name="org.htmlunit.javascript.host.xml.XMLHttpRequest"/>
+    </Match>
+
+    <!--
         DomElement.ATTRIBUTE_NOT_DEFINED is a marker instance, the identity check is intended
         (an empty attribute value is equal to the marker but not the same).
     -->
