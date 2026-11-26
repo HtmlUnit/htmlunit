@@ -17,7 +17,7 @@ package org.htmlunit.javascript;
 /**
  * An error that is thrown to stop a script whose page has been replaced
  * by another page in the window (e.g. because of a navigation) while the
- * script was still running.
+ * script was still running, or whose {@link org.htmlunit.WebClient} is closing.
  * <p>
  * This is an {@link Error} to make sure the script never gets
  * control back through catch or finally.

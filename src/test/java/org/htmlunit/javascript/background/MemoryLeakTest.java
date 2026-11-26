@@ -379,6 +379,50 @@ public class MemoryLeakTest extends SimpleWebTestCase {
         assertFalse("Thread '" + threadName + "' is still alive.", isThreadAlive(threadName));
     }
 
+    /**
+     * An endless loop in a timer is stopped by {@link WebClient#close()}; the close does not wait
+     * for the timeout of the event loop thread (10s) and the thread does not keep the page reachable
+     * (Thread.stop() is not supported by newer JVMs).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void endlessLoopInTimer() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + "  setTimeout(function() { while (true) { document.title = 'x'; } }, 10);\n"
+            + "</script></body></html>";
+
+        final MemoryLeakDetector detector = new MemoryLeakDetector();
+        final long start = System.currentTimeMillis();
+        final String threadName = loadWaitForLoopAndClose(detector, html);
+        final long duration = System.currentTimeMillis() - start;
+
+        assertTrue("close() took " + duration + "ms", duration < 5_000);
+
+        final long end = System.currentTimeMillis() + 5_000;
+        while (isThreadAlive(threadName) && System.currentTimeMillis() < end) {
+            Thread.sleep(50);
+        }
+        assertFalse("Thread '" + threadName + "' is still alive.", isThreadAlive(threadName));
+        assertTrue("Page can't be garbage collected.", detector.canBeGCed("page"));
+    }
+
+    private static String loadWaitForLoopAndClose(final MemoryLeakDetector detector, final String html)
+            throws Exception {
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+
+        try (WebClient client = new WebClient(BrowserVersion.BEST_SUPPORTED)) {
+            client.setWebConnection(conn);
+            final HtmlPage page = client.getPage(URL_FIRST);
+            // give the timer the time to start the loop
+            client.waitForBackgroundJavaScript(300);
+
+            detector.register("page", page);
+            return "JS executor for " + client;
+        }
+    }
+
     private static String loadAndCloseReturnThreadName(final String html) throws Exception {
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);

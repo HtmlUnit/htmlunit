@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#729">
+                WebClient.close() stops running scripts (e.g. an endless loop in a timer); so far close() waited 10s
+                for the thread of the event loop and, because Thread.stop() is no longer supported by newer JVMs,
+                the thread kept running and kept the page in memory.
+            </action>
             <action type="fix" dev="rbri">
                 A click navigating to another page waited up to 10s if a background job (e.g. the events
                 of an asynchronous XMLHttpRequest) was waiting to run a script of the page.

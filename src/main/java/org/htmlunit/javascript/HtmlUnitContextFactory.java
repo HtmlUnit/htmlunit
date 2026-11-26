@@ -349,6 +349,14 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 && page != page.getEnclosingWindow().getEnclosedPage()) {
             throw new PageUnloadedError();
         }
+
+        // stop all scripts if the client gets closed (e.g. an endless loop in a timer);
+        // otherwise the thread of the event loop keeps running (Thread.stop() is no longer
+        // supported) and keeps the page reachable
+        final AbstractJavaScriptEngine<?> engine = webClient_.getJavaScriptEngine();
+        if (engine == null || engine instanceof JavaScriptEngine jsEngine && jsEngine.isShutdownPending()) {
+            throw new PageUnloadedError();
+        }
     }
 
     /**

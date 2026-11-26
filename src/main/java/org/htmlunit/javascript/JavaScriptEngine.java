@@ -743,6 +743,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Returns whether {@link #prepareShutdown()} was called (the {@link org.htmlunit.WebClient} is closing);
+     * no new scripts are started and running scripts get stopped.
+     *
+     * @return whether the shutdown is pending
+     */
+    public boolean isShutdownPending() {
+        return shutdownPending_;
+    }
+
+    /**
      * Shutdown the JavaScriptEngine.
      */
     @Override
@@ -1031,7 +1041,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
             catch (final PageUnloadedError e) {
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("Script stopped because the page '" + page_.getUrl() + "' has been unloaded");
+                    LOG.debug("Script stopped because the page '" + page_.getUrl()
+                            + "' has been unloaded or the client is closing");
                 }
                 return null;
             }
