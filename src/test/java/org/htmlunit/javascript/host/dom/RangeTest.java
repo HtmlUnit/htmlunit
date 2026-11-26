@@ -305,6 +305,84 @@ public class RangeTest extends WebDriverTestCase {
     }
 
     /**
+     * The end container is an element; the clone of it contains only the children before the end offset.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<b id=\"b\">1</b>", "<b id=\"b\">1<i>2</i>3<u>4</u></b>5"})
+    public void cloneContentsEndInElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'><b id='b'>1<i>2</i>3<u>4</u></b>5</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var b = document.getElementById('b');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(d, 0);\n"
+            + "  r.setEnd(b, 1);\n"
+            + "  var f = r.cloneContents();\n"
+            + "  var div = document.createElement('div');\n"
+            + "  div.appendChild(f);\n"
+            + "  log(div.innerHTML);\n"
+            + "  log(d.innerHTML);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The end container is an element and the end offset is zero; the clone of it has no children.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<b id=\"b\"></b>", "<b id=\"b\">1<i>2</i>3<u>4</u></b>5"})
+    public void cloneContentsEndInElementOffsetZero() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'><b id='b'>1<i>2</i>3<u>4</u></b>5</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var b = document.getElementById('b');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(d, 0);\n"
+            + "  r.setEnd(b, 0);\n"
+            + "  var f = r.cloneContents();\n"
+            + "  var div = document.createElement('div');\n"
+            + "  div.appendChild(f);\n"
+            + "  log(div.innerHTML);\n"
+            + "  log(d.innerHTML);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The end container is an element; the children after the end offset stay in the document.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<b id=\"b\">1</b>", "<b id=\"b\"><i>2</i>3<u>4</u></b>5"})
+    public void extractContentsEndInElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'><b id='b'>1<i>2</i>3<u>4</u></b>5</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var b = document.getElementById('b');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(d, 0);\n"
+            + "  r.setEnd(b, 1);\n"
+            + "  var f = r.extractContents();\n"
+            + "  var div = document.createElement('div');\n"
+            + "  div.appendChild(f);\n"
+            + "  log(div.innerHTML);\n"
+            + "  log(d.innerHTML);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

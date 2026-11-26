@@ -657,11 +657,10 @@ public class SimpleRange implements Serializable {
             }
         }
         else {
+            // the list is live, removing a child moves the next one to the offset
             final DomNodeList<DomNode> children = node.getChildNodes();
-            for (int i = offset; i < children.getLength(); i++) {
-                final DomNode child = children.get(i);
-                child.remove();
-                i--;
+            while (children.getLength() > offset) {
+                children.get(offset).remove();
             }
         }
     }
