@@ -8,6 +8,11 @@
 
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#245">
+                XMLHttpRequest: the state changes and the events of an asynchronous request are no longer processed
+                while a script of the page is running; handlers assigned after send() are called now also if the
+                response is already available, and the script does not see the state changing.
+            </action>
             <action type="fix" dev="Vidya m">
                 A carriage return, line feed or double quote in the field name or the file name of a
                 multipart/form-data part is now escaped (%0D, %0A, %22) like in the browsers; so far

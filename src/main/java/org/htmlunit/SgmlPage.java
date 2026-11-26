@@ -136,6 +136,20 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the lock held while the scripts of this page are running (including the event handlers
+     * and the timers). Everything a script can observe and that is changed outside of a script
+     * (e.g. from the thread of the event loop) has to be done while holding this lock.
+     *
+     * @return the lock
+     */
+    public Object getScriptLock() {
+        // the page itself, user code may synchronize on the page
+        return this;
+    }
+
+    /**
      * Creates an empty {@link DomDocumentFragment} object.
      * @return a newly created {@link DomDocumentFragment}
      */

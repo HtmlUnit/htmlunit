@@ -1198,7 +1198,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
         }
 
-        synchronized (page) {
+        synchronized (page.getScriptLock()) {
             if (triggerMouseEvents) {
                 mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }

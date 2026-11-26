@@ -994,11 +994,17 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * Performs the actual send operation.
+     * <p>For an asynchronous request this runs in the thread of the event loop. The network part runs
+     * without a lock; the changes of the state and the events are done while holding the script lock of the page
+     * (see {@link SgmlPage#getScriptLock()}). Like in the browsers, they are therefore never processed while
+     * a script of the page is running; e.g. a handler assigned after send() in the same script is called
+     * and the script does not see the state changing.</p>
      */
     void doSend() {
         final Window window = getWindow();
         final WebWindow webWindow = window.getWebWindow();
         final WebClient wc = webWindow.getWebClient();
+        final Object pageLock = getPageScriptLock(webWindow);
 
         // accessing to local resource is forbidden for security reason
         if (!wc.getOptions().isFileProtocolForXMLHttpRequestsAllowed()
@@ -1009,10 +1015,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             if (async_) {
-                setState(DONE);
-                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-                fireJavascriptEvent(Event.TYPE_ERROR);
-                fireJavascriptEvent(Event.TYPE_LOAD_END);
+                synchronized (pageLock) {
+                    setState(DONE);
+                    fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+                    fireJavascriptEvent(Event.TYPE_ERROR);
+                    fireJavascriptEvent(Event.TYPE_LOAD_END);
+                }
                 return;
             }
 
@@ -1033,11 +1041,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 final WebResponse preflightResponse = loader.sendPreflight(webRequest_);
                 final String blocked = loader.checkPreflight(webRequest_, preflightResponse, null);
                 if (blocked != null) {
-                    setState(DONE);
-                    if (async_ || browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
-                        fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-                        fireJavascriptEvent(Event.TYPE_ERROR);
-                        fireJavascriptEvent(Event.TYPE_LOAD_END);
+                    synchronized (pageLock) {
+                        setState(DONE);
+                        if (async_ || browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
+                            fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+                            fireJavascriptEvent(Event.TYPE_ERROR);
+                            fireJavascriptEvent(Event.TYPE_LOAD_END);
+                        }
                     }
 
                     // the blocked request is logged by the CorsLoader
@@ -1047,87 +1057,78 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             // follows the redirects like the fetch standard describes it
             // and checks the CORS headers of all responses of a cross origin request
-            webResponse_ = loadWebResponseFollowingRedirects(loader);
+            final WebResponse loadedResponse = loadWebResponseFollowingRedirects(loader);
             LOG.debug("Web response loaded successfully.");
 
-            if (overriddenMimeType_ != null) {
-                final int index = overriddenMimeType_.toLowerCase(Locale.ROOT).indexOf("charset=");
-                String charsetName = "";
-                if (index != -1) {
-                    charsetName = overriddenMimeType_.substring(index + "charset=".length());
+            synchronized (pageLock) {
+                webResponse_ = loadedResponse;
+                if (overriddenMimeType_ != null) {
+                    final int index = overriddenMimeType_.toLowerCase(Locale.ROOT).indexOf("charset=");
+                    String charsetName = "";
+                    if (index != -1) {
+                        charsetName = overriddenMimeType_.substring(index + "charset=".length());
+                    }
+
+                    final String charsetNameFinal = charsetName;
+                    final Charset charset;
+                    if (XUserDefinedCharset.NAME.equalsIgnoreCase(charsetName)) {
+                        charset = XUserDefinedCharset.INSTANCE;
+                    }
+                    else {
+                        charset = EncodingSniffer.toCharset(charsetName);
+                    }
+                    webResponse_ = new WebResponseWrapper(webResponse_) {
+                        @Override
+                        public String getContentType() {
+                            return overriddenMimeType_;
+                        }
+
+                        @Override
+                        public Charset getContentCharset() {
+                            if (charsetNameFinal.isEmpty() || charset == null) {
+                                return super.getContentCharset();
+                            }
+                            return charset;
+                        }
+                    };
                 }
 
-                final String charsetNameFinal = charsetName;
-                final Charset charset;
-                if (XUserDefinedCharset.NAME.equalsIgnoreCase(charsetName)) {
-                    charset = XUserDefinedCharset.INSTANCE;
+                setState(HEADERS_RECEIVED);
+                if (async_) {
+                    fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+
+                    setState(LOADING);
+                    fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+                    fireJavascriptEvent(Event.TYPE_PROGRESS);
+                }
+
+                setState(DONE);
+                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+
+                if (!async_ && aborted_
+                        && browserVersion.hasFeature(XHR_SEND_NETWORK_ERROR_IF_ABORTED)) {
+                    throw JavaScriptEngine.constructError("Error",
+                            "Failed to execute 'send' on 'XMLHttpRequest': Failed to load '"
+                            + webRequest_.getUrl() + "'");
+                }
+
+                if (browserVersion.hasFeature(XHR_LOAD_ALWAYS_AFTER_DONE)) {
+                    fireJavascriptEventIgnoreAbort(Event.TYPE_LOAD);
+                    fireJavascriptEventIgnoreAbort(Event.TYPE_LOAD_END);
                 }
                 else {
-                    charset = EncodingSniffer.toCharset(charsetName);
+                    fireJavascriptEvent(Event.TYPE_LOAD);
+                    fireJavascriptEvent(Event.TYPE_LOAD_END);
                 }
-                webResponse_ = new WebResponseWrapper(webResponse_) {
-                    @Override
-                    public String getContentType() {
-                        return overriddenMimeType_;
-                    }
-
-                    @Override
-                    public Charset getContentCharset() {
-                        if (charsetNameFinal.isEmpty() || charset == null) {
-                            return super.getContentCharset();
-                        }
-                        return charset;
-                    }
-                };
-            }
-
-            setState(HEADERS_RECEIVED);
-            if (async_) {
-                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-
-                setState(LOADING);
-                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-                fireJavascriptEvent(Event.TYPE_PROGRESS);
-            }
-
-            setState(DONE);
-            fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-
-            if (!async_ && aborted_
-                    && browserVersion.hasFeature(XHR_SEND_NETWORK_ERROR_IF_ABORTED)) {
-                throw JavaScriptEngine.constructError("Error",
-                        "Failed to execute 'send' on 'XMLHttpRequest': Failed to load '" + webRequest_.getUrl() + "'");
-            }
-
-            if (browserVersion.hasFeature(XHR_LOAD_ALWAYS_AFTER_DONE)) {
-                fireJavascriptEventIgnoreAbort(Event.TYPE_LOAD);
-                fireJavascriptEventIgnoreAbort(Event.TYPE_LOAD_END);
-            }
-            else {
-                fireJavascriptEvent(Event.TYPE_LOAD);
-                fireJavascriptEvent(Event.TYPE_LOAD_END);
             }
         }
         catch (final IOException e) {
             LOG.debug("IOException: returning a network error response.", e);
 
-            webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
-            if (async_) {
-                setState(DONE);
-                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-                if (e instanceof SocketTimeoutException) {
-                    fireJavascriptEvent(Event.TYPE_TIMEOUT);
-                }
-                else {
-                    fireJavascriptEvent(Event.TYPE_ERROR);
-                }
-                fireJavascriptEvent(Event.TYPE_LOAD_END);
-                // violations of the Content-Security-Policy delayed until the request has failed
-                ContentSecurityPolicy.firePendingViolations();
-            }
-            else {
-                setState(DONE);
-                if (browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
+            synchronized (pageLock) {
+                webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
+                if (async_) {
+                    setState(DONE);
                     fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                     if (e instanceof SocketTimeoutException) {
                         fireJavascriptEvent(Event.TYPE_TIMEOUT);
@@ -1136,12 +1137,41 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         fireJavascriptEvent(Event.TYPE_ERROR);
                     }
                     fireJavascriptEvent(Event.TYPE_LOAD_END);
+                    // violations of the Content-Security-Policy delayed until the request has failed
+                    ContentSecurityPolicy.firePendingViolations();
                 }
+                else {
+                    setState(DONE);
+                    if (browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
+                        fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+                        if (e instanceof SocketTimeoutException) {
+                            fireJavascriptEvent(Event.TYPE_TIMEOUT);
+                        }
+                        else {
+                            fireJavascriptEvent(Event.TYPE_ERROR);
+                        }
+                        fireJavascriptEvent(Event.TYPE_LOAD_END);
+                    }
 
-                throw JavaScriptEngine.asJavaScriptException(window,
-                        e.getMessage(), DOMException.NETWORK_ERR, e);
+                    throw JavaScriptEngine.asJavaScriptException(window,
+                            e.getMessage(), DOMException.NETWORK_ERR, e);
+                }
             }
         }
+    }
+
+    /**
+     * Returns the lock held while the scripts of the page are running.
+     *
+     * @param webWindow the window
+     * @return the lock
+     * @see SgmlPage#getScriptLock()
+     */
+    private Object getPageScriptLock(final WebWindow webWindow) {
+        if (webWindow.getEnclosedPage() instanceof SgmlPage page) {
+            return page.getScriptLock();
+        }
+        return this;
     }
 
     /**

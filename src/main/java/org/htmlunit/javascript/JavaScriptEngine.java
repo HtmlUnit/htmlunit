@@ -953,7 +953,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             try {
                 final Object response;
                 cx.putThreadLocal(KEY_STARTING_PAGE, page_);
-                synchronized (page_) { // 2 scripts can't be executed in parallel for one page
+                synchronized (page_.getScriptLock()) { // 2 scripts can't be executed in parallel for one page
                     if (page_ != page_.getEnclosingWindow().getEnclosedPage()) {
                         return null; // page has been unloaded
                     }
@@ -998,7 +998,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
             try {
                 final Object response;
-                synchronized (page_) { // 2 scripts can't be executed in parallel for one page
+                synchronized (page_.getScriptLock()) { // 2 scripts can't be executed in parallel for one page
                     if (page_ != page_.getEnclosingWindow().getEnclosedPage()) {
                         return null; // page has been unloaded
                     }
