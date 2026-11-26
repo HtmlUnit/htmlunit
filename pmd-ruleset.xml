@@ -28,6 +28,13 @@
         </properties>
     </rule>
 
+    <!-- for (String s : strings) { s = s.trim(); ... } is ok -->
+    <rule ref="category/java/bestpractices.xml/AvoidReassigningLoopVariables">
+        <properties>
+            <property name="foreachReassign" value="firstOnly" />
+        </properties>
+    </rule>
+
     <rule ref="category/java/bestpractices.xml">
         <exclude name="AccessorMethodGeneration"/>
         <exclude name="UseVarargs"/>
