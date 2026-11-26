@@ -372,7 +372,7 @@ public class HttpWebConnection implements WebConnection {
                         buildFilePart(dataPair, builder);
                     }
                     else {
-                        builder.addTextBody(pair.getName(), pair.getValue(),
+                        builder.addTextBody(escapeMimeField(pair.getName()), pair.getValue(),
                                 ContentType.create(MimeType.TEXT_PLAIN, charset));
                     }
                 }
@@ -432,6 +432,25 @@ public class HttpWebConnection implements WebConnection {
         return query.replace("%%", "%25%25");
     }
 
+    /**
+     * Escapes the field name and the file name of a multipart/form-data part like the browsers do:
+     * a line feed is replaced by '%0A', a carriage return by '%0D' and a double quote by '%22'.
+     * Without this a carriage return or line feed breaks out of the Content-Disposition header and
+     * a double quote out of the quoted name, so a script controlling a field name or a file name
+     * (e.g. via FormData) could inject additional part headers or parts into the request body.
+     *
+     * @see <a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#multipart-form-data">
+     *     HTML Living Standard - multipart/form-data encoding algorithm</a>
+     * @param value the field name or file name
+     * @return the escaped value
+     */
+    private static String escapeMimeField(final String value) {
+        if (value == null) {
+            return null;
+        }
+        return value.replace("\n", "%0A").replace("\r", "%0D").replace("\"", "%22");
+    }
+
     private static Charset getCharset(final Charset charset, final List<NameValuePair> pairs) {
         for (final NameValuePair pair : pairs) {
             if (pair instanceof KeyDataPair pairWithFile) {
@@ -457,13 +476,15 @@ public class HttpWebConnection implements WebConnection {
 
         final ContentType contentType = ContentType.create(mimeType);
 
+        final String name = escapeMimeField(pairWithFile.getName());
+
         final File file = pairWithFile.getFile();
         if (file != null) {
             String filename = pairWithFile.getFileName();
             if (filename == null) {
                 filename = pairWithFile.getFile().getName();
             }
-            builder.addBinaryBody(pairWithFile.getName(), file, contentType, filename);
+            builder.addBinaryBody(name, file, contentType, escapeMimeField(filename));
             return;
         }
 
@@ -474,13 +495,14 @@ public class HttpWebConnection implements WebConnection {
                 filename = pairWithFile.getValue();
             }
 
-            builder.addBinaryBody(pairWithFile.getName(), data, contentType, filename);
+            builder.addBinaryBody(name, data, contentType, escapeMimeField(filename));
             return;
         }
 
-        builder.addPart(pairWithFile.getName(),
+        builder.addPart(name,
                 // Overridden in order not to have a chunked response.
-                new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getValue()) {
+                new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType,
+                        escapeMimeField(pairWithFile.getValue())) {
                 @Override
                 public long getContentLength() {
                     return 0;

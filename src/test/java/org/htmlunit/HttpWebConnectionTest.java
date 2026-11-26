@@ -261,6 +261,38 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     }
 
     /**
+     * A carriage return, line feed or double quote in the field name or the file name has to be
+     * escaped (%0D, %0A, %22) like in the browsers, otherwise it breaks out of the Content-Disposition
+     * header and injects additional part headers or parts into the multipart body.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void buildFilePartEscapesNameAndFilename() throws Exception {
+        final String encoding = "ISO8859-1";
+        final Path tempFile = Files.createTempFile("htmlunit", ".txt");
+        try {
+            final KeyDataPair pair = new KeyDataPair("na\r\nme\"x", tempFile.toFile(),
+                    "ev\r\nil\"name.txt", MimeType.TEXT_PLAIN, encoding);
+            final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();
+            final String part;
+            try (HttpWebConnection webConnection = new HttpWebConnection(getWebClient())) {
+                webConnection.buildFilePart(pair, builder);
+            }
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            builder.build().writeTo(baos);
+            part = baos.toString(encoding);
+
+            assertTrue(part, part.contains(
+                    "Content-Disposition: form-data; name=\"na%0D%0Ame%22x\"; "
+                    + "filename=\"ev%0D%0Ail%22name.txt\"\r\n"));
+            assertFalse(part, part.contains("name=\"na\r\nme"));
+        }
+        finally {
+            Files.delete(tempFile);
+        }
+    }
+
+    /**
      * @throws Exception on failure
      */
     @Test
