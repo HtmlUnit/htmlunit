@@ -2707,7 +2707,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the specified length value as a pixel length value
      * @see CssPixelValueConverter#pixelString(DomElement, CssValue)
      */
-    @SuppressWarnings("PMD.UseEqualsToCompareStrings")
+    @SuppressWarnings("PMD.UseEqualsToCompareStrings") // EMPTY_FINAL is a marker compared by identity
     private static String pixelString(final String value) {
         // EMPTY_FINAL is a marker compared by identity (an empty value is converted to '0px')
         if (EMPTY_FINAL == value || value.endsWith("px")) {

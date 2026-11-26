@@ -86,6 +86,16 @@
     </Match>
 
     <!--
+        ComputedCssStyleDeclaration.EMPTY_FINAL is a marker instance, the identity check is intended
+        (an empty value is converted to '0px').
+    -->
+    <Match>
+        <Bug pattern="ES_COMPARING_PARAMETER_STRING_WITH_EQ"/>
+        <Class name="org.htmlunit.css.ComputedCssStyleDeclaration"/>
+        <Method name="pixelString"/>
+    </Match>
+
+    <!--
         HttpClientCookie is only a carrier of the HttpClient cookie; the identity of a cookie is
         name, domain and path (Cookie.equals()), a HttpClientCookie has to be equal to a Cookie
         with the same identity.
