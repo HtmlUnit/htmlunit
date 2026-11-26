@@ -510,16 +510,13 @@ public class Navigator extends HtmlUnitScriptable {
             // makes the beacon a cors request with credentials; another origin has to allow it
             // in the preflight before the request is sent (also for redirect targets)
             if (CorsLoader.isPreflight(request)) {
-                final CorsLoader loader = new CorsLoader(webWindow, CorsLoader.CredentialsMode.INCLUDE,
-                        CorsLoader.RedirectMode.FOLLOW, 0);
+                final CorsLoader loader = new CorsLoader("sendBeacon", webWindow,
+                        CorsLoader.CredentialsMode.INCLUDE, CorsLoader.RedirectMode.FOLLOW, 0);
                 final boolean sameOrigin = UrlUtils.isSameOrigin(pageUrl, targetUrl);
                 if (!sameOrigin) {
                     final WebResponse preflightResponse = loader.sendPreflight(request);
-                    if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
-                            || !loader.isPreflightAuthorized(request, preflightResponse)) {
-                        if (LOG.isInfoEnabled()) {
-                            LOG.info("sendBeacon(): the preflight for '" + targetUrl + "' does not allow the request");
-                        }
+                    // a blocked request is logged by the CorsLoader
+                    if (loader.checkPreflight(request, preflightResponse, null) != null) {
                         return true;
                     }
                 }

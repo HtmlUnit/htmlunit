@@ -50,6 +50,7 @@ import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
+import org.htmlunit.javascript.host.fetch.CorsLoader;
 import org.htmlunit.platform.Platform;
 import org.htmlunit.platform.geom.IntDimension2D;
 import org.htmlunit.platform.image.ImageData;
@@ -772,7 +773,7 @@ public class HtmlImage extends HtmlElement {
                             // no-cors mode: the response is opaque
                             corsCrossOrigin_ = true;
                         }
-                        else if (!isCorsAllowed(originUrl)) {
+                        else if (!isCorsAllowed(originUrl, url)) {
                             // cors mode: a response failing the CORS check is a network error;
                             // like the browsers, the image is broken (error event, drawImage() throws).
                             // A response passing the check is CORS-same-origin.
@@ -870,11 +871,14 @@ public class HtmlImage extends HtmlElement {
      * the origin of the page and Access-Control-Allow-Credentials has to be 'true'; otherwise
      * the Access-Control-Allow-Origin header has to be the origin of the page or '*'.
      *
+     * A response failing the check is logged (see {@link CorsLoader#LOGGER_NAME}).
+     *
      * @param originUrl the url of the origin of the page
+     * @param requestUrl the url of the request
      * @return {@code true} if the response passes the CORS check
      * @see <a href="https://fetch.spec.whatwg.org/#cors-check">Fetch Standard - CORS check</a>
      */
-    private boolean isCorsAllowed(final URL originUrl) {
+    private boolean isCorsAllowed(final URL originUrl, final URL requestUrl) {
         // the serialized origin of the page
         String origin = originUrl.getProtocol() + "://" + originUrl.getHost();
         final int port = originUrl.getPort();
@@ -882,13 +886,16 @@ public class HtmlImage extends HtmlElement {
             origin += ":" + port;
         }
 
-        final String allowOrigin = imageWebResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
-        if ("use-credentials".equalsIgnoreCase(getAttributeDirect("crossorigin"))) {
-            final String allowCredentials =
-                    imageWebResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
-            return origin.equals(allowOrigin) && "true".equals(allowCredentials);
+        final String failure = CorsLoader.getCorsFailure(imageWebResponse_, origin,
+                "use-credentials".equalsIgnoreCase(getAttributeDirect("crossorigin")));
+        if (failure == null) {
+            return true;
         }
-        return "*".equals(allowOrigin) || origin.equals(allowOrigin);
+
+        final URL responseUrl = imageWebResponse_.getWebRequest().getUrl();
+        CorsLoader.logBlocked("image", responseUrl,
+                UrlUtils.sameFile(responseUrl, requestUrl) ? null : requestUrl, origin, failure);
+        return false;
     }
 
     /**

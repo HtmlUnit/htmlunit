@@ -85,7 +85,13 @@ import org.htmlunit.util.UrlUtils;
  */
 public final class ContentSecurityPolicy implements Serializable {
 
-    private static final Log LOG = LogFactory.getLog(ContentSecurityPolicy.class);
+    /**
+     * The name of the logger for the Content-Security-Policy violations (one warning per violation)
+     * and the failures sending a violation report.
+     */
+    public static final String LOGGER_NAME = "org.htmlunit.security.csp";
+
+    private static final Log LOG = LogFactory.getLog(LOGGER_NAME);
 
     /** The name of the report only header. */
     public static final String HEADER_REPORT_ONLY = "Content-Security-Policy-Report-Only";

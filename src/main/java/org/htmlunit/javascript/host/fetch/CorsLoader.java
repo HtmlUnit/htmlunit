@@ -53,7 +53,12 @@ import org.htmlunit.util.UrlUtils;
  */
 public final class CorsLoader {
 
-    private static final Log LOG = LogFactory.getLog(CorsLoader.class);
+    /**
+     * The name of the logger for the requests blocked by the CORS checks (one warning per blocked request).
+     */
+    public static final String LOGGER_NAME = "org.htmlunit.security.cors";
+
+    private static final Log LOG = LogFactory.getLog(LOGGER_NAME);
 
     // https://fetch.spec.whatwg.org/#cors-safelisted-response-header-name
     private static final Set<String> CORS_SAFELISTED_RESPONSE_HEADERS = Set.of(
@@ -64,6 +69,7 @@ public final class CorsLoader {
 
     private static final int MAX_REDIRECTS = 20;
 
+    private final String initiator_;
     private final WebWindow webWindow_;
     private final CredentialsMode credentialsMode_;
     private final RedirectMode redirectMode_;
@@ -121,7 +127,7 @@ public final class CorsLoader {
     }
 
     /**
-     * Thrown if the CORS check fails.
+     * Thrown if the CORS check fails; the message describes the reason.
      */
     public static final class NoPermittedHeaderException extends IOException {
         /**
@@ -158,27 +164,32 @@ public final class CorsLoader {
     /**
      * Ctor.
      *
+     * @param initiator the API that sends the request (e.g. 'fetch' or 'XMLHttpRequest'),
+     *        used for the log message if the request is blocked
      * @param webWindow the window of the page that sends the request
      * @param credentialsMode the credentials mode
      * @param redirectMode the redirect mode
      * @param timeout the timeout for the preflight requests (0 means no timeout)
      */
-    public CorsLoader(final WebWindow webWindow, final CredentialsMode credentialsMode,
+    public CorsLoader(final String initiator, final WebWindow webWindow, final CredentialsMode credentialsMode,
             final RedirectMode redirectMode, final int timeout) {
-        this(webWindow, credentialsMode, redirectMode, timeout, RequestMode.CORS);
+        this(initiator, webWindow, credentialsMode, redirectMode, timeout, RequestMode.CORS);
     }
 
     /**
      * Ctor.
      *
+     * @param initiator the API that sends the request (e.g. 'fetch' or 'XMLHttpRequest'),
+     *        used for the log message if the request is blocked
      * @param webWindow the window of the page that sends the request
      * @param credentialsMode the credentials mode
      * @param redirectMode the redirect mode
      * @param timeout the timeout for the preflight requests (0 means no timeout)
      * @param requestMode the request mode
      */
-    public CorsLoader(final WebWindow webWindow, final CredentialsMode credentialsMode,
+    public CorsLoader(final String initiator, final WebWindow webWindow, final CredentialsMode credentialsMode,
             final RedirectMode redirectMode, final int timeout, final RequestMode requestMode) {
+        initiator_ = initiator;
         webWindow_ = webWindow;
         credentialsMode_ = credentialsMode;
         redirectMode_ = redirectMode;
@@ -259,11 +270,12 @@ public final class CorsLoader {
 
             // each response of a cors request has to pass the check, also the one that redirects
             // (in mode 'no-cors' the response is opaque instead)
-            if (corsTainting && requestMode_ != RequestMode.NO_CORS && !isCorsAllowed(response, originHeader)) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + currentUrl);
+            if (corsTainting && requestMode_ != RequestMode.NO_CORS) {
+                final String failure = getCorsFailure(response, originHeader, isIncludeCredentials());
+                if (failure != null) {
+                    throw new NoPermittedHeaderException(logBlocked(initiator_, currentUrl,
+                            redirects > 0 ? webRequest.getUrl() : null, originHeader, failure));
                 }
-                throw new NoPermittedHeaderException("No permitted \"Access-Control-Allow-Origin\" header.");
             }
 
             if (nextUrl == null) {
@@ -304,9 +316,9 @@ public final class CorsLoader {
 
             if (corsTainting && requestMode_ != RequestMode.NO_CORS && isPreflight(request)) {
                 final WebResponse preflightResponse = sendPreflight(request);
-                if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
-                        || !isPreflightAuthorized(request, preflightResponse)) {
-                    throw new NoPermittedHeaderException("No permitted \"Access-Control-Allow-Origin\" header.");
+                final String blocked = checkPreflight(request, preflightResponse, webRequest.getUrl());
+                if (blocked != null) {
+                    throw new NoPermittedHeaderException(blocked);
                 }
             }
         }
@@ -439,17 +451,65 @@ public final class CorsLoader {
      *
      * @param response the response
      * @param origin the origin sent with the request
-     * @return whether the response passes the check
+     * @param includeCredentials whether the credentials mode of the request is 'include'
+     * @return {@code null} if the response passes the check, the reason otherwise
+     * @see <a href="https://fetch.spec.whatwg.org/#cors-check">Fetch Standard - CORS check</a>
      */
-    public boolean isCorsAllowed(final WebResponse response, final String origin) {
-        String value = response.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
-        final boolean allowed = origin != null && origin.equals(value);
-        if (isIncludeCredentials()) {
-            // second step: check the allow-credentials header for true
-            value = response.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
-            return allowed && Boolean.parseBoolean(value);
+    public static String getCorsFailure(final WebResponse response, final String origin,
+            final boolean includeCredentials) {
+        final String allowOrigin = response.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
+        if (allowOrigin == null) {
+            return "No 'Access-Control-Allow-Origin' header is present on the requested resource.";
         }
-        return allowed || ALLOW_ORIGIN_ALL.equals(value);
+        if (ALLOW_ORIGIN_ALL.equals(allowOrigin)) {
+            if (includeCredentials) {
+                return "The value of the 'Access-Control-Allow-Origin' header in the response must not be"
+                        + " the wildcard '*' when the request's credentials mode is 'include'.";
+            }
+            return null;
+        }
+        if (!allowOrigin.equals(origin)) {
+            return "The 'Access-Control-Allow-Origin' header has a value '" + allowOrigin
+                    + "' that is not equal to the supplied origin.";
+        }
+        if (includeCredentials) {
+            final String allowCredentials =
+                    response.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
+            if (!"true".equals(allowCredentials)) {
+                return "The value of the 'Access-Control-Allow-Credentials' header in the response is '"
+                        + (allowCredentials == null ? "" : allowCredentials)
+                        + "' which must be 'true' when the request's credentials mode is 'include'.";
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Logs a request blocked by the CORS checks (using the logger {@value #LOGGER_NAME}).
+     *
+     * @param initiator the API that sent the request (e.g. 'fetch', 'XMLHttpRequest' or 'image')
+     * @param url the url of the blocked response
+     * @param redirectedFrom the url of the request if the blocked response is the one of a redirect target,
+     *        {@code null} otherwise
+     * @param origin the origin sent with the request
+     * @param reason the reason
+     * @return the message
+     */
+    public static String logBlocked(final String initiator, final URL url, final URL redirectedFrom,
+            final String origin, final String reason) {
+        final StringBuilder message = new StringBuilder(256)
+                .append("Access to ").append(initiator).append(" at '").append(url).append('\'');
+        if (redirectedFrom != null) {
+            message.append(" (redirected from '").append(redirectedFrom).append("')");
+        }
+        message.append(" from origin '").append(origin)
+            .append("' has been blocked by CORS policy: ").append(reason);
+
+        final String result = message.toString();
+        if (LOG.isWarnEnabled()) {
+            LOG.warn(result);
+        }
+        return result;
     }
 
     /**
@@ -527,17 +587,37 @@ public final class CorsLoader {
     }
 
     /**
-     * Checks the response of the preflight request.
+     * Checks the response of the preflight request; if the request is not allowed, this is
+     * logged (see {@link #logBlocked(String, URL, URL, String, String)}).
      *
      * @param request the request
      * @param preflightResponse the response of the preflight request
-     * @return whether the request is allowed
+     * @param redirectedFrom the url of the original request if the request is the one for
+     *        a redirect target, {@code null} otherwise
+     * @return {@code null} if the request is allowed, the message describing why it is blocked otherwise
      */
-    public boolean isPreflightAuthorized(final WebRequest request, final WebResponse preflightResponse) {
+    public String checkPreflight(final WebRequest request, final WebResponse preflightResponse,
+            final URL redirectedFrom) {
+        final String failure = getPreflightFailure(request, preflightResponse);
+        if (failure == null) {
+            return null;
+        }
+        return logBlocked(initiator_, request.getUrl(), redirectedFrom,
+                request.getAdditionalHeaders().get(HttpHeader.ORIGIN), failure);
+    }
+
+    private String getPreflightFailure(final WebRequest request, final WebResponse preflightResponse) {
+        if (!preflightResponse.isSuccessOrUseProxyOrNotModified()) {
+            return "Response to preflight request doesn't pass access control check:"
+                    + " It does not have HTTP ok status (" + preflightResponse.getStatusCode() + ").";
+        }
+
         // the preflight response has to pass the CORS check too; for a request with credentials
         // this requires the exact origin and Access-Control-Allow-Credentials
-        if (!isCorsAllowed(preflightResponse, request.getAdditionalHeaders().get(HttpHeader.ORIGIN))) {
-            return false;
+        final String corsFailure = getCorsFailure(preflightResponse,
+                request.getAdditionalHeaders().get(HttpHeader.ORIGIN), isIncludeCredentials());
+        if (corsFailure != null) {
+            return "Response to preflight request doesn't pass access control check: " + corsFailure;
         }
 
         // the wildcard is not supported for requests with credentials
@@ -546,7 +626,7 @@ public final class CorsLoader {
         final HttpMethod method = request.getHttpMethod();
         if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST
                 && !isPreflightMethodAllowed(method.name(), preflightResponse, wildcard)) {
-            return false;
+            return "Method " + method.name() + " is not allowed by Access-Control-Allow-Methods in preflight response.";
         }
 
         // there is no test case for this because the servlet API has no support
@@ -558,7 +638,7 @@ public final class CorsLoader {
                 if (value != null) {
                     if (wildcard && ALLOW_ORIGIN_ALL.equals(value)) {
                         // all headers are allowed
-                        return true;
+                        return null;
                     }
                     value = StringUtils.toRootLowerCase(value);
                     final String[] values = StringUtils.splitAtComma(value);
@@ -572,14 +652,15 @@ public final class CorsLoader {
             }
         }
 
-        for (final Entry<String, String> header : request.getAdditionalHeaders().entrySet()) {
+        for (final Entry<String, String> header : new TreeMap<>(request.getAdditionalHeaders()).entrySet()) {
             final String key = StringUtils.toRootLowerCase(header.getKey());
             if (isPreflightHeader(key, header.getValue())
                     && !accessControlValues.contains(key)) {
-                return false;
+                return "Request header field " + key
+                        + " is not allowed by Access-Control-Allow-Headers in preflight response.";
             }
         }
-        return true;
+        return null;
     }
 
     /**

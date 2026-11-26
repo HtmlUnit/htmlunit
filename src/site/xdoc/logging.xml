@@ -93,6 +93,29 @@ webClient.setCssErrorHandler(myCSSErrorHandler);]]></source>
                 <source><![CDATA[final WebClient webClient = new WebClient();
 webClient.setCssErrorHandler(new SilentCssErrorHandler());]]></source>
             </subsection>
+
+            <subsection name="Logging blocked requests (CORS, Content-Security-Policy)" id="security_logging">
+                <p>
+                    Like the browsers, HtmlUnit blocks requests that do not pass the CORS checks
+                    or violate the Content-Security-Policy of the page. To make it easy to tell these cases
+                    from bugs of the application, every blocked request is logged as warning
+                    using one of two dedicated loggers:
+                </p>
+                <ul>
+                    <li><code>org.htmlunit.security.cors</code> - requests (fetch, XMLHttpRequest,
+                        images with a crossorigin attribute, ...) blocked by the CORS checks, for instance
+                        <source><![CDATA[Access to fetch at 'https://api.example.com/data' from origin 'https://www.example.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.]]></source>
+                    </li>
+                    <li><code>org.htmlunit.security.csp</code> - violations of the Content-Security-Policy
+                        (also the ones of a report only policy) and failures sending a violation report, for instance
+                        <source><![CDATA[Content-Security-Policy violation: 'connect-src' blocked 'https://api.example.com/data' in 'https://www.example.com/' (policy 'connect-src 'self'').]]></source>
+                    </li>
+                </ul>
+                <p>
+                    Both are children of <code>org.htmlunit.security</code>; e.g. to silence them with Log4j 2:
+                </p>
+                <source><![CDATA[<Logger name="org.htmlunit.security" level="error"/>]]></source>
+            </subsection>
         </section>
     </body>
 </document>

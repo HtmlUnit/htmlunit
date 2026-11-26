@@ -1024,15 +1024,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         final BrowserVersion browserVersion = getBrowserVersion();
         try {
-            final CorsLoader loader = new CorsLoader(webWindow,
+            final CorsLoader loader = new CorsLoader("XMLHttpRequest", webWindow,
                     isWithCredentials() ? CorsLoader.CredentialsMode.INCLUDE : CorsLoader.CredentialsMode.SAME_ORIGIN,
                     CorsLoader.RedirectMode.FOLLOW, timeout_);
             loader.ensureConnectionAllowed(webRequest_.getUrl(), webRequest_.getUrl());
 
             if (!isSameOrigin_ && CorsLoader.isPreflight(webRequest_)) {
                 final WebResponse preflightResponse = loader.sendPreflight(webRequest_);
-                if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
-                        || !loader.isPreflightAuthorized(webRequest_, preflightResponse)) {
+                final String blocked = loader.checkPreflight(webRequest_, preflightResponse, null);
+                if (blocked != null) {
                     setState(DONE);
                     if (async_ || browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
                         fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
@@ -1040,13 +1040,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         fireJavascriptEvent(Event.TYPE_LOAD_END);
                     }
 
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("No permitted request for URL " + webRequest_.getUrl());
-                    }
-                    throw JavaScriptEngine.asJavaScriptException(
-                            window,
-                            "No permitted \"Access-Control-Allow-Origin\" header.",
-                            DOMException.NETWORK_ERR);
+                    // the blocked request is logged by the CorsLoader
+                    throw JavaScriptEngine.asJavaScriptException(window, blocked, DOMException.NETWORK_ERR);
                 }
             }
 

@@ -527,7 +527,7 @@ public final class Fetch {
                 case "no-cors" -> CorsLoader.RequestMode.NO_CORS;
                 default -> CorsLoader.RequestMode.CORS;
             };
-            final CorsLoader loader = new CorsLoader(webWindow, credentialsMode, redirectMode, 0, requestMode);
+            final CorsLoader loader = new CorsLoader("fetch", webWindow, credentialsMode, redirectMode, 0, requestMode);
 
             final URL url = webRequest.getUrl();
             loader.ensureConnectionAllowed(url, url);
@@ -540,10 +540,9 @@ public final class Fetch {
             }
             if (!sameOrigin && requestMode == CorsLoader.RequestMode.CORS && CorsLoader.isPreflight(webRequest)) {
                 final WebResponse preflightResponse = loader.sendPreflight(webRequest);
-                if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
-                        || !loader.isPreflightAuthorized(webRequest, preflightResponse)) {
-                    throw new CorsLoader.NoPermittedHeaderException(
-                            "No permitted \"Access-Control-Allow-Origin\" header.");
+                final String blocked = loader.checkPreflight(webRequest, preflightResponse, null);
+                if (blocked != null) {
+                    throw new CorsLoader.NoPermittedHeaderException(blocked);
                 }
             }
 

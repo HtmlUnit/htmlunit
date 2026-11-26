@@ -8,6 +8,17 @@
 
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Requests blocked by the CORS checks (fetch, XMLHttpRequest, navigator.sendBeacon(), images
+                with a crossorigin attribute) are logged as warning with the reason, using the new logger
+                'org.htmlunit.security.cors'. The Content-Security-Policy violations are logged using the new logger
+                'org.htmlunit.security.csp' (before 'org.htmlunit.html.csp.ContentSecurityPolicy').
+                See the logging documentation for details.
+            </action>
+            <action type="fix" dev="rbri">
+                CORS: the Access-Control-Allow-Credentials header has to be 'true' (case-sensitive)
+                like in the browsers.
+            </action>
             <action type="fix" dev="rbri">
                 Clicking a checkbox or radio button fires the input event before the change event like in the browsers.
             </action>
