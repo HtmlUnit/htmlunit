@@ -76,15 +76,13 @@
     </Match>
 
     <!--
-        Ignored for the moment: identity check against DomElement.ATTRIBUTE_NOT_DEFINED.
+        DomElement.ATTRIBUTE_NOT_DEFINED is a marker instance, the identity check is intended
+        (an empty attribute value is equal to the marker but not the same).
     -->
     <Match>
         <Bug pattern="ES_COMPARING_PARAMETER_STRING_WITH_EQ"/>
-        <Class name="org.htmlunit.html.csp.ContentSecurityPolicy"/>
-        <Or>
-            <Method name="allowsObject"/>
-            <Method name="allowsMedia"/>
-        </Or>
+        <Class name="org.htmlunit.html.DomElement"/>
+        <Method name="isAttributeDefined"/>
     </Match>
 
     <!--

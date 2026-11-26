@@ -140,7 +140,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param value the attribute value to check
      * @return {@code true} if the value is not {@link #ATTRIBUTE_NOT_DEFINED}
      */
-    @SuppressWarnings("PMD.UseEqualsToCompareStrings")
+    @SuppressWarnings("PMD.UseEqualsToCompareStrings") // the marker is compared by identity
     public static boolean isAttributeDefined(final String value) {
         return value != ATTRIBUTE_NOT_DEFINED;
     }
@@ -339,7 +339,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @return a sorted map containing style elements, keyed on style element name
      */
-    @SuppressWarnings("PMD.UseEqualsToCompareStrings")
+    @SuppressWarnings("PMD.UseEqualsToCompareStrings") // the cache is checked by the identity of the attribute value
     public LinkedHashMap<String, StyleElement> getStyleMap() {
         final String styleAttribute = getAttributeDirect("style");
         // cache check by identity: the map is valid as long as the attribute value object is unchanged
