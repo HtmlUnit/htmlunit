@@ -679,6 +679,81 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     }
 
     /**
+     * An interrupted thread does not wait (and does not loop until the timeout,
+     * because every wait() throws immediately).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void interruptedThreadDoesNotWait() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>setTimeout(function() { document.title = 'done'; }, 5000);</script>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        startTimedTest();
+        Thread.currentThread().interrupt();
+        try {
+            assertEquals(1, page.getWebClient().waitForBackgroundJavaScript(2_000));
+            assertTrue("interrupted status lost", Thread.currentThread().isInterrupted());
+        }
+        finally {
+            // clear the interrupted status for the following tests
+            Thread.interrupted();
+        }
+        assertMaxTestRunTime(500);
+    }
+
+    /**
+     * An interrupted thread does not wait, also without timeout.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void interruptedThreadDoesNotWaitStartingBefore() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>setTimeout(function() { document.title = 'done'; }, 3000);</script>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        startTimedTest();
+        Thread.currentThread().interrupt();
+        try {
+            assertEquals(1, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(5_000));
+            assertTrue("interrupted status lost", Thread.currentThread().isInterrupted());
+        }
+        finally {
+            // clear the interrupted status for the following tests
+            Thread.interrupted();
+        }
+        assertMaxTestRunTime(500);
+        assertEquals("", page.getTitleText());
+    }
+
+    /**
+     * Without time left the method returns at once, also if a periodic job keeps
+     * the job count changing.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noTimeLeft() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>setInterval(function() { document.title += 'x'; }, 1);</script>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        // while the periodic job is running, it is also scheduled for the next run
+        startTimedTest();
+        assertTrue(page.getWebClient().waitForBackgroundJavaScript(0) > 0);
+        assertTrue(page.getWebClient().waitForBackgroundJavaScriptStartingBefore(0, 0) > 0);
+        assertMaxTestRunTime(500);
+    }
+
+    /**
      * Helper to ensure some synchronization state between threads
      * to reproduce a particular situation in the tests.
      */

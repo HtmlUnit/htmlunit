@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#96">
+                WebClient.waitForBackgroundJavaScript() and waitForBackgroundJavaScriptStartingBefore() return
+                immediately if the current thread is interrupted (the interrupted status is kept); so far they kept
+                looping until the timeout and logged an error for every loop. They also no longer call themselves
+                again after the time is over.
+            </action>
             <action type="fix" dev="rbri" issue="#729">
                 WebClient.close() stops running scripts (e.g. an endless loop in a timer); so far close() waited 10s
                 for the thread of the event loop and, because Thread.stop() is no longer supported by newer JVMs,

@@ -2780,6 +2780,9 @@ public class WebClient implements Serializable, AutoCloseable {
      * }
      * </code></pre>
      *
+     * <p>If the current thread is interrupted, this method returns immediately
+     * (the interrupted status of the thread is kept).</p>
+     *
      * @param timeoutMillis the maximum amount of time to wait in milliseconds; must be positive
      * @return the number of background JavaScript jobs still executing or waiting to be executed
      *         when this method returns; returns <code>0</code> if all jobs completed successfully
@@ -2811,11 +2814,13 @@ public class WebClient implements Serializable, AutoCloseable {
             final long newTimeout = endTime - System.currentTimeMillis();
             count += jobManager.waitForJobs(newTimeout);
         }
-        if (count != getAggregateJobCount()) {
-            final long newTimeout = endTime - System.currentTimeMillis();
-            return waitForBackgroundJavaScript(newTimeout);
+        // the job managers have changed while waiting (e.g. a window was opened);
+        // wait again for the remaining time, if any
+        final long remaining = endTime - System.currentTimeMillis();
+        if (remaining > 0 && !Thread.currentThread().isInterrupted() && count != getAggregateJobCount()) {
+            return waitForBackgroundJavaScript(remaining);
         }
-        return count;
+        return getAggregateJobCount();
     }
 
     /**
@@ -2926,6 +2931,9 @@ public class WebClient implements Serializable, AutoCloseable {
      * webClient.waitForBackgroundJavaScriptStartingBefore(500, 100); // timeout &lt; delay
      * </code></pre>
      *
+     * <p>If the current thread is interrupted, this method returns immediately
+     * (the interrupted status of the thread is kept).</p>
+     *
      * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds);
      *                   must be non-negative
      * @param timeoutMillis the maximum amount of time to wait (in milliseconds); if negative or
@@ -2967,10 +2975,14 @@ public class WebClient implements Serializable, AutoCloseable {
             final long newTimeout = (endTimeout == -1) ? -1 : endTimeout - now;
             count += jobManager.waitForJobsStartingBefore(newDelay, newTimeout);
         }
-        if (count != getAggregateJobCount()) {
-            now = System.currentTimeMillis();
-            final long newDelay = endTime - now;
-            final long newTimeout = (endTimeout == -1) ? -1 : endTimeout - now;
+        // the job managers have changed while waiting (e.g. a window was opened);
+        // wait again for the remaining time, if any
+        now = System.currentTimeMillis();
+        final long newDelay = endTime - now;
+        final long newTimeout = (endTimeout == -1) ? -1 : endTimeout - now;
+        if (newDelay > 0 && (endTimeout == -1 || newTimeout > 0)
+                && !Thread.currentThread().isInterrupted()
+                && count != getAggregateJobCount()) {
             return waitForBackgroundJavaScriptStartingBefore(newDelay, newTimeout);
         }
         return count;

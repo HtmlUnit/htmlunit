@@ -195,10 +195,10 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                         wait(end - now);
                     }
                     catch (final InterruptedException e) {
-                        LOG.error("InterruptedException while in waitForJobs", e);
-
-                        // restore interrupted status
+                        // restore interrupted status and stop waiting; every further
+                        // wait() would throw again immediately
                         Thread.currentThread().interrupt();
+                        break;
                     }
                     // maybe a change triggers the wakeup; we have to recalculate the
                     // wait time
@@ -269,10 +269,10 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                     wait(waitTime);
                 }
                 catch (final InterruptedException e) {
-                    LOG.error("InterruptedException while in waitForJobsStartingBefore", e);
-
-                    // restore interrupted status
+                    // restore interrupted status and stop waiting; every further
+                    // wait() would throw again immediately
                     Thread.currentThread().interrupt();
+                    break;
                 }
 
                 earliestJob = getEarliestJob(filter);
