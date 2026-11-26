@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="fix" dev="Vidya m">
+                A carriage return, line feed or double quote in the field name or the file name of a
+                multipart/form-data part is now escaped (%0D, %0A, %22) like in the browsers; so far
+                such a character (e.g. from a script controlled FormData field or file name) broke out
+                of the Content-Disposition header and could inject additional part headers or parts.
+            </action>
             <action type="update" dev="rbri">
                 Requests blocked by the CORS checks (fetch, XMLHttpRequest, navigator.sendBeacon(), images
                 with a crossorigin attribute) are logged as warning with the reason, using the new logger
@@ -83,12 +89,6 @@
                 The files stored by the DownloadingAttachmentHandler are readable for the owner only (by default
                 they are stored in the shared temp directory). The report folder of the DebuggingWebConnection is
                 no longer used if someone else created it in the meantime.
-            </action>
-            <action type="fix" dev="Vidya m">
-                A carriage return, line feed or double quote in the field name or the file name of a
-                multipart/form-data part is now escaped (%0D, %0A, %22) like in the browsers; so far
-                such a character (e.g. from a script controlled FormData field or file name) broke out
-                of the Content-Disposition header and could inject additional part headers or parts.
             </action>
             <action type="fix" dev="Vidya m">
                 A response that exceeds the max in memory size is stored in a temporary file that is only
