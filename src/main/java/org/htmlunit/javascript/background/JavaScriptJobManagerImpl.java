@@ -195,6 +195,10 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                         wait(end - now);
                     }
                     catch (final InterruptedException e) {
+                        if (LOG.isWarnEnabled()) {
+                            LOG.warn("InterruptedException while in waitForJobs, stop waiting");
+                        }
+
                         // restore interrupted status and stop waiting; every further
                         // wait() would throw again immediately
                         Thread.currentThread().interrupt();
@@ -269,6 +273,10 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                     wait(waitTime);
                 }
                 catch (final InterruptedException e) {
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("InterruptedException while in waitForJobsStartingBefore, stop waiting");
+                    }
+
                     // restore interrupted status and stop waiting; every further
                     // wait() would throw again immediately
                     Thread.currentThread().interrupt();
