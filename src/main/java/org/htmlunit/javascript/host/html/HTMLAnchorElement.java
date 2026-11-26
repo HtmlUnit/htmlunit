@@ -254,11 +254,11 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the search portion of the link's URL (the portion starting with '?'
      * and up to but not including any '#').
      * @param search the new search portion of the link's URL
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/search">MDN Documentation</a>
      */
     @JsxSetter
-    public void setSearch(final String search) throws Exception {
+    public void setSearch(final String search) throws MalformedURLException {
         setUrl(HTMLHyperlinkElementUtils.setSearch(getUrl(), search));
     }
 
@@ -280,11 +280,11 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Sets the hash portion of the link's URL (the portion following the '#').
      * @param hash the new hash portion of the link's URL
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/hash">MDN Documentation</a>
      */
     @JsxSetter
-    public void setHash(final String hash) throws Exception {
+    public void setHash(final String hash) throws MalformedURLException {
         setUrl(HTMLHyperlinkElementUtils.setHash(getUrl(), hash));
     }
 
@@ -313,11 +313,11 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Sets the host portion of the link's URL (the '[hostname]:[port]' portion).
      * @param host the new host portion of the link's URL
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/host">MDN Documentation</a>
      */
     @JsxSetter
-    public void setHost(final String host) throws Exception {
+    public void setHost(final String host) throws MalformedURLException {
         setUrl(HTMLHyperlinkElementUtils.setHost(getUrl(), host));
     }
 
@@ -339,11 +339,11 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Sets the hostname portion of the link's URL.
      * @param hostname the new hostname portion of the link's URL
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/hostname">MDN Documentation</a>
      */
     @JsxSetter
-    public void setHostname(final String hostname) throws Exception {
+    public void setHostname(final String hostname) throws MalformedURLException {
         if (org.htmlunit.util.StringUtils.isEmptyOrNull(hostname) || hostname.indexOf(' ') > -1) {
             return;
         }
@@ -398,11 +398,11 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Sets the pathname portion of the link's URL.
      * @param pathname the new pathname portion of the link's URL
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/pathname">MDN Documentation</a>
      */
     @JsxSetter
-    public void setPathname(final String pathname) throws Exception {
+    public void setPathname(final String pathname) throws MalformedURLException {
         setUrl(HTMLHyperlinkElementUtils.setPathname(getUrl(), pathname));
     }
 
@@ -429,11 +429,11 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Sets the port portion of the link's URL.
      * @param port the new port portion of the link's URL
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/port">MDN Documentation</a>
      */
     @JsxSetter
-    public void setPort(final String port) throws Exception {
+    public void setPort(final String port) throws MalformedURLException {
         final URL url = getUrl();
         final int newPort = Integer.parseInt(port);
         if (HTMLHyperlinkElementUtils.isDefaultPort(url.getProtocol(), newPort)) {
@@ -475,11 +475,11 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Sets the protocol portion of the link's URL.
      * @param protocol the new protocol portion of the link's URL
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/protocol">MDN Documentation</a>
      */
     @JsxSetter
-    public void setProtocol(final String protocol) throws Exception {
+    public void setProtocol(final String protocol) throws MalformedURLException {
         final URL result = HTMLHyperlinkElementUtils.setProtocol(getUrl(), protocol,
                 getBrowserVersion().hasFeature(JS_URL_FILE_WITHOUT_HOST));
         if (result != null) {

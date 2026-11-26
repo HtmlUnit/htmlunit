@@ -223,10 +223,10 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * Sets the {@code protocol} property.
      * @param protocol the {@code protocol} value
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      */
     @JsxSetter
-    public void setProtocol(final String protocol) throws Exception {
+    public void setProtocol(final String protocol) throws MalformedURLException {
         final URL result = HTMLHyperlinkElementUtils.setProtocol(getUrl(), protocol,
                 getBrowserVersion().hasFeature(JS_URL_FILE_WITHOUT_HOST));
         if (result != null) {
@@ -251,10 +251,10 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * Sets the {@code hostname} property.
      * @param hostname the {@code hostname} value
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      */
     @JsxSetter
-    public void setHostname(final String hostname) throws Exception {
+    public void setHostname(final String hostname) throws MalformedURLException {
         if (!StringUtils.isEmptyOrNull(hostname)) {
             setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
         }
@@ -284,10 +284,10 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * Sets the {@code host} property.
      * @param host the {@code host} value
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      */
     @JsxSetter
-    public void setHost(final String host) throws Exception {
+    public void setHost(final String host) throws MalformedURLException {
         setUrl(HTMLHyperlinkElementUtils.setHost(getUrl(), host));
     }
 
@@ -313,10 +313,10 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * Sets the {@code port} property.
      * @param port the {@code port} value
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      */
     @JsxSetter
-    public void setPort(final String port) throws Exception {
+    public void setPort(final String port) throws MalformedURLException {
         final URL url = getUrl();
         final int newPort = Integer.parseInt(port);
         if (HTMLHyperlinkElementUtils.isDefaultPort(url.getProtocol(), newPort)) {
@@ -344,10 +344,10 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * Sets the {@code pathname} property.
      * @param pathname the {@code pathname} value
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      */
     @JsxSetter
-    public void setPathname(final String pathname) throws Exception {
+    public void setPathname(final String pathname) throws MalformedURLException {
         setUrl(HTMLHyperlinkElementUtils.setPathname(getUrl(), pathname));
     }
 
@@ -368,10 +368,10 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * Sets the {@code search} property.
      * @param search the {@code search} value
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      */
     @JsxSetter
-    public void setSearch(final String search) throws Exception {
+    public void setSearch(final String search) throws MalformedURLException {
         setUrl(HTMLHyperlinkElementUtils.setSearch(getUrl(), search));
     }
 
@@ -392,10 +392,10 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * Sets the {@code hash} property.
      * @param hash the {@code hash} value
-     * @throws Exception if an error occurs
+     * @throws MalformedURLException if the url of the element is invalid
      */
     @JsxSetter
-    public void setHash(final String hash) throws Exception {
+    public void setHash(final String hash) throws MalformedURLException {
         setUrl(HTMLHyperlinkElementUtils.setHash(getUrl(), hash));
     }
 
