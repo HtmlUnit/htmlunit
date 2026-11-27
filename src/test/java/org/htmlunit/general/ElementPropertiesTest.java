@@ -10886,18 +10886,18 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "requestMIDIAccess(),sendBeacon(),serial,serviceWorker,storage,taintEnabled(),userActivation,"
                 + "userAgent,vendor,vendorSub,wakeLock,"
                 + "webdriver")
-    @HtmlUnitNYI(CHROME = "appCodeName,appName,appVersion,connection,cookieEnabled,doNotTrack,geolocation,"
-                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,platform,"
-                + "plugins,product,productSub,sendBeacon(),userAgent,vendor,vendorSub",
-            EDGE = "appCodeName,appName,appVersion,connection,cookieEnabled,doNotTrack,geolocation,"
-                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,platform,"
-                + "plugins,product,productSub,sendBeacon(),userAgent,vendor,vendorSub",
-            FF = "appCodeName,appName,appVersion,buildID,cookieEnabled,doNotTrack,geolocation,javaEnabled(),"
-                + "language,languages,mediaDevices,mimeTypes,onLine,oscpu,pdfViewerEnabled,platform,plugins,"
-                + "product,productSub,sendBeacon(),taintEnabled(),userAgent,vendor,vendorSub",
-            FF_ESR = "appCodeName,appName,appVersion,buildID,cookieEnabled,doNotTrack,geolocation,"
-                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,oscpu,pdfViewerEnabled,"
-                + "platform,plugins,product,productSub,sendBeacon(),taintEnabled(),userAgent,vendor,vendorSub")
+    @HtmlUnitNYI(CHROME = "appCodeName,appName,appVersion,connection,cookieEnabled,credentials,doNotTrack,"
+                + "geolocation,javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,"
+                + "platform,plugins,product,productSub,sendBeacon(),userAgent,vendor,vendorSub",
+            EDGE = "appCodeName,appName,appVersion,connection,cookieEnabled,credentials,doNotTrack,geolocation,"
+                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,platform,plugins,"
+                + "product,productSub,sendBeacon(),userAgent,vendor,vendorSub",
+            FF = "appCodeName,appName,appVersion,buildID,cookieEnabled,credentials,doNotTrack,geolocation,"
+                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,oscpu,pdfViewerEnabled,platform,"
+                + "plugins,product,productSub,sendBeacon(),taintEnabled(),userAgent,vendor,vendorSub",
+            FF_ESR = "appCodeName,appName,appVersion,buildID,cookieEnabled,credentials,doNotTrack,geolocation,"
+                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,oscpu,pdfViewerEnabled,platform,"
+                + "plugins,product,productSub,sendBeacon(),taintEnabled(),userAgent,vendor,vendorSub")
     public void navigator() throws Exception {
         testString("", "navigator");
     }

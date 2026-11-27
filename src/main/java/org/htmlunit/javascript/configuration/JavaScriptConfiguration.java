@@ -404,10 +404,14 @@ import org.htmlunit.javascript.host.performance.PerformanceNavigation;
 import org.htmlunit.javascript.host.performance.PerformanceNavigationTiming;
 import org.htmlunit.javascript.host.performance.PerformanceResourceTiming;
 import org.htmlunit.javascript.host.performance.PerformanceTiming;
+import org.htmlunit.javascript.host.security.AuthenticatorAssertionResponse;
+import org.htmlunit.javascript.host.security.AuthenticatorAttestationResponse;
+import org.htmlunit.javascript.host.security.AuthenticatorResponse;
 import org.htmlunit.javascript.host.security.Credential;
 import org.htmlunit.javascript.host.security.CredentialsContainer;
 import org.htmlunit.javascript.host.security.FederatedCredential;
 import org.htmlunit.javascript.host.security.PasswordCredential;
+import org.htmlunit.javascript.host.security.PublicKeyCredential;
 import org.htmlunit.javascript.host.speech.SpeechGrammar;
 import org.htmlunit.javascript.host.speech.SpeechGrammarList;
 import org.htmlunit.javascript.host.speech.SpeechRecognition;
@@ -546,7 +550,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
         // level 1
         AbortController.class, AbstractRange.class, Atomics.class, AudioBuffer.class, AudioListener.class,
-        AudioParam.class, BarProp.class, Blob.class, CSS.class, CSSRule.class, CSSRuleList.class,
+        AudioParam.class, AuthenticatorResponse.class,
+        BarProp.class, Blob.class, CSS.class, CSSRule.class, CSSRuleList.class,
         CSSStyleDeclaration.class, Cache.class, CacheStorage.class, CanvasGradient.class, CanvasPattern.class,
         CanvasRenderingContext2D.class, CaretPosition.class, Credential.class, CredentialsContainer.class, Crypto.class,
         CryptoKey.class, CustomElementRegistry.class, DOMError.class, DOMException.class, DOMImplementation.class,
@@ -587,6 +592,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         XPathEvaluator.class, XPathExpression.class, XPathResult.class, XSLTProcessor.class,
         // level 2
         AbortSignal.class, Animation.class, AnimationEvent.class, AudioNode.class, AudioProcessingEvent.class,
+        AuthenticatorAssertionResponse.class, AuthenticatorAttestationResponse.class,
         BaseAudioContext.class, BatteryManager.class, BeforeInstallPromptEvent.class, BeforeUnloadEvent.class,
         BlobEvent.class, BroadcastChannel.class, CSSCounterStyleRule.class, CSSFontFaceRule.class,
         CSSGroupingRule.class, CSSImportRule.class, CSSKeyframeRule.class, CSSKeyframesRule.class,
@@ -606,7 +612,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PerformanceMeasure.class, PerformanceResourceTiming.class, PermissionStatus.class, PopStateEvent.class,
         PresentationAvailability.class, PresentationConnection.class, PresentationConnectionAvailableEvent.class,
         PresentationConnectionCloseEvent.class, PresentationRequest.class, ProgressEvent.class,
-        PromiseRejectionEvent.class, RTCDataChannelEvent.class, RTCPeerConnection.class,
+        PromiseRejectionEvent.class, PublicKeyCredential.class, RTCDataChannelEvent.class, RTCPeerConnection.class,
         RTCPeerConnectionIceEvent.class, RTCSctpTransport.class, Range.class, RemotePlayback.class, Screen.class,
         ScreenOrientation.class, SecurityPolicyViolationEvent.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, SharedWorker.class, SourceBuffer.class, SourceBufferList.class,

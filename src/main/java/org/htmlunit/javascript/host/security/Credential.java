@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.security;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
  * JavaScript host object for {@code Credential}.
@@ -29,11 +30,42 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 @JsxClass
 public class Credential extends HtmlUnitScriptable {
 
+    private String id_;
+    private String type_;
+
     /**
      * Creates an instance of this object.
      */
     @JsxConstructor
     public void jsConstructor() {
         // nothing to do
+    }
+
+    /**
+     * Sets the identifier and the type of this credential.
+     * @param id the identifier
+     * @param type the type (e.g. {@code public-key})
+     */
+    protected void setIdAndType(final String id, final String type) {
+        id_ = id;
+        type_ = type;
+    }
+
+    /**
+     * Returns the identifier of this credential.
+     * @return the identifier
+     */
+    @JsxGetter
+    public String getId() {
+        return id_;
+    }
+
+    /**
+     * Returns the type of this credential.
+     * @return the type
+     */
+    @JsxGetter
+    public String getType() {
+        return type_;
     }
 }

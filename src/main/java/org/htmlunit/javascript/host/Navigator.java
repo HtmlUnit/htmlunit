@@ -52,6 +52,7 @@ import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.geo.Geolocation;
 import org.htmlunit.javascript.host.media.MediaDevices;
 import org.htmlunit.javascript.host.network.NetworkInformation;
+import org.htmlunit.javascript.host.security.CredentialsContainer;
 // TODO verify actual package - not visible from XMLHttpRequest.java's import list,
 // which suggests it may already share a package with XMLHttpRequest rather than
 // living here; adjust this import (and the FormData branch below) accordingly.
@@ -80,6 +81,7 @@ public class Navigator extends HtmlUnitScriptable {
     private PluginArray plugins_;
     private MimeTypeArray mimeTypes_;
     private MediaDevices mediaDevices_;
+    private CredentialsContainer credentials_;
 
     /**
      * Creates an instance of this object.
@@ -337,6 +339,22 @@ public class Navigator extends HtmlUnitScriptable {
         geolocation.setParentScope(getParentScope());
         geolocation.setPrototype(getPrototype(geolocation.getClass()));
         return geolocation;
+    }
+
+    /**
+     * Returns the {@code credentials} property (the entry point to the Credential Management
+     * and the Web Authentication API).
+     *
+     * @return the {@code credentials} property
+     */
+    @JsxGetter
+    public CredentialsContainer getCredentials() {
+        if (credentials_ == null) {
+            credentials_ = new CredentialsContainer();
+            credentials_.setPrototype(getPrototype(credentials_.getClass()));
+            credentials_.setParentScope(getParentScope());
+        }
+        return credentials_;
     }
 
     /**

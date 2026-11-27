@@ -8,6 +8,13 @@
 
     <body>
         <release version="5.10.0" date="xxxx xx, 2026" description="Bugfixes">
+            <action type="add" dev="rbri" issue="#782">
+                Web Authentication, first step: navigator.credentials (create(), get(), store() and
+                preventSilentAccess()), PublicKeyCredential (including isUserVerifyingPlatformAuthenticatorAvailable()
+                and isConditionalMediationAvailable()), AuthenticatorResponse, AuthenticatorAttestationResponse and
+                AuthenticatorAssertionResponse. There is no authenticator yet; public key requests are rejected with
+                a NotAllowedError like in a browser when the user cancels.
+            </action>
             <action type="add" dev="rbri">
                 Canvas: Path2D implemented (constructor with a Path2D or a svg path string, addPath(), closePath(),
                 moveTo(), lineTo(), bezierCurveTo(), quadraticCurveTo(), arc(), arcTo(), ellipse(), rect() and

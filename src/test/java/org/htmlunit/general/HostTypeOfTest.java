@@ -427,6 +427,39 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.security.AuthenticatorAssertionResponse}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void authenticatorAssertionResponse() throws Exception {
+        test("AuthenticatorAssertionResponse");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.security.AuthenticatorAttestationResponse}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void authenticatorAttestationResponse() throws Exception {
+        test("AuthenticatorAttestationResponse");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.security.AuthenticatorResponse}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void authenticatorResponse() throws Exception {
+        test("AuthenticatorResponse");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -6393,6 +6426,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("function")
     public void proxy() throws Exception {
         test("Proxy");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.security.PublicKeyCredential}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void publicKeyCredential() throws Exception {
+        test("PublicKeyCredential");
     }
 
     /**

@@ -470,6 +470,39 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.security.AuthenticatorAssertionResponse}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function AuthenticatorAssertionResponse() { [native code] }")
+    public void authenticatorAssertionResponse() throws Exception {
+        test("AuthenticatorAssertionResponse");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.security.AuthenticatorAttestationResponse}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function AuthenticatorAttestationResponse() { [native code] }")
+    public void authenticatorAttestationResponse() throws Exception {
+        test("AuthenticatorAttestationResponse");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.security.AuthenticatorResponse}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function AuthenticatorResponse() { [native code] }")
+    public void authenticatorResponse() throws Exception {
+        test("AuthenticatorResponse");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -6462,6 +6495,17 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts("function Proxy() { [native code] }")
     public void proxy() throws Exception {
         test("Proxy");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.security.PublicKeyCredential}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function PublicKeyCredential() { [native code] }")
+    public void publicKeyCredential() throws Exception {
+        test("PublicKeyCredential");
     }
 
     /**
